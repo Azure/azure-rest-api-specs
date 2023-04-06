@@ -163,6 +163,9 @@
           "Successful Submit Abstractive Summarization Task": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
           },
+          "Successful Submit Custom Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulCustomAbstractiveSummarizationTaskSubmit.json"
+          },
           "Successful Healthcare DocumentType Post Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypePostRequest.json"
           },
@@ -224,6 +227,9 @@
           },
           "Successful Get Abstractive Summarization Result": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
+          },
+          "Successful Get Custom Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulCustomAbstractiveSummarizationTaskResult.json"
           },
           "Successful Get Text Analysis Health DocumentType Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
@@ -310,6 +316,7 @@
         "CustomMultiLabelClassification",
         "AbstractiveSummarization",
         "CustomSentimentAnalysis"
+        "CustomAbstractiveSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -350,6 +357,7 @@
         "CustomMultiLabelClassificationLROResults",
         "AbstractiveSummarizationLROResults",
         "CustomSentimentAnalysisLROResults"
+        "CustomAbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -565,57 +573,6 @@
         "tasks"
       ]
     },
-    "CustomTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using custom models.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/TaskParameters"
-        }
-      ],
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "common.json#/definitions/RequestStatistics"
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
     "CustomEntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Entities task.",
@@ -626,7 +583,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -665,7 +622,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -677,7 +634,7 @@
       "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -716,7 +673,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -746,7 +703,7 @@
       "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -857,7 +814,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -920,7 +877,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -934,7 +891,7 @@
           "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
         },
         {
-          "$ref": "#/definitions/DocumentDetectedLanguageString"
+          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ]
     },
@@ -1028,6 +985,7 @@
             "BodyStructure",
             "Age",
             "Gender",
+            "Ethnicity",
             "ExaminationName",
             "Date",
             "Direction",
@@ -1036,21 +994,30 @@
             "MeasurementUnit",
             "RelationalOperator",
             "Time",
+            "Course",
             "GeneOrProtein",
             "Variant",
+            "Expression",
+            "MutationType",
             "AdministrativeEvent",
             "CareEnvironment",
             "HealthcareProfession",
             "Diagnosis",
             "SymptomOrSign",
             "ConditionQualifier",
+            "ConditionScale",
             "MedicationClass",
             "MedicationName",
             "Dosage",
             "MedicationForm",
             "MedicationRoute",
             "FamilyRelation",
-            "TreatmentName"
+            "TreatmentName",
+            "Allergen",
+            "Employment",
+            "LivingStatus",
+            "SubstanceUse",
+            "SubstanceUseAmount"
           ]
         },
         "subcategory": {
@@ -1126,17 +1093,30 @@
           "type": "string",
           "enum": [
             "Abbreviation",
+            "BodySiteOfCondition",
+            "BodySiteOfTreatment",
+            "CourseOfCondition",
+            "CourseOfExamination",
+            "CourseOfMedication",
+            "CourseOfTreatment",
             "DirectionOfBodyStructure",
             "DirectionOfCondition",
             "DirectionOfExamination",
             "DirectionOfTreatment",
             "DosageOfMedication",
+            "ExaminationFindsCondition",
+            "ExpressionOfGene",
+            "ExpressionOfVariant",
             "FormOfMedication",
+            "FrequencyOfCondition",
             "FrequencyOfMedication",
             "FrequencyOfTreatment",
+            "MutationTypeOfGene",
+            "MutationTypeOfVariant",
             "QualifierOfCondition",
             "RelationOfExamination",
             "RouteOfMedication",
+            "ScaleOfCondition",
             "TimeOfCondition",
             "TimeOfEvent",
             "TimeOfExamination",
@@ -1145,7 +1125,8 @@
             "UnitOfCondition",
             "UnitOfExamination",
             "ValueOfCondition",
-            "ValueOfExamination"
+            "ValueOfExamination",
+            "VariantOfGene"
           ],
           "x-ms-enum": {
             "name": "relationType",
@@ -1205,6 +1186,19 @@
           ],
           "x-ms-enum": {
             "name": "Association",
+            "modelAsString": false
+          }
+        },
+        "temporality": {
+          "description": "Describes temporal information regarding the entity.",
+          "type": "string",
+          "enum": [
+            "current",
+            "past",
+            "future"
+          ],
+          "x-ms-enum": {
+            "name": "Temporality",
             "modelAsString": false
           }
         }
@@ -3829,33 +3823,6 @@
         }
       }
     },
-    "DocumentDetectedLanguageString": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "type": "string",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
-        },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
     "DocumentWarning": {
       "type": "object",
       "required": [
@@ -3995,6 +3962,24 @@
       ],
       "x-ms-discriminator-value": "AbstractiveSummarization"
     },
+    "CustomAbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Custom Abstractive Summarization task.",
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomAbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomAbstractiveSummarization"
+    },
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for the pre-build Abstractive Summarization task.",
@@ -4004,6 +3989,18 @@
         },
         {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "CustomAbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the Custom Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -4024,6 +4021,24 @@
         "results"
       ],
       "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
+    },
+    "CustomAbstractiveSummarizationLROResult": {
+      "type": "object",
+      "description": "An object representing the results for an Custom Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomAbstractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomAbstractiveSummarizationLROResults"
     },
     "AbstractiveSummarizationResultBase": {
       "type": "object",
@@ -4062,6 +4077,21 @@
         },
         {
           "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "CustomAbstractiveSummarizationResult": {
+      "type": "object",
+      "description": "An object representing the custom summarization results of each document.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationResultBase"
+        },
+        {
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
