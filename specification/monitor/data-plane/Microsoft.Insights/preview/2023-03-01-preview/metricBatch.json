@@ -144,7 +144,11 @@
       "name": "metricnames",
       "in": "query",
       "required": true,
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
       "description": "The names of the metrics (comma separated) to retrieve.",
       "x-ms-parameter-location": "method"
     },
@@ -199,7 +203,8 @@
           "description": "The list of resource IDs to query metrics for.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id"
           }
         }
       },
