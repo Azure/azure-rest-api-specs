@@ -37,6 +37,16 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 ```yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.ContainerInstance/stable/2023-05-01/containerInstance.json
+tag: package-preview-2023-02
+```
+
+### Tag: package-preview-2023-02
+
+These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-02'
+input-file:
+  - Microsoft.ContainerInstance/preview/2023-02-01-preview/containerInstance.json
 ```
 ### Tag: package-preview-2022-10
 
