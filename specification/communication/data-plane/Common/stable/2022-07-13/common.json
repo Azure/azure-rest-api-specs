@@ -84,49 +84,6 @@
         "modelAsString": true
       }
     },
-    "CallingCommunicationIdentifierModel": {
-      "description": "Calling communication identifier model",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        }
-      ],
-      "properties": {
-        "unknownIdentifiers": {
-          "$ref": "#/definitions/UnknownIdentifierModel",
-          "description": "The unknown identifier."
-        }
-      }
-    },
-    "UnknownIdentifierModel": {
-      "description": "Unknown Communication Identifier model",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unknown id."
-        }
-      }
-    },
-    "CustomContextModel": {
-      "description": "Custom Context model",
-      "type": "object",
-      "properties": {
-        "customHeaders": {
-          "type": "string",
-          "description": "Custom Headers for incoming call"
-        },
-        "sipHeaders": {
-          "type": "object",
-          "description": "Sip Headers for incoming call",
-        },
-        "voipHeaders": {
-          "type": "object",
-          "description": "Voip Headers for incoming call",
-        }
-      }
-    },
     "CommunicationIdentifierModel": {
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model is polymorphic: Apart from kind and rawId, at most one further property may be set which must match the kind enum value.",
       "type": "object",
