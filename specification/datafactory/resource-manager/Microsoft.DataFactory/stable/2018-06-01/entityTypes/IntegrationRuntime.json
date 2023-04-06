@@ -126,6 +126,14 @@
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeVNetProperties"
+        },
+        "copyComputeScaleProperties": {
+          "description": "CopyComputeScale properties for managed integration runtime.",
+          "$ref": "#/definitions/CopyComputeScaleProperties"
+        },
+        "pipelineExternalComputeScaleProperties": {
+          "description": "PipelineExternalComputeScale properties for managed integration runtime.",
+          "$ref": "#/definitions/PipelineExternalComputeScaleProperties"
         }
       },
       "additionalProperties": {
@@ -161,6 +169,42 @@
         "cleanup": {
           "description": "Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.",
           "type": "boolean"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "CopyComputeScaleProperties": {
+      "description": "CopyComputeScale properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "dataIntegrationUnit": {
+          "description": "DIU number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 4
+        },
+        "timeToLive": {
+          "description": "Time to live (in minutes) setting of integration runtime which will execute copy activity.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PipelineExternalComputeScaleProperties": {
+      "description": "PipelineExternalComputeScale properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "timeToLive": {
+          "description": "Time to live (in minutes) setting of integration runtime which will execute pipeline and external activity.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5
         }
       },
       "additionalProperties": {

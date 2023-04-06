@@ -908,7 +908,7 @@
           "200": {
             "description": "Requested operation status",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -1402,6 +1402,22 @@
           "description": "The time of the status.",
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "type": "object",
+          "readOnly": true
         }
       }
     }

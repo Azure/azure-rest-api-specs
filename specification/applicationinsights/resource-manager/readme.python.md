@@ -14,6 +14,7 @@ no-namespace-folders: true
 
 ``` yaml $(python)
 multiapi: true
+default-api-version: "2022-04-01"
 clear-output-folder: true
 batch:
   - tag: package-2015-05
