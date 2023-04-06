@@ -53,7 +53,7 @@ namespace AzureMessagingEventGrid {
     source: string;
 
     @doc("Event data specific to the event type.")
-    data?: unknown;
+    data?: object;
 
     @doc("Event data specific to the event type, encoded as a base64 string.")
     data_base64?: bytes;
@@ -90,6 +90,7 @@ namespace AzureMessagingEventGrid {
   }
 
   @doc("Receive operation details per Cloud Event.") 
+  @internal
   model ReceiveDetails {
     @doc("The Event Broker details.")
     brokerProperties: BrokerProperties;
