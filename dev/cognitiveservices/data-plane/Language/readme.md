@@ -1,6 +1,6 @@
 # Cognitive Services Language SDK
 
-This is the AutoRest configuration file the Cognitive Services Language SDK. 
+This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 > see https://aka.ms/autorest
 
