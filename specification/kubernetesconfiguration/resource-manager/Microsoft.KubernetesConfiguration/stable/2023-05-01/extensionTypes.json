@@ -193,6 +193,107 @@
       "x-ms-pagable": {
         "nextLinkName": "nextLink"
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
+      "get": {
+        "tags": [
+          "ExtensionTypes",
+          "ClusterExtensionTypes"
+        ],
+        "description": "List Extension Types for the cluster.",
+        "operationId": "ExtensionTypes_List",
+        "x-ms-examples": {
+          "Get Extension Types": {
+            "$ref": "./examples/ListExtensionTypes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
+      "get": {
+        "tags": [
+          "ExtensionTypes",
+          "ClusterExtensionTypes"
+        ],
+        "description": "Get an Extension Type for the cluster.",
+        "operationId": "ExtensionTypes_Get",
+        "x-ms-examples": {
+          "Get Extension Types": {
+            "$ref": "./examples/GetExtensionType.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeGet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -233,6 +334,13 @@
           },
           "releaseTrains": {
             "description": "The list of release trains of the extension type.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportedRegions": {
+            "description": "The list of supported regions for the extension type.",
             "type": "array",
             "items": {
               "type": "string"
