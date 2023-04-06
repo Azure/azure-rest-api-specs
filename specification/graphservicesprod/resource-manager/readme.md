@@ -27,7 +27,17 @@ These are the global settings for the graphservicesprod.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-09-22-preview
+tag: package-2023-04-05-preview
+```
+
+### Tag: package-2023-04-05-preview
+
+These settings apply only when `--tag=package-2023-04-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04-05-preview'
+version: 2023-04-05-preview
+input-file:
+  - Microsoft.GraphServices/preview/2023-04-05-preview/graphservicesprod.json
 ```
 
 ### Tag: package-2022-09-22-preview
@@ -51,16 +61,11 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
