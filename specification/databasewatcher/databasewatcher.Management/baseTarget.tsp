@@ -1,22 +1,19 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-providerhub-controller";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-providerhub-controller";
 
 namespace Microsoft.DatabaseWatcher;
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
-
 
 @doc("Generic properties of a target")
 @discriminator("targetType")
 model TargetProperties {
- 
   @doc("To use SQL authentication for targets, specify the vault where username and password secrets are stored")
   targetVault?: VaultSecret;
 
@@ -31,13 +28,12 @@ model TargetProperties {
   @visibility("read")
   @doc("The provisioning state of the resource.")
   provisioningState?: ResourceProvisioningState;
-
 }
 @doc("Vault specific details required if using SQL authentication to connect to a target")
 model VaultSecret {
   @doc("ARM ResourceId of the Key Vault instance storing database authentication secrets")
   akvResourceId?: string;
-  
+
   @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target")
   akvTargetUser?: string;
 
@@ -48,9 +44,8 @@ model VaultSecret {
 @doc("Target states")
 enum TargetCollectionStatus {
   Enabled,
-  Disabled
+  Disabled,
 }
 
 @armResourceOperations
 interface Targets extends ProxyResourceOperations<Target> {}
-

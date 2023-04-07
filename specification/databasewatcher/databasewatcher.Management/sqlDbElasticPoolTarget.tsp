@@ -1,15 +1,14 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-providerhub-controller";
-import "./baseTarget.cadl";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-providerhub-controller";
+import "./baseTarget.tsp";
 
 namespace Microsoft.DatabaseWatcher;
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -17,7 +16,7 @@ using OpenAPI;
 model SqlDbElasticPoolTargetProperties extends TargetProperties {
   @doc("Azure SQL DB elastic pool target")
   targetType: "SqlEp";
-  
+
   @doc("ARM ResourceId of an Azure SQL DB elastic pool target")
   sqlEpResourceId: string;
 
