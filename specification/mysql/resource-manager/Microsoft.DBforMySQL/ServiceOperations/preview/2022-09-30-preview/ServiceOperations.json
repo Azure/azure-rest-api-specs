@@ -39,10 +39,10 @@
         "tags": [
           "LocationBasedCapabilities"
         ],
-        "operationId": "LocationBasedCapabilities_List",
+        "operationId": "LocationBasedCapabilities_Get",
         "x-ms-examples": {
           "CapabilitiesList": {
-            "$ref": "./examples/CapabilitiesByLocationList.json"
+            "$ref": "./examples/CapabilitiesByLocation.json"
           }
         },
         "description": "Get capabilities at specified location in a given subscription.",
@@ -54,14 +54,14 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CapabilitiesListResult"
+              "$ref": "#/definitions/CapabilityProperties"
             }
           },
           "default": {
@@ -70,9 +70,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -96,7 +93,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
           },
           {
             "name": "parameters",
@@ -144,7 +141,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/LocationNameParameter"
           },
           {
             "name": "nameAvailabilityRequest",
@@ -365,6 +362,22 @@
           "format": "int64",
           "description": "supported memory per vCore in MB",
           "readOnly": true
+        },
+        "supportedZones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported zones",
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
+          "readOnly": true
         }
       },
       "description": "Sku capability"
@@ -375,15 +388,6 @@
         "name": {
           "type": "string",
           "description": "server version",
-          "readOnly": true
-        },
-        "supportedSkus": {
-          "description": "A list of supported Skus",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuCapability"
-          },
-          "x-ms-identifiers": [],
           "readOnly": true
         }
       },
@@ -441,11 +445,11 @@
           "x-ms-identifiers": [],
           "readOnly": true
         },
-        "supportedServerVersions": {
-          "description": "A list of supported server versions.",
+        "supportedSkus": {
+          "description": "A list of supported Skus",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerVersionCapability"
+            "$ref": "#/definitions/SkuCapability"
           },
           "x-ms-identifiers": [],
           "readOnly": true
@@ -456,19 +460,6 @@
     "CapabilityProperties": {
       "type": "object",
       "properties": {
-        "zone": {
-          "type": "string",
-          "description": "zone name",
-          "readOnly": true
-        },
-        "supportedHAMode": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Supported high availability mode",
-          "readOnly": true
-        },
         "supportedGeoBackupRegions": {
           "type": "array",
           "items": {
@@ -485,29 +476,18 @@
           },
           "x-ms-identifiers": [],
           "readOnly": true
-        }
-      },
-      "description": "Location capabilities."
-    },
-    "CapabilitiesListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A list of supported capabilities.",
+        },
+        "supportedServerVersions": {
+          "description": "A list of supported server versions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CapabilityProperties"
+            "$ref": "#/definitions/ServerVersionCapability"
           },
           "x-ms-identifiers": [],
           "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       },
-      "description": "location capability"
+      "description": "Location capabilities."
     },
     "GetPrivateDnsZoneSuffixResponse": {
       "type": "object",
@@ -631,24 +611,6 @@
         }
       },
       "description": "An error response from the Batch service."
-    }
-  },
-  "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
-    },
-    "LocationNameParameter": {
-      "name": "locationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the location.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
