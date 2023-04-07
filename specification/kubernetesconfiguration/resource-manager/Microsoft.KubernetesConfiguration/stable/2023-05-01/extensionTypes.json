@@ -322,20 +322,21 @@
             "description": "Name of the publisher for the Extension Type"
           },
           "planInfo": {
+            "description": "Plan information only for the Marketplace Extension Type.",
             "type": "object",
             "required": false,
             "properties": {
               "publisherId": {
                 "type": "string",
-                "description": "Marketplace Extension Type Publisher ID."
+                "description": "Publisher ID of the Marketplace Extension Type."
               },
               "planId": {
                 "type": "string",
-                "description": "Marketplace Extension Type Plan ID."
+                "description": "Plan ID of the Marketplace Extension Type."
               },
               "offerId": {
                 "type": "string",
-                "description": "Marketplace Extension Type Offer ID."
+                "description": "Offer ID of the Marketplace Extension Type."
               }
             }
           },
@@ -354,7 +355,7 @@
             }
           },
           "supportedClusterTypes": {
-            "description": "The list of cluster types of the extension type.",
+            "description": "Cluster Types supported for this Extension Type.",
             "type": "array",
             "items": {
               "type": "string"
@@ -362,7 +363,7 @@
           },
           "supportedScopes": {
             "defaultScope": {
-              "description": "The default scope of the extension type.",
+              "description": "The default scope of the extension type. This scope will be used if the user does not provide a scope while creating an extension.",
               "type": "string"
             },
             "properties": {
@@ -383,7 +384,7 @@
               }
             },
             "protectedParameters": {
-              "description": "The list of protected parameters for the extension type.",
+              "description": "The list of protected parameter names for the extension type.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -416,7 +417,7 @@
           "type": "string"
         },
         "versions": {
-          "description": "The list of versions of the extension type.",
+          "description": "The list of versions of the extension type for this Release Train.",
           "type": "array",
           "items": {
             "description": "The version for the extension type.",
@@ -465,7 +466,7 @@
           "items": {
             "$ref": "#/definitions/ExtensionTypeVersionForReleaseTrain"
           },
-          "description": "List of Extension Type Versions for an Extension Type."
+          "description": "List of Extension Type Versions for an Extension Type in a Release Train."
         }
       }
     }
