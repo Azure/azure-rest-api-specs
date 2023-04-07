@@ -176,7 +176,6 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 - Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json
-- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/common-types.json
 ```
 
 ## Suppression
