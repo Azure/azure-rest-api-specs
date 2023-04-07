@@ -153,7 +153,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-02-01'
+``` yaml $(tag) == 'package-2023-05-01'
 input-file:
 - Microsoft.Databricks/stable/2023-02-01/databricks.json
 - Microsoft.Databricks/stable/2023-02-01/vnetpeering.json
