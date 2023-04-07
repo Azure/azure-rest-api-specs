@@ -2363,7 +2363,7 @@
     "AnalyzeTextJobState": {
       "allOf": [
         {
-          "$ref": "#/definitions/JobState"
+          "$ref": "common.json#/definitions/JobState"
         },
         {
           "$ref": "#/definitions/TasksState"
@@ -2380,60 +2380,6 @@
         }
       },
       "type": "object"
-    },
-    "JobState": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "partiallyCompleted",
-            "failed",
-            "cancelled",
-            "cancelling"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "State"
-          }
-        },
-        "errors": {
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          },
-          "type": "array"
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "jobId",
-        "lastUpdatedDateTime",
-        "createdDateTime",
-        "status"
-      ]
     },
     "JobErrors": {
       "properties": {
