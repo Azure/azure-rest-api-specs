@@ -53,13 +53,7 @@ available to Compute Nodes, use the Azure portal or the Azure Resource Manager
 API.
 """)
   @example("./examples/ApplicationGet.json", "Get applications")
-  Get is Azure.Core.ResourceRead<
-    Application,
-    {
-      parameters: BatchClientRequestHeaders;
-      response: BatchError;
-    }
-  >;
+  Get is BatchOperations.ResourceRead<Application,standardBatchTraits>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
