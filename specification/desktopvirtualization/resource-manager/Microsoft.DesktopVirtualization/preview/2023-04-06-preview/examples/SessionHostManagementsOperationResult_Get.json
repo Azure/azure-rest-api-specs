@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
+    "resourceGroupName": "resourceGroup1",
+    "hostPoolName": "hostPool1",
+    "operationResultId": "12345678-1234-1234-1234-123456789012",
+    "api-version": "2023-04-06-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostManagements/default/operationResults/12345678-1234-1234-1234-123456789012",
+        "type": "Microsoft.DesktopVirtualization/hostPools/sessionHostManagements",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "timeZone": "Alaskan Standard Time",
+          "update": {
+            "deleteOriginalVM": true,
+            "maxVmsRemovedDuringUpdate": 4,
+            "logOffDelayMinutes": 10,
+            "logOffMessage": "logging off for hostpool update"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostManagements/default/operationResults/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostManagements/default/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "Retry-After": "60"
+      }
+    },
+    "204": {},
+    "400": {
+      "body": {
+        "validationErrors": [
+          {
+            "faultType": "ServiceError",
+            "faultCode": "code1",
+            "faultText": "text1",
+            "faultContext": "context1"
+          }
+        ]
+      }
+    },
+    "500": {}
+  }
+}
