@@ -825,7 +825,7 @@
       }
     },
     "OperationListResult": {
-      "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
       "type": "object",
       "properties": {
         "value": {
@@ -836,11 +836,13 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "List of Microsoft.Resources operations."
+          "description": "List of operations supported by the resource provider",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       }
     },
