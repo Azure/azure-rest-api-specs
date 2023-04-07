@@ -21,8 +21,10 @@ using Azure.ClientGenerator.Core;
 namespace BatchService;
 
 // Interfaces ////////////////////
-@operationGroup
-@tag("Applications")
+
+
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 interface Applications {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
@@ -36,10 +38,9 @@ API.
   @route("/applications")
   @operationId("Application_List")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders,
     BatchResponseHeaders & ApplicationListResult,
-    {},
     BatchError
   >;
 
@@ -61,6 +62,7 @@ API.
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("Pools")
 interface Pool {
@@ -77,16 +79,15 @@ times of the last aggregation interval currently available; that is, only the
 last aggregation interval is returned.
 """)
   @example("./examples/PoolListUsageMetrics.json", "Pool list usage metrics")
-  ListUsageMetrics is Azure.Core.ResourceList<
-    PoolUsageMetrics,
-    {
-      parameters: BatchApplicationListHeaders &
-        Pool_ListUsageMetricRequestHeaders;
-      response: BatchResponseHeaders;
-    }
+  @route("/poolusagemetrics")
+  @get
+  ListUsageMetrics is RpcOperation<
+    BatchApplicationListHeaders & Pool_ListUsageMetricRequestHeaders,
+    BatchResponseHeaders & PoolListUsageMetricsResult,
+   BatchError
   >;
 
-  @summary("Gets lifetime summary statistics for all of the Pools in the specified Account.")
+   @summary("Gets lifetime summary statistics for all of the Pools in the specified Account.")
   @doc("""
 Statistics are aggregated across all Pools that have ever existed in the
 Account, from Account creation to the last update time of the statistics. The
@@ -99,11 +100,10 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
     "Pool get lifetime statistics"
   )
   @get
-  GetAllLifetimeStatistics is Azure.Core.Foundations.Operation<
+  GetAllLifetimeStatistics is RpcOperation<
     BatchClientRequestHeaders,
     BatchResponseHeaders & PoolStatistics,
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Adds a Pool to the specified Account.")
@@ -112,7 +112,7 @@ When naming Pools, avoid including sensitive information such as user names or
 secret project names. This information may appear in telemetry logs accessible
 to Microsoft Support engineers.
 """)
-  @route("/pools")
+  
   @example(
     "./examples/PoolAdd_CloudServiceConfiguration.json",
     "Add a CloudServiceConfiguration pool"
@@ -133,9 +133,9 @@ to Microsoft Support engineers.
     "./examples/PoolAdd_MountConfiguration.json",
     "Add a pool with mount drive specified"
   )
-  @post
-  Add is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & {
+  @route("/pools")
+  Add is RpcOperation<BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -143,25 +143,17 @@ to Microsoft Support engineers.
       @doc("The Pool to be added.")
       pool: BatchPool;
     },
-    BatchResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "201";
-
-      @header("DataServiceId")
-      @doc("The OData ID of the resource to which the request applied.")
-      DataServiceId: string;
-    },
-    {},
+    BatchResponseHeaders,
     BatchError
   >;
+
 
   @summary("Lists all of the Pools in the specified Account.")
   @doc("Lists all of the Pools in the specified Account.")
   @route("/pools")
   @example("./examples/PoolList_Basic.json", "Pool list")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -179,8 +171,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchPoolListResult,
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Deletes a Pool from the specified Account.")
@@ -201,23 +192,24 @@ error code PoolBeingDeleted.
   @example("./examples/PoolDelete.json", "Pool delete")
   @route("/pools/{poolId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  Delete is RpcOperation<
     BatchClientRequestHeaders & BatchPoolHeaders,
     DeleteResponseHeaders,
-    {},
-    BatchError
+   BatchError
   >;
+
 
   @doc("Gets basic properties of a Pool.")
   @example("./examples/PoolExists.json", "Check Pool Exists")
   @route("/pools/{poolId}")
   @head
-  Exists is Azure.Core.Foundations.Operation<
+  Exists is RpcOperation<
     BatchClientRequestHeaders & BatchPoolHeaders,
     PoolDoesntExistResponseHeaders | PoolDoesExistResponseHeaders,
-    {},
-    BatchError
+   BatchError
   >;
+
+  
 
   @doc("Gets information about the specified Pool.")
   @example("./examples/PoolGet_Basic.json", "Pool get")
@@ -225,23 +217,10 @@ error code PoolBeingDeleted.
     "./examples/PoolGet_VirtualMachineConfigurationWithExtensions.json",
     "Get a VirtualMachineConfiguration pool with extensions"
   )
-  @route("/pools/{poolId}")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders &
-      BatchPoolHeaders & {
-        @doc("An OData $select clause.")
-        @query
-        $select?: string;
-
-        @doc("An OData $expand clause.")
-        @query
-        $expand?: string;
-      },
-    BatchResponseHeaders & BatchPool,
-    {},
-    BatchError
-  >;
+  Get is BatchOperations.ResourceRead<BatchPool,
+  BatchRequestSelectExpandQueryParametersTraits &
+  BatchRequestMatchModifiedHeadersTraits &
+  BatchResponseHeadersTrait>;
 
   @summary("Updates the properties of the specified Pool.")
   @doc("""
@@ -252,9 +231,10 @@ a StartTask element, then the Pool keeps the existing StartTask.
   @example("./examples/PoolPatch.json", "Patch the Pool")
   @route("/pools/{poolId}")
   @patch
-  Patch is Azure.Core.Foundations.Operation<
+  Patch is RpcOperation<
     BatchClientRequestHeaders &
       BatchPoolHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -271,8 +251,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Disables automatic scaling for a Pool.")
@@ -280,7 +259,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
   @example("./examples/PoolDisableAutoScale.json", "Disable pool autoscale")
   @route("/pools/{poolId}/disableautoscale")
   @post
-  DisableAutoScale is Azure.Core.Foundations.Operation<
+  DisableAutoScale is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool on which to disable automatic scaling.")
       @path
@@ -295,8 +274,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Enables automatic scaling for a Pool.")
@@ -311,9 +289,10 @@ more than once every 30 seconds.
   @example("./examples/PoolEnableAutoscale.json", "Pool enable autoscale")
   @route("/pools/{poolId}/enableautoscale")
   @post
-  EnableAutoScale is Azure.Core.Foundations.Operation<
+  EnableAutoScale is RpcOperation<
     BatchClientRequestHeaders &
       BatchPoolHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -330,8 +309,7 @@ more than once every 30 seconds.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Gets the result of evaluating an automatic scaling formula on the Pool.")
@@ -343,8 +321,9 @@ scaling enabled in order to evaluate a formula.
   @example("./examples/PoolEvaluateAutoscale.json", "Pool evaluate autoscale")
   @route("/pools/{poolId}/evaluateautoscale")
   @post
-  EvaluateAutoScale is Azure.Core.Foundations.Operation<
+  EvaluateAutoScale is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -366,7 +345,6 @@ scaling enabled in order to evaluate a formula.
         @header("DataServiceId")
         DataServiceId: string;
       },
-      {},
       BatchError
   >;
 
@@ -383,9 +361,10 @@ Nodes, use the Pool remove Compute Nodes API instead.
   @example("./examples/PoolResize.json", "Pool resize")
   @route("/pools/{poolId}/resize")
   @post
-  Resize is Azure.Core.Foundations.Operation<
+  Resize is RpcOperation<
     BatchClientRequestHeaders &
       BatchPoolHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -402,8 +381,7 @@ Nodes, use the Pool remove Compute Nodes API instead.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Stops an ongoing resize operation on the Pool.")
@@ -419,11 +397,10 @@ be used to halt the initial sizing of the Pool when it is created.
   @example("./examples/PoolStopResize.json", "Pool stop resize")
   @route("/pools/{poolId}/stopresize")
   @post
-  StopResize is Azure.Core.Foundations.Operation<
+  StopResize is RpcOperation<
     BatchClientRequestHeaders & BatchPoolHeaders,
     PoolStopResizeResponseHeaders,
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Updates the properties of the specified Pool.")
@@ -435,8 +412,9 @@ with this request, then the Batch service will remove the existing StartTask.
   @example("./examples/PoolUpdate.json", "Pool update")
   @route("/pools/{poolId}/updateproperties")
   @post
-  UpdateProperties is Azure.Core.Foundations.Operation<
+  UpdateProperties is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -449,8 +427,7 @@ with this request, then the Batch service will remove the existing StartTask.
       poolUpdatePropertiesParameter: BatchPool;
     },
     PoolUpdatePropertiesResponseHeaders,
-    {},
-    BatchError
+   BatchError
   >;
 
   @summary("Removes Compute Nodes from the specified Pool.")
@@ -462,9 +439,10 @@ Each request may remove up to 100 nodes.
   @example("./examples/PoolRemoveNodes.json", "Pool remove nodes")
   @route("/pools/{poolId}/removenodes")
   @post
-  RemoveNodes is Azure.Core.Foundations.Operation<
+  RemoveNodes is RpcOperation<
     BatchClientRequestHeaders &
       BatchPoolHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -473,11 +451,12 @@ Each request may remove up to 100 nodes.
         parameters: NodeRemoveParameters;
       },
     PoolRemoveNodesResponseHeaders,
-    {},
-    BatchError
+   BatchError
   >;
 }
 
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("Accounts")
 interface Account {
@@ -489,7 +468,7 @@ interface Account {
   )
   @route("/supportedimages")
   @get
-  ListSupportedImages is Azure.Core.Foundations.Operation<
+  ListSupportedImages is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -499,8 +478,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
     },
     BatchResponseHeaders & AccountListSupportedImagesResult,
-    {},
-    BatchError
+   BatchError
   >;
 
   @doc("""
@@ -511,7 +489,7 @@ use a list query.
   @example("./examples/AccountListPoolNodeCounts.json", "NodeCountsPayload")
   @route("/nodecounts")
   @get
-  ListPoolNodeCounts is Azure.Core.Foundations.Operation<
+  ListPoolNodeCounts is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -521,11 +499,11 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
     },
     BatchClientResponseHeaders & PoolNodeCountsListResult,
-    {},
-    BatchError
+   BatchError
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("Jobs")
 interface Job {
@@ -542,10 +520,9 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
   )
   @route("/lifetimejobstats")
   @get
-  GetAllLifetimeStatistics is Azure.Core.Foundations.Operation<
+  GetAllLifetimeStatistics is RpcOperation<
     BatchClientRequestHeaders,
     BatchResponseHeaders & JobStatistics,
-    {},
     BatchError
   >;
 
@@ -563,7 +540,7 @@ that the Job is being deleted.
   @example("./examples/JobDelete.json", "Delete Job")
   @route("/jobs/{jobId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  Delete is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job to delete.")
@@ -571,34 +548,16 @@ that the Job is being deleted.
         jobId: string;
       },
     DeleteResponseHeaders,
-    {},
     BatchError
   >;
 
   @summary("Gets information about the specified Job.")
   @doc("Gets information about the specified Job.")
   @example("./examples/JobGet.json", "Job get")
-  @route("/jobs/{jobId}")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders &
-      BatchMatchHeaders & {
-        @doc("The ID of the Job.")
-        @path
-        jobId: string;
-
-        @doc("An OData $select clause.")
-        @query
-        $select?: string;
-
-        @doc("An OData $expand clause.")
-        @query
-        $expand?: string;
-      },
-    BatchResponseHeaders & BatchJob,
-    {},
-    BatchError
-  >;
+  Get is BatchOperations.ResourceRead<BatchJob,
+  BatchRequestSelectExpandQueryParametersTraits &
+  BatchRequestMatchModifiedHeadersTraits &
+  BatchResponseHeadersTrait>;
 
   @summary("Updates the properties of the specified Job.")
   @doc("""
@@ -609,9 +568,10 @@ element, then the Job keeps the existing constraints.
   @example("./examples/JobPatch.json", "Job patch")
   @route("/jobs/{jobId}")
   @patch
-  Patch is Azure.Core.Foundations.Operation<
+  Patch is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -632,7 +592,6 @@ element, then the Job keeps the existing constraints.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -645,9 +604,10 @@ with this request, then the Batch service will remove the existing constraints.
   @example("./examples/JobUpdate.json", "Job update")
   @route("/jobs/{jobId}")
   @put
-  Update is Azure.Core.Foundations.Operation<
+  Update is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -668,7 +628,6 @@ with this request, then the Batch service will remove the existing constraints.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -686,9 +645,10 @@ the request fails with status code 409.
   @example("./examples/JobDisable.json", "Job disable")
   @route("/jobs/{jobId}/disable")
   @post
-  Disable is Azure.Core.Foundations.Operation<
+  Disable is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -709,7 +669,6 @@ the request fails with status code 409.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -725,7 +684,7 @@ than 180 days ago, those Tasks will not run.
   @example("./examples/JobEnable.json", "Job enable")
   @route("/jobs/{jobId}/enable")
   @post
-  Enable is Azure.Core.Foundations.Operation<
+  Enable is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job to enable.")
@@ -741,7 +700,6 @@ than 180 days ago, those Tasks will not run.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -757,7 +715,7 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
   @example("./examples/JobTerminate.json", "Job terminate")
   @route("/jobs/{jobId}/terminate")
   @post
-  Terminate is Azure.Core.Foundations.Operation<
+  Terminate is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job to terminate.")
@@ -777,7 +735,6 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -797,8 +754,9 @@ engineers.
   @example("./examples/JobAdd_Complex.json", "Add a complex job")
   @route("/jobs")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  Add is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -815,7 +773,6 @@ engineers.
       @header("DataServiceId")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -824,7 +781,7 @@ engineers.
   @example("./examples/JobList.json", "Job list")
   @route("/jobs")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -842,7 +799,6 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchJobListResult,
-    {},
     BatchError
   >;
 
@@ -854,7 +810,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
   )
   @route("/jobschedules/{jobScheduleId}/jobs")
   @get
-  ListFromJobSchedule is Azure.Core.Foundations.Operation<
+  ListFromJobSchedule is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
       @path
@@ -876,7 +832,6 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchJobListResult,
-    {},
     BatchError
   >;
 
@@ -898,7 +853,7 @@ JobPreparationTaskNotSpecified.
   )
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
   @get
-  ListPreparationAndReleaseTaskStatus is Azure.Core.Foundations.Operation<
+  ListPreparationAndReleaseTaskStatus is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("The ID of the Job.")
       @path
@@ -916,7 +871,6 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $select?: string;
     },
     BatchResponseHeaders & BatchJobListPreparationAndReleaseTaskStatusResult,
-    {},
     BatchError
   >;
 
@@ -930,18 +884,21 @@ up to date. If you need exact task counts, use a list query.
   @example("./examples/JobGetTaskCounts.json", "Job get task counts")
   @route("/jobs/{jobId}/taskcounts")
   @get
-  GetTaskCounts is Azure.Core.Foundations.Operation<
+  GetTaskCounts is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Job.")
       @path
       jobId: string;
     },
     BatchClientResponseHeaders & TaskCountsResult,
-    {},
     BatchError
   >;
 }
 
+
+
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("Certificates")
 interface Certificates {
@@ -950,8 +907,9 @@ interface Certificates {
   @example("./examples/CertificateAdd.json", "Certificate add")
   @route("/certificates")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  Add is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -968,7 +926,6 @@ interface Certificates {
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -977,7 +934,7 @@ interface Certificates {
   @example("./examples/CertificateList.json", "Certificate list")
   @route("/certificates")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -991,7 +948,6 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $select?: string;
     },
     BatchResponseHeaders & CertificateListResult,
-    {},
     BatchError
   >;
 
@@ -1011,7 +967,7 @@ then you can try again to delete the Certificate.
   )
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
   @post
-  CancelDeletion is Azure.Core.Foundations.Operation<
+  CancelDeletion is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
       @path
@@ -1030,7 +986,6 @@ then you can try again to delete the Certificate.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1049,7 +1004,7 @@ active if you decide that you want to continue using the Certificate.
   @example("./examples/CertificateDelete.json", "Certificate delete")
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  Delete is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
       @path
@@ -1064,7 +1019,6 @@ active if you decide that you want to continue using the Certificate.
       @statusCode
       code: "202";
     },
-    {},
     BatchError
   >;
 
@@ -1072,7 +1026,7 @@ active if you decide that you want to continue using the Certificate.
   @example("./examples/CertificateGet.json", "Certificate get")
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  Get is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
       @path
@@ -1087,11 +1041,11 @@ active if you decide that you want to continue using the Certificate.
       $select?: string;
     },
     BatchResponseHeaders & Certificate,
-    {},
     BatchError
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("Files")
 interface File {
@@ -1100,7 +1054,7 @@ interface File {
   @example("./examples/FileDeleteFromTask.json", "File delete from task")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @delete
-  DeleteFromTask is Azure.Core.Foundations.Operation<
+  DeleteFromTask is RpcOperation<
     BatchJobFileClientRequestHeaders & {
       @doc("""
 Whether to delete children of a directory. If the filePath parameter represents
@@ -1116,7 +1070,6 @@ then the directory must be empty or deletion will fail.
       @statusCode
       code: "200";
     },
-    {},
     BatchError
   >;
 
@@ -1124,7 +1077,7 @@ then the directory must be empty or deletion will fail.
   @example("./examples/FileGetFromTask.json", "Get File From Task")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @get
-  GetFromTask is Azure.Core.Foundations.Operation<
+  GetFromTask is RpcOperation<
     BatchJobFileClientRequestHeaders &
       BatchModifiedSinceHeaders & {
         @doc("""
@@ -1136,13 +1089,13 @@ format is bytes=startRange-endRange.
       },
     BatchResponseHeaders &
       FileResponse & {
+        @doc("Type of content")
         @header("content-type") contentType: "application/octet-stream";
 
         @body
         @doc("A response containing the file content.")
         file: bytes;
       },
-      {},
       BatchError
   >;
 
@@ -1153,10 +1106,9 @@ format is bytes=startRange-endRange.
   )
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @head
-  GetPropertiesFromTask is Azure.Core.Foundations.Operation<
+  GetPropertiesFromTask is RpcOperation<
     BatchJobFileClientRequestHeaders & BatchModifiedSinceHeaders,
     BatchResponseHeaders & FileResponse,
-    {},
     BatchError
   >;
 
@@ -1165,7 +1117,7 @@ format is bytes=startRange-endRange.
   @example("./examples/FileDeleteFromNode.json", "File delete from node")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @delete
-  DeleteFromComputeNode is Azure.Core.Foundations.Operation<
+  DeleteFromComputeNode is RpcOperation<
     BatchPoolFileClientRequestHeaders & {
       @doc("""
 Whether to delete children of a directory. If the filePath parameter represents
@@ -1181,7 +1133,6 @@ then the directory must be empty or deletion will fail.
       @statusCode
       code: "200";
     },
-    {},
     BatchError
   >;
 
@@ -1189,7 +1140,7 @@ then the directory must be empty or deletion will fail.
   @example("./examples/FileGetFromNode.json", "Get File From Compute Node")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @get
-  GetFromComputeNode is Azure.Core.Foundations.Operation<
+  GetFromComputeNode is RpcOperation<
     BatchPoolFileClientRequestHeaders &
       BatchModifiedSinceHeaders & {
         @doc("""
@@ -1207,7 +1158,6 @@ format is bytes=startRange-endRange.
         @doc("A response containing the file content.")
         file: bytes;
       },
-      {},
       BatchError
   >;
 
@@ -1218,10 +1168,9 @@ format is bytes=startRange-endRange.
   )
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @head
-  GetPropertiesFromComputeNode is Azure.Core.Foundations.Operation<
+  GetPropertiesFromComputeNode is RpcOperation<
     BatchPoolFileClientRequestHeaders & BatchModifiedSinceHeaders,
     BatchResponseHeaders & FileResponse,
-    {},
     BatchError
   >;
 
@@ -1230,7 +1179,7 @@ format is bytes=startRange-endRange.
   @example("./examples/FileListFromTask.json", "File list from task")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
   @get
-  ListFromTask is Azure.Core.Foundations.Operation<
+  ListFromTask is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("The ID of the Job that contains the Task.")
       @path
@@ -1255,7 +1204,6 @@ combination with the filter parameter to list specific type of files.
       recursive?: boolean;
     },
     BatchResponseHeaders & NodeFileListResult,
-    {},
     BatchError
   >;
 
@@ -1264,7 +1212,7 @@ combination with the filter parameter to list specific type of files.
   @example("./examples/FileListFromNode.json", "File list from node")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
   @get
-  ListFromComputeNode is Azure.Core.Foundations.Operation<
+  ListFromComputeNode is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -1286,11 +1234,11 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       recursive?: boolean;
     },
     BatchResponseHeaders & NodeFileListResult,
-    {},
     BatchError
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("JobSchedules")
 interface JobSchedule {
@@ -1299,7 +1247,7 @@ interface JobSchedule {
   @example("./examples/JobScheduleExists.json", "Check Job Schedule Exists")
   @route("/jobschedules/{jobScheduleId}")
   @head
-  Exists is Azure.Core.Foundations.Operation<
+  Exists is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule which you want to check.")
@@ -1315,7 +1263,6 @@ interface JobSchedule {
       @statusCode
       code: "404";
     },
-    {},
     BatchError
   >;
 
@@ -1330,7 +1277,7 @@ though they are still counted towards Account lifetime statistics.
   @example("./examples/JobScheduleDelete.json", "JobSchedule delete")
   @route("/jobschedules/{jobScheduleId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  Delete is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule to delete.")
@@ -1338,33 +1285,15 @@ though they are still counted towards Account lifetime statistics.
         jobScheduleId: string;
       },
     DeleteResponseHeaders,
-    {},
     BatchError
   >;
 
   @doc("Gets information about the specified Job Schedule.")
   @example("./examples/JobScheduleGet.json", "JobSchedule get")
-  @route("/jobschedules/{jobScheduleId}")
-  @get
-  Get is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders &
-      BatchMatchHeaders & {
-        @doc("The ID of the Job Schedule to get.")
-        @path
-        jobScheduleId: string;
-
-        @doc("An OData $select clause.")
-        @query
-        $select?: string;
-
-        @doc("An OData $expand clause.")
-        @query
-        $expand?: string;
-      },
-    BatchResponseHeaders & BatchJobSchedule,
-    {},
-    BatchError
-  >;
+  Get is BatchOperations.ResourceRead<BatchJobSchedule,
+  BatchRequestSelectExpandQueryParametersTraits &
+  BatchRequestMatchModifiedHeadersTraits &
+  BatchResponseHeadersTrait>;
 
   @summary("Updates the properties of the specified Job Schedule.")
   @doc("""
@@ -1377,9 +1306,10 @@ running Jobs are unaffected.
   @example("./examples/JobSchedulePatch.json", "JobSchedule patch")
   @route("/jobschedules/{jobScheduleId}")
   @patch
-  Patch is Azure.Core.Foundations.Operation<
+  Patch is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -1400,7 +1330,6 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1415,9 +1344,10 @@ running Jobs are unaffected.
   @example("./examples/JobScheduleUpdate.json", "JobSchedule update")
   @route("/jobschedules/{jobScheduleId}")
   @put
-  Update is Azure.Core.Foundations.Operation<
+  Update is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -1438,7 +1368,6 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1447,7 +1376,7 @@ running Jobs are unaffected.
   @example("./examples/JobScheduleDisable.json", "JobSchedule disable")
   @route("/jobschedules/{jobScheduleId}/disable")
   @post
-  Disable is Azure.Core.Foundations.Operation<
+  Disable is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule to disable.")
@@ -1463,7 +1392,6 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1472,7 +1400,7 @@ running Jobs are unaffected.
   @example("./examples/JobScheduleEnable.json", "JobSchedule enable")
   @route("/jobschedules/{jobScheduleId}/enable")
   @post
-  Enable is Azure.Core.Foundations.Operation<
+  Enable is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule to enable.")
@@ -1488,7 +1416,6 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1497,7 +1424,7 @@ running Jobs are unaffected.
   @example("./examples/JobScheduleTerminate.json", "JobSchedule terminate")
   @route("/jobschedules/{jobScheduleId}/terminate")
   @post
-  Terminate is Azure.Core.Foundations.Operation<
+  Terminate is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule to terminates.")
@@ -1513,7 +1440,6 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1526,8 +1452,9 @@ running Jobs are unaffected.
   )
   @route("/jobschedules")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  Add is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -1544,7 +1471,6 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1553,7 +1479,7 @@ running Jobs are unaffected.
   @example("./examples/JobScheduleList.json", "JobSchedule list")
   @route("/jobschedules")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
@@ -1571,11 +1497,11 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchJobScheduleListResult,
-    {},
     BatchError
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("Tasks")
 interface Task {
@@ -1600,8 +1526,9 @@ the Batch service and left in whatever state it was in at that time.
   )
   @route("/jobs/{jobId}/tasks")
   @post
-  Add is Azure.Core.Foundations.Operation<
+  Add is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -1622,7 +1549,6 @@ the Batch service and left in whatever state it was in at that time.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1635,7 +1561,7 @@ information about subtasks.
   @example("./examples/TaskList.json", "Task list")
   @route("/jobs/{jobId}/tasks")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("The ID of the Job.")
       @path
@@ -1657,7 +1583,6 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchTaskListResult,
-    {},
     BatchError
   >;
 
@@ -1688,8 +1613,9 @@ service and left in whatever state it was in at that time.
   )
   @route("/jobs/{jobId}/addtaskcollection")
   @post
-  AddCollection is Azure.Core.Foundations.Operation<
+  AddCollection is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -1702,7 +1628,6 @@ service and left in whatever state it was in at that time.
       taskCollection: BatchTaskCollection;
     },
     BatchClientResponseHeaders & TaskAddCollectionResult,
-    {},
     BatchError
   >;
 
@@ -1717,7 +1642,7 @@ background.
   @example("./examples/TaskDelete.json", "Task delete")
   @route("/jobs/{jobId}/tasks/{taskId}")
   @delete
-  Delete is Azure.Core.Foundations.Operation<
+  Delete is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job from which to delete the Task.")
@@ -1733,7 +1658,6 @@ background.
       @statusCode
       code: "200";
     },
-    {},
     BatchError
   >;
 
@@ -1746,7 +1670,7 @@ information about subtasks.
   @example("./examples/TaskGet.json", "Task get")
   @route("/jobs/{jobId}/tasks/{taskId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  Get is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job that contains the Task.")
@@ -1771,7 +1695,6 @@ information about subtasks.
         @doc("The OData ID of the resource to which the request applied.")
         DataServiceId: string;
       },
-    {},
     BatchError
   >;
 
@@ -1779,9 +1702,10 @@ information about subtasks.
   @example("./examples/TaskUpdate.json", "Task update")
   @route("/jobs/{jobId}/tasks/{taskId}")
   @put
-  Update is Azure.Core.Foundations.Operation<
+  Update is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
+        @doc("Type of content")
         @header("content-type")
         contentType: "application/json; odata=minimalmetadata";
 
@@ -1806,7 +1730,6 @@ information about subtasks.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1818,7 +1741,7 @@ Task.
   @example("./examples/TaskListSubtasks.json", "Task list subtasks")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
   @get
-  ListSubtasks is Azure.Core.Foundations.Operation<
+  ListSubtasks is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Job.")
       @path
@@ -1833,7 +1756,6 @@ Task.
       $select?: string;
     },
     BatchResponseHeaders & BatchTaskListSubtasksResult,
-    {},
     BatchError
   >;
 
@@ -1846,7 +1768,7 @@ primary task; subtasks are then terminated asynchronously in the background.
   @example("./examples/TaskTerminate.json", "Task terminate")
   @route("/jobs/{jobId}/tasks/{taskId}/terminate")
   @post
-  Terminate is Azure.Core.Foundations.Operation<
+  Terminate is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job containing the Task.")
@@ -1862,7 +1784,6 @@ primary task; subtasks are then terminated asynchronously in the background.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1882,7 +1803,7 @@ will fail if the Job has completed (or is terminating or deleting).
   @example("./examples/TaskReactivate.json", "Task reactivate")
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
   @post
-  Reactivate is Azure.Core.Foundations.Operation<
+  Reactivate is RpcOperation<
     BatchClientRequestHeaders &
       BatchMatchHeaders & {
         @doc("The ID of the Job containing the Task.")
@@ -1898,11 +1819,11 @@ will fail if the Job has completed (or is terminating or deleting).
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("ComputeNodes")
 interface ComputeNodes {
@@ -1914,8 +1835,9 @@ running state.
   @example("./examples/NodeAddUser.json", "Node add user")
   @route("/pools/{poolId}/nodes/{nodeId}/users")
   @post
-  AddUser is Azure.Core.Foundations.Operation<
+  AddUser is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -1940,7 +1862,6 @@ running state.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -1952,7 +1873,7 @@ running state.
   @example("./examples/NodeDeleteUser.json", "Node delete user")
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @delete
-  DeleteUser is Azure.Core.Foundations.Operation<
+  DeleteUser is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -1971,7 +1892,6 @@ running state.
       @statusCode
       code: "200";
     },
-    {},
     BatchError
   >;
 
@@ -1988,8 +1908,9 @@ Account on a Compute Node only when it is in the idle or running state.
   @example("./examples/NodeUpdateUser.json", "Node update user")
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @put
-  UpdateUser is Azure.Core.Foundations.Operation<
+  UpdateUser is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -2018,7 +1939,6 @@ Account on a Compute Node only when it is in the idle or running state.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -2027,7 +1947,7 @@ Account on a Compute Node only when it is in the idle or running state.
   @example("./examples/NodeGet_Basic.json", "Node get")
   @route("/pools/{poolId}/nodes/{nodeId}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  Get is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2042,7 +1962,6 @@ Account on a Compute Node only when it is in the idle or running state.
       $select?: string;
     },
     BatchResponseHeaders & ComputeNode,
-    {},
     BatchError
   >;
 
@@ -2051,8 +1970,9 @@ Account on a Compute Node only when it is in the idle or running state.
   @example("./examples/NodeReboot.json", "Node reboot")
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
   @post
-  Reboot is Azure.Core.Foundations.Operation<
+  Reboot is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -2077,7 +1997,6 @@ Account on a Compute Node only when it is in the idle or running state.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -2090,8 +2009,9 @@ cloud service configuration property.
   @example("./examples/NodeReimage.json", "Node reimage")
   @route("/pools/{poolId}/nodes/{nodeId}/reimage")
   @post
-  Reimage is Azure.Core.Foundations.Operation<
+  Reimage is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -2116,7 +2036,6 @@ cloud service configuration property.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -2128,7 +2047,7 @@ scheduling state is enabled.
   @example("./examples/NodeDisableScheduling.json", "Node disable scheduling")
   @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
   @post
-  DisableScheduling is Azure.Core.Foundations.Operation<
+  DisableScheduling is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2151,7 +2070,6 @@ scheduling state is enabled.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -2163,7 +2081,7 @@ state is disabled
   @example("./examples/NodeEnableScheduling.json", "Node enable scheduling")
   @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
   @post
-  EnableScheduling is Azure.Core.Foundations.Operation<
+  EnableScheduling is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2182,7 +2100,6 @@ state is disabled
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
-    {},
     BatchError
   >;
 
@@ -2200,7 +2117,7 @@ API.
   )
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @get
-  GetRemoteLoginSettings is Azure.Core.Foundations.Operation<
+  GetRemoteLoginSettings is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2211,7 +2128,6 @@ API.
       nodeId: string;
     },
     BatchResponseHeaders & ComputeNodeGetRemoteLoginSettingsResult,
-    {},
     BatchError
   >;
 
@@ -2228,7 +2144,7 @@ configuration, see the GetRemoteLoginSettings API.
   )
   @route("/pools/{poolId}/nodes/{nodeId}/rdp")
   @get
-  GetRemoteDesktop is Azure.Core.Foundations.Operation<
+  GetRemoteDesktop is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2248,7 +2164,6 @@ Protocol file.
       @doc("A response containing the file content.")
       file: bytes;
     },
-    {},
     BatchError
   >;
 
@@ -2268,8 +2183,9 @@ support to aid in debugging issues with the Batch service.
   )
   @route("/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
   @post
-  UploadBatchServiceLogs is Azure.Core.Foundations.Operation<
+  UploadBatchServiceLogs is RpcOperation<
     BatchClientRequestHeaders & {
+      @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
 
@@ -2289,7 +2205,6 @@ Protocol file.
       uploadBatchServiceLogsConfiguration: UploadBatchServiceLogsConfiguration;
     },
     BatchClientResponseHeaders & UploadBatchServiceLogsResult,
-    {},
     BatchError
   >;
 
@@ -2298,7 +2213,7 @@ Protocol file.
   @example("./examples/NodeList.json", "Node list")
   @route("/pools/{poolId}/nodes")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("The ID of the Pool from which you want to list Compute Nodes.")
       @path
@@ -2316,11 +2231,11 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $select?: string;
     },
     BatchResponseHeaders & ComputeNodeListResult,
-    {},
     BatchError
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
 @tag("ComputeNodes")
 interface ComputeNodeExtensions {
@@ -2332,7 +2247,7 @@ interface ComputeNodeExtensions {
   )
   @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
   @get
-  Get is Azure.Core.Foundations.Operation<
+  Get is RpcOperation<
     BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
@@ -2354,7 +2269,6 @@ about.
       $select?: string;
     },
     BatchResponseHeaders & NodeVMExtension,
-    {},
     BatchError
   >;
 
@@ -2366,7 +2280,7 @@ about.
   )
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
   @get
-  List is Azure.Core.Foundations.Operation<
+  List is RpcOperation<
     BatchApplicationListHeaders & {
       @doc("The ID of the Pool that contains Compute Node.")
       @path
@@ -2381,13 +2295,13 @@ about.
       $select?: string;
     },
     BatchResponseHeaders & NodeVMExtensionList,
-    {},
     BatchError
   >;
 }
 
 // headers ////////////////////
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The request to the Batch service was successful.")
 model PoolRemoveNodesResponseHeaders {
   ...BatchResponseHeaders;
@@ -2401,6 +2315,7 @@ model PoolRemoveNodesResponseHeaders {
   DataServiceId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The request to the Batch service was successful.")
 model PoolUpdatePropertiesResponseHeaders {
   ...BatchResponseHeaders;
@@ -2416,6 +2331,7 @@ model PoolUpdatePropertiesResponseHeaders {
 
 alias PoolStopResizeResponseHeaders = PoolResizeResponseHeaders;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The request to the Batch service was successful.")
 model PoolResizeResponseHeaders {
   ...BatchResponseHeaders;
@@ -2429,6 +2345,7 @@ model PoolResizeResponseHeaders {
   DataServiceId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("Common header values for pool requests")
 model FileResponse {
   @doc("A process exit code.")
@@ -2455,19 +2372,174 @@ model FileResponse {
   @header
   @doc("The length of the file.")
   "Content-Length": int64;
-
-  //@header
-  //@doc("The content type of the file.")
-  //"content-Type":  string;
 }
+
+
+
+///////////////////////////////// Traits  ////////////////////////
+
+
+
+alias BatchRequestQueryParametersTrait =  QueryParametersTrait<{
+  @doc("""
+The maximum number of items to return in the response. A maximum of 1000
+applications can be returned.
+""")
+@query
+timeout?: int32 = 30;
+}>;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+alias BatchRequestSelectExpandQueryParametersTraits =  QueryParametersTrait<{
+  @doc("""
+The maximum number of items to return in the response. A maximum of 1000
+applications can be returned.
+""")
+@query
+timeout?: int32 = 30;
+
+@doc("An OData $select clause.")
+@query
+$select?: string;
+
+@doc("An OData $expand clause.")
+@query
+$expand?: string;
+}>;
+
+
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+alias BatchRequestHeadersTrait = RequestHeadersTrait<{
+   @doc("""
+The caller-generated request identity, in the form of a GUID with no decoration
+such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+""")
+@header
+@format("uuid")
+"client-request-id"?: string;
+
+@doc("Whether the server should return the client-request-id in the response.")
+@header
+"return-client-request-id"?: boolean = false;
+
+@doc("""
+The time the request was issued. Client libraries typically set this to the
+current system clock time; set it explicitly if you are calling the REST API
+directly.
+""")
+@header
+@format("date-time-rfc1123")
+"ocp-date"?: string;
+}>;
+
+
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+alias BatchRequestMatchModifiedHeadersTraits = RequestHeadersTrait<{
+   @doc("""
+The caller-generated request identity, in the form of a GUID with no decoration
+such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+""")
+@header
+@format("uuid")
+"client-request-id"?: string;
+
+@doc("Whether the server should return the client-request-id in the response.")
+@header
+"return-client-request-id"?: boolean = false;
+
+@doc("""
+The time the request was issued. Client libraries typically set this to the
+current system clock time; set it explicitly if you are calling the REST API
+directly.
+""")
+@header
+@format("date-time-rfc1123")
+"ocp-date"?: string;
+
+@doc("""
+An ETag value associated with the version of the resource known to the client.
+The operation will be performed only if the resource's current ETag on the
+service exactly matches the value specified by the client.
+""")
+@header
+"If-Match"?: string;
+
+@doc("""
+An ETag value associated with the version of the resource known to the client.
+The operation will be performed only if the resource's current ETag on the
+service does not match the value specified by the client.
+""")
+@header
+"If-None-Match"?: string;
+
+@doc("""
+A timestamp indicating the last modified time of the resource known to the
+client. The operation will be performed only if the resource on the service has
+been modified since the specified time.
+""")
+@header
+@format("date-time-rfc1123")
+"If-Modified-Since"?: string;
+
+@doc("""
+A timestamp indicating the last modified time of the resource known to the
+client. The operation will be performed only if the resource on the service has
+not been modified since the specified time.
+""")
+@header
+@format("date-time-rfc1123")
+"If-Unmodified-Since"?: string;
+}>;
+
+
+
+alias BatchResponseHeadersTrait = ResponseHeadersTrait<{
+   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
+@header
+@format("uuid")
+"client-request-id"?: string;
+
+@doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
+@header
+@format("uuid")
+"request-id"?: string;
+
+
+ @doc("The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.")
+@header
+ETag?: string;
+
+@doc("The time at which the resource was last modified.")
+@header
+@format("date-time-rfc1123")
+"Last-Modified"?: string;
+}>;
+
+
+alias DefaultBatchTraits = NoRepeatableRequests &
+NoConditionalRequests &
+NoClientRequestId;
+
+alias standardBatchTraits = BatchRequestQueryParametersTrait &
+BatchRequestHeadersTrait &
+BatchResponseHeadersTrait;
+
+alias BatchOperations = Azure.Core.ResourceOperations<DefaultBatchTraits,BatchError>;
+
+
+
+/////////////////////////////////////  Headers models ///////////////////////////////////
 
 @doc("Common header values for pool requests")
 model BatchPoolHeaders extends BatchMatchHeaders {
-  @doc("The ID of the Pool to get.")
+  @doc("The ID of the Pool to get.",)
   @path
   poolId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("Common header values for pool requests")
 model BatchMatchHeaders extends BatchModifiedSinceHeaders {
   @doc("""
@@ -2487,6 +2559,7 @@ service does not match the value specified by the client.
   "If-None-Match"?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("Common header values for modified headers")
 model BatchModifiedSinceHeaders {
   @doc("""
@@ -2512,6 +2585,7 @@ not been modified since the specified time.
 alias BatchResponseHeaders = BatchClientResponseHeaders &
   BatchEtagResponseHeaders;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("Etag related response header values")
 model BatchEtagResponseHeaders {
   @doc("The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.")
@@ -2524,6 +2598,7 @@ model BatchEtagResponseHeaders {
   "Last-Modified"?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("Client related response header values")
 model BatchClientResponseHeaders {
   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
@@ -2553,6 +2628,7 @@ model PoolDoesntExistResponseHeaders {
   code: "404";
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The parameters for a widget status request")
 model DeleteResponseHeaders {
   @doc("A process exit code.")
@@ -2585,7 +2661,8 @@ applications can be returned.
   )
   maxresults?: int32 = 1000;
 
-  @doc("""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+@doc("""
 The time the request was issued. Client libraries typically set this to the
 current system clock time; set it explicitly if you are calling the REST API
 directly.
@@ -2631,6 +2708,7 @@ model BatchJobFileClientRequestHeaders extends BatchClientRequestHeaders {
   filePath: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The parameters for a widget status request")
 model BatchClientRequestHeaders {
   @doc("""
@@ -2686,6 +2764,7 @@ directly.
   "ocp-date"?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The parameters for a widget status request")
 model Pool_ListUsageMetricRequestHeaders {
   @doc("""

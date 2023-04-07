@@ -537,7 +537,6 @@ model ApplicationListResult {
 @resource("applications")
 model Application {
   @doc("A string that uniquely identifies the application within the Account.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
   @visibility("read")
   @key("applicationId")
   id: string;
@@ -727,6 +726,7 @@ model PoolNodeCountsListResult {
   @items
   value?: PoolNodeCounts[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
@@ -835,6 +835,7 @@ of the Pool.
   dedicatedCoreTime: duration;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Statistics related to resource consumption by Compute Nodes in a Pool.")
 model ResourceStatistics {
   @doc("The start time of the time range covered by the statistics.")
@@ -896,6 +897,7 @@ the Pool.
   networkWriteGiB: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Job.")
 model JobStatistics {
   @doc("The URL of the statistics.")
@@ -1060,6 +1062,7 @@ model CertificateListResult {
   @items
   value?: Certificate[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
@@ -1075,6 +1078,7 @@ model NodeFileListResult {
   @items
   value?: NodeFile[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
@@ -1113,14 +1117,17 @@ model FileProperties {
   fileMode?: string;
 }
 
+
 @doc("""
 A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a
 specification used to create each Job.
 """)
+@resource("jobschedules")
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
-  @visibility("create")
-  id?: string;
+  @visibility("read","create")
+  @key("jobScheduleId")
+  id: string;
 
   @doc("The display name for the schedule.")
   @visibility("create")
@@ -2267,6 +2274,7 @@ the specified OS family.
   osVersion?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
 The configuration for Compute Nodes in a Pool based on the Azure Virtual
 Machines infrastructure.
@@ -2360,6 +2368,7 @@ model WindowsConfiguration {
   enableAutomaticUpdates?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
 Settings which will be used by the data disks associated to Compute Nodes in
 the Pool. When using attached data disks, you need to mount and format the
@@ -2434,6 +2443,7 @@ specified, Batch will use the regional policy.
   policy?: NodePlacementPolicyType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The configuration for virtual machine extensions.")
 model VMExtension {
   @doc("The name of the virtual machine extension.")
@@ -2471,6 +2481,7 @@ provisioned.
   provisionAfterExtensions?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Settings for the operating system disk of the compute node (VM).")
 model OSDisk {
   @doc("""
@@ -2503,6 +2514,7 @@ model TaskSchedulingPolicy {
   nodeFillType: ComputeNodeFillType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The network configuration for a Pool.")
 model NetworkConfiguration {
   @doc("""
@@ -2548,6 +2560,7 @@ virtualMachineConfiguration property.
   publicIPAddressConfiguration?: PublicIPAddressConfiguration;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The endpoint configuration for a Pool.")
 model PoolEndpointConfiguration {
   @doc("""
@@ -2560,6 +2573,7 @@ NoPublicIPAddresses.
   inboundNATPools: InboundNATPool[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
 A inbound NAT Pool that can be used to address specific ports on Compute Nodes
 in a Batch Pool externally.
@@ -2643,6 +2657,7 @@ status code 400. The default value is '*'.
   sourcePortRanges?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
 model PublicIPAddressConfiguration {
   @doc("The default value is BatchManaged.")
@@ -2899,6 +2914,7 @@ one must be specified.
   identityReference?: ComputeNodeIdentityReference;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Information used to connect to an NFS file system.")
 model NFSMountConfiguration {
   @doc("The URI of the file system to mount.")
@@ -2987,6 +3003,7 @@ model RecentJob {
   url?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Job Schedule.")
 model JobScheduleStatistics {
   @doc("The URL of the statistics.")
@@ -3079,18 +3096,22 @@ model BatchJobScheduleListResult {
   @items
   value?: BatchJobSchedule[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
 }
 
 @doc("An Azure Batch Job.")
+@resource("jobs")
 model BatchJob {
   @doc("""
 The ID is case-preserving and case-insensitive (that is, you may not have two
 IDs within an Account that differ only by case).
 """)
-  id?: string;
+  @visibility("read")
+  @key("jobId")
+  id: string;
 
   @doc("The display name for the Job.")
   @visibility("create")
@@ -3336,6 +3357,7 @@ model BatchJobListResult {
   @items
   value?: BatchJob[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
@@ -3351,6 +3373,7 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
   @items
   value?: JobPreparationAndReleaseTaskExecutionInformation[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
@@ -3591,6 +3614,7 @@ model TaskSlotCounts {
 }
 
 @doc("A Pool in the Azure Batch service.")
+@resource("pool")
 model BatchPool {
   @doc("""
 The ID can contain any combination of alphanumeric characters including hyphens
@@ -3599,7 +3623,8 @@ case-preserving and case-insensitive (that is, you may not have two IDs within
 an Account that differ only by case).
 """)
   @visibility("create")
-  id?: string;
+  @key
+  id: string;
 
   @doc("""
 The display name need not be unique and can contain any Unicode characters up
@@ -3929,6 +3954,7 @@ model BatchPoolListResult {
   @items
   value?: BatchPool[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
@@ -4401,6 +4427,7 @@ Application Packages, or Docker Containers.
   commonResourceFiles?: ResourceFile[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Task.")
 model TaskStatistics {
   @doc("The URL of the statistics.")
@@ -4496,6 +4523,7 @@ model BatchTaskListResult {
   @items
   value?: BatchTask[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
@@ -4916,6 +4944,7 @@ model ComputeNodeEndpointConfiguration {
   inboundEndpoints: InboundEndpoint[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("An inbound endpoint on a Compute Node.")
 model InboundEndpoint {
   @doc("The name of the endpoint.")
@@ -4985,6 +5014,7 @@ model NodeDisableSchedulingParameters {
   nodeDisableSchedulingOption?: DisableComputeNodeSchedulingOption;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
 model ComputeNodeGetRemoteLoginSettingsResult {
   @doc("The IP address used for remote login to the Compute Node.")
@@ -5052,11 +5082,13 @@ model ComputeNodeListResult {
   @items
   value?: ComputeNode[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
   "odata.nextLink"?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("The configuration for virtual machine extension instance view.")
 model NodeVMExtension {
   @doc("The provisioning state of the virtual machine extension.")
@@ -5069,6 +5101,7 @@ model NodeVMExtension {
   instanceView?: VMExtensionInstanceView;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The vm extension instance view.")
 model VMExtensionInstanceView {
   @doc("The name of the vm extension instance view.")
@@ -5099,6 +5132,7 @@ model InstanceViewStatus {
   time?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The result of listing the Compute Node extensions in a Node.")
 @pagedResult
 model NodeVMExtensionList {
