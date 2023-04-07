@@ -174,7 +174,7 @@ input-file:
 - Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
 - Microsoft.DBforMySQL/FlexibleServers/preview/2022-09-30-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
 ```
 
