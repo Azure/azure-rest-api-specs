@@ -17,7 +17,7 @@ during training, so if a prompt is not specified the model will generate as if
 from the beginning of a new document. Maximum allowed size of string list is
 2048.
 """)
-    prompt?: string | string[];
+    prompt?: string[] | string;
 
     @doc("The maximum number of tokens to generate. Has minimum of 0.")
     max_tokens?: int32;
