@@ -102,7 +102,7 @@ These are the global settings for the Databricks API.
 
 ``` yaml
 title: AzureDatabricksManagementClient
-description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
+description: 'The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.'
 openapi-type: arm
 tag: package-2023-05-01
 ```
