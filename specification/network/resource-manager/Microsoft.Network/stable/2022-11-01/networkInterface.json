@@ -65,7 +65,11 @@
         ],
         "responses": {
           "204": {
-            "description": "Request successful. Resource does not exist."
+            "description": "Request successful. Resource does not exist.",
+            "headers": {
+               "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2020-07-01",
+               "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2020-07-01"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -84,10 +88,6 @@
           "Delete network interface": {
             "$ref": "./examples/NetworkInterfaceDelete.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -209,10 +209,6 @@
           "Create network interface with Gateway Load Balancer Consumer configured": {
             "$ref": "./examples/NetworkInterfaceCreateGatewayLoadBalancerConsumer.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -408,10 +404,6 @@
           "Show network interface effective route tables": {
             "$ref": "./examples/NetworkInterfaceEffectiveRouteTableList.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -465,10 +457,6 @@
           "List network interface effective network security groups": {
             "$ref": "./examples/NetworkInterfaceEffectiveNSGList.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -692,10 +680,6 @@
           "Delete tap configuration": {
             "$ref": "./examples/NetworkInterfaceTapConfigurationDelete.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -821,10 +805,6 @@
           "Create Network Interface Tap Configurations": {
             "$ref": "./examples/NetworkInterfaceTapConfigurationCreate.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     },
