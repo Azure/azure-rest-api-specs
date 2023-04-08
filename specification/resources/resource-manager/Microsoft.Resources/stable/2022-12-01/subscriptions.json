@@ -43,7 +43,7 @@
         "description": "Lists all of the available Microsoft.Resources REST API operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -851,7 +851,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The Microsoft location."
+          "description": "The Microsoft location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "subscriptionIds": {
           "type": "array",
