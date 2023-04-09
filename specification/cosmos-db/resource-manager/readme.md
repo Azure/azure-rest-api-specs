@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
+  - Microsoft.DocumentDB/preview/2023-03-15-preview/managedCassandra.json
+```
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03'
+input-file:
   - Microsoft.DocumentDB/preview/2023-03-01-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2023-03-01-preview/dataTransferService.json
   - Microsoft.DocumentDB/preview/2023-03-01-preview/managedCassandra.json
@@ -51,6 +60,7 @@ input-file:
 modelerfour:
   lenient-model-deduplication: true
 ```
+
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
