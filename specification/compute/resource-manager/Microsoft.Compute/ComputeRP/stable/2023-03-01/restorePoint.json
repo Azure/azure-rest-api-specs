@@ -693,6 +693,11 @@
           "type": "string",
           "readOnly": true,
           "description": "UserData associated with the source VM for which restore point is captured, which is a base-64 encoded value."
+        },
+        "hyperVGeneration": {
+          "$ref": "./computeRPCommon.json#/definitions/HyperVGenerationType",
+          "readOnly": true,
+          "description": "HyperVGeneration of the source VM for which restore point is captured."
         }
       },
       "description": "Describes the properties of the Virtual Machine for which the restore point was created. The properties provided are a subset and the snapshot of the overall Virtual Machine properties captured at the time of the restore point creation."
@@ -759,6 +764,11 @@
         "diskRestorePoint": {
           "$ref": "#/definitions/DiskRestorePointAttributes",
           "description": "Contains Disk Restore Point properties."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Shows true if the disk is write-accelerator enabled."
         }
       },
       "description": "Describes an Operating System disk."
@@ -794,6 +804,11 @@
         "diskRestorePoint": {
           "$ref": "#/definitions/DiskRestorePointAttributes",
           "description": "Contains Disk Restore Point properties."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Shows true if the disk is write-accelerator enabled."
         }
       },
       "description": "Describes a data disk."
