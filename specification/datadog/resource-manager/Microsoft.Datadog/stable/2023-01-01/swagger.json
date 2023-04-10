@@ -68,48 +68,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses/default": {
-      "get": {
-        "tags": [
-          "CreateResource"
-        ],
-        "summary": "Informs if the current subscription is being already monitored for selected Datadog organization.",
-        "operationId": "CreationSupported_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/DatadogOrganizationId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreationSupported_Get": {
-            "$ref": "./examples/CreationSupported_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/default": {
       "put": {
         "tags": [
@@ -155,6 +113,90 @@
         "x-ms-examples": {
           "MarketplaceAgreements_CreateOrUpdate": {
             "$ref": "./examples/MarketplaceAgreements_Create.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses": {
+      "get": {
+        "tags": [
+          "CreateResource"
+        ],
+        "summary": "Informs if the current subscription is being already monitored for selected Datadog organization.",
+        "operationId": "CreationSupported_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DatadogOrganizationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceSupportedResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreationSupported_Get": {
+            "$ref": "./examples/CreationSupported_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses/default": {
+      "get": {
+        "tags": [
+          "CreateResource"
+        ],
+        "summary": "Informs if the current subscription is being already monitored for selected Datadog organization.",
+        "operationId": "CreationSupported_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DatadogOrganizationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceSupportedResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreationSupported_Get": {
+            "$ref": "./examples/CreationSupported_Get.json"
           }
         }
       }
@@ -1759,6 +1801,7 @@
           "description": "The state of monitoring.",
           "enum": [
             "InProgress",
+            "Deleting",
             "Active",
             "Failed"
           ],
