@@ -1,9 +1,13 @@
 {
   "parameters": {
-    "subcriptionId": "subId1",
-    "location": "westus2",
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "my-cluster",
     "publisherId": "myPublisherId",
     "offerId": "myOfferId",
+    "releaseTrain": "stable",
     "api-version": "2023-05-01"
   },
   "responses": {
@@ -15,6 +19,7 @@
           {
             "properties": {
               "isSystemExtension": false,
+              "shouldCreateIdentity": true,
               "description": "My extension type!",
               "publisher": "Microsoft",
               "planInfo": {
@@ -22,35 +27,8 @@
                 "planId": "myPlanId",
                 "offerId": "myOfferId"
               },
-              "releaseTrains": [
-                "stable"
-              ],
               "supportedClusterTypes": [
                 "connectedClusters"
-              ],
-              "supportedRegions": [
-                "westus",
-                "eastus"
-              ],
-              "properties": [
-                {
-                  "key": "MY_PARAMETER",
-                  "isRequired": true
-                },
-                {
-                  "key": "MY_OPTIONAL_PARAMETER",
-                  "isRequired": false
-                }
-              ],
-              "protectedParameters": [
-                {
-                  "key": "MY_PROTECTED_PARAMETER",
-                  "isRequired": true
-                },
-                {
-                  "key": "MY_OPTIONAL_PROTECTED_PARAMETER",
-                  "isRequired": false
-                }
               ],
               "supportedScopes": {
                 "defaultScope": "cluster",

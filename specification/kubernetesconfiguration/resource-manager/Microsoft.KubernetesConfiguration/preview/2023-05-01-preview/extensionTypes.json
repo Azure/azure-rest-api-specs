@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01",
+    "version": "2023-05-01-preview",
     "title": "ExtensionTypesClient",
     "description": "Use these APIs to view extension type resources through ARM, for Kubernetes Clusters."
   },
@@ -69,6 +69,27 @@
             "type": "string"
           },
           {
+            "name": "planId",
+            "in": "query",
+            "description": "Filter results by Plan ID of a marketplace extension type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "clusterType",
+            "in": "query",
+            "description": "Filter results by the cluster type for extension types",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "extensionType",
+            "in": "query",
+            "description": "Filter results by extension type name",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -115,6 +136,13 @@
             "$ref": "#/parameters/ExtensionTypeNameParameter"
           },
           {
+            "name": "clusterType",
+            "in": "query",
+            "description": "Filter results by the cluster type for extension types",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -144,7 +172,7 @@
         "operationId": "ExtensionTypes_ListVersions",
         "x-ms-examples": {
           "List Extension Type Versions": {
-            "$ref": "./examples/ListExtensionTypeVersions.json"
+            "$ref": "./examples/ListExtensionTypeVersionsByLocation.json"
           }
         },
         "parameters": [
@@ -161,6 +189,20 @@
             "name": "releaseTrain",
             "in": "query",
             "description": "Filter results by release train",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "clusterType",
+            "in": "query",
+            "description": "Filter results by the cluster type for extension types",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "majorVersion",
+            "in": "query",
+            "description": "Filter results by the major version of an extension type",
             "required": false,
             "type": "string"
           },
@@ -187,17 +229,77 @@
         "nextLinkName": "nextLink"
       }
     },
+    "/subcriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
+      "get": {
+        "tags": [
+          "ExtensionTypes",
+          "ClusterExtensionTypes"
+        ],
+        "description": "Get details of a version for an extension type and location",
+        "operationId": "ExtensionTypes_GetVersion",
+        "x-ms-examples": {
+          "List Extension Type Versions": {
+            "$ref": "./examples/GetExtensionTypeVersionsByLocation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNumberParameter"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Filter results by release train",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "clusterType",
+            "in": "query",
+            "description": "Filter results by the cluster type for extension types",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeVersionGet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
       "get": {
         "tags": [
           "ExtensionTypes",
           "ClusterExtensionTypes"
         ],
-        "description": "List Extension Types for the cluster based region and type for the cluster.",
+        "description": "List installable Extension Types for the cluster based region and type for the cluster.",
         "operationId": "ExtensionTypes_List",
         "x-ms-examples": {
           "Get Extension Types": {
-            "$ref": "./examples/ListExtensionTypes.json"
+            "$ref": "./examples/GetExtensionTypeVersion.json"
           }
         },
         "parameters": [
@@ -256,7 +358,7 @@
           "ExtensionTypes",
           "ClusterExtensionTypes"
         ],
-        "description": "Get an Extension Type for the cluster.",
+        "description": "Get an Extension Type installable to the cluster based region and type for the cluster.",
         "operationId": "ExtensionTypes_Get",
         "x-ms-examples": {
           "Get Extension Types": {
@@ -301,6 +403,137 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions": {
+      "get": {
+        "tags": [
+          "ExtensionTypes",
+          "ClusterExtensionTypes"
+        ],
+        "description": "List the version for an Extension Type installable to the cluster.",
+        "operationId": "ExtensionTypes_ClusterListVersions",
+        "x-ms-examples": {
+          "List Extension Type Versions": {
+            "$ref": "./examples/ListExtensionTypeVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Filter results by release train",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "majorVersion",
+            "in": "query",
+            "description": "Filter results by the major version of an extension type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeVersionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "x-ms-pagable": {
+        "nextLinkName": "nextLink"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
+      "get": {
+        "tags": [
+          "ExtensionTypes",
+          "ClusterExtensionTypes"
+        ],
+        "description": "Get details of a version for an Extension Type installable to the cluster.",
+        "operationId": "ExtensionTypes_ClusterGetVersion",
+        "x-ms-examples": {
+          "List Extension Type Versions": {
+            "$ref": "./examples/ListExtensionTypeVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterRpParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterResourceNameParameter"
+          },
+          {
+            "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNumberParameter"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Filter results by release train",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeVersionGet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -312,6 +545,10 @@
           "isSystemExtension": {
             "type": "boolean",
             "description": "Is this Extension Type a system extension."
+          },
+          "shouldCreateIdentity": {
+            "type": "boolean",
+            "description": "Should an identity for this cluster resource be created"
           },
           "description": {
             "type": "string",
@@ -340,20 +577,6 @@
               }
             }
           },
-          "releaseTrains": {
-            "description": "The list of release trains of the extension type.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "supportedRegions": {
-            "description": "The list of supported regions for the extension type.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "supportedClusterTypes": {
             "description": "Cluster Types supported for this Extension Type.",
             "type": "array",
@@ -365,40 +588,6 @@
             "defaultScope": {
               "description": "The default scope of the extension type. This scope will be used if the user does not provide a scope while creating an extension.",
               "type": "string"
-            },
-            "properties": {
-              "description": "The list of properties of the extension type.",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "key": {
-                    "description": "The key for the parameter",
-                    "type": "string"
-                  },
-                  "isRequired": {
-                    "description": "Is this parameter required",
-                    "type": "boolean"
-                  }
-                }
-              }
-            },
-            "protectedParameters": {
-              "description": "The list of protected parameter names for the extension type.",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "key": {
-                    "description": "The key for the protected parameter",
-                    "type": "string"
-                  },
-                  "isRequired": {
-                    "description": "Is this protected parameter required",
-                    "type": "boolean"
-                  }
-                }
-              }
             },
             "name": {
               "description": "The name of the extension type.",
@@ -412,16 +601,49 @@
       "description": "The Extension Type Version object.",
       "type": "object",
       "properties": {
-        "releaseTrain": {
-          "description": "The Release Train of the extension versions.",
-          "type": "string"
+        "version": {
+          "type": "string",
+          "description": "The version number for the extension type"
         },
-        "versions": {
-          "description": "The list of versions of the extension type for this Release Train.",
+        "supportedKubernetesVersions": {
+          "description": "The list of supported Kubernetes cluster versions for this extension type",
           "type": "array",
           "items": {
-            "description": "The version for the extension type.",
             "type": "string"
+          }
+        },
+        "configurationSettings": {
+          "description": "The list of configuration settings of the extension type.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "description": "The key for the parameter",
+                "type": "string"
+              },
+              "isRequired": {
+                "description": "Is this parameter required",
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "configurationProtectedSettings": {
+          "description": "The list of protected configuration setting names for the extension type.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "description": "The key for the protected parameter",
+                "type": "string"
+              },
+              "isRequired": {
+                "description": "Is this protected parameter required",
+                "type": "boolean"
+              }
+            }
           }
         }
       }
@@ -446,7 +668,7 @@
       }
     },
     "ExtensionTypeGet": {
-      "description": "Result of the request to get an Extension Type.",
+      "description": "Get an Extension Type Response Model.",
       "type": "object",
       "properties": {
         "value": {
@@ -469,6 +691,17 @@
           "description": "List of Extension Type Versions for an Extension Type in a Release Train."
         }
       }
+    },
+    "ExtensionTypeVersionGet": {
+      "description": "Get an Extension Type Version Response Model.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ExtensionTypeVersionForReleaseTrain",
+          "readOnly": true,
+          "description": "The Extension Type Version."
+        }
+      }
     }
   },
   "parameters": {
@@ -478,6 +711,14 @@
       "required": true,
       "type": "string",
       "description": "Name of the Extension Type.",
+      "x-ms-parameter-location": "method"
+    },
+    "VersionNumberParameter": {
+      "name": "versionNumber",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Version number of the Extension Type.",
       "x-ms-parameter-location": "method"
     }
   }

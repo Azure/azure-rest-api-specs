@@ -11,17 +11,11 @@
       "body": {
         "properties": {
           "isSystemExtension": false,
+          "shouldCreateIdentity": true,
           "description": "My extension type!",
           "publisher": "Microsoft",
-          "releaseTrains": [
-            "preview"
-          ],
           "supportedClusterTypes": [
             "connectedClusters"
-          ],
-          "supportedRegions": [
-            "westus",
-            "eastus"
           ],
           "supportedScopes": {
             "defaultScope": "cluster",
@@ -30,26 +24,6 @@
               "defaultReleaseNamespace": "kube-system"
             }
           },
-          "properties": [
-            {
-              "key": "MY_PARAMETER",
-              "isRequired": true
-            },
-            {
-              "key": "MY_OPTIONAL_PARAMETER",
-              "isRequired": false
-            }
-          ],
-          "protectedParameters": [
-            {
-              "key": "MY_PROTECTED_PARAMETER",
-              "isRequired": true
-            },
-            {
-              "key": "MY_OPTIONAL_PROTECTED_PARAMETER",
-              "isRequired": false
-            }
-          ],
           "systemData": {
             "createdBy": "identity",
             "createdByType": "User",

@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subcriptionId": "subId1",
+    "location": "westus",
+    "releaseTrain": "stable",
+    "clusterType": "connectedCluster",
+    "api-version": "2023-05-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Versions for the Extension Type",
+      "body": {
+        "value": {
+          "version": "1.1.0",
+          "supportedKubernetesVersions": [
+            "=1.24",
+            ">1.25"
+          ],
+          "configurationSettings": [
+            {
+              "key": "CONFIG_KEY_1",
+              "isRequired": true
+            },
+            {
+              "key": "CONFIG_KEY_2",
+              "isRequired": false
+            }
+          ],
+          "configurationProtectedSettings": [
+            {
+              "key": "PROTECTED_CONFIG_KEY_1",
+              "isRequired": true
+            },
+            {
+              "key": "PROTECTED_CONFIG_KEY_2",
+              "isRequired": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}

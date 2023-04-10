@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "subcriptionId": "subId1",
+    "location": "westus2",
+    "publisherId": "myPublisherId",
+    "offerId": "myOfferId",
+    "api-version": "2023-05-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the extension types registered for the given region",
+      "body": {
+        "value": [
+          {
+            "version": "1.1.0",
+            "supportedKubernetesVersions": [
+              "=1.24",
+              ">1.25"
+            ],
+            "configurationSettings": [
+              {
+                "key": "CONFIG_KEY_1",
+                "isRequired": true
+              },
+              {
+                "key": "CONFIG_KEY_2",
+                "isRequired": false
+              }
+            ],
+            "configurationProtectedSettings": [
+              {
+                "key": "PROTECTED_CONFIG_KEY_1",
+                "isRequired": true
+              },
+              {
+                "key": "PROTECTED_CONFIG_KEY_2",
+                "isRequired": false
+              }
+            ]
+          },
+          {
+            "version": "1.2.0",
+            "supportedKubernetesVersions": [
+              ">1.25"
+            ],
+            "configurationSettings": [
+              {
+                "key": "CONFIG_KEY_1",
+                "isRequired": true
+              },
+              {
+                "key": "CONFIG_KEY_2",
+                "isRequired": false
+              },
+              {
+                "key": "CONFIG_KEY_3",
+                "isRequired": false
+              }
+            ],
+            "configurationProtectedSettings": [
+              {
+                "key": "PROTECTED_CONFIG_KEY_1",
+                "isRequired": true
+              },
+              {
+                "key": "PROTECTED_CONFIG_KEY_2",
+                "isRequired": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
