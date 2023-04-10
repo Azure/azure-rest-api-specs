@@ -32,7 +32,7 @@ model AnalyzeTextOptions {
   @doc("The names of blocklists.")
   blocklistNames?: string[];
 
-  @doc("When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit.")
+  @doc("When set to true, further analysis of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit.")
   breakByBlocklists?: boolean;
 }
 
