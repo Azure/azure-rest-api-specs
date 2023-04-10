@@ -1,9 +1,10 @@
+
 {
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Easm",
     "description": "REST APIs for Easm",
-    "version": "2022-04-01-preview"
+    "version": "2023-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -283,6 +284,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Workspace will be deleted asynchronously."
+          },
           "202": {
             "description": "The Workspace will be deleted asynchronously."
           },
@@ -532,6 +536,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The Label will be deleted asynchronously."
+          },
           "202": {
             "description": "The Label will be deleted asynchronously."
           },
@@ -552,6 +559,51 @@
         "x-ms-examples": {
           "Labels": {
             "$ref": "./examples/Labels_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Easm/workspaces/{workspaceName}/tasks/{taskId}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Returns a task in the given workspace.",
+        "operationId": "Tasks_GetByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TaskIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task details.",
+            "schema": {
+              "$ref": "#/definitions/TaskResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks": {
+            "$ref": "./examples/Tasks_GetByWorkspace.json"
           }
         }
       }
@@ -628,6 +680,22 @@
         }
       }
     },
+    "WorkspaceResourceProperties": {
+      "description": "Workspace properties.",
+      "type": "object",
+      "properties": {
+        "dataPlaneEndpoint": {
+          "description": "Data plane endpoint.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
     "LabelResourceProperties": {
       "description": "Label properties.",
       "type": "object",
@@ -653,7 +721,7 @@
       "properties": {
         "properties": {
           "description": "Workspace properties.",
-          "$ref": "#/definitions/ResourceBaseProperties",
+          "$ref": "#/definitions/WorkspaceResourceProperties",
           "x-ms-client-flatten": true
         }
       },
@@ -740,6 +808,62 @@
           "description": "The link used to get the next page of Label list."
         }
       }
+    },
+    "TaskResourceProperties": {
+      "description": "Task properties.",
+      "type": "object",
+      "properties": {
+        "startedAt": {
+          "description": "The time the task started",
+          "type": "string"
+        },
+        "completedAt": {
+          "description": "The time the task completed",
+          "type": "string"
+        },
+        "lastPolledAt": {
+          "description": "The last time the task was polled",
+          "type": "string"
+        },
+        "state": {
+          "description": "the state the task is in",
+          "type": "string"
+        },
+        "phase": {
+          "description": "the phase the task is in",
+          "type": "string"
+        },
+        "reason": {
+          "description": "The reason the task was moved into its current state, if the task wasn't completed.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The reason the task was moved into its current state, if the task wasn't completed.",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "TaskResource": {
+      "type": "object",
+      "description": "Task details",
+      "properties": {
+        "properties": {
+          "description": "Task properties",
+          "$ref": "#/definitions/TaskResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -758,6 +882,16 @@
       "type": "string",
       "description": "The name of the Label.",
       "x-ms-parameter-location": "method"
+    },
+    "TaskIdParameter": {
+      "name": "taskId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the Task.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
+
+
