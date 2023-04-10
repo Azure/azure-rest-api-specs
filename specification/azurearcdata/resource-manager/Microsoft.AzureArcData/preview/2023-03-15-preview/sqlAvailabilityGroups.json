@@ -1,0 +1,130 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-03-15-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "SqlAvailabilityGroup": {
+      "description": "A SqlAvailabilityGroup.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlAvailabilityGroupProperties",
+          "description": "null",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "SqlAvailabilityGroupProperties": {
+      "description": "Properties of SqlAvailabilityGroup.",
+      "type": "object",
+      "properties": {
+        "availabilityGroupName": {
+          "description": "The name of the availability group.",
+          "type": "string"
+        },
+        "availabilityGroupId": {
+          "description": "Id GUID of the availability group.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9]{8}-([A-Za-z0-9]{4}-){3}[A-Za-z0-9]{12}$"
+        },
+        "instanceName": {
+          "description": "The name of the instance name which availability group primary is on.",
+          "type": "string"
+        },
+        "collectionTimestamp": {
+          "description": "Timestamp for when the data was collected from the client machine.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "integer",
+          "description": "SQL Server availability group current version.",
+          "format": "int32"
+        },
+        "basicFeatures": {
+          "type": "boolean",
+          "description": "SQL Server basic availability group."
+        },
+        "dtcSupport": {
+          "type": "boolean",
+          "description": "SQL Server availability group DTC support enabled."
+        },
+        "dbFailover": {
+          "type": "boolean",
+          "description": "SQL Server availability group failover for database health conditions."
+        },
+        "isDistributed": {
+          "type": "boolean",
+          "description": "SQL Server distributed availability group."
+        },
+        "clusterTypeDesc": {
+          "type": "string",
+          "description": "SQL Server availability group cluster type description"
+        },
+        "requiredSynchronizedSecondariesCommit": {
+          "type": "integer",
+          "description": "Availability group required the number of synchronized secondary to commit."
+        },
+        "isContained": {
+          "type": "boolean",
+          "description": "SQL Server availability group contained system databases."
+        }
+      },
+      "required": [
+        "availabilityGroupName",
+        "availabilityGroupId"
+      ]
+    },
+    "SqlAvailabilityGroupUpdate": {
+      "description": "An update to a SQL Availability Group.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlAvailabilityGroupListResult": {
+      "description": "A list of SqlAvailabilityGroup.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlAvailabilityGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

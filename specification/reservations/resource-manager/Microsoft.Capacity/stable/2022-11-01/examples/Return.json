@@ -15,9 +15,33 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004",
+        "type": "Microsoft.Capacity/reservationOrders",
+        "name": "50000000-aaaa-bbbb-cccc-100000000004",
+        "etag": 7,
+        "properties": {
+          "displayName": "cabri",
+          "requestDateTime": "2017-08-30T03:49:19.0252126Z",
+          "createdDateTime": "2017-08-30T03:51:49.8083758Z",
+          "expiryDate": "2018-08-30",
+          "expiryDateTime": "2018-08-30T03:51:49.8083758Z",
+          "term": "P1Y",
+          "billingPlan": "Monthly",
+          "provisioningState": "Succeeded",
+          "reservations": [
+            {
+              "id": "/providers/microsoft.capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000"
+            }
+          ],
+          "originalQuantity": 7
+        }
+      }
+    },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/providers/Microsoft.Capacity/reservationorders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000?api-version=2022-11-01"
+        "Location": "https://management.azure.com/providers/Microsoft.Capacity/reservationorders/50000000-aaaa-bbbb-cccc-100000000004?api-version=2022-11-01"
       },
       "body": {
         "id": "/providers/Microsoft.Capacity/reservationOrders/50000000-aaaa-bbbb-cccc-100000000004/reservations/40000000-aaaa-bbbb-cccc-100000000000",
