@@ -77,12 +77,12 @@ output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/sec
 perform-load: false
 ```
 
-### Tag: package-preview-2023-03 and python
+### Tag: package-preview-2023-03-only and python
 
-These settings apply only when `--tag=package-preview-2023-03 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-03-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2023-03' && $(python)
+``` yaml $(tag) == 'package-preview-2023-03-only' && $(python)
 namespace: azure.mgmt.security.v2023_03_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_03_01_preview
 ```
@@ -97,12 +97,12 @@ namespace: azure.mgmt.security.v2023_02_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_02_01_preview
 ```
 
-### Tag: package-preview-2023-01 and python
+### Tag: package-preview-2023-01-only and python
 
-These settings apply only when `--tag=package-preview-2023-01 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-01-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2023-01' && $(python)
+``` yaml $(tag) == 'package-preview-2023-01-only' && $(python)
 namespace: azure.mgmt.security.v2023_01_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_01_01_preview
 ```
