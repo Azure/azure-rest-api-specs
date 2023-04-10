@@ -823,12 +823,12 @@
           "$ref": "./computeRPCommon.json#/definitions/DiskEncryptionSetParameters"
         },
         "type": {
-          "$ref": "#/definitions/EncryptionType"
+          "$ref": "#/definitions/RestorePointEncryptionType"
         }
       },
       "description": "Encryption at rest settings for disk restore point. It is an optional property that can be specified in the input while creating a restore point."
     },
-    "EncryptionType": {
+    "RestorePointEncryptionType": {
       "type": "string",
       "description": "The type of key used to encrypt the data of the disk restore point.",
       "enum": [
@@ -837,7 +837,7 @@
         "EncryptionAtRestWithPlatformAndCustomerKeys"
       ],
       "x-ms-enum": {
-        "name": "EncryptionType",
+        "name": "RestorePointEncryptionType",
         "modelAsString": true,
         "values": [
           {
