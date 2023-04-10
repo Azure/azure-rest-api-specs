@@ -483,6 +483,140 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/start": {
+      "post": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Start a container app",
+        "operationId": "ContainerApps_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Container App started successfully."
+          },
+          "202": {
+            "description": "Start operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Container App": {
+            "$ref": "./examples/ContainerApps_Start.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/stop": {
+      "post": {
+        "tags": [
+          "ContainerApps"
+        ],
+        "summary": "Stop a container app",
+        "operationId": "ContainerApps_Stop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Container App stopped successfully."
+          },
+          "202": {
+            "description": "Stop operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request.",
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "Conflict.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Container App": {
+            "$ref": "./examples/ContainerApps_Stop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
