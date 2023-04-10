@@ -65,7 +65,7 @@
           }
         },
         "x-ms-examples": {
-          "Create an outbound call.": {
+          "CreateCall": {
             "$ref": "./examples/CreateCall.json"
           }
         }
@@ -121,7 +121,7 @@
           }
         },
         "x-ms-examples": {
-          "Answer a Call.": {
+          "AnswerCall": {
             "$ref": "./examples/AnswerCall.json"
           }
         }
@@ -174,7 +174,7 @@
           }
         },
         "x-ms-examples": {
-          "Redirect a call.": {
+          "RedirectCall": {
             "$ref": "./examples/RedirectCall.json"
           }
         }
@@ -227,7 +227,7 @@
           }
         },
         "x-ms-examples": {
-          "Reject the call.": {
+          "RejectCall": {
             "$ref": "./examples/RejectCall.json"
           }
         }
@@ -267,7 +267,7 @@
           }
         },
         "x-ms-examples": {
-          "Get call connection.": {
+          "CallConnection_GetCall": {
             "$ref": "./examples/CallConnection_GetCall.json"
           }
         }
@@ -303,7 +303,7 @@
           }
         },
         "x-ms-examples": {
-          "Hangup the call.": {
+          "CallConnection_HangupCall": {
             "$ref": "./examples/CallConnection_HangupCall.json"
           }
         }
@@ -354,7 +354,7 @@
           }
         },
         "x-ms-examples": {
-          "Terminate a call using CallConnectionId.": {
+          "CallConnection_TerminateCall": {
             "$ref": "./examples/CallConnection_TerminateCall.json"
           }
         }
@@ -417,7 +417,7 @@
           }
         },
         "x-ms-examples": {
-          "Transfer the call to a participant.": {
+          "CallConnection_TransferToParticipant": {
             "$ref": "./examples/CallConnection_TransferToParticipant.json"
           }
         }
@@ -464,7 +464,7 @@
           }
         },
         "x-ms-examples": {
-          "Plays audio to participants in the call.": {
+          "CallMedia_Play": {
             "$ref": "./examples/CallMedia_Play.json"
           }
         }
@@ -502,7 +502,7 @@
           }
         },
         "x-ms-examples": {
-          "Cancel all media operations in a call.": {
+          "CallMedia_CancelAllMediaOperations": {
             "$ref": "./examples/CallMedia_CancelAllMediaOperations.json"
           }
         }
@@ -549,7 +549,7 @@
           }
         },
         "x-ms-examples": {
-          "Recognize media from call.": {
+          "CallMedia_Recognize": {
             "$ref": "./examples/CallMedia_Recognize.json"
           }
         }
@@ -590,7 +590,7 @@
           }
         },
         "x-ms-examples": {
-          "Get participants from a call.": {
+          "CallConnection_GetParticipants": {
             "$ref": "./examples/CallConnection_GetParticipants.json"
           }
         }
@@ -652,7 +652,7 @@
           }
         },
         "x-ms-examples": {
-          "Add participants to the call.": {
+          "CallConnection_AddParticipant": {
             "$ref": "./examples/CallConnection_AddParticipant.json"
           }
         }
@@ -715,7 +715,7 @@
           }
         },
         "x-ms-examples": {
-          "Remove participant from the call using identifier.": {
+          "CallConnection_RemoveParticipant": {
             "$ref": "./examples/CallConnection_RemoveParticipant.json"
           }
         }
@@ -763,7 +763,7 @@
           }
         },
         "x-ms-examples": {
-          "Get participant from a call.": {
+          "CallConnection_GetParticipant": {
             "$ref": "./examples/CallConnection_GetParticipant.json"
           }
         }
@@ -818,7 +818,7 @@
           }
         },
         "x-ms-examples": {
-          "Start recording the call.": {
+          "CallRecording_StartRecording": {
             "$ref": "./examples/CallRecording_StartRecording.json"
           }
         }
@@ -858,7 +858,7 @@
           }
         },
         "x-ms-examples": {
-          "Get call recording properties.": {
+          "CallRecording_GetRecordingProperties": {
             "$ref": "./examples/CallRecording_GetRecordingProperties.json"
           }
         }
@@ -893,7 +893,7 @@
           }
         },
         "x-ms-examples": {
-          "Stop recording the call.": {
+          "CallRecording_StopRecording": {
             "$ref": "./examples/CallRecording_StopRecording.json"
           }
         }
@@ -930,7 +930,7 @@
           }
         },
         "x-ms-examples": {
-          "Pause recording the call.": {
+          "CallRecording_PauseRecording": {
             "$ref": "./examples/CallRecording_PauseRecording.json"
           }
         }
@@ -967,7 +967,7 @@
           }
         },
         "x-ms-examples": {
-          "Resume recording the call.": {
+          "CallRecording_ResumeRecording": {
             "$ref": "./examples/CallRecording_ResumeRecording.json"
           }
         }
@@ -1951,6 +1951,11 @@
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
+        "sequenceNumber": {
+          "format": "int32",
+          "description": "The Sequence Number of the event",
+          "type": "integer"
+        },
         "participants": {
           "description": "The list of participants in the call.",
           "type": "array",
@@ -1960,8 +1965,8 @@
         }
       }
     },
-    "RemoveParticipantFailed": {
-      "description": "The failed to remove participant event.",
+    "RemoveParticipantSucceeded": {
+      "description": "The participant removed event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -1990,8 +1995,8 @@
         }
       }
     },
-    "RemoveParticipantSucceeded": {
-      "description": "The participant removed event.",
+    "RemoveParticipantFailed": {
+      "description": "The failed to remove participant event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -2159,13 +2164,13 @@
         "recognitionType": {
           "$ref": "#/definitions/RecognitionType"
         },
-        "collectTonesResult": {
-          "$ref": "#/definitions/CollectTonesResult",
+        "dtmfResult": {
+          "$ref": "#/definitions/DtmfResult",
           "description": "Defines the result for RecognitionType = Dtmf"
         }
       }
     },
-    "CollectTonesResult": {
+    "DtmfResult": {
       "type": "object",
       "properties": {
         "tones": {
@@ -2239,6 +2244,7 @@
       "description": "The endpoint of the Azure Communication resource.",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
@@ -2285,14 +2291,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
-        "description": "The endpoint of the Azure Communication resource.",
-        "required": true,
-        "type": "string",
-        "format": "url",
-        "in": "path",
-        "x-ms-skip-url-encoding": true,
-        "x-ms-parameter-location": "client"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   }
