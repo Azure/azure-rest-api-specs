@@ -43,7 +43,6 @@ batch:
   - tag: package-preview-2023-02
   - tag: package-preview-2023-01-only
   - tag: package-2023-01
-  - tag: package-preview-2023-01
   - tag: package-preview-2022-08
   - tag: package-preview-2022-07
   - tag: package-2022-05
