@@ -2587,6 +2587,23 @@
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
     },
+    "ExtractiveSummarizationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/ExtractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarizationLROResults"
+    },
     "HealthcareLROResult": {
       "type": "object",
       "properties": {
@@ -2871,7 +2888,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
           }
         }
       },
@@ -2892,18 +2909,6 @@
       ],
       "required": [
         "documents"
-      ]
-    },
-    "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "An object representing the summarization result of a single document with detected language.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
       ]
     },
     "AbstractiveSummaryDocumentResult": {
