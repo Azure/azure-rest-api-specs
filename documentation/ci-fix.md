@@ -69,9 +69,13 @@ Please see [readme](https://github.com/Azure/openapi-diff/blob/master/README.md)
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for detailed description of all oad rules.
 
-## Linter Diff Validation
+## Linter Diff (LintDiff) Validation
 
-The lint diff validation is to run linter against the currect spec and the spec before current PR , the final result is the differece set between the result running against current specs and the result running against the specs before current PR.
+The lint diff validation is to run linter against the currect spec and the spec before current PR, the final result is the differece set between the result running against current specs and the result running against the specs before current PR.
+
+Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
+If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
+
 ### Run linter locally:
 
 #### Prerequisites:
@@ -88,7 +92,6 @@ autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-v
 
 Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/linter).
-Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
 
 ## Avocado
 
