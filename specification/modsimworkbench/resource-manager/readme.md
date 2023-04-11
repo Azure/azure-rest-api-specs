@@ -25,7 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the modsimworkbench.
 
 ```yaml
-openapi-type: arm
+openapi-type: rpaas
 openapi-subtype: providerHub
 tag: package-2021-03-01-preview
 ```
