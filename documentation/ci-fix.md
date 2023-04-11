@@ -69,8 +69,6 @@ Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) f
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
-## Linter Diff Validation
-
 ## Linter Diff (LintDiff) Validation
 
 The lint diff validation is to run linter against the currect spec and the spec before current PR, the final result is the differece set between the result running against current specs and the result running against the specs before current PR.
