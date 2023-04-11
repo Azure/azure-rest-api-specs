@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "subscriptionId": "management.azure.com",
+    "resourceGroupName": "db4e2fdb-6d80-4e6e-b7cd-736098270664",
+    "deviceName": "Microsoft.DataBoxEdge",
+    "name": "demo-edge-sdk8-2023",
+    "url": "https://management.azure.com",
+    "api-version": "2023-01-01-preview",
+    "Accept": "application/json, text/json",
+    "Authorization": "Sanitized",
+    "traceparent": "00-6fbb896075d5bc46718fa18de5c7dc57-0c3e49547b8dfb2f-00",
+    "User-Agent": "azsdk-net-ResourceManager.DataBoxEdge/1.1.0-alpha.20230329.1 (.NET 7.0.4; Microsoft Windows 10.0.22621)",
+    "x-ms-client-request-id": "4c8e6f5b119745d703b4b71c9f8aae0d",
+    "x-ms-return-client-request-id": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "hostPlatform": "Linux",
+          "provisioningState": "Created",
+          "hostPlatformType": "KubernetesCluster",
+          "kubernetesClusterInfo": {
+            "etcdInfo": {
+              "type": "Etcd",
+              "version": "v3.4.3",
+              "componentType": "Etcd"
+            },
+            "nodes": [
+              {
+                "name": "K8S-1DHMHQ2CL-1DHMHQ2",
+                "type": "Worker",
+                "ipConfiguration": [
+                  {
+                    "port": "vSwitch1",
+                    "ipAddress": "5.5.166.1"
+                  }
+                ],
+                "componentType": "Node"
+              },
+              {
+                "name": "K8S-1DHMHQ2CL-M0",
+                "type": "Master",
+                "ipConfiguration": [
+                  {
+                    "port": "vSwitch2",
+                    "ipAddress": "5.5.166.2"
+                  }
+                ],
+                "componentType": "Node"
+              }
+            ],
+            "version": "v1.17.3",
+            "componentType": "Cluster"
+          },
+          "kubernetesRoleResources": {
+            "storage": {
+              "storageClasses": [
+                {
+                  "name": "storageclass1",
+                  "type": "SMB",
+                  "posixCompliant": "Disabled"
+                },
+                {
+                  "name": "storageclass2",
+                  "type": "Blob",
+                  "posixCompliant": "Enabled"
+                }
+              ]
+            },
+            "compute": {
+              "vmProfile": "DS1_v2",
+              "memoryInBytes": 17179869184,
+              "processorCount": 12,
+              "hugePage2M": -1,
+              "hugePage1G": -1
+            },
+            "network": {
+              "cniConfig": {
+                "type": "Calico",
+                "version": "v3.1.7",
+                "podSubnet": "172.27.0.0/16",
+                "serviceSubnet": "172.28.0.0/16",
+                "componentType": "CNI"
+              },
+              "loadBalancerConfig": {
+                "type": "Metallb",
+                "version": "v0.8.1",
+                "componentType": "LoadBalancer"
+              }
+            }
+          },
+          "roleStatus": "Enabled"
+        },
+        "kind": "Kubernetes",
+        "id": "/subscriptions/db4e2fdb-6d80-4e6e-b7cd-736098270664/resourceGroups/demo-resources/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/demo-edge-sdk8-2023/roles/kubernetesRole",
+        "name": "kubernetesRole",
+        "type": "Microsoft.DataBoxEdge/dataBoxEdgeDevices/roles"
+      }
+    }
+  }
+}
