@@ -4221,11 +4221,6 @@
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateIPConfigurationProperties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
-        }
-      ],
       "description": "Describes a virtual machine scale set network profile's IP configuration. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network",
       "x-ms-azure-resource": true
     },
@@ -4260,7 +4255,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetIPConfiguration"
           },
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Specifies the IP configurations of the network interface."
         },
         "enableIPForwarding": {
@@ -4316,6 +4313,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetUpdateIPConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The virtual machine scale set IP Configuration."
         },
         "enableIPForwarding": {
@@ -4364,11 +4364,6 @@
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfigurationProperties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
-        }
-      ],
       "description": "Describes a virtual machine scale set network profile's network configurations.",
       "x-ms-azure-resource": true
     },
@@ -4560,6 +4555,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of network configurations."
         },
         "networkApiVersion": {
@@ -5663,7 +5661,9 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfiguration"
           },
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of network configurations."
         }
       },
