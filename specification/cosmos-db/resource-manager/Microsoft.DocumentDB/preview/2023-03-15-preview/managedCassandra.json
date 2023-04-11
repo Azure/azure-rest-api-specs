@@ -2035,7 +2035,7 @@
             "diskCapacity": {
               "type": "integer",
               "format": "int32",
-              "description": "Number of disk used for data centers. Default value is 4."
+              "description": "Number of disks attached to each node. Default value is 4."
             },
             "availabilityZone": {
               "type": "boolean",
@@ -2168,7 +2168,7 @@
         "repair_runs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CassandraReaperRunClusterStatus"
+            "$ref": "#/definitions/CassandraReaperRunStatus"
           }
         },
         "repair_schedules": {
@@ -2183,43 +2183,43 @@
       },
       "additionalProperties": false
     },
-    "CassandraReaperEndpointState": {
-      "type": "object",
-      "properties": {
-        "Endpoint": {
-          "type": "string"
-        },
-        "HostId": {
-          "type": "string"
-        },
-        "dc": {
-          "type": "string"
-        },
-        "Rack": {
-          "type": "string"
-        },
-        "Status": {
-          "type": "string"
-        },
-        "Severity": {
-          "type": "number",
-          "format": "double"
-        },
-        "ReleaseVersion": {
-          "type": "string"
-        },
-        "Tokens": {
-          "type": "string"
-        },
-        "Load": {
-          "type": "number",
-          "format": "double"
-        },
-        "Type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
+    "CassandraReaperEndpointState": {	
+      "type": "object",	
+      "properties": {	
+        "Endpoint": {	
+          "type": "string"	
+        },	
+        "HostId": {	
+          "type": "string"	
+        },	
+        "dc": {	
+          "type": "string"	
+        },	
+        "Rack": {	
+          "type": "string"	
+        },	
+        "Status": {	
+          "type": "string"	
+        },	
+        "Severity": {	
+          "type": "number",	
+          "format": "double"	
+        },	
+        "ReleaseVersion": {	
+          "type": "string"	
+        },	
+        "Tokens": {	
+          "type": "string"	
+        },	
+        "Load": {	
+          "type": "number",	
+          "format": "double"	
+        },	
+        "Type": {	
+          "type": "string"	
+        }	
+      },	
+      "additionalProperties": false	
     },
     "CassandraReaperGossipInfo": {
       "type": "object",
@@ -2264,7 +2264,7 @@
       },
       "additionalProperties": false
     },
-    "CassandraReaperRunClusterStatus": {
+    "CassandraReaperRunStatus": {
       "type": "object",
       "properties": {
         "cause": {
@@ -2359,106 +2359,6 @@
           "type": "string"
         },
         "adaptive_schedule": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "CassandraReaperRunStatus": {
-      "type": "object",
-      "properties": {
-        "cause": {
-          "type": "string"
-        },
-        "owner": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "clusterName": {
-          "type": "string"
-        },
-        "columnFamilies": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "keyspaceName": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "intensity": {
-          "type": "number",
-          "format": "double"
-        },
-        "incrementalRepair": {
-          "type": "boolean"
-        },
-        "totalSegments": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "repairParallelism": {
-          "type": "string"
-        },
-        "segmentsRepaired": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "lastEvent": {
-          "type": "string"
-        },
-        "duration": {
-          "type": "string"
-        },
-        "nodes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "datacenters": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "blacklistedTables": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "repairThreadCount": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "repairUnitId": {
-          "type": "string"
-        },
-        "creationTime": {
-          "type": "string"
-        },
-        "startTime": {
-          "type": "string"
-        },
-        "endTime": {
-          "type": "string"
-        },
-        "pauseTime": {
-          "type": "string"
-        },
-        "currentTime": {
-          "type": "string"
-        },
-        "segmentTimeout": {
-          "type": "string"
-        },
-        "adaptiveSchedule": {
           "type": "string"
         }
       },
@@ -2588,17 +2488,17 @@
       },
       "additionalProperties": false
     },
-    "CassandraRepairRingRange": {
-      "type": "object",
-      "properties": {
-        "Start": {
-          "type": "string"
-        },
-        "End": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
+    "CassandraRepairRingRange": {	
+      "type": "object",	
+      "properties": {	
+        "Start": {	
+          "type": "string"	
+        },	
+        "End": {	
+          "type": "string"	
+        }	
+      },	
+      "additionalProperties": false	
     },
     "CassandraRepairSegment": {
       "type": "object",
@@ -2721,7 +2621,7 @@
           }
         },
         "connectionTimeoutInMs": {
-          "description": "Timeout for connection to the LDAP server in milliseconds.The default is 5000 ms.",
+          "description": "Timeout for connecting to the LDAP server in miliseconds. The default is 5000 ms.",
           "type": "integer",
           "format": "int32"
         }
