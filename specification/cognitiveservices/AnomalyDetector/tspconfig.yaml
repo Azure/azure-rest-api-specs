@@ -1,12 +1,12 @@
 emit: [
   "@azure-tools/typespec-autorest",
-  "@azure-tools/typespec-python",
-  "@azure-tools/typespec-csharp",
 ]
 options:
   "@azure-tools/typespec-autorest":
-    "output-file": "openapi.json"
-    "examples-directory": ./examples
+    examples-directory: ./examples
+    omit-unreachable-types: true
+    output-file: openapi.json
+    emitter-output-dir: "{project-root}/../data-plane/AnomalyDetector/stable"
   "@azure-tools/typespec-python":
     "basic-setup-py": true
     "package-version": 3.0.0b6
@@ -22,5 +22,3 @@ options:
     clear-output-folder: true
     namespace: Azure.AI.AnomalyDetector
     model-namespace: false
-  # Uncomment this line and add "@azure-tools/typespec-typescript" to your package.json to generate Typescript code
-  # "@azure-tools/cadl-typescript": true
