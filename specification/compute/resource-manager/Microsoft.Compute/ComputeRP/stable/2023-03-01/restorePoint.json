@@ -651,6 +651,7 @@
     "RestorePointSourceMetadata": {
       "properties": {
         "hardwareProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/HardwareProfile",
           "description": "Gets the hardware profile."
         },
@@ -659,32 +660,44 @@
           "description": "Gets the storage profile."
         },
         "osProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/OSProfile",
           "description": "Gets the OS profile."
         },
         "diagnosticsProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/DiagnosticsProfile",
           "description": "Gets the diagnostics profile."
         },
         "licenseType": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the license type, which is for bring your own license scenario."
         },
         "vmId": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the virtual machine unique id."
         },
         "securityProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/SecurityProfile",
           "description": "Gets the security profile."
         },
         "location": {
           "type": "string",
+          "readOnly": true,
           "description": "Location of the VM from which the restore point was created."
         },
         "userData": {
           "type": "string",
+          "readOnly": true,
           "description": "UserData associated with the source VM for which restore point is captured, which is a base-64 encoded value."
+        },
+        "hyperVGeneration": {
+          "$ref": "./computeRPCommon.json#/definitions/HyperVGenerationType",
+          "readOnly": true,
+          "description": "HyperVGeneration of the source VM for which restore point is captured."
         }
       },
       "description": "Describes the properties of the Virtual Machine for which the restore point was created. The properties provided are a subset and the snapshot of the overall Virtual Machine properties captured at the time of the restore point creation."
@@ -712,6 +725,7 @@
       "properties": {
         "osType": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the Operating System type.",
           "enum": [
             "Windows",
@@ -723,19 +737,23 @@
           }
         },
         "encryptionSettings": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/DiskEncryptionSettings",
           "description": "Gets the disk encryption settings."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the disk name."
         },
         "caching": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/Caching",
           "description": "Gets the caching type."
         },
         "diskSizeGB": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "Gets the disk size in GB."
         },
@@ -744,8 +762,13 @@
           "description": "Gets the managed disk details"
         },
         "diskRestorePoint": {
-          "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
-          "description": "Gets the disk restore point Id."
+          "$ref": "#/definitions/DiskRestorePointAttributes",
+          "description": "Contains Disk Restore Point properties."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Shows true if the disk is write-accelerator enabled."
         }
       },
       "description": "Describes an Operating System disk."
@@ -754,32 +777,98 @@
       "properties": {
         "lun": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "Gets the logical unit number."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the disk name."
         },
         "caching": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/Caching",
           "description": "Gets the caching type."
         },
         "diskSizeGB": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "Gets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         },
         "managedDisk": {
           "$ref": "./computeRPCommon.json#/definitions/ManagedDiskParameters",
-          "description": "Gets the managed disk details"
+          "description": "Contains the managed disk details."
         },
         "diskRestorePoint": {
-          "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
-          "description": "Gets the disk restore point Id."
+          "$ref": "#/definitions/DiskRestorePointAttributes",
+          "description": "Contains Disk Restore Point properties."
+        },
+        "writeAcceleratorEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Shows true if the disk is write-accelerator enabled."
         }
       },
       "description": "Describes a data disk."
+    },
+    "DiskRestorePointAttributes": {
+      "type": "object",
+      "properties": {
+        "encryption": {
+          "$ref": "#/definitions/RestorePointEncryption"
+        },
+        "sourceDiskRestorePoint": {
+          "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
+          "description": "Resource Id of the source disk restore point."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
+        }
+      ],
+      "description": "Disk Restore Point details."
+    },
+    "RestorePointEncryption": {
+      "type": "object",
+      "properties": {
+        "diskEncryptionSet": {
+          "$ref": "./computeRPCommon.json#/definitions/DiskEncryptionSetParameters"
+        },
+        "type": {
+          "$ref": "#/definitions/RestorePointEncryptionType"
+        }
+      },
+      "description": "Encryption at rest settings for disk restore point. It is an optional property that can be specified in the input while creating a restore point."
+    },
+    "RestorePointEncryptionType": {
+      "type": "string",
+      "description": "The type of key used to encrypt the data of the disk restore point.",
+      "enum": [
+        "EncryptionAtRestWithPlatformKey",
+        "EncryptionAtRestWithCustomerKey",
+        "EncryptionAtRestWithPlatformAndCustomerKeys"
+      ],
+      "x-ms-enum": {
+        "name": "RestorePointEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EncryptionAtRestWithPlatformKey",
+            "description": "Disk Restore Point is encrypted at rest with Platform managed key. "
+          },
+          {
+            "value": "EncryptionAtRestWithCustomerKey",
+            "description": "Disk Restore Point is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
+          },
+          {
+            "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
+            "description": "Disk Restore Point is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+          }
+        ]
+      }
     },
     "RestorePoint": {
       "properties": {
@@ -856,7 +945,6 @@
           "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
         },
         "sourceMetadata": {
-          "readOnly": true,
           "$ref": "#/definitions/RestorePointSourceMetadata",
           "description": "Gets the details of the VM captured at the time of the restore point creation."
         },
