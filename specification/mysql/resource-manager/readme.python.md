@@ -24,7 +24,6 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-flexibleserver-2022-09-30-preview
-  - tag: package-2020-01-01
 ```
 
 ### Tag: package-flexibleserver-2021-12-01-preview and python
