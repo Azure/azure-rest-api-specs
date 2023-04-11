@@ -13,11 +13,11 @@
       "properties": {
         "to": {
           "description": "The communication identifier of the target user.",
-          "$ref": "#/definitions/AcsCallingCommunicationIdentifierProperties"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
         },
         "from": {
           "description": "The communication identifier of the user who initiated the call.",
-          "$ref": "#/definitions/AcsCallingCommunicationIdentifierProperties"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
         },
         "serverCallId": {
           "description": "The Id of the server call",
@@ -865,27 +865,6 @@
         "deleteLocation": {
           "description": "The location to delete all chunk storage",
           "type": "string"
-        }
-      }
-    },
-    "AcsCallingCommunicationIdentifierProperties": {
-      "description": "Schema for Calling communication identifier",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
-        }
-      ],
-      "properties": {
-        "unknownIdentifiers": {
-          "description": "Unknown Communication Identifier model",
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The unknown id."
-            }
-          }
         }
       }
     }
