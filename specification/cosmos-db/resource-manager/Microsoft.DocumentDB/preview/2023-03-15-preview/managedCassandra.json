@@ -1647,7 +1647,7 @@
             "$ref": "#/definitions/ConnectionError"
           }
         },
-        "Errors": {
+        "errors": {
           "type": "array",
           "description": "List relevant information about any errors about cluster, data center and connection error.",
           "items": {
@@ -2719,6 +2719,11 @@
           "items": {
             "$ref": "#/definitions/Certificate"
           }
+        },
+        "connectionTimeoutInMs": {
+          "description": "Timeout for connection to the LDAP server in milliseconds.The default is 5000 ms.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     }
