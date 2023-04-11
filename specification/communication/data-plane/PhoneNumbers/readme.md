@@ -62,7 +62,7 @@ title:
   Azure Communication Services
 ```
 
-### Tag: package-phonenumber-2022-06-01-preview
+### Tag: package-phonenumber-2023-05-01-preview
 
 These settings apply only when `--tag=package-phonenumber-2023-05-01-preview` is specified on the command line.
 

@@ -501,56 +501,13 @@
         }
       }
     },
-    "/operatorInfo/phoneNumbers/{phoneNumber}": {
-      "get": {
-        "tags": [
-          "OperatorInfo"
-        ],
-        "summary": "Endpoint for retrieving operator information for given phone number.\r\nThis includes the mnc, mcc, carrier details, and number type which can be used to determine a number’s capabilities",
-        "operationId": "GetPhoneNumberDetails",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "phoneNumber",
-            "description": "The phone number whose operator information and carrier details should be looked up",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PhoneNumberInformation"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Look up a single phone number": {
-            "$ref": "./examples/LookupSinglePhoneNumber.json"
-          }
-        }
-      }
-    },
     "/operatorInfo/phoneNumbers/:search": {
       "post": {
         "tags": [
-          "OperatorInfo"
+          "Obtain operator information for recipient numbers"
         ],
         "summary": "Endpoint for retrieving operator information for a set of phone numbers.\r\nThis includes the mnc, mcc, carrier details, and number type which can be used to determine a number’s capabilities",
-        "operationId": "PostPhoneNumberDetails",
+        "operationId": "PostPhoneNumberInformation",
         "consumes": [
           "application/json"
         ],
@@ -566,10 +523,7 @@
             "name": "body",
             "description": "The phone numbers whose operator information and carrier details should be looked up",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/PhoneNumberInformationRequest"
             }
           }
         ],
@@ -577,10 +531,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PhoneNumberInformation"
-              }
+              "$ref": "#/definitions/PhoneNumberInformationResponse"
             }
           },
           "default": {
@@ -588,11 +539,11 @@
             "schema": {
               "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Look up multiple phone numbers": {
-            "$ref": "./examples/LookupMultiplePhoneNumbers.json"
+          },
+          "x-ms-examples": {
+            "Look up multiple phone numbers": {
+              "$ref": "./examples/LookupMultiplePhoneNumbers.json"
+            }
           }
         }
       }
@@ -968,7 +919,7 @@
         }
       }
     },
-    "CarrierInfo": {
+    "CarrierInformation": {
       "description": "Represents carrier/operator information for a phone number",
       "type": "object",
       "properties": {
@@ -1003,7 +954,7 @@
             "freephone",
             "specialServices",
             "testNumber",
-            "voIP"
+            "voip"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1012,7 +963,31 @@
           }
         },
         "currentProviderInfo": {
-          "$ref": "#/definitions/CarrierInfo"
+          "$ref": "#/definitions/CarrierInformation"
+        }
+      }
+    },
+    "PhoneNumberInformationRequest": {
+      "description": "Represents a search request for information about phone numbers",
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PhoneNumberInformationResponse": {
+      "description": "Represents the results of a search for information about phone numbers",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhoneNumberInformation"
+          }
         }
       }
     }
