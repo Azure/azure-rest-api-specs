@@ -39,10 +39,10 @@
         "tags": [
           "LocationBasedCapabilities"
         ],
-        "operationId": "LocationBasedCapabilities_Get",
+        "operationId": "LocationBasedCapabilities_List",
         "x-ms-examples": {
           "CapabilitiesList": {
-            "$ref": "./examples/CapabilitiesByLocation.json"
+            "$ref": "./examples/CapabilitiesByLocationList.json"
           }
         },
         "description": "Get capabilities at specified location in a given subscription.",
@@ -61,7 +61,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CapabilityProperties"
+              "$ref": "#/definitions/CapabilitiesListResult"
             }
           },
           "default": {
@@ -70,6 +70,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -499,6 +502,26 @@
         }
       },
       "description": "Location capabilities."
+    },
+    "CapabilitiesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of supported capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityProperties"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "location capability"
     },
     "GetPrivateDnsZoneSuffixResponse": {
       "type": "object",
