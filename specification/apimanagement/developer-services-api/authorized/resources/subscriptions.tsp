@@ -22,7 +22,6 @@ interface Subscriptions {
   @doc("Get user subscription by its identifier.")
   getUserSubscription is ResourceRead<SubscriptionResource>;
 
-  //TODO: find a workaround
   @route("/users/{userId}/subscriptions/{subscriptionId}")
   @doc("Create user subscription.")
   @post
@@ -42,7 +41,6 @@ interface Subscriptions {
     userSubscriptionCreate: UserSubscriptionCreate
   ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
 
-  //TODO: It returns the body
   @route("/users/{userId}/subscriptions/{subscriptionId}")
   @doc("Update user subscription.")
   @patch
