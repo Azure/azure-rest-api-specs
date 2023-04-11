@@ -121,14 +121,12 @@
           {
             "in": "path",
             "name": "regionName",
+            "description": "Region where elastic deployment will take place.",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2004,6 +2002,7 @@
       }
     },
     "ElasticVersionsListResponse": {
+      "description": "List of elastic versions available in a region.",
       "type": "object",
       "properties": {
         "value": {
