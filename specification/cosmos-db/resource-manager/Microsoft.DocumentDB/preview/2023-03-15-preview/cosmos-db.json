@@ -11897,6 +11897,32 @@
             "$ref": "#/definitions/BackupStorageRedundancy"
           },
           "description": "The properties of available backup storage redundancies."
+        },
+        "isSubscriptionRegionAccessAllowedForRegular": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Flag indicating whether the subscription have access in region for Non-Availability Zones."
+        },
+        "isSubscriptionRegionAccessAllowedForAz": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Flag indicating whether the subscription have access in region for Availability Zones(Az)."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Enum to indicate current buildout status of the region.",
+          "enum": [
+            "Uninitialized",
+            "Initializing",
+            "InternallyReady",
+            "Online",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
         }
       }
     },

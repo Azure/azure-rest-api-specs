@@ -12,13 +12,15 @@
             "type": "Microsoft.DocumentDB/locations",
             "name": "westus",
             "properties": {
-              "status": "ProductionSLA",
               "supportsAvailabilityZone": false,
               "isResidencyRestricted": false,
               "backupStorageRedundancies": [
                 "Local",
                 "Geo"
-              ]
+              ],
+              "isSubscriptionRegionAccessAllowedForRegular": true,
+              "isSubscriptionRegionAccessAllowedForAz": false,
+              "status": "Online"
             }
           },
           {
@@ -26,13 +28,15 @@
             "type": "Microsoft.DocumentDB/locations",
             "name": "centralus",
             "properties": {
-              "status": "ProductionSLA",
               "supportsAvailabilityZone": true,
               "isResidencyRestricted": false,
               "backupStorageRedundancies": [
                 "Zone",
                 "Geo"
-              ]
+              ],
+              "isSubscriptionRegionAccessAllowedForRegular": false,
+              "isSubscriptionRegionAccessAllowedForAz": true,
+              "status": "Online"
             }
           }
         ]
