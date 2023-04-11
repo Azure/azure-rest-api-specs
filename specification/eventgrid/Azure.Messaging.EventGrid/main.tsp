@@ -11,7 +11,7 @@ enum ServiceApiVersions {
 
 @useAuth({type: AuthType.http, scheme: "SharedAccessKey"})
 @service({
-  title: "AzureMessagingEventGridClient",
+  title: "Azure.Messaging.EventGridMessagingClient",
   version: "2023-06-01-preview"
 })
 
@@ -35,7 +35,7 @@ enum ServiceApiVersions {
 
 @doc("Azure Messaging EventGrid Client")
 @versioned(ServiceApiVersions)
-namespace AzureMessagingEventGrid {
+namespace Azure.Messaging.EventGridMessaging {
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;
