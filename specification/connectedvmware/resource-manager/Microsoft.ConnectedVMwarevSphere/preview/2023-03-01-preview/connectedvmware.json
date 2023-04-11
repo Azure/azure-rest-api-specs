@@ -4430,6 +4430,190 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default": {
+      "put": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_Create",
+        "description": "Create Or Update GuestAgent.",
+        "summary": "Implements GuestAgent PUT method.",
+        "x-ms-examples": {
+          "CreateGuestAgent": {
+            "$ref": "./examples/CreateVMInstanceGuestAgent.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_Get",
+        "summary": "Gets GuestAgent.",
+        "description": "Implements GuestAgent GET method.",
+        "x-ms-examples": {
+          "GetGuestAgent": {
+            "$ref": "./examples/GetVMInstanceGuestAgent.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GuestAgent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_Delete",
+        "summary": "Deletes an GuestAgent.",
+        "description": "Implements GuestAgent DELETE method.",
+        "x-ms-examples": {
+          "DeleteGuestAgent": {
+            "$ref": "./examples/DeleteVMInstanceGuestAgent.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents": {
+      "get": {
+        "tags": [
+          "VMInstanceGuestAgents"
+        ],
+        "operationId": "VMInstanceGuestAgents_List",
+        "summary": "Implements GET GuestAgent in a vm.",
+        "description": "Returns the list of GuestAgent of the given vm.",
+        "x-ms-examples": {
+          "GuestAgentListByVm": {
+            "$ref": "./examples/VMInstanceGuestAgent_ListByVm.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GuestAgentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
