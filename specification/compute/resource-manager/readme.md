@@ -240,7 +240,6 @@ directive:
     from: virtualMachineScaleSet.json
     reason: x-ms-azure-resource tag makes 'ID' property required. However, VmssExtension is part of the VMSS property, not necessary a resource. So it does not always have ID.
   - suppress: ResourceNameRestriction
-    from: virtualMachineScaleSet.json
     where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reapply"].patch
     reason: there is no VMSS naming requirement. It only follows ARM resource naming requirement.
