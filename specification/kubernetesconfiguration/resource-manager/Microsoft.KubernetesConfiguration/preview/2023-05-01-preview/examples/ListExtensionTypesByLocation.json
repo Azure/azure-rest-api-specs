@@ -4,6 +4,7 @@
     "location": "westus2",
     "publisherId": "myPublisherId",
     "offerId": "myOfferId",
+    "clusterType": "connectedCluster",
     "api-version": "2023-05-01"
   },
   "responses": {
@@ -13,61 +14,32 @@
       "body": {
         "value": [
           {
-            "version": "1.1.0",
-            "supportedKubernetesVersions": [
-              "=1.24",
-              ">1.25"
-            ],
-            "configurationSettings": [
-              {
-                "key": "CONFIG_KEY_1",
-                "isRequired": true
+            "properties": {
+              "isSystemExtension": false,
+              "shouldCreateIdentity": true,
+              "description": "My extension type!",
+              "publisher": "Microsoft",
+              "planInfo": {
+                "publisherId": "myPublisherId",
+                "planId": "myPlanId",
+                "offerId": "myOfferId"
               },
-              {
-                "key": "CONFIG_KEY_2",
-                "isRequired": false
+              "supportedClusterTypes": [
+                "connectedClusters"
+              ],
+              "supportedScopes": {
+                "defaultScope": "cluster",
+                "clusterScopeSettings": {
+                  "properties": {
+                    "allowMultipleInstances": true,
+                    "defaultReleaseNamespace": "kube-system"
+                  },
+                  "id": "aaaaaaaaaaaaaaaaaa",
+                  "name": "bbbbbbbbbbbbb",
+                  "type": "ccccccccccccccccccccccccc"
+                }
               }
-            ],
-            "configurationProtectedSettings": [
-              {
-                "key": "PROTECTED_CONFIG_KEY_1",
-                "isRequired": true
-              },
-              {
-                "key": "PROTECTED_CONFIG_KEY_2",
-                "isRequired": false
-              }
-            ]
-          },
-          {
-            "version": "1.2.0",
-            "supportedKubernetesVersions": [
-              ">1.25"
-            ],
-            "configurationSettings": [
-              {
-                "key": "CONFIG_KEY_1",
-                "isRequired": true
-              },
-              {
-                "key": "CONFIG_KEY_2",
-                "isRequired": false
-              },
-              {
-                "key": "CONFIG_KEY_3",
-                "isRequired": false
-              }
-            ],
-            "configurationProtectedSettings": [
-              {
-                "key": "PROTECTED_CONFIG_KEY_1",
-                "isRequired": true
-              },
-              {
-                "key": "PROTECTED_CONFIG_KEY_2",
-                "isRequired": false
-              }
-            ]
+            }
           }
         ]
       }

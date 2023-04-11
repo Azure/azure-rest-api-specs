@@ -69,13 +69,6 @@
             "type": "string"
           },
           {
-            "name": "planId",
-            "in": "query",
-            "description": "Filter results by Plan ID of a marketplace extension type",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "clusterType",
             "in": "query",
             "description": "Filter results by the cluster type for extension types",
@@ -225,7 +218,7 @@
         "operationId": "ExtensionTypes_GetVersion",
         "x-ms-examples": {
           "List Extension Type Versions": {
-            "$ref": "./examples/GetExtensionTypeVersionsByLocation.json"
+            "$ref": "./examples/GetExtensionTypeVersionByLocation.json"
           }
         },
         "parameters": [
@@ -285,7 +278,7 @@
         "operationId": "ExtensionTypes_List",
         "x-ms-examples": {
           "Get Extension Types": {
-            "$ref": "./examples/GetExtensionTypeVersion.json"
+            "$ref": "./examples/ListExtensionTypes.json"
           }
         },
         "parameters": [
@@ -315,6 +308,13 @@
             "name": "offerId",
             "in": "query",
             "description": "Filter results by Offer ID of a marketplace extension type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Filter results by release train",
             "required": false,
             "type": "string"
           },
@@ -369,6 +369,13 @@
           },
           {
             "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Filter results by release train",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -469,7 +476,7 @@
         "operationId": "ExtensionTypes_ClusterGetVersion",
         "x-ms-examples": {
           "List Extension Type Versions": {
-            "$ref": "./examples/ListExtensionTypeVersions.json"
+            "$ref": "./examples/GetExtensionTypeVersion.json"
           }
         },
         "parameters": [
@@ -571,13 +578,30 @@
             }
           },
           "supportedScopes": {
-            "defaultScope": {
-              "description": "The default scope of the extension type. This scope will be used if the user does not provide a scope while creating an extension.",
-              "type": "string"
-            },
-            "name": {
-              "description": "The name of the extension type.",
-              "type": "string"
+            "description": "Supported Kubernetes Scopes for this Extension Type.",
+            "type": "object",
+            "properties": {
+              "defaultScope": {
+                "description": "The default scope of the extension type. This scope will be used if the user does not provide a scope while creating an extension.",
+                "type": "string"
+              },
+              "clusterScopeSettings": {
+                "type": "object",
+                "properties": {
+                  "properties": {
+                    "type": "object"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         }

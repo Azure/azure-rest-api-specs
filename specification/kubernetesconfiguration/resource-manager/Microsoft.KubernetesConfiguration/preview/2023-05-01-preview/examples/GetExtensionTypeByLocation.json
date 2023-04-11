@@ -2,35 +2,35 @@
   "parameters": {
     "subscriptionId": "subId1",
     "location": "westus2",
-    "extensionTypeName": "extensionType1"
+    "extensionTypeName": "extensionType1",
+    "api-version": "2023-05-01"
   },
   "responses": {
     "200": {
       "headers": {},
       "description": "Details of the extension type",
       "body": {
-        "properties": {
-          "isSystemExtension": false,
-          "shouldCreateIdentity": true,
-          "description": "My extension type!",
-          "publisher": "Microsoft",
-          "supportedClusterTypes": [
-            "connectedClusters"
-          ],
-          "supportedScopes": {
-            "defaultScope": "cluster",
-            "clusterScopeSettings": {
-              "allowMultipleInstances": true,
-              "defaultReleaseNamespace": "kube-system"
+        "value": {
+          "properties": {
+            "isSystemExtension": false,
+            "shouldCreateIdentity": true,
+            "description": "My extension type!",
+            "publisher": "Microsoft",
+            "planInfo": {
+              "publisherId": "myPublisherId",
+              "planId": "myPlanId",
+              "offerId": "myOfferId"
+            },
+            "supportedClusterTypes": [
+              "connectedClusters"
+            ],
+            "supportedScopes": {
+              "defaultScope": "cluster",
+              "clusterScopeSettings": {
+                "allowMultipleInstances": true,
+                "defaultReleaseNamespace": "kube-system"
+              }
             }
-          },
-          "systemData": {
-            "createdBy": "identity",
-            "createdByType": "User",
-            "createdAt": "2020-10-05T02:53:39.953Z",
-            "lastModifiedBy": "other-identity",
-            "lastModifiedByType": "User",
-            "lastModifiedAt": "2021-11-02T04:42:24.572Z"
           }
         }
       }
