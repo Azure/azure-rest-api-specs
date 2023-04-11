@@ -238,7 +238,17 @@ directive:
       - common.json
   - suppress: XmsResourceInPutResponse
     from: virtualMachineScaleSet.json
-    reason: x-ms-azure-resource tag makes 'ID' property required. However, VmssExtension is part of the VMSS property, not necessary a reousrce. So it does not always have ID.
+    reason: x-ms-azure-resource tag makes 'ID' property required. However, VmssExtension is part of the VMSS property, not necessary a resource. So it does not always have ID.
+  - suppress: ResourceNameRestriction
+    from: virtualMachineScaleSet.json
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reapply"].patch
+    reason: there is no VMSS naming requirement. It only follows ARM resource naming requirement.
+  - suppress: ArmResourcePropertiesBag
+    reason: This was an existing definition. Too much impact to go through breaking change to address this. 
+    from: virtualMachineScaleSet.json
+    where:
+      - $.definitions.VirtualMachineScaleSetVMExtension
 ```
 
 ### Tag: package-2023-03-01
