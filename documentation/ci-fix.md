@@ -73,7 +73,7 @@ Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for 
 
 The lint diff validation is to run linter against the currect spec and the spec before current PR, the final result is the differece set between the result running against current specs and the result running against the specs before current PR.
 
-Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
+Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.  
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
 ### Run linter locally:
