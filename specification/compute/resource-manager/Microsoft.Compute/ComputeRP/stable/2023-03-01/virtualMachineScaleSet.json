@@ -4977,7 +4977,14 @@
         "proximityPlacementGroup": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
-        }
+        },
+        "priorityMixPolicy": {
+          "$ref": "#/definitions/PriorityMixPolicy",
+          "description": "Specifies the desired targets for mixing Spot and Regular priority VMs within the same VMSS Flex instance."
+        },
+        "spotRestorePolicy": {
+          "$ref": "#/definitions/SpotRestorePolicy",
+          "description": "Specifies the Spot Restore properties for the virtual machine scale set."}
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
     },
