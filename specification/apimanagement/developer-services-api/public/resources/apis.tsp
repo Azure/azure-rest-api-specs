@@ -21,20 +21,24 @@ interface Apis {
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
+  @route("/apis/{apiId}")
   @doc("Get the details of the API specified by its identifier.")
-  getApi is ResourceRead<
-    ApiResource,
-    ParametersTrait<{
-      @doc("If true, the API will be exported in the specified format.")
-      @query
-      export?: boolean;
+  @get
+  getApi(
+    ...Azure.Core.Foundations.ApiVersionParameter,
 
-      @doc("If sent, the API will be exported in the specified format.")
-      @header
-      accept?: ContentTypes;
-    }>
-  >;
-  //TODO: is it correct?
+    @doc("API identifier.")
+    @path
+    apiId: string,
+
+    @doc("If sent, the API will be exported in the specified format.")
+    @header
+    accept?: ContentTypes,
+
+    @doc("If true, the API will be exported in the specified format.")
+    @query
+    export?: boolean
+  ): ApiResponse<TypedBody<Api, ContentTypes>>;
 
   @doc("List a collection of APIs schemas.")
   listApiSchemas is ResourceList<
