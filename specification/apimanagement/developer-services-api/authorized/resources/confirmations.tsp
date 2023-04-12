@@ -5,40 +5,24 @@ import "../../models/confirmation.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesAuthorizedApi.Resources.Confirmations;
 
 interface Confirmations {
+  @route("/confirmations/users/{userId}/identities/basic")
   @doc("Basic identity (Email) confirmation for a User.")
-  createBasicIdentityConfirmation is ResourceCreateWithServiceProvidedName<ConfirmationIdentityResource>;
-}
+  @post
+  CreateUserBasicIdentityConfirmation(
+    ...ApiVersionParameter,
 
-@doc("The confirmations resource.")
-@resource("confirmations")
-model ConfirmationsResource {
-  @doc("The confirmation.")
-  @key("confirmationId")
-  @visibility("query")
-  confirmationId: "";
-}
+    @doc("User identifier.")
+    @path
+    userId: string,
 
-@doc("Apis resource model.")
-@resource("users")
-@parentResource(ConfirmationsResource)
-model UsersResource {
-  @doc("User identifier.")
-  @key("userId")
-  @visibility("query")
-  userId: string;
-}
-
-@doc("The basic identity confirmation resource.")
-@resource("identities/basic")
-@parentResource(UsersResource)
-model ConfirmationIdentityResource extends IdentityConfirmationRequest {
-  @doc("The identity confirmation.")
-  @key("default")
-  @visibility("query")
-  default: "";
+    @doc("The identity confirmation request.")
+    @body
+    identityConfirmationRequest: IdentityConfirmationRequest
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
 }

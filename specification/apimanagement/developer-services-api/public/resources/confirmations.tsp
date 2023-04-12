@@ -11,27 +11,25 @@ using DeveloperServicesApi.Models;
 namespace DeveloperServicesPublicApi.Resources.Confirmations;
 
 interface Confirmations {
+  @route("/confirmations/password")
   @doc("Password reset confirmation.")
-  createPasswordConfirmation is ResourceCreateWithServiceProvidedName<ConfirmationPasswordResource>;
+  @post
+  CreatePasswordConfirmation(
+    ...ApiVersionParameter,
 
+    @doc("The password confirmation request.")
+    @body
+    confirmationRequest: PasswordConfirmationRequest
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+
+  @route("/confirmations/identities/basic")
   @doc("Basic identity (Email) confirmation.")
-  createBasicIdentityConfirmation is ResourceCreateWithServiceProvidedName<ConfirmationIdentityResource>;
-}
+  @post
+  CreateBasicIdentityConfirmation(
+    ...ApiVersionParameter,
 
-@doc("The confirmations resource.")
-@resource("confirmations/password")
-model ConfirmationPasswordResource extends PasswordConfirmationRequest {
-  @doc("Password reset confirmation.")
-  @key("default")
-  @visibility("query")
-  default: "";
-}
-
-@doc("The confirmations resource.")
-@resource("confirmations/identities/basic")
-model ConfirmationIdentityResource extends IdentityConfirmationRequest {
-  @doc("The identity confirmation.")
-  @key("default")
-  @visibility("query")
-  default: "";
+    @doc("The identity confirmation request.")
+    @body
+    identityConfirmationRequest: IdentityConfirmationRequest
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
 }
