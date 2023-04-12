@@ -44,7 +44,7 @@ interface CertificateProfileOperations {
     "GetSignOperation"
   )
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
-  GetSignOperation is Foundations.GetOperationStatus<
+  getSignOperation is Foundations.GetOperationStatus<
     CodeSignStatus,
     OperationStatus
   >;
@@ -55,13 +55,13 @@ interface CertificateProfileOperations {
     "./examples/CertificateProfile_GetSignEku.json",
     "GetSignEku"
   )
-  GetSignEku is ResourceList<Eku>;
+  listSignEku is ResourceList<Eku>;
 
   @summary("Initiates a sign operation.")
   @doc("Initiates a sign operation.")
   @example("./examples/CertificateProfile_Sign.json", "Sign")
-  @pollingOperation(CertificateProfileOperations.GetSignOperation)
-  Sign is ResourceAction<CertificateProfile, SignRequest, OperationStatus>;
+  @pollingOperation(CertificateProfileOperations.getSignOperation)
+  sign is ResourceAction<CertificateProfile, SignRequest, OperationStatus>;
 }
 
 @doc("Algorithms supported for signing.")
