@@ -846,11 +846,12 @@
         },
         "additionalNics": {
           "type": "array",
-          "readOnly": false,
+          "readOnly": true,
           "description": "Details required for Additional Network Interface.",
           "items": {
             "$ref": "#/definitions/VirtualApplianceAdditionalNicProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "virtualApplianceSites": {
           "type": "array",
@@ -925,11 +926,17 @@
           "type": "string",
           "readOnly": true,
           "description": "Private IP address."
+        },
+        "instanceName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Intance on which nic is attached."
         }
       },
       "description": "Network Virtual Appliance NIC properties."
     },
     "VirtualApplianceAdditionalNicProperties": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -937,9 +944,9 @@
           "description": "Customer Name for additional nic"
         },
         "hasPublicIp": {
-        "type": "boolean",
-        "readOnly": false,
-        "description": "Customer Intent for Public Ip on additional nic"
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Customer Intent for Public Ip on additional nic"
         }
       },
       "description": "Network Virtual Appliance Additional NIC properties."
