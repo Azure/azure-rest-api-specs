@@ -2,17 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "Computer Vision Client",
-    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the people in an image.  It also has other features like categorizing the content of images, and describing an image with complete English sentences.",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to extract text using Read OCR, caption an image using descriptive natural language, detect objects, people, and more.",
     "version": "2023-04-01-preview"
   },
   "paths": {
     "/imageanalysis:segment": {
       "post": {
         "tags": [
-          "ContentGenerationApi"
+          "OperationsApi"
         ],
-        "summary": "Analyze the input image without deployment. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
-        "operationId": "Segment",
+        "summary": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
+        "operationId": "ImageAnalysis_Segment",
         "consumes": [
           "application/json"
         ],
@@ -29,7 +29,11 @@
             "enum": [
               "backgroundRemoval",
               "foregroundMatting"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "SegmentationModeApiModel",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -55,7 +59,20 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Segment_BackgroundRemoval_FromImageUrl": {
+            "$ref": "./examples/Segment_BackgroundRemoval_FromImageUrl.json"
+          },
+          "Segment_ForegroundMatting_FromImageUrl": {
+            "$ref": "./examples/Segment_ForegroundMatting_FromImageUrl.json"
           }
         }
       }
@@ -66,7 +83,7 @@
           "ImageRetrievalApi"
         ],
         "summary": "Return vector from a text.",
-        "operationId": "VectorizeText",
+        "operationId": "ImageRetrieval_VectorizeText",
         "consumes": [
           "application/json"
         ],
@@ -103,7 +120,17 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImageRetrieval_VectorizeText": {
+            "$ref": "./examples/ImageRetrieval_VectorizeText.json"
           }
         }
       }
@@ -114,7 +141,7 @@
           "ImageRetrievalApi"
         ],
         "summary": "Return vector from an image.",
-        "operationId": "VectorizeImage",
+        "operationId": "ImageRetrieval_VectorizeImage",
         "consumes": [
           "application/json"
         ],
@@ -152,7 +179,17 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImageRetrieval_VectorizeImage": {
+            "$ref": "./examples/ImageRetrieval_VectorizeImage.json"
           }
         }
       }
@@ -530,7 +567,7 @@
           "OperationsApi"
         ],
         "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "AnalyzeImage",
+        "operationId": "ImageAnalysis_Analyze",
         "consumes": [
           "application/json"
         ],
@@ -553,7 +590,11 @@
                 "smartCrops",
                 "people"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "VisualFeatureApiModel",
+                "modelAsString": true
+              }
             },
             "collectionFormat": "csv"
           },
@@ -614,6 +655,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "AnalyzeImage_CustomModel": {
+            "$ref": "./examples/AnalyzeImage_CustomModel.json"
+          }
         }
       }
     },
@@ -671,6 +717,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "RegisterDataset_ImageClassification": {
+            "$ref": "./examples/RegisterDataset_ImageClassification.json"
+          }
         }
       },
       "get": {
@@ -713,6 +764,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_Get": {
+            "$ref": "./examples/Datasets_Get.json"
           }
         }
       },
@@ -775,6 +831,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Datasets_Update": {
+            "$ref": "./examples/Datasets_Update.json"
+          }
         }
       },
       "delete": {
@@ -820,6 +881,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_Unregister": {
+            "$ref": "./examples/Datasets_Unregister.json"
           }
         }
       }
@@ -876,6 +942,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Datasets_List": {
+            "$ref": "./examples/Datasets_List.json"
           }
         },
         "x-ms-pageable": {
@@ -937,6 +1008,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Models_Create": {
+            "$ref": "./examples/Models_Create.json"
+          }
         }
       },
       "get": {
@@ -980,6 +1056,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Models_Get": {
+            "$ref": "./examples/Models_Get.json"
+          }
         }
       },
       "delete": {
@@ -1019,6 +1100,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Models_Delete": {
+            "$ref": "./examples/Models_Delete.json"
           }
         }
       }
@@ -1077,6 +1163,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Models_List": {
+            "$ref": "./examples/Models_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1120,6 +1211,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Models_CancelTraining": {
+            "$ref": "./examples/Models_CancelTraining.json"
           }
         }
       }
@@ -1187,6 +1283,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "ModelEvaluations_Create": {
+            "$ref": "./examples/ModelEvaluations_Create.json"
+          }
         }
       },
       "get": {
@@ -1239,6 +1340,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "ModelEvaluations_Get": {
+            "$ref": "./examples/ModelEvaluations_Get.json"
+          }
         }
       },
       "delete": {
@@ -1287,6 +1393,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ModelEvaluations_Delete": {
+            "$ref": "./examples/ModelEvaluations_Delete.json"
           }
         }
       }
@@ -1352,6 +1463,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ModelEvaluations_List": {
+            "$ref": "./examples/ModelEvaluations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1972,10 +2088,6 @@
     },
     "ImagePredictionResult": {
       "description": "Describes the prediction result of an image.",
-      "required": [
-        "objectsResult",
-        "tagsResult"
-      ],
       "type": "object",
       "properties": {
         "tagsResult": {
@@ -2327,7 +2439,11 @@
             "succeeded",
             "failed"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProductRecognitionStateApiModel",
+            "modelAsString": true
+          }
         },
         "error": {
           "$ref": "#/definitions/ErrorResponseDetails"
@@ -2508,13 +2624,6 @@
     },
     "Dataset": {
       "description": "Describes a dataset, which represents a set of images and annotations that can be used for training or testing a model.",
-      "required": [
-        "annotationKind",
-        "createdDateTime",
-        "eTag",
-        "name",
-        "updatedDateTime"
-      ],
       "type": "object",
       "properties": {
         "annotationKind": {
@@ -2523,7 +2632,11 @@
             "imageClassification",
             "imageObjectDetection"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnnotationKindApiModel",
+            "modelAsString": true
+          }
         },
         "annotationFileUris": {
           "description": "List of absolute URIs to annotation files, each of which must be stored as a blob in an Azure Storage blob container.\r\nEach file must follow the COCO format for the specified AnnotationKind, with each image path being an absolute URI to a blob in a blob container.\r\nThe Computer Vision resource must have permission to read the annotation files and all referenced image files.\r\nThis can be done by turning on System managed identities for the Computer Vision resource, then assigning the identity to a role that has permission to read from the blob container containing the annotation and image files.",
@@ -2590,11 +2703,7 @@
     "Model": {
       "description": "Describes a training run for training a custom model.",
       "required": [
-        "createdDateTime",
-        "name",
-        "status",
-        "trainingParameters",
-        "updatedDateTime"
+        "trainingParameters"
       ],
       "type": "object",
       "properties": {
@@ -2627,7 +2736,11 @@
             "cancelling",
             "cancelled"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ModelStateApiModel",
+            "modelAsString": true
+          }
         },
         "trainingCostInMinutes": {
           "format": "int32",
@@ -2669,12 +2782,7 @@
     "ModelEvaluation": {
       "description": "Describes an evaluation run for evaluating the accuracy of a model using a test set.",
       "required": [
-        "createdDateTime",
-        "evaluationParameters",
-        "modelName",
-        "name",
-        "status",
-        "updatedDateTime"
+        "evaluationParameters"
       ],
       "type": "object",
       "properties": {
@@ -2708,7 +2816,11 @@
             "succeeded",
             "failed"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ModelEvaluationStateApiModel",
+            "modelAsString": true
+          }
         },
         "evaluationParameters": {
           "$ref": "#/definitions/ModelEvaluationParameters"
@@ -2843,7 +2955,11 @@
             "managedIdentity",
             "sas"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAuthenticationKindApiModel",
+            "modelAsString": true
+          }
         },
         "sasToken": {
           "description": "Optional. The sas token to access container. Only needed when Kind = Sas.",
@@ -2879,7 +2995,11 @@
             "Generic-Classifier",
             "Generic-Detector"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ModelKindApiModel",
+            "modelAsString": true
+          }
         }
       }
     }
@@ -2898,10 +3018,10 @@
     "/imageanalysis:segment?overload=stream": {
       "post": {
         "tags": [
-          "ContentGenerationApi"
+          "OperationsApi"
         ],
-        "summary": "Analyze the input image without deployment. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
-        "operationId": "SegmentFromImageStream",
+        "summary": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
+        "operationId": "ImageAnalysis_SegmentFromImageStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -2923,7 +3043,11 @@
             "enum": [
               "backgroundRemoval",
               "foregroundMatting"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "SegmentationModeApiModel",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -2934,8 +3058,8 @@
             "description": "An image stream.",
             "required": true,
             "schema": {
-              "format": "file",
-              "type": "object"
+              "format": "byte",
+              "type": "string"
             }
           }
         ],
@@ -2950,7 +3074,20 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Segment_BackgroundRemoval_FromImageStream": {
+            "$ref": "./examples/Segment_BackgroundRemoval_FromImageStream.json"
+          },
+          "Segment_ForegroundMatting_FromImageStream": {
+            "$ref": "./examples/Segment_ForegroundMatting_FromImageStream.json"
           }
         }
       }
@@ -2961,7 +3098,7 @@
           "ImageRetrievalApi"
         ],
         "summary": "Return vector from an image.",
-        "operationId": "VectorizeImageFromImageStream",
+        "operationId": "ImageRetrieval_VectorizeImageFromImageStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -2989,8 +3126,8 @@
             "description": "An image stream.",
             "required": true,
             "schema": {
-              "format": "file",
-              "type": "object"
+              "format": "byte",
+              "type": "string"
             }
           }
         ],
@@ -3005,7 +3142,17 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImageRetrieval_VectorizeImageFromImageStream": {
+            "$ref": "./examples/ImageRetrieval_VectorizeImageFromImageStream.json"
           }
         }
       }
@@ -3016,7 +3163,7 @@
           "OperationsApi"
         ],
         "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
-        "operationId": "AnalyzeImageFromImageStream",
+        "operationId": "ImageAnalysis_AnalyzeFromImageStream",
         "consumes": [
           "application/octet-stream",
           "image/jpeg",
@@ -3044,7 +3191,11 @@
                 "smartCrops",
                 "people"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "VisualFeatureApiModel",
+                "modelAsString": true
+              }
             },
             "collectionFormat": "csv"
           },
@@ -3083,8 +3234,8 @@
             "description": "An image stream.",
             "required": true,
             "schema": {
-              "format": "file",
-              "type": "object"
+              "format": "byte",
+              "type": "string"
             }
           }
         ],
@@ -3105,6 +3256,11 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyzeImageFromImageStream_CustomModel": {
+            "$ref": "./examples/AnalyzeImageFromImageStream_CustomModel.json"
           }
         }
       }
