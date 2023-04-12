@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ContentSafety service",
+    "title": "ContentSafety Service",
     "version": "2023-04-30-preview",
     "description": "Analyze harmful content",
     "x-typespec-generated": [
@@ -275,6 +275,53 @@
         }
       }
     },
+    "/text/blocklists/{blocklistName}:addBlockItems": {
+      "post": {
+        "operationId": "TextBlocklists_AddBlockItems",
+        "summary": "Add BlockItems To Text Blocklist",
+        "description": "Add blockItems to a text blocklist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "blocklistName",
+            "in": "path",
+            "required": true,
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "maxLength": 64,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AddBlockItemsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AddBlockItemsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/text/blocklists/{blocklistName}:removeBlockItems": {
       "post": {
         "operationId": "TextBlocklists_RemoveBlockItems",
@@ -497,7 +544,7 @@
           "description": "Array of blockItemInfo to add."
         }
       },
-      "description": "The request to add blockItems to text blocklist.",
+      "description": "The request of adding blockItems to text blocklist.",
       "required": [
         "blockItems"
       ]
@@ -586,7 +633,7 @@
         },
         "breakByBlocklists": {
           "type": "boolean",
-          "description": "When set to true, further analysis of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
+          "description": "When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
         }
       },
       "description": "The analysis request of the text.",
@@ -704,7 +751,7 @@
           "description": "The higher the severity of input content, the larger this value, currently its value could be: 0,2,4,6."
         }
       },
-      "description": "Image analysis result",
+      "description": "Image analysis result.",
       "required": [
         "category",
         "severity"
@@ -737,7 +784,7 @@
           "description": "The blob url of image."
         }
       },
-      "description": "The content or blob rl of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time."
+      "description": "The content or blob url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maximum size of image is 2048 pixels * 2048 pixels, no larger than 4MB at the same time. The minimum size of image is 50 pixels * 50 pixels."
     },
     "RemoveBlockItemsOptions": {
       "type": "object",
@@ -748,10 +795,10 @@
             "type": "string"
           },
           "x-typespec-name": "string[]",
-          "description": "Array of blockItemIds to delete."
+          "description": "Array of blockItemIds to remove."
         }
       },
-      "description": "The request to delete blockItems from text blocklist.",
+      "description": "The request of removing blockItems from text blocklist.",
       "required": [
         "blockItemIds"
       ]

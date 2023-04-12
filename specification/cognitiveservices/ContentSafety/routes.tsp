@@ -58,13 +58,13 @@ interface TextBlocklists {
   @doc("Get all text blocklists details.")
   listTextBlocklists is Azure.Core.ResourceList<TextBlocklist>;
 
-  // @summary("Add BlockItems To Text Blocklist")
-  // @doc("Add blockItems to a text blocklist.")
-  // addBlockItems is ResourceAction<
-  //   TextBlocklist,
-  //   AddBlockItemsOptions,
-  //   AddBlockItemsResult
-  // >;
+  @summary("Add BlockItems To Text Blocklist")
+  @doc("Add blockItems to a text blocklist.")
+  addBlockItems is ResourceAction<
+    TextBlocklist,
+    AddBlockItemsOptions,
+    AddBlockItemsResult
+  >;
 
   @summary("Remove BlockItems From Text Blocklist")
   @doc("Remove blockItems from a text blocklist.")

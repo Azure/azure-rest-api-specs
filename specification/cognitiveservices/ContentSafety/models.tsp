@@ -32,7 +32,7 @@ model AnalyzeTextOptions {
   @doc("The names of blocklists.")
   blocklistNames?: string[];
 
-  @doc("When set to true, further analysis of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit.")
+  @doc("When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit.")
   breakByBlocklists?: boolean;
 }
 
@@ -93,7 +93,7 @@ model AnalyzeImageOptions {
   categories?: ImageCategory[];
 }
 
-@doc("The content or blob rl of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time.")
+@doc("The content or blob url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maximum size of image is 2048 pixels * 2048 pixels, no larger than 4MB at the same time. The minimum size of image is 50 pixels * 50 pixels.")
 model ImageData {
   @doc("Base64 encoding of image.")
   content?: bytes;
@@ -122,7 +122,7 @@ model AnalyzeImageResult {
   violenceResult?: ImageAnalyzeSeverityResult;
 }
 
-@doc("Image analysis result")
+@doc("Image analysis result.")
 model ImageAnalyzeSeverityResult {
   @doc("The image category.")
   category: ImageCategory;
@@ -175,7 +175,7 @@ model TextBlockItemInfo {
   text: string;
 }
 
-@doc("The request to add blockItems to text blocklist.")
+@doc("The request of adding blockItems to text blocklist.")
 model AddBlockItemsOptions {
   @doc("Array of blockItemInfo to add.")
   blockItems: TextBlockItemInfo[];
@@ -187,8 +187,8 @@ model AddBlockItemsResult {
   blockItems?: TextBlockItem[];
 }
 
-@doc("The request to delete blockItems from text blocklist.")
+@doc("The request of removing blockItems from text blocklist.")
 model RemoveBlockItemsOptions {
-  @doc("Array of blockItemIds to delete.")
+  @doc("Array of blockItemIds to remove.")
   blockItemIds: string[];
 }

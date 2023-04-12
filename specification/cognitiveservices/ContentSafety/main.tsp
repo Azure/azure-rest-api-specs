@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
-  title: "ContentSafety service",
+  title: "ContentSafety Service",
 })
 @versioned(ContentSafety.Versions)
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
