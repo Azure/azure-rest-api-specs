@@ -7,8 +7,29 @@
     "networkVirtualApplianceName": "nva"
   },
   "responses": {
-    "200": {},
-    "202": {},
-    "204": {}
+    "200": {
+      "description": "Delete successful.",
+      "headers": {
+        "Location": {
+          "type": "string"
+        }
+      }
+    },
+    "202": {
+      "description": "Accepted and the operation will complete asynchronously.",
+      "headers": {
+        "Location": {
+          "type": "string"
+        }
+      }
+    },
+    "204": {
+      "description": "Request successful. Resource with the specified name does not exist.",
+      "headers": {
+        "Location": {
+          "type": "string"
+        }
+      }
+    }
   }
 }
