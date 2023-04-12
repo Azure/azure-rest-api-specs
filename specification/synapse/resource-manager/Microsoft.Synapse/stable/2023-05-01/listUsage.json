@@ -48,7 +48,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ListUsagesResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ListUsagesResult"
             },
             "description": ""
           },
@@ -95,7 +95,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/ListUsagesResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ListUsagesResult"
             },
             "description": ""
           },
@@ -115,69 +115,6 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "UsageName": {
-      "type": "object",
-      "description": "Name of the usage metrics",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The name of the usage metric."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "The localized name of the usage metric."
-        }
-      }
-    },
-    "Usage": {
-      "type": "object",
-      "description": "Resource usage and limit.",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "description": "The unit of usage measurement."
-        },
-        "currentValue": {
-          "type": "number",
-          "format": "double",
-          "description": "The current usage of the resource."
-        },
-        "limit": {
-          "type": "number",
-          "format": "double",
-          "description": "The maximum permitted usage of the resource."
-        },
-        "name": {
-          "$ref": "#/definitions/UsageName",
-          "description": "The name of the type of usage."
-        }
-      },
-      "required": [
-        "unit",
-        "currentValue",
-        "limit",
-        "name"
-      ]
-    },
-    "ListUsagesResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Usage"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of resource usages."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Usages operation response."
     }
   }
 }
