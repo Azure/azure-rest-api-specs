@@ -275,53 +275,6 @@
         }
       }
     },
-    "/text/blocklists/{blocklistName}:addBlockItems": {
-      "post": {
-        "operationId": "TextBlocklists_AddBlockItems",
-        "summary": "Add BlockItems To Text Blocklist",
-        "description": "Add blockItems to a text blocklist.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "blocklistName",
-            "in": "path",
-            "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
-            "maxLength": 64,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/AddBlockItemsOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AddBlockItemsResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/text/blocklists/{blocklistName}:removeBlockItems": {
       "post": {
         "operationId": "TextBlocklists_RemoveBlockItems",
@@ -490,7 +443,7 @@
     },
     "/text:analyze": {
       "post": {
-        "operationId": "TextOperations_Analyze",
+        "operationId": "TextOperations_AnalyzeText",
         "summary": "Analyze Text",
         "description": "A sync API for harmful content analysis for text.",
         "parameters": [
@@ -778,13 +731,13 @@
           "format": "byte",
           "description": "Base64 encoding of image."
         },
-        "url": {
+        "blobUrl": {
           "type": "string",
           "format": "uri",
           "description": "The blob url of image."
         }
       },
-      "description": "The content or url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time."
+      "description": "The content or blob rl of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time."
     },
     "RemoveBlockItemsOptions": {
       "type": "object",

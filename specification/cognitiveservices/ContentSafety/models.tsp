@@ -93,14 +93,19 @@ model AnalyzeImageOptions {
   categories?: ImageCategory[];
 }
 
-@doc("The content or url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time.")
+@doc("The content or blob rl of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time.")
 model ImageData {
   @doc("Base64 encoding of image.")
   content?: bytes;
 
   @doc("The blob url of image.")
-  url?: url;
+  blobUrl?: url;
 }
+
+alias ImageCategories = {
+  @doc("The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.")
+  categories?: ImageCategory[];
+};
 
 @doc("The analysis response of the image.")
 model AnalyzeImageResult {
