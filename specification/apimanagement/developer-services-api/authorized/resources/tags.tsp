@@ -14,7 +14,7 @@ namespace DeveloperServicesAuthorizedApi.Resources.Tags;
 
 interface Tags {
   @doc("List a collection of tags.")
-  listTags is ResourceList<
+  listUserTags is ResourceList<
     TagResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;

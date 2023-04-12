@@ -14,16 +14,16 @@ namespace DeveloperServicesAuthorizedApi.Resources.ApiVersionSets;
 
 interface ApiVersionSets {
   @doc("List a collection of API version sets.")
-  listApiVersionSets is ResourceList<
+  listUserApiVersionSets is ResourceList<
     ApiVersionSetResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("Get API version set specified by its identifier.")
-  getApiVersionSet is ResourceRead<ApiVersionSetResource>;
+  getUserApiVersionSet is ResourceRead<ApiVersionSetResource>;
 
   @doc("List a collection of API version set APIs.")
-  listApiVersionSetApis is ResourceList<
+  listUserApiVersionSetApis is ResourceList<
     ApiVersionSetApiResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;

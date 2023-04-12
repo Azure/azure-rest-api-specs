@@ -74,6 +74,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Confirmations_CreateUserBasicIdentityConfirmation": {
+            "$ref": "./examples/CreateUserBasicIdentityConfirmation.json"
+          }
         }
       }
     },
@@ -128,6 +133,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delegation_CreateUserDelegationUrl": {
+            "$ref": "./examples/CreateUserDelegationUrl.json"
+          }
         }
       }
     },
@@ -165,6 +175,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Users_GetUser": {
+            "$ref": "./examples/GetUser.json"
           }
         }
       },
@@ -217,6 +232,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Users_CreateOrUpdateUser": {
+            "$ref": "./examples/UpdateUser.json"
+          }
         }
       },
       "delete": {
@@ -250,12 +270,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Users_DeleteUser": {
+            "$ref": "./examples/DeleteUser.json"
+          }
         }
       }
     },
     "/users/{userId}/apis": {
       "get": {
-        "operationId": "Apis_ListApis",
+        "operationId": "Apis_ListUserApis",
         "description": "List a collection of APIs.",
         "parameters": [
           {
@@ -321,12 +346,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApis": {
+            "$ref": "./examples/ListUserApis.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}": {
       "get": {
-        "operationId": "Apis_GetApi",
+        "operationId": "Apis_GetUserApi",
         "description": "Get the details of the API specified by its identifier.",
         "parameters": [
           {
@@ -396,12 +426,17 @@
           "application/vnd.swagger.doc+json",
           "application/vnd.oai.openapi",
           "application/vnd.oai.openapi+json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Apis_GetUserApi": {
+            "$ref": "./examples/GetUserApi.json"
+          }
+        }
       }
     },
     "/users/{userId}/apis/{apiId}/authServers/oauth2": {
       "get": {
-        "operationId": "Apis_ListApiAuthServersOauth2",
+        "operationId": "Apis_ListUserApiAuthServersOauth2",
         "description": "List a collection of APIs OAuth 2.0 servers.",
         "parameters": [
           {
@@ -475,12 +510,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiAuthServersOauth2": {
+            "$ref": "./examples/ListUserApiOauth2Providers.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/authServers/oauth2/{providerId}": {
       "get": {
-        "operationId": "Apis_GetApiAuthServersOauth2",
+        "operationId": "Apis_GetUserApiAuthServersOauth2",
         "description": "Get the details of the APIs OAuth 2.0 server specified by its identifier.",
         "parameters": [
           {
@@ -527,12 +567,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Apis_GetUserApiAuthServersOauth2": {
+            "$ref": "./examples/GetUserApiOauth2Provider.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/authServers/openidconnect": {
       "get": {
-        "operationId": "Apis_ListApiAuthServersOpenidconnect",
+        "operationId": "Apis_ListUserApiAuthServersOpenidconnect",
         "description": "List a collection of APIs OpenID Connect servers.",
         "parameters": [
           {
@@ -606,12 +651,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiAuthServersOpenidconnect": {
+            "$ref": "./examples/ListUserApiOpenidProviders.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/authServers/openidconnect/{providerId}": {
       "get": {
-        "operationId": "Apis_GetApiAuthServersOpenidconnect",
+        "operationId": "Apis_GetUserApiAuthServersOpenidconnect",
         "description": "Get the details of the APIs OpenID Connect server specified by its identifier.",
         "parameters": [
           {
@@ -658,12 +708,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Apis_GetUserApiAuthServersOpenidconnect": {
+            "$ref": "./examples/GetUserApiOpenidProvider.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/hostnames": {
       "get": {
-        "operationId": "Apis_ListApiHostnames",
+        "operationId": "Apis_ListUserApiHostnames",
         "description": "List a collection of APIs hostnames.",
         "parameters": [
           {
@@ -736,12 +791,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiHostnames": {
+            "$ref": "./examples/ListUserApiHostnames.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/operations": {
       "get": {
-        "operationId": "Apis_ListApiOperations",
+        "operationId": "Apis_ListUserApiOperations",
         "description": "List a collection of APIs operations.",
         "parameters": [
           {
@@ -814,12 +874,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiOperations": {
+            "$ref": "./examples/ListUserApiOperations.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/operations/{operationId}": {
       "get": {
-        "operationId": "Apis_GetApiOperation",
+        "operationId": "Apis_GetUserApiOperation",
         "description": "Get the details of the APIs operation specified by its identifier.",
         "parameters": [
           {
@@ -866,12 +931,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Apis_GetUserApiOperation": {
+            "$ref": "./examples/GetUserApiOperation.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/operations/{operationId}/tags": {
       "get": {
-        "operationId": "Apis_ListApiOperationTags",
+        "operationId": "Apis_ListUserApiOperationTags",
         "description": "List a collection of APIs operation tags.",
         "parameters": [
           {
@@ -951,12 +1021,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiOperationTags": {
+            "$ref": "./examples/ListUserApiOperationTags.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/products": {
       "get": {
-        "operationId": "Apis_ListApiProducts",
+        "operationId": "Apis_ListUserApiProducts",
         "description": "List a collection of APIs products.",
         "parameters": [
           {
@@ -1029,12 +1104,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiProducts": {
+            "$ref": "./examples/ListUserApiProducts.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/releases": {
       "get": {
-        "operationId": "Apis_ListApiReleases",
+        "operationId": "Apis_ListUserApiReleases",
         "description": "List a collection of APIs releases.",
         "parameters": [
           {
@@ -1107,12 +1187,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiReleases": {
+            "$ref": "./examples/ListUserApiReleases.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/schemas": {
       "get": {
-        "operationId": "Apis_ListApiSchemas",
+        "operationId": "Apis_ListUserApiSchemas",
         "description": "List a collection of APIs schemas.",
         "parameters": [
           {
@@ -1185,12 +1270,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiSchemas": {
+            "$ref": "./examples/ListUserApiSchemas.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/schemas/{schemaId}": {
       "get": {
-        "operationId": "Apis_GetApiSchema",
+        "operationId": "Apis_GetUserApiSchema",
         "description": "Get the details of the APIs schema specified by its identifier.",
         "parameters": [
           {
@@ -1237,12 +1327,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Apis_GetUserApiSchema": {
+            "$ref": "./examples/GetUserApiSchema.json"
+          }
         }
       }
     },
     "/users/{userId}/apis/{apiId}/tags": {
       "get": {
-        "operationId": "Apis_ListApiTags",
+        "operationId": "Apis_ListUserApiTags",
         "description": "List a collection of APIs tags.",
         "parameters": [
           {
@@ -1315,12 +1410,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Apis_ListUserApiTags": {
+            "$ref": "./examples/ListUserApiTags.json"
+          }
         }
       }
     },
     "/users/{userId}/apiVersionSets": {
       "get": {
-        "operationId": "ApiVersionSets_ListApiVersionSets",
+        "operationId": "ApiVersionSets_ListUserApiVersionSets",
         "description": "List a collection of API version sets.",
         "parameters": [
           {
@@ -1386,12 +1486,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiVersionSets_ListUserApiVersionSets": {
+            "$ref": "./examples/ListUserApiVersionSets.json"
+          }
         }
       }
     },
     "/users/{userId}/apiVersionSets/{versionSetId}": {
       "get": {
-        "operationId": "ApiVersionSets_GetApiVersionSet",
+        "operationId": "ApiVersionSets_GetUserApiVersionSet",
         "description": "Get API version set specified by its identifier.",
         "parameters": [
           {
@@ -1431,12 +1536,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ApiVersionSets_GetUserApiVersionSet": {
+            "$ref": "./examples/GetUserApiVersionSet.json"
+          }
         }
       }
     },
     "/users/{userId}/apiVersionSets/{versionSetId}/apis": {
       "get": {
-        "operationId": "ApiVersionSets_ListApiVersionSetApis",
+        "operationId": "ApiVersionSets_ListUserApiVersionSetApis",
         "description": "List a collection of API version set APIs.",
         "parameters": [
           {
@@ -1509,6 +1619,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiVersionSets_ListUserApiVersionSetApis": {
+            "$ref": "./examples/ListUserApiVersionSetApis.json"
+          }
         }
       }
     },
@@ -1571,6 +1686,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Identities_ListIdentities": {
+            "$ref": "./examples/ListUserIdentities.json"
+          }
         }
       }
     },
@@ -1620,12 +1740,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Identities_CreateOrUpdateUserIdentityProvider": {
+            "$ref": "./examples/CreateUserIdentityProvider.json"
+          }
         }
       }
     },
     "/users/{userId}/products": {
       "get": {
-        "operationId": "Products_ListProducts",
+        "operationId": "Products_ListUserProducts",
         "description": "List a collection of products.",
         "parameters": [
           {
@@ -1691,12 +1816,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Products_ListUserProducts": {
+            "$ref": "./examples/ListUserProducts.json"
+          }
         }
       }
     },
     "/users/{userId}/products/{productId}": {
       "get": {
-        "operationId": "Products_GetProduct",
+        "operationId": "Products_GetUserProduct",
         "description": "Get the details of the product specified by its identifier.",
         "parameters": [
           {
@@ -1736,12 +1866,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Products_GetUserProduct": {
+            "$ref": "./examples/GetUserProduct.json"
+          }
         }
       }
     },
     "/users/{userId}/products/{productId}/apis": {
       "get": {
-        "operationId": "Products_ListProductApis",
+        "operationId": "Products_ListUserProductApis",
         "description": "List a collection of products APIs.",
         "parameters": [
           {
@@ -1814,12 +1949,17 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Products_ListUserProductApis": {
+            "$ref": "./examples/ListUserProductApis.json"
+          }
         }
       }
     },
     "/users/{userId}/products/{productId}/tags": {
       "get": {
-        "operationId": "Products_ListProductTags",
+        "operationId": "Products_ListUserProductTags",
         "description": "List a collection of products tags.",
         "parameters": [
           {
@@ -1892,6 +2032,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Products_ListUserProductTags": {
+            "$ref": "./examples/ListUserProductTags.json"
+          }
         }
       }
     },
@@ -2438,6 +2583,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Reports_ListReportsByTime": {
+            "$ref": "./examples/ListUserReports.json"
+          }
         }
       }
     },
@@ -2587,6 +2737,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Subscriptions_ListUserSubscriptions": {
+            "$ref": "./examples/ListUserSubscriptions.json"
+          }
         }
       }
     },
@@ -2631,6 +2786,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Subscriptions_GetUserSubscription": {
+            "$ref": "./examples/GetUserSubscription.json"
           }
         }
       },
@@ -2681,6 +2841,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Subscriptions_CreateUserSubscription": {
+            "$ref": "./examples/CreateUserSubscription.json"
+          }
         }
       },
       "patch": {
@@ -2730,6 +2895,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Subscriptions_UpdateUserSubscription": {
+            "$ref": "./examples/UpdateUserSubscription.json"
+          }
         }
       }
     },
@@ -2771,6 +2941,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Subscriptions_RegenerateUserSubscriptionPrimaryKey": {
+            "$ref": "./examples/CreateUserSubscriptionPrimaryKey.json"
           }
         }
       }
@@ -2814,12 +2989,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Subscriptions_RegenerateUserSubscriptionSecondaryKey": {
+            "$ref": "./examples/CreateUserSubscriptionSecondaryKey.json"
+          }
         }
       }
     },
     "/users/{userId}/tags": {
       "get": {
-        "operationId": "Tags_ListTags",
+        "operationId": "Tags_ListUserTags",
         "description": "List a collection of tags.",
         "parameters": [
           {
@@ -2885,6 +3065,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Tags_ListUserTags": {
+            "$ref": "./examples/ListUserTags.json"
+          }
         }
       }
     },
@@ -2919,6 +3104,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Users_RevokeToken": {
+            "$ref": "./examples/UpdateUserToken.json"
           }
         }
       }

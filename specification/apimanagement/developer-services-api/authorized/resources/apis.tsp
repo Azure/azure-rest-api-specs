@@ -19,7 +19,7 @@ namespace DeveloperServicesAuthorizedApi.Resources.Apis;
 
 interface Apis {
   @doc("List a collection of APIs.")
-  listApis is ResourceList<
+  listUserApis is ResourceList<
     ApiResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
@@ -27,7 +27,7 @@ interface Apis {
   @route("/users/{userId}/apis/{apiId}")
   @doc("Get the details of the API specified by its identifier.")
   @get
-  getApi(
+  getUserApi(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("User identifier.")
@@ -48,67 +48,67 @@ interface Apis {
   ): ApiResponse<TypedBody<Api, ContentTypes>>;
 
   @doc("List a collection of APIs schemas.")
-  listApiSchemas is ResourceList<
+  listUserApiSchemas is ResourceList<
     ApiSchemaResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("Get the details of the APIs schema specified by its identifier.")
-  getApiSchema is ResourceRead<ApiSchemaResource>;
+  getUserApiSchema is ResourceRead<ApiSchemaResource>;
 
   @doc("List a collection of APIs OAuth 2.0 servers.")
-  listApiAuthServersOauth2 is ResourceList<
+  listUserApiAuthServersOauth2 is ResourceList<
     ApiAuthServersOauth2Resource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("Get the details of the APIs OAuth 2.0 server specified by its identifier.")
-  getApiAuthServersOauth2 is ResourceRead<ApiAuthServersOauth2Resource>;
+  getUserApiAuthServersOauth2 is ResourceRead<ApiAuthServersOauth2Resource>;
 
   @doc("List a collection of APIs OpenID Connect servers.")
-  listApiAuthServersOpenidconnect is ResourceList<
+  listUserApiAuthServersOpenidconnect is ResourceList<
     ApiAuthServersOpenidconnectResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("Get the details of the APIs OpenID Connect server specified by its identifier.")
-  getApiAuthServersOpenidconnect is ResourceRead<ApiAuthServersOpenidconnectResource>;
+  getUserApiAuthServersOpenidconnect is ResourceRead<ApiAuthServersOpenidconnectResource>;
 
   @doc("List a collection of APIs products.")
-  listApiProducts is ResourceList<
+  listUserApiProducts is ResourceList<
     ApiProductResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("List a collection of APIs releases.")
-  listApiReleases is ResourceList<
+  listUserApiReleases is ResourceList<
     ApiReleaseResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("List a collection of APIs tags.")
-  listApiTags is ResourceList<
+  listUserApiTags is ResourceList<
     ApiTagResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("List a collection of APIs hostnames.")
-  listApiHostnames is ResourceList<
+  listUserApiHostnames is ResourceList<
     ApiHostnameResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("List a collection of APIs operations.")
-  listApiOperations is ResourceList<
+  listUserApiOperations is ResourceList<
     ApiOperationResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("Get the details of the APIs operation specified by its identifier.")
-  getApiOperation is ResourceRead<ApiOperationResource>;
+  getUserApiOperation is ResourceRead<ApiOperationResource>;
 
   @doc("List a collection of APIs operation tags.")
-  listApiOperationTags is ResourceList<
+  listUserApiOperationTags is ResourceList<
     ApiOperationTagResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;

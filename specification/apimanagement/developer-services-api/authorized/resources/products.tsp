@@ -15,22 +15,22 @@ namespace DeveloperServicesAuthorizedApi.Resources.Products;
 
 interface Products {
   @doc("List a collection of products.")
-  listProducts is ResourceList<
+  listUserProducts is ResourceList<
     ProductResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("Get the details of the product specified by its identifier.")
-  getProduct is ResourceRead<ProductResource>;
+  getUserProduct is ResourceRead<ProductResource>;
 
   @doc("List a collection of products APIs.")
-  listProductApis is ResourceList<
+  listUserProductApis is ResourceList<
     ProductApiResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("List a collection of products tags.")
-  listProductTags is ResourceList<
+  listUserProductTags is ResourceList<
     ProductTagResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
