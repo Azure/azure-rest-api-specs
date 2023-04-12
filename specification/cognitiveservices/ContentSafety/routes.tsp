@@ -13,7 +13,7 @@ namespace ContentSafety;
 
 interface TextOperations {
   @summary("Analyze Text")
-  @doc("A sync API for harmful content analysis for text.")
+  @doc("A sync API for harmful content analysis for text. Currently we support four categories: Hate, SelfHarm, Sexual, Violence.")
   @route("/text:analyze")
   @post
   analyzeText is Azure.Core.RpcOperation<
@@ -28,7 +28,7 @@ interface TextOperations {
 
 interface ImageOperations {
   @summary("Analyze Image")
-  @doc("A sync API for harmful content analysis for image.")
+  @doc("A sync API for harmful content analysis for image. Currently we support four categories: Hate, SelfHarm, Sexual, Violence.")
   @route("/image:analyze")
   @post
   analyze is Azure.Core.RpcOperation<
