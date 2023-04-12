@@ -107,7 +107,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/regions/{regionName}/listElasticVersions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/listElasticVersions": {
       "get": {
         "tags": [
           "ElasticVersions"
@@ -119,14 +119,17 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "regionName",
-            "description": "Region where elastic deployment will take place.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "query",
+            "name": "region",
+            "description": "Region where elastic deployment will take place.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
