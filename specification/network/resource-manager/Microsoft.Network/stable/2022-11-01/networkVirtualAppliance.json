@@ -849,7 +849,7 @@
           "readOnly": false,
           "description": "Details required for Additional Network Interface.",
           "items": {
-            "$ref": "#/definitions/VirtualApplianceAdditionalNic"
+            "$ref": "#/definitions/VirtualApplianceAdditionalNicProperties"
           },
           "x-ms-identifiers": []
         },
@@ -935,23 +935,8 @@
       },
       "description": "Network Virtual Appliance NIC properties."
     },
-    "VirtualApplianceAdditionalNic": {
+    "VirtualApplianceAdditionalNicProperties": {
       "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualApplianceAdditionalNicPropertiesFormat",
-          "description": "The properties of the Virtual Appliance Additional Nic."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ],
-      "description": "Virtual Appliance Additional Nic resource."
-    },
-    "VirtualApplianceAdditionalNicPropertiesFormat": {
       "title": "Network Virtual Appliance Additional Nic Properties",
       "description": "Network Virtual Appliance Additional NIC properties.",
       "properties": {
