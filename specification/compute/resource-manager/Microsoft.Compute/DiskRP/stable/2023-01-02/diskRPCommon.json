@@ -542,6 +542,29 @@
         "getSecureVMGuestStateSAS": {
           "type": "boolean",
           "description": "Set this flag to true to get additional SAS for VM guest state"
+        },
+        "fileFormat": {
+          "type": "string",
+          "description": "Used to specify the file format when making request for SAS on a VHDX file format snapshot",
+          "enum": [
+            "None",
+            "VHD",
+            "VHDX"
+          ],
+          "x-ms-enum": {
+            "name": "FileFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "VHD",
+                "description": "A VHD file is a disk image file in the Virtual Hard Disk file format."
+              },
+              {
+                "value": "VHDX",
+                "description": "A VHDX file is a disk image file in the Virtual Hard Disk v2 file format."
+              }
+            ]
+          }
         }
       },
       "required": [
