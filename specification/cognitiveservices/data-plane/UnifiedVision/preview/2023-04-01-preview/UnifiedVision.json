@@ -255,62 +255,6 @@
         }
       }
     },
-    "/productrecognition:analyze": {
-      "post": {
-        "tags": [
-          "OperationsApi"
-        ],
-        "summary": "Run the product understanding operation against an image.",
-        "operationId": "ProductRecognition_Analyze",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "product-classifier-model-name",
-            "description": "The name of the product classifier model to use. If omitted, products will be detected but not classified.",
-            "type": "string",
-            "maxLength": 255,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageUrl"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProductRecognitionResultApiModel"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
     "/planogramcompliance:match": {
       "post": {
         "tags": [
@@ -342,6 +286,228 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/PlanogramMatchingResultApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/productrecognition:analyze/{modelName}/runs/{runName}": {
+      "put": {
+        "tags": [
+          "OperationsApi"
+        ],
+        "summary": "Run the product recognition against a model with an image.",
+        "operationId": "ProductRecognition_Create",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "The name of the model to run product recognition with.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "in": "path",
+            "name": "runName",
+            "description": "The name of the product recognition run.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ProductRecognitionApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OperationsApi"
+        ],
+        "summary": "Get information about a specific product recognition run.",
+        "operationId": "ProductRecognition_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "The name of the model the product recognition run belongs to.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "in": "path",
+            "name": "runName",
+            "description": "The name of the product recognition run.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductRecognitionApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OperationsApi"
+        ],
+        "summary": "Delete a product recognition run. A product recognition run can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A product recognition run with the specified name was not found.",
+        "operationId": "ProductRecognition_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "The name of the model to delete the product recognition run for.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "in": "path",
+            "name": "runName",
+            "description": "The name of the product recognition run.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/productrecognition:analyze/{modelName}/runs": {
+      "get": {
+        "tags": [
+          "OperationsApi"
+        ],
+        "summary": "List all product recognition run of a model.",
+        "operationId": "ProductRecognition_List",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "The name of the model the product recognition runs belongs to.",
+            "required": true,
+            "type": "string",
+            "maxLength": 255,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Number of product recognition runs to be skipped.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Number of product recognition runs to be returned after skipping. The maximum allowed value is 30.",
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "maximum": 30,
+            "minimum": 1
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductRecognitionApiModelCollectionApiModel"
             }
           },
           "default": {
@@ -1997,24 +2163,6 @@
         }
       }
     },
-    "PlanogramMatchingPositionApiModel": {
-      "description": "Paired planogram position ID and corresponding detected object from product understanding result.",
-      "required": [
-        "detectedObject",
-        "positionId"
-      ],
-      "type": "object",
-      "properties": {
-        "positionId": {
-          "description": "The position ID from the planogram matched to the corresponding detected object.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "detectedObject": {
-          "$ref": "#/definitions/DetectedObject"
-        }
-      }
-    },
     "PlanogramMatchingRequestApiModel": {
       "description": "Input to pass into the planogram matching operation.",
       "required": [
@@ -2034,15 +2182,15 @@
     "PlanogramMatchingResultApiModel": {
       "description": "Results from the planogram matching operation.",
       "required": [
-        "matchedResultsPerPosition"
+        "matchingResultPerPosition"
       ],
       "type": "object",
       "properties": {
-        "matchedResultsPerPosition": {
+        "matchingResultPerPosition": {
           "description": "The matched detected object information for each planogram position.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PlanogramMatchingPositionApiModel"
+            "$ref": "#/definitions/PositionMatchingResultApiModel"
           }
         }
       }
@@ -2087,6 +2235,24 @@
         }
       }
     },
+    "PositionMatchingResultApiModel": {
+      "description": "Paired planogram position ID and corresponding detected object from product understanding result.",
+      "required": [
+        "detectedObject",
+        "positionId"
+      ],
+      "type": "object",
+      "properties": {
+        "positionId": {
+          "description": "The position ID from the planogram matched to the corresponding detected object.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "detectedObject": {
+          "$ref": "#/definitions/DetectedObject"
+        }
+      }
+    },
     "ProductApiModel": {
       "description": "Describes a product in the planogram.",
       "required": [
@@ -2117,6 +2283,77 @@
           "format": "double",
           "description": "Height of the fixture.",
           "type": "number"
+        }
+      }
+    },
+    "ProductRecognitionApiModel": {
+      "required": [
+        "createdDateTime",
+        "modelName",
+        "predictionName",
+        "predictionResult",
+        "status",
+        "updatedDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "predictionName": {
+          "description": "Read only. The name that is used to uniquely identify the prediction run.",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "type": "string"
+        },
+        "modelName": {
+          "description": "Read only. The model to predict.",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Read only. The date and time when the prediction run was first created, in UTC.",
+          "type": "string"
+        },
+        "updatedDateTime": {
+          "format": "date-time",
+          "description": "Read only. The date and time when the prediction run was last updated, in UTC.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Read only. The current state of the prediction run.",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed"
+          ],
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponseDetails"
+        },
+        "predictionResult": {
+          "$ref": "#/definitions/ProductRecognitionResultApiModel"
+        }
+      }
+    },
+    "ProductRecognitionApiModelCollectionApiModel": {
+      "description": "Contains an array of results that may be paginated.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductRecognitionApiModel"
+          }
+        },
+        "nextLink": {
+          "description": "A link to the next set of paginated results, if there are more results available; not present otherwise.",
+          "type": "string"
         }
       }
     },
@@ -2361,6 +2598,9 @@
       ],
       "type": "object",
       "properties": {
+        "trainingParameters": {
+          "$ref": "#/definitions/TrainingParameters"
+        },
         "name": {
           "description": "Read only. The name that is used to uniquely identify the training run.",
           "maxLength": 255,
@@ -2388,9 +2628,6 @@
             "cancelled"
           ],
           "type": "string"
-        },
-        "trainingParameters": {
-          "$ref": "#/definitions/TrainingParameters"
         },
         "trainingCostInMinutes": {
           "format": "int32",
@@ -2638,7 +2875,7 @@
         "modelKind": {
           "description": "Model kind.",
           "enum": [
-            "Product-Classifier",
+            "Product-Recognizer",
             "Generic-Classifier",
             "Generic-Detector"
           ],
@@ -2768,68 +3005,6 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/productrecognition:analyze?overload=stream": {
-      "post": {
-        "tags": [
-          "OperationsApi"
-        ],
-        "summary": "Run the product understanding operation against an image.",
-        "operationId": "ProductRecognition_AnalyzeFromImageStream",
-        "consumes": [
-          "application/octet-stream",
-          "image/jpeg",
-          "image/gif",
-          "image/tiff",
-          "image/bmp",
-          "image/png"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "product-classifier-model-name",
-            "description": "The name of the product classifier model to use. If omitted, products will be detected but not classified.",
-            "type": "string",
-            "maxLength": 255,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "An image stream.",
-            "required": true,
-            "schema": {
-              "format": "file",
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProductRecognitionResultApiModel"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string"
-              }
             }
           }
         }
