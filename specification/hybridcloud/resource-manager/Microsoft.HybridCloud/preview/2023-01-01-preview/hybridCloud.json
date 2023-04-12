@@ -43,7 +43,7 @@
         "operationId": "HybridCloud_ListOperations",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -82,7 +82,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -124,7 +124,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -169,7 +169,7 @@
             "$ref": "#/parameters/cloudConnectorNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -209,7 +209,7 @@
             "$ref": "#/parameters/cloudConnectorNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -275,7 +275,7 @@
             "$ref": "#/parameters/cloudConnectorNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -327,7 +327,7 @@
             "$ref": "#/parameters/cloudConnectorNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -378,7 +378,7 @@
             "$ref": "#/parameters/cloudConnectorNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -426,7 +426,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -468,7 +468,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -513,7 +513,7 @@
             "$ref": "#/parameters/cloudConnectionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -553,7 +553,7 @@
             "$ref": "#/parameters/cloudConnectionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -619,7 +619,7 @@
             "$ref": "#/parameters/cloudConnectionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -671,7 +671,7 @@
             "$ref": "#/parameters/cloudConnectionNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -739,7 +739,7 @@
       },
       "description": "Response for the ListCloudConnectors API service call"
     },
-    "CloudConnectorPropertiesFormat": {
+    "CloudConnectorProperties": {
       "type": "object",
       "properties": {
         "accountId": {
@@ -771,7 +771,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CloudConnectorPropertiesFormat",
+          "$ref": "#/definitions/CloudConnectorProperties",
           "description": "Properties of the cloud connector."
         },
         "etag": {
@@ -804,7 +804,7 @@
       },
       "description": "Response for the ListCloudConnections API service call"
     },
-    "CloudConnectionPropertiesFormat": {
+    "CloudConnectionProperties": {
       "type": "object",
       "properties": {
         "cloudConnector": {
@@ -851,7 +851,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CloudConnectionPropertiesFormat",
+          "$ref": "#/definitions/CloudConnectionProperties",
           "description": "Properties of the cloud connection."
         },
         "etag": {
@@ -966,23 +966,6 @@
     }
   },
   "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation.",
-      "minLength": 1,
-      "enum": [
-        "2023-01-01-preview"
-      ],
-      "default": "2023-01-01-preview",
-      "x-ms-enum": {
-        "name": "apiVersionParameter",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "client"
-    },
     "cloudConnectorNameParameter": {
       "name": "cloudConnectorName",
       "in": "path",
