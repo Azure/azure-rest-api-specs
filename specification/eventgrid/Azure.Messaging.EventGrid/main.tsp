@@ -42,7 +42,7 @@ enum ServiceApiVersions {
 
 @doc("Azure Messaging EventGrid Client")
 @versioned(ServiceApiVersions)
-namespace Azure.Messaging.EventGridMessaging {
+namespace Azure.Messaging.EventGrid {
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;
