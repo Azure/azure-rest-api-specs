@@ -87,7 +87,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -846,7 +846,7 @@
         },
         "additionalNics": {
           "type": "array",
-          "readOnly": true,
+          "readOnly": false,
           "description": "Details required for Additional Network Interface.",
           "items": {
             "$ref": "#/definitions/VirtualApplianceAdditionalNicProperties"
@@ -930,7 +930,7 @@
         "instanceName": {
           "type": "string",
           "readOnly": true,
-          "description": "Intance on which nic is attached."
+          "description": "Instance on which nic is attached."
         }
       },
       "description": "Network Virtual Appliance NIC properties."
