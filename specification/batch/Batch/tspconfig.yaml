@@ -1,5 +1,6 @@
 emit: [
-  "@azure-tools/typespec-autorest"
+  "@azure-tools/typespec-autorest",
+  "@azure-tools/typespec-csharp"
 ]
 options:
   "@azure-tools/typespec-autorest":
@@ -8,5 +9,14 @@ options:
   "@azure-tools/cadl-python":
     "basic-setup-py": true
     "package-version": 14.0.0b
-    "package-name": azure-batch
+    "package-name": azure-batch 
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  "@azure-tools/typespec-csharp":
+    save-inputs: false
+    clear-output-folder: true
+    namespace: Azure.BatchService
+    model-namespace: false
+  # Uncomment this line and add "@azure-tools/typespec-typescript" to your package.json to generate Typescript code
+  # "@azure-tools/cadl-typescript": true
+    
 
