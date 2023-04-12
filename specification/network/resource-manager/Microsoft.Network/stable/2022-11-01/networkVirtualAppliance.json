@@ -844,6 +844,14 @@
             "$ref": "#/definitions/VirtualApplianceNicProperties"
           }
         },
+        "additionalNics": {
+          "type": "array",
+          "readOnly": false,
+          "description": "Details required for Additional Network Interface.",
+          "items": {
+            "$ref": "#/definitions/VirtualApplianceAdditionalNicProperties"
+          }
+        },
         "virtualApplianceSites": {
           "type": "array",
           "readOnly": true,
@@ -920,6 +928,21 @@
         }
       },
       "description": "Network Virtual Appliance NIC properties."
+    },
+    "VirtualApplianceAdditionalNicProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Customer Name for additional nic"
+        },
+        "hasPublicIp": {
+        "type": "boolean",
+        "readOnly": false,
+        "description": "Customer Intent for Public Ip on additional nic"
+        }
+      },
+      "description": "Network Virtual Appliance Additional NIC properties."
     },
     "VirtualApplianceSite": {
       "properties": {
