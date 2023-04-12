@@ -32,6 +32,23 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://codesigning.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://codesigning.azure.net/.default": ""
+      }
+    }
+  },
   "tags": [],
   "paths": {
     "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}:sign": {
@@ -168,7 +185,7 @@
     },
     "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/eku": {
       "get": {
-        "operationId": "CertificateProfileOperations_GetSignEku",
+        "operationId": "CertificateProfileOperations_ListSignEku",
         "summary": "Gets a list of Extended Key Usage OIDs that are allowed.",
         "description": "Gets a list of Extended Key Usage OIDs that are allowed.",
         "parameters": [
