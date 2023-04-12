@@ -7956,7 +7956,7 @@
           "description": "Collection of addons",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/AddonProfile"
+            "type": "object"
           }
         },
         "provisioningState": {
@@ -8247,7 +8247,7 @@
           "description": "Binding parameters of the Binding resource",
           "type": "object",
           "additionalProperties": {
-            "type": "object"
+            "type": "string"
           }
         },
         "generatedProperties": {
@@ -9047,7 +9047,7 @@
           "description": "Collection of addons",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/AddonProfile"
+            "type": "object"
           }
         },
         "livenessProbe": {
@@ -9072,13 +9072,6 @@
           "$ref": "#/definitions/ContainerProbeSettings"
         }
       }
-    },
-    "AddonProfile": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "object"
-      },
-      "description": "Key-value pairs for configurations of add-on."
     },
     "Probe": {
       "description": "Probe describes a health check to be performed against an App Instance to determine whether it is alive or ready to receive traffic.",
@@ -10632,6 +10625,7 @@
       "description": "The name of the Service resource.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
       "x-ms-parameter-location": "method"
     },
     "AppNameParameter": {
