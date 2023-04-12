@@ -9,6 +9,12 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Autorest;
 
+@useAuth(
+  OAuth2Auth<[{
+    type: OAuth2FlowType.implicit,
+    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+    scopes: ["https://codesigning.azure.net/.default"]
+  }]>)
 @service({
   title: "Azure.CodeSigning service",
 })
