@@ -12,7 +12,7 @@ using TypeSpec.Http;
 
 namespace TextTranslation;
 
-@doc("Defines Text Translation custom Operation")
+@doc("Defines Text Translation custom  Operation")
 op CustomOperation<TBody, TParams, TResponse, Traits = {}, TError = ErrorResponse>(
   ...TParams,
 
