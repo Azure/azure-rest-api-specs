@@ -4366,8 +4366,18 @@
       "description": "settings for security policy patterns to match",
       "type": "object",
       "properties": {
+        "IsProfileLevel": {
+          "type":"boolean"
+        },
         "domains": {
           "description": "List of domains.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivatedResourceReference"
+          }
+        },
+        "routes": {
+          "description": "List of routes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActivatedResourceReference"
