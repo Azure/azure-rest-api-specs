@@ -16,29 +16,38 @@
       "body": {
         "value": {
           "version": "1.1.0",
-          "supportedKubernetesVersions": [
-            "=1.24",
-            ">1.25"
-          ],
-          "configurationSettings": [
-            {
-              "key": "CONFIG_KEY_1",
-              "isRequired": true
-            },
-            {
-              "key": "CONFIG_KEY_2",
-              "isRequired": false
-            }
-          ],
-          "configurationProtectedSettings": [
-            {
-              "key": "PROTECTED_CONFIG_KEY_1",
-              "isRequired": true
-            },
-            {
-              "key": "PROTECTED_CONFIG_KEY_2",
-              "isRequired": false
-            }
+          "unsupportedKubernetesVersions": {
+            "connectedCluster": [
+              {
+                "distribution": ["AKS"],
+                "unsupportedVersions": []
+              },
+              {
+                "distribution": ["GKE"],
+                "unsupportedVersions": [">1.22"]
+              }
+            ],
+            "appliances": [
+              {
+                "distribution": ["AKS"],
+                "unsupportedVersions": ["1.18..1.21"]
+              }
+            ],
+            "provisionedCluster": [
+              {
+                "distribution": ["AKS"],
+                "unsupportedVersions": []
+              }
+            ],
+            "managedCluster": [
+              {
+                "distribution": ["AKS"],
+                "unsupportedVersions": []
+              }
+            ]
+          },
+          "supportedClusterTypes": [
+            "connectedCluster"
           ]
         }
       }

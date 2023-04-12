@@ -78,7 +78,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -138,7 +138,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -188,7 +188,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -205,6 +205,13 @@
             "description": "Filter results by the major version of an extension type",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "showLatest",
+            "in": "query",
+            "description": "Filter results by only the latest version (based on other query parameters)",
+            "required": false,
+            "type": "boolean"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -258,7 +265,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -342,7 +349,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -401,7 +408,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -460,7 +467,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -470,6 +477,13 @@
             "description": "Filter results by the major version of an extension type",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "showLatest",
+            "in": "query",
+            "description": "Filter results by only the latest version (based on other query parameters)",
+            "required": false,
+            "type": "boolean"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -532,7 +546,7 @@
           {
             "name": "releaseTrain",
             "in": "query",
-            "description": "Filter results by release train",
+            "description": "Filter results by release train (default value is stable)",
             "required": false,
             "type": "string"
           },
@@ -567,7 +581,7 @@
             "type": "boolean",
             "description": "Is this Extension Type a system extension."
           },
-          "shouldCreateIdentity": { // Check with Anubhav if it's needed for the public API
+          "shouldCreateIdentity": {
             "type": "boolean",
             "description": "Should an identity for this cluster resource be created"
           },
@@ -643,45 +657,30 @@
           "type": "string",
           "description": "The version number for the extension type"
         },
-        "supportedKubernetesVersions": {
+        "unsupportedKubernetesVersions": {
           "description": "The list of supported Kubernetes cluster versions for this extension type",
+          "type": "object",
+          "properties": {
+            "connectedCluster": {
+              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+            },
+            "appliances": {
+              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+            },
+            "provisionedCluster": {
+              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+            },
+            "managedCluster": {
+              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+            }
+          }
+        },
+        "supportedClusterTypes": {
           "type": "array",
+          "description": "A list of supported cluster types for this version of the Extension Type",
           "items": {
+            "description": "The indivual cluster type that is supported by this extension",
             "type": "string"
-          }
-        },
-        "configurationSettings": {
-          "description": "The list of configuration settings of the extension type.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "key": {
-                "description": "The key for the parameter",
-                "type": "string"
-              },
-              "isRequired": {
-                "description": "Is this parameter required",
-                "type": "boolean"
-              }
-            }
-          }
-        },
-        "configurationProtectedSettings": {
-          "description": "The list of protected configuration setting names for the extension type.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "key": {
-                "description": "The key for the protected parameter",
-                "type": "string"
-              },
-              "isRequired": {
-                "description": "Is this protected parameter required",
-                "type": "boolean"
-              }
-            }
           }
         }
       }
@@ -738,6 +737,28 @@
           "$ref": "#/definitions/ExtensionTypeVersionForReleaseTrain",
           "readOnly": true,
           "description": "The Extension Type Version."
+        }
+      }
+    },
+    "ExtensionTypeVersionUnsupportedKubernetesMatrix": {
+      "optional": true,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "The list of Kubernetes Distribution and Versions that are not supported by this version of this Extension Type",
+        "properties": {
+          "distributions": {
+            "type": "array",
+            "description": "The list of Kubernetes Cluster Distribution Names not supported",
+            "items": {
+              "description": "A single Kubernetes Cluster Distribution Name",
+              "type": "string"
+            }
+          },
+          "unsupportedVersions": {
+            "type": "array",
+            "description": "The list of Kubernetes Versions not supported by the list of Kubernetes Cluster Distribution names in this object"
+          }
         }
       }
     }
