@@ -2402,15 +2402,15 @@
       "required": [
         "createdDateTime",
         "modelName",
-        "predictionName",
-        "predictionResult",
+        "result",
+        "runName",
         "status",
         "updatedDateTime"
       ],
       "type": "object",
       "properties": {
-        "predictionName": {
-          "description": "Read only. The name that is used to uniquely identify the prediction run.",
+        "runName": {
+          "description": "Read only. The name that is used to uniquely identify the product recognition run.",
           "maxLength": 255,
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
           "type": "string"
@@ -2423,16 +2423,16 @@
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "Read only. The date and time when the prediction run was first created, in UTC.",
+          "description": "Read only. The date and time when the product recognition run was first created, in UTC.",
           "type": "string"
         },
         "updatedDateTime": {
           "format": "date-time",
-          "description": "Read only. The date and time when the prediction run was last updated, in UTC.",
+          "description": "Read only. The date and time when the product recognition run was last updated, in UTC.",
           "type": "string"
         },
         "status": {
-          "description": "Read only. The current state of the prediction run.",
+          "description": "Read only. The current state of the product recognition run.",
           "enum": [
             "notStarted",
             "running",
@@ -2448,7 +2448,7 @@
         "error": {
           "$ref": "#/definitions/ErrorResponseDetails"
         },
-        "predictionResult": {
+        "result": {
           "$ref": "#/definitions/ProductRecognitionResultApiModel"
         }
       }
