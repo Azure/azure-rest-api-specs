@@ -27,6 +27,14 @@
                   "cpu": 1,
                   "memoryInGB": 1.5
                 }
+              },
+              "securityContext": {
+                "priviliged": false,
+                "capabilities": {
+                  "add": [
+                    "CAP_NET_ADMIN"
+                  ]
+                }
               }
             }
           }
@@ -74,7 +82,12 @@
                   }
                 },
                 "securityContext": {
-                  "privileged": true
+                  "privileged": false,
+                  "capabilities": {
+                    "add": [
+                      "CAP_NET_ADMIN"
+                    ]
+                  }
                 }
               }
             }
@@ -129,7 +142,12 @@
                   }
                 },
                 "securityContext": {
-                  "privileged": true
+                  "privileged": false,
+                  "capabilities": {
+                    "add": [
+                      "CAP_NET_ADMIN"
+                    ]
+                  }
                 }
               }
             }
