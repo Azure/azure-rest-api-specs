@@ -22,10 +22,25 @@
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
-        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/patchSchedules/default",
+        "location": "East US",
+        "name": "cachename1/default",
+        "type": "Microsoft.Cache/Redis/PatchSchedules",
+        "properties": {
+          "scheduleEntries": [
+            {
+              "dayOfWeek": "Monday",
+              "startHourUtc": 12,
+              "maintenanceWindow": "PT5H"
+            },
+            {
+              "dayOfWeek": "Tuesday",
+              "startHourUtc": 12
+            }
+          ]
+        }
       }
     },
     "200": {
