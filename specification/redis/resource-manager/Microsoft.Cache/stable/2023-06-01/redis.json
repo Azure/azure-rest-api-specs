@@ -1146,10 +1146,17 @@
               "$ref": "#/definitions/RedisPatchSchedule"
             }
           },
-          "201": {
-            "description": "The patch schedule was successfully created.",
-            "schema": {
-              "$ref": "#/definitions/RedisPatchSchedule"
+          "202": {
+            "description": "The patch schedule is successfully enqueued. Follow the Location header to poll for final outcome",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1211,6 +1218,19 @@
         "responses": {
           "200": {
             "description": "Success."
+          },
+          "202": {
+            "description": "The patch schedule deletion is successfully enqueued. Follow the Location header to poll for final outcome",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success."
