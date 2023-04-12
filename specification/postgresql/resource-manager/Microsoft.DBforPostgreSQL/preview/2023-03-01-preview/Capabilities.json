@@ -70,9 +70,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -83,7 +80,7 @@
         ],
         "operationId": "ServerCapabilities_Execute",
         "x-ms-examples": {
-          "CapabilitiesList": {
+          "ServerCapabilitiesList": {
             "$ref": "./examples/ServerCapabilities.json"
           }
         },
@@ -142,7 +139,7 @@
     "StorageMBCapability": {
       "type": "object",
       "properties": {
-        "supportedIOPS": {
+        "supportedIops": {
           "type": "integer",
           "format": "int64",
           "description": "supported IOPS",
@@ -186,7 +183,7 @@
           "description": "supported vCores",
           "readOnly": true
         },
-        "supportedIOPS": {
+        "supportedIops": {
           "type": "integer",
           "format": "int64",
           "description": "supported IOPS",
@@ -208,7 +205,10 @@
                 "description": "zone name",
                 "readOnly": true
               }
-            }
+            },
+            "x-ms-identifiers": [
+              
+            ]
           }
         },
         "supportedHAMode": {
@@ -286,7 +286,7 @@
             "$ref": "#/definitions/StorageMBCapability"
           },
           "x-ms-identifiers": [
-            "name"
+            "storageSizeMB"
           ],
           "readOnly": true
         }
@@ -299,7 +299,7 @@
         "supportedTier": {
           "type": "string",
           "description": "Fast provisioning supported tier name",
-          "readonly": true
+          "readOnly": true
         },
         "supportedSku": {
           "type": "string",
@@ -318,6 +318,7 @@
         },
         "serverCount": {
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
       }
@@ -401,7 +402,7 @@
             "$ref": "#/definitions/FastProvisioningEditionCapability"
           },
           "x-ms-identifiers": [
-            "name"
+            "supportedSku"
           ],
           "readOnly": true
         },
@@ -442,6 +443,9 @@
           "items": {
             "$ref": "#/definitions/FlexibleServerCapabilitiesList"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "nextLink": {
