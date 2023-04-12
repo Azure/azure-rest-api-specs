@@ -653,6 +653,10 @@
           "x-ms-identifiers": [
             "secretRef"
           ]
+        },
+        "mountOptions": {
+          "description": "Mount options used while mounting the AzureFile. Must be a comma-separated string.",
+          "type": "string"
         }
       }
     },
@@ -680,6 +684,10 @@
         },
         "mountPath": {
           "description": "Path within the container at which the volume should be mounted.Must not contain ':'.",
+          "type": "string"
+        },
+        "subPath": {
+          "description": "Path within the volume from which the container's volume should be mounted. Defaults to \"\" (volume's root).",
           "type": "string"
         }
       }
