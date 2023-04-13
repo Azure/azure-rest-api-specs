@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 enum ServiceApiVersions {
   v2023_06_01_preview: "2023-06-01-preview"
@@ -48,10 +47,8 @@ namespace Azure.Messaging.EventGrid {
   using TypeSpec.Versioning;
   using Azure.Core;
   using Azure.Core.Foundations;
-  using Azure.ClientGenerator.Core;
 
   @doc("Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.")
-  @internal
   model CloudEventEvent {
     @doc("An identifier for the event. The combination of id and source must be unique for each distinct event.")
     id: string;
@@ -97,7 +94,6 @@ namespace Azure.Messaging.EventGrid {
   }
 
   @doc("Receive operation details per Cloud Event.")
-  @internal 
   model ReceiveDetails {
     @doc("The Event Broker details.")
     brokerProperties: BrokerProperties;
@@ -143,7 +139,6 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Publish Single Cloud Event to namespace topic.")
   @route("/topics/{topicName}:publish", {shared: true})
-  @internal
   @post op PublishCloudEvent is Azure.Core.RpcOperation<{
     @doc("content type")
     @header("content-type")
@@ -161,7 +156,6 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Publish Batch of Cloud Events to namespace topic.")
   @route("/topics/{topicName}:publish", {shared: true})
-  @internal
   @post op PublishBatchOfCloudEvents is Azure.Core.RpcOperation<{
     @doc("content type")
     @header("content-type")
@@ -178,7 +172,6 @@ namespace Azure.Messaging.EventGrid {
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
-  @internal
   @post op ReceiveBatchOfCloudEvents is Azure.Core.RpcOperation<{
     @doc("Topic Name.")
     @path
