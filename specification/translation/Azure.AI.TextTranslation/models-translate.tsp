@@ -13,7 +13,7 @@ namespace TextTranslation;
 model TranslateParameters {
   ...CommonParameters;
 
-  @query
+  @query({format: "multi"})
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
     in the translation scope. For example, use to=de to translate to German.
