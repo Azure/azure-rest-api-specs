@@ -83,10 +83,41 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of OperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/OperationStatus",
+                  "description": "The result of the operation."
+                }
+              },
+              "description": "Provides status details for long running operations.",
+              "required": [
+                "id",
+                "status"
+              ],
+              "x-typespec-name": "Azure.Core.ResourceOperationStatus<CertificateProfile, OperationStatus, Azure.Core.Foundations.Error>"
             }
           },
           "default": {

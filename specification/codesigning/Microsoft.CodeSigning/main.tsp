@@ -61,7 +61,7 @@ interface CertificateProfileOperations {
   @doc("Initiates a sign operation.")
   @example("./examples/CertificateProfile_Sign.json", "Sign")
   @pollingOperation(CertificateProfileOperations.getSignOperation)
-  sign is ResourceAction<CertificateProfile, SignRequest, OperationStatus>;
+  sign is LongRunningResourceAction<CertificateProfile, SignRequest, OperationStatus>;
 }
 
 @doc("Algorithms supported for signing.")
