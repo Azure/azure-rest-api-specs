@@ -150,7 +150,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionTypeGet"
+              "$ref": "#/definitions/ExtensionType"
             }
           },
           "default": {
@@ -284,7 +284,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionTypeVersionGet"
+              "$ref": "#/definitions/ExtensionTypeVersionForReleaseTrain"
             }
           },
           "default": {
@@ -558,7 +558,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionTypeVersionGet"
+              "$ref": "#/definitions/ExtensionTypeVersionForReleaseTrain"
             }
           },
           "default": {
@@ -647,43 +647,55 @@
             }
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ExtensionTypeVersionForReleaseTrain": {
       "description": "The Extension Type Version object.",
       "type": "object",
       "properties": {
-        "version": {
-          "type": "string",
-          "description": "The version number for the extension type"
-        },
-        "unsupportedKubernetesVersions": {
-          "description": "The list of supported Kubernetes cluster versions for this extension type",
-          "type": "object",
-          "properties": {
-            "connectedCluster": {
-              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
-            },
-            "appliances": {
-              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
-            },
-            "provisionedCluster": {
-              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
-            },
-            "managedCluster": {
-              "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "The version number for the extension type"
+          },
+          "unsupportedKubernetesVersions": {
+            "description": "The list of supported Kubernetes cluster versions for this extension type",
+            "type": "object",
+            "properties": {
+              "connectedCluster": {
+                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+              },
+              "appliances": {
+                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+              },
+              "provisionedCluster": {
+                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+              },
+              "managedCluster": {
+                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+              }
+            }
+          },
+          "supportedClusterTypes": {
+            "type": "array",
+            "description": "A list of supported cluster types for this version of the Extension Type",
+            "items": {
+              "description": "The indivual cluster type that is supported by this extension",
+              "type": "string"
             }
           }
-        },
-        "supportedClusterTypes": {
-          "type": "array",
-          "description": "A list of supported cluster types for this version of the Extension Type",
-          "items": {
-            "description": "The indivual cluster type that is supported by this extension",
-            "type": "string"
-          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ExtensionTypesList": {
       "description": "List Extension Types. It contains a list of ExtensionType objects and a URL link to get the next set of results.",
@@ -704,17 +716,6 @@
         }
       }
     },
-    "ExtensionTypeGet": {
-      "description": "Get an Extension Type Response Model.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/ExtensionType",
-          "readOnly": true,
-          "description": "The Extension Type."
-        }
-      }
-    },
     "ExtensionTypeVersionsList": {
       "description": "List Extension Type Versions. It contains a list of ExtensionTypeVersionForReleaseTrain objects.",
       "type": "object",
@@ -726,17 +727,6 @@
             "$ref": "#/definitions/ExtensionTypeVersionForReleaseTrain"
           },
           "description": "List of Extension Type Versions for an Extension Type in a Release Train."
-        }
-      }
-    },
-    "ExtensionTypeVersionGet": {
-      "description": "Get an Extension Type Version Response Model.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "$ref": "#/definitions/ExtensionTypeVersionForReleaseTrain",
-          "readOnly": true,
-          "description": "The Extension Type Version."
         }
       }
     },
