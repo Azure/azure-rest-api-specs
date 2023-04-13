@@ -1,0 +1,42 @@
+{
+  "title": "Snapshots_ListByHealthModel",
+  "operationId": "Snapshots_ListByHealthModel",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "healthModelName": "myModel1",
+    "$top": 10,
+    "api-version": "2022-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourcegroups/myResourceGroup/providers/Microsoft.HealthModel/healthmodels/myModel1/snapshots/deb02859-5d2f-4c1d-939f-edbdb571b4f8",
+            "type": "Microsoft.HealthModel/healthmodels/snapshots",
+            "name": "deb02859-5d2f-4c1d-939f-edbdb571b4f8",
+            "properties": {
+              "healthModelVersionNumber": "1677679737124",
+              "timeGenerated": "2023-03-02T10:17:04.647851Z",
+              "overallState": "Healthy",
+              "executionDuration": "00:00:01"
+            }
+          },
+          {
+            "id": "/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourcegroups/myResourceGroup/providers/Microsoft.HealthModel/healthmodels/myModel1/snapshots/724e9b33-2dd2-4ed4-acba-e49fe511082c",
+            "type": "Microsoft.HealthModel/healthmodels/snapshots",
+            "name": "724e9b33-2dd2-4ed4-acba-e49fe511082c",
+            "properties": {
+              "healthModelVersionNumber": "1677679737124",
+              "timeGenerated": "2023-03-02T10:16:04.6009265Z",
+              "overallState": "Healthy",
+              "executionDuration": "00:00:05"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourceGroups/myResourceGroup/providers/Microsoft.HealthModel/healthmodels/myModel1/snapshots?api-version=2022-11-01-preview&$top=10&$skipToken=xxxxxxx"
+      }
+    }
+  }
+}

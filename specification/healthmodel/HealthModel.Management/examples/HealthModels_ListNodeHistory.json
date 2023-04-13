@@ -1,0 +1,55 @@
+{
+  "title": "HealthModels_ListNodeHistory",
+  "operationId": "HealthModels_ListNodeHistory",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "healthModelName": "myModel1",
+    "$top": 2,
+    "api-version": "2022-11-01-preview",
+    "body": {
+      "nodeId": "f1f908c2-283b-4a2c-a40b-55268773e66e",
+      "queryFrom": "2023-02-26T10:12:20.000Z",
+      "queryTo": "2023-03-02T10:17:20.555Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "healthState": "Healthy",
+            "healthScore": 100,
+            "timeGenerated": "2023-03-02T10:24:05.0935794Z",
+            "queryStates": [
+              {
+                "queryId": "dfa2180c-8092-4f6f-abd3-f9b014f12114",
+                "queryHealthState": "Healthy"
+              },
+              {
+                "queryId": "d86fd9b0-81f7-47d8-822c-df5c09a0a6cd",
+                "queryHealthState": "Degraded"
+              }
+            ]
+          },
+          {
+            "healthState": "Healthy",
+            "healthScore": 100,
+            "timeGenerated": "2023-03-02T10:23:04.4079496Z",
+            "queryStates": [
+              {
+                "queryId": "dfa2180c-8092-4f6f-abd3-f9b014f12114",
+                "queryHealthState": "Healthy"
+              },
+              {
+                "queryId": "d86fd9b0-81f7-47d8-822c-df5c09a0a6cd",
+                "queryHealthState": "Unhealty"
+              }
+            ]
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/d86fd9b0-81f7-47d8-822c-df5c09a0a6cd/resourceGroups/healthmodels-rg/providers/Microsoft.HealthModel/healthmodels/myModel1/listNodeHistory?api-version=2022-11-01-preview&$top=2&$skipToken=xxxxxxx"
+      }
+    }
+  }
+}
