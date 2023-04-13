@@ -9,7 +9,13 @@ enum ServiceApiVersions {
   v2023_06_01_preview: "2023-06-01-preview"
 }
 
-@useAuth({type: AuthType.http, scheme: "SharedAccessKey"})
+@useAuth(
+  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[{
+    type: OAuth2FlowType.implicit,
+    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+    scopes: ["https://eventgrid.azure.net/.default"],
+  }]>
+)
 @service({
   title: "Azure.Messaging.EventGridMessagingClient",
   version: "2023-06-01-preview"
@@ -35,7 +41,7 @@ enum ServiceApiVersions {
 
 @doc("Azure Messaging EventGrid Client")
 @versioned(ServiceApiVersions)
-namespace Azure.Messaging.EventGridMessaging {
+namespace Azure.Messaging.EventGrid {
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;
@@ -89,8 +95,7 @@ namespace Azure.Messaging.EventGridMessaging {
     lockToken: LockToken;
   }
 
-  @doc("Receive operation details per Cloud Event.") 
-  @internal
+  @doc("Receive operation details per Cloud Event.")
   model ReceiveDetails {
     @doc("The Event Broker details.")
     brokerProperties: BrokerProperties;
@@ -160,7 +165,6 @@ namespace Azure.Messaging.EventGridMessaging {
   @doc("Publish Single Cloud Event to namespace topic.")
   @route("/", {shared: true})
   @action("publish")
-  @internal
   op PublishCloudEvent is Azure.Core.ResourceAction<
     Topic,
     {
@@ -174,7 +178,6 @@ namespace Azure.Messaging.EventGridMessaging {
   @doc("Publish Batch of Cloud Events to namespace topic.")
   @route("/", {shared: true})
   @action("publish")
-  @internal
   op PublishBatchOfCloudEvents is Azure.Core.ResourceAction<
     Topic,
     {
@@ -193,7 +196,6 @@ namespace Azure.Messaging.EventGridMessaging {
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @action("receive")
-  @internal
   op ReceiveBatchOfCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
     {
