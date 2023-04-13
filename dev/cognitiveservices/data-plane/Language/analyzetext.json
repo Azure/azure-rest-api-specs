@@ -183,6 +183,9 @@
           },
           "Successful Healthcare DocumentType Post Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypePostRequest.json"
+          },
+          "Successful Custom Sentiment Analysis Post Request": {
+            "$ref": "./examples/text/SuccessfulCustomSentimentAnalysisTaskSubmit.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -245,6 +248,9 @@
           },
           "Successful Get Text Analysis Health DocumentType Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
+          },
+          "Successful Get Text Analysis Custom Sentiment Analysis Request": {
+            "$ref": "./examples/text/SuccessfulCustomSentimentAnalysisTaskStatusRequest.json"
           }
         }
       }
@@ -324,6 +330,7 @@
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
         "AbstractiveSummarization",
+        "CustomSentimentAnalysis",
         "CustomAbstractiveSummarization"
       ],
       "x-ms-enum": {
@@ -364,6 +371,7 @@
         "CustomSingleLabelClassificationLROResults",
         "CustomMultiLabelClassificationLROResults",
         "AbstractiveSummarizationLROResults",
+        "CustomSentimentAnalysisLROResults",
         "CustomAbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
@@ -1393,6 +1401,89 @@
         "documents"
       ]
     },
+    "CustomSentimentDocumentResult": {
+      "type": "object",
+      "properties": {
+        "sentiment": {
+          "type": "string",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "mixed"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentSentimentValue",
+            "modelAsString": false
+          }
+        },
+        "confidenceScores": {
+          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
+          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
+        },
+        "sentences": {
+          "type": "array",
+          "description": "Sentence level sentiment analysis.",
+          "items": {
+            "$ref": "#/definitions/CustomSentenceSentiment"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "sentiment",
+        "confidenceScores",
+        "sentences"
+      ]
+    },
+    "CustomSentenceSentiment": {
+      "type": "object",
+      "required": [
+        "text",
+        "sentiment",
+        "confidenceScores",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The sentence text."
+        },
+        "sentiment": {
+          "type": "string",
+          "description": "The predicted Sentiment for the sentence.",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative"
+          ],
+          "x-ms-enum": {
+            "name": "SentenceSentimentValue",
+            "modelAsString": false
+          }
+        },
+        "confidenceScores": {
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
+          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      }
+    },
     "SentimentDocumentResult": {
       "type": "object",
       "properties": {
@@ -1659,6 +1750,62 @@
         }
       },
       "description": "Represents the confidence scores across all sentiment classes: positive and negative."
+    },
+    "CustomSentimentAnalysisTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Custom Sentiment Analysis task.",
+      "properties": {
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/CustomTaskParameters"
+        }
+      ]
+    },
+    "CustomSentimentAnalysisLROTask": {
+      "type": "object",
+      "description": "Use custom models to ease the process of sentiment analysis from documents like product reviews",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomSentimentAnalysisTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomSentimentAnalysis"
+    },
+    "CustomSentimentAnalysisResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Sentiment analysis per document.",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/CustomSentimentDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/CustomResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
     },
     "EntityList": {
       "description": "(Optional) describes the entity categories.",
@@ -4315,6 +4462,23 @@
         "results"
       ],
       "x-ms-discriminator-value": "SentimentAnalysisLROResults"
+    },
+    "CustomSentimentAnalysisLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomSentimentAnalysisResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomSentimentAnalysisLROResults"
     },
     "KeyPhraseExtractionLROResult": {
       "type": "object",
