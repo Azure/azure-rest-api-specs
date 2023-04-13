@@ -20,7 +20,7 @@
         },
         "properties": {
           "source": {
-            "script": "Write-Host Hello World!"
+            "scriptUri": "https://gist.githubusercontent.com/myusername/75fd3634w7511116063c60bcc50bee0/raw/04a4c68ac9e1d36asfasdc64bd1d889b104c7abdb8/HelloWorld.ps1"
           },
           "parameters": [
             {
@@ -35,7 +35,9 @@
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
         }
       }
     }

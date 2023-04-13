@@ -17,7 +17,7 @@
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
             "properties": {
               "source": {
-                "script": "Write-Host Hello World!"
+                "script": "Write-Host Hello World! ; Remove-Item C:\test\testFile.txt"
               },
               "parameters": [
                 {
@@ -32,7 +32,9 @@
               "asyncExecution": false,
               "runAsUser": "user1",
               "timeoutInSeconds": 0,
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+              "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
             }
           }
         ]

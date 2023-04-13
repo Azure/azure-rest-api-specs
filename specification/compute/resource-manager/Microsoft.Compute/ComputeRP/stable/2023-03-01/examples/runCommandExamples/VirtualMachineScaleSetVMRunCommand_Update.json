@@ -9,7 +9,10 @@
     "runCommand": {
       "properties": {
         "source": {
-          "script": "Write-Host Script Source Updated!"
+          "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1",
+          "scriptUriManagedIdentity": {
+            "objectId": "4231e4d2-33e4-4e23-96b2-17888afa6072"
+          }
         }
       }
     }
@@ -27,7 +30,7 @@
         },
         "properties": {
           "source": {
-            "script": "Write-Host Script Source Updated!"
+            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
           },
           "parameters": [
             {
@@ -42,7 +45,9 @@
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
-          "provisioningState": "Updating"
+          "provisioningState": "Updating",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
         }
       }
     }
