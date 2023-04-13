@@ -119,7 +119,7 @@ If you are working on API specification of a service group, then you may choose 
 
 In the following folder structure sample, there is only 'resource-manager' folder. There could be a similar folder structure under 'data-plane' folder, while the sub-component/sub-service folders may not be the same.
 
-Ensure to consult [API Spec Review](https://teams.microsoft.com/l/channel/19%3a0351f5f9404446e4b4fd4eaf2c27448d%40thread.skype/API%2520Spec%2520Review?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) for the first time creating the folder structure or if you want to change current folder structure.
+Ensure to consult [API Spec Review](https://aka.ms/azsdk/support/specreview-channel) for the first time creating the folder structure or if you want to change current folder structure.
 
 ```bash
 .
