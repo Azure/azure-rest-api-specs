@@ -31,7 +31,6 @@ enum AnomalyDetectorErrorCodes {
   "InvalidImputeFixedValue",
 }
 
-@fixed
 enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
@@ -172,15 +171,15 @@ severe the anomaly is. For normal points, the severity is always 0.
 @doc("Error information that the API returned.")
 @error
 model AnomalyDetectorError {
-  @header
+  @header("x-ms-error-code")
   @doc("Error code.")
-  "x-ms-error-code"?: string,
+  msErrorCode: string,
 
   @doc("Error code.")
-  code?: AnomalyDetectorErrorCodes;
+  code: AnomalyDetectorErrorCodes;
 
   @doc("Message that explains the error that the service reported.")
-  message?: string;
+  message: string;
 }
 
 @doc("Response of the last anomaly detection.")
