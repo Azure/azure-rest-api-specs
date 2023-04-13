@@ -22,5 +22,5 @@ using Azure.Core;
   version: "2022-04-01-preview",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@doc("Developer Services API - Everything you need to display your APIs.")
+@doc("Developer Services API introduces endpoints to manage your developer portal APIs, users, subscriptions and more.")
 namespace DeveloperServicesPublicApi;
