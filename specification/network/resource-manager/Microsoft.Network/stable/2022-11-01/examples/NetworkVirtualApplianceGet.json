@@ -52,13 +52,28 @@
           "virtualApplianceAsn": 10000,
           "virtualApplianceNics": [
             {
-              "name": "managementNic",
+              "name": "publicnicipconfig",
               "publicIpAddress": "40.30.2.2",
-              "privateIpAddress": "192.168.12.1"
+              "privateIpAddress": "192.168.12.1",
+              "instanceName": "nva_0"
             },
             {
-              "name": "privateNic-1",
-              "privateIpAddress": "192.168.12.2"
+              "name": "privatenicipconfig",
+              "publicIpAddress": "",
+              "privateIpAddress": "192.168.12.2",
+              "instanceName": "nva_0"
+            },
+            {
+              "name": "exrsdwan",
+              "publicIpAddress": "4.231.25.19",
+              "privateIpAddress": "10.1.113.4",
+              "instanceName": "nva_0"
+            }
+          ],
+          "additionalNics": [
+            {
+              "name": "exrsdwan",
+              "hasPublicIp": true
             }
           ]
         }

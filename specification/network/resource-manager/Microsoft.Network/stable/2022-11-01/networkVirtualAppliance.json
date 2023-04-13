@@ -68,7 +68,13 @@
             "description": "Delete successful."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Request successful. Resource with the specified name does not exist."
@@ -248,6 +254,12 @@
           },
           "201": {
             "description": "Request received successfully. The operation returns the resulting Network Virtual Appliance resource.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/NetworkVirtualAppliance"
             }
@@ -844,6 +856,15 @@
             "$ref": "#/definitions/VirtualApplianceNicProperties"
           }
         },
+        "additionalNics": {
+          "type": "array",
+          "readOnly": false,
+          "description": "Details required for Additional Network Interface.",
+          "items": {
+            "$ref": "#/definitions/VirtualApplianceAdditionalNicProperties"
+          },
+          "x-ms-identifiers": []
+        },
         "virtualApplianceSites": {
           "type": "array",
           "readOnly": true,
@@ -917,9 +938,31 @@
           "type": "string",
           "readOnly": true,
           "description": "Private IP address."
+        },
+        "instanceName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Instance on which nic is attached."
         }
       },
       "description": "Network Virtual Appliance NIC properties."
+    },
+    "VirtualApplianceAdditionalNicProperties": {
+      "type": "object",
+      "title": "Network Virtual Appliance Additional Nic Properties",
+      "description": "Network Virtual Appliance Additional NIC properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Customer Name for additional nic"
+        },
+        "hasPublicIp": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Customer Intent for Public Ip on additional nic"
+        }
+      }
     },
     "VirtualApplianceSite": {
       "properties": {
