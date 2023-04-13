@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "AzureMessagingEventGridClient",
+    "title": "Azure.Messaging.EventGridMessagingClient",
     "version": "2023-06-01-preview",
     "description": "Azure Messaging EventGrid Client",
     "x-typespec-generated": [
@@ -36,16 +36,87 @@
   ],
   "security": [
     {
-      "http": []
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://eventgrid.azure.net/.default"
+      ]
     }
   ],
   "securityDefinitions": {
-    "http": {
-      "type": "basic"
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "SharedAccessKey"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://eventgrid.azure.net/.default": ""
+      }
     }
   },
   "tags": [],
   "paths": {
+    "/topics/{topicName}:publish": {
+      "post": {
+        "operationId": "PublishBatchOfCloudEvents",
+        "description": "Publish Batch of Cloud Events to namespace topic.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "description": "Topic Name.",
+            "type": "string"
+          },
+          {
+            "name": "events",
+            "in": "body",
+            "required": true,
+            "description": "Array of Cloud Events being published.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEvent"
+              },
+              "x-typespec-name": "CloudEvent[]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ]
+      }
+    },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive": {
       "post": {
         "operationId": "ReceiveBatchOfCloudEvents",
@@ -229,64 +300,6 @@
       }
     }
   },
-  "x-ms-paths": {
-    "/topics/{topicName}:publish?api-version={apiVersion}": {
-      "post": {
-        "operationId": "PublishBatchOfCloudEvents",
-        "description": "Publish Batch of Cloud Events to namespace topic.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "description": "Topic Name.",
-            "type": "string"
-          },
-          {
-            "name": "events",
-            "in": "body",
-            "required": true,
-            "description": "Array of Cloud Events being published.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudEvent"
-              },
-              "x-typespec-name": "CloudEvent[]"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "{}"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        },
-        "consumes": [
-          "application/cloudevents-batch+json; charset=utf-8"
-        ]
-      }
-    }
-  },
   "definitions": {
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -379,6 +392,7 @@
           "description": "Identifies the context in which an event happened. The combination of id and source must be unique for each distinct event."
         },
         "data": {
+          "$ref": "#/definitions/object",
           "description": "Event data specific to the event type."
         },
         "data_base64": {
@@ -479,7 +493,7 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "TypeSpec.string[]",
+          "x-typespec-name": "string[]",
           "description": "LockTokens"
         }
       },
@@ -505,7 +519,7 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "TypeSpec.string[]",
+          "x-typespec-name": "string[]",
           "description": "Array of LockToken values for succeeded cloud events."
         }
       },
@@ -569,6 +583,10 @@
       "required": [
         "topicName"
       ]
+    },
+    "object": {
+      "type": "object",
+      "properties": {}
     }
   },
   "parameters": {
