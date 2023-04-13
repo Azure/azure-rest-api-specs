@@ -244,6 +244,29 @@
     }
   },
   "definitions": {
+    "BaseLongTermRetentionPolicyProperties": {
+      "description": "Properties of a long term retention policy",
+      "type": "object",
+      "properties": {
+        "weeklyRetention": {
+          "description": "The weekly retention policy for an LTR backup in an ISO 8601 format.",
+          "type": "string"
+        },
+        "monthlyRetention": {
+          "description": "The monthly retention policy for an LTR backup in an ISO 8601 format.",
+          "type": "string"
+        },
+        "yearlyRetention": {
+          "description": "The yearly retention policy for an LTR backup in an ISO 8601 format.",
+          "type": "string"
+        },
+        "weekOfYear": {
+          "format": "int32",
+          "description": "The week of year to take the yearly backup in an ISO 8601 format.",
+          "type": "integer"
+        }
+      }
+    },
     "ManagedInstanceLongTermRetentionPolicy": {
       "description": "A long term retention policy.",
       "type": "object",
@@ -254,7 +277,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ManagedInstanceLongTermRetentionPolicyProperties",
+          "$ref": "#/definitions/BaseLongTermRetentionPolicyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -276,41 +299,6 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ManagedInstanceLongTermRetentionPolicyProperties": {
-      "description": "Properties of a long term retention policy",
-      "type": "object",
-      "properties": {
-        "backupStorageAccessTier": {
-          "description": "The BackupStorageAccessTier for the LTR backups",
-          "enum": [
-            "Hot",
-            "Archive"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BackupStorageAccessTier",
-            "modelAsString": true
-          }
-        },
-        "weeklyRetention": {
-          "description": "The weekly retention policy for an LTR backup in an ISO 8601 format.",
-          "type": "string"
-        },
-        "monthlyRetention": {
-          "description": "The monthly retention policy for an LTR backup in an ISO 8601 format.",
-          "type": "string"
-        },
-        "yearlyRetention": {
-          "description": "The yearly retention policy for an LTR backup in an ISO 8601 format.",
-          "type": "string"
-        },
-        "weekOfYear": {
-          "format": "int32",
-          "description": "The week of year to take the yearly backup in an ISO 8601 format.",
-          "type": "integer"
         }
       }
     }
