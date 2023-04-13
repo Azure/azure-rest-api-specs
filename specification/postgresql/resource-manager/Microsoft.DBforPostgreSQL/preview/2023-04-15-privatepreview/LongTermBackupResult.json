@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrbackupstatus/latest": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrbackupstatus/{backupName}": {
       "get": {
         "tags": [
           "LongTermRetention"
         ],
-        "operationId": "Ltr_Latest_status",
+        "operationId": "Ltr_backup_status",
         "x-ms-examples": {
           "Sample": {
             "$ref": "./examples/getltrstatus.json"
           }
         },
-        "description": "Gets the result of the latest LTR backup for the server.",
+        "description": "Gets the result of the give LTR backup for the server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -58,7 +58,11 @@
           },
           {
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
           }
+          
         ],
         "responses": {
           "200": {
@@ -138,5 +142,16 @@
       ],
       "description": "Server backup properties"
     }
+  },
+  "parameters": {
+    "BackupNameParameter": {
+        "name": "backupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the backup.",
+        "x-ms-parameter-location": "method",
+        "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+      }
   }
 }
