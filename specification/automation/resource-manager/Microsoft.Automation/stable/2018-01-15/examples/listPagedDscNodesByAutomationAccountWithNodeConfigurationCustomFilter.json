@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "api-version": "2018-01-15",
+    "$skip": 0,
+    "$top": 4,
+    "$inlinecount": "allpages",
+    "$filter": "contains(properties/nodeConfiguration/name,'SetupServer.localhost,SetupClient.localhost,$$Not$$Configured$$')"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node32",
+            "name": "Node32",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "properties": {
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "ip": "ip",
+              "nodeId": "477F9596-92F3-479A-82F2-9EE149F2C6B0",
+              "status": "Compliant",
+              "nodeConfiguration": {
+                "name": ""
+              },
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node33",
+            "name": "Node33",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "properties": {
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "ip": "ip",
+              "nodeId": "E5D5D0B5-400D-48F7-A791-612945DAC5EB",
+              "status": "Compliant",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node34",
+            "name": "Node34",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "properties": {
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "ip": "ip",
+              "nodeId": "Node34",
+              "status": "Compliant",
+              "nodeConfiguration": {
+                "name": "SetupClient.localhost"
+              },
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/Node35",
+            "name": "Node35",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "properties": {
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "ip": "ip",
+              "nodeId": "Node35",
+              "status": "NotCompliant",
+              "nodeConfiguration": {
+                "name": "SetupClient.localhost"
+              },
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ]
+            }
+          }
+        ],
+        "totalCount": 12
+      }
+    }
+  }
+}

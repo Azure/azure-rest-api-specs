@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client",
+    "version": "2018-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/sku/{sku}/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Regions_ListBySku",
+        "x-ms-examples": {
+          "RegionsListBySkuBasic": {
+            "$ref": "./examples/EHRegionsListBySkuBasic.json"
+          },
+          "RegionsListBySkuStandard": {
+            "$ref": "./examples/EHRegionsListBySkuStandard.json"
+          }
+        },
+        "description": "Gets the available Regions for a given sku",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkuNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Regions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/MessagingRegionsListResult"
+            }
+          },
+          "default": {
+            "description": "EventHub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MessagingRegions": {
+      "properties": {
+        "properties": {
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Region code"
+            },
+            "fullName": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Full name of the region"
+            }
+          },
+          "description": "Properties of Messaging Region"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Messaging Region"
+    },
+    "MessagingRegionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessagingRegions"
+          },
+          "description": "Result of the List MessagingRegions type."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of MessagingRegions."
+        }
+      },
+      "description": "The response of the List MessagingRegions operation."
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount33",
+    "api-version": "2018-01-15",
+    "$skip": 0,
+    "$top": 6,
+    "$inlinecount": "allpages",
+    "$filter": "contains('DSCCOMP',name)"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/DSCCOMP",
+            "name": "DSCCOMP",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "properties": {
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "ip": "ip",
+              "nodeId": "708D250A-2169-4B54-89FF-76F5F71C252A",
+              "status": "Compliant",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount33/nodes/DSCCOMP2",
+            "name": "DSCCOMP2",
+            "type": "Microsoft.Automation/AutomationAccounts/Nodes",
+            "properties": {
+              "lastSeen": "2018-03-22T22:25:39.0963773+00:00",
+              "registrationTime": "2018-03-10T00:51:12.5393083+00:00",
+              "ip": "ip",
+              "nodeId": "3B4BB31A-5132-4669-A15F-A17E234D1634",
+              "status": "Failed",
+              "nodeConfiguration": {
+                "name": "SetupServer.localhost"
+              },
+              "extensionHandler": [
+                {
+                  "name": "Microsoft.Powershell.DSC",
+                  "version": "2.75.0.0"
+                }
+              ]
+            }
+          }
+        ],
+        "totalCount": 2
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "api-version": "2018-02-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "virtualNetworkGatewayConnectionName": "connS2S",
+    "parameters": {
+      "properties": {
+        "virtualNetworkGateway1": {
+          "properties": {
+            "ipConfigurations": [
+              {
+                "properties": {
+                  "privateIPAllocationMethod": "Dynamic",
+                  "subnet": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+                  },
+                  "publicIPAddress": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/gwpip"
+                  }
+                },
+                "name": "gwipconfig1",
+                "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw/ipConfigurations/gwipconfig1"
+              }
+            ],
+            "gatewayType": "Vpn",
+            "vpnType": "RouteBased",
+            "enableBgp": false,
+            "activeActive": false,
+            "sku": {
+              "name": "VpnGw1",
+              "tier": "VpnGw1",
+              "capacity": 2
+            },
+            "bgpSettings": {
+              "asn": 65514,
+              "bgpPeeringAddress": "10.0.1.30",
+              "peerWeight": 0
+            },
+            "resourceGuid": "00000000-0000-0000-0000-000000000000"
+          },
+          "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw",
+          "location": "centralus",
+          "tags": {}
+        },
+        "localNetworkGateway2": {
+          "properties": {
+            "localNetworkAddressSpace": {
+              "addressPrefixes": [
+                "10.1.0.0/16"
+              ]
+            },
+            "gatewayIpAddress": "x.x.x.x",
+            "resourceGuid": "00000000-0000-0000-0000-000000000000"
+          },
+          "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw",
+          "location": "centralus",
+          "tags": {}
+        },
+        "connectionType": "IPsec",
+        "routingWeight": 0,
+        "sharedKey": "Abc123",
+        "enableBgp": false,
+        "usePolicyBasedTrafficSelectors": false,
+        "ipsecPolicies": []
+      },
+      "location": "centralus"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "connS2S",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/connS2S",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "type": "Microsoft.Network/connections",
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Updating",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "virtualNetworkGateway1": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw",
+            "properties": {}
+          },
+          "localNetworkGateway2": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw",
+            "properties": {}
+          },
+          "connectionType": "IPsec",
+          "routingWeight": 0,
+          "sharedKey": "Abc123",
+          "enableBgp": false,
+          "usePolicyBasedTrafficSelectors": false,
+          "ipsecPolicies": [],
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "connS2S",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/connS2S",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "type": "Microsoft.Network/connections",
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Updating",
+          "resourceGuid": "00000000-0000-0000-0000-000000000000",
+          "virtualNetworkGateway1": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw",
+            "properties": {}
+          },
+          "localNetworkGateway2": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw",
+            "properties": {}
+          },
+          "connectionType": "IPsec",
+          "routingWeight": 0,
+          "sharedKey": "Abc123",
+          "enableBgp": false,
+          "usePolicyBasedTrafficSelectors": false,
+          "ipsecPolicies": [],
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0
+        }
+      }
+    }
+  }
+}

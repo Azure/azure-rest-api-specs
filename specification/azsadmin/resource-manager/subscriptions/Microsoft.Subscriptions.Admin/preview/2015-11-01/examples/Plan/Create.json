@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "local",
+    "api-version": "2015-11-01",
+    "resourceGroupName": "plans",
+    "plan": "testplan",
+    "planDefinition": {
+      "properties": {
+        "description": "test plan",
+        "displayName": "testplans",
+        "name": "newplan",
+        "quotaIds": [
+          "123",
+          "abc"
+        ],
+        "subscriptionCount": 0
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/plans/testplans",
+        "name": "testplans",
+        "type": "Microsoft.Subscriptions.Admin/plans",
+        "location": "local",
+        "properties": {
+          "name": "testplans",
+          "displayName": "testplans",
+          "description": "test plan",
+          "subscriptionCount": 0,
+          "quotaIds": [
+            "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Subscriptions.Admin/locations/local/quotas/delegatedProviderQuota"
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/plans/testplans",
+        "name": "testplans",
+        "type": "Microsoft.Subscriptions.Admin/plans",
+        "location": "local",
+        "properties": {
+          "name": "testplans",
+          "displayName": "testplans",
+          "description": "test plan",
+          "subscriptionCount": 0,
+          "quotaIds": [
+            "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Subscriptions.Admin/locations/local/quotas/delegatedProviderQuota"
+          ]
+        }
+      }
+    }
+  }
+}

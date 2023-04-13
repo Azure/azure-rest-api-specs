@@ -1,0 +1,339 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}": {
+      "get": {
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "description": "Gets a Azure Active Directory administrator.",
+        "operationId": "ServerAzureADAdministrators_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "description": "The name of server active directory administrator.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified Azure Active Directory administrator.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAdministratorTypePropertyName - Server active directory administrator type should be ActiveDirectory\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Azure Active Directory administrator.": {
+            "$ref": "./examples/AdministratorGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "description": "Creates or updates an existing Azure Active Directory administrator.",
+        "operationId": "ServerAzureADAdministrators_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "description": "The name of server active directory administrator.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested Azure Active Directory administrator Resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a Azure Active Directory administrator.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAdministratorTypePropertyName - Server active directory administrator type should be ActiveDirectory\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 400 ServerAdministratorNameAlreadyExists - User tried to set the external admin and the principal name already exists in the 'master' database.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created a Azure Active Directory administrator.",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates an existing Azure Active Directory administrator.": {
+            "$ref": "./examples/AdministratorCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "description": "Deletes the Azure Active Directory administrator with the given name.",
+        "operationId": "ServerAzureADAdministrators_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "administratorName",
+            "in": "path",
+            "description": "The name of server active directory administrator.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ActiveDirectory"
+            ],
+            "x-ms-enum": {
+              "name": "AdministratorName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Azure Active Directory administrator."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAdministratorTypePropertyName - Server active directory administrator type should be ActiveDirectory\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified Azure Active Directory administrator does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Azure Active Directory administrator.": {
+            "$ref": "./examples/AdministratorDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "description": "Gets a list of Azure Active Directory administrators in a server.",
+        "operationId": "ServerAzureADAdministrators_ListByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Azure Active Directory administrators.",
+            "schema": {
+              "$ref": "#/definitions/AdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAdministratorTypePropertyName - Server active directory administrator type should be ActiveDirectory\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of Azure Active Directory administrator.": {
+            "$ref": "./examples/AdministratorList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdministratorProperties": {
+      "description": "Properties of a active directory administrator.",
+      "required": [
+        "administratorType",
+        "login",
+        "sid"
+      ],
+      "type": "object",
+      "properties": {
+        "administratorType": {
+          "description": "Type of the sever administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdministratorType",
+            "modelAsString": true
+          }
+        },
+        "login": {
+          "description": "Login name of the server administrator.",
+          "type": "string"
+        },
+        "sid": {
+          "format": "uuid",
+          "description": "SID (object ID) of the server administrator.",
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "Tenant ID of the administrator.",
+          "type": "string"
+        },
+        "azureADOnlyAuthentication": {
+          "description": "Azure Active Directory only Authentication enabled.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerAzureADAdministrator": {
+      "description": "Azure Active Directory administrator.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdministratorProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AdministratorListResult": {
+      "description": "A list of active directory administrators.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAzureADAdministrator"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

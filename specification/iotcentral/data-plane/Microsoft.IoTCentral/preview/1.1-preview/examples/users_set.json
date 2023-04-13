@@ -1,0 +1,40 @@
+{
+  "title": "Add or update an email user in your application",
+  "description": "Add or update an email user in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "userId": "123",
+    "api-version": "1.1-preview",
+    "body": {
+      "type": "email",
+      "roles": [
+        {
+          "role": "ca310b8d-2f4a-44e0-a36e-957c202cd8d4"
+        },
+        {
+          "role": "c495eb57-eb18-489e-9802-62c474e5645c",
+          "organization": "seattle"
+        }
+      ],
+      "email": "bob@contoso.com"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "email",
+        "roles": [
+          {
+            "role": "ca310b8d-2f4a-44e0-a36e-957c202cd8d4"
+          },
+          {
+            "role": "c495eb57-eb18-489e-9802-62c474e5645c",
+            "organization": "seattle"
+          }
+        ],
+        "email": "bob@contoso.com"
+      }
+    }
+  }
+}

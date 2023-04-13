@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2018-08-31",
+    "billingAccountId": "1234",
+    "enrollmentAccountId": "42425",
+    "$filter": "usageStart eq '2018-04-01' AND usageEnd eq '2018-05-30'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/enrollmentAccounts/42425/providers/Microsoft.Consumption/charges/chargeSummaryId1",
+            "name": "chargeSummaryId1",
+            "type": "Microsoft.Consumption/charges",
+            "properties": {
+              "billingPeriodId": "/providers/Microsoft.Billing/BillingAccounts/1234/providers/Microsoft.Billing/billingPeriods/201804",
+              "usageStart": "2018-04-01",
+              "usageEnd": "2018-04-30",
+              "azureCharges": 5000.00,
+              "chargesBilledSeparately": 60.90,
+              "marketplaceCharges": 100.00,
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/enrollmentAccounts/42425/providers/Microsoft.Consumption/charges/chargeSummaryId2",
+            "name": "chargeSummaryId2",
+            "type": "Microsoft.Consumption/charges",
+            "properties": {
+              "billingPeriodId": "/providers/Microsoft.Billing/BillingAccounts/1234/providers/Microsoft.Billing/billingPeriods/201805",
+              "usageStart": "2018-05-01",
+              "usageEnd": "2018-05-30",
+              "azureCharges": 5000.00,
+              "chargesBilledSeparately": 60.90,
+              "marketplaceCharges": 100.00,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

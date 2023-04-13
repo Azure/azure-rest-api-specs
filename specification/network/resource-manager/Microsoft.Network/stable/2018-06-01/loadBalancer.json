@@ -1,0 +1,1705 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2018-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}": {
+      "delete": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_Delete",
+        "description": "Deletes the specified load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-examples": {
+          "Delete load balancer": {
+            "$ref": "./examples/LoadBalancerDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_Get",
+        "description": "Gets the specified load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting LoadBalancer resource.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get load balancer": {
+            "$ref": "./examples/LoadBalancerGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_CreateOrUpdate",
+        "description": "Creates or updates a load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            },
+            "description": "Parameters supplied to the create or update load balancer operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting LoadBalancer resource.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting LoadBalancer resource.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create load balancer": {
+            "$ref": "./examples/LoadBalancerCreate.json"
+          },
+          "Create load balancer with Standard SKU": {
+            "$ref": "./examples/LoadBalancerCreateStandardSku.json"
+          },
+          "Create load balancer with Frontend IP in Zone 1": {
+            "$ref": "./examples/LoadBalancerCreateWithZones.json"
+          },
+          "Create load balancer with inbound nat pool": {
+            "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_UpdateTags",
+        "description": "Updates a load balancer tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update load balancer tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting LoadBalancer resource.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update load balancer tags": {
+            "$ref": "./examples/LoadBalancerUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/loadBalancers": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_ListAll",
+        "description": "Gets all the load balancers in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer resources.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all load balancers": {
+            "$ref": "./examples/LoadBalancerListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancers_List",
+        "description": "Gets all the load balancers in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer resources.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List load balancers in resource group": {
+            "$ref": "./examples/LoadBalancerList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerBackendAddressPools_List",
+        "description": "Gets all the load balancer backed address pools.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer BackendAddressPool resources.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerBackendAddressPoolListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerBackendAddressPoolList": {
+            "$ref": "./examples/LoadBalancerBackendAddressPoolList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerBackendAddressPools_Get",
+        "description": "Gets load balancer backend address pool.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "backendAddressPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the backend address pool."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns LoadBalancer BackendAddressPool resource.",
+            "schema": {
+              "$ref": "#/definitions/BackendAddressPool"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerBackendAddressPoolGet": {
+            "$ref": "./examples/LoadBalancerBackendAddressPoolGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerFrontendIPConfigurations_List",
+        "description": "Gets all the load balancer frontend IP configurations.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer FrontendIPConfiguration resources.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerFrontendIPConfigurationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerFrontendIPConfigurationList": {
+            "$ref": "./examples/LoadBalancerFrontendIPConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerFrontendIPConfigurations_Get",
+        "description": "Gets load balancer frontend IP configuration.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "frontendIPConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the frontend IP configuration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns LoadBalancer FrontendIPConfiguration resource.",
+            "schema": {
+              "$ref": "#/definitions/FrontendIPConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerFrontendIPConfigurationGet": {
+            "$ref": "./examples/LoadBalancerFrontendIPConfigurationGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_List",
+        "description": "Gets all the inbound nat rules in a load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer InboundNatRule resources.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InboundNatRuleList": {
+            "$ref": "./examples/InboundNatRuleList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}": {
+      "delete": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_Delete",
+        "description": "Deletes the specified load balancer inbound nat rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "inboundNatRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the inbound nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-examples": {
+          "InboundNatRuleDelete": {
+            "$ref": "./examples/InboundNatRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_Get",
+        "description": "Gets the specified load balancer inbound nat rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "inboundNatRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the inbound nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting InboundNatRule resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InboundNatRuleGet": {
+            "$ref": "./examples/InboundNatRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "InboundNatRules_CreateOrUpdate",
+        "description": "Creates or updates a load balancer inbound nat rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "inboundNatRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the inbound nat rule."
+          },
+          {
+            "name": "inboundNatRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            },
+            "description": "Parameters supplied to the create or update inbound nat rule operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting InboundNatRule resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting InboundNatRule resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundNatRule"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "InboundNatRuleCreate": {
+            "$ref": "./examples/InboundNatRuleCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerLoadBalancingRules_List",
+        "description": "Gets all the load balancing rules in a load balancer.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer LoadBalancingRule resources.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerLoadBalancingRuleListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "LoadBalancerLoadBalancingRuleList": {
+            "$ref": "./examples/LoadBalancerLoadBalancingRuleList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerLoadBalancingRules_Get",
+        "description": "Gets the specified load balancer load balancing rule.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "loadBalancingRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancing rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting LoadBalancingRule resource.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancingRule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerLoadBalancingRuleGet": {
+            "$ref": "./examples/LoadBalancerLoadBalancingRuleGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/networkInterfaces": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerNetworkInterfaces_List",
+        "description": "Gets associated load balancer network interfaces.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of NetworkInterface resources.",
+            "schema": {
+              "$ref": "./networkInterface.json#/definitions/NetworkInterfaceListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerNetworkInterfaceListVmss": {
+            "$ref": "./examples/LoadBalancerNetworkInterfaceListVmss.json"
+          },
+          "LoadBalancerNetworkInterfaceListSimple": {
+            "$ref": "./examples/LoadBalancerNetworkInterfaceListSimple.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerProbes_List",
+        "description": "Gets all the load balancer probes.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of LoadBalancer Probe resources.",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerProbeListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerProbeList": {
+            "$ref": "./examples/LoadBalancerProbeList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}": {
+      "get": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerProbes_Get",
+        "description": "Gets load balancer probe.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "probeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the probe."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns LoadBalancer Probe resource.",
+            "schema": {
+              "$ref": "#/definitions/Probe"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LoadBalancerProbeGet": {
+            "$ref": "./examples/LoadBalancerProbeGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LoadBalancerSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of a load balancer SKU.",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerSkuName",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "SKU of a load balancer"
+    },
+    "FrontendIPConfigurationPropertiesFormat": {
+      "properties": {
+        "inboundNatRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Read only. Inbound rules URIs that use this frontend IP."
+        },
+        "inboundNatPools": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Read only. Inbound pools URIs that use this frontend IP."
+        },
+        "outboundNatRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Read only. Outbound rules URIs that use this frontend IP."
+        },
+        "loadBalancingRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Gets load balancing rules URIs that use this frontend IP."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private IP address of the IP configuration."
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "description": "The Private IP allocation method. Possible values are: 'Static' and 'Dynamic'.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "subnet": {
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "description": "The reference of the subnet resource."
+        },
+        "publicIPAddress": {
+          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
+          "description": "The reference of the Public IP resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of Frontend IP Configuration of the load balancer."
+    },
+    "FrontendIPConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FrontendIPConfigurationPropertiesFormat",
+          "description": "Properties of the load balancer probe."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting the IP allocated for the resource needs to come from."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Frontend IP address of the load balancer."
+    },
+    "BackendAddressPoolPropertiesFormat": {
+      "properties": {
+        "backendIPConfigurations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "description": "Gets collection of references to IP addresses defined in network interfaces."
+        },
+        "loadBalancingRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Gets load balancing rules that use this backend address pool."
+        },
+        "outboundNatRule": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Gets outbound rules that use this backend address pool."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Get provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of the backend address pool."
+    },
+    "BackendAddressPool": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackendAddressPoolPropertiesFormat",
+          "description": "Properties of load balancer backend address pool."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Pool of backend IP addresses."
+    },
+    "LoadBalancingRulePropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "A reference to frontend IP addresses."
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "A reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs."
+        },
+        "probe": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference of the load balancer probe used by the load balancing rule."
+        },
+        "protocol": {
+          "$ref": "#/definitions/TransportProtocol"
+        },
+        "loadDistribution": {
+          "type": "string",
+          "description": "The load distribution policy for this rule. Possible values are 'Default', 'SourceIP', and 'SourceIPProtocol'.",
+          "enum": [
+            "Default",
+            "SourceIP",
+            "SourceIPProtocol"
+          ],
+          "x-ms-enum": {
+            "name": "LoadDistribution",
+            "modelAsString": true
+          }
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 0 and 65534. Note that value 0 enables \"Any Port\""
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for internal connections on the endpoint. Acceptable values are between 0 and 65535. Note that value 0 enables \"Any Port\""
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP."
+        },
+        "enableFloatingIP": {
+          "type": "boolean",
+          "description": "Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint."
+        },
+        "disableOutboundSnat": {
+          "type": "boolean",
+          "description": "Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "required": [
+        "protocol",
+        "frontendPort"
+      ],
+      "description": "Properties of the load balancer."
+    },
+    "LoadBalancingRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoadBalancingRulePropertiesFormat",
+          "description": "Properties of load balancer load balancing rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "A load balancing rule for a load balancer."
+    },
+    "ProbePropertiesFormat": {
+      "properties": {
+        "loadBalancingRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "The load balancer rules that use this probe."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol of the end point. Possible values are: 'Http', 'Tcp', or 'Https'. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
+          "enum": [
+            "Http",
+            "Tcp",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ProbeProtocol",
+            "modelAsString": true
+          }
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port for communicating the probe. Possible values range from 1 to 65535, inclusive."
+        },
+        "intervalInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval, in seconds, for how frequently to probe the endpoint for health status. Typically, the interval is slightly less than half the allocated timeout period (in seconds) which allows two full probes before taking the instance out of rotation. The default value is 15, the minimum value is 5."
+        },
+        "numberOfProbes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in Azure."
+        },
+        "requestPath": {
+          "type": "string",
+          "description": "The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "required": [
+        "protocol",
+        "port"
+      ],
+      "description": "Load balancer probe resource."
+    },
+    "Probe": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProbePropertiesFormat",
+          "description": "Properties of load balancer probe."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "A load balancer probe."
+    },
+    "InboundNatRulePropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "A reference to frontend IP addresses."
+        },
+        "backendIPConfiguration": {
+          "readOnly": true,
+          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+          "description": "A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP."
+        },
+        "protocol": {
+          "$ref": "#/definitions/TransportProtocol"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values range from 1 to 65534."
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for the internal endpoint. Acceptable values range from 1 to 65535."
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP."
+        },
+        "enableFloatingIP": {
+          "type": "boolean",
+          "description": "Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of the inbound NAT rule."
+    },
+    "InboundNatRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InboundNatRulePropertiesFormat",
+          "description": "Properties of load balancer inbound nat rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Inbound NAT rule of the load balancer."
+    },
+    "InboundNatPoolPropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "A reference to frontend IP addresses."
+        },
+        "protocol": {
+          "$ref": "#/definitions/TransportProtocol"
+        },
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65534."
+        },
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65535."
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535."
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP."
+        },
+        "enableFloatingIP": {
+          "type": "boolean",
+          "description": "Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "required": [
+        "protocol",
+        "frontendPortRangeStart",
+        "frontendPortRangeEnd",
+        "backendPort"
+      ],
+      "description": "Properties of Inbound NAT pool."
+    },
+    "InboundNatPool": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InboundNatPoolPropertiesFormat",
+          "description": "Properties of load balancer inbound nat pool."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Inbound NAT pool of the load balancer."
+    },
+    "OutboundNatRulePropertiesFormat": {
+      "properties": {
+        "allocatedOutboundPorts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of outbound ports to be used for NAT."
+        },
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "The Frontend IP addresses of the load balancer."
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "required": [
+        "backendAddressPool"
+      ],
+      "description": "Outbound NAT pool of the load balancer."
+    },
+    "OutboundNatRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OutboundNatRulePropertiesFormat",
+          "description": "Properties of load balancer outbound nat rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Outbound NAT pool of the load balancer."
+    },
+    "LoadBalancerPropertiesFormat": {
+      "properties": {
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontendIPConfiguration"
+          },
+          "description": "Object representing the frontend IPs to be used for the load balancer"
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendAddressPool"
+          },
+          "description": "Collection of backend address pools used by a load balancer"
+        },
+        "loadBalancingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "Object collection representing the load balancing rules Gets the provisioning "
+        },
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Probe"
+          },
+          "description": "Collection of probe objects used in the load balancer"
+        },
+        "inboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatRule"
+          },
+          "description": "Collection of inbound NAT Rules used by a load balancer. Defining inbound NAT rules on your load balancer is mutually exclusive with defining an inbound NAT pool. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an Inbound NAT pool. They have to reference individual inbound NAT rules."
+        },
+        "inboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatPool"
+          },
+          "description": "Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound Nat rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules."
+        },
+        "outboundNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundNatRule"
+          },
+          "description": "The outbound NAT rules."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the load balancer resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of the load balancer."
+    },
+    "LoadBalancer": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/LoadBalancerSku",
+          "description": "The load balancer SKU."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoadBalancerPropertiesFormat",
+          "description": "Properties of load balancer."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "LoadBalancer resource"
+    },
+    "LoadBalancerListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancer"
+          },
+          "description": "A list of load balancers in a resource group."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListLoadBalancers API service call."
+    },
+    "InboundNatRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatRule"
+          },
+          "description": "A list of inbound nat rules in a load balancer."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListInboundNatRule API service call."
+    },
+    "LoadBalancerBackendAddressPoolListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackendAddressPool"
+          },
+          "description": "A list of backend address pools in a load balancer."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListBackendAddressPool API service call."
+    },
+    "LoadBalancerFrontendIPConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontendIPConfiguration"
+          },
+          "description": "A list of frontend IP configurations in a load balancer."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListFrontendIPConfiguration API service call."
+    },
+    "LoadBalancerLoadBalancingRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "A list of load balancing rules in a load balancer."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListLoadBalancingRule API service call."
+    },
+    "LoadBalancerProbeListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Probe"
+          },
+          "description": "A list of probes in a load balancer."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListProbe API service call."
+    },
+    "TransportProtocol": {
+      "type": "string",
+      "description": "The transport protocol for the endpoint. Possible values are 'Udp' or 'Tcp' or 'All'.",
+      "enum": [
+        "Udp",
+        "Tcp",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "TransportProtocol",
+        "modelAsString": true
+      }
+    }
+  }
+}

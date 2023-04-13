@@ -1,0 +1,280 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2017-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/premiumMessagingRegions": {
+      "get": {
+        "tags": [
+          "PremiumMessagingRegions"
+        ],
+        "operationId": "PremiumMessagingRegions_List",
+        "x-ms-examples": {
+          "PremiumMessagingRegionsList": {
+            "$ref": "./examples/SkuRegions/PremiumMessagingRegions.json"
+          }
+        },
+        "description": "Gets the available premium messaging regions for servicebus ",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Premium messaging regions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/PremiumMessagingRegionsListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceNamespacePatch": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Resource definition."
+    },
+    "PremiumMessagingRegions": {
+      "properties": {
+        "properties": {
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Region code"
+            },
+            "fullName": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Full name of the region"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNamespacePatch"
+        }
+      ],
+      "description": "Premium Messaging Region"
+    },
+    "PremiumMessagingRegionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PremiumMessagingRegions"
+          },
+          "description": "Result of the List PremiumMessagingRegions type."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of PremiumMessagingRegions."
+        }
+      },
+      "description": "The response of the List PremiumMessagingRegions operation."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "NamespaceNameParameter": {
+      "name": "namespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The namespace name"
+    },
+    "AuthorizationRuleNameParameter": {
+      "name": "authorizationRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The authorization rule name."
+    },
+    "QueueNameParameter": {
+      "name": "queueName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The queue name."
+    },
+    "TopicNameParameter": {
+      "name": "topicName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The topic name."
+    },
+    "SubscriptionNameParameter": {
+      "name": "subscriptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The subscription name."
+    },
+    "RuleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The rule name."
+    },
+    "SkuNameParameter": {
+      "name": "sku",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The sku type."
+    },
+    "AliasNameParameter": {
+      "name": "alias",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The Disaster Recovery configuration name"
+    },
+    "ConfigNameParameter": {
+      "name": "configName",
+      "in": "path",
+      "description": "The configuration name. Should always be \"$default\".",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "$default"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationConfigurationName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "name": "$skip",
+      "description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results to the most recent N usageDetails.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

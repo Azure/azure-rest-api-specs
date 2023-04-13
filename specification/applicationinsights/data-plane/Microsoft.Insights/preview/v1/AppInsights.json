@@ -1,0 +1,2347 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Application Insights Data Plane",
+    "description": "This API exposes AI metric & event information and associated metadata",
+    "termsOfService": "https://dev.applicationinsights.io/tos",
+    "contact": {
+      "name": "AIAPI Team",
+      "url": "https://dev.applicationinsights.io/support",
+      "email": "aiapi@microsoft.com"
+    },
+    "license": {
+      "name": "Microsoft",
+      "url": "https://dev.applicationinsights.io/license"
+    }
+  },
+  "host": "api.applicationinsights.io",
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize?resource=https%3A%2F%2Fapi.applicationinsights.io",
+      "flow": "implicit",
+      "description": "Connect to Azure Application Insights API",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/apps/{appId}/metrics/{metricId}": {
+      "get": {
+        "operationId": "Metrics_Get",
+        "summary": "Retrieve metric data",
+        "description": "Gets metric values for a single metric",
+        "x-ms-examples": {
+          "simpleMetric": {
+            "$ref": "examples/metric-get.json"
+          },
+          "intervaledMetric": {
+            "$ref": "examples/metric-get-full.json"
+          },
+          "segmentedIntervaledMetric": {
+            "$ref": "examples/metric-get-segmented.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/metricId"
+          },
+          {
+            "$ref": "#/parameters/metricsTimespan"
+          },
+          {
+            "$ref": "#/parameters/metricsInterval"
+          },
+          {
+            "$ref": "#/parameters/metricsAggregation"
+          },
+          {
+            "$ref": "#/parameters/metricsSegment"
+          },
+          {
+            "$ref": "#/parameters/metricsTop"
+          },
+          {
+            "$ref": "#/parameters/metricsOrderBy"
+          },
+          {
+            "$ref": "#/parameters/metricsFilter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metricsResult"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/metrics": {
+      "post": {
+        "operationId": "Metrics_GetMultiple",
+        "summary": "Retrieve metric data",
+        "description": "Gets metric values for multiple metrics",
+        "x-ms-examples": {
+          "postMetric": {
+            "$ref": "examples/metric-post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/metricsPostBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metricsResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/metrics/metadata": {
+      "get": {
+        "operationId": "Metrics_GetMetadata",
+        "summary": "Retrieve metric metadata",
+        "description": "Gets metadata describing the available metrics",
+        "x-ms-examples": {
+          "metricMetadata": {
+            "$ref": "examples/metrics-get-metadata.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful responses",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/events/{eventType}": {
+      "get": {
+        "operationId": "Events_GetByType",
+        "summary": "Execute OData query",
+        "description": "Executes an OData query for events",
+        "x-ms-examples": {
+          "eventByType": {
+            "$ref": "examples/events-get-by-type.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/eventType"
+          },
+          {
+            "$ref": "#/parameters/eventsTimespan"
+          },
+          {
+            "$ref": "#/parameters/eventsFilter"
+          },
+          {
+            "$ref": "#/parameters/eventsSearch"
+          },
+          {
+            "$ref": "#/parameters/eventsOrderBy"
+          },
+          {
+            "$ref": "#/parameters/eventsSelect"
+          },
+          {
+            "$ref": "#/parameters/eventsSkip"
+          },
+          {
+            "$ref": "#/parameters/eventsTop"
+          },
+          {
+            "$ref": "#/parameters/eventsFormat"
+          },
+          {
+            "$ref": "#/parameters/eventsCount"
+          },
+          {
+            "$ref": "#/parameters/eventsApply"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/eventsResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/events/{eventType}/{eventId}": {
+      "get": {
+        "operationId": "Events_Get",
+        "summary": "Get an event",
+        "description": "Gets the data for a single event",
+        "x-ms-examples": {
+          "eventById": {
+            "$ref": "examples/events-get-by-id.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/eventType"
+          },
+          {
+            "$ref": "#/parameters/eventsTimespan"
+          },
+          {
+            "$ref": "#/parameters/eventId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/eventsResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/events/$metadata": {
+      "get": {
+        "operationId": "Events_GetOdataMetadata",
+        "summary": "Get OData metadata",
+        "description": "Gets OData EDMX metadata describing the event data model",
+        "x-ms-examples": {
+          "eventMetadata": {
+            "$ref": "examples/events-get-metadata.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          }
+        ],
+        "produces": [
+          "application/xml;charset=utf-8"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/query": {
+      "post": {
+        "operationId": "Query_Execute",
+        "summary": "Execute an Analytics query",
+        "description": "Executes an Analytics query for data. [Here](https://dev.applicationinsights.io/documentation/Using-the-API/Query) is an example for using POST with an Analytics query.",
+        "x-ms-examples": {
+          "queryPost": {
+            "$ref": "examples/query-post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/queryBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Query_Get",
+        "summary": "Execute an Analytics query",
+        "description": "Executes an Analytics query for data",
+        "x-ms-examples": {
+          "queryGet": {
+            "$ref": "examples/query-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          },
+          {
+            "$ref": "#/parameters/queryParam"
+          },
+          {
+            "$ref": "#/parameters/queryTimespan"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/queryResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apps/{appId}/metadata": {
+      "post": {
+        "operationId": "Metadata_Post",
+        "summary": "Gets metadata information",
+        "description": "Retrieve the metadata information for the app, including its schema, etc.",
+        "x-ms-examples": {
+          "metadataPost": {
+            "$ref": "examples/metadata-post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metadataResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Metadata_Get",
+        "summary": "Gets metadata information",
+        "description": "Retrieve the metadata information for the app, including its schema, etc.",
+        "x-ms-examples": {
+          "metadataGet": {
+            "$ref": "examples/metadata-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/appId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metadataResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "appId": {
+      "name": "appId",
+      "description": "ID of the application. This is Application ID from the API Access settings blade in the Azure portal.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "metricId": {
+      "name": "metricId",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "ID of the metric. This is either a standard AI metric, or an application-specific custom metric.",
+      "type": "string",
+      "enum": [
+        "requests/count",
+        "requests/duration",
+        "requests/failed",
+        "users/count",
+        "users/authenticated",
+        "pageViews/count",
+        "pageViews/duration",
+        "client/processingDuration",
+        "client/receiveDuration",
+        "client/networkDuration",
+        "client/sendDuration",
+        "client/totalDuration",
+        "dependencies/count",
+        "dependencies/failed",
+        "dependencies/duration",
+        "exceptions/count",
+        "exceptions/browser",
+        "exceptions/server",
+        "sessions/count",
+        "performanceCounters/requestExecutionTime",
+        "performanceCounters/requestsPerSecond",
+        "performanceCounters/requestsInQueue",
+        "performanceCounters/memoryAvailableBytes",
+        "performanceCounters/exceptionsPerSecond",
+        "performanceCounters/processCpuPercentage",
+        "performanceCounters/processIOBytesPerSecond",
+        "performanceCounters/processPrivateBytes",
+        "performanceCounters/processorCpuPercentage",
+        "availabilityResults/availabilityPercentage",
+        "availabilityResults/duration",
+        "billing/telemetryCount",
+        "customEvents/count"
+      ],
+      "x-ms-enum": {
+        "name": "MetricId",
+        "modelAsString": true
+      }
+    },
+    "metricsTimespan": {
+      "name": "timespan",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "The timespan over which to retrieve metric values. This is an ISO8601 time period value. If timespan is omitted, a default time range of `PT12H` (\"last 12 hours\") is used. The actual timespan that is queried may be adjusted by the server based. In all cases, the actual time span used for the query is included in the response.",
+      "type": "string"
+    },
+    "metricsAggregation": {
+      "name": "aggregation",
+      "in": "query",
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "description": "The aggregation to use when computing the metric values. To retrieve more than one aggregation at a time, separate them with a comma. If no aggregation is specified, then the default aggregation for the metric is used.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "min",
+          "max",
+          "avg",
+          "sum",
+          "count",
+          "unique"
+        ],
+        "x-ms-enum": {
+          "name": "MetricsAggregation",
+          "modelAsString": true
+        }
+      }
+    },
+    "metricsInterval": {
+      "name": "interval",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "The time interval to use when retrieving metric values. This is an ISO8601 duration. If interval is omitted, the metric value is aggregated across the entire timespan. If interval is supplied, the server may adjust the interval to a more appropriate size based on the timespan used for the query. In all cases, the actual interval used for the query is included in the response.",
+      "type": "string",
+      "format": "duration"
+    },
+    "metricsSegment": {
+      "name": "segment",
+      "in": "query",
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the dimension to segment the metric values by. This dimension must be applicable to the metric you are retrieving. To segment by more than one dimension at a time, separate them with a comma (,). In this case, the metric data will be segmented in the order the dimensions are listed in the parameter.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "applicationBuild",
+          "applicationVersion",
+          "authenticatedOrAnonymousTraffic",
+          "browser",
+          "browserVersion",
+          "city",
+          "cloudRoleName",
+          "cloudServiceName",
+          "continent",
+          "countryOrRegion",
+          "deploymentId",
+          "deploymentUnit",
+          "deviceType",
+          "environment",
+          "hostingLocation",
+          "instanceName"
+        ],
+        "x-ms-enum": {
+          "name": "MetricsSegment",
+          "modelAsString": true
+        }
+      }
+    },
+    "metricsTop": {
+      "name": "top",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "The number of segments to return.  This value is only valid when segment is specified.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "metricsOrderBy": {
+      "name": "orderby",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "The aggregation function and direction to sort the segments by.  This value is only valid when segment is specified.",
+      "type": "string"
+    },
+    "metricsFilter": {
+      "name": "filter",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "An expression used to filter the results.  This value should be a valid OData filter expression where the keys of each clause should be applicable dimensions for the metric you are retrieving.",
+      "type": "string"
+    },
+    "metricsPostBody": {
+      "name": "body",
+      "description": "The batched metrics query.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/metricsPostBody"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "eventType": {
+      "name": "eventType",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "The type of events to query; either a standard event type (`traces`, `customEvents`, `pageViews`, `requests`, `dependencies`, `exceptions`, `availabilityResults`) or `$all` to query across all event types.",
+      "type": "string",
+      "enum": [
+        "$all",
+        "traces",
+        "customEvents",
+        "pageViews",
+        "browserTimings",
+        "requests",
+        "dependencies",
+        "exceptions",
+        "availabilityResults",
+        "performanceCounters",
+        "customMetrics"
+      ],
+      "x-ms-enum": {
+        "name": "EventType",
+        "modelAsString": true
+      }
+    },
+    "eventId": {
+      "name": "eventId",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "ID of event.",
+      "type": "string"
+    },
+    "eventsTimespan": {
+      "name": "timespan",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Optional. The timespan over which to retrieve events. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the Odata expression.",
+      "type": "string"
+    },
+    "eventsFilter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "An expression used to filter the returned events",
+      "type": "string"
+    },
+    "eventsSearch": {
+      "name": "$search",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "A free-text search expression to match for whether a particular event should be returned",
+      "type": "string"
+    },
+    "eventsOrderBy": {
+      "name": "$orderby",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "A comma-separated list of properties with \\\"asc\\\" (the default) or \\\"desc\\\" to control the order of returned events",
+      "type": "string"
+    },
+    "eventsSelect": {
+      "name": "$select",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "Limits the properties to just those requested on each returned event",
+      "type": "string"
+    },
+    "eventsSkip": {
+      "name": "$skip",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "The number of items to skip over before returning events",
+      "type": "integer",
+      "format": "int32"
+    },
+    "eventsTop": {
+      "name": "$top",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "The number of events to return",
+      "type": "integer",
+      "format": "int32"
+    },
+    "eventsFormat": {
+      "name": "$format",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "Format for the returned events",
+      "type": "string"
+    },
+    "eventsCount": {
+      "name": "$count",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "Request a count of matching items included with the returned events",
+      "type": "boolean"
+    },
+    "eventsApply": {
+      "name": "$apply",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "description": "An expression used for aggregation over returned events",
+      "type": "string"
+    },
+    "applicationsParam": {
+      "description": "A list of applications over which to query.",
+      "name": "applications",
+      "in": "query",
+      "collectionFormat": "csv",
+      "required": false,
+      "default": "",
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "queryTimespan": {
+      "name": "timespan",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
+      "type": "string"
+    },
+    "queryParam": {
+      "name": "query",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "The Analytics query. Learn more about the [Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+      "type": "string"
+    },
+    "queryBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The Analytics query. Learn more about the [Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/queryBody"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "metricId": {
+      "description": "ID of the metric. This is either a standard AI metric, or an application-specific custom metric.",
+      "type": "string",
+      "enum": [
+        "requests/count",
+        "requests/duration",
+        "requests/failed",
+        "users/count",
+        "users/authenticated",
+        "pageViews/count",
+        "pageViews/duration",
+        "client/processingDuration",
+        "client/receiveDuration",
+        "client/networkDuration",
+        "client/sendDuration",
+        "client/totalDuration",
+        "dependencies/count",
+        "dependencies/failed",
+        "dependencies/duration",
+        "exceptions/count",
+        "exceptions/browser",
+        "exceptions/server",
+        "sessions/count",
+        "performanceCounters/requestExecutionTime",
+        "performanceCounters/requestsPerSecond",
+        "performanceCounters/requestsInQueue",
+        "performanceCounters/memoryAvailableBytes",
+        "performanceCounters/exceptionsPerSecond",
+        "performanceCounters/processCpuPercentage",
+        "performanceCounters/processIOBytesPerSecond",
+        "performanceCounters/processPrivateBytes",
+        "performanceCounters/processorCpuPercentage",
+        "availabilityResults/availabilityPercentage",
+        "availabilityResults/duration",
+        "billing/telemetryCount",
+        "customEvents/count"
+      ],
+      "x-ms-enum": {
+        "name": "MetricId",
+        "modelAsString": true
+      }
+    },
+    "metricsTimespan": {
+      "description": "The timespan over which to retrieve metric values. This is an ISO8601 time period value. If timespan is omitted, a default time range of `PT12H` (\"last 12 hours\") is used. The actual timespan that is queried may be adjusted by the server based. In all cases, the actual time span used for the query is included in the response.",
+      "type": "string"
+    },
+    "metricsAggregation": {
+      "description": "The aggregation to use when computing the metric values. To retrieve more than one aggregation at a time, separate them with a comma. If no aggregation is specified, then the default aggregation for the metric is used.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "min",
+          "max",
+          "avg",
+          "sum",
+          "count",
+          "unique"
+        ],
+        "x-ms-enum": {
+          "name": "MetricsAggregation",
+          "modelAsString": true
+        }
+      }
+    },
+    "metricsInterval": {
+      "description": "The time interval to use when retrieving metric values. This is an ISO8601 duration. If interval is omitted, the metric value is aggregated across the entire timespan. If interval is supplied, the server may adjust the interval to a more appropriate size based on the timespan used for the query. In all cases, the actual interval used for the query is included in the response.",
+      "type": "string",
+      "format": "duration"
+    },
+    "metricsSegment": {
+      "description": "The name of the dimension to segment the metric values by. This dimension must be applicable to the metric you are retrieving. To segment by more than one dimension at a time, separate them with a comma (,). In this case, the metric data will be segmented in the order the dimensions are listed in the parameter.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "applicationBuild",
+          "applicationVersion",
+          "authenticatedOrAnonymousTraffic",
+          "browser",
+          "browserVersion",
+          "city",
+          "cloudRoleName",
+          "cloudServiceName",
+          "continent",
+          "countryOrRegion",
+          "deploymentId",
+          "deploymentUnit",
+          "deviceType",
+          "environment",
+          "hostingLocation",
+          "instanceName"
+        ],
+        "x-ms-enum": {
+          "name": "MetricsSegment",
+          "modelAsString": true
+        }
+      }
+    },
+    "metricsTop": {
+      "description": "The number of segments to return.  This value is only valid when segment is specified.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "metricsOrderBy": {
+      "description": "The aggregation function and direction to sort the segments by.  This value is only valid when segment is specified.",
+      "type": "string"
+    },
+    "metricsFilter": {
+      "description": "An expression used to filter the results.  This value should be a valid OData filter expression where the keys of each clause should be applicable dimensions for the metric you are retrieving.",
+      "type": "string"
+    },
+    "metricsPostBody": {
+      "description": "Metrics request body",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/metricsPostBodySchema"
+      }
+    },
+    "metricsPostBodySchema": {
+      "description": "A metric request",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "An identifier for this query.  Must be unique within the post body of the request.  This identifier will be the 'id' property of the response object representing this query."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameters for a single metrics query",
+          "properties": {
+            "metricId": {
+              "$ref": "#/definitions/metricId"
+            },
+            "timespan": {
+              "$ref": "#/definitions/metricsTimespan"
+            },
+            "aggregation": {
+              "$ref": "#/definitions/metricsAggregation"
+            },
+            "interval": {
+              "$ref": "#/definitions/metricsInterval"
+            },
+            "segment": {
+              "$ref": "#/definitions/metricsSegment"
+            },
+            "top": {
+              "$ref": "#/definitions/metricsTop"
+            },
+            "orderby": {
+              "$ref": "#/definitions/metricsOrderBy"
+            },
+            "filter": {
+              "$ref": "#/definitions/metricsFilter"
+            }
+          },
+          "required": [
+            "metricId"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "parameters"
+      ]
+    },
+    "metricsResults": {
+      "description": "A set of metric results.",
+      "type": "array",
+      "items": {
+        "properties": {
+          "id": {
+            "description": "The specified ID for this metric.",
+            "type": "string"
+          },
+          "status": {
+            "description": "The HTTP status code of this metric query.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "body": {
+            "description": "The results of this metric query.",
+            "$ref": "#/definitions/metricsResult"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "body"
+        ]
+      }
+    },
+    "metricsResult": {
+      "description": "A metric result.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/metricsResultInfo"
+        }
+      }
+    },
+    "metricsResultInfo": {
+      "description": "A metric result data.",
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "Start time of the metric.",
+          "type": "string",
+          "format": "date_time"
+        },
+        "end": {
+          "description": "Start time of the metric.",
+          "type": "string",
+          "format": "date_time"
+        },
+        "interval": {
+          "description": "The interval used to segment the metric data.",
+          "type": "string",
+          "format": "duration"
+        },
+        "segments": {
+          "description": "Segmented metric data (if segmented).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metricsSegmentInfo"
+          }
+        }
+      },
+      "additionalProperties": {
+        "description": "Additional properties that can be provided on the metric result info",
+        "type": "object"
+      }
+    },
+    "metricsSegmentInfo": {
+      "description": "A metric segment",
+      "type": "object",
+      "properties": {
+        "start": {
+          "description": "Start time of the metric segment (only when an interval was specified).",
+          "type": "string",
+          "format": "date_time"
+        },
+        "end": {
+          "description": "Start time of the metric segment (only when an interval was specified).",
+          "type": "string",
+          "format": "date_time"
+        },
+        "segments": {
+          "description": "Segmented metric data (if further segmented).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metricsSegmentInfo"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "eventType": {
+      "description": "The type of events to query; either a standard event type (`traces`, `customEvents`, `pageViews`, `requests`, `dependencies`, `exceptions`, `availabilityResults`) or `$all` to query across all event types.",
+      "type": "string",
+      "enum": [
+        "$all",
+        "traces",
+        "customEvents",
+        "pageViews",
+        "browserTimings",
+        "requests",
+        "dependencies",
+        "exceptions",
+        "availabilityResults",
+        "performanceCounters",
+        "customMetrics"
+      ],
+      "x-ms-enum": {
+        "name": "EventType",
+        "modelAsString": true
+      }
+    },
+    "eventId": {
+      "description": "ID of event.",
+      "type": "string"
+    },
+    "eventsTimespan": {
+      "description": "Optional. The timespan over which to retrieve events. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the Odata expression.",
+      "type": "string"
+    },
+    "eventsFilter": {
+      "description": "An expression used to filter the returned events",
+      "type": "string"
+    },
+    "eventsSearch": {
+      "description": "A free-text search expression to match for whether a particular event should be returned",
+      "type": "string"
+    },
+    "eventsOrderBy": {
+      "description": "A comma-separated list of properties with \\\"asc\\\" (the default) or \\\"desc\\\" to control the order of returned events",
+      "type": "string"
+    },
+    "eventsSelect": {
+      "description": "Limits the properties to just those requested on each returned event",
+      "type": "string"
+    },
+    "eventsSkip": {
+      "description": "The number of items to skip over before returning events",
+      "type": "integer",
+      "format": "int32"
+    },
+    "eventsTop": {
+      "description": "The number of events to return",
+      "type": "integer",
+      "format": "int32"
+    },
+    "eventsFormat": {
+      "description": "Format for the returned events",
+      "type": "string"
+    },
+    "eventsCount": {
+      "description": "Request a count of matching items included with the returned events",
+      "type": "boolean"
+    },
+    "eventsApply": {
+      "description": "An expression used for aggregation over returned events",
+      "type": "string"
+    },
+    "eventsResults": {
+      "description": "An events query result.",
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "description": "OData context metadata endpoint for this response",
+          "type": "string"
+        },
+        "@ai.messages": {
+          "description": "OData messages for this response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/errorInfo"
+          }
+        },
+        "value": {
+          "description": "Contents of the events query result.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventsResultData"
+          }
+        }
+      }
+    },
+    "eventsResult": {
+      "description": "An event query result.",
+      "type": "object",
+      "properties": {
+        "@ai.messages": {
+          "description": "OData messages for this response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/errorInfo"
+          }
+        },
+        "value": {
+          "$ref": "#/definitions/eventsResultData"
+        }
+      }
+    },
+    "eventsResultData": {
+      "description": "Events query result data.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "id": {
+          "description": "The unique ID for this event.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of event.",
+          "$ref": "#/definitions/eventType"
+        },
+        "count": {
+          "description": "Count of the event",
+          "type": "integer",
+          "format": "int64"
+        },
+        "timestamp": {
+          "description": "Timestamp of the event",
+          "type": "string",
+          "format": "date-time"
+        },
+        "customDimensions": {
+          "description": "Custom dimensions of the event",
+          "type": "object",
+          "properties": {
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "customMeasurements": {
+          "description": "Custom measurements of the event",
+          "type": "object",
+          "properties": {
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "operation": {
+          "description": "Operation info of the event",
+          "$ref": "#/definitions/eventsOperationInfo"
+        },
+        "session": {
+          "description": "Session info of the event",
+          "$ref": "#/definitions/eventsSessionInfo"
+        },
+        "user": {
+          "description": "User info of the event",
+          "$ref": "#/definitions/eventsUserInfo"
+        },
+        "cloud": {
+          "description": "Cloud info of the event",
+          "$ref": "#/definitions/eventsCloudInfo"
+        },
+        "ai": {
+          "description": "AI info of the event",
+          "$ref": "#/definitions/eventsAiInfo"
+        },
+        "application": {
+          "description": "Application info of the event",
+          "$ref": "#/definitions/eventsApplicationInfo"
+        },
+        "client": {
+          "description": "Client info of the event",
+          "$ref": "#/definitions/eventsClientInfo"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "eventsTraceResult": {
+      "x-ms-discriminator-value": "trace",
+      "description": "A trace result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "trace": {
+              "$ref": "#/definitions/eventsTraceInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsTraceInfo": {
+      "description": "The trace information",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The trace message",
+          "type": "string"
+        },
+        "severityLevel": {
+          "description": "The trace severity level",
+          "type": "integer"
+        }
+      }
+    },
+    "eventsCustomEventResult": {
+      "x-ms-discriminator-value": "customEvent",
+      "description": "A custom event result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "customEvent": {
+              "$ref": "#/definitions/eventsCustomEventInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsCustomEventInfo": {
+      "description": "The custom event information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the custom event",
+          "type": "string"
+        }
+      }
+    },
+    "eventsPageViewResult": {
+      "x-ms-discriminator-value": "pageView",
+      "description": "A page view result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "pageView": {
+              "$ref": "#/definitions/eventsPageViewInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsPageViewInfo": {
+      "description": "The page view information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the page",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL of the page",
+          "type": "string"
+        },
+        "duration": {
+          "description": "The duration of the page view",
+          "type": "string"
+        },
+        "performanceBucket": {
+          "description": "The performance bucket of the page view",
+          "type": "string"
+        }
+      }
+    },
+    "eventsBrowserTimingResult": {
+      "x-ms-discriminator-value": "browserTiming",
+      "description": "A browser timing result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "browserTiming": {
+              "$ref": "#/definitions/eventsBrowserTimingInfo"
+            },
+            "clientPerformance": {
+              "$ref": "#/definitions/eventsClientPerformanceInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsBrowserTimingInfo": {
+      "description": "The browser timing information",
+      "type": "object",
+      "properties": {
+        "urlPath": {
+          "description": "The path of the URL",
+          "type": "string"
+        },
+        "urlHost": {
+          "description": "The host of the URL",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the page",
+          "type": "string"
+        },
+        "url": {
+          "description": "The url of the page",
+          "type": "string"
+        },
+        "totalDuration": {
+          "description": "The total duration of the load",
+          "type": "integer",
+          "format": "int64"
+        },
+        "performanceBucket": {
+          "description": "The performance bucket of the load",
+          "type": "string"
+        },
+        "networkDuration": {
+          "description": "The network duration of the load",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sendDuration": {
+          "description": "The send duration of the load",
+          "type": "integer",
+          "format": "int64"
+        },
+        "receiveDuration": {
+          "description": "The receive duration of the load",
+          "type": "integer",
+          "format": "int64"
+        },
+        "processingDuration": {
+          "description": "The processing duration of the load",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "eventsClientPerformanceInfo": {
+      "description": "Client performance information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the client performance",
+          "type": "string"
+        }
+      }
+    },
+    "eventsRequestResult": {
+      "x-ms-discriminator-value": "request",
+      "description": "A request result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "request": {
+              "$ref": "#/definitions/eventsRequestInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsRequestInfo": {
+      "description": "The request info",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the request",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL of the request",
+          "type": "string"
+        },
+        "success": {
+          "description": "Indicates if the request was successful",
+          "type": "string"
+        },
+        "duration": {
+          "description": "The duration of the request",
+          "type": "number",
+          "format": "double"
+        },
+        "performanceBucket": {
+          "description": "The performance bucket of the request",
+          "type": "string"
+        },
+        "resultCode": {
+          "description": "The result code of the request",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the request",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the request",
+          "type": "string"
+        }
+      }
+    },
+    "eventsDependencyResult": {
+      "x-ms-discriminator-value": "dependency",
+      "description": "A dependency result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dependency": {
+              "$ref": "#/definitions/eventsDependencyInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsDependencyInfo": {
+      "description": "The dependency info",
+      "type": "object",
+      "properties": {
+        "target": {
+          "description": "The target of the dependency",
+          "type": "string"
+        },
+        "data": {
+          "description": "The data of the dependency",
+          "type": "string"
+        },
+        "success": {
+          "description": "Indicates if the dependency was successful",
+          "type": "string"
+        },
+        "duration": {
+          "description": "The duration of the dependency",
+          "type": "integer",
+          "format": "int64"
+        },
+        "performanceBucket": {
+          "description": "The performance bucket of the dependency",
+          "type": "string"
+        },
+        "resultCode": {
+          "description": "The result code of the dependency",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the dependency",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the dependency",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the dependency",
+          "type": "string"
+        }
+      }
+    },
+    "eventsExceptionResult": {
+      "x-ms-discriminator-value": "exception",
+      "description": "An exception result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "exception": {
+              "$ref": "#/definitions/eventsExceptionInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsExceptionInfo": {
+      "description": "The exception info",
+      "type": "object",
+      "properties": {
+        "severityLevel": {
+          "description": "The severity level of the exception",
+          "type": "integer"
+        },
+        "problemId": {
+          "description": "The problem ID of the exception",
+          "type": "string"
+        },
+        "handledAt": {
+          "description": "Indicates where the exception was handled at",
+          "type": "string"
+        },
+        "assembly": {
+          "description": "The assembly which threw the exception",
+          "type": "string"
+        },
+        "method": {
+          "description": "The method that threw the exception",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the exception",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the exception",
+          "type": "string"
+        },
+        "outerType": {
+          "description": "The outer type of the exception",
+          "type": "string"
+        },
+        "outerMethod": {
+          "description": "The outer method of the exception",
+          "type": "string"
+        },
+        "outerAssembly": {
+          "description": "The outer assembly of the exception",
+          "type": "string"
+        },
+        "outerMessage": {
+          "description": "The outer message of the exception",
+          "type": "string"
+        },
+        "innermostType": {
+          "description": "The inner most type of the exception",
+          "type": "string"
+        },
+        "innermostMessage": {
+          "description": "The inner most message of the exception",
+          "type": "string"
+        },
+        "innermostMethod": {
+          "description": "The inner most method of the exception",
+          "type": "string"
+        },
+        "innermostAssembly": {
+          "description": "The inner most assembly of the exception",
+          "type": "string"
+        },
+        "details": {
+          "description": "The details of the exception",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventsExceptionDetail"
+          }
+        }
+      }
+    },
+    "eventsExceptionDetail": {
+      "description": "Exception details",
+      "type": "object",
+      "properties": {
+        "severityLevel": {
+          "description": "The severity level of the exception detail",
+          "type": "string"
+        },
+        "outerId": {
+          "description": "The outer ID of the exception detail",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the exception detail",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the exception detail",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the exception detail",
+          "type": "string"
+        },
+        "parsedStack": {
+          "description": "The parsed stack",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventsExceptionDetailsParsedStack"
+          }
+        }
+      }
+    },
+    "eventsExceptionDetailsParsedStack": {
+      "description": "A parsed stack entry",
+      "type": "object",
+      "properties": {
+        "assembly": {
+          "description": "The assembly of the stack entry",
+          "type": "string"
+        },
+        "method": {
+          "description": "The method of the stack entry",
+          "type": "string"
+        },
+        "level": {
+          "description": "The level of the stack entry",
+          "type": "integer",
+          "format": "int64"
+        },
+        "line": {
+          "description": "The line of the stack entry",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "eventsAvailabilityResultResult": {
+      "x-ms-discriminator-value": "availabilityResult",
+      "description": "An availability result result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "availabilityResult": {
+              "$ref": "#/definitions/eventsAvailabilityResultInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsAvailabilityResultInfo": {
+      "description": "The availability result info",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the availability result",
+          "type": "string"
+        },
+        "success": {
+          "description": "Indicates if the availability result was successful",
+          "type": "string"
+        },
+        "duration": {
+          "description": "The duration of the availability result",
+          "type": "integer",
+          "format": "int64"
+        },
+        "performanceBucket": {
+          "description": "The performance bucket of the availability result",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the availability result",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the availability result",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the availability result",
+          "type": "string"
+        },
+        "size": {
+          "description": "The size of the availability result",
+          "type": "string"
+        }
+      }
+    },
+    "eventsPerformanceCounterResult": {
+      "x-ms-discriminator-value": "performanceCounter",
+      "description": "A performance counter result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "performanceCounter": {
+              "$ref": "#/definitions/eventsPerformanceCounterInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsPerformanceCounterInfo": {
+      "description": "The performance counter info",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value of the performance counter",
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "description": "The name of the performance counter",
+          "type": "string"
+        },
+        "category": {
+          "description": "The category of the performance counter",
+          "type": "string"
+        },
+        "counter": {
+          "description": "The counter of the performance counter",
+          "type": "string"
+        },
+        "instanceName": {
+          "description": "The instance name of the performance counter",
+          "type": "string"
+        },
+        "instance": {
+          "description": "The instance of the performance counter",
+          "type": "string"
+        }
+      }
+    },
+    "eventsCustomMetricResult": {
+      "x-ms-discriminator-value": "customMetric",
+      "description": "A custom metric result",
+      "allOf": [
+        {
+          "$ref": "#/definitions/eventsResultData"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "customMetric": {
+              "$ref": "#/definitions/eventsCustomMetricInfo"
+            }
+          }
+        }
+      ]
+    },
+    "eventsCustomMetricInfo": {
+      "description": "The custom metric info",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the custom metric",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the custom metric",
+          "type": "number",
+          "format": "double"
+        },
+        "valueSum": {
+          "description": "The sum of the custom metric",
+          "type": "number",
+          "format": "double"
+        },
+        "valueCount": {
+          "description": "The count of the custom metric",
+          "type": "integer",
+          "format": "int32"
+        },
+        "valueMin": {
+          "description": "The minimum value of the custom metric",
+          "type": "number",
+          "format": "double"
+        },
+        "valueMax": {
+          "description": "The maximum value of the custom metric",
+          "type": "number",
+          "format": "double"
+        },
+        "valueStdDev": {
+          "description": "The standard deviation of the custom metric",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "eventsOperationInfo": {
+      "description": "Operation info for an event result",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "id": {
+          "description": "ID of the operation",
+          "type": "string"
+        },
+        "parentId": {
+          "description": "Parent ID of the operation",
+          "type": "string"
+        },
+        "syntheticSource": {
+          "description": "Synthetic source of the operation",
+          "type": "string"
+        }
+      }
+    },
+    "eventsSessionInfo": {
+      "description": "Session info for an event result",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the session",
+          "type": "string"
+        }
+      }
+    },
+    "eventsUserInfo": {
+      "description": "User info for an event result",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ID of the user",
+          "type": "string"
+        },
+        "accountId": {
+          "description": "Account ID of the user",
+          "type": "string"
+        },
+        "authenticatedId": {
+          "description": "Authenticated ID of the user",
+          "type": "string"
+        }
+      }
+    },
+    "eventsCloudInfo": {
+      "description": "Cloud info for an event result",
+      "type": "object",
+      "properties": {
+        "roleName": {
+          "description": "Role name of the cloud",
+          "type": "string"
+        },
+        "roleInstance": {
+          "description": "Role instance of the cloud",
+          "type": "string"
+        }
+      }
+    },
+    "eventsAiInfo": {
+      "description": "AI related application info for an event result",
+      "type": "object",
+      "properties": {
+        "iKey": {
+          "description": "iKey of the app",
+          "type": "string"
+        },
+        "appName": {
+          "description": "Name of the application",
+          "type": "string"
+        },
+        "appId": {
+          "description": "ID of the application",
+          "type": "string"
+        },
+        "sdkVersion": {
+          "description": "SDK version of the application",
+          "type": "string"
+        }
+      }
+    },
+    "eventsApplicationInfo": {
+      "description": "Application info for an event result",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the application",
+          "type": "string"
+        }
+      }
+    },
+    "eventsClientInfo": {
+      "description": "Client info for an event result",
+      "type": "object",
+      "properties": {
+        "model": {
+          "description": "Model of the client",
+          "type": "string"
+        },
+        "os": {
+          "description": "Operating system of the client",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the client",
+          "type": "string"
+        },
+        "browser": {
+          "description": "Browser of the client",
+          "type": "string"
+        },
+        "ip": {
+          "description": "IP address of the client",
+          "type": "string"
+        },
+        "city": {
+          "description": "City of the client",
+          "type": "string"
+        },
+        "stateOrProvince": {
+          "description": "State or province of the client",
+          "type": "string"
+        },
+        "countryOrRegion": {
+          "description": "Country or region of the client",
+          "type": "string"
+        }
+      }
+    },
+    "queryParam": {
+      "description": "The Analytics query. Learn more about the [Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+      "type": "string"
+    },
+    "queryTimespan": {
+      "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
+      "type": "string"
+    },
+    "applicationsParam": {
+      "description": "Application IDs to include in cross-application queries.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "queryBody": {
+      "description": "The Analytics query. Learn more about the [Analytics query syntax](https://azure.microsoft.com/documentation/articles/app-insights-analytics-reference/)",
+      "type": "object",
+      "properties": {
+        "query": {
+          "description": "The query to execute.",
+          "$ref": "#/definitions/queryParam"
+        },
+        "timespan": {
+          "description": "Optional. The timespan over which to query data. This is an ISO8601 time period value.  This timespan is applied in addition to any that are specified in the query expression.",
+          "$ref": "#/definitions/queryTimespan"
+        },
+        "applications": {
+          "description": "A list of Application IDs for cross-application queries.",
+          "$ref": "#/definitions/applicationsParam"
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "queryResults": {
+      "title": "A query response.",
+      "description": "Contains the tables, columns & rows resulting from a query.",
+      "type": "object",
+      "properties": {
+        "tables": {
+          "description": "The list of tables, columns and rows.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/table"
+          }
+        }
+      },
+      "required": [
+        "tables"
+      ]
+    },
+    "table": {
+      "title": "A query response table.",
+      "description": "Contains the columns and rows for one table in a query response.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the table.",
+          "type": "string"
+        },
+        "columns": {
+          "description": "The list of columns in this table.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/column"
+          }
+        },
+        "rows": {
+          "description": "The resulting rows from this query.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "name",
+        "columns",
+        "rows"
+      ]
+    },
+    "column": {
+      "title": "A table column.",
+      "description": "A column in a table.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of this column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The data type of this column.",
+          "type": "string"
+        }
+      }
+    },
+    "metadataResults": {
+      "title": "A metadata response.",
+      "description": "The metadata result for the app, including available tables, etc.",
+      "type": "object",
+      "properties": {
+        "tableGroups": {
+          "description": "The list of groups of tables on the app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataTableGroup"
+          },
+          "uniqueItems": true
+        },
+        "tables": {
+          "description": "The list of tables and columns that comprise the schema of the app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataTable"
+          },
+          "uniqueItems": true
+        },
+        "functions": {
+          "description": "The list of functions stored on the app.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataFunction"
+          },
+          "uniqueItems": true
+        },
+        "applications": {
+          "description": "The list of Application Insights apps that were referenced in the metadata request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataApplication"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "metadataTableGroup": {
+      "title": "A group of tables.",
+      "description": "The table grouping can be either an Application Insights schema or a Log Analytics solution.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the table group",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the table group",
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the table group, can be either AI or OMS for Log Analytics workspaces",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the table group",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the table group",
+          "type": "string"
+        },
+        "tables": {
+          "description": "The list of tables contained in the table group",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "metadataTable": {
+      "title": "A data table that takes part in a schema of an Application Insights app.",
+      "description": "Tables are part of the app schema, and contain a list of columns and a reference to other relevant metadata items.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the table",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the table",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the table",
+          "type": "string"
+        },
+        "timespanColumn": {
+          "description": "The column associated with the timespan query parameter for the table",
+          "type": "string"
+        },
+        "columns": {
+          "description": "The list of columns defined on the table",
+          "type": "array",
+          "items": {
+            "properties": {
+              "name": {
+                "description": "The name of the column",
+                "type": "string"
+              },
+              "description": {
+                "description": "The description of the column",
+                "type": "string"
+              },
+              "type": {
+                "description": "The data type of the column",
+                "type": "string",
+                "enum": [
+                  "bool",
+                  "datetime",
+                  "dynamic",
+                  "int",
+                  "long",
+                  "real",
+                  "string"
+                ],
+                "x-ms-enum": {
+                  "name": "MetadataColumnDataType",
+                  "modelAsString": true
+                }
+              },
+              "isPreferredFacet": {
+                "description": "A flag indicating this column is a preferred facet",
+                "type": "boolean"
+              },
+              "source": {
+                "description": "an indication of the source of the column, used only when multiple apps have conflicting definition for the column",
+                "type": "object"
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "metadataFunction": {
+      "title": "A stored function.",
+      "description": "Functions are stored Kusto queries that can be specified as part of queries by using their name.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the function.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the function, to be used in queries.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "The parameters/arguments of the function, if any.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the function.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the function.",
+          "type": "string"
+        },
+        "body": {
+          "description": "The KQL body of the function.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "body"
+      ]
+    },
+    "metadataApplication": {
+      "title": "An Application Insights application.",
+      "description": "Application Insights apps that were part of the metadata request and that the user has access to.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the Application Insights app.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The ARM resource ID of the Application Insights app.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the Application Insights app.",
+          "type": "string"
+        },
+        "region": {
+          "description": "The Azure region of the Application Insights app.",
+          "type": "string"
+        },
+        "tables": {
+          "description": "The list of custom tables for the Application Insights app.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "functions": {
+          "description": "The list of stored functions on the Application Insights app",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tableGroups": {
+          "description": "The list of table groups on the Application Insights app",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "resourceId",
+        "name",
+        "region"
+      ]
+    },
+    "errorDetail": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error's code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Indicates which value in 'target' is responsible for the error.",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Indicates resources which were responsible for the error.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "errorInfo": {
+      "title": "The code and message for an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A machine readable error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/errorDetail"
+          }
+        },
+        "innererror": {
+          "description": "Inner error details if they exist.",
+          "$ref": "#/definitions/errorInfo"
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "errorResponse": {
+      "title": "Error details.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/errorInfo"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    }
+  }
+}

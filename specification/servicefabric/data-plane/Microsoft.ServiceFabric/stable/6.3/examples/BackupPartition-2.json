@@ -1,0 +1,18 @@
+{
+  "operationId": "BackupPartition",
+  "description": "This example shows how to trigger backup of a partition now, and save the backup to a specific Azure blob storage account.",
+  "parameters": {
+    "api-version": "6.2-preview",
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "BackupPartitionDescription": {
+      "BackupStorage": {
+        "StorageKind": "AzureBlobStore",
+        "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=storagesample;AccountKey=<PutYourAccountKeyHere>",
+        "ContainerName": "BackupContainer"
+      }
+    }
+  },
+  "responses": {
+    "202": {}
+  }
+}

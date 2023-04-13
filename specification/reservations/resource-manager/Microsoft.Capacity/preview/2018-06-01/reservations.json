@@ -1,0 +1,1223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Reservation API",
+    "description": "This API describe Azure Reservation",
+    "version": "2018-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/catalogs": {
+      "get": {
+        "summary": "Get the regions and skus that are available for RI purchase for the specified Azure subscription.",
+        "operationId": "GetCatalog",
+        "x-ms-examples": {
+          "Catalog": {
+            "$ref": "./examples/GetCatalog.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservedResourceTypeIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationIdParameter"
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available resources",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Catalog"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/appliedReservations": {
+      "get": {
+        "summary": "Get list of applicable `Reservation`s.",
+        "description": "Get applicable `Reservation`s that are applied to this subscription.",
+        "operationId": "GetAppliedReservationList",
+        "x-ms-examples": {
+          "AppliedReservationList": {
+            "$ref": "./examples/GetAppliedReservations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "tags": [
+          "AppliedReservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Applicable `Reservation`s.",
+            "schema": {
+              "$ref": "#/definitions/AppliedReservations"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders": {
+      "get": {
+        "summary": "Get all `ReservationOrder`s.",
+        "description": "List of all the `ReservationOrder`s that the user has access to in the current tenant.",
+        "operationId": "ReservationOrder_List",
+        "x-ms-examples": {
+          "ReservationOrderList": {
+            "$ref": "./examples/GetReservationOrders.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `ReservationOrder`s",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}": {
+      "get": {
+        "summary": "Get a specific `ReservationOrder`.",
+        "description": "Get the details of the `ReservationOrder`.",
+        "operationId": "ReservationOrder_Get",
+        "x-ms-examples": {
+          "GetReservation": {
+            "$ref": "./examples/GetReservationOrderDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the details of the `ReservationOrder`.",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/split": {
+      "post": {
+        "summary": "Split the `Reservation`.",
+        "description": "Split a `Reservation` into two `Reservation`s with specified quantity distribution.\n",
+        "operationId": "Reservation_Split",
+        "x-ms-examples": {
+          "Split": {
+            "$ref": "./examples/SplitReservation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SplitParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Split"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Reservation`s created after the split operation.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReservationResponse"
+              }
+            }
+          },
+          "202": {
+            "description": "The request is accepted and is being processed"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/merge": {
+      "post": {
+        "summary": "Merges two `Reservation`s.",
+        "description": "Merge the specified `Reservation`s into a new `Reservation`. The two `Reservation`s being merged must have same properties.",
+        "operationId": "Reservation_Merge",
+        "x-ms-examples": {
+          "Merge": {
+            "$ref": "./examples/MergeReservations.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MergeParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Merge"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the `Reservation` created after the merge.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReservationResponse"
+              }
+            }
+          },
+          "202": {
+            "description": "The request is accepted and is being processed"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations": {
+      "get": {
+        "summary": "Get `Reservation`s in a given reservation Order",
+        "description": "List `Reservation`s within a single `ReservationOrder`.",
+        "operationId": "Reservation_List",
+        "x-ms-examples": {
+          "ReservationList": {
+            "$ref": "./examples/GetReservations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "List `Reservation`s within a single `ReservationOrder`.",
+            "schema": {
+              "$ref": "#/definitions/ReservationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}": {
+      "get": {
+        "summary": "Get `Reservation` details.",
+        "description": "Get specific `Reservation` details.",
+        "operationId": "Reservation_Get",
+        "x-ms-examples": {
+          "GetReservation": {
+            "$ref": "./examples/GetReservationDetails.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get `Reservation` details.",
+            "schema": {
+              "$ref": "#/definitions/ReservationResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a `Reservation`.",
+        "description": "Updates the applied scopes of the `Reservation`.",
+        "operationId": "Reservation_Update",
+        "x-ms-examples": {
+          "PatchReservation": {
+            "$ref": "./examples/UpdateReservation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchParameter"
+          }
+        ],
+        "tags": [
+          "Reservation",
+          "ApplyScope"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated `Reservation`.",
+            "schema": {
+              "$ref": "#/definitions/ReservationResponse"
+            }
+          },
+          "202": {
+            "description": "The request is accepted and is being processed"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/revisions": {
+      "get": {
+        "summary": "Get `Reservation` revisions.",
+        "description": "List of all the revisions for the `Reservation`.\n",
+        "operationId": "Reservation_ListRevisions",
+        "x-ms-examples": {
+          "ReservationRevisions": {
+            "$ref": "./examples/GetReservationRevisions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all the revisions for the `Reservation`.",
+            "schema": {
+              "$ref": "#/definitions/ReservationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/operations": {
+      "get": {
+        "summary": "Get operations.",
+        "description": "List all the operations.",
+        "operationId": "Operation_List",
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Operation"
+        ],
+        "responses": {
+          "200": {
+            "description": "List all the operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ReservationStatusCode": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Pending",
+        "Active",
+        "PurchaseError",
+        "PaymentInstrumentError",
+        "Split",
+        "Merged",
+        "Expired",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationStatusCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponseCode": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "InternalServerError",
+        "ServerTimeout",
+        "AuthorizationFailed",
+        "BadRequest",
+        "ClientCertificateThumbprintNotSet",
+        "InvalidRequestContent",
+        "OperationFailed",
+        "HttpMethodNotSupported",
+        "InvalidRequestUri",
+        "MissingTenantId",
+        "InvalidTenantId",
+        "InvalidReservationOrderId",
+        "InvalidReservationId",
+        "ReservationIdNotInReservationOrder",
+        "ReservationOrderNotFound",
+        "InvalidSubscriptionId",
+        "InvalidAccessToken",
+        "InvalidLocationId",
+        "UnauthenticatedRequestsThrottled",
+        "InvalidHealthCheckType",
+        "Forbidden",
+        "BillingScopeIdCannotBeChanged",
+        "AppliedScopesNotAssociatedWithCommerceAccount",
+        "PatchValuesSameAsExisting",
+        "RoleAssignmentCreationFailed",
+        "ReservationOrderCreationFailed",
+        "ReservationOrderNotEnabled",
+        "CapacityUpdateScopesFailed",
+        "UnsupportedReservationTerm",
+        "ReservationOrderIdAlreadyExists",
+        "RiskCheckFailed",
+        "CreateQuoteFailed",
+        "ActivateQuoteFailed",
+        "NonsupportedAccountId",
+        "PaymentInstrumentNotFound",
+        "MissingAppliedScopesForSingle",
+        "NoValidReservationsToReRate",
+        "ReRateOnlyAllowedForEA",
+        "OperationCannotBePerformedInCurrentState",
+        "InvalidSingleAppliedScopesCount",
+        "InvalidFulfillmentRequestParameters",
+        "NotSupportedCountry",
+        "InvalidRefundQuantity",
+        "PurchaseError",
+        "BillingCustomerInputError",
+        "BillingPaymentInstrumentSoftError",
+        "BillingPaymentInstrumentHardError",
+        "BillingTransientError",
+        "BillingError",
+        "FulfillmentConfigurationError",
+        "FulfillmentOutOfStockError",
+        "FulfillmentTransientError",
+        "FulfillmentError",
+        "CalculatePriceFailed"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorResponseCode",
+        "modelAsString": true
+      }
+    },
+    "SkuName": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Catalog": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource the SKU applies to.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of SKU",
+          "readOnly": true
+        },
+        "terms": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Available reservation terms for this resource",
+          "items": {
+            "$ref": "#/definitions/ReservationTerm"
+          }
+        },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "The set of locations that the SKU is available. If not specified, the SKU is available in all locations."
+          }
+        },
+        "skuProperties": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SkuProperty"
+          }
+        },
+        "restrictions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SkuRestriction"
+          }
+        }
+      }
+    },
+    "SkuProperty": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "An invariant to describe the feature."
+        },
+        "value": {
+          "type": "string",
+          "description": "An invariant if the feature is measured by quantity."
+        }
+      }
+    },
+    "SkuRestriction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of restrictions."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "The reason for restriction."
+        }
+      }
+    },
+    "ReservationOrderResponse": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "etag": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier of the reservation"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the reservation"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationOrderProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/reservations\""
+        }
+      }
+    },
+    "ReservationTerm": {
+      "type": "string",
+      "description": "Represent the term of Reservation.",
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationTerm",
+        "modelAsString": true
+      }
+    },
+    "ReservationOrderProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name for user to easily identified the reservation."
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation was initially requested for purchase."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation was created."
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation will expire."
+        },
+        "originalQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total Quantity of the SKUs purchased in the Reservation."
+        },
+        "term": {
+          "$ref": "#/definitions/ReservationTerm"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of the reservation."
+        },
+        "reservations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReservationResponse"
+          }
+        }
+      }
+    },
+    "ReservationResponse": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure Region where the reserved resource lives."
+        },
+        "etag": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier of the reservation"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the reservation"
+        },
+        "sku": {
+          "$ref": "#/definitions/SkuName"
+        },
+        "properties": {
+          "$ref": "#/definitions/ReservationProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/reservationOrders/reservations\""
+        }
+      }
+    },
+    "ReservationProperties": {
+      "type": "object",
+      "properties": {
+        "reservedResourceType": {
+          "$ref": "#/definitions/ReservedResourceType"
+        },
+        "instanceFlexibility": {
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name for user to easily identify the reservation"
+        },
+        "appliedScopes": {
+          "$ref": "#/definitions/AppliedScopes"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of the SKUs that are part of the Reservation."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of the reservation."
+        },
+        "effectiveDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the Reservation starting when this version is effective from."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the last time the Reservation was updated.",
+          "readOnly": true
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the Reservation will expire."
+        },
+        "skuDescription": {
+          "type": "string",
+          "description": "Description of the SKU in english."
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        },
+        "splitProperties": {
+          "$ref": "#/definitions/ReservationSplitProperties"
+        },
+        "mergeProperties": {
+          "$ref": "#/definitions/ReservationMergeProperties"
+        }
+      }
+    },
+    "ReservationSplitProperties": {
+      "type": "object",
+      "properties": {
+        "splitDestinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of destination Resource Id that are created due to split. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "splitSource": {
+          "type": "string",
+          "description": "Resource Id of the Reservation from which this is split. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "ReservationMergeProperties": {
+      "type": "object",
+      "properties": {
+        "mergeDestination": {
+          "type": "string",
+          "description": "Reservation Resource Id Created due to the merge. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "mergeSources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Resource Ids of the Source Reservation's merged to form this Reservation. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "PatchProperties": {
+      "type": "object",
+      "properties": {
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopes": {
+          "$ref": "#/definitions/AppliedScopes"
+        },
+        "instanceFlexibility": {
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
+        "name": {
+          "description": "Name of the Reservation",
+          "type": "string"
+        }
+      }
+    },
+    "SplitProperties": {
+      "type": "object",
+      "properties": {
+        "quantities": {
+          "type": "array",
+          "description": "List of the quantities in the new reservations to create.",
+          "items": {
+            "type": "integer",
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "reservationId": {
+          "type": "string",
+          "description": "Resource id of the reservation to be split. Format of the resource id should be /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "MergeProperties": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "Format of the resource id should be /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MergeRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MergeProperties"
+        }
+      }
+    },
+    "Patch": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PatchProperties"
+        }
+      }
+    },
+    "SplitRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SplitProperties"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ExtendedErrorInfo"
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorResponseCode"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtendedStatusInfo": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "$ref": "#/definitions/ReservationStatusCode"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message giving detailed information about the status code."
+        }
+      }
+    },
+    "ReservationOrderList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReservationOrderResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of reservationOrders."
+        }
+      }
+    },
+    "ReservationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReservationResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of reservations."
+        }
+      }
+    },
+    "AppliedReservations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the applied reservations",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of resource. \"Microsoft.Capacity/AppliedReservations\"",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppliedReservationsProperties"
+        }
+      }
+    },
+    "AppliedReservationsProperties": {
+      "type": "object",
+      "properties": {
+        "reservationOrderIds": {
+          "$ref": "#/definitions/AppliedReservationList"
+        }
+      }
+    },
+    "AppliedReservationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Reservation resource Id. \"/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}\""
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of reservations"
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of items."
+        }
+      }
+    },
+    "OperationResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "InstanceFlexibility": {
+      "type": "string",
+      "description": "Allows reservation discount to be applied across skus within the same Autofit group. Not all skus support instance size flexibility.",
+      "enum": [
+        "On",
+        "Off",
+        "NotSupported"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceFlexibility",
+        "modelAsString": true
+      }
+    },
+    "AppliedScopeType": {
+      "type": "string",
+      "description": "Type of the Applied Scope.",
+      "enum": [
+        "Single",
+        "Shared"
+      ],
+      "x-ms-enum": {
+        "name": "AppliedScopeType",
+        "modelAsString": true
+      }
+    },
+    "AppliedScopes": {
+      "type": "array",
+      "description": "List of the subscriptions that the benefit will be applied. Do not specify if AppliedScopeType is Shared.",
+      "items": {
+        "type": "string",
+        "minItems": 1,
+        "maxItems": 1
+      }
+    },
+    "ReservedResourceType": {
+      "type": "string",
+      "description": "The type of the resource that is being reserved.",
+      "enum": [
+        "VirtualMachines",
+        "SqlDatabases",
+        "SuseLinux",
+        "CosmosDb",
+        "RedHat"
+      ],
+      "x-ms-enum": {
+        "name": "ReservedResourceType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ReservationIdParameter": {
+      "name": "reservationId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Id of the Reservation Item"
+    },
+    "MergeParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed for commercial request for a reservation",
+      "schema": {
+        "$ref": "#/definitions/MergeRequest"
+      }
+    },
+    "PatchParameter": {
+      "name": "parameters",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed to patch a reservation item",
+      "schema": {
+        "$ref": "#/definitions/Patch"
+      }
+    },
+    "SplitParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Information needed to Split a reservation item",
+      "schema": {
+        "$ref": "#/definitions/SplitRequest"
+      }
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Supported version.",
+      "required": true,
+      "type": "string"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Id of the subscription"
+    },
+    "ReservedResourceTypeIdParameter": {
+      "name": "reservedResourceType",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The type of the resource for which the skus should be provided."
+    },
+    "LocationIdParameter": {
+      "name": "location",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Filters the skus based on the location specified in this parameter. This can be an azure region or global"
+    },
+    "ReservationOrderIdParameter": {
+      "name": "reservationOrderId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Order Id of the reservation\n"
+    }
+  }
+}

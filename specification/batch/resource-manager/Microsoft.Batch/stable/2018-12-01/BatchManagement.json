@@ -1,0 +1,4170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BatchManagement",
+    "version": "2018-12-01",
+    "x-ms-code-generation-settings": {
+      "name": "BatchManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}": {
+      "put": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Create",
+        "x-ms-examples": {
+          "BatchAccountCreate_Default": {
+            "$ref": "./examples/BatchAccountCreate_Default.json"
+          },
+          "BatchAccountCreate_BYOS": {
+            "$ref": "./examples/BatchAccountCreate_BYOS.json"
+          }
+        },
+        "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$",
+            "minLength": 3,
+            "maxLength": 24,
+            "description": "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountCreateParameters"
+            },
+            "description": "Additional parameters for account creation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Update",
+        "x-ms-examples": {
+          "BatchAccountUpdate": {
+            "$ref": "./examples/BatchAccountUpdate.json"
+          }
+        },
+        "description": "Updates the properties of an existing Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountUpdateParameters"
+            },
+            "description": "Additional parameters for account update."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Delete",
+        "x-ms-examples": {
+          "BatchAccountDelete": {
+            "$ref": "./examples/BatchAccountDelete.json"
+          }
+        },
+        "description": "Deletes the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that specifies the delay in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- account does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_Get",
+        "x-ms-examples": {
+          "BatchAccountGet": {
+            "$ref": "./examples/BatchAccountGet.json"
+          }
+        },
+        "description": "Gets information about the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account entity.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/batchAccounts": {
+      "get": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_List",
+        "x-ms-examples": {
+          "BatchAccountList": {
+            "$ref": "./examples/BatchAccountList.json"
+          }
+        },
+        "description": "Gets information about the Batch accounts associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of Batch account entities associated with the subscription.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts": {
+      "get": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_ListByResourceGroup",
+        "x-ms-examples": {
+          "BatchAccountListByResourceGroup": {
+            "$ref": "./examples/BatchAccountListByResourceGroup.json"
+          }
+        },
+        "description": "Gets information about the Batch accounts associated with the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of Batch account entities associated with the resource group.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/syncAutoStorageKeys": {
+      "post": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_SynchronizeAutoStorageKeys",
+        "x-ms-examples": {
+          "BatchAccountSynchronizeAutoStorageKeys": {
+            "$ref": "./examples/BatchAccountSynchronizeAutoStorageKeys.json"
+          }
+        },
+        "description": "Synchronizes access keys for the auto-storage account configured for the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_RegenerateKey",
+        "x-ms-examples": {
+          "BatchAccountRegenerateKey": {
+            "$ref": "./examples/BatchAccountRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the specified account key for the Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchAccountRegenerateKeyParameters"
+            },
+            "description": "The type of key to regenerate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch account keys.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/listKeys": {
+      "post": {
+        "tags": [
+          "BatchAccount"
+        ],
+        "operationId": "BatchAccount_GetKeys",
+        "x-ms-examples": {
+          "BatchAccountGetKeys": {
+            "$ref": "./examples/BatchAccountGetKeys.json"
+          }
+        },
+        "summary": "Gets the account keys for the specified Batch account.",
+        "description": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the keys of the Batch account.",
+            "schema": {
+              "$ref": "#/definitions/BatchAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}/versions/{versionName}/activate": {
+      "post": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Activate",
+        "x-ms-examples": {
+          "ApplicationPackageActivate": {
+            "$ref": "./examples/ApplicationPackageActivate.json"
+          }
+        },
+        "description": "Activates the specified application package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivateApplicationPackageParameters"
+            },
+            "description": "The parameters for the request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application package entity.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}": {
+      "put": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Create",
+        "x-ms-examples": {
+          "ApplicationCreate": {
+            "$ref": "./examples/ApplicationCreate.json"
+          }
+        },
+        "description": "Adds an application to the specified Batch account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            },
+            "description": "The parameters for the request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application entity.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Delete",
+        "x-ms-examples": {
+          "ApplicationDelete": {
+            "$ref": "./examples/ApplicationDelete.json"
+          }
+        },
+        "description": "Deletes an application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Get",
+        "x-ms-examples": {
+          "ApplicationGet": {
+            "$ref": "./examples/ApplicationGet.json"
+          }
+        },
+        "description": "Gets information about the specified application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application entity.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_Update",
+        "x-ms-examples": {
+          "ApplicationUpdate": {
+            "$ref": "./examples/ApplicationUpdate.json"
+          }
+        },
+        "description": "Updates settings for the specified application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            },
+            "description": "The parameters for the request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application entity.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}/versions/{versionName}": {
+      "put": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Create",
+        "x-ms-examples": {
+          "ApplicationPackageCreate": {
+            "$ref": "./examples/ApplicationPackageCreate.json"
+          }
+        },
+        "description": "Creates an application package record.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ApplicationPackage"
+            },
+            "description": "The parameters for the request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application package entity.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Delete",
+        "x-ms-examples": {
+          "ApplicationPackageDelete": {
+            "$ref": "./examples/ApplicationPackageDelete.json"
+          }
+        },
+        "description": "Deletes an application package record and its associated binary file.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "204": {
+            "description": "The operation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_Get",
+        "x-ms-examples": {
+          "ApplicationPackageGet": {
+            "$ref": "./examples/ApplicationPackageGet.json"
+          }
+        },
+        "description": "Gets information about the specified application package.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the application package entity.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationPackage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Application_List",
+        "x-ms-examples": {
+          "ApplicationList": {
+            "$ref": "./examples/ApplicationList.json"
+          }
+        },
+        "description": "Lists all of the applications in the specified account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of the application entities associated with the specified account.",
+            "schema": {
+              "$ref": "#/definitions/ListApplicationsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}/versions": {
+      "get": {
+        "tags": [
+          "ApplicationPackage"
+        ],
+        "operationId": "ApplicationPackage_List",
+        "x-ms-examples": {
+          "ApplicationList": {
+            "$ref": "./examples/ApplicationPackageList.json"
+          }
+        },
+        "description": "Lists all of the application packages in the specified application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of the application package entities associated with the specified application.",
+            "schema": {
+              "$ref": "#/definitions/ListApplicationPackagesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/quotas": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "operationId": "Location_GetQuotas",
+        "x-ms-examples": {
+          "LocationGetQuotas": {
+            "$ref": "./examples/LocationGetQuotas.json"
+          }
+        },
+        "description": "Gets the Batch service quotas for the specified subscription at the given location.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region for which to retrieve Batch service quotas."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the Batch service quotas for the subscription in the specified location.",
+            "schema": {
+              "$ref": "#/definitions/BatchLocationQuota"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Batch/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the Microsoft.Batch provider",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "operationId": "Location_CheckNameAvailability",
+        "description": "Checks whether the Batch account name is available in the specified region.",
+        "x-ms-examples": {
+          "LocationCheckNameAvailability_Available": {
+            "$ref": "./examples/LocationCheckNameAvailability_Available.json"
+          },
+          "LocationCheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/LocationCheckNameAvailability_AlreadyExists.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The desired region for the name check."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Properties needed to check the availability of a name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Returns details about whether a Batch account name is available.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates": {
+      "get": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_ListByBatchAccount",
+        "description": "Lists all of the certificates in the specified account.",
+        "x-ms-examples": {
+          "ListCertificates": {
+            "$ref": "./examples/CertificateList.json"
+          },
+          "ListCertificates - Filter and Select": {
+            "$ref": "./examples/CertificateListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Comma separated list of properties that should be returned. e.g. \"properties/provisioningState\". Only top level properties under properties/ are valid for selection."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are \"properties/provisioningState\", \"properties/provisioningStateTransitionTime\", \"name\"."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of certificates associated with the account.",
+            "schema": {
+              "$ref": "#/definitions/ListCertificatesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}": {
+      "put": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_Create",
+        "description": "Creates a new certificate inside the specified account.",
+        "x-ms-examples": {
+          "CreateCertificate - Minimal Pfx": {
+            "$ref": "./examples/CertificateCreate_Minimal.json"
+          },
+          "CreateCertificate - Minimal Cer": {
+            "$ref": "./examples/CertificateCreate_MinimalCer.json"
+          },
+          "CreateCertificate - Full": {
+            "$ref": "./examples/CertificateCreate_Full.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateCreateOrUpdateParameters"
+            },
+            "description": "Additional parameters for certificate creation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the certificate to update. A value of \"*\" can be used to apply the operation only if the certificate already exists. If omitted, this operation will always be applied."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Set to '*' to allow a new certificate to be created, but to prevent updating an existing certificate. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the certificate entity.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_Update",
+        "description": "Updates the properties of an existing certificate.",
+        "x-ms-examples": {
+          "UpdateCertificate": {
+            "$ref": "./examples/CertificateUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateCreateOrUpdateParameters"
+            },
+            "description": "Certificate entity to update."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the certificate to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the certificate entity.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_Delete",
+        "description": "Deletes the specified certificate.",
+        "x-ms-examples": {
+          "CertificateDelete": {
+            "$ref": "./examples/CertificateDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "204": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_Get",
+        "description": "Gets information about the specified certificate.",
+        "x-ms-examples": {
+          "Get Certificate": {
+            "$ref": "./examples/CertificateGet.json"
+          },
+          "Get Certificate with Deletion Error": {
+            "$ref": "./examples/CertificateGetWithDeletionError.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the certificate entity.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/certificates/{certificateName}/cancelDelete": {
+      "post": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_CancelDeletion",
+        "summary": "Cancels a failed deletion of a certificate from the specified account.",
+        "description": "If you try to delete a certificate that is being used by a pool or compute node, the status of the certificate changes to deleteFailed. If you decide that you want to continue using the certificate, you can use this operation to set the status of the certificate back to active. If you intend to delete the certificate, you do not need to run this operation after the deletion failed. You must make sure that the certificate is not being used by any resources, and then you can try again to delete the certificate.",
+        "x-ms-examples": {
+          "CertificateCancelDeletion": {
+            "$ref": "./examples/CertificateCancelDeletion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the certificate entity.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools": {
+      "get": {
+        "tags": [
+          "Pool"
+        ],
+        "operationId": "Pool_ListByBatchAccount",
+        "description": "Lists all of the pools in the specified account.",
+        "x-ms-examples": {
+          "ListPool": {
+            "$ref": "./examples/PoolList.json"
+          },
+          "ListPoolWithFilter": {
+            "$ref": "./examples/PoolListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Comma separated list of properties that should be returned. e.g. \"properties/provisioningState\". Only top level properties under properties/ are valid for selection."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are:\n\n name\n properties/allocationState\n properties/allocationStateTransitionTime\n properties/creationTime\n properties/provisioningState\n properties/provisioningStateTransitionTime\n properties/lastModified\n properties/vmSize\n properties/interNodeCommunication\n properties/scaleSettings/autoScale\n properties/scaleSettings/fixedScale"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of certificates associated with the account.",
+            "schema": {
+              "$ref": "#/definitions/ListPoolsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}": {
+      "put": {
+        "tags": [
+          "Pool"
+        ],
+        "operationId": "Pool_Create",
+        "description": "Creates a new pool inside the specified account.",
+        "x-ms-examples": {
+          "CreatePool - Minimal CloudServiceConfiguration": {
+            "$ref": "./examples/PoolCreate_MinimalCloudServiceConfiguration.json"
+          },
+          "CreatePool - Minimal VirtualMachineConfiguration": {
+            "$ref": "./examples/PoolCreate_MinimalVirtualMachineConfiguration.json"
+          },
+          "CreatePool - Full Example": {
+            "$ref": "./examples/PoolCreate_FullExample.json"
+          },
+          "CreatePool - Custom Image": {
+            "$ref": "./examples/PoolCreate_CustomImage.json"
+          },
+          "CreatePool - Full VirtualMachineConfiguration": {
+            "$ref": "./examples/PoolCreate_VirtualMachineConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "description": "Additional parameters for pool creation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. A value of \"*\" can be used to apply the operation only if the pool already exists. If omitted, this operation will always be applied."
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Set to '*' to allow a new pool to be created, but to prevent updating an existing pool. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the pool entity.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Pool"
+        ],
+        "operationId": "Pool_Update",
+        "description": "Updates the properties of an existing pool.",
+        "x-ms-examples": {
+          "UpdatePool - Resize Pool": {
+            "$ref": "./examples/PoolUpdate_ResizePool.json"
+          },
+          "UpdatePool - Enable Autoscale": {
+            "$ref": "./examples/PoolUpdate_EnableAutoScale.json"
+          },
+          "UpdatePool - Remove Start Task": {
+            "$ref": "./examples/PoolUpdate_RemoveStartTask.json"
+          },
+          "UpdatePool - Other Properties": {
+            "$ref": "./examples/PoolUpdate_OtherProperties.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "description": "Pool properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the pool entity.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pool"
+        ],
+        "operationId": "Pool_Delete",
+        "description": "Deletes the specified pool.",
+        "x-ms-examples": {
+          "DeletePool": {
+            "$ref": "./examples/PoolDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "204": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Pool"
+        ],
+        "operationId": "Pool_Get",
+        "description": "Gets information about the specified pool.",
+        "x-ms-examples": {
+          "GetPool": {
+            "$ref": "./examples/PoolGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the pool entity.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}/disableAutoScale": {
+      "post": {
+        "tags": [
+          "Pool"
+        ],
+        "operationId": "Pool_DisableAutoScale",
+        "description": "Disables automatic scaling for a pool.",
+        "x-ms-examples": {
+          "Disable AutoScale": {
+            "$ref": "./examples/PoolDisableAutoScale.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the pool entity.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools/{poolName}/stopResize": {
+      "post": {
+        "tags": [
+          "Pool"
+        ],
+        "operationId": "Pool_StopResize",
+        "summary": "Stops an ongoing resize operation on the pool.",
+        "description": "This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. After stopping, the pool stabilizes at the number of nodes it was at when the stop operation was done. During the stop operation, the pool allocation state changes first to stopping and then to steady. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.",
+        "x-ms-examples": {
+          "StopPoolResize": {
+            "$ref": "./examples/PoolStopResize.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the pool entity.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoStorageBaseProperties": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to be used for auto-storage account."
+        }
+      },
+      "required": [
+        "storageAccountId"
+      ],
+      "description": "The properties related to the auto-storage account."
+    },
+    "BatchAccountUpdateProperties": {
+      "properties": {
+        "autoStorage": {
+          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "description": "The properties related to the auto-storage account."
+        }
+      },
+      "description": "The properties of a Batch account."
+    },
+    "BatchAccountCreateProperties": {
+      "properties": {
+        "autoStorage": {
+          "$ref": "#/definitions/AutoStorageBaseProperties",
+          "description": "The properties related to the auto-storage account."
+        },
+        "poolAllocationMode": {
+          "title": "The allocation mode to use for creating pools in the Batch account.",
+          "description": "The pool allocation mode also affects how clients may authenticate to the Batch Service API. If the mode is BatchService, clients may authenticate using access keys or Azure Active Directory. If the mode is UserSubscription, clients must use Azure Active Directory. The default is BatchService.",
+          "$ref": "#/definitions/PoolAllocationMode"
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "A reference to the Azure key vault associated with the Batch account."
+        }
+      },
+      "description": "The properties of a Batch account."
+    },
+    "BatchAccountCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The region in which to create the account."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the account."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BatchAccountCreateProperties",
+          "description": "The properties of the Batch account."
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Parameters supplied to the Create operation."
+    },
+    "KeyVaultReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the Azure key vault associated with the Batch account."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the Azure key vault associated with the Batch account."
+        }
+      },
+      "required": [
+        "id",
+        "url"
+      ],
+      "description": "Identifies the Azure key vault associated with a Batch account."
+    },
+    "AutoStorageProperties": {
+      "properties": {
+        "lastKeySync": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time at which storage keys were last synchronized with the Batch account."
+        }
+      },
+      "required": [
+        "lastKeySync"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutoStorageBaseProperties"
+        }
+      ],
+      "description": "Contains information about the auto-storage account associated with a Batch account."
+    },
+    "BatchAccountProperties": {
+      "properties": {
+        "accountEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The account endpoint used to interact with the Batch service."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "description": "The provisioned state of the resource",
+          "enum": [
+            "Invalid",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Invalid",
+                "description": "The account is in an invalid state."
+              },
+              {
+                "value": "Creating",
+                "description": "The account is being created."
+              },
+              {
+                "value": "Deleting",
+                "description": "The account is being deleted."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The account has been created and is ready for use."
+              },
+              {
+                "value": "Failed",
+                "description": "The last operation for the account is failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "The last operation for the account is cancelled."
+              }
+            ]
+          }
+        },
+        "poolAllocationMode": {
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "The allocation mode to use for creating pools in the Batch account.",
+          "$ref": "#/definitions/PoolAllocationMode"
+        },
+        "keyVaultReference": {
+          "title": "A reference to the Azure key vault associated with the Batch account.",
+          "readOnly": true,
+          "$ref": "#/definitions/KeyVaultReference"
+        },
+        "autoStorage": {
+          "title": "The properties and status of any auto-storage account associated with the Batch account.",
+          "readOnly": true,
+          "$ref": "#/definitions/AutoStorageProperties"
+        },
+        "dedicatedCoreQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The dedicated core quota for this Batch account."
+        },
+        "lowPriorityCoreQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The low-priority core quota for this Batch account."
+        },
+        "poolQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The pool quota for this Batch account."
+        },
+        "activeJobAndJobScheduleQuota": {
+          "readOnly": true,
+          "x-nullable": false,
+          "type": "integer",
+          "format": "int32",
+          "title": "The active job and job schedule quota for this Batch account."
+        }
+      },
+      "description": "Account specific properties."
+    },
+    "BatchAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BatchAccountProperties",
+          "description": "The properties associated with the account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Contains information about an Azure Batch account."
+    },
+    "BatchAccountUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the account."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BatchAccountUpdateProperties",
+          "description": "The properties of the account."
+        }
+      },
+      "description": "Parameters for updating an Azure Batch account."
+    },
+    "BatchAccountListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchAccount"
+          },
+          "description": "The collection of Batch accounts returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "BatchAccountRegenerateKeyParameters": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The type of account key to regenerate.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "x-ms-enum": {
+            "name": "AccountKeyType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Primary",
+                "description": "The primary account key."
+              },
+              {
+                "value": "Secondary",
+                "description": "The secondary account key."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "keyName"
+      ],
+      "description": "Parameters supplied to the RegenerateKey operation."
+    },
+    "BatchAccountKeys": {
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Batch account name."
+        },
+        "primary": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The primary key associated with the account."
+        },
+        "secondary": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The secondary key associated with the account."
+        }
+      },
+      "description": "A set of Azure Batch account keys."
+    },
+    "ActivateApplicationPackageParameters": {
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "The format of the application package binary file."
+        }
+      },
+      "required": [
+        "format"
+      ],
+      "description": "Parameters for an activating an application package."
+    },
+    "Application": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "The properties associated with the Application."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Contains information about an application in a Batch account."
+    },
+    "ApplicationProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the application."
+        },
+        "allowUpdates": {
+          "type": "boolean",
+          "description": "A value indicating whether packages within the application may be overwritten using the same version string."
+        },
+        "defaultVersion": {
+          "type": "string",
+          "description": "The package to use if a client requests the application but does not specify a version. This property can only be set to the name of an existing package."
+        }
+      },
+      "description": "The properties associated with the Application."
+    },
+    "ApplicationPackage": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationPackageProperties",
+          "description": "The properties associated with the Application Package."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "An application package which represents a particular version of an application."
+    },
+    "ApplicationPackageProperties": {
+      "properties": {
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current state of the application package.",
+          "enum": [
+            "Pending",
+            "Active"
+          ],
+          "x-ms-enum": {
+            "name": "PackageState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "The application package has been created but has not yet been activated."
+              },
+              {
+                "value": "Active",
+                "description": "The application package is ready for use."
+              }
+            ]
+          }
+        },
+        "format": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The format of the application package, if the package is active."
+        },
+        "storageUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL for the application package in Azure Storage."
+        },
+        "storageUrlExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The UTC time at which the Azure Storage URL will expire."
+        },
+        "lastActivationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time at which the package was last activated, if the package is active."
+        }
+      },
+      "description": "Properties of an application package"
+    },
+    "ListApplicationsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          },
+          "description": "The list of applications."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The result of performing list applications."
+    },
+    "ListApplicationPackagesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackage"
+          },
+          "description": "The list of application packages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The result of performing list application packages."
+    },
+    "BatchLocationQuota": {
+      "properties": {
+        "accountQuota": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The number of Batch accounts that may be created under the subscription in the specified region."
+        }
+      },
+      "description": "Quotas associated with a Batch region for a particular subscription."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags of the resource."
+        }
+      },
+      "description": "A definition of an Azure resource.",
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements."
+        }
+      },
+      "description": "A definition of an Azure resource.",
+      "x-ms-azure-resource": true
+    },
+    "PoolAllocationMode": {
+      "type": "string",
+      "description": "The allocation mode for creating pools in the Batch account.",
+      "enum": [
+        "BatchService",
+        "UserSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "PoolAllocationMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "BatchService",
+            "description": "Pools will be allocated in subscriptions owned by the Batch service."
+          },
+          {
+            "value": "UserSubscription",
+            "description": "Pools will be allocated in a subscription owned by the user."
+          }
+        ]
+      }
+    },
+    "CertificateBaseProperties": {
+      "properties": {
+        "thumbprintAlgorithm": {
+          "type": "string",
+          "title": "The algorithm of the certificate thumbprint",
+          "description": "This must match the first portion of the certificate name. Currently required to be 'SHA1'."
+        },
+        "thumbprint": {
+          "type": "string",
+          "title": "The thumbprint of the certificate",
+          "description": "This must match the thumbprint from the name."
+        },
+        "format": {
+          "type": "string",
+          "x-nullable": false,
+          "description": "The format of the certificate - either Pfx or Cer. If omitted, the default is Pfx.",
+          "enum": [
+            "Pfx",
+            "Cer"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateFormat",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Pfx",
+                "description": "The certificate is a PFX (PKCS#12) formatted certificate or certificate chain."
+              },
+              {
+                "value": "Cer",
+                "description": "The certificate is a base64-encoded X.509 certificate."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "CertificateProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "title": "The provisioned state of the resource",
+          "enum": [
+            "Succeeded",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateProvisioningState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The certificate is available for use in pools."
+              },
+              {
+                "value": "Deleting",
+                "description": "The user has requested that the certificate be deleted, but the delete operation has not yet completed. You may not reference the certificate when creating or updating pools."
+              },
+              {
+                "value": "Failed",
+                "description": "The user requested that the certificate be deleted, but there are pools that still have references to the certificate, or it is still installed on one or more compute nodes. (The latter can occur if the certificate has been removed from the pool, but the node has not yet restarted. Nodes refresh their certificates only when they restart.) You may use the cancel certificate delete operation to cancel the delete, or the delete certificate operation to retry the delete."
+              }
+            ]
+          }
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time at which the certificate entered its current state.",
+          "readOnly": true
+        },
+        "previousProvisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false,
+          "description": "The previous provisioned state of the resource",
+          "enum": [
+            "Succeeded",
+            "Deleting",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateProvisioningState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The certificate is available for use in pools."
+              },
+              {
+                "value": "Deleting",
+                "description": "The user has requested that the certificate be deleted, but the delete operation has not yet completed. You may not reference the certificate when creating or updating pools."
+              },
+              {
+                "value": "Failed",
+                "description": "The user requested that the certificate be deleted, but there are pools that still have references to the certificate, or it is still installed on one or more compute nodes. (The latter can occur if the certificate has been removed from the pool, but the node has not yet restarted. Nodes refresh their certificates only when they restart.) You may use the cancel certificate delete operation to cancel the delete, or the delete certificate operation to retry the delete."
+              }
+            ]
+          }
+        },
+        "previousProvisioningStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time at which the certificate entered its previous state.",
+          "readOnly": true
+        },
+        "publicData": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The public key of the certificate."
+        },
+        "deleteCertificateError": {
+          "readOnly": true,
+          "$ref": "#/definitions/DeleteCertificateError",
+          "title": "The error which occurred while deleting the certificate",
+          "description": "This is only returned when the certificate provisioningState is 'Failed'."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateBaseProperties"
+        }
+      ],
+      "description": "Certificate properties."
+    },
+    "CertificateCreateOrUpdateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateBaseProperties"
+        }
+      ],
+      "properties": {
+        "data": {
+          "type": "string",
+          "title": "The base64-encoded contents of the certificate.",
+          "description": "The maximum size is 10KB."
+        },
+        "password": {
+          "type": "string",
+          "title": "The password to access the certificate's private key.",
+          "description": "This is required if the certificate format is pfx and must be omitted if the certificate format is cer."
+        }
+      },
+      "description": "Certificate properties for create operations",
+      "required": [
+        "data"
+      ]
+    },
+    "Certificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CertificateProperties",
+          "description": "The properties associated with the certificate."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Contains information about a certificate."
+    },
+    "CertificateCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CertificateCreateOrUpdateProperties",
+          "description": "The properties associated with the certificate."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Contains information about a certificate."
+    },
+    "ListCertificatesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          },
+          "description": "The collection of returned certificates."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "DeleteCertificateError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeleteCertificateError"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "description": "An error response from the Batch service."
+    },
+    "Pool": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PoolProperties",
+          "description": "The properties associated with the pool."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Contains information about a pool."
+    },
+    "PoolProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "title": "The display name for the pool.",
+          "description": "The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The last modified time of the pool.",
+          "description": "This is the last time at which the pool level data, such as the targetDedicatedNodes or autoScaleSettings, changed. It does not factor in node-level changes such as a compute node changing state.",
+          "readOnly": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The creation time of the pool.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "title": "The current state of the pool.",
+          "enum": [
+            "Succeeded",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "PoolProvisioningState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The pool is available to run tasks subject to the availability of compute nodes."
+              },
+              {
+                "value": "Deleting",
+                "description": "The user has requested that the pool be deleted, but the delete operation has not yet completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "provisioningStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time at which the pool entered its current state.",
+          "readOnly": true
+        },
+        "allocationState": {
+          "type": "string",
+          "title": "Whether the pool is resizing.",
+          "enum": [
+            "Steady",
+            "Resizing",
+            "Stopping"
+          ],
+          "x-ms-enum": {
+            "name": "AllocationState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Steady",
+                "description": "The pool is not resizing. There are no changes to the number of nodes in the pool in progress. A pool enters this state when it is created and when no operations are being performed on the pool to change the number of nodes."
+              },
+              {
+                "value": "Resizing",
+                "description": "The pool is resizing; that is, compute nodes are being added to or removed from the pool."
+              },
+              {
+                "value": "Stopping",
+                "description": "The pool was resizing, but the user has requested that the resize be stopped, but the stop request has not yet been completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "allocationStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time at which the pool entered its current allocation state.",
+          "readOnly": true
+        },
+        "vmSize": {
+          "type": "string",
+          "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+        },
+        "deploymentConfiguration": {
+          "$ref": "#/definitions/DeploymentConfiguration",
+          "title": "This property describes how the pool nodes will be deployed - using Cloud Services or Virtual Machines.",
+          "description": "Using CloudServiceConfiguration specifies that the nodes should be creating using Azure Cloud Services (PaaS), while VirtualMachineConfiguration uses Azure Virtual Machines (IaaS)."
+        },
+        "currentDedicatedNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of compute nodes currently in the pool.",
+          "readOnly": true
+        },
+        "currentLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of low priority compute nodes currently in the pool.",
+          "readOnly": true
+        },
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Settings which configure the number of nodes in the pool."
+        },
+        "autoScaleRun": {
+          "$ref": "#/definitions/AutoScaleRun",
+          "title": "The results and errors from the last execution of the autoscale formula.",
+          "description": "This property is set only if the pool automatically scales, i.e. autoScaleSettings are used.",
+          "readOnly": true
+        },
+        "interNodeCommunication": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InterNodeCommunicationState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Enable network communication between virtual machines."
+              },
+              {
+                "value": "Disabled",
+                "description": "Disable network communication between virtual machines."
+              }
+            ]
+          },
+          "title": "Whether the pool permits direct communication between nodes.",
+          "description": "This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'."
+        },
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "title": "The network configuration for the pool."
+        },
+        "maxTasksPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The maximum number of tasks that can run concurrently on a single compute node in the pool."
+        },
+        "taskSchedulingPolicy": {
+          "$ref": "#/definitions/TaskSchedulingPolicy",
+          "title": "How tasks are distributed across compute nodes in a pool."
+        },
+        "userAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAccount"
+          },
+          "title": "The list of user accounts to be created on each node in the pool."
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "title": "A list of name-value pairs associated with the pool as metadata.",
+          "description": "The Batch service does not assign any meaning to metadata; it is solely for the use of user code."
+        },
+        "startTask": {
+          "$ref": "#/definitions/StartTask",
+          "title": "A task specified to run on each compute node as it joins the pool.",
+          "description": "In an PATCH (update) operation, this property can be set to an empty object to remove the start task from the pool."
+        },
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateReference"
+          },
+          "title": "The list of certificates to be installed on each compute node in the pool.",
+          "description": "For Windows compute nodes, the Batch service installs the certificates to the specified certificate store and location. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory."
+        },
+        "applicationPackages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackageReference"
+          },
+          "title": "The list of application packages to be installed on each compute node in the pool.",
+          "description": "Changes to application packages affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged."
+        },
+        "applicationLicenses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The list of application licenses the Batch service will make available on each compute node in the pool.",
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, pool creation will fail."
+        },
+        "resizeOperationStatus": {
+          "$ref": "#/definitions/ResizeOperationStatus",
+          "title": "Contains details about the current or last completed resize operation.",
+          "readOnly": true
+        }
+      },
+      "description": "Pool properties."
+    },
+    "DeploymentConfiguration": {
+      "properties": {
+        "cloudServiceConfiguration": {
+          "$ref": "#/definitions/CloudServiceConfiguration",
+          "title": "The cloud service configuration for the pool.",
+          "description": "This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch account was created with its poolAllocationMode property set to 'UserSubscription'."
+        },
+        "virtualMachineConfiguration": {
+          "$ref": "#/definitions/VirtualMachineConfiguration",
+          "title": "The virtual machine configuration for the pool.",
+          "description": "This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified."
+        }
+      },
+      "title": "Deployment configuration properties."
+    },
+    "ScaleSettings": {
+      "properties": {
+        "fixedScale": {
+          "$ref": "#/definitions/FixedScaleSettings",
+          "title": "Fixed scale settings for the pool.",
+          "description": "This property and autoScale are mutually exclusive and one of the properties must be specified."
+        },
+        "autoScale": {
+          "$ref": "#/definitions/AutoScaleSettings",
+          "title": "AutoScale settings for the pool.",
+          "description": "This property and fixedScale are mutually exclusive and one of the properties must be specified."
+        }
+      },
+      "title": "Scale settings for the pool",
+      "description": "Defines the desired size of the pool. This can either be 'fixedScale' where the requested targetDedicatedNodes is specified, or 'autoScale' which defines a formula which is periodically reevaluated. If this property is not specified, the pool will have a fixed scale with 0 targetDedicatedNodes."
+    },
+    "AutoScaleSettings": {
+      "properties": {
+        "formula": {
+          "type": "string",
+          "title": "A formula for the desired number of compute nodes in the pool.",
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/en-us/azure/batch/batch-automatic-scaling",
+            "description": "Create an automatic scaling formula for scaling compute nodes in a Batch pool"
+          }
+        },
+        "evaluationInterval": {
+          "type": "string",
+          "format": "duration",
+          "title": "The time interval at which to automatically adjust the pool size according to the autoscale formula.",
+          "description": "If omitted, the default value is 15 minutes (PT15M)."
+        }
+      },
+      "required": [
+        "formula"
+      ],
+      "title": "AutoScale settings for the pool."
+    },
+    "FixedScaleSettings": {
+      "properties": {
+        "resizeTimeout": {
+          "type": "string",
+          "format": "duration",
+          "title": "The timeout for allocation of compute nodes to the pool.",
+          "description": "The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+        },
+        "targetDedicatedNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of dedicated compute nodes in the pool.",
+          "description": "At least one of targetDedicatedNodes, targetLowPriority nodes must be set."
+        },
+        "targetLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of low-priority compute nodes in the pool.",
+          "description": "At least one of targetDedicatedNodes, targetLowPriority nodes must be set."
+        },
+        "nodeDeallocationOption": {
+          "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",
+          "description": "If omitted, the default value is Requeue.",
+          "$ref": "#/definitions/ComputeNodeDeallocationOption"
+        }
+      },
+      "title": "Fixed scale settings for the pool."
+    },
+    "ComputeNodeDeallocationOption": {
+      "type": "string",
+      "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
+      "enum": [
+        "Requeue",
+        "Terminate",
+        "TaskCompletion",
+        "RetainedData"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeNodeDeallocationOption",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Requeue",
+            "description": "Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated."
+          },
+          {
+            "value": "Terminate",
+            "description": "Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated."
+          },
+          {
+            "value": "TaskCompletion",
+            "description": "Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed."
+          },
+          {
+            "value": "RetainedData",
+            "description": "Allow currently running tasks to complete, then wait for all task data retention periods to expire. Schedule no new tasks while waiting. Remove nodes when all task retention periods have expired."
+          }
+        ]
+      }
+    },
+    "CertificateReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool."
+        },
+        "storeLocation": {
+          "type": "string",
+          "title": "The location of the certificate store on the compute node into which to install the certificate.",
+          "description": "The default value is currentUser. This property is applicable only for pools configured with Windows nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows image reference). For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.",
+          "enum": [
+            "CurrentUser",
+            "LocalMachine"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateStoreLocation",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "CurrentUser",
+                "description": "Certificates should be installed to the CurrentUser certificate store."
+              },
+              {
+                "value": "LocalMachine",
+                "description": "Certificates should be installed to the LocalMachine certificate store."
+              }
+            ]
+          }
+        },
+        "storeName": {
+          "type": "string",
+          "title": "The name of the certificate store on the compute node into which to install the certificate.",
+          "description": "This property is applicable only for pools configured with Windows nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows image reference). Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My."
+        },
+        "visibility": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": false,
+            "enum": [
+              "StartTask",
+              "Task",
+              "RemoteUser"
+            ],
+            "x-ms-enum": {
+              "name": "CertificateVisibility",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "StartTask",
+                  "description": "The certificate should be visible to the user account under which the start task is run."
+                },
+                {
+                  "value": "Task",
+                  "description": "The certificate should be visible to the user accounts under which job tasks are run."
+                },
+                {
+                  "value": "RemoteUser",
+                  "description": "The certificate should be visible to the user accounts under which users remotely access the node."
+                }
+              ]
+            }
+          },
+          "title": "Which user accounts on the compute node should have access to the private data of the certificate."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "A reference to a certificate to be installed on compute nodes in a pool. This must exist inside the same account as the pool."
+    },
+    "ApplicationPackageReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists."
+        },
+        "version": {
+          "type": "string",
+          "title": "The version of the application to deploy. If omitted, the default version is deployed.",
+          "description": "If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409."
+        }
+      },
+      "title": "Link to an application package inside the batch account",
+      "required": [
+        "id"
+      ]
+    },
+    "ResizeError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResizeError"
+          },
+          "title": "Additional details about the error."
+        }
+      },
+      "title": "An error that occurred when resizing a pool.",
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "AutoScaleRunError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoScaleRunError"
+          },
+          "title": "Additional details about the error."
+        }
+      },
+      "title": "An error that occurred when autoscaling a pool.",
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "AutoScaleRun": {
+      "properties": {
+        "evaluationTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time at which the autoscale formula was last evaluated."
+        },
+        "results": {
+          "type": "string",
+          "title": "The final values of all variables used in the evaluation of the autoscale formula.",
+          "description": "Each variable value is returned in the form $variable=value, and variables are separated by semicolons."
+        },
+        "error": {
+          "$ref": "#/definitions/AutoScaleRunError",
+          "title": "Details of the error encountered evaluating the autoscale formula on the pool, if the evaluation was unsuccessful."
+        }
+      },
+      "required": [
+        "evaluationTime"
+      ],
+      "title": "The results and errors from an execution of a pool autoscale formula."
+    },
+    "VirtualMachineConfiguration": {
+      "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "title": "A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use."
+        },
+        "nodeAgentSkuId": {
+          "type": "string",
+          "title": "The SKU of the Batch node agent to be provisioned on compute nodes in the pool.",
+          "description": "The Batch node agent is a program that runs on each node in the pool, and provides the command-and-control interface between the node and the Batch service. There are different implementations of the node agent, known as SKUs, for different operating systems. You must specify a node agent SKU which matches the selected image reference. To get the list of supported node agent SKUs along with their list of verified image references, see the 'List supported node agent SKUs' operation."
+        },
+        "windowsConfiguration": {
+          "$ref": "#/definitions/WindowsConfiguration",
+          "title": "Windows operating system settings on the virtual machine.",
+          "description": "This property must not be specified if the imageReference specifies a Linux OS image."
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          },
+          "title": "The configuration for data disks attached to the compute nodes in the pool.",
+          "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them."
+        },
+        "licenseType": {
+          "type": "string",
+          "title": "The type of on-premises license to be used when deploying the operating system.",
+          "description": "This only applies to images that contain the Windows operating system, and should only be used when you hold valid on-premises licenses for the nodes which will be deployed. If omitted, no on-premises licensing discount is applied. Values are:\n\n Windows_Server - The on-premises license is for Windows Server.\n Windows_Client - The on-premises license is for Windows Client.\n"
+        },
+        "containerConfiguration": {
+          "$ref": "#/definitions/ContainerConfiguration",
+          "title": "The container configuration for the pool.",
+          "description": "If specified, setup is performed on each node in the pool to allow tasks to run in containers. All regular tasks and job manager tasks run on this pool must specify the containerSettings property, and all other tasks may specify it."
+        }
+      },
+      "required": [
+        "imageReference",
+        "nodeAgentSkuId"
+      ],
+      "title": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure."
+    },
+    "ContainerRegistry": {
+      "properties": {
+        "registryServer": {
+          "type": "string",
+          "title": "The registry URL.",
+          "description": "If omitted, the default is \"docker.io\"."
+        },
+        "username": {
+          "type": "string",
+          "x-ms-client-name": "userName",
+          "title": "The user name to log into the registry server."
+        },
+        "password": {
+          "type": "string",
+          "title": "The password to log into the registry server."
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ],
+      "title": "A private container registry."
+    },
+    "ContainerConfiguration": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "The container technology to be used.",
+          "enum": [
+            "DockerCompatible"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "DockerCompatible",
+                "description": "A Docker compatible container technology will be used to launch the containers."
+              }
+            ]
+          }
+        },
+        "containerImageNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The collection of container image names.",
+          "description": "This is the full image reference, as would be specified to \"docker pull\". An image will be sourced from the default Docker registry unless the image is fully qualified with an alternative registry."
+        },
+        "containerRegistries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerRegistry"
+          },
+          "title": "Additional private registries from which containers can be pulled.",
+          "description": "If any images must be downloaded from a private registry which requires credentials, then those credentials must be provided here."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "The configuration for container-enabled pools."
+    },
+    "WindowsConfiguration": {
+      "properties": {
+        "enableAutomaticUpdates": {
+          "type": "boolean",
+          "title": "Whether automatic updates are enabled on the virtual machine.",
+          "description": "If omitted, the default value is true."
+        }
+      },
+      "title": "Windows operating system settings to apply to the virtual machine."
+    },
+    "ImageReference": {
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "title": "The publisher of the Azure Virtual Machines Marketplace image.",
+          "description": "For example, Canonical or MicrosoftWindowsServer."
+        },
+        "offer": {
+          "type": "string",
+          "title": "The offer type of the Azure Virtual Machines Marketplace image.",
+          "description": "For example, UbuntuServer or WindowsServer."
+        },
+        "sku": {
+          "type": "string",
+          "title": "The SKU of the Azure Virtual Machines Marketplace image.",
+          "description": "For example, 14.04.0-LTS or 2012-R2-Datacenter."
+        },
+        "version": {
+          "type": "string",
+          "title": "The version of the Azure Virtual Machines Marketplace image.",
+          "description": "A value of 'latest' can be specified to select the latest version of an image. If omitted, the default is 'latest'."
+        },
+        "id": {
+          "type": "string",
+          "title": "The ARM resource identifier of the virtual machine image. Computes nodes of the pool will be created using this custom image. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}",
+          "description": "This property is mutually exclusive with other properties. The virtual machine image must be in the same region and subscription as the Azure Batch account. For information about the firewall settings for Batch node agent to communicate with Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration ."
+        }
+      },
+      "title": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
+    },
+    "DataDisk": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The logical unit number.",
+          "description": "The lun is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct lun."
+        },
+        "caching": {
+          "$ref": "#/definitions/CachingType",
+          "title": "The type of caching to be enabled for the data disks.",
+          "description": "Values are:\n\n none - The caching mode for the disk is not enabled.\n readOnly - The caching mode for the disk is read only.\n readWrite - The caching mode for the disk is read and write.\n\n The default value for caching is none. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The initial disk size in GB when creating new data disk."
+        },
+        "storageAccountType": {
+          "title": "The storage account type to be used for the data disk.",
+          "description": "If omitted, the default is \"Standard_LRS\". Values are:\n\n Standard_LRS - The data disk should use standard locally redundant storage.\n Premium_LRS - The data disk should use premium locally redundant storage.",
+          "$ref": "#/definitions/StorageAccountType"
+        }
+      },
+      "required": [
+        "lun",
+        "diskSizeGB"
+      ],
+      "description": "Data Disk settings which will be used by the data disks associated to Compute Nodes in the pool."
+    },
+    "TaskSchedulingPolicy": {
+      "properties": {
+        "nodeFillType": {
+          "type": "string",
+          "title": "How tasks should be distributed across compute nodes.",
+          "enum": [
+            "Spread",
+            "Pack"
+          ],
+          "x-ms-enum": {
+            "name": "ComputeNodeFillType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Spread",
+                "description": "Tasks should be assigned evenly across all nodes in the pool."
+              },
+              {
+                "value": "Pack",
+                "description": "As many tasks as possible (maxTasksPerNode) should be assigned to each node in the pool before any tasks are assigned to the next node in the pool."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "nodeFillType"
+      ],
+      "title": "Specifies how tasks should be distributed across compute nodes."
+    },
+    "LinuxUserConfiguration": {
+      "properties": {
+        "uid": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The user ID of the user account.",
+          "description": "The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the uid."
+        },
+        "gid": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The group ID for the user account.",
+          "description": "The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the gid."
+        },
+        "sshPrivateKey": {
+          "type": "string",
+          "title": "The SSH private key for the user account.",
+          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done)."
+        }
+      },
+      "title": "Properties used to create a user account on a Linux node."
+    },
+    "WindowsUserConfiguration": {
+      "properties": {
+        "loginMode": {
+          "type": "string",
+          "title": "Login mode for user",
+          "description": "Specifies login mode for the user. The default value for VirtualMachineConfiguration pools is interactive mode and for CloudServiceConfiguration pools is batch mode.",
+          "enum": [
+            "Batch",
+            "Interactive"
+          ],
+          "x-ms-enum": {
+            "name": "LoginMode",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Batch",
+                "description": "The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended for long running parallel processes."
+              },
+              {
+                "value": "Interactive",
+                "description": "The LOGON32_LOGON_INTERACTIVE Win32 login mode. Some applications require having permissions associated with the interactive login mode. If this is the case for an application used in your task, then this option is recommended."
+              }
+            ]
+          }
+        }
+      },
+      "title": "Properties used to create a user account on a Windows node."
+    },
+    "UserAccount": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the user account."
+        },
+        "password": {
+          "type": "string",
+          "title": "The password for the user account."
+        },
+        "elevationLevel": {
+          "title": "The elevation level of the user account.",
+          "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
+          "$ref": "#/definitions/ElevationLevel"
+        },
+        "linuxUserConfiguration": {
+          "title": "The Linux-specific user configuration for the user account.",
+          "description": "This property is ignored if specified on a Windows pool. If not specified, the user is created with the default options.",
+          "$ref": "#/definitions/LinuxUserConfiguration"
+        },
+        "windowsUserConfiguration": {
+          "title": "The Windows-specific user configuration for the user account.",
+          "description": "This property can only be specified if the user is on a Windows pool. If not specified and on a Windows pool, the user is created with the default options.",
+          "$ref": "#/definitions/WindowsUserConfiguration"
+        }
+      },
+      "required": [
+        "name",
+        "password"
+      ],
+      "title": "Properties used to create a user on an Azure Batch node."
+    },
+    "StartTask": {
+      "properties": {
+        "commandLine": {
+          "type": "string",
+          "title": "The command line of the start task.",
+          "description": "The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. Required if any other properties of the startTask are specified."
+        },
+        "resourceFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceFile"
+          },
+          "title": "A list of files that the Batch service will download to the compute node before running the command line."
+        },
+        "environmentSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentSetting"
+          },
+          "title": "A list of environment variable settings for the start task."
+        },
+        "userIdentity": {
+          "$ref": "#/definitions/UserIdentity",
+          "title": "The user identity under which the start task runs.",
+          "description": "If omitted, the task runs as a non-administrative user unique to the task."
+        },
+        "maxTaskRetryCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The maximum number of times the task may be retried.",
+          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit."
+        },
+        "waitForSuccess": {
+          "type": "boolean",
+          "title": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node.",
+          "description": "If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is false."
+        },
+        "containerSettings": {
+          "$ref": "#/definitions/TaskContainerSettings",
+          "title": "The settings for the container under which the start task runs.",
+          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+        }
+      },
+      "title": "A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged."
+    },
+    "TaskContainerSettings": {
+      "properties": {
+        "containerRunOptions": {
+          "type": "string",
+          "title": "Additional options to the container create command.",
+          "description": "These additional options are supplied as arguments to the \"docker create\" command, in addition to those controlled by the Batch Service."
+        },
+        "imageName": {
+          "type": "string",
+          "title": "The image to use to create the container in which the task will run.",
+          "description": "This is the full image reference, as would be specified to \"docker pull\". If no tag is provided as part of the image name, the tag \":latest\" is used as a default."
+        },
+        "registry": {
+          "$ref": "#/definitions/ContainerRegistry",
+          "title": "The private registry which contains the container image.",
+          "description": "This setting can be omitted if was already provided at pool creation."
+        }
+      },
+      "required": [
+        "imageName"
+      ],
+      "title": "The container settings for a task."
+    },
+    "ResourceFile": {
+      "properties": {
+        "autoStorageContainerName": {
+          "type": "string",
+          "title": "The storage container name in the auto storage account.",
+          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified."
+        },
+        "storageContainerUrl": {
+          "type": "string",
+          "title": "The URL of the blob container within Azure Blob Storage.",
+          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable using anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the blob, or set the ACL for the blob or its container to allow public access."
+        },
+        "httpUrl": {
+          "type": "string",
+          "title": "The URL of the file to download.",
+          "description": "The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL is Azure Blob Storage, it must be readable using anonymous access; that is, the Batch service does not present any credentials when downloading the blob. There are two ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, or set the ACL for the blob or its container to allow public access."
+        },
+        "blobPrefix": {
+          "type": "string",
+          "title": "The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded.",
+          "description": "The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded."
+        },
+        "filePath": {
+          "type": "string",
+          "title": "The location on the compute node to which to download the file, relative to the task's working directory.",
+          "description": "If the httpUrl property is specified, the filePath is required and describes the path which the file will be downloaded to, including the filename. Otherwise, if the autoStorageContainerName or storageContainerUrl property is specified, filePath is optional and is the directory to download the files to. In the case where filePath is used as a directory, any directory structure already associated with the input data will be retained in full and appended to the specified filePath directory. The specified relative path cannot break out of the task's working directory (for example by using '..')."
+        },
+        "fileMode": {
+          "type": "string",
+          "title": "The file permission mode attribute in octal format.",
+          "description": "This property applies only to files being downloaded to Linux compute nodes. It will be ignored if it is specified for a resourceFile which will be downloaded to a Windows node. If this property is not specified for a Linux node, then a default value of 0770 is applied to the file."
+        }
+      },
+      "title": "A single file or multiple files to be downloaded to a compute node."
+    },
+    "EnvironmentSetting": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the environment variable."
+        },
+        "value": {
+          "type": "string",
+          "title": "The value of the environment variable."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "An environment variable to be set on a task process."
+    },
+    "UserIdentity": {
+      "properties": {
+        "userName": {
+          "type": "string",
+          "title": "The name of the user identity under which the task is run.",
+          "description": "The userName and autoUser properties are mutually exclusive; you must specify one but not both."
+        },
+        "autoUser": {
+          "$ref": "#/definitions/AutoUserSpecification",
+          "title": "The auto user under which the task is run.",
+          "description": "The userName and autoUser properties are mutually exclusive; you must specify one but not both."
+        }
+      },
+      "title": "The definition of the user identity under which the task is run.",
+      "description": "Specify either the userName or autoUser property, but not both."
+    },
+    "AutoUserSpecification": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "title": "The scope for the auto user",
+          "description": "The default value is task.",
+          "enum": [
+            "Task",
+            "Pool"
+          ],
+          "x-ms-enum": {
+            "name": "AutoUserScope",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Task",
+                "description": "Specifies that the service should create a new user for the task."
+              },
+              {
+                "value": "Pool",
+                "description": "Specifies that the task runs as the common auto user account which is created on every node in a pool."
+              }
+            ]
+          }
+        },
+        "elevationLevel": {
+          "title": "The elevation level of the auto user.",
+          "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
+          "$ref": "#/definitions/ElevationLevel"
+        }
+      },
+      "title": "Specifies the parameters for the auto user that runs a task on the Batch service."
+    },
+    "ElevationLevel": {
+      "type": "string",
+      "title": "The elevation level of the user.",
+      "enum": [
+        "NonAdmin",
+        "Admin"
+      ],
+      "x-ms-enum": {
+        "name": "ElevationLevel",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "NonAdmin",
+            "description": "The user is a standard user without elevated access."
+          },
+          {
+            "value": "Admin",
+            "description": "The user is a user with elevated access and operates with full Administrator permissions."
+          }
+        ]
+      }
+    },
+    "StorageAccountType": {
+      "type": "string",
+      "title": "The storage account type for use in creating data disks.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Standard_LRS",
+            "description": "The data disk should use standard locally redundant storage."
+          },
+          {
+            "value": "Premium_LRS",
+            "description": "The data disk should use premium locally redundant storage."
+          }
+        ]
+      }
+    },
+    "CachingType": {
+      "type": "string",
+      "title": "The type of caching to enable for the disk.",
+      "enum": [
+        "None",
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "x-ms-enum": {
+        "name": "CachingType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "None",
+            "description": "The caching mode for the disk is not enabled."
+          },
+          {
+            "value": "ReadOnly",
+            "description": "The caching mode for the disk is read only."
+          },
+          {
+            "value": "ReadWrite",
+            "description": "The caching mode for the disk is read and write."
+          }
+        ]
+      }
+    },
+    "NetworkConfiguration": {
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. For pools created via virtualMachineConfiguration the Batch account must have poolAllocationMode userSubscription in order to use a VNet. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
+            "description": "Setting up RBAC for Azure Batch VNets"
+          }
+        },
+        "endpointConfiguration": {
+          "$ref": "#/definitions/PoolEndpointConfiguration",
+          "title": "The configuration for endpoints on compute nodes in the Batch pool.",
+          "description": "Pool endpoint configuration is only supported on pools with the virtualMachineConfiguration property."
+        }
+      },
+      "description": "The network configuration for a pool."
+    },
+    "CloudServiceConfiguration": {
+      "properties": {
+        "osFamily": {
+          "type": "string",
+          "title": "The Azure Guest OS family to be installed on the virtual machines in the pool.",
+          "description": "Possible values are: 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 - OS Family 3, equivalent to Windows Server 2012. 4 - OS Family 4, equivalent to Windows Server 2012 R2. 5 - OS Family 5, equivalent to Windows Server 2016. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases)."
+        },
+        "osVersion": {
+          "type": "string",
+          "title": "The Azure Guest OS version to be installed on the virtual machines in the pool.",
+          "description": "The default value is * which specifies the latest operating system version for the specified OS family."
+        }
+      },
+      "required": [
+        "osFamily"
+      ],
+      "title": "The configuration for nodes in a pool based on the Azure Cloud Services platform."
+    },
+    "MetadataItem": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the metadata item."
+        },
+        "value": {
+          "type": "string",
+          "title": "The value of the metadata item."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "A name-value pair associated with a Batch service resource.",
+      "description": "The Batch service does not assign any meaning to this metadata; it is solely for the use of user code."
+    },
+    "ResizeOperationStatus": {
+      "properties": {
+        "targetDedicatedNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of dedicated compute nodes in the pool."
+        },
+        "targetLowPriorityNodes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The desired number of low-priority compute nodes in the pool."
+        },
+        "resizeTimeout": {
+          "type": "string",
+          "format": "duration",
+          "title": "The timeout for allocation of compute nodes to the pool or removal of compute nodes from the pool.",
+          "description": "The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+        },
+        "nodeDeallocationOption": {
+          "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",
+          "description": "The default value is requeue.",
+          "$ref": "#/definitions/ComputeNodeDeallocationOption"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time when this resize operation was started."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResizeError"
+          },
+          "title": "Details of any errors encountered while performing the last resize on the pool.",
+          "description": "This property is set only if an error occurred during the last pool resize, and only when the pool allocationState is Steady."
+        }
+      },
+      "title": "Details about the current or last completed resize operation.",
+      "description": "Describes either the current operation (if the pool AllocationState is Resizing) or the previously completed operation (if the AllocationState is Steady)."
+    },
+    "PoolEndpointConfiguration": {
+      "properties": {
+        "inboundNatPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundNatPool"
+          },
+          "title": "A list of inbound NAT pools that can be used to address specific ports on an individual compute node externally.",
+          "description": "The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400."
+        }
+      },
+      "required": [
+        "inboundNatPools"
+      ],
+      "title": "The endpoint configuration for a pool."
+    },
+    "InboundNatPool": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the endpoint.",
+          "description": "The name must be unique within a Batch pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400."
+        },
+        "protocol": {
+          "type": "string",
+          "title": "The protocol of the endpoint.",
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "name": "InboundEndpointProtocol",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "TCP",
+                "description": "Use TCP for the endpoint."
+              },
+              {
+                "value": "UDP",
+                "description": "Use UDP for the endpoint."
+              }
+            ]
+          }
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The port number on the compute node.",
+          "description": "This must be unique within a Batch pool. Acceptable values are between 1 and 65535 except for 22, 3389, 29876 and 29877 as these are reserved. If any reserved values are provided the request fails with HTTP status code 400."
+        },
+        "frontendPortRangeStart": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The first port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes.",
+          "description": "Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved. All ranges within a pool must be distinct and cannot overlap. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
+        },
+        "frontendPortRangeEnd": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The last port number in the range of external ports that will be used to provide inbound access to the backendPort on individual compute nodes.",
+          "description": "Acceptable values range between 1 and 65534 except ports from 50000 to 55000 which are reserved by the Batch service. All ranges within a pool must be distinct and cannot overlap. If any reserved or overlapping values are provided the request fails with HTTP status code 400."
+        },
+        "networkSecurityGroupRules": {
+          "type": "array",
+          "title": "A list of network security group rules that will be applied to the endpoint.",
+          "description": "The maximum number of rules that can be specified across all the endpoints on a Batch pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityGroupRule"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "protocol",
+        "backendPort",
+        "frontendPortRangeStart",
+        "frontendPortRangeEnd"
+      ],
+      "title": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally."
+    },
+    "NetworkSecurityGroupRule": {
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The priority for this rule.",
+          "description": "Priorities within a pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 3500. If any reserved or duplicate values are provided the request fails with HTTP status code 400."
+        },
+        "access": {
+          "type": "string",
+          "title": "The action that should be taken for a specified IP address, subnet range or tag.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkSecurityGroupRuleAccess",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Allow",
+                "description": "Allow access."
+              },
+              {
+                "value": "Deny",
+                "description": "Deny access."
+              }
+            ]
+          }
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "title": "The source address prefix or tag to match for the rule.",
+          "description": "Valid values are a single IP address (i.e. 10.10.10.10), IP subnet (i.e. 192.168.1.0/24), default tag, or * (for all addresses).  If any other values are provided the request fails with HTTP status code 400."
+        }
+      },
+      "required": [
+        "priority",
+        "access",
+        "sourceAddressPrefix"
+      ],
+      "title": "A network security group rule to apply to an inbound endpoint."
+    },
+    "ListPoolsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          },
+          "description": "The collection of returned pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "Operation": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "title": "The object that describes the operation.",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete, or listKeys/action",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object"
+        }
+      }
+    },
+    "OperationListResult": {
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name to check for availability"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Batch/batchAccounts"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Microsoft.Batch/batchAccounts",
+                "description": "The Batch account resource type.",
+                "name": "BatchAccounts"
+              }
+            ]
+          },
+          "description": "The resource type. Must be set to Microsoft.Batch/batchAccounts"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Parameters for a check name availability request."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Invalid",
+                "description": "The requested name is invalid."
+              },
+              {
+                "value": "AlreadyExists",
+                "description": "The requested name is already in use."
+              }
+            ]
+          },
+          "description": "Gets the reason that a Batch account name could not be used. The Reason element is only returned if NameAvailable is false."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets an error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group that contains the Batch account.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._]+$",
+      "minLength": 3,
+      "maxLength": 24,
+      "description": "The name of the Batch account.",
+      "x-ms-parameter-location": "method"
+    },
+    "CertificateNameParameter": {
+      "name": "certificateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[\\w]+-[\\w]+$",
+      "minLength": 5,
+      "maxLength": 45,
+      "description": "The identifier for the certificate. This must be made up of algorithm and thumbprint separated by a dash, and must match the certificate data in the request. For example SHA1-a3d1c5.",
+      "x-ms-parameter-location": "method"
+    },
+    "PoolNameParameter": {
+      "name": "poolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The pool name. This must be unique within the account.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationNameParameter": {
+      "name": "applicationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the application. This must be unique within the account.",
+      "x-ms-parameter-location": "method"
+    },
+    "VersionNameParameter": {
+      "name": "versionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]*$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The version of the application.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

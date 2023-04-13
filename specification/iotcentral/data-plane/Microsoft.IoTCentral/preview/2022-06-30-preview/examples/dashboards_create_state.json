@@ -1,0 +1,86 @@
+{
+  "title": "Create a new dashboard with state chart tile",
+  "description": "Create a new dashboard with state chart tile",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "dashboardId": "urn:homepageView:uqxri3i7x",
+    "api-version": "2022-06-30-preview",
+    "body": {
+      "displayName": "My Dashboard",
+      "tiles": [
+        {
+          "displayName": "State Chart",
+          "configuration": {
+            "type": "stateChart",
+            "capabilities": [
+              {
+                "capability": "stateMultiState",
+                "aggregateFunction": "count"
+              },
+              {
+                "capability": "stateTwoState",
+                "aggregateFunction": "count"
+              }
+            ],
+            "devices": [
+              "1on0f5oyp9c",
+              "2lpfdbwc8x4"
+            ],
+            "group": "953ef094-1198-4645-82d1-87a21266abc6",
+            "queryRange": {
+              "type": "time",
+              "duration": "PT30M"
+            }
+          },
+          "x": 0,
+          "y": 0,
+          "width": 2,
+          "height": 2
+        }
+      ],
+      "favorite": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "urn:homepageView:uqxri3i7x",
+        "displayName": "My Dashboard",
+        "personal": false,
+        "tiles": [
+          {
+            "displayName": "State Chart",
+            "configuration": {
+              "type": "stateChart",
+              "capabilities": [
+                {
+                  "capability": "stateMultiState",
+                  "aggregateFunction": "count"
+                },
+                {
+                  "capability": "stateTwoState",
+                  "aggregateFunction": "count"
+                }
+              ],
+              "devices": [
+                "1on0f5oyp9c",
+                "2lpfdbwc8x4"
+              ],
+              "group": "953ef094-1198-4645-82d1-87a21266abc6",
+              "queryRange": {
+                "type": "time",
+                "duration": "PT30M"
+              }
+            },
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        ],
+        "favorite": false
+      }
+    }
+  }
+}

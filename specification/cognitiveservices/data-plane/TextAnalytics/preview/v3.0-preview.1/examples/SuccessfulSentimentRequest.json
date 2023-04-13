@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "language": "en",
+          "id": "1",
+          "text": "Hello world. This is some input text that I love."
+        },
+        {
+          "language": "en",
+          "id": "2",
+          "text": "It's incredibly sunny outside! I'm so happy."
+        },
+        {
+          "language": "en",
+          "id": "3",
+          "text": "Pike place market is my favorite Seattle attraction."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "sentiment": "positive",
+            "documentScores": {
+              "positive": 0.998519241809845,
+              "neutral": 0.0009635657188483,
+              "negative": 0.000517153472174
+            },
+            "sentences": [
+              {
+                "sentiment": "neutral",
+                "sentenceScores": {
+                  "positive": 0.070910170674324,
+                  "neutral": 0.9124033451080322,
+                  "negative": 0.0166865326464176
+                },
+                "offset": 0,
+                "length": 12
+              },
+              {
+                "sentiment": "positive",
+                "sentenceScores": {
+                  "positive": 0.998519241809845,
+                  "neutral": 0.0009635657188483,
+                  "negative": 0.000517153472174
+                },
+                "offset": 13,
+                "length": 36
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "sentiment": "positive",
+            "documentScores": {
+              "positive": 0.9954571723937988,
+              "neutral": 0.0034653299953789,
+              "negative": 0.0010774657130241
+            },
+            "sentences": [
+              {
+                "sentiment": "neutral",
+                "sentenceScores": {
+                  "positive": 0.0499138832092285,
+                  "neutral": 0.9387012720108032,
+                  "negative": 0.0113849258050323
+                },
+                "offset": 0,
+                "length": 30
+              },
+              {
+                "sentiment": "positive",
+                "sentenceScores": {
+                  "positive": 0.9954571723937988,
+                  "neutral": 0.0034653299953789,
+                  "negative": 0.0010774657130241
+                },
+                "offset": 31,
+                "length": 13
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "sentiment": "positive",
+            "documentScores": {
+              "positive": 0.9965128302574158,
+              "neutral": 0.0018965365597978,
+              "negative": 0.0015906029148027
+            },
+            "sentences": [
+              {
+                "sentiment": "positive",
+                "sentenceScores": {
+                  "positive": 0.9965128302574158,
+                  "neutral": 0.0018965365597978,
+                  "negative": 0.0015906029148027
+                },
+                "offset": 0,
+                "length": 52
+              }
+            ]
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2019-10-01"
+      }
+    }
+  }
+}

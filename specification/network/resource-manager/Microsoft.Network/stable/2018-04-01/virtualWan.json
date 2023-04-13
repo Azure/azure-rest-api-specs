@@ -1,0 +1,2177 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VirtualWANAsAServiceManagementClient",
+    "description": "REST API for Azure VirtualWAN As a Service.",
+    "version": "2018-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{VirtualWANName}": {
+      "get": {
+        "operationId": "VirtualWANs_Get",
+        "x-ms-examples": {
+          "VirtualWANGet": {
+            "$ref": "./examples/VirtualWANGet.json"
+          }
+        },
+        "description": "Retrieves the details of a VirtualWAN.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualWan."
+          },
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualWAN being retrieved."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualWAN retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualWANs_CreateOrUpdate",
+        "x-ms-examples": {
+          "VirtualWANCreate": {
+            "$ref": "./examples/VirtualWANPut.json"
+          }
+        },
+        "description": "Creates a VirtualWAN resource if it doesn't exist else updates the existing VirtualWAN.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualWan."
+          },
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualWAN being created or updated."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "WANParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            },
+            "description": "Parameters supplied to create or update VirtualWAN."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualWAN created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting VirtualWAN resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VirtualWANs"
+        ],
+        "operationId": "VirtualWANs_UpdateTags",
+        "x-ms-examples": {
+          "VirtualWANUpdate": {
+            "$ref": "./examples/VirtualWANUpdateTags.json"
+          }
+        },
+        "description": "Updates a VirtualWAN tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualWan."
+          },
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualWAN being updated."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "WANParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to Update VirtualWAN tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualWAN updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VirtualWAN updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualWANs_Delete",
+        "x-ms-examples": {
+          "VirtualWANDelete": {
+            "$ref": "./examples/VirtualWANDelete.json"
+          }
+        },
+        "description": "Deletes a VirtualWAN.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualWan."
+          },
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualWAN being deleted."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. VirtualWAN deleted."
+          },
+          "202": {
+            "description": "Request received successfully. VirtualWAN deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No VirtualWANs exist by the name provided."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans": {
+      "get": {
+        "operationId": "VirtualWANs_ListByResourceGroup",
+        "x-ms-examples": {
+          "VirtualWANListByResourceGroup": {
+            "$ref": "./examples/VirtualWANListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all the VirtualWANs in a resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualWan."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VirtualWANs in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualWANsResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualWans": {
+      "get": {
+        "operationId": "VirtualWANs_List",
+        "x-ms-examples": {
+          "VirtualWANList": {
+            "$ref": "./examples/VirtualWANList.json"
+          }
+        },
+        "description": "Lists all the VirtualWANs in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VirtualWANs in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualWANsResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnSites/{vpnSiteName}": {
+      "get": {
+        "operationId": "VpnSites_Get",
+        "x-ms-examples": {
+          "VpnSiteGet": {
+            "$ref": "./examples/VpnSiteGet.json"
+          }
+        },
+        "description": "Retrieves the details of a VPN site.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnSite."
+          },
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnSite being retrieved."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VpnSite retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnSites_CreateOrUpdate",
+        "x-ms-examples": {
+          "VpnSiteCreate": {
+            "$ref": "./examples/VpnSitePut.json"
+          }
+        },
+        "description": "Creates a VpnSite resource if it doesn't exist else updates the existing VpnSite.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnSite."
+          },
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnSite being created or updated."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "VpnSiteParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            },
+            "description": "Parameters supplied to create or update VpnSite."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VpnSite created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VpnSite created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VpnSites"
+        ],
+        "operationId": "VpnSites_UpdateTags",
+        "x-ms-examples": {
+          "VpnSiteUpdate": {
+            "$ref": "./examples/VpnSiteUpdateTags.json"
+          }
+        },
+        "description": "Updates VpnSite tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnSite."
+          },
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnSite being updated."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "VpnSiteParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update VpnSite tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VpnSite updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VpnSite updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnSites_Delete",
+        "x-ms-examples": {
+          "VpnSiteDelete": {
+            "$ref": "./examples/VpnSiteDelete.json"
+          }
+        },
+        "description": "Deletes a VpnSite.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnSite."
+          },
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnSite being deleted."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. VpnSite deleted."
+          },
+          "202": {
+            "description": "Request received successfully. VpnSite deletion is in progress"
+          },
+          "204": {
+            "description": "No VpnSites exist by the name provided."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnSites": {
+      "get": {
+        "operationId": "VpnSites_ListByResourceGroup",
+        "x-ms-examples": {
+          "VpnSiteListByResourceGroup": {
+            "$ref": "./examples/VpnSiteListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all the vpnSites in a resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnSite."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the vpnSites in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnSitesResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnSites": {
+      "get": {
+        "operationId": "VpnSites_List",
+        "x-ms-examples": {
+          "VpnSiteList": {
+            "$ref": "./examples/VpnSiteList.json"
+          }
+        },
+        "description": "Lists all the VpnSites in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VpnSites in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnSitesResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
+      "post": {
+        "operationId": "VpnSitesConfiguration_Download",
+        "x-ms-examples": {
+          "VpnSitesConfigurationDownload": {
+            "$ref": "./examples/VpnSitesConfigurationDownload.json"
+          }
+        },
+        "description": "Gives the sas-url to download the configurations for vpn-sites in a resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name."
+          },
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualWAN for which configuration of all vpn-sites is needed."
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetVpnSitesConfigurationRequest"
+            },
+            "description": "Parameters supplied to download vpn-sites configuration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Follow the location header for sas-url to output blob."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously. Follow the location header for sas-url to output blob."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
+      "get": {
+        "operationId": "VirtualHubs_Get",
+        "x-ms-examples": {
+          "VirtualHubGet": {
+            "$ref": "./examples/VirtualHubGet.json"
+          }
+        },
+        "description": "Retrieves the details of a VirtualHub.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualHub retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubs_CreateOrUpdate",
+        "x-ms-examples": {
+          "VirtualHubPut": {
+            "$ref": "./examples/VirtualHubPut.json"
+          }
+        },
+        "description": "Creates a VirtualHub resource if it doesn't exist else updates the existing VirtualHub.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualHubParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            },
+            "description": "Parameters supplied to create or update VirtualHub."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualHub created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VirtualHub created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VirtualWANs"
+        ],
+        "operationId": "VirtualHubs_UpdateTags",
+        "x-ms-examples": {
+          "VirtualHubUpdate": {
+            "$ref": "./examples/VirtualHubUpdateTags.json"
+          }
+        },
+        "description": "Updates VirtualHub tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualHubParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update VirtualHub tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualHub updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VirtualHub updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualHubs_Delete",
+        "x-ms-examples": {
+          "VirtualHubDelete": {
+            "$ref": "./examples/VirtualHubDelete.json"
+          }
+        },
+        "description": "Deletes a VirtualHub.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. VirtualHub deleted."
+          },
+          "202": {
+            "description": "Request received successfully. VirtualHub deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No VirtualHubs exist by the name provided."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs": {
+      "get": {
+        "operationId": "VirtualHubs_ListByResourceGroup",
+        "x-ms-examples": {
+          "VirtualHubListByResourceGroup": {
+            "$ref": "./examples/VirtualHubListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all the VirtualHubs in a resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VirtualHubs in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubsResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualHubs": {
+      "get": {
+        "operationId": "VirtualHubs_List",
+        "x-ms-examples": {
+          "VirtualHubList": {
+            "$ref": "./examples/VirtualHubList.json"
+          }
+        },
+        "description": "Lists all the VirtualHubs in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VirtualHubs in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubsResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}": {
+      "get": {
+        "operationId": "HubVirtualNetworkConnections_Get",
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionGet": {
+            "$ref": "./examples/HubVirtualNetworkConnectionGet.json"
+          }
+        },
+        "description": "Retrieves the details of a HubVirtualNetworkConnection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the HubVirtualNetworkConnection retrieved.",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections": {
+      "get": {
+        "operationId": "HubVirtualNetworkConnections_List",
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionList": {
+            "$ref": "./examples/HubVirtualNetworkConnectionList.json"
+          }
+        },
+        "description": "Retrieves the details of all HubVirtualNetworkConnections.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the HubVirtualNetworkConnections for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListHubVirtualNetworkConnectionsResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}": {
+      "get": {
+        "operationId": "VpnGateways_Get",
+        "x-ms-examples": {
+          "VpnGatewayGet": {
+            "$ref": "./examples/VpnGatewayGet.json"
+          }
+        },
+        "description": "Retrieves the details of a virtual wan vpn gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the virtual wan vpn gateway retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnGateways_CreateOrUpdate",
+        "x-ms-examples": {
+          "VpnGatewayPut": {
+            "$ref": "./examples/VpnGatewayPut.json"
+          }
+        },
+        "description": "Creates a virtual wan vpn gateway if it doesn't exist else updates the existing gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vpnGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            },
+            "description": "Parameters supplied to create or Update a virtual wan vpn gateway."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the virtual wan vpn Gateway created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the virtual wan vpn gateway retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VpnGateways"
+        ],
+        "operationId": "VpnGateways_UpdateTags",
+        "x-ms-examples": {
+          "VpnGatewayUpdate": {
+            "$ref": "./examples/VpnGatewayUpdateTags.json"
+          }
+        },
+        "description": "Updates virtual wan vpn gateway tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "vpnGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update a virtual wan vpn gateway tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the updated gateway.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the updated gateway.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnGateways_Delete",
+        "x-ms-examples": {
+          "VpnGatewayDelete": {
+            "$ref": "./examples/VpnGatewayDelete.json"
+          }
+        },
+        "description": "Deletes a virtual wan vpn gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Vpn Gateway deleted."
+          },
+          "202": {
+            "description": "Request received successfully. Vpn Gateway deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No vpn gateways exist by the name provided."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways": {
+      "get": {
+        "operationId": "VpnGateways_ListByResourceGroup",
+        "x-ms-examples": {
+          "VpnGatewayListByResourceGroup": {
+            "$ref": "./examples/VpnGatewayListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all the VpnGateways in a resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VpnGateways in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnGatewaysResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnGateways": {
+      "get": {
+        "operationId": "VpnGateways_List",
+        "x-ms-examples": {
+          "VpnGatewayListBySubscription": {
+            "$ref": "./examples/VpnGatewayList.json"
+          }
+        },
+        "description": "Lists all the VpnGateways in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VpnGateways in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnGatewaysResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
+      "get": {
+        "operationId": "VpnConnections_Get",
+        "x-ms-examples": {
+          "VpnConnectionGet": {
+            "$ref": "./examples/VpnConnectionGet.json"
+          }
+        },
+        "description": "Retrieves the details of a vpn connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the vpn connection.",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "VpnConnectionPut": {
+            "$ref": "./examples/VpnConnectionPut.json"
+          }
+        },
+        "description": "Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "VpnConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            },
+            "description": "Parameters supplied to create or Update a VPN Connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the vpn connection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the vpn connection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnConnections_Delete",
+        "x-ms-examples": {
+          "VpnConnectionDelete": {
+            "$ref": "./examples/VpnConnectionDelete.json"
+          }
+        },
+        "description": "Deletes a vpn connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Vpn Connection deleted."
+          },
+          "202": {
+            "description": "Request received successfully. Vpn Connection deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No vpn connections exist by the name provided."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections": {
+      "get": {
+        "operationId": "VpnConnections_ListByVpnGateway",
+        "x-ms-examples": {
+          "VpnConnectionList": {
+            "$ref": "./examples/VpnConnectionList.json"
+          }
+        },
+        "description": "Retrieves all vpn connections for a particular virtual wan vpn gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns all Vpn connections for a virtual wan vpn gateway.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnConnectionsResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VirtualWanProperties": {
+      "properties": {
+        "disableVpnEncryption": {
+          "type": "boolean",
+          "description": "Vpn encryption to be disabled or not."
+        },
+        "virtualHubs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of VirtualHubs in the VirtualWAN."
+        },
+        "vpnSites": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Parameters for VirtualWAN"
+    },
+    "VirtualWAN": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualWanProperties"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "VirtualWAN Resource."
+    },
+    "ListVirtualWANsResult": {
+      "description": "Result of the request to list VirtualWANs. It contains a list of VirtualWANs and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualWAN"
+          },
+          "description": "List of VirtualWANs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "VpnSiteProperties": {
+      "properties": {
+        "virtualWAN": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The VirtualWAN to which the vpnSite belongs"
+        },
+        "deviceProperties": {
+          "description": "The device properties",
+          "$ref": "#/definitions/DeviceProperties"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The ip-address for the vpn-site."
+        },
+        "siteKey": {
+          "type": "string",
+          "description": "The key for vpn-site that can be used for connections."
+        },
+        "addressSpace": {
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
+          "description": "The AddressSpace that contains an array of IP address ranges."
+        },
+        "bgpProperties": {
+          "$ref": "./virtualNetworkGateway.json#/definitions/BgpSettings",
+          "description": "The set of bgp properties."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Parameters for VpnSite"
+    },
+    "VpnSite": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnSiteProperties"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "VpnSite Resource."
+    },
+    "ListVpnSitesResult": {
+      "description": "Result of the request to list VpnSites. It contains a list of VpnSites and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnSite"
+          },
+          "description": "List of VpnSites."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "GetVpnSitesConfigurationRequest": {
+      "properties": {
+        "vpnSites": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of resource-ids of the vpn-sites for which config is to be downloaded."
+        },
+        "outputBlobSasUrl": {
+          "type": "string",
+          "description": "The sas-url to download the configurations for vpn-sites"
+        }
+      },
+      "description": "List of Vpn-Sites"
+    },
+    "VirtualHubProperties": {
+      "properties": {
+        "virtualWan": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The VirtualWAN to which the VirtualHub belongs"
+        },
+        "hubVirtualNetworkConnections": {
+          "type": "array",
+          "description": "list of all vnet connections with this VirtualHub.",
+          "items": {
+            "$ref": "#/definitions/HubVirtualNetworkConnection"
+          }
+        },
+        "addressPrefix": {
+          "type": "string",
+          "description": "Address-prefix for this VirtualHub."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Parameters for VirtualHub"
+    },
+    "VirtualHub": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualHubProperties"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "VirtualHub Resource."
+    },
+    "ListVirtualHubsResult": {
+      "description": "Result of the request to list VirtualHubs. It contains a list of VirtualHubs and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualHub"
+          },
+          "description": "List of VirtualHubs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "VpnGatewayProperties": {
+      "properties": {
+        "virtualHub": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The VirtualHub to which the gateway belongs"
+        },
+        "connections": {
+          "type": "array",
+          "description": "list of all vpn connections to the gateway.",
+          "items": {
+            "$ref": "#/definitions/VpnConnection"
+          }
+        },
+        "bgpSettings": {
+          "$ref": "./virtualNetworkGateway.json#/definitions/BgpSettings",
+          "description": "Local network gateway's BGP speaker settings."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "policies": {
+          "description": "The policies applied to this vpn gateway.",
+          "$ref": "#/definitions/Policies"
+        }
+      },
+      "description": "Parameters for VpnGateway"
+    },
+    "VpnGateway": {
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnGatewayProperties"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "VpnGateway Resource."
+    },
+    "ListVpnGatewaysResult": {
+      "description": "Result of the request to list VpnGateways. It contains a list of VpnGateways and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnGateway"
+          },
+          "description": "List of VpnGateways."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "VpnConnectionProperties": {
+      "properties": {
+        "remoteVpnSite": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Id of the connected vpn site."
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "routing weight for vpn connection."
+        },
+        "connectionStatus": {
+          "description": "The connection status.",
+          "$ref": "#/definitions/VpnConnectionStatus"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Ingress bytes transferred."
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Egress bytes transferred."
+        },
+        "connectionBandwidth": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Expected bandwidth in MBPS."
+        },
+        "sharedKey": {
+          "type": "string",
+          "description": "SharedKey for the vpn connection."
+        },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp flag"
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetworkGateway.json#/definitions/IpsecPolicy"
+          },
+          "description": "The IPSec Policies to be considered by this connection."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Parameters for VpnConnection"
+    },
+    "VpnConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnConnectionProperties"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "VpnConnection Resource."
+    },
+    "ListVpnConnectionsResult": {
+      "description": "Result of the request to list all vpn connections to a virtual wan vpn gateway. It contains a list of Vpn Connections and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnConnection"
+          },
+          "description": "List of Vpn Connections."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "HubVirtualNetworkConnectionProperties": {
+      "properties": {
+        "remoteVirtualNetwork": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to the remote virtual network."
+        },
+        "allowHubToRemoteVnetTransit": {
+          "type": "boolean",
+          "description": "VirtualHub to RemoteVnet transit to enabled or not."
+        },
+        "allowRemoteVnetToUseHubVnetGateways": {
+          "type": "boolean",
+          "description": "Allow RemoteVnet to use Virtual Hub's gateways."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Parameters for HubVirtualNetworkConnection"
+    },
+    "HubVirtualNetworkConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HubVirtualNetworkConnectionProperties"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "HubVirtualNetworkConnection Resource."
+    },
+    "ListHubVirtualNetworkConnectionsResult": {
+      "description": "List of HubVirtualNetworkConnections and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HubVirtualNetworkConnection"
+          },
+          "description": "List of HubVirtualNetworkConnections."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "VpnSiteId": {
+      "properties": {
+        "vpnSite": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource-uri of the vpn-site for which config is to be fetched."
+        }
+      },
+      "description": "VpnSite Resource."
+    },
+    "DeviceProperties": {
+      "properties": {
+        "deviceVendor": {
+          "type": "string",
+          "description": "Name of the device Vendor."
+        },
+        "deviceModel": {
+          "type": "string",
+          "description": "Model of the device."
+        },
+        "linkSpeedInMbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Link speed."
+        }
+      },
+      "description": "List of properties of the device."
+    },
+    "Policies": {
+      "properties": {
+        "allowBranchToBranchTraffic": {
+          "type": "boolean",
+          "description": "True if branch to branch traffic is allowed."
+        },
+        "allowVnetToVnetTraffic": {
+          "type": "boolean",
+          "description": "True if Vnet to Vnet traffic is allowed."
+        }
+      },
+      "description": "Policies for vpn gateway."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "VpnConnectionStatus": {
+      "type": "string",
+      "description": "The current state of the vpn connection.",
+      "readOnly": true,
+      "enum": [
+        "Unknown",
+        "Connecting",
+        "Connected",
+        "NotConnected"
+      ],
+      "x-ms-enum": {
+        "name": "vpnConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "TunnelConnectionStatus": {
+      "type": "string",
+      "description": "The current state of the tunnel.",
+      "readOnly": true,
+      "enum": [
+        "Unknown",
+        "Connecting",
+        "Connected",
+        "NotConnected"
+      ],
+      "x-ms-enum": {
+        "name": "tunnelConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "HubVirtualNetworkConnectionStatus": {
+      "type": "string",
+      "description": "The current state of the VirtualHub to vnet connection.",
+      "readOnly": true,
+      "enum": [
+        "Unknown",
+        "Connecting",
+        "Connected",
+        "NotConnected"
+      ],
+      "x-ms-enum": {
+        "name": "HubVirtualNetworkConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "disableVpnEncryption": {
+      "type": "boolean",
+      "description": "Vpn encryption to be disabled or not."
+    },
+    "access": {
+      "type": "string",
+      "description": "Access to be allowed or denied.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "access",
+        "modelAsString": true
+      }
+    }
+  }
+}

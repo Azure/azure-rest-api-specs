@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "gcpResourceGroup",
+    "securityConnectorName": "gcpconnector"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/gcpResourceGroup/providers/Microsoft.Security/securityConnectors/gcpconnector/providers/Microsoft.Security/applications/ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+            "name": "ad9a8e26-29d9-4829-bb30-e597a58cdbb8",
+            "type": "Microsoft.Security/applications",
+            "properties": {
+              "displayName": "Admin's GCP application",
+              "description": "An application on critical GCP recommendations",
+              "sourceResourceType": "Assessments",
+              "conditionSets": [
+                {
+                  "conditions": [
+                    {
+                      "property": "$.Id",
+                      "value": "-bil-",
+                      "operator": "contains"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourcegroups/gcpResourceGroup/providers/Microsoft.Security/securityConnectors/gcpconnector/providers/Microsoft.Security/applications/4106f43c-6d82-4fc8-a92c-dcfe50799d1d",
+            "name": "4106f43c-6d82-4fc8-a92c-dcfe50799d1d",
+            "type": "Microsoft.Security/applications",
+            "properties": {
+              "displayName": "GCP Admin's application",
+              "description": "An application on critical GCP recommendations",
+              "sourceResourceType": "Assessments",
+              "conditionSets": [
+                {
+                  "conditions": [
+                    {
+                      "property": "$.Id",
+                      "value": "-prod-",
+                      "operator": "contains"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

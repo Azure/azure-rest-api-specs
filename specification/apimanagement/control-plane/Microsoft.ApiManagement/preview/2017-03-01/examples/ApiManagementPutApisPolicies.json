@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "apimBaseUrl": "apimservice1.management.azure-api.net",
+    "apiId": "5a58bd43a40f7e104892a398",
+    "policyId": "policy",
+    "api-version": "2017-03-01",
+    "If-Match": "*",
+    "parameters": {
+      "policyContent": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <cache-lookup vary-by-developer=\"false\" vary-by-developer-groups=\"false\" downstream-caching-type=\"none\">\r\n      <vary-by-query-parameter>version</vary-by-query-parameter>\r\n      <vary-by-header>Accept</vary-by-header>\r\n      <vary-by-header>Accept-Charset</vary-by-header>\r\n    </cache-lookup>\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <cache-store duration=\"@(10)\" />\r\n    <base />\r\n  </outbound>\r\n</policies>"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/apis/5a58bd43a40f7e104892a398/policies/policy",
+        "policyContent": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <cache-lookup vary-by-developer=\"false\" vary-by-developer-groups=\"false\" downstream-caching-type=\"none\">\r\n      <vary-by-query-parameter>version</vary-by-query-parameter>\r\n      <vary-by-header>Accept</vary-by-header>\r\n      <vary-by-header>Accept-Charset</vary-by-header>\r\n    </cache-lookup>\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <cache-store duration=\"@(10)\" />\r\n    <base />\r\n  </outbound>\r\n</policies>"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/apis/5a58bd43a40f7e104892a398/policies/policy",
+        "policyContent": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <cache-lookup vary-by-developer=\"false\" vary-by-developer-groups=\"false\" downstream-caching-type=\"none\">\r\n      <vary-by-query-parameter>version</vary-by-query-parameter>\r\n      <vary-by-header>Accept</vary-by-header>\r\n      <vary-by-header>Accept-Charset</vary-by-header>\r\n    </cache-lookup>\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <cache-store duration=\"@(10)\" />\r\n    <base />\r\n  </outbound>\r\n</policies>"
+      }
+    }
+  }
+}

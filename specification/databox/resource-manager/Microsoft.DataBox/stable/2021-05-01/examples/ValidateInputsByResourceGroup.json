@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg6861",
+    "location": "westus",
+    "api-version": "2020-11-01",
+    "x-ms-client-request-id": [
+      "85f045bb-7659-4a2f-bcf5-96723954afdf"
+    ],
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.29017.01",
+      "OSName/Windows",
+      "OSVersion/Microsoft.Windows.10.0.18363.",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "1675"
+    ],
+    "validationRequest": {
+      "validationCategory": "JobCreationValidation",
+      "individualRequestDetails": [
+        {
+          "validationType": "ValidateDataTransferDetails",
+          "dataImportDetails": [
+            {
+              "accountDetails": {
+                "dataAccountType": "StorageAccount",
+                "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount"
+              }
+            }
+          ],
+          "deviceType": "DataBox",
+          "transferType": "ImportToAzure"
+        },
+        {
+          "validationType": "ValidateAddress",
+          "shippingAddress": {
+            "streetAddress1": "16 TOWNSEND ST",
+            "streetAddress2": "Unit 1",
+            "city": "San Francisco",
+            "stateOrProvince": "CA",
+            "country": "US",
+            "postalCode": "94107",
+            "companyName": "Microsoft",
+            "addressType": "Commercial"
+          },
+          "deviceType": "DataBox",
+          "transportPreferences": {
+            "preferredShipmentType": "MicrosoftManaged"
+          }
+        },
+        {
+          "validationType": "ValidateSubscriptionIsAllowedToCreateJob"
+        },
+        {
+          "validationType": "ValidateSkuAvailability",
+          "deviceType": "DataBox",
+          "transferType": "ImportToAzure",
+          "country": "US",
+          "location": "westus"
+        },
+        {
+          "validationType": "ValidateCreateOrderLimit",
+          "deviceType": "DataBox"
+        },
+        {
+          "validationType": "ValidatePreferences",
+          "preference": {
+            "transportPreferences": {
+              "preferredShipmentType": "MicrosoftManaged"
+            }
+          },
+          "deviceType": "DataBox"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "status": "AllValidToProceed",
+          "individualResponseDetails": [
+            {
+              "status": "Valid",
+              "validationType": "ValidateDataTransferDetails",
+              "error": {
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": [],
+                "additionalInfo": []
+              }
+            },
+            {
+              "validationStatus": "Valid",
+              "alternateAddresses": [
+                {
+                  "streetAddress1": "16 TOWNSEND ST",
+                  "streetAddress2": "Unit 1",
+                  "streetAddress3": "",
+                  "city": "SAN FRANCISCO",
+                  "stateOrProvince": "CA",
+                  "country": "US",
+                  "postalCode": "94107",
+                  "addressType": "None"
+                }
+              ],
+              "validationType": "ValidateAddress",
+              "error": {
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": [],
+                "additionalInfo": []
+              }
+            },
+            {
+              "status": "Valid",
+              "validationType": "ValidateSubscriptionIsAllowedToCreateJob",
+              "error": {
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": [],
+                "additionalInfo": []
+              }
+            },
+            {
+              "status": "Valid",
+              "validationType": "ValidateSkuAvailability",
+              "error": {
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": [],
+                "additionalInfo": []
+              }
+            },
+            {
+              "status": "Valid",
+              "validationType": "ValidateCreateOrderLimit",
+              "error": {
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": [],
+                "additionalInfo": []
+              }
+            },
+            {
+              "status": "Valid",
+              "validationType": "ValidatePreferences",
+              "error": {
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": [],
+                "additionalInfo": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "blueprintName": "simpleBlueprint",
+    "versionId": "V2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "displayName": "enforce owners of given subscription",
+              "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7",
+              "principalIds": "[parameters('owners')]"
+            },
+            "kind": "roleAssignment",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/ownerAssignment",
+            "type": "Microsoft.Blueprint/blueprints/versions/artifacts",
+            "name": "ownerAssignment"
+          },
+          {
+            "properties": {
+              "displayName": "force costCenter tag on all resources",
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62",
+              "parameters": {
+                "tagName": {
+                  "value": "costCenter"
+                },
+                "tagValue": {
+                  "value": "[parameter('costCenter')]"
+                }
+              }
+            },
+            "kind": "policyAssignment",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy",
+            "type": "Microsoft.Blueprint/blueprints/versions/artifacts",
+            "name": "costCenterPolicy"
+          },
+          {
+            "properties": {
+              "template": {
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "storageAccountType": {
+                    "type": "string",
+                    "defaultValue": "Standard_LRS",
+                    "allowedValues": [
+                      "Standard_LRS",
+                      "Standard_GRS",
+                      "Standard_ZRS",
+                      "Premium_LRS"
+                    ],
+                    "metadata": {
+                      "description": "Storage Account type"
+                    }
+                  }
+                },
+                "variables": {
+                  "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'standardsa')]"
+                },
+                "resources": [
+                  {
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "name": "[variables('storageAccountName')]",
+                    "apiVersion": "2016-01-01",
+                    "location": "[resourceGroup().location]",
+                    "sku": {
+                      "name": "[parameters('storageAccountType')]"
+                    },
+                    "kind": "Storage",
+                    "properties": {}
+                  }
+                ],
+                "outputs": {
+                  "storageAccountName": {
+                    "type": "string",
+                    "value": "[variables('storageAccountName')]"
+                  }
+                }
+              },
+              "resourceGroup": "storageRG",
+              "parameters": {
+                "storageAccountType": {
+                  "value": "[parameters('storageAccountType')]"
+                }
+              }
+            },
+            "kind": "template",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/storageTemplate",
+            "type": "Microsoft.Blueprint/blueprints/versions/artifacts",
+            "name": "storageTemplate"
+          }
+        ]
+      }
+    }
+  }
+}

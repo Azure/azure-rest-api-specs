@@ -1,0 +1,66 @@
+{
+  "title": "Next page query",
+  "description": "A query on resources requesting the next page using skip token. Please note id field is required in the response to return the pages in stable sorted fashion.",
+  "parameters": {
+    "api-version": "2019-04-01",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "where name contains 'test' | project id, name, type, location",
+      "options": {
+        "$skipToken": "eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ=="
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 386,
+        "count": 3,
+        "resultTruncated": "false",
+        "$skipToken": "eyAibm8yIjogImx1Y2syIiwgImJ1dDIiOiAibmljZTIiLCAidHJ5MiI6ICIhIiB9",
+        "data": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "location",
+              "type": "string"
+            }
+          ],
+          "rows": [
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Compute/disks/second_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+              "second_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+              "microsoft.compute/disks",
+              "eastus"
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/AATest",
+              "AATest",
+              "microsoft.automation/automationaccounts",
+              "westcentralus"
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/TestAA/runbooks/RBTest",
+              "RBTest",
+              "microsoft.automation/automationaccounts/runbooks",
+              "westcentralus"
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

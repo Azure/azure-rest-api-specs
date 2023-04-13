@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2019-04-01-preview",
+    "viewName": "swaggerExample",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/views/swaggerExample",
+        "name": "swaggerExample",
+        "type": "Microsoft.CostManagement/Views",
+        "eTag": "\"1d4ff9fe66f1d10\"",
+        "properties": {
+          "displayName": "swagger Example",
+          "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG",
+          "query": {
+            "type": "Usage",
+            "timeframe": "MonthToDate",
+            "dataset": {
+              "granularity": "Daily",
+              "aggregation": {
+                "totalCost": {
+                  "name": "PreTaxCost",
+                  "function": "Sum"
+                }
+              },
+              "grouping": [],
+              "sorting": [
+                {
+                  "direction": "Ascending",
+                  "name": "UsageDate"
+                }
+              ]
+            }
+          },
+          "chart": "Table",
+          "accumulated": "true",
+          "metric": "ActualCost",
+          "kpis": [
+            {
+              "type": "Forecast",
+              "id": null,
+              "enabled": true
+            },
+            {
+              "type": "Budget",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/swaggerDemo",
+              "enabled": true
+            }
+          ],
+          "pivots": [
+            {
+              "type": "Dimension",
+              "name": "ServiceName"
+            },
+            {
+              "type": "Dimension",
+              "name": "MeterCategory"
+            },
+            {
+              "type": "TagKey",
+              "name": "swaggerTagKey"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "customerName": "{customerName}",
+    "$expand": "enabledAzureSkus,resellers"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
+        "name": "{customerName}",
+        "type": "Microsoft.Billing/customers",
+        "properties": {
+          "displayName": "customerName1",
+          "enabledAzureSKUs": [
+            {
+              "skuId": "0002",
+              "skuDescription": "Microsoft Azure Standard"
+            }
+          ],
+          "resellers": [
+            {
+              "resellerId": "89e87bdf-a2a2-4687-925f-4c18b27bccfd",
+              "description": "Reseller1"
+            },
+            {
+              "resellerId": "3b65b5a8-bd4f-4084-90e9-e1bd667a2b19",
+              "description": "Reseller2"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

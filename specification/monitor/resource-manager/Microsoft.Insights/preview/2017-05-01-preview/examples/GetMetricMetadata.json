@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "timespan": "2021-04-18T22:14:26.647Z/2021-04-19T22:14:26.647Z",
+    "metric": "BlobCount",
+    "$filter": "BlobType eq '*'",
+    "resulttype": "metadata",
+    "resourceUri": "subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default",
+    "api-version": "2017-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timespan": "2021-04-18T22:14:26Z/2021-04-19T22:14:26Z",
+        "interval": "PT1H",
+        "value": [
+          {
+            "id": "/subscriptions/1f3fa6d2-851c-4a91-9087-1a050f3a9c38/resourceGroups/todking/providers/Microsoft.Storage/storageAccounts/tkfileserv/blobServices/default/providers/Microsoft.Insights/metrics/BlobCount",
+            "type": "Microsoft.Insights/metrics",
+            "name": {
+              "value": "BlobCount",
+              "localizedValue": "Blob Count"
+            },
+            "displayDescription": "The number of blob objects stored in the storage account.",
+            "unit": "Count",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "BlockBlob"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "PageBlob"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "Azure Data Lake Storage"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

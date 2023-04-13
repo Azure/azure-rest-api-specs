@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2021-08-01",
+    "diskName": "myDisk",
+    "disk": {
+      "location": "West US",
+      "properties": {
+        "osType": "Windows",
+        "securityProfile": {
+          "securityType": "TrustedLaunch"
+        },
+        "creationData": {
+          "createOption": "UploadPreparedSecure",
+          "uploadSizeBytes": 10737418752
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "TrustedLaunch"
+          },
+          "creationData": {
+            "createOption": "UploadPreparedSecure",
+            "uploadSizeBytes": 10737418752
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "securityProfile": {
+            "securityType": "TrustedLaunch"
+          },
+          "creationData": {
+            "createOption": "UploadPreparedSecure",
+            "uploadSizeBytes": 10737418752
+          },
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "myDisk"
+      }
+    }
+  }
+}

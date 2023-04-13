@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "apimBaseUrl": "apimservice1.management.azure-api.net",
+    "productId": "5a58be7ba40f7e104892b23a",
+    "policyId": "policy",
+    "api-version": "2017-03-01",
+    "parameters": {
+      "policyContent": "<policies>\r\n  <inbound>\r\n    <rate-limit calls=\"5\" renewal-period=\"60\" />\r\n    <quota calls=\"100\" renewal-period=\"604800\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/products/5a58be7ba40f7e104892b23a/policies/policy",
+        "policyContent": "<policies>\r\n  <inbound>\r\n    <rate-limit calls=\"5\" renewal-period=\"60\" version=\"2\" />\r\n    <quota calls=\"100\" renewal-period=\"604800\" version=\"2\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/products/5a58be7ba40f7e104892b23a/policies/policy",
+        "policyContent": "<policies>\r\n  <inbound>\r\n    <rate-limit calls=\"5\" renewal-period=\"60\" version=\"2\" />\r\n    <quota calls=\"100\" renewal-period=\"604800\" version=\"2\" />\r\n    <base />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n</policies>"
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contosomedia",
+    "contentKeyPolicyName": "PolicyWithWidevineOptionAndJwtTokenRestriction",
+    "api-version": "2018-03-30-preview",
+    "parameters": {
+      "properties": {
+        "description": "ArmPolicyDescription",
+        "options": [
+          {
+            "name": "widevineoption",
+            "configuration": {
+              "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
+              "widevineTemplate": "{\"allowed_track_types\":\"SD_HD\",\"content_key_specs\":[{\"track_type\":\"SD\",\"security_level\":1,\"required_output_protection\":{\"hdcp\":\"HDCP_V2\"}}],\"policy_overrides\":{\"can_play\":true,\"can_persist\":true,\"can_renew\":false}}"
+            },
+            "restriction": {
+              "@odata.type": "#Microsoft.Media.ContentKeyPolicyTokenRestriction",
+              "issuer": "urn:issuer",
+              "audience": "urn:audience",
+              "primaryVerificationKey": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey",
+                "exponent": "AQAB",
+                "modulus": "AQAD"
+              },
+              "alternateVerificationKeys": [
+                {
+                  "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
+                  "keyValue": "AAAAAAAAAAAAAAAAAAAAAA=="
+                }
+              ],
+              "restrictionTokenType": "Jwt"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "PolicyWithWidevineOptionAndJwtTokenRestriction",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithWidevineOptionAndJwtTokenRestriction",
+        "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+        "properties": {
+          "policyId": "f5f2f742-e073-4a7a-8663-09ffdad9d2c0",
+          "created": "2018-03-07T18:49:21.007Z",
+          "lastModified": "2018-03-07T18:49:21.007Z",
+          "description": "ArmPolicyDescription",
+          "options": [
+            {
+              "policyOptionId": "56af71e4-6e97-4588-a162-bad1f5b03074",
+              "name": "widevineoption",
+              "configuration": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
+                "widevineTemplate": "{\"allowed_track_types\":\"SD_HD\",\"content_key_specs\":[{\"track_type\":\"SD\",\"security_level\":1,\"required_output_protection\":{\"hdcp\":\"HDCP_V2\"}}],\"policy_overrides\":{\"can_play\":true,\"can_persist\":true,\"can_renew\":false}}"
+              },
+              "restriction": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyTokenRestriction",
+                "issuer": "urn:issuer",
+                "audience": "urn:audience",
+                "primaryVerificationKey": {
+                  "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey",
+                  "exponent": "",
+                  "modulus": ""
+                },
+                "alternateVerificationKeys": [
+                  {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
+                    "keyValue": ""
+                  }
+                ],
+                "requiredClaims": [],
+                "restrictionTokenType": "Jwt",
+                "openIdConnectDiscoveryDocument": null
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "PolicyWithWidevineOptionAndJwtTokenRestriction",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithWidevineOptionAndJwtTokenRestriction",
+        "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+        "properties": {
+          "policyId": "f5f2f742-e073-4a7a-8663-09ffdad9d2c0",
+          "created": "2018-03-07T18:49:21.007Z",
+          "lastModified": "2018-03-07T18:49:21.007Z",
+          "description": "ArmPolicyDescription",
+          "options": [
+            {
+              "policyOptionId": "56af71e4-6e97-4588-a162-bad1f5b03074",
+              "name": "widevineoption",
+              "configuration": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
+                "widevineTemplate": "{\"allowed_track_types\":\"SD_HD\",\"content_key_specs\":[{\"track_type\":\"SD\",\"security_level\":1,\"required_output_protection\":{\"hdcp\":\"HDCP_V2\"}}],\"policy_overrides\":{\"can_play\":true,\"can_persist\":true,\"can_renew\":false}}"
+              },
+              "restriction": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyTokenRestriction",
+                "issuer": "urn:issuer",
+                "audience": "urn:audience",
+                "primaryVerificationKey": {
+                  "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey",
+                  "exponent": "",
+                  "modulus": ""
+                },
+                "alternateVerificationKeys": [
+                  {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
+                    "keyValue": ""
+                  }
+                ],
+                "requiredClaims": [],
+                "restrictionTokenType": "Jwt",
+                "openIdConnectDiscoveryDocument": null
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
