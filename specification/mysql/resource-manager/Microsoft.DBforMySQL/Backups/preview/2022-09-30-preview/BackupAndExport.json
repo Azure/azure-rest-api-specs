@@ -125,7 +125,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -323,7 +323,7 @@
           "description": "The response properties of a backup and export operation."
         },
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
           "description": "The BackupAndExport operation error response."
         }
       },
@@ -344,17 +344,6 @@
         }
       },
       "description": "Represents ValidateBackup API Response"
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
-          "description": "The resource management error response."
-        }
-      },
-      "description": "An error response from the Batch service."
     }
   },
   "produces": [
