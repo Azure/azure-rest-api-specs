@@ -144,6 +144,12 @@
           "Successful Conversational PII Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationPIISubmit.json"
           },
+          "Successful Conversational PII Analysis Exclusion Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIExclusionSubmit.json"
+          },
+          "Successful Conversational PII Analysis Redaction Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIRedactionCharSubmit.json"
+          },
           "Successful Conversation Summarization Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
           },
@@ -196,6 +202,12 @@
         "x-ms-examples": {
           "Successful Get Conversation PII Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationPIITaskStatusRequest.json"
+          },
+          "Successful Get Text Conversation Analysis Exclusion Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIExclusionTaskStatusRequest.json"
+          },
+          "Successful Get Text Conversation Analysis Redaction Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIRedactionCharTaskStatusRequest.json"
           },
           "Successful Get Text Conversation Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
@@ -2041,15 +2053,22 @@
         "piiCategories": {
           "$ref": "#/definitions/ConversationPIICategories"
         },
-        "includeAudioRedaction": {
+        "redactAudioTiming": {
           "type": "boolean",
-          "description": "Flag to indicate if audio redaction is requested. By default audio redaction will not be performed.",
+          "description": "Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included.",
           "default": false
         },
         "redactionSource": {
           "type": "string",
           "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
+        },
+        "redactionCharacter": {
+          "$ref": "common.json#/definitions/RedactionCharacter"
+        },
+        "excludePiiCategories": {
+          "description": "List of categories that need to be excluded instead of included.",
+          "$ref": "#/definitions/ConversationPIICategoriesExclude"
         }
       },
       "allOf": [
@@ -2070,13 +2089,34 @@
           "Address",
           "CreditCardNumber",
           "Email",
-          "Name",
+          "Person",
           "NumericIdentifier",
           "PhoneNumber",
           "USSocialSecurityNumber",
           "Miscellaneous",
           "All",
           "Default"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ConversationPIICategoriesExclude": {
+      "description": "Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ConversationPIICategoriesExclude",
+          "modelAsString": true
+        },
+        "enum": [
+          "Address",
+          "CreditCardNumber",
+          "Email",
+          "Person",
+          "NumericIdentifier",
+          "PhoneNumber",
+          "USSocialSecurityNumber"
         ]
       },
       "type": "array",
