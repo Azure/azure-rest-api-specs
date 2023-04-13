@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/longtermretention/backup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrbackup": {
       "post": {
         "description": "Start the Backup operation",
         "tags": [
@@ -49,13 +49,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-              "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "name": "parameters",
@@ -78,7 +78,7 @@
           "200": {
             "description": "Ok. API finished synchronously with Success.",
             "schema": {
-              "$ref": "#/definitions/Response"
+              "$ref": "#/definitions/BackupResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -123,8 +123,8 @@
           }
         },
         "x-ms-examples": {
-          "Sample for Backup API.": {
-            "$ref": "./Examples/backup.json"
+          "Sample_ExecuteBackup": {
+            "$ref": "./examples/ltrbackup.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -134,7 +134,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/longtermretention/prebackup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrprebackup": {
       "post": {
         "description": "PreBackup operation performs all the checks that are need for the subsequent Backup to succeed.",
         "tags": [
@@ -149,13 +149,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-              "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "name": "parameters",
@@ -178,7 +178,7 @@
           "200": {
             "description": "Ok. API finished synchronously with Success.",
             "schema": {
-              "$ref": "#/definitions/Response"
+              "$ref": "#/definitions/PreBackupResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -205,80 +205,8 @@
           }
         },
         "x-ms-examples": {
-          "Sample for pre Backup API.": {
-            "$ref": "./Examples/prebackup.json"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/longtermretention/operationStatus/{backupName}": {
-      "get": {
-        "description": "Get on operation Status",
-        "tags": [
-          "LongTermRetention"
-        ],
-        "operationId": "plugin_operationStatus",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-              "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BackupNameParameter"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "A unique ID provided by the client to identify the specific request.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok. API finished synchronously with Success.",
-            "schema": {
-              "$ref": "#/definitions/Response"
-            },
-            "headers": {
-              "x-ms-request-id": {
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error Scenario 4xx/5xx",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "ErrorCode string in the event of a failure.",
-                "type": "string"
-              },
-              "x-ms-request-id": {
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Sample for Backup API.": {
-            "$ref": "./Examples/get.json"
+          "Sample_Prebackup": {
+            "$ref": "./examples/ltrprebackup.json"
           }
         },
         "deprecated": false
@@ -293,10 +221,6 @@
       ],
       "type": "object",
       "properties": {
-        "scope": {
-          "$ref": "#/definitions/Scope",
-          "description": "Scope"
-        },
         "backupSettings": {
           "$ref": "#/definitions/BackupSettings",
           "description": "Backup Settings"
@@ -328,140 +252,25 @@
         }
       ]
     },
-    "Scope": {
-      "description": "Scope identifies the subset of items within the ARM resource that need to be backed up, or restored.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "Type of the specific object - used for deserializing",
-          "type": "string",
-          "readOnly": false
-        }
-      },
-      "discriminator": "objectType"
-    },
-    "AbsoluteScope": {
-      "description": "Absolute scope identifies the subset of items within the ARM resource that need to be backed up, or restored, using their absolute urls.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Scope"
-        }
-      ],
-      "properties": {
-        "absoluteItemIds": {
-          "description": "List of absolute itemIds",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "RangeScope": {
-      "description": "Range scope identifies the subset of items within the ARM resource that need to be backed up, or restored, using start-end based Range objects.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Scope"
-        }
-      ],
-      "properties": {
-        "rangeList": {
-          "description": "List of start-end ranges",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/Range"
-          }
-        }
-      }
-    },
-    "Range": {
-      "description": "Range captures a start-end of items.",
-      "type": "object",
-      "required": [ "startRange", "endRange" ],
-      "properties": {
-        "startRange": {
-          "description": "startRange",
-          "type": "string"
-        },
-        "endRange": {
-          "description": "endRange",
-          "type": "string"
-        }
-      }
-    },
-    "RegExScope": {
-      "description": "Regex scope identifies the subset of items within the ARM resource that need to be backed up, or restored, using regular expressions.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Scope"
-        }
-      ],
-      "properties": {
-        "regExes": {
-          "description": "List of Regular expressions.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "BackupSettings": {
       "description": "backupSettings",
       "type": "object",
-      "required": [ "backupType", "backupFormat" ],
+      "required": [
+        "backupName"
+      ],
       "properties": {
         "backupName": {
           "type": "string",
           "description": "Backup Name for the current backup"
-        },
-        "backupType": {
-          "type": "string",
-          "description": "Type of backup like Full, Differential etc."
-        },
-        "backupFormat": {
-          "description": "backupFormat for the current backup.",
-          "enum": [
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BackupFormat",
-            "modelAsString": true
-          }
         }
       }
     },
     "BackupStoreDetails": {
       "description": "Details about the target where the backup content will be stored.",
       "required": [
-        "objectType"
+        "sasUriList"
       ],
       "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "Type of the specific object - used for deserializing",
-          "type": "string",
-          "readOnly": false
-        }
-      },
-      "discriminator": "objectType"
-    },
-    "FullBackupStoreDetails": {
-      "description": "FullBackupStoreDetails is used for scenarios where backup data is streamed/copied over to a storage destination.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupStoreDetails"
-        }
-      ],
       "properties": {
         "sasUriList": {
           "description": "SASUriList of storage containers where backup data is to be streamed/copied.",
@@ -499,7 +308,9 @@
           "$ref": "#/definitions/Properties"
         }
       ],
-      "required": [ "numberOfContainers" ],
+      "required": [
+        "numberOfContainers"
+      ],
       "properties": {
         "numberOfContainers": {
           "format": "int32",
@@ -516,8 +327,11 @@
           "$ref": "#/definitions/Properties"
         }
       ],
-      "required": [ "datasourceSizeInBytes", "dataTransferredInBytes", "backupMetadata" ],
-
+      "required": [
+        "datasourceSizeInBytes",
+        "dataTransferredInBytes",
+        "backupMetadata"
+      ],
       "properties": {
         "datasourceSizeInBytes": {
           "format": "int64",
@@ -535,12 +349,15 @@
         }
       }
     },
-    "Response": {
-      "description": "Response",
+    "BackupResponse": {
+      "description": "Response for the LTR backup API call",
       "type": "object",
-
-      "required": [ "id", "name", "status", "startTime" ],
-
+      "required": [
+        "id",
+        "name",
+        "status",
+        "startTime"
+      ],
       "properties": {
         "id": {
           "description": "full rp id",
@@ -580,12 +397,25 @@
         },
         "properties": {
           "description": "AdditionalProperties",
-          "$ref": "#/definitions/Properties"
+          "$ref": "#/definitions/BackupResponseProperties"
         },
         "percentComplete": {
           "description": "PercentageCompleted",
           "format": "double",
-          "type": "number"
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "PreBackupResponse": {
+      "description": "Response for the LTR pre-backup API call",
+      "type": "object",
+      "required" : ["properties"],
+      "properties": {
+        "properties": {
+          "description": "Additional Properties for the pre backup response",
+          "$ref": "#/definitions/PreBackupResponseProperties"
         }
       }
     }
