@@ -1093,6 +1093,10 @@
             "$ref": "./examples/RedisCachePatchSchedulesCreateOrUpdate.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Create or replace the patching schedule for Redis cache.",
         "parameters": [
           {
@@ -1148,8 +1152,18 @@
           },
           "201": {
             "description": "The patch schedule was successfully created.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/RedisPatchSchedule"
+              "$ref": "#/definitions/RedisPatchScheduleWithProvisioningState"
             }
           },
           "default": {
@@ -2550,11 +2564,56 @@
       ],
       "description": "List of patch schedules for a Redis cache."
     },
+    "ScheduleEntriesWithProvisioningState": {
+      "properties": {
+        "scheduleEntries": {
+          "x-ms-client-name": "ScheduleEntries",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleEntry"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of patch schedules for a Redis cache."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Non-terminal state of the status of the schedule entry creation/updation."
+        }
+      },
+      "required": [
+        "scheduleEntries"
+      ],
+      "description": "List of patch schedules for a Redis cache."
+    },
     "RedisPatchSchedule": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
+          "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Response to put/get patch schedules for Redis cache."
+    },
+    "RedisPatchScheduleWithProvisioningState": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleEntriesWithProvisioningState",
           "description": "List of patch schedules for a Redis cache."
         },
         "location": {
