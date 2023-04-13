@@ -66,15 +66,25 @@ interface CertificateProfileOperations {
 
 @doc("Algorithms supported for signing.")
 enum SignatureAlgorithm {
+  @doc("RSASSA-PKCS1-v1_5 using SHA-256 hash algorithm.")
   RS256,
+  @doc("RSASSA-PKCS1-v1_5 using SHA-384 hash algorithm.")
   RS384,
+  @doc("RSASSA-PKCS1-v1_5 using SHA-512 hash algorithm.")
   RS512,
+  @doc("RSASSA-PSS using SHA-256 hash algorithm.")
   PS256,
+  @doc("RSASSA-PSS using SHA-384 hash algorithm.")
   PS384,
+  @doc("RSASSA-PSS using SHA-512 hash algorithm.")
   PS512,
+  @doc("ECDSA using P-256 and SHA-256 hash algorithm.")
   ES256,
+  @doc("ECDSA using P-384 and SHA-384 hash algorithm.")
   ES384,
+  @doc("ECDSA using P-521 and SHA-512 hash algorithm.")
   ES512,
+  @doc("ECDSA using secp256k1 and SHA-256 hash algorithm.")
   ES256K,
 }
 
