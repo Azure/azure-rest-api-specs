@@ -41,6 +41,7 @@ input-file:
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/configurationGroupValues.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/networkFunction.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/networkFunctionDefinition.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/networkFunctionReadyK8s.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/networkServiceDesign.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/operation.json
   - Microsoft.HybridNetwork/preview/2023-04-01-preview/proxyPublisher.json
