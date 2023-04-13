@@ -507,6 +507,41 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/usages": {
+      "get": {
+        "summary": "Gets subscription core usages for location.",
+        "description": "Gets subscription core usages for location.",
+        "operationId": "GetUsagesInLocation",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CsmUsageQuota" 
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+      }
+    }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
       "post": {
         "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
