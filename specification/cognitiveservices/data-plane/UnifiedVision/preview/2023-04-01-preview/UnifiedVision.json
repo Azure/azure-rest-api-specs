@@ -9,7 +9,7 @@
     "/imageanalysis:segment": {
       "post": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
         "operationId": "ImageAnalysis_Segment",
@@ -24,14 +24,14 @@
           {
             "in": "query",
             "name": "mode",
-            "description": "The analysis mode requested. One of: backgroundRemoval, foregroundMatting.",
+            "description": "The analysis mode requested.",
             "type": "string",
             "enum": [
               "backgroundRemoval",
               "foregroundMatting"
             ],
             "x-ms-enum": {
-              "name": "SegmentationModeApiModel",
+              "name": "SegmentationMode",
               "modelAsString": true
             }
           },
@@ -80,7 +80,7 @@
     "/retrieval:vectorizeText": {
       "post": {
         "tags": [
-          "ImageRetrievalApi"
+          "ImageRetrieval"
         ],
         "summary": "Return vector from a text.",
         "operationId": "ImageRetrieval_VectorizeText",
@@ -138,7 +138,7 @@
     "/retrieval:vectorizeImage": {
       "post": {
         "tags": [
-          "ImageRetrievalApi"
+          "ImageRetrieval"
         ],
         "summary": "Return vector from an image.",
         "operationId": "ImageRetrieval_VectorizeImage",
@@ -197,7 +197,7 @@
     "/imagecomposition:stitch": {
       "post": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Run the image stitching operation against a sequence of images.",
         "operationId": "ImageComposition_Stitch",
@@ -251,7 +251,7 @@
     "/imagecomposition:rectify": {
       "post": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Run the image rectification operation against an image with 4 control points provided in the parameter.",
         "operationId": "ImageComposition_Rectify",
@@ -305,7 +305,7 @@
     "/planogramcompliance:match": {
       "post": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Run the planogram matching operation against a planogram and a product understanding result.",
         "operationId": "PlanogramCompliance_Match",
@@ -354,10 +354,10 @@
         }
       }
     },
-    "/productrecognition:analyze/{modelName}/runs/{runName}": {
+    "/productrecognition/{modelName}/runs/{runName}": {
       "put": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Run the product recognition against a model with an image.",
         "operationId": "ProductRecognition_Create",
@@ -414,13 +414,12 @@
       },
       "get": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Get information about a specific product recognition run.",
         "operationId": "ProductRecognition_Get",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -472,7 +471,7 @@
       },
       "delete": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Delete a product recognition run. A product recognition run can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A product recognition run with the specified name was not found.",
         "operationId": "ProductRecognition_Delete",
@@ -525,16 +524,15 @@
         }
       }
     },
-    "/productrecognition:analyze/{modelName}/runs": {
+    "/productrecognition/{modelName}/runs": {
       "get": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "List all product recognition run of a model.",
         "operationId": "ProductRecognition_List",
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -589,6 +587,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "ProductRecognition_List": {
             "$ref": "./examples/ProductRecognition_List.json"
@@ -599,7 +600,7 @@
     "/imageanalysis:analyze": {
       "post": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
         "operationId": "ImageAnalysis_Analyze",
@@ -627,7 +628,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "VisualFeatureApiModel",
+                "name": "VisualFeature",
                 "modelAsString": true
               }
             },
@@ -701,7 +702,7 @@
     "/datasets/{name}": {
       "put": {
         "tags": [
-          "DatasetsApi"
+          "Datasets"
         ],
         "summary": "Register a new dataset.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: A dataset with the specified name already exists.",
         "operationId": "Datasets_Register",
@@ -761,7 +762,7 @@
       },
       "get": {
         "tags": [
-          "DatasetsApi"
+          "Datasets"
         ],
         "summary": "Get information about a specific dataset.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.",
         "operationId": "Datasets_Get",
@@ -809,7 +810,7 @@
       },
       "patch": {
         "tags": [
-          "DatasetsApi"
+          "Datasets"
         ],
         "summary": "Update the properties of an existing dataset.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.\r\n- 412: An If-Match header was provided, but the given ETag did not match the current ETag value.",
         "operationId": "Datasets_Update",
@@ -875,7 +876,7 @@
       },
       "delete": {
         "tags": [
-          "DatasetsApi"
+          "Datasets"
         ],
         "summary": "Unregister a dataset.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A dataset with the specified name was not found.\r\n- 412: An If-Match header was provided, but the given ETag did not match the current ETag value.",
         "operationId": "Datasets_Unregister",
@@ -928,7 +929,7 @@
     "/datasets": {
       "get": {
         "tags": [
-          "DatasetsApi"
+          "Datasets"
         ],
         "summary": "Get a list of datasets that have been registered.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
         "operationId": "Datasets_List",
@@ -992,7 +993,7 @@
     "/models/{name}": {
       "put": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Start training a custom model.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: A model with the specified name already exists.",
         "operationId": "Models_Create",
@@ -1052,7 +1053,7 @@
       },
       "get": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Get information about a specific model.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
         "operationId": "Models_Get",
@@ -1100,7 +1101,7 @@
       },
       "delete": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Delete a custom model. A model can be deleted if it is in one of the 'Succeeded', 'Failed', or 'Canceled' states.\r\nIf a model is in the 'NotStarted' or 'Training' state, cancel training and wait for cancellation to finish before deleting the model.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
         "operationId": "Models_Delete",
@@ -1147,7 +1148,7 @@
     "/models": {
       "get": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Get a list of the available models.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
         "operationId": "Models_List",
@@ -1211,7 +1212,7 @@
     "/models/{name}:cancel": {
       "post": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Cancel model training.\r\n            \r\nStatus codes returned:\r\n- 202: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model with the specified name was not found.",
         "operationId": "Models_CancelTraining",
@@ -1258,7 +1259,7 @@
     "/models/{name}/evaluations/{evaluationName}": {
       "put": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Evaluate an existing model.\r\n            \r\nStatus codes returned:\r\n- 201: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 409: An evaluation with the specified name already exists.",
         "operationId": "ModelEvaluations_Create",
@@ -1327,7 +1328,7 @@
       },
       "get": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Get information about a specific model evaluation.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model  evaluation with the specified name was not found.",
         "operationId": "ModelEvaluations_Get",
@@ -1384,7 +1385,7 @@
       },
       "delete": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Delete a model evaluation. A model evaluation can be deleted if it is in the 'Succeeded' or 'Failed' states.\r\n            \r\nStatus codes returned:\r\n- 204: Operation completed successfully.\r\n- 400: The request was malformed.\r\n- 404: A model evaluation with the specified name was not found.",
         "operationId": "ModelEvaluations_Delete",
@@ -1440,7 +1441,7 @@
     "/models/{name}/evaluations": {
       "get": {
         "tags": [
-          "ModelsApi"
+          "Models"
         ],
         "summary": "Get a list of the available evaluations for a model.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
         "operationId": "ModelEvaluations_List",
@@ -2476,7 +2477,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ProductRecognitionStateApiModel",
+            "name": "ProductRecognitionState",
             "modelAsString": true
           }
         },
@@ -2669,7 +2670,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "AnnotationKindApiModel",
+            "name": "AnnotationKind",
             "modelAsString": true
           }
         },
@@ -2773,7 +2774,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ModelStateApiModel",
+            "name": "ModelState",
             "modelAsString": true
           }
         },
@@ -2853,7 +2854,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ModelEvaluationStateApiModel",
+            "name": "ModelEvaluationState",
             "modelAsString": true
           }
         },
@@ -2992,7 +2993,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "StorageAuthenticationKindApiModel",
+            "name": "StorageAuthenticationKind",
             "modelAsString": true
           }
         },
@@ -3032,7 +3033,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ModelKindApiModel",
+            "name": "ModelKind",
             "modelAsString": true
           }
         }
@@ -3053,7 +3054,7 @@
     "/imageanalysis:segment?overload=stream": {
       "post": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Analyze the input image. The request either contains an image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes a url property to be used to retrieve the image stream. An image stream of content type 'image/png' is returned, where the pixel values depend on the analysis mode. The returned image has the same dimensions as the input image for modes: foregroundMatting. The returned image has the same aspect ratio and same dimensions as the input image up to a limit of 16 megapixels for modes: backgroundRemoval.",
         "operationId": "ImageAnalysis_SegmentFromImageStream",
@@ -3073,14 +3074,14 @@
           {
             "in": "query",
             "name": "mode",
-            "description": "The analysis mode requested. One of: backgroundRemoval, foregroundMatting.",
+            "description": "The analysis mode requested.",
             "type": "string",
             "enum": [
               "backgroundRemoval",
               "foregroundMatting"
             ],
             "x-ms-enum": {
-              "name": "SegmentationModeApiModel",
+              "name": "SegmentationMode",
               "modelAsString": true
             }
           },
@@ -3130,7 +3131,7 @@
     "/retrieval:vectorizeImage?overload=stream": {
       "post": {
         "tags": [
-          "ImageRetrievalApi"
+          "ImageRetrieval"
         ],
         "summary": "Return vector from an image.",
         "operationId": "ImageRetrieval_VectorizeImageFromImageStream",
@@ -3195,7 +3196,7 @@
     "/imageanalysis:analyze?overload=stream": {
       "post": {
         "tags": [
-          "OperationsApi"
+          "Operations"
         ],
         "summary": "Analyze the input image. The request either contains image stream with any content type ['image/*', 'application/octet-stream'], or a JSON payload which includes an url property to be used to retrieve the image stream.",
         "operationId": "ImageAnalysis_AnalyzeFromImageStream",
@@ -3228,7 +3229,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "VisualFeatureApiModel",
+                "name": "VisualFeature",
                 "modelAsString": true
               }
             },
