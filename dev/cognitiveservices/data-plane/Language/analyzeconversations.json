@@ -144,11 +144,20 @@
           "Successful Conversational PII Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationPIISubmit.json"
           },
+          "Successful Conversational PII Analysis Exclusion Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIExclusionSubmit.json"
+          },
+          "Successful Conversational PII Analysis Redaction Job Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIRedactionCharSubmit.json"
+          },
           "Successful Conversation Summarization Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarySubmit.json"
           },
           "Successful Conversation Summarization Task Submit": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskSubmit.json"
+          },
+          "Successful Custom Conversation Summarization Task Submit": {
+            "$ref": "./examples/conversations/SuccessfulCustomConversationSummarizationTaskSubmit.json"
           },
           "Successful Conversation Sentiment Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSentimentSubmit.json"
@@ -194,6 +203,12 @@
           "Successful Get Conversation PII Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationPIITaskStatusRequest.json"
           },
+          "Successful Get Text Conversation Analysis Exclusion Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIExclusionTaskStatusRequest.json"
+          },
+          "Successful Get Text Conversation Analysis Redaction Job Status Request": {
+            "$ref": "./examples/conversations/SuccessfulConversationPIIRedactionCharTaskStatusRequest.json"
+          },
           "Successful Get Text Conversation Analysis Job Status Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskStatusRequest.json"
           },
@@ -202,6 +217,9 @@
           },
           "Successful Get Conversation Summarization Result": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskResult.json"
+          },
+          "Successful Get Custom Conversation Summarization Result": {
+            "$ref": "./examples/conversations/SuccessfulCustomConversationSummarizationTaskResult.json"
           }
         }
       }
@@ -1653,6 +1671,7 @@
       "enum": [
         "ConversationalPIITask",
         "ConversationalSummarizationTask",
+        "CustomConversationalSummarizationTask",
         "ConversationalSentimentTask"
       ],
       "x-ms-enum": {
@@ -1666,6 +1685,7 @@
       "enum": [
         "ConversationalPIIResults",
         "ConversationalSummarizationResults",
+        "CustomConversationalSummarizationResults",
         "ConversationalSentimentResults"
       ],
       "x-ms-enum": {
@@ -2033,15 +2053,22 @@
         "piiCategories": {
           "$ref": "#/definitions/ConversationPIICategories"
         },
-        "includeAudioRedaction": {
+        "redactAudioTiming": {
           "type": "boolean",
-          "description": "Flag to indicate if audio redaction is requested. By default audio redaction will not be performed.",
+          "description": "Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included.",
           "default": false
         },
         "redactionSource": {
           "type": "string",
           "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
+        },
+        "redactionCharacter": {
+          "$ref": "common.json#/definitions/RedactionCharacter"
+        },
+        "excludePiiCategories": {
+          "description": "List of categories that need to be excluded instead of included.",
+          "$ref": "#/definitions/ConversationPIICategoriesExclude"
         }
       },
       "allOf": [
@@ -2062,13 +2089,34 @@
           "Address",
           "CreditCardNumber",
           "Email",
-          "Name",
+          "Person",
           "NumericIdentifier",
           "PhoneNumber",
           "USSocialSecurityNumber",
           "Miscellaneous",
           "All",
           "Default"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ConversationPIICategoriesExclude": {
+      "description": "Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ConversationPIICategoriesExclude",
+          "modelAsString": true
+        },
+        "enum": [
+          "Address",
+          "CreditCardNumber",
+          "Email",
+          "Person",
+          "NumericIdentifier",
+          "PhoneNumber",
+          "USSocialSecurityNumber"
         ]
       },
       "type": "array",
@@ -2103,9 +2151,24 @@
       ],
       "x-ms-discriminator-value": "ConversationalSummarizationTask"
     },
-    "ConversationSummarizationTaskParameters": {
+    "AnalyzeCustomConversationSummarizationTask": {
       "type": "object",
-      "description": "Supported parameters for an conversational summarization task.",
+      "description": "Task definition for custom conversational summarization.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomConversationSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomConversationalSummarizationTask"
+    },
+    "ConversationSummarizationTaskParametersBase": {
+      "type": "object",
+      "description": "Supported parameters for any conversational summarization task.",
       "required": [
         "summaryAspects"
       ],
@@ -2147,10 +2210,31 @@
       },
       "allOf": [
         {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        }
+      ]
+    },
+    "ConversationSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for pre-build conversational summarization task.",
+      "allOf": [
+        {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         },
         {
-          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase"
+        }
+      ]
+    },
+    "CustomConversationSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a custom conversation summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/CustomTaskParameters"
+        },
+        {
+          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase"
         }
       ]
     },
@@ -2172,7 +2256,25 @@
       ],
       "x-ms-discriminator-value": "ConversationalSummarizationResults"
     },
-    "SummaryResult": {
+    "AnalyzeCustomConversationSummarizationResult": {
+      "type": "object",
+      "description": "Result for the custom summarization task on the conversation.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomSummaryResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomConversationalSummarizationResults"
+    },
+    "SummaryResultBase": {
       "type": "object",
       "required": [
         "conversations"
@@ -2184,10 +2286,27 @@
             "$ref": "#/definitions/ConversationsSummaryResult"
           }
         }
-      },
+      }
+    },
+    "SummaryResult": {
+      "type": "object",
       "allOf": [
         {
+          "$ref": "#/definitions/SummaryResultBase"
+        },
+        {
           "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "CustomSummaryResult": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResultBase"
+        },
+        {
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ]
     },

@@ -91,11 +91,26 @@
           "Successful Entity Recognition Request": {
             "$ref": "./examples/text/SuccessfulEntityRecognitionRequest.json"
           },
+          "Successful Entity Recognition Inclusion Request": {
+            "$ref": "./examples/text/SuccessfulEntityRecognitionInclusionRequest.json"
+          },
+          "Successful Entity Recognition Exclusion Request": {
+            "$ref": "./examples/text/SuccessfulEntityRecognitionExclusionRequest.json"
+          },
+          "Successful Entity Recognition Overlap Policy Request": {
+            "$ref": "./examples/text/SuccessfulEntityRecognitionOverlapPolicy.json"
+          },
           "Successful Key Phrase Extraction Request": {
             "$ref": "./examples/text/SuccessfulKeyPhraseExtractionRequest.json"
           },
           "Successful PII Entity Recognition Request": {
             "$ref": "./examples/text/SuccessfulPiiEntityRecognitionRequest.json"
+          },
+          "Successful PII Entity Recognition Redaction Request": {
+            "$ref": "./examples/text/SuccessfulPiiEntityRecognitionRedactionRequest.json"
+          },
+          "Successful PII Entity Recognition Exclusion Request": {
+            "$ref": "./examples/text/SuccessfulPiiEntityRecognitionExclusionRequest.json"
           },
           "Successful Language Detection Request": {
             "$ref": "./examples/text/SuccessfulLanguageDetectionRequest.json"
@@ -163,10 +178,13 @@
           "Successful Submit Abstractive Summarization Task": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
           },
+          "Successful Submit Custom Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulCustomAbstractiveSummarizationTaskSubmit.json"
+          },
           "Successful Healthcare DocumentType Post Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypePostRequest.json"
           },
-          "Successful Custom Custom Sentiment Analysis Post Request": {
+          "Successful Custom Sentiment Analysis Post Request": {
             "$ref": "./examples/text/SuccessfulCustomSentimentAnalysisTaskSubmit.json"
           }
         },
@@ -224,6 +242,9 @@
           },
           "Successful Get Abstractive Summarization Result": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
+          },
+          "Successful Get Custom Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulCustomAbstractiveSummarizationTaskResult.json"
           },
           "Successful Get Text Analysis Health DocumentType Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
@@ -309,7 +330,8 @@
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
         "AbstractiveSummarization",
-        "CustomSentimentAnalysis"
+        "CustomSentimentAnalysis",
+        "CustomAbstractiveSummarization"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -349,7 +371,8 @@
         "CustomSingleLabelClassificationLROResults",
         "CustomMultiLabelClassificationLROResults",
         "AbstractiveSummarizationLROResults",
-        "CustomSentimentAnalysisLROResults"
+        "CustomSentimentAnalysisLROResults",
+        "CustomAbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -565,57 +588,6 @@
         "tasks"
       ]
     },
-    "CustomTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using custom models.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/TaskParameters"
-        }
-      ],
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "common.json#/definitions/RequestStatistics"
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
     "CustomEntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Entities task.",
@@ -626,7 +598,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -665,7 +637,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -677,7 +649,7 @@
       "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -716,7 +688,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -746,7 +718,7 @@
       "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -857,7 +829,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -920,7 +892,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -934,7 +906,7 @@
           "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
         },
         {
-          "$ref": "#/definitions/DocumentDetectedLanguageString"
+          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ]
     },
@@ -1028,6 +1000,7 @@
             "BodyStructure",
             "Age",
             "Gender",
+            "Ethnicity",
             "ExaminationName",
             "Date",
             "Direction",
@@ -1036,21 +1009,30 @@
             "MeasurementUnit",
             "RelationalOperator",
             "Time",
+            "Course",
             "GeneOrProtein",
             "Variant",
+            "Expression",
+            "MutationType",
             "AdministrativeEvent",
             "CareEnvironment",
             "HealthcareProfession",
             "Diagnosis",
             "SymptomOrSign",
             "ConditionQualifier",
+            "ConditionScale",
             "MedicationClass",
             "MedicationName",
             "Dosage",
             "MedicationForm",
             "MedicationRoute",
             "FamilyRelation",
-            "TreatmentName"
+            "TreatmentName",
+            "Allergen",
+            "Employment",
+            "LivingStatus",
+            "SubstanceUse",
+            "SubstanceUseAmount"
           ]
         },
         "subcategory": {
@@ -1126,17 +1108,30 @@
           "type": "string",
           "enum": [
             "Abbreviation",
+            "BodySiteOfCondition",
+            "BodySiteOfTreatment",
+            "CourseOfCondition",
+            "CourseOfExamination",
+            "CourseOfMedication",
+            "CourseOfTreatment",
             "DirectionOfBodyStructure",
             "DirectionOfCondition",
             "DirectionOfExamination",
             "DirectionOfTreatment",
             "DosageOfMedication",
+            "ExaminationFindsCondition",
+            "ExpressionOfGene",
+            "ExpressionOfVariant",
             "FormOfMedication",
+            "FrequencyOfCondition",
             "FrequencyOfMedication",
             "FrequencyOfTreatment",
+            "MutationTypeOfGene",
+            "MutationTypeOfVariant",
             "QualifierOfCondition",
             "RelationOfExamination",
             "RouteOfMedication",
+            "ScaleOfCondition",
             "TimeOfCondition",
             "TimeOfEvent",
             "TimeOfExamination",
@@ -1145,7 +1140,8 @@
             "UnitOfCondition",
             "UnitOfExamination",
             "ValueOfCondition",
-            "ValueOfExamination"
+            "ValueOfExamination",
+            "VariantOfGene"
           ],
           "x-ms-enum": {
             "name": "relationType",
@@ -1205,6 +1201,19 @@
           ],
           "x-ms-enum": {
             "name": "Association",
+            "modelAsString": false
+          }
+        },
+        "temporality": {
+          "description": "Describes temporal information regarding the entity.",
+          "type": "string",
+          "enum": [
+            "current",
+            "past",
+            "future"
+          ],
+          "x-ms-enum": {
+            "name": "Temporality",
             "modelAsString": false
           }
         }
@@ -1417,7 +1426,7 @@
           "type": "array",
           "description": "Sentence level sentiment analysis.",
           "items": {
-            "$ref": "#/definitions/CustomSentimentSentenceResult"
+            "$ref": "#/definitions/CustomSentenceSentiment"
           }
         }
       },
@@ -1432,7 +1441,7 @@
         "sentences"
       ]
     },
-    "CustomSentimentSentenceResult": {
+    "CustomSentenceSentiment": {
       "type": "object",
       "required": [
         "text",
@@ -1752,7 +1761,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -1791,12 +1800,332 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
         "documents"
       ]
+    },
+    "EntityList": {
+      "description": "(Optional) describes the entity categories.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Address",
+          "Numeric",
+          "Age",
+          "Currency",
+          "Number",
+          "NumberRange",
+          "Percentage",
+          "Ordinal",
+          "Temperature",
+          "Dimension",
+          "Length",
+          "Weight",
+          "Height",
+          "Speed",
+          "Area",
+          "Volume",
+          "Information",
+          "Temporal",
+          "Date",
+          "Time",
+          "DateTime",
+          "DateRange",
+          "TimeRange",
+          "DateTimeRange",
+          "Duration",
+          "SetTemporal",
+          "Event",
+          "SportsEvent",
+          "CulturalEvent",
+          "NaturalEvent",
+          "Location",
+          "GPE",
+          "City",
+          "State",
+          "CountryRegion",
+          "Continent",
+          "Structural",
+          "Airport",
+          "Geological",
+          "Organization",
+          "OrganizationMedical",
+          "OrganizationStockExchange",
+          "OrganizationSports",
+          "Person",
+          "PersonType",
+          "Email",
+          "URL",
+          "IP",
+          "PhoneNumber",
+          "Product",
+          "ComputingProduct",
+          "Skill"
+        ]
+      },
+      "x-ms-enum": {
+        "name": "EntityCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Address",
+            "description": "Specific street-level mentions of locations: house/building numbers, streets, avenues, highways, intersections referenced by name."
+          },
+          {
+            "value": "Numeric",
+            "description": "Numeric values, including digits and number words."
+          },
+          {
+            "value": "Age",
+            "description": "Age-related values."
+          },
+          {
+            "value": "Currency",
+            "description": "Currency-related values."
+          },
+          {
+            "value": "Number",
+            "description": "Numbers without a unit"
+          },
+          {
+            "value": "NumberRange",
+            "description": "Range of Numbers"
+          },
+          {
+            "value": "Percentage",
+            "description": "Percentage-related values."
+          },
+          {
+            "value": "Ordinal",
+            "description": "Ordinal numbers."
+          },
+          {
+            "value": "Temperature",
+            "description": "Temperature-related values."
+          },
+          {
+            "value": "Dimension",
+            "description": "Dimension of measurements"
+          },
+          {
+            "value": "Length",
+            "description": "Length of an object."
+          },
+          {
+            "value": "Weight",
+            "description": "Weight of an object."
+          },
+          {
+            "value": "Height",
+            "description": "Height of an object."
+          },
+          {
+            "value": "Speed",
+            "description": "Speed of an object."
+          },
+          {
+            "value": "Area",
+            "description": "Area of an object."
+          },
+          {
+            "value": "Volume",
+            "description": "Volume of an object."
+          },
+          {
+            "value": "Information",
+            "description": "Unit of measure for digital information."
+          },
+          {
+            "value": "Temporal",
+            "description": "Items relating to time."
+          },
+          {
+            "value": "Date",
+            "description": "Calendar dates."
+          },
+          {
+            "value": "Time",
+            "description": "Times of day."
+          },
+          {
+            "value": "DateTime",
+            "description": "Calendar dates with time."
+          },
+          {
+            "value": "DateRange",
+            "description": "Range of dates."
+          },
+          {
+            "value": "TimeRange",
+            "description": "Range of times."
+          },
+          {
+            "value": "DateTimeRange",
+            "description": "Range of date and time."
+          },
+          {
+            "value": "Duration",
+            "description": "Duration of time."
+          },
+          {
+            "value": "SetTemporal",
+            "description": "Set of time-related values."
+          },
+          {
+            "value": "Event",
+            "description": "Social, sports, business, political, educational, natural, historical, criminal, violent, legal, military events with a timed period."
+          },
+          {
+            "value": "SportsEvent",
+            "description": "Sports event-related values."
+          },
+          {
+            "value": "CulturalEvent",
+            "description": "Cultural event-related values."
+          },
+          {
+            "value": "NaturalEvent",
+            "description": "Natural event-related values."
+          },
+          {
+            "value": "Location",
+            "description": "Particular point or place in physical space."
+          },
+          {
+            "value": "GPE",
+            "description": "Cities, countries/regions, states.",
+            "name": "GeoPoliticalEntity"
+          },
+          {
+            "value": "City",
+            "description": "City-related values."
+          },
+          {
+            "value": "State",
+            "description": "State-related values."
+          },
+          {
+            "value": "CountryRegion",
+            "description": "Country or region-related values."
+          },
+          {
+            "value": "Continent",
+            "description": "Continent-related values."
+          },
+          {
+            "value": "Structural",
+            "description": "Manmade structures."
+          },
+          {
+            "value": "Airport",
+            "description": "Airports."
+          },
+          {
+            "value": "Geological",
+            "description": " Geographic and natural features such as rivers, oceans, and deserts."
+          },
+          {
+            "value": "Organization",
+            "description": "Corporations, agencies, and other groups of people defined by some established organizational structure. These labels can include companies, political parties/movements, musical bands, sport clubs, government bodies, and public organizations. Nationalities or religions are not ORGANIZATION."
+          },
+          {
+            "value": "OrganizationMedical",
+            "description": "Medical companies and groups."
+          },
+          {
+            "value": "OrganizationStockExchange",
+            "description": "Stock exchange groups."
+          },
+          {
+            "value": "OrganizationSports",
+            "description": "Sports-related organizations."
+          },
+          {
+            "value": "Person",
+            "description": "First, last, and middle names, names of fictional characters, and aliases. Titles, such as “Mr.” or “President”, are not considered part of the named entity."
+          },
+          {
+            "value": "PersonType",
+            "description": "Human roles classified by a group membership."
+          },
+          {
+            "value": "Email",
+            "description": "Email addresses."
+          },
+          {
+            "value": "URL",
+            "description": "URLs to websites."
+          },
+          {
+            "value": "IP",
+            "description": "network IP addresses."
+          },
+          {
+            "value": "PhoneNumber",
+            "description": "Phone numbers (US and EU phone numbers only)."
+          },
+          {
+            "value": "Product",
+            "description": "Single or group of commercial, consumable objects, electronics, vehicles, food groups."
+          },
+          {
+            "value": "ComputingProduct",
+            "description": "Computing products."
+          },
+          {
+            "value": "Skill",
+            "description": "A capability, skill, or expertise."
+          }
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BaseEntityOverlapPolicy": {
+      "description": "The abstract base class for entity OverlapPolicy.",
+      "type": "object",
+      "discriminator": "policyKind",
+      "properties": {
+        "policyKind": {
+          "description": "The entity OverlapPolicy object kind.",
+          "type": "string",
+          "default": "matchLongest",
+          "enum": [
+            "matchLongest",
+            "allowOverlap"
+          ],
+          "x-ms-enum": {
+            "name": "policyKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "policyKind"
+      ]
+    },
+    "MatchLongestEntityPolicyType": {
+      "description": "Represents the Match longest overlap policy. No overlapping entities as far as it is possible. 1. If there are overlapping entities, the longest one will be returned. 2. If the set of characters predicted for 2 or more entities are exactly the same, select the entity that has the higher confidence score.3. If the entity scores are identical, return all entities that are still present after applying the previous rules. 3. If there is partial overlap (as in Hello Text Analytics) follow the above steps starting from 1.  ",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseEntityOverlapPolicy"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "matchLongest"
+    },
+    "AllowOverlapEntityPolicyType": {
+      "description": "Represents the allow overlap policy. Will apply no post processing logic for the entities. Whatever the model predicts is what will be returned to the user. This allows the user to get a full view of every single model's possible values and apply their own custom logic on entity selection",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseEntityOverlapPolicy"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "allowOverlap"
     },
     "EntitiesTaskParameters": {
       "type": "object",
@@ -1804,6 +2133,18 @@
       "properties": {
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "inclusionList": {
+          "description": "(Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList",
+          "$ref": "#/definitions/EntityList"
+        },
+        "exclusionList": {
+          "description": "(Optional) request parameter that filters out any entities that are included the excludeList. When a user specifies an excludeList, they cannot get a prediction returned with an entity in that list. We will apply inclusionList before exclusionList",
+          "$ref": "#/definitions/EntityList"
+        },
+        "overlapPolicy": {
+          "description": "(Optional) describes the type of overlap policy to apply to the ner output.",
+          "$ref": "#/definitions/BaseEntityOverlapPolicy"
         }
       },
       "allOf": [
@@ -1868,7 +2209,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/EntitiesDocumentResult"
+          "$ref": "#/definitions/EntitiesDocumentResultWithMetadata"
         },
         {
           "$ref": "#/definitions/DocumentDetectedLanguage"
@@ -1882,7 +2223,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/EntityWithResolution"
+            "$ref": "#/definitions/Entity"
           }
         }
       },
@@ -1893,6 +2234,43 @@
       ],
       "required": [
         "entities"
+      ]
+    },
+    "EntitiesDocumentResultWithMetadata": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/EntityWithMetadata"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "entities"
+      ]
+    },
+    "EntityTag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tags are to express some similarities/affinity between entities. Entity Tags will be unique globally."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Detection score between 0 and 1 of the extracted entity."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "Entity": {
@@ -1934,20 +2312,43 @@
         }
       }
     },
-    "EntityWithResolution": {
-      "type": "object",
+    "EntityWithTags": {
       "allOf": [
         {
           "$ref": "#/definitions/Entity"
         }
       ],
+      "type": "object",
+      "required": [
+        "type",
+        "tags"
+      ],
       "properties": {
-        "resolutions": {
-          "description": "The collection of entity resolution objects.",
+        "type": {
+          "type": "string",
+          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
+        },
+        "tags": {
           "type": "array",
+          "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
           "items": {
-            "$ref": "#/definitions/BaseResolution"
+            "$ref": "#/definitions/EntityTag"
           }
+        }
+      }
+    },
+    "EntityWithMetadata": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityWithTags"
+        }
+      ],
+      "properties": {
+        "metadata": {
+          "description": "The entity metadata object.",
+          "type": "object",
+          "$ref": "#/definitions/BaseMetadata"
         }
       }
     },
@@ -2091,43 +2492,339 @@
         }
       }
     },
-    "BaseResolution": {
-      "description": "The abstract base class for entity resolutions.",
+    "AgeUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Year",
+        "Month",
+        "Week",
+        "Day"
+      ],
+      "x-ms-enum": {
+        "name": "AgeUnit",
+        "modelAsString": true
+      },
+      "description": "The Age Unit of measurement"
+    },
+    "VolumeUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "CubicMeter",
+        "CubicCentimeter",
+        "CubicMillimeter",
+        "Hectoliter",
+        "Decaliter",
+        "Liter",
+        "Centiliter",
+        "Milliliter",
+        "CubicYard",
+        "CubicInch",
+        "CubicFoot",
+        "CubicMile",
+        "FluidOunce",
+        "Teaspoon",
+        "Tablespoon",
+        "Pint",
+        "Quart",
+        "Cup",
+        "Gill",
+        "Pinch",
+        "FluidDram",
+        "Barrel",
+        "Minim",
+        "Cord",
+        "Peck",
+        "Bushel",
+        "Hogshead"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeUnit",
+        "modelAsString": true
+      },
+      "description": "The Volume Unit of measurement"
+    },
+    "SpeedUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "MeterPerSecond",
+        "KilometerPerHour",
+        "KilometerPerMinute",
+        "KilometerPerSecond",
+        "MilePerHour",
+        "Knot",
+        "FootPerSecond",
+        "FootPerMinute",
+        "YardPerMinute",
+        "YardPerSecond",
+        "MeterPerMillisecond",
+        "CentimeterPerMillisecond",
+        "KilometerPerMillisecond"
+      ],
+      "x-ms-enum": {
+        "name": "SpeedUnit",
+        "modelAsString": true
+      },
+      "description": "The speed Unit of measurement"
+    },
+    "AreaUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "SquareKilometer",
+        "SquareHectometer",
+        "SquareDecameter",
+        "SquareDecimeter",
+        "SquareMeter",
+        "SquareCentimeter",
+        "SquareMillimeter",
+        "SquareInch",
+        "SquareFoot",
+        "SquareMile",
+        "SquareYard",
+        "Acre"
+      ],
+      "x-ms-enum": {
+        "name": "AreaUnit",
+        "modelAsString": true
+      },
+      "description": "The area Unit of measurement"
+    },
+    "LengthUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Kilometer",
+        "Hectometer",
+        "Decameter",
+        "Meter",
+        "Decimeter",
+        "Centimeter",
+        "Millimeter",
+        "Micrometer",
+        "Nanometer",
+        "Picometer",
+        "Mile",
+        "Yard",
+        "Inch",
+        "Foot",
+        "LightYear",
+        "Point"
+      ],
+      "x-ms-enum": {
+        "name": "LengthUnit",
+        "modelAsString": true
+      },
+      "description": "The length Unit of measurement"
+    },
+    "InformationUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Bit",
+        "Kilobit",
+        "Megabit",
+        "Gigabit",
+        "Terabit",
+        "Petabit",
+        "Byte",
+        "Kilobyte",
+        "Megabyte",
+        "Gigabyte",
+        "Terabyte",
+        "Petabyte"
+      ],
+      "x-ms-enum": {
+        "name": "InformationUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unspecified",
+            "description": "Unspecified information unit."
+          },
+          {
+            "value": "Bit",
+            "description": "Bit information unit. "
+          },
+          {
+            "value": "Kilobit",
+            "description": "Kilobit information unit. Usually defined as 1000 bits or 1024 bits."
+          },
+          {
+            "value": "Megabit",
+            "description": "Megabit information unit. Usually defined as 1000 kilobits or 1024 kilobits."
+          },
+          {
+            "value": "Gigabit",
+            "description": "Gigabit information unit. Usually defined as 1000 megabits or 1024 megabits."
+          },
+          {
+            "value": "Terabit",
+            "description": "Terabit information unit. Usually defined as 1000 gigabits or 1024 gigabits."
+          },
+          {
+            "value": "Petabit",
+            "description": "Petabit information unit. Usually defined as 1000 terabits or 1024 terabits."
+          },
+          {
+            "value": "Byte",
+            "description": "Byte information unit. Usually defined as 8 bits are used to form a byte.."
+          },
+          {
+            "value": "Kilobyte",
+            "description": "Kilobyte information unit. Usually defined as 1000 bytes or 1024 bytes."
+          },
+          {
+            "value": "Megabyte",
+            "description": "Megabyte information unit. Usually defined as 1000 kilobytes or 1024 kilobytes."
+          },
+          {
+            "value": "Gigabyte",
+            "description": "Gigabyte information unit. Usually defined as 1000 megabytes or 1024 megabytes."
+          },
+          {
+            "value": "Terabyte",
+            "description": "Terabyte information unit. Usually defined as 1000 gigabytes or 1024 gigabytes."
+          },
+          {
+            "value": "Petabyte",
+            "description": "Petabyte information unit. Usually defined as 1000 terabytes or 1024 terabytes."
+          }
+        ]
+      },
+      "description": "The information (data) Unit of measurement."
+    },
+    "TemperatureUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Fahrenheit",
+        "Kelvin",
+        "Rankine",
+        "Celsius"
+      ],
+      "x-ms-enum": {
+        "name": "TemperatureUnit",
+        "modelAsString": true
+      },
+      "description": "The temperature Unit of measurement."
+    },
+    "WeightUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Kilogram",
+        "Gram",
+        "Milligram",
+        "Gallon",
+        "MetricTon",
+        "Ton",
+        "Pound",
+        "Ounce",
+        "Grain",
+        "PennyWeight",
+        "LongTonBritish",
+        "ShortTonUS",
+        "ShortHundredWeightUS",
+        "Stone",
+        "Dram"
+      ],
+      "x-ms-enum": {
+        "name": "WeightUnit",
+        "modelAsString": true
+      },
+      "description": "The weight Unit of measurement."
+    },
+    "NumberKind": {
+      "type": "string",
+      "enum": [
+        "Integer",
+        "Decimal",
+        "Power",
+        "Fraction",
+        "Percent",
+        "Unspecified"
+      ],
+      "x-ms-enum": {
+        "name": "NumberKind",
+        "modelAsString": true
+      },
+      "description": "The type of the extracted number entity."
+    },
+    "OrdinalRelativeTo": {
+      "type": "string",
+      "enum": [
+        "Current",
+        "End",
+        "Start"
+      ],
+      "x-ms-enum": {
+        "name": "RelativeTo",
+        "modelAsString": true
+      },
+      "description": "The reference point that the ordinal number denotes."
+    },
+    "NumericRangeKind": {
+      "type": "string",
+      "enum": [
+        "Number",
+        "Speed",
+        "Weight",
+        "Length",
+        "Volume",
+        "Area",
+        "Age",
+        "Information",
+        "Temperature",
+        "Currency"
+      ],
+      "x-ms-enum": {
+        "name": "RangeKind",
+        "modelAsString": true
+      },
+      "description": "The kind of range that the resolution object represents."
+    },
+    "BaseMetadata": {
+      "description": "The abstract base class for entity Metadata.",
       "type": "object",
-      "discriminator": "resolutionKind",
+      "discriminator": "metadataKind",
       "properties": {
-        "resolutionKind": {
-          "description": "The entity resolution object kind.",
+        "metadataKind": {
+          "description": "The entity Metadata object kind.",
           "type": "string",
           "enum": [
-            "BooleanResolution",
-            "DateTimeResolution",
-            "NumberResolution",
-            "OrdinalResolution",
-            "SpeedResolution",
-            "WeightResolution",
-            "LengthResolution",
-            "VolumeResolution",
-            "AreaResolution",
-            "AgeResolution",
-            "InformationResolution",
-            "TemperatureResolution",
-            "CurrencyResolution",
-            "NumericRangeResolution",
-            "TemporalSpanResolution"
+            "DateMetadata",
+            "DateTimeMetadata",
+            "TimeMetadata",
+            "TemporalSetMetadata",
+            "NumberMetadata",
+            "OrdinalMetadata",
+            "SpeedMetadata",
+            "WeightMetadata",
+            "LengthMetadata",
+            "VolumeMetadata",
+            "AreaMetadata",
+            "AgeMetadata",
+            "InformationMetadata",
+            "TemperatureMetadata",
+            "CurrencyMetadata",
+            "NumberRangeMetadata",
+            "TemporalSpanMetadata"
           ],
           "x-ms-enum": {
-            "name": "ResolutionKind",
+            "name": "MetadataKind",
             "modelAsString": true
           }
         }
       },
       "required": [
-        "resolutionKind"
+        "metadataKind"
       ]
     },
-    "QuantityResolution": {
-      "description": "Represents resolutions for quantities.",
+    "QuantityMetadata": {
+      "description": "Represents Metadata for quantities.",
       "type": "object",
       "properties": {
         "value": {
@@ -2140,353 +2837,186 @@
         "value"
       ]
     },
-    "AgeResolution": {
-      "description": "Represents the Age entity resolution model.",
+    "AgeMetadata": {
+      "description": "Represents the Age entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "AgeResolution",
+      "x-ms-discriminator-value": "AgeMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Year",
-            "Month",
-            "Week",
-            "Day"
-          ],
-          "x-ms-enum": {
-            "name": "AgeUnit",
-            "modelAsString": true
-          },
-          "description": "The Age Unit of measurement"
+          "$ref": "#/definitions/AgeUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "VolumeResolution": {
-      "description": "Represents the volume entity resolution model.",
+    "VolumeMetadata": {
+      "description": "Represents the volume entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "VolumeResolution",
+      "x-ms-discriminator-value": "VolumeMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "CubicMeter",
-            "CubicCentimeter",
-            "CubicMillimeter",
-            "Hectoliter",
-            "Decaliter",
-            "Liter",
-            "Centiliter",
-            "Milliliter",
-            "CubicYard",
-            "CubicInch",
-            "CubicFoot",
-            "CubicMile",
-            "FluidOunce",
-            "Teaspoon",
-            "Tablespoon",
-            "Pint",
-            "Quart",
-            "Cup",
-            "Gill",
-            "Pinch",
-            "FluidDram",
-            "Barrel",
-            "Minim",
-            "Cord",
-            "Peck",
-            "Bushel",
-            "Hogshead"
-          ],
-          "x-ms-enum": {
-            "name": "VolumeUnit",
-            "modelAsString": true
-          },
-          "description": "The Volume Unit of measurement"
+          "$ref": "#/definitions/VolumeUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "SpeedResolution": {
-      "description": "Represents the speed entity resolution model.",
+    "SpeedMetadata": {
+      "description": "Represents the speed entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "SpeedResolution",
+      "x-ms-discriminator-value": "SpeedMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "MeterPerSecond",
-            "KilometerPerHour",
-            "KilometerPerMinute",
-            "KilometerPerSecond",
-            "MilePerHour",
-            "Knot",
-            "FootPerSecond",
-            "FootPerMinute",
-            "YardPerMinute",
-            "YardPerSecond",
-            "MeterPerMillisecond",
-            "CentimeterPerMillisecond",
-            "KilometerPerMillisecond"
-          ],
-          "x-ms-enum": {
-            "name": "SpeedUnit",
-            "modelAsString": true
-          },
-          "description": "The speed Unit of measurement"
+          "$ref": "#/definitions/SpeedUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "AreaResolution": {
-      "description": "Represents the area entity resolution model.",
+    "AreaMetadata": {
+      "description": "Represents the area entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "AreaResolution",
+      "x-ms-discriminator-value": "AreaMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "SquareKilometer",
-            "SquareHectometer",
-            "SquareDecameter",
-            "SquareDecimeter",
-            "SquareMeter",
-            "SquareCentimeter",
-            "SquareMillimeter",
-            "SquareInch",
-            "SquareFoot",
-            "SquareMile",
-            "SquareYard",
-            "Acre"
-          ],
-          "x-ms-enum": {
-            "name": "AreaUnit",
-            "modelAsString": true
-          },
-          "description": "The area Unit of measurement"
+          "$ref": "#/definitions/AreaUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "LengthResolution": {
-      "description": "Represents the length entity resolution model.",
+    "LengthMetadata": {
+      "description": "Represents the length entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "LengthResolution",
+      "x-ms-discriminator-value": "LengthMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilometer",
-            "Hectometer",
-            "Decameter",
-            "Meter",
-            "Decimeter",
-            "Centimeter",
-            "Millimeter",
-            "Micrometer",
-            "Nanometer",
-            "Picometer",
-            "Mile",
-            "Yard",
-            "Inch",
-            "Foot",
-            "LightYear",
-            "Pt"
-          ],
-          "x-ms-enum": {
-            "name": "LengthUnit",
-            "modelAsString": true
-          },
-          "description": "The length Unit of measurement"
+          "$ref": "#/definitions/LengthUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "InformationResolution": {
-      "description": "Represents the information (data) entity resolution model.",
+    "InformationMetadata": {
+      "description": "Represents the information (data) entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "InformationResolution",
+      "x-ms-discriminator-value": "InformationMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Bit",
-            "Kilobit",
-            "Megabit",
-            "Gigabit",
-            "Terabit",
-            "Petabit",
-            "Byte",
-            "Kilobyte",
-            "Megabyte",
-            "Gigabyte",
-            "Terabyte",
-            "Petabyte"
-          ],
-          "x-ms-enum": {
-            "name": "InformationUnit",
-            "modelAsString": true
-          },
-          "description": "The information (data) Unit of measurement."
+          "$ref": "#/definitions/InformationUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "TemperatureResolution": {
-      "description": "Represents the temperature entity resolution model.",
+    "TemperatureMetadata": {
+      "description": "Represents the temperature entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemperatureResolution",
+      "x-ms-discriminator-value": "TemperatureMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Fahrenheit",
-            "Kelvin",
-            "Rankine",
-            "Celsius"
-          ],
-          "x-ms-enum": {
-            "name": "TemperatureUnit",
-            "modelAsString": true
-          },
-          "description": "The temperature Unit of measurement."
+          "$ref": "#/definitions/TemperatureUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "WeightResolution": {
-      "description": "Represents the weight entity resolution model.",
+    "WeightMetadata": {
+      "description": "Represents the weight entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "WeightResolution",
+      "x-ms-discriminator-value": "WeightMetadata",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilogram",
-            "Gram",
-            "Milligram",
-            "Gallon",
-            "MetricTon",
-            "Ton",
-            "Pound",
-            "Ounce",
-            "Grain",
-            "PennyWeight",
-            "LongTonBritish",
-            "ShortTonUS",
-            "ShortHundredWeightUS",
-            "Stone",
-            "Dram"
-          ],
-          "x-ms-enum": {
-            "name": "WeightUnit",
-            "modelAsString": true
-          },
-          "description": "The weight Unit of measurement."
+          "$ref": "#/definitions/WeightUnit"
         }
       },
       "required": [
         "unit"
       ]
     },
-    "CurrencyResolution": {
-      "description": "Represents the currency entity resolution model.",
+    "CurrencyMetadata": {
+      "description": "Represents the currency entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "CurrencyResolution",
+      "x-ms-discriminator-value": "CurrencyMetadata",
       "properties": {
         "iso4217": {
           "type": "string",
@@ -2507,51 +3037,12 @@
         "unit"
       ]
     },
-    "BooleanResolution": {
-      "description": "A resolution for boolean expressions",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
+    "DateValue": {
+      "description": "Represents the date value.",
       "type": "object",
-      "x-ms-discriminator-value": "BooleanResolution",
-      "properties": {
-        "value": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DateTimeResolution": {
-      "description": "A resolution for datetime entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "DateTimeResolution",
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
-        },
-        "dateTimeSubKind": {
-          "type": "string",
-          "enum": [
-            "Time",
-            "Date",
-            "DateTime",
-            "Duration",
-            "Set"
-          ],
-          "x-ms-enum": {
-            "name": "DateTimeSubKind",
-            "modelAsString": true
-          },
-          "description": "The DateTime SubKind"
         },
         "value": {
           "type": "string",
@@ -2563,35 +3054,85 @@
       },
       "required": [
         "timex",
-        "dateTimeSubKind",
         "value"
       ]
     },
-    "NumberResolution": {
-      "description": "A resolution for numeric entity instances.",
+    "BaseTemporalMetadata": {
+      "type": "object",
+      "properties": {
+        "dateValues": {
+          "type": "array",
+          "description": "The list of date values.",
+          "items": {
+            "$ref": "#/definitions/DateValue"
+          }
+        }
+      }
+    },
+    "DateMetadata": {
+      "description": "A Metadata for date entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumberResolution",
+      "x-ms-discriminator-value": "DateMetadata"
+    },
+    "DateTimeMetadata": {
+      "description": "A Metadata for datetime entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "DateTimeMetadata"
+    },
+    "TemporalSetMetadata": {
+      "description": "A Metadata for temporal set entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "TemporalSetMetadata"
+    },
+    "TimeMetadata": {
+      "description": "A Metadata for time entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "TimeMetadata"
+    },
+    "NumberMetadata": {
+      "description": "A metadata for numeric entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "NumberMetadata",
       "properties": {
         "numberKind": {
-          "type": "string",
-          "enum": [
-            "Integer",
-            "Decimal",
-            "Power",
-            "Fraction",
-            "Percent",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "NumberKind",
-            "modelAsString": true
-          },
-          "description": "The type of the extracted number entity."
+          "$ref": "#/definitions/NumberKind"
         },
         "value": {
           "type": "number",
@@ -2604,32 +3145,22 @@
         "value"
       ]
     },
-    "OrdinalResolution": {
-      "description": "A resolution for ordinal numbers entity instances.",
+    "OrdinalMetadata": {
+      "description": "A Metadata for ordinal numbers entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "OrdinalResolution",
+      "x-ms-discriminator-value": "OrdinalMetadata",
       "properties": {
         "offset": {
           "type": "string",
           "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
         },
         "relativeTo": {
-          "type": "string",
-          "enum": [
-            "Current",
-            "End",
-            "Start"
-          ],
-          "x-ms-enum": {
-            "name": "RelativeTo",
-            "modelAsString": true
-          },
-          "description": "The reference point that the ordinal number denotes."
+          "$ref": "#/definitions/OrdinalRelativeTo"
         },
         "value": {
           "type": "string",
@@ -2642,15 +3173,15 @@
         "value"
       ]
     },
-    "TemporalSpanResolution": {
-      "description": "represents the resolution of a date and/or time span.",
+    "TemporalSpanMetadata": {
+      "description": "represents the Metadata of a date and/or time span.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemporalSpanResolution",
+      "x-ms-discriminator-value": "TemporalSpanMetadata",
       "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
@@ -2671,35 +3202,18 @@
         }
       }
     },
-    "NumericRangeResolution": {
-      "description": "represents the resolution of numeric intervals.",
+    "NumberRangeMetadata": {
+      "description": "represents the Metadata of numeric intervals.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumericRangeResolution",
+      "x-ms-discriminator-value": "NumberRangeMetadata",
       "properties": {
         "rangeKind": {
-          "type": "string",
-          "enum": [
-            "Number",
-            "Speed",
-            "Weight",
-            "Length",
-            "Volume",
-            "Area",
-            "Age",
-            "Information",
-            "Temperature",
-            "Currency"
-          ],
-          "x-ms-enum": {
-            "name": "RangeKind",
-            "modelAsString": true
-          },
-          "description": "The kind of range that the resolution object represents."
+          "$ref": "#/definitions/NumericRangeKind"
         },
         "minimum": {
           "type": "number",
@@ -2790,8 +3304,14 @@
         "piiCategories": {
           "$ref": "#/definitions/PiiCategories"
         },
+        "excludePiiCategories": {
+          "$ref": "#/definitions/PiiCategoriesExclude"
+        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "redactionCharacter": {
+          "$ref": "common.json#/definitions/RedactionCharacter"
         }
       },
       "allOf": [
@@ -3095,6 +3615,191 @@
           "Address",
           "All",
           "Default"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "PiiCategoriesExclude": {
+      "description": "(Optional) describes the PII categories to return",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PiiCategoriesExclude",
+          "modelAsString": true
+        },
+        "enum": [
+          "ABARoutingNumber",
+          "ARNationalIdentityNumber",
+          "AUBankAccountNumber",
+          "AUDriversLicenseNumber",
+          "AUMedicalAccountNumber",
+          "AUPassportNumber",
+          "AUTaxFileNumber",
+          "AUBusinessNumber",
+          "AUCompanyNumber",
+          "ATIdentityCard",
+          "ATTaxIdentificationNumber",
+          "ATValueAddedTaxNumber",
+          "AzureDocumentDBAuthKey",
+          "AzureIAASDatabaseConnectionAndSQLString",
+          "AzureIoTConnectionString",
+          "AzurePublishSettingPassword",
+          "AzureRedisCacheString",
+          "AzureSAS",
+          "AzureServiceBusString",
+          "AzureStorageAccountKey",
+          "AzureStorageAccountGeneric",
+          "BENationalNumber",
+          "BENationalNumberV2",
+          "BEValueAddedTaxNumber",
+          "BRCPFNumber",
+          "BRLegalEntityNumber",
+          "BRNationalIDRG",
+          "BGUniformCivilNumber",
+          "CABankAccountNumber",
+          "CADriversLicenseNumber",
+          "CAHealthServiceNumber",
+          "CAPassportNumber",
+          "CAPersonalHealthIdentification",
+          "CASocialInsuranceNumber",
+          "CLIdentityCardNumber",
+          "CNResidentIdentityCardNumber",
+          "CreditCardNumber",
+          "HRIdentityCardNumber",
+          "HRNationalIDNumber",
+          "HRPersonalIdentificationNumber",
+          "HRPersonalIdentificationOIBNumberV2",
+          "CYIdentityCard",
+          "CYTaxIdentificationNumber",
+          "CZPersonalIdentityNumber",
+          "CZPersonalIdentityV2",
+          "DKPersonalIdentificationNumber",
+          "DKPersonalIdentificationV2",
+          "DrugEnforcementAgencyNumber",
+          "EEPersonalIdentificationCode",
+          "EUDebitCardNumber",
+          "EUDriversLicenseNumber",
+          "EUGPSCoordinates",
+          "EUNationalIdentificationNumber",
+          "EUPassportNumber",
+          "EUSocialSecurityNumber",
+          "EUTaxIdentificationNumber",
+          "FIEuropeanHealthNumber",
+          "FINationalID",
+          "FINationalIDV2",
+          "FIPassportNumber",
+          "FRDriversLicenseNumber",
+          "FRHealthInsuranceNumber",
+          "FRNationalID",
+          "FRPassportNumber",
+          "FRSocialSecurityNumber",
+          "FRTaxIdentificationNumber",
+          "FRValueAddedTaxNumber",
+          "DEDriversLicenseNumber",
+          "DEPassportNumber",
+          "DEIdentityCardNumber",
+          "DETaxIdentificationNumber",
+          "DEValueAddedNumber",
+          "GRNationalIDCard",
+          "GRNationalIDV2",
+          "GRTaxIdentificationNumber",
+          "HKIdentityCardNumber",
+          "HUValueAddedNumber",
+          "HUPersonalIdentificationNumber",
+          "HUTaxIdentificationNumber",
+          "INPermanentAccount",
+          "INUniqueIdentificationNumber",
+          "IDIdentityCardNumber",
+          "InternationalBankingAccountNumber",
+          "IEPersonalPublicServiceNumber",
+          "IEPersonalPublicServiceNumberV2",
+          "ILBankAccountNumber",
+          "ILNationalID",
+          "ITDriversLicenseNumber",
+          "ITFiscalCode",
+          "ITValueAddedTaxNumber",
+          "JPBankAccountNumber",
+          "JPDriversLicenseNumber",
+          "JPPassportNumber",
+          "JPResidentRegistrationNumber",
+          "JPSocialInsuranceNumber",
+          "JPMyNumberCorporate",
+          "JPMyNumberPersonal",
+          "JPResidenceCardNumber",
+          "LVPersonalCode",
+          "LTPersonalCode",
+          "LUNationalIdentificationNumberNatural",
+          "LUNationalIdentificationNumberNonNatural",
+          "MYIdentityCardNumber",
+          "MTIdentityCardNumber",
+          "MTTaxIDNumber",
+          "NLCitizensServiceNumber",
+          "NLCitizensServiceNumberV2",
+          "NLTaxIdentificationNumber",
+          "NLValueAddedTaxNumber",
+          "NZBankAccountNumber",
+          "NZDriversLicenseNumber",
+          "NZInlandRevenueNumber",
+          "NZMinistryOfHealthNumber",
+          "NZSocialWelfareNumber",
+          "NOIdentityNumber",
+          "PHUnifiedMultiPurposeIDNumber",
+          "PLIdentityCard",
+          "PLNationalID",
+          "PLNationalIDV2",
+          "PLPassportNumber",
+          "PLTaxIdentificationNumber",
+          "PLREGONNumber",
+          "PTCitizenCardNumber",
+          "PTCitizenCardNumberV2",
+          "PTTaxIdentificationNumber",
+          "ROPersonalNumericalCode",
+          "RUPassportNumberDomestic",
+          "RUPassportNumberInternational",
+          "SANationalID",
+          "SGNationalRegistrationIdentityCardNumber",
+          "SKPersonalNumber",
+          "SITaxIdentificationNumber",
+          "SIUniqueMasterCitizenNumber",
+          "ZAIdentificationNumber",
+          "KRResidentRegistrationNumber",
+          "ESDNI",
+          "ESSocialSecurityNumber",
+          "ESTaxIdentificationNumber",
+          "SQLServerConnectionString",
+          "SENationalID",
+          "SENationalIDV2",
+          "SEPassportNumber",
+          "SETaxIdentificationNumber",
+          "SWIFTCode",
+          "CHSocialSecurityNumber",
+          "TWNationalID",
+          "TWPassportNumber",
+          "TWResidentCertificate",
+          "THPopulationIdentificationCode",
+          "TRNationalIdentificationNumber",
+          "UKDriversLicenseNumber",
+          "UKElectoralRollNumber",
+          "UKNationalHealthNumber",
+          "UKNationalInsuranceNumber",
+          "UKUniqueTaxpayerNumber",
+          "USUKPassportNumber",
+          "USBankAccountNumber",
+          "USDriversLicenseNumber",
+          "USIndividualTaxpayerIdentification",
+          "USSocialSecurityNumber",
+          "UAPassportNumberDomestic",
+          "UAPassportNumberInternational",
+          "Organization",
+          "Email",
+          "URL",
+          "Age",
+          "PhoneNumber",
+          "IPAddress",
+          "Date",
+          "Person",
+          "Address"
         ]
       },
       "type": "array",
@@ -3829,33 +4534,6 @@
         }
       }
     },
-    "DocumentDetectedLanguageString": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "type": "string",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
-        },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
     "DocumentWarning": {
       "type": "object",
       "required": [
@@ -3995,6 +4673,24 @@
       ],
       "x-ms-discriminator-value": "AbstractiveSummarization"
     },
+    "CustomAbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Custom Abstractive Summarization task.",
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomAbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomAbstractiveSummarization"
+    },
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for the pre-build Abstractive Summarization task.",
@@ -4004,6 +4700,18 @@
         },
         {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "CustomAbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the Custom Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -4024,6 +4732,24 @@
         "results"
       ],
       "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
+    },
+    "CustomAbstractiveSummarizationLROResult": {
+      "type": "object",
+      "description": "An object representing the results for an Custom Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomAbstractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomAbstractiveSummarizationLROResults"
     },
     "AbstractiveSummarizationResultBase": {
       "type": "object",
@@ -4062,6 +4788,21 @@
         },
         {
           "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "CustomAbstractiveSummarizationResult": {
+      "type": "object",
+      "description": "An object representing the custom summarization results of each document.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationResultBase"
+        },
+        {
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [

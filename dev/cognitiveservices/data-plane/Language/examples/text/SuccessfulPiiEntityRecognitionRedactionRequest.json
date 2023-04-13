@@ -6,7 +6,8 @@
     "body": {
       "kind": "PiiEntityRecognition",
       "parameters": {
-        "modelVersion": "latest"
+        "modelVersion": "latest",
+        "redactionCharacter": "-"
       },
       "analysisInput": {
         "documents": [
@@ -38,7 +39,7 @@
           "documents": [
             {
               "id": "1",
-              "redactedText": "My SSN is ***********",
+              "redactedText": "My SSN is -----------",
               "entities": [
                 {
                   "category": "USSocialSecurityNumber",
@@ -52,7 +53,7 @@
             },
             {
               "id": "2",
-              "redactedText": "Your ABA number - ********* - is the first 9 digits in the lower left hand corner of your personal check.",
+              "redactedText": "Your ABA number - --------- - is the first 9 digits in the lower left hand corner of your personal check.",
               "entities": [
                 {
                   "category": "ABARoutingNumber",
@@ -66,7 +67,7 @@
             },
             {
               "id": "3",
-              "redactedText": "Is ************** your Brazilian CPF number?",
+              "redactedText": "Is -------------- your Brazilian CPF number?",
               "entities": [
                 {
                   "category": "BRCPFNumber",
