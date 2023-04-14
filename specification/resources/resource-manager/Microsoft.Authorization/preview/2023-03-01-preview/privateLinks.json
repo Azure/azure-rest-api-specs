@@ -59,7 +59,7 @@
           "202": {
             "description": "Accepted - Returns an Azure async operation header with HttpStatusCode 202.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "location": {
                 "type": "string"
               }
             }
@@ -73,7 +73,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Enable a private link network access.": {
@@ -87,7 +87,7 @@
     "EnablePrivateLinkNetworkAccessObject": {
       "type": "object",
       "properties": {
-        "Scope": {
+        "scope": {
           "type": "string",
           "description": "The scope of private link associations where network access is updated."
         }
