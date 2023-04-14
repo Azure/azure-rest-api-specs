@@ -507,7 +507,7 @@
           "Obtain operator information for recipient numbers"
         ],
         "summary": "Endpoint for retrieving operator information for a set of phone numbers.\r\nThis includes the mnc, mcc, and number type which can be used to determine a number’s capabilities",
-        "operationId": "SearchOperatorInformation",
+        "operationId": "OperatorInformation_Search",
         "consumes": [
           "application/json"
         ],
@@ -521,6 +521,7 @@
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "description": "The phone number(s) whose operator information should be looked up",
             "schema": {
               "$ref": "#/definitions/OperatorInformationSearchRequest"
@@ -539,11 +540,11 @@
             "schema": {
               "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
-          },
-          "x-ms-examples": {
-            "Search for operator information on phone numbers": {
-              "$ref": "./examples/SearchOperatorInformation.json"
-            }
+          }
+        },
+        "x-ms-examples": {
+          "Search for operator information on phone numbers": {
+            "$ref": "./examples/SearchOperatorInformation.json"
           }
         }
       }
@@ -946,6 +947,7 @@
       "type": "object",
       "properties": {
         "phoneNumbers": {
+          "description": "Phone numbers to search for operator information",
           "type": "array",
           "items": {
             "type": "string"
@@ -958,6 +960,7 @@
       "type": "object",
       "properties": {
         "values": {
+          "description": "Results of the search, this array will have one entry per requested phone number with the relevant operator information for each",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperatorInformation"
