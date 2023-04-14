@@ -8,6 +8,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-compute
 no-namespace-folders: true
 package-version: 1.0.0b1
+combine-operation-files: true
+only-path-and-body-params-positional: true
 modelerfour:
   lenient-model-deduplication: true
 
@@ -35,6 +37,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
+default-api-version: "2022-11-01"
 clear-output-folder: true
 batch:
   - tag: package-2022-11-01-only

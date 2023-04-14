@@ -1251,10 +1251,10 @@
           "ImportJobs"
         ],
         "operationId": "ImportJobs_List",
-        "description": "Retrieves all bulk import jobs.\nStatus codes:\n* 200 OK",
+        "description": "Retrieves all import jobs.\nStatus codes:\n* 200 OK",
         "x-ms-examples": {
-          "Get all bulk jobs": {
-            "$ref": "./examples/BulkImportJobList.json"
+          "Get all import jobs": {
+            "$ref": "./examples/ImportJobList.json"
           }
         },
         "parameters": [
@@ -1269,7 +1269,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/BulkImportJobCollection"
+              "$ref": "#/definitions/ImportJobCollection"
             }
           },
           "default": {
@@ -1298,23 +1298,23 @@
           "ImportJobs"
         ],
         "operationId": "ImportJobs_Add",
-        "description": "Creates a bulk import job.\nStatus codes:\n* 201 Created\n* 400 Bad Request\n  * JobLimitReached - The maximum number of bulk import jobs allowed has been reached.\n  * ValidationFailed - The bulk job request is not valid.",
+        "description": "Creates an import job.\nStatus codes:\n* 201 Created\n* 400 Bad Request\n  * JobLimitReached - The maximum number of import jobs allowed has been reached.\n  * ValidationFailed - The import job request is not valid.",
         "x-ms-examples": {
           "Add a job": {
-            "$ref": "./examples/BulkImportJobPut.json"
+            "$ref": "./examples/ImportJobPut.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/bulkImportJobId"
+            "$ref": "#/parameters/importJobId"
           },
           {
             "name": "importJob",
-            "description": "The bulk import job being added.",
+            "description": "The import job being added.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BulkImportJob"
+              "$ref": "#/definitions/ImportJob"
             }
           },
           {
@@ -1325,7 +1325,7 @@
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/BulkImportJob"
+              "$ref": "#/definitions/ImportJob"
             }
           },
           "default": {
@@ -1341,15 +1341,15 @@
           "ImportJobs"
         ],
         "operationId": "ImportJobs_GetById",
-        "description": "Retrieves a bulk job.\nStatus codes:\n* 200 OK\n* 404 Not Found\n  * BulkJobNotFound - The bulk job was not found.",
+        "description": "Retrieves an import job.\nStatus codes:\n* 200 OK\n* 404 Not Found\n  * ImportJobNotFound - The import job was not found.",
         "x-ms-examples": {
-          "Get a bulk job by id": {
-            "$ref": "./examples/BulkImportJobGet.json"
+          "Get an import job by id": {
+            "$ref": "./examples/ImportJobGet.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/bulkImportJobId"
+            "$ref": "#/parameters/importJobId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1359,7 +1359,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/BulkImportJob"
+              "$ref": "#/definitions/ImportJob"
             }
           },
           "default": {
@@ -1375,15 +1375,15 @@
           "ImportJobs"
         ],
         "operationId": "ImportJobs_Delete",
-        "description": "Deletes a bulk import job.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * ValidationFailed - The bulk job request is not valid.",
+        "description": "Deletes an import job.\nStatus codes:\n* 204 No Content\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
         "x-ms-examples": {
-          "Delete a bulk job": {
-            "$ref": "./examples/BulkImportJobDelete.json"
+          "Delete an import job": {
+            "$ref": "./examples/ImportJobDelete.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/bulkImportJobId"
+            "$ref": "#/parameters/importJobId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1416,15 +1416,15 @@
           "ImportJobs"
         ],
         "operationId": "ImportJobs_Cancel",
-        "description": "Cancels a bulk import job.\nStatus codes:\n* 200 Request Accepted\n* 400 Bad Request\n  * ValidationFailed - The bulk job request is not valid.",
+        "description": "Cancels an import job.\nStatus codes:\n* 200 Request Accepted\n* 400 Bad Request\n  * ValidationFailed - The import job request is not valid.",
         "x-ms-examples": {
           "Cancel a job": {
-            "$ref": "./examples/BulkImportJobCancel.json"
+            "$ref": "./examples/ImportJobCancel.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/bulkImportJobId"
+            "$ref": "#/parameters/importJobId"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1434,7 +1434,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/BulkImportJob"
+              "$ref": "#/definitions/ImportJob"
             }
           },
           "default": {
@@ -1670,7 +1670,7 @@
         }
       }
     },
-    "BulkImportJob": {
+    "ImportJob": {
       "description": "A job which contains a reference to the operations to perform, results, and execution metadata.",
       "type": "object",
       "required": [
@@ -1679,7 +1679,7 @@
       ],
       "properties": {
         "id": {
-          "description": "The identifier of the bulk import job.",
+          "description": "The identifier of the import job.",
           "type": "string",
           "readOnly": true
         },
@@ -1735,22 +1735,22 @@
         },
         "error": {
           "$ref": "#/definitions/Error",
-          "description": "Details of the error(s) that occurred executing the bulk job."
+          "description": "Details of the error(s) that occurred executing the import job."
         }
       }
     },
-    "BulkImportJobCollection": {
-      "description": "A collection of bulk import job objects.",
+    "ImportJobCollection": {
+      "description": "A collection of import job objects.",
       "type": "object",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
-          "description": "The list of bulk import job objects.",
+          "description": "The list of import job objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BulkImportJob"
+            "$ref": "#/definitions/ImportJob"
           }
         },
         "nextLink": {
@@ -1861,10 +1861,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "bulkImportJobId": {
+    "importJobId": {
       "name": "id",
       "in": "path",
-      "description": "The id for the bulk import job. The id is unique within the service and case sensitive.",
+      "description": "The id for the import job. The id is unique within the service and case sensitive.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
