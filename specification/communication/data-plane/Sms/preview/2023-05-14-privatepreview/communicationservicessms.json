@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Communication SMS Service",
-    "description": "Azure Communication SMS Service",
+    "title": "communicationservicessms",
+    "description": "Azure Communication Sms/Mms Service",
     "version": "2023-05-14-privatepreview"
   },
   "securityDefinitions": {
@@ -17,18 +17,12 @@
     }
   },
   "paths": {
-    "/sms": {
+    "/mms": {
       "post": {
         "tags": [
-          "Sms"
+          "Mms"
         ],
-        "summary": "Sends a SMS message from a phone number that belongs to the authenticated account.",
-        "operationId": "Sms_Send",
-        "x-ms-examples": {
-          "SuccessfulSend": {
-            "$ref": "./examples/send.json"
-          }
-        },
+        "operationId": "Mms_Send",
         "consumes": [
           "application/json"
         ],
@@ -37,20 +31,50 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
-            "name": "SendMessageRequest",
-            "description": "Represents the body of the send message request.",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MmsSendMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/MmsSendResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sms": {
+      "post": {
+        "tags": [
+          "Sms"
+        ],
+        "operationId": "Sms_Send",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SendMessageRequest"
             }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -60,73 +84,146 @@
               "$ref": "#/definitions/SmsSendResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Send Message": {
+            "$ref": "./examples/SendMessageAsync.json"
+          }
         }
       }
     }
   },
   "definitions": {
-    "SmsRecipient": {
-      "description": "Recipient details for sending SMS messages.",
+    "MmsSendMessageRequest": {
+      "required": [
+        "from",
+        "recipients"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "recipients": {
+          "maxItems": 100,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MmsSendRecipient"
+          }
+        },
+        "message": {
+          "maxLength": 1000,
+          "minLength": 0,
+          "type": "string"
+        },
+        "attachments": {
+          "maxItems": 10,
+          "minItems": 0,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MmsSendRequestAttachment"
+          }
+        },
+        "sendOptions": {
+          "$ref": "#/definitions/MmsSendOptions"
+        }
+      }
+    },
+    "MmsSendOptions": {
+      "type": "object",
+      "properties": {
+        "enableDeliveryReport": {
+          "type": "boolean"
+        },
+        "tag": {
+          "type": "string"
+        }
+      }
+    },
+    "MmsSendRecipient": {
       "required": [
         "to"
       ],
       "type": "object",
       "properties": {
         "to": {
-          "description": "The recipient's phone number in E.164 format.",
-          "type": "string"
-        },
-        "repeatabilityRequestId": {
-          "description": "If specified, the client directs that the request is repeatable; that is, the client can make the request multiple times with the same Repeatability-Request-ID and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-ID is an opaque string representing a client-generated, 36-character hexadecimal case-insensitive encoding of a UUID (GUID), identifier for the request.",
-          "type": "string"
-        },
-        "repeatabilityFirstSent": {
-          "description": "MUST be sent by clients to specify that a request is repeatable. Repeatability-First-Sent is used to specify the date and time at which the request was first created.eg- Tue, 26 Mar 2019 16:06:51 GMT",
+          "minLength": 1,
           "type": "string"
         }
       }
     },
-    "SmsSendOptions": {
-      "description": "Optional configuration for sending SMS messages.",
+    "MmsSendRequestAttachment": {
       "required": [
-        "enableDeliveryReport"
+        "content",
+        "mimeType"
       ],
       "type": "object",
       "properties": {
-        "enableDeliveryReport": {
-          "description": "Enable this flag to receive a delivery report for this message on the Azure Resource EventGrid.",
-          "type": "boolean"
-        },
-        "tag": {
-          "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
+        "mimeType": {
+          "minLength": 1,
           "type": "string"
+        },
+        "content": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "MmsSendResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MmsSendResponseItem"
+          }
+        }
+      }
+    },
+    "MmsSendResponseItem": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "string"
+        },
+        "messageId": {
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "successful": {
+          "type": "boolean"
         }
       }
     },
     "SendMessageRequest": {
-      "description": "Represents the properties of a send message request.",
       "required": [
+        "from",
         "message",
-        "smsRecipients",
-        "from"
+        "smsRecipients"
       ],
       "type": "object",
       "properties": {
         "from": {
-          "description": "The sender's phone number in E.164 format that is owned by the authenticated account.",
+          "minLength": 1,
           "type": "string"
         },
         "smsRecipients": {
-          "description": "The recipient's phone number in E.164 format. In this version, a minimum of 1 and upto 100 recipients in the list are supported.",
-          "maxLength": 100,
-          "minLength": 1,
+          "maxItems": 100,
+          "minItems": 1,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SmsRecipient"
           }
         },
         "message": {
-          "description": "The contents of the message that will be sent to the recipient. The allowable content is defined by RFC 5724.",
           "maxLength": 2048,
           "minLength": 0,
           "type": "string"
@@ -136,11 +233,36 @@
         }
       }
     },
-    "SmsSendResponse": {
-      "description": "Response for a successful or multi status send Sms request.",
+    "SmsRecipient": {
       "required": [
-        "value"
+        "to"
       ],
+      "type": "object",
+      "properties": {
+        "repeatabilityRequestId": {
+          "type": "string"
+        },
+        "repeatabilityFirstSent": {
+          "type": "string"
+        },
+        "to": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "SmsSendOptions": {
+      "type": "object",
+      "properties": {
+        "enableDeliveryReport": {
+          "type": "boolean"
+        },
+        "tag": {
+          "type": "string"
+        }
+      }
+    },
+    "SmsSendResponse": {
       "type": "object",
       "properties": {
         "value": {
@@ -152,58 +274,54 @@
       }
     },
     "SmsSendResponseItem": {
-      "description": "Response for a single recipient.",
-      "required": [
-        "httpStatusCode",
-        "to",
-        "successful"
-      ],
       "type": "object",
       "properties": {
         "to": {
-          "description": "The recipient's phone number in E.164 format.",
           "type": "string"
         },
         "messageId": {
-          "description": "The identifier of the outgoing Sms message. Only present if message processed.",
           "type": "string"
         },
         "httpStatusCode": {
-          "description": "HTTP Status code.",
+          "format": "int32",
           "type": "integer"
         },
+        "errorMessage": {
+          "type": "string"
+        },
         "repeatabilityResult": {
-          "description": "The result of a repeatable request with one of the case-insensitive values accepted or rejected.",
-          "type": "string",
-          "enum": [
-            "accepted",
-            "rejected"
-          ]
+          "type": "string"
         },
         "successful": {
-          "description": "Indicates if the message is processed successfully or not.",
           "type": "boolean"
-        },
-        "errorMessage": {
-          "description": "Optional error message in case of 4xx/5xx/repeatable errors.",
-          "type": "string"
         }
       }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke",
+      "required": true,
+      "type": "string"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The communication resource, for example https://resourcename.communication.azure.com",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "endpoint",
-        "description": "The communication resource, for example https://my-resource.communication.azure.com",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true,
-        "x-ms-parameter-location": "client"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   }
