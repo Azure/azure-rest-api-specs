@@ -204,7 +204,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "get": {
         "tags": [
@@ -581,8 +584,7 @@
       "x-ms-enum": {
         "name": "EnableStatusEnum",
         "modelAsString": true
-      },
-      "default": "Disabled"
+      }
     },
     "ReplicationRole": {
       "type": "string",
@@ -595,8 +597,7 @@
         "name": "ReplicationRole",
         "modelAsString": true
       },
-      "description": "The replication role.",
-      "readOnly": true
+      "description": "The replication role."
     },
     "DataEncryption": {
       "type": "object",
