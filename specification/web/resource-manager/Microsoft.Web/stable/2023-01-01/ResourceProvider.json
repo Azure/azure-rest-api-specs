@@ -510,11 +510,12 @@
       "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/usages": {
       "get": {
         "summary": "Gets subscription core usages for location.",
-        "description": "Gets subscription core usages for location.",
+        "description": "Gets the usage in cores for a subscription in a given location.",
         "operationId": "GetUsagesInLocation",
         "parameters": [
           {
             "name": "location",
+            "description": "The location for which to check usages",
             "in": "path",
             "required": true,
             "type": "string"
@@ -539,7 +540,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-      }
+      },
+      "x-ms-examples": {
+          "Get usages in location for subscription": {
+            "$ref": "./examples/GetUsagesInLocation.json"
+          }
     }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
