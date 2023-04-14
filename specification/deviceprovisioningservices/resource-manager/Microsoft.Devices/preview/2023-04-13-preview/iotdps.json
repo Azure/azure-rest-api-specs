@@ -584,11 +584,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The provisioning service resource provider always returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the provisioning service status directly, or query the operation resource."
-          },
           "200": {
             "description": "This is returned as a response to the status polling request for the delete operation. The body contains the resource representation that indicates a transitional provisioning state."
+          },
+          "202": {
+            "description": "The provisioning service resource provider always returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the provisioning service status directly, or query the operation resource."
           },
           "204": {
             "description": "Once the long running delete operation completes successfully, a 204 No Content status code is returned when the status polling request finds the provisioning service metadata in the service and the status of the delete operation is set to a completed state."
@@ -1308,6 +1308,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/failover": {
+      "post": {
+        "tags": [
+          "IotDpsResource"
+        ],
+        "summary": "Customer Initiated Failover for DPS",
+        "description": "Start Customer Initiated Failover for the given provisioning service",
+        "operationId": "IotDpsResource_Failover",
+        "x-ms-examples": {
+          "DPSFailover": {
+            "$ref": "./examples/DPSFailover.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "provisioningServiceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The provisioning service name to start customer initiated failover."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the failover operation.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateLinkResources": {
       "get": {
         "tags": [
@@ -1529,14 +1576,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
+          "200": {
+            "description": "This is returned as a response to the status polling request for the update operation.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "200": {
-            "description": "This is returned as a response to the status polling request for the update operation.",
+          "201": {
+            "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation. If successful, the operation returns HTTP status code of 201 (OK).",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -1581,6 +1628,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "This is returned as a response to the status polling request for the delete operation.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
           "202": {
             "description": "This is a long running operation. The operation returns a 202 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
             "schema": {
@@ -1599,12 +1652,6 @@
                 "description": "Retry After",
                 "type": "string"
               }
-            }
-          },
-          "200": {
-            "description": "This is returned as a response to the status polling request for the delete operation.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "204": {
