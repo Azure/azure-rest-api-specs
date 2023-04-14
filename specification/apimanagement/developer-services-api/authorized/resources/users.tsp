@@ -25,7 +25,7 @@ interface Users {
   ): ApiResponse<User>;
 
   @route("/users/{userId}")
-  @doc("Create or updatea a user by its identifier.")
+  @doc("Create or update a user by its identifier.")
   @patch
   CreateOrUpdateUser(
     ...ApiVersionParameter,
