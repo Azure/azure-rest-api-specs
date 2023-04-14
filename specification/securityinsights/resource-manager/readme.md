@@ -26,15 +26,84 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-02
+tag: package-preview-2023-04
 ```
+
+
 ---
+
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Hunts.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/WorkspaceManagerGroups.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/WorkspaceManagerAssignments.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/WorkspaceManagerConfigurations.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/WorkspaceManagerMembers.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/operations.json
+```
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-03-01-preview/operations.json
+```
 
 ### Tag: package-2023-02
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02'
+``` yaml $(tag) == 'package-2023-02'
 input-file:
   - Microsoft.SecurityInsights/stable/2023-02-01/AlertRules.json
   - Microsoft.SecurityInsights/stable/2023-02-01/AutomationRules.json
@@ -48,11 +117,12 @@ input-file:
   - Microsoft.SecurityInsights/stable/2023-02-01/Watchlists.json
   - Microsoft.SecurityInsights/stable/2023-02-01/operations.json
 ```
+
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-02'
+``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/TriggeredAnalyticsRuleRuns.json
@@ -76,6 +146,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2022-12
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
@@ -522,6 +593,8 @@ directive:
     reason: Our resources do not support list by subscription. They're not top-level resources. To get a SecurityInsights resource, we should have a subscription as well as a resource group and Log Analytics workspace.
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
+  - suppress: GuidUsage
+    reason: 'Tenent Id should be a Guid'
 ```
 
 ---
