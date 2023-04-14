@@ -535,12 +535,12 @@
       },
       "additionalProperties": false
     },
-    "PrivateEndpointConnection": {
+    "RegistryPrivateEndpointConnection": {
       "description": "Private endpoint connection definition.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "This is the private endpoint connection name created on SRP\r\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/privateEndpointConnections/{peConnectionName}",
+          "description": "This is the private endpoint connection name created on SRP\r\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/RegistryPrivateEndpointConnections/{peConnectionName}",
           "type": "string",
           "x-nullable": true
         },
@@ -556,13 +556,13 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of the Private Endpoint Connection",
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/RegistryPrivateEndpointConnectionProperties",
           "x-nullable": true
         }
       },
       "additionalProperties": false
     },
-    "PrivateEndpointConnectionProperties": {
+    "RegistryPrivateEndpointConnectionProperties": {
       "description": "Properties of the Private Endpoint Connection",
       "type": "object",
       "properties": {
@@ -654,11 +654,11 @@
           "type": "string",
           "x-nullable": true
         },
-        "privateEndpointConnections": {
+        "RegistryPrivateEndpointConnections": {
           "description": "Private endpoint connections info used for pending connections in private link portal",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/RegistryPrivateEndpointConnection"
           },
           "x-nullable": true
         },
