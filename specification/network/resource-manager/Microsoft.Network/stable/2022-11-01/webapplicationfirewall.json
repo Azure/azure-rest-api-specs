@@ -562,7 +562,6 @@
         "rateLimitDuration": {
           "type": "string",
           "description": "Duration over which Rate Limit policy will be applied. Applies only when ruleType is RateLimitRule.",
-          "required": false,
           "enum": [
             "OneMin",
             "FiveMins"
@@ -575,9 +574,7 @@
         "rateLimitThreshold": {
           "description": "Rate Limit threshold to apply in case ruleType is RateLimitRule. Must be greater than or equal to 1",
           "type": "integer",
-          "format": "int32",
-          "required": false,
-          "minimum": 1
+          "format": "int32"
         },
         "ruleType": {
           "description": "The rule type.",
