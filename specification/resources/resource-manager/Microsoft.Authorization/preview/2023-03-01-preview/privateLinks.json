@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Authorization/EnablePrivateLinkNetworkAccess": {
+    "/providers/Microsoft.Authorization/enablePrivateLinkNetworkAccess": {
       "post": {
         "tags" : [
           "EnablePrivateLinkNetworkAccess"
@@ -57,7 +57,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted - Returns an Azure async operation header with HttpStatusCode 202."
+            "description": "Accepted - Returns an Azure async operation header with HttpStatusCode 202.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -67,6 +72,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Enable a private link network access.": {
             "$ref": "./examples/PostEnablePrivateLinkNetworkAccess.json"
@@ -86,6 +94,7 @@
       }
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -101,7 +110,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for this operation."
+      "description": "The API version to use for this operation.",
+      "x-ms-parameter-location":"client"
     }
   }
 }
