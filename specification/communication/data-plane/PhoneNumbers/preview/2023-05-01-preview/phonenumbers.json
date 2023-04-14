@@ -3,7 +3,7 @@
   "info": {
     "title": "PhoneNumbersClient",
     "description": "The phone numbers client uses Azure Communication Services to purchase and manage phone numbers. This version includes the ACS Operator Connect private preview version",
-    "version": "2022-06-01-preview"
+    "version": "2023-05-01-preview"
   },
   "paths": {
     "/availablePhoneNumbers/countries/{countryCode}/:search": {
@@ -500,6 +500,53 @@
           }
         }
       }
+    },
+    "/operatorInformation/:search": {
+      "post": {
+        "tags": [
+          "Obtain operator information for recipient numbers"
+        ],
+        "summary": "Endpoint for retrieving operator information for a set of phone numbers.\r\nThis includes the mnc, mcc, and number type which can be used to determine a number’s capabilities",
+        "operationId": "SearchOperatorInformation",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The phone number(s) whose operator information should be looked up",
+            "schema": {
+              "$ref": "#/definitions/OperatorInformationSearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperatorInformationSearchResponse"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "x-ms-examples": {
+            "Look up multiple phone numbers": {
+              "$ref": "./examples/SearchOperatorInformation.json"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -890,6 +937,78 @@
         },
         "nextLink": {
           "description": "Represents the URL link to the next page of phone number results.",
+          "type": "string"
+        }
+      }
+    },
+    "OperatorInformationSearchRequest": {
+      "description": "Represents a search request for operator information about phone numbers",
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperatorInformationSearchResponse": {
+      "description": "Represents a search result containing operator information for phone numbers",
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperatorInformation"
+          }
+        }
+      }
+    },
+    "OperatorInformation": {
+      "description": "Represents metadata about a phone number that is controlled/provided by the phone number's operator.",
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "description": "E.164 formatted string representation of the phone number",
+          "type": "string"
+        },
+        "phoneNumberType": {
+          "description": "Type of service associated with the phone number",
+          "enum": [
+            "geographic",
+            "mobile",
+            "paging",
+            "freephone",
+            "specialServices",
+            "testNumber",
+            "voip"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TelephoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "operator": {
+          "$ref": "#/definitions/Operator"
+        }
+      }
+    },
+    "Operator": {
+      "description": "Represents metadata describing the operator of a phone number",
+      "type": "object",
+      "properties": {
+        "operator": {
+          "description": "Name of the phone operator",
+          "type": "string"
+        },
+        "mobileNetworkCode": {
+          "description": "Mobile Network Code",
+          "type": "string"
+        },
+        "mobileCountryCode": {
+          "description": "Mobile Country Code",
           "type": "string"
         }
       }
