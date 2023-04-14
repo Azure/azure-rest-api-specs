@@ -27,7 +27,7 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2023-03
+tag: package-2023-05
 ```
 
 ### Validations
@@ -139,11 +139,19 @@ directive:
 ```
 
 
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.PolicyInsights/stable/2023-05-01/attestations.json
+```
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+``` yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
   - Microsoft.PolicyInsights/stable/2021-10-01/remediations.json
@@ -155,6 +163,7 @@ input-file:
   - Microsoft.PolicyInsights/stable/2022-04-01/operations.json
   - Microsoft.PolicyInsights/stable/2022-09-01/attestations.json
 ```
+
 ### Tag: package-2022-09
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
