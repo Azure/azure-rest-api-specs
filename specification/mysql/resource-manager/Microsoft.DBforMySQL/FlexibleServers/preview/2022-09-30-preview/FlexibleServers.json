@@ -763,7 +763,8 @@
         },
         "geoRedundantBackup": {
           "$ref": "#/definitions/EnableStatusEnum",
-          "description": "Whether or not geo redundant backup is enabled."
+          "description": "Whether or not geo redundant backup is enabled.",
+          "default": "Disabled"
         },
         "earliestRestoreDate": {
           "type": "string",
@@ -789,7 +790,8 @@
         },
         "autoGrow": {
           "description": "Enable Storage Auto Grow or not.",
-          "$ref": "#/definitions/EnableStatusEnum"
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
         },
         "storageSku": {
           "type": "string",
@@ -798,7 +800,8 @@
         },
         "autoIoScaling": {
           "description": "Enable IO Auto Scaling or not.",
-          "$ref": "#/definitions/EnableStatusEnum"
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
         }
       },
       "description": "Storage Profile properties of a server"
@@ -835,7 +838,6 @@
       "properties": {
         "publicNetworkAccess": {
           "$ref": "#/definitions/EnableStatusEnum",
-          "readOnly": true,
           "description": "Whether or not public network access is allowed for this server. Value is 'Disabled' when server has VNet integration."
         },
         "delegatedSubnetResourceId": {
