@@ -59,7 +59,7 @@
           "202": {
             "description": "Accepted - Returns an Azure async operation header with HttpStatusCode 202.",
             "headers": {
-              "location": {
+              "Azure-AsyncOperation": {
                 "type": "string"
               }
             }
@@ -73,7 +73,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Enable a private link network access.": {
