@@ -30,7 +30,7 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-privatelinks)
-tag: package-privatelinks-2020-05
+tag: package-privatelinks-2023-03-preview
 ```
 
 ``` yaml $(package-features)
@@ -78,17 +78,16 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-preview-2023-03
+tag: package-snapshots-2022-11
 ```
 
 
-### Tag: package-preview-2023-03
+### Tag: package-privatelink-2023-03-preview
 
-These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+These settings apply only when `--tag=package-privatelink-2023-03-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-03'
+```yaml $(tag) == 'package-privatelink-2023-03-preview'
 input-file:
-  - Microsoft.Authorization/preview/2023-03-01-preview/locks.json
   - Microsoft.Authorization/preview/2023-03-01-preview/privateLinks.json
 ```
 ### Tag: package-policy-2022-06
