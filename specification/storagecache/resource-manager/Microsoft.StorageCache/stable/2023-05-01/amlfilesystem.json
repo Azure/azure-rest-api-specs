@@ -670,20 +670,9 @@
               ],
               "$ref": "storagecache.json#/definitions/URLString"
             },
-            "mgsAddress": {
-              "description": "The IPv4 address used by clients to mount the AML file system's Lustre Management Service (MGS).",
-              "readOnly": true,
-              "type": "string"
-            },
-            "mountCommand": {
-              "description": "Recommended command to mount the AML file system",
-              "readOnly": true,
-              "type": "string"
-            },
-            "lustreVersion": {
-              "type": "string",
-              "description": "The version of Lustre running in the AML file system",
-              "readOnly": true
+            "clientInfo": {
+              "$ref": "#/definitions/AmlFilesystemClientInfo",
+              "description": "Client information for the AML file system."
             },
             "throughputProvisionedMBps": {
               "type": "integer",
@@ -897,6 +886,54 @@
         "container",
         "loggingContainer"
       ]
+    },
+    "AmlFilesystemClientInfo": {
+      "type": "object",
+      "description": "AML file system client information",
+      "readOnly": true,
+      "properties": {
+        "mgsAddress": {
+          "description": "The IPv4 address used by clients to mount the AML file system's Lustre Management Service (MGS).",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mountCommand": {
+          "description": "Recommended command to mount the AML file system",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lustreVersion": {
+          "type": "string",
+          "description": "The version of Lustre running in the AML file system",
+          "readOnly": true
+        },
+        "containerStorageInterface": {
+          "$ref": "#/definitions/AmlFilesystemContainerStorageInterface",
+          "description": "Container Storage Interface information for the AML file system."
+        },
+      }
+    },
+    "AmlFilesystemContainerStorageInterface": {
+      "type": "object",
+      "description": "AML file system container storage interface information",
+      "readOnly": true,
+      "properties": {
+        "persistentVolumeClaim": {
+          "description": "Recommended AKS Persistent Volume Claim for the azurelustre CSI driver, in Base64 encoded YAML",
+          "readOnly": true,
+          "type": "string"
+        },
+        "persistentVolume": {
+            "description": "Recommended AKS Persistent Volume for the azurelustre CSI driver, in Base64 encoded YAML",
+            "readOnly": true,
+            "type": "string"
+        },
+        "storageClass": {
+            "description": "Recommended AKS Storage Class for the azurelustre CSI driver, in Base64 encoded YAML",
+            "readOnly": true,
+            "type": "string"
+        }
+      }
     },
     "AmlFilesystemArchiveInfo": {
       "type": "object",
