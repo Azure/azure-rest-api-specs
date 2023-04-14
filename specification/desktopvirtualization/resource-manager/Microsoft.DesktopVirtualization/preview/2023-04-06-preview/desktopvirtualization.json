@@ -2702,70 +2702,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/operationResults/{operationResultId}": {
-      "get": {
-        "tags": [
-          "SessionHostManagements"
-        ],
-        "operationId": "SessionHostManagementsOperationResult_Get",
-        "description": "Get Operation result for SessionHostManagement",
-        "x-ms-examples": {
-          "SessionHostManagementsOperationResult_Get": {
-            "$ref": "./examples/SessionHostManagementsOperationResult_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/OperationResultIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Async SessionHost Provisioning operation completed.",
-            "schema": {
-              "$ref": "#/definitions/SessionHostManagement"
-            }
-          },
-          "204": {
-            "description": "Success No Content."
-          },
-          "400": {
-            "description": "Error response with validation information.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SessionHostManagementValidationErrorsList"
-            }
-          },
-          "500": {
-            "description": "Failure No Content.",
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/operationStatuses/{operationStatusId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/operationStatuses/{operationId}": {
       "get": {
         "tags": [
           "SessionHostManagements"
@@ -2791,7 +2728,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationStatusIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
@@ -3128,66 +3065,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default/operationResults/{operationResultId}": {
-      "get": {
-        "tags": [
-          "SessionHostConfigurations"
-        ],
-        "operationId": "SessionHostConfigurationsOperationResult_Get",
-        "description": "Get Operation result for SessionHostConfiguration",
-        "x-ms-examples": {
-          "SessionHostConfigurationsOperationResult_Get": {
-            "$ref": "./examples/SessionHostConfigurationsOperationResult_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HostPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/OperationResultIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Async SessionHostConfiguration update validation completed.",
-            "schema": {
-              "$ref": "#/definitions/SessionHostConfiguration"
-            }
-          },
-          "204": {
-            "description": "No Content."
-          },
-          "400": {
-            "description": "Error response with validation information.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/SessionHostConfigurationValidationErrorsList"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default/operationStatuses/{operationStatusId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default/operationStatuses/{operationId}": {
       "get": {
         "tags": [
           "SessionHostConfigurations"
@@ -3213,7 +3091,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "$ref": "#/parameters/OperationStatusIdParameter"
+            "$ref": "#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
@@ -5772,20 +5650,6 @@
         }
       }
     },
-    "SessionHostManagementValidationErrorsList": {
-      "type": "object",
-      "description": "SessionHostManagement Operation status properties.",
-      "properties": {
-        "validationErrors": {
-          "type": "array",
-          "description": "List of validation errors for the sessionHostManagement Operation.",
-          "items": {
-            "$ref": "#/definitions/SessionHostManagementProgressError"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "SessionHostManagementOperationType": {
       "enum": [
         "UpdateSessionHosts",
@@ -5973,20 +5837,6 @@
           "type": "string",
           "readOnly": true,
           "description": "Link to the next page of results."
-        }
-      }
-    },
-    "SessionHostConfigurationValidationErrorsList": {
-      "type": "object",
-      "description": "SessionHostManagement Operation status properties.",
-      "properties": {
-        "validationErrors": {
-          "type": "array",
-          "description": "List of validation errors for the sessionHostManagement Operation.",
-          "items": {
-            "$ref": "#/definitions/SessionHostManagementProgressError"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -8952,18 +8802,8 @@
       "minLength": 1,
       "x-ms-parameter-location": "method"
     },
-    "OperationResultIdParameter": {
-      "name": "operationResultId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Guid of the operation result.",
-      "maxLength": 36,
-      "minLength": 36,
-      "x-ms-parameter-location": "method"
-    },
-    "OperationStatusIdParameter": {
-      "name": "operationStatusId",
+    "OperationIdParameter": {
+      "name": "operationId",
       "in": "path",
       "required": true,
       "type": "string",
