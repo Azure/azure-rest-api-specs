@@ -2237,7 +2237,7 @@
                 "format": "int32"
               },
               "Operation-Location": {
-                "description": "The location of the created resource.",
+                "description": "The location of the operation to track progress.",
                 "type": "string",
                 "format": "uri"
               }
@@ -2545,8 +2545,11 @@
           }
         },
         "x-ms-examples": {
-          "Get an operation": {
-            "$ref": "./examples/get_operation.json"
+          "Get model copy operation pending": {
+            "$ref": "./examples/get_operation_copy_model_pending.json"
+          },
+          "Get model copy operation": {
+            "$ref": "./examples/get_operation_copy_model.json"
           }
         }
       }
@@ -5790,7 +5793,8 @@
         },
         "properties": {
           "description": "The configuration for running this model in a container.",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
