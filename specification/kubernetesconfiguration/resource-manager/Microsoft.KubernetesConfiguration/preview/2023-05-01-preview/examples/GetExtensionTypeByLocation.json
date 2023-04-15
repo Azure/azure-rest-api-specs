@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "location": "westus2",
+    "extensionTypeName": "extensionType1",
+    "releaseTrain": "stable",
+    "api-version": "2023-05-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "description": "Details of the extension type",
+      "body": {
+        "id": "aaaa",
+        "name": "bbbb",
+        "type": "cccc",
+        "properties": {
+          "isSystemExtension": false,
+          "isManagedIdentityRequired": true,
+          "description": "My extension type!",
+          "publisher": "Microsoft",
+          "planInfo": {
+            "publisherId": "myPublisherId",
+            "planId": "myPlanId",
+            "offerId": "myOfferId"
+          },
+          "supportedClusterTypes": [
+            "connectedClusters"
+          ],
+          "supportedScopes": {
+            "defaultScope": "cluster",
+            "clusterScopeSettings": {
+              "allowMultipleInstances": true,
+              "defaultReleaseNamespace": "kube-system"
+            }
+          }
+        }
+      }
+    }
+  }
+}
