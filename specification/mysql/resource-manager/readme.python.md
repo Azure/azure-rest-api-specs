@@ -24,6 +24,7 @@ Generate all API versions currently shipped for this package
 clear-output-folder: true
 batch:
   - tag: package-2022-01-01
+  - tag: package-flexibleserver-2021-12-01-preview
 ```
 
 ### Tag: package-2022-01-01 and python
@@ -32,6 +33,16 @@ These settings apply only when `--tag=package-2022-01-01 --python` is specified 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2022-01-01' && $(python)
+namespace: azure.mgmt.rdbms.mysql_flexibleservers
+output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql_flexibleservers
+```
+
+### Tag: package-2020-01-01 and python
+
+These settings apply only when `--tag=package-2020-01-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-01-01' && $(python)
 namespace: azure.mgmt.rdbms.mysql
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 ```
