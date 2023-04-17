@@ -23,10 +23,6 @@ directive:
   - rename-operation:
       from: 'MonitorOperations_List'
       to: 'OperationsForMonitor_List'
-  - from: privateLinkScopes_API.json # this is to resolve the duplicated schema issue in this swagger
-    where: "$.path['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses['200'].schema"
-    transform: >
-      $["$ref"] = "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection";
 modelerfour:
   lenient-model-deduplication: true
 ```
