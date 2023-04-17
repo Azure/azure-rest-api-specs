@@ -17,7 +17,7 @@ enum ServiceApiVersions {
 )
 
 @service({
-  title: "Azure.Messaging.EventGridMessagingClient",
+  title: "Azure.Messaging.EventGridClient",
   version: "2023-06-01-preview"
 })
 
@@ -57,7 +57,7 @@ namespace Azure.Messaging.EventGrid {
     source: string;
 
     @doc("Event data specific to the event type.")
-    data?: object;
+    data?: unknown;
 
     @doc("Event data specific to the event type, encoded as a base64 string.")
     data_base64?: bytes;
@@ -66,7 +66,7 @@ namespace Azure.Messaging.EventGrid {
     type: string;
 
     @doc("The time (in UTC) the event was generated, in RFC3339 format.")
-    time?: zonedDateTime;
+    time?: utcDateTime;
 
     @doc("The version of the CloudEvents specification which the event uses.")
     specversion: string;
