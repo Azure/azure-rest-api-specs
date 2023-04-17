@@ -99,7 +99,7 @@ and imputeMode is \"fixed\".
 @doc("Definition of input time series points.")
 model TimeSeriesPoint {
   @doc("Argument that indicates the time stamp of a data point (ISO8601 format).")
-  timestamp?: zonedDateTime;
+  timestamp?: utcDateTime;
 
   @doc("Measurement of that point.")
   value: float32;
