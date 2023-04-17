@@ -1335,7 +1335,11 @@
             },
             "automaticSnapshotPolicyEnabled": {
               "type": "boolean",
-              "description": "Deprecated in favor of isVersioningEnabled property."
+              "description": "Deprecated in favor of isVersioningEnabled property.",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
             "changeFeed": {
               "$ref": "#/definitions/ChangeFeed",
@@ -1407,9 +1411,9 @@
         },
         "days": {
           "type": "integer",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 365,
-          "description": "how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days."
+          "description": "how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days. 0 will be retruned when policy is disabled"
         },
         "lastEnabledTime": {
           "type": "string",

@@ -2989,8 +2989,7 @@
         }
       },
       "required": [
-        "domainName",
-        "domainGuid"
+        "domainName"
       ],
       "description": "Settings properties for Active Directory (AD)."
     },
@@ -3446,10 +3445,10 @@
       "properties": {
         "immutabilityPeriodSinceCreationInDays": {
           "type": "integer",
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 146000,
           "format": "int32",
-          "description": "The immutability period for the blobs in the container since the policy creation, in days."
+          "description": "The immutability period for the blobs in the container since the policy creation in days. 0 is returned when state is disabled."
         },
         "state": {
           "type": "string",
