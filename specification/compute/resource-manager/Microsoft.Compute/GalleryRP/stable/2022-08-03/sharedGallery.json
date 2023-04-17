@@ -404,13 +404,6 @@
         "identifier": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedGalleryIdentifier"
-        },
-        "artifactTags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Shared gallery resource tags"
         }
       },
       "allOf": [
@@ -419,6 +412,18 @@
         }
       ],
       "description": "Base information about the shared gallery resource in pir."
+    },
+    "SharedGalleryArtifactTags": {
+      "properties": {
+        "artifactTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Shared gallery resource tags"
+        }
+      },
+      "description": "The artifact tags of a Shared gallery resource."
     },
     "SharedGalleryIdentifier": {
       "properties": {
@@ -452,13 +457,26 @@
       ]
     },
     "SharedGallery": {
-      "properties": {},
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedGalleryProperties"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/PirSharedGalleryResource"
         }
       ],
       "description": "Specifies information about the Shared Gallery that you want to create or update."
+    },
+    "SharedGalleryProperties": {
+      "properties": {
+        "artifactTags": {
+          "$ref": "#/definitions/SharedGalleryArtifactTags"
+        }
+      },
+      "description": "Specifies the properties of a shared gallery"
     },
     "SharedGalleryImageList": {
       "description": "The List Shared Gallery Images operation response.",
@@ -569,6 +587,9 @@
         "eula": {
           "type": "string",
           "description": "End-user license agreement for the current community gallery image."
+        },
+        "artifactTags": {
+          "$ref": "#/definitions/SharedGalleryArtifactTags"
         }
       },
       "required": [
@@ -631,6 +652,9 @@
         "storageProfile": {
           "$ref": "./galleryRPCommon.json#/definitions/SharedGalleryImageVersionStorageProfile",
           "description": "Describes the storage profile of the image version."
+        },
+        "artifactTags": {
+          "$ref": "#/definitions/SharedGalleryArtifactTags"
         }
       },
       "description": "Describes the properties of a gallery image version."
