@@ -35,6 +35,67 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations/{configurationName}": {
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "ConfigurationCreateOrUpdate": {
+            "$ref": "./examples/ConfigurationCreateOrUpdate.json"
+          }
+        },
+        "description": "Updates a configuration of a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "description": "The required parameters for updating a server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "patch": {
         "tags": [
           "Configurations"
@@ -259,10 +320,19 @@
           "type": "string",
           "description": "Value of the configuration."
         },
+        "currentValue": {
+          "type": "string",
+          "description": "Current value of the configuration."
+        },
         "description": {
           "type": "string",
           "readOnly": true,
           "description": "Description of the configuration."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The link used to get the document from community or Azure site."
         },
         "defaultValue": {
           "type": "string",
