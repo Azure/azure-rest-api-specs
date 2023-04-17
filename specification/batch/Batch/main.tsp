@@ -9,10 +9,19 @@ using TypeSpec.Versioning;
   title: "BatchServiceClient",
   version: "2022-10-01.16.0",
 })
+@server(
+  "{endpoint}",
+  "Batch Account endpoint",
+  {
+    @doc("Need to be set as 'https://{endpoint}' in client.")
+    endpoint: url,
+  }
+)
 @useAuth(AADToken)
 @versioned(BatchService.Versions)
-@versionedDependency([[BatchService.Versions.v2022_10_01, Azure.Core.Versions.v1_0_Preview_2]])
-
+@versionedDependency(
+  [[BatchService.Versions.v2022_10_01, Azure.Core.Versions.v1_0_Preview_2]]
+)
 @doc("A client for issuing REST requests to the Azure Batch service.")
 namespace BatchService;
 
