@@ -27,10 +27,20 @@ These are the global settings for the testbase.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-01-15-preview
+tag: package-2023-01-16-preview
 ```
 
 
+### Tag: package-2023-01-16-preview
+
+These settings apply only when `--tag=package-2023-01-16-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01-16-preview'
+input-file:
+  - Microsoft.TestBase/preview/2023-01-16-preview/actionrequest.json
+  - Microsoft.TestBase/preview/2023-01-16-preview/draftpackage.json
+  - Microsoft.TestBase/preview/2023-01-16-preview/testbase.json
+```
 ### Tag: package-2020-12-16-preview
 
 These settings apply only when `--tag=package-2020-12-16-preview` is specified on the command line.
@@ -174,7 +184,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-01-01-preview'
+``` yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
   - Microsoft.TestBase/preview/2023-01-01-preview/draftpackage.json
   - Microsoft.TestBase/preview/2023-01-01-preview/testbase.json
