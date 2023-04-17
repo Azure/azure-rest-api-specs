@@ -11,14 +11,15 @@ using DeveloperServicesApi.Models;
 namespace DeveloperServicesPublicApi.Resources.Users;
 
 interface Users {
-  @route("/users")
-  @doc("Create a new user.")
-  @post
-  CreateUser(
-    ...ApiVersionParameter,
+  @doc("Create a user by its identifier.")
+  createUser is ResourceCreateWithServiceProvidedName<UserCreateResouce>;
+}
 
-    @doc("The user to create.")
-    @body
-    userCreate: UserCreate
-  ): CreatedApiResponse<User>;
+@doc("The user resource.")
+@resource("users")
+model UserCreateResouce extends UserCreate {
+  @doc("User id.")
+  @key("userId")
+  @visibility("query")
+  userId: string;
 }
