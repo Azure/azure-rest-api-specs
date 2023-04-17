@@ -13,7 +13,10 @@ using TypeSpec.Versioning;
   "{endpoint}",
   "Batch Account endpoint",
   {
-    @doc("Need to be set as 'https://{endpoint}' in client.")
+    @doc("""
+    Supported Batch Service endpoints (protocol and hostname, for example:
+    https://mybatchaccount.mybatchregion.batch.azure.com).
+    """)
     endpoint: url,
   }
 )
