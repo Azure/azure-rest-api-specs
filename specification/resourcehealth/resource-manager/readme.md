@@ -129,6 +129,14 @@ directive:
     from: ResourceHealth.json
     where: $.definitions.recommendedAction.properties["_ActionUrl.Comment"]
     reason: field _ActionUrl.Comment has existed for several years but has been missing from swagger. s360= https://portal.azure-devex-tools.com/amekpis/correctness/detail?errorId=647F3368-7670-4ADF-9D8D-6A6F02006D3F 
+  - suppress: ParametersInPost
+    from: ResourceHealth.json
+    where: $..paths["/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/listSecurityAdvisoryImpactedResources"]
+    reason: already existing api endpoint
+  - suppress: ParametersInPost
+    from: ResourceHealth.json
+    where: $..paths["/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events/{eventTrackingId}/listSecurityAdvisoryImpactedResources"]
+    reason: already existing api endpoint 
 ```
 ---
 
