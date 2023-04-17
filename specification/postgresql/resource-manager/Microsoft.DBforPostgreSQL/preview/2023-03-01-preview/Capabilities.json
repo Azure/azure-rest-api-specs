@@ -78,7 +78,7 @@
         "tags": [
           "LocationBasedCapabilities"
         ],
-        "operationId": "ServerCapabilities_Execute",
+        "operationId": "ServerCapabilities_List",
         "x-ms-examples": {
           "ServerCapabilitiesList": {
             "$ref": "./examples/ServerCapabilities.json"
@@ -202,8 +202,8 @@
         "supportedZones": {
           "type": "array",
           "description": "List of supported Availability Zones",
-          "items": {            
-            "type":  "object",
+          "items": {
+            "type": "object",
             "properties": {
               "zone": {
                 "type": "string",
@@ -211,9 +211,7 @@
                 "readOnly": true
               }
             },
-            "x-ms-identifiers": [
-              
-            ]
+            "x-ms-identifiers": []
           }
         },
         "supportedHaMode": {
@@ -274,7 +272,7 @@
           "description": "Storage edition name",
           "readOnly": true
         },
-        "defaultsSorageSizeMb": {
+        "defaultStorageSizeMb": {
           "type": "integer",
           "format": "int64",
           "description": "Default storage size in MB for storage edition",
@@ -287,7 +285,7 @@
             "$ref": "#/definitions/StorageMbCapability"
           },
           "x-ms-identifiers": [
-            "storageSizeMB"
+            "storageSizeMb"
           ],
           "readOnly": true
         }
