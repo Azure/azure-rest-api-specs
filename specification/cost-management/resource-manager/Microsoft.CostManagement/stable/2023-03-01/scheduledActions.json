@@ -924,8 +924,9 @@
       "name": "If-Match",
       "in": "header",
       "required": false,
-      "description": "ETag of the Entity. Not required when creating an entity, but required when updating an entity.",
-      "type": "string"
+      "description": "ETag of the Entity. Not required when creating an entity. Optional when updating an entity and can be specified to achieve optimistic concurrency.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
