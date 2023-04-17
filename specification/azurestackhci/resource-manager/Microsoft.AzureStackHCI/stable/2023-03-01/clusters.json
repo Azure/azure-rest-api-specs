@@ -805,6 +805,24 @@
             "type": "string",
             "readOnly": true
           }
+        },
+        "clusterType": {
+          "description": "The node type of all the nodes of the cluster.",
+          "type": "string",
+          "enum": [
+            "FirstParty",
+            "ThirdParty"
+          ],
+          "x-ms-enum": {
+            "name": "ClusterNodeType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "manufacturer": {
+          "description": "The manufacturer of all the nodes of the cluster.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
