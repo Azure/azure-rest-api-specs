@@ -119,7 +119,7 @@ If you are working on API specification of a service group, then you may choose 
 
 In the following folder structure sample, there is only 'resource-manager' folder. There could be a similar folder structure under 'data-plane' folder, while the sub-component/sub-service folders may not be the same.
 
-Ensure to consult [API Spec and Tooling Support](https://teams.microsoft.com/l/channel/19%3af1b9607b948840cca8b7852ed6bb1713%40thread.skype/General?groupId=a5e9b41d-1b0a-471d-a170-8ce202fa30b1&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) for the first time creating the folder structure or if you want to change current folder structure.
+Ensure to consult [API Spec Review](https://aka.ms/azsdk/support/specreview-channel) for the first time creating the folder structure or if you want to change current folder structure.
 
 ```bash
 .
@@ -166,7 +166,7 @@ Ensure to consult [API Spec and Tooling Support](https://teams.microsoft.com/l/c
 |    |       \---readme.md
 ```
 
-If the AutoRest configuration file (aka. the readme.md) is placed out of sub-service/sub-component folders, then there will be only one SDK package that holds all sub-services/sub-components. If the file is placed in each sub-service/sub-component folder, then there will be separate SDK packages of each sub-service/sub-component.  Ensure to consult [Azure SDK ArchBoard](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/667/Azure-SDK-Archboard-Review) for SDK packaging strategy when consolidating AutoRest configuration file for SDK generation.
+If the AutoRest configuration file (aka. the readme.md) is placed out of sub-service/sub-component folders, then there will be only one SDK package that holds all sub-services/sub-components. If the file is placed in each sub-service/sub-component folder, then there will be separate SDK packages of each sub-service/sub-component.  Ensure to consult [Azure SDK ArchBoard](https://aka.ms/azsdk/onboarding/archboardschedule) for SDK packaging strategy when consolidating AutoRest configuration file for SDK generation.
 
 ### common-types
 

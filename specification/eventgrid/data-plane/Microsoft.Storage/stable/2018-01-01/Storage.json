@@ -424,6 +424,73 @@
           "type": "string"
         }
       }
+    },
+    "StorageTaskQueuedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event.",
+      "type": "object",
+      "properties": {
+        "queuedDateTime": {
+          "description": "The time at which a storage task was queued.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "taskExecutionId": {
+          "description": "The execution id for a storage task.",
+          "type": "string"
+        }
+      },
+      "x-ms-examples": {
+        "StorageTaskQueuedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/storage_task_queued.json"
+        },
+        "StorageTaskQueuedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/storage_task_queued.json"
+        }
+      }
+    },
+    "StorageTaskCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status for a storage task.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTaskCompletedStatus",
+            "modelAsString": true
+          }
+        },
+        "completedDateTime": {
+          "description": "The time at which a storage task was completed.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "taskExecutionId": {
+          "description": "The execution id for a storage task.",
+          "type": "string"
+        },
+        "taskName": {
+          "description": "The task name for a storage task.",
+          "type": "string"
+        },
+        "summaryReportBlobUrl": {
+          "description": "The summary report blob url for a storage task",
+          "format": "url",
+          "type": "string"
+        }
+      },
+      "x-ms-examples": {
+        "StorageTaskCompletedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/storage_task_completed.json"
+        },
+        "StorageTaskCompletedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/storage_task_completed.json"
+        }
+      }
     }
   }
 }
