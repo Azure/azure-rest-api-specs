@@ -129,12 +129,6 @@ namespace Azure.Messaging.EventGrid {
     succeededLockTokens: string[];
   }
 
-  @doc("Lock token input formatting.")
-  model LockTokenInput {
-    @doc("LockTokens")
-    lockTokens: string[];
-  }
-
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
   @doc("Publish Single Cloud Event to namespace topic.")
@@ -209,7 +203,7 @@ namespace Azure.Messaging.EventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body
-    lockTokens: LockTokenInput;
+    lockTokens: LockToken[];
   }, LockTokensResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
