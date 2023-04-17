@@ -731,6 +731,35 @@
             "name": "StorageAutoGrow",
             "modelAsString": true
           }
+        },
+        "iopsTier": {
+          "type": "string",
+          "description": "Name of storage tier for IOPS.",
+          "enum": [
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P6",
+            "P10",
+            "P15",
+            "P20",
+            "P30",
+            "P40",
+            "P50",
+            "P60",
+            "P70",
+            "P80"
+          ],
+          "x-ms-enum": {
+            "name": "AzureManagedDiskPerformanceTiers",
+            "modelAsString": true
+          }
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage tier IOPS quantity."
         }
       },
       "description": "Storage properties of a server"
