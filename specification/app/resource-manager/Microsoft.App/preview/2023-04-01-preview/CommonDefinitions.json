@@ -578,6 +578,11 @@
           "description": "User friendly suffix that is appended to the revision name",
           "type": "string"
         },
+        "terminationGracePeriodSeconds": {
+          "description": "Optional duration in seconds the Container App Instance needs to terminate gracefully. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). If this value is nil, the default grace period will be used instead. Set this value longer than the expected cleanup time for your process. Defaults to 30 seconds.",
+          "format": "int64",
+          "type": "integer"
+        },
         "initContainers": {
           "description": "List of specialized containers that run before app containers.",
           "type": "array",
@@ -648,6 +653,10 @@
           "x-ms-identifiers": [
             "secretRef"
           ]
+        },
+        "mountOptions": {
+          "description": "Mount options used while mounting the AzureFile. Must be a comma-separated string.",
+          "type": "string"
         }
       }
     },
@@ -675,6 +684,10 @@
         },
         "mountPath": {
           "description": "Path within the container at which the volume should be mounted.Must not contain ':'.",
+          "type": "string"
+        },
+        "subPath": {
+          "description": "Path within the volume from which the container's volume should be mounted. Defaults to \"\" (volume's root).",
           "type": "string"
         }
       }
