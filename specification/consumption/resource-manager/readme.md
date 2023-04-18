@@ -26,17 +26,7 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-06
-```
-
-### Tag: package-2022-06
-
-These settings apply only when `--tag=package-2022-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-06'
-input-file:
-  - Microsoft.Consumption/stable/2021-10-01/consumption.json
-  - Microsoft.Consumption/stable/2022-06-01/consumption.pricesheets.operations.json
+tag: package-2021-10
 ```
 
 
