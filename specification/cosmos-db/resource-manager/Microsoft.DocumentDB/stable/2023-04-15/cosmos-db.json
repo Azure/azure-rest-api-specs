@@ -6,20 +6,12 @@
     "version": "2023-04-15"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -646,9 +638,7 @@
     },
     "/providers/Microsoft.DocumentDB/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Lists all of the available Cosmos DB Resource Provider operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
@@ -6036,9 +6026,7 @@
           }
         }
       },
-      "required": [
-        "failoverPolicies"
-      ],
+      "required": ["failoverPolicies"],
       "description": "The list of new failover policies for the failover priority change."
     },
     "FailoverPolicy": {
@@ -6069,9 +6057,7 @@
           "description": "Cosmos DB region, with spaces between words and each word capitalized."
         }
       },
-      "required": [
-        "region"
-      ],
+      "required": ["region"],
       "description": "Cosmos DB region to online or offline."
     },
     "Location": {
@@ -6168,9 +6154,7 @@
           "$ref": "#/definitions/ClientEncryptionKeyCreateUpdateProperties"
         }
       },
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "ClientEncryptionKeyCreateUpdateProperties": {
       "description": "Properties to create and update ClientEncryptionKey.",
@@ -6181,9 +6165,7 @@
           "$ref": "#/definitions/ClientEncryptionKeyResource"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "ClientEncryptionKeyGetResults": {
       "description": "Client Encryption Key.",
@@ -6225,11 +6207,7 @@
           "description": "Indicates the type of database account. This can only be set at database account creation.",
           "type": "string",
           "default": "GlobalDocumentDB",
-          "enum": [
-            "GlobalDocumentDB",
-            "MongoDB",
-            "Parse"
-          ],
+          "enum": ["GlobalDocumentDB", "MongoDB", "Parse"],
           "x-ms-enum": {
             "name": "DatabaseAccountKind",
             "modelAsString": true
@@ -6798,9 +6776,7 @@
           "format": "int32"
         }
       },
-      "required": [
-        "defaultConsistencyLevel"
-      ]
+      "required": ["defaultConsistencyLevel"]
     },
     "CorsPolicy": {
       "type": "object",
@@ -6830,9 +6806,7 @@
           "format": "int64"
         }
       },
-      "required": [
-        "allowedOrigins"
-      ]
+      "required": ["allowedOrigins"]
     },
     "DatabaseAccountGetProperties": {
       "description": "Properties for the database account.",
@@ -7181,10 +7155,7 @@
           "$ref": "#/definitions/MinimalTlsVersion"
         }
       },
-      "required": [
-        "locations",
-        "databaseAccountOfferType"
-      ]
+      "required": ["locations", "databaseAccountOfferType"]
     },
     "DatabaseAccountCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB database accounts.",
@@ -7194,11 +7165,7 @@
           "description": "Indicates the type of database account. This can only be set at database account creation.",
           "type": "string",
           "default": "GlobalDocumentDB",
-          "enum": [
-            "GlobalDocumentDB",
-            "MongoDB",
-            "Parse"
-          ],
+          "enum": ["GlobalDocumentDB", "MongoDB", "Parse"],
           "x-ms-enum": {
             "name": "DatabaseAccountKind",
             "modelAsString": true
@@ -7217,9 +7184,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "DatabaseAccountUpdateProperties": {
       "description": "Properties to update Azure Cosmos DB database accounts.",
@@ -7492,16 +7457,12 @@
           }
         }
       },
-      "required": [
-        "keyKind"
-      ]
+      "required": ["keyKind"]
     },
     "DatabaseAccountOfferType": {
       "description": "The offer type for the Cosmos DB database account.",
       "type": "string",
-      "enum": [
-        "Standard"
-      ],
+      "enum": ["Standard"],
       "x-ms-enum": {
         "name": "DatabaseAccountOfferType",
         "modelAsString": false
@@ -7522,9 +7483,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "ThroughputSettingsUpdateProperties": {
       "description": "Properties to update Azure Cosmos DB resource throughput.",
@@ -7535,9 +7494,7 @@
           "$ref": "#/definitions/ThroughputSettingsResource"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "SqlDatabaseCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB SQL database.",
@@ -7554,9 +7511,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "SqlDatabaseCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB SQL database.",
@@ -7571,9 +7526,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "SqlContainerCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB container.",
@@ -7590,9 +7543,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "SqlContainerCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB container.",
@@ -7607,9 +7558,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "SqlStoredProcedureCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB storedProcedure.",
@@ -7626,9 +7575,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "SqlStoredProcedureCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB storedProcedure.",
@@ -7643,9 +7590,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "SqlUserDefinedFunctionCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB userDefinedFunction.",
@@ -7662,9 +7607,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "SqlUserDefinedFunctionCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB userDefinedFunction.",
@@ -7679,9 +7622,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "SqlTriggerCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB trigger.",
@@ -7698,9 +7639,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "SqlTriggerCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB trigger.",
@@ -7715,9 +7654,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "MongoDBDatabaseCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB MongoDB database.",
@@ -7734,9 +7671,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "MongoDBDatabaseCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB MongoDB database.",
@@ -7751,9 +7686,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "MongoDBCollectionCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB MongoDB collection.",
@@ -7770,9 +7703,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "MongoDBCollectionCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB MongoDB collection.",
@@ -7787,9 +7718,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "TableCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB Table.",
@@ -7806,9 +7735,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "TableCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB Table.",
@@ -7823,9 +7750,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "CassandraKeyspaceCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB Cassandra keyspace.",
@@ -7842,9 +7767,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "CassandraKeyspaceCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB Cassandra keyspace.",
@@ -7859,9 +7782,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "CassandraTableCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB Cassandra table.",
@@ -7878,9 +7799,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "CassandraTableCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB Cassandra table.",
@@ -7895,9 +7814,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "GremlinDatabaseCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB Gremlin database.",
@@ -7914,9 +7831,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "GremlinDatabaseCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB Gremlin database.",
@@ -7931,9 +7846,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "GremlinGraphCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB Gremlin graph.",
@@ -7950,9 +7863,7 @@
           "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
-      "required": [
-        "properties"
-      ]
+      "required": ["properties"]
     },
     "GremlinGraphCreateUpdateProperties": {
       "description": "Properties to create and update Azure Cosmos DB Gremlin graph.",
@@ -7967,9 +7878,7 @@
           "$ref": "#/definitions/CreateUpdateOptions"
         }
       },
-      "required": [
-        "resource"
-      ]
+      "required": ["resource"]
     },
     "ThroughputSettingsResource": {
       "type": "object",
@@ -7992,7 +7901,7 @@
           "type": "string",
           "description": "The throughput replace is pending",
           "readOnly": true
-        },            
+        },
         "instantMaximumThroughput": {
           "type": "string",
           "description": "The offer throughput value to instantly scale up without triggering splits",
@@ -8023,9 +7932,7 @@
           "readOnly": true
         }
       },
-      "required": [
-        "maxThroughput"
-      ]
+      "required": ["maxThroughput"]
     },
     "AutoUpgradePolicyResource": {
       "type": "object",
@@ -8121,9 +8028,7 @@
           "description": "Name of the Cosmos DB SQL database"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "SqlContainerResource": {
       "type": "object",
@@ -8163,9 +8068,7 @@
           "description": "Analytical TTL."
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "IndexingPolicy": {
       "type": "object",
@@ -8179,11 +8082,7 @@
           "description": "Indicates the indexing mode.",
           "type": "string",
           "default": "consistent",
-          "enum": [
-            "consistent",
-            "lazy",
-            "none"
-          ],
+          "enum": ["consistent", "lazy", "none"],
           "x-ms-enum": {
             "name": "IndexingMode",
             "modelAsString": true
@@ -8274,11 +8173,7 @@
           "description": "Indicates the type of index.",
           "type": "string",
           "default": "Hash",
-          "enum": [
-            "Hash",
-            "Range",
-            "Spatial"
-          ],
+          "enum": ["Hash", "Range", "Spatial"],
           "x-ms-enum": {
             "name": "IndexKind",
             "modelAsString": true
@@ -8303,10 +8198,7 @@
         "order": {
           "description": "Sort order for composite paths.",
           "type": "string",
-          "enum": [
-            "ascending",
-            "descending"
-          ],
+          "enum": ["ascending", "descending"],
           "x-ms-enum": {
             "name": "CompositePathSortOrder",
             "modelAsString": true
@@ -8333,12 +8225,7 @@
     "SpatialType": {
       "description": "Indicates the spatial type of index.",
       "type": "string",
-      "enum": [
-        "Point",
-        "LineString",
-        "Polygon",
-        "MultiPolygon"
-      ],
+      "enum": ["Point", "LineString", "Polygon", "MultiPolygon"],
       "x-ms-enum": {
         "name": "SpatialType",
         "modelAsString": true
@@ -8359,11 +8246,7 @@
           "description": "Indicates the kind of algorithm used for partitioning. For MultiHash, multiple partition keys (upto three maximum) are supported for container create",
           "type": "string",
           "default": "Hash",
-          "enum": [
-            "Hash",
-            "Range",
-            "MultiHash"
-          ],
+          "enum": ["Hash", "Range", "MultiHash"],
           "x-ms-enum": {
             "name": "PartitionKind",
             "modelAsString": true
@@ -8421,10 +8304,7 @@
           "description": "Indicates the conflict resolution mode.",
           "type": "string",
           "default": "LastWriterWins",
-          "enum": [
-            "LastWriterWins",
-            "Custom"
-          ],
+          "enum": ["LastWriterWins", "Custom"],
           "x-ms-enum": {
             "name": "ConflictResolutionMode",
             "modelAsString": true
@@ -8460,10 +8340,7 @@
           "format": "int32"
         }
       },
-      "required": [
-        "includedPaths",
-        "policyFormatVersion"
-      ]
+      "required": ["includedPaths", "policyFormatVersion"]
     },
     "ClientEncryptionIncludedPath": {
       "type": "object",
@@ -8506,9 +8383,7 @@
           "description": "Body of the Stored Procedure"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "SqlUserDefinedFunctionResource": {
       "type": "object",
@@ -8523,9 +8398,7 @@
           "description": "Body of the User Defined Function"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "SqlTriggerResource": {
       "type": "object",
@@ -8541,10 +8414,7 @@
         },
         "triggerType": {
           "type": "string",
-          "enum": [
-            "Pre",
-            "Post"
-          ],
+          "enum": ["Pre", "Post"],
           "description": "Type of the Trigger",
           "x-ms-enum": {
             "name": "triggerType",
@@ -8553,13 +8423,7 @@
         },
         "triggerOperation": {
           "type": "string",
-          "enum": [
-            "All",
-            "Create",
-            "Update",
-            "Delete",
-            "Replace"
-          ],
+          "enum": ["All", "Create", "Update", "Delete", "Replace"],
           "description": "The operation the trigger is associated with",
           "x-ms-enum": {
             "name": "triggerOperation",
@@ -8567,9 +8431,7 @@
           }
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "MongoDBDatabaseResource": {
       "type": "object",
@@ -8580,9 +8442,7 @@
           "description": "Name of the Cosmos DB MongoDB database"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "MongoDBCollectionResource": {
       "type": "object",
@@ -8608,9 +8468,7 @@
           "description": "Analytical TTL."
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "ShardKeys": {
       "type": "object",
@@ -8673,9 +8531,7 @@
           "description": "Name of the Cosmos DB table"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "CassandraKeyspaceResource": {
       "type": "object",
@@ -8686,9 +8542,7 @@
           "description": "Name of the Cosmos DB Cassandra keyspace"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "CassandraTableResource": {
       "type": "object",
@@ -8711,9 +8565,7 @@
           "description": "Analytical TTL."
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "CassandraSchema": {
       "type": "object",
@@ -8789,9 +8641,7 @@
           "description": "Name of the Cosmos DB Gremlin database"
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "GremlinGraphResource": {
       "type": "object",
@@ -8827,9 +8677,7 @@
           "description": "Analytical TTL."
         }
       },
-      "required": [
-        "id"
-      ]
+      "required": ["id"]
     },
     "CreateUpdateOptions": {
       "type": "object",
@@ -8978,10 +8826,7 @@
     "NetworkAclBypass": {
       "description": "Indicates what services are allowed to bypass firewall checks.",
       "type": "string",
-      "enum": [
-        "None",
-        "AzureServices"
-      ],
+      "enum": ["None", "AzureServices"],
       "x-ms-enum": {
         "name": "NetworkAclBypass",
         "modelAsString": false
@@ -9177,14 +9022,7 @@
           "readOnly": true,
           "type": "string",
           "description": "The primary aggregation type of the metric.",
-          "enum": [
-            "None",
-            "Average",
-            "Total",
-            "Minimum",
-            "Maximum",
-            "Last"
-          ],
+          "enum": ["None", "Average", "Total", "Minimum", "Maximum", "Last"],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "PrimaryAggregationType"
@@ -9488,9 +9326,7 @@
     "ConnectorOffer": {
       "description": "The cassandra connector offer type for the Cosmos DB C* database account.",
       "type": "string",
-      "enum": [
-        "Small"
-      ],
+      "enum": ["Small"],
       "x-ms-enum": {
         "name": "ConnectorOffer",
         "modelAsString": true
@@ -9499,11 +9335,7 @@
     "PublicNetworkAccess": {
       "type": "string",
       "description": "Whether requests from Public Network are allowed",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "SecuredByPerimeter"
-      ],
+      "enum": ["Enabled", "Disabled", "SecuredByPerimeter"],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "PublicNetworkAccess"
@@ -9514,12 +9346,7 @@
       "properties": {
         "serverVersion": {
           "type": "string",
-          "enum": [
-            "3.2",
-            "3.6",
-            "4.0",
-            "4.2"
-          ],
+          "enum": ["3.2", "3.6", "4.0", "4.2"],
           "description": "Describes the ServerVersion of an a MongoDB account.",
           "x-ms-enum": {
             "modelAsString": true,
@@ -9541,10 +9368,7 @@
     "AnalyticalStorageSchemaType": {
       "type": "string",
       "description": "Describes the types of schema for analytical storage.",
-      "enum": [
-        "WellDefined",
-        "FullFidelity"
-      ],
+      "enum": ["WellDefined", "FullFidelity"],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "AnalyticalStorageSchemaType"
@@ -9554,10 +9378,7 @@
       "description": "Enum to indicate the mode of account creation.",
       "type": "string",
       "default": "Default",
-      "enum": [
-        "Default",
-        "Restore"
-      ],
+      "enum": ["Default", "Restore"],
       "x-ms-enum": {
         "name": "CreateMode",
         "modelAsString": true
@@ -9566,16 +9387,11 @@
     "RestoreParameters": {
       "type": "object",
       "description": "Parameters to indicate the information about the restore.",
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ],
+      "x-ms-mutability": ["read", "create"],
       "properties": {
         "restoreMode": {
           "type": "string",
-          "enum": [
-            "PointInTime"
-          ],
+          "enum": ["PointInTime"],
           "description": "Describes the mode of the restore.",
           "x-ms-enum": {
             "modelAsString": true,
@@ -9676,17 +9492,12 @@
           "$ref": "#/definitions/BackupPolicyMigrationState"
         }
       },
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     },
     "BackupPolicyType": {
       "description": "Describes the mode of backups.",
       "type": "string",
-      "enum": [
-        "Periodic",
-        "Continuous"
-      ],
+      "enum": ["Periodic", "Continuous"],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "BackupPolicyType"
@@ -9716,12 +9527,7 @@
     "BackupPolicyMigrationStatus": {
       "description": "Describes the status of migration between backup policy types.",
       "type": "string",
-      "enum": [
-        "Invalid",
-        "InProgress",
-        "Completed",
-        "Failed"
-      ],
+      "enum": ["Invalid", "InProgress", "Completed", "Failed"],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "BackupPolicyMigrationStatus"
@@ -9878,11 +9684,7 @@
     "BackupStorageRedundancy": {
       "description": "Enum to indicate type of backup storage redundancy.",
       "type": "string",
-      "enum": [
-        "Geo",
-        "Local",
-        "Zone"
-      ],
+      "enum": ["Geo", "Local", "Zone"],
       "x-ms-enum": {
         "name": "BackupStorageRedundancy",
         "modelAsString": true
@@ -9891,10 +9693,7 @@
     "ContinuousTier": {
       "description": "Enum to indicate type of Continuous backup tier.",
       "type": "string",
-      "enum": [
-        "Continuous7Days",
-        "Continuous30Days"
-      ],
+      "enum": ["Continuous7Days", "Continuous30Days"],
       "x-ms-enum": {
         "name": "ContinuousTier",
         "modelAsString": true
@@ -9903,11 +9702,7 @@
     "MinimalTlsVersion": {
       "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
       "type": "string",
-      "enum": [
-        "Tls",
-        "Tls11",
-        "Tls12"
-      ],
+      "enum": ["Tls", "Tls11", "Tls12"],
       "x-ms-enum": {
         "name": "MinimalTlsVersion",
         "modelAsString": true
