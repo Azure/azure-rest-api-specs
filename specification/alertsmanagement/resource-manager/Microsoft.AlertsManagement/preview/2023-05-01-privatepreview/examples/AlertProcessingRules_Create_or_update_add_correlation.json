@@ -1,0 +1,231 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01-privatepreview",
+    "subscriptionId": "subId1",
+    "resourceGroupName": "alertscorrelationrg",
+    "alertProcessingRuleName": "CorrelationExample",
+    "alertProcessingRule": {
+      "location": "Global",
+      "tags": {},
+      "properties": {
+        "scopes": [
+          "/subscriptions/subId1"
+        ],
+        "actions": [
+          {
+            "actionType": "Correlation",
+            "correlateBy": [
+              {
+                "field": "essentials.alertRuleName",
+                "type": "Simple"
+              },
+              {
+                "field": "essentials.severity",
+                "type": "Grouped",
+                "groups": [
+                  {
+                    "operator": "Equals",
+                    "values":[
+                      "sev0",
+                      "sev1"
+                    ]
+                  },
+                  {
+                    "operator": "Equals",
+                    "values":[
+                      "sev2",
+                      "sev3",
+                      "sev4"
+                    ]
+                  },
+                  {
+                    "field": "context.labes['clusterName']",
+                    "type": "Grouped",
+                    "groups": [
+                      {
+                        "operator": "StartsWith",
+                        "values": [
+                          "Prod"
+                        ]
+                      },
+                      {
+                        "operator": "StartsWith",
+                        "values": [
+                          "Test"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "correlationTimeWindow": "00:30:00",
+            "priority": 50,
+            "suppressNotificationForChildAlerts": true,
+            "targetRegion": "West US"
+          }
+        ],
+        "description": "Simple and Grouped Correlation Example.",
+        "enabled": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-02-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-13T16:15:34Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1"
+          ],
+          "actions": [
+            {
+              "actionType": "Correlation",
+              "correlateBy": [
+                {
+                  "field": "essentials.alertRuleName",
+                  "type": "Simple"
+                },
+                {
+                  "field": "essentials.severity",
+                  "type": "Grouped",
+                  "groups": [
+                    {
+                      "operator": "Equals",
+                      "values":[
+                        "sev0",
+                        "sev1"
+                      ]
+                    },
+                    {
+                      "operator": "Equals",
+                      "values":[
+                        "sev2",
+                        "sev3",
+                        "sev4"
+                      ]
+                    },
+                    {
+                      "field": "context.labes['clusterName']",
+                      "type": "Grouped",
+                      "groups": [
+                        {
+                          "operator": "StartsWith",
+                          "values": [
+                            "Prod"
+                          ]
+                        },
+                        {
+                          "operator": "StartsWith",
+                          "values": [
+                            "Test"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "correlationTimeWindow": "00:30:00",
+              "priority": 50,
+              "suppressNotificationForChildAlerts": true,
+              "targetRegion": "West US"
+            }
+          ],
+          "description": "Simple and Grouped Correlation Example.",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelationExample",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "CorrelationExample",
+        "location": "Global",
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-02-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-02-13T16:15:34Z"
+        },
+        "properties": {
+          "scopes": [
+            "/subscriptions/subId1"
+          ],
+          "actions": [
+            {
+              "actionType": "Correlation",
+              "correlateBy": [
+                {
+                  "field": "essentials.alertRuleName",
+                  "type": "Simple"
+                },
+                {
+                  "field": "essentials.severity",
+                  "type": "Grouped",
+                  "groups": [
+                    {
+                      "operator": "Equals",
+                      "values":[
+                        "sev0",
+                        "sev1"
+                      ]
+                    },
+                    {
+                      "operator": "Equals",
+                      "values":[
+                        "sev2",
+                        "sev3",
+                        "sev4"
+                      ]
+                    },
+                    {
+                      "field": "context.labes['clusterName']",
+                      "type": "Grouped",
+                      "groups": [
+                        {
+                          "operator": "StartsWith",
+                          "values": [
+                            "Prod"
+                          ]
+                        },
+                        {
+                          "operator": "StartsWith",
+                          "values": [
+                            "Test"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "correlationTimeWindow": "00:30:00",
+              "priority": 50,
+              "suppressNotificationForChildAlerts": true,
+              "targetRegion": "West US"
+            }
+          ],
+          "description": "Simple and Grouped Correlation Example.",
+          "enabled": true
+        },
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelationExample",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "CorrelationExample",
+        "location": "Global",
+        "tags": {}
+      }
+    }
+  }
+}
