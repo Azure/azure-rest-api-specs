@@ -1338,13 +1338,22 @@
             "type": "string",
             "description": "The provisioning service name to start customer initiated failover.",
             "pattern": "^[a-zA-Z0-9-]+$"
+          },
+          {
+            "name": "dpsFailoverDescription",
+            "in": "body",
+            "required": true,
+            "description": "Failover desciption",
+            "schema": {
+              "$ref": "#/definitions/CustomerInitiatedFailoverInput"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The status of the failover operation.",
             "schema": {
-              "$ref": "#/definitions/AsyncOperationResult"
+              "$ref": "#/definitions/CustomerInitiatedFailoverResponse"
             }
           },
           "default": {
@@ -1868,6 +1877,33 @@
         "sku",
         "properties"
       ]
+    },
+    "CustomerInitiatedFailoverInput": {
+      "description": "The DPS failover input.",
+      "type": "object",
+      "properties": {
+        "failoverRegion": {
+          "description": "Region that failover is porting to",
+          "type": "string"
+        }
+      },
+      "required": [
+        "failoverRegion"
+      ]
+    },
+    "CustomerInitiatedFailoverResponse": {
+      "description": "The DPS failover response.",
+      "type": "object",
+      "properties": {
+        "LastProvisioningState": {
+          "description": "Failover state",
+          "type": "string"
+        },
+        "AsyncOperationUri": {
+          "description": "Uri where can track progress",
+          "type": "string"
+        }
+      }
     },
     "IotDpsPropertiesDescription": {
       "description": "the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
