@@ -20,7 +20,7 @@ interface Confirmations {
     @doc("The password confirmation request.")
     @body
     confirmationRequest: PasswordConfirmationRequest
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 
   @route("/confirmations/identities/basic")
   @doc("Basic identity (Email) confirmation.")
@@ -31,5 +31,5 @@ interface Confirmations {
     @doc("The identity confirmation request.")
     @body
     identityConfirmationRequest: IdentityConfirmationRequest
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 }

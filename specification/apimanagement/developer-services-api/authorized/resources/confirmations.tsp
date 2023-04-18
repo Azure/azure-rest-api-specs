@@ -24,5 +24,5 @@ interface Confirmations {
     @doc("The identity confirmation request.")
     @body
     identityConfirmationRequest: IdentityConfirmationRequest
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 }

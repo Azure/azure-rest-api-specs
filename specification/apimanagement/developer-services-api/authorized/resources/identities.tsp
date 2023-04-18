@@ -32,7 +32,7 @@ interface Identities {
     @doc("The identity.")
     @path
     identity: string
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 }
 @doc("Identity resource model.")
 @resource("identities")

@@ -39,7 +39,7 @@ interface Subscriptions {
     @doc("User subscription create model.")
     @body
     userSubscriptionCreate: UserSubscriptionCreate
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 
   @route("/users/{userId}/subscriptions/{subscriptionId}")
   @doc("Update user subscription.")
@@ -58,7 +58,7 @@ interface Subscriptions {
     @doc("User subscription update model.")
     @body
     userSubscriptionUpdate: UserSubscriptionUpdate
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 
   @route("/users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey")
   @doc("Regenerate subscription primary key.")
@@ -73,7 +73,7 @@ interface Subscriptions {
     @doc("User identifier.")
     @path
     userId: string
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 
   @route("/users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey")
   @doc("Regenerate subscription secondary key.")
@@ -88,7 +88,7 @@ interface Subscriptions {
     @doc("User identifier.")
     @path
     userId: string
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
 }
 
 @doc("Subscription resource model.")
