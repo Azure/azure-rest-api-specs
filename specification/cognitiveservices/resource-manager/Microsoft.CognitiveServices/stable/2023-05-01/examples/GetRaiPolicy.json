@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "deploymentName",
+    "raiPolicyName": "raiPolicyName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "raiPolicyName",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiPolicies/raiPolicyName",
+        "properties": {
+          "basePolicyName": "112",
+          "contentFilters": [
+            {
+              "name": "hate",
+              "allowedContentLevel": "Low",
+              "blocking": true
+            },
+            {
+              "name": "sexual",
+              "allowedContentLevel": "Low"
+            },
+            {
+              "name": "violence",
+              "enabled": false
+            },
+            {
+              "name": "DefaultHateSpeechBlockList",
+              "enabled": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}

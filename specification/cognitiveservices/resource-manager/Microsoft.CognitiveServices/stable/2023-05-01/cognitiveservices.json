@@ -622,6 +622,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "description": "Get usages for the requested subscription",
+        "x-ms-examples": {
+          "Get Usages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        },
+        "operationId": "Usages_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/usageFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/UsageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/usages": {
       "get": {
         "tags": [
@@ -826,6 +871,48 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/CommitmentTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/models": {
+      "get": {
+        "tags": [
+          "Models"
+        ],
+        "operationId": "Models_List",
+        "description": "List Models.",
+        "x-ms-examples": {
+          "ListCommitmentTiers": {
+            "$ref": "./examples/ListModels.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ModelListResult"
             }
           },
           "default": {
@@ -1267,7 +1354,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1315,6 +1405,51 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiPolicies/{raiPolicyName}/effectivePolicy": {
+      "get": {
+        "tags": [
+          "RaiPolicy"
+        ],
+        "operationId": "RaiPolicy_GetEffectivePolicy",
+        "description": "Gets the specified EffectivePolicy of Rai Policy associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetDeployment": {
+            "$ref": "./examples/GetEffectivePolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the rai policy effective policy properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans": {
@@ -1510,6 +1645,248 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiPolicies": {
+      "get": {
+        "tags": [
+          "RaiPolicies"
+        ],
+        "operationId": "RaiPolicies_List",
+        "description": "Gets the RaiPolicies associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "ListRaiPolicies": {
+            "$ref": "./examples/ListRaiPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved RaiPolicies.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiPolicies/{raiPolicyName}": {
+      "get": {
+        "tags": [
+          "RaiPolicies"
+        ],
+        "operationId": "RaiPolicies_Get",
+        "description": "Gets the specified RaiPolicy associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "GetRaiPolicy": {
+            "$ref": "./examples/GetRaiPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the RaiPolicies properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RaiPolicies"
+        ],
+        "operationId": "RaiPolicies_CreateOrUpdate",
+        "description": "Update the state of specified RaiPolicies associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "PutRaiPolicy": {
+            "$ref": "./examples/PutRaiPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiPolicyNameParameter"
+          },
+          {
+            "name": "raiPolicy",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            },
+            "description": "The RaiPolicy properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create/Update the RaiPolicy successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            }
+          },
+          "201": {
+            "description": "Create the RaiPolicy successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RaiPolicies"
+        ],
+        "operationId": "RaiPolicies_Delete",
+        "description": "Deletes the specified RaiPolicy associated with the Cognitive Services account.",
+        "x-ms-examples": {
+          "DeleteRaiPolicy": {
+            "$ref": "./examples/DeleteRaiPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the RaiPolicy successfully."
+          },
+          "202": {
+            "description": "Accepted -- the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content -- The RaiPolicy does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/raiContentFilters": {
+      "get": {
+        "tags": [
+          "RaiContentFilters"
+        ],
+        "operationId": "RaiContentFilters_List",
+        "description": "List RaiContentFilters",
+        "x-ms-examples": {
+          "GetRaiPolicy": {
+            "$ref": "./examples/ListRaiContentFilters.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RaiContentFilterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/commitmentPlans/{commitmentPlanName}": {
@@ -2146,7 +2523,8 @@
             "Moving",
             "Failed",
             "Succeeded",
-            "ResolvingDNS"
+            "ResolvingDNS",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -2271,7 +2649,11 @@
           }
         },
         "restore": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "deletionDate": {
           "type": "string",
@@ -2297,6 +2679,10 @@
           ],
           "description": "The commitment plan associations of Cognitive Services account.",
           "readOnly": true
+        },
+        "abusePenalty": {
+          "readOnly": true,
+          "$ref": "#/definitions/AbusePenalty"
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -2403,6 +2789,32 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "AbusePenalty": {
+      "description": "The abuse penalty.",
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "Throttle",
+            "Block"
+          ],
+          "x-ms-enum": {
+            "name": "AbusePenaltyAction",
+            "modelAsString": true
+          },
+          "description": "The action of AbusePenalty."
+        },
+        "rateLimitPercentage": {
+          "type": "number",
+          "description": "The percentage of rate limit."
+        },
+        "expiration": {
+          "type": "string",
+          "description": "The datetime of expiration of the AbusePenalty."
+        }
+      }
     },
     "CommitmentPlanAccountAssociationProperties": {
       "type": "object",
@@ -2645,6 +3057,10 @@
     "UsageListResult": {
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Usages.",
+          "type": "string"
+        },
         "value": {
           "type": "array",
           "items": {
@@ -3316,6 +3732,9 @@
       "description": "Cognitive Services account deployment.",
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
@@ -3349,7 +3768,8 @@
             "Deleting",
             "Moving",
             "Failed",
-            "Succeeded"
+            "Succeeded",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "DeploymentProvisioningState",
@@ -3379,6 +3799,23 @@
         "callRateLimit": {
           "readOnly": true,
           "$ref": "#/definitions/CallRateLimit"
+        },
+        "tokenRateLimit": {
+          "readOnly": true,
+          "$ref": "#/definitions/CallRateLimit"
+        },
+        "versionUpgradeOption": {
+          "type": "string",
+          "description": "Deployment model version upgrade option.",
+          "enum": [
+            "OnceNewDefaultVersionAvailable",
+            "OnceCurrentVersionExpired",
+            "NoAutoUpgrade"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentModelVersionUpgradeOption",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of Cognitive Services account deployment."
@@ -3396,7 +3833,15 @@
         },
         "version": {
           "type": "string",
-          "description": "Deployment model version."
+          "description": "Optional. Deployment model version. If version is not specified, a default version will be assigned. The default version is different for different models and might change when there is new version available for a model. Default version for a model could be found from list models API."
+        },
+        "source": {
+          "type": "string",
+          "description": "Optional. Deployment model source ARM resource ID."
+        },
+        "source": {
+          "type": "string",
+          "description": "Optional deployment model source ARM resource ID."
         },
         "callRateLimit": {
           "readOnly": true,
@@ -3645,6 +4090,14 @@
           "type": "object",
           "$ref": "#/definitions/CommitmentPeriod",
           "readOnly": true
+        },
+        "provisioningIssues": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of ProvisioningIssue."
         }
       },
       "description": "Properties of Cognitive Services account commitment plan."
@@ -3655,7 +4108,8 @@
       "enum": [
         "Web",
         "ConnectedContainer",
-        "DisconnectedContainer"
+        "DisconnectedContainer",
+        "ProvisionedWeb"
       ],
       "x-ms-enum": {
         "name": "HostingModel",
@@ -3692,6 +4146,83 @@
       },
       "description": "Cognitive Services account commitment period."
     },
+    "ModelListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Model.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Model"
+          },
+          "x-ms-identifiers": [
+            "kind",
+            "skuName",
+            "/model/name",
+            "/model/format",
+            "/model/version"
+          ],
+          "description": "Gets the list of Cognitive Services accounts Model and their properties."
+        }
+      },
+      "description": "The list of cognitive services models."
+    },
+    "Model": {
+      "description": "Cognitive Services Model.",
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "object",
+          "description": "Model Metadata.",
+          "$ref": "#/definitions/AccountModel"
+        },
+        "kind": {
+          "$ref": "#/definitions/Kind",
+          "description": "The Kind of the Model."
+        },
+        "skuName": {
+          "$ref": "#/definitions/SkuName",
+          "description": "The SKU of the Model."
+        }
+      }
+    },
+    "ModelSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the model SKU."
+        },
+        "usageName": {
+          "type": "string",
+          "description": "The usage name of the model SKU."
+        },
+        "unitsPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of units per each instance."
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max capacity allowed."
+        },
+        "rateLimits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CallRateLimit"
+          },
+          "x-ms-identifiers": [
+            "rules"
+          ],
+          "description": "The list of rateLimit."
+        }
+      },
+      "description": "Describes an available Cognitive Services Model SKU."
+    },
     "AccountModelListResult": {
       "type": "object",
       "properties": {
@@ -3722,6 +4253,20 @@
           "type": "object",
           "description": "Base Model Identifier.",
           "$ref": "#/definitions/DeploymentModel"
+        },
+        "isDefaultVersion": {
+          "type": "boolean",
+          "description": "If the model is default version."
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelSku"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of Model Sku."
         },
         "maxCapacity": {
           "type": "integer",
@@ -3813,6 +4358,175 @@
           "$ref": "#/definitions/PatchResourceTags"
         }
       ]
+    },
+    "RaiPolicyListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of RaiPolicy.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiPolicy"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of RaiPolicy."
+        }
+      },
+      "description": "The list of cognitive services RaiPolicies."
+    },
+    "RaiPolicy": {
+      "description": "Cognitive Services RaiPolicy.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "$ref": "#/definitions/RaiPolicyProperties",
+          "description": "Properties of Cognitive Services account deployment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RaiPolicyProperties": {
+      "description": "Cognitive Services RaiPolicy Properties.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "UserManaged",
+            "SystemManaged"
+          ],
+          "x-ms-enum": {
+            "name": "RaiPolicyType",
+            "modelAsString": true
+          },
+          "description": "Rai Policy Type.",
+          "readOnly": true
+        },
+        "basePolicyName": {
+          "type": "string",
+          "description": "Name of the base policy."
+        },
+        "contentFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiPolicyContentFilter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of RaiPolicy ContentFilter."
+        }
+      }
+    },
+    "RaiPolicyContentSource": {
+      "description": "Cognitive Services RaiPolicy ContentSource.",
+      "type": "string",
+      "enum": [
+        "Prompt",
+        "Completion"
+      ],
+      "x-ms-enum": {
+        "name": "RaiPolicyContentSource",
+        "modelAsString": true
+      }
+    },
+    "RaiPolicyContentFilter": {
+      "description": "Cognitive Services RaiPolicy ContentFilter.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of ContentFilter."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "If the ContentFilter is enabled."
+        },
+        "allowedContentLevel": {
+          "description": "Cognitive Services RaiPolicy ContentFilter.",
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "allowedContentLevel",
+            "modelAsString": true
+          }
+        },
+        "blocking": {
+          "type": "boolean",
+          "description": "If blocking would occur."
+        },
+        "source": {
+          "$ref": "#/definitions/RaiPolicyContentSource"
+        }
+      }
+    },
+    "RaiContentFilterListResult": {
+      "description": "The list of RaiContentFilters.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of RaiContentFilter.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiContentFilter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of RaiContentFilter."
+        }
+      }
+    },
+    "RaiContentFilter": {
+      "description": "Cognitive Services RaiContentFilter.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of RaiContentFilter."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of RaiContentFilter."
+        },
+        "filterType": {
+          "type": "string",
+          "description": "Rai Content Filter type.",
+          "enum": [
+            "MultiLevel",
+            "Switch"
+          ],
+          "x-ms-enum": {
+            "name": "RaiContentFilterType",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -3857,6 +4571,15 @@
       "required": true,
       "type": "string",
       "description": "The name of the deployment associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "raiPolicyNameParameter": {
+      "name": "raiPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the RaiPolicy associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
     "commitmentPlanNameParameter": {
