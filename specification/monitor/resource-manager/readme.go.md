@@ -23,7 +23,6 @@ directive:
   - rename-operation:
       from: 'MonitorOperations_List'
       to: 'OperationsForMonitor_List'
-
 modelerfour:
   lenient-model-deduplication: true
 ```
