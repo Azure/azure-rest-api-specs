@@ -324,6 +324,15 @@ input-file:
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
+### Tag: package-2022-06-15-only
+
+These settings apply only when `--tag=package-2022-06-15-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06-15-only'
+input-file:
+  - Microsoft.Insights/stable/2022-06-15/webTests_API.json
+```
+
 ### Tag: package-2022-04-01
 
 These settings apply only when `--tag=package-2022-04-01` is specified on the command line.
