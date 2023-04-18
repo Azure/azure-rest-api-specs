@@ -522,8 +522,37 @@
               "format": "date-time",
               "readOnly": true
             },
+            "runningState": {
+              "description": "Current running state of the replica",
+              "enum": [
+                "Running",
+                "NotRunning",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ContainerAppReplicaRunningState",
+                "modelAsString": true
+              }
+            },
+            "runningStateDetails": {
+              "description": "The details of replica currect running state",
+              "type": "string",
+              "readOnly": true
+            },
             "containers": {
               "description": "The containers collection under a replica.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ReplicaContainer"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "initContainers": {
+              "description": "The init containers collection under a replica.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/ReplicaContainer"
@@ -577,6 +606,25 @@
           "format": "int32",
           "description": "The container restart count",
           "type": "integer"
+        },
+        "runningState": {
+          "description": "Current running state of the container",
+          "enum": [
+            "Running",
+            "Terminated",
+            "Waiting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ContainerAppContainerRunningState",
+            "modelAsString": true
+          }
+        },
+        "runningStateDetails": {
+          "description": "The details of container currect running state",
+          "type": "string",
+          "readOnly": true
         },
         "logStreamEndpoint": {
           "description": "Log Stream endpoint",
