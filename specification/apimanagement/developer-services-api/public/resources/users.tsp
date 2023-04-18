@@ -12,12 +12,12 @@ namespace DeveloperServicesPublicApi.Resources.Users;
 
 interface Users {
   @doc("Create a user by its identifier.")
-  createUser is ResourceCreateWithServiceProvidedName<UserCreateResouce>;
+  createUser is ResourceCreateWithServiceProvidedName<UserCreateResource>;
 }
 
 @doc("The user resource.")
 @resource("users")
-model UserCreateResouce extends UserCreate {
+model UserCreateResource extends UserCreate {
   @doc("User id.")
   @key("userId")
   @visibility("query")
