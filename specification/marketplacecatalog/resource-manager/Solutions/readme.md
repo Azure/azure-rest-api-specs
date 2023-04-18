@@ -36,3 +36,4 @@ These settings apply only when `--tag=package-2023-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-03-01-preview'
 input-file:
   - preview\2023-03-01-preview\solutions.json
+```
