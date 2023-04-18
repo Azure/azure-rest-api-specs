@@ -37,7 +37,7 @@ model Frontend is TrackedResource<FrontendProperties>{
 @doc("Frontend Properties.")
 model FrontendProperties {
   @visibility("read")
-  @doc("Provisioning State of Traffic Controller Frontend Resource")
+  @doc("The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.")
   fqdn : string;
 
   @visibility("read")
@@ -132,7 +132,7 @@ interface FrontendsInterface extends ResourceInstanceOperations<Frontend, Fronte
 }
 
 @armResourceOperations
-interface TrafficControllerInterface extends ResourceInstanceOperations<TrafficController, TrafficControllerProperties>, ResourceListBySubscription<TrafficController>{
+interface TrafficControllerInterface extends TrackedResourceOperations<TrafficController, TrafficControllerProperties>{
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

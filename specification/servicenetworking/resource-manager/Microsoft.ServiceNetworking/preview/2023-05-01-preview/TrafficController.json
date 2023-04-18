@@ -128,6 +128,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers": {
+      "get": {
+        "tags": [
+          "TrafficControllerInterface"
+        ],
+        "operationId": "TrafficControllerInterface_ListByResourceGroup",
+        "description": "List TrafficController resources by resource group",
+        "x-ms-examples": {
+          "Get Traffic Controllers": {
+            "$ref": "../../cadl/examples/TrafficControllersGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TrafficControllerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}": {
       "get": {
         "tags": [
@@ -155,7 +197,8 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -199,7 +242,8 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "resource",
@@ -269,7 +313,8 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "properties",
@@ -322,7 +367,8 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -386,7 +432,8 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -435,14 +482,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
             "description": "Name of Association",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -486,14 +535,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
             "description": "Name of Association",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "resource",
@@ -563,14 +614,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
             "description": "Name of Association",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "properties",
@@ -623,14 +676,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
             "description": "Name of Association",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -694,7 +749,8 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -743,14 +799,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
             "description": "Frontends",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -794,14 +852,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
             "description": "Frontends",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "resource",
@@ -871,14 +931,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
             "description": "Frontends",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "properties",
@@ -911,6 +973,11 @@
         ],
         "operationId": "FrontendsInterface_Delete",
         "description": "Delete a Frontend",
+        "x-ms-examples": {
+          "Delete Frontend": {
+            "$ref": "../../cadl/examples/FrontendDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -926,14 +993,16 @@
             "in": "path",
             "required": true,
             "description": "traffic controller name for path",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
             "description": "Frontends",
-            "type": "string"
+            "type": "string",
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -1150,7 +1219,7 @@
       "properties": {
         "fqdn": {
           "type": "string",
-          "description": "Provisioning State of Traffic Controller Frontend Resource",
+          "description": "The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.",
           "readOnly": true
         },
         "provisioningState": {
@@ -1159,10 +1228,7 @@
           "readOnly": true
         }
       },
-      "description": "Frontend Properties.",
-      "required": [
-        "fqdn"
-      ]
+      "description": "Frontend Properties."
     },
     "FrontendUpdate": {
       "type": "object",
