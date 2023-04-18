@@ -26,7 +26,6 @@ These are the global settings for User Solutions.
 
 ```yaml
 openapi-type: arm
-tag: package-2023-03-01-preview
 ```
 
 ### Tag: package-2023-03-01-preview
