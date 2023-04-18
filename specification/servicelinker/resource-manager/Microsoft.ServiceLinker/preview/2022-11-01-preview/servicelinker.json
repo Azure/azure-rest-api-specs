@@ -1510,8 +1510,7 @@
       "x-ms-enum": {
         "name": "DeleteOrUpdateBehavior",
         "modelAsString": true
-      },
-      "default": "Default"
+      }
     },
     "ClientType": {
       "description": "The application client type",
@@ -1527,7 +1526,8 @@
         "django",
         "nodejs",
         "springBoot",
-        "kafka-springBoot"
+        "kafka-springBoot",
+        "dapr"
       ],
       "x-ms-enum": {
         "name": "clientType",
@@ -2031,6 +2031,10 @@
           "$ref": "#/definitions/AuthType",
           "description": "The auth type."
         },
+        "daprProperties": {
+          "description": "Indicates some additional properties for dapr client type",
+          "$ref": "#/definitions/DaprProperties"
+        },
         "names": {
           "type": "array",
           "description": "The configuration names to be set in compute service environment.",
@@ -2050,6 +2054,10 @@
         "description": {
           "type": "string",
           "description": "Description for the configuration name."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Represent the configuration is required or not"
         }
       }
     },
@@ -2283,12 +2291,72 @@
             "type": "string"
           }
         },
+        "daprProperties": {
+          "description": "Indicates some additional properties for dapr client type",
+          "$ref": "#/definitions/DaprProperties"
+        },
         "additionalConfigurations": {
           "description": "A dictionary of additional configurations to be added. Service will auto generate a set of basic configurations and this property is to full fill more customized configurations",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "DaprProperties": {
+      "type": "object",
+      "description": "Indicates some additional properties for dapr client type",
+      "properties": {
+        "version": {
+          "x-nullable": true,
+          "type": "string",
+          "description": "The dapr component version"
+        },
+        "componentType": {
+          "x-nullable": true,
+          "type": "string",
+          "description": "The dapr component type"
+        },
+        "secretStoreComponent": {
+          "x-nullable": true,
+          "type": "string",
+          "description": "The name of a secret store dapr to retrieve secret"
+        },
+        "metadata": {
+          "description": "Additional dapr metadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaprMetadata"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "scopes": {
+          "description": "The dapr component scopes",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DaprMetadata": {
+      "description": "The dapr component metadata.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metadata property name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Metadata property value.",
+          "type": "string"
+        },
+        "secretRef": {
+          "description": "The secret name where dapr could get value",
+          "type": "string"
         }
       }
     },
@@ -2541,8 +2609,7 @@
       "x-ms-enum": {
         "name": "actionType",
         "modelAsString": true
-      },
-      "default": "enable"
+      }
     },
     "AllowType": {
       "description": "Whether to allow firewall rules.",
@@ -2554,8 +2621,7 @@
       "x-ms-enum": {
         "name": "allowType",
         "modelAsString": true
-      },
-      "default": "false"
+      }
     }
   },
   "parameters": {

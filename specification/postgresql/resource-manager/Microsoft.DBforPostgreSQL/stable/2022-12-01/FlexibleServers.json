@@ -772,9 +772,9 @@
         },
         "type": {
           "type": "string",
-          "description": "Data encryption type to depict if it is System assigned vs Azure Key vault.",
+          "description": "Data encryption type to depict if it is System Managed vs Azure Key vault.",
           "enum": [
-            "SystemAssigned",
+            "SystemManaged",
             "AzureKeyVault"
           ],
           "x-ms-enum": {
@@ -818,7 +818,6 @@
           "description": "the types of identities associated with this resource; currently restricted to 'SystemAssigned and UserAssigned'",
           "enum": [
             "None",
-            "SystemAssigned",
             "UserAssigned"
           ],
           "x-ms-enum": {
@@ -838,11 +837,7 @@
       "enum": [
         "None",
         "Primary",
-        "Secondary",
-        "WalReplica",
-        "SyncReplica",
         "AsyncReplica",
-        "GeoSyncReplica",
         "GeoAsyncReplica"
       ],
       "x-ms-enum": {
