@@ -50,7 +50,7 @@ tag: package-resources-2022-09
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2021-01
+tag: package-subscriptions-2022-12
 ```
 
 ``` yaml $(package-links)
@@ -81,6 +81,15 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.Resources/stable/2022-12-01/subscriptions.json
+```
 ### Tag: package-policy-2022-06
 
 These settings apply only when `--tag=package-policy-2022-06` is specified on the command line.
@@ -198,6 +207,7 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+
 ### Tag: package-locks-2017-04
 
 These settings apply only when `--tag=package-locks-2017-04` is specified on the command line.
@@ -207,7 +217,6 @@ input-file:
 - Microsoft.Authorization/stable/2017-04-01/locks.json
 ```
 
-
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
@@ -215,6 +224,15 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 ``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
+```
+
+### Tag: package-subscriptions-2022-12
+
+These settings apply only when `--tag=package-subscriptions-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2022-12'
+input-file:
+- Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
 
 
@@ -226,7 +244,6 @@ These settings apply only when `--tag=package-subscriptions-2021-01` is specifie
 input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
-
 
 ### Tag: package-deploymentscripts-2020-10
 
@@ -1002,6 +1019,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -1050,4 +1068,3 @@ input-file:
 override-info:
   title: PolicyClient
 ```
-
