@@ -414,16 +414,11 @@
       "description": "Base information about the shared gallery resource in pir."
     },
     "SharedGalleryArtifactTags": {
-      "properties": {
-        "artifactTags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Shared gallery resource tags"
-        }
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
       },
-      "description": "The artifact tags of a Shared gallery resource."
+      "description": "The artifact tags of a shared gallery resource."
     },
     "SharedGalleryIdentifier": {
       "properties": {
@@ -473,6 +468,7 @@
     "SharedGalleryProperties": {
       "properties": {
         "artifactTags": {
+          "readOnly": true,
           "$ref": "#/definitions/SharedGalleryArtifactTags"
         }
       },
