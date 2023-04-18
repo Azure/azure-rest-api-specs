@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 input-file:
   - Microsoft.SecurityInsights/preview/2023-05-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-05-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-05-01-preview/BillingStatistics.json
   - Microsoft.SecurityInsights/preview/2023-05-01-preview/Bookmarks.json
   - Microsoft.SecurityInsights/preview/2023-05-01-preview/Enrichment.json
   - Microsoft.SecurityInsights/preview/2023-05-01-preview/Entities.json
