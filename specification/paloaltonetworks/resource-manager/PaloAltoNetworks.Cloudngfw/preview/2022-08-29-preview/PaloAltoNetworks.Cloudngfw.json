@@ -37,6 +37,9 @@
       "name": "Firewalls"
     },
     {
+      "name": "FirewallStatus"
+    },
+    {
       "name": "GlobalRulestack"
     },
     {
@@ -2553,6 +2556,99 @@
           },
           "Firewalls_saveLogProfile_MinimumSet_Gen": {
             "$ref": "./examples/Firewalls_saveLogProfile_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/statuses": {
+      "get": {
+        "tags": [
+          "FirewallStatus"
+        ],
+        "operationId": "FirewallStatus_ListByFirewalls",
+        "description": "List FirewallStatusResource resources by Firewalls",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallStatusResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FirewallStatus_ListByFirewalls_MaximumSet_Gen": {
+            "$ref": "./examples/FirewallStatus_ListByFirewalls_MaximumSet_Gen.json"
+          },
+          "FirewallStatus_ListByFirewalls_MinimumSet_Gen": {
+            "$ref": "./examples/FirewallStatus_ListByFirewalls_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/statuses/default": {
+      "get": {
+        "tags": [
+          "FirewallStatus"
+        ],
+        "operationId": "FirewallStatus_Get",
+        "description": "Get a FirewallStatusResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallStatusResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FirewallStatus_Get_MaximumSet_Gen": {
+            "$ref": "./examples/FirewallStatus_Get_MaximumSet_Gen.json"
+          },
+          "FirewallStatus_Get_MinimumSet_Gen": {
+            "$ref": "./examples/FirewallStatus_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -5173,6 +5269,86 @@
       },
       "description": "The updatable properties of the FirewallResource."
     },
+    "FirewallStatusProperty": {
+      "type": "object",
+      "properties": {
+        "isPanoramaManaged": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Panorama Managed: Default is False. Default will be CloudSec managed",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "$ref": "#/definitions/HealthStatus",
+          "description": "Current status of the Firewall",
+          "readOnly": true
+        },
+        "healthReason": {
+          "type": "string",
+          "description": "Detail description of current health of the Firewall",
+          "readOnly": true
+        },
+        "panoramaStatus": {
+          "$ref": "#/definitions/PanoramaStatus",
+          "description": "Panorama Status",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ReadOnlyProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Firewall Status"
+    },
+    "FirewallStatusResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallStatusProperty",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Firewall Status",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FirewallStatusResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallStatusResource"
+          },
+          "x-cadl-name": "FirewallStatusResource[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a FirewallStatusResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
     "FqdnListGlobalRulestackResource": {
       "type": "object",
       "properties": {
@@ -5462,6 +5638,20 @@
         }
       },
       "description": "The updatable properties of the GlobalRulestackResource."
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "Status Codes for the Firewall",
+      "enum": [
+        "GREEN",
+        "YELLOW",
+        "RED",
+        "INITIALIZING"
+      ],
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true
+      }
     },
     "IPAddress": {
       "type": "object",
@@ -5967,6 +6157,22 @@
         "configString"
       ]
     },
+    "PanoramaStatus": {
+      "type": "object",
+      "properties": {
+        "panoramaServerStatus": {
+          "$ref": "#/definitions/ServerStatus",
+          "description": "Primary Panorama connection status",
+          "readOnly": true
+        },
+        "panoramaServer2Status": {
+          "$ref": "#/definitions/ServerStatus",
+          "description": "Secondary Panorama connection status",
+          "readOnly": true
+        }
+      },
+      "description": "Panorama connectivity information"
+    },
     "PlanData": {
       "type": "object",
       "properties": {
@@ -6295,6 +6501,19 @@
         "modelAsString": true
       }
     },
+    "ReadOnlyProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the firewall resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ReadOnlyProvisioningState",
+        "modelAsString": true
+      }
+    },
     "RuleCounter": {
       "type": "object",
       "properties": {
@@ -6570,6 +6789,18 @@
       ],
       "x-ms-enum": {
         "name": "SecurityServicesTypeEnum",
+        "modelAsString": true
+      }
+    },
+    "ServerStatus": {
+      "type": "string",
+      "description": "Connectivity Status for Panorama Server",
+      "enum": [
+        "UP",
+        "DOWN"
+      ],
+      "x-ms-enum": {
+        "name": "ServerStatus",
         "modelAsString": true
       }
     },
