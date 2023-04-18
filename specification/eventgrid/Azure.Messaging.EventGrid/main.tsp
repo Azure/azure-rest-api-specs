@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
 enum ServiceApiVersions {
@@ -119,6 +118,12 @@ namespace Azure.Messaging.EventGrid {
     @doc("Description of the error")
     errorDescription: string; 
   }
+
+  @doc("Array of Lock Tokens")
+  model LockTokens {
+    @doc("Array of LockToken values.")
+    lockTokens: LockToken[];
+  }
    
   @doc("Details of the LockTokens information. This is used for both Acknowledge and Release operation response.")
   model LockTokensResponse {
@@ -203,7 +208,7 @@ namespace Azure.Messaging.EventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body
-    lockTokens: LockToken[];
+    lockTokens: LockTokens;
   }, LockTokensResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
@@ -225,6 +230,6 @@ namespace Azure.Messaging.EventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body    
-    tokens : LockToken[];
+    tokens : LockTokens;
   }, LockTokensResponse >;
 }
