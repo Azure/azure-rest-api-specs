@@ -1,345 +1,107 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "Marketplace Solution Builder",
-      "version": "2023-03-01-preview"
-    },
-    "paths": {
-      "/me/solutions": {
-        "get": {
-          "tags": [
-            "UserSolutions"
-          ],
-          "description": "Returns all user solutions",
-          "operationId": "GetUserSolutions",
-          "parameters": [
-            {
-              "name": "ApiVersion",
-              "in": "query",
-              "required": true,
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "default": "2023-03-01-preview"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/UserSolutions"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Marketplace Solution Builder",
+    "version": "2023-03-01-preview"
+  },
+  "paths": {
+    "/me/solutions": {
+      "get": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Returns all user solutions",
+        "operationId": "GetUserSolutions",
+        "x-ms-examples": {
+          "GetUserSolutions": {
+            "$ref": "./examples/GetUserSolutions.json"
           }
         },
-        "post": {
-          "tags": [
-            "UserSolutions"
-          ],
-          "description": "Adds a new solution to user solutions",
-          "operationId": "CreateUserSolution",
-          "parameters": [
-            {
-              "name": "ApiVersion",
-              "in": "query",
-              "required": true,
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "default": "2023-03-01-preview"
-              }
+        "parameters": [
+          {
+            "name": "ApiVersion",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "default": "2023-03-01-preview"
             }
-          ],
-          "requestBody": {
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateUserSolutionRequest"
+                  "$ref": "#/components/schemas/UserSolutions"
                 }
               }
-            },
-            "required": true
+            }
           },
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Solution"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
           }
         }
       },
-      "/me/solutions/{id}": {
-        "get": {
-          "tags": [
-            "UserSolutions"
-          ],
-          "description": "Returns a user solution",
-          "operationId": "GetUserSolution",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "ApiVersion",
-              "in": "query",
-              "required": true,
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "default": "2023-03-01-preview"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
+      "post": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Adds a new solution to user solutions",
+        "operationId": "CreateUserSolution",
+        "x-ms-examples": {
+          "CreateUserSolution": {
+            "$ref": "./examples/CreateUserSolution.json"
           }
         },
-        "patch": {
-          "tags": [
-            "UserSolutions"
-          ],
-          "description": "Renames a user solution",
-          "operationId": "RenameUserSolution",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
+        "parameters": [
+          {
+            "name": "ApiVersion",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "default": "2023-03-01-preview"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
               "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "ApiVersion",
-              "in": "query",
-              "required": true,
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "default": "2023-03-01-preview"
+                "$ref": "#/components/schemas/CreateUserSolutionRequest"
               }
             }
-          ],
-          "requestBody": {
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RenameUserSolutionRequest"
+                  "$ref": "#/components/schemas/Solution"
                 }
               }
-            },
-            "required": true
+            }
           },
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "UserSolutions"
-          ],
-          "description": "Removes a user solution",
-          "operationId": "RemoveUserSolution",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "ApiVersion",
-              "in": "query",
-              "required": true,
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "default": "2023-03-01-preview"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/me/solutions/{id}/products/{uniqueProductId}": {
-        "put": {
-          "tags": [
-            "UserSolutions"
-          ],
-          "description": "Adds a product to a user solution",
-          "operationId": "AddProductToUserSolution",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "uniqueProductId",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "ApiVersion",
-              "in": "query",
-              "required": true,
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "default": "2023-03-01-preview"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "delete": {
-          "tags": [
-            "UserSolutions"
-          ],
-          "description": "Removes a product from a user solution",
-          "operationId": "RemoveProductFromUserSolution",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "uniqueProductId",
-              "in": "path",
-              "required": true,
-              "style": "simple",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "ApiVersion",
-              "in": "query",
-              "required": true,
-              "style": "form",
-              "schema": {
-                "type": "string",
-                "default": "2023-03-01-preview"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "400": {
-              "description": "Bad Request",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/ErrorResponse"
-                  }
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -347,238 +109,429 @@
         }
       }
     },
-    "components": {
-      "schemas": {
-        "ArticleSummary": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "nullable": true
-            },
-            "link": {
-              "type": "string",
-              "format": "uri",
-              "nullable": true
-            },
-            "shortSummary": {
-              "type": "string",
-              "nullable": true
-            },
-            "title": {
-              "type": "string",
-              "nullable": true
-            },
-            "author": {
-              "type": "string",
-              "nullable": true
-            },
-            "publishDate": {
-              "type": "string",
-              "format": "date",
-              "nullable": true
-            },
-            "articleType": {
-              "$ref": "#/components/schemas/ArticleType"
+    "/me/solutions/{id}": {
+      "get": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Returns a user solution",
+        "operationId": "GetUserSolution",
+        "x-ms-examples": {
+          "GetUserSolution": {
+            "$ref": "./examples/GetUserSolution.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
+          {
+            "name": "ApiVersion",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "default": "2023-03-01-preview"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Renames a user solution",
+        "operationId": "RenameUserSolution",
+        "x-ms-examples": {
+          "RenameUserSolution": {
+            "$ref": "./examples/RenameUserSolution.json"
+          }
         },
-        "ArticleType": {
-          "enum": [
-            0,
-            1
-          ],
-          "type": "integer",
-          "format": "int32"
-        },
-        "ArticlesResponse": {
-          "type": "object",
-          "properties": {
-            "articles": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/ArticleSummary"
-              },
-              "nullable": true
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
-        },
-        "CreateUserSolutionRequest": {
-          "type": "object",
-          "properties": {
-            "name": {
+          {
+            "name": "ApiVersion",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
               "type": "string",
-              "nullable": true
-            },
-            "productIds": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "nullable": true
+              "default": "2023-03-01-preview"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RenameUserSolutionRequest"
+              }
             }
           },
-          "additionalProperties": false
+          "required": true
         },
-        "ErrorDetails": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "nullable": true
-            },
-            "message": {
-              "type": "string",
-              "nullable": true
-            },
-            "details": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/ErrorDetails"
-              },
-              "nullable": true
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Removes a user solution",
+        "operationId": "RemoveUserSolution",
+        "x-ms-examples": {
+          "RemoveUserSolution": {
+            "$ref": "./examples/RemoveUserSolution.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
+          {
+            "name": "ApiVersion",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string",
+              "default": "2023-03-01-preview"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me/solutions/{id}/products/{uniqueProductId}": {
+      "put": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Adds a product to a user solution",
+        "operationId": "AddProductToUserSolution",
+        "x-ms-examples": {
+          "AddProductToUserSolution": {
+            "$ref": "./examples/AddProductToUserSolution.json"
+          }
         },
-        "ErrorResponse": {
-          "type": "object",
-          "properties": {
-            "error": {
-              "$ref": "#/components/schemas/ErrorDetails"
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
-        },
-        "Product": {
-          "type": "object",
-          "properties": {
-            "uniqueProductId": {
-              "type": "string",
-              "nullable": true
-            },
-            "displayName": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
-            },
-            "summary": {
-              "type": "string",
-              "nullable": true
-            },
-            "smallIconUri": {
-              "type": "string",
-              "nullable": true
-            },
-            "publisherDisplayName": {
-              "type": "string",
-              "nullable": true
-            },
-            "productType": {
-              "type": "string",
-              "nullable": true
-            },
-            "pricingTypes": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "nullable": true
-            },
-            "storeFronts": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "nullable": true
-            },
-            "ratingAverage": {
-              "type": "number",
-              "format": "double",
-              "nullable": true
+          {
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
-        },
-        "ProductsResponse": {
-          "type": "object",
-          "properties": {
-            "products": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Product"
-              },
-              "nullable": true
-            }
-          },
-          "additionalProperties": false
-        },
-        "RenameUserSolutionRequest": {
-          "type": "object",
-          "properties": {
-            "name": {
+          {
+            "name": "ApiVersion",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
               "type": "string",
-              "nullable": true
+              "default": "2023-03-01-preview"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           },
-          "additionalProperties": false
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Removes a product from a user solution",
+        "operationId": "RemoveProductFromUserSolution",
+        "x-ms-examples": {
+          "RemoveProductFromUserSolution": {
+            "$ref": "./examples/RemoveProductFromUserSolution.json"
+          }
         },
-        "SimilarQueriesResponse": {
-          "type": "object",
-          "properties": {
-            "value": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "nullable": true
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
-        },
-        "Solution": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "nullable": true
-            },
-            "name": {
-              "type": "string",
-              "nullable": true
-            },
-            "products": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Product"
-              },
-              "nullable": true
+          {
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
             }
           },
-          "additionalProperties": false
-        },
-        "UserSolutions": {
-          "type": "object",
-          "properties": {
-            "id": {
+          {
+            "name": "ApiVersion",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "schema": {
               "type": "string",
-              "nullable": true
-            },
-            "solutions": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/Solution"
-              },
-              "nullable": true
+              "default": "2023-03-01-preview"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           },
-          "additionalProperties": false
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
         }
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "CreateUserSolutionRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "productIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorDetails": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetails"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetails"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "uniqueProductId": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "smallIconUri": {
+            "type": "string",
+            "nullable": true
+          },
+          "publisherDisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productType": {
+            "type": "string",
+            "nullable": true
+          },
+          "pricingTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "storeFronts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "ratingAverage": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RenameUserSolutionRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Solution": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserSolutions": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "solutions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Solution"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
   }
+}
