@@ -8,7 +8,6 @@ import "./resources/apiVersionSets.tsp";
 import "./resources/configuration.tsp";
 import "./resources/confirmations.tsp";
 import "./resources/delegation.tsp";
-import "./resources/identity.tsp";
 import "./resources/products.tsp";
 import "./resources/tags.tsp";
 import "./resources/users.tsp";

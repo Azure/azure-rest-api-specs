@@ -1,3 +1,5 @@
+import "./identity.tsp";
+
 namespace DeveloperServicesApi.Models;
 
 @doc("User profile.")
