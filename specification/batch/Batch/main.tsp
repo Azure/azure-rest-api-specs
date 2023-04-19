@@ -18,7 +18,7 @@ namespace BatchService;
 
 enum Versions {
    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2023-04-01.17.0`,
+  `2022-10-01.16.0`,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"

@@ -35,7 +35,6 @@ API.
 """)
   @example("./examples/ApplicationList.json", "List applications")
   @route("/applications")
-  @operationId("Application_List")
   @get
   List is RpcOperation<
     BatchApplicationListHeaders,
