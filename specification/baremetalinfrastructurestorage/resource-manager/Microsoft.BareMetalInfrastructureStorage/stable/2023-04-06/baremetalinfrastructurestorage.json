@@ -73,11 +73,53 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.BareMetalInfrastructureStorage/operations": {
+      "get": {
+        "tags": [
+          "AzureBareMetalInfrastructureStorage"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List all management operations supported by the AzureBareMetalInfrastructureStorage RP": {
+            "$ref": "./examples/AzureBareMetalInfrastructureStorageOperations_List.json"
+          }
+        },
+        "description": "Gets a list of AzureBareMetalInfrastructureStorage management operations.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
     "AzureBareMetalInfrastructureStorageInstancesListResult": {
-      "type": "object", 
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -125,13 +167,13 @@
         "storageProperties": {
           "type": "object",
           "readOnly": true,
-          "$ref": "#/definitions/StorageProfile",
+          "$ref": "#/definitions/storageProfile",
           "description": "Specifies the storage settings for the AzureBareMetalInfrastructureStorage instance."
         }
       },
       "description": "Describes the properties of an AzureBareMetalInfrastructureStorage instance."
     },
-    "StorageProfile": {
+    "storageProfile": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -144,7 +186,7 @@
             "Failed",
             "Succeeded",
             "Deleting",
-            "Cancelled",
+            "Canceled",
             "Migrating"
           ],
           "x-ms-enum": {
@@ -163,7 +205,7 @@
           "type": "string",
           "description": "the storage protocol for which the resource is getting provisioned"
         },
-        "Generation": {
+        "generation": {
           "readOnly": true,
           "type": "string",
           "description": "the kind of storage instance"
@@ -194,13 +236,75 @@
           "type": "string",
           "description": "the billing mode for the storage instance"
         },
-        "SKU": {
+        "Sku": {
           "readOnly": true,
           "type": "string",
           "description": "the SKU type that is provisioned"
         }
       },
       "description": "Describes the billing related details of the AzureBareMetalInfrastructureStorageInstance."
+    },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of AzureBareMetalInfrastructureStorage operations"
+        }
+      },
+      "description": "List of AzureBareMetalInfrastructureStorage operations"
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Displayed AzureBareMetalInfrastructureStorage operation information"
+        },
+        "isDataAction": {
+          "readOnly": true,
+          "description": "indicates whether an operation is a data action or not.",
+          "type": "boolean"
+        }
+      },
+      "description": "AzureBareMetalInfrastructureStorage operation information"
+    },
+    "Display": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name."
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly form of the resource type related to this action/operation."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly name for the operation as shown to the user."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly description for the operation as shown to the user."
+        }
+      },
+      "description": "Detailed BareMetalInfrastructureStorage operation information"
     },
     "ErrorResponse": {
       "type": "object",
