@@ -30,6 +30,14 @@ openapi-type: data-plane
 tag: package-2022-10-01.16.0
 ```
 
+### Tag: package-2022-10.16.0-preview
+
+These settings apply only when `--tag=package-2022-10.16.0-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10.16.0-preview'
+input-file:
+- Microsoft.Batch/preview/2022-10-01.16.0/BatchService.json
+```
 
 ### Tag: package-2022-10
 

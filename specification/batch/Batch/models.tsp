@@ -3859,7 +3859,7 @@ dictionary key references will be ARM resource ids in the form:
   @doc("If omitted, the default value is Default.")
   targetNodeCommunicationMode?: NodeCommunicationMode;
 
-  @doc("Determines how a pool communicates with the Batch service.")
+  @doc("The current state of the pool communication mode.")
   @visibility("read")
   currentNodeCommunicationMode?: NodeCommunicationMode;
 }
