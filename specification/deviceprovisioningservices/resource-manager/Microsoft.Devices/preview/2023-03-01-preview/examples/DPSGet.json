@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "provisioningServiceName": "myFirstProvisioningService",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2023-03-01-preview",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "etag": "AAAAAAAADGk=",
+        "name": "myFirstProvisioningService",
+        "location": "eastus",
+        "properties": {
+          "state": "Active",
+          "allocationPolicy": "Hashed",
+          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
+          "idScope": "0ne00000012",
+          "authorizationPolicies": [],
+          "portalOperationsHostName": "myFirstProvisioningService.services.azure-devices-provisioning.net"
+        },
+        "resourcegroup": "myResourceGroup",
+        "type": "Microsoft.Devices/ProvisioningServices",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService",
+        "subscriptionid": "91d12660-3dec-467a-be2a-213b5544ddc0",
+        "tags": {},
+        "sku": {
+          "name": "S1",
+          "tier": "Standard",
+          "capacity": 1
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "aa80bd74-a3f0-4f14-b9da-99c5351cf9d5",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "userAssignedIdentities": {
+            "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourcegroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity": {
+              "clientId": "c38f618d-47f6-4260-8b3d-1dd8c130f323",
+              "principalId": "f1b0b133-10dc-4985-966f-a98a04675fe9"
+            }
+          }
+        }
+      }
+    }
+  }
+}
