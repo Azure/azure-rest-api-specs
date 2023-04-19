@@ -109,6 +109,7 @@
       }
     },
     "MmsSendRequestAttachment": {
+      "description": "Represents the properties of a send message request.",
       "required": [
         "content",
         "mimeType"
@@ -147,19 +148,24 @@
       "type": "object",
       "properties": {
         "to": {
+          "description": "The recipient's phone number in E.164 format.",
           "type": "string"
         },
         "messageId": {
+          "description": "The identifier of the sent(outgoing) message. Present only if message was accepted.",
           "type": "string"
         },
         "httpStatusCode": {
+          "description": "HTTP Status code.",
           "format": "int32",
           "type": "integer"
         },
         "errorMessage": {
+          "description": "Optional error message in case of 4xx/5xx errors.",
           "type": "string"
         },
         "successful": {
+          "description": "Indicates if the message is processed successfully or not.",
           "type": "boolean"
         }
       }
