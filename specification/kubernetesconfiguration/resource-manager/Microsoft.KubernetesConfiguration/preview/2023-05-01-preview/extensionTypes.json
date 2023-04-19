@@ -136,13 +136,6 @@
             "$ref": "#/parameters/ExtensionTypeNameParameter"
           },
           {
-            "name": "releaseTrain",
-            "in": "query",
-            "description": "Filter results by release train (default value is stable)",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -230,10 +223,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
@@ -261,20 +254,6 @@
           },
           {
             "$ref": "#/parameters/VersionNumberParameter"
-          },
-          {
-            "name": "releaseTrain",
-            "in": "query",
-            "description": "Filter results by release train (default value is stable)",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "clusterType",
-            "in": "query",
-            "description": "Filter results by the cluster type for extension types",
-            "required": false,
-            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -406,13 +385,6 @@
             "$ref": "#/parameters/ExtensionTypeNameParameter"
           },
           {
-            "name": "releaseTrain",
-            "in": "query",
-            "description": "Filter results by release train (default value is stable)",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -502,10 +474,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
@@ -542,13 +514,6 @@
           },
           {
             "$ref": "#/parameters/VersionNumberParameter"
-          },
-          {
-            "name": "releaseTrain",
-            "in": "query",
-            "description": "Filter results by release train (default value is stable)",
-            "required": false,
-            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
