@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for BareMetalInfrastructure.
+This is the AutoRest configuration file for BareMetalInfrastructureStorage.
 
 ## Getting Started
 
@@ -22,29 +22,20 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the BareMetalInfrastructure API.
+These are the global settings for the BareMetalInfrastructureStorage API.
 
 ```yaml
 openapi-type: arm
-tag: package-2021-08-09
+tag: package-2023-04-06
 ```
 
-### Tag: package-2021-08-09
+### Tag: package-2023-04-06
 
-These settings apply only when `--tag=package-2021-08-09` is specified on the command line.
+These settings apply only when `--tag=package-2023-04-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08-09'
+```yaml $(tag) == 'package-2023-04-06'
 input-file:
-  - Microsoft.BareMetalInfrastructure/stable/2021-08-09/baremetalinfrastructure.json
-```
-
-### Tag: package-2020-08-06-preview
-
-These settings apply only when `--tag=package-2020-08-06-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-08-06-preview'
-input-file:
-  - Microsoft.BareMetalInfrastructure/preview/2020-08-06-preview/baremetalinfrastructure.json
+  - Microsoft.BareMetalInfrastructureStorage/stable/2023-04-06/baremetalinfrastructurestorage.json
 ```
 
 ---
@@ -64,7 +55,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_baremetalinfrastructure']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_baremetalinfrastructurestorage']
   - repo: azure-powershell
 ```
 
@@ -87,3 +78,4 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+

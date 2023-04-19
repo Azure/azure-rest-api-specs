@@ -1,0 +1,274 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-04-06",
+    "title": "bareMetalInfrastructureStorageClient",
+    "description": "The BareMetalInfrastructureStorage Management client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BareMetalInfrastructureStorage/bareMetalInfrastructureStorageInstances": {
+      "get": {
+        "tags": [
+          "BareMetalInfrastructureStorage"
+        ],
+        "operationId": "AzureBareMetalInfrastructureStorageInstances_ListBySubscription",
+        "summary": "Gets a list of Azure BareMetal Infrastructure Storage instances in the specified subscription.",
+        "description": "Gets a list of AzureBareMetalInfrastructureStorage instances in the specified subscription. The operations returns various properties of each Azure BareMetal Infrastructure Storage instance.",
+        "x-ms-examples": {
+          "List all AzureBareMetalInfrastructureStorage instances in a subscription": {
+            "$ref": "./examples/AzureBareMetalInfrastructureStorageInstances_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInfrastructureStorageInstancesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureBareMetalInfrastructureStorageInstancesListResult": {
+      "type": "object", 
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureBareMetalInfrastructureStorageInstance"
+          },
+          "description": "The list of AzureBareMetalInfrastructure Storage instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of AzureBareMetalInfrastructure Storage instances."
+        }
+      },
+      "description": "The response from the Get AzureBareMetalInfrastructureStorage Instances operation."
+    },
+    "AzureBareMetalInfrastructureStorageInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBareMetalInfrastructureStorageInstanceProperties",
+          "description": "AzureBareMetalInfrastructureStorage instance properties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "AzureBareMetalInfrastructureStorage instance info on Azure (ARM properties and AzureBareMetalInfrastructureStorage properties)"
+    },
+    "AzureBareMetalInfrastructureStorageInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "azureBareMetalInfrastructureStorageInstanceUniqueIdentifier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the AzureBareMetalInfrastructureStorage instance unique ID."
+        },
+        "storageProperties": {
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the AzureBareMetalInfrastructureStorage instance."
+        }
+      },
+      "description": "Describes the properties of an AzureBareMetalInfrastructureStorage instance."
+    },
+    "StorageProfile": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Cancelled",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "AzureBareMetalInfrastructureStorageProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the AzureBareMetalInfrastructureStorageInstance"
+        },
+        "offeringType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the offering type for which the resource is getting provisioned"
+        },
+        "storageType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the storage protocol for which the resource is getting provisioned"
+        },
+        "Generation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the kind of storage instance"
+        },
+        "hardwareType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the hardware type of the storage instance"
+        },
+        "workloadType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the workload for which the resource is getting provisioned"
+        },
+        "storageBillingProperties": {
+          "readOnly": true,
+          "$ref": "#/definitions/StorageBillingProperties",
+          "description": "the billing related information for the resource"
+        }
+      },
+      "description": "Specifies the storage settings for the AzureBareMetalInfrastructureStorage instance disks."
+    },
+    "StorageBillingProperties": {
+      "type": "object",
+      "properties": {
+        "billingMode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the billing mode for the storage instance"
+        },
+        "SKU": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the SKU type that is provisioned"
+        }
+      },
+      "description": "Describes the billing related details of the AzureBareMetalInfrastructureStorageInstance."
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags field of the AzureBareMetalInfrastructureStorage instance."
+        }
+      },
+      "description": "Tags field of the AzureBareMetalInfrastructureStorage instance."
+    }
+  },
+  "parameters": {
+    "AzureBareMetalInfrastructureStorageInstanceNameParameter": {
+      "name": "azureBareMetalInfrastructureStorageInstanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the AzureBareMetalInfrastructureStorage on Azure instance.",
+      "x-ms-parameter-location": "method"
+    },
+    "TagsParameter": {
+      "name": "tagsParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Tags"
+      },
+      "description": "Request body that only contains the new Tags field",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
