@@ -107,7 +107,7 @@
             }
           }
         },
-        "x-ms-pagable": {
+        "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
@@ -162,7 +162,7 @@
         }
       }
     },
-    "/subcriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -232,11 +232,11 @@
           }
         }
       },
-      "x-ms-pagable": {
+      "x-ms-pageable": {
         "nextLinkName": "nextLink"
       }
     },
-    "/subcriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -296,7 +296,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -373,7 +373,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -432,7 +432,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -504,11 +504,11 @@
           }
         }
       },
-      "x-ms-pagable": {
+      "x-ms-pageable": {
         "nextLinkName": "nextLink"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRP}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions/{versionNumber}": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -629,23 +629,35 @@
                   "type": "string"
                 },
                 "clusterScopeSettings": {
-                  "type": "object",
-                  "properties": {
-                    "properties": {
-                      "type": "object"
-                    },
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/definitions/ClusterScopeSettings"
                 }
               }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterScopeSettings": {
+      "type": "object",
+      "description": "Extension scope settings",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Extension scope settings",
+          "properties": {
+            "allowMultipleInstances": {
+              "type": "boolean",
+              "description": "Describes if multiple instances of the extension are allowed"
+            },
+            "defaultReleaseNamespace": {
+              "type": "string",
+              "description": "Default extension release namespace"
             }
           }
         }
@@ -689,7 +701,7 @@
               "type": "array",
               "description": "A list of supported cluster types for this version of the Extension Type",
               "items": {
-                "description": "The indivual cluster type that is supported by this extension",
+                "description": "The individual cluster type that is supported by this extension",
                 "type": "string"
               }
             }
