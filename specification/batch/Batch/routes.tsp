@@ -86,7 +86,30 @@ last aggregation interval is returned.
   @route("/poolusagemetrics")
   @get
   ListUsageMetrics is RpcOperation<
-    BatchApplicationListHeaders & Pool_ListUsageMetricRequestHeaders,
+    BatchApplicationListHeaders & {
+      @doc("""
+    The earliest time from which to include metrics. This must be at least two and
+    a half hours before the current time. If not specified this defaults to the
+    start time of the last aggregation interval currently available.
+    """)
+      @query
+      starttime?: utcDateTime;
+    
+      @doc("""
+    The latest time from which to include metrics. This must be at least two hours
+    before the current time. If not specified this defaults to the end time of the
+    last aggregation interval currently available.
+    """)
+      @query
+      endtime?: utcDateTime;
+    
+      @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
+    """)
+      @query
+      $filter?: string;
+    },
     BatchResponseHeaders & PoolListUsageMetricsResult,
     {},
     BatchError
@@ -2874,29 +2897,4 @@ directly.
   `ocp-date`?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("The parameters for a widget status request")
-model Pool_ListUsageMetricRequestHeaders {
-  @doc("""
-The earliest time from which to include metrics. This must be at least two and
-a half hours before the current time. If not specified this defaults to the
-start time of the last aggregation interval currently available.
-""")
-  @query
-  starttime?: utcDateTime;
 
-  @doc("""
-The latest time from which to include metrics. This must be at least two hours
-before the current time. If not specified this defaults to the end time of the
-last aggregation interval currently available.
-""")
-  @query
-  endtime?: utcDateTime;
-
-  @doc("""
-An OData $filter clause. For more information on constructing this filter, see
-https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
-""")
-  @query
-  $filter?: string;
-}
