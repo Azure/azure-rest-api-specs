@@ -2437,8 +2437,7 @@ model FileResponse {
 
   @header
   @doc("The file creation time.")
-  @format("date-time-rfc1123")
-  "ocp-creation-time"?: string;
+  "ocp-creation-time"?: offsetDateTime;
 
   @header
   @doc("Whether the object represents a directory.")
@@ -2495,8 +2494,7 @@ client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
   @header
-  @format("date-time-rfc1123")
-  "If-Modified-Since"?: string;
+  "If-Modified-Since"?: offsetDateTime;
 
   @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2504,8 +2502,7 @@ client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
   @header
-  @format("date-time-rfc1123")
-  "If-Unmodified-Since"?: string;
+  "If-Unmodified-Since"?: offsetDateTime;
 }
 
 // This is the standard set of headers that most of batch apis return
@@ -2520,8 +2517,7 @@ model BatchEtagResponseHeaders {
 
   @doc("The time at which the resource was last modified.")
   @header
-  @format("date-time-rfc1123")
-  "Last-Modified"?: string;
+  "Last-Modified"?: offsetDateTime;
 }
 
 @doc("Client related response header values")
@@ -2591,14 +2587,13 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
   @header
-  @format("date-time-rfc1123")
   @extension(
     "x-ms-parameter-grouping",
     {
       postfix: "Options",
     }
   )
-  "ocp-date"?: string;
+  "ocp-date"?: offsetDateTime;
 }
 
 @doc("Common header parms for Pool related File operartions")
@@ -2682,8 +2677,7 @@ directly.
       postfix: "Options",
     }
   )
-  @format("date-time-rfc1123")
-  "ocp-date"?: string;
+  "ocp-date"?: offsetDateTime;
 }
 
 @doc("The parameters for a widget status request")
