@@ -1575,8 +1575,8 @@
         }
       }
     },
-    "CreateResourceSupportedResponse": {
-      "description": "Datadog resource can be created or not.",
+    "CreateResourceSupportedProperties": {
+      "description": "Datadog resource can be created or not properties.",
       "type": "object",
       "properties": {
         "name": {
@@ -1588,6 +1588,16 @@
           "description": "Indicates if selected subscription supports Datadog resource creation, if not it is already being monitored for the selected organization via multi subscription feature. ",
           "type": "boolean",
           "readOnly": true
+        }
+      }
+    },
+    "CreateResourceSupportedResponse": {
+      "description": "Datadog resource can be created or not.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CreateResourceSupportedProperties",
+          "description": "Represents the properties of the resource."
         }
       }
     },
@@ -1801,9 +1811,9 @@
           "description": "The state of monitoring.",
           "enum": [
             "InProgress",
-            "Deleting",
             "Active",
-            "Failed"
+            "Failed",
+            "Deleting"
           ],
           "x-ms-enum": {
             "modelAsString": true,
