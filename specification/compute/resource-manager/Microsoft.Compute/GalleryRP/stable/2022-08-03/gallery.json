@@ -845,6 +845,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versionNames/latest": {
+      "get": {
+        "tags": [
+          "GalleryImageVersions"
+        ],
+        "operationId": "GalleryImageVersions_Get",
+        "description": "Retrieves information about the latest version of an image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the Image Definition resides."
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery image definition in which the Image Version resides."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/latestVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get latest version of an image.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_LatestVersionName.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}": {
       "put": {
         "tags": [
@@ -3142,6 +3195,30 @@
         "location": {
           "type": "string",
           "description": "region of the Gallery Image Version."
+        }
+      }
+    },
+    "latestVersion": {
+      "readOnly": true,
+      "description": "The name of the latest version in the region.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/LatestGalleryImageVersion"
         }
       }
     }
