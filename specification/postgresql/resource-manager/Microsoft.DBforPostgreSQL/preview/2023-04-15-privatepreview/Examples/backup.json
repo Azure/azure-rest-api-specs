@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2022-02-01",
+    "x-ms-client-request-id": "D1186BE0-60B4-4ED6-A455-C7DB24D0D5AA",
+    "parameters": {
+      "targetDetails": {
+        "objectType": "FullBackupStoreDetails",
+        "sasUriList": [ "sasuri1", "sasuri2" ]
+      },
+      "backupSettings": {
+        "backupType": "Full",
+	  "backupFormat": "DPPCollatedFormat"
+      },
+      "scope": {
+        "objectType": "AbsoluteScope",
+        "absoluteItemIds": [ "item1", "item2" ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": "60",
+        "x-ms-request-id": "D1186BE0-60B4-4ED6-A455-C7DB24D0D5AA",
+        "Azure-AsyncOperation": "https://<service-endpoint>/1"
+      }
+    },
+    "200": {
+      "x-ms-request-id": "D1186BE0-60B4-4ED6-A455-C7DB24D0D5AA",
+      "body": {
+        "id": "/subscriptions/id/locations/westus/operationsStatuses/someguid",
+        "name": "someguid",
+        "status": "Succeeded",
+        "startTime": "2019-03-01T13:00:00Z",
+        "endTime": "2019-03-01T13:00:00Z",
+        "properties": {
+          "objectType": "BackupResponseProperties",
+          "datasourceSizeInBytes": 1024,
+          "dataTransferredInBytes": 100,
+          "backupMetadata": "Metadta to be used during recovery"
+        },
+        "percentComplete": 100
+      }
+    }
+  }
+}

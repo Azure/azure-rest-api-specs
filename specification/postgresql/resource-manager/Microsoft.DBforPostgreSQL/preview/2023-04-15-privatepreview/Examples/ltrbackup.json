@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2023-04-15-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rgLongTermRetention",
+    "serverName": "pgsqlltrtestserver",
+    "parameters": {
+      "backupSettings": {
+        "backupName": "backup1"
+      },
+      "targetDetails": {
+        "sasUriList": [
+          "sasuri"
+        ]
+      }
+    },
+    "x-ms-client-request-id": "F950B900-26D4-4AFB-A07A-1997B6B0E686"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rgLongTermRetention/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgsqlltrtestserver",
+        "name": "backup1",
+        "status": "Succeeded",
+        "error": {
+          "code": "SystemException",
+          "message": "System.AggregateException: One or more errors occurred."
+        },
+        "startTime": "2023-04-13T01:32:30.128Z",
+        "endTime": "2023-04-13T01:32:30.128Z",
+        "properties": {
+          "datasourceSizeInBytes": 23,
+          "dataTransferredInBytes": 23,
+          "backupMetadata": "backupmetadata"
+        },
+        "percentComplete": 100
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/azureAsyncOperation/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2023-04-15-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/operationResults/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2023-04-15-preview"
+      }
+    }
+  }
+}
