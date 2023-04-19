@@ -36,29 +36,18 @@ tag: package-flexibleserver-2022-12-01
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2023-04
+tag: package-2020-01-01
 ```
 
 
-### Tag: package-preview-2023-04
+### Tag: package-flexibleserver-2023-04-15-privatepreview
 
-These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2023-04-15-privatepreview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-04'
+```yaml $(tag) == 'package-flexibleserver-2023-04-15-privatepreview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/LongTermBackupResult.json
+  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/LongTermRetention.json
 ```
 ### Tag: package-flexibleserver-2022-12-01
 
