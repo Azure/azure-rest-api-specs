@@ -77,6 +77,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 input-file:
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/BillingStatistics.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/Bookmarks.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentPackages.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentProductPackages.json
