@@ -16,48 +16,9 @@
             "actionType": "Correlation",
             "correlateBy": [
               {
-                "field": "essentials.alertRuleName",
+                "field": "essentials.alertRule",
                 "type": "Simple"
-              },
-              {
-                "field": "essentials.severity",
-                "type": "Grouped",
-                "groups": [
-                  {
-                    "operator": "Equals",
-                    "values":[
-                      "sev0",
-                      "sev1"
-                    ]
-                  },
-                  {
-                    "operator": "Equals",
-                    "values":[
-                      "sev2",
-                      "sev3",
-                      "sev4"
-                    ]
-                  },
-                  {
-                    "field": "context.labes['clusterName']",
-                    "type": "Grouped",
-                    "groups": [
-                      {
-                        "operator": "StartsWith",
-                        "values": [
-                          "Prod"
-                        ]
-                      },
-                      {
-                        "operator": "StartsWith",
-                        "values": [
-                          "Test"
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
+              }              
             ],
             "correlationTimeWindow": "00:30:00",
             "priority": 50,
@@ -65,7 +26,7 @@
             "targetRegion": "West US"
           }
         ],
-        "description": "Simple and Grouped Correlation Example.",
+        "description": "Simple Correlation Example.",
         "enabled": true
       }
     }
@@ -90,47 +51,8 @@
               "actionType": "Correlation",
               "correlateBy": [
                 {
-                  "field": "essentials.alertRuleName",
+                  "field": "essentials.alertRule",
                   "type": "Simple"
-                },
-                {
-                  "field": "essentials.severity",
-                  "type": "Grouped",
-                  "groups": [
-                    {
-                      "operator": "Equals",
-                      "values":[
-                        "sev0",
-                        "sev1"
-                      ]
-                    },
-                    {
-                      "operator": "Equals",
-                      "values":[
-                        "sev2",
-                        "sev3",
-                        "sev4"
-                      ]
-                    },
-                    {
-                      "field": "context.labes['clusterName']",
-                      "type": "Grouped",
-                      "groups": [
-                        {
-                          "operator": "StartsWith",
-                          "values": [
-                            "Prod"
-                          ]
-                        },
-                        {
-                          "operator": "StartsWith",
-                          "values": [
-                            "Test"
-                          ]
-                        }
-                      ]
-                    }
-                  ]
                 }
               ],
               "correlationTimeWindow": "00:30:00",
@@ -139,7 +61,7 @@
               "targetRegion": "West US"
             }
           ],
-          "description": "Simple and Grouped Correlation Example.",
+          "description": "Simple Correlation Example.",
           "enabled": true
         },
         "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelationExample",
@@ -168,48 +90,9 @@
               "actionType": "Correlation",
               "correlateBy": [
                 {
-                  "field": "essentials.alertRuleName",
+                  "field": "essentials.alertRule",
                   "type": "Simple"
-                },
-                {
-                  "field": "essentials.severity",
-                  "type": "Grouped",
-                  "groups": [
-                    {
-                      "operator": "Equals",
-                      "values":[
-                        "sev0",
-                        "sev1"
-                      ]
-                    },
-                    {
-                      "operator": "Equals",
-                      "values":[
-                        "sev2",
-                        "sev3",
-                        "sev4"
-                      ]
-                    },
-                    {
-                      "field": "context.labes['clusterName']",
-                      "type": "Grouped",
-                      "groups": [
-                        {
-                          "operator": "StartsWith",
-                          "values": [
-                            "Prod"
-                          ]
-                        },
-                        {
-                          "operator": "StartsWith",
-                          "values": [
-                            "Test"
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
+                }                
               ],
               "correlationTimeWindow": "00:30:00",
               "priority": 50,
@@ -217,7 +100,7 @@
               "targetRegion": "West US"
             }
           ],
-          "description": "Simple and Grouped Correlation Example.",
+          "description": "Simple Correlation Example.",
           "enabled": true
         },
         "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelationExample",
