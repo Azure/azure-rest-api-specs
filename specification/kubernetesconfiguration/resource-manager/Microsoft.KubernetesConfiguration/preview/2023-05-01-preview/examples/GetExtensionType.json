@@ -7,7 +7,7 @@
     "clusterName": "my-cluster",
     "extensionTypeName": "my-extension-type",
     "releaseTrain": "stable",
-    "api-version": "2023-05-01"
+    "api-version": "2023-05-01-preview"
   },
   "responses": {
     "200": {
@@ -33,8 +33,13 @@
           "supportedScopes": {
             "defaultScope": "cluster",
             "clusterScopeSettings": {
-              "allowMultipleInstances": true,
-              "defaultReleaseNamespace": "kube-system"
+              "properties": {
+                "allowMultipleInstances": true,
+                "defaultReleaseNamespace": "kube-system"
+              },
+              "id": "aaaaaaaaaaaaaaaaaa",
+              "name": "bbbbbbbbbbbbb",
+              "type": "ccccccccccccccccccccccccc"
             }
           }
         }
