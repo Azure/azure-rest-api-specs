@@ -7,14 +7,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  package-name: azure-mgmt-playwrightservice
-  namespace: azure.mgmt.playwrightservice
-  package-version: 2022-09-01-preview
+  payload-flattening-threshold: 2
+  namespace: Microsoft.AzurePlaywrightService
+  package-name: playwrightservice
+  package-version: 2023-06-01-preview
   clear-output-folder: true
 ```
 
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)//azure-mgmt-playwrightservice/azure/mgmt/playwrightservice
+  output-folder: $(python-sdks-folder)/azure-mgmt/playwrightservice
 ```
