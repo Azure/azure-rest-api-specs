@@ -2,22 +2,16 @@
   "swagger": "2.0",
   "info": {
     "title": "CCF governance",
-    "version": "2023-02-20",
-    "x-cadl-generated": [
+    "version": "2023-04-19",
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "tags": [],
   "paths": {
     "/gov/ack": {
@@ -81,6 +75,28 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/GetCommit"
+            }
+          }
+        }
+      }
+    },
+    "/gov/encrypted_recovery_share/{member_id}": {
+      "get": {
+        "operationId": "GetEncryptedRecoveryShare",
+        "summary": "A member's encrypted recovery share",
+        "parameters": [
+          {
+            "name": "member_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetEncryptedRecoveryShare"
             }
           }
         }
@@ -678,21 +694,8 @@
       }
     },
     "/gov/recovery_share": {
-      "get": {
-        "operationId": "Recover_GetRecoveryShare",
-        "summary": "A member's recovery share",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/GetRecoveryShare"
-            }
-          }
-        }
-      },
       "post": {
-        "operationId": "Recover_PostRecoveryShare",
+        "operationId": "PostRecoveryShare",
         "summary": "Provide a recovery share for the purpose of completing a service recovery",
         "parameters": [
           {
@@ -747,7 +750,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]"
+          "x-typespec-name": "string[]"
         },
         "challengeType": {
           "type": "string"
@@ -757,7 +760,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]"
+          "x-typespec-name": "string[]"
         },
         "directoryUrl": {
           "type": "string"
@@ -785,9 +788,7 @@
           "$ref": "#/definitions/ACME"
         }
       },
-      "required": [
-        "acme"
-      ]
+      "required": ["acme"]
     },
     "Action": {
       "type": "object",
@@ -799,10 +800,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "args",
-        "name"
-      ]
+      "required": ["args", "name"]
     },
     "ActionArray": {
       "type": "object",
@@ -813,19 +811,14 @@
             "$ref": "#/definitions/Action"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Action[]"
+          "x-typespec-name": "Action[]"
         }
       },
-      "required": [
-        "actions"
-      ]
+      "required": ["actions"]
     },
     "AppProtocol": {
       "type": "string",
-      "enum": [
-        "HTTP1",
-        "HTTP2"
-      ],
+      "enum": ["HTTP1", "HTTP2"],
       "x-ms-enum": {
         "name": "AppProtocol",
         "modelAsString": true
@@ -833,12 +826,7 @@
     },
     "Authority": {
       "type": "string",
-      "enum": [
-        "Node",
-        "Service",
-        "ACME",
-        "Unsecured"
-      ],
+      "enum": ["Node", "Service", "ACME", "Unsecured"],
       "x-ms-enum": {
         "name": "Authority",
         "modelAsString": true
@@ -851,9 +839,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "ballot"
-      ]
+      "required": ["ballot"]
     },
     "CodeDetails": {
       "type": "object",
@@ -867,10 +853,7 @@
           "$ref": "#/definitions/CodeStatusValues"
         }
       },
-      "required": [
-        "codeDigest",
-        "codeStatus"
-      ]
+      "required": ["codeDigest", "codeStatus"]
     },
     "CodeDigestToCodeStatus": {
       "type": "object",
@@ -881,18 +864,14 @@
             "$ref": "#/definitions/CodeDetails"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "CodeDetails[]"
+          "x-typespec-name": "CodeDetails[]"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "CodeStatusValues": {
       "type": "string",
-      "enum": [
-        "AllowedToJoin"
-      ],
+      "enum": ["AllowedToJoin"],
       "x-ms-enum": {
         "name": "CodeStatusValues",
         "modelAsString": true
@@ -900,10 +879,7 @@
     },
     "ConsensusType": {
       "type": "string",
-      "enum": [
-        "BFT",
-        "CFT"
-      ],
+      "enum": ["BFT", "CFT"],
       "x-ms-enum": {
         "name": "ConsensusType",
         "modelAsString": true
@@ -919,9 +895,7 @@
           "$ref": "#/definitions/Authority"
         }
       },
-      "required": [
-        "authority"
-      ]
+      "required": ["authority"]
     },
     "Failure": {
       "type": "object",
@@ -933,9 +907,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "reason"
-      ]
+      "required": ["reason"]
     },
     "GetCommit": {
       "type": "object",
@@ -949,24 +921,19 @@
             "$ref": "#/definitions/Transaction"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Transaction[]"
+          "x-typespec-name": "Transaction[]"
         }
       },
-      "required": [
-        "transactionValue",
-        "viewHistory"
-      ]
+      "required": ["transactionValue", "viewHistory"]
     },
-    "GetRecoveryShare": {
+    "GetEncryptedRecoveryShare": {
       "type": "object",
       "properties": {
         "encryptedShare": {
           "type": "string"
         }
       },
-      "required": [
-        "encryptedShare"
-      ]
+      "required": ["encryptedShare"]
     },
     "GetTxStatusOut": {
       "type": "object",
@@ -979,10 +946,7 @@
           "pattern": "^[0-9]+\\.[0-9]+$"
         }
       },
-      "required": [
-        "status",
-        "transactionID"
-      ]
+      "required": ["status", "transactionID"]
     },
     "HttpConfiguration": {
       "type": "object",
@@ -1041,19 +1005,12 @@
           "format": "uint64"
         }
       },
-      "required": [
-        "maxExecutionTimeInMs",
-        "maxHeapBytes",
-        "maxStackBytes"
-      ]
+      "required": ["maxExecutionTimeInMs", "maxHeapBytes", "maxStackBytes"]
     },
     "Json": {},
     "JwtIssuerKeyFilter": {
       "type": "string",
-      "enum": [
-        "all",
-        "sgx"
-      ],
+      "enum": ["all", "sgx"],
       "x-ms-enum": {
         "name": "JwtIssuerKeyFilter",
         "modelAsString": true
@@ -1066,9 +1023,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "sgxClaims"
-      ]
+      "required": ["sgxClaims"]
     },
     "JwtIssuerMetadata": {
       "type": "object",
@@ -1086,19 +1041,11 @@
           "$ref": "#/definitions/JwtIssuerKeyPolicy"
         }
       },
-      "required": [
-        "keyFilter"
-      ]
+      "required": ["keyFilter"]
     },
     "MDType": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "SHA1",
-        "SHA256",
-        "SHA384",
-        "SHA512"
-      ],
+      "enum": ["NONE", "SHA1", "SHA256", "SHA384", "SHA512"],
       "x-ms-enum": {
         "name": "MDType",
         "modelAsString": true
@@ -1118,9 +1065,7 @@
           "$ref": "#/definitions/StateDigest"
         }
       },
-      "required": [
-        "stateDigest"
-      ]
+      "required": ["stateDigest"]
     },
     "MemberDetails": {
       "type": "object",
@@ -1132,10 +1077,7 @@
           "$ref": "#/definitions/MemberStatus"
         }
       },
-      "required": [
-        "memberData",
-        "memberStatus"
-      ]
+      "required": ["memberData", "memberStatus"]
     },
     "MemberIdToBase64": {
       "type": "object",
@@ -1145,9 +1087,7 @@
           "format": "base64"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "MemberIdToFailure": {
       "type": "object",
@@ -1159,9 +1099,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "reason"
-      ]
+      "required": ["reason"]
     },
     "MemberIdToMemberAck": {
       "type": "object",
@@ -1177,9 +1115,7 @@
           "$ref": "#/definitions/StateDigest"
         }
       },
-      "required": [
-        "stateDigest"
-      ]
+      "required": ["stateDigest"]
     },
     "MemberIdToMemberDetails": {
       "type": "object",
@@ -1191,10 +1127,7 @@
           "$ref": "#/definitions/MemberStatus"
         }
       },
-      "required": [
-        "memberData",
-        "memberStatus"
-      ]
+      "required": ["memberData", "memberStatus"]
     },
     "MemberIdToPem": {
       "type": "object",
@@ -1203,9 +1136,7 @@
           "$ref": "#/definitions/Pem"
         }
       },
-      "required": [
-        "Id"
-      ]
+      "required": ["Id"]
     },
     "MemberIdToSignedReq": {
       "type": "object",
@@ -1229,20 +1160,11 @@
           "format": "base64"
         }
       },
-      "required": [
-        "keyId",
-        "req",
-        "md",
-        "requestBody",
-        "sig"
-      ]
+      "required": ["keyId", "req", "md", "requestBody", "sig"]
     },
     "MemberStatus": {
       "type": "string",
-      "enum": [
-        "Accepted",
-        "Active"
-      ],
+      "enum": ["Accepted", "Active"],
       "x-ms-enum": {
         "name": "MemberStatus",
         "modelAsString": true
@@ -1307,9 +1229,7 @@
           "$ref": "#/definitions/Pem"
         }
       },
-      "required": [
-        "Id"
-      ]
+      "required": ["Id"]
     },
     "NodeInfo": {
       "type": "object",
@@ -1365,13 +1285,7 @@
     },
     "NodeStatus": {
       "type": "string",
-      "enum": [
-        "Pending",
-        "Trusted",
-        "Retired",
-        "Learner",
-        "Retiring"
-      ],
+      "enum": ["Pending", "Trusted", "Retired", "Learner", "Retiring"],
       "x-ms-enum": {
         "name": "NodeStatus",
         "modelAsString": true
@@ -1385,7 +1299,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]"
+          "x-typespec-name": "string[]"
         },
         "appProtocol": {
           "$ref": "#/definitions/AppProtocol"
@@ -1418,9 +1332,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "bindAddress"
-      ]
+      "required": ["bindAddress"]
     },
     "Pem": {
       "type": "object",
@@ -1430,9 +1342,7 @@
           "format": "pem"
         }
       },
-      "required": [
-        "pemValue"
-      ]
+      "required": ["pemValue"]
     },
     "Proposal": {
       "type": "object",
@@ -1441,9 +1351,7 @@
           "$ref": "#/definitions/ActionArray"
         }
       },
-      "required": [
-        "actions"
-      ]
+      "required": ["actions"]
     },
     "ProposalInfo": {
       "type": "object",
@@ -1469,12 +1377,7 @@
           "$ref": "#/definitions/MemberIdToFailure"
         }
       },
-      "required": [
-        "ballots",
-        "proposerId",
-        "state",
-        "voteFailures"
-      ]
+      "required": ["ballots", "proposerId", "state", "voteFailures"]
     },
     "ProposalInfoSummary": {
       "type": "object",
@@ -1504,12 +1407,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "ballotCount",
-        "proposalId",
-        "proposerId",
-        "state"
-      ]
+      "required": ["ballotCount", "proposalId", "proposerId", "state"]
     },
     "ProposalState": {
       "type": "string",
@@ -1528,11 +1426,7 @@
     },
     "QuoteFormat": {
       "type": "string",
-      "enum": [
-        "OE_SGX_v1",
-        "Insecure_Virtual",
-        "AMD_SEV_SNP_v1"
-      ],
+      "enum": ["OE_SGX_v1", "Insecure_Virtual", "AMD_SEV_SNP_v1"],
       "x-ms-enum": {
         "name": "QuoteFormat",
         "modelAsString": true
@@ -1553,11 +1447,7 @@
           "format": "base64"
         }
       },
-      "required": [
-        "endorsements",
-        "format",
-        "quote"
-      ]
+      "required": ["endorsements", "format", "quote"]
     },
     "RPCInterfaces": {
       "type": "object",
@@ -1567,7 +1457,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]"
+          "x-typespec-name": "string[]"
         },
         "appProtocol": {
           "$ref": "#/definitions/AppProtocol"
@@ -1600,9 +1490,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "bindAddress"
-      ]
+      "required": ["bindAddress"]
     },
     "ServiceConfiguration": {
       "type": "object",
@@ -1630,10 +1518,7 @@
           "format": "uint64"
         }
       },
-      "required": [
-        "consensus",
-        "recoveryThreshold"
-      ]
+      "required": ["consensus", "recoveryThreshold"]
     },
     "ServiceInfo": {
       "type": "object",
@@ -1660,19 +1545,11 @@
           "$ref": "#/definitions/ServiceStatus"
         }
       },
-      "required": [
-        "cert",
-        "status"
-      ]
+      "required": ["cert", "status"]
     },
     "ServiceStatus": {
       "type": "string",
-      "enum": [
-        "Opening",
-        "Open",
-        "WaitingForRecoveryShares",
-        "Recovering"
-      ],
+      "enum": ["Opening", "Open", "WaitingForRecoveryShares", "Recovering"],
       "x-ms-enum": {
         "name": "ServiceStatus",
         "modelAsString": true
@@ -1687,12 +1564,10 @@
             "$ref": "#/definitions/Sha256DigestToStringMap"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Sha256DigestToStringMap[]"
+          "x-typespec-name": "Sha256DigestToStringMap[]"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "Sha256DigestToStringMap": {
       "type": "object",
@@ -1706,10 +1581,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "digest",
-        "value"
-      ]
+      "required": ["digest", "value"]
     },
     "SignedReq": {
       "type": "object",
@@ -1733,13 +1605,7 @@
           "format": "base64"
         }
       },
-      "required": [
-        "keyId",
-        "req",
-        "md",
-        "requestBody",
-        "sig"
-      ]
+      "required": ["keyId", "req", "md", "requestBody", "sig"]
     },
     "StateDigest": {
       "type": "object",
@@ -1748,9 +1614,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "state_digest"
-      ]
+      "required": ["state_digest"]
     },
     "StringToBase64": {
       "type": "object",
@@ -1760,9 +1624,7 @@
           "format": "base64"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "StringToJwtIssuerMetadata": {
       "type": "object",
@@ -1780,9 +1642,7 @@
           "$ref": "#/definitions/JwtIssuerKeyPolicy"
         }
       },
-      "required": [
-        "keyFilter"
-      ]
+      "required": ["keyFilter"]
     },
     "StringToPem": {
       "type": "object",
@@ -1792,9 +1652,7 @@
           "format": "pem"
         }
       },
-      "required": [
-        "pemValue"
-      ]
+      "required": ["pemValue"]
     },
     "StringToProposalInfo": {
       "type": "object",
@@ -1820,12 +1678,7 @@
           "$ref": "#/definitions/MemberIdToFailure"
         }
       },
-      "required": [
-        "ballots",
-        "proposerId",
-        "state",
-        "voteFailures"
-      ]
+      "required": ["ballots", "proposerId", "state", "voteFailures"]
     },
     "SubmitRecoveryShareIn": {
       "type": "object",
@@ -1834,9 +1687,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "share"
-      ]
+      "required": ["share"]
     },
     "SubmitRecoveryShareOut": {
       "type": "object",
@@ -1845,9 +1696,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "message"
-      ]
+      "required": ["message"]
     },
     "Transaction": {
       "type": "object",
@@ -1857,18 +1706,11 @@
           "pattern": "^[0-9]+\\.[0-9]+$"
         }
       },
-      "required": [
-        "transactionId"
-      ]
+      "required": ["transactionId"]
     },
     "TxStatus": {
       "type": "string",
-      "enum": [
-        "Unknown",
-        "Pending",
-        "Committed",
-        "Invalid"
-      ],
+      "enum": ["Unknown", "Pending", "Committed", "Invalid"],
       "x-ms-enum": {
         "name": "TxStatus",
         "modelAsString": true
@@ -1881,9 +1723,7 @@
           "$ref": "#/definitions/Json"
         }
       },
-      "required": [
-        "userData"
-      ]
+      "required": ["userData"]
     },
     "UserIdToPem": {
       "type": "object",
@@ -1892,16 +1732,11 @@
           "$ref": "#/definitions/Pem"
         }
       },
-      "required": [
-        "Id"
-      ]
+      "required": ["Id"]
     },
     "reconfigurationType": {
       "type": "string",
-      "enum": [
-        "OneTransaction",
-        "TwoTransaction"
-      ],
+      "enum": ["OneTransaction", "TwoTransaction"],
       "x-ms-enum": {
         "name": "reconfigurationType",
         "modelAsString": true

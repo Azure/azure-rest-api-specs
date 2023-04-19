@@ -1,11 +1,11 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi3";
+import "@typespec/rest";
+import "@typespec/openapi3";
 
-using Cadl.Http;
+using TypeSpec.Http;
 
 @service({
     title: "CCF governance",
-    version: "2023-02-20"
+    version: "2023-04-19"
 })
 namespace Governance;
 
@@ -290,7 +290,7 @@ model Ballot {
     ballot: string;
 }
 
-model GetRecoveryShare {
+model GetEncryptedRecoveryShare {
     encryptedShare: string;
 }
 
@@ -551,17 +551,16 @@ namespace proposal {
 };
 
 @route("/gov/recovery_share")
-namespace recover {
-    @summary("A member's recovery share")
-    @get op getRecoveryShare(): {
-        @body recoveryShare: GetRecoveryShare;
-    };
+@summary("Provide a recovery share for the purpose of completing a service recovery")
+@post op postRecoveryShare(@body recoveryShare: SubmitRecoveryShareIn): {
+    @body recoveryShare: SubmitRecoveryShareOut;
+};
 
-    @summary("Provide a recovery share for the purpose of completing a service recovery")
-    @post op postRecoveryShare(@body recoveryShare: SubmitRecoveryShareIn): {
-        @body recoveryShare: SubmitRecoveryShareOut;
-    };
-}
+@route("/gov/encrypted_recovery_share/{member_id}")
+@summary("A member's encrypted recovery share")
+@get op getEncryptedRecoveryShare(@path member_id: string): {
+    @body recoveryShare: GetEncryptedRecoveryShare;
+};
 
 @route("/gov/tx")
 @doc("Possible statuses returned are Unknown, Pending, Committed or Invalid.")
