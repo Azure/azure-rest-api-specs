@@ -31,7 +31,7 @@ interface ImageOperations {
   @doc("A sync API for harmful content analysis for image. Currently we support four categories: Hate, SelfHarm, Sexual, Violence.")
   @route("/image:analyze")
   @post
-  analyze is Azure.Core.RpcOperation<
+  analyzeImage is Azure.Core.RpcOperation<
     {
       @doc("The analysis request of the image.")
       @body
