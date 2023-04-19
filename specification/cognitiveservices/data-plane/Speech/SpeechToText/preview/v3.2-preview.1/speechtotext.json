@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Speech Services API v3.2-preview.1",
-    "description": "Speech Services API v3.2-preview.1.",
+    "title": "Speech Services API v3.2-preview1",
+    "description": "Speech Services API v3.2-preview1.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "v3.2-preview.1"
+    "version": "v3.2-preview1"
   },
   "paths": {
     "/datasets/locales": {
@@ -2535,6 +2535,13 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Operation"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait for a non terminal operation to complete.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "default": {
@@ -6916,7 +6923,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.2-preview.1",
+    "hostTemplate": "{endpoint}/speechtotext/v3.2-preview1",
     "useSchemePrefix": false,
     "parameters": [
       {
