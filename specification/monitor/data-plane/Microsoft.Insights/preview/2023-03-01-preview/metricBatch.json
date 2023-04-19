@@ -11,7 +11,7 @@
     "parameters": [
       {
         "name": "baseUrl",
-        "description": "The regional endpoint to use, for example https://eastus.metrics.monitor.azure.com. The region should match the region of the requested resources.",
+        "description": "The regional endpoint to use, for example https://eastus.metrics.monitor.azure.com. The region should match the region of the requested resources. For global resources, the region should be 'global'.",
         "required": true,
         "type": "string",
         "in": "path",
@@ -129,7 +129,7 @@
       "type": "string",
       "format": "duration",
       "default": "PT1M",
-      "description": "The interval (i.e. timegrain) of the query.",
+      "description": "The interval (i.e. timegrain) of the query.\n*Examples: PT15M, PT1H, P1D*",
       "x-ms-parameter-location": "method"
     },
     "MetricNamespaceParameter": {
@@ -157,7 +157,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The list of aggregation types (comma separated) to retrieve.",
+      "description": "The list of aggregation types (comma separated) to retrieve.\n*Examples: average, minimum, maximum*",
       "x-ms-parameter-location": "method"
     },
     "TopParameter": {
@@ -166,7 +166,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "description": "The maximum number of records to retrieve.\nValid only if filter is specified.\nDefaults to 10.",
+      "description": "The maximum number of records to retrieve per resource ID in the request.\nValid only if filter is specified.\nDefaults to 10.",
       "x-ms-parameter-location": "method"
     },
     "OrderByParameter": {
@@ -174,7 +174,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
+      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\n*Examples: sum asc*",
       "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
