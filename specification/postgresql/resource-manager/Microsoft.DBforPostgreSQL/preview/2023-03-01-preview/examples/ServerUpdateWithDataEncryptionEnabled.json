@@ -26,10 +26,6 @@
           "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
           "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity"
         },
-        "storage": {
-          "storageSizeGB": 1024,
-          "autoGrow": "Disabled"
-        },
         "backup": {
           "backupRetentionDays": 20
         }
@@ -82,7 +78,9 @@
           },
           "storage": {
             "storageSizeGB": 1024,
-            "autoGrow": "Disabled"
+            "autoGrow": "Disabled",
+            "iopsTier": "P30",
+            "iops": 5000
           },
           "backup": {
             "backupRetentionDays": 20,
