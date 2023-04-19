@@ -420,7 +420,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionTypeGet"
+              "$ref": "#/definitions/ExtensionType"
             }
           },
           "default": {
@@ -577,70 +577,72 @@
       "type": "object",
       "properties": {
         "properties": {
-          "isSystemExtension": {
-            "type": "boolean",
-            "description": "Is this Extension Type a system extension."
-          },
-          "isManagedIdentityRequired": {
-            "type": "boolean",
-            "description": "Should an identity for this cluster resource be created"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the extension type"
-          },
-          "publisher": {
-            "type": "string",
-            "description": "Name of the publisher for the Extension Type"
-          },
-          "planInfo": {
-            "description": "Plan information only for the Marketplace Extension Type.",
-            "type": "object",
-            "required": false,
-            "properties": {
-              "publisherId": {
-                "type": "string",
-                "description": "Publisher ID of the Marketplace Extension Type."
-              },
-              "planId": {
-                "type": "string",
-                "description": "Plan ID of the Marketplace Extension Type."
-              },
-              "offerId": {
-                "type": "string",
-                "description": "Offer or Product ID of the Marketplace Extension Type."
+          "type": "object",
+          "properties": {
+            "isSystemExtension": {
+              "type": "boolean",
+              "description": "Is this Extension Type a system extension."
+            },
+            "isManagedIdentityRequired": {
+              "type": "boolean",
+              "description": "Should an identity for this cluster resource be created"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the extension type"
+            },
+            "publisher": {
+              "type": "string",
+              "description": "Name of the publisher for the Extension Type"
+            },
+            "planInfo": {
+              "description": "Plan information only for the Marketplace Extension Type.",
+              "type": "object",
+              "properties": {
+                "publisherId": {
+                  "type": "string",
+                  "description": "Publisher ID of the Marketplace Extension Type."
+                },
+                "planId": {
+                  "type": "string",
+                  "description": "Plan ID of the Marketplace Extension Type."
+                },
+                "offerId": {
+                  "type": "string",
+                  "description": "Offer or Product ID of the Marketplace Extension Type."
+                }
               }
-            }
-          },
-          "supportedClusterTypes": {
-            "description": "Cluster Types supported for this Extension Type.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "supportedScopes": {
-            "description": "Supported Kubernetes Scopes for this Extension Type.",
-            "type": "object",
-            "properties": {
-              "defaultScope": {
-                "description": "The default scope of the extension type. This scope will be used if the user does not provide a scope while creating an extension.",
+            },
+            "supportedClusterTypes": {
+              "description": "Cluster Types supported for this Extension Type.",
+              "type": "array",
+              "items": {
                 "type": "string"
-              },
-              "clusterScopeSettings": {
-                "type": "object",
-                "properties": {
+              }
+            },
+            "supportedScopes": {
+              "description": "Supported Kubernetes Scopes for this Extension Type.",
+              "type": "object",
+              "properties": {
+                "defaultScope": {
+                  "description": "The default scope of the extension type. This scope will be used if the user does not provide a scope while creating an extension.",
+                  "type": "string"
+                },
+                "clusterScopeSettings": {
+                  "type": "object",
                   "properties": {
-                    "type": "object"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "string"
+                    "properties": {
+                      "type": "object"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -659,34 +661,37 @@
       "type": "object",
       "properties": {
         "properties": {
-          "version": {
-            "type": "string",
-            "description": "The version number for the extension type"
-          },
-          "unsupportedKubernetesVersions": {
-            "description": "The list of supported Kubernetes cluster versions for this extension type",
-            "type": "object",
-            "properties": {
-              "connectedCluster": {
-                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
-              },
-              "appliances": {
-                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
-              },
-              "provisionedCluster": {
-                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
-              },
-              "managedCluster": {
-                "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "The version number for the extension type"
+            },
+            "unsupportedKubernetesVersions": {
+              "description": "The list of supported Kubernetes cluster versions for this extension type",
+              "type": "object",
+              "properties": {
+                "connectedCluster": {
+                  "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+                },
+                "appliances": {
+                  "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+                },
+                "provisionedCluster": {
+                  "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+                },
+                "managedCluster": {
+                  "$ref": "#/definitions/ExtensionTypeVersionUnsupportedKubernetesMatrix"
+                }
               }
-            }
-          },
-          "supportedClusterTypes": {
-            "type": "array",
-            "description": "A list of supported cluster types for this version of the Extension Type",
-            "items": {
-              "description": "The indivual cluster type that is supported by this extension",
-              "type": "string"
+            },
+            "supportedClusterTypes": {
+              "type": "array",
+              "description": "A list of supported cluster types for this version of the Extension Type",
+              "items": {
+                "description": "The indivual cluster type that is supported by this extension",
+                "type": "string"
+              }
             }
           }
         }
@@ -746,7 +751,11 @@
           },
           "unsupportedVersions": {
             "type": "array",
-            "description": "The list of Kubernetes Versions not supported by the list of Kubernetes Cluster Distribution names in this object"
+            "description": "The list of Kubernetes Versions not supported by the list of Kubernetes Cluster Distribution names in this object",
+            "items": {
+              "type": "string",
+              "description": "A Kubernetes Version not supported by the list of Kubernetes Cluster Distribution names"
+            }
           }
         }
       }
