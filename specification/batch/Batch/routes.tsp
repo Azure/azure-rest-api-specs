@@ -8,7 +8,6 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -22,9 +21,9 @@ namespace BatchService;
 
 // Interfaces ////////////////////
 
-
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+@operationGroup
+@tag("Applications")
 interface Applications {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
@@ -41,6 +40,7 @@ API.
   List is RpcOperation<
     BatchApplicationListHeaders,
     BatchResponseHeaders & ApplicationListResult,
+    {},
     BatchError
   >;
 
@@ -53,7 +53,18 @@ available to Compute Nodes, use the Azure portal or the Azure Resource Manager
 API.
 """)
   @example("./examples/ApplicationGet.json", "Get applications")
-  Get is BatchOperations.ResourceRead<Application,standardBatchTraits>;
+  @route("/applications")
+  @get
+  Get is RpcOperation<
+    BatchClientRequestHeaders & {
+      @doc("The ID of the Application")
+      @path
+      applicationId: string;
+    },
+    BatchResponseHeaders & Application,
+    {},
+    BatchError
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
@@ -78,10 +89,11 @@ last aggregation interval is returned.
   ListUsageMetrics is RpcOperation<
     BatchApplicationListHeaders & Pool_ListUsageMetricRequestHeaders,
     BatchResponseHeaders & PoolListUsageMetricsResult,
-   BatchError
+    {},
+    BatchError
   >;
 
-   @summary("Gets lifetime summary statistics for all of the Pools in the specified Account.")
+  @summary("Gets lifetime summary statistics for all of the Pools in the specified Account.")
   @doc("""
 Statistics are aggregated across all Pools that have ever existed in the
 Account, from Account creation to the last update time of the statistics. The
@@ -97,7 +109,8 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
   GetAllLifetimeStatistics is RpcOperation<
     BatchClientRequestHeaders,
     BatchResponseHeaders & PoolStatistics,
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Adds a Pool to the specified Account.")
@@ -106,7 +119,6 @@ When naming Pools, avoid including sensitive information such as user names or
 secret project names. This information may appear in telemetry logs accessible
 to Microsoft Support engineers.
 """)
-  
   @example(
     "./examples/PoolAdd_CloudServiceConfiguration.json",
     "Add a CloudServiceConfiguration pool"
@@ -128,7 +140,8 @@ to Microsoft Support engineers.
     "Add a pool with mount drive specified"
   )
   @route("/pools")
-  Add is RpcOperation<BatchClientRequestHeaders & {
+  Add is RpcOperation<
+    BatchClientRequestHeaders & {
       @doc("Type of content")
       @header("content-type")
       contentType: "application/json; odata=minimalmetadata";
@@ -137,10 +150,18 @@ to Microsoft Support engineers.
       @doc("The Pool to be added.")
       pool: BatchPool;
     },
-    BatchResponseHeaders,
+    BatchResponseHeaders & {
+      @doc("A process exit code.")
+      @statusCode
+      code: "201";
+
+      @doc("The OData ID of the resource to which the request applied")
+      @header("DataServiceId")
+      DataServiceId: string;
+    },
+    {},
     BatchError
   >;
-
 
   @summary("Lists all of the Pools in the specified Account.")
   @doc("Lists all of the Pools in the specified Account.")
@@ -165,7 +186,8 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchPoolListResult,
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Deletes a Pool from the specified Account.")
@@ -189,9 +211,9 @@ error code PoolBeingDeleted.
   Delete is RpcOperation<
     BatchClientRequestHeaders & BatchPoolHeaders,
     DeleteResponseHeaders,
-   BatchError
+    {},
+    BatchError
   >;
-
 
   @doc("Gets basic properties of a Pool.")
   @example("./examples/PoolExists.json", "Check Pool Exists")
@@ -200,10 +222,9 @@ error code PoolBeingDeleted.
   Exists is RpcOperation<
     BatchClientRequestHeaders & BatchPoolHeaders,
     PoolDoesntExistResponseHeaders | PoolDoesExistResponseHeaders,
-   BatchError
+    {},
+    BatchError
   >;
-
-  
 
   @doc("Gets information about the specified Pool.")
   @example("./examples/PoolGet_Basic.json", "Pool get")
@@ -211,10 +232,23 @@ error code PoolBeingDeleted.
     "./examples/PoolGet_VirtualMachineConfigurationWithExtensions.json",
     "Get a VirtualMachineConfiguration pool with extensions"
   )
-  Get is BatchOperations.ResourceRead<BatchPool,
-  BatchRequestSelectExpandQueryParametersTraits &
-  BatchRequestMatchModifiedHeadersTraits &
-  BatchResponseHeadersTrait>;
+  @route("/pools/{poolId}")
+  @get
+  Get is RpcOperation<
+    BatchClientRequestHeaders &
+      BatchPoolHeaders & {
+        @doc("An OData $select clause.")
+        @query
+        $select?: string;
+
+        @doc("An OData $expand clause.")
+        @query
+        $expand?: string;
+      },
+    BatchResponseHeaders & BatchPool,
+    {},
+    BatchError
+  >;
 
   @summary("Updates the properties of the specified Pool.")
   @doc("""
@@ -245,7 +279,8 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @header("DataServiceId")
       DataServiceId: string;
     },
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Disables automatic scaling for a Pool.")
@@ -268,7 +303,8 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @header("DataServiceId")
       DataServiceId: string;
     },
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Enables automatic scaling for a Pool.")
@@ -303,7 +339,8 @@ more than once every 30 seconds.
       @header("DataServiceId")
       DataServiceId: string;
     },
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Gets the result of evaluating an automatic scaling formula on the Pool.")
@@ -339,7 +376,8 @@ scaling enabled in order to evaluate a formula.
         @header("DataServiceId")
         DataServiceId: string;
       },
-      BatchError
+    {},
+    BatchError
   >;
 
   @summary("Changes the number of Compute Nodes that are assigned to a Pool.")
@@ -375,7 +413,8 @@ Nodes, use the Pool remove Compute Nodes API instead.
       @header("DataServiceId")
       DataServiceId: string;
     },
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Stops an ongoing resize operation on the Pool.")
@@ -394,7 +433,8 @@ be used to halt the initial sizing of the Pool when it is created.
   StopResize is RpcOperation<
     BatchClientRequestHeaders & BatchPoolHeaders,
     PoolStopResizeResponseHeaders,
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Updates the properties of the specified Pool.")
@@ -421,7 +461,8 @@ with this request, then the Batch service will remove the existing StartTask.
       poolUpdatePropertiesParameter: BatchPool;
     },
     PoolUpdatePropertiesResponseHeaders,
-   BatchError
+    {},
+    BatchError
   >;
 
   @summary("Removes Compute Nodes from the specified Pool.")
@@ -445,10 +486,10 @@ Each request may remove up to 100 nodes.
         parameters: NodeRemoveParameters;
       },
     PoolRemoveNodesResponseHeaders,
-   BatchError
+    {},
+    BatchError
   >;
 }
-
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
@@ -472,7 +513,8 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
     },
     BatchResponseHeaders & AccountListSupportedImagesResult,
-   BatchError
+    {},
+    BatchError
   >;
 
   @doc("""
@@ -493,7 +535,8 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $filter?: string;
     },
     BatchClientResponseHeaders & PoolNodeCountsListResult,
-   BatchError
+    {},
+    BatchError
   >;
 }
 
@@ -517,6 +560,7 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
   GetAllLifetimeStatistics is RpcOperation<
     BatchClientRequestHeaders,
     BatchResponseHeaders & JobStatistics,
+    {},
     BatchError
   >;
 
@@ -542,16 +586,34 @@ that the Job is being deleted.
         jobId: string;
       },
     DeleteResponseHeaders,
+    {},
     BatchError
   >;
 
   @summary("Gets information about the specified Job.")
   @doc("Gets information about the specified Job.")
   @example("./examples/JobGet.json", "Job get")
-  Get is BatchOperations.ResourceRead<BatchJob,
-  BatchRequestSelectExpandQueryParametersTraits &
-  BatchRequestMatchModifiedHeadersTraits &
-  BatchResponseHeadersTrait>;
+  @route("/jobs/{jobId}")
+  @get
+  Get is RpcOperation<
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job.")
+        @path
+        jobId: string;
+
+        @doc("An OData $select clause.")
+        @query
+        $select?: string;
+
+        @doc("An OData $expand clause.")
+        @query
+        $expand?: string;
+      },
+    BatchResponseHeaders & BatchJob,
+    {},
+    BatchError
+  >;
 
   @summary("Updates the properties of the specified Job.")
   @doc("""
@@ -586,6 +648,7 @@ element, then the Job keeps the existing constraints.
       @header("DataServiceId")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -622,6 +685,7 @@ with this request, then the Batch service will remove the existing constraints.
       @header("DataServiceId")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -663,6 +727,7 @@ the request fails with status code 409.
       @header("DataServiceId")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -694,6 +759,7 @@ than 180 days ago, those Tasks will not run.
       @header("DataServiceId")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -729,6 +795,7 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
       @header("DataServiceId")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -767,6 +834,7 @@ engineers.
       @header("DataServiceId")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -793,6 +861,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchJobListResult,
+    {},
     BatchError
   >;
 
@@ -826,6 +895,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchJobListResult,
+    {},
     BatchError
   >;
 
@@ -865,6 +935,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $select?: string;
     },
     BatchResponseHeaders & BatchJobListPreparationAndReleaseTaskStatusResult,
+    {},
     BatchError
   >;
 
@@ -885,12 +956,10 @@ up to date. If you need exact task counts, use a list query.
       jobId: string;
     },
     BatchClientResponseHeaders & TaskCountsResult,
+    {},
     BatchError
   >;
 }
-
-
-
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @operationGroup
@@ -920,6 +989,7 @@ interface Certificates {
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -942,6 +1012,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $select?: string;
     },
     BatchResponseHeaders & CertificateListResult,
+    {},
     BatchError
   >;
 
@@ -980,6 +1051,7 @@ then you can try again to delete the Certificate.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1013,6 +1085,7 @@ active if you decide that you want to continue using the Certificate.
       @statusCode
       code: "202";
     },
+    {},
     BatchError
   >;
 
@@ -1035,6 +1108,7 @@ active if you decide that you want to continue using the Certificate.
       $select?: string;
     },
     BatchResponseHeaders & Certificate,
+    {},
     BatchError
   >;
 }
@@ -1064,6 +1138,7 @@ then the directory must be empty or deletion will fail.
       @statusCode
       code: "200";
     },
+    {},
     BatchError
   >;
 
@@ -1079,18 +1154,20 @@ The byte range to be retrieved. The default is to retrieve the entire file. The
 format is bytes=startRange-endRange.
 """)
         @header
-        "ocp-range"?: string;
+        `ocp-range`?: string;
       },
     BatchResponseHeaders &
       FileResponse & {
         @doc("Type of content")
-        @header("content-type") contentType: "application/octet-stream";
+        @header("content-type")
+        contentType: "application/octet-stream";
 
         @body
         @doc("A response containing the file content.")
         file: bytes;
       },
-      BatchError
+    {},
+    BatchError
   >;
 
   @doc("Gets the properties of the specified Task file.")
@@ -1103,6 +1180,7 @@ format is bytes=startRange-endRange.
   GetPropertiesFromTask is RpcOperation<
     BatchJobFileClientRequestHeaders & BatchModifiedSinceHeaders,
     BatchResponseHeaders & FileResponse,
+    {},
     BatchError
   >;
 
@@ -1127,6 +1205,7 @@ then the directory must be empty or deletion will fail.
       @statusCode
       code: "200";
     },
+    {},
     BatchError
   >;
 
@@ -1142,17 +1221,16 @@ The byte range to be retrieved. The default is to retrieve the entire file. The
 format is bytes=startRange-endRange.
 """)
         @header
-        "ocp-range"?: string;
+        `ocp-range`?: string;
       },
     BatchResponseHeaders &
       FileResponse & {
-        
-
         @body
         @doc("A response containing the file content.")
         file: bytes;
       },
-      BatchError
+    {},
+    BatchError
   >;
 
   @doc("Gets the properties of the specified Compute Node file.")
@@ -1165,6 +1243,7 @@ format is bytes=startRange-endRange.
   GetPropertiesFromComputeNode is RpcOperation<
     BatchPoolFileClientRequestHeaders & BatchModifiedSinceHeaders,
     BatchResponseHeaders & FileResponse,
+    {},
     BatchError
   >;
 
@@ -1198,6 +1277,7 @@ combination with the filter parameter to list specific type of files.
       recursive?: boolean;
     },
     BatchResponseHeaders & NodeFileListResult,
+    {},
     BatchError
   >;
 
@@ -1228,6 +1308,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       recursive?: boolean;
     },
     BatchResponseHeaders & NodeFileListResult,
+    {},
     BatchError
   >;
 }
@@ -1257,6 +1338,7 @@ interface JobSchedule {
       @statusCode
       code: "404";
     },
+    {},
     BatchError
   >;
 
@@ -1279,15 +1361,33 @@ though they are still counted towards Account lifetime statistics.
         jobScheduleId: string;
       },
     DeleteResponseHeaders,
+    {},
     BatchError
   >;
 
   @doc("Gets information about the specified Job Schedule.")
   @example("./examples/JobScheduleGet.json", "JobSchedule get")
-  Get is BatchOperations.ResourceRead<BatchJobSchedule,
-  BatchRequestSelectExpandQueryParametersTraits &
-  BatchRequestMatchModifiedHeadersTraits &
-  BatchResponseHeadersTrait>;
+  @route("/jobschedules/{jobScheduleId}")
+  @get
+  Get is RpcOperation<
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job Schedule to get.")
+        @path
+        jobScheduleId: string;
+
+        @doc("An OData $select clause.")
+        @query
+        $select?: string;
+
+        @doc("An OData $expand clause.")
+        @query
+        $expand?: string;
+      },
+    BatchResponseHeaders & BatchJobSchedule,
+    {},
+    BatchError
+  >;
 
   @summary("Updates the properties of the specified Job Schedule.")
   @doc("""
@@ -1324,6 +1424,7 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1362,6 +1463,7 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1386,6 +1488,7 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1410,6 +1513,7 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1434,6 +1538,7 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1465,6 +1570,7 @@ running Jobs are unaffected.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1491,6 +1597,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchJobScheduleListResult,
+    {},
     BatchError
   >;
 }
@@ -1543,6 +1650,7 @@ the Batch service and left in whatever state it was in at that time.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1577,6 +1685,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $expand?: string;
     },
     BatchResponseHeaders & BatchTaskListResult,
+    {},
     BatchError
   >;
 
@@ -1622,6 +1731,7 @@ service and left in whatever state it was in at that time.
       taskCollection: BatchTaskCollection;
     },
     BatchClientResponseHeaders & TaskAddCollectionResult,
+    {},
     BatchError
   >;
 
@@ -1652,6 +1762,7 @@ background.
       @statusCode
       code: "200";
     },
+    {},
     BatchError
   >;
 
@@ -1689,6 +1800,7 @@ information about subtasks.
         @doc("The OData ID of the resource to which the request applied.")
         DataServiceId: string;
       },
+    {},
     BatchError
   >;
 
@@ -1724,6 +1836,7 @@ information about subtasks.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1750,6 +1863,7 @@ Task.
       $select?: string;
     },
     BatchResponseHeaders & BatchTaskListSubtasksResult,
+    {},
     BatchError
   >;
 
@@ -1778,6 +1892,7 @@ primary task; subtasks are then terminated asynchronously in the background.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1813,6 +1928,7 @@ will fail if the Job has completed (or is terminating or deleting).
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 }
@@ -1856,6 +1972,7 @@ running state.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1886,6 +2003,7 @@ running state.
       @statusCode
       code: "200";
     },
+    {},
     BatchError
   >;
 
@@ -1933,6 +2051,7 @@ Account on a Compute Node only when it is in the idle or running state.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -1956,6 +2075,7 @@ Account on a Compute Node only when it is in the idle or running state.
       $select?: string;
     },
     BatchResponseHeaders & ComputeNode,
+    {},
     BatchError
   >;
 
@@ -1991,6 +2111,7 @@ Account on a Compute Node only when it is in the idle or running state.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -2030,6 +2151,7 @@ cloud service configuration property.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -2064,6 +2186,7 @@ scheduling state is enabled.
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -2094,6 +2217,7 @@ state is disabled
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
     },
+    {},
     BatchError
   >;
 
@@ -2122,6 +2246,7 @@ API.
       nodeId: string;
     },
     BatchResponseHeaders & ComputeNodeGetRemoteLoginSettingsResult,
+    {},
     BatchError
   >;
 
@@ -2152,12 +2277,11 @@ Protocol file.
       nodeId: string;
     },
     BatchResponseHeaders & {
-      
-
       @body
       @doc("A response containing the file content.")
       file: bytes;
     },
+    {},
     BatchError
   >;
 
@@ -2199,6 +2323,7 @@ Protocol file.
       uploadBatchServiceLogsConfiguration: UploadBatchServiceLogsConfiguration;
     },
     BatchClientResponseHeaders & UploadBatchServiceLogsResult,
+    {},
     BatchError
   >;
 
@@ -2225,6 +2350,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       $select?: string;
     },
     BatchResponseHeaders & ComputeNodeListResult,
+    {},
     BatchError
   >;
 }
@@ -2263,6 +2389,7 @@ about.
       $select?: string;
     },
     BatchResponseHeaders & NodeVMExtension,
+    {},
     BatchError
   >;
 
@@ -2289,6 +2416,7 @@ about.
       $select?: string;
     },
     BatchResponseHeaders & NodeVMExtensionList,
+    {},
     BatchError
   >;
 }
@@ -2349,186 +2477,175 @@ model FileResponse {
   @header
   @doc("The file creation time.")
   @format("date-time-rfc1123")
-  "ocp-creation-time"?: string;
+  `ocp-creation-time`?: string;
 
   @header
   @doc("Whether the object represents a directory.")
-  "ocp-batch-file-isdirectory": boolean;
+  `ocp-batch-file-isdirectory`: boolean;
 
   @header
   @doc("The URL of the file.")
-  "ocp-batch-file-url": string;
+  `ocp-batch-file-url`: string;
 
   @header
   @doc("The file mode attribute in octal format.")
-  "ocp-batch-file-mode": string;
+  `ocp-batch-file-mode`: string;
 
   @header
   @doc("The length of the file.")
-  "Content-Length": int64;
+  `Content-Length`: int64;
 }
-
-
 
 ///////////////////////////////// Traits  ////////////////////////
 
-
-
-alias BatchRequestQueryParametersTrait =  QueryParametersTrait<{
+alias BatchRequestQueryParametersTrait = QueryParametersTrait<{
   @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 applications can be returned.
 """)
-@query
-timeout?: int32 = 30;
+  @query
+  timeout?: int32 = 30;
 }>;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-alias BatchRequestSelectExpandQueryParametersTraits =  QueryParametersTrait<{
+alias BatchRequestSelectExpandQueryParametersTraits = QueryParametersTrait<{
   @doc("""
 The maximum number of items to return in the response. A maximum of 1000
 applications can be returned.
 """)
-@query
-timeout?: int32 = 30;
+  @query
+  timeout?: int32 = 30;
 
-@doc("An OData $select clause.")
-@query
-$select?: string;
+  @doc("An OData $select clause.")
+  @query
+  $select?: string;
 
-@doc("An OData $expand clause.")
-@query
-$expand?: string;
+  @doc("An OData $expand clause.")
+  @query
+  $expand?: string;
 }>;
-
-
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 alias BatchRequestHeadersTrait = RequestHeadersTrait<{
-   @doc("""
+  @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
-@header
-@format("uuid")
-"client-request-id"?: string;
+  @header
+  @format("uuid")
+  `client-request-id`?: string;
 
-@doc("Whether the server should return the client-request-id in the response.")
-@header
-"return-client-request-id"?: boolean = false;
+  @doc("Whether the server should return the client-request-id in the response.")
+  @header
+  `return-client-request-id`?: boolean = false;
 
-@doc("""
+  @doc("""
 The time the request was issued. Client libraries typically set this to the
 current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
-@header
-@format("date-time-rfc1123")
-"ocp-date"?: string;
+  @header
+  @format("date-time-rfc1123")
+  `ocp-date`?: string;
 }>;
-
-
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 alias BatchRequestMatchModifiedHeadersTraits = RequestHeadersTrait<{
-   @doc("""
+  @doc("""
 The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
-@header
-@format("uuid")
-"client-request-id"?: string;
+  @header
+  @format("uuid")
+  `client-request-id`?: string;
 
-@doc("Whether the server should return the client-request-id in the response.")
-@header
-"return-client-request-id"?: boolean = false;
+  @doc("Whether the server should return the client-request-id in the response.")
+  @header
+  `return-client-request-id`?: boolean = false;
 
-@doc("""
+  @doc("""
 The time the request was issued. Client libraries typically set this to the
 current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
-@header
-@format("date-time-rfc1123")
-"ocp-date"?: string;
+  @header
+  @format("date-time-rfc1123")
+  `ocp-date`?: string;
 
-@doc("""
+  @doc("""
 An ETag value associated with the version of the resource known to the client.
 The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
-@header
-"If-Match"?: string;
+  @header
+  `If-Match`?: string;
 
-@doc("""
+  @doc("""
 An ETag value associated with the version of the resource known to the client.
 The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
-@header
-"If-None-Match"?: string;
+  @header
+  `If-None-Match`?: string;
 
-@doc("""
+  @doc("""
 A timestamp indicating the last modified time of the resource known to the
 client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
-@header
-@format("date-time-rfc1123")
-"If-Modified-Since"?: string;
+  @header
+  @format("date-time-rfc1123")
+  `If-Modified-Since`?: string;
 
-@doc("""
+  @doc("""
 A timestamp indicating the last modified time of the resource known to the
 client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
-@header
-@format("date-time-rfc1123")
-"If-Unmodified-Since"?: string;
+  @header
+  @format("date-time-rfc1123")
+  `If-Unmodified-Since`?: string;
 }>;
-
-
 
 alias BatchResponseHeadersTrait = ResponseHeadersTrait<{
-   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
-@header
-@format("uuid")
-"client-request-id"?: string;
+  @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
+  @header
+  @format("uuid")
+  `client-request-id`?: string;
 
-@doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
-@header
-@format("uuid")
-"request-id"?: string;
+  @doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
+  @header
+  @format("uuid")
+  `request-id`?: string;
 
+  @doc("The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.")
+  @header
+  ETag?: string;
 
- @doc("The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.")
-@header
-ETag?: string;
-
-@doc("The time at which the resource was last modified.")
-@header
-@format("date-time-rfc1123")
-"Last-Modified"?: string;
+  @doc("The time at which the resource was last modified.")
+  @header
+  @format("date-time-rfc1123")
+  `Last-Modified`?: string;
 }>;
 
-
 alias DefaultBatchTraits = NoRepeatableRequests &
-NoConditionalRequests &
-NoClientRequestId;
+  NoConditionalRequests &
+  NoClientRequestId;
 
 alias standardBatchTraits = BatchRequestQueryParametersTrait &
-BatchRequestHeadersTrait &
-BatchResponseHeadersTrait;
+  BatchRequestHeadersTrait &
+  BatchResponseHeadersTrait;
 
-alias BatchOperations = Azure.Core.ResourceOperations<DefaultBatchTraits,BatchError>;
-
-
+alias BatchOperations = Azure.Core.ResourceOperations<
+  DefaultBatchTraits,
+  BatchError
+>;
 
 /////////////////////////////////////  Headers models ///////////////////////////////////
 
 @doc("Common header values for pool requests")
 model BatchPoolHeaders extends BatchMatchHeaders {
-  @doc("The ID of the Pool to get.",)
+  @doc("The ID of the Pool to get.")
   @path
   poolId: string;
 }
@@ -2542,7 +2659,7 @@ The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
   @header
-  "If-Match"?: string;
+  `If-Match`?: string;
 
   @doc("""
 An ETag value associated with the version of the resource known to the client.
@@ -2550,7 +2667,7 @@ The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
   @header
-  "If-None-Match"?: string;
+  `If-None-Match`?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
@@ -2563,7 +2680,7 @@ been modified since the specified time.
 """)
   @header
   @format("date-time-rfc1123")
-  "If-Modified-Since"?: string;
+  `If-Modified-Since`?: string;
 
   @doc("""
 A timestamp indicating the last modified time of the resource known to the
@@ -2572,7 +2689,7 @@ not been modified since the specified time.
 """)
   @header
   @format("date-time-rfc1123")
-  "If-Unmodified-Since"?: string;
+  `If-Unmodified-Since`?: string;
 }
 
 // This is the standard set of headers that most of batch apis return
@@ -2589,7 +2706,7 @@ model BatchEtagResponseHeaders {
   @doc("The time at which the resource was last modified.")
   @header
   @format("date-time-rfc1123")
-  "Last-Modified"?: string;
+  `Last-Modified`?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
@@ -2598,12 +2715,12 @@ model BatchClientResponseHeaders {
   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
   @header
   @format("uuid")
-  "client-request-id"?: string;
+  `client-request-id`?: string;
 
   @doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
   @header
   @format("uuid")
-  "request-id"?: string;
+  `request-id`?: string;
 }
 
 @doc("A response containing headers related to the Pool, if it exists.")
@@ -2631,11 +2748,11 @@ model DeleteResponseHeaders {
 
   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
   @header
-  "client-request-id"?: string;
+  `client-request-id`?: string;
 
   @doc("A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.")
   @header
-  "request-id"?: string;
+  `request-id`?: string;
 }
 
 @doc("The parameters for a widget status request")
@@ -2655,8 +2772,8 @@ applications can be returned.
   )
   maxresults?: int32 = 1000;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-@doc("""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
+  @doc("""
 The time the request was issued. Client libraries typically set this to the
 current system clock time; set it explicitly if you are calling the REST API
 directly.
@@ -2669,7 +2786,7 @@ directly.
       postfix: "Options",
     }
   )
-  "ocp-date"?: string;
+  `ocp-date`?: string;
 }
 
 @doc("Common header parms for Pool related File operartions")
@@ -2730,7 +2847,7 @@ such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
     }
   )
   @format("uuid")
-  "client-request-id"?: string;
+  `client-request-id`?: string;
 
   @doc("Whether the server should return the client-request-id in the response.")
   @header
@@ -2740,7 +2857,7 @@ such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
       postfix: "Options",
     }
   )
-  "return-client-request-id"?: boolean = false;
+  `return-client-request-id`?: boolean = false;
 
   @doc("""
 The time the request was issued. Client libraries typically set this to the
@@ -2755,7 +2872,7 @@ directly.
     }
   )
   @format("date-time-rfc1123")
-  "ocp-date"?: string;
+  `ocp-date`?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
@@ -2767,7 +2884,7 @@ a half hours before the current time. If not specified this defaults to the
 start time of the last aggregation interval currently available.
 """)
   @query
-  starttime?: zonedDateTime;
+  starttime?: utcDateTime;
 
   @doc("""
 The latest time from which to include metrics. This must be at least two hours
@@ -2775,7 +2892,7 @@ before the current time. If not specified this defaults to the end time of the
 last aggregation interval currently available.
 """)
   @query
-  endtime?: zonedDateTime;
+  endtime?: utcDateTime;
 
   @doc("""
 An OData $filter clause. For more information on constructing this filter, see

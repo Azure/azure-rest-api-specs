@@ -153,30 +153,57 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/BatchClientRequestHeaders.timeOut"
+          },
+          {
+            "$ref": "#/parameters/BatchClientRequestHeaders.client-request-id"
+          },
+          {
+            "$ref": "#/parameters/BatchClientRequestHeaders.return-client-request-id"
+          },
+          {
+            "$ref": "#/parameters/BatchClientRequestHeaders.ocp-date"
+          },
+          {
             "name": "applicationId",
             "in": "path",
             "required": true,
-            "description": "A string that uniquely identifies the application within the Account.",
+            "description": "The ID of the Application",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "etag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
+                "type": "string"
+              },
+              "last-modified": {
+                "description": "The time at which the resource was last modified.",
+                "format": "date-time-rfc1123",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Application"
             }
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/BatchError"
             }
           }
         },
@@ -4049,7 +4076,7 @@
                 "type": "string"
               },
               "DataServiceId": {
-                "description": "The OData ID of the resource to which the request applied.",
+                "description": "The OData ID of the resource to which the request applied",
                 "type": "string"
               }
             }
@@ -6769,47 +6796,64 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/BatchApplicationListHeaders.maxresults"
+          },
+          {
+            "$ref": "#/parameters/BatchApplicationListHeaders.ocp-date"
+          },
+          {
+            "$ref": "#/parameters/BatchClientRequestHeaders.timeOut"
+          },
+          {
+            "$ref": "#/parameters/BatchClientRequestHeaders.client-request-id"
+          },
+          {
+            "$ref": "#/parameters/BatchClientRequestHeaders.return-client-request-id"
+          },
+          {
+            "$ref": "#/parameters/Pool_ListUsageMetricRequestHeaders.starttime"
+          },
+          {
+            "$ref": "#/parameters/Pool_ListUsageMetricRequestHeaders.endtime"
+          },
+          {
+            "$ref": "#/parameters/Pool_ListUsageMetricRequestHeaders.%24filter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/PoolUsageMetrics"
-                  },
-                  "x-ms-identifiers": [],
-                  "x-typespec-name": "PoolUsageMetrics[]",
-                  "description": "The PoolUsageMetrics items on this page"
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "Rest.ResourceLocation"
-                }
-              },
-              "description": "Paged collection of PoolUsageMetrics items",
-              "required": [
-                "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<PoolUsageMetrics, Azure.Core.(anonymous model)>"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
             "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
+                "format": "uuid",
+                "type": "string"
+              },
+              "etag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
+                "type": "string"
+              },
+              "last-modified": {
+                "description": "The time at which the resource was last modified.",
+                "format": "date-time-rfc1123",
                 "type": "string"
               }
             },
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/PoolListUsageMetricsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
             }
           }
         },
@@ -7213,72 +7257,6 @@
       },
       "description": "Specifies the parameters for the auto user that runs a Task on the Batch\nservice."
     },
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "description": "The error object.",
-      "required": [
-        "code",
-        "message",
-        "details"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "description": "A response containing error details.",
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
-    },
     "AzureBlobFileSystemConfiguration": {
       "type": "object",
       "properties": {
@@ -7405,7 +7383,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID is case-preserving and case-insensitive (that is, you may not have two\nIDs within an Account that differ only by case)."
+          "description": "The ID is case-preserving and case-insensitive (that is, you may not have two\nIDs within an Account that differ only by case).",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -7559,7 +7538,10 @@
           "readOnly": true
         }
       },
-      "description": "An Azure Batch Job."
+      "description": "An Azure Batch Job.",
+      "required": [
+        "id"
+      ]
     },
     "BatchJobDisableParameters": {
       "type": "object",
@@ -7618,6 +7600,7 @@
           "type": "string",
           "description": "A string that uniquely identifies the schedule within the Account.",
           "x-ms-mutability": [
+            "read",
             "create"
           ]
         },
@@ -7700,7 +7683,10 @@
           "readOnly": true
         }
       },
-      "description": "A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a\nspecification used to create each Job."
+      "description": "A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a\nspecification used to create each Job.",
+      "required": [
+        "id"
+      ]
     },
     "BatchJobScheduleListResult": {
       "type": "object",
@@ -7756,10 +7742,6 @@
     "BatchJobUpdate": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID is case-preserving and case-insensitive (that is, you may not have two\nIDs within an Account that differ only by case)."
-        },
         "priority": {
           "type": "integer",
           "format": "int32",
@@ -8069,7 +8051,10 @@
           "readOnly": true
         }
       },
-      "description": "A Pool in the Azure Batch service."
+      "description": "A Pool in the Azure Batch service.",
+      "required": [
+        "id"
+      ]
     },
     "BatchPoolEnableAutoScaleParameters": {
       "type": "object",
@@ -12461,26 +12446,6 @@
         "totalCoreHours"
       ]
     },
-    "Pool_ListUsageMetricRequestHeaders": {
-      "type": "object",
-      "properties": {
-        "starttime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The earliest time from which to include metrics. This must be at least two and\na half hours before the current time. If not specified this defaults to the\nstart time of the last aggregation interval currently available."
-        },
-        "endtime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The latest time from which to include metrics. This must be at least two hours\nbefore the current time. If not specified this defaults to the end time of the\nlast aggregation interval currently available."
-        },
-        "$filter": {
-          "type": "string",
-          "description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics."
-        }
-      },
-      "description": "The parameters for a widget status request"
-    },
     "PublicIPAddressConfiguration": {
       "type": "object",
       "properties": {
@@ -13821,13 +13786,7 @@
       ],
       "x-ms-enum": {
         "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_04_01",
-            "value": "2023-04-01.17.0"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "VirtualMachineConfiguration": {
@@ -14160,6 +14119,32 @@
       "required": true,
       "description": "The ID of the Pool to get.",
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Pool_ListUsageMetricRequestHeaders.$filter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Pool_ListUsageMetricRequestHeaders.endtime": {
+      "name": "endtime",
+      "in": "query",
+      "required": false,
+      "description": "The latest time from which to include metrics. This must be at least two hours\nbefore the current time. If not specified this defaults to the end time of the\nlast aggregation interval currently available.",
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "Pool_ListUsageMetricRequestHeaders.starttime": {
+      "name": "starttime",
+      "in": "query",
+      "required": false,
+      "description": "The earliest time from which to include metrics. This must be at least two and\na half hours before the current time. If not specified this defaults to the\nstart time of the last aggregation interval currently available.",
+      "type": "string",
+      "format": "date-time",
       "x-ms-parameter-location": "method"
     }
   }
