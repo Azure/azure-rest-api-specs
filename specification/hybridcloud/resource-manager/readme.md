@@ -38,7 +38,13 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 input-file:
   - Microsoft.HybridCloud/preview/2023-01-01-preview/hybridCloud.json
 ```
-
+### Suppression
+``` yaml
+directive:
+  - suppress: LROPostFinalStateViaProperty
+    from: hybridCloud.json
+    reason: This LRO error is still under development.
+```
 ---
 
 # Code Generation
