@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "communicationservicesmms",
+    "title": "Azure Communication MMS Service",
     "description": "Azure Communication Mms Service",
     "version": "2023-05-14-privatepreview"
   },
@@ -64,7 +64,7 @@
       "type": "object",
       "properties": {
         "from": {
-          "description": "The from identifier that is owned by the authenticated account. Typically in E.164 phone number format or shortcode.",
+          "description": "The from identifier that is owned by the authenticated account. Typically in E.164 phone number format.",
           "minLength": 1,
           "type": "string"
         },
@@ -117,7 +117,7 @@
       "type": "object",
       "properties": {
         "mimeType": {
-          "description": "MIME type of attachment. See https://en.wikipedia.org/wiki/Media_type\r\n            \r\nThe following MIME types are supported\r\n- audio/wav\r\n- audio/x-wav\r\n- audio/ac3\r\n- audio/amr\r\n- image/png\r\n- image/jpeg\r\n- image/gif\r\n- image/bmp\r\n- video/mp4\r\n- video/x-msvideo\r\n- text/plain(Unlike other media types, the maximum .txt file size supported is 64KB per attachment.)",
+          "description": "MIME type of attachment.",
           "minLength": 1,
           "type": "string",
           "example": "image/png"
@@ -189,7 +189,7 @@
     "parameters": [
       {
         "name": "endpoint",
-        "description": "The connection string communication resource, for example https://my-resource.communication.azure.com",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
         "required": true,
         "type": "string",
         "format" : "url",
