@@ -35,12 +35,19 @@ model Frontend is TrackedResource<FrontendProperties>{
 
 @doc("Frontend Properties.")
 model FrontendProperties {
+<<<<<<< Updated upstream
   @doc("Frontend Mode (Optional).")
   mode?: FrontendMode;
   @doc("Frontend IP Address Version (Optional).")
   ipAddressVersion?: FrontendIPAddressVersion;
   @doc("Frontend Public IP Address (Optional).")
   publicIPAddress?: FrontendPropertiesIPAddress;
+=======
+  @visibility("read")
+  @doc("The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.")
+  fqdn : string;
+
+>>>>>>> Stashed changes
   @visibility("read")
   @doc("Provisioning State of Traffic Controller Frontend Resource")
   provisioningState?: ProvisioningState;
@@ -147,7 +154,11 @@ interface FrontendsInterface extends ResourceInstanceOperations<Frontend, Fronte
 }
 
 @armResourceOperations
+<<<<<<< Updated upstream
 interface TrafficControllerInterface extends ResourceInstanceOperations<TrafficController, TrafficControllerProperties>{
+=======
+interface TrafficControllerInterface extends TrackedResourceOperations<TrafficController, TrafficControllerProperties>{
+>>>>>>> Stashed changes
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
