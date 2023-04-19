@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "Marketplace Solution Builder",
     "version": "2023-03-01-preview"
@@ -19,25 +19,17 @@
         },
         "parameters": [
           {
+            "type": "string",
             "name": "ApiVersion",
             "in": "query",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string",
-              "default": "2023-03-01-preview"
-            }
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserSolutions"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/UserSolutions"
             }
           }
         }
@@ -55,35 +47,26 @@
         },
         "parameters": [
           {
+            "type": "string",
             "name": "ApiVersion",
             "in": "query",
+            "required": true
+          },
+          {
+            "name": "request",
+            "in": "body",
             "required": true,
-            "style": "form",
             "schema": {
-              "type": "string",
-              "default": "2023-03-01-preview"
-            }
+              "$ref": "#/definitions/CreateUserSolutionRequest"
+            },
+            "x-nullable": false
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserSolutionRequest"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Solution"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/Solution"
             }
           }
         }
@@ -103,23 +86,16 @@
         },
         "parameters": [
           {
+            "type": "string",
             "name": "id",
             "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
+            "type": "string",
             "name": "ApiVersion",
             "in": "query",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string",
-              "default": "2023-03-01-preview"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -141,35 +117,27 @@
         },
         "parameters": [
           {
+            "type": "string",
             "name": "id",
             "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
+            "type": "string",
             "name": "ApiVersion",
             "in": "query",
+            "required": true
+          },
+          {
+            "name": "request",
+            "in": "body",
             "required": true,
-            "style": "form",
             "schema": {
-              "type": "string",
-              "default": "2023-03-01-preview"
-            }
+              "$ref": "#/definitions/RenameUserSolutionRequest"
+            },
+            "x-nullable": false
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RenameUserSolutionRequest"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "Success"
@@ -189,23 +157,16 @@
         },
         "parameters": [
           {
+            "type": "string",
             "name": "id",
             "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
+            "type": "string",
             "name": "ApiVersion",
             "in": "query",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string",
-              "default": "2023-03-01-preview"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -229,32 +190,22 @@
         },
         "parameters": [
           {
+            "type": "string",
             "name": "id",
             "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
+            "type": "string",
             "name": "uniqueProductId",
             "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
+            "type": "string",
             "name": "ApiVersion",
             "in": "query",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string",
-              "default": "2023-03-01-preview"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -276,32 +227,22 @@
         },
         "parameters": [
           {
+            "type": "string",
             "name": "id",
             "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
+            "type": "string",
             "name": "uniqueProductId",
             "in": "path",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string"
-            }
+            "required": true
           },
           {
+            "type": "string",
             "name": "ApiVersion",
             "in": "query",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string",
-              "default": "2023-03-01-preview"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -312,156 +253,133 @@
       }
     }
   },
-  "components": {
-    "schemas": {
-      "CreateUserSolutionRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "productIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
+  "definitions": {
+    "CreateUserSolutionRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         },
-        "additionalProperties": false
+        "productIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
-      "ErrorDetails": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "message": {
-            "type": "string",
-            "nullable": true
-          },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ErrorDetails"
-            },
-            "nullable": true
-          }
+      "additionalProperties": false
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
         },
-        "additionalProperties": false
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
       },
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "$ref": "#/components/schemas/ErrorDetails"
-          }
-        },
-        "additionalProperties": false
+      "additionalProperties": false
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetails"
+        }
       },
-      "Product": {
-        "type": "object",
-        "properties": {
-          "uniqueProductId": {
-            "type": "string",
-            "nullable": true
-          },
-          "displayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "summary": {
-            "type": "string",
-            "nullable": true
-          },
-          "smallIconUri": {
-            "type": "string",
-            "nullable": true
-          },
-          "publisherDisplayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "productType": {
-            "type": "string",
-            "nullable": true
-          },
-          "pricingTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "storeFronts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "ratingAverage": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
+      "additionalProperties": false
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "uniqueProductId": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "smallIconUri": {
+          "type": "string"
+        },
+        "publisherDisplayName": {
+          "type": "string"
+        },
+        "productType": {
+          "type": "string"
+        },
+        "pricingTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
-        "additionalProperties": false
+        "storeFronts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ratingAverage": {
+          "type": "number",
+          "format": "double"
+        }
       },
-      "RenameUserSolutionRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
+      "additionalProperties": false
+    },
+    "RenameUserSolutionRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
       },
-      "Solution": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "products": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Product"
-            },
-            "nullable": true
-          }
+      "additionalProperties": false
+    },
+    "Solution": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         },
-        "additionalProperties": false
+        "name": {
+          "type": "string"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
       },
-      "UserSolutions": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "solutions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Solution"
-            },
-            "nullable": true
-          }
+      "additionalProperties": false
+    },
+    "UserSolutions": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         },
-        "additionalProperties": false
-      }
+        "solutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        }
+      },
+      "additionalProperties": false
     }
   }
 }
