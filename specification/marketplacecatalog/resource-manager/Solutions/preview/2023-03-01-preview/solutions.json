@@ -126,7 +126,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
           },
           "default": {
             "x-nullable": false,
@@ -164,11 +167,11 @@
           },
           {
             "in": "body",
+            "name": "payload",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RenameUserSolutionRequest"
-            },
-            "x-nullable": false
+            }
           }
         ],
         "responses": {
@@ -419,7 +422,7 @@
     "RenameUserSolutionRequest": {
       "type": "object",
       "properties": {
-        "name": {
+        "newName": {
           "type": "string"
         }
       },
@@ -438,7 +441,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Product"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": false
