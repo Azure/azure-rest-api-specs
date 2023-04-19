@@ -4,8 +4,18 @@
     "title": "Marketplace Solution Builder",
     "version": "2023-03-01-preview"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/me/solutions": {
+    "/providers/Microsoft.Marketplace/me/solutions": {
       "get": {
         "tags": [
           "UserSolutions"
@@ -34,7 +44,7 @@
           }
         }
       },
-      "put": {
+      "post": {
         "tags": [
           "UserSolutions"
         ],
@@ -72,7 +82,7 @@
         }
       }
     },
-    "/me/solutions/{id}": {
+    "/providers/Microsoft.Marketplace/me/solutions/{id}": {
       "get": {
         "tags": [
           "UserSolutions"
@@ -176,7 +186,7 @@
         }
       }
     },
-    "/me/solutions/{id}/products/{uniqueProductId}": {
+    "/providers/Microsoft.Marketplace/me/solutions/{id}/products/{uniqueProductId}": {
       "put": {
         "tags": [
           "UserSolutions"
@@ -253,9 +263,11 @@
             "description": "No Content"
           },
           "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "x-nullable": false,
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "x-ms-error-response": true,
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -307,33 +319,6 @@
           "items": {
             "type": "string"
           }
-        }
-      },
-      "additionalProperties": false
-    },
-    "ErrorDetails": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDetails"
         }
       },
       "additionalProperties": false
