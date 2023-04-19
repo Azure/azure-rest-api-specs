@@ -4717,6 +4717,23 @@
           "$ref": "#/definitions/PrivateEndpoint",
           "description": "Gets or sets private endpoint associated with the private endpoint connection"
         },
+        "groupIds": {
+          "description": "Group Ids for the Private Endpoint",
+          "type": "array",
+          "items": {
+            "description": "GroupId for the PrivateEndpointConnection - AzureBackup, AzureBackup_secondary or AzureSiteRecovery",
+            "enum": [
+              "AzureBackup",
+              "AzureBackup_secondary",
+              "AzureSiteRecovery"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "VaultSubResourceType",
+              "modelAsString": true
+            }
+          }
+        },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "Gets or sets private link service connection state"
@@ -4759,7 +4776,7 @@
           "description": "Gets or sets description",
           "type": "string"
         },
-        "actionRequired": {
+        "actionsRequired": {
           "description": "Gets or sets actions required",
           "type": "string"
         }
