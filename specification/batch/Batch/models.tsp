@@ -534,11 +534,8 @@ model ApplicationListResult {
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
-@resource("applications")
 model Application {
   @doc("A string that uniquely identifies the application within the Account.")
-  @visibility("read")
-  @key("applicationId")
   id: string;
 
   @doc("The display name for the application.")
@@ -596,12 +593,8 @@ model PoolListUsageMetricsResult {
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
-@resource("poolusagemetrics")
 model PoolUsageMetrics {
   @doc("The ID of the Pool whose metrics are aggregated in this entry.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   poolId: string;
 
   @doc("The start time of the aggregation interval covered by this entry.")
@@ -638,13 +631,9 @@ model AccountListSupportedImagesResult {
 A reference to the Azure Virtual Machines Marketplace Image and additional
 information about the Image.
 """)
-@resource("supportedimages")
 model ImageInformation {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   @projectedName("python", "node_agent_sku_id")
   nodeAgentSKUId: string;
 
@@ -733,12 +722,8 @@ model PoolNodeCountsListResult {
 }
 
 @doc("The number of Compute Nodes in each state for a Pool.")
-@resource("nodecounts")
 model PoolNodeCounts {
   @doc("The ID of the Pool.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   poolId: string;
 
   @doc("The number of Compute Nodes in each Compute Node state.")
@@ -796,9 +781,6 @@ model NodeCounts {
 @doc("Contains utilization and resource usage statistics for the lifetime of a Pool.")
 model PoolStatistics {
   @doc("The URL for the statistics.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -901,9 +883,6 @@ the Pool.
 @doc("Resource usage statistics for a Job.")
 model JobStatistics {
   @doc("The URL of the statistics.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -3564,9 +3543,6 @@ failureInfo property.
 @doc("The Task and TaskSlot counts for a Job.")
 model TaskCountsResult {
   @doc("The Task counts for a Job.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   taskCounts: TaskCounts;
 
   @doc("The TaskSlot counts for a Job.")
@@ -3885,9 +3861,6 @@ in a user interface.
 @doc("The results and errors from an execution of a Pool autoscale formula.")
 model AutoScaleRun {
   @doc("The time at which the autoscale formula was last evaluated.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   timestamp: utcDateTime;
 
   @doc("""
@@ -5023,9 +4996,6 @@ model NodeDisableSchedulingParameters {
 @doc("The remote login settings for a Compute Node.")
 model ComputeNodeGetRemoteLoginSettingsResult {
   @doc("The IP address used for remote login to the Compute Node.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   @projectedName("python", "remote_login_ip_address")
   remoteLoginIPAddress: string;
 
@@ -5065,15 +5035,11 @@ upload all logs available after the startTime.
 }
 
 @doc("The result of uploading Batch service log files from a specific Compute Node.")
-@resource("pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
 model UploadBatchServiceLogsResult {
   @doc("""
 The virtual directory name is part of the blob name for each log file uploaded,
 and it is built based poolId, nodeId and a unique identifier.
 """)
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   virtualDirectoryName: string;
 
   @doc("The number of log files which will be uploaded.")
