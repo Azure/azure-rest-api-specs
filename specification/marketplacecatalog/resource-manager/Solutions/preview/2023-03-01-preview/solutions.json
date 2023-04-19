@@ -20,7 +20,7 @@
         "parameters": [
           {
             "type": "string",
-            "name": "ApiVersion",
+            "name": "api-version",
             "in": "query",
             "required": true
           }
@@ -34,7 +34,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "UserSolutions"
         ],
@@ -48,7 +48,7 @@
         "parameters": [
           {
             "type": "string",
-            "name": "ApiVersion",
+            "name": "api-version",
             "in": "query",
             "required": true
           },
@@ -93,7 +93,7 @@
           },
           {
             "type": "string",
-            "name": "ApiVersion",
+            "name": "api-version",
             "in": "query",
             "required": true
           }
@@ -124,7 +124,7 @@
           },
           {
             "type": "string",
-            "name": "ApiVersion",
+            "name": "api-version",
             "in": "query",
             "required": true
           },
@@ -164,7 +164,7 @@
           },
           {
             "type": "string",
-            "name": "ApiVersion",
+            "name": "api-version",
             "in": "query",
             "required": true
           }
@@ -203,7 +203,7 @@
           },
           {
             "type": "string",
-            "name": "ApiVersion",
+            "name": "api-version",
             "in": "query",
             "required": true
           }
@@ -240,14 +240,56 @@
           },
           {
             "type": "string",
-            "name": "ApiVersion",
+            "name": "api-version",
             "in": "query",
             "required": true
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Product was removed from user solution successfully."
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
           }
         }
       }
