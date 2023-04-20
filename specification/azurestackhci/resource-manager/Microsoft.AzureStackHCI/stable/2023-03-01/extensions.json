@@ -402,8 +402,7 @@
         },
         "extensionParameters": {
           "description": "Parameters specific to this extension type.",
-          "$ref": "#/definitions/ExtensionParameters",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ExtensionParameters"
         },
         "aggregateState": {
           "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
@@ -556,12 +555,24 @@
         },
         "settings": {
           "type": "object",
-          "description": "Json formatted public settings for the extension."
+          "description": "Json formatted public settings for the extension.",
+          "properties": {
+            "workspaceId": {
+              "description": "Workspace Id.",
+              "type": "string"
+            }
+          }
         },
         "protectedSettings": {
           "type": "object",
           "description": "Protected settings (may contain secrets).",
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "properties": {
+            "workspaceKey": {
+              "description": "Workspace Key.",
+              "type": "string"
+            }
+          }
         },
         "enableAutomaticUpgrade": {
           "type": "boolean",
