@@ -2021,7 +2021,7 @@
             "type": "string"
           },
           {
-            "name": "task",
+            "name": "taskUpdateParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -2855,7 +2855,7 @@
             "$ref": "#/parameters/BatchClientRequestHeaders.ocp-date"
           },
           {
-            "name": "jobSchedule",
+            "name": "cloudJobSchedule",
             "in": "body",
             "required": true,
             "description": "The Job Schedule to be added.",
@@ -3300,7 +3300,7 @@
             "type": "string"
           },
           {
-            "name": "jobScheduleUpdate",
+            "name": "jobSchedulePatchParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -3397,7 +3397,7 @@
             "type": "string"
           },
           {
-            "name": "jobSchedule",
+            "name": "jobScheduleUpdateParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -4483,7 +4483,7 @@
             "$ref": "#/parameters/BatchModifiedSinceHeaders.If-Unmodified-Since"
           },
           {
-            "name": "poolUpdate",
+            "name": "poolPatchParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -4740,7 +4740,7 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "poolEvaluateAutoScaleParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -6330,7 +6330,7 @@
           "ComputeNodes"
         ],
         "operationId": "ComputeNodes_UpdateUser",
-        "summary": "Updates the password and expiration time of a user Account on the specified\nCompute Node.",
+        "summary": "Updates the password and expiration time of a user Account on the specified Compute Node.",
         "description": "This operation replaces of all the updatable properties of the Account. For\nexample, if the expiryTime element is not specified, the current value is\nreplaced with the default value, not left unmodified. You can update a user\nAccount on a Compute Node only when it is in the idle or running state.",
         "parameters": [
           {
@@ -6370,7 +6370,7 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "nodeUpdateUserParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -6465,7 +6465,7 @@
             "$ref": "#/parameters/BatchModifiedSinceHeaders.If-Unmodified-Since"
           },
           {
-            "name": "parameters",
+            "name": "nodeRemoveParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -6560,7 +6560,7 @@
             "$ref": "#/parameters/BatchModifiedSinceHeaders.If-Unmodified-Since"
           },
           {
-            "name": "parameters",
+            "name": "poolResizeParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -8383,11 +8383,7 @@
           "description": "If this property is set, the Batch service provides the Task with an\nauthentication token which can be used to authenticate Batch service operations\nwithout requiring an Account access key. The token is provided via the\nAZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the\nTask can carry out using the token depend on the settings. For example, a Task\ncan request Job permissions in order to add other Tasks to the Job, or check\nthe status of the Job or of other Tasks under the Job."
         }
       },
-      "description": "Batch will retry Tasks when a recovery operation is triggered on a Node.\nExamples of recovery operations include (but are not limited to) when an\nunhealthy Node is rebooted or a Compute Node disappeared due to host failure.\nRetries due to recovery operations are independent of and are not counted\nagainst the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal\nretry due to a recovery operation may occur. Because of this, all Tasks should\nbe idempotent. This means Tasks need to tolerate being interrupted and\nrestarted without causing any corruption or duplicate data. The best practice\nfor long running Tasks is to use some form of checkpointing.",
-      "required": [
-        "id",
-        "commandLine"
-      ]
+      "description": "Batch will retry Tasks when a recovery operation is triggered on a Node.\nExamples of recovery operations include (but are not limited to) when an\nunhealthy Node is rebooted or a Compute Node disappeared due to host failure.\nRetries due to recovery operations are independent of and are not counted\nagainst the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal\nretry due to a recovery operation may occur. Because of this, all Tasks should\nbe idempotent. This means Tasks need to tolerate being interrupted and\nrestarted without causing any corruption or duplicate data. The best practice\nfor long running Tasks is to use some form of checkpointing."
     },
     "BatchTaskCollection": {
       "type": "object",
@@ -13758,11 +13754,7 @@
           "description": "Indicates whether the extension should use a newer minor version if one is\navailable at deployment time. Once deployed, however, the extension will not\nupgrade minor versions unless redeployed, even with this property set to true."
         },
         "settings": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
+          "$ref": "#/definitions/object",
           "description": "JSON formatted public settings for the extension."
         },
         "protectedSettings": {

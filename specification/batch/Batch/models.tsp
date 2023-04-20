@@ -2445,7 +2445,7 @@ upgrade minor versions unless redeployed, even with this property set to true.
   autoUpgradeMinorVersion?: boolean;
 
   @doc("JSON formatted public settings for the extension.")
-  settings?: Record<string>;
+  settings?: object;
 
   @doc("""
 The extension can contain either protectedSettings or
@@ -4017,7 +4017,7 @@ The ID can contain any combination of alphanumeric characters including hyphens
 and underscores, and cannot contain more than 64 characters.
 """)
   @visibility("read","create")
-  id: string;
+  id?: string;
 
   @doc("""
 The display name need not be unique and can contain any Unicode characters up
@@ -4079,7 +4079,7 @@ directory), or use the Batch provided environment variable
 (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
 """)
   @visibility("read","create")
-  commandLine: string;
+  commandLine?: string;
 
   @doc("""
 If the Pool that will run this Task has containerConfiguration set, this must
