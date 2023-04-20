@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-changes-2022-05
+tag: package-subscriptions-2022-12
 ```
 
 ``` yaml $(package-privatelinks)
@@ -50,7 +50,7 @@ tag: package-resources-2022-09
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2021-01
+tag: package-subscriptions-2022-12
 ```
 
 ``` yaml $(package-links)
@@ -69,6 +69,10 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2022-02
 ```
 
+``` yaml $(package-deploymentstacks)
+tag: package-deploymentstacks-2022-08-preview
+```
+
 ``` yaml $(package-changes)
 tag: package-changes-2022-05
 ```
@@ -77,6 +81,15 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.Resources/stable/2022-12-01/subscriptions.json
+```
 ### Tag: package-policy-2022-06
 
 These settings apply only when `--tag=package-policy-2022-06` is specified on the command line.
@@ -94,6 +107,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-changes-2023-03-01-preview
+
+These settings apply only when `--tag=package-changes-2023-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2023-03-01-preview'
+input-file:
+- Microsoft.Resources/preview/2023-03-01-preview/changes.json
 ```
 
 ### Tag: package-snapshots-2022-11
@@ -185,6 +207,7 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+
 ### Tag: package-locks-2017-04
 
 These settings apply only when `--tag=package-locks-2017-04` is specified on the command line.
@@ -194,7 +217,6 @@ input-file:
 - Microsoft.Authorization/stable/2017-04-01/locks.json
 ```
 
-
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
@@ -202,6 +224,15 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 ``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
+```
+
+### Tag: package-subscriptions-2022-12
+
+These settings apply only when `--tag=package-subscriptions-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2022-12'
+input-file:
+- Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
 
 
@@ -213,7 +244,6 @@ These settings apply only when `--tag=package-subscriptions-2021-01` is specifie
 input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
-
 
 ### Tag: package-deploymentscripts-2020-10
 
@@ -428,6 +458,15 @@ These settings apply only when `--tag=package-templatespecs-2019-06-preview` is 
 ``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
 input-file:
 - Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
+```
+
+### Tag: package-deploymentstacks-2022-08-preview
+
+These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
+input-file:
+- Microsoft.Resources/preview/2022-08-01-preview/deploymentStacks.json
 ```
 
 ### Tag: package-policy-2016-12
@@ -858,6 +897,10 @@ directive:
       - $.definitions.AzureCliScript.properties
       - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
+  - from: deploymentStacks.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI will come from Resources
   - suppress: OperationsAPIImplementation
     from: templateSpecs.json
     where: $.paths
@@ -878,6 +921,10 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+  - from: deploymentStacks.json
+    suppress: TrackedResourcePatchOperation
+    where: $.definitions
+    reason: Not a tracked resource.
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: dataPolicyManifests.json
@@ -949,7 +996,7 @@ directive:
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].put'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
-    reason: The tags API does not support system data  
+    reason: The tags API does not support system data
 ```
 
 ---
@@ -972,6 +1019,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -999,6 +1047,7 @@ batch:
   - package-managedapplications: true
   - package-deploymentscripts: true
   - package-templatespecs: true
+  - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
 ```
@@ -1019,4 +1068,3 @@ input-file:
 override-info:
   title: PolicyClient
 ```
-
