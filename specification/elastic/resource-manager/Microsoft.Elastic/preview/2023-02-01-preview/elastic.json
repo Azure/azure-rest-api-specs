@@ -2009,16 +2009,18 @@
       "description": "List of elastic versions available in a region.",
       "type": "object",
       "properties": {
-        "value": {
-          "description": "Results of a list operation.",
-          "type": "array",
-          "items": {
+        "properties": {
+          "value": {
+            "description": "Results of a list operation.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "nextLink": {
+            "description": "Link to the next set of results, if any.",
             "type": "string"
           }
-        },
-        "nextLink": {
-          "description": "Link to the next set of results, if any.",
-          "type": "string"
         }
       }
     },
@@ -2424,12 +2426,14 @@
       "description": "The User Api Key created for the Organization associated with the User Email Id that was passed in the request",
       "type": "object",
       "properties": {
-        "apiKey": {
-          "type": "string",
-          "description": "The User Api Key Generated based on ReturnApiKey flag. This is applicable for non-Portal clients only.",
-          "x-ms-secret": true
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "description": "The User Api Key Generated based on ReturnApiKey flag. This is applicable for non-Portal clients only.",
+            "x-ms-secret": true
+          }
         }
-      }
+      }          
     }
   },
   "parameters": {
