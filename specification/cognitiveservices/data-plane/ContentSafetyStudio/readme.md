@@ -29,11 +29,11 @@ openapi-type: data-plane
 tag: release_2023_04_30_preview
 ```
 
-### Tag: package-2023-04-30-preview
+### Tag: release-2023-04-30-preview
 
 These settings apply only when `--tag=release_2023_04_30_preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04-30-preview'
+```yaml $(tag) == 'release-2023-04-30-preview'
 input-file:
   - preview/2023-04-30-preview/ContentSafetyStudio.json
 ```
