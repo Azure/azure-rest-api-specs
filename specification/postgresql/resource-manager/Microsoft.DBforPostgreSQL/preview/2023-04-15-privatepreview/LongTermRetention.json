@@ -284,18 +284,9 @@
         }
       }
     },
-    "Properties": {
-      "description": "The properties.",
-      "type": "object"
-    },
     "PreBackupResponseProperties": {
       "description": "Response for the pre-backup request.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Properties"
-        }
-      ],
       "required": [
         "numberOfContainers"
       ],
@@ -310,11 +301,6 @@
     "BackupResponseProperties": {
       "description": "Response for the backup request.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Properties"
-        }
-      ],
       "required": [
         "datasourceSizeInBytes",
         "dataTransferredInBytes",
@@ -385,6 +371,7 @@
         },
         "properties": {
           "description": "AdditionalProperties",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/BackupResponseProperties"
         },
         "percentComplete": {
@@ -403,6 +390,7 @@
       "properties": {
         "properties": {
           "description": "Additional Properties for the pre backup response",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PreBackupResponseProperties"
         }
       }
