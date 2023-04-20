@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "cassandra-prod-rg",
+    "clusterName": "cassandra-prod",
+    "api-version": "2023-03-15-preview",
+    "body": {
+      "properties": {
+        "keyspace": "system",
+        "owner": "vs-test",
+        "cause": "example"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/dd31ecae-4522-468e-8b27-5befd051dd53/resourceGroups/vs-repair-rg/providers/Microsoft.DocumentDB/cassandraClusters/vs-repair-2/repairRuns/operationResults/54c1f7f5-bf70-45a6-87a2-8e1dcf4202a0?api-version=2023-03-01-preview"
+      }
+    },
+    "200": {
+      "body": {
+        "cause": "demo-test-1",
+        "owner": "vs-test-1",
+        "id": "00000000-0000-0002-0000-000000000000",
+        "state": "NOT_STARTED",
+        "intensity": 0.89999997615814209,
+        "cluster_name": "vs-repair-1",
+        "column_families": [
+            "role_permissions",
+            "resource_role_permissons_index",
+            "roles",
+            "role_members"
+        ],
+        "keyspace_name": "system_auth",
+        "incremental_repair": false,
+        "total_segments": 37,
+        "repair_parallelism": "PARALLEL",
+        "segments_repaired": 0,
+        "last_event": "no events",
+        "nodes": [],
+        "datacenters": [],
+        "blacklisted_tables": [],
+        "repair_thread_count": 1,
+        "repair_unit_id": "00000000-0000-0002-0000-000000000000"
+      }
+    }
+  }
+}
