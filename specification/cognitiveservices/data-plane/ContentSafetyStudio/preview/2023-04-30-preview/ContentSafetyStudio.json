@@ -81,14 +81,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Blocklist_ListHitCalls_MaximumSet_Gen": {
-            "$ref": "./examples/Blocklist_ListHitCalls_MaximumSet_Gen.json"
-          },
-          "Blocklist_ListHitCalls_MinimumSet_Gen": {
-            "$ref": "./examples/Blocklist_ListHitCalls_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -140,14 +132,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Blocklist_ListTopTerms_MaximumSet_Gen": {
-            "$ref": "./examples/Blocklist_ListTopTerms_MaximumSet_Gen.json"
-          },
-          "Blocklist_ListTopTerms_MinimumSet_Gen": {
-            "$ref": "./examples/Blocklist_ListTopTerms_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -246,22 +230,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListSeverityDistributionByCategoryAndSeverity_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListSeverityDistributionByCategoryAndSeverity_MaximumSet_Gen.json"
-          },
-          "Metrics_ListSeverityDistributionByCategoryAndSeverity_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListSeverityDistributionByCategoryAndSeverity_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/contentSafety/studio/metrics/categories/{category}/severities/{severity}/totalCalls": {
+    "/contentSafety/studio/metrics/categories/{category}/severities/{severity}/requestCounts": {
       "get": {
         "operationId": "Metrics_ListTotalCallsByCategoryAndSeverity",
-        "summary": "List total API counts at different timestamps of a specific category and a specific severity given a time range",
-        "description": "List total API counts at different timestamps of a specific category and a specific severity given a time range",
+        "summary": "List API request count at different timestamps of a specific category and a specific severity given a time range",
+        "description": "List API request count at different timestamps of a specific category and a specific severity given a time range",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -369,18 +345,67 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListTotalCallsByCategoryAndSeverity_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListTotalCallsByCategoryAndSeverity_MaximumSet_Gen.json"
-          },
-          "Metrics_ListTotalCallsByCategoryAndSeverity_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListTotalCallsByCategoryAndSeverity_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/contentSafety/studio/metrics/latencies": {
+    "/contentSafety/studio/metrics/requestCounts": {
+      "get": {
+        "operationId": "Metrics_ListTotalCalls",
+        "summary": "List API request counts at different timestamps given a time range.",
+        "description": "List API request counts at different timestamps given a time range.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TimeGranularityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CallList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/contentSafety/studio/metrics/requestLatencies": {
       "get": {
         "operationId": "Metrics_ListLatencies",
         "summary": "List aggregated API latencies at different timestamps given a time range.",
@@ -434,79 +459,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListLatencies_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListLatencies_MaximumSet_Gen.json"
-          },
-          "Metrics_ListLatencies_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListLatencies_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/contentSafety/studio/metrics/totalCalls": {
-      "get": {
-        "operationId": "Metrics_ListTotalCalls",
-        "summary": "List total API counts at different timestamps given a time range.",
-        "description": "List total API counts at different timestamps given a time range.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/StartTimeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/EndTimeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/TimeGranularityQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CallList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListTotalCalls_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListTotalCalls_MaximumSet_Gen.json"
-          },
-          "Metrics_ListTotalCalls_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListTotalCalls_MinimumSet_Gen.json"
-          }
         }
       }
     }
@@ -739,7 +691,7 @@
           },
           "x-ms-identifiers": [],
           "x-typespec-name": "CountPerTimestamp[]",
-          "description": "List of total call."
+          "description": "List of request count."
         },
         "nextLink": {
           "type": "string",
@@ -847,10 +799,10 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "The count of the API total call."
+          "description": "The count of the API request."
         }
       },
-      "description": "API total count at a timestamp.",
+      "description": "API request count at a timestamp.",
       "required": [
         "dateTime",
         "count"
@@ -939,7 +891,7 @@
           "description": "The aggregated latency of the API in milliseconds."
         }
       },
-      "description": "API latency at a timestamp.",
+      "description": "API request latency at a timestamp.",
       "required": [
         "dateTime",
         "latency"
@@ -1154,10 +1106,10 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "The count of the total call."
+          "description": "The count of the request."
         }
       },
-      "description": "API count at a timestamp",
+      "description": "API request count at a timestamp",
       "required": [
         "dateTime",
         "count"
