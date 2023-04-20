@@ -84,6 +84,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2022-09-01-preview/apimtags.json
   - Microsoft.ApiManagement/preview/2022-09-01-preview/apimtenant.json
   - Microsoft.ApiManagement/preview/2022-09-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2022-09-01-preview/apimworkspaces.json
   - Microsoft.ApiManagement/preview/2022-09-01-preview/definitions.json
 ```
 ### Tag: package--2022-08
