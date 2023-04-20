@@ -659,7 +659,7 @@ element, then the Job keeps the existing constraints.
 
         @doc("The parameters for the request.")
         @body
-        jobUpdate: BatchJob;
+        jobPatchParameter: BatchJob;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -696,7 +696,7 @@ with this request, then the Batch service will remove the existing constraints.
 
         @doc("The parameters for the request.")
         @body
-        job: BatchJob;
+        jobUpdateParameter: BatchJob;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -738,7 +738,7 @@ the request fails with status code 409.
 
         @doc("The parameters for the request.")
         @body
-        parameters: BatchJobDisableParameters;
+        jobDisableParameter: BatchJobDisableParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")

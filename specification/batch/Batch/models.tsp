@@ -393,7 +393,7 @@ enum TaskState {
 
 enum TaskAddStatus {
   @doc("The Task was added successfully.")
-  Success: "Success",
+  Success: "success",
 
   @doc("The Task failed to add due to a client error and should not be retried without modifying the request as appropriate.")
   ClientError: "clienterror",
@@ -999,11 +999,11 @@ digits.
 
   @doc("The format of the Certificate data.")
   @visibility("create")
-  certificateFormat: CertificateFormat;
+  certificateFormat?: CertificateFormat;
 
   @doc("This must be omitted if the Certificate format is cer.")
   @visibility("create")
-  password: string;
+  password?: string;
 }
 
 @doc("An error encountered by the Batch service when deleting a Certificate.")
@@ -1103,12 +1103,10 @@ model FileProperties {
 A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a
 specification used to create each Job.
 """)
-@resource("jobschedules")
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
   @visibility("read", "create")
-  @key("jobScheduleId")
-  id: string;
+  id?: string;
 
   @doc("The display name for the schedule.")
   @visibility("read", "create")
@@ -3084,15 +3082,13 @@ model BatchJobScheduleListResult {
 }
 
 @doc("An Azure Batch Job.")
-@resource("jobs")
 model BatchJob {
   @doc("""
 The ID is case-preserving and case-insensitive (that is, you may not have two
 IDs within an Account that differ only by case).
 """)
 @visibility("read", "create")
-  @key("jobId")
-  id: string;
+  id?: string;
 
   @doc("The display name for the Job.")
   @visibility("read", "create")
@@ -3592,7 +3588,6 @@ model TaskSlotCounts {
 }
 
 @doc("A Pool in the Azure Batch service.")
-@resource("pool")
 model BatchPool {
   @doc("""
 The ID can contain any combination of alphanumeric characters including hyphens
@@ -3601,8 +3596,7 @@ case-preserving and case-insensitive (that is, you may not have two IDs within
 an Account that differ only by case).
 """)
   @visibility("read", "create")
-  @key
-  id: string;
+  id?: string;
 
   @doc("""
 The display name need not be unique and can contain any Unicode characters up
