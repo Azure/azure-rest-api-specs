@@ -99,12 +99,12 @@
                 "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
                 "type": "string"
               },
-              "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.",
-                "type": "string"
-              },
               "Location": {
                 "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.",
                 "type": "string"
               }
             }
@@ -134,8 +134,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        },
-        "deprecated": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrprebackup": {
