@@ -48,9 +48,9 @@
   "paths": {
     "/image:analyze": {
       "post": {
-        "operationId": "ImageOperations_Analyze",
+        "operationId": "ImageOperations_AnalyzeImage",
         "summary": "Analyze Image",
-        "description": "A sync API for harmful content analysis for image. Currently we support four categories: Hate, SelfHarm, Sexual, Violence.",
+        "description": "A sync API for harmful content analysis for image. Currently, we support four categories: Hate, SelfHarm, Sexual, Violence.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -157,7 +157,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           }
@@ -195,7 +195,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -251,7 +251,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           }
@@ -288,7 +288,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -335,7 +335,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -379,7 +379,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -453,7 +453,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+            "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -492,7 +492,7 @@
       "post": {
         "operationId": "TextOperations_AnalyzeText",
         "summary": "Analyze Text",
-        "description": "A sync API for harmful content analysis for text. Currently we support four categories: Hate, SelfHarm, Sexual, Violence.",
+        "description": "A sync API for harmful content analysis for text. Currently, we support four categories: Hate, SelfHarm, Sexual, Violence.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -552,7 +552,7 @@
     "AddBlockItemsResult": {
       "type": "object",
       "properties": {
-        "blockItems": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextBlockItem"
@@ -577,7 +577,7 @@
             "$ref": "#/definitions/ImageCategory"
           },
           "x-typespec-name": "ImageCategory[]",
-          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
+          "description": "The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned."
         }
       },
       "description": "The analysis request of the image.",
@@ -612,7 +612,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be scanned. We support at most 1000 characters(unicode code points) in text of one request.",
+          "description": "The text needs to be scanned. We support at most 1000 characters (unicode code points) in text of one request.",
           "maxLength": 1000
         },
         "categories": {
@@ -621,7 +621,7 @@
             "$ref": "#/definitions/TextCategory"
           },
           "x-typespec-name": "TextCategory[]",
-          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
+          "description": "The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned."
         },
         "blocklistNames": {
           "type": "array",
@@ -784,7 +784,7 @@
           "description": "The blob url of image."
         }
       },
-      "description": "The content or blob url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maximum size of image is 2048 pixels * 2048 pixels, no larger than 4MB at the same time. The minimum size of image is 50 pixels * 50 pixels."
+      "description": "The content or blob url of image, could be base64 encoding bytes or blob url. If both are given, the request will be refused. The maximum size of image is 2048 pixels * 2048 pixels, no larger than 4MB at the same time. The minimum size of image is 50 pixels * 50 pixels."
     },
     "RemoveBlockItemsOptions": {
       "type": "object",
@@ -813,7 +813,7 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The higher the severity of input content, the larger this value, currently its value could be: 0,2,4,6."
+          "description": "The higher the severity of input content, the larger this value is. The values could be: 0,2,4,6."
         }
       },
       "description": "Text analysis result.",
@@ -875,7 +875,7 @@
       "properties": {
         "blocklistName": {
           "type": "string",
-          "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
+          "description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
           "maxLength": 64,
           "x-ms-mutability": [
             "read",

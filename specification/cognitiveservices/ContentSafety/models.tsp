@@ -22,11 +22,11 @@ enum ImageCategory {
 
 @doc("The analysis request of the text.")
 model AnalyzeTextOptions {
-  @doc("The text needs to be scanned. We support at most 1000 characters(unicode code points) in text of one request.")
+  @doc("The text needs to be scanned. We support at most 1000 characters (unicode code points) in text of one request.")
   @maxLength(1000)
   text: string;
 
-  @doc("The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.")
+  @doc("The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned.")
   categories?: TextCategory[];
 
   @doc("The names of blocklists.")
@@ -80,7 +80,7 @@ model TextAnalyzeSeverityResult {
   @doc("The text category.")
   category: TextCategory;
 
-  @doc("The higher the severity of input content, the larger this value, currently its value could be: 0,2,4,6.")
+  @doc("The higher the severity of input content, the larger this value is. The values could be: 0,2,4,6.")
   severity: int32;
 }
 
@@ -89,11 +89,11 @@ model AnalyzeImageOptions {
   @doc("The image needs to be analyzed.")
   image: ImageData;
 
-  @doc("The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.")
+  @doc("The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned.")
   categories?: ImageCategory[];
 }
 
-@doc("The content or blob url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maximum size of image is 2048 pixels * 2048 pixels, no larger than 4MB at the same time. The minimum size of image is 50 pixels * 50 pixels.")
+@doc("The content or blob url of image, could be base64 encoding bytes or blob url. If both are given, the request will be refused. The maximum size of image is 2048 pixels * 2048 pixels, no larger than 4MB at the same time. The minimum size of image is 50 pixels * 50 pixels.")
 model ImageData {
   @doc("Base64 encoding of image.")
   content?: bytes;
@@ -101,11 +101,6 @@ model ImageData {
   @doc("The blob url of image.")
   blobUrl?: url;
 }
-
-alias ImageCategories = {
-  @doc("The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.")
-  categories?: ImageCategory[];
-};
 
 @doc("The analysis response of the image.")
 model AnalyzeImageResult {
@@ -134,7 +129,7 @@ model ImageAnalyzeSeverityResult {
 @doc("Text Blocklist.")
 @resource("text/blocklists")
 model TextBlocklist {
-  @doc("Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~")
+  @doc("Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~")
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
@@ -184,7 +179,7 @@ model AddBlockItemsOptions {
 @doc("The response of adding blockItems to text blocklist.")
 model AddBlockItemsResult {
   @doc("Array of blockItems added.")
-  blockItems?: TextBlockItem[];
+  value?: TextBlockItem[];
 }
 
 @doc("The request of removing blockItems from text blocklist.")
