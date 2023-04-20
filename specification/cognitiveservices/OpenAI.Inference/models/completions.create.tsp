@@ -11,13 +11,10 @@ Completions support a wide variety of tasks and generate text that continues fro
 provided prompt data.
 """)
 model CompletionsOptions {
-    @doc("""
-    The prompts to generate completions from. Defaults to a single prompt of <|endoftext|> if not
-    otherwise specified.
-    """)
+    @doc("The prompts to generate completions from.")
     @projectedName("json", "prompt")
     @projectedName("csharp", "Prompts")
-    prompt?: string[];
+    prompt: string[];
 
     @doc("The maximum number of tokens to generate.")
     @projectedName("json", "max_tokens")
