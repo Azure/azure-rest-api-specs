@@ -20,6 +20,9 @@ directive:
   where: '$.paths.*[?(@.operationId.startsWith("Connectors_"))]'
   transform: >
     $["operationId"] = $["operationId"].replace("Connectors_", "AccountConnectors_");
+- rename-model:
+    from: SecurityOperator
+    to: OperatorResource
 ```
 
 ### Common Go settings
