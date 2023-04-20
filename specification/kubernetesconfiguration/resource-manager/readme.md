@@ -39,7 +39,9 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-05'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
 ```
 
