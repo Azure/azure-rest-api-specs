@@ -114,16 +114,16 @@ These settings apply only when `--tag=2023-04-15-preview` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-04-preview'
 input-file:
-- Microsoft.HDInsight/stable/2023-04-15-preview/cluster.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/applications.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/locations.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/configurations.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/extensions.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/scriptActions.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/operations.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/virtualMachines.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/privateEndpointConnections.json
-- Microsoft.HDInsight/stable/2023-04-15-preview/privateLinkResources.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/applications.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/locations.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/configurations.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/extensions.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/operations.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/privateEndpointConnections.json
+- Microsoft.HDInsight/preview/2023-04-15-preview/privateLinkResources.json
 ```
 
 ### Tag: package-2021-06
