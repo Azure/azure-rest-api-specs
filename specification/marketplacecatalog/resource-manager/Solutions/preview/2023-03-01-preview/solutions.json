@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Marketplace/me/solutions": {
+    "/providers/Microsoft.Marketplace/mysolutions": {
       "get": {
         "tags": [
           "UserSolutions"
@@ -98,7 +98,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/me/solutions/{id}": {
+    "/providers/Microsoft.Marketplace/mysolutions/{id}": {
       "get": {
         "tags": [
           "UserSolutions"
@@ -130,53 +130,6 @@
             "schema": {
               "$ref": "#/definitions/Solution"
             }
-          },
-          "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "UserSolutions"
-        ],
-        "description": "Renames a user solution",
-        "operationId": "RenameUserSolution",
-        "x-ms-examples": {
-          "RenameUserSolution": {
-            "$ref": "./examples/RenameUserSolution.json"
-          }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "payload",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RenameUserSolutionRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
           },
           "default": {
             "x-nullable": false,
@@ -231,8 +184,57 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/me/solutions/{id}/products/{uniqueProductId}": {
-      "put": {
+    "/providers/Microsoft.Marketplace/mysolutions/{id}/rename": {
+      "post": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "description": "Renames a user solution",
+        "operationId": "RenameUserSolution",
+        "x-ms-examples": {
+          "RenameUserSolution": {
+            "$ref": "./examples/RenameUserSolution.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RenameUserSolutionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/mysolutions/{id}/products": {
+      "post": {
         "tags": [
           "UserSolutions"
         ],
@@ -251,10 +253,13 @@
             "required": true
           },
           {
-            "type": "string",
-            "name": "uniqueProductId",
-            "in": "path",
-            "required": true
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddProductToUserSolutionRequest"
+            },
+            "x-nullable": false
           },
           {
             "type": "string",
@@ -276,7 +281,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/providers/Microsoft.Marketplace/mysolutions/{id}/products/{uniqueProductId}": {
       "delete": {
         "tags": [
           "UserSolutions"
@@ -376,6 +383,15 @@
       },
       "additionalProperties": false
     },
+    "AddProductToUserSolutionRequest": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "Product": {
       "type": "object",
       "properties": {
@@ -420,13 +436,13 @@
       "additionalProperties": false
     },
     "RenameUserSolutionRequest": {
+      "description": "The service properties for a given service.",
       "type": "object",
       "properties": {
         "newName": {
           "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "Solution": {
       "type": "object",
@@ -453,7 +469,7 @@
         "id": {
           "type": "string"
         },
-        "solutions": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Solution"
