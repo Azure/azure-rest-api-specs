@@ -3,7 +3,7 @@
     "api-version": "2023-05-01-privatepreview",
     "subscriptionId": "subId1",
     "resourceGroupName": "alertscorrelationrg",
-    "alertProcessingRuleName": "CorrelationExample",
+    "alertProcessingRuleName": "CorrelateAlerts",
     "alertProcessingRule": {
       "location": "Global",
       "tags": {},
@@ -13,11 +13,10 @@
         ],
         "actions": [
           {
-            "actionType": "Correlation",
+            "actionType": "CorrelateAlerts",
             "correlateBy": [
               {
-                "field": "essentials.alertRule",
-                "type": "Simple"
+                "field": "essentials.alertRule"
               }              
             ],
             "correlationTimeWindow": "00:30:00",
@@ -26,7 +25,7 @@
             "targetRegion": "West US"
           }
         ],
-        "description": "Simple Correlation Example.",
+        "description": "Correlate Alerts Example.",
         "enabled": true
       }
     }
@@ -48,11 +47,10 @@
           ],
           "actions": [
             {
-              "actionType": "Correlation",
+              "actionType": "CorrelateAlerts",
               "correlateBy": [
                 {
-                  "field": "essentials.alertRule",
-                  "type": "Simple"
+                  "field": "essentials.alertRule"
                 }
               ],
               "correlationTimeWindow": "00:30:00",
@@ -61,12 +59,12 @@
               "targetRegion": "West US"
             }
           ],
-          "description": "Simple Correlation Example.",
+          "description": "Correlate Alerts Example.",
           "enabled": true
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelationExample",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelateAlerts",
         "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "CorrelationExample",
+        "name": "CorrelateAlerts",
         "location": "Global",
         "tags": {}
       }
@@ -87,11 +85,10 @@
           ],
           "actions": [
             {
-              "actionType": "Correlation",
+              "actionType": "CorrelateAlerts",
               "correlateBy": [
                 {
-                  "field": "essentials.alertRule",
-                  "type": "Simple"
+                  "field": "essentials.alertRule"
                 }                
               ],
               "correlationTimeWindow": "00:30:00",
@@ -100,12 +97,12 @@
               "targetRegion": "West US"
             }
           ],
-          "description": "Simple Correlation Example.",
+          "description": "Correlate Alerts Example.",
           "enabled": true
         },
-        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelationExample",
+        "id": "/subscriptions/subId1/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/CorrelateAlerts",
         "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "CorrelationExample",
+        "name": "CorrelateAlerts",
         "location": "Global",
         "tags": {}
       }

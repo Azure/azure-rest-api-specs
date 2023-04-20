@@ -242,6 +242,9 @@
           },
           "Create or update a rule that removes all action groups from all alerts in a subscription coming from a specific alert rule": {
             "$ref": "./examples/AlertProcessingRules_Create_or_update_remove_all_action_groups_from_specific_alert_rule.json"
+          },
+          "Create or update a rule that adds alerts correlation": {
+            "$ref": "./examples/AlertProcessingRules_Create_or_update_add_correlation.json"
           }
         }
       },
@@ -736,7 +739,8 @@
           "description": "Action that should be applied.",
           "enum": [
             "AddActionGroups",
-            "RemoveAllActionGroups"
+            "RemoveAllActionGroups",
+            "CorrelateAlerts"
           ],
           "x-ms-enum": {
             "name": "actionType",
@@ -776,6 +780,47 @@
           "$ref": "#/definitions/Action"
         }
       ]
+    },
+    "CorrelateAlerts": {
+      "x-ms-discriminator-value": "CorrelateAlerts",
+      "type": "object",
+      "description": "Add logic for alerts correlation.",
+      "correlateBy": {
+        "type": "array",
+        "items": {
+          "type": "#/definitions/CorrelatedBy"
+        },
+        "description": "The list of conditions for the alerts correlations."
+      },
+      "correlationTimeWindow": {
+        "type": "string",
+        "format": "duration",
+        "description": "The required duration (in ISO8601 format) for the alerts correlation."
+      },
+      "priority": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The priority of this correlation."
+      },
+      "suppressNotificationForChildAlerts": {
+        "type": "boolean",
+        "default": true,
+        "description": "Indicates whether child alerts notifications should be suppressed."
+      },
+      "targetRegion": {
+        "type": "string",
+        "description": "Indicates in which region the correlation will occur."
+      }
+    },
+    "CorrelatedBy": {
+      "type": "object",
+      "description": "The logic for the correlation.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The JPath of the propery that the alerts should be correlated by."          
+        }
+      }
     },
     "AlertProcessingRulesList": {
       "type": "object",
