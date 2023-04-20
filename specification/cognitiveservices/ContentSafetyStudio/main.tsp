@@ -70,20 +70,32 @@ enum Aggregation {
 }
 
 
-@doc("API total count at a timestamp.")
-@resource("totalCalls")
+@doc("API request count at a timestamp.")
+@resource("requestCounts")
 model CountPerTimestamp {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @key("dateTime")
   @doc("The date time.")
   dateTime: utcDateTime;
 
-  @doc("The count of the API total call.")
+  @doc("The count of the API request.")
   count: int32;
 }
 
-@doc("API latency at a timestamp.")
-@resource("latencies")
+@doc("Response of calls.")
+@pagedResult
+model CallList {
+  @doc("List of request count.")
+  @items
+  value: CountPerTimestamp[];
+
+  @doc("Link to fetch more.")
+  @nextLink
+  nextLink?: string;
+}
+
+@doc("API request latency at a timestamp.")
+@resource("requestLatencies")
 model LatencyPerTimestamp {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @key("dateTime")
@@ -92,6 +104,18 @@ model LatencyPerTimestamp {
 
   @doc("The aggregated latency of the API in milliseconds.")
   latency: int32;
+}
+
+@doc("Response of latencies.")
+@pagedResult
+model LatencyList {
+  @doc("List of latency.")
+  @items
+  value: LatencyPerTimestamp[];
+
+  @doc("Link to fetch more.")
+  @nextLink
+  nextLink?: string;
 }
 
 @doc("Popular term and it's API count.")
@@ -104,6 +128,19 @@ model TopTermCount {
 
   @doc("The API call count of the term.")
   count: int32;
+}
+
+
+@doc("Response of listing hit terms.")
+@pagedResult
+model TermList {
+  @doc("List of terms.")
+  @items
+  value: TopTermCount[];
+
+  @doc("Link to fetch more terms.")
+  @nextLink
+  nextLink?: string;
 }
 
 @doc("Blocklist hit call counts at a timestamp")
@@ -140,29 +177,55 @@ model Severity {
   count: int32;
 }
 
-@doc("API count at a timestamp")
-@resource("totalCalls")
+@doc("Response of severities.")
+@pagedResult
+model SeverityList {
+  @doc("List of terms.")
+  @items
+  value: Severity[];
+
+  @doc("Link to fetch more terms.")
+  @nextLink
+  nextLink?: string;
+}
+
+
+@doc("API request count at a timestamp")
+@resource("requestCounts")
 @parentResource(Severity)
-model TotalCountsPerTimestamp {
+model RequestCountsPerTimestamp {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @key("dateTime")
   @doc("The date time.")
   dateTime: utcDateTime;
 
-  @doc("The count of the total call.")
+  @doc("The count of the request.")
   count: int32;
 }
 
-// @doc("Error response")
-// @error
-// model Error {
-//   @header("x-ms-error-code")
-//   @doc("Error code.")
-//   code: int32;
 
-//   @doc("Error message.")
-//   message: string;
-// }
+@doc("Response of listing hit calls.")
+@pagedResult
+model HitCallsList {
+  @doc("List of hit calls.")
+  @items
+  value: BlockListHitCallsPerTimestamp[];
+
+  @doc("Link to fetch more calls.")
+  @nextLink
+  nextLink?: string;
+}
+
+@doc("Error response")
+@error
+model Error {
+  @header("x-ms-error-code")
+  @doc("Error code.")
+  code: int32;
+
+  @doc("Error message.")
+  message: string;
+}
 
 // Query parameter ////////////////////
 @doc("Provides the 'start' query parameter for list operations.")
@@ -240,6 +303,7 @@ model ModalityQueryParameters {
   ...StartTimeQueryParameter;
   ...EndTimeQueryParameter;
   ...TimeGranularityQueryParameter;
+  ...ContentSafetyVersionQueryParameter;
   ...ModalityTypeQueryParameter;
 }
 
@@ -269,48 +333,97 @@ model AggregationListQueryParameters {
 }
 
 interface Metrics {
-  @doc("List total API counts at different timestamps given a time range")
-  @route("/contentSafety/studio/metrics")
-  listTotalCalls is ResourceList<
-    CountPerTimestamp,
-    ListQueryParametersTrait<ApiListQueryParameters>
-  >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  @summary("List API request counts at different timestamps given a time range.")
+  @doc("List API request counts at different timestamps given a time range.")
+  @route("contentSafety/studio/metrics/requestCounts")
+  op listTotalCalls (
+    ...TopQueryParameter,
+    ...SkipQueryParameter,
+    ...MaxPageSizeQueryParameter,
+    ...StartTimeQueryParameter,
+    ...EndTimeQueryParameter,
+    ...TimeGranularityQueryParameter,
+    ...ContentSafetyOperationQueryParameter,
+    ...ContentSafetyVersionQueryParameter
+  ) : CallList| Error;
 
-  @doc("List aggregated API latencies at different timestamps given a time range")
-  @route("/contentSafety/studio/metrics")
-  listLatencies is ResourceList<
-    LatencyPerTimestamp,
-    ListQueryParametersTrait<AggregationListQueryParameters>
-  >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  @summary("List aggregated API latencies at different timestamps given a time range.")
+  @doc("List aggregated API latencies at different timestamps given a time range.")
+  @route("contentSafety/studio/metrics/requestLatencies")
+  op listLatencies (
+    ...TopQueryParameter,
+    ...SkipQueryParameter,
+    ...MaxPageSizeQueryParameter,
+    ...StartTimeQueryParameter,
+    ...EndTimeQueryParameter,
+    ...TimeGranularityQueryParameter,
+    ...ContentSafetyOperationQueryParameter,
+    ...ContentSafetyVersionQueryParameter
+  ) : LatencyList| Error;
+  
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  // @summary("List all severities and API call count number of a specific category and a specific severity given a time range")
+  // @doc("List all severities and API call count number of a specific category and a specific severity given a time range.")
+  // @route("/contentSafety/studio/metrics/categories/{category}/severities")
+  // op listSeverityDistribution (
+  //   @format("Category")
+  //   @doc("Category.")
+  //   @path
+  //   category: string,
+  //   ...TopQueryParameter,
+  //   ...SkipQueryParameter,
+  //   ...MaxPageSizeQueryParameter,
+  //   ...StartTimeQueryParameter,
+  //   ...EndTimeQueryParameter,
+  //   ...TimeGranularityQueryParameter,
+  //   ...ContentSafetyOperationQueryParameter,
+  //   ...ContentSafetyVersionQueryParameter
+  // ) : SeverityList| Error;
 
+  @summary("List all severities and API call count number of a specific category and a specific severity given a time range")
   @doc("List all severities and API call count number of a specific category and a specific severity given a time range")
   @route("/contentSafety/studio/metrics")
   listSeverityDistributionByCategoryAndSeverity is ResourceList<
     Severity,
     ListQueryParametersTrait<ModalityQueryParameters>
   >;
-
-  @doc("List total API counts at different timestamps of a specific category and a specific severity given a time range")
+  
+  @summary("List API request count at different timestamps of a specific category and a specific severity given a time range")
+  @doc("List API request count at different timestamps of a specific category and a specific severity given a time range")
   @route("/contentSafety/studio/metrics")
   listTotalCallsByCategoryAndSeverity is ResourceList<
-    TotalCountsPerTimestamp,
+    RequestCountsPerTimestamp,
     ListQueryParametersTrait<ModalityQueryParameters>
   >;
 }
 
-
 interface Blocklist {
-  @doc("List top terms hit in blocklist at different timestamps")
-  @route("/contentSafety/studio/metrics/blocklists")
-  listTopTerms is ResourceList<
-    TopTermCount,
-    ListQueryParametersTrait<CommonListQueryParameters>
-  >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  @summary("List top terms hit in blocklist at different timestamps.")
+  @doc("List top terms hit in blocklist at different timestamps.")
+  @route("/contentSafety/studio/metrics/blocklists/topTerms")
+  op listTopTerms (
+    ...SkipQueryParameter,
+    ...TopQueryParameter,
+    ...MaxPageSizeQueryParameter,
+    ...StartTimeQueryParameter,
+    ...EndTimeQueryParameter,
+    ...ContentSafetyVersionQueryParameter,
+  ) : TermList| Error;
 
-  @doc("Show all blocklist hit API count at different timestamps")
-  @route("/contentSafety/studio/metrics/blocklists")
-  listHitCalls is ResourceList<
-    BlockListHitCallsPerTimestamp,
-    ListQueryParametersTrait<TimeGranularityListQueryParameters>
-  >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  @get
+  @route("/contentSafety/studio/metrics/blocklists/hitCalls")
+  @summary("Show all blocklist hit API count at different timestamps.")
+  @doc("Show all blocklist hit API count at different timestamps.")
+  op listHitCalls (
+    ...SkipQueryParameter,
+    ...TopQueryParameter,
+    ...MaxPageSizeQueryParameter,
+    ...StartTimeQueryParameter,
+    ...EndTimeQueryParameter,
+    ...ContentSafetyVersionQueryParameter,
+  ) : HitCallsList| Error;
 }
