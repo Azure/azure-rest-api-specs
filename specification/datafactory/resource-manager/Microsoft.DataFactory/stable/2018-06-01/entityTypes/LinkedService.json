@@ -135,9 +135,8 @@
           "description": "The Azure key vault secret reference of sasToken in sas uri."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -182,7 +181,7 @@
         "azureCloudType": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
+          "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions cloud type. Type: string (or Expression with resultType string)."
         },
         "accountKind": {
           "type": "object",
@@ -190,9 +189,8 @@
           "description": "Specify the kind of your storage account. Allowed values are: Storage (general purpose v1), StorageV2 (general purpose v2), BlobStorage, or BlockBlobStorage. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -272,9 +270,8 @@
           "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -323,9 +320,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "alwaysEncryptedSettings": {
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
@@ -374,9 +370,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "alwaysEncryptedSettings": {
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
@@ -439,9 +434,8 @@
           "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "alwaysEncryptedSettings": {
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
@@ -508,9 +502,8 @@
           "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "alwaysEncryptedSettings": {
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
@@ -608,9 +601,8 @@
           "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -749,9 +741,8 @@
           }
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -837,9 +828,8 @@
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -954,9 +944,8 @@
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1054,9 +1043,8 @@
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1111,9 +1099,8 @@
           "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "isEspEnabled": {
           "type": "object",
@@ -1168,9 +1155,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1242,9 +1228,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -1292,9 +1277,8 @@
           "description": "If true, use S3 path-style access instead of virtual hosted-style access. Default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -1337,9 +1321,8 @@
           "description": "This value specifies the endpoint to access with the Oracle Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -1382,9 +1365,8 @@
           "description": "This value specifies the endpoint to access with the Google Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -1421,9 +1403,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1463,9 +1444,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1505,9 +1485,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1547,9 +1526,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1589,9 +1567,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1659,9 +1636,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1738,9 +1714,8 @@
           "description": "Certificate Common Name when TLS is enabled. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. It is mutually exclusive with connectionString property. Type: string."
         }
       }
     },
@@ -1799,9 +1774,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -1858,9 +1832,8 @@
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "authentication": {
           "type": "object",
@@ -1927,9 +1900,8 @@
           "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -1986,9 +1958,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -2043,9 +2014,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -2100,9 +2070,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -2144,9 +2113,8 @@
           "description": "Type of authentication used to connect to the HDFS. Possible values are: Anonymous and Windows. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "userName": {
           "type": "object",
@@ -2265,9 +2233,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -2430,9 +2397,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -2515,9 +2481,8 @@
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -2711,9 +2676,8 @@
           "description": "Data Lake Store account resource group name (if different from Data Factory account). Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -2778,9 +2742,8 @@
           "description": "Indicates the azure cloud type of the service principle auth. Allowed values are AzurePublic, AzureChina, AzureUsGovernment, AzureGermany. Default value is the data factory regions’ cloud type. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -2849,9 +2812,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -2909,9 +2871,8 @@
           "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -2968,9 +2929,8 @@
           "description": "Extended properties appended to the connection string. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -3013,9 +2973,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string."
         }
       },
       "required": [
@@ -3062,8 +3021,7 @@
         },
         "encryptedCredential": {
           "type": "string",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string (or Expression with resultType string)."
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Either encryptedCredential or username/password must be provided. Type: string."
         }
       },
       "required": [
@@ -3144,9 +3102,8 @@
           "description": "The Logon Group for the SAP System. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -3259,9 +3216,8 @@
           "description": "The subscriber name. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -3353,9 +3309,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -3446,9 +3401,8 @@
           "description": "The api token for the TeamDesk source."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3490,9 +3444,8 @@
           "description": "The user token for the Quickbase source."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3529,9 +3482,8 @@
           "description": "The api token for the Smartsheet source."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3593,9 +3545,8 @@
           "description": "The api token for the Zendesk source."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3632,9 +3583,8 @@
           "description": "The api token for the Dataworld source."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3714,9 +3664,8 @@
           "description": "The api token for the Asana source."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3791,9 +3740,8 @@
           "description": "The api token for the GoogleSheets source."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3848,9 +3796,8 @@
           "description": "The session token for the S3 temporary security credential."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -3903,9 +3850,8 @@
           "description": "The TCP port number that the Amazon Redshift server uses to listen for client connections. The default value is 5439. Type: integer (or Expression with resultType integer)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -3967,9 +3913,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -4045,9 +3990,8 @@
           "description": "Thumbprint of certificate for ClientCertificate authentication. Only valid for on-premises copy. For on-premises copy with ClientCertificate authentication, either CertThumbprint or EmbeddedCertData/Password should be specified. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "enableServerCertificateValidation": {
           "type": "object",
@@ -4115,9 +4059,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "enableSsl": {
           "type": "object",
@@ -4191,9 +4134,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "privateKeyPath": {
           "type": "object",
@@ -4272,9 +4214,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -4338,9 +4279,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -4405,9 +4345,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -4450,9 +4389,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -4509,9 +4447,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -4552,9 +4489,8 @@
           "description": "The Azure key vault secret reference of credString in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -4591,9 +4527,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -4646,9 +4581,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -4741,9 +4675,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -4784,9 +4717,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -4863,9 +4795,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -4990,9 +4921,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5053,9 +4983,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5136,9 +5065,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5199,9 +5127,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5254,9 +5181,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5296,9 +5222,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -5335,9 +5260,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -5390,9 +5314,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5449,9 +5372,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5537,9 +5459,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5632,9 +5553,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5701,9 +5621,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -5776,9 +5695,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5831,9 +5749,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -5945,9 +5862,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -6013,9 +5929,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -6072,9 +5987,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -6127,9 +6041,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -6166,9 +6079,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -6205,9 +6117,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -6265,9 +6176,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -6418,9 +6328,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "headNodeSize": {
           "type": "object",
@@ -6568,9 +6477,8 @@
           "description": "Azure Data Lake Analytics URI Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -6695,9 +6603,8 @@
           "description": "Enable the elastic disk on the new cluster. This property is now ignored, and takes the default elastic disk behavior in Databricks (elastic disks are always enabled). Type: boolean (or Expression with resultType boolean)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "policyId": {
           "type": "object",
@@ -6752,9 +6659,8 @@
           "description": "The id of an existing interactive cluster that will be used for all runs of this job. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -6824,9 +6730,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -6883,9 +6788,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -6948,9 +6852,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -7042,9 +6945,8 @@
           "type": "object"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -7147,9 +7049,8 @@
           "description": "The Logon Group for the SAP System. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       }
     },
@@ -7244,9 +7145,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         },
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
@@ -7299,9 +7199,8 @@
           "description": "The Azure key vault secret reference of password in connection string."
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
@@ -7352,9 +7251,8 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "type": "string",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
         }
       },
       "required": [
