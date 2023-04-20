@@ -193,7 +193,7 @@ model Choice {
 
     @doc("Reason for finishing")
     @projectedName("json", "finish_reason")
-    finishReason: CompletionsFinishReason;
+    finishReason: CompletionsFinishReason | null;
 }
 
 alias NullableFloat = float32 | null;
