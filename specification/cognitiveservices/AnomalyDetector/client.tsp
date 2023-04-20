@@ -11,6 +11,6 @@ using Azure.ClientGenerator.Core;
 @@convenientAPI(AnomalyDetector.Multivariate.DetectMultivariateBatchAnomaly, true)
 @@convenientAPI(AnomalyDetector.Multivariate.DetectMultivariateLastAnomaly, true)
 
-@@convenientAPI(AnomalyDetector.Univariate.DetectUnivariateEntireSeries, true)
+@@convenientAPI(AnomalyDetector.Univariate.DetectUnivariateEntireSeries, false)
 @@convenientAPI(AnomalyDetector.Univariate.DetectUnivariateLastPoint, true)
 @@convenientAPI(AnomalyDetector.Univariate.DetectUnivariateChangePoint, true)
