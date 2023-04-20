@@ -230,24 +230,27 @@
     },
     "AvoidFeatures": {
       "name": "avoidFeatures",
-      "description": "To avoid certain types of connectors in the resulting path. Multiple values can be specified.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "stairs",
-          "elevators"
-        ],
-        "x-ms-enum": {
-          "name": "avoidFeatures",
-          "values": [
-            "stairs",
-            "elevators"
-          ],
-          "modelAsString": true
-        }
+      "description": "To avoid certain types of connectors in the resulting path. Can be specified multiple times in one request, for example, '&avoidFeatures=elevators&avoidFeatures=escalators'.",
+      "type": "string",
+      "enum": [
+        "stairs",
+        "elevators"
+      ],
+      "x-ms-enum": {
+        "name": "avoidFeatures",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "stairs",
+            "description": "Avoids the use of stairs in route calculation."
+          },
+          {
+            "value": "elevators",
+            "description": "Avoids the use of elevators in route calculation."
+          }
+        ]
       },
-      "in": "query",
+    "in": "query",
       "x-ms-parameter-location": "client"
     },
     "MinWidth": {
