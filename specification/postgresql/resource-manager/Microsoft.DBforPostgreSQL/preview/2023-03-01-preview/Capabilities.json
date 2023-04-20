@@ -128,7 +128,7 @@
         },
         "iops": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Supported IOPS for this storage tier",
           "readOnly": true
         }
@@ -139,7 +139,7 @@
       "properties": {
         "supportedIops": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Supported IOPS",
           "readOnly": true
         },
@@ -154,7 +154,7 @@
           "description": "Default tier for IOPS",
           "readOnly": true
         },
-        "supportedIopsTierList": {
+        "supportedIopsTiers": {
           "type": "array",
           "description": "List of available options to upgrade the storage performance",
           "items": {
@@ -183,13 +183,13 @@
         },
         "vCores": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Supported vCores",
           "readOnly": true
         },
         "supportedIops": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Supported IOPS",
           "readOnly": true
         },
@@ -203,18 +203,9 @@
           "type": "array",
           "description": "List of supported Availability Zones",
           "items": {
-            "type": "object",
-            "properties": {
-              "zone": {
-                "type": "string",
-                "description": "Availability Zone name",
-                "readOnly": true
-              }
-            }
+            "type": "string"
           },
-          "x-ms-identifiers": [
-            "zone"
-          ]
+          "readOnly": true
         },
         "supportedHaMode": {
           "type": "array",
@@ -309,7 +300,8 @@
           "readOnly": true
         },
         "supportedStorageGb": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "Fast provisioning supported storage in Gb",
           "readOnly": true
         },
