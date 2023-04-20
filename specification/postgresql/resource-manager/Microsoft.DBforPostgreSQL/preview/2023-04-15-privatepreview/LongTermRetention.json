@@ -102,6 +102,10 @@
               "Azure-AsyncOperation": {
                 "description": "URL for checking the ongoing status of the operation.",
                 "type": "string"
+              },
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
               }
             }
           },
@@ -129,7 +133,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "Location"
         },
         "deprecated": false
       }
@@ -232,7 +236,7 @@
       }
     },
     "BackupRequest": {
-      "description": "BackupRequest",
+      "description": "The request that is made for a backup.",
       "type": "object",
       "allOf": [
         {
@@ -244,7 +248,7 @@
       ]
     },
     "PreBackupRequest": {
-      "description": "PreBackupRequest.",
+      "description": "A request that is made for pre-backup.",
       "type": "object",
       "allOf": [
         {
@@ -253,7 +257,7 @@
       ]
     },
     "BackupSettings": {
-      "description": "backupSettings",
+      "description": "The settings for the long term backup.",
       "type": "object",
       "required": [
         "backupName"
@@ -282,11 +286,11 @@
       }
     },
     "Properties": {
-      "description": "Properties",
+      "description": "The properties.",
       "type": "object"
     },
     "PreBackupResponseProperties": {
-      "description": "PreBackupResponseProperties",
+      "description": "Response for the pre-backup request.",
       "type": "object",
       "allOf": [
         {
@@ -305,7 +309,7 @@
       }
     },
     "BackupResponseProperties": {
-      "description": "BackupResponseProperties",
+      "description": "Response for the backup request.",
       "type": "object",
       "allOf": [
         {
@@ -349,7 +353,7 @@
           "type": "string"
         },
         "name": {
-          "description": "name",
+          "description": "the name of the backup",
           "type": "string"
         },
         "status": {
@@ -371,12 +375,12 @@
           "description": "Embedded Error Object."
         },
         "startTime": {
-          "description": "StartTime",
+          "description": "Start time of the operation.",
           "format": "date-time",
           "type": "string"
         },
         "endTime": {
-          "description": "endTime",
+          "description": "End time of the operation.",
           "format": "date-time",
           "type": "string"
         },
