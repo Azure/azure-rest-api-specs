@@ -1011,7 +1011,7 @@
             "type": "string"
           },
           {
-            "name": "jobUpdate",
+            "name": "jobPatchParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -1108,7 +1108,7 @@
             "type": "string"
           },
           {
-            "name": "job",
+            "name": "jobUpdateParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -1287,7 +1287,7 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "jobDisableParameter",
             "in": "body",
             "required": true,
             "description": "The parameters for the request.",
@@ -7561,10 +7561,7 @@
           "readOnly": true
         }
       },
-      "description": "An Azure Batch Job.",
-      "required": [
-        "id"
-      ]
+      "description": "An Azure Batch Job."
     },
     "BatchJobDisableParameters": {
       "type": "object",
@@ -7707,10 +7704,7 @@
           "readOnly": true
         }
       },
-      "description": "A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a\nspecification used to create each Job.",
-      "required": [
-        "id"
-      ]
+      "description": "A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a\nspecification used to create each Job."
     },
     "BatchJobScheduleListResult": {
       "type": "object",
@@ -8093,10 +8087,7 @@
           "readOnly": true
         }
       },
-      "description": "A Pool in the Azure Batch service.",
-      "required": [
-        "id"
-      ]
+      "description": "A Pool in the Azure Batch service."
     },
     "BatchPoolEnableAutoScaleParameters": {
       "type": "object",
@@ -8548,9 +8539,7 @@
       },
       "description": "A Certificate that can be installed on Compute Nodes and can be used to\nauthenticate operations on the machine.",
       "required": [
-        "data",
-        "certificateFormat",
-        "password"
+        "data"
       ]
     },
     "CertificateFormat": {
@@ -13081,7 +13070,7 @@
     "TaskAddStatus": {
       "type": "string",
       "enum": [
-        "Success",
+        "success",
         "clienterror",
         "servererror"
       ],
@@ -13091,7 +13080,7 @@
         "values": [
           {
             "name": "Success",
-            "value": "Success",
+            "value": "success",
             "description": "The Task was added successfully."
           },
           {
