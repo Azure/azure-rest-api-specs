@@ -1986,37 +1986,25 @@
     },
     "SendDtmfRequest": {
       "required": [
-        "sendDtmfOptions"
-      ],
-      "type": "object",
-      "properties": {
-        "sendDtmfOptions": {
-          "$ref": "#/definitions/SendDtmfOptions",
-          "description": "Defines options for sending dtmf tones."
-        },
-        "operationContext": {
-          "description": "The value to identify context of the operation.",
-          "type": "string"
-        }
-      }
-    },
-    "SendDtmfOptions": {
-      "required": [
         "tones",
         "targetParticipant"
       ],
       "type": "object",
       "properties": {
-        "targetParticipant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "Target participant of Send DTMF tone."
-        },
         "tones": {
-          "description": "The captured tones.",
+          "description": "List of tones to be sent to target participant.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Tone"
           }
+        },
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Target participant of send DTMF."
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
         }
       }
     },
@@ -2615,56 +2603,6 @@
         }
       }
     },
-    "SendDtmfCompleted": {
-      "type": "object",
-      "properties": {
-        "callConnectionId": {
-          "description": "Call connection ID.",
-          "type": "string"
-        },
-        "serverCallId": {
-          "description": "Server call ID.",
-          "type": "string"
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC service."
-        }
-      }
-    },
-    "SendDtmfFailed": {
-      "type": "object",
-      "properties": {
-        "callConnectionId": {
-          "description": "Call connection ID.",
-          "type": "string"
-        },
-        "serverCallId": {
-          "description": "Server call ID.",
-          "type": "string"
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC service."
-        }
-      }
-    },
     "RecordingStateChanged": {
       "type": "object",
       "properties": {
@@ -2922,10 +2860,6 @@
     "ContinuousDtmfRecognitionToneFailed": {
       "type": "object",
       "properties": {
-        "toneInfo": {
-          "$ref": "#/definitions/ToneInfo",
-          "description": "Information about Tone."
-        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string"
@@ -3015,6 +2949,56 @@
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
         }
       }
+    },
+    "SendDtmfCompleted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+        }
+      }
+    },
+    "SendDtmfFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+        }
+      }
     }
   },
   "parameters": {
@@ -3032,6 +3016,7 @@
       "description": "The endpoint of the Azure Communication resource.",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
