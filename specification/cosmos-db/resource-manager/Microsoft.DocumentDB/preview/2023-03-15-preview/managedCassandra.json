@@ -1500,6 +1500,18 @@
                 "modelAsString": true
               }
             },
+            "azureConnectionMethod": {
+              "type": "string",
+              "description": "Which connection method Managed Cassandra should use to conenct to Azure resources it needs. 'None' is the deafukt which means conenct directly, 'Vpn' will connect through a VPN endpoint for added security and simplicity.",
+              "enum": [
+                "None",
+                "Vpn"
+              ],
+              "x-ms-enum": {
+                "name": "AzureConnectionMethod",
+                "modelAsString": true
+              }
+            },
             "initialCassandraAdminPassword": {
               "x-ms-mutability": [
                 "create"
