@@ -29,7 +29,12 @@
                 "resourceGroups": "delete",
                 "managementGroups": "detach"
               },
-              "denySettings": "none",
+              "denySettings": {
+                "mode": "denyDelete",
+                "excludedPrincipals": "[principal]",
+                "excludedActions": "[action]",
+                "applyToChildScopes": "false"
+              },
               "parameters": {
                 "parameter1": {
                   "value": "a string"
@@ -77,7 +82,12 @@
                 "resourceGroups": "delete",
                 "managementGroups": "detach"
               },
-              "denySettings": "none",
+              "denySettings": {
+                "mode": "denyDelete",
+                "excludedPrincipals": "[principal]",
+                "excludedActions": "[action]",
+                "applyToChildScopes": "false"
+              },
               "parameters": {
                 "parameter1": {
                   "value": "a string"
