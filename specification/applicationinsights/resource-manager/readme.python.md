@@ -45,8 +45,8 @@ perform-load: false
 These settings apply only when `--tag=package-2022-06-15-only --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2022-06-15-only' && $(python)
-namespace: azure.mgmt.applicationinsights.v2022_06_15_only
-output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2022_06_15_only
+namespace: azure.mgmt.applicationinsights.v2022_06_15
+output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2022_06_15
 ```
 
 ### Tag: package-2015-05 and python
