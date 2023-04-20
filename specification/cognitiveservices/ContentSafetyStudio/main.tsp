@@ -54,7 +54,7 @@ enum CategoryEnum {
   "Self-harm" 
 }
 
-@doc("Severity level.")
+@doc("Severity level. The higher the value, the more risk it is.")
 enum SeverityEnum {
   "0",
   "2",
