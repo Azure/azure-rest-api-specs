@@ -1289,7 +1289,8 @@
       "x-ms-enum": {
         "name": "ChatMessageType",
         "modelAsString": true
-      }
+      },
+      "example": "html"
     },
     "SendChatMessageRequest": {
       "description": "Details of the message to send.",
@@ -1301,7 +1302,7 @@
         "content": {
           "description": "Chat message content.",
           "type": "string",
-          "example": "Come one guys, lets go for lunch together."
+          "example": "<p>Come one guys, lets go for lunch together.</p>"
         },
         "senderDisplayName": {
           "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
@@ -1416,7 +1417,7 @@
         "message": {
           "description": "Chat message content for messages of types text or html.",
           "type": "string",
-          "example": "Come one guys, lets go for lunch together."
+          "example": "<p>Come one guys, lets go for lunch together.</p><img id=\"A27C7079-626F-4D23-8BEE-582F2C376B5A\">"
         },
         "topic": {
           "description": "Chat message content for messages of type topicUpdated.",
@@ -1435,7 +1436,25 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChatAttachment"
-          }
+          },
+          "example": [
+            {
+              "id": "A27C7079-626F-4D23-8BEE-582F2C376B5A",
+              "attachmentType": "teamsInlineImage",
+              "contentType": "png",
+              "name": "SomeImage.png",
+              "url": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original",
+              "previewUrl": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
+            },
+            {
+              "id": "R47C7079-626F-4D23-8BEE-582F2CSADFEF",
+              "attachmentType": "teamsFile",
+              "contentType": "txt",
+              "name": "document.txt",
+              "url": "https://example.sharepoint.com/gYVRbks8GlpVRbk-PoBs8GlpgYVRbk",
+              "previewUrl": ""
+            }
+          ]
         },
         "initiatorCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel"
