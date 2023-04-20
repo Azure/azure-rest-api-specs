@@ -2427,13 +2427,19 @@
       "type": "object",
       "properties": {
         "properties": {
-          "apiKey": {
-            "type": "string",
-            "description": "The User Api Key Generated based on ReturnApiKey flag. This is applicable for non-Portal clients only.",
-            "x-ms-secret": true
-          }
+          "$ref": "#/definitions/UserApiKeyResponseProperties"
         }
       }          
+    },
+    "UserApiKeyResponseProperties": {
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "description": "The User Api Key Generated based on GenerateApiKey flag. This is applicable for non-Portal clients only.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
     }
   },
   "parameters": {
