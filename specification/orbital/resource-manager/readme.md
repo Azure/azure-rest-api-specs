@@ -47,15 +47,6 @@ input-file:
   - Microsoft.Orbital/stable/2022-03-01/orbital.json
 ```
 
-### Tag: package-2021-04-04-preview
-
-These settings apply only when `--tag=package-2021-04-04-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-04-04-preview'
-input-file:
-  - Microsoft.Orbital/preview/2021-04-04-preview/orbital.json
-```
-
 ---
 
 # Code Generation

@@ -191,21 +191,6 @@ input-file:
   - Azure.Analytics.Purview.Share/preview/2023-02-15-preview/share.json
 ```
 
-``` yaml
-openapi-type: data-plane
-tag: package-2022-11-01-preview
-title: PurviewPDSClient
-```
-
-### Tag: package-2022-11-01-preview
-
-These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-11-01-preview'
-input-file:
-- Azure.Analytics.Purview.PDS/preview/2022-11-01-preview/pds.json
-```
-
 ---
 
 # Code Generation

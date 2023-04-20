@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HyperscaleCitusManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Cosmos DB for PostgreSQL resources including clusters, servers, configurations, firewall rules, roles, private endpoint connections and private link resources.",
+    "title": "Azure Cosmos DB for PostgreSQL",
+    "description": "Azure Cosmos DB for PostgreSQL database service resource provider REST APIs",
     "version": "2022-11-08"
   },
   "host": "management.azure.com",
@@ -29,7 +29,7 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "user_impersonation": "Impersonate your user account."
       }
     }
   },
@@ -45,7 +45,7 @@
             "$ref": "./examples/ClusterList.json"
           }
         },
-        "description": "List all the clusters in a given subscription.",
+        "description": "Lists all clusters in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -84,7 +84,7 @@
             "$ref": "./examples/ClusterListByResourceGroup.json"
           }
         },
-        "description": "List all the clusters in a given resource group.",
+        "description": "Lists all clusters in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -121,7 +121,7 @@
         "tags": [
           "Clusters"
         ],
-        "operationId": "Clusters_CreateOrUpdate",
+        "operationId": "Clusters_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -190,7 +190,7 @@
         }
       },
       "get": {
-        "description": "Gets information about a cluster.",
+        "description": "Gets information about a cluster such as compute and storage configuration and cluster lifecycle metadata such as cluster creation date and time.",
         "tags": [
           "Clusters"
         ],
@@ -285,7 +285,7 @@
         }
       },
       "patch": {
-        "description": "Updates an existing cluster. The request body can contain one to many of the properties present in the normal cluster definition.",
+        "description": "Updates an existing cluster. The request body can contain one or several properties from the cluster definition.",
         "tags": [
           "Clusters"
         ],
@@ -295,19 +295,19 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Update the cluster": {
+          "Update multiple configuration settings of the cluster": {
             "$ref": "./examples/ClusterUpdate.json"
           },
-          "Scale compute": {
+          "Scale compute up or down": {
             "$ref": "./examples/ClusterScaleCompute.json"
           },
-          "Scale storage": {
+          "Scale up storage": {
             "$ref": "./examples/ClusterScaleStorage.json"
           },
-          "Add new worker nodes": {
+          "Scale out: Add new worker nodes": {
             "$ref": "./examples/ClusterAddNode.json"
           },
-          "Update customer maintenance window": {
+          "Update or define maintenance window": {
             "$ref": "./examples/ClusterUpdateMaintenanceWindow.json"
           }
         },
@@ -641,7 +641,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_CreateOrUpdateCoordinator",
+        "operationId": "Configurations_UpdateOnCoordinator",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -709,7 +709,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/nodeConfigurations/{configurationName}": {
       "get": {
-        "description": "Gets information of a configuration for node.",
+        "description": "Gets information of a configuration for worker nodes.",
         "tags": [
           "Configurations"
         ],
@@ -752,11 +752,11 @@
         }
       },
       "put": {
-        "description": "Updates configuration of nodes in a cluster",
+        "description": "Updates configuration of worker nodes in a cluster",
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_CreateOrUpdateNode",
+        "operationId": "Configurations_UpdateOnNode",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -824,7 +824,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/firewallRules/{firewallRuleName}": {
       "put": {
-        "description": "Creates a new firewall rule or updates an existing firewall rule.",
+        "description": "Creates a new cluster firewall rule or updates an existing cluster firewall rule.",
         "tags": [
           "FirewallRules"
         ],
@@ -994,7 +994,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/firewallRules": {
       "get": {
-        "description": "List all the firewall rules in a given cluster.",
+        "description": "Lists all the firewall rules on cluster.",
         "tags": [
           "FirewallRules"
         ],
@@ -1254,7 +1254,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/restart": {
       "post": {
-        "description": "Restarts the cluster.",
+        "description": "Restarts all nodes in the cluster.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1305,7 +1305,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/start": {
       "post": {
-        "description": "Starts the cluster.",
+        "description": "Starts stopped compute on all cluster nodes.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1359,7 +1359,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/stop": {
       "post": {
-        "description": "Stops the cluster.",
+        "description": "Stops compute on all cluster nodes.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1413,7 +1413,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/promote": {
       "post": {
-        "description": "Promote the read replica cluster.",
+        "description": "Promotes read replica cluster to an independent read-write cluster.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1423,7 +1423,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Promote the read replica": {
+          "Promote read replica cluster to an independent read-write cluster.": {
             "$ref": "./examples/ClusterPromoteReadReplica.json"
           }
         },
@@ -1464,7 +1464,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
       "post": {
-        "description": "Check the availability of name for resource",
+        "description": "Checks availability of a cluster name. Cluster names should be globally unique; at least 3 characters and at most 40 characters long; they must only contain lowercase letters, numbers, and hyphens; and must not start or end with a hyphen.",
         "tags": [
           "Clusters"
         ],
@@ -1488,7 +1488,7 @@
             "schema": {
               "$ref": "#/definitions/NameAvailabilityRequest"
             },
-            "description": "The required parameters for checking if resource name is available."
+            "description": "The required parameters for checking if cluster name is available."
           }
         ],
         "responses": {
@@ -1633,7 +1633,7 @@
         }
       },
       "put": {
-        "description": "Approve or reject a private endpoint connection with a given name.",
+        "description": "Approves or Rejects a private endpoint connection with a given name.",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -1643,7 +1643,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Approve or reject a private endpoint connection with a given name": {
+          "Approves or Rejects a Private Endpoint Connection with a given name.": {
             "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
           }
         },
@@ -1868,7 +1868,7 @@
       "properties": {
         "serverEdition": {
           "type": "string",
-          "description": "The edition of a server"
+          "description": "The edition of a server."
         },
         "storageQuotaInMb": {
           "type": "integer",
@@ -1878,15 +1878,15 @@
         "vCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a server (max: 64)."
+          "description": "The vCores count of a server."
         },
         "enableHa": {
           "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
+          "description": "If high availability (HA) is enabled or not for the server."
         },
         "enablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server.",
+          "description": "If public access is enabled on server.",
           "readOnly": true
         },
         "isReadOnly": {
@@ -1950,11 +1950,11 @@
         },
         "postgresqlVersion": {
           "type": "string",
-          "description": "The PostgreSQL version of server."
+          "description": "The major PostgreSQL version of server."
         },
         "citusVersion": {
           "type": "string",
-          "description": "The Citus version of server."
+          "description": "The Citus extension version of server."
         }
       }
     },
@@ -2017,15 +2017,15 @@
             "create",
             "update"
           ],
-          "description": "The password of the administrator login."
+          "description": "The password of the administrator login. Each cluster is created with pre-defined administrative role called ‘citus’. "
         },
         "postgresqlVersion": {
           "type": "string",
-          "description": "The PostgreSQL version of the cluster."
+          "description": "The major PostgreSQL version on all cluster servers."
         },
         "citusVersion": {
           "type": "string",
-          "description": "The Citus version of the cluster."
+          "description": "The Citus extension version on all cluster servers."
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
@@ -2033,11 +2033,11 @@
         },
         "enableHa": {
           "type": "boolean",
-          "description": "If high availability is enabled or not for the cluster."
+          "description": "If high availability (HA) is enabled or not for the cluster."
         },
         "preferredPrimaryZone": {
           "type": "string",
-          "description": "Preferred primary zone for the cluster"
+          "description": "Preferred primary availability zone (AZ) for all cluster servers."
         },
         "coordinatorServerEdition": {
           "type": "string",
@@ -2051,11 +2051,11 @@
         "coordinatorVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of the coordinator (max: 64)."
+          "description": "The vCores count of the coordinator (max: 96)."
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for the coordinator."
+          "description": "If public access is enabled on coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2064,21 +2064,21 @@
         "nodeCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1."
+          "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
           "format": "int64",
-          "description": "The storage of a node in MB."
+          "description": "The storage in MB on each worker node."
         },
         "nodeVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a node (max: 64)."
+          "description": "The compute in vCores on each worker node (max: 104)."
         },
         "nodeEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a node.",
+          "description": "If public access is enabled on worker nodes.",
           "readOnly": true
         },
         "maintenanceWindow": {
@@ -2152,11 +2152,11 @@
         },
         "postgresqlVersion": {
           "type": "string",
-          "description": "The PostgreSQL version of cluster."
+          "description": "The major PostgreSQL version on all cluster servers."
         },
         "citusVersion": {
           "type": "string",
-          "description": "The Citus version of cluster."
+          "description": "The Citus extension version on all cluster servers."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -2164,7 +2164,7 @@
         },
         "preferredPrimaryZone": {
           "type": "string",
-          "description": "Preferred primary zone for the cluster"
+          "description": "Preferred primary availability zone (AZ) for all cluster servers."
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
@@ -2172,7 +2172,7 @@
         },
         "enableHa": {
           "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
+          "description": "If high availability (HA) is enabled or not for the cluster."
         },
         "coordinatorServerEdition": {
           "type": "string",
@@ -2181,16 +2181,16 @@
         "coordinatorStorageQuotaInMb": {
           "type": "integer",
           "format": "int64",
-          "description": "The storage of a server in MB. Required for creation."
+          "description": "The storage of a server in MB. Required for creation. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "coordinatorVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a server (max: 64). Required for creation."
+          "description": "The vCores count of a server (max: 96). Required for creation. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server."
+          "description": "If public access is enabled on coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2199,21 +2199,21 @@
         "nodeCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1. Required for creation."
+          "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1. Required for creation."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
           "format": "int64",
-          "description": "The storage of a server in MB."
+          "description": "The storage in MB on each worker node. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "nodeVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a server (max: 64)."
+          "description": "The compute in vCores on each worker node (max: 104). See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "nodeEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server."
+          "description": "If public access is enabled on worker nodes."
         },
         "serverNames": {
           "type": "array",
@@ -2233,12 +2233,12 @@
         },
         "sourceLocation": {
           "type": "string",
-          "description": "The location of source cluster for read replica clusters."
+          "description": "The Azure region of source cluster for read replica clusters."
         },
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
+          "description": "Date and time in UTC (ISO8601 format) for cluster restore."
         },
         "readReplicas": {
           "type": "array",
@@ -2267,26 +2267,26 @@
     },
     "MaintenanceWindow": {
       "type": "object",
-      "description": "Maintenance window of a cluster.",
+      "description": "Schedule settings for regular cluster updates.",
       "properties": {
         "customWindow": {
           "type": "string",
-          "description": "indicates whether custom window is enabled or disabled"
+          "description": "Indicates whether custom maintenance window is enabled or not."
         },
         "startHour": {
           "type": "integer",
           "format": "int32",
-          "description": "start hour for maintenance window"
+          "description": "Start hour within preferred day of the week for maintenance window."
         },
         "startMinute": {
           "type": "integer",
           "format": "int32",
-          "description": "start minute for maintenance window"
+          "description": "Start minute within the start hour for maintenance window."
         },
         "dayOfWeek": {
           "type": "integer",
           "format": "int32",
-          "description": "day of week for maintenance window"
+          "description": "Preferred day of the week for maintenance window."
         }
       }
     },
@@ -2650,7 +2650,7 @@
           "description": "The localized display information for this particular operation or action."
         },
         "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
+          "description": "Indicates whether the operation is a data action.",
           "type": "boolean"
         },
         "origin": {
@@ -2683,7 +2683,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of available operation details",
+          "description": "Collection of available operation details.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2701,12 +2701,12 @@
       }
     },
     "NameAvailabilityRequest": {
-      "description": "Request from client to check resource name availability.",
+      "description": "Request from client to check cluster name availability.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Resource name to verify."
+          "description": "Cluster name to verify."
         },
         "type": {
           "type": "string",
@@ -2726,24 +2726,24 @@
       ]
     },
     "NameAvailability": {
-      "description": "Represents a resource name availability.",
+      "description": "Represents cluster name availability.",
       "type": "object",
       "properties": {
         "message": {
           "type": "string",
-          "description": "Error Message."
+          "description": "Error message."
         },
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicates whether the resource name is available."
+          "description": "Indicates whether the cluster name is available."
         },
         "name": {
           "type": "string",
-          "description": "name of the cluster."
+          "description": "Name of the cluster."
         },
         "type": {
           "type": "string",
-          "description": "type of the cluster"
+          "description": "Type of the cluster."
         }
       }
     },
@@ -2758,7 +2758,7 @@
       }
     },
     "SimplePrivateEndpointConnection": {
-      "description": "A private endpoint connection",
+      "description": "A private endpoint connection.",
       "type": "object",
       "allOf": [
         {
@@ -2892,7 +2892,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the private endpoint connection associated with the Azure resource.",
+      "description": "The name of the private endpoint connection associated with the cluster.",
       "pattern": "^[-\\w\\._]+$",
       "x-ms-parameter-location": "method"
     },

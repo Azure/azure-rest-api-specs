@@ -1482,6 +1482,50 @@
           }
         }
       }
+    },
+    "/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Gets the state of a long running operation.",
+        "operationId": "GetOperationDetails",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "snapshot",
+            "in": "query",
+            "description": "Snapshot identifier for the long running operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOperationStatus": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1601,7 +1645,7 @@
         "retention_period": {
           "description": "The amount of time, in seconds, that a snapshot will remain in the archived state before expiring. This property is only writable during the creation of a snapshot. If not specified, the default lifetime of key-value revisions will be used.",
           "type": "integer",
-          "minimum": 0,
+          "minimum": 3600,
           "maximum": 7776000,
           "format": "int64"
         },
@@ -1722,6 +1766,82 @@
         }
       },
       "readOnly": true
+    },
+    "OperationDetails": {
+      "description": "Details of a long running operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id of the operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the operation",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "State"
+          }
+        },
+        "error": {
+          "description": "An error, available when the status is `Failed`, describing why the operation failed.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ErrorDetail": {
+      "description": "The details of an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerError"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "InnerError": {
+      "description": "An object containing specific information about an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string"
+        },
+        "innererror": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerError"
+        }
+      }
     },
     "KeyListResult": {
       "description": "The result of a list request.",
