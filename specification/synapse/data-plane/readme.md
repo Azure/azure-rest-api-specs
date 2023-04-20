@@ -1,14 +1,13 @@
 # Azure Synapse Analytics
 
-
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Azure Synapse Analytics.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Azure Synapse Analytics, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -16,11 +15,13 @@ To build the SDK for Azure Synapse Analytics, simply [Install AutoRest](https://
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Azure Synapse Analytics API.
 
 ``` yaml
@@ -46,9 +47,18 @@ tag: package-vnet-2020-12-01
 ```
 
 ``` yaml $(package-monitoring)
-tag: package-monitoring-2020-12-01
+tag: package-preview-2023-04
 ```
 
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.Synapse/preview/2023-04-18-preview/linkConnections.json
+```
 ### Tag: package-artifacts-composite-v6
 
 These settings apply only when `--tag=package-artifacts-composite-v6` is specified on the command line.
@@ -456,6 +466,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
@@ -485,6 +496,7 @@ directive:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
