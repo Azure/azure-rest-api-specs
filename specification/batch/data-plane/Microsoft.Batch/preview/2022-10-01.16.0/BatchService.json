@@ -7135,7 +7135,7 @@
             "$ref": "#/definitions/AccessScope"
           },
           "x-typespec-name": "AccessScope[]",
-          "description": "The authentication token grants access to a limited set of Batch service\noperations. Currently the only supported value for the access property is\n'job', which grants access to all operations related to the Job which contains\nthe Task."
+          "description": "The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task."
         }
       },
       "description": "The settings for an authentication token that the Task can use to perform Batch\nservice operations."
@@ -7752,7 +7752,7 @@
       "properties": {
         "terminateReason": {
           "type": "string",
-          "description": "The text you want to appear as the Job's TerminateReason. The default is\n'UserTerminate'."
+          "description": "The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'."
         }
       },
       "description": "Options when terminating a Job."
@@ -7804,7 +7804,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores, and cannot contain more than 64 characters. The ID is\ncase-preserving and case-insensitive (that is, you may not have two IDs within\nan Account that differ only by case).",
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7872,7 +7872,7 @@
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
-          "description": "This property and virtualMachineConfiguration are mutually exclusive and one of\nthe properties must be specified. This property cannot be specified if the\nBatch Account was created with its poolAllocationMode property set to\n'UserSubscription'.",
+          "description": "This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8009,7 +8009,7 @@
             "type": "string"
           },
           "x-typespec-name": "string[]",
-          "description": "The list of application licenses must be a subset of available Batch service\napplication licenses. If a license is requested which is not supported, Pool\ncreation will fail.",
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8228,7 +8228,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores, and cannot contain more than 64 characters.",
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9231,7 +9231,7 @@
         },
         "password": {
           "type": "string",
-          "description": "The password is required for Windows Compute Nodes (those created with\n'cloudServiceConfiguration', or created with 'virtualMachineConfiguration'\nusing a Windows Image reference). For Linux Compute Nodes, the password can\noptionally be specified along with the sshPublicKey property."
+          "description": "The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property."
         },
         "sshPublicKey": {
           "type": "string",
@@ -9463,7 +9463,7 @@
       "properties": {
         "placement": {
           "$ref": "#/definitions/DiffDiskPlacement",
-          "description": "This property can be used by user in the request to choose the location e.g.,\ncache disk space for Ephemeral OS disk provisioning. For more information on\nEphemeral OS disk size requirements, please refer to Ephemeral OS disk size\nrequirements for Windows VMs at\nhttps://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements\nand Linux VMs at\nhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements."
+          "description": "  This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at\nhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements. "
         }
       },
       "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the\ncompute node (VM)."
@@ -9752,7 +9752,7 @@
         },
         "dependencyAction": {
           "$ref": "#/definitions/DependencyAction",
-          "description": "Possible values are 'satisfy' (allowing dependent tasks to progress) and\n'block' (dependent tasks continue to wait). Batch does not yet support\ncancellation of dependent tasks."
+          "description": "Possible values are 'satisfy' (allowing dependent tasks to progress) and 'block' (dependent tasks continue to wait). Batch does not yet support cancellation of dependent tasks."
         }
       },
       "description": "Specifies how the Batch service responds to a particular exit condition."
@@ -10128,7 +10128,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores and cannot contain more than 64 characters."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters."
         },
         "displayName": {
           "type": "string",
@@ -10219,7 +10219,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores and cannot contain more than 64 characters."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters."
         },
         "displayName": {
           "type": "string",
@@ -10306,7 +10306,7 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "description": "The virtual network must be in the same region and subscription as the Azure\nBatch Account. The specified subnet should have enough free IP addresses to\naccommodate the number of Compute Nodes which will run Tasks from the Job. This\ncan be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch'\nservice principal must have the 'Classic Virtual Machine Contributor'\nRole-Based Access Control (RBAC) role for the specified VNet so that Azure\nBatch service can schedule Tasks on the Nodes. This can be verified by checking\nif the specified VNet has any associated Network Security Groups (NSG). If\ncommunication to the Nodes in the specified subnet is denied by an NSG, then\nthe Batch service will set the state of the Compute Nodes to unusable. This is\nof the form\n/subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.\nIf the specified VNet has any associated Network Security Groups (NSG), then a\nfew reserved system ports must be enabled for inbound communication from the\nAzure Batch service. For Pools created with a Virtual Machine configuration,\nenable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for\nWindows. Port 443 is also required to be open for outbound connections for\ncommunications to Azure Storage. For more details see:\nhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor'\nRole-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is\nof the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a\nfew reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
         }
       },
       "description": "The network configuration for the Job.",
@@ -10319,7 +10319,7 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "description": "The virtual network must be in the same region and subscription as the Azure\nBatch Account. The specified subnet should have enough free IP addresses to\naccommodate the number of Compute Nodes which will run Tasks from the Job. This\ncan be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch'\nservice principal must have the 'Classic Virtual Machine Contributor'\nRole-Based Access Control (RBAC) role for the specified VNet so that Azure\nBatch service can schedule Tasks on the Nodes. This can be verified by checking\nif the specified VNet has any associated Network Security Groups (NSG). If\ncommunication to the Nodes in the specified subnet is denied by an NSG, then\nthe Batch service will set the state of the Compute Nodes to unusable. This is\nof the form\n/subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.\nIf the specified VNet has any associated Network Security Groups (NSG), then a\nfew reserved system ports must be enabled for inbound communication from the\nAzure Batch service. For Pools created with a Virtual Machine configuration,\nenable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for\nWindows. Port 443 is also required to be open for outbound connections for\ncommunications to Azure Storage. For more details see:\nhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor'\nRole-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is\nof the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a\nfew reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
         }
       },
       "description": "The network configuration for the Job."
@@ -10355,7 +10355,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores and cannot contain more than 64 characters. If you do not\nspecify this property, the Batch service assigns a default value of\n'jobpreparation'. No other Task in the Job can have the same ID as the Job\nPreparation Task. If you try to submit a Task with the same id, the Batch\nservice rejects the request with error code TaskIdSameAsJobPreparationTask; if\nyou are calling the REST API directly, the HTTP status code is 409 (Conflict)."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
         },
         "commandLine": {
           "type": "string",
@@ -10493,7 +10493,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores and cannot contain more than 64 characters. If you do not\nspecify this property, the Batch service assigns a default value of\n'jobpreparation'. No other Task in the Job can have the same ID as the Job\nPreparation Task. If you try to submit a Task with the same id, the Batch\nservice rejects the request with error code TaskIdSameAsJobPreparationTask; if\nyou are calling the REST API directly, the HTTP status code is 409 (Conflict)."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
         },
         "commandLine": {
           "type": "string",
@@ -10545,7 +10545,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores and cannot contain more than 64 characters. If you do not\nspecify this property, the Batch service assigns a default value of\n'jobrelease'. No other Task in the Job can have the same ID as the Job Release\nTask. If you try to submit a Task with the same id, the Batch service rejects\nthe request with error code TaskIdSameAsJobReleaseTask; if you are calling the\nREST API directly, the HTTP status code is 409 (Conflict)."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
         },
         "commandLine": {
           "type": "string",
@@ -10670,7 +10670,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID can contain any combination of alphanumeric characters including hyphens\nand underscores and cannot contain more than 64 characters. If you do not\nspecify this property, the Batch service assigns a default value of\n'jobrelease'. No other Task in the Job can have the same ID as the Job Release\nTask. If you try to submit a Task with the same id, the Batch service rejects\nthe request with error code TaskIdSameAsJobReleaseTask; if you are calling the\nREST API directly, the HTTP status code is 409 (Conflict)."
+          "description": "The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
         },
         "commandLine": {
           "type": "string",
@@ -11351,7 +11351,7 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "description": "The virtual network must be in the same region and subscription as the Azure\nBatch Account. The specified subnet should have enough free IP addresses to\naccommodate the number of Compute Nodes in the Pool. If the subnet doesn't have\nenough free IP addresses, the Pool will partially allocate Nodes and a resize\nerror will occur. The 'MicrosoftAzureBatch' service principal must have the\n'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for\nthe specified VNet. The specified subnet must allow communication from the\nAzure Batch service to be able to schedule Tasks on the Nodes. This can be\nverified by checking if the specified VNet has any associated Network Security\nGroups (NSG). If communication to the Nodes in the specified subnet is denied\nby an NSG, then the Batch service will set the state of the Compute Nodes to\nunusable. For Pools created with virtualMachineConfiguration only ARM virtual\nnetworks ('Microsoft.Network/virtualNetworks') are supported, but for Pools\ncreated with cloudServiceConfiguration both ARM and classic virtual networks\nare supported. If the specified VNet has any associated Network Security Groups\n(NSG), then a few reserved system ports must be enabled for inbound\ncommunication. For Pools created with a virtual machine configuration, enable\nports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows.\nFor Pools created with a cloud service configuration, enable ports 10100,\n20100, and 30100. Also enable outbound connections to Azure Storage on port\n443. For more details see:\nhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to\naccommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize\nerror will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for\nthe specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be\nverified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied\nby an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual\nnetworks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks\nare supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound\ncommunication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows.\nFor Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port\n443. For more details see:\nhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
         },
         "dynamicVNetAssignmentScope": {
           "$ref": "#/definitions/DynamicVNetAssignmentScope",
@@ -11373,7 +11373,7 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "description": "The virtual network must be in the same region and subscription as the Azure\nBatch Account. The specified subnet should have enough free IP addresses to\naccommodate the number of Compute Nodes in the Pool. If the subnet doesn't have\nenough free IP addresses, the Pool will partially allocate Nodes and a resize\nerror will occur. The 'MicrosoftAzureBatch' service principal must have the\n'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for\nthe specified VNet. The specified subnet must allow communication from the\nAzure Batch service to be able to schedule Tasks on the Nodes. This can be\nverified by checking if the specified VNet has any associated Network Security\nGroups (NSG). If communication to the Nodes in the specified subnet is denied\nby an NSG, then the Batch service will set the state of the Compute Nodes to\nunusable. For Pools created with virtualMachineConfiguration only ARM virtual\nnetworks ('Microsoft.Network/virtualNetworks') are supported, but for Pools\ncreated with cloudServiceConfiguration both ARM and classic virtual networks\nare supported. If the specified VNet has any associated Network Security Groups\n(NSG), then a few reserved system ports must be enabled for inbound\ncommunication. For Pools created with a virtual machine configuration, enable\nports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows.\nFor Pools created with a cloud service configuration, enable ports 10100,\n20100, and 30100. Also enable outbound connections to Azure Storage on port\n443. For more details see:\nhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to\naccommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize\nerror will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for\nthe specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be\nverified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied\nby an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual\nnetworks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks\nare supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound\ncommunication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows.\nFor Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port\n443. For more details see:\nhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
         },
         "dynamicVNetAssignmentScope": {
           "$ref": "#/definitions/DynamicVNetAssignmentScope",
@@ -11720,7 +11720,7 @@
       "properties": {
         "password": {
           "type": "string",
-          "description": "The password is required for Windows Compute Nodes (those created with\n'cloudServiceConfiguration', or created with 'virtualMachineConfiguration'\nusing a Windows Image reference). For Linux Compute Nodes, the password can\noptionally be specified along with the sshPublicKey property. If omitted, any\nexisting password is removed."
+          "description": "The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed."
         },
         "expiryTime": {
           "type": "string",
@@ -11866,7 +11866,7 @@
           "description": "Details about an output file upload operation, including under what conditions\nto perform the upload."
         }
       },
-      "description": "On every file uploads, Batch service writes two log files to the compute node,\n'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn\nmore about a specific failure.",
+      "description": "On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure.",
       "required": [
         "filePattern",
         "destination",
@@ -12154,7 +12154,7 @@
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfiguration",
-          "description": "This property must be specified if the Pool needs to be created with Azure PaaS\nVMs. This property and virtualMachineConfiguration are mutually exclusive and\none of the properties must be specified. If neither is specified then the Batch\nservice returns an error; if you are calling the REST API directly, the HTTP\nstatus code is 400 (Bad Request). This property cannot be specified if the\nBatch Account was created with its poolAllocationMode property set to\n'UserSubscription'."
+          "description": "This property must be specified if the Pool needs to be created with Azure PaaS VMs. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
@@ -12233,7 +12233,7 @@
             "type": "string"
           },
           "x-typespec-name": "string[]",
-          "description": "The list of application licenses must be a subset of available Batch service\napplication licenses. If a license is requested which is not supported, Pool\ncreation will fail. The permitted licenses available on the Pool are 'maya',\n'vray', '3dsmax', 'arnold'. An additional charge applies for each application\nlicense added to the Pool."
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail. The permitted licenses available on the Pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the Pool."
         },
         "userAccounts": {
           "type": "array",
@@ -12285,7 +12285,7 @@
         },
         "cloudServiceConfiguration": {
           "$ref": "#/definitions/CloudServiceConfigurationUpdate",
-          "description": "This property must be specified if the Pool needs to be created with Azure PaaS\nVMs. This property and virtualMachineConfiguration are mutually exclusive and\none of the properties must be specified. If neither is specified then the Batch\nservice returns an error; if you are calling the REST API directly, the HTTP\nstatus code is 400 (Bad Request). This property cannot be specified if the\nBatch Account was created with its poolAllocationMode property set to\n'UserSubscription'."
+          "description": "This property must be specified if the Pool needs to be created with Azure PaaS VMs. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
@@ -12364,7 +12364,7 @@
             "type": "string"
           },
           "x-typespec-name": "string[]",
-          "description": "The list of application licenses must be a subset of available Batch service\napplication licenses. If a license is requested which is not supported, Pool\ncreation will fail. The permitted licenses available on the Pool are 'maya',\n'vray', '3dsmax', 'arnold'. An additional charge applies for each application\nlicense added to the Pool."
+          "description": "The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail. The permitted licenses available on the Pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the Pool."
         },
         "userAccounts": {
           "type": "array",
