@@ -53,6 +53,9 @@
           },
           {
             "$ref": "#/parameters/EndTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
           }
         ],
         "responses": {
@@ -109,6 +112,9 @@
           },
           {
             "$ref": "#/parameters/EndTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
           }
         ],
         "responses": {
@@ -147,17 +153,29 @@
     },
     "/contentSafety/studio/metrics/categories/{category}/severities": {
       "get": {
-        "operationId": "Metrics_ListSeverityDistribution",
+        "operationId": "Metrics_ListSeverityDistributionByCategoryAndSeverity",
         "summary": "List all severities and API call count number of a specific category and a specific severity given a time range",
-        "description": "List all severities and API call count number of a specific category and a specific severity given a time range.",
+        "description": "List all severities and API call count number of a specific category and a specific severity given a time range",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "category",
             "in": "path",
             "required": true,
-            "description": "Category.",
-            "format": "Category",
-            "type": "string"
+            "description": "Category type.",
+            "type": "string",
+            "enum": [
+              "Hate",
+              "Sexual",
+              "Violence",
+              "Self-harm"
+            ],
+            "x-ms-enum": {
+              "name": "CategoryEnum",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -178,30 +196,51 @@
             "$ref": "#/parameters/TimeGranularityQueryParameter"
           },
           {
-            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
           },
           {
-            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
+            "$ref": "#/parameters/ModalityTypeQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SeverityList"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Severity"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Severity[]",
+                  "description": "The Severity items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of Severity items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Severity, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "integer",
-                "format": "int32"
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
               }
             },
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -209,11 +248,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Metrics_ListSeverityDistribution_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListSeverityDistribution_MaximumSet_Gen.json"
+          "Metrics_ListSeverityDistributionByCategoryAndSeverity_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListSeverityDistributionByCategoryAndSeverity_MaximumSet_Gen.json"
           },
-          "Metrics_ListSeverityDistribution_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListSeverityDistribution_MinimumSet_Gen.json"
+          "Metrics_ListSeverityDistributionByCategoryAndSeverity_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListSeverityDistributionByCategoryAndSeverity_MinimumSet_Gen.json"
           }
         }
       }
@@ -221,6 +260,7 @@
     "/contentSafety/studio/metrics/categories/{category}/severities/{severity}/totalCalls": {
       "get": {
         "operationId": "Metrics_ListTotalCallsByCategoryAndSeverity",
+        "summary": "List total API counts at different timestamps of a specific category and a specific severity given a time range",
         "description": "List total API counts at different timestamps of a specific category and a specific severity given a time range",
         "parameters": [
           {
@@ -277,6 +317,9 @@
           },
           {
             "$ref": "#/parameters/TimeGranularityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
           },
           {
             "$ref": "#/parameters/ModalityTypeQueryParameter"
@@ -946,6 +989,10 @@
           "$ref": "#/definitions/Granularity",
           "description": "Granularity, the value could be 'Hourly', 'Daily'."
         },
+        "contentSafetyVersion": {
+          "$ref": "#/definitions/ContentSafetyVersion",
+          "description": "API version of the call, the value could be '2023-04-30-preview'."
+        },
         "modality": {
           "$ref": "#/definitions/Modality",
           "description": "Modality type, the value could be 'Text', 'Image'."
@@ -956,6 +1003,7 @@
         "start",
         "end",
         "granularity",
+        "contentSafetyVersion",
         "modality"
       ]
     },
