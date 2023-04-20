@@ -2010,18 +2010,24 @@
       "type": "object",
       "properties": {
         "properties": {
-          "value": {
-            "description": "Results of a list operation.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "nextLink": {
-            "description": "Link to the next set of results, if any.",
+          "$ref": "#/definitions/ElasticVersionsListResponseProperties"
+        }
+      }
+    },
+    "ElasticVersionsListResponseProperties": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
             "type": "string"
           }
-        }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }        
       }
     },
     "LogRules": {
