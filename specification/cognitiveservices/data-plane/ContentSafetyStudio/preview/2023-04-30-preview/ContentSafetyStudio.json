@@ -1,0 +1,1249 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Content Safety Studio API",
+    "version": "2023-04-30-preview",
+    "description": "Content Safety studio API for different metrics",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Ocp-Apim-Subscription-Key"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/contentSafety/studio/metrics/blocklists/hitCalls": {
+      "get": {
+        "operationId": "Blocklist_ListHitCalls",
+        "summary": "Show all blocklist hit API count at different timestamps.",
+        "description": "Show all blocklist hit API count at different timestamps.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HitCallsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Blocklist_ListHitCalls_MaximumSet_Gen": {
+            "$ref": "./examples/Blocklist_ListHitCalls_MaximumSet_Gen.json"
+          },
+          "Blocklist_ListHitCalls_MinimumSet_Gen": {
+            "$ref": "./examples/Blocklist_ListHitCalls_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/contentSafety/studio/metrics/blocklists/topTerms": {
+      "get": {
+        "operationId": "Blocklist_ListTopTerms",
+        "summary": "List top terms hit in blocklist at different timestamps.",
+        "description": "List top terms hit in blocklist at different timestamps.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TermList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Blocklist_ListTopTerms_MaximumSet_Gen": {
+            "$ref": "./examples/Blocklist_ListTopTerms_MaximumSet_Gen.json"
+          },
+          "Blocklist_ListTopTerms_MinimumSet_Gen": {
+            "$ref": "./examples/Blocklist_ListTopTerms_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/contentSafety/studio/metrics/categories/{category}/severities": {
+      "get": {
+        "operationId": "Metrics_ListSeverityDistribution",
+        "summary": "List all severities and API call count number of a specific category and a specific severity given a time range",
+        "description": "List all severities and API call count number of a specific category and a specific severity given a time range.",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "description": "Category.",
+            "format": "Category",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TimeGranularityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SeverityList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListSeverityDistribution_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListSeverityDistribution_MaximumSet_Gen.json"
+          },
+          "Metrics_ListSeverityDistribution_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListSeverityDistribution_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/contentSafety/studio/metrics/categories/{category}/severities/{severity}/totalCalls": {
+      "get": {
+        "operationId": "Metrics_ListTotalCallsByCategoryAndSeverity",
+        "description": "List total API counts at different timestamps of a specific category and a specific severity given a time range",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "description": "Category type.",
+            "type": "string",
+            "enum": [
+              "Hate",
+              "Sexual",
+              "Violence",
+              "Self-harm"
+            ],
+            "x-ms-enum": {
+              "name": "CategoryEnum",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "severity",
+            "in": "path",
+            "required": true,
+            "description": "Severity level. The higher the value, the more risk it is.",
+            "type": "string",
+            "enum": [
+              "0",
+              "2",
+              "4",
+              "6"
+            ],
+            "x-ms-enum": {
+              "name": "SeverityEnum",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TimeGranularityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ModalityTypeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TotalCountsPerTimestamp"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "TotalCountsPerTimestamp[]",
+                  "description": "The TotalCountsPerTimestamp items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of TotalCountsPerTimestamp items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<TotalCountsPerTimestamp, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListTotalCallsByCategoryAndSeverity_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListTotalCallsByCategoryAndSeverity_MaximumSet_Gen.json"
+          },
+          "Metrics_ListTotalCallsByCategoryAndSeverity_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListTotalCallsByCategoryAndSeverity_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/contentSafety/studio/metrics/latencies": {
+      "get": {
+        "operationId": "Metrics_ListLatencies",
+        "summary": "List aggregated API latencies at different timestamps given a time range.",
+        "description": "List aggregated API latencies at different timestamps given a time range.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TimeGranularityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LatencyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListLatencies_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListLatencies_MaximumSet_Gen.json"
+          },
+          "Metrics_ListLatencies_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListLatencies_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/contentSafety/studio/metrics/totalCalls": {
+      "get": {
+        "operationId": "Metrics_ListTotalCalls",
+        "summary": "List total API counts at different timestamps given a time range.",
+        "description": "List total API counts at different timestamps given a time range.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TimeGranularityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CallList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListTotalCalls_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListTotalCalls_MaximumSet_Gen.json"
+          },
+          "Metrics_ListTotalCalls_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListTotalCalls_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Aggregation": {
+      "type": "string",
+      "description": "Aggregation methods for latency.",
+      "enum": [
+        "P99",
+        "P95",
+        "Avg"
+      ],
+      "x-ms-enum": {
+        "name": "Aggregation",
+        "modelAsString": true
+      }
+    },
+    "AggregationListQueryParameters": {
+      "type": "object",
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to return."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip."
+        },
+        "maxpagesize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date time."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date time."
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity",
+          "description": "Granularity, the value could be 'Hourly', 'Daily'."
+        },
+        "contentSafetyOperation": {
+          "$ref": "#/definitions/ContentSafetyOperation",
+          "description": "Content safety operation, the value could be 'AnalyzeText', 'AnalyzeImage'."
+        },
+        "contentSafetyVersion": {
+          "$ref": "#/definitions/ContentSafetyVersion",
+          "description": "API version of the call, the value could be '2023-04-30-preview'."
+        },
+        "aggregation": {
+          "$ref": "#/definitions/Aggregation",
+          "description": "Aggregation method of the latency, the value could be 'Percentile99', 'Percentile95', 'Average'."
+        }
+      },
+      "description": "Provides the aggregation query parameter along with common query parameters for list operations.",
+      "required": [
+        "start",
+        "end",
+        "granularity",
+        "contentSafetyOperation",
+        "contentSafetyVersion",
+        "aggregation"
+      ]
+    },
+    "AggregationQueryParameter": {
+      "type": "object",
+      "properties": {
+        "aggregation": {
+          "$ref": "#/definitions/Aggregation",
+          "description": "Aggregation method of the latency, the value could be 'Percentile99', 'Percentile95', 'Average'."
+        }
+      },
+      "description": "Provides the 'aggregation' query parameter for list operations.",
+      "required": [
+        "aggregation"
+      ]
+    },
+    "ApiListQueryParameters": {
+      "type": "object",
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to return."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip."
+        },
+        "maxpagesize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date time."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date time."
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity",
+          "description": "Granularity, the value could be 'Hourly', 'Daily'."
+        },
+        "contentSafetyOperation": {
+          "$ref": "#/definitions/ContentSafetyOperation",
+          "description": "Content safety operation, the value could be 'AnalyzeText', 'AnalyzeImage'."
+        },
+        "contentSafetyVersion": {
+          "$ref": "#/definitions/ContentSafetyVersion",
+          "description": "API version of the call, the value could be '2023-04-30-preview'."
+        }
+      },
+      "description": "Provides the content safety operation and version info along with common query parameters for list operations.",
+      "required": [
+        "start",
+        "end",
+        "granularity",
+        "contentSafetyOperation",
+        "contentSafetyVersion"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
+          "description": "An array of details about specific errors that led to this reported error."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message",
+        "details"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      },
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
+    },
+    "BlockListHitCallsPerTimestamp": {
+      "type": "object",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The call count of the hit API."
+        }
+      },
+      "description": "Blocklist hit call counts at a timestamp",
+      "required": [
+        "dateTime",
+        "count"
+      ]
+    },
+    "CallList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CountPerTimestamp"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "CountPerTimestamp[]",
+          "description": "List of total call."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to fetch more."
+        }
+      },
+      "description": "Response of calls.",
+      "required": [
+        "value"
+      ]
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/CategoryEnum",
+          "description": "The category of the API. The value could be Hate, Sexual, Violence, Self-Harm"
+        }
+      },
+      "description": "The detection category.",
+      "required": [
+        "category"
+      ]
+    },
+    "CategoryEnum": {
+      "type": "string",
+      "description": "Category type.",
+      "enum": [
+        "Hate",
+        "Sexual",
+        "Violence",
+        "Self-harm"
+      ],
+      "x-ms-enum": {
+        "name": "CategoryEnum",
+        "modelAsString": true
+      }
+    },
+    "CommonListQueryParameters": {
+      "type": "object",
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to return."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip."
+        },
+        "maxpagesize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date time."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date time."
+        }
+      },
+      "description": "Provides the most common query parameters for list operations.",
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "ContentSafetyOperation": {
+      "type": "string",
+      "description": "Content safety Operation.",
+      "enum": [
+        "AnalyzeText",
+        "AnalyzeImage"
+      ],
+      "x-ms-enum": {
+        "name": "ContentSafetyOperation",
+        "modelAsString": true
+      }
+    },
+    "ContentSafetyVersion": {
+      "type": "string",
+      "description": "Content safety API version.",
+      "enum": [
+        "2023-04-30-preview"
+      ],
+      "x-ms-enum": {
+        "name": "ContentSafetyVersion",
+        "modelAsString": true
+      }
+    },
+    "CountPerTimestamp": {
+      "type": "object",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the API total call."
+        }
+      },
+      "description": "API total count at a timestamp.",
+      "required": [
+        "dateTime",
+        "count"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "description": "Error response",
+      "required": [
+        "message"
+      ]
+    },
+    "Granularity": {
+      "type": "string",
+      "description": "Time granularity.",
+      "enum": [
+        "Hourly",
+        "Daily"
+      ],
+      "x-ms-enum": {
+        "name": "Granularity",
+        "modelAsString": true
+      }
+    },
+    "HitCallsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlockListHitCallsPerTimestamp"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "BlockListHitCallsPerTimestamp[]",
+          "description": "List of hit calls."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to fetch more calls."
+        }
+      },
+      "description": "Response of listing hit calls.",
+      "required": [
+        "value"
+      ]
+    },
+    "LatencyList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LatencyPerTimestamp"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "LatencyPerTimestamp[]",
+          "description": "List of latency."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to fetch more."
+        }
+      },
+      "description": "Response of latencies.",
+      "required": [
+        "value"
+      ]
+    },
+    "LatencyPerTimestamp": {
+      "type": "object",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time."
+        },
+        "latency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The aggregated latency of the API in milliseconds."
+        }
+      },
+      "description": "API latency at a timestamp.",
+      "required": [
+        "dateTime",
+        "latency"
+      ]
+    },
+    "Modality": {
+      "type": "string",
+      "description": "Modality type.",
+      "enum": [
+        "Text",
+        "Image"
+      ],
+      "x-ms-enum": {
+        "name": "Modality",
+        "modelAsString": true
+      }
+    },
+    "ModalityQueryParameters": {
+      "type": "object",
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to return."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip."
+        },
+        "maxpagesize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date time."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date time."
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity",
+          "description": "Granularity, the value could be 'Hourly', 'Daily'."
+        },
+        "modality": {
+          "$ref": "#/definitions/Modality",
+          "description": "Modality type, the value could be 'Text', 'Image'."
+        }
+      },
+      "description": "Provides the modality along with common query parameters for list operations.",
+      "required": [
+        "start",
+        "end",
+        "granularity",
+        "modality"
+      ]
+    },
+    "Severity": {
+      "type": "object",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/SeverityEnum",
+          "description": "The severity the API returned."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the severity."
+        }
+      },
+      "description": "Severity and count the API detected.",
+      "required": [
+        "severity",
+        "count"
+      ]
+    },
+    "SeverityEnum": {
+      "type": "string",
+      "description": "Severity level. The higher the value, the more risk it is.",
+      "enum": [
+        "0",
+        "2",
+        "4",
+        "6"
+      ],
+      "x-ms-enum": {
+        "name": "SeverityEnum",
+        "modelAsString": true
+      }
+    },
+    "SeverityList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Severity"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "Severity[]",
+          "description": "List of terms."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to fetch more terms."
+        }
+      },
+      "description": "Response of severities.",
+      "required": [
+        "value"
+      ]
+    },
+    "TermList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopTermCount"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "TopTermCount[]",
+          "description": "List of terms."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to fetch more terms."
+        }
+      },
+      "description": "Response of listing hit terms.",
+      "required": [
+        "value"
+      ]
+    },
+    "TimeGranularityListQueryParameters": {
+      "type": "object",
+      "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to return."
+        },
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of result items to skip."
+        },
+        "maxpagesize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of result items per page."
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date time."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date time."
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity",
+          "description": "Granularity, the value could be 'Hourly', 'Daily'."
+        }
+      },
+      "description": "Provides the granularity along with common query parameters for list operations.",
+      "required": [
+        "start",
+        "end",
+        "granularity"
+      ]
+    },
+    "TopTermCount": {
+      "type": "object",
+      "properties": {
+        "term": {
+          "type": "string",
+          "description": "The term content."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The API call count of the term."
+        }
+      },
+      "description": "Popular term and it's API count.",
+      "required": [
+        "term",
+        "count"
+      ]
+    },
+    "TotalCountsPerTimestamp": {
+      "type": "object",
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of the total call."
+        }
+      },
+      "description": "API count at a timestamp",
+      "required": [
+        "dateTime",
+        "count"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "2023-04-30-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
+      "minLength": 1,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "required": false,
+      "description": "The maximum number of result items per page.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "required": false,
+      "description": "The number of result items to skip.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "description": "The number of result items to return.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ContentSafetyOperationQueryParameter": {
+      "name": "contentSafetyOperation",
+      "in": "query",
+      "required": true,
+      "description": "Content safety Operation.",
+      "type": "string",
+      "enum": [
+        "AnalyzeText",
+        "AnalyzeImage"
+      ],
+      "x-ms-enum": {
+        "name": "ContentSafetyOperation",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ContentSafetyVersionQueryParameter": {
+      "name": "contentSafetyVersion",
+      "in": "query",
+      "required": true,
+      "description": "Content safety API version.",
+      "type": "string",
+      "enum": [
+        "2023-04-30-preview"
+      ],
+      "x-ms-enum": {
+        "name": "ContentSafetyVersion",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "EndTimeQueryParameter": {
+      "name": "end",
+      "in": "query",
+      "required": true,
+      "description": "End date time.",
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ModalityTypeQueryParameter": {
+      "name": "modality",
+      "in": "query",
+      "required": true,
+      "description": "Modality type.",
+      "type": "string",
+      "enum": [
+        "Text",
+        "Image"
+      ],
+      "x-ms-enum": {
+        "name": "Modality",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "StartTimeQueryParameter": {
+      "name": "start",
+      "in": "query",
+      "required": true,
+      "description": "Start date time.",
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "TimeGranularityQueryParameter": {
+      "name": "granularity",
+      "in": "query",
+      "required": true,
+      "description": "Time granularity.",
+      "type": "string",
+      "enum": [
+        "Hourly",
+        "Daily"
+      ],
+      "x-ms-enum": {
+        "name": "Granularity",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
