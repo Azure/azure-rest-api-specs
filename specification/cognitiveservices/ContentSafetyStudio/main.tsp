@@ -61,10 +61,10 @@ enum CategoryEnum {
 
 @doc("Severity level. The higher the value, the more risk it is.")
 enum SeverityEnum {
-  "0",
-  "2",
-  "4",
-  "6"
+  Zero: 0,
+  Two: 2,
+  Four: 4,
+  Six: 6
 }
 
 @doc("Aggregation methods for latency.")
@@ -393,10 +393,9 @@ interface Metrics {
   @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
   op listSeverities is RpcOperation<
     {
-      @format("Category")
       @doc("Category.")
       @path
-      category: string,
+      category: CategoryEnum,
       ...TopQueryParameter,
       ...SkipQueryParameter,
       ...MaxPageSizeQueryParameter,
@@ -435,14 +434,12 @@ interface Metrics {
   @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
   op listRequestCountsByCategoryAndSeverity is RpcOperation<
     {
-      @format("Category")
       @doc("Category.")
       @path
-      category: string,
-      @format("Severity")
-      @doc("Severity.")
+      category: CategoryEnum,
+      @doc("Severity, the value could be 0, 2, 4, 6.")
       @path
-      severity: string,
+      severity: SeverityEnum,
       ...TopQueryParameter,
       ...SkipQueryParameter,
       ...MaxPageSizeQueryParameter,
