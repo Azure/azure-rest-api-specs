@@ -803,7 +803,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "The status of the long running operation.",
             "schema": {
               "$ref": "#/definitions/AsyncOperationResult"
@@ -1350,11 +1350,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The status of the failover operation.",
-            "schema": {
-              "$ref": "#/definitions/CustomerInitiatedFailoverResponse"
-            }
+          "202": {
+            "description": "The status of the failover operation."
           },
           "default": {
             "description": "Default error response.",
@@ -1890,20 +1887,6 @@
       "required": [
         "failoverRegion"
       ]
-    },
-    "CustomerInitiatedFailoverResponse": {
-      "description": "The DPS failover response.",
-      "type": "object",
-      "properties": {
-        "lastProvisioningState": {
-          "description": "Failover state",
-          "type": "string"
-        },
-        "asyncOperationUri": {
-          "description": "Uri where can track progress",
-          "type": "string"
-        }
-      }
     },
     "IotDpsPropertiesDescription": {
       "description": "the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
