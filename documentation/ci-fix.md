@@ -21,7 +21,7 @@ Or if you want to fix specified service, use the complete path, not relative:
 
 ```
 npm install
-npm run prettier -- --write "<path to repo>/azure-rest-api-specs/specification/**/*.json"
+npm run prettier-fix --write "<path to repo>/azure-rest-api-specs/specification/**/*.json"
 ```
 
 Then please commit and push changes made by prettier.
