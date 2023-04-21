@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup1",
+    "privateLinkHubName": "privateLinkHub1",
+    "api-version": "2023-05-01"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/01234567-89ab-4def-0123-456789abcdef/providers/Microsoft.Synapse/locations/exampleLocation/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2023-05-01",
+        "Location": "https://management.azure.com/subscriptions/01234567-89ab-4def-0123-456789abcdef/providers/Microsoft.Synapse/locations/exampleLocation/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-05-01"
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}
