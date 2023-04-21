@@ -2070,6 +2070,9 @@
         "safetyProfile": {
           "$ref": "#/definitions/GalleryApplicationVersionSafetyProfile"
         },
+        "securityProfile": {
+          "$ref": "#/definitions/ImageVersionSecurityProfile"
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "#/definitions/GalleryProvisioningState"
@@ -2083,6 +2086,14 @@
         "publishingProfile"
       ],
       "description": "Describes the properties of a gallery image version."
+    },
+    "ImageVersionSecurityProfile": {
+      "description": "The security profile of a gallery image version",
+      "properties": {
+        "uefiSettings": {
+          "$ref": "#/definitions/UefiSettings"
+        }
+      }
     },
     "GalleryApplicationVersionPublishingProfile": {
       "properties": {
@@ -2643,7 +2654,8 @@
           "enum": [
             "EncryptedVMGuestStateOnlyWithPmk",
             "EncryptedWithPmk",
-            "EncryptedWithCmk"
+            "EncryptedWithCmk",
+            "NonPersistedVMGuestState"
           ],
           "x-ms-enum": {
             "name": "ConfidentialVMEncryptionType",
@@ -3142,6 +3154,95 @@
         "location": {
           "type": "string",
           "description": "region of the Gallery Image Version."
+        }
+      }
+    },
+    "uefiSettings": {
+      "type": "object",
+      "description": "The UEFI settings of the image version.",
+      "properties": {
+        "signatureTemplateNames": {
+          "type": "array",
+          "description": "The name of the template(s) that contains default UEFI key signatures that will be added to the image.",
+          "items": {
+            "$ref": "#/definitions/uefiSignatureTemplateName"
+          },
+          "x-ms-identifiers": []
+        },
+        "additionalSignatures": {
+          "$ref": "#defintions/uefiKeySignatures"
+        }
+      }
+    },
+    "uefiSignatureTemplateName": {
+      "type": "string",
+      "description": "The name of the signature template that contains default UEFI keys.",
+      "enum": [
+        "NoSignatureTemplate",
+        "MicrosoftUefiCertificateAuthorityTemplate",
+        "MicrosoftWindowsTemplate"
+      ],
+      "x-ms-enum": {
+        "name": "UefiSignatureTemplateName",
+        "modelAsString": true
+      }
+    },
+    "uefiKeySignatures": {
+      "type": "object",
+      "description": "Additional UEFI key signatures that will be added to the image in addition to the signature templates",
+      "properties": {
+        "PK": {
+          "$ref": "#/definitions/uefiKey"
+        },
+        "KEK": {
+          "type": "array",
+          "description": "The Key Encryption Keys of this image version.",
+          "items": {
+            "$ref": "#/definitions/uefiKey"
+          },
+          "x-ms-identifiers": []
+        },
+        "DB": {
+          "type": "array",
+          "description": "The database of UEFI keys for this image version.",
+          "items": {
+            "$ref": "#/definitions/uefiKey"
+          },
+          "x-ms-identifiers": []
+        },
+        "DBX": {
+          "type": "array",
+          "description": "The database of revoked UEFI keys for this image version.",
+          "items": {
+            "$ref": "#/definitions/uefiKey"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "uefiKey": {
+      "type": "object",
+      "description": "A UEFI key signature.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of key signature.",
+          "enum": [
+            "sha256",
+            "x509"
+          ],
+          "x-ms-enum": {
+            "name": "UefiKeyType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "array",
+          "description": "The value of the key signature.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
       }
     }
