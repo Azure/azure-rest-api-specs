@@ -83,6 +83,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListBlocklistHitCalls_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListBlocklistHitCalls_MaximumSet_Gen.json"
+          },
+          "Metrics_ListBlocklistHitCalls_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListBlocklistHitCalls_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -136,6 +144,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListBlocklistTopTerms_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListBlocklistTopTerms_MaximumSet_Gen.json"
+          },
+          "Metrics_ListBlocklistTopTerms_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListBlocklistTopTerms_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -152,9 +168,18 @@
             "name": "category",
             "in": "path",
             "required": true,
-            "description": "Category.",
-            "format": "Category",
-            "type": "string"
+            "description": "Category type.",
+            "type": "string",
+            "enum": [
+              "Hate",
+              "Sexual",
+              "Violence",
+              "Self-harm"
+            ],
+            "x-ms-enum": {
+              "name": "CategoryEnum",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -206,6 +231,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListSeverities_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListSeverities_MaximumSet_Gen.json"
+          },
+          "Metrics_ListSeverities_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListSeverities_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -222,17 +255,53 @@
             "name": "category",
             "in": "path",
             "required": true,
-            "description": "Category.",
-            "format": "Category",
-            "type": "string"
+            "description": "Category type.",
+            "type": "string",
+            "enum": [
+              "Hate",
+              "Sexual",
+              "Violence",
+              "Self-harm"
+            ],
+            "x-ms-enum": {
+              "name": "CategoryEnum",
+              "modelAsString": true
+            }
           },
           {
             "name": "severity",
             "in": "path",
             "required": true,
-            "description": "Severity.",
-            "format": "Severity",
-            "type": "string"
+            "description": "Severity level. The higher the value, the more risk it is.",
+            "type": "number",
+            "enum": [
+              0,
+              2,
+              4,
+              6
+            ],
+            "x-ms-enum": {
+              "name": "SeverityEnum",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Zero",
+                  "value": 0
+                },
+                {
+                  "name": "Two",
+                  "value": 2
+                },
+                {
+                  "name": "Four",
+                  "value": 4
+                },
+                {
+                  "name": "Six",
+                  "value": 6
+                }
+              ]
+            }
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -284,6 +353,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListRequestCountsByCategoryAndSeverity_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListRequestCountsByCategoryAndSeverity_MaximumSet_Gen.json"
+          },
+          "Metrics_ListRequestCountsByCategoryAndSeverity_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListRequestCountsByCategoryAndSeverity_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -343,6 +420,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListRequestCounts_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListRequestCounts_MaximumSet_Gen.json"
+          },
+          "Metrics_ListRequestCounts_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListRequestCounts_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -405,6 +490,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Metrics_ListRequestLatencies_MaximumSet_Gen": {
+            "$ref": "./examples/Metrics_ListRequestLatencies_MaximumSet_Gen.json"
+          },
+          "Metrics_ListRequestLatencies_MinimumSet_Gen": {
+            "$ref": "./examples/Metrics_ListRequestLatencies_MinimumSet_Gen.json"
+          }
         }
       }
     }
@@ -889,17 +982,35 @@
       ]
     },
     "SeverityEnum": {
-      "type": "string",
+      "type": "number",
       "description": "Severity level. The higher the value, the more risk it is.",
       "enum": [
-        "0",
-        "2",
-        "4",
-        "6"
+        0,
+        2,
+        4,
+        6
       ],
       "x-ms-enum": {
         "name": "SeverityEnum",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zero",
+            "value": 0
+          },
+          {
+            "name": "Two",
+            "value": 2
+          },
+          {
+            "name": "Four",
+            "value": 4
+          },
+          {
+            "name": "Six",
+            "value": 6
+          }
+        ]
       }
     },
     "SeverityList": {
