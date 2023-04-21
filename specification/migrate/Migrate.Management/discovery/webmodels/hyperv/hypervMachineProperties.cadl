@@ -24,6 +24,9 @@ model HypervMachineProperties {
   @visibility("read")
   hostProcessorInfo?: ProcessorInfo;
 
+  @doc("Gets or sets tags on HyperV machine.")
+  tags?: Record<Object>;
+
   @doc("On-premise Instance UUID of the machine.")
   @visibility("read")
   instanceUuid?: string;
@@ -33,7 +36,7 @@ model HypervMachineProperties {
   hostFqdn?: string;
 
   @doc("Host ARM ID.")
-  @visibility("read")
+  @visibility("read") 
   hostId?: string;
 
   @doc("Generation of the virtual machine.")

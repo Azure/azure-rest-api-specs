@@ -88,6 +88,25 @@ op ArmResourceListByParentUpdated<
   ...ResourceParentParameters<TResource, TBaseParameters>
 ): ArmResponse<ResourceListResultUpdated<TResource>> ;
 
+@doc("Ok")
+model ArmOkResponse {
+  ...OkResponse;
+}
+
+@get
+@autoRoute
+@list(TResource)
+@segmentOf(TResource)
+@armRenameListByOperation(TResource, TParentName, TParentFriendlyName) // This must come before @armResourceList!
+@armResourceList(TResource)
+op ArmResourceListByParentUpdatedOk<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>,
+  TParentName = "",
+  TParentFriendlyName = ""
+>(
+  ...ResourceParentParameters<TResource, TBaseParameters>
+): ArmOkResponse ;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)

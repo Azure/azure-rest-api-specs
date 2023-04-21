@@ -152,6 +152,21 @@ op ArmCustomPatchSyncNoError<
   body: TPatchModel
 ): ArmResponse<TResource> ;
 
+// @autoRoute
+// @doc("Update a {name}", TResource)
+// @armResourceUpdate(TResource)
+// @patch
+// op ArmProxyTagsPatchSyncNoError<
+//   TResource extends ArmResource,
+//   TBaseParameters = BaseParameters<TResource>
+// >(
+//   ...ResourceInstanceParametersCustom<TResource, TBaseParameters>,
+
+//   @doc("The tags to be updated.")
+//   @body
+//   parameters: TagsPatchBody
+// ): ArmResponse<TResource> ;
+
 @autoRoute
 @doc("Delete a {name}", TResource)
 @extension("x-ms-long-running-operation", true)

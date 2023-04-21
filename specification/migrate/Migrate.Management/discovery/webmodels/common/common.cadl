@@ -490,6 +490,7 @@ enum PrivateLinkServiceConnectionStateStatusKnownValues {
   "Disconnected",
 }
 
+@doc("PrivateLinkServiceConnectionState")
 @knownValues(PrivateLinkServiceConnectionStateStatusKnownValues)
 scalar PrivateLinkServiceConnectionStateStatus extends string;
 
@@ -594,10 +595,6 @@ enum V202007MasterSitePropertiesPublicNetworkAccess {
   "Enabled",
   "Disabled",
 }
-
-//@knownValues(V202007MasterSitePropertiesPublicNetworkAccess)
-// scalar MicrosoftAzureFDSWebRoleV202007MasterSitePropertiesPublicNetworkAccess
-// extends string;
 
 @doc("Private Endpoint Connection Proxy Request Body")
 model MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody {
@@ -1059,6 +1056,7 @@ enum SqlSitePropertiesDiscoveryScenarioKnownValues {
   "Migrate",
   "DR",
 }
+@doc("SqlSiteProperties DiscoveryScenario")
 scalar SqlSitePropertiesDiscoveryScenario extends string;
 
 @doc("Class for site appliance properties.")
@@ -1214,6 +1212,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaStateKnownValues
   "Primary",
   "Secondary",
 }
+@doc("ReplicaState")
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaState
   extends string;
 
@@ -1223,6 +1222,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSyncStatusKnownV
   "Synchronized",
   "Unsynchronized",
 }
+@doc("ReplicaSyncStatus")  
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSyncStatus
   extends string;
 
@@ -1375,6 +1375,9 @@ model IisWebApplicationProperties {
   @visibility("read")
   applications?: IisApplicationUnit[];
 
+  @doc("Gets or sets the tags on IIS Web application.")
+  tags?: Record<Object>;
+
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Gets the list of application units for the web site.")
   @visibility("read")
@@ -1419,10 +1422,6 @@ model IisWebApplicationProperties {
   @doc("Gets the display name.")
   @visibility("read")
   displayName?: string;
-
-  @doc("Gets tags that can be used with ODATA.")
-  @visibility("read")
-  tags?: Record<object>;
 
   @doc("Gets a value indicating whether application is deleted.")
   @visibility("read")
@@ -1938,7 +1937,7 @@ model WebRoleV202011PreviewWebApplicationProperties {
 
   @doc("Gets tags that can be used with ODATA.")
   @visibility("read")
-  tags?: Record<object>;
+  tags?: Record<Object>;
 
   @doc("Gets a value indicating whether application is deleted.")
   @visibility("read")
@@ -2074,7 +2073,7 @@ model WebAppProperties {
   webAppArmId?: string;
 
   @doc("Gets or sets Tags.")
-  tags?: Record<string>;
+  tags?: Record<object>;
 }
 
 @doc("Processor Information.")
@@ -2472,10 +2471,16 @@ model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStat
   actionsRequired?: string;
 }
 
-@doc("Value indicating whether the VM is highly available")
+/**
+ * Represent any structured model.(With properties)
+ */
+@doc("an object")
+model Object {}
+
 @knownValues(
   MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusValues
 )
+@doc("Value indicating whether the VM is highly available")
 scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus
   extends string;
 

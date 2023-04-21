@@ -1620,7 +1620,7 @@
         "tags": [
           "HypervMachinesController"
         ],
-        "operationId": "HyperVMachines_UpdateMachineTags",
+        "operationId": "HyperVMachines_UpdateTags",
         "description": "Patches the Hyper-V machine tags.",
         "parameters": [
           {
@@ -1667,11 +1667,11 @@
           }
         },
         "x-ms-examples": {
-          "HyperVMachines_UpdateMachineTags_MaximumSet_Gen": {
-            "$ref": "./examples/HyperVMachines_UpdateMachineTags_MaximumSet_Gen.json"
+          "HyperVMachines_UpdateTags_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVMachines_UpdateTags_MaximumSet_Gen.json"
           },
-          "HyperVMachines_UpdateMachineTags_MinimumSet_Gen": {
-            "$ref": "./examples/HyperVMachines_UpdateMachineTags_MinimumSet_Gen.json"
+          "HyperVMachines_UpdateTags_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVMachines_UpdateTags_MinimumSet_Gen.json"
           }
         }
       }
@@ -10576,7 +10576,7 @@
         "tags": [
           "MachinesController"
         ],
-        "operationId": "Machines_UpdateMachineTags",
+        "operationId": "Machines_UpdateTags",
         "description": "Patches the VMware machine tags.",
         "parameters": [
           {
@@ -10623,11 +10623,11 @@
           }
         },
         "x-ms-examples": {
-          "Machines_UpdateMachineTags_MaximumSet_Gen": {
-            "$ref": "./examples/Machines_UpdateMachineTags_MaximumSet_Gen.json"
+          "Machines_UpdateTags_MaximumSet_Gen": {
+            "$ref": "./examples/Machines_UpdateTags_MaximumSet_Gen.json"
           },
-          "Machines_UpdateMachineTags_MinimumSet_Gen": {
-            "$ref": "./examples/Machines_UpdateMachineTags_MinimumSet_Gen.json"
+          "Machines_UpdateTags_MinimumSet_Gen": {
+            "$ref": "./examples/Machines_UpdateTags_MinimumSet_Gen.json"
           }
         }
       }
@@ -13076,9 +13076,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "$ref": "#/definitions/Object"
           },
-          "x-cadl-name": "Record<object>",
+          "x-cadl-name": "Record<Object>",
           "description": "Gets or sets tags on HyperV machine."
         },
         "instanceUuid": {
@@ -13387,9 +13387,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "$ref": "#/definitions/Object"
           },
-          "x-cadl-name": "Record<object>",
+          "x-cadl-name": "Record<Object>",
           "description": "Gets or sets tags on HyperV machine."
         },
         "firmware": {
@@ -13791,9 +13791,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "$ref": "#/definitions/Object"
           },
-          "x-cadl-name": "Record<object>",
+          "x-cadl-name": "Record<Object>",
           "description": "Gets or sets the tags on IIS Web application."
         },
         "virtualApplications": {
@@ -13979,9 +13979,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "$ref": "#/definitions/Object"
           },
-          "x-cadl-name": "Record<object>",
+          "x-cadl-name": "Record<Object>",
           "description": "Gets or sets the tags on IIS Web application."
         }
       },
@@ -15264,6 +15264,11 @@
         }
       },
       "description": "Nonce Request REST Resource."
+    },
+    "Object": {
+      "type": "object",
+      "properties": {},
+      "description": "an object"
     },
     "OperatingSystem": {
       "type": "object",
@@ -17652,9 +17657,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "$ref": "#/definitions/Object"
           },
-          "x-cadl-name": "Record<object>",
+          "x-cadl-name": "Record<Object>",
           "description": "Gets or sets the tags on SQL server."
         },
         "fciProperties": {
@@ -17832,9 +17837,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "$ref": "#/definitions/Object"
           },
-          "x-cadl-name": "Record<object>",
+          "x-cadl-name": "Record<Object>",
           "description": "Gets or sets the tags on SQL server."
         },
         "fciProperties": {
@@ -19053,6 +19058,7 @@
     },
     "Versions": {
       "type": "string",
+      "description": "service api versions",
       "enum": [
         "2018-05-01-preview",
         "2019-05-01-preview",
@@ -20504,9 +20510,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "$ref": "#/definitions/Object"
           },
-          "x-cadl-name": "Record<object>",
+          "x-cadl-name": "Record<Object>",
           "description": "Gets tags that can be used with ODATA.",
           "readOnly": true
         },
