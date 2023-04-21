@@ -120,6 +120,7 @@
       "properties": {
         "connectionString": {
           "description": "The connection string. It is mutually exclusive with sasUri property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "x-ms-format": "dfe-string",
           "type": "object"
         },
         "accountKey": {
@@ -127,8 +128,9 @@
           "description": "The Azure key vault secret reference of accountKey in connection string."
         },
         "sasUri": {
-          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SAS URI of the Azure Storage resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "sasToken": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -146,6 +148,7 @@
       "properties": {
         "connectionString": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The connection string. It is mutually exclusive with sasUri, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "accountKey": {
@@ -153,15 +156,17 @@
           "description": "The Azure key vault secret reference of accountKey in connection string."
         },
         "sasUri": {
-          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SAS URI of the Azure Blob Storage resource. It is mutually exclusive with connectionString, serviceEndpoint property. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "sasToken": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
           "description": "The Azure key vault secret reference of sasToken in sas uri."
         },
         "serviceEndpoint": {
-          "type": "string",
+          "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Blob service endpoint of the Azure Blob Storage resource. It is mutually exclusive with connectionString, sasUri property."
         },
         "servicePrincipalId": {
@@ -243,8 +248,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -307,8 +313,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "userName": {
           "type": "object",
@@ -357,8 +364,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "userName": {
           "type": "object",
@@ -407,8 +415,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -475,8 +484,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -679,8 +689,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "accountEndpoint": {
           "x-ms-format": "dfe-string",
@@ -702,15 +713,7 @@
           "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalCredentialType": {
-          "x-ms-enum": {
-            "name": "CosmosDbServicePrincipalCredentialType",
-            "modelAsString": true
-          },
-          "enum": [
-            "ServicePrincipalKey",
-            "ServicePrincipalCert"
-          ],
-          "type": "string",
+          "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string."
         },
@@ -1104,6 +1107,7 @@
         },
         "isEspEnabled": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specify if the HDInsight is created with ESP (Enterprise Security Package). Type: Boolean."
         },
         "fileSystem": {
@@ -1203,6 +1207,7 @@
         },
         "connectionString": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The connection string. It is mutually exclusive with sasUri property. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "accountKey": {
@@ -1210,8 +1215,9 @@
           "description": "The Azure key vault secret reference of accountKey in connection string."
         },
         "sasUri": {
-          "description": "SAS URI of the Azure File resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SAS URI of the Azure File resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "sasToken": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1395,8 +1401,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1436,8 +1443,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
@@ -1477,8 +1485,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1518,8 +1527,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1559,8 +1569,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The connection string.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1671,6 +1682,7 @@
       "properties": {
         "connectionString": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The connection string. It is mutually exclusive with server, database, authenticationType, userName, packageCollection and certificateCommonName property. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "server": {
@@ -2515,8 +2527,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The MongoDB Atlas connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The MongoDB Atlas connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "database": {
           "type": "object",
@@ -2554,8 +2567,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "The MongoDB connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The MongoDB connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "database": {
           "type": "object",
@@ -2598,8 +2612,9 @@
           "description": "Whether the CosmosDB (MongoDB API) server version is higher than 3.2. The default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "connectionString": {
-          "description": "The CosmosDB (MongoDB API) connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The CosmosDB (MongoDB API) connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "database": {
           "type": "object",
@@ -2759,8 +2774,9 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "sasUri": {
-          "description": "SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "sasToken": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
@@ -3006,12 +3022,12 @@
       "type": "object",
       "properties": {
         "url": {
-          "type": "string",
+          "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The URL of SAP ECC OData API. For example, '[https://hostname:port/sap/opu/odata/sap/servicename/]'. Type: string (or Expression with resultType string)."
         },
         "username": {
-          "type": "string",
+          "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The username for Basic authentication. Type: string (or Expression with resultType string)."
         },
@@ -4250,6 +4266,7 @@
       "properties": {
         "connectionString": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SAP HANA ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "server": {
@@ -4310,15 +4327,18 @@
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Amazon MWS server, (i.e. mws.amazonservices.com)",
+          "x-ms-format":"dfe-string",
           "type": "object"
         },
         "marketplaceID": {
           "description": "The Amazon Marketplace ID you want to retrieve data from. To retrieve data from multiple Marketplace IDs, separate them with a comma (,). (i.e. A2EUQ1WTGCTBG2)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "sellerID": {
           "description": "The Amazon seller ID.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "mwsAuthToken": {
           "description": "The Amazon MWS authentication token.",
@@ -4326,7 +4346,8 @@
         },
         "accessKeyId": {
           "description": "The access key id used to access data.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "secretKey": {
           "description": "The secret key used to access data.",
@@ -4334,15 +4355,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -4381,8 +4405,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -4424,11 +4449,13 @@
         },
         "clientId": {
           "description": "Application client_id supplied by Concur App Management.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "username": {
           "description": "The user name that you use to access Concur Service.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name that you provided in the username field.",
@@ -4436,15 +4463,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -4481,8 +4511,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "credString": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -4519,8 +4550,9 @@
       "type": "object",
       "properties": {
         "connectionString": {
-          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -4558,11 +4590,13 @@
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Eloqua server. (i.e. eloqua.example.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "username": {
           "description": "The site name and user name of your Eloqua account in the form: sitename/username. (i.e. Eloqua/Alice)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name.",
@@ -4570,15 +4604,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -4748,15 +4785,18 @@
       "properties": {
         "host": {
           "description": "The IP address or host name of the HBase server. (i.e. 192.168.222.160)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "port": {
           "description": "The TCP port that the HBase instance uses to listen for client connections. The default value is 9090.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "httpPath": {
           "description": "The partial URL corresponding to the HBase server. (i.e. /gateway/sandbox/hbase/version)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "authenticationType": {
           "description": "The authentication mechanism to use to connect to the HBase server.",
@@ -4772,7 +4812,8 @@
         },
         "username": {
           "description": "The user name used to connect to the HBase instance.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name.",
@@ -4780,19 +4821,23 @@
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "allowHostNameCNMismatch": {
           "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowSelfSignedServerCert": {
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -4830,11 +4875,13 @@
       "properties": {
         "host": {
           "description": "IP address or host name of the Hive server, separated by ';' for multiple hosts (only when serviceDiscoveryMode is enable).",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "port": {
           "description": "The TCP port that the Hive server uses to listen for client connections.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "serverType": {
           "description": "The type of Hive server.",
@@ -4878,19 +4925,23 @@
         },
         "serviceDiscoveryMode": {
           "description": "true to indicate using the ZooKeeper service, false not.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "zooKeeperNameSpace": {
           "description": "The namespace on ZooKeeper under which Hive Server 2 nodes are added.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "useNativeQuery": {
           "description": "Specifies whether the driver uses native HiveQL queries,or converts them into an equivalent form in HiveQL.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "username": {
           "description": "The user name that you use to access Hive Server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name that you provided in the Username field",
@@ -4898,27 +4949,33 @@
         },
         "httpPath": {
           "description": "The partial URL corresponding to the Hive server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "useSystemTrustStore": {
           "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowHostNameCNMismatch": {
           "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowSelfSignedServerCert": {
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -4956,7 +5013,8 @@
       "properties": {
         "clientId": {
           "description": "The client ID associated with your Hubspot application.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientSecret": {
           "description": "The client secret associated with your Hubspot application.",
@@ -4972,15 +5030,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5017,11 +5078,13 @@
       "properties": {
         "host": {
           "description": "The IP address or host name of the Impala server. (i.e. 192.168.222.160)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "port": {
           "description": "The TCP port that the Impala server uses to listen for client connections. The default value is 21050.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "authenticationType": {
           "description": "The authentication type to use.",
@@ -5038,7 +5101,8 @@
         },
         "username": {
           "description": "The user name used to access the Impala server. The default value is anonymous when using SASLUsername.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name when using UsernameAndPassword.",
@@ -5046,23 +5110,28 @@
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "useSystemTrustStore": {
           "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowHostNameCNMismatch": {
           "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowSelfSignedServerCert": {
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5100,15 +5169,18 @@
       "properties": {
         "host": {
           "description": "The IP address or host name of the Jira service. (e.g. jira.example.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "port": {
           "description": "The TCP port that the Jira server uses to listen for client connections. The default value is 443 if connecting through HTTPS, or 8080 if connecting through HTTP.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "username": {
           "description": "The user name that you use to access Jira Service.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name that you provided in the username field.",
@@ -5116,15 +5188,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5162,7 +5237,8 @@
       "properties": {
         "host": {
           "description": "The URL of the Magento instance. (i.e. 192.168.222.110/magento3)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "accessToken": {
           "description": "The access token from Magento.",
@@ -5170,15 +5246,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5215,7 +5294,8 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -5253,7 +5333,8 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -5291,11 +5372,13 @@
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Marketo server. (i.e. 123-ABC-321.mktorest.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientId": {
           "description": "The client Id of your Marketo service.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientSecret": {
           "description": "The client secret of your Marketo service.",
@@ -5303,15 +5386,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5348,12 +5434,14 @@
       "type": "object",
       "properties": {
         "host": {
-          "description": "The URL of the PayPal instance. (i.e. api.sandbox.paypal.com)",
-          "type": "object"
+          "description": "The URL of the PayPal instance. (i.e. api.sandbox.paypal.com)",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientId": {
           "description": "The client ID associated with your PayPal application.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientSecret": {
           "description": "The client secret associated with your PayPal application.",
@@ -5361,15 +5449,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5407,15 +5498,18 @@
       "properties": {
         "host": {
           "description": "The IP address or host name of the Phoenix server. (i.e. 192.168.222.160)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "port": {
           "description": "The TCP port that the Phoenix server uses to listen for client connections. The default value is 8765.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "httpPath": {
           "description": "The partial URL corresponding to the Phoenix server. (i.e. /gateway/sandbox/phoenix/version). The default value is hbasephoenix if using WindowsAzureHDInsightService.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "authenticationType": {
           "description": "The authentication mechanism used to connect to the Phoenix server.",
@@ -5432,7 +5526,8 @@
         },
         "username": {
           "description": "The user name used to connect to the Phoenix server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name.",
@@ -5440,23 +5535,28 @@
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "useSystemTrustStore": {
           "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowHostNameCNMismatch": {
           "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowSelfSignedServerCert": {
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5494,19 +5594,23 @@
       "properties": {
         "host": {
           "description": "The IP address or host name of the Presto server. (i.e. 192.168.222.160)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "serverVersion": {
           "description": "The version of the Presto server. (i.e. 0.148-t)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "catalog": {
           "description": "The catalog context for all request against the server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "port": {
           "description": "The TCP port that the Presto server uses to listen for client connections. The default value is 8080.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "authenticationType": {
           "description": "The authentication mechanism used to connect to the Presto server.",
@@ -5522,7 +5626,8 @@
         },
         "username": {
           "description": "The user name used to connect to the Presto server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name.",
@@ -5530,27 +5635,33 @@
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "useSystemTrustStore": {
           "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowHostNameCNMismatch": {
           "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowSelfSignedServerCert": {
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "timeZoneID": {
           "description": "The local time zone used by the connection. Valid values for this option are specified in the IANA Time Zone Database. The default value is the system time zone.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5594,15 +5705,18 @@
         },
         "endpoint": {
           "description": "The endpoint of the QuickBooks server. (i.e. quickbooks.api.intuit.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "companyId": {
           "description": "The company ID of the QuickBooks company to authorize.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "consumerKey": {
           "description": "The consumer key for OAuth 1.0 authentication.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "consumerSecret": {
           "description": "The consumer secret for OAuth 1.0 authentication.",
@@ -5618,7 +5732,8 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5668,7 +5783,8 @@
         },
         "username": {
           "description": "The user name used to connect to the ServiceNow server for Basic and OAuth2 authentication.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name for Basic and OAuth2 authentication.",
@@ -5676,7 +5792,8 @@
         },
         "clientId": {
           "description": "The client id for OAuth2 authentication.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientSecret": {
           "description": "The client secret for OAuth2 authentication.",
@@ -5684,15 +5801,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5730,7 +5850,8 @@
       "properties": {
         "host": {
           "description": "The endpoint of the Shopify server. (i.e. mystore.myshopify.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "accessToken": {
           "description": "The API access token that can be used to access Shopify’s data. The token won't expire if it is offline mode.",
@@ -5738,15 +5859,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5783,11 +5907,13 @@
       "properties": {
         "host": {
           "description": "IP address or host name of the Spark server",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "port": {
           "description": "The TCP port that the Spark server uses to listen for client connections.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "serverType": {
           "description": "The type of Spark server.",
@@ -5831,7 +5957,8 @@
         },
         "username": {
           "description": "The user name that you use to access Spark Server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "password": {
           "description": "The password corresponding to the user name that you provided in the Username field",
@@ -5839,27 +5966,33 @@
         },
         "httpPath": {
           "description": "The partial URL corresponding to the Spark server.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "trustedCertPath": {
           "description": "The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "useSystemTrustStore": {
           "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowHostNameCNMismatch": {
           "description": "Specifies whether to require a CA-issued SSL certificate name to match the host name of the server when connecting over SSL. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "allowSelfSignedServerCert": {
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5901,12 +6034,14 @@
           "type": "object"
         },
         "host": {
-          "description": "The URL of the Square instance. (i.e. mystore.mysquare.com)",
-          "type": "object"
+          "description": "The URL of the Square instance. (i.e. mystore.mysquare.com)",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientId": {
           "description": "The client ID associated with your Square application.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "clientSecret": {
           "description": "The client secret associated with your Square application.",
@@ -5914,19 +6049,23 @@
         },
         "redirectUri": {
           "description": "The redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -5964,7 +6103,8 @@
         },
         "host": {
           "description": "The endpoint of the Xero server. (i.e. api.xero.com)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "consumerKey": {
           "description": "The consumer key associated with the Xero application.",
@@ -5976,15 +6116,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -6022,7 +6165,8 @@
         },
         "endpoint": {
           "description": "The endpoint of the Zoho server. (i.e. crm.zoho.com/crm/private)",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "accessToken": {
           "description": "The access token for Zoho authentication.",
@@ -6030,15 +6174,18 @@
         },
         "useEncryptedEndpoints": {
           "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "useHostVerification": {
           "description": "Specifies whether to require the host name in the server's certificate to match the host name of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "usePeerVerification": {
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-bool"
         },
         "encryptedCredential": {
           "type": "string",
@@ -6072,7 +6219,8 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -6110,7 +6258,8 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",

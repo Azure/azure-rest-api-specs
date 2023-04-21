@@ -900,7 +900,7 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "useBinaryTransfer": {
-          "type": "boolean",
+          "type": "object",
           "x-ms-format": "dfe-bool",
           "description": "Specify whether to use binary transfer mode for FTP stores. Type: boolean (or Expression with resultType boolean)."
         },
@@ -5411,14 +5411,17 @@
       "properties": {
         "ingestionMappingName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A name of a pre-created csv mapping that was defined on the target Kusto table. Type: string."
         },
         "ingestionMappingAsJson": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "An explicit column mapping description provided in a json format. Type: string."
         },
         "flushImmediately": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If set to true, any aggregation will be skipped. Default is false. Type: boolean."
         }
       }
