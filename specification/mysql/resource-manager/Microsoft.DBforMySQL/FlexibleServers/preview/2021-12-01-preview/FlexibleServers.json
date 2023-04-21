@@ -204,7 +204,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "get": {
         "tags": [
@@ -665,7 +668,8 @@
         },
         "geoRedundantBackup": {
           "$ref": "#/definitions/EnableStatusEnum",
-          "description": "Whether or not geo redundant backup is enabled."
+          "description": "Whether or not geo redundant backup is enabled.",
+          "default": "Disabled"
         },
         "earliestRestoreDate": {
           "type": "string",
@@ -691,7 +695,13 @@
         },
         "autoGrow": {
           "description": "Enable Storage Auto Grow or not.",
-          "$ref": "#/definitions/EnableStatusEnum"
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
+        },
+        "logOnDisk": {
+          "description": "Enable Log On Disk or not.",
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
         },
         "storageSku": {
           "type": "string",
@@ -700,7 +710,8 @@
         },
         "autoIoScaling": {
           "description": "Enable IO Auto Scaling or not.",
-          "$ref": "#/definitions/EnableStatusEnum"
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
         }
       },
       "description": "Storage Profile properties of a server"

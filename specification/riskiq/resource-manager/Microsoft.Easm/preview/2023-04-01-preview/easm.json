@@ -1,0 +1,872 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Easm",
+    "description": "REST APIs for Easm",
+    "version": "2023-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Easm/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Returns a list of workspaces under the given subscription.",
+        "operationId": "Workspaces_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of workspaces.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces": {
+            "$ref": "./examples/Workspaces_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Easm/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Returns a list of workspaces in the given resource group.",
+        "operationId": "Workspaces_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of workspaces.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workspaces": {
+            "$ref": "./examples/Workspaces_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Easm/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Returns a workspace with the given name.",
+        "operationId": "Workspaces_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace details.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces": {
+            "$ref": "./examples/Workspaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Create or update a Workspace.",
+        "operationId": "Workspaces_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "WorkspaceResource",
+            "description": "Workspace details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResource"
+            }
+          },
+          "201": {
+            "description": "Long running operation.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Workspaces": {
+            "$ref": "./examples/Workspaces_CreateAndUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Update a Workspace.",
+        "operationId": "Workspaces_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "WorkspacePatchResource",
+            "description": "Workspace patch details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workspaces": {
+            "$ref": "./examples/Workspaces_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Delete a Workspace.",
+        "operationId": "Workspaces_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Workspace will be deleted asynchronously."
+          },
+          "204": {
+            "description": "The Workspace does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Workspaces": {
+            "$ref": "./examples/Workspaces_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Easm/workspaces/{workspaceName}/labels": {
+      "get": {
+        "tags": [
+          "Labels"
+        ],
+        "description": "Returns a list of labels in the given workspace.",
+        "operationId": "Labels_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists of labels.",
+            "schema": {
+              "$ref": "#/definitions/LabelResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Labels": {
+            "$ref": "./examples/Labels_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Easm/workspaces/{workspaceName}/labels/{labelName}": {
+      "get": {
+        "tags": [
+          "Labels"
+        ],
+        "description": "Returns a label in the given workspace.",
+        "operationId": "Labels_GetByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LabelNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Label details.",
+            "schema": {
+              "$ref": "#/definitions/LabelResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labels": {
+            "$ref": "./examples/Labels_GetByWorkspace.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Labels"
+        ],
+        "description": "Create or update a Label.",
+        "operationId": "Labels_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LabelNameParameter"
+          },
+          {
+            "name": "LabelResource",
+            "description": "Label details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LabelResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/LabelResource"
+            }
+          },
+          "201": {
+            "description": "Long running operation.",
+            "schema": {
+              "$ref": "#/definitions/LabelResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Labels": {
+            "$ref": "./examples/Labels_CreateAndUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Labels"
+        ],
+        "description": "Update a Label.",
+        "operationId": "Labels_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LabelNameParameter"
+          },
+          {
+            "name": "LabelPatchResource",
+            "description": "Label patch details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LabelPatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/LabelResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labels": {
+            "$ref": "./examples/Labels_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Labels"
+        ],
+        "description": "Delete a Label.",
+        "operationId": "Labels_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LabelNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Label will be deleted asynchronously."
+          },
+          "204": {
+            "description": "The Label does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Labels": {
+            "$ref": "./examples/Labels_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Easm/workspaces/{workspaceName}/tasks/{taskId}": {
+      "get": {
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Returns a task in the given workspace.",
+        "operationId": "Tasks_GetByWorkspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TaskIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task details.",
+            "schema": {
+              "$ref": "#/definitions/TaskResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks": {
+            "$ref": "./examples/Tasks_GetByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Easm/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceState": {
+      "description": "Resources provisioning states.",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "ProvisioningResources",
+        "InstallingApplication",
+        "ConfiguringApplication",
+        "MigratingApplicationData",
+        "RunningValidations",
+        "CreatingArtifacts",
+        "DeletingArtifacts"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true
+      }
+    },
+    "ResourceBaseProperties": {
+      "description": "Resource base properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Resource provisioning state.",
+          "$ref": "#/definitions/ResourceState",
+          "readOnly": true
+        }
+      }
+    },
+    "LabelResourceProperties": {
+      "description": "Label properties.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "Label display name.",
+          "type": "string"
+        },
+        "color": {
+          "description": "Label color.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "WorkspaceResource": {
+      "type": "object",
+      "description": "Workspace details.",
+      "properties": {
+        "properties": {
+          "description": "Workspace properties.",
+          "$ref": "#/definitions/ResourceBaseProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "WorkspacePatchResource": {
+      "type": "object",
+      "description": "Workspace patch properties.",
+      "properties": {
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "WorkspaceResourceList": {
+      "description": "The list of workspaces.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Workspace list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of workspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceResource"
+          }
+        }
+      }
+    },
+    "LabelResource": {
+      "type": "object",
+      "description": "Label details",
+      "properties": {
+        "properties": {
+          "description": "Label properties",
+          "$ref": "#/definitions/LabelResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "LabelPatchResource": {
+      "type": "object",
+      "description": "Label patch properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabelResource"
+        }
+      ]
+    },
+    "LabelResourceList": {
+      "type": "object",
+      "description": "The list of labels.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of labels.",
+          "items": {
+            "$ref": "#/definitions/LabelResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of Label list."
+        }
+      }
+    },
+    "TaskResourceProperties": {
+      "description": "Task properties.",
+      "type": "object",
+      "properties": {
+        "startedAt": {
+          "description": "The time the task started",
+          "type": "string"
+        },
+        "completedAt": {
+          "description": "The time the task completed",
+          "type": "string"
+        },
+        "lastPolledAt": {
+          "description": "The last time the task was polled",
+          "type": "string"
+        },
+        "state": {
+          "description": "the state the task is in",
+          "type": "string"
+        },
+        "phase": {
+          "description": "the phase the task is in",
+          "type": "string"
+        },
+        "reason": {
+          "description": "The reason the task was moved into its current state, if the task wasn't completed.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The reason the task was moved into its current state, if the task wasn't completed.",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "TaskResource": {
+      "type": "object",
+      "description": "Task details",
+      "properties": {
+        "properties": {
+          "description": "Task properties",
+          "$ref": "#/definitions/TaskResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Workspace.",
+      "x-ms-parameter-location": "method"
+    },
+    "LabelNameParameter": {
+      "name": "labelName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Label.",
+      "x-ms-parameter-location": "method"
+    },
+    "TaskIdParameter": {
+      "name": "taskId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the Task.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
