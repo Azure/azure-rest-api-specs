@@ -34,7 +34,7 @@ If upon running running `prettier` in any of the ways described above you encoun
 [error] Cannot find module '/home/<username>/tmp/azure-rest-api-specs/scripts/prettier-swagger-plugin'
 ```
 
-then please first run `npx tsc`. Even if it outputs errors, try running `prettier` againl it should work.
+then please first run `npx tsc`. Even if it outputs errors, try running `prettier` again. It should work.
 
 ## Model Validation
 
