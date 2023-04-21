@@ -5,7 +5,7 @@
     "clusterRp": "Microsoft.Kubernetes",
     "clusterResourceName": "connectedClusters",
     "fluxConfigurationName": "srs-fluxconfig",
-    "api-version": "2022-11-01",
+    "api-version": "2023-05-01",
     "clusterName": "clusterName1",
     "fluxConfiguration": {
       "properties": {
@@ -27,7 +27,21 @@
             "path": "./test/path",
             "dependsOn": [],
             "timeoutInSeconds": 600,
-            "syncIntervalInSeconds": 600
+            "syncIntervalInSeconds": 600,
+            "wait": true,
+            "postBuild": {
+              "substitute": {
+                "cluster_env": "prod",
+                "replica_count": "2"
+              },
+              "substituteFrom": [
+                {
+                  "kind": "ConfigMap",
+                  "name": "cluster-test",
+                  "optional": true
+                }
+              ]
+            }
           },
           "srs-kustomization2": {
             "path": "./other/test/path",
@@ -37,9 +51,26 @@
             "timeoutInSeconds": 600,
             "syncIntervalInSeconds": 600,
             "retryIntervalInSeconds": 600,
-            "prune": false
+            "prune": false,
+            "wait": false,
+            "postBuild": {
+              "substituteFrom": [
+                {
+                  "kind": "ConfigMap",
+                  "name": "cluster-values",
+                  "optional": true
+                },
+                {
+                  "kind": "Secret",
+                  "name": "secret-name",
+                  "optional": false
+                }
+              ]
+            }
           }
-        }
+        },
+        "waitForReconciliation": true,
+        "reconciliationWaitDuration": "PT30M"
       }
     }
   },
@@ -85,7 +116,21 @@
               "path": "./test/path",
               "dependsOn": [],
               "timeoutInSeconds": 600,
-              "syncIntervalInSeconds": 600
+              "syncIntervalInSeconds": 600,
+              "wait": true,
+              "postBuild": {
+                "substitute": {
+                  "cluster_env": "prod",
+                  "replica_count": "2"
+                },
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-test",
+                    "optional": true
+                  }
+                ]
+              }
             },
             "srs-kustomization2": {
               "name": "srs-kustomization2",
@@ -96,7 +141,22 @@
               "timeoutInSeconds": 600,
               "syncIntervalInSeconds": 600,
               "retryIntervalInSeconds": 600,
-              "prune": false
+              "prune": false,
+              "wait": false,
+              "postBuild": {
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-values",
+                    "optional": true
+                  },
+                  {
+                    "kind": "Secret",
+                    "name": "secret-name",
+                    "optional": false
+                  }
+                ]
+              }
             }
           },
           "statuses": [
@@ -181,7 +241,7 @@
       "headers": {
         "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
         "x-ms-async-operation-timeout": "PT48H",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/operationId?api-version=2022-11-01"
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/operationId?api-version=2023-05-01"
       },
       "description": "Details of the Kubernetes Flux Configuration's current status.",
       "body": {
@@ -219,7 +279,21 @@
               "path": "./test/path",
               "dependsOn": [],
               "timeoutInSeconds": 600,
-              "syncIntervalInSeconds": 600
+              "syncIntervalInSeconds": 600,
+              "wait": true,
+              "postBuild": {
+                "substitute": {
+                  "cluster_env": "prod",
+                  "replica_count": "2"
+                },
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-test",
+                    "optional": true
+                  }
+                ]
+              }
             },
             "srs-kustomization2": {
               "name": "srs-kustomization2",
@@ -230,7 +304,22 @@
               "timeoutInSeconds": 600,
               "syncIntervalInSeconds": 600,
               "retryIntervalInSeconds": 600,
-              "prune": false
+              "prune": false,
+              "wait": false,
+              "postBuild": {
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-values",
+                    "optional": true
+                  },
+                  {
+                    "kind": "Secret",
+                    "name": "secret-name",
+                    "optional": false
+                  }
+                ]
+              }
             }
           },
           "statuses": [
