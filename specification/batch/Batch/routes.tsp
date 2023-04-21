@@ -291,7 +291,6 @@ a StartTask element, then the Pool keeps the existing StartTask.
         @doc("The parameters for the request.")
         @body
         poolUpdate: BatchPool;
-        poolPatchParameter: BatchPool;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
