@@ -290,6 +290,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
 
         @doc("The parameters for the request.")
         @body
+        poolUpdate: BatchPool;
         poolPatchParameter: BatchPool;
       },
     BatchResponseHeaders & {
@@ -386,7 +387,7 @@ scaling enabled in order to evaluate a formula.
 
       @doc("The parameters for the request.")
       @body
-      poolEvaluateAutoScaleParameter: BatchPoolEvaluateAutoScaleParameters;
+      parameters: BatchPoolEvaluateAutoScaleParameters;
     },
     BatchResponseHeaders &
       AutoScaleRun & {
@@ -424,7 +425,7 @@ Nodes, use the Pool remove Compute Nodes API instead.
 
         @doc("The parameters for the request.")
         @body
-        poolResizeParameter: BatchPoolResizeParameters;
+        parameters: BatchPoolResizeParameters;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -505,7 +506,7 @@ Each request may remove up to 100 nodes.
 
         @doc("The parameters for the request.")
         @body
-        nodeRemoveParameter: NodeRemoveParameters;
+        parameters: NodeRemoveParameters;
       },
     PoolRemoveNodesResponseHeaders,
     {},
@@ -1435,7 +1436,7 @@ running Jobs are unaffected.
 
         @doc("The parameters for the request.")
         @body
-        jobSchedulePatchParameter: BatchJobSchedule;
+        jobScheduleUpdate: BatchJobSchedule;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1474,7 +1475,7 @@ running Jobs are unaffected.
 
         @doc("The parameters for the request.")
         @body
-        jobScheduleUpdateParameter: BatchJobSchedule;
+        jobSchedule: BatchJobSchedule;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1581,7 +1582,7 @@ running Jobs are unaffected.
 
       @doc("The Job Schedule to be added.")
       @body
-      cloudJobSchedule: BatchJobSchedule;
+      jobSchedule: BatchJobSchedule;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1847,7 +1848,7 @@ information about subtasks.
 
         @doc("The parameters for the request.")
         @body
-        taskUpdateParameter: BatchTask;
+        task: BatchTask;
       },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -2061,7 +2062,7 @@ Account on a Compute Node only when it is in the idle or running state.
 
       @doc("The parameters for the request.")
       @body
-      nodeUpdateUserParameter: NodeUpdateUserParameters;
+      parameters: NodeUpdateUserParameters;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
