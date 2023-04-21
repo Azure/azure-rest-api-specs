@@ -21,23 +21,20 @@ Or if you want to fix specified service, use the complete path, not relative:
 
 ```
 npm install
-npm run prettier --write "<path to repo clone>/azure-rest-api-specs/specification/**/*.json"
+npx prettier --write "<path to repo clone>/azure-rest-api-specs/specification/**/*.json"
 ```
 
 Then please commit and push changes made by prettier.
 
 ### Troublshooting prettier
 
-If upon running `npm run prettier-fix` or `npm run prettier` you encounter error similar to this one:
+If upon running running `prettier` in any of the ways described above you encounter error similar to this one:
+
 ```
 [error] Cannot find module '/home/<username>/tmp/azure-rest-api-specs/scripts/prettier-swagger-plugin'
 ```
 
-then please first run
-
-```
-npx tsc
-```
+then please first run `npx tsc`. Even if it outputs errors, try running `prettier` againl it should work.
 
 ## Model Validation
 
