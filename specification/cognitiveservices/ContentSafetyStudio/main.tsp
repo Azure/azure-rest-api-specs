@@ -22,6 +22,11 @@ enum Versions {
   `2023-04-30-preview`,
 }
 
+alias ServiceTraits = SupportsRepeatableRequests &
+SupportsConditionalRequests &
+SupportsClientRequestId;
+
+
 // Models ////////////////////
 @doc("Time granularity.")
 enum Granularity {
@@ -221,24 +226,34 @@ model HitCallsList {
 model Error {
   @header("x-ms-error-code")
   @doc("Error code.")
-  code: int32;
+  msErrorCode?: string,
+  ...ErrorResponse
+}
 
-  @doc("Error message.")
+@doc("Error information that the API returned.")
+@error
+model ErrorResponse {
+
+  @doc("Error code.")
+  code: string;
+
+  @doc("Message that explains the error that the service reported.")
   message: string;
 }
 
+
 // Query parameter ////////////////////
-@doc("Provides the 'start' query parameter for list operations.")
+@doc("Provides the 'start' query parameter for list operations. The start time is inclusive.")
 model StartTimeQueryParameter {
   @query
-  @doc("Start date time.")
+  @doc("Start date time inclusive.")
   start: utcDateTime;
 }
 
-@doc("Provides the 'end' query parameter for list operations.")
+@doc("Provides the 'end' query parameter for list operations. The end time is exclusive.")
 model EndTimeQueryParameter {
   @query
-  @doc("End date time.")
+  @doc("End date time inclusive.")
   end: utcDateTime;
 }
 
@@ -333,97 +348,158 @@ model AggregationListQueryParameters {
 }
 
 interface Metrics {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+
+  @route("/contentSafety/metrics/requestCounts")
   @summary("List API request counts at different timestamps given a time range.")
   @doc("List API request counts at different timestamps given a time range.")
-  @route("contentSafety/studio/metrics/requestCounts")
-  op listTotalCalls (
-    ...TopQueryParameter,
-    ...SkipQueryParameter,
-    ...MaxPageSizeQueryParameter,
-    ...StartTimeQueryParameter,
-    ...EndTimeQueryParameter,
-    ...TimeGranularityQueryParameter,
-    ...ContentSafetyOperationQueryParameter,
-    ...ContentSafetyVersionQueryParameter
-  ) : CallList| Error;
+  op listRequestCounts is RpcOperation<
+    {
+      ...SkipQueryParameter,
+      ...TopQueryParameter,
+      ...MaxPageSizeQueryParameter,
+      ...StartTimeQueryParameter,
+      ...EndTimeQueryParameter,
+      ...TimeGranularityQueryParameter,
+      ...ContentSafetyOperationQueryParameter,
+      ...ContentSafetyVersionQueryParameter
+    },
+    CallList  ,
+    ServiceTraits,
+    Error
+  >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
-  @summary("List aggregated API latencies at different timestamps given a time range.")
-  @doc("List aggregated API latencies at different timestamps given a time range.")
-  @route("contentSafety/studio/metrics/requestLatencies")
-  op listLatencies (
-    ...TopQueryParameter,
-    ...SkipQueryParameter,
-    ...MaxPageSizeQueryParameter,
-    ...StartTimeQueryParameter,
-    ...EndTimeQueryParameter,
-    ...TimeGranularityQueryParameter,
-    ...ContentSafetyOperationQueryParameter,
-    ...ContentSafetyVersionQueryParameter
-  ) : LatencyList| Error;
-  
-  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  @route("/contentSafety/metrics/requestLatencies")
+  @summary("List API request counts at different timestamps given a time range.")
+  @doc("List API request counts at different timestamps given a time range. Default top is 50.")
+  op listRequestLatencies is RpcOperation<
+    {
+      ...TopQueryParameter,
+      ...SkipQueryParameter,
+      ...MaxPageSizeQueryParameter,
+      ...StartTimeQueryParameter,
+      ...EndTimeQueryParameter,
+      ...TimeGranularityQueryParameter,
+      ...ContentSafetyOperationQueryParameter,
+      ...ContentSafetyVersionQueryParameter,
+      ...AggregationQueryParameter
+    },
+    LatencyList  ,
+    ServiceTraits,
+    Error
+  >;
+
+  @route("/contentSafety/metrics/categories/{category}/severities")
+  @summary("List all severities and API call count number of a specific category and a specific severity given a time range.")
+  @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
+  op listSeverities is RpcOperation<
+    {
+      @format("Category")
+      @doc("Category.")
+      @path
+      category: string,
+      ...TopQueryParameter,
+      ...SkipQueryParameter,
+      ...MaxPageSizeQueryParameter,
+      ...StartTimeQueryParameter,
+      ...EndTimeQueryParameter,
+      ...TimeGranularityQueryParameter,
+      ...ContentSafetyOperationQueryParameter,
+      ...ContentSafetyVersionQueryParameter,
+      ...ModalityTypeQueryParameter
+    },
+    LatencyList  ,
+    ServiceTraits,
+    Error
+  >;
+
   // @summary("List all severities and API call count number of a specific category and a specific severity given a time range")
-  // @doc("List all severities and API call count number of a specific category and a specific severity given a time range.")
-  // @route("/contentSafety/studio/metrics/categories/{category}/severities")
-  // op listSeverityDistribution (
-  //   @format("Category")
-  //   @doc("Category.")
-  //   @path
-  //   category: string,
-  //   ...TopQueryParameter,
-  //   ...SkipQueryParameter,
-  //   ...MaxPageSizeQueryParameter,
-  //   ...StartTimeQueryParameter,
-  //   ...EndTimeQueryParameter,
-  //   ...TimeGranularityQueryParameter,
-  //   ...ContentSafetyOperationQueryParameter,
-  //   ...ContentSafetyVersionQueryParameter
-  // ) : SeverityList| Error;
+  // @doc("List all severities and API call count number of a specific category and a specific severity given a time range")
+  // @route("/contentSafety/metrics")
+  // listSeverityDistributionByCategoryAndSeverity is ResourceList<
+  //   Severity,
+  //   ListQueryParametersTrait<{
+  //     ...SkipQueryParameter,
+  //     ...TopQueryParameter,
+  //     ...MaxPageSizeQueryParameter,
+  //     ...StartTimeQueryParameter,
+  //     ...EndTimeQueryParameter,
+  //     ...TimeGranularityQueryParameter,
+  //     ...ContentSafetyVersionQueryParameter,
+  //     ...ModalityTypeQueryParameter
+  //   }>
+  // >;
 
-  @summary("List all severities and API call count number of a specific category and a specific severity given a time range")
-  @doc("List all severities and API call count number of a specific category and a specific severity given a time range")
-  @route("/contentSafety/studio/metrics")
-  listSeverityDistributionByCategoryAndSeverity is ResourceList<
-    Severity,
-    ListQueryParametersTrait<ModalityQueryParameters>
+  
+  @route("/contentSafety/metrics/categories/{category}/severities/{severity}/requestCounts")
+  @summary("List all severities and API call count number of a specific category and a specific severity given a time range.")
+  @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
+  op listRequestCountsByCategoryAndSeverity is RpcOperation<
+    {
+      @format("Category")
+      @doc("Category.")
+      @path
+      category: string,
+      @format("Severity")
+      @doc("Severity.")
+      @path
+      severity: string,
+      ...TopQueryParameter,
+      ...SkipQueryParameter,
+      ...MaxPageSizeQueryParameter,
+      ...StartTimeQueryParameter,
+      ...EndTimeQueryParameter,
+      ...TimeGranularityQueryParameter,
+      ...ContentSafetyOperationQueryParameter,
+      ...ContentSafetyVersionQueryParameter,
+      ...ModalityTypeQueryParameter
+    },
+    CallList  ,
+    ServiceTraits,
+    Error
   >;
   
-  @summary("List API request count at different timestamps of a specific category and a specific severity given a time range")
-  @doc("List API request count at different timestamps of a specific category and a specific severity given a time range")
-  @route("/contentSafety/studio/metrics")
-  listTotalCallsByCategoryAndSeverity is ResourceList<
-    RequestCountsPerTimestamp,
-    ListQueryParametersTrait<ModalityQueryParameters>
-  >;
-}
+  // @summary("List API request count at different timestamps of a specific category and a specific severity given a time range")
+  // @doc("List API request count at different timestamps of a specific category and a specific severity given a time range")
+  // @route("/contentSafety/metrics")
+  // listTotalCallsByCategoryAndSeverity is ResourceList<
+  //   RequestCountsPerTimestamp,
+  //   ListQueryParametersTrait<ModalityQueryParameters>
+  // >;
 
-interface Blocklist {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  @route("/contentSafety/metrics/blocklistTopTerms")
   @summary("List top terms hit in blocklist at different timestamps.")
   @doc("List top terms hit in blocklist at different timestamps.")
-  @route("/contentSafety/studio/metrics/blocklists/topTerms")
-  op listTopTerms (
-    ...SkipQueryParameter,
-    ...TopQueryParameter,
-    ...MaxPageSizeQueryParameter,
-    ...StartTimeQueryParameter,
-    ...EndTimeQueryParameter,
-    ...ContentSafetyVersionQueryParameter,
-  ) : TermList| Error;
+  op listBlocklistTopTerms is RpcOperation<
+    {
+      ...SkipQueryParameter,
+      ...TopQueryParameter,
+      ...MaxPageSizeQueryParameter,
+      ...StartTimeQueryParameter,
+      ...EndTimeQueryParameter,
+      ...ContentSafetyVersionQueryParameter,
+    },
+    TermList  ,
+    ServiceTraits,
+    Error
+  >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
-  @get
-  @route("/contentSafety/studio/metrics/blocklists/hitCalls")
-  @summary("Show all blocklist hit API count at different timestamps.")
-  @doc("Show all blocklist hit API count at different timestamps.")
-  op listHitCalls (
-    ...SkipQueryParameter,
-    ...TopQueryParameter,
-    ...MaxPageSizeQueryParameter,
-    ...StartTimeQueryParameter,
-    ...EndTimeQueryParameter,
-    ...ContentSafetyVersionQueryParameter,
-  ) : HitCallsList| Error;
+  @route("/contentSafety/metrics/blocklistHitCalls")
+  @summary("Show blocklist hit request count at different timestamps.")
+  @doc("Show blocklist hit request count at different timestamps.")
+  op listBlocklistHitCalls is RpcOperation<
+    {
+      ...SkipQueryParameter,
+      ...TopQueryParameter,
+      ...MaxPageSizeQueryParameter,
+      ...StartTimeQueryParameter,
+      ...EndTimeQueryParameter,
+      ...ContentSafetyVersionQueryParameter,
+    },
+    HitCallsList  ,
+    ServiceTraits,
+    Error
+  >;
 }
+
+
+
