@@ -2269,16 +2269,7 @@
             "$ref": "#/parameters/includeTermHierarchy"
           },
           {
-            "name": "excludeRelationshipTypes",
-            "in": "query",
-            "description": "An array of relationship types which need to be excluded.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "x-ms-client-name": "excludeRelationshipTypeList"
+            "$ref": "#/parameters/excludeRelationshipTypes"
           }
         ],
         "responses": {
@@ -3417,6 +3408,103 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/glossary/terms": {
+      "put": {
+        "tags": [
+          "Glossary"
+        ],
+        "description": "Update terms in bulk.",
+        "operationId": "Glossary_BulkUpdateGlossaryTerms",
+        "x-ms-examples": {
+          "Glossary_BulkUpdateGlossaryTerms": {
+            "$ref": "./examples/Glossary_BulkUpdateGlossaryTerms.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/includeTermHierarchy"
+          },
+          {
+            "in": "body",
+            "name": "terms",
+            "description": "An array of terms to update.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "description": "An array of glossary terms.",
+              "items": {
+                "$ref": "#/definitions/AtlasGlossaryTerm"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. An array of glossary terms.",
+            "schema": {
+              "type": "array",
+              "description": "An array of glossary terms.",
+              "items": {
+                "$ref": "#/definitions/AtlasGlossaryTerm"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Glossary"
+        ],
+        "description": "Get terms by guids.",
+        "operationId": "Glossary_ListGlossaryTermsByGuids",
+        "x-ms-examples": {
+          "Glossary_ListGlossaryTermsByGuids": {
+            "$ref": "./examples/Glossary_ListGlossaryTermsByGuids.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "query",
+            "description": "An array of GUIDs of terms to list.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
+          },
+          {
+            "$ref": "#/parameters/excludeRelationshipTypes"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. An array of glossary terms or an empty list.",
+            "schema": {
+              "type": "array",
+              "description": "An array of glossary terms or an empty list.",
+              "items": {
+                "$ref": "#/definitions/AtlasGlossaryTerm"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -8675,7 +8763,7 @@
     },
     "excludeRelationshipTypes": {
       "name": "excludeRelationshipTypes",
-      "description": "An array of the relationship types need to be excluded from the response.",
+      "description": "An array of the relationship types need to be excluded.",
       "in": "query",
       "required": false,
       "type": "array",
@@ -8683,7 +8771,8 @@
         "type": "string"
       },
       "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "excludeRelationshipTypeList"
     },
     "includeTermTemplate": {
       "name": "includeTermTemplate",
