@@ -1,6 +1,3 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@cadl-lang/compiler";
 import "@azure-tools/cadl-providerhub";
 import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
@@ -945,9 +942,9 @@ interface ServersController {
   update is ArmResourcePatchSyncNoError<ServerSiteResource, SitesProperties>;
   delete is ArmResourceDeleteSyncNoError<ServerSiteResource>;
 
-  @added(Versions.v2019_05_01_preview)
-  @doc("Get all server sites.")
-  listByParent is ArmResourceListByParentUpdated<ServerSiteResource>;
+  // @added(Versions.v2019_05_01_preview)
+  // @doc("Get all server sites.")
+  // listByParent is ArmResourceListByParentUpdated<ServerSiteResource>;
 
   @added(Versions.v2019_05_01_preview)
   @operationId("ServerSites_ListBySubscription")
