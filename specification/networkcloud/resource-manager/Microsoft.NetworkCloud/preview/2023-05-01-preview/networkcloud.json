@@ -2191,9 +2191,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/bareMetalMachineKeySets": {
       "get": {
-        "description": "Get a list of bare metal machine key sets of the cluster in the provided resource group.",
-        "summary": "List bare metal machine key sets of the cluster in the resource group.",
-        "operationId": "BareMetalMachineKeySets_ListByResourceGroup",
+        "description": "Get a list of bare metal machine key sets for the provided cluster.",
+        "summary": "List bare metal machine key sets of the cluster.",
+        "operationId": "bareMetalMachineKeySets_ListByCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2223,8 +2223,8 @@
           }
         },
         "x-ms-examples": {
-          "List bare metal machine key set of cluster for resource group": {
-            "$ref": "./examples/BareMetalMachineKeySets_ListByResourceGroup.json"
+          "List bare metal machine key sets of the cluster": {
+            "$ref": "./examples/BareMetalMachineKeySets_ListByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -2462,9 +2462,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/bmcKeySets": {
       "get": {
-        "description": "Get a list of baseboard management controller key sets of the cluster in the provided resource group.",
-        "summary": "List baseboard management controller key sets of the cluster in the resource group.",
-        "operationId": "BmcKeySets_ListByResourceGroup",
+        "description": "Get a list of baseboard management controller key sets for the provided cluster.",
+        "summary": "List baseboard management controller key sets of the cluster.",
+        "operationId": "bmcKeySets_ListByCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2494,8 +2494,8 @@
           }
         },
         "x-ms-examples": {
-          "List baseboard management controller key set of cluster for resource group": {
-            "$ref": "./examples/BmcKeySets_ListByResourceGroup.json"
+          "List baseboard management controller key sets of the cluster": {
+            "$ref": "./examples/BmcKeySets_ListByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -2794,9 +2794,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/metricsConfigurations": {
       "get": {
-        "description": "Get a list of metrics configurations of the clusters in the provided resource group.",
-        "summary": "List metrics configurations of the cluster in the resource group.",
-        "operationId": "MetricsConfigurations_ListByResourceGroup",
+        "description": "Get a list of metrics configurations for the provided cluster.",
+        "summary": "List metrics configurations of the cluster.",
+        "operationId": "metricsConfigurations_ListByCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2826,8 +2826,8 @@
           }
         },
         "x-ms-examples": {
-          "List metrics configurations of cluster for resource group": {
-            "$ref": "./examples/ClusterMetricsConfigurations_ListByResourceGroup.json"
+          "List metrics configurations of the cluster": {
+            "$ref": "./examples/ClusterMetricsConfigurations_ListByCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -3364,9 +3364,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesClusters/{kubernetesClusterName}/agentPools": {
       "get": {
-        "description": "Get a list of Kubernetes cluster agent pools in the provided resource group.",
-        "summary": "List Kubernetes cluster agent pools in the resource group.",
-        "operationId": "AgentPools_ListByResourceGroup",
+        "description": "Get a list of agent pools for the provided Kubernetes cluster.",
+        "summary": "List agent pools of the Kubernetes cluster.",
+        "operationId": "agentPools_ListByKubernetesCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3396,8 +3396,8 @@
           }
         },
         "x-ms-examples": {
-          "List Kubernetes cluster agent pool for resource group": {
-            "$ref": "./examples/AgentPools_ListByResourceGroup.json"
+          "List agent pools of the Kubernetes cluster": {
+            "$ref": "./examples/AgentPools_ListByKubernetesCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -5408,9 +5408,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/consoles": {
       "get": {
-        "description": "Get a list of virtual machine consoles in the provided resource group.",
-        "summary": "List virtual machine consoles in the resource group.",
-        "operationId": "Consoles_ListByResourceGroup",
+        "description": "Get a list of consoles for the provided virtual machine.",
+        "summary": "List consoles of the virtual machine.",
+        "operationId": "consoles_ListByVirtualMachine",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -5440,8 +5440,8 @@
           }
         },
         "x-ms-examples": {
-          "List virtual machine consoles for resource group": {
-            "$ref": "./examples/Consoles_ListByResourceGroup.json"
+          "List consoles of the virtual machine": {
+            "$ref": "./examples/Consoles_ListByVirtualMachine.json"
           }
         },
         "x-ms-pageable": {
@@ -9344,6 +9344,10 @@
             "Terminating",
             "Unknown"
           ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KubernetesClusterNodeDetailedStatus"
+          },
           "readOnly": true
         },
         "detailedStatusMessage": {
@@ -9422,6 +9426,10 @@
             "Off",
             "Unknown"
           ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KubernetesNodePowerState"
+          },
           "readOnly": true
         },
         "role": {
