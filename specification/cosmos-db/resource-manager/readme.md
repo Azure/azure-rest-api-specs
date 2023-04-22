@@ -27,15 +27,15 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2023-03
+tag: package-preview-2023-03
 ```
 
 
-### Tag: package-2023-03
+### Tag: package-2023-03-15
 
-These settings apply only when `--tag=package-2023-03` is specified on the command line.
+These settings apply only when `--tag=package-2023-03-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+```yaml $(tag) == 'package-2023-03-15'
 input-file:
   - Microsoft.DocumentDB/stable/2023-03-15/cosmos-db.json
   - Microsoft.DocumentDB/stable/2023-03-15/managedCassandra.json
