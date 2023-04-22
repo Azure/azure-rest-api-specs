@@ -1376,7 +1376,7 @@ model IisWebApplicationProperties {
   applications?: IisApplicationUnit[];
 
   @doc("Gets or sets the tags on IIS Web application.")
-  tags?: Record<Object>;
+  tags?: Record<object>;
 
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Gets the list of application units for the web site.")
@@ -1937,7 +1937,7 @@ model WebRoleV202011PreviewWebApplicationProperties {
 
   @doc("Gets tags that can be used with ODATA.")
   @visibility("read")
-  tags?: Record<Object>;
+  tags?: Record<object>;
 
   @doc("Gets a value indicating whether application is deleted.")
   @visibility("read")
@@ -2474,8 +2474,10 @@ model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStat
 /**
  * Represent any structured model.(With properties)
  */
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("an object")
-model Object {}
+model object {}
 
 @knownValues(
   MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusValues
