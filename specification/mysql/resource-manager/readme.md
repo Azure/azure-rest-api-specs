@@ -178,6 +178,24 @@ input-file:
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
 ```
 
+### Tag: package-flexibleserver-2022-10-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-10-01-preview'
+input-file:
+- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/preview/2022-09-30-preview/Backups.json
+- Microsoft.DBforMySQL/Backups/preview/2022-09-30-preview/BackupAndExport.json
+- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2022-09-30-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+```
+
 ### Tag: package-flexibleserver-2022-01-01
 
 These settings apply only when `--tag=package-flexibleserver-2022-01-01` is specified on the command line.
