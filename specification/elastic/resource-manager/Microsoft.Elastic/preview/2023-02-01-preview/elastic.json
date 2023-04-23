@@ -107,6 +107,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/elasticVersions": {
+      "get": {
+        "tags": [
+          "ElasticVersions"
+        ],
+        "summary": "Get a list of available versions for a region.",
+        "operationId": "ElasticVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "query",
+            "name": "region",
+            "description": "Region where elastic deployment will take place.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticVersionsListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticVersions_List": {
+            "$ref": "./examples/ElasticVersions_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors": {
       "get": {
         "tags": [
@@ -1371,12 +1417,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/getOrganizationApiKey": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/getOrganizationApiKey": {
       "post": {
         "tags": [
           "ApiKey"
         ],
         "summary": "Fetch User API Key from internal database, if it was generated and stored while creating the Elasticsearch Organization.",
+        "description": "Fetch User API Key from internal database, if it was generated and stored while creating the Elasticsearch Organization.",
         "operationId": "Organizations_GetApiKey",
         "consumes": [
           "application/json"
@@ -1390,9 +1437,6 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "body",
@@ -1755,6 +1799,10 @@
           "format": "int32",
           "type": "integer",
           "readOnly": true
+        },
+        "generateApiKey": {
+          "description": "Flag to determine if User API Key has to be generated and shared.",
+          "type": "boolean"
         }
       }
     },
@@ -1824,11 +1872,6 @@
         "identity": {
           "description": "Identity properties of the monitor resource.",
           "$ref": "#/definitions/IdentityProperties"
-        },
-        "generateApiKey": {
-          "description": "Flag to determine if User API Key has to be generated and shared.",
-          "type": "boolean",
-          "readOnly": true
         },
         "tags": {
           "description": "The tags of the monitor resource.",
@@ -1962,6 +2005,23 @@
         }
       }
     },
+    "ElasticVersionsListResponse": {
+      "description": "List of elastic versions available in a region.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
+        }
+      }
+    },
     "LogRules": {
       "description": "Set of rules for sending logs for the Monitor resource.",
       "type": "object",
@@ -2057,7 +2117,7 @@
       "type": "object",
       "properties": {
         "marketplaceSubscription": {
-          "description": "Marketplace Subscription Id",
+          "description": "Marketplace Subscription",
           "type": "object",
           "properties": {
             "id": {
@@ -2067,11 +2127,11 @@
           }
         },
         "marketplaceName": {
-          "description": "Subscription Details: Marketplace SAAS Name",
+          "description": "Marketplace Subscription Details: SAAS Name",
           "type": "string"
         },
         "marketplaceResourceId": {
-          "description": "Subscription Details: Marketplace Resource URI",
+          "description": "Marketplace Subscription Details: Resource URI",
           "type": "string"
         }
       }

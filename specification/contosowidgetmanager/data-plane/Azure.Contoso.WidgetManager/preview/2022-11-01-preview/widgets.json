@@ -3,9 +3,9 @@
   "info": {
     "title": "Contoso Widget Manager",
     "version": "2022-11-01-preview",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -41,25 +41,31 @@
                     "$ref": "#/definitions/Widget"
                   },
                   "x-ms-identifiers": [],
-                  "x-cadl-name": "Widget[]",
+                  "x-typespec-name": "Widget[]",
                   "description": "The Widget items on this page"
                 },
                 "nextLink": {
                   "type": "string",
                   "format": "uri",
                   "description": "The link to the next page of items",
-                  "x-cadl-name": "Rest.ResourceLocation"
+                  "x-typespec-name": "Rest.ResourceLocation"
                 }
               },
               "description": "Paged collection of Widget items",
               "required": [
                 "value"
               ],
-              "x-cadl-name": "Azure.Core.Foundations.CustomPage<Widget, Azure.Core.(anonymous model)>"
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Widget, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -100,6 +106,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -164,6 +176,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -224,11 +242,17 @@
                 "id",
                 "status"
               ],
-              "x-cadl-name": "Azure.Core.Foundations.OperationStatus<never, Azure.Core.Foundations.Error>"
+              "x-typespec-name": "Azure.Core.Foundations.OperationStatus<never, Azure.Core.Foundations.Error>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -285,22 +309,24 @@
                 "result": {
                   "$ref": "#/definitions/Widget",
                   "description": "The result of the operation."
-                },
-                "widgetName": {
-                  "type": "string",
-                  "description": "The widget name."
                 }
               },
+              "description": "Provides status details for long running operations.",
               "required": [
                 "id",
-                "status",
-                "widgetName"
+                "status"
               ],
-              "x-cadl-name": "(anonymous model)"
+              "x-typespec-name": "Azure.Core.ResourceOperationStatus<Widget, Widget, Azure.Core.Foundations.Error>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -336,7 +362,7 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Azure.Core.Foundations.Error[]",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
           "description": "An array of details about specific errors that led to this reported error."
         },
         "innererror": {
