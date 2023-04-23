@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./models-languages.tsp";
 import "./models-translate.tsp";
 import "./models-transliterate.tsp";
@@ -9,6 +10,7 @@ import "./models-dictionary.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 namespace TextTranslation;
 
@@ -39,6 +41,7 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
+@protocolAPI(false)
 op GetLanguages is CustomGetOperation<
   GetLanguageParameters,
   GetLanguagesResult,
@@ -51,6 +54,7 @@ op GetLanguages is CustomGetOperation<
 @route("translate")
 @summary("Translate Text")
 @doc("Translate Text")
+@protocolAPI(false)
 op Translate is CustomOperation<
   InputTextItem[],
   TranslateParameters,
@@ -64,6 +68,7 @@ op Translate is CustomOperation<
 @route("transliterate")
 @summary("Transliterate Text")
 @doc("Transliterate Text")
+@protocolAPI(false)
 op Transliterate is CustomOperation<
   InputTextItem[],
   TransliterateParameters,
@@ -77,6 +82,7 @@ op Transliterate is CustomOperation<
 @route("breaksentence")
 @summary("Find Sentence Boundaries")
 @doc("Find Sentence Boundaries")
+@protocolAPI(false)
 op FindSentenceBoundaries is CustomOperation<
   InputTextItem[],
   BreakSentenceParameters,
@@ -90,6 +96,7 @@ op FindSentenceBoundaries is CustomOperation<
 @route("dictionary/lookup")
 @summary("Lookup Dictionary Entries")
 @doc("Lookup Dictionary Entries")
+@protocolAPI(false)
 op LookupDictionaryEntries is CustomOperation<
   InputTextItem[],
   DictionaryLookupParameters,
@@ -103,6 +110,7 @@ op LookupDictionaryEntries is CustomOperation<
 @route("dictionary/examples")
 @summary("Lookup Dictionary Examples")
 @doc("Lookup Dictionary Examples")
+@protocolAPI(false)
 op LookupDictionaryExamples is CustomOperation<
   DictionaryExampleTextItem[],
   DictionaryExamplesParameters,
