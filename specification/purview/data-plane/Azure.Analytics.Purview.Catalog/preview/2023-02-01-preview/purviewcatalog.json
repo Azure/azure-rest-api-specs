@@ -6079,6 +6079,10 @@
               "type": "string",
               "description": "The abbreviation of the term."
             },
+            "nickName": {
+              "type": "string",
+              "description": "The nick name of the term."
+            },
             "templateName": {
               "type": "array",
               "items": {
@@ -6166,6 +6170,16 @@
               "items": {
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
               }
+            },
+            "childrenTerms": {
+              "type": "array",
+              "description": "An array of chilren terms.",
+              "items": {
+                "$ref": "#/definitions/AtlasRelatedTermHeader"
+              }
+            },
+            "parentTerm": {
+              "$ref": "#/definitions/AtlasGlossaryHeader"
             },
             "replacedBy": {
               "type": "array",
@@ -6387,25 +6401,32 @@
     },
     "PurviewObjectId": {
       "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the object."
+      "allOf": [
+        {
+          "$ref": "#/definitions/AtlasObjectId"
         },
-        "itemPath": {
-          "type": "string",
-          "description": "The item path of the object."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The resource Id of the object."
-        },
-        "properties": {
-          "type": "object",
-          "description": "The properties of the purview object.",
-          "additionalProperties": {}
+        {
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the object."
+            },
+            "itemPath": {
+              "type": "string",
+              "description": "The item path of the object."
+            },
+            "resourceId": {
+              "type": "string",
+              "description": "The resource Id of the object."
+            },
+            "properties": {
+              "type": "object",
+              "description": "The properties of the purview object.",
+              "additionalProperties": {}
+            }
+          }
         }
-      },
+      ],
       "title": "PurviewObjectId",
       "description": "Reference to an object-instance."
     },
