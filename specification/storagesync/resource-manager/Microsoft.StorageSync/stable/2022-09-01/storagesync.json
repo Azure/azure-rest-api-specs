@@ -3535,7 +3535,7 @@
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
-		"identity": {
+        "identity": {
           "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
@@ -3772,7 +3772,7 @@
           "type": "string",
           "description": "Friendly Name"
         },
-		"ApplicationId": {
+        "ApplicationId": {
           "type": "string",
           "description": "Server ServicePrincipal Id"
         }
@@ -3781,7 +3781,7 @@
     "RegisteredServerUpdateParametersProperties": {
       "description": "RegisteredServer Update Properties object.",
       "properties": {
-		"ApplicationId": {
+        "ApplicationId": {
           "type": "string",
           "description": "Server ServicePrincipal Id"
         }
@@ -4326,7 +4326,7 @@
           },
           "description": "The user-specified tags associated with the storage sync service."
         },
-		"identity": {
+        "identity": {
           "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
@@ -4376,6 +4376,7 @@
           "description": "StorageSyncService Provisioning State"
         },
         "UseIdentity": {
+          "readOnly": true,
           "type": "boolean",
           "description": "Use Identity authorization when customer have finished setup RBAC permissions."
         },
@@ -4558,7 +4559,7 @@
           "description": "Server name",
           "readOnly": true
         },
-		"ApplicationId": {
+        "ApplicationId": {
           "type": "string",
           "description": "Server ServicePrincipal Id"
         }
