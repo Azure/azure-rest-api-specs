@@ -1450,14 +1450,35 @@
       },
       "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
-    "EntitiesLROTaskParameters": {
+    "EntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Entity Recognition task.",
       "properties": {
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "responseFormat": {
+          "type": "string",
+          "description": "The format in which the response to be returned. If simple is selected we only return the entities result, if detailed is included we include the metadata.",
+          "enum": [
+            "simple",
+            "detailed"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseFormat",
+            "modelAsString": true
+          }
         }
       },
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "EntitiesLROTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Entity Recognition LRO task.",
       "allOf": [
         {
           "$ref": "#/definitions/EntitiesTaskParameters"
@@ -1516,32 +1537,6 @@
       },
       "required": [
         "type"
-      ]
-    },
-    "EntitiesTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for an Entity Recognition task.",
-      "properties": {
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
-        },
-        "responseFormat": {
-          "type": "string",
-          "description": "The format in which the response to be returned. If simple is selected we only return the entities result, if detailed is included we include the metadata.",
-          "enum": [
-            "simple",
-            "detailed"
-          ],
-          "x-ms-enum": {
-            "name": "ResponseFormat",
-            "modelAsString": true
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        }
       ]
     },
     "EntitiesLROTask": {
