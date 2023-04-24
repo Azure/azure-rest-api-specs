@@ -1,8 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Marketplace Solution Builder",
-    "version": "2023-03-01-preview"
+    "version": "2023-03-01-preview",
+    "title": "Marketplace RP Service",
+    "description": "REST APIs for User Solutions"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -16,25 +17,17 @@
   ],
   "paths": {
     "/providers/Microsoft.Marketplace/mysolutions": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "UserSolutions"
         ],
-        "description": "Returns all user solutions",
-        "operationId": "GetUserSolutions",
-        "x-ms-examples": {
-          "GetUserSolutions": {
-            "$ref": "./examples/GetUserSolutions.json"
-          }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          }
-        ],
+        "operationId": "UserSolutions_List",
+        "description": "Gets the list of user solutions",
         "responses": {
           "200": {
             "description": "Success",
@@ -43,43 +36,77 @@
             }
           },
           "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetUserSolutions": {
+            "$ref": "./examples/GetUserSolutions.json"
+          }
         }
-      },
-      "post": {
+      }
+    },
+    "/providers/Microsoft.Marketplace/mysolutions/{solutionId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/SolutionIdParameter"
+        }
+      ],
+      "get": {
         "tags": [
           "UserSolutions"
         ],
-        "description": "Adds a new solution to user solutions",
-        "operationId": "CreateUserSolution",
+        "operationId": "UserSolution_Get",
+        "description": "Get information about the user solution",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetUserSolution": {
+            "$ref": "./examples/GetUserSolution.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserSolutions"
+        ],
+        "operationId": "UserSolution_CreateOrUpdate",
+        "description": "Creates or updates a user solutions",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateSolutionRequestPayload"
+            }
+          }
+        ],
         "x-ms-examples": {
           "CreateUserSolution": {
             "$ref": "./examples/CreateUserSolution.json"
           }
         },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateUserSolutionRequest"
-            },
-            "x-nullable": false
-          }
-        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -88,55 +115,9 @@
             }
           },
           "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Marketplace/mysolutions/{id}": {
-      "get": {
-        "tags": [
-          "UserSolutions"
-        ],
-        "description": "Returns a user solution",
-        "operationId": "GetUserSolution",
-        "x-ms-examples": {
-          "GetUserSolution": {
-            "$ref": "./examples/GetUserSolution.json"
-          }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Solution"
-            }
-          },
-          "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -145,27 +126,8 @@
         "tags": [
           "UserSolutions"
         ],
-        "description": "Removes a user solution",
         "operationId": "RemoveUserSolution",
-        "x-ms-examples": {
-          "RemoveUserSolution": {
-            "$ref": "./examples/RemoveUserSolution.json"
-          }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          }
-        ],
+        "description": "Removes a user solution",
         "responses": {
           "200": {
             "description": "Success"
@@ -174,147 +136,60 @@
             "description": "No Content"
           },
           "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RemoveUserSolution": {
+            "$ref": "./examples/RemoveUserSolution.json"
           }
         }
       }
     },
-    "/providers/Microsoft.Marketplace/mysolutions/{id}/rename": {
-      "post": {
+    "/providers/Microsoft.Marketplace/mysolutions/{solutionId}/products/{productId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/SolutionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ProductIdPathParameter"
+        }
+      ],
+      "put": {
         "tags": [
           "UserSolutions"
         ],
-        "description": "Renames a user solution",
-        "operationId": "RenameUserSolution",
-        "x-ms-examples": {
-          "RenameUserSolution": {
-            "$ref": "./examples/RenameUserSolution.json"
-          }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "payload",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RenameUserSolutionRequest"
-            }
-          }
-        ],
+        "operationId": "UserSolutionProduct_Add",
+        "description": "Adds a product to a user solution",
         "responses": {
           "200": {
             "description": "Success"
           },
           "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.Marketplace/mysolutions/{id}/products": {
-      "post": {
-        "tags": [
-          "UserSolutions"
-        ],
-        "description": "Adds a product to a user solution",
-        "operationId": "AddProductToUserSolution",
+        },
         "x-ms-examples": {
           "AddProductToUserSolution": {
             "$ref": "./examples/AddProductToUserSolution.json"
           }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "required": true
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddProductToUserSolutionRequest"
-            },
-            "x-nullable": false
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
         }
-      }
-    },
-    "/providers/Microsoft.Marketplace/mysolutions/{id}/products/{uniqueProductId}": {
+      },
       "delete": {
         "tags": [
           "UserSolutions"
         ],
-        "description": "Removes a product from a user solution",
         "operationId": "RemoveProductFromUserSolution",
-        "x-ms-examples": {
-          "RemoveProductFromUserSolution": {
-            "$ref": "./examples/RemoveProductFromUserSolution.json"
-          }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "uniqueProductId",
-            "in": "path",
-            "required": true
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true
-          }
-        ],
+        "description": "Removes a product from a user solution",
         "responses": {
           "200": {
             "description": "Product was removed from user solution successfully."
@@ -323,12 +198,15 @@
             "description": "No Content"
           },
           "default": {
-            "x-nullable": false,
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "x-ms-error-response": true,
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RemoveProductFromUserSolution": {
+            "$ref": "./examples/RemoveProductFromUserSolution.json"
           }
         }
       }
@@ -355,7 +233,7 @@
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -367,11 +245,37 @@
       }
     }
   },
+  "parameters": {
+    "SolutionIdParameter": {
+      "name": "solutionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The solution id"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The API version to use for the request."
+    },
+    "ProductIdPathParameter": {
+      "in": "path",
+      "name": "productId",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "The product id to update or delete"
+    }
+  },
   "definitions": {
-    "CreateUserSolutionRequest": {
+    "CreateOrUpdateSolutionRequestPayload": {
       "type": "object",
       "properties": {
-        "name": {
+        "solutionName": {
           "type": "string"
         },
         "productIds": {
@@ -445,12 +349,29 @@
       }
     },
     "Solution": {
+      "description": "The Solution data structure",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties",
+          "description": "The Solution data structure",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SolutionProperties": {
+      "description": "Describes the json payload for solution operations",
       "type": "object",
       "properties": {
-        "id": {
+        "solutionId": {
           "type": "string"
         },
-        "name": {
+        "solutionName": {
           "type": "string"
         },
         "products": {
@@ -460,8 +381,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "additionalProperties": false
+      }
     },
     "UserSolutions": {
       "type": "object",
@@ -474,9 +394,108 @@
           "items": {
             "$ref": "#/definitions/Solution"
           }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of PrivateStore list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource"
         }
       },
-      "additionalProperties": false
+      "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
     }
   }
 }
