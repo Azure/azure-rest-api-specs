@@ -371,7 +371,17 @@
             "description": "Cache deleted."
           },
           "202": {
-            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor."
+            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Cache deleted."
@@ -541,6 +551,19 @@
               "$ref": "#/definitions/Cache"
             }
           },
+          "202": {
+            "description": "Cache update has been initiated.  Poll the Cache's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -555,6 +578,10 @@
           "Caches_Update_ldap_only": {
             "$ref": "./examples/Caches_Update_ldap_only.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "tags": [
           "Caches"
@@ -590,7 +617,17 @@
             "description": "Cache has refreshed the storage target's DNS information."
           },
           "202": {
-            "description": "Cache has started refreshing storage target DNS information."
+            "description": "Cache has started refreshing storage target DNS information.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -639,7 +676,17 @@
             "description": "Cache has started generating debug info."
           },
           "202": {
-            "description": "Cache has started generating debug info."
+            "description": "Cache has started generating debug info.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Cache has started generating debug info."
@@ -691,7 +738,17 @@
             "description": "All cached data has been flushed to the Storage Target(s)."
           },
           "202": {
-            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor."
+            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Cache flush already in progress or has completed."
@@ -743,7 +800,17 @@
             "description": "Cache is Active."
           },
           "202": {
-            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor."
+            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Restarted VMs associated with the cache."
@@ -795,7 +862,17 @@
             "description": "Cache is stopped."
           },
           "202": {
-            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor."
+            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Stopped VMs associated with the cache."
@@ -905,7 +982,17 @@
             "description": "Storage Target deleted."
           },
           "202": {
-            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor."
+            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Storage Target deleted."
@@ -1076,7 +1163,17 @@
             "description": "All data has been flushed to the storage target."
           },
           "202": {
-            "description": "Cache has started flushing to the storage target. Poll the storage target's state field to monitor."
+            "description": "Cache has started flushing to the storage target. Poll the storage target's state field to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Flush already in progress or has completed."
@@ -1131,7 +1228,17 @@
             "description": "Client access to the storage target has been suspended."
           },
           "202": {
-            "description": "Storage target suspend has started. Poll the storage target's state field to monitor."
+            "description": "Storage target suspend has started. Poll the storage target's state field to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The storage target is already suspended or suspend is in progress."
@@ -1186,7 +1293,17 @@
             "description": "Client access to the storage target has been resumed."
           },
           "202": {
-            "description": "Storage target resume has started. Poll the storage target's state field to monitor."
+            "description": "Storage target resume has started. Poll the storage target's state field to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The storage target has already resumed or resume is in progress."
@@ -1241,7 +1358,17 @@
             "description": "All cached data for the storage target was invalidated"
           },
           "202": {
-            "description": "Storage target invalidation has started. Poll the storage target's state field to monitor progress."
+            "description": "Storage target invalidation has started. Poll the storage target's state field to monitor progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The storage target already has been invalidated, or invalidate is in progress."
@@ -1561,7 +1688,17 @@
             "description": "Cache firmware is up to date."
           },
           "202": {
-            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor."
+            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Cache firmware is up to date."
