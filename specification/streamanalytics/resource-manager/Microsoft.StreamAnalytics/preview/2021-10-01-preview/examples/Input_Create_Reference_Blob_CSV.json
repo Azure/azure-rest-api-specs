@@ -20,7 +20,12 @@
             "container": "state",
             "pathPattern": "{date}/{time}",
             "dateFormat": "yyyy/MM/dd",
-            "timeFormat": "HH"
+            "timeFormat": "HH",
+            "blobName": "myblobinput",
+            "deltaPathPattern": "/testBlob/{date}/delta/{time}/",
+            "sourcePartitionCount": 16,
+            "fullSnapshotRefreshRate": "16:14:30",
+            "deltaSnapshotRefreshRate": "16:14:30"
           }
         },
         "serialization": {

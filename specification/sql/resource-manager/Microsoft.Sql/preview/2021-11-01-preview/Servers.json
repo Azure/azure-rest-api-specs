@@ -1,0 +1,1055 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Determines whether a resource can be created with the specified name.",
+        "operationId": "Servers_CheckNameAvailability",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The name availability request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed the availability check.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidNameAvailabilityRequest - The check name availability request is invalid.\n\n * 400 UnknownNameType - Unknown resource type specified for a subscription level name availability check."
+          }
+        },
+        "x-ms-examples": {
+          "Check for a server name that already exists": {
+            "$ref": "./examples/CheckNameAvailabilityServerAlreadyExists.json"
+          },
+          "Check for a server name that is available": {
+            "$ref": "./examples/CheckNameAvailabilityServerAvailable.json"
+          },
+          "Check for a server name that is invalid": {
+            "$ref": "./examples/CheckNameAvailabilityServerInvalid.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/servers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Gets a list of all servers in the subscription.",
+        "operationId": "Servers_List",
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of servers.",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List servers": {
+            "$ref": "./examples/ServerList.json"
+          },
+          "List servers with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerListWithExpandEqualsAdministrators.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Gets a list of servers in a resource groups.",
+        "operationId": "Servers_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of servers.",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List servers by resource group": {
+            "$ref": "./examples/ServerListByResourceGroup.json"
+          },
+          "List servers by resource group with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerListByResourceGroupWithExpandEqualsAdministrators.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Gets a server.",
+        "operationId": "Servers_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified server.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-examples": {
+          "Get server": {
+            "$ref": "./examples/ServerGet.json"
+          },
+          "Get server with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ServerGetWithExpandEqualsAdministrators.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Creates or updates a server.",
+        "operationId": "Servers_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested server resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the server.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingIdentityId - No user assigned identity is provided when the identity type is set to UserAssigned\n\n * 400 InvalidPrimaryIdentityId - User provides a value for PrimaryUserIdentityId but the same is not listed in the IdentityId parameter\n\n * 400 PECsNotExistingToDenyPublicNetworkAccess - Unable to set Deny Public Network Access to Yes since there is no private endpoint enabled to access the server. Please set up private endpoints and retry the operation (https://docs.microsoft.com/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database).\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 UmiMissingAkvPermissions - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 MissingPrimaryIdentity - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 PrimaryIdentityMissingPermissionForKeyId - KeyId is provided by user during create but PrimaryUserAssignedIdentityId is not provided in the API call\n\n * 400 InvalidIdentityTypeForKeyId - KeyId is provided by user during create but identity type is not set to 'UserAssigned'\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 Ipv6FeatureNotEnabled - User tried to turn on Ipv6 support on the server without enabling feature flag on subscription, or the feature support is currently disabled in the region.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 AadOnlyAuthenticationIsEnabled - Azure Active Directory Only Authentication is enabled. Please contact your system administrator.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidExternalAdministratorLogin - Invalid or missing external administrator login name.\n\n * 400 InvalidExternalAdministratorSid - Invalid or missing external administrator object id.\n\n * 400 InvalidExternalAdministratorTenantId - Invalid or missing external administrator tenant id.\n\n * 400 ExternalAdministratorPrincipalType - Invalid or missing external administrator principal type. Please select from User, Application or Group.\n\n * 400 MissingExternalAdministratorWithAadOnlyAuth - In order to use Azure AD Only Authentication, please provide details of an external administrator.\n\n * 400 ExternalAdministratorLoginSameAsSqlAdmin - The names of the Azure Active Directory administrator and of the server admin account must be different. Please provide different values.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UpsertLogicalServerRequestAlreadyInProgress - An ongoing logical server request is already in progress, please try your request again later.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the server.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create server": {
+            "$ref": "./examples/ServerCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Deletes a server.",
+        "operationId": "Servers_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the server."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 DropLogicalServerAlreadyInProgress - Server is already being dropped.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified server does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete server": {
+            "$ref": "./examples/ServerDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Updates a server.",
+        "operationId": "Servers_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested server resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerUpdate"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the server.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingIdentityId - No user assigned identity is provided when the identity type is set to UserAssigned\n\n * 400 InvalidPrimaryIdentityId - User provides a value for PrimaryUserIdentityId but the same is not listed in the IdentityId parameter\n\n * 400 PECsNotExistingToDenyPublicNetworkAccess - Unable to set Deny Public Network Access to Yes since there is no private endpoint enabled to access the server. Please set up private endpoints and retry the operation (https://docs.microsoft.com/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database).\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 UmiMissingAkvPermissions - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 MissingPrimaryIdentity - PrimaryUserAssignedIdentityId provided by user does not have access to KeyId provided\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 PrimaryIdentityMissingPermissionForKeyId - KeyId is provided by user during create but PrimaryUserAssignedIdentityId is not provided in the API call\n\n * 400 InvalidIdentityTypeForKeyId - KeyId is provided by user during create but identity type is not set to 'UserAssigned'\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 Ipv6FeatureNotEnabled - User tried to turn on Ipv6 support on the server without enabling feature flag on subscription, or the feature support is currently disabled in the region.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 AadOnlyAuthenticationIsEnabled - Azure Active Directory Only Authentication is enabled. Please contact your system administrator.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidExternalAdministratorLogin - Invalid or missing external administrator login name.\n\n * 400 InvalidExternalAdministratorSid - Invalid or missing external administrator object id.\n\n * 400 InvalidExternalAdministratorTenantId - Invalid or missing external administrator tenant id.\n\n * 400 ExternalAdministratorPrincipalType - Invalid or missing external administrator principal type. Please select from User, Application or Group.\n\n * 400 MissingExternalAdministratorWithAadOnlyAuth - In order to use Azure AD Only Authentication, please provide details of an external administrator.\n\n * 400 ExternalAdministratorLoginSameAsSqlAdmin - The names of the Azure Active Directory administrator and of the server admin account must be different. Please provide different values.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UpsertLogicalServerRequestAlreadyInProgress - An ongoing logical server request is already in progress, please try your request again later.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a server": {
+            "$ref": "./examples/ServerUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/import": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Imports a bacpac into a new database.",
+        "operationId": "Servers_ImportDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database import request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportNewDatabaseDefinition"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully imported the database.",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 InvalidImportExportInputParameter - The import/export request failed due to an invalid input parameter.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 DatabaseExtensionsInvalidOperationMode - Invalid operationMode parameter for database extension.\n\n * 400 DatabaseExtensionsInvalidStorageKeyType - The storage key type must by 'StorageAccessKey'.\n\n * 400 DatabaseExtensionsMissingStorageUri - Storage URI cannot be empty.\n\n * 400 InvalidMaxSizeTierCombination - The specified tier does not support the specified database max size.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 400 ImportExportJobError - The ImportExport operation has failed.\n\n * 400 BlockedByOutboundFirewall - The outbound firewall rules blocked the request.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+          },
+          "202": {
+            "description": "Importing the database is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Imports to a new database.": {
+            "$ref": "./examples/ImportNewDatabase.json"
+          },
+          "Imports to a new database, using private link for the SQL server and storage account.": {
+            "$ref": "./examples/ImportNewDatabaseWithNetworkIsolation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
+      "description": "A request to check whether the specified name for a resource is available.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "Microsoft.Sql/servers"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "The result of a name availability check.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name whose availability was checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "available": {
+          "description": "True if the name is available, otherwise false.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason code explaining why the name is unavailable. Will be undefined if the name is available.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "A message explaining why the name is unavailable. Will be undefined if the name is available.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportExportOperationResult": {
+      "description": "An ImportExport operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImportExportOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ImportExportOperationResultProperties": {
+      "description": "Contains the operation result properties for import/export operation.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "format": "uuid",
+          "description": "Request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestType": {
+          "description": "Request type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "description": "Last modified time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobUri": {
+          "description": "Blob Uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "Server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "Database name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the status of private endpoints associated with this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImportNewDatabaseDefinition": {
+      "description": "Contains the information necessary to perform import operation for new database.",
+      "required": [
+        "storageKeyType",
+        "storageKey",
+        "storageUri",
+        "administratorLogin",
+        "administratorLoginPassword"
+      ],
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "Name of the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "edition": {
+          "description": "Edition of the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "serviceObjectiveName": {
+          "description": "Service level objective name of the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "maxSizeBytes": {
+          "description": "Max size in bytes for the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKeyType": {
+          "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKey": {
+          "description": "Storage key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageUri": {
+          "description": "Storage Uri.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "description": "Administrator login name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "Administrator login password.",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "authenticationType": {
+          "description": "Authentication type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "NetworkIsolationSettings": {
+      "description": "Contains the ARM resources for which to create private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sqlServerResourceId": {
+          "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "groupIds": {
+          "description": "Group IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestStatus": {
+      "description": "Contains the private endpoint connection requests status.",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceId": {
+          "description": "Resource id for which the private endpoint is created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnectionName": {
+          "description": "The connection name for the private endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of this private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Server": {
+      "description": "An Azure SQL Database server.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../common/v2/types.json#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
+        "kind": {
+          "description": "Kind of sql server. This is metadata used for the Azure portal experience.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerExternalAdministrator": {
+      "description": "Properties of a active directory administrator.",
+      "type": "object",
+      "properties": {
+        "administratorType": {
+          "description": "Type of the sever administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AdministratorType",
+            "modelAsString": true
+          }
+        },
+        "principalType": {
+          "description": "Principal Type of the sever administrator.",
+          "enum": [
+            "User",
+            "Group",
+            "Application"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
+        "login": {
+          "description": "Login name of the server administrator.",
+          "type": "string"
+        },
+        "sid": {
+          "format": "uuid",
+          "description": "SID (object ID) of the server administrator.",
+          "type": "string"
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "Tenant ID of the administrator.",
+          "type": "string"
+        },
+        "azureADOnlyAuthentication": {
+          "description": "Azure Active Directory only Authentication enabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ServerListResult": {
+      "description": "A list of servers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerPrivateEndpointConnection": {
+      "description": "A private endpoint connection under a server",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerProperties": {
+      "description": "The properties of a server.",
+      "type": "object",
+      "properties": {
+        "administratorLogin": {
+          "description": "Administrator username for the server. Once created it cannot be changed.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "The administrator login password (required for server creation).",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "version": {
+          "description": "The version of the server.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state of the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fullyQualifiedDomainName": {
+          "description": "The fully qualified domain name of the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a server",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "minimalTlsVersion": {
+          "description": "Minimal TLS version. Allowed values: '1.0', '1.1', '1.2'",
+          "type": "string"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerNetworkAccessFlag",
+            "modelAsString": true
+          }
+        },
+        "workspaceFeature": {
+          "description": "Whether or not existing server has a workspace created and if it allows connection from workspace",
+          "enum": [
+            "Connected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ServerWorkspaceFeature",
+            "modelAsString": true
+          }
+        },
+        "primaryUserAssignedIdentityId": {
+          "description": "The resource id of a user assigned identity to be used by default.",
+          "type": "string"
+        },
+        "federatedClientId": {
+          "format": "uuid",
+          "description": "The Client id used for cross tenant CMK scenario",
+          "type": "string"
+        },
+        "keyId": {
+          "description": "A CMK URI of the key to use for encryption.",
+          "type": "string"
+        },
+        "administrators": {
+          "$ref": "#/definitions/ServerExternalAdministrator",
+          "description": "The Azure Active Directory administrator of the server.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "restrictOutboundNetworkAccess": {
+          "description": "Whether or not to restrict outbound network access for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerNetworkAccessFlag",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ServerUpdate": {
+      "description": "An update request for an Azure SQL Database server.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../common/v2/types.json#/definitions/ResourceIdentity",
+          "description": "Server identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UserIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory client id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

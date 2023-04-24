@@ -132,6 +132,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
             }
@@ -184,7 +190,13 @@
             "description": "Request successful. Resource does not exist."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Delete successful."
@@ -518,7 +530,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
@@ -798,7 +816,8 @@
           "description": "SKU of the managed HSM Pool",
           "enum": [
             "Standard_B1",
-            "Custom_B32"
+            "Custom_B32",
+            "Custom_B6"
           ],
           "x-ms-enum": {
             "name": "ManagedHsmSkuName",
@@ -834,18 +853,18 @@
         "enableSoftDelete": {
           "type": "boolean",
           "default": true,
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. If it's not set to any value(true or false) when creating new managed HSM pool, it will be set to true by default. Once set to true, it cannot be reverted to false."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. Soft delete is enabled by default for all managed HSMs and is immutable."
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
           "format": "int32",
           "default": 90,
-          "description": "softDelete data retention days. It accepts >=7 and <=90."
+          "description": "Soft deleted data retention days. When you delete an HSM or a key, it will remain recoverable for the configured retention period or for a default period of 90 days. It accepts values between 7 and 90."
         },
         "enablePurgeProtection": {
           "type": "boolean",
           "default": true,
-          "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible."
+          "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. Enabling this functionality is irreversible."
         },
         "createMode": {
           "type": "string",
@@ -867,7 +886,11 @@
                 "description": "Create a new managed HSM pool. This is the default option."
               }
             ]
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "statusMessage": {
           "readOnly": true,
@@ -940,11 +963,12 @@
           "description": "List of private endpoint connections associated with the managed hsm pool."
         },
         "publicNetworkAccess": {
-          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "description": "Control permission to the managed HSM from public networks.",
           "enum": [
             "Enabled",
             "Disabled"
           ],
+          "default": "Enabled",
           "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -1171,7 +1195,8 @@
           "x-ms-enum": {
             "name": "NetworkRuleBypassOptions",
             "modelAsString": true
-          }
+          },
+          "default": "AzureServices"
         },
         "defaultAction": {
           "type": "string",
@@ -1183,7 +1208,8 @@
           "x-ms-enum": {
             "name": "NetworkRuleAction",
             "modelAsString": true
-          }
+          },
+          "default": "Allow"
         },
         "ipRules": {
           "type": "array",
@@ -1228,6 +1254,14 @@
     },
     "MHSMPrivateEndpointConnectionItem": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of private endpoint connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        },
         "properties": {
           "$ref": "#/definitions/MHSMPrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,

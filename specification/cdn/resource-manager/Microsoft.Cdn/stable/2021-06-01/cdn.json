@@ -2108,7 +2108,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded."
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
@@ -2122,7 +2125,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains/{customDomainName}/enableCustomHttps": {
@@ -2183,7 +2187,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded."
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
@@ -2197,7 +2204,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Cdn/checkNameAvailability": {
@@ -2490,14 +2498,21 @@
             "modelAsString": true
           }
         },
-        "identity": {
-          "description": "Managed service identity.",
-          "$ref": "#/definitions/ManagedServiceIdentity"
-        },
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the profile.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "ProfileProvisioningState",
+            "modelAsString": true
+          }
         },
         "frontDoorId": {
           "readOnly": true,
@@ -2510,59 +2525,6 @@
           "format": "int32",
           "minimum": 16,
           "exclusiveMinimum": false
-        }
-      }
-    },
-    "ManagedServiceIdentity": {
-      "description": "Managed service identity.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of managed service identity.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ManagedServiceIdentityType",
-            "modelAsString": true
-          }
-        },
-        "tenantId": {
-          "description": "Tenant of managed service identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "principalId": {
-          "description": "Principal Id of managed service identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "userAssignedIdentities": {
-          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/userAssignedIdentity"
-          }
-        }
-      }
-    },
-    "userAssignedIdentity": {
-      "description": "User Assigned identity.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "Principal Id of user assigned identity",
-          "type": "string",
-          "readOnly": true
-        },
-        "clientId": {
-          "description": "Client Id of user assigned identity",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -2611,10 +2573,6 @@
           "format": "int32",
           "minimum": 16,
           "exclusiveMinimum": false
-        },
-        "identity": {
-          "description": "Managed service identity.",
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -2699,8 +2657,11 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/CustomDomain"
-          }
+            "$ref": "#/definitions/DeepCreatedCustomDomain"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "resourceState": {
           "description": "Resource status of the endpoint.",
@@ -2722,7 +2683,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the endpoint.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2785,15 +2757,18 @@
         },
         "isHttpAllowed": {
           "description": "Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "isHttpsAllowed": {
           "description": "Indicates whether HTTPS traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "queryStringCachingBehavior": {
           "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
-          "$ref": "#/definitions/QueryStringCachingBehavior"
+          "$ref": "#/definitions/QueryStringCachingBehavior",
+          "default": "NotSet"
         },
         "optimizationType": {
           "description": "Specifies what scenario the customer wants this CDN endpoint to optimize for, e.g. Download, Media services. With this information, CDN can apply scenario driven optimization.",
@@ -3313,7 +3288,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match.",
@@ -3357,7 +3333,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "transforms": {
           "description": "List of transforms",
@@ -3419,7 +3396,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3476,7 +3454,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3529,7 +3508,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3586,7 +3566,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3639,7 +3620,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3679,7 +3661,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "transforms": {
           "description": "List of transforms",
@@ -3737,7 +3720,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3790,7 +3774,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3843,7 +3828,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3887,7 +3873,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3944,7 +3931,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -3988,7 +3976,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -4038,7 +4027,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -4092,7 +4082,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -4146,7 +4137,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -4200,7 +4192,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -4245,7 +4238,8 @@
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "matchValues": {
           "description": "The match value for the condition of the delivery rule",
@@ -5190,7 +5184,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the origin.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "OriginProvisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpointStatus": {
           "description": "The approval status for the connection to the Private Link",
@@ -5337,7 +5342,18 @@
         "provisioningState": {
           "readOnly": true,
           "description": "Provisioning status of the origin group.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Creating"
+          ],
+          "x-ms-enum": {
+            "name": "OriginGroupProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5493,6 +5509,40 @@
         }
       }
     },
+    "DeepCreatedCustomDomain": {
+      "description": "Custom domains created on the CDN endpoint.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "Custom domain name.",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeepCreatedCustomDomainProperties"
+        }
+      }
+    },
+    "DeepCreatedCustomDomainProperties": {
+      "description": "Properties of the custom domain created on the CDN endpoint.",
+      "type": "object",
+      "required": [
+        "hostName"
+      ],
+      "properties": {
+        "hostName": {
+          "description": "The host name of the custom domain. Must be a domain name.",
+          "type": "string"
+        },
+        "validationData": {
+          "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",
+          "type": "string"
+        }
+      }
+    },
     "CustomDomain": {
       "description": "Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.",
       "type": "object",
@@ -5533,7 +5583,7 @@
           }
         },
         "customHttpsProvisioningState": {
-          "description": "Provisioning status of Custom Https of the custom domain.",
+          "description": "Provisioning status of the custom domain.",
           "readOnly": true,
           "enum": [
             "Enabling",
@@ -5578,9 +5628,20 @@
           "type": "string"
         },
         "provisioningState": {
+          "description": "Provisioning status of Custom Https of the custom domain.",
           "readOnly": true,
-          "description": "Provisioning status of the custom domain.",
-          "type": "string"
+          "enum": [
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomHttpsProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5934,7 +5995,14 @@
         "unit": {
           "type": "string",
           "readOnly": true,
-          "description": "Unit of the usage. e.g. Count."
+          "description": "Unit of the usage. e.g. count.",
+          "enum": [
+            "count"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceUsageUnit",
+            "modelAsString": true
+          }
         },
         "currentValue": {
           "type": "integer",

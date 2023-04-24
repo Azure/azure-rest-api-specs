@@ -15,12 +15,24 @@ module-name: sdk/resourcemanager/storagecache/armstoragecache
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+modelerfour:
+  lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.StorageTargetProperties.properties.provisioningState
+    transform: >
+      $['enum'][2] = "Cancelled";
+  - from: swagger-document
+    where: $.definitions.Cache.properties.properties.properties.provisioningState
+    transform: >
+      $['enum'][2] = "Cancelled";
 ```
 
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-01
   - tag: package-2021-09
   - tag: package-2021-05
   - tag: package-2021-03
@@ -28,6 +40,15 @@ batch:
   - tag: package-2020-03-01
   - tag: package-2019-11-01
   - tag: package-2019-08
+```
+
+### Tag: package-2022-01 and go
+
+These settings apply only when `--tag=package-2022-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2022-01' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-01-01/$(namespace)
 ```
 
 ### Tag: package-2021-09 and go

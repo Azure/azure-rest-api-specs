@@ -942,6 +942,7 @@
           "items": {
             "$ref": "#/definitions/AutoscaleSchedule"
           },
+          "x-ms-identifiers": [],
           "description": "Array of schedule-based autoscale rules"
         }
       },
@@ -1036,6 +1037,9 @@
           "items": {
             "$ref": "#/definitions/SshPublicKey"
           },
+          "x-ms-identifiers": [
+            "certificateData"
+          ],
           "description": "The list of SSH public keys."
         }
       }
@@ -1117,6 +1121,7 @@
           "items": {
             "$ref": "#/definitions/DataDisksGroups"
           },
+          "x-ms-identifiers": [],
           "description": "The data disks groups for the role."
         },
         "scriptActions": {
@@ -1124,6 +1129,7 @@
           "items": {
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
+          "x-ms-identifiers": [],
           "description": "The list of script actions on the role.",
           "x-ms-secret": true
         },
@@ -1143,6 +1149,9 @@
           "items": {
             "$ref": "#/definitions/Role"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of roles in the cluster."
         }
       },
@@ -1198,6 +1207,9 @@
           "items": {
             "$ref": "#/definitions/StorageAccount"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of storage accounts in the cluster."
         }
       },
@@ -1534,6 +1546,9 @@
           "items": {
             "$ref": "#/definitions/Errors"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "description": "The list of errors."
         },
         "connectivityEndpoints": {
@@ -1541,6 +1556,9 @@
           "items": {
             "$ref": "#/definitions/ConnectivityEndpoint"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of connectivity endpoints."
         },
         "diskEncryptionProperties": {
@@ -1638,11 +1656,7 @@
         },
         "parameters": {
           "type": "string",
-          "description": "The parameters for the script",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "description": "The parameters for the script"
         },
         "roles": {
           "type": "array",
@@ -1672,6 +1686,7 @@
           "items": {
             "$ref": "#/definitions/RuntimeScriptAction"
           },
+          "x-ms-identifiers": [],
           "description": "The list of run time script actions."
         },
         "persistOnSuccess": {
@@ -1692,7 +1707,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RuntimeScriptAction"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -1759,6 +1775,7 @@
           "items": {
             "$ref": "#/definitions/ScriptActionExecutionSummary"
           },
+          "x-ms-identifiers": [],
           "description": "The summary of script action execution result."
         },
         "debugInformation": {

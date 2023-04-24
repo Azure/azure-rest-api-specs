@@ -21,12 +21,22 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-03
   - tag: package-2021-07-01
   - tag: package-2020-10-25
   - tag: package-preview-2019-07-19
   - tag: package-preview-2019-04
   - tag: package-2018-06
   - tag: package-2017-11
+```
+
+### Tag: package-2022-03 and go
+
+These settings apply only when `--tag=package-2022-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2022-03' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-03-01/$(namespace)
 ```
 
 ### Tag: package-2021-07-01 and go

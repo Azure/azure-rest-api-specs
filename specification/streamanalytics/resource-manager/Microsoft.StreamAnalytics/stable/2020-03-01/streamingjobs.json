@@ -559,6 +559,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The scale streaming job request succeeded."
+          },
           "202": {
             "description": "The scale streaming job request was successfully initiated."
           },
@@ -584,7 +587,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -932,11 +938,13 @@
       "properties": {
         "tenantId": {
           "type": "string",
-          "description": "The identity tenantId"
+          "description": "The identity tenantId",
+          "readOnly": true
         },
         "principalId": {
           "type": "string",
-          "description": "The identity principal ID"
+          "description": "The identity principal ID",
+          "readOnly": true
         },
         "type": {
           "type": "string",

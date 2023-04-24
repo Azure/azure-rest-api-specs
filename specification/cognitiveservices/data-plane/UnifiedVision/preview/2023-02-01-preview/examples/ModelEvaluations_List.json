@@ -1,0 +1,26 @@
+{
+  "title": "Get a list of the available evaluations for a model.\r\n            \r\nStatus codes returned:\r\n- 200: Operation completed successfully.\r\n- 400: The request was malformed.",
+  "operationId": "ModelEvaluations_List",
+  "parameters": {
+    "name": "my_model_name",
+    "api-version": "2023-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "my_evaluation_name",
+            "modelName": "my_model_name",
+            "createdDateTime": "2023-01-13T20:46:22.127Z",
+            "updatedDateTime": "2023-01-13T20:46:22.127Z",
+            "status": "notStarted",
+            "evaluationParameters": {
+              "testDatasetName": "my_test_dataset_name"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
