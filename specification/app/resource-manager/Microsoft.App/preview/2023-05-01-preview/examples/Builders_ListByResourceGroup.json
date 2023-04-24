@@ -1,0 +1,86 @@
+{
+  "operationId": "Builders_ListByResourceGroup",
+  "title": "Builders_ListByResourceGroup_0",
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder1",
+            "name": "testBuilder1",
+            "type": "Microsoft.App/builders",
+            "location": "eastus",
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "userAssignedIdentities": {
+                "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "environmentId": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
+              "buildComputeId": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/containerApps/buildContainerApp1234",
+              "patchComputeId": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/containerApps/patcher1234"
+            },
+            "systemData": {
+              "createdBy": "pauldorsch@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedBy": "pauldorsch@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+            },
+            "tags": {
+              "key": "value"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/builders/testBuilder2",
+            "name": "testBuilder2",
+            "type": "Microsoft.App/builders",
+            "location": "eastus",
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "userAssignedIdentities": {
+                "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "environmentId": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
+              "buildComputeId": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/containerApps/buildContainerApp1234",
+              "patchComputeId": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.App/containerApps/patcher1234"
+            },
+            "systemData": {
+              "createdBy": "pauldorsch@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedBy": "pauldorsch@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+            },
+            "tags": {
+              "key": "value"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
