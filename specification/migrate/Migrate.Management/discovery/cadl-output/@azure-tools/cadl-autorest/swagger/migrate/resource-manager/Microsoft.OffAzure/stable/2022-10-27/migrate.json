@@ -1391,57 +1391,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "HypervMachinesController"
-        ],
-        "operationId": "HyperVMachines_UpdateTags",
-        "description": "Patches the Hyper-V machine tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": " HypervMachine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/HypervMachineUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HypervMachine"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/machines/{machineName}/applications": {
@@ -4930,65 +4879,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "SqlServersController"
-        ],
-        "operationId": "SqlServersController_UpdateSqlServerTags",
-        "description": "Patches the sql server tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "sqlSiteName",
-            "in": "path",
-            "required": true,
-            "description": "SQL site name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "sqlServerName",
-            "in": "path",
-            "required": true,
-            "description": "SQL server name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/SqlServerUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SqlServer"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/summary": {
@@ -5878,65 +5768,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "IisWebApplicationsController"
-        ],
-        "operationId": "IisWebApplicationsController_UpdateWebApplicationTags",
-        "description": "Method to patch tags on IIS web application.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "webAppSiteName",
-            "in": "path",
-            "required": true,
-            "description": "Web app site name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "webApplicationName",
-            "in": "path",
-            "required": true,
-            "description": "Web application name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/IisWebApplicationsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/IisWebApplications"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/webAppSites/{webAppSiteName}/iisWebServers": {
@@ -6395,65 +6226,6 @@
             "description": "Web application name.",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TomcatWebApplications"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "TomcatWebApplicationsController"
-        ],
-        "operationId": "TomcatWebApplicationsController_UpdateWebApplicationTags",
-        "description": "Patches the Tomcat web application tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "webAppSiteName",
-            "in": "path",
-            "required": true,
-            "description": "Web app site name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "webApplicationName",
-            "in": "path",
-            "required": true,
-            "description": "Web application name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/TomcatWebApplicationsUpdate"
-            }
           }
         ],
         "responses": {
@@ -7618,57 +7390,6 @@
           },
           "204": {
             "description": "Resource deleted successfully."
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ServersController"
-        ],
-        "operationId": "ServersController_UpdateMachineTags",
-        "description": "Patches the server machine tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": " A server machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/ServerMachineResourceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServerMachineResource"
-            }
           }
         }
       }
@@ -11364,6 +11085,15 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets tags that can be used with ODATA",
+          "readOnly": true
         }
       },
       "description": "A machine resource belonging to a site resource.",
@@ -11401,14 +11131,6 @@
           "$ref": "#/definitions/ProcessorInfo",
           "description": "Gets the Information about Host Processor.",
           "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or sets tags on HyperV machine."
         },
         "instanceUuid": {
           "type": "string",
@@ -11699,64 +11421,6 @@
         }
       },
       "description": "The properties of AddressResource"
-    },
-    "HypervMachineUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HypervMachineUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the HypervMachine."
-    },
-    "HypervMachineUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or sets tags on HyperV machine."
-        },
-        "firmware": {
-          "type": "string",
-          "description": "Gets or sets the firmware."
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the run as account ID of the machine."
-        },
-        "numberOfProcessorCore": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
-        },
-        "allocatedMemoryInMb": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the allocated Memory in MB."
-        },
-        "operatingSystemDetails": {
-          "$ref": "#/definitions/OperatingSystem",
-          "description": "Gets or sets the Operating System Details installed on the machine."
-        },
-        "biosSerialNumber": {
-          "type": "string",
-          "description": "Gets or sets the Machine BIOS serial number."
-        },
-        "biosGuid": {
-          "type": "string",
-          "description": "Gets or sets the BIOS GUID."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "The updatable properties of the HypervMachine."
     },
     "HypervNetworkAdapter": {
       "type": "object",
@@ -12291,30 +11955,6 @@
         }
       },
       "description": "The response of a IisWebApplications list operation."
-    },
-    "IisWebApplicationsUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/IisWebApplicationsUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the IisWebApplications."
-    },
-    "IisWebApplicationsUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or sets the tags on IIS Web application."
-        }
-      },
-      "description": "The updatable properties of the IisWebApplications."
     },
     "IisWebServerProperties": {
       "type": "object",
@@ -13087,6 +12727,15 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets tags that can be used with ODATA",
+          "readOnly": true
         }
       },
       "description": "An machine resource belonging to a site resource.",
@@ -13130,14 +12779,6 @@
     "MachineResourceUpdateProperties": {
       "type": "object",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or sets tags on VMware machine."
-        },
         "firmware": {
           "type": "string",
           "description": "Gets or sets the firmware."
@@ -14387,6 +14028,15 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets tags that can be used with ODATA",
+          "readOnly": true
         }
       },
       "description": "A machine resource belonging to a site resource.",
@@ -14416,93 +14066,6 @@
         }
       },
       "description": "The response of a ServerMachineResource list operation."
-    },
-    "ServerMachineResourceUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServerMachineResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the ServerMachineResource."
-    },
-    "ServerMachineResourceUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or ses tags on Server machine."
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "Gets or sets the FQDN/IPAddress of the server."
-        },
-        "networkAdapters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerNetworkAdapter"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "ServerNetworkAdapter[]",
-          "description": "Gets or sets the network adapters of the server."
-        },
-        "hydratedFqdn": {
-          "type": "string",
-          "description": "Gets or sets the FQDN of machine which can be changed."
-        },
-        "disks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerDisk"
-          },
-          "x-cadl-name": "ServerDisk[]",
-          "description": "Gets or sets the disk details of server."
-        },
-        "validationRequired": {
-          "type": "string",
-          "description": "Gets or sets the validation required for the machine."
-        },
-        "firmware": {
-          "type": "string",
-          "description": "Gets or sets the firmware."
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the run as account ID of the machine."
-        },
-        "numberOfProcessorCore": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
-        },
-        "allocatedMemoryInMb": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets the allocated Memory in MB."
-        },
-        "operatingSystemDetails": {
-          "$ref": "#/definitions/OperatingSystem",
-          "description": "Gets or sets the Operating System Details installed on the machine."
-        },
-        "biosSerialNumber": {
-          "type": "string",
-          "description": "Gets or sets the Machine BIOS serial number."
-        },
-        "biosGuid": {
-          "type": "string",
-          "description": "Gets or sets the BIOS GUID."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the server resource."
-        }
-      },
-      "description": "The updatable properties of the ServerMachineResource."
     },
     "ServerNetworkAdapter": {
       "type": "object",
@@ -14542,14 +14105,6 @@
           "type": "string",
           "description": "Gets the Display name of the machine.\n            For server entity hydrated\nFQDN is set as display name\n            as the server id and server name are\nsame.",
           "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or ses tags on Server machine."
         },
         "fqdn": {
           "type": "string",
@@ -15978,14 +15533,6 @@
           "format": "int32",
           "description": "Gets or sets the number of databases part of availability group on this SQL instance."
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or sets the tags on SQL server."
-        },
         "fciProperties": {
           "$ref": "#/definitions/FciProperties",
           "description": "Gets or sets the FCI properties if the instance is an FCI instance. This would be populated if IsClustered is true."
@@ -16139,150 +15686,6 @@
         "name": "SqlServerStatus",
         "modelAsString": true
       }
-    },
-    "SqlServerUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SqlServerUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the SqlServer."
-    },
-    "SqlServerUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "numberOfAgDatabases": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of databases part of availability group on this SQL instance."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or sets the tags on SQL server."
-        },
-        "fciProperties": {
-          "$ref": "#/definitions/FciProperties",
-          "description": "Gets or sets the FCI properties if the instance is an FCI instance. This would be populated if IsClustered is true."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the SQL server version."
-        },
-        "numberOfUserDatabases": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets total number of users databases."
-        },
-        "sumOfUserDatabasesSizeInMb": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets total size of all user databases."
-        },
-        "tempDbSizeInMb": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets size of temp database."
-        },
-        "maxServerMemoryInUseInMb": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets maximum server memory in use."
-        },
-        "visibleOnlineCoreCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the SQL server number of cores that have visible online status."
-        },
-        "numOfLogins": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets number of logins."
-        },
-        "physicalCpuCount": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets physical CPU count."
-        },
-        "logicalCpuCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets logical CPU count."
-        },
-        "engineEdition": {
-          "type": "string",
-          "description": "Gets or sets the SQL server engine edition."
-        },
-        "edition": {
-          "type": "string",
-          "description": "Gets or sets the SQL server edition."
-        },
-        "isHighAvailabilityEnabled": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether High Availability is enabled or not."
-        },
-        "isClustered": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether failover cluster is configured or not."
-        },
-        "hyperthreadRatio": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the Hyper thread ratio."
-        },
-        "sqlStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the SQL start time."
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the run as account ID of the SQL server."
-        },
-        "hydratedRunAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the hydrated run as account ID of the SQL server."
-        },
-        "hostName": {
-          "type": "string",
-          "description": "Gets or sets hostname."
-        },
-        "sqlServerName": {
-          "type": "string",
-          "description": "Gets or sets the SQL server instance name."
-        },
-        "portNumber": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the Preferred Port Number."
-        },
-        "isDeleted": {
-          "type": "boolean",
-          "description": "Gets or sets a value indicating whether the entity is deleted."
-        },
-        "createdTimestamp": {
-          "type": "string",
-          "description": "Gets or sets the marking machine creation."
-        },
-        "updatedTimestamp": {
-          "type": "string",
-          "description": "Gets or sets the timestamp marking last updated on the machine."
-        },
-        "status": {
-          "$ref": "#/definitions/SqlServerStatus",
-          "description": "Gets or sets the powered on status."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "The updatable properties of the SqlServer."
     },
     "SqlSite": {
       "type": "object",
@@ -16709,11 +16112,6 @@
         }
       },
       "description": "The response of a TomcatWebApplications list operation."
-    },
-    "TomcatWebApplicationsUpdate": {
-      "type": "object",
-      "properties": {},
-      "description": "The type used for update operations of the TomcatWebApplications."
     },
     "TomcatWebServerProperties": {
       "type": "object",
@@ -17677,14 +17075,6 @@
           "$ref": "#/definitions/ProcessorInfo",
           "description": "Gets the Information about Host Processor.",
           "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or sets tags on VMware machine."
         },
         "vCenterFqdn": {
           "type": "string",

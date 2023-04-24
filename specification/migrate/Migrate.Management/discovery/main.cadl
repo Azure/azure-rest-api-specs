@@ -34,7 +34,6 @@ import "./webmodels/import/importMachineProperties.cadl";
 import "./webmodels/import/importCommon.cadl";
 
 import "./webmodels/sql/sqlmodels.cadl";
-import "./webmodels/common/tagsPatchBody.cadl";
 
 using Autorest;
 using Cadl.Http;
@@ -373,6 +372,7 @@ interface VmwareSites {
   ): ArmResponse<SiteHealthSummaryCollection>;
 }
 
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("An machine resource belonging to a site resource.")
 @parentResource(VmwareSite)
 model MachineResource is ProxyResource<VmwareMachineProperties> {
@@ -382,6 +382,11 @@ model MachineResource is ProxyResource<VmwareMachineProperties> {
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
+
+  @doc("Gets tags that can be used with ODATA")
+  @visibility("read")
+  @added(Versions.v2020_07_10)
+  tags?: Record<object>;
 }
 
 @armResourceOperations
@@ -825,6 +830,11 @@ model HypervMachine is ProxyResource<HypervMachineProperties> {
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;  
+
+  @doc("Gets tags that can be used with ODATA")
+  @visibility("read")
+  @added(Versions.v2020_07_10)
+  tags?: Record<object>;
 }
 
 @armResourceOperations
@@ -832,11 +842,6 @@ interface HypervMachinesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVMachines_Get")
   get is ArmResourceReadNoError<HypervMachine>;
-
-  @doc("Patches the Hyper-V machine tags.")
-  @added(Versions.v2022_10_27)
-  @operationId("HyperVMachines_Update   Tags")
-  update is ArmResourcePatchSyncNoError<HypervMachine, HypervMachineProperties>;
 
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVMachines_List")
@@ -1028,10 +1033,6 @@ interface ServersController {
   @operationId("ServersController_ListMachines")
   listByParent is ArmResourceListByParentUpdated<ServerMachineResource>;
 
-  @doc("Patches the server machine tags.")
-  @added(Versions.v2022_10_27)
-  @operationId("ServersController_UpdateMachineTags")
-  updateMachineTags is ArmResourcePatchSyncNoError<ServerMachineResource,ServerProperties>;
 }
 
 @armResourceOperations
@@ -1109,6 +1110,7 @@ interface ServerDependencyMapController {
   >;
 }
 //*** Server Machine Proxy Resource ***/
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("A machine resource belonging to a site resource.")
 @parentResource(ServerSiteResource)
 model ServerMachineResource is ProxyResource<ServerProperties> {
@@ -1118,6 +1120,11 @@ model ServerMachineResource is ProxyResource<ServerProperties> {
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
+  
+  @doc("Gets tags that can be used with ODATA")
+  @visibility("read")
+  @added(Versions.v2020_07_10)
+  tags?: Record<object>;
 }
 
 //*** Server RunAsAccount Proxy Resource ***/
@@ -1802,11 +1809,6 @@ interface TomcatWebApplicationsController {
   @operationId("TomcatWebApplicationsController_GetWebApplication")
   get is ArmResourceReadNoError<TomcatWebApplications>;
 
-  @doc("Patches the Tomcat web application tags.")
-  @added(Versions.v2022_10_27)
-  @operationId("TomcatWebApplicationsController_UpdateWebApplicationTags")
-  update is ArmResourcePatchSyncNoError<TomcatWebApplications,TomcatWebApplicationProperties>;
-
   // #suppress "order is different"
   @added(Versions.v2020_11_11_preview)
   @doc("Method to get all Tomcat web application.")
@@ -1903,11 +1905,6 @@ interface IisWebApplicationsController {
   @added(Versions.v2020_11_11_preview)
   @operationId("IISWebApplicationsController_GetWebApplication")
   get is ArmResourceReadNoError<IisWebApplications>;
-
-  @doc("Method to patch tags on IIS web application.")
-  @added(Versions.v2022_10_27)
-  @operationId("IISWebApplicationsController_UpdateWebApplicationTags")
-  update is ArmResourcePatchSyncNoError<IisWebApplications,IisWebApplicationProperties>;
 
   // #suppress "order is different"
   @added(Versions.v2020_11_11_preview)
@@ -2263,10 +2260,6 @@ interface SqlServersController {
     }
   >;
 
-  @doc("Patches the sql server tags.")
-  @added(Versions.v2022_10_27)
-  @operationId("SqlServersController_UpdateSqlServerTags")
-  update is ArmResourcePatchSyncNoError<SqlServer,SqlServerProperties>;
 }
 
 @doc("Class representing the web model of SQL Database.")
