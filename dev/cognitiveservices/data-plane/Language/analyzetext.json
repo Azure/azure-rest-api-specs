@@ -1524,6 +1524,18 @@
       "properties": {
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "responseFormat": {
+          "type": "string",
+          "description": "The format in which the response to be returned. If simple is selected we only return the entities result, if detailed is included we include the metadata.",
+          "enum": [
+            "simple",
+            "detailed"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseFormat",
+            "modelAsString": true
+          }
         }
       },
       "allOf": [

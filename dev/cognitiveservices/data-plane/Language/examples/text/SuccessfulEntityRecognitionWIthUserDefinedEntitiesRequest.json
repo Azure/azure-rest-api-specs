@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-05-15-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "EntityRecognition",
+      "parameters": {
+        "modelVersion": "latest",
+        "userDefinedEntities": {
+          "entities": [
+            {
+              "type": "woa",
+              "hint": "A work of art, artwork, art piece, piece of art or art object is an artistic creation of aesthetic value."
+            },
+            {
+              "type": "artist",
+              "hint": "An artist is a person engaged in an activity related to creating art, practicing the arts, or demonstrating an art."
+            }
+          ],
+          "samples": [
+            "<woa>David</woa> completed by <artist>Michelangelo</artist> in 1504, is one of the most renowned works of the Renaissance. In early 1504 <artist>Leonardo da Vinci</artist> had been commissioned to paint <woa>The Battle of Anghiari</woa> in the council chamber of the Palazzo Vecchio, depicting the battle between Florence and Milan in 1440. <artist>Michelangelo</artist> was then commissioned to paint <woa>The Battle of Cascina</woa>.",
+            "<woa>Irises</woa> is one of several paintings of irises by the Dutch artist <artist>Vincent van Gogh</artist>, and one of a series of paintings he made at the Saint Paul-de-Mausole asylum in Saint-Rémy-de-Provence, France, in the last year before his death in 1890.",
+            "The picture bears a strong resemblance to many Renaissance depictions of the Virgin Mary"
+          ]
+        }
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "text": "The title of the painting, which is known in English as Mona Lisa, is based on the presumption that it depicts Lisa del Giocondo, although her likeness is uncertain.",
+            "id": "1",
+            "language": "en"
+          }
+
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "EntityRecognitionResults",
+        "results": {
+          "documents": [
+            {
+              "entities": [
+                {
+                  "text": "Mona Lisa",
+                  "category": "ude",
+                  "type": "woa",
+                  "offset": 56,
+                  "length": 9,
+                  "confidenceScore": 0.8,
+                  "tags": [
+                    {
+                      "name": "woa",
+                      "score": 0.8
+                    },
+                    {
+                      "name": "ude",
+                      "score": 0.8
+                    }
+                   ]
+                },
+                {
+                  "text": "Lisa del Giocondo",
+                  "category": "Person",
+                  "type": "Person",
+                  "offset": 111,
+                  "length": 17,
+                  "confidenceScore": 0.87,
+                  "tags": [
+                    {
+                      "name": "Person",
+                      "score": 0.87
+                    }
+                  ]
+                }
+
+              ],
+              "id": "1",
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2023-05-15-preview"
+        }
+      }
+    }
+  }
+}
