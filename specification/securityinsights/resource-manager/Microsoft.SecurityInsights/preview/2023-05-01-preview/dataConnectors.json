@@ -144,6 +144,9 @@
           },
           "Get a IoT data connector": {
             "$ref": "./examples/dataConnectors/GetIoTById.json"
+          },
+          "Get a GCP data connector": {
+            "$ref": "./examples/dataConnectors/GetGoogleCloudPlatformById.json"
           }
         },
         "tags": [
@@ -217,6 +220,9 @@
           },
           "Creates or updates a MicrosoftThreatProtection data connector": {
             "$ref": "./examples/dataConnectors/CreateMicrosoftThreatProtectionDataConnetor.json"
+          },
+          "Creates or updates a GCP data connector": {
+            "$ref": "./examples/dataConnectors/CreateGoogleCloudPlatform.json"
           }
         },
         "tags": [
@@ -287,6 +293,9 @@
           },
           "Delete a APIPolling data connector": {
             "$ref": "./examples/dataConnectors/DeleteAPIPolling.json"
+          },
+          "Delete a GCP data connector": {
+            "$ref": "./examples/dataConnectors/DeleteGoogleCloudPlatform.json"
           }
         },
         "tags": [
@@ -1404,6 +1413,119 @@
         "dataTypes"
       ]
     },
+    "GCPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Google Cloud Platform data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GCPDataConnectorProperties",
+          "description": "Google Cloud Platform data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "GCP"
+    },
+    "GCPDataConnectorProperties": {
+      "description": "Google Cloud Platform data connector properties.",
+      "properties": {
+        "connectorDefinitionName": {
+          "description": "The name of the connector definition that represents the UI config.",
+          "type": "string"
+        },
+        "auth": {
+          "$ref": "#/definitions/GCPAuthProperties",
+          "description": "The auth section of the connector."
+        },
+        "request": {
+          "$ref": "#/definitions/GCPRequestProperties",
+          "description": "The request section of the connector."
+        },
+        "dcrConfig": {
+          "$ref": "#/definitions/DCRConfiguration",
+          "description": "The configuration of the destination of the data."
+        }
+      },
+      "type": "object",
+      "required": [
+        "connectorDefinitionName",
+        "auth",
+        "request"
+      ]
+    },
+    "GCPAuthProperties": {
+      "description": "Google Cloud Platform auth section properties.",
+      "properties":{
+        "serviceAccountEmail": {
+          "description": "The service account that is used to access the GCP project.",
+          "type": "string"
+        },
+        "projectNumber": {
+          "description": "The GCP project number.",
+          "type": "string"
+        },
+        "workloadIdentityProviderId": {
+          "description": "The workload identity provider id that is used to gain access to the GCP project.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "serviceAccountEmail",
+        "projectNumber",
+        "workloadIdentityProviderId"
+      ]
+    },
+    "GCPRequestProperties": {
+      "description": "Google Cloud Platform request section properties.",
+      "properties":{
+        "projectId": {
+          "description": "The GCP project id.",
+          "type": "string"
+        },
+        "subscriptionNames": {
+          "description": "The GCP pub/sub subscription names.",
+          "x-ms-identifiers": [],
+          "type": "array",
+          "items": {
+            "description": "GCP pub/sub subscription name.",
+            "type": "string"
+          }
+        }
+      },
+      "type": "object",
+      "required": [
+        "projectId",
+        "subscriptionNames"
+      ]
+    },
+    "DCRConfiguration": {
+      "description": "The configuration of the destination of the data.",
+      "properties":{
+        "dataCollectionEndpoint": {
+          "description": "Represents the data collection ingestion endpoint in log analytics.",
+          "type": "string"
+        },
+        "dataCollectionRuleImmutableId": {
+          "description": "The data collection rule immutable id, the rule defines the transformation and data destination.",
+          "type": "string"
+        },
+        "streamName": {
+          "description": "The stream we are sending the data to.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataCollectionEndpoint",
+        "dataCollectionRuleImmutableId",
+        "streamName"
+      ]
+    },
     "DataConnector": {
       "description": "Data connector",
       "allOf": [
@@ -1478,7 +1600,8 @@
         "MicrosoftThreatIntelligence",
         "GenericUI",
         "APIPolling",
-        "IOT"
+        "IOT",
+        "GCP"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1547,6 +1670,9 @@
           },
           {
             "value": "IOT"
+          },
+          {
+            "value": "GCP"
           }
         ]
       }
