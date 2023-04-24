@@ -1450,6 +1450,74 @@
       },
       "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
+    "EntitiesLROTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Entity Recognition task.",
+      "properties": {
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitiesTaskParameters"
+        },
+        {
+          "$ref": "#/definitions/EntitiesUDEParameters"
+        }
+      ]
+    },
+    "EntitiesUDEParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using user defined entities.",
+      "properties": {
+        "userDefinedEntities": {
+          "$ref": "#/definitions/UserDefinedEntities"
+        }
+      }
+    },
+    "UserDefinedEntities":{
+      "type": "object",
+      "description": "The container object for user defined entities parameter definition.",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/UserDefinedEntityDefinition"
+          }
+        },
+        "samples": {
+          "type": "array",
+          "description": "List of sample sentences to provide contextual examples to the model to better learn about the entity.",
+          "maxItems": 5,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "entities",
+        "samples"
+      ]
+    },
+    "UserDefinedEntityDefinition":{
+      "type": "object",
+      "description": "The user defined entity definition.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The name of the user defined entity."
+        },
+        "hint": {
+          "type": "string",
+          "description": "A description or hint to provide to the model to better understand the type of the entity."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "EntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Entity Recognition task.",
@@ -1469,7 +1537,7 @@
       "description": "An object representing the task definition for an Entities Recognition task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/EntitiesTaskParameters"
+          "$ref": "#/definitions/EntitiesLROTaskParameters"
         }
       },
       "allOf": [
