@@ -14,6 +14,17 @@ using Azure.Core.Traits;
 })
 @versioned(ContentSafetyStudio.Versions)
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@server(
+  "{endpoint}/contentsafety",
+  "Show metrics of content safety service",
+  {
+    @doc("""
+Supported Cognitive Services endpoints (protocol and hostname, for example:
+https://<resource-name>.cognitiveservices.azure.com).
+""")
+    endpoint: string,
+  }
+)
 @doc("Content Safety studio API for different metrics")
 namespace ContentSafetyStudio;
 
@@ -169,35 +180,35 @@ model Category {
   category: CategoryEnum;
 }
 
-@doc("Severity and count the API detected.")
-@resource("severities")
-@parentResource(Category)
-model Severity {
-  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
-  @doc("The severity the API returned.")
-  @key("severity")
-  severity: SeverityEnum;
+// @doc("Severity and count the API detected.")
+// @resource("severities")
+// @parentResource(Category)
+// model Severity {
+//   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
+//   @doc("The severity the API returned.")
+//   @key("severity")
+//   severity: SeverityEnum;
 
-  @doc("The count of the severity.")
-  count: int32;
-}
+//   @doc("The count of the severity.")
+//   count: int32;
+// }
 
-@doc("Response of severities.")
-@pagedResult
-model SeverityList {
-  @doc("List of terms.")
-  @items
-  value: Severity[];
+// @doc("Response of severities.")
+// @pagedResult
+// model SeverityList {
+//   @doc("List of terms.")
+//   @items
+//   value: Severity[];
 
-  @doc("Link to fetch more terms.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("Link to fetch more terms.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 
 @doc("API request count at a timestamp")
 @resource("requestCounts")
-@parentResource(Severity)
+// @parentResource(Severity)
 model RequestCountsPerTimestamp {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @key("dateTime")
@@ -349,9 +360,9 @@ model AggregationListQueryParameters {
 
 interface Metrics {
 
-  @route("/contentSafety/metrics/requestCounts")
+  @route("/metrics/requestCounts")
   @summary("List API request counts at different timestamps given a time range.")
-  @doc("List API request counts at different timestamps given a time range.")
+  @doc("List API request counts at different timestamps given a time range. Default maxpagesize is 1000.")
   op listRequestCounts is RpcOperation<
     {
       ...SkipQueryParameter,
@@ -368,9 +379,9 @@ interface Metrics {
     Error
   >;
 
-  @route("/contentSafety/metrics/requestLatencies")
-  @summary("List API request counts at different timestamps given a time range.")
-  @doc("List API request counts at different timestamps given a time range. Default top is 50.")
+  @route("/metrics/requestLatencies")
+  @summary("List API request latencies at different timestamps given a time range.")
+  @doc("List API request latencies at different timestamps given a time range. Default maxpagesize is 1000.")
   op listRequestLatencies is RpcOperation<
     {
       ...TopQueryParameter,
@@ -388,26 +399,26 @@ interface Metrics {
     Error
   >;
 
-  @route("/contentSafety/metrics/categories/{category}/severities")
-  @summary("List severitie distribution， severity and API call count number of a specific category and a specific severity given a time range.")
-  @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
-  op listSeverities is RpcOperation<
-    {
-      @doc("Category.")
-      @path
-      category: CategoryEnum,
-      ...TopQueryParameter,
-      ...SkipQueryParameter,
-      ...MaxPageSizeQueryParameter,
-      ...StartTimeQueryParameter,
-      ...EndTimeQueryParameter,
-      ...ContentSafetyVersionQueryParameter,
-      ...ModalityTypeQueryParameter
-    },
-    SeverityList,
-    ServiceTraits,
-    Error
-  >;
+  // @route("/metrics/categories/{category}/severities")
+  // @summary("List severitie distribution， severity and API call count number of a specific category and a specific severity given a time range.")
+  // @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
+  // op listSeverities is RpcOperation<
+  //   {
+  //     @doc("Category.")
+  //     @path
+  //     category: CategoryEnum,
+  //     ...TopQueryParameter,
+  //     ...SkipQueryParameter,
+  //     ...MaxPageSizeQueryParameter,
+  //     ...StartTimeQueryParameter,
+  //     ...EndTimeQueryParameter,
+  //     ...ContentSafetyVersionQueryParameter,
+  //     ...ModalityTypeQueryParameter
+  //   },
+  //   SeverityList,
+  //   ServiceTraits,
+  //   Error
+  // >;
 
   // @summary("List all severities and API call count number of a specific category and a specific severity given a time range")
   // @doc("List all severities and API call count number of a specific category and a specific severity given a time range")
@@ -427,9 +438,9 @@ interface Metrics {
   // >;
 
   
-  @route("/contentSafety/metrics/categories/{category}/severities/{severity}/requestCounts")
-  @summary("List all severities and API call count number of a specific category and a specific severity given a time range.")
-  @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
+  @route("/metrics/categories/{category}/severities/{severity}/requestCounts")
+  @summary("ListAPI request count number of a specific category and a specific severity given a time range.")
+  @doc("List API request count number of a specific category and a specific severity given a time range. Default maxpagesize is 1000.")
   op listRequestCountsByCategoryAndSeverity is RpcOperation<
     {
       @doc("Category.")
@@ -460,7 +471,7 @@ interface Metrics {
   //   ListQueryParametersTrait<ModalityQueryParameters>
   // >;
 
-  @route("/contentSafety/metrics/blocklistTopTerms")
+  @route("/metrics/blocklistTopTerms")
   @summary("List top terms hit in blocklist at different timestamps.")
   @doc("List top terms hit in blocklist at different timestamps.")
   op listBlocklistTopTerms is RpcOperation<
@@ -477,7 +488,7 @@ interface Metrics {
     Error
   >;
 
-  @route("/contentSafety/metrics/blocklistHitCalls")
+  @route("/metrics/blocklistHitCalls")
   @summary("Show blocklist hit request count at different timestamps.")
   @doc("Show blocklist hit request count at different timestamps.")
   op listBlocklistHitCalls is RpcOperation<

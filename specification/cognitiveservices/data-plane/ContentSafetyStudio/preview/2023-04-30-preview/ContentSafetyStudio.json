@@ -13,6 +13,19 @@
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/contentsafety",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://<resource-name>.cognitiveservices.azure.com).",
+        "type": "string"
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
@@ -33,7 +46,7 @@
   },
   "tags": [],
   "paths": {
-    "/contentSafety/metrics/blocklistHitCalls": {
+    "/metrics/blocklistHitCalls": {
       "get": {
         "operationId": "Metrics_ListBlocklistHitCalls",
         "summary": "Show blocklist hit request count at different timestamps.",
@@ -83,18 +96,10 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListBlocklistHitCalls_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListBlocklistHitCalls_MaximumSet_Gen.json"
-          },
-          "Metrics_ListBlocklistHitCalls_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListBlocklistHitCalls_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/contentSafety/metrics/blocklistTopTerms": {
+    "/metrics/blocklistTopTerms": {
       "get": {
         "operationId": "Metrics_ListBlocklistTopTerms",
         "summary": "List top terms hit in blocklist at different timestamps.",
@@ -144,103 +149,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListBlocklistTopTerms_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListBlocklistTopTerms_MaximumSet_Gen.json"
-          },
-          "Metrics_ListBlocklistTopTerms_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListBlocklistTopTerms_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/contentSafety/metrics/categories/{category}/severities": {
-      "get": {
-        "operationId": "Metrics_ListSeverities",
-        "summary": "List severitie distribution， severity and API call count number of a specific category and a specific severity given a time range.",
-        "description": "List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "category",
-            "in": "path",
-            "required": true,
-            "description": "Category type.",
-            "type": "string",
-            "enum": [
-              "Hate",
-              "Sexual",
-              "Violence",
-              "Self-harm"
-            ],
-            "x-ms-enum": {
-              "name": "CategoryEnum",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/StartTimeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/EndTimeQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ModalityTypeQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SeverityList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "Error code.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListSeverities_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListSeverities_MaximumSet_Gen.json"
-          },
-          "Metrics_ListSeverities_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListSeverities_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/contentSafety/metrics/categories/{category}/severities/{severity}/requestCounts": {
+    "/metrics/categories/{category}/severities/{severity}/requestCounts": {
       "get": {
         "operationId": "Metrics_ListRequestCountsByCategoryAndSeverity",
-        "summary": "List all severities and API call count number of a specific category and a specific severity given a time range.",
-        "description": "List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.",
+        "summary": "ListAPI request count number of a specific category and a specific severity given a time range.",
+        "description": "List API request count number of a specific category and a specific severity given a time range. Default maxpagesize is 1000.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -344,22 +260,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListRequestCountsByCategoryAndSeverity_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListRequestCountsByCategoryAndSeverity_MaximumSet_Gen.json"
-          },
-          "Metrics_ListRequestCountsByCategoryAndSeverity_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListRequestCountsByCategoryAndSeverity_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/contentSafety/metrics/requestCounts": {
+    "/metrics/requestCounts": {
       "get": {
         "operationId": "Metrics_ListRequestCounts",
         "summary": "List API request counts at different timestamps given a time range.",
-        "description": "List API request counts at different timestamps given a time range.",
+        "description": "List API request counts at different timestamps given a time range. Default maxpagesize is 1000.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -411,22 +319,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListRequestCounts_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListRequestCounts_MaximumSet_Gen.json"
-          },
-          "Metrics_ListRequestCounts_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListRequestCounts_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/contentSafety/metrics/requestLatencies": {
+    "/metrics/requestLatencies": {
       "get": {
         "operationId": "Metrics_ListRequestLatencies",
-        "summary": "List API request counts at different timestamps given a time range.",
-        "description": "List API request counts at different timestamps given a time range. Default top is 50.",
+        "summary": "List API request latencies at different timestamps given a time range.",
+        "description": "List API request latencies at different timestamps given a time range. Default maxpagesize is 1000.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -481,14 +381,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Metrics_ListRequestLatencies_MaximumSet_Gen": {
-            "$ref": "./examples/Metrics_ListRequestLatencies_MaximumSet_Gen.json"
-          },
-          "Metrics_ListRequestLatencies_MinimumSet_Gen": {
-            "$ref": "./examples/Metrics_ListRequestLatencies_MinimumSet_Gen.json"
-          }
         }
       }
     }
@@ -953,25 +845,6 @@
         "count"
       ]
     },
-    "Severity": {
-      "type": "object",
-      "properties": {
-        "severity": {
-          "$ref": "#/definitions/SeverityEnum",
-          "description": "The severity the API returned."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The count of the severity."
-        }
-      },
-      "description": "Severity and count the API detected.",
-      "required": [
-        "severity",
-        "count"
-      ]
-    },
     "SeverityEnum": {
       "type": "number",
       "description": "Severity level. The higher the value, the more risk it is.",
@@ -1003,28 +876,6 @@
           }
         ]
       }
-    },
-    "SeverityList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Severity"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "Severity[]",
-          "description": "List of terms."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Link to fetch more terms."
-        }
-      },
-      "description": "Response of severities.",
-      "required": [
-        "value"
-      ]
     },
     "TermList": {
       "type": "object",
