@@ -401,9 +401,17 @@
           "readOnly": true
         },
         "fastProvisioningSupported": {
-          "type": "boolean",
+          "type": "string",
           "description": "Gets a value indicating whether fast provisioning is supported",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "fastProvisioningSupportedEnum",
+            "modelAsString": true
+          }
         },
         "supportedFastProvisioningEditions": {
           "type": "array",
@@ -417,29 +425,69 @@
           "readOnly": true
         },
         "geoBackupSupported": {
-          "type": "boolean",
+          "type": "string",
           "description": "Determines if geo-backup is supported in this region.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "geoBackupSupportedEnum",
+            "modelAsString": true
+          }
         },
         "zoneRedundantHaSupported": {
-          "type": "boolean",
+          "type": "string",
           "description": "A value indicating whether Zone Redundant HA is supported in this region.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "zoneRedundantHaSupportedEnum",
+            "modelAsString": true
+          }
         },
         "zoneRedundantHaAndGeoBackupSupported": {
-          "type": "boolean",
+          "type": "string",
           "description": "A value indicating whether Zone Redundant HA and Geo-backup is supported in this region.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "zoneRedundantHaAndGeoBackupSupportedEnum",
+            "modelAsString": true
+          }
         },
         "storageAutoGrowthSupported": {
-          "type": "boolean",
+          "type": "string",
           "description": "A value indicating whether storage auto-grow is supported in this region.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "storageAutoGrowthSupportedEnum",
+            "modelAsString": true
+          }
         },
         "restricted": {
-          "type": "boolean",
+          "type": "string",
           "description": "A value indicating whether this region is restricted.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "restrictedEnum",
+            "modelAsString": true
+          }
         }
       },
       "description": "Capability for the PostgreSQL server"
