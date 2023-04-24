@@ -6,6 +6,3 @@ using Azure.ClientGenerator.Core;
 @@internal(Azure.Messaging.EventGrid.PublishCloudEvents);
 @@internal(Azure.Messaging.EventGrid.PublishCloudEvent);
 @@internal(Azure.Messaging.EventGrid.ReceiveCloudEvents);
-
-
-@@clientFormat(Azure.Messaging.EventGrid.ReceiveCloudEvents::timeout, "seconds");
