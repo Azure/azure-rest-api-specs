@@ -231,6 +231,6 @@ namespace Azure.Messaging.EventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body    
-    tokens : LockToken[];
+    tokens : LockTokenInput;
   }, LockTokensResponse >;
 }
