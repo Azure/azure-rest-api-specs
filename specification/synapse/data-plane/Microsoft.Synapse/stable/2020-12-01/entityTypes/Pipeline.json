@@ -313,8 +313,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -368,8 +368,8 @@
           "description": "Lists files before the value (inclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -861,8 +861,8 @@
       ],
       "properties": {
         "expiryDateTime": {
-          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: integer (or Expression with resultType integer).",
-          "type": "object"
+          "type": "object",
+          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -4593,8 +4593,8 @@
       ],
       "properties": {
         "copyBehavior": {
-          "description": "The type of copy behavior for copy sink.",
-          "type": "object"
+          "type": "object",
+          "description": "The type of copy behavior for copy sink. Type: string (or Expression with resultType string)."
         },
         "enableAdlsSingleFileParallel": {
           "description": "Single File Parallel.",
@@ -4612,8 +4612,8 @@
       ],
       "properties": {
         "copyBehavior": {
-          "description": "The type of copy behavior for copy sink.",
-          "type": "object"
+          "type": "object",
+          "description": "The type of copy behavior for copy sink. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -6898,8 +6898,12 @@
           "type": "string"
         },
         "value": {
-          "description": "Value to be set. Could be a static value or Expression",
+          "description": "Value to be set. Could be a static value or Expression.",
           "type": "object"
+        },
+        "setSystemVariable": {
+          "description": "If set to true, it sets the pipeline run return value.",
+          "type": "boolean"
         }
       }
     },
@@ -7497,6 +7501,10 @@
           "type": "object",
           "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
+        "scanFolder": {
+          "type": "object",
+          "description": "Scanning subfolders from the root folder of the main definition file, these files will be added as reference files. The folders named 'jars', 'pyFiles', 'files' or 'archives' will be scanned, and the folders name are case sensitive. Type: boolean (or Expression with resultType boolean)."
+        },
         "className": {
           "type": "object",
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
@@ -7545,13 +7553,62 @@
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
-          "type": "integer",
-          "format": "int32"
+          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        },
+        "configurationType": {
+          "enum": [
+            "Default",
+            "Customized",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationParametrizationReference"
+        },
+        "sparkConfig": {
+          "description": "Spark configuration property.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [
         "sparkJob"
+      ]
+    },
+    "SparkConfigurationParametrizationReference": {
+      "description": "Spark configuration reference.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Spark configuration reference type.",
+          "type": "string",
+          "enum": [
+            "SparkConfigurationReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkConfigurationReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "Reference spark configuration name. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
       ]
     },
     "SqlPoolStoredProcedureActivity": {
