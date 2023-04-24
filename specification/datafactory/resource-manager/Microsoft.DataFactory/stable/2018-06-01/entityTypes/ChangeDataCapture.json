@@ -7,15 +7,15 @@
   "paths": {},
   "definitions": {
     "ChangeDataCapture": {
-      "description": "A Azure Data Factory object which automatically detects data changes at the source and then sends the updated data to the destination",
+      "description": "A Azure Data Factory object which automatically detects data changes at the source and then sends the updated data to the destination.",
       "type": "object",
       "properties": {
         "folder": {
-          "description": "The folder that this cdc is in. If not specified, cdc will appear at the root level.",
+          "description": "The folder that this CDC is in. If not specified, CDC will appear at the root level.",
           "type": "object",
           "properties": {
             "name": {
-              "description": "The name of the folder that this cdc is in.",
+              "description": "The name of the folder that this CDC is in.",
               "type": "string"
             }
           }
@@ -25,7 +25,7 @@
           "type": "string"
         },
         "SourceConnectionsInfo": {
-          "description": "List of sources connections that can be used as sources in the cdc.",
+          "description": "List of sources connections that can be used as sources in the CDC.",
           "type": "array",
           "items": {
             "type": "object",
@@ -33,7 +33,7 @@
           }
         },
         "TargetConnectionsInfo": {
-          "description": "List of target connections that can be used as sources in the cdc.",
+          "description": "List of target connections that can be used as sources in the CDC.",
           "type": "array",
           "items": {
             "type": "object",
@@ -41,16 +41,16 @@
           }
         },
         "Policy": {
-          "description": "Cdc policy",
+          "description": "CDC policy",
           "type": "object",
           "$ref": "#/definitions/MapperPolicy"
         },
         "allowVNetOverride": {
-          "description": "A boolean to determine if the vnet configuration needs to be overwritten",
+          "description": "A boolean to determine if the vnet configuration needs to be overwritten.",
           "type": "boolean"
         },
         "status": {
-          "description": "Status of the cdc as to if it is running or stopped",
+          "description": "Status of the CDC as to if it is running or stopped.",
           "type": "string"
         }
       },
@@ -61,7 +61,7 @@
       ]
     },
     "MapperSourceConnectionsInfo": {
-      "description": "A object which contains list of tables and connection details for a source connection",
+      "description": "A object which contains list of tables and connection details for a source connection.",
       "type": "object",
       "properties": {
         "SourceEntities": {
@@ -79,7 +79,7 @@
       }
     },
     "MapperTargetConnectionsInfo": {
-      "description": "A object which contains list of tables and connection details for a target connection",
+      "description": "A object which contains list of tables and connection details for a target connection.",
       "type": "object",
       "properties": {
         "TargetEntities": {
@@ -129,12 +129,12 @@
           "$ref": "#/definitions/MapperConnectionReference"
         },
         "attributeMappingInfo": {
-          "description": "This holds the user provided attribute mapping infomation.",
+          "description": "This holds the user provided attribute mapping information.",
           "type": "object",
           "$ref": "#/definitions/MapperAttributeMappings"
         },
         "sourceDenormalizeInfo": {
-          "description": "This holds the source denormalization infomation used while joining multiple sources.",
+          "description": "This holds the source denormalization information used while joining multiple sources.",
           "type": "object"
         }
       }
@@ -148,7 +148,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Type of connection via linked service or dataset. Possible value: 'linkedservicetype'",
+          "description": "Type of connection via linked service or dataset.",
           "type": "string",
           "enum": [
             "linkedservicetype"
@@ -179,7 +179,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Type of the cdc attribute mapping. Note: 'Advanced' mapping type is also saved as 'Derived'.",
+          "description": "Type of the CDC attribute mapping. Note: 'Advanced' mapping type is also saved as 'Derived'.",
           "type": "string",
           "enum": [
             "Direct",
@@ -201,7 +201,7 @@
           "$ref": "#/definitions/MapperAttributeReference"
         },
         "attributeReferences": {
-          "description": "List of references for source columns. It is used for 'Derived' and 'Aggregate' type mappings only",
+          "description": "List of references for source columns. It is used for 'Derived' and 'Aggregate' type mappings only.",
           "type": "array",
           "items": {
             "type": "object",
@@ -242,14 +242,14 @@
           "type": "string"
         },
         "type": {
-          "description": "Type of connection via linked service or dataset. Possible value: 'linkedservicetype'",
+          "description": "Type of connection via linked service or dataset.",
           "type": "string",
           "enum": [
             "linkedservicetype"
           ]
         },
         "isInlineDataset": {
-          "description": "A boolean indicating whether linked service is of type inline dataset. Possible value: true",
+          "description": "A boolean indicating whether linked service is of type inline dataset.",
           "type": "boolean",
           "enum": [
             true
@@ -269,7 +269,7 @@
       ]
     },
     "MapperTable": {
-      "description": "Cdc table details.",
+      "description": "CDC table details.",
       "type": "object",
       "properties": {
         "name": {
@@ -284,7 +284,7 @@
       }
     },
     "MapperTableProperties": {
-      "description": "Properties for a cdc table.",
+      "description": "Properties for a CDC table.",
       "type": "object",
       "properties": {
         "schema": {
@@ -306,7 +306,7 @@
       }
     },
     "MapperTableSchema": {
-      "description": "Schema of a cdc table in terms of column names and their corresponding data types.",
+      "description": "Schema of a CDC table in terms of column names and their corresponding data types.",
       "type": "object",
       "properties": {
         "name": {
@@ -320,7 +320,7 @@
       }
     },
     "MapperDslConnectorProperties": {
-      "description": "Connector properties of a cdc table in terms of name / value pairs.",
+      "description": "Connector properties of a CDC table in terms of name / value pairs.",
       "type": "object",
       "properties": {
         "name": {
@@ -334,22 +334,22 @@
       }
     },
     "MapperPolicy": {
-      "description": "Cdc Policy.",
+      "description": "CDC Policy.",
       "type": "object",
       "properties": {
         "mode": {
-          "description": "Mode of running the Cdc: batch vs continuous.",
+          "description": "Mode of running the CDC: batch vs continuous.",
           "type": "string"
         },
         "recurrence": {
-          "description": "Defines the frequency and interval for running the cdc for batch mode.",
+          "description": "Defines the frequency and interval for running the CDC for batch mode.",
           "type": "object",
           "$ref": "#/definitions/MapperPolicyRecurrence"
         }
       }
     },
     "MapperPolicyRecurrence": {
-      "description": "Cdc policy recurrence details.",
+      "description": "CDC policy recurrence details.",
       "type": "object",
       "properties": {
         "frequency": {
