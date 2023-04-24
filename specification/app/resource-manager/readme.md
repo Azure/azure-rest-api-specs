@@ -55,6 +55,12 @@ input-file:
   - Microsoft.App/preview/2023-05-01-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2023-05-01-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2023-05-01-preview/SourceControls.json
+directive:
+  - suppress: OperationIdNounVerb
+    from: Builds.json
+    reason: |
+      The linting thinks that 'Builder' in 'Builds_ListByBuilderResource' is a noun, while it
+      is really the parent.
 ```
 ### Tag: package-preview-2023-04
 

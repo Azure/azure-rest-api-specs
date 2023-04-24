@@ -138,7 +138,8 @@
             "description": "The name of the builder.",
             "minLength": 2,
             "maxLength": 32,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
         "responses": {
@@ -184,7 +185,8 @@
             "description": "The name of the builder.",
             "minLength": 2,
             "maxLength": 32,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "builderEnvelope",
@@ -256,7 +258,8 @@
             "description": "The name of the builder.",
             "minLength": 2,
             "maxLength": 32,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "builderEnvelope",
@@ -278,10 +281,8 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
+              "Location": {
+                "type": "string"
               }
             },
             "schema": {
@@ -301,7 +302,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -328,7 +329,8 @@
             "description": "The name of the builder.",
             "minLength": 2,
             "maxLength": 32,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
         "responses": {
@@ -338,10 +340,8 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
+              "Location": {
+                "type": "string"
               }
             }
           },
@@ -361,7 +361,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
