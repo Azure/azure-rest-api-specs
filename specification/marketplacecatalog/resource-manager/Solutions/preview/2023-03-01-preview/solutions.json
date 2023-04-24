@@ -65,7 +65,7 @@
         "tags": [
           "UserSolutions"
         ],
-        "operationId": "UserSolution_Get",
+        "operationId": "UserSolutions_Get",
         "description": "Get information about the user solution",
         "responses": {
           "200": {
@@ -91,14 +91,14 @@
         "tags": [
           "UserSolutions"
         ],
-        "operationId": "UserSolution_CreateOrUpdate",
+        "operationId": "UserSolutions_CreateOrUpdate",
         "description": "Creates or updates a user solutions",
         "parameters": [
           {
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/CreateOrUpdateSolutionRequestPayload"
+              "$ref": "#/definitions/Solution"
             }
           }
         ],
@@ -126,8 +126,8 @@
         "tags": [
           "UserSolutions"
         ],
-        "operationId": "RemoveUserSolution",
-        "description": "Removes a user solution",
+        "operationId": "UserSolutions_Delete",
+        "description": "Deletes a user solution",
         "responses": {
           "200": {
             "description": "Success"
@@ -145,68 +145,6 @@
         "x-ms-examples": {
           "RemoveUserSolution": {
             "$ref": "./examples/RemoveUserSolution.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Marketplace/mysolutions/{solutionId}/products/{productId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/SolutionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ProductIdPathParameter"
-        }
-      ],
-      "put": {
-        "tags": [
-          "UserSolutions"
-        ],
-        "operationId": "UserSolutionProduct_Add",
-        "description": "Adds a product to a user solution",
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AddProductToUserSolution": {
-            "$ref": "./examples/AddProductToUserSolution.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "UserSolutions"
-        ],
-        "operationId": "RemoveProductFromUserSolution",
-        "description": "Removes a product from a user solution",
-        "responses": {
-          "200": {
-            "description": "Product was removed from user solution successfully."
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "RemoveProductFromUserSolution": {
-            "$ref": "./examples/RemoveProductFromUserSolution.json"
           }
         }
       }
@@ -261,41 +199,9 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The API version to use for the request."
-    },
-    "ProductIdPathParameter": {
-      "in": "path",
-      "name": "productId",
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "description": "The product id to update or delete"
     }
   },
   "definitions": {
-    "CreateOrUpdateSolutionRequestPayload": {
-      "type": "object",
-      "properties": {
-        "solutionName": {
-          "type": "string"
-        },
-        "productIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "AddProductToUserSolutionRequest": {
-      "type": "object",
-      "properties": {
-        "productId": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
     "Product": {
       "type": "object",
       "properties": {
@@ -339,15 +245,6 @@
       },
       "additionalProperties": false
     },
-    "RenameUserSolutionRequest": {
-      "description": "The service properties for a given service.",
-      "type": "object",
-      "properties": {
-        "newName": {
-          "type": "string"
-        }
-      }
-    },
     "Solution": {
       "description": "The Solution data structure",
       "type": "object",
@@ -368,9 +265,6 @@
       "description": "Describes the json payload for solution operations",
       "type": "object",
       "properties": {
-        "solutionId": {
-          "type": "string"
-        },
         "solutionName": {
           "type": "string"
         },
@@ -386,9 +280,6 @@
     "UserSolutions": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "value": {
           "type": "array",
           "items": {
@@ -396,7 +287,7 @@
           }
         },
         "nextLink": {
-          "description": "URL to get the next set of PrivateStore list results if there are any.",
+          "description": "URL to get the next set of the user solutions if there are any.",
           "type": "string"
         }
       }
