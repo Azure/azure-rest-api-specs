@@ -3895,7 +3895,7 @@ Pool'. For more information about specifying this formula, see Automatically
 scale Compute Nodes in an Azure Batch Pool
 (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).
 """)
-  autoScaleFormula: string;
+  autoScaleFormula?: string;
 }
 
 @doc("Options for changing the size of a Pool.")
