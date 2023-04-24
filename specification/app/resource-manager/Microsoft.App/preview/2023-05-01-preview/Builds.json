@@ -183,7 +183,7 @@
             "name": "buildEnvelope",
             "in": "body",
             "required": true,
-            "description": "Resource create parameters.",
+            "description": "Resource create or update parameters.",
             "schema": {
               "$ref": "#/definitions/BuildResource"
             }
@@ -191,13 +191,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM create or update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BuildResource"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "ARM create or update operation has been started.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
@@ -521,7 +521,8 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     }
   },
   "parameters": {}
