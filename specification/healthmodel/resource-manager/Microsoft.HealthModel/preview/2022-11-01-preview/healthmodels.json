@@ -1,0 +1,1922 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HealthModel ProviderHub Client",
+    "version": "2022-11-01-preview",
+    "description": "Microsoft.HealthModel Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "HealthModelVersions"
+    },
+    {
+      "name": "Snapshots"
+    },
+    {
+      "name": "HealthModels"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.HealthModel/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthModel/healthmodels": {
+      "get": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_ListBySubscription",
+        "description": "List HealthModel resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HealthModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HealthModels_ListBySubscription": {
+            "$ref": "./examples/HealthModels_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels": {
+      "get": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_ListByResourceGroup",
+        "description": "List HealthModel resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HealthModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HealthModels_ListByResourceGroup": {
+            "$ref": "./examples/HealthModels_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels/{healthModelName}": {
+      "get": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_Get",
+        "description": "Get a HealthModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HealthModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModels_Get": {
+            "$ref": "./examples/HealthModels_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_CreateOrUpdate",
+        "description": "Create a HealthModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/HealthModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HealthModel"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HealthModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModels_CreateOrUpdate": {
+            "$ref": "./examples/HealthModels_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_Update",
+        "description": "Update a HealthModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/HealthModelUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HealthModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModels_Update": {
+            "$ref": "./examples/HealthModels_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_Delete",
+        "description": "Delete a HealthModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModels_Delete": {
+            "$ref": "./examples/HealthModels_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels/{healthModelName}/getNodeHealthStateDistribution": {
+      "post": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_GetNodeHealthStateDistribution",
+        "description": "Return the health state distribution in a timespan for a node",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/NodeHealthStateDistributionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeHealthStateDistribution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModels_GetNodeHealthStateDistribution": {
+            "$ref": "./examples/HealthModels_GetNodeHealthStateDistribution.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels/{healthModelName}/getRunstate": {
+      "post": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_GetRunstate",
+        "description": "Gets the execution and scheduling state of the health model",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunstateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModels_HealthModels_GetRunstate": {
+            "$ref": "./examples/HealthModels_GetRunstate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels/{healthModelName}/listNodeHistory": {
+      "post": {
+        "tags": [
+          "HealthModels"
+        ],
+        "operationId": "HealthModels_ListNodeHistory",
+        "description": "Lists the health state history of a specific node with all its queries",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/ListNodeHistoryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PagedNodeStatePointInTime"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HealthModels_ListNodeHistory": {
+            "$ref": "./examples/HealthModels_ListNodeHistory.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels/{healthModelName}/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_ListByHealthModel",
+        "description": "List Snapshot resources by HealthModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Snapshots_ListByHealthModel": {
+            "$ref": "./examples/Snapshots_ListByHealthModel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels/{healthModelName}/snapshots/{snapshotId}": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Get",
+        "description": "Get a Snapshot",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          },
+          {
+            "name": "snapshotId",
+            "in": "path",
+            "required": true,
+            "description": "Id of the snapshot. Use 'latest' to get the latest snapshot.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Get": {
+            "$ref": "./examples/Snapshots_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthModel/healthmodels/{healthModelName}/versions/{versionNumber}": {
+      "get": {
+        "tags": [
+          "HealthModelVersions"
+        ],
+        "operationId": "HealthModelVersions_Get",
+        "description": "Get a HealthModelVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "required": true,
+            "description": "Name of health model resource",
+            "pattern": "^(?=[a-zA-Z0-9-]{3,60}$)(?!-)(?!.*--)[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$",
+            "type": "string"
+          },
+          {
+            "name": "versionNumber",
+            "in": "path",
+            "required": true,
+            "description": "Version number of a health model",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HealthModelVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModelVersions_Get": {
+            "$ref": "./examples/HealthModelVersions_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActiveState": {
+      "type": "string",
+      "description": "Active state of the health model",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ActiveState",
+        "modelAsString": true
+      }
+    },
+    "AggregationNode": {
+      "type": "object",
+      "properties": {},
+      "description": "Aggregation node which does not have any queries itself",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Node"
+        }
+      ],
+      "x-ms-discriminator-value": "AggregationNode"
+    },
+    "ApplicationInsightsNode": {
+      "type": "object",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "description": "Application Insights resource ID",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              "Microsoft.Insights/components"
+            ]
+          },
+          "x-typespec-name": "Azure.ResourceManager.ResourceIdentifier"
+        },
+        "logAnalyticsResourceId": {
+          "type": "string",
+          "description": "Log Analytics resource ID",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              "Microsoft.OperationalInsights/workspaces"
+            ]
+          },
+          "x-typespec-name": "Azure.ResourceManager.ResourceIdentifier"
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics workspace ID",
+          "format": "uuid"
+        }
+      },
+      "description": "Node for a Application Insights data source",
+      "required": [
+        "applicationInsightsResourceId",
+        "logAnalyticsResourceId",
+        "logAnalyticsWorkspaceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Node"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplicationInsightsNode"
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "AzureResourceNode": {
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "Azure resource ID",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          },
+          "x-typespec-name": "Azure.ResourceManager.ResourceIdentifier"
+        },
+        "logAnalyticsResourceId": {
+          "type": "string",
+          "description": "Log Analytics resource ID",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              "Microsoft.OperationalInsights/workspaces"
+            ]
+          },
+          "x-typespec-name": "Azure.ResourceManager.ResourceIdentifier"
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics workspace ID",
+          "format": "uuid"
+        }
+      },
+      "description": "Node for an Azure Resource data source",
+      "required": [
+        "azureResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Node"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureResourceNode"
+    },
+    "HealthModel": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HealthModelProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "A HealthModel resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HealthModelListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthModel"
+          },
+          "x-typespec-name": "HealthModel[]",
+          "description": "The HealthModel items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a HealthModel list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "HealthModelProperties": {
+      "type": "object",
+      "properties": {
+        "refreshInterval": {
+          "$ref": "#/definitions/RefreshInterval",
+          "description": "Interval in which the health model state is being evaluated and new snapshots are created."
+        },
+        "activeState": {
+          "$ref": "#/definitions/ActiveState",
+          "description": "Active state of the health model"
+        },
+        "versionNumber": {
+          "type": "string",
+          "description": "Version number of the model",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          },
+          "x-ms-identifiers": [
+            "nodeId"
+          ],
+          "x-typespec-name": "Node[]",
+          "description": "The list of nodes in the health model"
+        }
+      },
+      "description": "HealthModel properties",
+      "required": [
+        "activeState"
+      ]
+    },
+    "HealthModelUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/HealthModelUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the HealthModel."
+    },
+    "HealthModelUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "refreshInterval": {
+          "$ref": "#/definitions/RefreshInterval",
+          "description": "Interval in which the health model state is being evaluated and new snapshots are created."
+        },
+        "activeState": {
+          "$ref": "#/definitions/ActiveState",
+          "description": "Active state of the health model"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          },
+          "x-ms-identifiers": [
+            "nodeId"
+          ],
+          "x-typespec-name": "Node[]",
+          "description": "The list of nodes in the health model"
+        }
+      },
+      "description": "The updatable properties of the HealthModel."
+    },
+    "HealthModelVersion": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HealthModelVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A specific version of a health model",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HealthModelVersionProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          },
+          "x-ms-identifiers": [
+            "nodeId"
+          ],
+          "x-typespec-name": "Node[]",
+          "description": "The list of nodes in the health model",
+          "readOnly": true
+        }
+      },
+      "description": "HealthModel properties"
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "Health state of either a node or a query",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Unhealthy",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true
+      }
+    },
+    "ListNodeHistoryRequest": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "Id of the node to get history for",
+          "pattern": "^(?![-_.]*$)[_\\-\\.\\w\\d]{1,40}$"
+        },
+        "queryFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time range to filter the results. If not specified, the default is 1 day before the current time."
+        },
+        "queryTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time range to filter the results. If not specified, the default is the current time."
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Optional: Timegrain. ISO duration format like PT10M. If set, the result will be aggregated by this interval. If not set, full results including query results for every snapshots are sent."
+        }
+      },
+      "description": "Request to list the history of a specific node",
+      "required": [
+        "nodeId"
+      ]
+    },
+    "LogAnalyticsNode": {
+      "type": "object",
+      "properties": {
+        "logAnalyticsResourceId": {
+          "type": "string",
+          "description": "Log Analytics resource ID",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              "Microsoft.OperationalInsights/workspaces"
+            ]
+          },
+          "x-typespec-name": "Azure.ResourceManager.ResourceIdentifier"
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics workspace ID",
+          "format": "uuid"
+        }
+      },
+      "description": "Node for a Log Analytics data source",
+      "required": [
+        "logAnalyticsResourceId",
+        "logAnalyticsWorkspaceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Node"
+        }
+      ],
+      "x-ms-discriminator-value": "LogAnalyticsNode"
+    },
+    "LogQuery": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the query"
+        },
+        "queryText": {
+          "type": "string",
+          "description": "Query text"
+        },
+        "valueColumnName": {
+          "type": "string",
+          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to 'value' if not specified."
+        },
+        "dataType": {
+          "$ref": "#/definitions/ResultDataType",
+          "description": "Data type of the result"
+        },
+        "encodedQuery": {
+          "type": "string",
+          "description": "Query Text in encoded format",
+          "readOnly": true
+        }
+      },
+      "description": "Query for a Log Analytics data source",
+      "required": [
+        "name",
+        "queryText",
+        "valueColumnName",
+        "dataType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Query"
+        }
+      ],
+      "x-ms-discriminator-value": "LogQuery"
+    },
+    "MetricAggregationType": {
+      "type": "string",
+      "description": "Metric aggregation type",
+      "enum": [
+        "None",
+        "Average",
+        "Count",
+        "Minimum",
+        "Maximum",
+        "Total"
+      ],
+      "x-ms-enum": {
+        "name": "MetricAggregationType",
+        "modelAsString": true
+      }
+    },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "type": "string",
+          "description": "Discriminator property for Node."
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "Id of the node",
+          "pattern": "^(?![-_.]*$)[_\\-\\.\\w\\d]{1,40}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the node"
+        },
+        "childNodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "List of children Node IDs"
+        },
+        "nodeKind": {
+          "type": "string",
+          "description": "Kind of the node"
+        },
+        "impact": {
+          "$ref": "#/definitions/NodeImpact",
+          "description": "Impact of the node in health state propagation",
+          "default": "Standard"
+        },
+        "queries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query"
+          },
+          "x-ms-identifiers": [
+            "queryId"
+          ],
+          "x-typespec-name": "Query[]",
+          "description": "List of queries"
+        },
+        "queryEndpoint": {
+          "type": "string",
+          "description": "Optional query endpoint to use for queries of this node. If not specified, the default endpoint for the respective query will be used."
+        },
+        "healthTargetPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Health target in percent",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "credentialId": {
+          "type": "string",
+          "description": "Credential to use for queries of this node. Not required on Aggregation Nodes."
+        },
+        "visual": {
+          "$ref": "#/definitions/NodeVisual",
+          "description": "Visual of the node"
+        }
+      },
+      "description": "A Node in the health model",
+      "discriminator": "nodeType",
+      "required": [
+        "nodeType",
+        "nodeId",
+        "name"
+      ]
+    },
+    "NodeHealthStateDistribution": {
+      "type": "object",
+      "properties": {
+        "healthyPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of healthy data points"
+        },
+        "degradedPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of degraded data points"
+        },
+        "unhealthyPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of unhealthy data points"
+        },
+        "unknownPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of unknown data points"
+        },
+        "numberOfDataPoints": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of data points"
+        },
+        "dateGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the data was generated"
+        },
+        "earliestDataPoint": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest data point"
+        }
+      },
+      "description": "Distribution of health states of a node in a timespan"
+    },
+    "NodeHealthStateDistributionRequest": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "Id of the node to get history for",
+          "pattern": "^(?![-_.]*$)[_\\-\\.\\w\\d]{1,40}$"
+        },
+        "timespan": {
+          "$ref": "#/definitions/NodeStateDistributionTimespan",
+          "description": "Timespan"
+        }
+      },
+      "description": "Request to get health state distribution in a timespan for a node",
+      "required": [
+        "nodeId",
+        "timespan"
+      ]
+    },
+    "NodeImpact": {
+      "type": "string",
+      "description": "Type of impact a node has on health state propagation",
+      "enum": [
+        "Standard",
+        "Limited",
+        "Suppressed"
+      ],
+      "x-ms-enum": {
+        "name": "NodeImpact",
+        "modelAsString": true
+      }
+    },
+    "NodeState": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "type": "string",
+          "description": "Id of the node"
+        },
+        "timeGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the snapshot was generated"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of the node"
+        },
+        "healthScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Health score of the node"
+        }
+      },
+      "description": "A point-in-time state of a node in a health model",
+      "required": [
+        "nodeId",
+        "timeGenerated",
+        "healthState",
+        "healthScore"
+      ]
+    },
+    "NodeStateDistributionTimespan": {
+      "type": "string",
+      "description": "Refresh interval of the health model",
+      "enum": [
+        "P7D",
+        "P30D",
+        "P90D",
+        "P180D",
+        "P365D"
+      ],
+      "x-ms-enum": {
+        "name": "NodeStateDistributionTimespan",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "P7D",
+            "value": "P7D",
+            "description": "7 days"
+          },
+          {
+            "name": "P30D",
+            "value": "P30D",
+            "description": "30 days"
+          },
+          {
+            "name": "P90D",
+            "value": "P90D",
+            "description": "90 days"
+          },
+          {
+            "name": "P180D",
+            "value": "P180D",
+            "description": "180 days"
+          },
+          {
+            "name": "P365D",
+            "value": "P365D",
+            "description": "365 days"
+          }
+        ]
+      }
+    },
+    "NodeStatePointInTime": {
+      "type": "object",
+      "properties": {
+        "timeGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the snapshot was generated"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of the node"
+        },
+        "healthScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Health score of the node"
+        },
+        "queryStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryState"
+          },
+          "x-ms-identifiers": [
+            "queryId"
+          ],
+          "x-typespec-name": "QueryState[]",
+          "description": "List of query states in the snapshot"
+        }
+      },
+      "description": "A point-in-time state of a node in a health model",
+      "required": [
+        "timeGenerated",
+        "healthState",
+        "healthScore"
+      ]
+    },
+    "NodeVisual": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "float",
+          "description": "X Coordinate"
+        },
+        "y": {
+          "type": "number",
+          "format": "float",
+          "description": "Y Coordinate"
+        }
+      },
+      "description": "Visual of the node",
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "PagedNodeStatePointInTime": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeStatePointInTime"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "NodeStatePointInTime[]",
+          "description": "The NodeStatePointInTime items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of NodeStatePointInTime items",
+      "required": [
+        "value"
+      ]
+    },
+    "PrometheusMetricsQuery": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the query"
+        },
+        "queryText": {
+          "type": "string",
+          "description": "Query text"
+        }
+      },
+      "description": "Query for a Prometheus data source",
+      "required": [
+        "name",
+        "queryText"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Query"
+        }
+      ],
+      "x-ms-discriminator-value": "PrometheusMetricsQuery"
+    },
+    "PrometheusNode": {
+      "type": "object",
+      "properties": {
+        "azureMonitorWorkspaceResourceId": {
+          "type": "string",
+          "description": "Azure Monitor workspace resource ID",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              "Microsoft.Monitor/accounts"
+            ]
+          },
+          "x-typespec-name": "Azure.ResourceManager.ResourceIdentifier"
+        }
+      },
+      "description": "Node for a Prometheus data source",
+      "required": [
+        "azureMonitorWorkspaceResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Node"
+        }
+      ],
+      "x-ms-discriminator-value": "PrometheusNode"
+    },
+    "Query": {
+      "type": "object",
+      "properties": {
+        "queryType": {
+          "type": "string",
+          "description": "Discriminator property for Query."
+        },
+        "queryId": {
+          "type": "string",
+          "description": "Query ID",
+          "pattern": "^(?![-_.]*$)[_\\-\\.\\w\\d]{1,40}$"
+        },
+        "degradedThreshold": {
+          "type": "string",
+          "description": "Degraded threshold"
+        },
+        "unhealthyThreshold": {
+          "type": "string",
+          "description": "Unhealthy threshold"
+        },
+        "degradedOperator": {
+          "$ref": "#/definitions/QueryOperator",
+          "description": "Degraded operator"
+        },
+        "unhealthyOperator": {
+          "$ref": "#/definitions/QueryOperator",
+          "description": "Unhealthy operator"
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of the query"
+        },
+        "dataUnit": {
+          "type": "string",
+          "description": "Unit of the query result"
+        },
+        "enabledState": {
+          "$ref": "#/definitions/QueryEnabledState",
+          "description": "Query enabled state"
+        }
+      },
+      "description": "A Query of a health model node",
+      "discriminator": "queryType",
+      "required": [
+        "queryType",
+        "queryId",
+        "degradedThreshold",
+        "unhealthyThreshold",
+        "degradedOperator",
+        "unhealthyOperator",
+        "timeGrain",
+        "enabledState"
+      ]
+    },
+    "QueryEnabledState": {
+      "type": "string",
+      "description": "Query enabled state",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "QueryEnabledState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "QueryOperator": {
+      "type": "string",
+      "description": "Query operator",
+      "enum": [
+        "LowerThan",
+        "LowerOrEquals",
+        "GreaterThan",
+        "GreaterOrEquals",
+        "Equals",
+        "Contains"
+      ],
+      "x-ms-enum": {
+        "name": "QueryOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowerThan",
+            "value": "LowerThan",
+            "description": "Lower than"
+          },
+          {
+            "name": "LowerOrEquals",
+            "value": "LowerOrEquals",
+            "description": "Lower than or equal to"
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan",
+            "description": "Greater than"
+          },
+          {
+            "name": "GreaterOrEquals",
+            "value": "GreaterOrEquals",
+            "description": "Greater than or equal to"
+          },
+          {
+            "name": "Equals",
+            "value": "Equals",
+            "description": "Equal to"
+          },
+          {
+            "name": "Contains",
+            "value": "Contains",
+            "description": "Contains"
+          }
+        ]
+      }
+    },
+    "QueryResult": {
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "Query ID"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "Id of the node"
+        },
+        "timeGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the snapshot was generated"
+        },
+        "queryExecutionDuration": {
+          "type": "string",
+          "description": "Execution duration of the query"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of the query"
+        },
+        "resultValue": {
+          "type": "string",
+          "description": "Query result value"
+        },
+        "error": {
+          "type": "string",
+          "description": "Query result error"
+        }
+      },
+      "description": "A result of a query in a health model",
+      "required": [
+        "queryId",
+        "nodeId",
+        "timeGenerated",
+        "queryExecutionDuration",
+        "healthState"
+      ]
+    },
+    "QueryState": {
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "Query ID"
+        },
+        "queryHealthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of the query"
+        }
+      },
+      "description": "A state of a query in a health model",
+      "required": [
+        "queryId",
+        "queryHealthState"
+      ]
+    },
+    "RefreshInterval": {
+      "type": "string",
+      "description": "Refresh interval of the health model",
+      "enum": [
+        "PT1M",
+        "PT5M",
+        "PT10M",
+        "PT30M",
+        "PT1H",
+        "PT2H"
+      ],
+      "x-ms-enum": {
+        "name": "RefreshInterval",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PT1M",
+            "value": "PT1M",
+            "description": "One Minute"
+          },
+          {
+            "name": "PT5M",
+            "value": "PT5M",
+            "description": "Five Minutes"
+          },
+          {
+            "name": "PT10M",
+            "value": "PT10M",
+            "description": "Ten Minutes"
+          },
+          {
+            "name": "PT30M",
+            "value": "PT30M",
+            "description": "Thirty Minutes"
+          },
+          {
+            "name": "PT1H",
+            "value": "PT1H",
+            "description": "One Hour"
+          },
+          {
+            "name": "PT2H",
+            "value": "PT2H",
+            "description": "Two Hours"
+          }
+        ]
+      }
+    },
+    "ResourceMetricsQuery": {
+      "type": "object",
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric to query"
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Metric namespace"
+        },
+        "aggregationType": {
+          "$ref": "#/definitions/MetricAggregationType",
+          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to 'value' if not specified."
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Optional: Dimension to split by"
+        },
+        "dimensionFilter": {
+          "type": "string",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set."
+        }
+      },
+      "description": "Metrics query for an Azure Resource data source",
+      "required": [
+        "metricName",
+        "metricNamespace",
+        "aggregationType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Query"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceMetricsQuery"
+    },
+    "ResultDataType": {
+      "type": "string",
+      "description": "Result data type",
+      "enum": [
+        "Numeric",
+        "Text"
+      ],
+      "x-ms-enum": {
+        "name": "ResultDataType",
+        "modelAsString": true
+      }
+    },
+    "RunstateResponse": {
+      "type": "object",
+      "properties": {
+        "healthModelVersionNumber": {
+          "type": "string",
+          "description": "Version number of the model"
+        },
+        "cronJobName": {
+          "type": "string",
+          "description": "Name of the cron job"
+        },
+        "cronJobCreation": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the cron job was created"
+        },
+        "cronJobLastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the cron job was last updated"
+        },
+        "lastScheduled": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the cron job was last scheduled"
+        },
+        "lastSuccessfulRun": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the cron job was last successfully run"
+        },
+        "cronSchedule": {
+          "type": "string",
+          "description": "Cron schedule of the cron job"
+        }
+      },
+      "description": "Runstate of the health model",
+      "required": [
+        "healthModelVersionNumber"
+      ]
+    },
+    "Snapshot": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SnapshotProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A point-in-time snapshot result of a health model",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SnapshotListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          },
+          "x-typespec-name": "Snapshot[]",
+          "description": "The Snapshot items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a Snapshot list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "SnapshotProperties": {
+      "type": "object",
+      "properties": {
+        "healthModelVersionNumber": {
+          "type": "string",
+          "description": "Version number of the model"
+        },
+        "timeGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the snapshot was generated"
+        },
+        "overallState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Overall state of this snapshot"
+        },
+        "executionDuration": {
+          "type": "string",
+          "description": "Execution duration of the snapshot"
+        },
+        "nodeStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeState"
+          },
+          "x-ms-identifiers": [
+            "nodeId"
+          ],
+          "x-typespec-name": "NodeState[]",
+          "description": "List of node states in the snapshot"
+        },
+        "queryResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryResult"
+          },
+          "x-ms-identifiers": [
+            "nodeId",
+            "queryId"
+          ],
+          "x-typespec-name": "QueryResult[]",
+          "description": "List of query results in the snapshot"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "description": "Properties of a snapshot",
+      "required": [
+        "healthModelVersionNumber",
+        "timeGenerated",
+        "overallState",
+        "executionDuration"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "description": "The number of result items to return.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
