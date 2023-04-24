@@ -257,13 +257,8 @@
           }
         },
         "isInlineDataset": {
-          "description": "A boolean indicating whether linked service is of type inline dataset.",
-          "type": "boolean",
-          "enum": [true],
-          "x-ms-enum": {
-            "name": "InlineDatasetBool",
-            "modelAsString": false
-          }
+          "description": "A boolean indicating whether linked service is of type inline dataset. Currently only inline datasets are supported.",
+          "type": "boolean"
         },
         "commonDslConnectorProperties": {
           "description": "List of name/value pairs for connection properties.",
@@ -288,6 +283,7 @@
         "properties": {
           "description": "Table properties.",
           "type": "object",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/MapperTableProperties"
         }
       }
@@ -374,7 +370,9 @@
         },
         "interval": {
           "description": "Actual interval value as per frequency.",
-          "type": "integer"
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
         }
       }
     }
