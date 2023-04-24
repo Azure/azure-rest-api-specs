@@ -209,7 +209,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/transfers/{transferName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}": {
       "get": {
         "tags": [
           "Transfers"
@@ -224,6 +224,9 @@
         "parameters": [
           {
             "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
             "$ref": "./types.json#/parameters/customerName"
@@ -266,6 +269,9 @@
             "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
             "$ref": "./types.json#/parameters/customerName"
           },
           {
@@ -306,7 +312,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/transfers/{transferName}/cancel": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}/cancel": {
       "post": {
         "tags": [
           "Transfers"
@@ -321,6 +327,9 @@
         "parameters": [
           {
             "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
             "$ref": "./types.json#/parameters/customerName"
@@ -348,7 +357,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/transfers": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers": {
       "get": {
         "tags": [
           "Transfers"
@@ -363,6 +372,9 @@
         "parameters": [
           {
             "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
             "$ref": "./types.json#/parameters/customerName"
