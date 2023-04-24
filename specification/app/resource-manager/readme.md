@@ -39,6 +39,8 @@ input-file:
   - Microsoft.App/preview/2023-05-01-preview/AuthConfigs.json
   - Microsoft.App/preview/2023-05-01-preview/AvailableWorkloadProfiles.json
   - Microsoft.App/preview/2023-05-01-preview/BillingMeters.json
+  - Microsoft.App/preview/2023-05-01-preview/Builders.json
+  - Microsoft.App/preview/2023-05-01-preview/Builds.json
   - Microsoft.App/preview/2023-05-01-preview/CommonDefinitions.json
   - Microsoft.App/preview/2023-05-01-preview/ConnectedEnvironments.json
   - Microsoft.App/preview/2023-05-01-preview/ConnectedEnvironmentsCertificates.json
