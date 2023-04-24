@@ -158,7 +158,7 @@
     "/contentSafety/metrics/categories/{category}/severities": {
       "get": {
         "operationId": "Metrics_ListSeverities",
-        "summary": "List all severities and API call count number of a specific category and a specific severity given a time range.",
+        "summary": "List severitie distribution， severity and API call count number of a specific category and a specific severity given a time range.",
         "description": "List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.",
         "parameters": [
           {
@@ -197,12 +197,6 @@
             "$ref": "#/parameters/EndTimeQueryParameter"
           },
           {
-            "$ref": "#/parameters/TimeGranularityQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
-          },
-          {
             "$ref": "#/parameters/ContentSafetyVersionQueryParameter"
           },
           {
@@ -213,7 +207,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LatencyList"
+              "$ref": "#/definitions/SeverityList"
             }
           },
           "default": {
@@ -320,9 +314,6 @@
           },
           {
             "$ref": "#/parameters/TimeGranularityQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ContentSafetyOperationQueryParameter"
           },
           {
             "$ref": "#/parameters/ContentSafetyVersionQueryParameter"

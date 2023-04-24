@@ -389,7 +389,7 @@ interface Metrics {
   >;
 
   @route("/contentSafety/metrics/categories/{category}/severities")
-  @summary("List all severities and API call count number of a specific category and a specific severity given a time range.")
+  @summary("List severitie distribution， severity and API call count number of a specific category and a specific severity given a time range.")
   @doc("List all severities and API call count number of a specific category and a specific severity given a time range. Default top is 50.")
   op listSeverities is RpcOperation<
     {
@@ -401,12 +401,10 @@ interface Metrics {
       ...MaxPageSizeQueryParameter,
       ...StartTimeQueryParameter,
       ...EndTimeQueryParameter,
-      ...TimeGranularityQueryParameter,
-      ...ContentSafetyOperationQueryParameter,
       ...ContentSafetyVersionQueryParameter,
       ...ModalityTypeQueryParameter
     },
-    LatencyList  ,
+    SeverityList,
     ServiceTraits,
     Error
   >;
@@ -446,7 +444,6 @@ interface Metrics {
       ...StartTimeQueryParameter,
       ...EndTimeQueryParameter,
       ...TimeGranularityQueryParameter,
-      ...ContentSafetyOperationQueryParameter,
       ...ContentSafetyVersionQueryParameter,
       ...ModalityTypeQueryParameter
     },
