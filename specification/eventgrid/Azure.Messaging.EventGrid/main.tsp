@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
 enum ServiceApiVersions {
@@ -103,7 +102,7 @@ namespace Azure.Messaging.EventGrid {
   }
 
   @doc("Details of the Receive operation response.")
-  model ReceiveResponse {
+  model ReceiveResult {
     @doc("Array of receive responses, one per cloud event.")
     value: ReceiveDetails[];
   }
@@ -121,7 +120,7 @@ namespace Azure.Messaging.EventGrid {
   }
    
   @doc("Details of the LockTokens information. This is used for both Acknowledge and Release operation response.")
-  model LockTokensResponse {
+  model LockTokensResult {
     @doc("Array of LockToken values for failed cloud events.")
     failedLockTokens: FailedLockToken[];
 
@@ -130,7 +129,7 @@ namespace Azure.Messaging.EventGrid {
   }
 
   @doc("Lock token input formatting.")
-  model LockTokenInput {
+  model LockTokens {
     @doc("LockTokens")
     lockTokens: string[];
   }
@@ -156,7 +155,7 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Publish Batch of Cloud Events to namespace topic.")
   @route("/topics/{topicName}:publish", {shared: true})
-  @post op PublishBatchOfCloudEvents is Azure.Core.RpcOperation<{
+  @post op PublishCloudEvents is Azure.Core.RpcOperation<{
     @doc("content type")
     @header("content-type")
     contentType: "application/cloudevents-batch+json; charset=utf-8";
@@ -172,7 +171,7 @@ namespace Azure.Messaging.EventGrid {
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
-  @post op ReceiveBatchOfCloudEvents is Azure.Core.RpcOperation<{
+  @post op ReceiveCloudEvents is Azure.Core.RpcOperation<{
     @doc("Topic Name.")
     @path
     topicName: string;
@@ -186,15 +185,16 @@ namespace Azure.Messaging.EventGrid {
     maxEvents?: int32 = 1;
 
     @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
-    @query
-    timeout?: int32 =60;
-  }, ReceiveResponse & CreatedResponse >;
+    @query({name:"timeout", default:"60s"})
+    // Default value was lost in generated code.  Need to investigate.
+    maxWaitTime?: duration;
+  }, ReceiveResult & CreatedResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
   @doc("Acknowledge Cloud Events.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge")
-  @post op AcknowledgeBatchOfCloudEvents is Azure.Core.RpcOperation<{
+  @post op AcknowledgeCloudEvents is Azure.Core.RpcOperation<{
     @doc("content type")
     @header("content-type")
     contentType: "application/json; charset=utf-8";
@@ -209,14 +209,14 @@ namespace Azure.Messaging.EventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body
-    lockTokens: LockTokenInput;
-  }, LockTokensResponse >;
+    lockTokens: LockTokens;
+  }, LockTokensResult >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
   
   @doc("Release Cloud Events.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release")
-  @post op ReleaseBatchOfCloudEvents is Azure.Core.RpcOperation<{
+  @post op ReleaseCloudEvents is Azure.Core.RpcOperation<{
     @doc("content type")
     @header("content-type")
     contentType: "application/json; charset=utf-8";
@@ -231,6 +231,6 @@ namespace Azure.Messaging.EventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body    
-    tokens : LockToken[];
-  }, LockTokensResponse >;
+    tokens : LockTokens;
+  }, LockTokensResult >;
 }
