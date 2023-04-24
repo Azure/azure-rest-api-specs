@@ -66,7 +66,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "name": "parameters",
@@ -131,7 +131,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "name": "parameters",
@@ -184,7 +184,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -234,7 +234,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -357,7 +357,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -400,7 +400,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "name": "parameters",
@@ -452,7 +452,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -495,7 +495,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -538,7 +538,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -668,7 +668,8 @@
         },
         "geoRedundantBackup": {
           "$ref": "#/definitions/EnableStatusEnum",
-          "description": "Whether or not geo redundant backup is enabled."
+          "description": "Whether or not geo redundant backup is enabled.",
+          "default": "Disabled"
         },
         "earliestRestoreDate": {
           "type": "string",
@@ -694,7 +695,13 @@
         },
         "autoGrow": {
           "description": "Enable Storage Auto Grow or not.",
-          "$ref": "#/definitions/EnableStatusEnum"
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
+        },
+        "logOnDisk": {
+          "description": "Enable Log On Disk or not.",
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
         },
         "storageSku": {
           "type": "string",
@@ -703,7 +710,8 @@
         },
         "autoIoScaling": {
           "description": "Enable IO Auto Scaling or not.",
-          "$ref": "#/definitions/EnableStatusEnum"
+          "$ref": "#/definitions/EnableStatusEnum",
+          "default": "Disabled"
         }
       },
       "description": "Storage Profile properties of a server"
@@ -1122,16 +1130,6 @@
         }
       },
       "description": "An error response from the Batch service."
-    }
-  },
-  "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
