@@ -13,6 +13,19 @@
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{serviceName}.data.azure-api.net",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "serviceName",
+        "in": "path",
+        "required": true,
+        "description": "Service name",
+        "type": "string"
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
@@ -87,7 +100,7 @@
     },
     "/delegation/urls/users/{userId}/{action}": {
       "post": {
-        "operationId": "Delegation_CreateUserDelegationUrl",
+        "operationId": "Delegations_CreateUserDelegationUrl",
         "description": "User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).",
         "parameters": [
           {
@@ -138,11 +151,11 @@
           }
         },
         "x-ms-examples": {
-          "Delegation_CreateUserDelegationUrl_MaximumSet_Gen": {
-            "$ref": "./examples/Delegation_CreateUserDelegationUrl_MaximumSet_Gen.json"
+          "Delegations_CreateUserDelegationUrl_MaximumSet_Gen": {
+            "$ref": "./examples/Delegations_CreateUserDelegationUrl_MaximumSet_Gen.json"
           },
-          "Delegation_CreateUserDelegationUrl_MinimumSet_Gen": {
-            "$ref": "./examples/Delegation_CreateUserDelegationUrl_MinimumSet_Gen.json"
+          "Delegations_CreateUserDelegationUrl_MinimumSet_Gen": {
+            "$ref": "./examples/Delegations_CreateUserDelegationUrl_MinimumSet_Gen.json"
           }
         }
       }
@@ -232,8 +245,8 @@
         }
       },
       "patch": {
-        "operationId": "Users_CreateOrUpdateUser",
-        "description": "Create or update a user by its identifier.",
+        "operationId": "Users_UpdateUser",
+        "description": "Update a user by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -248,7 +261,7 @@
           {
             "name": "if-match",
             "in": "header",
-            "required": true,
+            "required": false,
             "x-ms-client-name": "ifMatch",
             "type": "string"
           },
@@ -282,11 +295,11 @@
           }
         },
         "x-ms-examples": {
-          "Users_CreateOrUpdateUser_MaximumSet_Gen": {
-            "$ref": "./examples/Users_CreateOrUpdateUser_MaximumSet_Gen.json"
+          "Users_UpdateUser_MaximumSet_Gen": {
+            "$ref": "./examples/Users_UpdateUser_MaximumSet_Gen.json"
           },
-          "Users_CreateOrUpdateUser_MinimumSet_Gen": {
-            "$ref": "./examples/Users_CreateOrUpdateUser_MinimumSet_Gen.json"
+          "Users_UpdateUser_MinimumSet_Gen": {
+            "$ref": "./examples/Users_UpdateUser_MinimumSet_Gen.json"
           }
         }
       },

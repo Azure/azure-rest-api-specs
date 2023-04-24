@@ -25,15 +25,15 @@ interface Users {
   ): ApiResponse<User>;
 
   @route("/users/{userId}")
-  @doc("Create or update a user by its identifier.")
+  @doc("Update a user by its identifier.")
   @patch
-  CreateOrUpdateUser(
+  UpdateUser(
     ...ApiVersionParameter,
 
     @doc("User identifier.")
     @path
     userId: string,
-    @header @friendlyName("If-Match") ifMatch: string,
+    @header @friendlyName("If-Match") ifMatch?: string,
     @body userUpdate: UserUpdate
   ): ApiResponse<User>;
 

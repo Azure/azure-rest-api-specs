@@ -9,7 +9,7 @@ using Azure.Core.Traits;
 using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Resources.Delegation;
+namespace DeveloperServicesPublicApi.Resources.Delegations;
 
 interface Delegations {
   @doc("Delegation settings.")

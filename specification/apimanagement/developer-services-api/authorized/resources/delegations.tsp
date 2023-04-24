@@ -6,9 +6,9 @@ using TypeSpec.Http;
 using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Resources.Delegation;
+namespace DeveloperServicesAuthorizedApi.Resources.Delegations;
 
-interface Delegation {
+interface Delegations {
   @route("/delegation/urls/users/{userId}/{action}")
   @doc("User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).")
   @post
