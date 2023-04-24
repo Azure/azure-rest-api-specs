@@ -23,7 +23,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(python)
 clear-output-folder: true
 batch:
-  - tag: package-flexibleserver-2022-09-30-preview
+  - tag: package-flexibleserver-2022-10-01-preview
   - tag: package-2020-01-01
 ```
 
