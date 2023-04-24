@@ -2008,28 +2008,35 @@
         }
       }
     },
-    "ElasticVersionsListResponse": {
-      "description": "List of elastic versions available in a region.",
+    "ElasticVersionListFormat": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ElasticVersionsListResponseProperties"
-        },
-        "nextLink": {
-          "description": "Link to the next set of results, if any.",
+          "$ref": "#/definitions/ElasticVersionListProperties"
+        }
+      }
+    },
+    "ElasticVersionListProperties": {
+      "type": "object",
+      "properties": {
+        "version": {
           "type": "string"
         }
       }
     },
-    "ElasticVersionsListResponseProperties": {
+    "ElasticVersionsListResponse": {
       "type": "object",
       "properties": {
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ElasticVersionListFormat"
           }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
+          "type": "string"
         }
       }
     },
