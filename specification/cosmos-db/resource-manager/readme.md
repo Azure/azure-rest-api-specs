@@ -69,6 +69,24 @@ modelerfour:
   lenient-model-deduplication: true
 
 ```
+### Tag: package-2022-11-08
+
+These settings apply only when `--tag=package-2022-11-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11-08'
+input-file:
+  - Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json
+```
+
+### Tag: package-2020-10-05-privatepreview
+
+These settings apply only when `--tag=package-2020-10-05-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10-05-privatepreview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2020-10-05-privatepreview/postgresqlhsc.json
+```
+
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
@@ -670,6 +688,17 @@ directive:
   - suppress: LroLocationHeader
     from: services.json
     reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PathResourceProviderNamePascalCase
+    from: postgresqlhsc.json
+    reason: Service provider name Microsoft.DBforPostgreSQL directly violates this rule.
+  - suppress: EnumInsteadOfBoolean
+    from: postgresqlhsc.json
+    reason: It's been used as boolean since 2019 by internal teams and also private preview customers like Azure Portal and we have no plans to use any values other than true/false.
+  - suppress: PutInOperationName
+    where:
+      - $..paths[($..operationId["Configurations_Update*"])]
+    from: postgresqlhsc.json
+    reason: Configurations have preset default values and customers can only update them, they can't create. So we don't need "Create" in operation id.
 ```
 
 ---
