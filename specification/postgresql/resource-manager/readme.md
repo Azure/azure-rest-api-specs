@@ -49,6 +49,7 @@ These settings apply only when `--tag=package-flexibleserver-2023-04-15-privatep
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/LongTermRetention.json
   - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/LongTermBackupResult.json
+  - Microsoft.DBforPostgreSQL/preview/2023-04-15-privatepreview/Operations.json
 ```
 ### Tag: package-flexibleserver-2022-12-01
 
