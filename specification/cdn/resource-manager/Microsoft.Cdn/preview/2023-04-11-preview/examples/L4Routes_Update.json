@@ -7,23 +7,21 @@
     "endpointName": "endpoint1",
     "routeName": "route1",
     "routeUpdateProperties": {
-      "properties": {
-        "customDomains": [
-          {
-            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
-          }
-        ],
-        "originGroup": {
-          "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
-        },
-        "RoutingMethod": "SNIBased/PortBased",
-           "L4BaseSettings":{
-             "FrontendProtocol":"TCP/UDP",
-             "BackendProtocol":"TCP/UDP",
-             "Ports": "2002-2098"
-           },
-        "enabledState": "Enabled"
-      }
+      "customDomains": [
+        {
+          "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+        }
+      ],
+      "originGroup": {
+        "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+      },
+      "RoutingMethod": "SNIBased",
+      "L4RouteBaseSettings": {
+        "FrontendProtocol":"TCP",
+        "BackendProtocol":"TCP",
+        "Ports": "2098"
+      },
+      "enabledState": "Enabled"
     }
   },
   "responses": {
@@ -41,11 +39,11 @@
           "originGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
           },
-          "RoutingMethod": "SNIBased/PortBased",
-          "L4BaseSettings":{
-            "FrontendProtocol":"TCP/UDP",
-            "BackendProtocol":"TCP/UDP",
-            "Ports": "2002-2098"
+          "RoutingMethod": "SNIBased",
+          "L4RouteBaseSettings": {
+            "FrontendProtocol":"TCP",
+            "BackendProtocol":"TCP",
+            "Ports": "2098"
           },
           "enabledState": "Enabled",
           "provisioningState": "Succeeded",
@@ -70,12 +68,12 @@
           "originGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
           },
-          "RoutingMethod": "SNIBased/PortBased",
-           "L4BaseSettings":{
-             "FrontendProtocol":"TCP/UDP",
-             "BackendProtocol":"TCP/UDP",
-             "Ports": "2002-2098"
-           },
+          "RoutingMethod": "SNIBased",
+          "L4RouteBaseSettings": {
+            "FrontendProtocol":"TCP",
+            "BackendProtocol":"TCP",
+            "Ports": "2098"
+          },
           "enabledState": "Enabled",
           "provisioningState": "Updating",
           "deploymentStatus": "NotStarted"

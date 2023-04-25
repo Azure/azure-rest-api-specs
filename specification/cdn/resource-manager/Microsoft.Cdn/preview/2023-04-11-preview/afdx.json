@@ -1980,6 +1980,362 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/l4routes": {
+      "get": {
+        "tags": [
+          "L4Routes"
+        ],
+        "description": "Lists all of the L4 routes within a profile.",
+        "operationId": "L4Routes_ListByEndpoint",
+        "x-ms-examples": {
+          "Routes_ListByEndpoint": {
+            "$ref": "./examples/L4Routes_ListByEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/L4RouteListResult"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/l4routes/{routeName}": {
+      "get": {
+        "tags": [
+          "L4Routes"
+        ],
+        "description": "Gets an existing route with the specified route name for L4 under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "L4Routes_Get",
+        "x-ms-examples": {
+          "Routes_Get": {
+            "$ref": "./examples/L4Routes_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the L4 route.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/L4Route"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "L4Routes"
+        ],
+        "description": "Creates a new route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "L4Routes_Create",
+        "x-ms-examples": {
+          "Routes_Create": {
+            "$ref": "./examples/L4Routes_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the routing rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "route",
+            "in": "body",
+            "description": "Route properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/L4Route"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/L4Route"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new endpoint has been created.",
+            "schema": {
+              "$ref": "#/definitions/L4Route"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/L4Route"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "L4Routes"
+        ],
+        "description": "Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "L4Routes_Update",
+        "x-ms-examples": {
+          "Routes_Update": {
+            "$ref": "./examples/L4Routes_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the routing rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeUpdateProperties",
+            "in": "body",
+            "description": "Route update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/L4RouteUpdatePropertiesParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/L4Route"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/L4Route"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "L4Routes"
+        ],
+        "description": "Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
+        "operationId": "L4Routes_Delete",
+        "x-ms-examples": {
+          "Routes_Delete": {
+            "$ref": "./examples/L4Routes_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeName",
+            "in": "path",
+            "description": "Name of the routing rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/routes": {
       "get": {
         "tags": [
@@ -5198,11 +5554,8 @@
           "type": "string"
         },
         "OriginPorts": {
-          "description": "The ports used for the TCP/UDP connection to the customer's backend. Must be between 1024 and 65535 exlcuding reserved ports. The ports can be a comma separated list or a valid range like 5050-5090",
-          "type": "integer",
-          "format": "int32",
-          "maximum": 65535,
-          "minimum": 1024
+          "description": "The ports used for the TCP/UDP connection to the customer's backend. Must be between 1024 and 65535 excluding reserved ports. The ports can be a comma separated list or a valid range like 5050-5090",
+          "type": "string"
         },
         "ClientIPPreservationState": {
           "description": "Preserves the client side source IP allowing the back-end to see the IP address of the client. This can then be used by applications for applying any rules. Valid options are 'Enabled' or 'Disabled'",
@@ -5746,307 +6099,23 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/l4routes/{routeName}": {
-      "get": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Gets an existing route with the specified route name for L4 under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Get",
-        "x-ms-examples": {
-          "Routes_Get": {
-            "$ref": "./examples/L4Routes_Get.json"
-          }
+    "L4RouteListResult": {
+      "description": "Result of the request to list L4 routes. It contains a list of L4 route objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/L4Route"
+          },
+          "description": "List of AzureFrontDoor L4 routes within a profile."
         },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the routing rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Creates a new route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Create",
-        "x-ms-examples": {
-          "Routes_Create": {
-            "$ref": "./examples/L4Routes_Create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the routing rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "Route properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Route"
-            }
-          },
-          "201": {
-            "description": "Created. The request has been fulfilled and a new endpoint has been created.",
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Update",
-        "x-ms-examples": {
-          "Routes_Update": {
-            "$ref": "./examples/L4Routes_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the routing rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeUpdateProperties",
-            "in": "body",
-            "description": "Route update properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RouteUpdateParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "delete": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Delete",
-        "x-ms-examples": {
-          "Routes_Delete": {
-            "$ref": "./examples/L4Routes_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the routing rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
         }
       }
     },
-
     "L4Route": {
       "description": "Friendly Routes name mapping to the any Routes or secret related information.",
       "type": "object",
@@ -6058,11 +6127,11 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/L4RoutePropeties"
+          "$ref": "#/definitions/L4RouteProperties"
         }
       }
     },
-    "L4RoutePropeties": {
+    "L4RouteProperties": {
       "description": "The JSON object that contains the properties of the Routes to create.",
       "allOf": [
         {
@@ -6081,7 +6150,7 @@
       "type": "object",
       "properties": {
         "RoutingMethod": {
-          "description": "Routing method for TCP/UDP routes based on SNI or Ports division, if it is SNI based then the we can read SNI header to get the origin name or if its based on the ports then we can have port division to connect to specific origin for example port range 2000-2050 belongs to origingroup1 and port range 3000-3050 belongs to originggroup2.",
+          "description": "Routing method for TCP/UDP routes based on SNI or Ports division, if it is SNI based then the we can read SNI header to get the origin name or if its based on the ports then we can have port division to connect to specific origin for example port range 2000-2050 belongs to origingroup1 and port range 3000-3050 belongs to origingroup2.",
           "type": "string",
           "enum": [
             "SNIBased",
@@ -6108,10 +6177,21 @@
           "description": "L4 Route base settings",
           "type": "object",
           "$ref": "#/definitions/L4RouteBaseSettings"
+        },
+        "enabledState": {
+          "description": "Whether to enable the route. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnabledState",
+            "modelAsString": true
+          }
         }
       }
     },
-
     "L4RouteBaseSettings": {
       "description": "Base class for all L4 route settings.",
       "type": "object",
@@ -6141,15 +6221,11 @@
           }
         },
         "Ports": {
-          "description": "The ports used for the TCP/UDP connection. Must be between 1024 and 65535 exlcuding reserved ports. The ports can be a comma separated list or a valid range like 5050-5090",
-          "type": "integer",
-          "format": "int32",
-          "maximum": 65535,
-          "minimum": 1024
+          "description": "The ports used for the TCP/UDP connection. Must be between 1024 and 65535 excluding reserved ports. The ports can be a comma separated list or a valid range like 5050-5090",
+          "type": "string"
         }
       }
     },
-
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",
       "type": "object",
@@ -6734,7 +6810,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2022-11-01-preview."
+      "description": "Version of the API to be used with the client request. Current version is 2023-04-11-preview."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
