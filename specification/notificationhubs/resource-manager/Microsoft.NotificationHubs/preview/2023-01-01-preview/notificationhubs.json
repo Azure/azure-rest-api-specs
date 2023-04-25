@@ -1,0 +1,4162 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NotificationHubs RP Client",
+    "description": "Microsoft Notification Hubs Resource Provider REST API.",
+    "version": "2023-01-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkNotificationHubAvailability": {
+      "post": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Checks the availability of the given notificationHub in a namespace.",
+        "operationId": "NotificationHubs_CheckNotificationHubAvailability",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request content.",
+            "schema": {
+              "$ref": "#/definitions/CheckAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CheckAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}": {
+      "get": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Gets the notification hub.",
+        "operationId": "NotificationHubs_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Creates/Update a NotificationHub in a namespace.",
+        "operationId": "NotificationHubs_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Patch a NotificationHub in a namespace.",
+        "operationId": "NotificationHubs_Patch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Deletes a notification hub associated with a namespace.",
+        "operationId": "NotificationHubs_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "description": "Added when available. Set to the principal Id of the client JWT making the request. Service principal will not have the principal Id.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs": {
+      "get": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Lists the notification hubs associated with a namespace.",
+        "operationId": "NotificationHubs_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "description": "Page size",
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/debugsend": {
+      "post": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Test send a push notification.",
+        "operationId": "NotificationHubs_DebugSend",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DebugSendResponse"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Creates/Updates an authorization rule for a NotificationHub",
+        "operationId": "NotificationHubs_CreateOrUpdateAuthorizationRule",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "description": "Authorization Rule Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The shared access authorization rule.",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Deletes a notificationHub authorization rule",
+        "operationId": "NotificationHubs_DeleteAuthorizationRule",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "description": "Authorization Rule Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Gets an authorization rule for a NotificationHub by name.",
+        "operationId": "NotificationHubs_GetAuthorizationRule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "description": "Authorization Rule Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Gets an authorization rule for a NotificationHub by name.",
+        "operationId": "NotificationHubs_GetAuthorizationRule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "description": "Authorization Rule Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules": {
+      "get": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Gets the authorization rules for a NotificationHub.",
+        "operationId": "NotificationHubs_ListAuthorizationRules",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Gets the Primary and Secondary ConnectionStrings to the NotificationHub",
+        "operationId": "NotificationHubs_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "description": "Authorization Rule Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Regenerates the Primary/Secondary Keys to the NotificationHub Authorization Rule",
+        "operationId": "NotificationHubs_RegenerateKeys",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "description": "Authorization Rule Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parameters supplied to regenerate the NotificationHub Authorization Rule Key.",
+            "schema": {
+              "$ref": "#/definitions/PolicyKeyResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/pnsCredentials": {
+      "post": {
+        "tags": [
+          "Hubs"
+        ],
+        "summary": "Lists the PNS Credentials associated with a notification hub.",
+        "operationId": "NotificationHubs_GetPnsCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "The namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "notificationHubName",
+            "description": "The notification hub name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PnsCredentialsResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "tags": [
+          "Move"
+        ],
+        "summary": "Moves resources from the resource group to a target resource group.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MoveResourcesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNamespaceAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckAvailability",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CheckAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CheckAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CheckAvailability",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CheckAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CheckAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Patch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NamespaceResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListAll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_DeleteAuthorizationRule",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_GetAuthorizationRule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_GetAuthorizationRule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_RegenerateKeys",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "authorizationRuleName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PolicyKeyResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceListKeys"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/pnsCredentials": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "summary": "Lists the PNS credentials associated with a namespace.",
+        "operationId": "Namespaces_GetPnsCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Azure Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "Namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PnsCredentials"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.NotificationHubs/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/operationsStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "API for operation statuses, as defined by the Azure-AsyncOperation header spec\r\nhttps://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
+        "operationId": "OperationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "API for operation results, as defined by the Location header spec\r\nhttps://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
+        "operationId": "OperationStatus",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "NamespaceOperationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateEndpointConnectionProxies/{proxyName}/operationStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "NamespaceOperationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "proxyName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupId}/moveResources/operationStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ResourceMoveOperationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "proxyName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-principal-name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Approves or rejects Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "description": "This is an asynchronous API, which sets the Azure-AsyncOperation header. \r\nCaller can use URI from that header to check status of the operation.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Subscription id of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "Resource group of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "Namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "privateEndpointConnectionName",
+            "description": "Private Endpoint Connection name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Description of the Private Endpoint Connection resource.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Deletes the Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "description": "This is an asynchronous API, which sets the Azure-AsyncOperation header. \r\nCaller can use URI from that header to check status of the operation.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "Namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "privateEndpointConnectionName",
+            "description": "Name of the Private Endpoint Connection to remove.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns a Private Endpoint Connection with a given name. \r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Subscription id of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "Resource group name of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "Namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "privateEndpointConnectionName",
+            "description": "Private Endpoint Connection name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns all Private Endpoint Connections that belong to the given Notification Hubs namespace.\r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Subscription id of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "Resource group name of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "Namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateLinkResources/{subResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns Group Id response. \r\nThis is a public API required by the Networking RP contract. It can be used directly by Notification Hubs users.",
+        "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\r\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Subscription id of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "Resource group name of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "Namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "subResourceName",
+            "description": "Name of the Private Link sub-resource. The only supported sub-resource is \"namespace\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLink"
+        ],
+        "summary": "Returns all Group Ids supported by the Notification Hubs RP.\r\nThis is a public API required by the Networking RP contract. It can be used directly by Notification Hubs users.",
+        "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\r\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscriptionId",
+            "description": "Subscription id of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroupName",
+            "description": "Resource group name of the Notification Hubs namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "namespaceName",
+            "description": "Namespace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API Version - expected 2023-01-01-preview.",
+            "required": true,
+            "type": "string",
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error code with reason."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessRights": {
+      "enum": [
+        "Manage",
+        "Send",
+        "Listen"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AccessRights",
+        "modelAsString": true
+      }
+    },
+    "AdmCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdmCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "AdmCredentialProperties": {
+      "required": [
+        "authTokenUrl",
+        "clientId",
+        "clientSecret"
+      ],
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "clientSecret": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "authTokenUrl": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ApnsCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApnsCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "ApnsCredentialProperties": {
+      "required": [
+        "endpoint"
+      ],
+      "type": "object",
+      "properties": {
+        "apnsCertificate": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "certificateKey": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "endpoint": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "keyId": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "appName": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "appId": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "token": {
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "Availability": {
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BaiduCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BaiduCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "BaiduCredentialProperties": {
+      "required": [
+        "baiduApiKey",
+        "baiduEndPoint",
+        "baiduSecretKey"
+      ],
+      "type": "object",
+      "properties": {
+        "baiduApiKey": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "baiduEndPoint": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "baiduSecretKey": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "BrowserCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BrowserCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "BrowserCredentialProperties": {
+      "required": [
+        "subject",
+        "vapidPrivateKey",
+        "vapidPublicKey"
+      ],
+      "type": "object",
+      "properties": {
+        "subject": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "vapidPrivateKey": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "vapidPublicKey": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "CheckAvailabilityParameters": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isAvailiable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CheckAvailabilityResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isAvailiable": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectionDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "linkIdentifier": {
+          "type": "string",
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DebugSendResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DebugSendResult"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DebugSendResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "failure": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrationResult"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetails": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "GcmCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GcmCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "GcmCredentialProperties": {
+      "required": [
+        "googleApiKey"
+      ],
+      "type": "object",
+      "properties": {
+        "gcmEndpoint": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "googleApiKey": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "customerVisibleFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "internalFqdn": {
+          "type": "string",
+          "readOnly": true
+        },
+        "redirectMapId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateLinkServiceArmRegion": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IpRule": {
+      "required": [
+        "ipMask",
+        "rights"
+      ],
+      "type": "object",
+      "properties": {
+        "ipMask": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "rights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRights"
+          }
+        }
+      }
+    },
+    "LinkedNotification": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/LinkedNotificationProperties"
+        }
+      }
+    },
+    "LinkedNotificationProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          },
+          "readOnly": true
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "readOnly": true
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "MoveResourcesRequest": {
+      "required": [
+        "resources",
+        "targetResourceGroup"
+      ],
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MpnsCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MpnsCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "MpnsCredentialProperties": {
+      "required": [
+        "certificateKey",
+        "mpnsCertificate",
+        "thumbprint"
+      ],
+      "type": "object",
+      "properties": {
+        "mpnsCertificate": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "certificateKey": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "thumbprint": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "NamespaceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NamespaceProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OperationProvisioningState"
+        },
+        "status": {
+          "$ref": "#/definitions/NamespaceStatus"
+        },
+        "enabled": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "critical": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "region": {
+          "type": "string",
+          "readOnly": true
+        },
+        "metricId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "namespaceType": {
+          "$ref": "#/definitions/NamespaceType"
+        },
+        "replicationRegion": {
+          "$ref": "#/definitions/ReplicationRegion"
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkAcls"
+        },
+        "pnsCredentials": {
+          "$ref": "#/definitions/PnsCredentials"
+        },
+        "serviceBusEndpoint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "NamespaceResource": {
+      "required": [
+        "location",
+        "properties",
+        "sku"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      }
+    },
+    "NamespaceStatus": {
+      "enum": [
+        "Created",
+        "Creating",
+        "Suspended",
+        "Deleting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NamespaceStatus",
+        "modelAsString": true
+      }
+    },
+    "NamespaceType": {
+      "enum": [
+        "Messaging",
+        "NotificationHub"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NamespaceType",
+        "modelAsString": true
+      }
+    },
+    "NetworkAcls": {
+      "required": [
+        "ipRules",
+        "publicInternetRule"
+      ],
+      "type": "object",
+      "properties": {
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          }
+        },
+        "publicInternetRule": {
+          "$ref": "#/definitions/PublicInternetAuthorizationRule"
+        }
+      }
+    },
+    "NotificationHubListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationHubResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NotificationHubProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "registrationTtl": {
+          "type": "string"
+        },
+        "authorizationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+          },
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "apnsCredential": {
+          "$ref": "#/definitions/ApnsCredential"
+        },
+        "wnsCredential": {
+          "$ref": "#/definitions/WnsCredential"
+        },
+        "gcmCredential": {
+          "$ref": "#/definitions/GcmCredential"
+        },
+        "mpnsCredential": {
+          "$ref": "#/definitions/MpnsCredential"
+        },
+        "admCredential": {
+          "$ref": "#/definitions/AdmCredential"
+        },
+        "baiduCredential": {
+          "$ref": "#/definitions/BaiduCredential"
+        },
+        "browserCredential": {
+          "$ref": "#/definitions/BrowserCredential"
+        },
+        "xiaomiCredential": {
+          "$ref": "#/definitions/XiaomiCredential"
+        },
+        "dailyMaxActiveDevices": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "NotificationHubResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NotificationHubProperties"
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "OperationProvisioningState": {
+      "enum": [
+        "Unknown",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperationProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "OperationStatusResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OperationProvisioningState"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "PnsCredentials": {
+      "type": "object",
+      "properties": {
+        "admCredential": {
+          "$ref": "#/definitions/AdmCredential"
+        },
+        "apnsCredential": {
+          "$ref": "#/definitions/ApnsCredential"
+        },
+        "baiduCredential": {
+          "$ref": "#/definitions/BaiduCredential"
+        },
+        "browserCredential": {
+          "$ref": "#/definitions/BrowserCredential"
+        },
+        "gcmCredential": {
+          "$ref": "#/definitions/GcmCredential"
+        },
+        "mpnsCredential": {
+          "$ref": "#/definitions/MpnsCredential"
+        },
+        "wnsCredential": {
+          "$ref": "#/definitions/WnsCredential"
+        },
+        "xiaomiCredential": {
+          "$ref": "#/definitions/XiaomiCredential"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "PnsCredentialsResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PnsCredentials"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyKeyResource": {
+      "required": [
+        "policyKey"
+      ],
+      "type": "object",
+      "properties": {
+        "policyKey": {
+          "$ref": "#/definitions/PolicyKeyType"
+        }
+      }
+    },
+    "PolicyKeyType": {
+      "enum": [
+        "PrimaryKey",
+        "SecondaryKey"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PolicyKeyType",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/RemotePrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        },
+        "remotePrivateEndpoint": {
+          "$ref": "#/definitions/RemotePrivateEndpoint"
+        }
+      }
+    },
+    "PrivateEndpointConnectionResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkConnectionStatus": {
+      "enum": [
+        "Disconnected",
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PrivateLinkConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "PublicInternetAuthorizationRule": {
+      "required": [
+        "rights"
+      ],
+      "type": "object",
+      "properties": {
+        "rights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRights"
+          }
+        }
+      }
+    },
+    "RegistrationResult": {
+      "type": "object",
+      "properties": {
+        "applicationPlatform": {
+          "type": "string",
+          "readOnly": true
+        },
+        "pnsHandle": {
+          "type": "string",
+          "readOnly": true
+        },
+        "registrationId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "outcome": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RemotePrivateEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "immutableSubscriptionId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "immutableResourceId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        },
+        "manualPrivateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "readOnly": true
+        },
+        "privateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "readOnly": true
+        },
+        "connectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RemotePrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateLinkConnectionStatus"
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "actionsRequired": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationRegion": {
+      "enum": [
+        "Default",
+        "WestUs2",
+        "NorthEurope",
+        "AustraliaEast",
+        "BrazilSouth",
+        "SouthEastAsia",
+        "SouthAfricaNorth",
+        "None"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ReplicationRegion",
+        "modelAsString": true
+      }
+    },
+    "ResourceListKeys": {
+      "type": "object",
+      "properties": {
+        "primaryConnectionString": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "secondaryConnectionString": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "primaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "keyName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "readOnly": true
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SharedAccessAuthorizationRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedAccessAuthorizationRuleProperties": {
+      "required": [
+        "rights"
+      ],
+      "type": "object",
+      "properties": {
+        "rights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRights"
+          }
+        },
+        "primaryKey": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "keyName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "claimType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "claimValue": {
+          "type": "string",
+          "readOnly": true
+        },
+        "revision": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedAccessAuthorizationRuleResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "family": {
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "WnsCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WnsCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "WnsCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "packageSid": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "secretKey": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "windowsLiveEndpoint": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "certificateKey": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "wnsCertificate": {
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "XiaomiCredential": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/XiaomiCredentialProperties"
+        }
+      },
+      "x-ms-secret": true
+    },
+    "XiaomiCredentialProperties": {
+      "type": "object",
+      "properties": {
+        "appSecret": {
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "endpoint": {
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    }
+  }
+}
