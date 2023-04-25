@@ -149,6 +149,10 @@
               "$ref": "#/definitions/BuilderResource"
             }
           },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -207,13 +211,6 @@
           },
           "201": {
             "description": "ARM create or update operation has been started.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/BuilderResource"
             }
@@ -284,9 +281,6 @@
               "Location": {
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/BuilderResource"
             }
           },
           "default": {
