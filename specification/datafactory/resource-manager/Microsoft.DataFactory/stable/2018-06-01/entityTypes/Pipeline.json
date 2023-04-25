@@ -61,6 +61,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         },
@@ -151,6 +152,7 @@
           "type": "string"
         },
         "value": {
+          "x-ms-format": "dfe-string",
           "description": "User property value. Type: string (or Expression with resultType string).",
           "type": "object"
         }
@@ -229,10 +231,12 @@
       "properties": {
         "timeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the timeout for the activity to run. The default timeout is 7 days. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "retry": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Maximum ordinary retry attempts. Default is 0. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "retryIntervalInSeconds": {
@@ -265,10 +269,12 @@
         },
         "maxConcurrentConnections": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
         },
         "disableMetricsCollection": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -290,42 +296,52 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure blob wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure blob wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "prefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -341,38 +357,47 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure blobFS wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure blobFS wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -388,46 +413,57 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "ADLS wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "ADLS wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "listAfter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Lists files after the value (exclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
         },
         "listBefore": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Lists files before the value (inclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -443,42 +479,52 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "AmazonS3 wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "AmazonS3 wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "prefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -494,42 +540,52 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "FileServer wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "FileServer wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "fileFilter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify a filter to be used to select a subset of files in the folderPath rather than all files. Type: string (or Expression with resultType string)."
         }
       }
@@ -545,42 +601,52 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure File Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure File Storage wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "prefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The prefix filter for the Azure File name starting from root path. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -595,10 +661,12 @@
       ],
       "properties": {
         "operationTimeout": {
+          "x-ms-format": "dfe-string",
           "description": "Specifies the timeout for writing each chunk to SFTP server. Default value: 01:00:00 (one hour). Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "useTempFileRename": {
+          "x-ms-format": "dfe-bool",
           "description": "Upload to temporary file(s) and rename. Disable this option if your SFTP server doesn't support rename operation. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
@@ -615,42 +683,52 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Amazon S3 Compatible wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Amazon S3 Compatible wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "prefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The prefix filter for the S3 Compatible object name. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -666,42 +744,52 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Oracle Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Oracle Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "prefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The prefix filter for the Oracle Cloud Storage object name. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -717,42 +805,52 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Google Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Google Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "prefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The prefix filter for the Google Cloud Storage object name. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         }
       }
@@ -768,38 +866,47 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Ftp wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Ftp wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "useBinaryTransfer": {
-          "type": "boolean",
-          "description": "Specify whether to use binary transfer mode for FTP stores."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Specify whether to use binary transfer mode for FTP stores. Type: boolean (or Expression with resultType boolean)."
         },
         "disableChunking": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -815,48 +922,58 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Sftp wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Sftp wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "disableChunking": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, disable parallel reading within each file. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
     },
     "HttpReadSettings": {
-      "description": "Sftp read settings.",
+      "description": "Http read settings.",
       "type": "object",
       "allOf": [
         {
@@ -866,27 +983,27 @@
       "properties": {
         "requestMethod": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
         },
         "requestBody": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
         },
         "additionalHeaders": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
         },
         "requestTimeout": {
           "type": "object",
-          "description": "Specifies the timeout for a HTTP client to get HTTP response from HTTP server."
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the timeout for a HTTP client to get HTTP response from HTTP server. Type: string (or Expression with resultType string)."
         },
-        "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
-        },
-        "partitionRootPath": {
+        "additionalColumns": {
           "type": "object",
-          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
       }
     },
@@ -901,34 +1018,42 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "wildcardFolderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "HDFS wildcardFolderPath. Type: string (or Expression with resultType string)."
         },
         "wildcardFileName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "HDFS wildcardFileName. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeEnd": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
         },
         "distcpSettings": {
@@ -937,6 +1062,7 @@
         },
         "deleteFilesAfterCompletion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -952,10 +1078,12 @@
         },
         "maxConcurrentConnections": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
         },
         "disableMetricsCollection": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "copyBehavior": {
@@ -980,6 +1108,7 @@
       ],
       "properties": {
         "blockSizeInMB": {
+          "x-ms-format": "dfe-int",
           "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
           "type": "object"
         }
@@ -995,6 +1124,7 @@
       ],
       "properties": {
         "blockSizeInMB": {
+          "x-ms-format": "dfe-int",
           "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
           "type": "object"
         }
@@ -1010,8 +1140,9 @@
       ],
       "properties": {
         "expiryDateTime": {
-          "type": "object",
-          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: string (or Expression with resultType string)."
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       }
     },
@@ -1077,6 +1208,7 @@
       ],
       "properties": {
         "preserveZipFileNameAsFolder": {
+          "x-ms-format": "dfe-bool",
           "description": "Preserve the zip file name as folder path. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
@@ -1092,6 +1224,7 @@
       ],
       "properties": {
         "preserveCompressionFileNameAsFolder": {
+          "x-ms-format": "dfe-bool",
           "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
@@ -1107,6 +1240,7 @@
       ],
       "properties": {
         "preserveCompressionFileNameAsFolder": {
+          "x-ms-format": "dfe-bool",
           "description": "Preserve the compression file name as folder path. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
@@ -1123,6 +1257,7 @@
       "properties": {
         "skipLineCount": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Indicates the number of non-empty rows to skip when reading data from input files. Type: integer (or Expression with resultType integer)."
         },
         "compressionProperties": {
@@ -1161,14 +1296,17 @@
         },
         "validationMode": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Indicates what validation method is used when reading the xml files. Allowed values: 'none', 'xsd', or 'dtd'. Type: string (or Expression with resultType string)."
         },
         "detectDataType": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether type detection is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
         },
         "namespaces": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether namespace is enabled when reading the xml files. Type: boolean (or Expression with resultType boolean)."
         },
         "namespacePrefixes": {
@@ -1228,10 +1366,12 @@
         },
         "maxRowsPerFile": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
         },
         "fileNamePrefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       }
@@ -1247,10 +1387,12 @@
       "properties": {
         "maxRowsPerFile": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
         },
         "fileNamePrefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       }
@@ -1266,10 +1408,12 @@
       "properties": {
         "maxRowsPerFile": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
         },
         "fileNamePrefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       }
@@ -1285,18 +1429,22 @@
       "properties": {
         "quoteAllText": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates whether string values should always be enclosed with quotes. Type: boolean (or Expression with resultType boolean)."
         },
         "fileExtension": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
         },
         "maxRowsPerFile": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Limit the written file's row count to be smaller than or equal to the specified count. Type: integer (or Expression with resultType integer)."
         },
         "fileNamePrefix": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the file name pattern <fileNamePrefix>_<fileIndex>.<fileExtension> when copy from non-file based store without partitionOptions. Type: string (or Expression with resultType string)."
         }
       },
@@ -1589,6 +1737,7 @@
         },
         "enableStaging": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specifies whether to copy data via an interim staging. Default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "stagingSettings": {
@@ -1597,14 +1746,17 @@
         },
         "parallelCopies": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Maximum number of concurrent sessions opened on the source or sink to avoid overloading the data store. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "dataIntegrationUnits": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Maximum number of data integration units that can be used to perform this data movement. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "enableSkipIncompatibleRow": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to skip incompatible row. Default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "redirectIncompatibleRowSettings": {
@@ -1623,6 +1775,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Preserve Rules.",
@@ -1632,6 +1785,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Preserve rules.",
@@ -1639,6 +1793,7 @@
         },
         "validateDataConsistency": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to enable Data Consistency validation. Type: boolean (or Expression with resultType boolean)."
         },
         "skipErrorFile": {
@@ -1662,18 +1817,22 @@
         },
         "sourceRetryCount": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Source retry count. Type: integer (or Expression with resultType integer)."
         },
         "sourceRetryWait": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "maxConcurrentConnections": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
         },
         "disableMetricsCollection": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -1714,6 +1873,7 @@
       "properties": {
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
@@ -1733,10 +1893,12 @@
       "properties": {
         "azureTableSourceQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure Table source query. Type: string (or Expression with resultType string)."
         },
         "azureTableSourceIgnoreTableNotFound": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Azure Table source ignore table not found. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -1752,14 +1914,17 @@
       "properties": {
         "treatEmptyAsNull": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Treat empty as null. Type: boolean (or Expression with resultType boolean)."
         },
         "skipHeaderLineCount": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Number of header lines to skip from each blob. Type: integer (or Expression with resultType integer)."
         },
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -1775,14 +1940,17 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Documents query. Type: string (or Expression with resultType string)."
         },
         "nestingSeparator": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Nested properties separator. Type: string (or Expression with resultType string)."
         },
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
@@ -1802,18 +1970,22 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL API query. Type: string (or Expression with resultType string)."
         },
         "pageSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
         },
         "preferredRegions": {
           "type": "object",
+          "x-ms-format": "dfe-list-string",
           "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
         },
         "detectDatetime": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether detect primitive values as datetime values. Type: boolean (or Expression with resultType boolean)."
         },
         "additionalColumns": {
@@ -1833,6 +2005,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics (online & on-premises). Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
@@ -1852,6 +2025,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics CRM (online & on-premises). Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
@@ -1871,6 +2045,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "FetchXML is a proprietary query language that is used in Microsoft Common Data Service for Apps (online & on-premises). Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
@@ -1890,6 +2065,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
@@ -1909,6 +2085,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
@@ -1924,6 +2101,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
@@ -1943,6 +2121,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
@@ -1958,6 +2137,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
@@ -1973,6 +2153,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
@@ -1988,6 +2169,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
@@ -2003,6 +2185,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
@@ -2018,6 +2201,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "MDX query. Type: string (or Expression with resultType string)."
         }
       }
@@ -2033,10 +2217,12 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
@@ -2056,6 +2242,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
@@ -2083,6 +2270,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
@@ -2114,10 +2302,12 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SAP Cloud for Customer OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
@@ -2133,10 +2323,12 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SAP ECC OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
@@ -2152,10 +2344,12 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SAP HANA Sql query. Type: string (or Expression with resultType string)."
         },
         "packetSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
         },
         "partitionOption": {
@@ -2174,6 +2368,7 @@
       "properties": {
         "partitionColumnName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
@@ -2189,18 +2384,22 @@
       "properties": {
         "excludeLastRequest": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean)."
         },
         "baseRequestId": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
         },
         "customRfcReadTableFunctionModule": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
         },
         "sapDataColumnDelimiter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         }
       }
@@ -2216,10 +2415,12 @@
       "properties": {
         "extractionMode": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The extraction mode. Allowed value include: Full, Delta and Recovery. The default value is Full. Type: string (or Expression with resultType string)."
         },
         "subscriberProcess": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The subscriber process to manage the delta process. Type: string (or Expression with resultType string)."
         },
         "selection": {
@@ -2243,30 +2444,37 @@
       "properties": {
         "rowCount": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The number of rows to be retrieved. Type: integer(or Expression with resultType integer)."
         },
         "rowSkips": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The number of rows that will be skipped. Type: integer (or Expression with resultType integer)."
         },
         "rfcTableFields": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The fields of the SAP table that will be retrieved. For example, column0, column1. Type: string (or Expression with resultType string)."
         },
         "rfcTableOptions": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The options for the filtering of the SAP Table. For example, COLUMN0 EQ SOME VALUE. Type: string (or Expression with resultType string)."
         },
         "batchSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Specifies the maximum number of rows that will be retrieved at a time when retrieving data from SAP Table. Type: integer (or Expression with resultType integer)."
         },
         "customRfcReadTableFunctionModule": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
         },
         "sapDataColumnDelimiter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
@@ -2285,18 +2493,22 @@
       "properties": {
         "partitionColumnName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionUpperBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionLowerBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "maxPartitionsNumber": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The maximum value of partitions the table will be split into. Type: integer (or Expression with resultType string)."
         }
       }
@@ -2312,14 +2524,17 @@
       "properties": {
         "requestMethod": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP method used to call the RESTful API. The default is POST. Type: string (or Expression with resultType string)."
         },
         "additionalHeaders": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "requestInterval": {
@@ -2343,22 +2558,27 @@
       "properties": {
         "requestMethod": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
         },
         "requestBody": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
         },
         "additionalHeaders": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
         },
         "paginationRules": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The pagination rules to compose next page requests. Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "requestInterval": {
@@ -2382,10 +2602,12 @@
       "properties": {
         "sqlReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL reader query. Type: string (or Expression with resultType string)."
         },
         "sqlReaderStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -2393,6 +2615,7 @@
           "type": "object"
         },
         "isolationLevel": {
+          "x-ms-format": "dfe-string",
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -2417,10 +2640,12 @@
       "properties": {
         "sqlReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL reader query. Type: string (or Expression with resultType string)."
         },
         "sqlReaderStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -2452,10 +2677,12 @@
       "properties": {
         "sqlReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL reader query. Type: string (or Expression with resultType string)."
         },
         "sqlReaderStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -2487,10 +2714,12 @@
       "properties": {
         "sqlReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL reader query. Type: string (or Expression with resultType string)."
         },
         "sqlReaderStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -2522,10 +2751,12 @@
       "properties": {
         "sqlReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL reader query. Type: string (or Expression with resultType string)."
         },
         "sqlReaderStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the stored procedure for a Azure SQL Managed Instance source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -2557,10 +2788,12 @@
       "properties": {
         "sqlReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL Data Warehouse reader query. Type: string (or Expression with resultType string)."
         },
         "sqlReaderStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the stored procedure for a SQL Data Warehouse source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -2583,14 +2816,17 @@
       "properties": {
         "partitionColumnName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the column in integer or datetime type that will be used for proceeding partitioning. If not specified, the primary key of the table is auto-detected and used as the partition column. Type: string (or Expression with resultType string)."
         },
         "partitionUpperBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The maximum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
         },
         "partitionLowerBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The minimum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
         }
       }
@@ -2606,6 +2842,7 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "additionalColumns": {
@@ -2625,6 +2862,7 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "distcpSettings": {
@@ -2639,14 +2877,17 @@
       "properties": {
         "resourceManagerEndpoint": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the Yarn ResourceManager endpoint. Type: string (or Expression with resultType string)."
         },
         "tempScriptPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies an existing folder path which will be used to store temp Distcp command script. The script file is generated by ADF and will be removed after Copy job finished. Type: string (or Expression with resultType string)."
         },
         "distcpOptions": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the Distcp options. Type: string (or Expression with resultType string)."
         }
       },
@@ -2666,6 +2907,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
@@ -2681,6 +2923,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Should be a Kusto Query Language (KQL) query. Type: string (or Expression with resultType string)."
         },
         "noTruncation": {
@@ -2689,6 +2932,7 @@
         },
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).."
         },
         "additionalColumns": {
@@ -2711,10 +2955,12 @@
       "properties": {
         "oracleReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Oracle reader query. Type: string (or Expression with resultType string)."
         },
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "partitionOption": {
@@ -2739,20 +2985,24 @@
           "type": "object",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Names of the physical partitions of Oracle table. "
         },
         "partitionColumnName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionUpperBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionLowerBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
@@ -2768,14 +3018,17 @@
       "properties": {
         "oracleReaderQuery": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "AmazonRdsForOracle reader query. Type: string (or Expression with resultType string)."
         },
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "partitionOption": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The partition mechanism that will be used for AmazonRdsForOracle read in parallel. Type: string (or Expression with resultType string)."
         },
         "partitionSettings": {
@@ -2808,20 +3061,24 @@
           "type": "object",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Names of the physical partitions of AmazonRdsForOracle table. "
         },
         "partitionColumnName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionUpperBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionLowerBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
@@ -2837,6 +3094,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Teradata query. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
@@ -2855,14 +3113,17 @@
       "properties": {
         "partitionColumnName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the column that will be used for proceeding range or hash partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionUpperBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionLowerBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
@@ -2893,6 +3154,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Should be a SQL-92 query expression or Cassandra Query Language (CQL) command. Type: string (or Expression with resultType string)."
         },
         "consistencyLevel": {
@@ -2928,6 +3190,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string)."
         },
         "additionalColumns": {
@@ -2947,6 +3210,7 @@
       "properties": {
         "filter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
         },
         "cursorMethods": {
@@ -2955,10 +3219,12 @@
         },
         "batchSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB Atlas instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
         },
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
@@ -2978,6 +3244,7 @@
       "properties": {
         "filter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
         },
         "cursorMethods": {
@@ -2986,10 +3253,12 @@
         },
         "batchSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
         },
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
@@ -3009,6 +3278,7 @@
       "properties": {
         "filter": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
         },
         "cursorMethods": {
@@ -3017,10 +3287,12 @@
         },
         "batchSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
         },
         "queryTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "additionalColumns": {
@@ -3035,18 +3307,22 @@
       "properties": {
         "project": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string)."
         },
         "sort": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
         },
         "skip": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer)."
         },
         "limit": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer)."
         }
       },
@@ -3065,26 +3341,32 @@
       "properties": {
         "allowedGroups": {
           "type": "object",
+          "x-ms-format": "dfe-list-string",
           "description": "The groups containing all the users. Type: array of strings (or Expression with resultType array of strings)."
         },
         "userScopeFilterUri": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The user scope uri. Type: string (or Expression with resultType string)."
         },
         "dateFilterColumn": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The Column to apply the <paramref name=\"StartTime\"/> and <paramref name=\"EndTime\"/>. Type: string (or Expression with resultType string)."
         },
         "startTime": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Start time of the requested range for this dataset. Type: string (or Expression with resultType string)."
         },
         "endTime": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "End time of the requested range for this dataset. Type: string (or Expression with resultType string)."
         },
         "outputColumns": {
           "type": "object",
+          "x-ms-format": "dfe-list-generic",
           "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
         }
       }
@@ -3100,6 +3382,7 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -3115,14 +3398,17 @@
       "properties": {
         "treatEmptyAsNull": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Treat empty as null. Type: boolean (or Expression with resultType boolean)."
         },
         "skipHeaderLineCount": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Number of header lines to skip from each blob. Type: integer (or Expression with resultType integer)."
         },
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -3138,6 +3424,7 @@
       "properties": {
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the timeout for a HTTP client to get HTTP response from HTTP server. The default value is equivalent to System.Net.HttpWebRequest.Timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
@@ -3153,6 +3440,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3168,6 +3456,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3183,6 +3472,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
         }
       }
@@ -3198,6 +3488,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
         }
       }
@@ -3213,6 +3504,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3228,6 +3520,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3243,6 +3536,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3258,6 +3552,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3273,6 +3568,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3288,6 +3584,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3303,6 +3600,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3318,6 +3616,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3333,6 +3632,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3348,6 +3648,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3363,6 +3664,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3378,6 +3680,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3393,6 +3696,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3408,6 +3712,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3423,6 +3728,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3438,6 +3744,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3453,6 +3760,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3468,6 +3776,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3483,6 +3792,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3498,6 +3808,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3513,6 +3824,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3528,6 +3840,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3543,6 +3856,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3558,6 +3872,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3573,6 +3888,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3588,6 +3904,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
@@ -3606,14 +3923,17 @@
       "properties": {
         "partitionColumnName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionUpperBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionLowerBound": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
@@ -3629,6 +3949,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3644,6 +3965,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3659,6 +3981,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3674,10 +3997,12 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
@@ -3693,6 +4018,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3708,6 +4034,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
       }
@@ -3723,6 +4050,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "redshiftUnloadSettings": {
@@ -3741,6 +4069,7 @@
         },
         "bucketName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The bucket of the interim Amazon S3 which will be used to store the unloaded data from Amazon Redshift source. The bucket must be in the same region as the Amazon Redshift source. Type: string (or Expression with resultType string)."
         }
       },
@@ -3760,6 +4089,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Snowflake Sql query. Type: string (or Expression with resultType string)."
         },
         "exportSettings": {
@@ -3799,6 +4129,7 @@
       "properties": {
         "additionalCopyOptions": {
           "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }",
           "additionalProperties": {
             "type": "object"
@@ -3806,6 +4137,7 @@
         },
         "additionalFormatOptions": {
           "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"OVERWRITE\": \"TRUE\", \"MAX_FILE_SIZE\": \"'FALSE'\" }",
           "additionalProperties": {
             "type": "object"
@@ -3824,6 +4156,7 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure Databricks Delta Lake Sql query. Type: string (or Expression with resultType string)."
         },
         "exportSettings": {
@@ -3843,10 +4176,12 @@
       "properties": {
         "dateFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the date format for the csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
         },
         "timestampFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the timestamp format for the csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
         }
       }
@@ -3862,6 +4197,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "importSettings": {
@@ -3881,10 +4217,12 @@
       "properties": {
         "dateFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the date format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
         },
         "timestampFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specify the timestamp format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
         }
       }
@@ -3895,6 +4233,7 @@
       "properties": {
         "value": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Stored procedure parameter value. Type: string (or Expression with resultType string)."
         },
         "type": {
@@ -3931,26 +4270,32 @@
         },
         "writeBatchSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Write batch size. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "writeBatchTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Write batch timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "sinkRetryCount": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Sink retry count. Type: integer (or Expression with resultType integer)."
         },
         "sinkRetryWait": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Sink retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "maxConcurrentConnections": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
         },
         "disableMetricsCollection": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -3984,6 +4329,7 @@
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
@@ -4022,18 +4368,22 @@
       "properties": {
         "azureTableDefaultPartitionKeyValue": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure Table default partition key value. Type: string (or Expression with resultType string)."
         },
         "azureTablePartitionKeyName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure Table partition key name. Type: string (or Expression with resultType string)."
         },
         "azureTableRowKeyName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure Table row key name. Type: string (or Expression with resultType string)."
         },
         "azureTableInsertType": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Azure Table insert type. Type: string (or Expression with resultType string)."
         }
       }
@@ -4102,14 +4452,17 @@
       "properties": {
         "blobWriterOverwriteFiles": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Blob writer overwrite files. Type: boolean (or Expression with resultType boolean)."
         },
         "blobWriterDateTimeFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Blob writer date time format. Type: string (or Expression with resultType string)."
         },
         "blobWriterAddHeader": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Blob writer add header. Type: boolean (or Expression with resultType boolean)."
         },
         "copyBehavior": {
@@ -4154,10 +4507,12 @@
       "properties": {
         "nestingSeparator": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Nested properties separator. Default is . (dot). Type: string (or Expression with resultType string)."
         },
         "writeBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
         }
       }
@@ -4173,6 +4528,7 @@
       "properties": {
         "writeBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
         }
       }
@@ -4188,14 +4544,17 @@
       "properties": {
         "sqlWriterStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
         },
         "sqlWriterTableType": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer table type. Type: string (or Expression with resultType string)."
         },
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -4204,14 +4563,17 @@
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
         },
         "tableOption": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         },
         "sqlWriterUseTableLock": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
@@ -4236,14 +4598,17 @@
       "properties": {
         "sqlWriterStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
         },
         "sqlWriterTableType": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer table type. Type: string (or Expression with resultType string)."
         },
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -4252,14 +4617,17 @@
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
         },
         "tableOption": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         },
         "sqlWriterUseTableLock": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
@@ -4284,14 +4652,17 @@
       "properties": {
         "sqlWriterStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
         },
         "sqlWriterTableType": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer table type. Type: string (or Expression with resultType string)."
         },
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -4300,14 +4671,17 @@
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
         },
         "tableOption": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         },
         "sqlWriterUseTableLock": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
@@ -4332,14 +4706,17 @@
       "properties": {
         "sqlWriterStoredProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
         },
         "sqlWriterTableType": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL writer table type. Type: string (or Expression with resultType string)."
         },
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -4348,14 +4725,17 @@
         },
         "storedProcedureTableTypeParameterName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
         },
         "tableOption": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         },
         "sqlWriterUseTableLock": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
@@ -4380,10 +4760,12 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "allowPolyBase": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates to use PolyBase to copy data into SQL Data Warehouse when applicable. Type: boolean (or Expression with resultType boolean)."
         },
         "polyBaseSettings": {
@@ -4392,6 +4774,7 @@
         },
         "allowCopyCommand": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Indicates to use Copy Command to copy data into SQL Data Warehouse. Type: boolean (or Expression with resultType boolean)."
         },
         "copyCommandSettings": {
@@ -4400,10 +4783,12 @@
         },
         "tableOption": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         },
         "sqlWriterUseTableLock": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to use table lock during bulk copy. Type: boolean (or Expression with resultType boolean)."
         },
         "writeBehavior": {
@@ -4431,10 +4816,12 @@
         },
         "rejectSampleValue": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Determines the number of rows to attempt to retrieve before the PolyBase recalculates the percentage of rejected rows. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "useTypeDefault": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specifies how to handle missing values in delimited text files when PolyBase retrieves data from the text file. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -4470,6 +4857,7 @@
         },
         "additionalOptions": {
           "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalOptions\": { \"MAXERRORS\": \"1000\", \"DATEFORMAT\": \"'ymd'\" }",
           "additionalProperties": {
             "type": "string"
@@ -4497,14 +4885,17 @@
       "properties": {
         "useTempDB": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specifies whether to use temp db for upsert interim table. Type: boolean (or Expression with resultType boolean)."
         },
         "interimSchemaName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
         },
         "keys": {
           "type": "object",
+          "x-ms-format": "dfe-list-string",
           "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
         }
       }
@@ -4515,10 +4906,12 @@
       "properties": {
         "interimSchemaName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Schema name for interim table. Type: string (or Expression with resultType string)."
         },
         "keys": {
           "type": "object",
+          "x-ms-format": "dfe-list-string",
           "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
         }
       }
@@ -4559,6 +4952,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "importSettings": {
@@ -4595,6 +4989,7 @@
       "properties": {
         "additionalCopyOptions": {
           "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }",
           "additionalProperties": {
             "type": "object"
@@ -4602,6 +4997,7 @@
         },
         "additionalFormatOptions": {
           "type": "object",
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"FORCE\": \"TRUE\", \"LOAD_UNCERTAIN_FILES\": \"'FALSE'\" }",
           "additionalProperties": {
             "type": "object"
@@ -4619,14 +5015,17 @@
         },
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
         },
         "logLevel": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
         },
         "enableReliableLogging": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -4643,6 +5042,7 @@
       "properties": {
         "enableCopyActivityLog": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specifies whether to enable copy activity log. Type: boolean (or Expression with resultType boolean)."
         },
         "copyActivityLogSettings": {
@@ -4668,6 +5068,7 @@
         },
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
         }
       },
@@ -4681,10 +5082,12 @@
       "properties": {
         "logLevel": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Gets or sets the log level, support: Info, Warning. Type: string (or Expression with resultType string)."
         },
         "enableReliableLogging": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specifies whether to enable reliable logging. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -4699,10 +5102,12 @@
         },
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path to storage for storing the interim data. Type: string (or Expression with resultType string)."
         },
         "enableCompression": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Specifies whether to use compression when copying data via an interim staging. Default value is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -4719,10 +5124,12 @@
       "properties": {
         "linkedServiceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the Azure Storage, Storage SAS, or Azure Data Lake Store linked service used for redirecting incompatible row. Must be specified if redirectIncompatibleRowSettings is specified. Type: string (or Expression with resultType string)."
         },
         "path": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The path for storing the redirect incompatible row data. Type: string (or Expression with resultType string)."
         }
       },
@@ -4739,10 +5146,12 @@
       "properties": {
         "fileMissing": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Skip if file is deleted by other client during copy. Default is true. Type: boolean (or Expression with resultType boolean)."
         },
         "dataInconsistency": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Skip if source/sink file changed by other concurrent write. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -4753,10 +5162,12 @@
       "properties": {
         "name": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Additional column name. Type: string (or Expression with resultType string)."
         },
         "value": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Additional column value. Type: string (or Expression with resultType string)."
         }
       }
@@ -4772,6 +5183,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         }
       }
@@ -4787,6 +5199,7 @@
       "properties": {
         "copyBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The type of copy behavior for copy sink. Type: string (or Expression with resultType string)."
         },
         "enableAdlsSingleFileParallel": {
@@ -4806,6 +5219,7 @@
       "properties": {
         "copyBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The type of copy behavior for copy sink. Type: string (or Expression with resultType string)."
         },
         "metadata": {
@@ -4854,6 +5268,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
         }
       }
@@ -4869,6 +5284,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
         }
       }
@@ -4884,6 +5300,7 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
         }
       }
@@ -4914,10 +5331,12 @@
         },
         "ignoreNullValues": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "alternateKeyName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
@@ -4940,10 +5359,12 @@
         },
         "ignoreNullValues": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "alternateKeyName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
@@ -4966,10 +5387,12 @@
         },
         "ignoreNullValues": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "alternateKeyName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
@@ -4988,14 +5411,17 @@
       "properties": {
         "ingestionMappingName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A name of a pre-created csv mapping that was defined on the target Kusto table. Type: string."
         },
         "ingestionMappingAsJson": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "An explicit column mapping description provided in a json format. Type: string."
         },
         "flushImmediately": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If set to true, any aggregation will be skipped. Default is false. Type: boolean."
         }
       }
@@ -5023,10 +5449,12 @@
         },
         "externalIdFieldName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
         },
         "ignoreNullValues": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -5054,10 +5482,12 @@
         },
         "externalIdFieldName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
         },
         "ignoreNullValues": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
         }
       }
@@ -5073,6 +5503,7 @@
       "properties": {
         "writeBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
         }
       }
@@ -5088,6 +5519,7 @@
       "properties": {
         "writeBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
         }
       }
@@ -5103,6 +5535,7 @@
       "properties": {
         "writeBehavior": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
         }
       }
@@ -5135,6 +5568,7 @@
       "properties": {
         "columnMappings": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Column mappings. Example: \"UserId: MyUserId, Group: MyGroup, Name: MyName\" Type: string (or Expression with resultType string). This property will be retired. Please use mappings property."
         },
         "schemaMapping": {
@@ -5147,6 +5581,7 @@
         },
         "mapComplexValuesToString": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to map complex (array and object) values to simple strings in json format. Type: boolean (or Expression with resultType boolean)."
         },
         "mappings": {
@@ -5155,6 +5590,7 @@
         },
         "typeConversion": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to enable the advanced type conversion feature in the Copy activity. Type: boolean (or Expression with resultType boolean)."
         },
         "typeConversionSettings": {
@@ -5169,26 +5605,32 @@
       "properties": {
         "allowDataTruncation": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to allow data truncation when converting the data. Type: boolean (or Expression with resultType boolean)."
         },
         "treatBooleanAsNumber": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to treat boolean values as numbers. Type: boolean (or Expression with resultType boolean)."
         },
         "dateTimeFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The format for DateTime values. Type: string (or Expression with resultType string)."
         },
         "dateTimeOffsetFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The format for DateTimeOffset values. Type: string (or Expression with resultType string)."
         },
         "timeSpanFormat": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
         },
         "culture": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The culture used to convert data from/to string. Type: string (or Expression with resultType string)."
         }
       }
@@ -5230,6 +5672,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -5240,6 +5683,7 @@
         },
         "scriptPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Script path. Type: string (or Expression with resultType string)."
         },
         "scriptLinkedService": {
@@ -5251,17 +5695,18 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         },
         "variables": {
           "description": "User specified arguments under hivevar namespace.",
-          "type": "array",
-          "items": {
+          "type": "object",
+          "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
-          },
-          "x-ms-identifiers": []
+          }
         },
         "queryTimeout": {
           "type": "integer",
@@ -5324,6 +5769,7 @@
         },
         "scriptPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Script path. Type: string (or Expression with resultType string)."
         },
         "scriptLinkedService": {
@@ -5335,6 +5781,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         }
@@ -5377,6 +5824,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -5387,10 +5835,12 @@
         },
         "className": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Class name. Type: string (or Expression with resultType string)."
         },
         "jarFilePath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Jar path. Type: string (or Expression with resultType string)."
         },
         "jarLinkedService": {
@@ -5402,6 +5852,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -5411,6 +5862,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         }
@@ -5457,6 +5909,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -5467,18 +5920,22 @@
         },
         "mapper": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Mapper executable name. Type: string (or Expression with resultType string)."
         },
         "reducer": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reducer executable name. Type: string (or Expression with resultType string)."
         },
         "input": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Input blob path. Type: string (or Expression with resultType string)."
         },
         "output": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Output blob path. Type: string (or Expression with resultType string)."
         },
         "filePaths": {
@@ -5486,6 +5943,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -5496,6 +5954,7 @@
         },
         "combiner": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Combiner executable name. Type: string (or Expression with resultType string)."
         },
         "commandEnvironment": {
@@ -5503,6 +5962,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -5512,6 +5972,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         }
@@ -5548,10 +6009,12 @@
       "properties": {
         "rootPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The root path in 'sparkJobLinkedService' for all the job’s files. Type: string (or Expression with resultType string)."
         },
         "entryFilePath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The relative path to the root folder of the code/package to be executed. Type: string (or Expression with resultType string)."
         },
         "arguments": {
@@ -5559,6 +6022,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -5577,6 +6041,7 @@
         },
         "proxyUser": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The user to impersonate that will execute the job. Type: string (or Expression with resultType string)."
         },
         "sparkConfig": {
@@ -5584,6 +6049,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         }
@@ -5620,14 +6086,17 @@
           "$ref": "#/definitions/SSISPackageLocation"
         },
         "runtime": {
+          "x-ms-format": "dfe-string",
           "description": "Specifies the runtime to execute SSIS package. The value should be \"x86\" or \"x64\". Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "loggingLevel": {
+          "x-ms-format": "dfe-string",
           "description": "The logging level of SSIS package execution. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "environmentPath": {
+          "x-ms-format": "dfe-string",
           "description": "The environment path to execute the SSIS package. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -5689,6 +6158,7 @@
       "type": "object",
       "properties": {
         "packagePath": {
+          "x-ms-format": "dfe-string",
           "description": "The SSIS package path. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -5726,6 +6196,7 @@
           "$ref": "#/definitions/SSISAccessCredential"
         },
         "configurationPath": {
+          "x-ms-format": "dfe-string",
           "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -5738,6 +6209,7 @@
           "type": "string"
         },
         "packageContent": {
+          "x-ms-format": "dfe-string",
           "description": "The embedded package content. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -5771,6 +6243,7 @@
       "properties": {
         "value": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SSIS package execution parameter value. Type: string (or Expression with resultType string)."
         }
       },
@@ -5784,6 +6257,7 @@
       "properties": {
         "value": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SSIS package property override value. Type: string (or Expression with resultType string)."
         },
         "isSensitive": {
@@ -5801,11 +6275,13 @@
       "properties": {
         "domain": {
           "type": "object",
-          "description": "Domain for windows authentication."
+          "x-ms-format": "dfe-string",
+          "description": "Domain for windows authentication. Type: string (or Expression with resultType string)."
         },
         "userName": {
           "type": "object",
-          "description": "UseName for windows authentication."
+          "x-ms-format": "dfe-string",
+          "description": "UseName for windows authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/SecureString",
@@ -5824,11 +6300,13 @@
       "properties": {
         "domain": {
           "type": "object",
-          "description": "Domain for windows authentication."
+          "x-ms-format": "dfe-string",
+          "description": "Domain for windows authentication. Type: string (or Expression with resultType string)."
         },
         "userName": {
           "type": "object",
-          "description": "UseName for windows authentication."
+          "x-ms-format": "dfe-string",
+          "description": "UseName for windows authentication. Type: string (or Expression with resultType string)."
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
@@ -5847,6 +6325,7 @@
       "properties": {
         "packagePath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Path for embedded child package. Type: string (or Expression with resultType string)."
         },
         "packageName": {
@@ -5855,6 +6334,7 @@
         },
         "packageContent": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Content for embedded child package. Type: string (or Expression with resultType string)."
         },
         "packageLastModifiedDate": {
@@ -5872,6 +6352,7 @@
       "type": "object",
       "properties": {
         "logPath": {
+          "x-ms-format": "dfe-string",
           "description": "The SSIS package execution log path. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -5908,6 +6389,7 @@
         },
         "logRefreshInterval": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
@@ -5936,6 +6418,7 @@
       "properties": {
         "command": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Command for custom activity Type: string (or Expression with resultType string)."
         },
         "resourceLinkedService": {
@@ -5944,6 +6427,7 @@
         },
         "folderPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Folder path for resource files Type: string (or Expression with resultType string)."
         },
         "referenceObjects": {
@@ -5955,15 +6439,18 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         },
         "retentionTimeInDays": {
           "type": "object",
+          "x-ms-format": "dfe-double",
           "description": "The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double)."
         },
         "autoUserSpecification": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Elevation level and scope for the user, default is nonadmin task. Type: string (or Expression with resultType double)."
         }
       },
@@ -6021,6 +6508,7 @@
       "properties": {
         "storedProcedureName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Stored procedure name. Type: string (or Expression with resultType string)."
         },
         "storedProcedureParameters": {
@@ -6112,6 +6600,7 @@
       "properties": {
         "recursive": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "If true, files or sub-folders under current folder path will be deleted recursively. Default is false. Type: boolean (or Expression with resultType boolean)."
         },
         "maxConcurrentConnections": {
@@ -6121,6 +6610,7 @@
         },
         "enableLogging": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to record detailed logs of delete-activity execution. Default value is false. Type: boolean (or Expression with resultType boolean)."
         },
         "logStorageSettings": {
@@ -6164,10 +6654,12 @@
       "properties": {
         "command": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "A control command, according to the Azure Data Explorer command syntax. Type: string (or Expression with resultType string)."
         },
         "commandTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Control command timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))..)"
         }
       },
@@ -6207,6 +6699,7 @@
         },
         "firstRowOnly": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Whether to return first row or all rows. Default value is true. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -6260,6 +6753,7 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
+          "x-ms-format": "dfe-string",
           "description": "Web activity authentication user name for basic authentication or ClientID when used for ServicePrincipal. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -6268,10 +6762,12 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
+          "x-ms-format": "dfe-string",
           "description": "Resource for which Azure Auth token will be requested when using MSI Authentication. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "userTenant": {
+          "x-ms-format": "dfe-string",
           "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
           "type": "object"
         },
@@ -6290,14 +6786,17 @@
         },
         "url": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Web activity target endpoint and path. Type: string (or Expression with resultType string)."
         },
         "headers": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
         },
         "body": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
         },
         "authentication": {
@@ -6369,6 +6868,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -6586,6 +7086,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         },
@@ -6611,6 +7112,7 @@
       "properties": {
         "filePath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The relative file path, including container name, in the Azure Blob Storage specified by the LinkedService. Type: string (or Expression with resultType string)."
         },
         "linkedServiceName": {
@@ -6647,6 +7149,7 @@
       "properties": {
         "trainedModelName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the Trained Model module in the Web Service experiment to be updated. Type: string (or Expression with resultType string)."
         },
         "trainedModelLinkedServiceName": {
@@ -6655,6 +7158,7 @@
         },
         "trainedModelFilePath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The relative file path in trainedModelLinkedService to represent the .ilearner file that will be uploaded by the update operation.  Type: string (or Expression with resultType string)."
         }
       },
@@ -6687,34 +7191,42 @@
       "description": "Azure ML Execute Pipeline activity properties.",
       "properties": {
         "mlPipelineId": {
+          "x-ms-format": "dfe-string",
           "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "mlPipelineEndpointId": {
+          "x-ms-format": "dfe-string",
           "description": "ID of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "version": {
+          "x-ms-format": "dfe-string",
           "description": "Version of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "experimentName": {
+          "x-ms-format": "dfe-string",
           "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "mlPipelineParameters": {
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
           "type": "object"
         },
         "dataPathAssignments": {
+          "x-ms-format": "dfe-key-value-pairs",
           "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
           "type": "object"
         },
         "mlParentRunId": {
+          "x-ms-format": "dfe-string",
           "description": "The parent Azure ML Service pipeline run id. This information will be passed in the ParentRunId property of the published pipeline execution request. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "continueOnStepFailure": {
+          "x-ms-format": "dfe-bool",
           "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
@@ -6725,6 +7237,7 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
+        "x-ms-format": "dfe-string",
         "description": "Type: string (or Expression with resultType string)."
       }
     },
@@ -6733,6 +7246,7 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
+        "x-ms-format": "dfe-string",
         "description": "Type: string (or Expression with resultType string)."
       }
     },
@@ -6760,6 +7274,7 @@
       "properties": {
         "scriptPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Case-sensitive path to folder that contains the U-SQL script. Type: string (or Expression with resultType string)."
         },
         "scriptLinkedService": {
@@ -6768,10 +7283,12 @@
         },
         "degreeOfParallelism": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "The maximum number of nodes simultaneously used to run the job. Default value is 1. Type: integer (or Expression with resultType integer), minimum: 1."
         },
         "priority": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Determines which jobs out of all that are queued should be selected to run first. The lower the number, the higher the priority. Default value is 1000. Type: integer (or Expression with resultType integer), minimum: 1."
         },
         "parameters": {
@@ -6779,15 +7296,18 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         },
         "runtimeVersion": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Runtime version of the U-SQL engine to use. Type: string (or Expression with resultType string)."
         },
         "compilationMode": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Compilation mode of U-SQL. Must be one of these values : Semantic, Full and SingleBox. Type: string (or Expression with resultType string)."
         }
       },
@@ -6819,8 +7339,9 @@
       "description": "Wait activity properties.",
       "properties": {
         "waitTimeInSeconds": {
-          "description": "Duration in seconds.",
-          "type": "object"
+          "description": "Duration in seconds. Type: integer (or Expression with resultType integer).",
+          "type": "object",
+          "x-ms-format": "dfe-int"
         }
       },
       "required": [
@@ -6852,10 +7373,12 @@
       "type": "object",
       "properties": {
         "message": {
+          "x-ms-format": "dfe-string",
           "description": "The error message that surfaced in the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "errorCode": {
+          "x-ms-format": "dfe-string",
           "description": "The error code that categorizes the error type of the Fail activity. It can be dynamic content that's evaluated to a non empty/blank string at runtime. Type: string (or Expression with resultType string).",
           "type": "object"
         }
@@ -6893,7 +7416,8 @@
         },
         "timeout": {
           "type": "object",
-          "description": "Specifies the timeout for the activity to run. If there is no value specified, it takes the value of TimeSpan.FromDays(7) which is 1 week as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the timeout for the activity to run. If there is no value specified, it takes the value of TimeSpan.FromDays(7) which is 1 week as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "activities": {
           "type": "array",
@@ -6935,18 +7459,22 @@
       "properties": {
         "timeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Specifies the timeout for the activity to run. If there is no value specified, it takes the value of TimeSpan.FromDays(7) which is 1 week as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "sleep": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "A delay in seconds between validation attempts. If no value is specified, 10 seconds will be used as the default. Type: integer (or Expression with resultType integer)."
         },
         "minimumSize": {
           "type": "object",
+          "x-ms-format": "dfe-int",
           "description": "Can be used if dataset points to a file. The file must be greater than or equal in size to the value specified. Type: integer (or Expression with resultType integer)."
         },
         "childItems": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Can be used if dataset points to a folder. If set to true, the folder must have at least one file. If set to false, the folder must be empty. Type: boolean (or Expression with resultType boolean)."
         },
         "dataset": {
@@ -7018,6 +7546,7 @@
       "properties": {
         "notebookPath": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The absolute path of the notebook to be run in the Databricks Workspace. This path must begin with a slash. Type: string (or Expression with resultType string)."
         },
         "baseParameters": {
@@ -7025,6 +7554,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         },
@@ -7069,6 +7599,7 @@
       "properties": {
         "mainClassName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The full name of the class containing the main method to be executed. This class must be contained in a JAR provided as a library. Type: string (or Expression with resultType string)."
         },
         "parameters": {
@@ -7076,6 +7607,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7121,6 +7653,7 @@
       "properties": {
         "pythonFile": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The URI of the Python file to be executed. DBFS paths are supported. Type: string (or Expression with resultType string)."
         },
         "parameters": {
@@ -7128,6 +7661,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7177,7 +7711,8 @@
         },
         "value": {
           "description": "Value to be set. Could be a static value or Expression.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-object"
         },
         "setSystemVariable": {
           "description": "If set to true, it sets the pipeline run return value.",
@@ -7212,8 +7747,9 @@
           "type": "string"
         },
         "value": {
-          "description": "Value to be appended. Could be a static value or Expression",
-          "type": "object"
+          "description": "Value to be appended. Type: could be a static value matching type of the variable item or Expression with resultType matching type of the variable item",
+          "type": "object",
+          "x-ms-format": "dfe-object"
         }
       }
     },
@@ -7262,14 +7798,17 @@
         },
         "functionName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Name of the Function that the Azure Function Activity will call. Type: string (or Expression with resultType string)"
         },
         "headers": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
         },
         "body": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
         }
       },
@@ -7317,6 +7856,7 @@
         },
         "url": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "WebHook activity target endpoint and path. Type: string (or Expression with resultType string)."
         },
         "timeout": {
@@ -7325,10 +7865,12 @@
         },
         "headers": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
         },
         "body": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
         },
         "authentication": {
@@ -7337,6 +7879,7 @@
         },
         "reportStatusOnCallBack": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
@@ -7408,28 +7951,34 @@
           "type": "object",
           "properties": {
             "computeType": {
+              "x-ms-format": "dfe-string",
               "description": "Compute type of the cluster which will execute data flow job. Possible values include: 'General', 'MemoryOptimized', 'ComputeOptimized'. Type: string (or Expression with resultType string)",
               "type": "object"
             },
             "coreCount": {
+              "x-ms-format": "dfe-int",
               "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272. Type: integer (or Expression with resultType integer)",
               "type": "object"
             }
           }
         },
         "traceLevel": {
+          "x-ms-format": "dfe-string",
           "description": "Trace level setting used for data flow monitoring output. Supported values are: 'coarse', 'fine', and 'none'. Type: string (or Expression with resultType string)",
           "type": "object"
         },
         "continueOnError": {
+          "x-ms-format": "dfe-bool",
           "description": "Continue on error setting used for data flow execution. Enables processing to continue if a sink fails. Type: boolean (or Expression with resultType boolean)",
           "type": "object"
         },
         "runConcurrently": {
+          "x-ms-format": "dfe-bool",
           "description": "Concurrent run setting used for data flow execution. Allows sinks with the same save order to be processed concurrently. Type: boolean (or Expression with resultType boolean)",
           "type": "object"
         },
         "sourceStagingConcurrency": {
+          "x-ms-format": "dfe-int",
           "description": "Specify number of parallel staging for sources applicable to the sink. Type: integer (or Expression with resultType integer)",
           "type": "object"
         }
@@ -7513,6 +8062,7 @@
       "properties": {
         "scriptBlockExecutionTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "ScriptBlock execution timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "scripts": {
@@ -7556,6 +8106,7 @@
       "properties": {
         "text": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The query text. Type: string (or Expression with resultType string)."
         },
         "type": {
@@ -7592,6 +8143,7 @@
       "properties": {
         "name": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The name of the parameter. Type: string (or Expression with resultType string)."
         },
         "type": {
@@ -7617,8 +8169,9 @@
           }
         },
         "value": {
-          "description": "The value of the parameter.",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The value of the parameter. Type: string (or Expression with resultType string)."
         },
         "direction": {
           "description": "The direction of the parameter.",
@@ -7651,10 +8204,12 @@
       "properties": {
         "query": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The OData query to filter the data in SharePoint Online list. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         },
         "httpRequestTimeout": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
@@ -7746,10 +8301,12 @@
       "properties": {
         "name": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Metadata item key name. Type: string (or Expression with resultType string)."
         },
         "value": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Metadata item value. Type: string (or Expression with resultType string)."
         }
       }
@@ -7795,6 +8352,7 @@
         },
         "executorSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the session, which will be used for overriding 'executorCores' and 'executorMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
         },
         "conf": {
@@ -7803,12 +8361,13 @@
         },
         "driverSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the session, which will be used for overriding 'driverCores' and 'driverMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide.",
-          "type": "integer",
-          "format": "int32"
+          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide. Type: integer (or Expression with resultType integer).",
+          "type": "object",
+          "x-ms-format": "dfe-int"
         }
       },
       "required": [
@@ -7832,6 +8391,7 @@
         },
         "referenceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reference notebook name. Type: string (or Expression with resultType string)."
         }
       },
@@ -7857,6 +8417,7 @@
         },
         "referenceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
         }
       },
@@ -7871,6 +8432,7 @@
       "properties": {
         "value": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Notebook parameter value. Type: string (or Expression with resultType string).",
           "x-nullable": true
         },
@@ -7933,14 +8495,17 @@
         },
         "file": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "scanFolder": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Scanning subfolders from the root folder of the main definition file, these files will be added as reference files. The folders named 'jars', 'pyFiles', 'files' or 'archives' will be scanned, and the folders name are case sensitive. Type: boolean (or Expression with resultType boolean)."
         },
         "className": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "files": {
@@ -7948,6 +8513,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7957,6 +8523,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7966,6 +8533,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7976,6 +8544,7 @@
         },
         "executorSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the job, which will be used for overriding 'executorCores' and 'executorMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "conf": {
@@ -7984,9 +8553,11 @@
         },
         "driverSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
+          "x-ms-format": "dfe-int",
           "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide. Type: integer (or Expression with resultType integer).",
           "type": "object"
         },
@@ -8012,6 +8583,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           }
         }
@@ -8061,6 +8633,7 @@
           }
         },
         "referenceName": {
+          "x-ms-format": "dfe-string",
           "description": "Reference spark configuration name. Type: string (or Expression with resultType string).",
           "type": "object"
         }
