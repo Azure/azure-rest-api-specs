@@ -202,6 +202,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/assets/{assetId}/observations": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AssetIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObservationPageResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Assets"
+        ],
+        "operationId": "Assets_Observations",
+        "summary": "Retrieve observations on an asset.",
+        "x-ms-examples": {
+          "Assets": {
+            "$ref": "./examples/Assets_Observations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/dataConnections": {
       "get": {
         "produces": [
@@ -425,7 +490,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/dataConnections/{dataConnectionName}:validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/dataConnections:validate": {
       "post": {
         "consumes": [
           "application/json"
@@ -442,9 +507,6 @@
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DataConnectionNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -783,7 +845,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups/{groupName}:validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/discoGroups:validate": {
       "post": {
         "consumes": [
           "application/json"
@@ -802,10 +864,10 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiscoGroupNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/DiscoGroupNameParameter"
           },
           {
             "in": "body",
@@ -1392,6 +1454,9 @@
             "$ref": "#/parameters/FilterParameter"
           },
           {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
             "$ref": "#/parameters/SkipParameter"
           },
           {
@@ -1719,21 +1784,6 @@
     "AssetPageResponse": {
       "description": "The page of assets that match the provided metric.",
       "properties": {
-        "content": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/AssetResponse"
-          },
-          "type": "array"
-        },
-        "first": {
-          "description": "Whether or not this is the first page of results.",
-          "type": "boolean"
-        },
-        "last": {
-          "description": "Whether or not this is the last page of results.",
-          "type": "boolean"
-        },
         "mark": {
           "description": "The cursor mark to be used on the next request.  Not set if using paging.",
           "type": "string"
@@ -1742,30 +1792,17 @@
           "description": "The link to access the next page of results.  Not set if at the end of the result set.",
           "type": "string"
         },
-        "number": {
-          "description": "The page number requested.  Set to -1 if using a cursor.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfElements": {
-          "description": "The number of items in the current page of results.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "size": {
-          "description": "The page size requested.",
-          "format": "int32",
-          "type": "integer"
-        },
         "totalElements": {
           "description": "The total number of items available in the full result set.",
           "format": "int64",
           "type": "integer"
         },
-        "totalPages": {
-          "description": "The total number of pages available in the full result set.",
-          "format": "int32",
-          "type": "integer"
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/AssetResponse"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -2079,6 +2116,23 @@
       },
       "type": "object"
     },
+    "AzureDataExplorerDataConnectionProperties": {
+      "properties": {
+        "clusterName": {
+          "description": "The azure data explorer cluster name",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "The azure data explorer database name",
+          "type": "string"
+        },
+        "region": {
+          "description": "The azure data explorer region",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Banner": {
       "properties": {
         "banner": {
@@ -2268,64 +2322,32 @@
     },
     "DataConnectionPageResponse": {
       "properties": {
-        "content": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/DataConnectionResponse"
-          },
-          "type": "array"
-        },
-        "first": {
-          "description": "Whether or not this is the first page of results.",
-          "type": "boolean"
-        },
-        "last": {
-          "description": "Whether or not this is the last page of results.",
-          "type": "boolean"
-        },
         "nextLink": {
           "description": "The link to access the next page of results.  Not set if at the end of the result set.",
           "type": "string"
-        },
-        "number": {
-          "description": "The page number requested.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfElements": {
-          "description": "The number of items in the current page of results.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "size": {
-          "description": "The page size requested.",
-          "format": "int32",
-          "type": "integer"
         },
         "totalElements": {
           "description": "The total number of items available in the full result set.",
           "format": "int64",
           "type": "integer"
         },
-        "totalPages": {
-          "description": "The total number of pages available in the full result set.",
-          "format": "int32",
-          "type": "integer"
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DataConnectionResponse"
+          },
+          "type": "array"
         }
       },
       "type": "object"
     },
     "DataConnectionRequest": {
       "properties": {
-        "connectionString": {
-          "description": "The connection string for the data connection.",
-          "type": "string"
-        },
         "content": {
           "description": "The type of data the data connection will transfer.",
           "enum": [
             "assets",
-            "asi"
+            "attackSurfaceInsights"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2346,6 +2368,11 @@
             "name": "DataConnectionRequestFrequency"
           }
         },
+        "frequencyOffset": {
+          "description": "The day to update the data connection on. (1-7 for weekly, 1-31 for monthly)",
+          "format": "int32",
+          "type": "integer"
+        },
         "kind": {
           "description": "The kind of data connection.",
           "enum": [
@@ -2358,13 +2385,8 @@
             "name": "DataConnectionRequestKind"
           }
         },
-        "offset": {
-          "description": "The day to update the data connection on. (1-7 for weekly, 1-31 for monthly)",
-          "format": "int32",
-          "type": "integer"
-        },
-        "options": {
-          "description": "Any connection specific options.",
+        "name": {
+          "description": "The name of data connection",
           "type": "string"
         }
       },
@@ -2376,15 +2398,11 @@
           "description": "An indicator of whether the data connection is active.",
           "type": "boolean"
         },
-        "connectionString": {
-          "description": "The connection string for the data connection.",
-          "type": "string"
-        },
         "content": {
           "description": "The type of data the data connection will transfer",
           "enum": [
             "assets",
-            "asi"
+            "attackSurfaceInsights"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2414,6 +2432,11 @@
             "name": "DataConnectionResponseFrequency"
           }
         },
+        "frequencyOffset": {
+          "description": "The day to update the data connection on.",
+          "format": "int32",
+          "type": "integer"
+        },
         "id": {
           "description": "The system generated unique id for the resource.",
           "type": "string"
@@ -2436,15 +2459,6 @@
         },
         "name": {
           "description": "The caller provided unique name for the resource.",
-          "type": "string"
-        },
-        "offset": {
-          "description": "The day to update the data connection on.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "options": {
-          "description": "Any connection specific options.",
           "type": "string"
         },
         "updatedDate": {
@@ -2552,49 +2566,21 @@
     },
     "DiscoGroupPageResponse": {
       "properties": {
-        "content": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/DiscoGroupResponse"
-          },
-          "type": "array"
-        },
-        "first": {
-          "description": "Whether or not this is the first page of results.",
-          "type": "boolean"
-        },
-        "last": {
-          "description": "Whether or not this is the last page of results.",
-          "type": "boolean"
-        },
         "nextLink": {
           "description": "The link to access the next page of results.  Not set if at the end of the result set.",
           "type": "string"
-        },
-        "number": {
-          "description": "The page number requested.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfElements": {
-          "description": "The number of items in the current page of results.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "size": {
-          "description": "The page size requested.",
-          "format": "int32",
-          "type": "integer"
         },
         "totalElements": {
           "description": "The total number of items available in the full result set.",
           "format": "int64",
           "type": "integer"
         },
-        "totalPages": {
-          "description": "The total number of pages available in the full result set.",
-          "format": "int32",
-          "type": "integer"
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DiscoGroupResponse"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -2617,6 +2603,10 @@
           "description": "The frequency at which the disco group is supposed to be rerun in milliseconds.",
           "format": "int64",
           "type": "integer"
+        },
+        "name": {
+          "description": "The name for a disco group.",
+          "type": "string"
         },
         "names": {
           "description": "The list of names used for the disco group runs.",
@@ -2708,49 +2698,21 @@
     },
     "DiscoRunPageResponse": {
       "properties": {
-        "content": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/DiscoRunResponse"
-          },
-          "type": "array"
-        },
-        "first": {
-          "description": "Whether or not this is the first page of results.",
-          "type": "boolean"
-        },
-        "last": {
-          "description": "Whether or not this is the last page of results.",
-          "type": "boolean"
-        },
         "nextLink": {
           "description": "The link to access the next page of results.  Not set if at the end of the result set.",
           "type": "string"
-        },
-        "number": {
-          "description": "The page number requested.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfElements": {
-          "description": "The number of items in the current page of results.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "size": {
-          "description": "The page size requested.",
-          "format": "int32",
-          "type": "integer"
         },
         "totalElements": {
           "description": "The total number of items available in the full result set.",
           "format": "int64",
           "type": "integer"
         },
-        "totalPages": {
-          "description": "The total number of pages available in the full result set.",
-          "format": "int32",
-          "type": "integer"
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DiscoRunResponse"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -2848,49 +2810,21 @@
     },
     "DiscoTemplatePageResponse": {
       "properties": {
-        "content": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/DiscoTemplateResponse"
-          },
-          "type": "array"
-        },
-        "first": {
-          "description": "Whether or not this is the first page of results.",
-          "type": "boolean"
-        },
-        "last": {
-          "description": "Whether or not this is the last page of results.",
-          "type": "boolean"
-        },
         "nextLink": {
           "description": "The link to access the next page of results.  Not set if at the end of the result set.",
           "type": "string"
-        },
-        "number": {
-          "description": "The page number requested.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfElements": {
-          "description": "The number of items in the current page of results.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "size": {
-          "description": "The page size requested.",
-          "format": "int32",
-          "type": "integer"
         },
         "totalElements": {
           "description": "The total number of items available in the full result set.",
           "format": "int64",
           "type": "integer"
         },
-        "totalPages": {
-          "description": "The total number of pages available in the full result set.",
-          "format": "int32",
-          "type": "integer"
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DiscoTemplateResponse"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -3919,6 +3853,73 @@
       },
       "type": "object"
     },
+    "LogAnalyticsDataConnectionProperties": {
+      "properties": {
+        "apiKey": {
+          "description": "log analytics api key",
+          "type": "string"
+        },
+        "workspaceId": {
+          "description": "log analytics workspace id",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ObservationPageResponse": {
+      "properties": {
+        "nextLink": {
+          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
+          "type": "string"
+        },
+        "totalElements": {
+          "description": "The total number of items available in the full result set.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/ObservationResponse"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ObservationResponse": {
+      "description": "The items in the current page of results.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "none"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ObservationResponseSeverity"
+          }
+        },
+        "type": {
+          "enum": [
+            "cve",
+            "insight"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ObservationResponseType"
+          }
+        }
+      },
+      "type": "object"
+    },
     "ObservedBoolean": {
       "properties": {
         "count": {
@@ -4775,49 +4776,21 @@
     },
     "SavedFilterPageResponse": {
       "properties": {
-        "content": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/SavedFilterResponse"
-          },
-          "type": "array"
-        },
-        "first": {
-          "description": "Whether or not this is the first page of results.",
-          "type": "boolean"
-        },
-        "last": {
-          "description": "Whether or not this is the last page of results.",
-          "type": "boolean"
-        },
         "nextLink": {
           "description": "The link to access the next page of results.  Not set if at the end of the result set.",
           "type": "string"
-        },
-        "number": {
-          "description": "The page number requested.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfElements": {
-          "description": "The number of items in the current page of results.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "size": {
-          "description": "The page size requested.",
-          "format": "int32",
-          "type": "integer"
         },
         "totalElements": {
           "description": "The total number of items available in the full result set.",
           "format": "int64",
           "type": "integer"
         },
-        "totalPages": {
-          "description": "The total number of pages available in the full result set.",
-          "format": "int32",
-          "type": "integer"
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/SavedFilterResponse"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -5236,49 +5209,21 @@
     },
     "TaskPageResponse": {
       "properties": {
-        "content": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/TaskResponse"
-          },
-          "type": "array"
-        },
-        "first": {
-          "description": "Whether or not this is the first page of results.",
-          "type": "boolean"
-        },
-        "last": {
-          "description": "Whether or not this is the last page of results.",
-          "type": "boolean"
-        },
         "nextLink": {
           "description": "The link to access the next page of results.  Not set if at the end of the result set.",
           "type": "string"
-        },
-        "number": {
-          "description": "The page number requested.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfElements": {
-          "description": "The number of items in the current page of results.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "size": {
-          "description": "The page size requested.",
-          "format": "int32",
-          "type": "integer"
         },
         "totalElements": {
           "description": "The total number of items available in the full result set.",
           "format": "int64",
           "type": "integer"
         },
-        "totalPages": {
-          "description": "The total number of pages available in the full result set.",
-          "format": "int32",
-          "type": "integer"
+        "value": {
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/TaskResponse"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -5549,6 +5494,74 @@
         }
       ],
       "x-ms-discriminator-value": "sslCert"
+    },
+    "LogAnalyticsDataConnectionResponse": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogAnalyticsDataConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectionResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "logAnalytics"
+    },
+    "LogAnalyticsDataConnectionRequest": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogAnalyticsDataConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectionRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "logAnalytics"
+    },
+    "AzureDataExplorerDataConnectionResponse": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDataExplorerDataConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectionResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "azureDataExplorer"
+    },
+    "AzureDataExplorerDataConnectionRequest": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDataExplorerDataConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectionRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "azureDataExplorer"
     }
   },
   "securityDefinitions": {
