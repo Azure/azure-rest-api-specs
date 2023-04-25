@@ -4,7 +4,7 @@
     "workspaceId": "1c4dc0fd-695f-4608-b956-e5bad47b67ef",
     "body": {
       "sourcesystem": "TestSource",
-      "value": [
+      "indicators": [
         {
           "type": "indicator",
           "spec_version": "2.1",
@@ -59,14 +59,17 @@
   "responses": {
     "200": {
       "body": {
-        "errors": [
-          {
-            "recordIndex": 1,
-            "errorMessages": [
-              "Error for Property=id: Required property is missing. Actual value: NULL."
-            ]
-          }
-        ]
+        "error": {
+          "code": "UploadIndicatorsValidationErrors",
+          "message": "Some or all of the provided indicators failed to upload because of validation errors.",
+          "details": [
+            {
+              "recordIndex": 1,
+              "message": "Error for Property=id: Required property is missing. Actual value: NULL.",
+              "code": "IndicatorValidationError"
+            }
+          ]
+        }
       }
     },
     "400": {

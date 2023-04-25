@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/{workspaceId}/threatintelligence:upload-indicators": {
+    "/workspaces/{workspaceId}/threat-intelligence/indicators:upload": {
       "post": {
         "x-ms-examples": {
           "Upload Threat Intelligence indicators": {
@@ -94,11 +94,11 @@
       "type": "object",
       "properties": {
         "sourcesystem": {
-          "description": "Source system name cannot be Microsoft Sentinel.",
+          "description": "Source of the indicators to be uploaded. Source system name cannot be Microsoft Sentinel.",
           "type": "string"
         },
-        "value": {
-          "description": "The value param is an array of STIX indictors. Indicators need to be in STIX format (STIX Indicator documentation). Indicators need to contain the “ID” field. We only support Stix 2.0 and 2.1 format.",
+        "indicators": {
+          "description": "The indicators param is an array of STIX indictors. Indicators need to be in STIX format (STIX Indicator documentation). Indicators need to contain the “ID” field. We only support Stix 2.0 and 2.1 format.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JsonPropertyBag"
@@ -107,33 +107,49 @@
       }
     },
     "UploadIndicatorsResponse": {
-      "description": "Schema for API response.",
       "type": "object",
       "properties": {
-        "errors": {
-          "description": "List of indicator validation errors",
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Server defined code for the error",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        },
+        "details": {
+          "description": "Details of the error. Contains list of indicator validation errors",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UploadIndicatorsValidationError"
+            "$ref": "#/definitions/IndicatorValidationError"
           }
         }
       }
     },
-    "UploadIndicatorsValidationError": {
+    "IndicatorValidationError": {
       "description": "Object that stores a list of errors encountered when executing the Upload Indicators operation.",
       "type": "object",
       "properties": {
+        "code": {
+          "description": "Server defined code for the error",
+          "type": "string"
+        },
         "recordIndex": {
           "format": "int64",
           "description": "Index of the indicator in indicators array from request.",
           "type": "integer"
         },
-        "errorMessages": {
-          "description": "List of error messages.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "message": {
+          "description": "Error message",
+          "type": "string"
         }
       }
     }
