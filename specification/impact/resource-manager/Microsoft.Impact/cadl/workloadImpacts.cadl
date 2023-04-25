@@ -36,7 +36,22 @@ model Performance {
 	expected?: float64;
 	@doc("Observed value for the metric")
 	actual?: float64;
+  @doc("Max and Min Threshold values for the metric")
+  expectedValueRange?:ExpectedValueRange;
+  @doc("Unit of the metric ex: Bytes, Percentage, Count, Seconds, Milliseconds, Bytes/Second, Count/Second, etc.., Other")
+  unit?:MetricUnit;
+
 }
+
+@doc("Max and Min Threshold values for the metric")
+model ExpectedValueRange {
+	@doc("Min threshold value for the metric")
+	min: float64;
+	@doc("Max threshold value for the metric")
+	max: float64;  
+}
+
+
 
 @doc("Details about the connectivity issue. Applicable only for connectivity type of impacts.")
 model Connectivity {
@@ -186,6 +201,22 @@ enum Protocol {
   RDP,
   FTP,
   SSH,
+  Other
+}
+
+@doc("List of unit of the metric.")
+enum MetricUnit {
+  ByteSeconds,
+  Bytes,
+  BytesPerSecond,
+  Cores,
+  Count,
+  CountPerSecond,
+  MilliCores,
+  MilliSeconds,
+  NanoCores,
+  Percent,
+  Seconds,
   Other
 }
 
