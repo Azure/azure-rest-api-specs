@@ -116,7 +116,7 @@ namespace Azure.Messaging.EventGrid {
   }
    
   @doc("Details of the LockTokens information. This is used for both Acknowledge and Release operation response.")
-  model LockTokensResult {
+  model AcknowledgeResult {
     @doc("Array of LockToken values for failed cloud events.")
     failedLockTokens: FailedLockToken[];
 
@@ -124,9 +124,24 @@ namespace Azure.Messaging.EventGrid {
     succeededLockTokens: string[];
   }
 
-  @doc("Lock token input formatting.")
-  model LockTokens {
-    @doc("LockTokens")
+  @doc("Details of the LockTokens information. This is used for both Acknowledge and Release operation response.")
+  model ReleaseResult {
+    @doc("Array of LockToken values for failed cloud events.")
+    failedLockTokens: FailedLockToken[];
+
+    @doc("Array of LockToken values for succeeded cloud events.")
+    succeededLockTokens: string[];
+  }
+
+  @doc("Array of lock token strings for the corresponding received Cloud Events to be released.")
+  model ReleaseOptions {
+    @doc("String array of lock tokens.")
+    lockTokens: string[];
+  }
+
+  @doc("Array of lock token strings for the corresponding received Cloud Events to be acknowledged.")
+  model AcknowledgeOptions {
+    @doc("String array of lock tokens.")
     lockTokens: string[];
   }
 
@@ -202,10 +217,10 @@ namespace Azure.Messaging.EventGrid {
     @path
     eventSubscriptionName: string;
 
-    @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
+    @doc("AcknowledgeOptions.")
     @body
-    lockTokens: LockTokens;
-  }, LockTokensResult >;
+    lockTokens: AcknowledgeOptions;
+  }, AcknowledgeResult >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
   
@@ -224,8 +239,8 @@ namespace Azure.Messaging.EventGrid {
     @path
     eventSubscriptionName: string;
 
-    @doc("Array of LockTokens for the corresponding received Cloud Events to be released.")
+    @doc("ReleaseOptions")
     @body    
-    lockTokens : LockTokens;
-  }, LockTokensResult >;
+    lockTokens : ReleaseOptions;
+  }, ReleaseResult >;
 }
