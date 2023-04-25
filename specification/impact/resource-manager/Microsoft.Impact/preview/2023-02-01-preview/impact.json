@@ -431,6 +431,26 @@
       },
       "description": "ARM error code and error message associated with the impact"
     },
+    "ExpectedValueRange": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "Min threshold value for the metric"
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "Max threshold value for the metric"
+        }
+      },
+      "description": "Max and Min Threshold values for the metric",
+      "required": [
+        "min",
+        "max"
+      ]
+    },
     "IPAddress": {
       "type": "object",
       "properties": {
@@ -545,6 +565,28 @@
         "modelAsString": true
       }
     },
+    "MetricUnit": {
+      "type": "string",
+      "description": "List of unit of the metric.",
+      "enum": [
+        "ByteSeconds",
+        "Bytes",
+        "BytesPerSecond",
+        "Cores",
+        "Count",
+        "CountPerSecond",
+        "MilliCores",
+        "MilliSeconds",
+        "NanoCores",
+        "Percent",
+        "Seconds",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "MetricUnit",
+        "modelAsString": true
+      }
+    },
     "Performance": {
       "type": "object",
       "properties": {
@@ -561,6 +603,14 @@
           "type": "number",
           "format": "double",
           "description": "Observed value for the metric"
+        },
+        "expectedValueRange": {
+          "$ref": "#/definitions/ExpectedValueRange",
+          "description": "Max and Min Threshold values for the metric"
+        },
+        "unit": {
+          "$ref": "#/definitions/MetricUnit",
+          "description": "Unit of the metric ex: Bytes, Percentage, Count, Seconds, Milliseconds, Bytes/Second, Count/Second, etc.., Other"
         }
       },
       "description": "Details about impacted performance metrics. Applicable for performance related impact"
