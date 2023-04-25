@@ -8,11 +8,7 @@ enum ServiceApiVersions {
 }
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[{
-    type: OAuth2FlowType.implicit,
-    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    scopes: ["https://eventgrid.azure.net/.default"],
-  }]>
+  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">
 )
 
 @service({
