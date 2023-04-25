@@ -190,7 +190,7 @@ model ChatCompletions {
     Token limits and other settings may limit the number of choices generated.
     """)
     @projectedName("json", "choices")
-    choices?: ChatChoice[];
+    choices: ChatChoice[];
 
     @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
