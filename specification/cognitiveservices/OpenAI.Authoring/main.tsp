@@ -20,9 +20,6 @@ using TypeSpec.Versioning;
     }]>)
 @service({title: "Azure OpenAI API"})
 @versioned(Azure.OpenAI.Versions)
-@versionedDependency(
-  [[Azure.OpenAI.Versions.v2022_06_01_preview, Azure.Core.Versions.v1_0_Preview_1]]
-)
 @server(
   "{endpoint}/openai",
   "API for managing and utilizing Azure Open AI endpoints",
@@ -38,5 +35,6 @@ https://westus.api.cognitive.microsoft.com).
 namespace Azure.OpenAI;
 
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_06_01_preview: "2022-06-01-preview",
 }
