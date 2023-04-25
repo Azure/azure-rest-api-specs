@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2022-09-01",
+    "version": "2022-11-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -1342,6 +1342,68 @@
         "x-ms-examples": {
           "Volumes_BreakFileLocks": {
             "$ref": "examples/Volumes_BreakFileLocks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/getGroupIdListForLdapUser": {
+      "post": {
+        "tags": [
+          "Group Id List for LDAP User"
+        ],
+        "summary": " Get Group Id List for LDAP User",
+        "description": "Returns the list of group Ids for a specific LDAP User",
+        "operationId": "Volumes_GetGroupIdListForLDAPUser",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Returns group Id list for a specific LDAP user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/getGroupIdListForLDAPUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getGroupIdListForLDAPUserResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "GetGroupIdListForUser": {
+            "$ref": "examples/GroupIdListForLDAPUser.json"
           }
         }
       }
@@ -4484,7 +4546,11 @@
             "Default",
             "T1",
             "T2",
-            "T1AndT2"
+            "AcrossT2",
+            "T1AndT2",
+            "T1AndAcrossT2",
+            "T2AndAcrossT2",
+            "T1AndT2AndAcrossT2"
           ],
           "x-ms-enum": {
             "name": "RegionStorageToNetworkProximity",
@@ -4503,8 +4569,24 @@
                 "description": "Standard T2 network connectivity."
               },
               {
+                "value": "AcrossT2",
+                "description": "Standard AcrossT2 network connectivity."
+              },
+              {
                 "value": "T1AndT2",
                 "description": "Standard T1 and T2 network connectivity."
+              },
+              {
+                "value": "T1AndAcrossT2",
+                "description": "Standard T1 and AcrossT2 network connectivity."
+              },
+              {
+                "value": "T2AndAcrossT2",
+                "description": "Standard T2 and AcrossT2 network connectivity."
+              },
+              {
+                "value": "T1AndT2AndAcrossT2",
+                "description": "Standard T1, T2 and AcrossT2 network connectivity."
               }
             ]
           },
@@ -5566,7 +5648,8 @@
           "enum": [
             "Default",
             "T1",
-            "T2"
+            "T2",
+            "AcrossT2"
           ],
           "readOnly": true,
           "x-ms-enum": {
@@ -5584,6 +5667,10 @@
               {
                 "value": "T2",
                 "description": "Standard T2 storage to network connectivity."
+              },
+              {
+                "value": "AcrossT2",
+                "description": "Standard AcrossT2 storage to network connectivity."
               }
             ]
           },
@@ -5642,7 +5729,7 @@
         "snapshotDirectoryVisible": {
           "type": "boolean",
           "default": true,
-          "description": "If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots (default to true)."
+          "description": "If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots (defaults to true)."
         },
         "kerberosEnabled": {
           "type": "boolean",
@@ -5732,6 +5819,12 @@
           "type": "number",
           "x-nullable": true,
           "example": 128.22
+        },
+        "actualThroughputMibps": {
+          "type": "number",
+          "description": "Actual throughput in MiB/s for auto qosType volumes calculated based on size and serviceLevel",
+          "example": 164.221,
+          "readOnly": true
         },
         "encryptionKeySource": {
           "description": "Source of key used to encrypt data in volume. Applicable if NetApp account has encryption.keySource = 'Microsoft.KeyVault'. Possible values (case-insensitive) are: 'Microsoft.NetApp, Microsoft.KeyVault'",
@@ -5962,6 +6055,14 @@
           "description": "Specifies whether volume is a Large Volume or Regular Volume.",
           "example": false,
           "default": false
+        },
+        "originatingResourceId": {
+          "title": "Originating Resource Id",
+          "type": "string",
+          "description": "Id of the snapshot or backup that the volume is restored from.",
+          "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
@@ -7291,6 +7392,38 @@
           "format": "int64",
           "readOnly": true,
           "description": "Displays the total bytes transferred"
+        }
+      }
+    },
+    "getGroupIdListForLDAPUserRequest": {
+      "description": "Get group Id list for LDAP User request",
+      "type": "object",
+      "required": [
+        "username"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "username is required to fetch the group to which user is part of",
+          "maxLength": 255,
+          "minLength": 1
+        }
+      }
+    },
+    "getGroupIdListForLDAPUserResponse": {
+      "description": "Group Id list for Ldap user",
+      "type": "object",
+      "properties": {
+        "groupIdsForLdapUser": {
+          "description": "Group Id list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "123",
+            "224"
+          ]
         }
       }
     },
