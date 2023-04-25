@@ -73,6 +73,66 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/reservations": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "x-ms-examples": {
+          "ReservationsListByBillingProfile": {
+            "$ref": "./examples/reservationsListByBillingProfile.json"
+          }
+        },
+        "operationId": "Reservations_ListByBillingProfile",
+        "description": "Lists the reservations for a billing profile and the roll up counts of reservations group by provisioning state.",
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/RefreshSummaryParameter"
+          },
+          {
+            "$ref": "#/parameters/SelectedStateParameter"
+          },
+          {
+            "$ref": "#/parameters/TakeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}": {
       "get": {
         "summary": "Get Reservation details in the billing account.",
