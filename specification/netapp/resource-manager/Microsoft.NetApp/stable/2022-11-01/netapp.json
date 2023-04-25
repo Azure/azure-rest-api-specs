@@ -1353,7 +1353,7 @@
         ],
         "summary": " Get Group Id List for LDAP User",
         "description": "Returns the list of group Ids for a specific LDAP User",
-        "operationId": "Volumes_GetGroupIdListForLDAPUser",
+        "operationId": "GetGroupIds_ListByVolume",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -6476,6 +6476,10 @@
           "minimum": 7,
           "maximum": 63,
           "format": "int32"
+        },
+        "snapshotDirectoryVisible": {
+          "type": "boolean",
+          "description": "If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots."
         }
       }
     },
