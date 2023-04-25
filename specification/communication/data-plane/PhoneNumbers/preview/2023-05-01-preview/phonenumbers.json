@@ -844,6 +844,54 @@
           }
         }
       }
+    },
+    "/operatorInformation/:search": {
+      "post": {
+        "tags": [
+          "Obtain operator information for recipient numbers"
+        ],
+        "summary": "Endpoint for retrieving operator information for a set of phone numbers.\r\nThis includes the mnc, mcc, and number type which can be used to determine a number’s capabilities",
+        "operationId": "OperatorInformation_Search",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "The phone number(s) whose operator information should be looked up",
+            "schema": {
+              "$ref": "#/definitions/OperatorInformationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperatorInformationResult"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Search for operator information on phone numbers": {
+            "$ref": "./examples/SearchOperatorInformation.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1415,6 +1463,80 @@
         },
         "nextLink": {
           "description": "Represents the URL link to the next page of phone number results.",
+          "type": "string"
+        }
+      }
+    },
+    "OperatorInformationRequest": {
+      "description": "Represents a search request for operator information about phone numbers",
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "description": "Phone numbers to search for operator information",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperatorInformationResult": {
+      "description": "Represents a search result containing operator information for phone numbers",
+      "type": "object",
+      "properties": {
+        "results": {
+          "description": "Results of the search, this array will have one entry per requested phone number with the relevant operator information for each",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperatorInformation"
+          }
+        }
+      }
+    },
+    "OperatorInformation": {
+      "description": "Represents metadata about a phone number that is controlled/provided by the phone number's operator.",
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "description": "E.164 formatted string representation of the phone number",
+          "type": "string"
+        },
+        "numberType": {
+          "description": "Type of service associated with the phone number",
+          "enum": [
+            "geographic",
+            "mobile",
+            "paging",
+            "freePhone",
+            "specialServices",
+            "testNumber",
+            "voip"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperatorNumberType",
+            "modelAsString": true
+          }
+        },
+        "operatorDetails": {
+          "$ref": "#/definitions/OperatorDetails"
+        }
+      }
+    },
+    "OperatorDetails": {
+      "description": "Represents metadata describing the operator of a phone number",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the phone operator",
+          "type": "string"
+        },
+        "mobileNetworkCode": {
+          "description": "Mobile Network Code",
+          "type": "string"
+        },
+        "mobileCountryCode": {
+          "description": "Mobile Country Code",
           "type": "string"
         }
       }
