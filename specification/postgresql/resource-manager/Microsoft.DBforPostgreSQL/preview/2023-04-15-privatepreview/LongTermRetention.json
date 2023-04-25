@@ -63,7 +63,7 @@
             "description": "Request body for operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackupRequest"
+              "$ref": "#/definitions/LtrBackupRequest"
             }
           },
           {
@@ -78,7 +78,7 @@
           "200": {
             "description": "Ok. API finished synchronously with Success.",
             "schema": {
-              "$ref": "#/definitions/BackupResponse"
+              "$ref": "#/definitions/LtrBackupResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -181,7 +181,7 @@
           "200": {
             "description": "Ok. API finished synchronously with Success.",
             "schema": {
-              "$ref": "#/definitions/PreBackupResponse"
+              "$ref": "#/definitions/LtrPreBackupResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -234,7 +234,7 @@
         }
       }
     },
-    "BackupRequest": {
+    "LtrBackupRequest": {
       "description": "The request that is made for a backup.",
       "type": "object",
       "allOf": [
@@ -284,7 +284,7 @@
         }
       }
     },
-    "PreBackupResponseProperties": {
+    "LtrPreBackupResponseProperties": {
       "description": "Response for the pre-backup request.",
       "type": "object",
       "required": [
@@ -298,7 +298,7 @@
         }
       }
     },
-    "BackupResponseProperties": {
+    "LtrBackupResponseProperties": {
       "description": "Response for the backup request.",
       "type": "object",
       "required": [
@@ -323,7 +323,7 @@
         }
       }
     },
-    "BackupResponse": {
+    "LtrBackupResponse": {
       "description": "Response for the LTR backup API call",
       "type": "object",
       "required": [
@@ -372,7 +372,7 @@
         "properties": {
           "description": "AdditionalProperties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BackupResponseProperties"
+          "$ref": "#/definitions/LtrBackupResponseProperties"
         },
         "percentComplete": {
           "description": "PercentageCompleted",
@@ -383,7 +383,7 @@
         }
       }
     },
-    "PreBackupResponse": {
+    "LtrPreBackupResponse": {
       "description": "Response for the LTR pre-backup API call",
       "type": "object",
       "required" : ["properties"],
@@ -391,7 +391,7 @@
         "properties": {
           "description": "Additional Properties for the pre backup response",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PreBackupResponseProperties"
+          "$ref": "#/definitions/LtrPreBackupResponseProperties"
         }
       }
     }
