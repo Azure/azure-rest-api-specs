@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-02-01-preview"
+    "version": "2023-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1309,6 +1309,18 @@
         "useCustomVnet": {
           "type": "boolean",
           "description": "For new clusters, this parameter indicates that it uses Bring your own VNet, but the subnet is specified at node type level; and for such clusters, the subnetId property is required for node types."
+        },
+        "publicIPPrefixId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPPrefixes"
+              }
+            ]
+          },
+          "description": "Specify the resource id of a public IP prefix that the load balancer will allocate a public IP address from. Only supports IPv4."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -1929,7 +1941,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-02-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-03-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

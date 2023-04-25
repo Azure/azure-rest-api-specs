@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2023-02-01-preview"
+    "version": "2023-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -412,6 +412,9 @@
           },
           "Put node type with shared galleries custom vm image": {
             "$ref": "./examples/NodeTypePutOperationCustomSharedGalleriesImage_example.json"
+          },
+          "Put node type with vm image plan ": {
+            "$ref": "./examples/NodeTypePutOperationVmImagePlan_example.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1002,7 +1005,7 @@
           "type": "boolean",
           "description": "Specifies whether each node is allocated its own public IP address. This is only supported on secondary node types with custom Load Balancers."
         },
-        "VmSharedGalleryImageId": {
+        "vmSharedGalleryImageId": {
           "type": "string",
           "format": "arm-id",
           "x-ms-arm-id-details": {
@@ -1016,6 +1019,22 @@
             ]
           },
           "description": "Indicates the resource id of the vm shared galleries image. This parameter is used for custom vm image."
+        },
+        "natGatewayId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/natGateways"
+              }
+            ]
+          },
+          "description": "Specifies the resource id of a NAT Gateway to attach to the subnet of this node type. Node type must use custom load balancer."
+        },
+        "vmImagePlan": {
+          "$ref": "#/definitions/VmImagePlan",
+          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use. In the Azure portal, find the marketplace image that you want to use and then click Want to deploy programmatically, Get Started ->. Enter any required information and then click Save."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1242,6 +1261,28 @@
         }
       },
       "description": "Specifies set of certificates that should be installed onto the virtual machines."
+    },
+    "VmImagePlan": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The promotion code."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        }
+      },
+      "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use. In the Azure portal, find the marketplace image that you want to use and then click Want to deploy programmatically, Get Started ->. Enter any required information and then click Save."
     },
     "VmManagedIdentity": {
       "type": "object",
@@ -1647,7 +1688,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-02-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-03-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
