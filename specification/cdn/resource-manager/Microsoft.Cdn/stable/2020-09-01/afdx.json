@@ -4747,7 +4747,8 @@
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
-          "exclusiveMinimum": false
+          "exclusiveMinimum": false,
+          "default": 80
         },
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
@@ -4756,7 +4757,8 @@
           "format": "int32",
           "exclusiveMaximum": false,
           "minimum": 1,
-          "exclusiveMinimum": false
+          "exclusiveMinimum": false,
+          "default": 443
         },
         "originHostHeader": {
           "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint",
@@ -5050,7 +5052,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AFDEndpointProtocols"
-          }
+          },
+          "default": [
+            "Http",
+            "Https"
+          ]
         },
         "patternsToMatch": {
           "description": "The route patterns of the rule.",
@@ -5089,7 +5095,8 @@
           "x-ms-enum": {
             "name": "ForwardingProtocol",
             "modelAsString": true
-          }
+          },
+          "default": "MatchRequest"
         },
         "linkToDefaultDomain": {
           "description": "whether this route will be linked to the default endpoint domain.",
@@ -5101,7 +5108,8 @@
           "x-ms-enum": {
             "name": "LinkToDefaultDomain",
             "modelAsString": true
-          }
+          },
+          "default": "Disabled"
         },
         "httpsRedirect": {
           "description": "Whether to automatically redirect HTTP traffic to HTTPS traffic. Note that this is a easy way to set up this rule and it will be the first rule that gets executed.",
@@ -5113,7 +5121,8 @@
           "x-ms-enum": {
             "name": "httpsRedirect",
             "modelAsString": true
-          }
+          },
+          "default": "Disabled"
         },
         "enabledState": {
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
@@ -5219,7 +5228,8 @@
           "x-ms-enum": {
             "name": "MatchProcessingBehavior",
             "modelAsString": true
-          }
+          },
+          "default": "Continue"
         }
       }
     },

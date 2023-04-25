@@ -356,8 +356,8 @@
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -411,8 +411,8 @@
           "description": "Lists files before the value (inclusive) based on file/folder names’ lexicographical order. Applies under the folderPath in data set, and filter files/sub-folders under the folderPath. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
-          "type": "boolean",
-          "description": "Indicates whether to enable partition discovery."
+          "type": "object",
+          "description": "Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean)."
         },
         "partitionRootPath": {
           "type": "object",
@@ -1010,8 +1010,8 @@
       ],
       "properties": {
         "expiryDateTime": {
-          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: integer (or Expression with resultType integer).",
-          "type": "object"
+          "type": "object",
+          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -4786,8 +4786,8 @@
       ],
       "properties": {
         "copyBehavior": {
-          "description": "The type of copy behavior for copy sink.",
-          "type": "object"
+          "type": "object",
+          "description": "The type of copy behavior for copy sink. Type: string (or Expression with resultType string)."
         },
         "enableAdlsSingleFileParallel": {
           "description": "Single File Parallel.",
@@ -4805,8 +4805,8 @@
       ],
       "properties": {
         "copyBehavior": {
-          "description": "The type of copy behavior for copy sink.",
-          "type": "object"
+          "type": "object",
+          "description": "The type of copy behavior for copy sink. Type: string (or Expression with resultType string)."
         },
         "metadata": {
           "type": "array",
@@ -7176,8 +7176,12 @@
           "type": "string"
         },
         "value": {
-          "description": "Value to be set. Could be a static value or Expression",
+          "description": "Value to be set. Could be a static value or Expression.",
           "type": "object"
+        },
+        "setSystemVariable": {
+          "description": "If set to true, it sets the pipeline run return value.",
+          "type": "boolean"
         }
       }
     },

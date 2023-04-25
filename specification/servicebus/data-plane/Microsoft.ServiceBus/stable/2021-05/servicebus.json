@@ -104,7 +104,7 @@
       ],
       "x-ms-enum": {
         "name": "AccessRights",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "AuthorizationRule": {
@@ -341,7 +341,7 @@
       ],
       "x-ms-enum": {
         "name": "EntityAvailabilityStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "EntityStatus": {
@@ -364,7 +364,7 @@
       ],
       "x-ms-enum": {
         "name": "EntityStatus",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "MessageCountDetails": {
@@ -441,7 +441,7 @@
       ],
       "x-ms-enum": {
         "name": "MessagingSku",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "NamespaceProperties": {
@@ -519,7 +519,7 @@
         },
         "title": {
           "description": "The name of the namespace.",
-          "type": "string",
+          "type": "object",
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           }
@@ -606,7 +606,7 @@
         "maxSizeInMegabytes": {
           "description": "The maximum size of the queue in megabytes, which is the size of memory allocated for the queue.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxSizeInMegabytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -805,7 +805,7 @@
         "maxMessageSizeInKilobytes": {
           "description": "The maximum size in kilobytes of message payload that can be accepted by the queue.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxMessageSizeInKilobytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -835,7 +835,7 @@
         },
         "title": {
           "description": "The name of the queue",
-          "type": "string",
+          "type": "object",
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           }
@@ -1019,7 +1019,7 @@
         "maxSizeInMegabytes": {
           "description": "The maximum size of the topic in megabytes, which is the size of memory allocated for the topic.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxSizeInMegabytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1184,7 +1184,7 @@
         "maxMessageSizeInKilobytes": {
           "description": "The maximum size in kilobytes of message payload that can be accepted by the topic.",
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "xml": {
             "name": "MaxMessageSizeInKilobytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1214,7 +1214,7 @@
         },
         "title": {
           "description": "The name of the topic",
-          "type": "string",
+          "type": "object",
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           }
@@ -1484,7 +1484,7 @@
         },
         "title": {
           "description": "The name of the subscription",
-          "type": "string",
+          "type": "object",
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           }
@@ -1891,7 +1891,7 @@
         },
         "title": {
           "description": "The name of the rule",
-          "type": "string",
+          "type": "object",
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           }

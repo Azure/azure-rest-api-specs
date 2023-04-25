@@ -1,0 +1,37 @@
+parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-csharp/"
+  "service-directory-name":
+    default: "translation"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "../data-plane/Azure.AI.TextTranslation"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "./examples"
+    output-file: openapi.json
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: true
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+    model-namespace: false
+    namespace: Azure.AI.Translation.Text
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-name: "azure-ai-translation-text"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-translation-text"
+    namespace: com.azure.ai.translation.text
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-translation-text-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/ai-translation-text"
+      description: "Microsoft Translation Text"
