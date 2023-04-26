@@ -2580,7 +2580,7 @@
         "tags": [
           "SessionHostManagement"
         ],
-        "operationId": "UpdateSessionHosts_Post",
+        "operationId": "InitiateSessionHostUpdate_Post",
         "description": "Initiates a hostpool update or schedule an update for the future. When validateOnly is true this will only run validations and return warnings and errors.",
         "x-ms-examples": {
           "HostPools_Update_Post": {
@@ -2802,7 +2802,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Filter based on the type of sessionHostManagement operation. Valid values are 'UpdateSessionHosts' and 'ValidateSessionHostUpdate'"
+            "description": "Filter based on the type of sessionHostManagement operation. Valid values are 'InitiateSessionHostUpdate' and 'ValidateSessionHostUpdate'"
           },
           {
             "name": "isNonTerminal",
@@ -5674,7 +5674,7 @@
     },
     "SessionHostManagementOperationType": {
       "enum": [
-        "UpdateSessionHosts",
+        "InitiateSessionHostUpdate",
         "ValidateSessionHostUpdate"
       ],
       "type": "string",
