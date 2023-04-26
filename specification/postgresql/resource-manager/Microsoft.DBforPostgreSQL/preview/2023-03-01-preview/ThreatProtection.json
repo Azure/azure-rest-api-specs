@@ -70,6 +70,9 @@
           "Get a server's Advanced Threat Protection settings": {
             "$ref": "./examples/ServerThreatProtectionSettingsListByServer.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -94,25 +97,14 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "name": "threatProtectionName",
-            "in": "path",
-            "description": "The name of the Threat Protection state.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Default"
-            ],
-            "x-ms-enum": {
-              "name": "ThreatProtectionName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/ThreatProtectionNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved the server threat protection settings.",
             "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionSettings"
+              "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
             }
           },
           "default": {
@@ -145,25 +137,14 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "name": "threatProtectionName",
-            "in": "path",
-            "description": "The name of the server's Threat Protection state.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Default"
-            ],
-            "x-ms-enum": {
-              "name": "ThreatProtectionName",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/ThreatProtectionNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully set the server Threat Protection settings.",
             "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionSettings"
+              "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
             }
           },
           "default": {
@@ -172,11 +153,14 @@
           "201": {
             "description": "Successfully created the server Threat Protection settings.",
             "schema": {
-              "$ref": "#/definitions/ServerThreatProtectionSettings"
+              "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
             }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Update a server's Threat Protection settings with minimal parameters": {
             "$ref": "./examples/ServerThreatProtectionSettingsCreateMin.json"
@@ -216,7 +200,7 @@
         }
       }
     },
-    "ServerThreatProtectionSettings": {
+    "ServerThreatProtectionSettingsModel": {
       "description": "Server's Threat Protection settings.",
       "type": "object",
       "allOf": [
@@ -245,7 +229,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerThreatProtectionSettings"
+            "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
           },
           "readOnly": true
         },
@@ -257,5 +241,22 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ThreatProtectionNameParameter": {
+      "name": "threatProtectionName",
+      "in": "path",
+      "description": "The name of the Threat Protection state.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "ThreatProtectionName",
+        "modelAsString": true
+      },
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
