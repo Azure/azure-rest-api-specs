@@ -338,10 +338,10 @@ enum AllocationState {
 
 enum PoolIdentityType {
   @doc("Batch pool has user assigned identities with it.")
-  "UserAssigned",
+  UserAssigned,
 
   @doc("Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities.")
-  "None",
+  None,
 }
 
 enum ComputeNodeDeallocationOption {
@@ -393,7 +393,7 @@ enum TaskState {
 
 enum TaskAddStatus {
   @doc("The Task was added successfully.")
-  Success: "Success",
+  Success: "success",
 
   @doc("The Task failed to add due to a client error and should not be retried without modifying the request as appropriate.")
   ClientError: "clienterror",
@@ -511,13 +511,13 @@ enum DisableComputeNodeSchedulingOption {
 
 enum StatusLevelTypes {
   @doc("")
-  "Error",
+  Error,
 
   @doc("")
-  "Info",
+  Info,
 
   @doc("")
-  "Warning",
+  Warning,
 }
 
 @doc("The result of listing the applications available in an Account.")
@@ -530,16 +530,12 @@ model ApplicationListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
-@resource("applications")
 model Application {
   @doc("A string that uniquely identifies the application within the Account.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key("applicationId")
   id: string;
 
   @doc("The display name for the application.")
@@ -593,23 +589,19 @@ model PoolListUsageMetricsResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
-@resource("poolusagemetrics")
 model PoolUsageMetrics {
   @doc("The ID of the Pool whose metrics are aggregated in this entry.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   poolId: string;
 
   @doc("The start time of the aggregation interval covered by this entry.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("The end time of the aggregation interval covered by this entry.")
-  endTime: zonedDateTime;
+  endTime: utcDateTime;
 
   @doc("""
 For information about available sizes of virtual machines in Pools, see Choose
@@ -632,20 +624,16 @@ model AccountListSupportedImagesResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("""
 A reference to the Azure Virtual Machines Marketplace Image and additional
 information about the Image.
 """)
-@resource("supportedimages")
 model ImageInformation {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   @projectedName("python", "node_agent_sku_id")
   nodeAgentSKUId: string;
 
@@ -670,7 +658,7 @@ other features in the Azure Batch service.
 The time when the Azure Batch service will stop accepting create Pool requests
 for the Image.
 """)
-  batchSupportEndOfLife?: zonedDateTime;
+  batchSupportEndOfLife?: utcDateTime;
 
   @doc("""
 Whether the Azure Batch service actively verifies that the Image is compatible
@@ -727,18 +715,15 @@ model PoolNodeCountsListResult {
   @items
   value?: PoolNodeCounts[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("The number of Compute Nodes in each state for a Pool.")
-@resource("nodecounts")
 model PoolNodeCounts {
   @doc("The ID of the Pool.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   poolId: string;
 
   @doc("The number of Compute Nodes in each Compute Node state.")
@@ -781,7 +766,7 @@ model NodeCounts {
   leavingPool: int32;
 
   @doc("The number of Compute Nodes in the unknown state.")
-  "unknown": int32;
+  `unknown`: int32;
 
   @doc("The number of Compute Nodes in the unusable state.")
   unusable: int32;
@@ -796,19 +781,16 @@ model NodeCounts {
 @doc("Contains utilization and resource usage statistics for the lifetime of a Pool.")
 model PoolStatistics {
   @doc("The URL for the statistics.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: utcDateTime;
 
   @doc("Statistics related to Pool usage information.")
   usageStats?: UsageStatistics;
@@ -820,13 +802,13 @@ to the range between startTime and lastUpdateTime.
 @doc("Statistics related to Pool usage information.")
 model UsageStatistics {
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: utcDateTime;
 
   @doc("""
 The aggregated wall-clock time of the dedicated Compute Node cores being part
@@ -835,22 +817,23 @@ of the Pool.
   dedicatedCoreTime: duration;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Statistics related to resource consumption by Compute Nodes in a Pool.")
 model ResourceStatistics {
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: utcDateTime;
 
   @doc("""
 The average CPU usage across all Compute Nodes in the Pool (percentage per
 node).
 """)
-  @projectedName("python","avg_cpu_percentage")
+  @projectedName("python", "avg_cpu_percentage")
   avgCPUPercentage: float32;
 
   @doc("The average memory usage in GiB across all Compute Nodes in the Pool.")
@@ -896,22 +879,20 @@ the Pool.
   networkWriteGiB: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Job.")
 model JobStatistics {
   @doc("The URL of the statistics.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: utcDateTime;
 
   @doc("""
 The total user mode CPU time (summed across all cores and all Compute Nodes)
@@ -994,7 +975,7 @@ digits.
 
   @doc("The time at which the Certificate entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: utcDateTime;
 
   @doc("This property is not set if the Certificate is in its initial active state.")
   @visibility("read")
@@ -1002,7 +983,7 @@ digits.
 
   @doc("This property is not set if the Certificate is in its initial Active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: utcDateTime;
 
   @doc("The public part of the Certificate as a base-64 encoded .cer file.")
   @visibility("read")
@@ -1013,12 +994,15 @@ digits.
   deleteCertificateError?: DeleteCertificateError;
 
   @doc("The base64-encoded contents of the Certificate. The maximum size is 10KB.")
-  data?: string;
+  @visibility("create")
+  data: string;
 
   @doc("The format of the Certificate data.")
+  @visibility("create")
   certificateFormat?: CertificateFormat;
 
   @doc("This must be omitted if the Certificate format is cer.")
+  @visibility("create")
   password?: string;
 }
 
@@ -1060,9 +1044,10 @@ model CertificateListResult {
   @items
   value?: Certificate[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("""
@@ -1075,9 +1060,10 @@ model NodeFileListResult {
   @items
   value?: NodeFile[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("Information about a file or directory on a Compute Node.")
@@ -1098,10 +1084,10 @@ model NodeFile {
 @doc("The properties of a file on a Compute Node.")
 model FileProperties {
   @doc("The creation time is not returned for files on Linux Compute Nodes.")
-  creationTime?: zonedDateTime;
+  creationTime?: utcDateTime;
 
   @doc("The time at which the file was last modified.")
-  lastModified: zonedDateTime;
+  lastModified: utcDateTime;
 
   @doc("The length of the file.")
   contentLength: int32;
@@ -1119,11 +1105,11 @@ specification used to create each Job.
 """)
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
-  @visibility("create")
+  @visibility("read", "create")
   id?: string;
 
   @doc("The display name for the schedule.")
-  @visibility("create")
+  @visibility("read", "create")
   displayName?: string;
 
   @doc("The URL of the Job Schedule.")
@@ -1145,11 +1131,11 @@ specification or recurrence information, changed. It does not factor in
 job-level changes such as new Jobs being created or Jobs changing state.
 """)
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: utcDateTime;
 
   @doc("The creation time of the Job Schedule.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: utcDateTime;
 
   @doc("The state of the Job Schedule.")
   @visibility("read")
@@ -1157,7 +1143,7 @@ job-level changes such as new Jobs being created or Jobs changing state.
 
   @doc("The time at which the Job Schedule entered the current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: utcDateTime;
 
   @doc("This property is not present if the Job Schedule is in its initial active state.")
   @visibility("read")
@@ -1165,7 +1151,7 @@ job-level changes such as new Jobs being created or Jobs changing state.
 
   @doc("This property is not present if the Job Schedule is in its initial active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: utcDateTime;
 
   @doc("""
 All times are fixed respective to UTC and are not impacted by daylight saving
@@ -1203,14 +1189,14 @@ model Schedule {
 If you do not specify a doNotRunUntil time, the schedule becomes ready to
 create Jobs immediately.
 """)
-  doNotRunUntil?: zonedDateTime;
+  doNotRunUntil?: utcDateTime;
 
   @doc("""
 If you do not specify a doNotRunAfter time, and you are creating a recurring
 Job Schedule, the Job Schedule will remain active until you explicitly
 terminate it.
 """)
-  doNotRunAfter?: zonedDateTime;
+  doNotRunAfter?: utcDateTime;
 
   @doc("""
 If a Job is not created within the startWindow interval, then the 'opportunity'
@@ -1347,25 +1333,10 @@ use of user code.
 @doc("The network configuration for the Job.")
 model JobNetworkConfiguration {
   @doc("""
-The virtual network must be in the same region and subscription as the Azure
-Batch Account. The specified subnet should have enough free IP addresses to
-accommodate the number of Compute Nodes which will run Tasks from the Job. This
-can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch'
-service principal must have the 'Classic Virtual Machine Contributor'
-Role-Based Access Control (RBAC) role for the specified VNet so that Azure
-Batch service can schedule Tasks on the Nodes. This can be verified by checking
-if the specified VNet has any associated Network Security Groups (NSG). If
-communication to the Nodes in the specified subnet is denied by an NSG, then
-the Batch service will set the state of the Compute Nodes to unusable. This is
-of the form
-/subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.
-If the specified VNet has any associated Network Security Groups (NSG), then a
-few reserved system ports must be enabled for inbound communication from the
-Azure Batch service. For Pools created with a Virtual Machine configuration,
-enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for
-Windows. Port 443 is also required to be open for outbound connections for
-communications to Azure Storage. For more details see:
-https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
+The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor'
+Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is
+of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a
+few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
 """)
   subnetId: string;
 }
@@ -1418,8 +1389,7 @@ checkpointing.
 """)
 model JobManagerTask {
   @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens
-and underscores and cannot contain more than 64 characters.
+The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters.
 """)
   id: string;
 
@@ -1648,9 +1618,7 @@ a compute node will use.
 }
 
 @doc("""
-On every file uploads, Batch service writes two log files to the compute node,
-'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn
-more about a specific failure.
+On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure.
 """)
 model OutputFile {
   @doc("""
@@ -1826,10 +1794,7 @@ service operations.
 """)
 model AuthenticationTokenSettings {
   @doc("""
-The authentication token grants access to a limited set of Batch service
-operations. Currently the only supported value for the access property is
-'job', which grants access to all operations related to the Job which contains
-the Task.
+The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.
 """)
   access?: AccessScope[];
 }
@@ -1863,13 +1828,7 @@ running Tasks is to use some form of checkpointing.
 """)
 model JobPreparationTask {
   @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens
-and underscores and cannot contain more than 64 characters. If you do not
-specify this property, the Batch service assigns a default value of
-'jobpreparation'. No other Task in the Job can have the same ID as the Job
-Preparation Task. If you try to submit a Task with the same id, the Batch
-service rejects the request with error code TaskIdSameAsJobPreparationTask; if
-you are calling the REST API directly, the HTTP status code is 409 (Conflict).
+The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).
 """)
   id?: string;
 
@@ -1962,13 +1921,7 @@ specified on the Pool.
 """)
 model JobReleaseTask {
   @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens
-and underscores and cannot contain more than 64 characters. If you do not
-specify this property, the Batch service assigns a default value of
-'jobrelease'. No other Task in the Job can have the same ID as the Job Release
-Task. If you try to submit a Task with the same id, the Batch service rejects
-the request with error code TaskIdSameAsJobReleaseTask; if you are calling the
-REST API directly, the HTTP status code is 409 (Conflict).
+The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).
 """)
   id?: string;
 
@@ -2093,13 +2046,7 @@ a VM size for Compute Nodes in an Azure Batch Pool
   vmSize: string;
 
   @doc("""
-This property must be specified if the Pool needs to be created with Azure PaaS
-VMs. This property and virtualMachineConfiguration are mutually exclusive and
-one of the properties must be specified. If neither is specified then the Batch
-service returns an error; if you are calling the REST API directly, the HTTP
-status code is 400 (Bad Request). This property cannot be specified if the
-Batch Account was created with its poolAllocationMode property set to
-'UserSubscription'.
+This property must be specified if the Pool needs to be created with Azure PaaS VMs. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.
 """)
   cloudServiceConfiguration?: CloudServiceConfiguration;
 
@@ -2216,11 +2163,7 @@ reimaged. There is a maximum of 10 Package references on any given Pool.
   applicationPackageReferences?: ApplicationPackageReference[];
 
   @doc("""
-The list of application licenses must be a subset of available Batch service
-application licenses. If a license is requested which is not supported, Pool
-creation will fail. The permitted licenses available on the Pool are 'maya',
-'vray', '3dsmax', 'arnold'. An additional charge applies for each application
-license added to the Pool.
+The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail. The permitted licenses available on the Pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the Pool.
 """)
   applicationLicenses?: string[];
 
@@ -2267,6 +2210,7 @@ the specified OS family.
   osVersion?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
 The configuration for Compute Nodes in a Pool based on the Azure Virtual
 Machines infrastructure.
@@ -2360,6 +2304,7 @@ model WindowsConfiguration {
   enableAutomaticUpdates?: boolean;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
 Settings which will be used by the data disks associated to Compute Nodes in
 the Pool. When using attached data disks, you need to mount and format the
@@ -2381,7 +2326,7 @@ https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-window
   caching?: CachingType;
 
   @doc("The initial disk size in gigabytes.")
-  @projectedName("python","disk_size_gb")
+  @projectedName("python", "disk_size_gb")
   diskSizeGB: int32;
 
   @doc("If omitted, the default is \"standard_lrs\".")
@@ -2434,6 +2379,7 @@ specified, Batch will use the regional policy.
   policy?: NodePlacementPolicyType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The configuration for virtual machine extensions.")
 model VMExtension {
   @doc("The name of the virtual machine extension.")
@@ -2471,6 +2417,7 @@ provisioned.
   provisionAfterExtensions?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Settings for the operating system disk of the compute node (VM).")
 model OSDisk {
   @doc("""
@@ -2486,13 +2433,8 @@ compute node (VM).
 """)
 model DiffDiskSettings {
   @doc("""
-This property can be used by user in the request to choose the location e.g.,
-cache disk space for Ephemeral OS disk provisioning. For more information on
-Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size
-requirements for Windows VMs at
-https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements
-and Linux VMs at
-https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.
+  This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at
+https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements. 
 """)
   placement?: DiffDiskPlacement;
 }
@@ -2503,29 +2445,20 @@ model TaskSchedulingPolicy {
   nodeFillType: ComputeNodeFillType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The network configuration for a Pool.")
 model NetworkConfiguration {
   @doc("""
-The virtual network must be in the same region and subscription as the Azure
-Batch Account. The specified subnet should have enough free IP addresses to
-accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have
-enough free IP addresses, the Pool will partially allocate Nodes and a resize
-error will occur. The 'MicrosoftAzureBatch' service principal must have the
-'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for
-the specified VNet. The specified subnet must allow communication from the
-Azure Batch service to be able to schedule Tasks on the Nodes. This can be
-verified by checking if the specified VNet has any associated Network Security
-Groups (NSG). If communication to the Nodes in the specified subnet is denied
-by an NSG, then the Batch service will set the state of the Compute Nodes to
-unusable. For Pools created with virtualMachineConfiguration only ARM virtual
-networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools
-created with cloudServiceConfiguration both ARM and classic virtual networks
-are supported. If the specified VNet has any associated Network Security Groups
-(NSG), then a few reserved system ports must be enabled for inbound
-communication. For Pools created with a virtual machine configuration, enable
-ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows.
-For Pools created with a cloud service configuration, enable ports 10100,
-20100, and 30100. Also enable outbound connections to Azure Storage on port
+The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to
+accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize
+error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for
+the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be
+verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied
+by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual
+networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks
+are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound
+communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows.
+For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port
 443. For more details see:
 https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
 """)
@@ -2548,6 +2481,7 @@ virtualMachineConfiguration property.
   publicIPAddressConfiguration?: PublicIPAddressConfiguration;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The endpoint configuration for a Pool.")
 model PoolEndpointConfiguration {
   @doc("""
@@ -2560,6 +2494,7 @@ NoPublicIPAddresses.
   inboundNATPools: InboundNATPool[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
 A inbound NAT Pool that can be used to address specific ports on Compute Nodes
 in a Batch Pool externally.
@@ -2643,6 +2578,7 @@ status code 400. The default value is '*'.
   sourcePortRanges?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
 model PublicIPAddressConfiguration {
   @doc("The default value is BatchManaged.")
@@ -2899,6 +2835,7 @@ one must be specified.
   identityReference?: ComputeNodeIdentityReference;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Information used to connect to an NFS file system.")
 model NFSMountConfiguration {
   @doc("The URI of the file system to mount.")
@@ -2966,7 +2903,7 @@ This property is meaningful only if the schedule is in the active state when
 the time comes around. For example, if the schedule is disabled, no Job will be
 created at nextRunTime unless the Job is enabled before then.
 """)
-  nextRunTime?: zonedDateTime;
+  nextRunTime?: utcDateTime;
 
   @doc("""
 This property is present only if the at least one Job has run under the
@@ -2975,7 +2912,7 @@ schedule.
   recentJob?: RecentJob;
 
   @doc("This property is set only if the Job Schedule is in the completed state.")
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 }
 
 @doc("Information about the most recent Job to run under the Job Schedule.")
@@ -2987,19 +2924,20 @@ model RecentJob {
   url?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Job Schedule.")
 model JobScheduleStatistics {
   @doc("The URL of the statistics.")
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: utcDateTime;
 
   @doc("""
 The total user mode CPU time (summed across all cores and all Compute Nodes)
@@ -3079,9 +3017,10 @@ model BatchJobScheduleListResult {
   @items
   value?: BatchJobSchedule[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("An Azure Batch Job.")
@@ -3090,17 +3029,18 @@ model BatchJob {
 The ID is case-preserving and case-insensitive (that is, you may not have two
 IDs within an Account that differ only by case).
 """)
+@visibility("read", "create")
   id?: string;
 
   @doc("The display name for the Job.")
-  @visibility("create")
+  @visibility("read", "create")
   displayName?: string;
 
   @doc("""
 Whether Tasks in the Job can define dependencies on each other. The default is
 false.
 """)
-  @visibility("create")
+@visibility("read", "create")
   usesTaskDependencies?: boolean;
 
   @doc("The URL of the Job.")
@@ -3122,11 +3062,11 @@ priority, changed. It does not factor in task-level changes such as adding new
 Tasks or Tasks changing state.
 """)
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: utcDateTime;
 
   @doc("The creation time of the Job.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: utcDateTime;
 
   @doc("The state of the Job.")
   @visibility("read")
@@ -3134,7 +3074,7 @@ Tasks or Tasks changing state.
 
   @doc("The time at which the Job entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: utcDateTime;
 
   @doc("This property is not set if the Job is in its initial Active state.")
   @visibility("read")
@@ -3142,7 +3082,7 @@ Tasks or Tasks changing state.
 
   @doc("This property is not set if the Job is in its initial Active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: utcDateTime;
 
   @doc("""
 Priority values can range from -1000 to 1000, with -1000 being the lowest
@@ -3193,28 +3133,28 @@ to tolerate being interrupted and restarted without causing any corruption or
 duplicate data. The best practice for long running Tasks is to use some form of
 checkpointing.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   jobManagerTask?: JobManagerTask;
 
   @doc("""
 The Job Preparation Task is a special Task run on each Compute Node before any
 other Task of the Job.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   jobPreparationTask?: JobPreparationTask;
 
   @doc("""
 The Job Release Task is a special Task run at the end of the Job on each
 Compute Node that has run any other Task of the Job.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   jobReleaseTask?: JobReleaseTask;
 
   @doc("""
 Individual Tasks can override an environment setting specified here by
 specifying the same setting name with a different value.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("Specifies how a Job should be assigned to a Pool.")
@@ -3229,11 +3169,11 @@ if the Task completes with a non-zero exit code after exhausting its retry
 count, or if there was an error starting the Task, for example due to a
 resource file download error. The default is noaction.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   onTaskFailure?: OnTaskFailure;
 
   @doc("The network configuration for the Job.")
-  @visibility("create")
+  @visibility("read", "create")
   networkConfiguration?: JobNetworkConfiguration;
 
   @doc("""
@@ -3259,10 +3199,10 @@ of statistics. The typical delay is about 30 minutes.
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
 model JobExecutionInformation {
   @doc("This is the time at which the Job was created.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("This property is set only if the Job is in the completed state.")
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 
   @doc("""
 This element contains the actual Pool where the Job is assigned. When you get
@@ -3323,8 +3263,7 @@ model BatchJobDisableParameters {
 @doc("Options when terminating a Job.")
 model BatchJobTerminateParameters {
   @doc("""
-The text you want to appear as the Job's TerminateReason. The default is
-'UserTerminate'.
+The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'.
 """)
   terminateReason?: string;
 }
@@ -3336,9 +3275,10 @@ model BatchJobListResult {
   @items
   value?: BatchJob[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("""
@@ -3351,9 +3291,10 @@ model BatchJobListPreparationAndReleaseTaskStatusResult {
   @items
   value?: JobPreparationAndReleaseTaskExecutionInformation[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("The status of the Job Preparation and Job Release Tasks on a Compute Node.")
@@ -3386,10 +3327,10 @@ model JobPreparationTaskExecutionInformation {
 If the Task has been restarted or retried, this is the most recent time at
 which the Task started running.
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("This property is set only if the Task is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 
   @doc("The current state of the Job Preparation Task on the Compute Node.")
   state: JobPreparationTaskState;
@@ -3436,7 +3377,7 @@ the Task has been restarted for reasons other than retry; for example, if the
 Compute Node was rebooted during a retry, then the startTime is updated but the
 lastRetryTime is not.
 """)
-  lastRetryTime?: zonedDateTime;
+  lastRetryTime?: utcDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -3493,10 +3434,10 @@ model JobReleaseTaskExecutionInformation {
 If the Task has been restarted or retried, this is the most recent time at
 which the Task started running.
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("This property is set only if the Task is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 
   @doc("The current state of the Job Release Task on the Compute Node.")
   state: JobReleaseTaskState;
@@ -3539,9 +3480,6 @@ failureInfo property.
 @doc("The Task and TaskSlot counts for a Job.")
 model TaskCountsResult {
   @doc("The Task counts for a Job.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   taskCounts: TaskCounts;
 
   @doc("The TaskSlot counts for a Job.")
@@ -3593,19 +3531,16 @@ model TaskSlotCounts {
 @doc("A Pool in the Azure Batch service.")
 model BatchPool {
   @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens
-and underscores, and cannot contain more than 64 characters. The ID is
-case-preserving and case-insensitive (that is, you may not have two IDs within
-an Account that differ only by case).
+The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).
 """)
-  @visibility("create")
+  @visibility("read", "create")
   id?: string;
 
   @doc("""
 The display name need not be unique and can contain any Unicode characters up
 to a maximum length of 1024.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   displayName?: string;
 
   @doc("The URL of the Pool.")
@@ -3627,11 +3562,11 @@ targetDedicatedNodes or enableAutoscale settings, changed. It does not factor
 in node-level changes such as a Compute Node changing state.
 """)
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: utcDateTime;
 
   @doc("The creation time of the Pool.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: utcDateTime;
 
   @doc("The current state of the Pool.")
   @visibility("read")
@@ -3639,7 +3574,7 @@ in node-level changes such as a Compute Node changing state.
 
   @doc("The time at which the Pool entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: utcDateTime;
 
   @doc("Whether the Pool is resizing.")
   @visibility("read")
@@ -3647,37 +3582,34 @@ in node-level changes such as a Compute Node changing state.
 
   @doc("The time at which the Pool entered its current allocation state.")
   @visibility("read")
-  allocationStateTransitionTime?: zonedDateTime;
+  allocationStateTransitionTime?: utcDateTime;
 
   @doc("""
 For information about available sizes of virtual machines in Pools, see Choose
 a VM size for Compute Nodes in an Azure Batch Pool
 (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
 """)
-  @visibility("create")
+  @visibility("read", "create")
   vmSize?: string;
 
   @doc("""
-This property and virtualMachineConfiguration are mutually exclusive and one of
-the properties must be specified. This property cannot be specified if the
-Batch Account was created with its poolAllocationMode property set to
-'UserSubscription'.
+This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   cloudServiceConfiguration?: CloudServiceConfiguration;
 
   @doc("""
 This property and cloudServiceConfiguration are mutually exclusive and one of
 the properties must be specified.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   @doc("""
 This is the timeout for the most recent resize operation. (The initial sizing
 when the Pool is created counts as a resize.) The default value is 15 minutes.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   resizeTimeout?: duration;
 
   @doc("""
@@ -3699,11 +3631,11 @@ count.
   currentLowPriorityNodes?: int32;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool.")
-  @visibility("create")
+  @visibility("read", "create")
   targetDedicatedNodes?: int32;
 
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool.")
-  @visibility("create")
+  @visibility("read", "create")
   targetLowPriorityNodes?: int32;
 
   @doc("""
@@ -3711,21 +3643,21 @@ If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must
 be specified. If true, the autoScaleFormula property is required and the Pool
 automatically resizes according to the formula. The default value is false.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   enableAutoScale?: boolean;
 
   @doc("""
 This property is set only if the Pool automatically scales, i.e.
 enableAutoScale is true.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   autoScaleFormula?: string;
 
   @doc("""
 This property is set only if the Pool automatically scales, i.e.
 enableAutoScale is true.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   autoScaleEvaluationInterval?: duration;
 
   @doc("""
@@ -3740,11 +3672,11 @@ This imposes restrictions on which Compute Nodes can be assigned to the Pool.
 Specifying this value can reduce the chance of the requested number of Compute
 Nodes to be allocated in the Pool.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   enableInterNodeCommunication?: boolean;
 
   @doc("The network configuration for a Pool.")
-  @visibility("create")
+  @visibility("read", "create")
   networkConfiguration?: NetworkConfiguration;
 
   @doc("""
@@ -3783,26 +3715,24 @@ reimaged. There is a maximum of 10 Package references on any given Pool.
   applicationPackageReferences?: ApplicationPackageReference[];
 
   @doc("""
-The list of application licenses must be a subset of available Batch service
-application licenses. If a license is requested which is not supported, Pool
-creation will fail.
+The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   applicationLicenses?: string[];
 
   @doc("""
 The default value is 1. The maximum value is the smaller of 4 times the number
 of cores of the vmSize of the pool or 256.
 """)
-  @visibility("create")
+  @visibility("read", "create")
   taskSlotsPerNode?: int32;
 
   @doc("If not specified, the default is spread.")
-  @visibility("create")
+  @visibility("read", "create")
   taskSchedulingPolicy?: TaskSchedulingPolicy;
 
   @doc("The list of user Accounts to be created on each Compute Node in the Pool.")
-  @visibility("create")
+  @visibility("read", "create")
   userAccounts?: UserAccount[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata.")
@@ -3818,7 +3748,7 @@ of statistics. The typical delay is about 30 minutes.
   stats?: PoolStatistics;
 
   @doc("This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
-  @visibility("create")
+  @visibility("read", "create")
   mountConfiguration?: MountConfiguration[];
 
   @doc("""
@@ -3832,7 +3762,7 @@ dictionary key references will be ARM resource ids in the form:
   @doc("If omitted, the default value is Default.")
   targetNodeCommunicationMode?: NodeCommunicationMode;
 
-  @doc("Determines how a pool communicates with the Batch service.")
+  @doc("The current state of the pool communication mode.")
   @visibility("read")
   currentNodeCommunicationMode?: NodeCommunicationMode;
 }
@@ -3858,10 +3788,7 @@ in a user interface.
 @doc("The results and errors from an execution of a Pool autoscale formula.")
 model AutoScaleRun {
   @doc("The time at which the autoscale formula was last evaluated.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
-  timestamp: zonedDateTime;
+  timestamp: utcDateTime;
 
   @doc("""
 Each variable value is returned in the form $variable=value, and variables are
@@ -3929,9 +3856,10 @@ model BatchPoolListResult {
   @items
   value?: BatchPool[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("Options for enabling automatic scaling on a Pool.")
@@ -3967,7 +3895,7 @@ Pool'. For more information about specifying this formula, see Automatically
 scale Compute Nodes in an Azure Batch Pool
 (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling).
 """)
-  autoScaleFormula: string;
+  autoScaleFormula?: string;
 }
 
 @doc("Options for changing the size of a Pool.")
@@ -4018,15 +3946,16 @@ for long running Tasks is to use some form of checkpointing.
 """)
 model BatchTask {
   @doc("""
-The ID can contain any combination of alphanumeric characters including hyphens
-and underscores, and cannot contain more than 64 characters.
+The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.
 """)
+  @visibility("read","create")
   id?: string;
 
   @doc("""
 The display name need not be unique and can contain any Unicode characters up
 to a maximum length of 1024.
 """)
+  @visibility("read","create")
   displayName?: string;
 
   @doc("The URL of the Task.")
@@ -4044,11 +3973,11 @@ modified the Task in the meantime.
 
   @doc("The last modified time of the Task.")
   @visibility("read")
-  lastModified?: zonedDateTime;
+  lastModified?: utcDateTime;
 
   @doc("The creation time of the Task.")
   @visibility("read")
-  creationTime?: zonedDateTime;
+  creationTime?: utcDateTime;
 
   @doc("How the Batch service should respond when the Task completes.")
   exitConditions?: ExitConditions;
@@ -4059,7 +3988,7 @@ modified the Task in the meantime.
 
   @doc("The time at which the Task entered its current state.")
   @visibility("read")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: utcDateTime;
 
   @doc("This property is not set if the Task is in its initial Active state.")
   @visibility("read")
@@ -4067,7 +3996,7 @@ modified the Task in the meantime.
 
   @doc("This property is not set if the Task is in its initial Active state.")
   @visibility("read")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: utcDateTime;
 
   @doc("""
 For multi-instance Tasks, the command line is executed as the primary Task,
@@ -4081,6 +4010,7 @@ file paths, it should use a relative path (relative to the Task working
 directory), or use the Batch provided environment variable
 (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
 """)
+  @visibility("read","create")
   commandLine?: string;
 
   @doc("""
@@ -4242,9 +4172,7 @@ code is 400 (Bad Request).
   jobAction?: JobAction;
 
   @doc("""
-Possible values are 'satisfy' (allowing dependent tasks to progress) and
-'block' (dependent tasks continue to wait). Batch does not yet support
-cancellation of dependent tasks.
+Possible values are 'satisfy' (allowing dependent tasks to progress) and 'block' (dependent tasks continue to wait). Batch does not yet support cancellation of dependent tasks.
 """)
   dependencyAction?: DependencyAction;
 }
@@ -4287,10 +4215,10 @@ started downloading or deploying these. If the Task has been restarted or
 retried, this is the most recent time at which the Task started running. This
 property is present only for Tasks that are in the running or completed state.
 """)
-  startTime?: zonedDateTime;
+  startTime?: utcDateTime;
 
   @doc("This property is set only if the Task is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 
   @doc("""
 This property is set only if the Task is in the completed state. In general,
@@ -4326,7 +4254,7 @@ different if the Task has been restarted for reasons other than retry; for
 example, if the Compute Node was rebooted during a retry, then the startTime is
 updated but the lastRetryTime is not.
 """)
-  lastRetryTime?: zonedDateTime;
+  lastRetryTime?: utcDateTime;
 
   @doc("""
 When the user removes Compute Nodes from a Pool (by resizing/shrinking the
@@ -4337,7 +4265,7 @@ many times the Task has been requeued for these reasons.
   requeueCount: int32;
 
   @doc("This property is set only if the requeueCount is nonzero.")
-  lastRequeueTime?: zonedDateTime;
+  lastRequeueTime?: utcDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -4401,19 +4329,20 @@ Application Packages, or Docker Containers.
   commonResourceFiles?: ResourceFile[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Resource usage statistics for a Task.")
 model TaskStatistics {
   @doc("The URL of the statistics.")
   url: string;
 
   @doc("The start time of the time range covered by the statistics.")
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 The time at which the statistics were last updated. All statistics are limited
 to the range between startTime and lastUpdateTime.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: utcDateTime;
 
   @doc("""
 The total user mode CPU time (summed across all cores and all Compute Nodes)
@@ -4496,9 +4425,10 @@ model BatchTaskListResult {
   @items
   value?: BatchTask[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
 @doc("A collection of Azure Batch Tasks to add.")
@@ -4535,7 +4465,7 @@ in the meantime.
   eTag?: string;
 
   @doc("The last modified time of the Task.")
-  lastModified?: zonedDateTime;
+  lastModified?: utcDateTime;
 
   @doc("The URL of the Task, if the Task was successfully added.")
   location?: string;
@@ -4563,10 +4493,10 @@ The time at which the subtask started running. If the subtask has been
 restarted or retried, this is the most recent time at which the subtask started
 running.
 """)
-  startTime?: zonedDateTime;
+  startTime?: utcDateTime;
 
   @doc("This property is set only if the subtask is in the Completed state.")
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 
   @doc("""
 This property is set only if the subtask is in the completed state. In general,
@@ -4592,13 +4522,13 @@ a failure.
   state?: SubtaskState;
 
   @doc("The time at which the subtask entered its current state.")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: utcDateTime;
 
   @doc("This property is not set if the subtask is in its initial running state.")
   previousState?: SubtaskState;
 
   @doc("This property is not set if the subtask is in its initial running state.")
-  previousStateTransitionTime?: zonedDateTime;
+  previousStateTransitionTime?: utcDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -4619,13 +4549,10 @@ model ComputeNodeUser {
 If omitted, the default is 1 day from the current time. For Linux Compute
 Nodes, the expiryTime has a precision up to a day.
 """)
-  expiryTime?: zonedDateTime;
+  expiryTime?: utcDateTime;
 
   @doc("""
-The password is required for Windows Compute Nodes (those created with
-'cloudServiceConfiguration', or created with 'virtualMachineConfiguration'
-using a Windows Image reference). For Linux Compute Nodes, the password can
-optionally be specified along with the sshPublicKey property.
+The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.
 """)
   password?: string;
 
@@ -4642,11 +4569,7 @@ request; if you are calling the REST API directly, the HTTP status code is 400
 @doc("The set of changes to be made to a user Account on a Compute Node.")
 model NodeUpdateUserParameters {
   @doc("""
-The password is required for Windows Compute Nodes (those created with
-'cloudServiceConfiguration', or created with 'virtualMachineConfiguration'
-using a Windows Image reference). For Linux Compute Nodes, the password can
-optionally be specified along with the sshPublicKey property. If omitted, any
-existing password is removed.
+The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.
 """)
   password?: string;
 
@@ -4654,7 +4577,7 @@ existing password is removed.
 If omitted, the default is 1 day from the current time. For Linux Compute
 Nodes, the expiryTime has a precision up to a day.
 """)
-  expiryTime?: zonedDateTime;
+  expiryTime?: utcDateTime;
 
   @doc("""
 The public key should be compatible with OpenSSH encoding and should be base 64
@@ -4689,17 +4612,17 @@ Compute Node becomes available.
   schedulingState?: SchedulingState;
 
   @doc("The time at which the Compute Node entered its current state.")
-  stateTransitionTime?: zonedDateTime;
+  stateTransitionTime?: utcDateTime;
 
   @doc("This property may not be present if the Compute Node state is unusable.")
-  lastBootTime?: zonedDateTime;
+  lastBootTime?: utcDateTime;
 
   @doc("""
 This is the time when the Compute Node was initially allocated and doesn't
 change once set. It is not updated when the Compute Node is service healed or
 preempted.
 """)
-  allocationTime?: zonedDateTime;
+  allocationTime?: utcDateTime;
 
   @doc("""
 Every Compute Node that is added to a Pool is assigned a unique IP address.
@@ -4840,14 +4763,14 @@ model StartTaskInformation {
 This value is reset every time the Task is restarted or retried (that is, this
 is the most recent time at which the StartTask started running).
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 This is the end time of the most recent run of the StartTask, if that run has
 completed (even if that run failed and a retry is pending). This element is not
 present if the StartTask is currently running.
 """)
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 
   @doc("""
 This property is set only if the StartTask is in the completed state. In
@@ -4883,7 +4806,7 @@ different if the Task has been restarted for reasons other than retry; for
 example, if the Compute Node was rebooted during a retry, then the startTime is
 updated but the lastRetryTime is not.
 """)
-  lastRetryTime?: zonedDateTime;
+  lastRetryTime?: utcDateTime;
 
   @doc("""
 If the value is 'failed', then the details of the failure can be found in the
@@ -4916,6 +4839,7 @@ model ComputeNodeEndpointConfiguration {
   inboundEndpoints: InboundEndpoint[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("An inbound endpoint on a Compute Node.")
 model InboundEndpoint {
   @doc("The name of the endpoint.")
@@ -4954,7 +4878,7 @@ https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.
 This is the most recent time that the Compute Node agent was updated to a new
 version.
 """)
-  lastUpdateTime: zonedDateTime;
+  lastUpdateTime: utcDateTime;
 }
 
 @doc("Info about the current state of the virtual machine.")
@@ -4985,12 +4909,10 @@ model NodeDisableSchedulingParameters {
   nodeDisableSchedulingOption?: DisableComputeNodeSchedulingOption;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The remote login settings for a Compute Node.")
 model ComputeNodeGetRemoteLoginSettingsResult {
   @doc("The IP address used for remote login to the Compute Node.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   @projectedName("python", "remote_login_ip_address")
   remoteLoginIPAddress: string;
 
@@ -5014,7 +4936,7 @@ means that the operation might retrieve more logs than have been requested
 since the entire log file is always uploaded, but the operation should not
 retrieve fewer logs than have been requested.
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 Any log file containing a log message in the time range will be uploaded. This
@@ -5023,22 +4945,18 @@ since the entire log file is always uploaded, but the operation should not
 retrieve fewer logs than have been requested. If omitted, the default is to
 upload all logs available after the startTime.
 """)
-  endTime?: zonedDateTime;
+  endTime?: utcDateTime;
 
   @doc("The identity must have write access to the Azure Blob Storage container.")
   identityReference?: ComputeNodeIdentityReference;
 }
 
 @doc("The result of uploading Batch service log files from a specific Compute Node.")
-@resource("pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
 model UploadBatchServiceLogsResult {
   @doc("""
 The virtual directory name is part of the blob name for each log file uploaded,
 and it is built based poolId, nodeId and a unique identifier.
 """)
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @visibility("read")
-  @key
   virtualDirectoryName: string;
 
   @doc("The number of log files which will be uploaded.")
@@ -5052,11 +4970,13 @@ model ComputeNodeListResult {
   @items
   value?: ComputeNode[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("The configuration for virtual machine extension instance view.")
 model NodeVMExtension {
   @doc("The provisioning state of the virtual machine extension.")
@@ -5069,6 +4989,7 @@ model NodeVMExtension {
   instanceView?: VMExtensionInstanceView;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The vm extension instance view.")
 model VMExtensionInstanceView {
   @doc("The name of the vm extension instance view.")
@@ -5099,6 +5020,7 @@ model InstanceViewStatus {
   time?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 @doc("The result of listing the Compute Node extensions in a Node.")
 @pagedResult
 model NodeVMExtensionList {
@@ -5108,5 +5030,5 @@ model NodeVMExtensionList {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  "odata.nextLink"?: string;
+  `odata.nextLink`?: string;
 }
