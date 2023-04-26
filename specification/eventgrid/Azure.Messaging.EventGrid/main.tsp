@@ -124,7 +124,7 @@ namespace Azure.Messaging.EventGrid {
     succeededLockTokens: string[];
   }
 
-  @doc("Details of the LockTokens information. This is used for both Acknowledge and Release operation response.")
+  @doc("The result of the Release operation.")
   model ReleaseResult {
     @doc("Array of LockToken values for failed cloud events.")
     failedLockTokens: FailedLockToken[];
