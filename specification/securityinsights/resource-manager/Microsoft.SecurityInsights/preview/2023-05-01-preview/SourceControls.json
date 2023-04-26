@@ -171,49 +171,6 @@
           }
         }
       },
-      "delete": {
-        "x-ms-examples": {
-          "Delete a source control.": {
-            "$ref": "./examples/sourcecontrols/DeleteSourceControl.json"
-          }
-        },
-        "tags": [
-          "SourceControls"
-        ],
-        "description": "Delete a source control.",
-        "operationId": "SourceControls_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/SourceControlIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
       "put": {
         "x-ms-examples": {
           "Creates a source control.": {
@@ -257,6 +214,51 @@
             "schema": {
               "$ref": "#/definitions/SourceControl"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}/delete": {
+      "post": {
+        "x-ms-examples": {
+          "Delete a source control.": {
+            "$ref": "./examples/sourcecontrols/DeleteSourceControl.json"
+          }
+        },
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Delete a source control.",
+        "operationId": "SourceControls_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SourceControlIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -387,6 +389,10 @@
           "description": "Repository metadata.",
           "$ref": "#/definitions/Repository"
         },
+        "servicePrincipal": {
+          "description": "Service principal metadata.",
+          "$ref": "#/definitions/ServicePrincipal"
+        },
         "repositoryResourceInfo": {
           "description": "Information regarding the resources created in user's repository.",
           "$ref": "#/definitions/RepositoryResourceInfo"
@@ -394,6 +400,10 @@
         "lastDeploymentInfo": {
           "description": "Information regarding the latest deployment for the source control.",
           "$ref": "#/definitions/DeploymentInfo"
+        },
+        "pullRequest": {
+          "description": "Information regarding the pull request of the source control.",
+          "$ref": "#/definitions/PullRequest"
         }
       },
       "required": [
@@ -431,6 +441,41 @@
           },
           "type": "array",
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServicePrincipal": {
+      "type": "object",
+      "description": "Service principal metadata.",
+      "properties": {
+        "id": {
+          "description": "Id of service principal.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Tenant id of service principal.",
+          "type": "string"
+        },
+        "appId": {
+          "description": "App id of service principal.",
+          "type": "string"
+        },
+        "passwordExpirationSet": {
+          "description": "Indicates if service principal password expiration has been set.",
+          "type": "boolean"
+        },
+        "passwordExpired": {
+          "description": "Indicates if service principal password has expired.",
+          "type": "boolean"
+        },
+        "passwordExpirationDate": {
+          "description": "Date-time of when service principal password expires.",
+          "type": "string"
+        },
+        "passwordExpirationTimeframe": {
+          "description": "Interval of time in minutes that password is valid for.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -697,6 +742,41 @@
           },
           {
             "value": "Failed"
+          }
+        ]
+      }
+    },
+    "PullRequest": {
+      "description": "Information regarding pull request for protected branches.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "URL of pull request",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/PullRequestState",
+          "description": "State of the pull request",
+          "type": "object"
+        }
+      }
+    },
+    "PullRequestState": {
+      "description": "Status of the pull request.",
+      "enum": [
+        "Open",
+        "Closed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "state",
+        "values": [
+          {
+            "value": "Open"
+          },
+          {
+            "value": "Closed"
           }
         ]
       }
