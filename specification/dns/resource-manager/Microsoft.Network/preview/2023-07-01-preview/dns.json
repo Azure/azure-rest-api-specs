@@ -380,7 +380,10 @@
               "PTR",
               "SOA",
               "SRV",
-              "TXT"
+              "TXT",
+              "TLSA",
+              "DS",
+              "NAPTR"
             ],
             "x-ms-enum": {
               "name": "RecordType",
@@ -490,7 +493,10 @@
               "PTR",
               "SOA",
               "SRV",
-              "TXT"
+              "TXT",
+              "TLSA",
+              "DS",
+              "NAPTR"
             ],
             "x-ms-enum": {
               "name": "RecordType",
@@ -617,7 +623,10 @@
               "PTR",
               "SOA",
               "SRV",
-              "TXT"
+              "TXT",
+              "TLSA",
+              "DS",
+              "NAPTR"
             ],
             "x-ms-enum": {
               "name": "RecordType",
@@ -715,7 +724,10 @@
               "PTR",
               "SOA",
               "SRV",
-              "TXT"
+              "TXT",
+              "TLSA",
+              "DS",
+              "NAPTR"
             ],
             "x-ms-enum": {
               "name": "RecordType",
@@ -807,7 +819,10 @@
               "PTR",
               "SOA",
               "SRV",
-              "TXT"
+              "TXT",
+              "TLSA",
+              "DS",
+              "NAPTR"
             ],
             "x-ms-enum": {
               "name": "RecordType",
@@ -1517,6 +1532,94 @@
       },
       "description": "A CAA record."
     },
+    "Digest": {
+      "properties": {
+        "algorithmType": {
+          "type": "string",
+          "format": "byte",
+          "description": "The digest algorithm type."
+        },
+        "value": {
+          "type": "string",
+          "description": "The digest value."
+        }
+      },
+      "description": "A digest."
+    },
+    "DsRecord": {
+      "properties": {
+        "keyTag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The key tag."
+        },
+        "algorithm": {
+          "type": "string",
+          "format": "byte",
+          "description": "The algorithm."
+        },
+        "digest": {
+          "$ref": "#/definitions/Digest",
+          "description": "The digest."
+        }
+      },
+      "description": "A DS record."
+    },
+    "TlsaRecord": {
+      "properties": {
+        "usage": {
+          "type": "string",
+          "format": "byte",
+          "description": "The usage."
+        },
+        "selector": {
+          "type": "string",
+          "format": "byte",
+          "description": "The selector."
+        },
+        "matchingType": {
+          "type": "string",
+          "format": "byte",
+          "description": "The matchingType."
+        },
+        "certAssociationData": {
+          "type": "string",
+          "description": "The certAssociationData."
+        }
+      },
+      "description": "A TLSA record."
+    },
+    "NaptrRecord": {
+      "properties": {
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The order."
+        },
+        "preference": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The preference."
+        },
+        "flags": {
+          "type": "string",
+          "description": "The flags."
+        },
+        "services": {
+          "type": "string",
+          "description": "The services."
+        },
+        "regexp": {
+          "type": "string",
+          "description": "The regexp."
+        },
+        "replacement": {
+          "type": "string",
+          "description": "The replacement."
+        }
+      },
+      "description": "A NAPTR record."
+    },
     "RecordSetProperties": {
       "properties": {
         "metadata": {
@@ -1617,6 +1720,30 @@
             "$ref": "#/definitions/CaaRecord"
           },
           "description": "The list of CAA records in the record set."
+        },
+        "DSRecords": {
+          "type": "array",
+          "x-ms-client-name": "DsRecords",
+          "items": {
+            "$ref": "#/definitions/DsRecord"
+          },
+          "description": "The list of DS records in the record set."
+        },
+        "TLSARecords": {
+          "type": "array",
+          "x-ms-client-name": "TlsaRecords",
+          "items": {
+            "$ref": "#/definitions/TlsaRecord"
+          },
+          "description": "The list of TLSA records in the record set."
+        },
+        "NAPTRRecords": {
+          "type": "array",
+          "x-ms-client-name": "NaptrRecords",
+          "items": {
+            "$ref": "#/definitions/NaptrRecord"
+          },
+          "description": "The list of NAPTR records in the record set."
         }
       },
       "description": "Represents the properties of the records in the record set."
