@@ -135,7 +135,7 @@ model LatencyList {
 }
 
 @doc("Popular term and it's API count.")
-@resource("topTerms")
+@resource("blocklistTopTerms")
 model TopTermCount {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @key("term")
@@ -160,7 +160,7 @@ model TermList {
 }
 
 @doc("Blocklist hit call counts at a timestamp")
-@resource("hitCalls")
+@resource("blocklistHitCalls")
 model BlockListHitCallsPerTimestamp {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @key("dateTime")
@@ -180,18 +180,18 @@ model Category {
   category: CategoryEnum;
 }
 
-// @doc("Severity and count the API detected.")
-// @resource("severities")
-// @parentResource(Category)
-// model Severity {
-//   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
-//   @doc("The severity the API returned.")
-//   @key("severity")
-//   severity: SeverityEnum;
+@doc("Severity and count the API detected.")
+@resource("severities")
+@parentResource(Category)
+model Severity {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
+  @doc("The severity the API returned.")
+  @key("severity")
+  severity: SeverityEnum;
 
-//   @doc("The count of the severity.")
-//   count: int32;
-// }
+  @doc("The count of the severity.")
+  count: int32;
+}
 
 // @doc("Response of severities.")
 // @pagedResult
@@ -208,7 +208,7 @@ model Category {
 
 @doc("API request count at a timestamp")
 @resource("requestCounts")
-// @parentResource(Severity)
+@parentResource(Severity)
 model RequestCountsPerTimestamp {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @key("dateTime")
@@ -311,93 +311,80 @@ model CommonListQueryParameters {
   ...EndTimeQueryParameter;
 }
 
-@doc("Provides the granularity along with common query parameters for list operations.")
-model TimeGranularityListQueryParameters {
-  ...TopQueryParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
-  ...StartTimeQueryParameter;
-  ...EndTimeQueryParameter;
-  ...TimeGranularityQueryParameter;
-}
-
-@doc("Provides the modality along with common query parameters for list operations.")
-model ModalityQueryParameters {
-  ...TopQueryParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
-  ...StartTimeQueryParameter;
-  ...EndTimeQueryParameter;
-  ...TimeGranularityQueryParameter;
-  ...ContentSafetyVersionQueryParameter;
-  ...ModalityTypeQueryParameter;
-}
-
-@doc("Provides the content safety operation and version info along with common query parameters for list operations.")
-model ApiListQueryParameters {
-  ...TopQueryParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
-  ...StartTimeQueryParameter;
-  ...EndTimeQueryParameter;
-  ...TimeGranularityQueryParameter;
-  ...ContentSafetyOperationQueryParameter;
-  ...ContentSafetyVersionQueryParameter;
-}
-
-@doc("Provides the aggregation query parameter along with common query parameters for list operations.")
-model AggregationListQueryParameters {
-  ...TopQueryParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
-  ...StartTimeQueryParameter;
-  ...EndTimeQueryParameter;
-  ...TimeGranularityQueryParameter;
-  ...ContentSafetyOperationQueryParameter;
-  ...ContentSafetyVersionQueryParameter;
-  ...AggregationQueryParameter;
-}
-
 interface Metrics {
 
-  @route("/metrics/requestCounts")
+  // @route("/metrics/requestCounts")
+  // @summary("List API request counts at different timestamps given a time range.")
+  // @doc("List API request counts at different timestamps given a time range. Default maxpagesize is 1000.")
+  // op listRequestCounts is RpcOperation<
+  //   {
+  //     ...SkipQueryParameter,
+  //     ...TopQueryParameter,
+  //     ...MaxPageSizeQueryParameter,
+  //     ...StartTimeQueryParameter,
+  //     ...EndTimeQueryParameter,
+  //     ...TimeGranularityQueryParameter,
+  //     ...ContentSafetyOperationQueryParameter,
+  //     ...ContentSafetyVersionQueryParameter
+  //   },
+  //   CallList  ,
+  //   ServiceTraits,
+  //   Error
+  // >;
+
+  @route("/metrics")
   @summary("List API request counts at different timestamps given a time range.")
   @doc("List API request counts at different timestamps given a time range. Default maxpagesize is 1000.")
-  op listRequestCounts is RpcOperation<
-    {
+  listRequestCounts is ResourceList<
+    CountPerTimestamp,
+    ListQueryParametersTrait<{
       ...SkipQueryParameter,
       ...TopQueryParameter,
       ...MaxPageSizeQueryParameter,
       ...StartTimeQueryParameter,
       ...EndTimeQueryParameter,
       ...TimeGranularityQueryParameter,
-      ...ContentSafetyOperationQueryParameter,
-      ...ContentSafetyVersionQueryParameter
-    },
-    CallList  ,
-    ServiceTraits,
-    Error
+      ...ContentSafetyVersionQueryParameter,
+      ...ContentSafetyOperationQueryParameter
+    }>
   >;
 
-  @route("/metrics/requestLatencies")
+  @route("/metrics")
   @summary("List API request latencies at different timestamps given a time range.")
   @doc("List API request latencies at different timestamps given a time range. Default maxpagesize is 1000.")
-  op listRequestLatencies is RpcOperation<
-    {
-      ...TopQueryParameter,
-      ...SkipQueryParameter,
-      ...MaxPageSizeQueryParameter,
-      ...StartTimeQueryParameter,
-      ...EndTimeQueryParameter,
-      ...TimeGranularityQueryParameter,
-      ...ContentSafetyOperationQueryParameter,
-      ...ContentSafetyVersionQueryParameter,
-      ...AggregationQueryParameter
-    },
-    LatencyList  ,
-    ServiceTraits,
-    Error
-  >;
+  listRequestLatencies is ResourceList<
+  LatencyPerTimestamp,
+  ListQueryParametersTrait<{
+    ...SkipQueryParameter,
+    ...TopQueryParameter,
+    ...MaxPageSizeQueryParameter,
+    ...StartTimeQueryParameter,
+    ...EndTimeQueryParameter,
+    ...TimeGranularityQueryParameter,
+    ...ContentSafetyVersionQueryParameter,
+    ...ContentSafetyOperationQueryParameter
+  }>
+>;
+
+  // @route("/metrics/requestLatencies")
+  // @summary("List API request latencies at different timestamps given a time range.")
+  // @doc("List API request latencies at different timestamps given a time range. Default maxpagesize is 1000.")
+  // op listRequestLatencies is RpcOperation<
+  //   {
+  //     ...TopQueryParameter,
+  //     ...SkipQueryParameter,
+  //     ...MaxPageSizeQueryParameter,
+  //     ...StartTimeQueryParameter,
+  //     ...EndTimeQueryParameter,
+  //     ...TimeGranularityQueryParameter,
+  //     ...ContentSafetyOperationQueryParameter,
+  //     ...ContentSafetyVersionQueryParameter,
+  //     ...AggregationQueryParameter
+  //   },
+  //   LatencyList  ,
+  //   ServiceTraits,
+  //   Error
+  // >;
 
   // @route("/metrics/categories/{category}/severities")
   // @summary("List severitie distribution， severity and API call count number of a specific category and a specific severity given a time range.")
@@ -438,72 +425,113 @@ interface Metrics {
   // >;
 
   
-  @route("/metrics/categories/{category}/severities/{severity}/requestCounts")
-  @summary("ListAPI request count number of a specific category and a specific severity given a time range.")
-  @doc("List API request count number of a specific category and a specific severity given a time range. Default maxpagesize is 1000.")
-  op listRequestCountsByCategoryAndSeverity is RpcOperation<
-    {
-      @doc("Category.")
-      @path
-      category: CategoryEnum,
-      @doc("Severity, the value could be 0, 2, 4, 6.")
-      @path
-      severity: SeverityEnum,
-      ...TopQueryParameter,
-      ...SkipQueryParameter,
-      ...MaxPageSizeQueryParameter,
-      ...StartTimeQueryParameter,
-      ...EndTimeQueryParameter,
-      ...TimeGranularityQueryParameter,
-      ...ContentSafetyVersionQueryParameter,
-      ...ModalityTypeQueryParameter
-    },
-    CallList  ,
-    ServiceTraits,
-    Error
-  >;
+  // @route("/metrics/categories/{category}/severities/{severity}/requestCounts")
+  // @summary("ListAPI request count number of a specific category and a specific severity given a time range.")
+  // @doc("List API request count number of a specific category and a specific severity given a time range. Default maxpagesize is 1000.")
+  // op listRequestCountsByCategoryAndSeverity is RpcOperation<
+  //   {
+  //     @doc("Category.")
+  //     @path
+  //     category: CategoryEnum,
+  //     @doc("Severity, the value could be 0, 2, 4, 6.")
+  //     @path
+  //     severity: SeverityEnum,
+  //     ...TopQueryParameter,
+  //     ...SkipQueryParameter,
+  //     ...MaxPageSizeQueryParameter,
+  //     ...StartTimeQueryParameter,
+  //     ...EndTimeQueryParameter,
+  //     ...TimeGranularityQueryParameter,
+  //     ...ContentSafetyVersionQueryParameter,
+  //     ...ModalityTypeQueryParameter
+  //   },
+  //   CallList  ,
+  //   ServiceTraits,
+  //   Error
+  // >;
   
-  // @summary("List API request count at different timestamps of a specific category and a specific severity given a time range")
-  // @doc("List API request count at different timestamps of a specific category and a specific severity given a time range")
-  // @route("/contentSafety/metrics")
-  // listTotalCallsByCategoryAndSeverity is ResourceList<
-  //   RequestCountsPerTimestamp,
-  //   ListQueryParametersTrait<ModalityQueryParameters>
+  @summary("List API request count at different timestamps of a specific category and a specific severity given a time range")
+  @doc("List API request count at different timestamps of a specific category and a specific severity given a time range")
+  @route("/metrics")
+  listRequestCountsByCategoryAndSeverity is ResourceList<
+    RequestCountsPerTimestamp,
+    ListQueryParametersTrait<{
+      ...TopQueryParameter,
+          ...SkipQueryParameter,
+          ...MaxPageSizeQueryParameter,
+          ...StartTimeQueryParameter,
+          ...EndTimeQueryParameter,
+          ...TimeGranularityQueryParameter,
+          ...ContentSafetyVersionQueryParameter,
+          ...ModalityTypeQueryParameter
+    }>
+  >;
+
+  // @route("/metrics/blocklistTopTerms")
+  // @summary("List top terms hit in blocklist at different timestamps.")
+  // @doc("List top terms hit in blocklist at different timestamps.")
+  // op listBlocklistTopTerms is RpcOperation<
+  //   {
+  //     ...SkipQueryParameter,
+  //     ...TopQueryParameter,
+  //     ...MaxPageSizeQueryParameter,
+  //     ...StartTimeQueryParameter,
+  //     ...EndTimeQueryParameter,
+  //     ...ContentSafetyVersionQueryParameter,
+  //   },
+  //   TermList  ,
+  //   ServiceTraits,
+  //   Error
   // >;
 
-  @route("/metrics/blocklistTopTerms")
+  @route("/metrics")
   @summary("List top terms hit in blocklist at different timestamps.")
   @doc("List top terms hit in blocklist at different timestamps.")
-  op listBlocklistTopTerms is RpcOperation<
-    {
-      ...SkipQueryParameter,
-      ...TopQueryParameter,
-      ...MaxPageSizeQueryParameter,
-      ...StartTimeQueryParameter,
-      ...EndTimeQueryParameter,
-      ...ContentSafetyVersionQueryParameter,
-    },
-    TermList  ,
-    ServiceTraits,
-    Error
+  op listBlocklistTopterms is ResourceList<
+  TopTermCount,
+  ListQueryParametersTrait<{
+    ...SkipQueryParameter,
+    ...TopQueryParameter,
+    ...MaxPageSizeQueryParameter,
+    ...StartTimeQueryParameter,
+    ...EndTimeQueryParameter,
+    ...ContentSafetyVersionQueryParameter,
+    }>
   >;
 
-  @route("/metrics/blocklistHitCalls")
+  @route("/metrics")
   @summary("Show blocklist hit request count at different timestamps.")
   @doc("Show blocklist hit request count at different timestamps.")
-  op listBlocklistHitCalls is RpcOperation<
-    {
-      ...SkipQueryParameter,
-      ...TopQueryParameter,
-      ...MaxPageSizeQueryParameter,
-      ...StartTimeQueryParameter,
-      ...EndTimeQueryParameter,
-      ...ContentSafetyVersionQueryParameter,
-    },
-    HitCallsList  ,
-    ServiceTraits,
-    Error
+  op listBlocklistHitCalls is ResourceList<
+  BlockListHitCallsPerTimestamp,
+  ListQueryParametersTrait<{
+    ...SkipQueryParameter,
+    ...TopQueryParameter,
+    ...MaxPageSizeQueryParameter,
+    ...StartTimeQueryParameter,
+    ...EndTimeQueryParameter,
+    ...TimeGranularityQueryParameter,
+    ...ContentSafetyVersionQueryParameter,
+    }>
   >;
+
+  // @route("/metrics/blocklistHitCalls")
+  // @summary("Show blocklist hit request count at different timestamps.")
+  // @doc("Show blocklist hit request count at different timestamps.")
+  // op listBlocklistHitCalls is RpcOperation<
+  //   {
+  //     ...SkipQueryParameter,
+  //     ...TopQueryParameter,
+  //     ...MaxPageSizeQueryParameter,
+  //     ...StartTimeQueryParameter,
+  //     ...EndTimeQueryParameter,
+  //     ...TimeGranularityQueryParameter,
+  //     ...ContentSafetyVersionQueryParameter,
+  //   },
+  //   HitCallsList  ,
+  //   ServiceTraits,
+  //   Error
+  // >;
 }
 
 
