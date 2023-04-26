@@ -1,6 +1,6 @@
 # Security Insights
 
-> see https://aka.ms/autorest
+> see <https://aka.ms/autorest>
 
 This is the AutoRest configuration file for SecurityInsights.
 
@@ -28,31 +28,32 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 input-file:
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/ThreatIntelligence.json
 ```
+
 ### Supressions
 
 ```yaml
 directive:
   - suppress: R3023
     where: 
-      - $..paths["/{workspaceId}/threatintelligence:upload-indicators/"]
+      - $..paths["/workspaces/{workspaceId}/threat-intelligence/indicators:upload"]
     from: ThreatIntelligence.json
     reason: This is an ARM API requirement to list all the available operations, but this is a data-plane API.
 
   - suppress: R4010
     where: 
-      - $..paths["/{workspaceId}/threatintelligence:upload-indicators/"]
+      - $..paths["/workspaces/{workspaceId}/threat-intelligence/indicators:upload"]
     from: ThreatIntelligence.json
     reason: This is an ARM API requirement to have a default error response, but it is irrelevant to this data-plane API.
 
   - suppress: R4041
     where: 
-      - $..paths["/{workspaceId}/threatintelligence:upload-indicators/"]
+      - $..paths["/workspaces/{workspaceId}/threat-intelligence/indicators:upload"]
     from: ThreatIntelligence.json
     reason: This API does not have array identifiers (data-plane).
 
   - suppress: PathForResourceAction
     where: 
-      - $..paths["/{workspaceId}/threatintelligence:upload-indicators/"]
+      - $..paths["/workspaces/{workspaceId}/threat-intelligence/indicators:upload"]
     from: ThreatIntelligence.json
     reason: This is an ARM API naming requirement and is not relevant to a data-plane API.
 ```
