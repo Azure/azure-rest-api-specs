@@ -34,7 +34,6 @@ directive:
       - BodyTopLevelProperties
 ```
 
-
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
@@ -44,6 +43,17 @@ input-file:
   - Microsoft.HybridCompute/preview/2023-03-15-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2023-03-15-preview/privateLinkScopes.json
 ```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.HybridCompute/stable/2022-12-27/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2022-12-27/privateLinkScopes.json
+```
+
 ### Tag: package-preview-2022-12
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
