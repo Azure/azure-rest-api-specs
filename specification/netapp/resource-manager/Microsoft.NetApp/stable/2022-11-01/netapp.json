@@ -1353,7 +1353,7 @@
         ],
         "summary": " Get Group Id List for LDAP User",
         "description": "Returns the list of group Ids for a specific LDAP User",
-        "operationId": "GetGroupIds_ListByVolume",
+        "operationId": "Volumes_ListGetGroupIdListForLdapUser",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1391,7 +1391,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed."
