@@ -6212,7 +6212,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the list of the effective routemap routes or follow the location header for the inbound routes list.",
+            "description": "Request successful. Returns the list of the effective route map routes or follow the location header for the inbound routes list.",
             "schema": {
               "$ref": "#/definitions/EffectiveRouteMapRouteList"
             }     
@@ -6275,7 +6275,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the list of the effective routemap routes or follow the location header for the outbound routes list.",
+            "description": "Request successful. Returns the list of the effective route map routes or follow the location header for the outbound routes list.",
             "schema": {
               "$ref": "#/definitions/EffectiveRouteMapRouteList"
             }   
@@ -9342,13 +9342,15 @@
     },
     "EffectiveRouteMapRouteList": {
       "description": "EffectiveRouteMapRoute List.",
+      "type":"object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EffectiveRouteMapRoute"
           },
-          "description": "The list of Effective RouteMap Routes configured on the connection resource."
+          "description": "The list of Effective RouteMap Routes configured on the connection resource.",
+          "x-ms-identifiers": []
         }
       }
     },
