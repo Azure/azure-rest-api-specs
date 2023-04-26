@@ -848,10 +848,10 @@
     "/operatorInformation/:search": {
       "post": {
         "tags": [
-          "Obtain operator information for recipient numbers"
+          "Obtain operator information for requested numbers"
         ],
-        "summary": "Endpoint for retrieving operator information for a set of phone numbers.\r\nThis includes the mnc, mcc, and number type which can be used to determine a number’s capabilities",
-        "operationId": "OperatorInformation_Search",
+        "summary": "Searches for operator information for a given list of phone numbers.",
+        "operationId": "PhoneNumbers_OperatorInformation_Search",
         "consumes": [
           "application/json"
         ],
@@ -866,7 +866,7 @@
             "in": "body",
             "name": "body",
             "required": true,
-            "description": "The phone number(s) whose operator information should be looked up",
+            "description": "The phone number(s) whose operator information should be searched",
             "schema": {
               "$ref": "#/definitions/OperatorInformationRequest"
             }
@@ -1468,11 +1468,11 @@
       }
     },
     "OperatorInformationRequest": {
-      "description": "Represents a search request for operator information about phone numbers",
+      "description": "Represents a search request for operator information for the given phone numbers",
       "type": "object",
       "properties": {
         "phoneNumbers": {
-          "description": "Phone numbers to search for operator information",
+          "description": "Phone number(s) whose operator information is being requested",
           "type": "array",
           "items": {
             "type": "string"
@@ -1481,11 +1481,11 @@
       }
     },
     "OperatorInformationResult": {
-      "description": "Represents a search result containing operator information for phone numbers",
+      "description": "Represents a search result containing operator information associated with the requested phone numbers",
       "type": "object",
       "properties": {
-        "results": {
-          "description": "Results of the search, this array will have one entry per requested phone number with the relevant operator information for each",
+        "values": {
+          "description": "Results of a search.\r\nThis array will have one entry per requested phone number which will contain the relevant operator information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperatorInformation"
@@ -1494,7 +1494,7 @@
       }
     },
     "OperatorInformation": {
-      "description": "Represents metadata about a phone number that is controlled/provided by the phone number's operator.",
+      "description": "Represents metadata about a phone number that is controlled/provided by that phone number's operator.",
       "type": "object",
       "properties": {
         "phoneNumber": {
