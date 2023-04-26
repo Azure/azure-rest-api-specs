@@ -4,23 +4,17 @@
     "resourceGroupName": "myResourceGroup",
     "machineName": "myMachine",
     "runCommandName": "myRunCommand",
-    "api-version": "2022-09-11-preview",
+    "api-version": "2023-04-25-preview",
     "runCommandProperties": {
       "location": "eastus2",
       "properties": {
         "source": {
           "script": "Write-Host Hello World!"
         },
-        "parameters": [
-          {
-            "name": "param1",
-            "value": "value1"
-          },
-          {
-            "name": "param2",
-            "value": "value2"
-          }
-        ],
+        "parameters": {
+          "param1": "value1",
+          "param2": "value2"
+        },
         "asyncExecution": false,
         "runAsUser": "user1",
         "runAsPassword": "<runAsPassword>",
@@ -39,29 +33,23 @@
           "source": {
             "script": "Write-Host Hello World!"
           },
-          "parameters": [
-            {
-              "name": "param1",
-              "value": "value1"
-            },
-            {
-              "name": "param2",
-              "value": "value2"
-            }
-          ],
+          "parameters": {
+            "param1": "value1",
+            "param2": "value2"
+          },
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
-          "provisioningState": "Succeeded"
-        },
-        "instanceView": {
-          "name": "myRunCommand",
-          "status": {
-            "code": "success",
-            "level": "Info",
-            "displayStatus": "Provisioning succeeded",
-            "message": "Finished executing command, StdOut: , StdErr:",
-            "time": "2019-08-08T20:42:10.999Z"
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "name": "myRunCommand",
+            "status": {
+              "code": "success",
+              "level": "Info",
+              "displayStatus": "Provisioning succeeded",
+              "message": "Finished executing command, StdOut: , StdErr:",
+              "time": "2019-08-08T20:42:10.999Z"
+            }
           }
         }
       }

@@ -2568,6 +2568,23 @@
         }
       },
       "description": "Describes the Machine Extension Instance View."
+    },
+    "RunCommandsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCommand"
+          },
+          "description": "The list of run commands"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
+        }
+      },
+      "description": "Describes the Run Commands List Result."
     }
   },
   "parameters": {}

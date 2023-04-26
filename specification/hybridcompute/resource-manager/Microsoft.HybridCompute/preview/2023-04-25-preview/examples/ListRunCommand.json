@@ -3,7 +3,7 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "machineName": "myMachine",
-    "api-version": "2022-09-11-preview"
+    "api-version": "2023-04-25-preview"
   },
   "responses": {
     "200": {
@@ -18,16 +18,10 @@
               "source": {
                 "script": "Write-Host Hello World!"
               },
-              "parameters": [
-                {
-                  "name": "param1",
-                  "value": "value1"
-                },
-                {
-                  "name": "param2",
-                  "value": "value2"
-                }
-              ],
+              "parameters": {
+                "param1": "value1",
+                "param2": "value2"
+              },
               "protectedParameters": {},
               "asyncExecution": false,
               "runAsUser": "user1",
