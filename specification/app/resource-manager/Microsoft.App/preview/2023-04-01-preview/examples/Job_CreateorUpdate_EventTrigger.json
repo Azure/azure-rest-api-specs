@@ -91,9 +91,24 @@
           "configuration": {
             "replicaTimeout": 10,
             "replicaRetryLimit": 10,
-            "manualTriggerConfig": {
+            "eventTriggerConfig": {
               "replicaCompletionCount": 1,
-              "parallelism": 4
+              "parallelism": 4,
+              "scale": {
+                "minReplicas": 1,
+                "maxReplicas": 5,
+                "rules": [
+                  {
+                    "name": "servicebuscalingrule",
+                    "custom": {
+                      "type": "azure-servicebus",
+                      "metadata": {
+                        "concurrentRequests": "50"
+                      }
+                    }
+                  }
+                ]
+              }
             },
             "triggerType": "Event"
           },
@@ -162,9 +177,24 @@
           "configuration": {
             "replicaTimeout": 10,
             "replicaRetryLimit": 10,
-            "manualTriggerConfig": {
+            "eventTriggerConfig": {
               "replicaCompletionCount": 1,
-              "parallelism": 4
+              "parallelism": 4,
+              "scale": {
+                "minReplicas": 1,
+                "maxReplicas": 5,
+                "rules": [
+                  {
+                    "name": "servicebuscalingrule",
+                    "custom": {
+                      "type": "azure-servicebus",
+                      "metadata": {
+                        "concurrentRequests": "50"
+                      }
+                    }
+                  }
+                ]
+              }
             },
             "triggerType": "Event"
           },
