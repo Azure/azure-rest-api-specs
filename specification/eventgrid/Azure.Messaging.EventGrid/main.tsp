@@ -13,7 +13,6 @@ enum ServiceApiVersions {
 
 @service({
   title: "Azure.Messaging.EventGridClient",
-  version: "2023-06-01-preview"
 })
 
 //
