@@ -55,13 +55,13 @@ interface CertificateProfileOperations {
     "./examples/CertificateProfile_GetSignEku.json",
     "GetSignEku"
   )
-  listSignEku is ResourceList<Eku>;
+  listSignEku is StandardResourceOperations.ResourceList<Eku>;
 
   @summary("Initiates a sign operation.")
   @doc("Initiates a sign operation.")
   @example("./examples/CertificateProfile_Sign.json", "Sign")
   @pollingOperation(CertificateProfileOperations.getSignOperation)
-  sign is LongRunningResourceAction<CertificateProfile, SignRequest, OperationStatus>;
+  sign is StandardResourceOperations.LongRunningResourceAction<CertificateProfile, SignRequest, OperationStatus>;
 }
 
 @doc("Algorithms supported for signing.")
