@@ -1259,13 +1259,25 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RunCommand"
-            }
+            "description": "OK"
           },
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1273,13 +1285,8 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a Run Command": {
-            "$ref": "./examples/DeleteRunCommand.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1372,7 +1379,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MachineExtensionsListResult"
+              "$ref": "#/definitions/RunCommandsListResult"
             }
           },
           "default": {
