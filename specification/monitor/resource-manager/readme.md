@@ -31,7 +31,7 @@ title: MonitorClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2023-05-01-preview-only
+tag: package-2023-04
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
@@ -62,7 +62,7 @@ input-file:
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
   - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
-  - Microsoft.Insights/preview/2023-03-01-preview/tenantActionGroups_API.json
+  - Microsoft.Insights/preview/2023-05-01-preview/tenantActionGroups_API.json
   - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
   - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
