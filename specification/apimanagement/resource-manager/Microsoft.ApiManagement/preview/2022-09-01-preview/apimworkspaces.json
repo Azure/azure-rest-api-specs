@@ -412,6 +412,9 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -476,11 +479,6 @@
             "$ref": "./examples/ApiManagementGetWorkspacePolicy.json"
           }
         },
-        "produces": [
-          "application/json",
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2092,6 +2090,9 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4085,7 +4086,7 @@
           "202": {
             "description": "Request to create or update API was accepted. Location header contains the URL where the status of the long running operation can be checked.",
             "headers": {
-              "Location": {
+              "location": {
                 "type": "string"
               }
             }
@@ -5099,6 +5100,9 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5402,6 +5406,9 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5469,11 +5476,6 @@
             "$ref": "./examples/ApiManagementGetWorkspaceApiPolicy.json"
           }
         },
-        "produces": [
-          "application/json",
-          "application/vnd.ms-azure-apim.policy+xml",
-          "application/vnd.ms-azure-apim.policy.raw+xml"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5714,7 +5716,8 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "x-ms-odata": "./definitions.json#/definitions/SchemaContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/schemas/{schemaId}": {
