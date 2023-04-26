@@ -195,31 +195,14 @@
           "description": "The recommendation alert rule type."
         },
         "displayInformation": {
-          "$ref": "#/definitions/DisplayInformationItem"
+          "description": "A dictionary that provides the display information for an alert rule recommendation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "ruleArmTemplate": {
           "$ref": "#/definitions/ruleArmTemplate"
-        }
-      }
-    },
-    "DisplayInformationItem": {
-      "description": "Provides the display information for an alert rule recommendation recommendations.",
-      "type": "object",
-      "properties": {
-        "ruleInfo": {
-          "type": "string",
-          "description": "The alert rule information."
-        },
-        "infoBallonMessage": {
-          "type": "string",
-          "description": "The information to display inside an information balloon."
-        },
-        "infoBallonLink": {
-          "type": "string",
-          "description": "The documentation link to display inside an information balloon."
-        },
-        "metricAlertsDisplayInformation": {
-          "$ref": "#/definitions/MetricAlertsDisplayInformation"
         }
       }
     },
@@ -267,24 +250,6 @@
       "x-ms-enum": {
         "name": "MetricAlertsDisplayUnit",
         "modelAsString": true
-      }
-    },
-    "MetricAlertsDisplayInformation": {
-      "description": "Provides display information specific for Metric Alerts rule.",
-      "type": "object",
-      "required": [
-        "metricDisplayName",
-        "displayUnits"
-      ],
-      "properties": {
-        "metricDisplayName": {
-          "type": "string",
-          "description": "The metric display name to use in the UI for the metric alert rule."
-        },
-        "displayUnits": {
-          "$ref": "#/definitions/MetricAlertsDisplayUnit",
-          "description": "The display units to use in the UI for the metric alert rule."
-        }
       }
     },
     "ruleArmTemplate": {

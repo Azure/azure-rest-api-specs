@@ -42,7 +42,7 @@ model FrontendProperties {
   @doc("Frontend Public IP Address (Optional).")
   publicIPAddress?: FrontendPropertiesIPAddress;
   @visibility("read")
-  @doc("test doc")
+  @doc("Provisioning State of Traffic Controller Frontend Resource")
   provisioningState?: ProvisioningState;
 }
 
@@ -79,7 +79,7 @@ model AssociationProperties {
   @doc("Association Subnet")
   subnet?: AssociationSubnet;
   @visibility("read")
-  @doc("Provisioning State")
+  @doc("Provisioning State of Traffic Controller Association Resource")
   provisioningState?: ProvisioningState;
 
 }
@@ -120,17 +120,17 @@ model TrafficControllerProperties {
   provisioningState?: ProvisioningState;
 }
 
-@knownValues(ProvisioningStateKV)
-model ProvisioningState is string;
-
 @lroStatus
-enum ProvisioningStateKV {
-  ...ResourceProvisioningStateKV,
+enum ProvisioningState{
   Provisioning,
   Updating,
   Deleting,
   Accepted,
+  Succeeded, 
+  Failed, 
+  Canceled
 }
+
 @doc("Resource ID definition used by parent to reference child resources.")
 model ResourceID{
   @doc("Resource ID of child resource.")
@@ -147,7 +147,7 @@ interface FrontendsInterface extends ResourceInstanceOperations<Frontend, Fronte
 }
 
 @armResourceOperations
-interface TrafficControllerInterface extends ResourceOperations<TrafficController, TrafficControllerProperties>{
+interface TrafficControllerInterface extends ResourceInstanceOperations<TrafficController, TrafficControllerProperties>{
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
