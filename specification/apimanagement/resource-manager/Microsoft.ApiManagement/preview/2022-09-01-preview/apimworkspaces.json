@@ -694,8 +694,26 @@
             "name": "isKeyVaultRefreshFailed",
             "in": "query",
             "required": false,
-            "type": "boolean",
-            "description": "When set to true, the response contains only named value entities which failed refresh."
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "KeyVaultRefreshState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "true",
+                  "description": "Entities for which KeyVault refresh failed."
+                },
+                {
+                  "value": "false",
+                  "description": "Entities for which KeyVault refresh succeeded"
+                }
+              ]
+            },
+            "description": "Query parameter to fetch named value entities based on refresh status."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
