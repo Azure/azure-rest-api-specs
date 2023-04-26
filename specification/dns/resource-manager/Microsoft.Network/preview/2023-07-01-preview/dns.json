@@ -365,8 +365,27 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RecordTypeParameter",
-            "description": "The type of DNS record in this record set."
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
           },
           {
             "name": "parameters",
@@ -456,8 +475,27 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RecordTypeParameter",
-            "description": "The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created)."
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created).",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
           },
           {
             "name": "parameters",
@@ -564,8 +602,27 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RecordTypeParameter",
-            "description": "The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the DNS zone is deleted)."
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the DNS zone is deleted).",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
           },
           {
             "name": "If-Match",
@@ -643,8 +700,27 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RecordTypeParameter",
-            "description": "The type of DNS record in this record set."
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of DNS record in this record set.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -716,8 +792,27 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RecordTypeParameter",
-            "description": "The type of record sets to enumerate."
+            "name": "recordType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The type of record sets to enumerate.",
+            "enum": [
+              "A",
+              "AAAA",
+              "CAA",
+              "CNAME",
+              "MX",
+              "NS",
+              "PTR",
+              "SOA",
+              "SRV",
+              "TXT"
+            ],
+            "x-ms-enum": {
+              "name": "RecordType",
+              "modelAsString": false
+            }
           },
           {
             "name": "$top",
@@ -1985,29 +2080,6 @@
       "type": "string",
       "description": "The name of the record set, relative to the name of the zone.",
       "x-ms-skip-url-encoding": true
-    },
-    "RecordTypeParameter": {
-      "name": "recordType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The type of DNS record.",
-      "enum": [
-        "A",
-        "AAAA",
-        "CAA",
-        "CNAME",
-        "MX",
-        "NS",
-        "PTR",
-        "SOA",
-        "SRV",
-        "TXT"
-      ],
-      "x-ms-enum": {
-        "name": "RecordType",
-        "modelAsString": false
-      }
     },
     "ApiVersionParameter": {
       "name": "api-version",
