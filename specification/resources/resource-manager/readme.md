@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-subscriptions-2022-12
+tag: package-privatelinks-2023-03-preview
 ```
 
 ``` yaml $(package-privatelinks)
@@ -88,6 +88,15 @@ These settings apply only when `--tag=package-privatelink-2023-03-preview` is sp
 ```yaml $(tag) == 'package-privatelink-2023-03-preview'
 input-file:
   - Microsoft.Authorization/preview/2023-03-01-preview/privateLinks.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
 
 ### Tag: package-policy-2022-06
