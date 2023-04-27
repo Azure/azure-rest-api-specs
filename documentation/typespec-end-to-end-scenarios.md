@@ -170,7 +170,6 @@ Step of "run `generateScript`":
    - typespecProjectDirectory
    - repo
    - commit
-   - additionalDirectories
    - localMode (use local spec and don't fetch from remote)
    - localSpecRepoPath
 Note: we might pull out tsp-location.yaml create/update part as single script to be used by #2 scenario
