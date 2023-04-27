@@ -32,7 +32,7 @@ Aside from the developer process, we have a few goals on managing repo package v
 ```mermaid
 flowchart TD
 classDef highlight fill:#ffd700
-classDef grey fill:#CCCCCC;
+classDef grey fill:#CCCCCC,color:#555555;
 User((::)) --> A[clone spec repo locally]
 A --> B[1.1 Create folder structure according ]
 B --> C["1.2 tsp init https://aka.ms/azure-init
@@ -62,7 +62,7 @@ class A,G,D,E grey
 ```mermaid
 flowchart TD
 classDef highlight fill:#ffd700
-classDef grey fill:#CCCCCC;
+classDef grey fill:#CCCCCC,color:#555555;
 User((::))-->A
 A["clone Rest-API and SDK repo locally"] --> B
 B["2.1 pre-requsite dependencies installation
