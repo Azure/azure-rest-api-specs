@@ -5,6 +5,10 @@
     "description": "Microsoft Notification Hubs Resource Provider REST API.",
     "version": "2023-01-01-preview"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/checkNotificationHubAvailability": {
       "post": {
@@ -68,6 +72,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_CheckNotificationHubAvailability": {
+            "$ref": "./examples/NotificationHubs/CheckAvailability.json"
+          }
         }
       }
     },
@@ -128,6 +137,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_Get": {
+            "$ref": "./examples/NotificationHubs/Get.json"
           }
         }
       },
@@ -200,6 +214,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_CreateOrUpdate": {
+            "$ref": "./examples/NotificationHubs/CreateOrUpdate.json"
+          }
         }
       },
       "patch": {
@@ -265,6 +284,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_Patch": {
+            "$ref": "./examples/NotificationHubs/Udpate.json"
+          }
         }
       },
       "delete": {
@@ -323,6 +347,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_Delete": {
+            "$ref": "./examples/NotificationHubs/Delete.json"
           }
         }
       }
@@ -396,6 +425,11 @@
         "x-ms-pageable": {
           "itemName": "value",
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NotificationHubs_List": {
+            "$ref": "./examples/NotificationHubs/List.json"
+          }
         }
       }
     },
@@ -456,6 +490,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_DebugSend": {
+            "$ref": "./examples/NotificationHubs/DebugSend.json"
           }
         }
       }
@@ -536,6 +575,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_CreateOrUpdateAuthorizationRule": {
+            "$ref": "./examples/NotificationHubs/AuthorizationRuleCreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -595,6 +639,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_DeleteAuthorizationRule": {
+            "$ref": "./examples/NotificationHubs/AuthorizationRuleDelete.json"
           }
         }
       },
@@ -662,14 +711,19 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_GetAuthorizationRule": {
+            "$ref": "./examples/NotificationHubs/AuthorizationRuleGet.json"
+          }
         }
       },
       "post": {
         "tags": [
           "Hubs"
         ],
-        "summary": "Gets an authorization rule for a NotificationHub by name.",
-        "operationId": "NotificationHubs_GetAuthorizationRule",
+        "summary": "Gets an authorization rule for a NotificationHub by name, including keys.",
+        "operationId": "NotificationHubs_GetAuthorizationRuleWithKeys",
         "produces": [
           "application/json"
         ],
@@ -727,6 +781,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_GetAuthorizationRuleWithKeys": {
+            "$ref": "./examples/NotificationHubs/AuthorizationRuleGetWithKeys.json"
           }
         }
       }
@@ -793,6 +852,11 @@
         "x-ms-pageable": {
           "itemName": "value",
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NotificationHubs_ListAuthorizationRules": {
+            "$ref": "./examples/NotificationHubs/AuthorizationRuleList.json"
+          }
         }
       }
     },
@@ -860,6 +924,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_ListKeys": {
+            "$ref": "./examples/NotificationHubs/AuthorizationRuleListKeys.json"
           }
         }
       }
@@ -940,6 +1009,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_RegenerateKeys": {
+            "$ref": "./examples/NotificationHubs/AuthorizationRuleRegenerateKey.json"
+          }
         }
       }
     },
@@ -1000,6 +1074,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "NotificationHubs_GetPnsCredentials": {
+            "$ref": "./examples/NotificationHubs/PnsCredentialsGet.json"
           }
         }
       }
@@ -1104,53 +1183,10 @@
           "default": {
             "description": "Error code with reason."
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.NotificationHubs/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_CheckAvailability",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "subscriptionId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API Version - expected 2023-01-01-preview.",
-            "required": true,
-            "type": "string",
-            "default": "2023-01-01-preview"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/CheckAvailabilityParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CheckAvailabilityResult"
-            }
-          },
-          "default": {
-            "description": "Error code with reason."
+        },
+        "x-ms-examples": {
+          "Namespaces_CheckAvailability": {
+            "$ref": "./examples/Namespaces/CheckAvailability"
           }
         }
       }
@@ -1206,6 +1242,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "Namespaces_Get": {
+            "$ref": "./examples/Namespaces/Get.json"
           }
         }
       },
@@ -1276,6 +1317,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "Namespaces_CreateOrUpdate": {
+            "$ref": "./examples/Namespaces/CreateOrUpdate.json"
+          }
         }
       },
       "patch": {
@@ -1339,6 +1385,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "Namespaces_Patch": {
+            "$ref": "./examples/Namespaces/Update.json"
+          }
         }
       },
       "delete": {
@@ -1385,6 +1436,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "Namespaces_Delete": {
+            "$ref": "./examples/Namespaces/Delete.json"
           }
         }
       }
@@ -1440,6 +1496,11 @@
         "x-ms-pageable": {
           "itemName": "value",
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Namespaces_ListAll": {
+            "$ref": "./examples/Namespaces/ListBySubscription.json"
+          }
         }
       }
     },
@@ -1500,6 +1561,11 @@
         "x-ms-pageable": {
           "itemName": "value",
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Namespaces_List": {
+            "$ref": "./examples/Namespaces/ListByResourceGroup.json"
+          }
         }
       }
     },
@@ -1566,6 +1632,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "Namespaces_CreateOrUpdateAuthorizationRule": {
+            "$ref": "./examples/Namespaces/AuthorizationRuleCreateOrUpdate.json"
+          }
         }
       },
       "delete": {
@@ -1613,6 +1684,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "Namespaces_DeleteAuthorizationRule": {
+            "$ref": "./examples/Namespaces/AuthorizationRuleDelete.json"
           }
         }
       },
@@ -1668,13 +1744,18 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "Namespaces_GetAuthorizationRule": {
+            "$ref": "./examples/Namespaces/AuthorizationRuleGet.json"
+          }
         }
       },
       "post": {
         "tags": [
           "Namespaces"
         ],
-        "operationId": "Namespaces_GetAuthorizationRule",
+        "operationId": "Namespaces_GetAuthorizationRuleWithKeys",
         "produces": [
           "application/json"
         ],
@@ -1721,6 +1802,11 @@
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "Namespaces_GetAuthorizationRuleWithKeys": {
+            "$ref": "./examples/Namespaces/AuthorizationRuleGetWithKeys.json"
           }
         }
       }
@@ -1776,6 +1862,11 @@
         "x-ms-pageable": {
           "itemName": "value",
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Namespaces_ListAuthorizationRules": {
+            "$ref": "./examples/Namespaces/AuthorizationRuleList.json"
+          }
         }
       }
     },
@@ -1836,6 +1927,11 @@
         "x-ms-pageable": {
           "itemName": "value",
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Namespaces_ListKeys": {
+            "$ref": "./examples/Namespaces/AuthorizationRuleListKeys.json"
+          }
         }
       }
     },
@@ -1902,6 +1998,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "Namespaces_RegenerateKeys": {
+            "$ref": "./examples/Namespaces/AuthorizationRuleRegenerateKey.json"
+          }
         }
       }
     },
@@ -1956,6 +2057,11 @@
           "default": {
             "description": "Error code with reason."
           }
+        },
+        "x-ms-examples": {
+          "Namespaces_GetPnsCredentials": {
+            "$ref": "./examples/Namespaces/PnsCredentialsGet.json"
+          }
         }
       }
     },
@@ -1992,6 +2098,11 @@
         "x-ms-pageable": {
           "itemName": "value",
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/NHOperationsList.json"
+          }
         }
       }
     },
@@ -2051,7 +2162,7 @@
           "Operations"
         ],
         "summary": "API for operation results, as defined by the Location header spec\r\nhttps://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
-        "operationId": "OperationStatus",
+        "operationId": "OperationResult",
         "parameters": [
           {
             "in": "path",
@@ -2155,7 +2266,7 @@
         "tags": [
           "Operations"
         ],
-        "operationId": "NamespaceOperationStatus",
+        "operationId": "NamespacePrivateLinkOperationStatus",
         "produces": [
           "application/json"
         ],
@@ -2236,18 +2347,6 @@
           {
             "in": "path",
             "name": "resourceGroupId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "namespaceName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "proxyName",
             "required": true,
             "type": "string"
           },
@@ -4161,5 +4260,23 @@
         }
       }
     }
-  }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
