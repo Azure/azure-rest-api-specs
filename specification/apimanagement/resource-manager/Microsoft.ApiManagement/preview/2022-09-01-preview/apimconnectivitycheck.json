@@ -36,9 +36,6 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/connectivityCheck": {
       "post": {
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "tags": [
           "PerformConnectivityCheck"
         ],
@@ -77,7 +74,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Request was accepted and is currently running. Location header contains the URL where the status of the long running operation can be checked and the result eventually retrieved."
+            "description": "Request was accepted and is currently running. Location header contains the URL where the status of the long running operation can be checked and the result eventually retrieved.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Connectivity Check Request was completed.",
@@ -92,7 +94,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   }
