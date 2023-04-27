@@ -3,12 +3,12 @@
     "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
     "resourceGroupName": "examplerg",
     "api-version": "2021-10-15-preview",
-    "partnerConfigurationUpdateParameters": {
-      "tags": {
-        "tag1": "value11",
-        "tag2": "value22"
-      },
-      "defaultMaximumExpirationTimeInDays": 100
+    "partner": {
+      "properties": {
+        "partnerRegistrationImmutableId": "941892bc-f5d0-4d1c-8fb5-477570fc2b71",
+        "partnerName": "Contoso.Finance",
+        "authorizationExpirationTimeInUtc": "2022-01-28T01:20:55.142Z"
+      }
     }
   },
   "responses": {
@@ -16,7 +16,7 @@
       "body": {
         "properties": {
           "partnerAuthorization": {
-            "defaultMaximumExpirationTimeInDays": 100,
+            "defaultMaximumExpirationTimeInDays": 10,
             "authorizedPartnersList": [
               {
                 "partnerRegistrationImmutableId": "941892bc-f5d0-4d1c-8fb5-477570fc2b71",
@@ -33,8 +33,8 @@
         },
         "location": "global",
         "tags": {
-          "tag1": "value11",
-          "tag2": "value22"
+          "tag1": "value1",
+          "tag2": "value2"
         },
         "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/partnerConfigurations/default",
         "name": "default",
