@@ -4,8 +4,12 @@
 
 It is crucial having simple and smooth processes that allow developer to easily:
 
-1. [Scaffolding TypeSpec project in `rest-api-specs` repo](e2e-scenario-tasks.md#1-scaffolding-typespec-project-in-rest-api-specs-repo)
-2. [TypeSpec inner dev loop](#2-inner-dev-loop-typespec--sdk-generation)
+1. [Scaffolding TypeSpec project in `rest-api-specs` repo](#1-typespec-project-scaffolding)
+2. [Scaffolding SDK projects in SDK repos](#2-sdk-project-scaffolding)
+   1. All SDK required information (SDK path, namespace etc) should be set in `tspconfig.yaml`.
+   2. Single call via `eng/scripts` in each language repo to complete the task
+   3. Optional, intelligent CI pipeline component to create related PRs when a new service API PR is submitted.
+3. [TypeSpec inner dev loop](#3-inner-dev-loop-sdk-generation-local-scenario)
    1. For spec writers:
       1. locally preview generated Swagger file
       2. gather relevant files to generate rest-api-spec PRs with green CI results
@@ -13,14 +17,9 @@ It is crucial having simple and smooth processes that allow developer to easily:
       1. locally preview generated SDK files
       2. generating SDK PRs from checked in TypeSpec files in rest-api-spec with APIView
    3. any CI failures can be reproduced locally
-3. [Typespec outer dev loop `rest-api-specs`](#3-dev-outer-loop).
-   1. CI should run TypeSpec verification, API view, SDK generation for a given PR
-4. Scaffolding SDK projects in SDK repos
-   1. All SDK required information (SDK path, namespace etc) should be set in `tspconfig.yaml`.
-   2. Single call via `eng/scripts` in each language repo to complete the task
-   3. Optional, intelligent CI pipeline component to create related PRs when a new service API PR is submitted.
-5. SDK outer dev loop
-   1. SDK repo CI pipeline must perform SDK generation from `rest-api-specs` and verify no diff
+4. [Typespec outer dev loop `rest-api-specs`](#4-outer-loop-overall-status-and-tracking).
+   1. [Spec repo outer dev loop](#41-outer-dev-loop-azure-rest-api-specs-pipeline)
+   2. [SDK outer dev loop](#42-outer-dev-loop-sdk-repo-pipeline)
 
 Aside from the developer process, we have a few goals on managing repo package version
 - Should adopt a centralized package version control to avoid chaos
