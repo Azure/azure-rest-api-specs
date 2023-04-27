@@ -660,6 +660,33 @@
         "dropExistingTargetTableOnStart": {
           "type": "boolean",
           "description": "Drop and recreate same existing target table on link connection target database"
+        },
+        "actionOnExistingTargetTable": {
+          "type": "string",
+          "enum": [
+            "FailOnNonEmptyTable",
+            "DropAndRecreateTable",
+            "MergeWithExistingData"
+          ],
+          "x-ms-enum": {
+            "name": "actionOnExistingTargetTable",
+            "values": [
+              {
+                "value": "FailOnNonEmptyTable",
+                "description": "Same existing tables on target database will be Failed."
+              },
+              {
+                "value": "DropAndRecreateTable",
+                "description": "Same existing tables on target database will be dropped and recreated."
+              },
+              {
+                "value": "MergeWithExistingData",
+                "description": "Same existing tables on target database will be Merged together."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Action on existing target table. If not specified, 'FailOnNonEmptyTable' action is used."
         }
       }
     },
