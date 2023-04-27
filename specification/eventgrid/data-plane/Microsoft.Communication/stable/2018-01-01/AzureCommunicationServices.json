@@ -29,21 +29,7 @@
         },
         "customContext": {
           "description": "Custom Context of Incoming Call",
-          "type": "object",
-          "properties": {
-            "customHeaders": {
-              "type": "string",
-              "description": "Custom Headers for incoming call"
-            },
-            "sipHeaders": {
-              "type": "string",
-              "description": "Sip Headers for incoming call"
-            },
-            "voipHeaders": {
-              "type": "string",
-              "description": "Voip Headers for incoming call"
-            }
-          }
+          "$ref": "#/definitions/AcsIncomingCallCustomContext"
         },
         "incomingCallContext": {
           "description": "Signed incoming call context.",
@@ -866,6 +852,25 @@
         "deleteLocation": {
           "description": "The location to delete all chunk storage",
           "type": "string"
+        }
+      }
+    },
+    "AcsIncomingCallCustomContext": 
+    {
+      "description": "Custom context for incoming call.",
+      "type": "object",
+      "properties": {
+        "customHeaders": {
+          "type": "string",
+          "description": "Custom Headers for incoming call"
+        },
+        "sipHeaders": {
+          "type": "string",
+          "description": "Sip Headers for incoming call"
+        },
+        "voipHeaders": {
+          "type": "string",
+          "description": "Voip Headers for incoming call"
         }
       }
     }
