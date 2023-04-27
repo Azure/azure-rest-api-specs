@@ -1296,12 +1296,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runcommands/{runCommandName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}": {
       "put": {
         "tags": [
-          "RunCommands"
+          "MachineRunCommands"
         ],
-        "operationId": "RunCommands_CreateOrUpdate",
+        "operationId": "MachineRunCommands_CreateOrUpdate",
         "description": "The operation to create or update a run command.",
         "parameters": [
           {
@@ -1312,6 +1312,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the machine where the run command should be created or updated."
           },
           {
@@ -1326,7 +1327,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RunCommand"
+              "$ref": "#/definitions/MachineRunCommand"
             },
             "description": "Parameters supplied to the Create Run Command."
           },
@@ -1341,7 +1342,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RunCommand"
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
             }
           },
           "202": {
@@ -1361,11 +1368,67 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "operationId": "MachineRunCommands_Update",
+        "description": "The operation to update the run command.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "description": "The name of the machine where the run command should be created or updated."
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the run command."
+          },
+          {
+            "name": "runCommandProperties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            },
+            "description": "Parameters supplied to the Create Run Command."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
-          "RunCommands"
+          "MachineRunCommands"
         ],
-        "operationId": "RunCommands_Delete",
+        "operationId": "MachineRunCommands_Delete",
         "description": "The operation to delete a run command.",
         "parameters": [
           {
@@ -1376,6 +1439,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the machine where the run command should be deleted."
           },
           {
@@ -1433,9 +1497,9 @@
       },
       "get": {
         "tags": [
-          "RunCommands"
+          "MachineRunCommands"
         ],
-        "operationId": "RunCommands_Get",
+        "operationId": "MachineRunCommands_Get",
         "description": "The operation to get a run command.",
         "parameters": [
           {
@@ -1446,6 +1510,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the machine containing the run command."
           },
           {
@@ -1466,7 +1531,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RunCommand"
+              "$ref": "#/definitions/MachineRunCommand"
             }
           },
           "default": {
@@ -1483,12 +1548,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runcommands": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands": {
       "get": {
         "tags": [
-          "RunCommands"
+          "MachineRunCommands"
         ],
-        "operationId": "RunCommands_List",
+        "operationId": "MachineRunCommands_List",
         "description": "The operation to get all the run commands of a non-Azure machine.",
         "parameters": [
           {
@@ -1499,6 +1564,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the machine containing the run command."
           },
           {
@@ -1519,7 +1585,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RunCommandsListResult"
+              "$ref": "#/definitions/MachineRunCommandsListResult"
             }
           },
           "default": {
@@ -2997,12 +3063,12 @@
       },
       "description": "The result summary of an installation operation."
     },
-    "RunCommand": {
+    "MachineRunCommand": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RunCommandProperties",
+          "$ref": "#/definitions/MachineRunCommandProperties",
           "description": "Describes Run Command Properties"
         }
       },
@@ -3013,11 +3079,11 @@
       ],
       "description": "Describes a Run Command"
     },
-    "RunCommandProperties": {
+    "MachineRunCommandProperties": {
       "type": "object",
       "properties": {
         "source": {
-          "$ref": "#/definitions/RunCommandScriptSource",
+          "$ref": "#/definitions/MachineRunCommandScriptSource",
           "description": "The source of the run command script."
         },
         "parameters": {
@@ -3063,13 +3129,13 @@
         },
         "instanceView": {
           "readOnly": true,
-          "$ref": "#/definitions/RunCommandInstanceView",
+          "$ref": "#/definitions/MachineRunCommandInstanceView",
           "description": "The machine run command instance view."
         }
       },
       "description": "Describes the properties of a run command."
     },
-    "RunCommandScriptSource": {
+    "MachineRunCommandScriptSource": {
       "type": "object",
       "properties": {
         "script": {
@@ -3087,7 +3153,7 @@
       },
       "description": "Describes the script sources for run command."
     },
-    "RunCommandInstanceView": {
+    "MachineRunCommandInstanceView": {
       "type": "object",
       "properties": {
         "name": {
@@ -3133,13 +3199,13 @@
       },
       "description": "Describes the Machine Extension Instance View."
     },
-    "RunCommandsListResult": {
+    "MachineRunCommandsListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RunCommand"
+            "$ref": "#/definitions/MachineRunCommand"
           },
           "description": "The list of run commands"
         },
@@ -3149,6 +3215,15 @@
         }
       },
       "description": "Describes the Run Commands List Result."
+    },
+    "MachineRunCommandsUpdate": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Describes a Machine Extension Update."
     }
   },
   "parameters": {}
