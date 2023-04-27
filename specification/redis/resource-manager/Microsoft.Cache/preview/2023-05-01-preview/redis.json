@@ -3276,7 +3276,9 @@
       "required": true,
       "type": "string",
       "description": "The name of the access policy that is being added to the Redis cache.",
-      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "AccessPolicyAssignmentNameParameter": {
       "name": "accessPolicyAssignmentName",
@@ -3284,7 +3286,9 @@
       "required": true,
       "type": "string",
       "description": "The name of the access policy assignment.",
-      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$",
+      "minLength": 3,
+      "maxLength": 63
     }
   }
 }
