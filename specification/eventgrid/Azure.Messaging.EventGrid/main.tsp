@@ -75,12 +75,6 @@ namespace Azure.Messaging.EventGrid {
     subject?: string;
   }
 
-  @doc("LockToken information.")
-  model LockToken {
-    @doc("The token used to lock the event.")
-    lockToken: string;
-  }
-
   @doc("Properties of the Event Broker operation.")
   model BrokerProperties {
     @doc("The token used to lock the event.")
@@ -105,7 +99,7 @@ namespace Azure.Messaging.EventGrid {
   @doc("Failed LockToken information.")
   model FailedLockToken {
     @doc("LockToken value")
-    lockToken: LockToken;
+    lockToken: string;
 
     @doc("Error code")
     errorCode: string;
