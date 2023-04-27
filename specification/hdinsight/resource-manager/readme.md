@@ -112,7 +112,7 @@ directive:
 
 These settings apply only when `--tag=2023-04-15-preview` is specified on the command line, add a new field to control use secure channel during creation.
 
-``` yaml $(tag) == 'package-2023-04-preview'
+``` yaml $(tag) == 'package-2023-04-15-preview'
 input-file:
 - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
 - Microsoft.HDInsight/preview/2023-04-15-preview/applications.json
