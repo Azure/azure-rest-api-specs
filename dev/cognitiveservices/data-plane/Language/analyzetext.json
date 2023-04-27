@@ -1458,16 +1458,7 @@
           "$ref": "common.json#/definitions/StringIndexType"
         },
         "responseFormat": {
-          "type": "string",
-          "description": "The format in which the response to be returned. If simple is selected we only return the entities result, if detailed is included we include the metadata.",
-          "enum": [
-            "simple",
-            "detailed"
-          ],
-          "x-ms-enum": {
-            "name": "ResponseFormat",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ResponseFormat"
         }
       },
       "allOf": [
@@ -1475,6 +1466,28 @@
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         }
       ]
+    },
+    "ResponseFormat":{
+      "type": "string",
+          "description": "The format in which the response to be returned. If simple is selected we only return the entities result, if detailed is included we include the metadata.",
+          "enum": [
+            "simple",
+            "detailed"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseFormat",
+            "modelAsString": true,
+            "values":[
+              {
+                "value": "simple",
+                "description": "The returned response contains detected entities in the simplified format without additional metadata."
+              },
+              {
+                "value": "detailed",
+                "description": "The returned response the detected entities along with any associated metadata."
+              }
+            ]
+          }
     },
     "EntitiesLROTaskParameters": {
       "type": "object",
@@ -1484,11 +1497,11 @@
           "$ref": "#/definitions/EntitiesTaskParameters"
         },
         {
-          "$ref": "#/definitions/EntitiesUDEParameters"
+          "$ref": "#/definitions/UserDefinedEntityParameters"
         }
       ]
     },
-    "EntitiesUDEParameters": {
+    "UserDefinedEntityParameters": {
       "type": "object",
       "description": "Parameters object for a text analysis task using user defined entities.",
       "properties": {
