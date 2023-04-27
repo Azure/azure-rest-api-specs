@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
 enum ServiceApiVersions {
@@ -9,16 +8,11 @@ enum ServiceApiVersions {
 }
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[{
-    type: OAuth2FlowType.implicit,
-    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    scopes: ["https://eventgrid.azure.net/.default"],
-  }]>
+  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">
 )
 
 @service({
   title: "Azure.Messaging.EventGridClient",
-  version: "2023-06-01-preview"
 })
 
 //
@@ -103,7 +97,7 @@ namespace Azure.Messaging.EventGrid {
   }
 
   @doc("Details of the Receive operation response.")
-  model ReceiveResponse {
+  model ReceiveResult {
     @doc("Array of receive responses, one per cloud event.")
     value: ReceiveDetails[];
   }
@@ -120,8 +114,8 @@ namespace Azure.Messaging.EventGrid {
     errorDescription: string; 
   }
    
-  @doc("Details of the LockTokens information. This is used for both Acknowledge and Release operation response.")
-  model LockTokensResponse {
+  @doc("The result of the Acknowledge operation.")
+  model AcknowledgeResult {
     @doc("Array of LockToken values for failed cloud events.")
     failedLockTokens: FailedLockToken[];
 
@@ -129,9 +123,24 @@ namespace Azure.Messaging.EventGrid {
     succeededLockTokens: string[];
   }
 
-  @doc("Lock token input formatting.")
-  model LockTokenInput {
-    @doc("LockTokens")
+  @doc("The result of the Release operation.")
+  model ReleaseResult {
+    @doc("Array of LockToken values for failed cloud events.")
+    failedLockTokens: FailedLockToken[];
+
+    @doc("Array of LockToken values for succeeded cloud events.")
+    succeededLockTokens: string[];
+  }
+
+  @doc("Array of lock token strings for the corresponding received Cloud Events to be released.")
+  model ReleaseOptions {
+    @doc("String array of lock tokens.")
+    lockTokens: string[];
+  }
+
+  @doc("Array of lock token strings for the corresponding received Cloud Events to be acknowledged.")
+  model AcknowledgeOptions {
+    @doc("String array of lock tokens.")
     lockTokens: string[];
   }
 
@@ -176,7 +185,7 @@ namespace Azure.Messaging.EventGrid {
   @doc("Publish Batch of Cloud Events to namespace topic.")
   @route("/", {shared: true})
   @action("publish")
-  op PublishBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op PublishCloudEvents is Azure.Core.ResourceAction<
     Topic,
     {
       @doc("content type")
@@ -194,7 +203,7 @@ namespace Azure.Messaging.EventGrid {
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @action("receive")
-  op ReceiveBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op ReceiveCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
     {
       @doc("Max Events count to be received.")
@@ -205,7 +214,7 @@ namespace Azure.Messaging.EventGrid {
       @query
       timeout?: int32 = 60;
     },
-    ReceiveResponse & CreatedResponse
+    ReceiveResult & CreatedResponse
   >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
@@ -213,37 +222,33 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Acknowledge Cloud Events.")
   @action("acknowledge")
-  op AcknowledgeBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op AcknowledgeCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
     {
       @doc("content type")
       @header("content-type")
       contentType: "application/json; charset=utf-8";   
 
-      @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
+      @doc("AcknowledgeOptions.")
       @body
-      lockTokens: LockTokenInput;
+      lockTokens: AcknowledgeOptions;
     },
-    LockTokensResponse
+    AcknowledgeResult
   >;
-
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
   
   @doc("Release Cloud Events.")
   @action("release")
-  op ReleaseBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op ReleaseCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
     {
       @doc("content type")
       @header("content-type")
       contentType: "application/json; charset=utf-8";
 
-      @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
-      @body    
-      tokens : LockToken[];
-    },
-    LockTokensResponse 
-  >;
-
-  }
+    @doc("ReleaseOptions")
+    @body    
+    lockTokens : ReleaseOptions;
+  }, ReleaseResult >;
+}

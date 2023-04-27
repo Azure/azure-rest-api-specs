@@ -67,14 +67,25 @@
 
 - rule:
     paths:
-        - "specification/**/*Management/**/*.cadl"
-        - "specification/**/*Management.Shared/**/*.cadl"
-        - "specification/**/resource-management/**/*.cadl"
-        - "specification/**/*Management/**/*.tsp"
-        - "specification/**/*Management.Shared/**/*.tsp"
-        - "specification/**/resource-management/**/*.tsp"
+      - "specification/**/*Management/**/*.cadl"
+      - "specification/**/*Management.Shared/**/*.cadl"
+      - "specification/**/resource-manager/**/*.cadl"
+      - "specification/**/*Management/**/*.tsp"
+      - "specification/**/*Management.Shared/**/*.tsp"
+      - "specification/**/resource-manager/**/*.tsp"
     reviewers:
-        - raych1
+      - raych1
+      - lirenhe
+      - weidongxu-microsoft
+      - ArcturusZhang
+      - chunyu3
+      - msyyc
+      - live1206
+      - tadelesh
+      - haolingdong-msft
+      - XiaofeiCao
+      - MaryGao
+      - qiaozha
 
 - rule:
     paths:
@@ -105,15 +116,9 @@
    
       
 - rule:
-    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc|containerservice|azure-kusto)/**"
+    paths: "specification/providerhub/**"
     reviewers:
       - raych1
-      
-- rule:
-    paths: "specification/voiceservices/**"
-    reviewers:
-      - raych1
-
 
 - rule:
     paths: "specification/sql/**"
@@ -122,15 +127,13 @@
     branches:
       - dev-sql-
 
-
 - rule:
     paths: "specification/@(financialdataservices|standbypool)/**"
     reviewers:
-      - raych1
+      - live1206
     branches:
       - RPSaaSDev
-      
-  
+
 - rule:
     paths: "specification/compute/**"
     reviewers:
@@ -148,16 +151,58 @@
     reviewers:
       - ArcturusZhang
 
-      
+- rule:
+    paths:
+      - "specification/@(azurestackhci|security)/**"
+    reviewers:
+      - chunyu3
 
 - rule:
     paths:
-      - "specification/web/**"
+      - "specification/@(web|app)/**"
     reviewers:
       - weidongxu-microsoft
-      
-      
-      
+
+- rule:
+    paths: "specification/@(synapse|azurearcdata)/**"
+    reviewers:
+      - msyyc
+
+- rule:
+    paths: "specification/@(workloads|apimanagement)/**"
+    reviewers:
+      - live1206
+
+- rule:
+    paths: "specification/@(securityinsights|impact)/**"
+    reviewers:
+      - tadelesh
+
+- rule:
+    paths: "specification/@(appcomplianceautomation|hybridnetwork)/**"
+    reviewers:
+      - haolingdong-msft
+
+#- rule:
+ #   paths: "specification/@(cost-management|hybridconnectivity)/**"
+ #   reviewers:
+ #     - archerzz
+
+- rule:
+    paths: "specification/@(billing|resources)/**"
+    reviewers:
+      - XiaofeiCao
+
+- rule:
+    paths: "specification/@(testbase|appplatform)/**"
+    reviewers:
+      - MaryGao
+
+- rule:
+    paths: "specification/@(containerservice|paloaltonetworks)/**"
+    reviewers:
+      - qiaozha
+
 - rule:
     paths:
       - "documentation/**"
@@ -189,6 +234,6 @@
       - live1206
       - tadelesh
       - haolingdong-msft
-      - archerzz
       - XiaofeiCao
       - MaryGao
+      - qiaozha

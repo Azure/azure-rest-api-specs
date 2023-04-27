@@ -12,9 +12,6 @@ modelerfour:
 ```
 
 ``` yaml $(typescript)
-input-file:
-  - Microsoft.ContainerRegistry/preview/2023-01-01-preview/containerregistry.json
-  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 typescript:
   azure-arm: true
   package-name: "@azure/arm-containerregistry"

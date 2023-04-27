@@ -85,6 +85,33 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2023-03-only
+
+These settings apply only when `--tag=package-preview-2023-03-only` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03-only'
+input-file:
+  - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+```
+
+### Tag: package-preview-2023-01-only
+
+These settings apply only when `--tag=package-preview-2023-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-01-only'
+input-file:
+  - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+```
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+```
 
 ### Tag: package-preview-2023-02
 
@@ -95,8 +122,10 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-  - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
+  - Microsoft.Security/preview/2023-02-01-preview/healthReports.json 
+  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
+
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
@@ -158,6 +187,15 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.Security/stable/2022-03-01/pricings.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.Security/stable/2023-01-01/pricings.json
 ```
 
 ### Tag: package-preview-2021-12
@@ -289,7 +327,7 @@ input-file:
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
-- Microsoft.Security/stable/2022-03-01/pricings.json
+- Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
@@ -320,11 +358,11 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
-- Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
@@ -333,6 +371,8 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 
 
 # Needed when there is more than one input file
