@@ -112,9 +112,7 @@ flowchart TD;
 ##### Remaining Tasks
 | Step | Step Detail | Assignee | Implemented | Verified |
 |--|--|--|--:|--:|
-| 1.1 | [Folder layout doc]() | Ray Chen | [X] | [X] |
-| 1.2 | tsp init | Allen Zhang | [X] | | [ ] |
-| 1.3 | example generation | Ray Chen | [ ] | | [ ] |
+
 
 ##### Details & Open questions
 Dev Inner Loop is defined as what spec/sdk developer does locally on the dev box.
