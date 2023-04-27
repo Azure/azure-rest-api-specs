@@ -11,14 +11,22 @@
         "source": {
           "script": "Write-Host Hello World!"
         },
-        "parameters": {
-          "param1": "value1",
-          "param2": "value2"
-        },
+        "parameters": [
+          {
+            "name": "param1",
+            "value": "value1"
+          },
+          {
+            "name": "param2",
+            "value": "value2"
+          }
+        ],
         "asyncExecution": false,
         "runAsUser": "user1",
         "runAsPassword": "<runAsPassword>",
-        "timeoutInSeconds": 3600
+        "timeoutInSeconds": 3600,
+        "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+        "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt?sp=racw&st=2022-10-07T19:40:21Z&se=2022-10-08T03:40:21Z&spr=https&sv=2021-06-08&sr=b&sig=Yh7B%2Fy83olbYBdfsfbUREvd7ol8Dq5EVP3lAO4Kj4xDcN8%3D"
       }
     }
   },
@@ -33,13 +41,21 @@
           "source": {
             "script": "Write-Host Hello World!"
           },
-          "parameters": {
-            "param1": "value1",
-            "param2": "value2"
-          },
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt?sp=racw&st=2022-10-07T19:40:21Z&se=2022-10-08T03:40:21Z&spr=https&sv=2021-06-08&sr=b&sig=Yh7B%2Fy83olbYBdfsfbUREvd7ol8Dq5EVP3lAO4Kj4xDcN8%3D",
           "provisioningState": "Succeeded",
           "instanceView": {
             "name": "myRunCommand",
@@ -51,6 +67,35 @@
               "time": "2019-08-08T20:42:10.999Z"
             }
           }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
+        "name": "myRunCommand",
+        "type": "Microsoft.HybridCompute/machines/runcommands",
+        "location": "eastus2",
+        "properties": {
+          "source": {
+            "script": "Write-Host Hello World!"
+          },
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
+          "asyncExecution": false,
+          "runAsUser": "user1",
+          "timeoutInSeconds": 3600,
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt?sp=racw&st=2022-10-07T19:40:21Z&se=2022-10-08T03:40:21Z&spr=https&sv=2021-06-08&sr=b&sig=Yh7B%2Fy83olbYBdfsfbUREvd7ol8Dq5EVP3lAO4Kj4xDcN8%3D",
+          "provisioningState": "Creating"
         }
       }
     },
