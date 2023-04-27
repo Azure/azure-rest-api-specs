@@ -1,4 +1,22 @@
+parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-csharp/"
+  "service-directory-name":
+    default: "eventgrid"
+emit:
+  - "@azure-tools/typespec-autorest"
 options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "./data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "./examples"
+    output-file: AzureEventGrid.json
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-mode: "dataplane"
+    package-name: "azure-eventgrid"
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   "@azure-tools/typespec-csharp":
     model-namespace: false
