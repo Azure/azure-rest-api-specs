@@ -1,12 +1,13 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2023-05-15-preview",
+    "api-version": "2023-04-15-preview",
     "Endpoint": "{Endpoint}",
     "body": {
       "kind": "EntityRecognition",
       "parameters": {
         "modelVersion": "latest",
+        "responseFormat": "detailed",
         "userDefinedEntities": {
           "entities": [
             {
@@ -28,7 +29,7 @@
       "analysisInput": {
         "documents": [
           {
-            "text": "The title of the painting, which is known in English as Mona Lisa, is based on the presumption that it depicts Lisa del Giocondo, although her likeness is uncertain.",
+            "text": "The title of the painting, which is known in English as Mona Lisa, is based on the presumption that it depicts Lisa del Giocondo, although her likeness is uncertain. It was believed to have been painted between 1503 and 1506",
             "id": "1",
             "language": "en"
           }
@@ -77,15 +78,39 @@
                       "score": 0.87
                     }
                   ]
+                },
+                {
+                  "text": "between 1503 and 1506",
+                  "category": "Temporal",
+                  "type": "DateRange",
+                  "offset": 203,
+                  "length": 21,
+                  "confidenceScore": 0.99,
+                  "tags":[
+                    {
+                      "name": "Temporal",
+                      "score": 0.99
+                    },
+                    {
+                      "name": "DateRange",
+                      "score": 0.99
+                    }
+                  ],
+                  "metadata": {
+                    "metadataKind": "TemporalSpanMetadata",
+                    "timex": "(1503-01-01,1506-01-01,P3Y)",
+                    "duration": "P3Y",
+                    "begin": "1503-01-01",
+                    "end": "1506-01-01"
+                  }
                 }
-
               ],
               "id": "1",
               "warnings": []
             }
           ],
           "errors": [],
-          "modelVersion": "2023-05-15-preview"
+          "modelVersion": "2023-04-15-preview"
         }
       }
     }
