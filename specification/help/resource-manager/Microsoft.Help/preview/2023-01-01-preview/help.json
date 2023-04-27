@@ -523,11 +523,8 @@
           "description": "The list of solution metadata.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SolutionMetadata"
-          },
-          "x-ms-identifiers": [
-            "solutionId"
-          ]
+            "$ref": "#/definitions/SolutionMetadataResource"
+          }
         },
         "nextLink": {
           "description": "The link used to get the next page of solution metadata.",
@@ -535,7 +532,24 @@
         }
       }
     },
-    "SolutionMetadata": {
+    "SolutionMetadataResource": {
+      "description": "Solution Metadata resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SolutionMetadataProperties",
+          "description": "Solution metadata Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionMetadataProperties": {
       "description": "Diagnostic solution metadata.",
       "type": "object",
       "properties": {
@@ -573,7 +587,7 @@
       "required": true,
       "type": "string",
       "description": "This is an extension resource provider and only resource level extension is supported at the moment.",
-      "x-ms-parameter-location": "client",
+      "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
     "ApiVersionParameter": {
@@ -593,7 +607,7 @@
       "maxLength": 100,
       "pattern": "^[A-Za-z0-9-+@()_]+$",
       "description": "Unique resource name for insight resources",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
       "name": "$filter",
@@ -601,14 +615,16 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "x-ms-skip-url-encoding": true
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
       "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
