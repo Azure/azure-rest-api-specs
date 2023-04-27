@@ -412,12 +412,28 @@
           "description": "Number of databases to migrate"
         },
         "setupLogicalReplicationOnSourceDbIfNeeded": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalReplicationOnSourceDbEnum",
+            "modelAsString": true
+          },
           "description": "Indicates whether to setup LogicalReplicationOnSourceDb, if needed"
         },
         "overwriteDbsInTarget": {
-          "type": "boolean",
-          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If not set or set to false, the migration workflow will wait for a confirmation, if it detects that the database already exists."
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OverwriteDbsInTargetEnum",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to Disabled, the migration workflow will wait for a confirmation, if it detects that the database already exists."
         },
         "migrationWindowStartTimeInUtc": {
           "format": "date-time",
@@ -430,30 +446,54 @@
           "description": "End time in UTC for migration window"
         },
         "startDataMigration": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StartDataMigrationEnum",
+            "modelAsString": true
+          },
           "description": "Indicates whether the data migration should start right away"
         },
         "triggerCutover": {
-          "type": "boolean",
-          "description": "To trigger cutover for entire migration we need to send this flag as true"
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerCutoverEnum",
+            "modelAsString": true
+          },
+          "description": "To trigger cutover for entire migration we need to send this flag as Enabled"
         },
         "dbsToTiggerCutoverOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as true and database names in this array"
+          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as Enabled and database names in this array"
         },
         "cancel": {
-          "type": "boolean",
-          "description": "To trigger cancel for entire migration we need to send this flag as true"
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "CancelEnum",
+            "modelAsString": true
+          },
+          "description": "To trigger cancel for entire migration we need to send this flag as Enabled"
         },
         "dbsToCancelMigrationOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cancel for specific databases send triggerCutover flag as true and database names in this array"
+          "description": "When you want to trigger cancel for specific databases send cancel flag as Enabled and database names in this array"
         }
       },
       "description": "Migration resource properties."
@@ -523,12 +563,28 @@
           "description": "Number of databases to migrate"
         },
         "setupLogicalReplicationOnSourceDbIfNeeded": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalReplicationOnSourceDbEnum",
+            "modelAsString": true
+          },
           "description": "Indicates whether to setup LogicalReplicationOnSourceDb, if needed"
         },
         "overwriteDbsInTarget": {
-          "type": "boolean",
-          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If not set or set to false, the migration workflow will wait for a confirmation, if it detects that the database already exists."
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OverwriteDbsInTargetEnum",
+            "modelAsString": true
+          },
+          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to Disabled, the migration workflow will wait for a confirmation, if it detects that the database already exists."
         },
         "migrationWindowStartTimeInUtc": {
           "format": "date-time",
@@ -536,30 +592,54 @@
           "description": "Start time in UTC for migration window"
         },
         "startDataMigration": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StartDataMigrationEnum",
+            "modelAsString": true
+          },
           "description": "Indicates whether the data migration should start right away"
         },
         "triggerCutover": {
-          "type": "boolean",
-          "description": "To trigger cutover for entire migration we need to send this flag as true"
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerCutoverEnum",
+            "modelAsString": true
+          },
+          "description": "To trigger cutover for entire migration we need to send this flag as Enabled"
         },
         "dbsToTiggerCutoverOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as true and database names in this array"
+          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as Enabled and database names in this array"
         },
         "cancel": {
-          "type": "boolean",
-          "description": "To trigger cancel for entire migration we need to send this flag as true"
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "CancelEnum",
+            "modelAsString": true
+          },
+          "description": "To trigger cancel for entire migration we need to send this flag as Enabled"
         },
         "dbsToCancelMigrationOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cancel for specific databases send triggerCutover flag as true and database names in this array"
+          "description": "When you want to trigger cancel for specific databases send cancel flag as Enabled and database names in this array"
         },
         "migrationMode": {
           "$ref": "#/definitions/MigrationMode",
@@ -619,7 +699,9 @@
         "location": {
           "type": "string",
           "description": "Location of database server",
-          "x-ms-mutability": [ "read" ]
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "version": {
           "type": "string",
