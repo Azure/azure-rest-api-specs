@@ -18,7 +18,7 @@ enum ServiceApiVersions {
 //
 // Supported operations.
 //
-// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
+// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&timeout=60&maxEvents={maxEvents}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge?api-Version={apiVersion}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
@@ -84,7 +84,7 @@ namespace Azure.Messaging.EventGrid {
   @doc("Properties of the Event Broker operation.")
   model BrokerProperties {
     @doc("The token used to lock the event.")
-    lockToken: LockToken;
+    lockToken: string;
   }
 
   @doc("Receive operation details per Cloud Event.")
@@ -108,7 +108,7 @@ namespace Azure.Messaging.EventGrid {
     lockToken: LockToken;
 
     @doc("Error code")
-    errorCode: int32;
+    errorCode: string;
 
     @doc("Description of the error")
     errorDescription: string; 
