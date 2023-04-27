@@ -861,15 +861,24 @@
       "type": "object",
       "properties": {
         "customHeaders": {
-          "type": "string",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Custom Headers for incoming call"
         },
         "sipHeaders": {
-          "type": "string",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Sip Headers for incoming call"
         },
         "voipHeaders": {
-          "type": "string",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Voip Headers for incoming call"
         }
       }
