@@ -24,15 +24,14 @@ classDef highlight fill:#ffd700
 User((::))-->A
 A["tsp init https://aka.ms/azure-init
 (on the root folder to create a new typespec project)"] --> B
-B --> B
 B[...iterate on *.tsp specs] --> C
 C["tsp compile . 
 (generate swaggers)"] --> D
 D["generate swagger examples
 (need a new script)"] --> E
-E[clone spec repo locally] --> F
+E[optional:clone spec repo locally] --> F
 F[copy files needed to spec repo] --> G
-G[create a spec PR]
+G[create a spec PR] -->|loop|B
 class D highlight
 ```
 
@@ -48,7 +47,7 @@ C["create sdk project scaffolding
  (e.g. Invoke-TypeSpecDataPlaneGenerateSDKPackage.ps1)"] --> D
  D["create tsp-location.yaml
  (need a new script)"]
- class D highlight
+ class C,D highlight
 ```
 
 #### 3.Inner Dev loop SDK generation local scenario
@@ -58,19 +57,25 @@ flowchart TD;
   User((::))-->A
   A
   A["clone spec repo and clone sdk repo"]-->B
-  B-->B
   B["... iterate on .tsp specs"]-->C
   C["tsp compile ."]-->D
-  D["copy all related files to spec repo folder
+  D["optional:copy all related files to spec repo folder if it's not there
   (*.tsp,*.json,tspconfig.yaml)"]-->E
   D-->F
-  E["create API spec PR"]
-  F["docker run ..."]-->I
-  D-->G
+  E["create API spec PR"]-->|loop|B
+  F["a. run `initScript`
+  (docker run...)"]-->M  
+  M["b. run `generateScript`
+  (docker run...)"]-->I
+  M-.->G
+  M-.->H
+  D-->K
+  K["optional:prerequisite dependencies installation"]-->G
   G["TypeSpec-Project-Sync.ps1
   (on cloned sdk repo folder)"]-->H
   H["TypeSpec-Project-Generate.ps1"]-->I
   I["build code and work on test,sample,readme,etc."]-->J
+  I-->|loop|B
   J["create sdk PR"]
   class G,H highlight
 ```
@@ -121,20 +126,21 @@ A["filter SDK languages to be generated
 B["get language scripts path for `initScript` and `generateScript`
 (from codegen_to_sdk_config.json)"]-->C
 C["run `initScript`
-(dependencies installation)"]-->E
+(dependencies installation)"]-->G
 subgraph D["run `generateScript`"]
-  E
   G
   H
 end
-E["create sdk project scaffolding if it's a new service
-(e.g. Invoke-TypeSpecDataPlaneGenerateSDKPackage.ps1)"]-->G
+
 G["TypeSpec-Project-Sync.ps1
-(a.create/update tsp-location.yaml
-b.fetch specs from remote spec repo or use local spec repo
-c.then copy typespec specs to temp folder)"]-->H
+(a.create tsp-location.yaml and drop to temp location
+b.update tsp-location.yaml if existed
+c.fetch specs from remote spec repo or use local spec repo)"]-->H
 H["TypeSpec-Project-Generate.ps1
-(generate sdk code)"]-->I
+(a.create scaffolding for new project
+b.update tsp-location.yaml
+c.copy typespec specs to temp folder
+d.generate sdk code)"]-->I
 I["package sdk code"]-->J
 J["optional:build code and run test"]-->K
 K["upload artifacts"]-->L
@@ -160,7 +166,8 @@ Step of "run `generateScript`":
 
 `TypeSpec-Project-Sync.ps1`
  - input: 
-   - projectDirectory
+   - sdkProjectDirectory
+   - typespecProjectDirectory
    - repo
    - commit
    - additionalDirectories
@@ -168,10 +175,20 @@ Step of "run `generateScript`":
    - localSpecRepoPath
 Note: we might pull out tsp-location.yaml create/update part as single script to be used by #2 scenario
 
+Function `Get-{Language}-Tsp-Location-Path`
+ - input: specific language emitter options loaded from tspconfig.yaml
+ - output: path of tsp-location.yaml
+
 `TypeSpec-Project-Generate.ps1`
  - input: 
    - projectDirectory
+   - repo
+   - commit
+   - additionalDirectories
    - typespecAdditionalOptions (emitter options)
+
+Function `Generate-{Language}-New-Project-Scaffolding`
+ - input: path of tsp-location.yaml
 
 ###### 4.2 Outer Dev loop SDK repo pipeline
 ```mermaid
