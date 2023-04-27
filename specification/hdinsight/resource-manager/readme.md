@@ -110,7 +110,7 @@ directive:
 
 ### Tag: package-2023-04-15-preview
 
-These settings apply only when `--tag=2023-04-15-preview` is specified on the command line.
+These settings apply only when `--tag=2023-04-15-preview` is specified on the command line, add a new field to control use secure channel during creation.
 
 ``` yaml $(tag) == 'package-2023-04-preview'
 input-file:
