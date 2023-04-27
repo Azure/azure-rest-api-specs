@@ -1726,12 +1726,7 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "name": "accessPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the access policy that is being added to the Redis cache.",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "$ref": "#/parameters/AccessPolicyNameParameter"
           },
           {
             "name": "parameters",
@@ -1794,12 +1789,7 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "name": "accessPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the access policy that is being deleted from the Redis cache.",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "$ref": "#/parameters/AccessPolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1854,12 +1844,7 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "name": "accessPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the access policy that is being deleted from the Redis cache.",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "$ref": "#/parameters/AccessPolicyNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1930,7 +1915,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicyAssignments/{accessPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicyAssignments/{accessPolicyAssignmentName}": {
       "put": {
         "tags": [
           "Redis",
@@ -1952,19 +1937,14 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "name": "accessPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the access policy to assign.",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentSet"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
             },
             "description": "Parameters supplied to the Create Update Access Policy Assignment operation."
           },
@@ -1979,13 +1959,13 @@
           "200": {
             "description": "The existing access policy assignment was successfully updated. Check provisioningState to see detailed status.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentSet"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
             }
           },
           "201": {
             "description": "The new access policy assignment was successfully created. Check provisioningState to see detailed status.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentSet"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
             }
           },
           "default": {
@@ -2020,12 +2000,7 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "name": "accessPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the access policy being unassigned.",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2049,7 +2024,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentSet"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
             }
           },
           "default": {
@@ -2080,12 +2055,7 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "name": "accessPolicyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the assigned access policy.",
-            "pattern": "^[a-zA-Z0-9]+$"
+            "$ref": "#/parameters/AccessPolicyAssignmentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2098,7 +2068,7 @@
           "200": {
             "description": "Response of get access policy assignments.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentSet"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
             }
           },
           "default": {
@@ -2732,7 +2702,8 @@
         "ports": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           "description": "A list of redis instances to reboot, specified by per-instance SSL ports or non-SSL ports."
         }
@@ -3083,25 +3054,8 @@
       "description": "List of access policies (with properties) of a Redis cache.",
       "type": "object"
     },
-    "RedisCacheAccessPolicyAssignment": {
+    "RedisCacheAccessPolicyAssignmentProperties": {
       "description": "Properties for an access policy assignment",
-      "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "Object Id to assign access policy to"
-        },
-        "objectIdAlias": {
-          "type": "string",
-          "description": "User friendly name for object id. Also represents username for token based authentication"
-        }
-      },
-      "required": [
-        "objectId",
-        "objectIdAlias"
-      ],
-      "type": "object"
-    },
-    "RedisCacheAccessPolicyAssignmentSetProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -3120,24 +3074,33 @@
             "modelAsString": true
           }
         },
-        "assignments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
-          },
-          "x-ms-identifiers": [
-            "objectId"
-          ]
+        "objectId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Object Id to assign access policy to"
+        },
+        "objectIdAlias": {
+          "type": "string",
+          "description": "User friendly name for object id. Also represents username for token based authentication"
+        },
+        "accessPolicyName": {
+          "type": "string",
+          "description": "The name of the access policy that is being assigned",
+          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
         }
       },
-      "type": "object",
-      "description": "Properties of an access policy assignment set"
+      "required": [
+        "objectId",
+        "objectIdAlias",
+        "accessPolicyName"
+      ],
+      "type": "object"
     },
-    "RedisCacheAccessPolicyAssignmentSet": {
+    "RedisCacheAccessPolicyAssignment": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentSetProperties",
+          "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties",
           "description": "Properties of an access policy assignment"
         }
       },
@@ -3305,6 +3268,22 @@
       "type": "string",
       "description": "The name of the Redis cache.",
       "x-ms-parameter-location": "method",
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
+    },
+    "AccessPolicyNameParameter": {
+      "name": "accessPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the access policy that is being added to the Redis cache.",
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
+    },
+    "AccessPolicyAssignmentNameParameter": {
+      "name": "accessPolicyAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the access policy assignment.",
       "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
     }
   }
