@@ -2244,6 +2244,13 @@
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         },
+        "channelAffinity": {
+          "description": "The channel affinity of call recording\r\nWhen 'recordingChannelType' is set to 'unmixed', if channelAffinity is not specified, 'channel' will be automatically assigned.\r\nChannel-Participant mapping details can be found in the metadata of the recording.\r\n///",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChannelAffinity"
+          }
+        },
         "externalStorage": {
           "$ref": "#/definitions/ExternalStorage",
           "description": "Optional property to specify location where recording will be stored"
@@ -2276,6 +2283,26 @@
         },
         "kind": {
           "$ref": "#/definitions/CallLocatorKind"
+        }
+      }
+    },
+    "ChannelAffinity": {
+      "description": "Channel affinity for a participant",
+      "required": [
+        "participant"
+      ],
+      "type": "object",
+      "properties": {
+        "channel": {
+          "format": "int32",
+          "description": "Channel number to which bitstream from a particular participant will be written.",
+          "maximum": 4,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The identifier for the participant whose bitstream will be written to the channel \r\nrepresented by the channel number."
         }
       }
     },
