@@ -197,7 +197,7 @@ namespace Azure.Messaging.EventGrid {
     @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
     @query({name:"timeout"})
     maxWaitTime?: int32 = 60;
-  }, ReceiveResult & CreatedResponse >;
+  }, ReceiveResult>;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
