@@ -13,11 +13,11 @@
       "properties": {
         "to": {
           "description": "The communication identifier of the target user.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "from": {
           "description": "The communication identifier of the user who initiated the call.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "serverCallId": {
           "description": "The Id of the server call",
@@ -570,9 +570,8 @@
           "description": "The status of the email",
           "type": "string",
           "enum": [
-            "Bounced",
-            "Delivered",
             "Failed",
+            "Delivered",
             "FilteredSpam",
             "Quarantined",
             "Suppressed"
@@ -581,10 +580,6 @@
             "name": "AcsEmailDeliveryReportStatus",
             "modelAsString": true
           }
-        },
-        "deliveryStatusDetails": {
-          "description": "Detailed information about the status if any",
-          "type": "string"
         },
         "deliveryAttemptTimeStamp": {
           "description": "The time at which the email delivery report received timestamp",
