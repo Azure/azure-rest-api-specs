@@ -38,9 +38,13 @@ enum AlignMode {
 }
 
 enum ModelStatus {
+  @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
+  @doc("The model is being trained.")
   Running: "RUNNING",
+  @doc("The model has been trained and is ready to be used for anomaly detection.")
   Ready: "READY",
+  @doc("The model training failed.")
   Failed: "FAILED",
 }
 
@@ -118,9 +122,11 @@ model MultivariateBatchDetectionOptions {
 Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection. The data schema should
-be exactly the same as those used in the training phase.
+be exactly the same as those used in the training phase. The input data must
+contain at least slidingWindow entries preceding the start time of the data
+to be detected.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
 Number of top contributed
@@ -206,7 +212,7 @@ Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
 Data schema of the input data source. The default
