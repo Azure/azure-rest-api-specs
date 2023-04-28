@@ -433,93 +433,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Authorization/enablePrivateLinkNetworkAccess": {
-      "post": {
-        "tags" : [
-          "EnablePrivateLinkNetworkAccess"
-        ],
-        "operationId": "EnablePrivateLinkNetworkAccess_Post",
-        "description": "Enable private link network access for global administrator",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnablePrivateLinkNetworkAccessObject"
-            },
-            "description": "Parameters supplied to enable private link network access."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Post Succeed."
-          },
-          "202": {
-            "description": "Accepted - Returns an Azure async operation header with HttpStatusCode 202.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Enable a private link network access.": {
-            "$ref": "./examples/PostEnablePrivateLinkNetworkAccess.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Authorization/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "AuthorizationOperations_List",
-        "description": "Lists all of the available Microsoft.Authorization REST API operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List provider operations": {
-            "$ref": "./examples/ListProviderOperations.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -529,15 +442,6 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkAssociationProperties",
           "description": "The properties of the PrivateLinkAssociation."
-        }
-      }
-    },
-    "EnablePrivateLinkNetworkAccessObject": {
-      "type": "object",
-      "properties": {
-        "scope": {
-          "type": "string",
-          "description": "The scope of private link associations where network access is updated."
         }
       }
     },
@@ -690,7 +594,6 @@
       }
     },
     "CloudError": {
-      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -698,52 +601,6 @@
         }
       },
       "description": "An error response for a resource management request."
-    },
-    "Operation": {
-      "description": "Microsoft.Authorization operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Authorization",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list Microsoft.Authorization operations. It contains a list of operations and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [],
-          "description": "List of Microsoft.Authorization operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
     }
   },
   "parameters": {
