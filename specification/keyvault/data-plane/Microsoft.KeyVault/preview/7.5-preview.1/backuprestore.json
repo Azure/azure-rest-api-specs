@@ -82,12 +82,12 @@
         }
       }
     },
-    "/trustedmodebackup": {
+    "/managedidentitymodebackup": {
       "post": {
         "tags": [
-          "TrustedModeFullBackup"
+          "ManagedIdentityModeFullBackup"
         ],
-        "operationId": "TrustedModeFullBackup",
+        "operationId": "ManagedIdentityModeFullBackup",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -132,7 +132,7 @@
         },
         "x-ms-examples": {
           "Create full backup": {
-            "$ref": "./examples/TrustedModeFullBackup-example.json"
+            "$ref": "./examples/ManagedIdentityModeFullBackup-example.json"
           }
         }
       }
@@ -232,12 +232,12 @@
         }
       }
     },
-    "/trustedmoderestore": {
+    "/managedidentitymoderestore": {
       "put": {
         "tags": [
-          "TrustedModeFullRestore"
+          "ManagedIdentityModeFullRestore"
         ],
-        "operationId": "TrustedModeFullRestore",
+        "operationId": "ManagedIdentityModeFullRestore",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -248,7 +248,7 @@
             "name": "restoreBlobDetails",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/TrustedModeRestoreOperationParameters"
+              "$ref": "#/definitions/ManagedIdentityModeRestoreOperationParameters"
             },
             "description": "The Azure blob storage account and folder details where the previous successful full backup was stored"
           },
@@ -282,7 +282,7 @@
         },
         "x-ms-examples": {
           "Restore all key materials from a given backup folder": {
-            "$ref": "./examples/TrustedModeFullRestore-example.json"
+            "$ref": "./examples/ManagedIdentityModeFullRestore-example.json"
           }
         }
       }
@@ -389,12 +389,12 @@
         }
       }
     },
-    "/keys/{keyName}/trustedmoderestore": {
+    "/keys/{keyName}/managedidentitymoderestore": {
       "put": {
         "tags": [
           "Keys"
         ],
-        "operationId": "TrustedModeSelectiveKeyRestoreOperation",
+        "operationId": "ManagedIdentityModeSelectiveKeyRestoreOperation",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -412,7 +412,7 @@
             "name": "restoreBlobDetails",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/TrustedModeRestoreOperationParameters"
+              "$ref": "#/definitions/ManagedIdentityModeRestoreOperationParameters"
             },
             "description": "The Azure blob storage account and backup folder details where the previous successful full backup was stored"
           },
@@ -446,7 +446,7 @@
         },
         "x-ms-examples": {
           "Selectively restore a given key and its versions from a given backup": {
-            "$ref": "./examples/TrustedModeSelectiveRestore-example.json"
+            "$ref": "./examples/ManagedIdentityModeSelectiveRestore-example.json"
           }
         }
       }
@@ -468,7 +468,7 @@
         "sasTokenParameters"
       ]
     },
-    "TrustedModeRestoreOperationParameters": {
+    "ManagedIdentityModeRestoreOperationParameters": {
       "properties": {
         "blobStorageAccountContainerUri": {
           "type": "string",
