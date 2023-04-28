@@ -79,39 +79,40 @@
           "tag1": "value1",
           "tag2": "value2"
         }
-      },
-      "201": {
-        "body": {
-          "location": "East US",
-          "sku": {
-            "name": "Standard"
-          },
-          "properties": {
-            "networkAcls": {
-              "ipRules": [
-                {
-                  "ipMask": "185.48.100.00/24",
-                  "rights": [
-                    "Manage",
-                    "Send",
-                    "Listen"
-                  ]
-                }
-              ],
-              "publicInternetRule": {
+      }
+    },
+    "201": {
+      "body": {
+        "location": "East US",
+        "sku": {
+          "name": "Standard"
+        },
+        "properties": {
+          "networkAcls": {
+            "ipRules": [
+              {
+                "ipMask": "185.48.100.00/24",
                 "rights": [
+                  "Manage",
+                  "Send",
                   "Listen"
                 ]
               }
+            ],
+            "publicInternetRule": {
+              "rights": [
+                "Listen"
+              ]
             }
-          },
-          "name": "nh-sdk-ns",
-          "type": "Microsoft.NotificationHubs/namespaces",
-          "tags": {
-            "tag1": "value1",
-            "tag2": "value2"
           }
+        },
+        "name": "nh-sdk-ns",
+        "type": "Microsoft.NotificationHubs/namespaces",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
         }
       }
     }
   }
+}
