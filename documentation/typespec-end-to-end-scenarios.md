@@ -33,28 +33,30 @@ Aside from the developer process, we have a few goals on managing repo package v
 flowchart TD
 classDef highlight fill:#ffd700
 classDef grey fill:#CCCCCC,color:#555555;
-User((::)) --> A[clone spec repo locally]
-A --> B[1.1 Create folder structure according ]
-B --> C["1.2 tsp init https://aka.ms/azure-init
-(on the root folder to create a new typespec project)"]
+User((::)) --> |Develop in rest-api repo|A[Clone rest-api repo]
+User((::)) --> |Develop in custom service repo|B1[1.2 `tsp init https://aka.ms/azure-init`]
+B1-->D
+A --> B[1.1 Create folder structure per spec ]
+B --> C["1.2 `tsp init https://aka.ms/azure-init`<br>delete package.json in project folder"]
 C --> D[...iterate on *.tsp specs]
-D --> D
-D --> E["tsp compile . (generate swaggers)"]
-E --> F["1.3 generate swagger examples
+D ---> |Loop|F
+D --> E["1.3 generate swagger examples
 (need a new script)"]
+E --> F["tsp compile . (generate swaggers)"]
+F --> G1[Copy specs files into rest-api repo]
+G1 --> G2[Optionally: Adopt shift-left pipeline]
+G2--> G
 F --> G[create a spec PR]
-class A,G,D,E grey
+class A,G,D,F grey
 ```
 ##### Remaining Tasks
 | Step | Step Detail | Assignee | Implemented | Verified |
 |--|--|--|--:|--:|
-| 1.1 | [Folder layout doc]() | Ray Chen | [X] | [X] |
-| 1.2 | `tsp init`. <br> additional info may be collected for SDK | Allen Zhang | [X] | | [ ] |
-| 1.3 | example generation | Ray Chen | [ ] | | [ ] |
+| 1.1 | [Folder layout doc](./typespec-structure-guidelines.md) | Ray Chen | [X] | [X] |
+| 1.2 | `tsp init`. <br> additional info may be collected for SDK | Allen Zhang | [X] | [ ] |
+| 1.3 | Example generation instructions | Ray Chen | [ ] | [ ] |
 
 ##### Details & Open questions
-- We may ask user to enter additional info like SDK path and capture in `tspconfig.yaml`
-- SDK scaffolding step would use the info to create folder 
 
 #### 2. SDK project scaffolding
 
@@ -174,16 +176,16 @@ M["generate apiView"]
 ###### Details & Open questions
 
 - Step of "run `initScript`":
- - output: a string map of environment variables to be set in following scripts.
+   - output: a string map of environment variables to be set in following scripts.
   
 - Step of "run `generateScript`":
- - input: [GenerateInputSchema](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/sdkautomation/GenerateInputSchema.json)
-   - specFolder
-   - headSha
-   - repoUrl
-   - relatedTypeSpecProjectFolder
+   - input: [GenerateInputSchema](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/sdkautomation/GenerateInputSchema.json)
+     - specFolder
+     - headSha
+     - repoUrl
+     - relatedTypeSpecProjectFolder
 
- - output: [GenerateOutputSchema](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/sdkautomation/GenerateOutputSchema.json)
+   - output: [GenerateOutputSchema](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/sdkautomation/GenerateOutputSchema.json)
    - packageName
    - result
    - path
@@ -191,19 +193,19 @@ M["generate apiView"]
    - artifacts
 
 - `TypeSpec-Project-Sync.ps1`
- - input: 
-   - projectDirectory
-   - repo
-   - commit
-   - additionalDirectories
-   - localMode (use local spec and don't fetch from remote)
-   - localSpecRepoPath
+   - input: 
+     - projectDirectory
+     - repo
+     - commit
+     - additionalDirectories
+     - localMode (use local spec and don't fetch from remote)
+     - localSpecRepoPath
 Note: we might pull out tsp-location.yaml create/update part as single script to be used by #2 scenario
 
 - `TypeSpec-Project-Generate.ps1`
- - input: 
-   - projectDirectory
-   - typespecAdditionalOptions (emitter options)
+   - input: 
+     - projectDirectory
+     - typespecAdditionalOptions (emitter options)
 
 ##### 4.2 Outer Dev loop SDK repo pipeline
 ###### Flowchart
