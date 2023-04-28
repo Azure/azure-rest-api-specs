@@ -459,12 +459,24 @@
           "200": {
             "description": "Post Succeed."
           },
+          "202": {
+            "description": "Accepted - Returns an Azure async operation header with HttpStatusCode 202.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Enable a private link network access.": {
