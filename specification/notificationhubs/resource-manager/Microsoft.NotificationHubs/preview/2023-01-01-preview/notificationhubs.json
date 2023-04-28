@@ -2390,10 +2390,16 @@
         ],
         "summary": "Approves or rejects Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
         "description": "This is an asynchronous API, which sets the Azure-AsyncOperation header. \r\nCaller can use URI from that header to check status of the operation.",
+        "operationId": "PrivateEndpointConnections_ApproveOrReject",
         "consumes": [
           "application/json",
           "text/json",
           "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -2442,11 +2448,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ApproveOrReject": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionApproveOrReject.json"
           }
         }
       },
@@ -2456,6 +2470,7 @@
         ],
         "summary": "Deletes the Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
         "description": "This is an asynchronous API, which sets the Azure-AsyncOperation header. \r\nCaller can use URI from that header to check status of the operation.",
+        "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
             "in": "path",
@@ -2493,11 +2508,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionDelete.json"
           }
         }
       },
@@ -2506,6 +2526,12 @@
           "PrivateLink"
         ],
         "summary": "Returns a Private Endpoint Connection with a given name. \r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2546,10 +2572,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionGet.json"
           }
         }
       }
@@ -2560,6 +2594,12 @@
           "PrivateLink"
         ],
         "summary": "Returns all Private Endpoint Connections that belong to the given Notification Hubs namespace.\r\nThis is a public API that can be called directly by Notification Hubs users.",
+        "operationId": "PrivateEndpointConnections_List",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2593,10 +2633,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResourcePrivateLinkResourceCollection"
+            }
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/Namespaces/PrivateEndpointConnectionList.json"
           }
         }
       }
@@ -2608,6 +2656,12 @@
         ],
         "summary": "Returns Group Id response. \r\nThis is a public API required by the Networking RP contract. It can be used directly by Notification Hubs users.",
         "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\r\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
+        "operationId": "PrivateEndpointConnections_GetGroupId",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2648,10 +2702,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_GetGroupId": {
+            "$ref": "./examples/Namespaces/PrivateLinkResourcesGet.json"
           }
         }
       }
@@ -2663,6 +2725,12 @@
         ],
         "summary": "Returns all Group Ids supported by the Notification Hubs RP.\r\nThis is a public API required by the Networking RP contract. It can be used directly by Notification Hubs users.",
         "description": "Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.\r\nThat's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.",
+        "operationId": "PrivateEndpointConnections_ListGroupIds",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -2696,10 +2764,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcePrivateLinkResourceCollection"
+            }
           },
           "default": {
             "description": "Error code with reason."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListGroupIds": {
+            "$ref": "./examples/Namespaces/PrivateLinkResourceList.json"
           }
         }
       }
@@ -3875,6 +3951,18 @@
         }
       }
     },
+    "PrivateEndpointConnectionResourcePrivateLinkResourceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "PrivateLinkConnectionStatus": {
       "enum": [
         "Disconnected",
@@ -3886,6 +3974,73 @@
       "x-ms-enum": {
         "name": "PrivateLinkConnectionStatus",
         "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
+        }
+      }
+    },
+    "PrivateLinkResourcePrivateLinkResourceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
       }
     },
     "PrivateLinkServiceConnection": {
