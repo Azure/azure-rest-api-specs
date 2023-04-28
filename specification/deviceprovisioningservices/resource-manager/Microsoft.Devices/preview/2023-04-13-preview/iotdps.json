@@ -1986,9 +1986,22 @@
             "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
           }
         },
-        "enableDataResidency": {
+        "enableCustomerEnabledFailover": {
           "type": "boolean",
-          "description": "Optional.\nIndicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster recovery."
+          "description": "Indicates if the DPS instance has Customer Enabled Failover enabled."
+        },
+        "dpsFailoverDescription": {
+          "description": "The DPS failover input.",
+          "type": "object",
+          "properties": {
+            "failoverRegion": {
+              "description": "Region that failover is porting to",
+              "type": "string"
+            }
+          },
+          "required": [
+            "failoverRegion"
+          ]
         },
         "portalOperationsHostName": {
           "type": "string",
