@@ -5,7 +5,7 @@
 It is crucial having simple and smooth processes that allow developer to easily:
 
 1. [Scaffolding TypeSpec project in `rest-api-specs` repo](#1-typespec-project-scaffolding)
-2. [Scaffolding SDK projects in SDK repos](#2-sdk-project-scaffolding)
+2. [SDK code generation in SDK repos](#2-sdk-code-generation)
    1. All SDK required information (SDK path, namespace etc) should be set in `tspconfig.yaml`.
    2. Single call via `eng/scripts` in each language repo to complete the task
    3. Optional, intelligent CI pipeline component to create related PRs when a new service API PR is submitted.
@@ -58,7 +58,7 @@ class A,G,D,F grey
 
 ##### Details & Open questions
 
-#### 2. SDK project scaffolding
+#### 2. SDK code generation
 
 ##### Flowchart
 ```mermaid
@@ -69,20 +69,52 @@ User((::))-->A
 A["clone Rest-API and SDK repo locally"] --> B
 B["2.1 pre-requsite dependencies installation
 (each language would have a installation script)"] --> C
-C["2.2 create sdk project scaffolding
- (e.g. Invoke-TypeSpecDataPlaneGenerateSDKPackage.ps1)"<br>This should create tsp_location.yaml from referencing the source tspconfig.yaml] --> D
- D["- tsp-location.yaml is created.<br> - User update commit hash
- (need a new script)"]
-D-->E[2.3 Running Sync & Generate script]
-E-->F[SDK code can be compiled and PR submitted]
-class A,D,F grey
+C["2.2 TypeSpec-Project-Sync.ps1
+(a.create tsp-location.yaml and drop to temp location
+b.update tsp-location.yaml if existed
+c.fetch specs from remote spec repo or use local spec repo)"] --> D
+ D["2.3 TypeSpec-Project-Generate.ps1
+(a.create scaffolding for new project
+b.update tsp-location.yaml
+c.copy typespec specs to temp folder
+d.generate sdk code)"]
+D-->E["code build"]
+class A,E grey
+class C,D highlight
 ```
+- 2.2 `TypeSpec-Project-Sync.ps1`
+   - input: 
+     - sdkProjectDirectory
+     - typespecProjectDirectory
+     - repo
+     - commit
+     - additionalDirectories
+     - localMode (use local spec and don't fetch from remote)
+     - localSpecRepoPath
+    Note: we might pull out tsp-location.yaml create/update part as single script to be used by #2 scenario
+   - output:
+     - path of sdkProjectDirectory
+
+- Function `Get-{Language}-Tsp-Location-Path`
+   - input: sdkProjectDirectory
+   - output: path of tsp-location.yaml
+
+- 2.3 `TypeSpec-Project-Generate.ps1`
+   - input: 
+     - projectDirectory
+     - typespecAdditionalOptions (emitter options)
+
+- Function `Generate-{Language}-New-Project-Scaffolding`
+   - input: path of tsp-location.yaml
+
 ##### Remaining Tasks
 | Step | Step Detail | Assignee | Implemented | Verified |
 |--|--|--|--:|--:|
 | 2.1 | Dependencies scripts | SDK owner | [ ] | [] |
-| 2.2 | creating SDK folder & `tsp-location.yaml` | Michael, EngSys | [ ] | | [ ] |
-| 2.3 | Sync & Generate script | Michael, EngSys | [ ] | | [ ] |
+| 2.2 | common script | EngSys | [ ] | | [ ] |
+| 2.3 | common script | EngSys | [ ] | | [ ] |
+| 2.4 | language script to call common script | SDK owner | [] | []
+| 2.5 | update to dotnet build target | Michael, Crystal | [] | []
 
 ##### Details & Open questions
 - 2.1 Optional: Scripts should exists under `\eng\scripts\` folder on all repos.
@@ -94,23 +126,31 @@ class A,D,F grey
 flowchart TD;
   classDef highlight fill:#ffd700
   User((::))-->A
+  A
   A["clone spec repo and clone sdk repo"]-->B
-  B-->B
   B["... iterate on .tsp specs"]-->C
   C["tsp compile ."]-->D
-  D["copy all related files to spec repo folder
+  D["optional:copy all related files to spec repo folder if it's not there
   (*.tsp,*.json,tspconfig.yaml)"]-->E
   D-->F
-  E["create API spec PR"]
-  F["docker run ..."]-->I
-  D-->G
-  G["TypeSpec-Project-Sync.ps1
-  (on cloned sdk repo folder)"]-->H
-  H["TypeSpec-Project-Generate.ps1"]-->I
+  E["create API spec PR"]-->|loop|B
+  F["docker run
+  (a. call `initScript` - 2.1
+  b. call `generateScript` 
+  (2.2 + 2.3) )"]-->I  
+  D-->K
+  K["optional:2.1"]-->G
+  G["2.2"]-->H
+  H["2.3"]-->I
   I["build code and work on test,sample,readme,etc."]-->J
+  I-->|loop|B
   J["create sdk PR"]
-  class G,H highlight
+  class F,G,H highlight
 ```
+- Note: docker run command is
+  ```
+  docker run -it --privileged -v {local_spec_repo_path}:/spec-repo -v {local_work_folder}:/work-dir -v sdkgeneration.azurecr.io/sdk-generation:latest --typespec-project={relative_typespec_project} --sdk={sdk_to_generate}
+  ```
 ##### Remaining Tasks
 | Step | Step Detail | Assignee | Implemented | Verified |
 |--|--|--|--:|--:|
@@ -152,20 +192,13 @@ A["filter SDK languages to be generated
 B["get language scripts path for `initScript` and `generateScript`
 (from codegen_to_sdk_config.json)"]-->C
 C["run `initScript`
-(dependencies installation)"]-->E
+(2.1)"]-->G
 subgraph D["run `generateScript`"]
-  E
   G
   H
 end
-E["create sdk project scaffolding if it's a new service
-(e.g. Invoke-TypeSpecDataPlaneGenerateSDKPackage.ps1)"]-->G
-G["TypeSpec-Project-Sync.ps1
-(a.create/update tsp-location.yaml
-b.fetch specs from remote spec repo or use local spec repo
-c.then copy typespec specs to temp folder)"]-->H
-H["TypeSpec-Project-Generate.ps1
-(generate sdk code)"]-->I
+G["2.2"]-->H
+H["2.3"]-->I
 I["package sdk code"]-->J
 J["optional:build code and run test"]-->K
 K["upload artifacts"]-->L
@@ -192,21 +225,6 @@ M["generate apiView"]
    - changelog
    - artifacts
 
-- `TypeSpec-Project-Sync.ps1`
-   - input: 
-     - projectDirectory
-     - repo
-     - commit
-     - additionalDirectories
-     - localMode (use local spec and don't fetch from remote)
-     - localSpecRepoPath
-Note: we might pull out tsp-location.yaml create/update part as single script to be used by #2 scenario
-
-- `TypeSpec-Project-Generate.ps1`
-   - input: 
-     - projectDirectory
-     - typespecAdditionalOptions (emitter options)
-
 ##### 4.2 Outer Dev loop SDK repo pipeline
 ###### Flowchart
 ```mermaid
@@ -215,7 +233,7 @@ flowchart TD;
   classDef automationStep fill:#7de188
   Pipeline((::))-->A
 A["run `initScript`
-(dependencies installation)"]-->C
+(2.1)"]-->C
 subgraph B["run `generateScript`"]
   C
   D
@@ -223,11 +241,11 @@ subgraph B["run `generateScript`"]
   F
   G
 end
-C["TypeSpec-Project-Sync.ps1
+C["2.2
 (a.use existing tsp-location.yaml
 b.fetch specs from remote spec repo
 c.then copy typespec specs to temp folder)"]-->D
-D["TypeSpec-Project-Generate.ps1
+D["2.3
 (generate sdk code)"]-->E
 E["package sdk code"]-->F
 F["build code"]-->G
