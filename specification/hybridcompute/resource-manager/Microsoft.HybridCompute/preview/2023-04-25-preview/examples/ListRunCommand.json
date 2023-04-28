@@ -18,11 +18,17 @@
               "source": {
                 "script": "Write-Host Hello World!"
               },
-              "parameters": {
-                "param1": "value1",
-                "param2": "value2"
-              },
-              "protectedParameters": {},
+              "parameters": [
+                {
+                  "name": "param1",
+                  "value": "value1"
+                },
+                {
+                  "name": "param2",
+                  "value": "value2"
+                }
+              ],
+              "protectedParameters": [],
               "asyncExecution": false,
               "runAsUser": "user1",
               "timeoutInSeconds": 3600,
@@ -48,8 +54,8 @@
               "source": {
                 "script": "Get-Process | Where-Object { $_.CPU -gt 10000 }"
               },
-              "parameters": {},
-              "protectedParameters": {},
+              "parameters": [],
+              "protectedParameters": [],
               "asyncExecution": false,
               "runAsUser": "userA",
               "timeoutInSeconds": 100,

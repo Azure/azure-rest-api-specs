@@ -1345,14 +1345,23 @@
               "$ref": "#/definitions/MachineRunCommand"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommand"
-            }
-          },
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1366,7 +1375,10 @@
             "$ref": "./examples/PutRunCommand.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
@@ -1416,13 +1428,37 @@
               "$ref": "#/definitions/MachineRunCommand"
             }
           },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Update a Run Command": {
+            "$ref": "./examples/UpdateRunCommand.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1489,6 +1525,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Delete a Machine Extension": {
             "$ref": "./examples/DeleteRunCommand.json"
@@ -3087,14 +3126,16 @@
           "description": "The source of the run command script."
         },
         "parameters": {
-          "type": "object",
-          "additionalProperties": {},
-          "description": "JSON formatted public parameters for the run command."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCommandInputParameter"
+          }
         },
         "protectedParameters": {
-          "type": "object",
-          "additionalProperties": {},
-          "description": "JSON formatted protected parameters for the run command."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCommandInputParameter"
+          }
         },
         "asyncExecution": {
           "type": "boolean",
@@ -3121,6 +3162,14 @@
         "errorBlobUri": {
           "type": "string",
           "description": "Specifies the Azure storage blob where script error stream will be uploaded."
+        },
+        "outputBlobManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity",
+          "description": "User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
+        },
+        "errorBlobManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity",
+          "description": "User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
         },
         "provisioningState": {
           "readOnly": true,
@@ -3224,6 +3273,38 @@
         }
       ],
       "description": "Describes a Machine Extension Update."
+    },
+    "RunCommandInputParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The run command parameter name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The run command parameter value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "Describes the properties of a run command parameter."
+    },
+    "RunCommandManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id (GUID value) of the user-assigned managed identity. ObjectId should not be used if this is provided."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Object Id (GUID value) of the user-assigned managed identity. ClientId should not be used if this is provided."
+        }
+      },
+      "description": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
     }
   },
   "parameters": {}

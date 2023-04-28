@@ -4,7 +4,13 @@
     "resourceGroupName": "myResourceGroup",
     "machineName": "myMachine",
     "runCommandName": "myRunCommand",
-    "api-version": "2023-04-25-preview"
+    "api-version": "2023-04-25-preview",
+    "runCommandProperties": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -13,10 +19,6 @@
         "name": "myRunCommand",
         "type": "Microsoft.HybridCompute/machines/runcommands",
         "location": "eastus2",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
           "source": {
             "script": "Write-Host Hello World!"
@@ -31,10 +33,11 @@
               "value": "value2"
             }
           ],
-          "protectedParameters": [],
           "asyncExecution": false,
           "runAsUser": "user1",
           "timeoutInSeconds": 3600,
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt?sp=racw&st=2022-10-07T19:40:21Z&se=2022-10-08T03:40:21Z&spr=https&sv=2021-06-08&sr=b&sig=Yh7B%2Fy83olbYBdfsfbUREvd7ol8Dq5EVP3lAO4Kj4xDcN8%3D",
           "provisioningState": "Succeeded",
           "instanceView": {
             "name": "myRunCommand",
@@ -47,6 +50,13 @@
             }
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
       }
     }
   }
