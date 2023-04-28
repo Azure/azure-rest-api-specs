@@ -822,6 +822,75 @@
         }
       }
     },
+    "AvailabilityGroupInfo": {
+      "description": "The specifications of the availability group state",
+      "type": "object",
+      "properties": {
+        "failureConditionLevel": {
+          "type": "integer",
+          "description": "User-defined failure condition level under which an automatic failover must be triggered, one of the integer values shown in the table immediately below this table.",
+          "format": "int32"
+        },
+        "healthCheckTimeout": {
+          "type": "integer",
+          "description": "Wait time (in milliseconds) for the sp_server_diagnostics system stored procedure to return server-health information, before the server instance is assumed to be slow or not responding.",
+          "format": "int32"
+        },
+        "automatedBackupPreferenceDesc": {
+          "type": "string",
+          "description": "Preferred location for performing backups on the availability databases in this availability group."
+        },
+        "version": {
+          "type": "integer",
+          "description": "SQL Server availability group current version.",
+          "format": "int32"
+        },
+        "basicFeatures": {
+          "type": "boolean",
+          "description": "SQL Server basic availability group."
+        },
+        "dtcSupport": {
+          "type": "boolean",
+          "description": "SQL Server availability group DTC support enabled."
+        },
+        "dbFailover": {
+          "type": "boolean",
+          "description": "SQL Server availability group failover for database health conditions."
+        },
+        "isDistributed": {
+          "type": "boolean",
+          "description": "SQL Server distributed availability group."
+        },
+        "clusterTypeDesc": {
+          "type": "string",
+          "description": "SQL Server availability group cluster type description"
+        },
+        "requiredSynchronizedSecondariesCommit": {
+          "type": "integer",
+          "description": "Availability group required the number of synchronized secondary to commit."
+        },
+        "isContained": {
+          "type": "boolean",
+          "description": "SQL Server availability group contained system databases."
+        },
+        "primaryReplica": {
+          "type": "string",
+          "description": "Name of the server instance that is hosting the current primary replica."
+        },
+        "primaryRecoveryHealthDesc": {
+          "type": "string",
+          "description": "Indicates the recovery health of the primary replica."
+        },
+        "secondaryRecoveryHealthDesc": {
+          "type": "string",
+          "description": "Indicates the recovery health of a secondary replica."
+        },
+        "synchronizationHealthDesc": {
+          "type": "string",
+          "description": "Reflects a roll-up of the synchronizationHealthDesc of all availability replicas in the availability group."
+        }
+      }
+    },
     "ArcSqlServerAvailabilityGroupListResult": {
       "description": "A list of Arc Sql Server Availability Group.",
       "type": "object",
@@ -873,15 +942,59 @@
           "type": "string",
           "description": "the availability group name."
         },
-        "configure": {
-          "$ref": "#/definitions/AvailabilityGroupConfigure",
-          "description": "null",
+        "serverName": {
+          "type": "string",
+          "description": "the SQL server name."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "the SQL Server Instance name."
+        },
+        "collectionTimestamp": {
+          "description": "Timestamp for when the data was collected from the client machine.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "info": {
+          "$ref": "#/definitions/AvailabilityGroupInfo",
+          "description": "Availability Group Info",
           "x-ms-client-flatten": false
         },
-        "state": {
-          "$ref": "#/definitions/AvailabilityGroupState",
-          "description": "null",
-          "x-ms-client-flatten": false
+        "replicas": {
+          "description": "A list of Arc Sql Availability Group Replica.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "description": "Array of  Arc Sql Availability Group Replica.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SqlAvailabilityGroupReplicaResourceProperties"
+              }
+            },
+            "nextLink": {
+              "description": "Link to retrieve next page of results.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "databases": {
+          "description": "A list of Arc Sql Availability Group Databases Replicas.",
+          "type": "object",
+          "properties": {
+            "value": {
+              "description": "Array of  Arc Sql Availability Group Database Replica.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SqlAvailabilityGroupDatabaseReplicaResourceProperties"
+              }
+            },
+            "nextLink": {
+              "description": "Link to retrieve next page of results.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         },
         "provisioningState": {
           "type": "string",
@@ -1062,6 +1175,10 @@
       "type": "object",
       "description": "The properties of Arc Sql availability group database replica resource",
       "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "the database name."
+        },
         "replicaName": {
           "type": "string",
           "description": "the database replica name."
