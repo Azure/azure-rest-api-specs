@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Load Testing",
     "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
-    "version": "2022-11-01"
+    "version": "2023-04-01-preview"
   },
   "paths": {
     "/tests/{testId}": {
@@ -191,6 +191,12 @@
           },
           {
             "in": "query",
+            "name": "continuationToken",
+            "description": "Continuation token to get the next page of response",
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "maxpagesize",
             "description": "Number of results in response.",
             "type": "integer",
@@ -259,11 +265,12 @@
             "in": "query",
             "name": "fileType",
             "description": "File type",
-            "type": "string",
+            "type": "integer",
+            "format": "int32",
             "enum": [
-              "JMX_FILE",
-              "USER_PROPERTIES",
-              "ADDITIONAL_ARTIFACTS"
+              0,
+              1,
+              2
             ],
             "x-ms-enum": {
               "name": "fileType",
@@ -435,6 +442,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/TestIdPathParameter"
+          },
+          {
+            "in": "query",
+            "name": "continuationToken",
+            "description": "Continuation token to get the next page of response",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -901,6 +914,12 @@
             "in": "query",
             "name": "orderby",
             "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime asc. Supported fields - executedDateTime",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "continuationToken",
+            "description": "Continuation token to get the next page of response",
             "type": "string"
           },
           {
@@ -1610,15 +1629,15 @@
       }
     },
     "AutoAbortCriteria": {
-      "description": "Auto Abort criteria for a test.",
+      "description": "Auto abort criteria for a test.",
       "type": "object",
       "properties": {
-	    "autoAbortEnabled": {
-          "description": "Auto abort is enabled or not",
+        "autoAbortEnabled": {
+          "description": "Auto abort is enabled or not ",
           "type": "boolean"
         },
         "autoAbortMetrics": {
-          "description": "Map of id and auto Abort metrics { id  : auto abort metrics }.",
+          "description": "Map of id and auto abort metrics { id  : auto abort metrics }.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/AutoAbortMetric"
@@ -1627,18 +1646,23 @@
       }
     },
     "AutoAbortMetric": {
-    "description": "auto abort metric",
-    "type": "object",
-    "properties": {
-      "error_rate": {
-        "format": double
-        "description": "Auto abort criteria for error rate metric",
-        "type": number
-      },
-      "time_window_error_rate": {
-        "format": long
-        "description": "Time window in seconds for error rate metric",
-        "type": number
+      "description": "Auto abort metric",
+      "type": "object",
+      "properties": {
+        "autoAbortMetric": {
+          "description": "The auto abort metric on which the criteria should be applied. Allowed values - ‘error_rate’",
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "description": "Auto abort criteria for error rate metric",
+          "type": "number"
+        },
+        "timeWindow": {
+          "format": "int64",
+          "description": "Time window in seconds for error rate metric",
+          "type": "integer"
+        }
       }
     },
     "CertificateMetadata": {
@@ -1730,10 +1754,12 @@
       "properties": {
         "code": {
           "description": "The error code.",
+          "minLength": 1,
           "type": "string"
         },
         "message": {
           "description": "The error message.",
+          "minLength": 1,
           "type": "string"
         },
         "target": {
@@ -1776,22 +1802,15 @@
       "description": "File info",
       "type": "object",
       "properties": {
-        "url": {
-          "description": "File URL.",
-          "type": "string"
-        },
-        "fileName": {
-          "description": "Name of the file.",
-          "type": "string"
-        },
         "fileType": {
+          "format": "int32",
           "description": "File type",
           "enum": [
-            "JMX_FILE",
-            "USER_PROPERTIES",
-            "ADDITIONAL_ARTIFACTS"
+            0,
+            1,
+            2
           ],
-          "type": "string",
+          "type": "integer",
           "x-ms-enum": {
             "name": "FileType",
             "modelAsString": true,
@@ -1855,6 +1874,14 @@
         },
         "validationFailureDetails": {
           "description": "Validation failure error details",
+          "type": "string"
+        },
+        "fileName": {
+          "description": "Name of the file.",
+          "type": "string"
+        },
+        "url": {
+          "description": "File URL.",
           "type": "string"
         }
       }
@@ -2202,6 +2229,16 @@
           "description": "No of concurrent virtual users",
           "type": "integer"
         },
+        "rps": {
+          "format": "int32",
+          "description": "Throughput required",
+          "type": "integer"
+        },
+        "maxResponseTime": {
+          "format": "int32",
+          "description": "Maximum response time of the API/hitPoint",
+          "type": "integer"
+        },
         "rampUpTime": {
           "format": "int32",
           "description": "Ramp up time",
@@ -2415,10 +2452,12 @@
         },
         "resourceId": {
           "description": "Azure resource id.",
+          "minLength": 1,
           "type": "string"
         },
         "metricNamespace": {
           "description": "Metric name space.",
+          "minLength": 1,
           "type": "string"
         },
         "displayDescription": {
@@ -2427,10 +2466,12 @@
         },
         "name": {
           "description": "The invariant value of metric name",
+          "minLength": 1,
           "type": "string"
         },
         "aggregation": {
           "description": "Metric aggregation.",
+          "minLength": 1,
           "type": "string"
         },
         "unit": {
@@ -2439,6 +2480,7 @@
         },
         "resourceType": {
           "description": "Azure resource type.",
+          "minLength": 1,
           "type": "string"
         }
       }
@@ -2482,7 +2524,7 @@
         "passFailCriteria": {
           "$ref": "#/definitions/PassFailCriteria"
         },
-        "autoAbort": {                                               
+        "autoAbortCriteria": {
           "$ref": "#/definitions/AutoAbortCriteria"
         },
         "secrets": {
@@ -2639,7 +2681,7 @@
         "passFailCriteria": {
           "$ref": "#/definitions/PassFailCriteria"
         },
-        "autoAbort": {                                               
+        "autoAbortCriteria": {
           "$ref": "#/definitions/AutoAbortCriteria"
         },
         "secrets": {
@@ -3257,7 +3299,6 @@
       "description": "URL to perform data plane API operations on the resource.",
       "required": true,
       "type": "string",
-      "format": "uri",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     }
