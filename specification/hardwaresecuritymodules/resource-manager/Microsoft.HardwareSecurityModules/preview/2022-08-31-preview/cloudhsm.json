@@ -522,6 +522,23 @@
           },
           {
             "$ref": "#/parameters/peConnectionName"
+          },
+          {
+            "in": "query",
+            "name": "chsmOperation",
+            "type": "string",
+            "description": "Private endpoint connection operation state.",
+            "enum": [
+              "Provisioning",
+              "Succeeded",
+              "Failed",
+              "Deleting",
+              "Canceled"
+            ],
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -761,9 +778,11 @@
           "type": "string",
           "description": "The Cloud HSM Cluster's provisioningState",
           "enum": [
+            "Provisioning",
             "Succeeded",
-            "Canceled",
-            "Failed"
+            "Failed",
+            "Deleting",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -785,6 +804,20 @@
           ],
           "items": {
             "$ref": "#/definitions/CloudHsmProperties"
+          }
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "The Cloud HSM Cluster public network access"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connection resources",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
           }
         }
       },
@@ -982,14 +1015,6 @@
     "PrivateEndpointConnectionProperties": {
       "type": "object",
       "properties": {
-        "groupIds": {
-          "description": "The group ids for the private endpoint resource.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpoint",
           "description": "The private endpoint resource."
@@ -1058,7 +1083,9 @@
         "Succeeded",
         "Creating",
         "Deleting",
-        "Failed"
+        "Failed",
+        "Updating",
+        "InternalError"
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointConnectionProvisioningState",
