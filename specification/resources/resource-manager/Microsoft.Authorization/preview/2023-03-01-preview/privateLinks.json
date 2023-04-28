@@ -433,6 +433,45 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Authorization/enablePrivateLinkNetworkAccess": {
+      "post": {
+        "tags": [
+          "EnablePrivateLinkNetworkAccess"
+        ],
+        "operationId": "EnablePrivateLinkNetworkAccess_Post",
+        "description": "Enable private link network access for global administrator",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnablePrivateLinkNetworkAccessObject"
+            },
+            "description": "Parameters supplied to enable private link network access."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post Succeed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enable a private link network access.": {
+            "$ref": "./examples/PostEnablePrivateLinkNetworkAccess.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
