@@ -1632,33 +1632,16 @@
       "description": "Auto abort criteria for a test.",
       "type": "object",
       "properties": {
-        "autoAbortEnabled": {
+        "isAutoAbortEnabled": {
           "description": "Auto abort is enabled or not ",
           "type": "boolean"
         },
-        "autoAbortMetrics": {
-          "description": "Map of id and auto abort metrics { id  : auto abort metrics }.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AutoAbortMetric"
-          }
-        }
-      }
-    },
-    "AutoAbortMetric": {
-      "description": "Auto abort metric",
-      "type": "object",
-      "properties": {
-        "autoAbortMetric": {
-          "description": "The auto abort metric on which the criteria should be applied. Allowed values - ‘error_rate’",
-          "type": "string"
-        },
-        "value": {
+        "errorRate": {
           "format": "double",
           "description": "Value of auto abort criteria metric",
           "type": "number"
         },
-        "timeWindow": {
+        "errorRateTimeWindow": {
           "format": "int64",
           "description": "Time window in seconds for auto abort metric",
           "type": "integer"
