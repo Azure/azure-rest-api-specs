@@ -19,10 +19,11 @@ enum ServiceApiVersions {
 // Supported operations.
 //
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
-// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&timeout=60&maxEvents={maxEvents}
+// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge?api-Version={apiVersion}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
-//
+// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
+
 
 @server(
   "{endpoint}",
@@ -85,6 +86,9 @@ namespace Azure.Messaging.EventGrid {
   model BrokerProperties {
     @doc("The token used to lock the event.")
     lockToken: LockToken;
+
+    @doc("The attempt count for deliverying the event.")
+    deliveryAttemptCount:: int32;
   }
 
   @doc("Receive operation details per Cloud Event.")
@@ -135,6 +139,15 @@ namespace Azure.Messaging.EventGrid {
     succeededLockTokens: string[];
   }
 
+  @doc("The result of the Reject operation.")
+  model RejectResult {
+    @doc("Array of LockToken values for failed cloud events.")
+    failedLockTokens: FailedLockToken[];
+
+    @doc("Array of LockToken values for succeeded cloud events.")
+    succeededLockTokens: string[];
+  }
+
   @doc("Array of lock token strings for the corresponding received Cloud Events to be released.")
   model ReleaseOptions {
     @doc("String array of lock tokens.")
@@ -143,6 +156,12 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Array of lock token strings for the corresponding received Cloud Events to be acknowledged.")
   model AcknowledgeOptions {
+    @doc("String array of lock tokens.")
+    lockTokens: string[];
+  }
+
+  @doc("Array of lock token strings for the corresponding received Cloud Events to be rejected.")
+  model RejectOptions {
     @doc("String array of lock tokens.")
     lockTokens: string[];
   }
@@ -183,7 +202,7 @@ namespace Azure.Messaging.EventGrid {
   }, PublishResult>;
 
   // Receive Operation:
-  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&timeout=60&maxEvents={maxEvents}
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
@@ -196,12 +215,12 @@ namespace Azure.Messaging.EventGrid {
     @path
     eventSubscriptionName: string;
 
-    @doc("Max Events count to be received. Minimum value is 1, while maximum value is 100 seconds. If not specified, the default value is 1.")
+    @doc("Max Events count to be received. Minimum value is 1, while maximum value is 100 events. If not specified, the default value is 1.")
     @query
     maxEvents?: int32 = 1;
 
-    @doc("Timeout value for receive operation in Seconds. It is the time in seconds that the server approximately waits for the availability of an event and responds to the request. If an event is available, the broker responds immediately to the client. Minimum value is 10 seconds, while maximum value is 120 seconds. If not specified, the default value is 60 seconds.")
-    @query({name:"timeout"})
+    @doc("Max wait time value for receive operation in Seconds. It is the time in seconds that the server approximately waits for the availability of an event and responds to the request. If an event is available, the broker responds immediately to the client. Minimum value is 10 seconds, while maximum value is 120 seconds. If not specified, the default value is 60 seconds.")
+    @query({name:"maxWaitTime"})
     maxWaitTime?: int32 = 60;
   }, ReceiveResult>;
 
@@ -230,9 +249,9 @@ namespace Azure.Messaging.EventGrid {
   }, AcknowledgeResult>;
 
   // Release Operation:
-  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}&eventDeliveryDelayInSeconds={eventDeliveryDelayInSeconds}
   
-  @doc("Release batch of Cloud Events.")
+  @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release")
   @post op ReleaseCloudEvents is Azure.Core.RpcOperation<{
     @doc("content type")
@@ -247,8 +266,35 @@ namespace Azure.Messaging.EventGrid {
     @path
     eventSubscriptionName: string;
 
+    @doc("Delivery delay for the event in seconds. When value is 0, the event is released immediately. It is an optional parameter and if not specified, the default value is 0.")
+    @query
+    eventDeliveryDelayInSeconds?: int32 = 0;
+
     @doc("ReleaseOptions")
     @body    
     lockTokens : ReleaseOptions;
   }, ReleaseResult>;
+
+  // Reject Operation:
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
+
+  @doc("Reject batch of Cloud Events.")
+  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject")
+  @post op RejectCloudEvents is Azure.Core.RpcOperation<{
+    @doc("content type")
+    @header("content-type")
+    contentType: "application/json; charset=utf-8";
+
+    @doc("Topic Name.")
+    @path
+    topicName: string;
+
+    @doc("Event Subscription Name.")
+    @path
+    eventSubscriptionName: string;
+
+    @doc("RejectOptions")
+    @body
+    lockTokens : RejectOptions;
+  }, RejectResult>;
 }
