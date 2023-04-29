@@ -306,6 +306,61 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "ResourceManagementPrivateLink"
+        ],
+        "operationId": "ResourceManagementPrivateLink_Update",
+        "description": "Update a resource management private link.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceManagementPrivateLinkParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLinkPatch"
+            },
+            "description": "Patch parameters for Resource Management private link."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns information about the Resource Management Private Link.",
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementPrivateLink"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Resource Management Private Link.": {
+            "$ref": "./examples/PatchResourceManagementPrivateLink.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ResourceManagementPrivateLink"
@@ -665,6 +720,19 @@
         "location": {
           "type": "string",
           "description": "the region to create private link association."
+        }
+      }
+    },
+    "ResourceManagementPrivateLinkPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
         }
       }
     },
