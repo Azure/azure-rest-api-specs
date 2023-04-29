@@ -336,7 +336,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceManagementPrivateLinkPatch"
+              "$ref": "#/definitions/ResourceManagementPrivateLinkLocation"
             },
             "description": "Patch parameters for Resource Management private link."
           }
@@ -720,19 +720,6 @@
         "location": {
           "type": "string",
           "description": "the region to create private link association."
-        }
-      }
-    },
-    "ResourceManagementPrivateLinkPatch": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
         }
       }
     },
