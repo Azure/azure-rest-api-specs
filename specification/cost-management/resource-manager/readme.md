@@ -32,11 +32,22 @@ azure-validator: false
 
 ---
 
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.CostManagement/preview/2023-04-01-preview/common-types.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2022-10-01/costmanagement.json
+```
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.CostManagement/stable/2022-10-01/common-types.json
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.json
@@ -52,7 +63,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-10-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-10-05'
+``` yaml $(tag) == 'package-preview-2022-10-05'
 input-file:
   - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2022-10-05-preview/settings.json
@@ -254,7 +265,13 @@ input-file:
 directive:
   - suppress: R4011
     from: costmanagement.exports.json
-    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
+    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'
+  - suppress: TrackedResourcePatchOperation
+    from: costmanagement.exports.json
+    reason: False alarm, Export is a proxy resource
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: costmanagement.exports.json
+    reason: False alarm, Export is a proxy resource
   - suppress: R3023
     from: costmanagement.generatedetailedcostreport.json    
     reason: 'API change needed, Operations API must be implemented for operations'
