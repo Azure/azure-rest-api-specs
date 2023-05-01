@@ -1362,6 +1362,7 @@
       "description": "The type of attachment.",
       "enum": [
         "teamsInlineImage",
+        "teamsImage",
         "file"
       ],
       "type": "string",
@@ -1440,21 +1441,29 @@
           },
           "example": [
             {
-              "id": "A27C7079-626F-4D23-8BEE-582F2C376B5A",
+              "id": "f508ce15-e878-431f-b871-f530cac5331d",
               "attachmentType": "teamsInlineImage",
               "contentType": "png",
               "name": "SomeImage.png",
-              "url": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original",
-              "previewUrl": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
+              "url": "https://{resourceEndpoint}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original",
+              "previewUrl": "https://{resourceEndpoint}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
             },
             {
-              "id": "R47C7079-626F-4D23-8BEE-582F2CS543F",
+              "id": "dc869855-9743-496d-80da-cd09d2fc2c63",
               "attachmentType": "file",
               "contentType": "txt",
               "name": "document.txt",
-              "url": "https://example.sharepoint.com/gYVRbks8GlpVRbk-PoBs8GlpgYVRbk",
-              "previewUrl": ""
-            }
+              "url": "https://example.sharepoint.com/download.aspx?share=EzvQXTNWhiceSNYrd4a26w-EzvQXTNWhiceSNYrd4a26w",
+              "previewUrl": "https://example.sharepoint.com/5-6rZ6VQt2-38QXvebIY6g-EzvQXTNWhiceSNYrd4a26w"
+            },
+            {
+              "id": "c4c539e5-a286-46a6-bb6a-67ff662c5bf3",
+              "attachmentType": "teamsImage",
+              "contentType": "png",
+              "name": "SomeImage.png",
+              "url": "https://{resourceEndpoint}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original",
+              "previewUrl": "https://{resourceEndpoint}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
+            },
           ]
         },
         "initiatorCommunicationIdentifier": {
