@@ -37,11 +37,8 @@ These settings apply only when `--tag=package-2023-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-05-01-preview'
 input-file:
   - Microsoft.ServiceNetworking/preview/2023-05-01-preview/TrafficController.json
-```
-
-```yaml
 openapi-type: arm
-tag: package-2022-10-01-preview
+tag: package-2023-05-01-preview
 ```
 
 ### Tag: package-2022-10-01-preview
