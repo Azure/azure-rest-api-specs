@@ -1526,10 +1526,10 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete a Machine Extension": {
+          "Delete a Machine Run Command": {
             "$ref": "./examples/DeleteRunCommand.json"
           }
         }
@@ -1638,7 +1638,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GET all Machine Extensions": {
+          "GET all Machine Run Commands": {
             "$ref": "./examples/ListRunCommand.json"
           }
         }
@@ -3129,13 +3129,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RunCommandInputParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The parameters used by the script."
         },
         "protectedParameters": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RunCommandInputParameter"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The parameters used by the script."
         },
         "asyncExecution": {
           "type": "boolean",
