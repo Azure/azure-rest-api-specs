@@ -1320,6 +1320,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the run command."
           },
           {
@@ -1345,8 +1346,11 @@
               "$ref": "#/definitions/MachineRunCommand"
             }
           },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            },
             "headers": {
               "Location": {
                 "description": "The URL of the resource used to check the status of the asynchronous operation.",
@@ -1403,6 +1407,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the run command."
           },
           {
@@ -1483,6 +1488,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the run command."
           },
           {
@@ -1557,6 +1563,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "The name of the run command."
           },
           {
