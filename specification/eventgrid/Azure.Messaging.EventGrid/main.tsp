@@ -112,7 +112,7 @@ namespace Azure.Messaging.EventGrid {
     lockToken: LockToken;
 
     @doc("Error code related to the token. Example of such error codes are BadToken: which indicates the Token is not formatted correctly, TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors.")
-    errorCode: int32;
+    errorCode: string;
 
     @doc("Description of the token error.")
     errorDescription: string; 
@@ -123,28 +123,28 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("The result of the Acknowledge operation.")
   model AcknowledgeResult {
-    @doc("Array of LockToken values for failed cloud events.")
+    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
 
-    @doc("Array of LockToken values for succeeded cloud events.")
+    @doc("Array of lock tokens values for the successfully acknowledged cloud events.")
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Release operation.")
   model ReleaseResult {
-    @doc("Array of LockToken values for failed cloud events.")
+    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
 
-    @doc("Array of LockToken values for succeeded cloud events.")
+    @doc("Array of lock tokens values for the successfully released cloud events.")
     succeededLockTokens: string[];
   }
 
   @doc("The result of the Reject operation.")
   model RejectResult {
-    @doc("Array of LockToken values for failed cloud events.")
+    @doc("Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).")
     failedLockTokens: FailedLockToken[];
 
-    @doc("Array of LockToken values for succeeded cloud events.")
+    @doc("Array of lock tokens values for the successfully rejected cloud events.")
     succeededLockTokens: string[];
   }
 
