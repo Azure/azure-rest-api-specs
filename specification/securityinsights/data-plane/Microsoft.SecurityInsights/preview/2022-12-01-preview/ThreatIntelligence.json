@@ -51,7 +51,7 @@
           "200": {
             "description": "The API returns 200 when one or many indicators are successfully validated and published.",
             "schema": {
-              "$ref": "#/definitions/UploadIndicatorsResponse"
+              "$ref": "#/definitions/ErrorResponseObject"
             }
           },
           "429": {
@@ -106,15 +106,17 @@
         }
       }
     },
-    "UploadIndicatorsResponse": {
+    "ErrorResponseObject": {
+      "description": "Error response object with error details.",
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "#/definitions/ErrorData"
         }
       }
     },
-    "ErrorDetail": {
+    "ErrorData": {
+      "description": "Further details about the error response",
       "type": "object",
       "properties": {
         "code": {
@@ -150,6 +152,13 @@
         "message": {
           "description": "Error message",
           "type": "string"
+        },
+        "validationErrorMessages": {
+          "description": "List of validation errors for a single indicator.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
