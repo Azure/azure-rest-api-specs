@@ -18,7 +18,7 @@ enum ServiceApiVersions {
 //
 // Supported operations.
 //
-// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
+// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge?api-Version={apiVersion}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
@@ -76,19 +76,13 @@ namespace Azure.Messaging.EventGrid {
     subject?: string;
   }
 
-  @doc("LockToken information.")
-  model LockToken {
-    @doc("The token used to lock the event.")
-    lockToken: string;
-  }
-
   @doc("Properties of the Event Broker operation.")
   model BrokerProperties {
     @doc("The token used to lock the event.")
-    lockToken: LockToken;
+    lockToken: string;
 
     @doc("The attempt count for deliverying the event.")
-    deliveryAttemptCount:: int32;
+    deliveryAttemptCount: int32;
   }
 
   @doc("Receive operation details per Cloud Event.")
@@ -109,7 +103,7 @@ namespace Azure.Messaging.EventGrid {
   @doc("Failed LockToken information.")
   model FailedLockToken {
     @doc("LockToken value")
-    lockToken: LockToken;
+    lockToken: string;
 
     @doc("Error code related to the token. Example of such error codes are BadToken: which indicates the Token is not formatted correctly, TokenLost: which indicates that token is not found, and InternalServerError: For any internal server errors.")
     errorCode: string;
