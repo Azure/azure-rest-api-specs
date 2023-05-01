@@ -336,7 +336,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceManagementPrivateLinkLocation"
+              "$ref": "#/definitions/ResourceManagementPrivateLinkPatch"
             },
             "description": "Patch parameters for Resource Management private link."
           }
@@ -710,6 +710,13 @@
         "location": {
           "type": "string",
           "description": "the region of the rmpl"
+        },
+        "tags": {
+          "description": "The resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-azure-resource": true
@@ -720,6 +727,19 @@
         "location": {
           "type": "string",
           "description": "the region to create private link association."
+        }
+      }
+    },
+    "ResourceManagementPrivateLinkPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
         }
       }
     },
