@@ -26,9 +26,39 @@ These are the global settings for the DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05
+tag: package-2023-07-preview
 ```
 
+### Tag: package-2023-07-preview
+
+These settings apply only when `--tag=package-2023-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-preview'
+input-file:
+  - Microsoft.Network/preview/2023-07-01-preview/dns.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+  - where:
+      - $.definitions.RecordSetProperties.properties.TTL
+      - $.definitions.RecordSetProperties.properties.ARecords
+      - $.definitions.RecordSetProperties.properties.AAAARecords
+      - $.definitions.RecordSetProperties.properties.MXRecords
+      - $.definitions.RecordSetProperties.properties.NSRecords
+      - $.definitions.RecordSetProperties.properties.PTRRecords
+      - $.definitions.RecordSetProperties.properties.SRVRecords
+      - $.definitions.RecordSetProperties.properties.TXTRecords
+      - $.definitions.RecordSetProperties.properties.CNAMERecord
+      - $.definitions.RecordSetProperties.properties.SOARecord
+      - $.definitions.RecordSetProperties.properties.DSRecord
+      - $.definitions.RecordSetProperties.properties.TLSARecord
+      - $.definitions.RecordSetProperties.properties.NAPTRRecord
+      - $.definitions.RecordSetUpdateParameters.properties.RecordSet
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+```
 
 ### Tag: package-2018-05
 
@@ -57,6 +87,7 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase  
 ```
+
 ### Tag: package-2018-03-preview
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
@@ -182,61 +213,4 @@ See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.dns
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dns
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-10
-  - tag: package-2016-04
-```
-
-### Tag: package-2017-10 and java
-
-These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.dns.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/dns/mgmt-v2017_10_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-04 and java
-
-These settings apply only when `--tag=package-2016-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.dns.v2016_04_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/dns/mgmt-v2016_04_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Network/stable/2016-04-01/dns.json
-```
-
-
-
+See configuration in [readme.java.md](./readme.java.md)
