@@ -87,7 +87,8 @@
       "properties": {
         "code": {
           "description": "Error code.",
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "message": {
@@ -111,7 +112,7 @@
           "readOnly": true,
           "description": "The additional details of the error.",
           "items": {
-            "$ref": "#/definitions/ErrorDetails"
+            "$ref": "#/definitions/ErrorDetailsWithNestedDetails"
           },
           "x-ms-identifiers": []
         }
