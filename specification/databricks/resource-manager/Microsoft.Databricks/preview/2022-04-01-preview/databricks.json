@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DatabricksClient",
+    "title": "AzureDatabricksManagementClient",
     "version": "2022-04-01-preview",
     "description": "These APIs allow end users to operate on Azure Databricks Workspace resources."
   },
@@ -47,6 +47,9 @@
           },
           "Get a workspace with custom parameters": {
             "$ref": "./examples/WorkspaceGetParameters.json"
+          },
+          "Get a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
+            "$ref": "./examples/WorkspaceManagedDiskEncryptionGet.json"
           }
         },
         "parameters": [
@@ -143,6 +146,12 @@
           },
           "Revert Customer-Managed Key (CMK) encryption to Microsoft Managed Keys encryption on a workspace": {
             "$ref": "./examples/DisableEncryption.json"
+          },
+          "Create a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
+            "$ref": "./examples/WorkspaceManagedDiskEncryptionCreate.json"
+          },
+          "Update a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
+            "$ref": "./examples/WorkspaceManagedDiskEncryptionUpdate.json"
           }
         },
         "parameters": [
@@ -546,7 +555,8 @@
       },
       "put": {
         "tags": [
-          "PUT"
+          "PUT",
+          "PrivateEndpointConnections"
         ],
         "summary": "Update private endpoint connection status",
         "description": "Update the status of a private endpoint connection with the specified name",
@@ -606,7 +616,8 @@
       },
       "delete": {
         "tags": [
-          "DELETE"
+          "DELETE",
+          "PrivateEndpointConnections"
         ],
         "summary": "Remove private endpoint connection",
         "description": "Remove private endpoint connection with the specified name",
@@ -748,6 +759,7 @@
         "authorizations": {
           "description": "The workspace provider authorizations.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/WorkspaceProviderAuthorization"
           }
@@ -777,6 +789,15 @@
         "storageAccountIdentity": {
           "description": "The details of Managed Identity of Storage Account",
           "$ref": "#/definitions/ManagedIdentityConfiguration"
+        },
+        "managedDiskIdentity": {
+          "description": "The details of Managed Identity of Disk Encryption Set used for Managed Disk Encryption",
+          "$ref": "#/definitions/ManagedIdentityConfiguration"
+        },
+        "diskEncryptionSetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource Id of the managed disk encryption set."
         },
         "encryption": {
           "type": "object",
@@ -1170,6 +1191,11 @@
           "type": "object",
           "description": "Encryption properties for the databricks managed services.",
           "$ref": "#/definitions/EncryptionV2"
+        },
+        "managedDisk": {
+          "type": "object",
+          "description": "Encryption properties for the databricks managed disks.",
+          "$ref": "#/definitions/ManagedDiskEncryption"
         }
       },
       "description": "Encryption entities for databricks workspace resource."
@@ -1212,6 +1238,54 @@
       },
       "required": [
         "keySource"
+      ],
+      "description": "The object that contains details of encryption used on the workspace."
+    },
+    "ManagedDiskEncryption": {
+      "type": "object",
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault",
+          "enum": [
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKeySource",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "type": "object",
+          "properties": {
+            "keyVaultUri": {
+              "type": "string",
+              "description": "The URI of KeyVault."
+            },
+            "keyName": {
+              "type": "string",
+              "description": "The name of KeyVault key."
+            },
+            "keyVersion": {
+              "type": "string",
+              "description": "The version of KeyVault key."
+            }
+          },
+          "required": [
+            "keyVaultUri",
+            "keyName",
+            "keyVersion"
+          ],
+          "description": "Key Vault input properties for encryption."
+        },
+        "rotationToLatestKeyVersionEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether the latest key version should be automatically used for Managed Disk Encryption."
+        }
+      },
+      "required": [
+        "keySource",
+        "keyVaultProperties"
       ],
       "description": "The object that contains details of encryption used on the workspace."
     },
@@ -1340,7 +1414,7 @@
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
-              "description": "Service provider: Microsoft.ResourceProvider",
+              "description": "Service provider: ex Microsoft.Databricks",
               "type": "string"
             },
             "resource": {
@@ -1349,6 +1423,10 @@
             },
             "operation": {
               "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description for the resource operation.",
               "type": "string"
             }
           }
@@ -1360,6 +1438,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/Operation"
           },
@@ -1504,6 +1583,13 @@
           "description": "Private endpoint",
           "$ref": "#/definitions/PrivateEndpoint"
         },
+        "groupIds": {
+          "type": "array",
+          "description": "GroupIds from the private link service resource.",
+          "items": {
+            "type": "string"
+          }
+        },
         "privateLinkServiceConnectionState": {
           "title": "Private link service service connection state",
           "description": "Private endpoint connection state",
@@ -1551,7 +1637,7 @@
           "type": "string",
           "description": "The description for the current state of a private endpoint connection"
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "description": "Actions required for a private endpoint connection"
         }
@@ -1587,6 +1673,7 @@
         "endpointDetails": {
           "description": "The Ports used when connecting to domainName.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/EndpointDetail"
           }
@@ -1628,6 +1715,7 @@
         "endpoints": {
           "description": "The endpoints that Workspace connect to",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           }
@@ -1637,6 +1725,7 @@
     "OutboundEnvironmentEndpointCollection": {
       "description": "Collection of outbound network dependency endpoints",
       "type": "array",
+      "x-ms-identifiers": [],
       "items": {
         "$ref": "#/definitions/OutboundEnvironmentEndpoint"
       }

@@ -253,15 +253,15 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/BigDataPoolResourceInfo"
             },
-            "description": ""
+            "description": "Created"
           },
           "204": {
             "description": ""
@@ -433,7 +433,8 @@
         "cacheSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The cache size"
+          "description": "The cache size",
+          "readOnly": true
         },
         "dynamicExecutorAllocation": {
           "$ref": "#/definitions/DynamicExecutorAllocation",
@@ -457,7 +458,8 @@
           "type": "array",
           "items": {
             "$ref": "../../../../common/v1/types.json#/definitions/LibraryInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "sparkConfigProperties": {
           "$ref": "#/definitions/SparkConfigProperties",

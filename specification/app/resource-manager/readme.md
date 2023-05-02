@@ -26,15 +26,62 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-06
+tag: package-preview-2022-11
 ```
 
 
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.App/preview/2022-11-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2022-11-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2022-11-01-preview/BillingMeters.json
+  - Microsoft.App/preview/2022-11-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-11-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-11-01-preview/Jobs.json
+  - Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-11-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2022-11-01-preview/Global.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-11-01-preview/SourceControls.json
+```
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.App/stable/2022-10-01/AuthConfigs.json
+  - Microsoft.App/stable/2022-10-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2022-10-01/BillingMeters.json
+  - Microsoft.App/stable/2022-10-01/CommonDefinitions.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2022-10-01/ContainerApps.json
+  - Microsoft.App/stable/2022-10-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2022-10-01/Diagnostics.json
+  - Microsoft.App/stable/2022-10-01/Global.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2022-10-01/SourceControls.json
+```
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-06'
+``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
   - Microsoft.App/preview/2022-06-01-preview/AuthConfigs.json
   - Microsoft.App/preview/2022-06-01-preview/CommonDefinitions.json
