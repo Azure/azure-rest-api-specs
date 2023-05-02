@@ -1,17 +1,22 @@
 {
-  "operationId": "FleetMembers_Get",
-  "title": "Gets a FleetMember resource.",
+  "operationId": "FleetMembers_Update",
+  "title": "Updates a FleetMember resource synchronously.",
   "parameters": {
-    "api-version": "2022-09-02-preview",
+    "api-version": "2023-03-15-preview",
     "subscriptionId": "subid1",
     "resourceGroupName": "rg1",
     "fleetName": "fleet1",
-    "fleetMemberName": "member-1"
+    "fleetMemberName": "member-1",
+    "properties": {
+      "properties": {
+        "group": "staging"
+      }
+    }
   },
   "responses": {
     "200": {
       "headers": {
-        "ETag": "kd30rkdfo49="
+        "ETag": "23ujdflewrj3="
       },
       "body": {
         "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
@@ -25,9 +30,10 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
         },
-        "eTag": "kd30rkdfo49=",
+        "eTag": "23ujdflewrj3=",
         "properties": {
           "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
+          "group": "staging",
           "provisioningState": "Succeeded"
         }
       }
