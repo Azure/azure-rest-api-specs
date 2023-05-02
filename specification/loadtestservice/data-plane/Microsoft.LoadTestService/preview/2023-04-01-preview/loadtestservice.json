@@ -1628,22 +1628,22 @@
         }
       }
     },
-    "AutoAbortCriteria": {
-      "description": "Auto abort criteria for a test.",
+    "AutoStopCriteria": {
+      "description": "Auto stop criteria for a test.",
       "type": "object",
       "properties": {
-        "isAutoAbortEnabled": {
-          "description": "Auto abort is enabled or not ",
+        "isAutoStopEnabled": {
+          "description": "Auto stop is enabled or not ",
           "type": "boolean"
         },
         "errorRate": {
           "format": "double",
-          "description": "Value of auto abort criteria metric",
+          "description": "Value of auto stop criteria metric",
           "type": "number"
         },
         "errorRateTimeWindow": {
           "format": "int64",
-          "description": "Time window in seconds for auto abort metric",
+          "description": "Time window in seconds for auto stop metric",
           "type": "integer"
         }
       }
@@ -2507,8 +2507,8 @@
         "passFailCriteria": {
           "$ref": "#/definitions/PassFailCriteria"
         },
-        "autoAbortCriteria": {
-          "$ref": "#/definitions/AutoAbortCriteria"
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria"
         },
         "secrets": {
           "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the secret is stored in an Azure Key Vault, the value should be the secret identifier and the type should be AKV_SECRET_URI. If the secret is stored elsewhere, the secret value should be provided directly and the type should be SECRET_VALUE.",
@@ -2664,8 +2664,8 @@
         "passFailCriteria": {
           "$ref": "#/definitions/PassFailCriteria"
         },
-        "autoAbortCriteria": {
-          "$ref": "#/definitions/AutoAbortCriteria"
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria"
         },
         "secrets": {
           "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the secret is stored in an Azure Key Vault, the value should be the secret identifier and the type should be AKV_SECRET_URI. If the secret is stored elsewhere, the secret value should be provided directly and the type should be SECRET_VALUE.",
