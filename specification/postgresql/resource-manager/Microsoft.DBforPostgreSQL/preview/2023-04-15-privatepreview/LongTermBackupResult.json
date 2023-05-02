@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrbackupstatus/{backupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrbackup/{backupName}": {
       "get": {
         "tags": [
           "LongTermRetention"
@@ -68,7 +68,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LtrServerBackupStatus"
+              "$ref": "#/definitions/LtrServerBackup"
             }
           },
           "default": {
@@ -104,6 +104,16 @@
           "description": "Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc",
           "type": "string"
         },
+        "startTime": {
+          "description": "Start time of the operation.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time of the operation.",
+          "format": "date-time",
+          "type": "string"
+        },
         "status": {
           "description": "Service-set extensible enum indicating operation?s kind",
           "enum": [
@@ -126,7 +136,7 @@
       },
       "description": "The properties of a server backup."
     },
-    "LtrServerBackupStatus": {
+    "LtrServerBackup": {
       "type": "object",
       "properties": {
         "properties": {
