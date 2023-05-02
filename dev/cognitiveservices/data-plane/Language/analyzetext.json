@@ -545,29 +545,6 @@
         }
       ]
     },
-    "PreBuiltResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
     "CustomTaskParameters": {
       "type": "object",
       "description": "Parameters object for a text analysis task using custom models.",
@@ -598,11 +575,11 @@
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/DocumentError"
+            "$ref": "common.json#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "common.json#/definitions/RequestStatistics"
         },
         "projectName": {
           "type": "string",
@@ -825,7 +802,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1168,7 +1145,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1505,7 +1482,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1634,7 +1611,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -1803,7 +1780,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -2247,7 +2224,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -2313,7 +2290,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "common.json#/definitions/PreBuiltResult"
         }
       ],
       "required": [
@@ -2395,7 +2372,7 @@
     "AnalyzeTextJobStatistics": {
       "properties": {
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "common.json#/definitions/RequestStatistics"
         }
       },
       "type": "object"
@@ -2689,24 +2666,6 @@
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
-        },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
         }
       }
     },
