@@ -90,7 +90,7 @@ Each package should have the following minimum structure:
 
 Authors may use folders as desired for organizing tsp files.
 
-To distinguish between folders which define a service, an SDK, or both, one can look to the `tspconfig.yaml` which should only have SDK configuration data for for projects that wish to generate SDKs.
+To distinguish between folders which define a service, an SDK, or both, one can look to the `tspconfig.yaml` which should only have SDK configuration data for for projects that wish to generate SDKs. Please copy it from [sample project](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml) as a template.
 
 - Services should **not** have a `package.json` directly in the TypeSpec project directory as they all should be using the `package.json` in the root director of the repo for installing any dependencies needed.
   - The root level `package.json` will only depend on the `@azure-tools/typespec-autorest` and `@azure-tools/typespec-apiview` emitters.
