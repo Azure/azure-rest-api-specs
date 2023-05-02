@@ -288,6 +288,9 @@
           },
           "ApiManagementCreateServiceWithNatGatewayEnabled": {
             "$ref": "./examples/ApiManagementCreateServiceWithNatGatewayEnabled.json"
+          },
+          "ApiManagementCreateServiceWithoutLegacyConfigurationApi": {
+            "$ref": "./examples/ApiManagementCreateServiceWithoutLegacyConfigurationApi.json"
           }
         },
         "parameters": [
@@ -1111,6 +1114,17 @@
       ],
       "description": "Custom hostname configuration."
     },
+    "ConfigurationApi": {
+      "type": "object",
+      "properties": {
+        "legacyApiEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indication whether or not the legacy Configuration API (v1) should be exposed on the API Management service."
+        }
+      },
+      "description": "Information regarding the Configuration API of the API Management service."
+    },
     "VirtualNetworkConfiguration": {
       "type": "object",
       "properties": {
@@ -1169,6 +1183,10 @@
         "publicIpAddressId": {
           "type": "string",
           "description": "Public Standard SKU IP V4 based IP address to be associated with Virtual Network deployed service in the location. Supported only for Premium SKU being deployed in Virtual Network."
+        },
+        "configurationApi": {
+          "$ref": "#/definitions/ConfigurationApi",
+          "description": "Configuration API configuration of the API Management service."
         },
         "virtualNetworkConfiguration": {
           "$ref": "#/definitions/VirtualNetworkConfiguration",
