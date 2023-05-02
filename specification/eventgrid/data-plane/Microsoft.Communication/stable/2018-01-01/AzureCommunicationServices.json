@@ -13,11 +13,11 @@
       "properties": {
         "to": {
           "description": "The communication identifier of the target user.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "from": {
           "description": "The communication identifier of the user who initiated the call.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "serverCallId": {
           "description": "The Id of the server call",
@@ -37,11 +37,17 @@
             },
             "sipHeaders": {
               "type": "object",
-              "description": "Sip Headers for incoming call"
+              "description": "Sip Headers for incoming call",
+              "additionalProperties": {
+                "type": "string"
+              }
             },
             "voipHeaders": {
               "type": "object",
-              "description": "Voip Headers for incoming call"
+              "description": "Voip Headers for incoming call",
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           }
         },
