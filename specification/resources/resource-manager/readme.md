@@ -1083,7 +1083,6 @@ suppressions:
  - code: PathForPutOperation
  - code: TopLevelResourcesListBySubscription
  - code: PostOperationAsyncResponseValidation
- - code: ResourceMustReferenceCommonTypes
  - code: ResourceNameRestriction
    from: privateLinks.json
    reason: Tenant level APIs validation failure that are not errors. Suppressing the errors for tenant APIs and resource name pattern missing from the previous versions.
