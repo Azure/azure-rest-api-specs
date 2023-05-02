@@ -1,24 +1,25 @@
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@service({title:"TrafficController"})
-@service({version: "2022-10-01-preview"})
+@service({
+  title: "TrafficController",
+  version: "2023-05-01-preview",
+})
 @doc("Traffic Controller Provider management API.")
-@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace Microsoft.ServiceNetworking;
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-
 
 
 //----------------------- Frontends -----------------------
@@ -35,29 +36,13 @@ model Frontend is TrackedResource<FrontendProperties>{
 
 @doc("Frontend Properties.")
 model FrontendProperties {
-  @doc("Frontend Mode (Optional).")
-  mode?: FrontendMode;
-  @doc("Frontend IP Address Version (Optional).")
-  ipAddressVersion?: FrontendIPAddressVersion;
-  @doc("Frontend Public IP Address (Optional).")
-  publicIPAddress?: FrontendPropertiesIPAddress;
+  @visibility("read")
+  @doc("The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.")
+  fqdn : string;
+
   @visibility("read")
   @doc("Provisioning State of Traffic Controller Frontend Resource")
   provisioningState?: ProvisioningState;
-}
-
-enum FrontendMode {
-  public
-}
-enum FrontendIPAddressVersion {
-  IPv4,
-  IPv6,
-}
-
-@doc("Frontend IP Address.")
-model FrontendPropertiesIPAddress {
-  @doc("IP Address.")
-  id: string;
 }
 
 //----------------------- Associations -----------------------
@@ -111,10 +96,10 @@ model TrafficControllerProperties {
   configurationEndpoints?: string[];
   @visibility("read")
   @doc("Frontends References List")
-  frontends? : ResourceID[];
+  frontends? : ResourceId[];
   @visibility("read")
   @doc("Associations References List")
-  associations? : ResourceID[];
+  associations? : ResourceId[];
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -132,7 +117,7 @@ enum ProvisioningState{
 }
 
 @doc("Resource ID definition used by parent to reference child resources.")
-model ResourceID{
+model ResourceId{
   @doc("Resource ID of child resource.")
   id : string;
 }
@@ -147,7 +132,7 @@ interface FrontendsInterface extends ResourceInstanceOperations<Frontend, Fronte
 }
 
 @armResourceOperations
-interface TrafficControllerInterface extends ResourceInstanceOperations<TrafficController, TrafficControllerProperties>{
+interface TrafficControllerInterface extends TrackedResourceOperations<TrafficController, TrafficControllerProperties>{
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
