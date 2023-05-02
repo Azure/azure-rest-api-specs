@@ -1264,7 +1264,7 @@
           "type": "string"
         },
         "sourceIdentity": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the source of the call"
         },
         "operationContext": {
@@ -1334,6 +1334,17 @@
       "type": "object",
       "properties": {
         "value": {
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationUserIdentifierModel": {
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
           "type": "string"
         }
       }
@@ -1411,17 +1422,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "CommunicationUserIdentifierModel": {
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
         }
       }
     },
@@ -1545,8 +1545,16 @@
           "type": "string"
         },
         "sourceIdentity": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "Source identity."
+        },
+        "correlationId": {
+          "description": "The correlation ID.",
+          "type": "string"
+        },
+        "answeredByIdentifier": {
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "Identity of the answering entity. Only populated when identity is provided in the request."
         }
       }
     },
@@ -1566,6 +1574,10 @@
           "description": "The callback uri.",
           "type": "string"
         },
+        "operationContext": {
+          "description": "A customer set value used to track the answering of a call.",
+          "type": "string"
+        },
         "mediaStreamingConfiguration": {
           "$ref": "#/definitions/MediaStreamingConfiguration",
           "description": "Media Streaming Configuration."
@@ -1575,8 +1587,8 @@
           "type": "string"
         },
         "answeredByIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The identifier of the contoso app which answers the call"
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "The identifier of the call automation entity which answers the call"
         }
       }
     },
