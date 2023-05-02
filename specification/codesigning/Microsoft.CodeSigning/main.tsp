@@ -176,7 +176,6 @@ digest.
 }
 
 @doc("Sign status request parameters")
-@parentResource(CertificateProfile)
 model CodeSignStatus {
   @doc("Azure Code Signing account name.")
   @path
