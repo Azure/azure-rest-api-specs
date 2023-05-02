@@ -43,7 +43,7 @@
         "description": "Create or Update a Cloud HSM Cluster in the specified subscription.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "original-uri"
         },
         "parameters": [
           {
@@ -522,23 +522,6 @@
           },
           {
             "$ref": "#/parameters/peConnectionName"
-          },
-          {
-            "in": "query",
-            "name": "chsmOperation",
-            "type": "string",
-            "description": "Private endpoint connection operation state.",
-            "enum": [
-              "Provisioning",
-              "Succeeded",
-              "Failed",
-              "Deleting",
-              "Canceled"
-            ],
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": true
-            }
           }
         ],
         "responses": {
@@ -597,6 +580,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "CloudHsmClusterPrivateEndpointConnection_ListByResource_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_ListByCloudHsmCluster_MaximumSet_Gen.json"
@@ -649,128 +635,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CHsmTrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Cloud HSM Cluster Resource",
       "type": "object",
       "x-ms-azure-resource": true
-    },
-    "CHsmTrackedResource": {
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResource"
-        }
-      ]
-    },
-    "AzureResource": {
-      "title": "Azure Resource",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
-        "systemData": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "#/definitions/AzureSystemData"
-        }
-      }
-    },
-    "AzureSystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
     },
     "CloudHsmClusterProperties": {
       "properties": {
@@ -938,63 +808,6 @@
       "description": "List of Cloud HSM Clusters",
       "type": "object"
     },
-    "CloudHsmClusterOperation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the Cloud HSM Cluster Resource Provider Operation.",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Gets or sets a value indicating whether it is a data plane action",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "display": {
-          "properties": {
-            "provider": {
-              "description": "The Resource Provider of the operation",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "The object that represents the operation.",
-              "type": "string"
-            }
-          },
-          "description": "The display string.",
-          "type": "object"
-        }
-      }
-    },
-    "CloudHsmClusterOperationListResult": {
-      "type": "object",
-      "description": "Result of the request to list Cloud HSM Cluster Provider operations. It contains a list of operations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudHsmClusterOperation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of Cloud HSM Cluster Resource Provider operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of operations."
-        }
-      }
-    },
     "PrivateEndpointConnection": {
       "type": "object",
       "properties": {
@@ -1006,7 +819,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The private endpoint connection resource.",
@@ -1101,6 +914,10 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of private endpoint connections."
         }
       },
       "description": "List of private endpoint connections associated with the specified resource."
@@ -1129,7 +946,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "A private link resource."
