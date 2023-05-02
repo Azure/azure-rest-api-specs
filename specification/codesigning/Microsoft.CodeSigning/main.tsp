@@ -10,11 +10,14 @@ using Azure.Core;
 using Autorest;
 
 @useAuth(
-  OAuth2Auth<[{
-    type: OAuth2FlowType.implicit,
-    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    scopes: ["https://codesigning.azure.net/.default"]
-  }]>)
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: ["https://codesigning.azure.net/.default"],
+    }
+  ]>
+)
 @service({
   title: "Azure.CodeSigning service",
 })
@@ -51,39 +54,49 @@ interface CertificateProfileOperations {
 
   @summary("Gets a list of Extended Key Usage OIDs that are allowed.")
   @doc("Gets a list of Extended Key Usage OIDs that are allowed.")
-  @example(
-    "./examples/CertificateProfile_GetSignEku.json",
-    "GetSignEku"
-  )
+  @example("./examples/CertificateProfile_GetSignEku.json", "GetSignEku")
   listSignEku is StandardResourceOperations.ResourceList<Eku>;
 
   @summary("Initiates a sign operation.")
   @doc("Initiates a sign operation.")
   @example("./examples/CertificateProfile_Sign.json", "Sign")
   @pollingOperation(CertificateProfileOperations.getSignOperation)
-  sign is StandardResourceOperations.LongRunningResourceAction<CertificateProfile, SignRequest, OperationStatus>;
+  sign is StandardResourceOperations.LongRunningResourceAction<
+    CertificateProfile,
+    SignRequest,
+    OperationStatus
+  >;
 }
 
 @doc("Algorithms supported for signing.")
 enum SignatureAlgorithm {
   @doc("RSASSA-PKCS1-v1_5 using SHA-256 hash algorithm.")
   RS256,
+
   @doc("RSASSA-PKCS1-v1_5 using SHA-384 hash algorithm.")
   RS384,
+
   @doc("RSASSA-PKCS1-v1_5 using SHA-512 hash algorithm.")
   RS512,
+
   @doc("RSASSA-PSS using SHA-256 hash algorithm.")
   PS256,
+
   @doc("RSASSA-PSS using SHA-384 hash algorithm.")
   PS384,
+
   @doc("RSASSA-PSS using SHA-512 hash algorithm.")
   PS512,
+
   @doc("ECDSA using P-256 and SHA-256 hash algorithm.")
   ES256,
+
   @doc("ECDSA using P-384 and SHA-384 hash algorithm.")
   ES384,
+
   @doc("ECDSA using P-521 and SHA-512 hash algorithm.")
   ES512,
+
   @doc("ECDSA using secp256k1 and SHA-256 hash algorithm.")
   ES256K,
 }
