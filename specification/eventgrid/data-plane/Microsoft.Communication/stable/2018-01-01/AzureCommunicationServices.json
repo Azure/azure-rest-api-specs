@@ -519,7 +519,7 @@
           "type": "string"
         },
         "status": {
-          "description": "The status of the email",
+          "description": "The status of the email. Any value other than Delivered is considered failed.",
           "type": "string",
           "enum": [
             "Bounced",
@@ -536,7 +536,13 @@
         },
         "deliveryStatusDetails": {
           "description": "Detailed information about the status if any",
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "statusMessage": {
+            "description": "Detailed status message",
+            "type": "string"
+          }
+        }
         },
         "deliveryAttemptTimeStamp": {
           "description": "The time at which the email delivery report received timestamp",
