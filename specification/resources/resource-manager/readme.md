@@ -1076,3 +1076,14 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+
+### Supression
+``` yaml
+suppressions:
+ - code: PathForPutOperation
+ - code: TopLevelResourcesListBySubscription
+ - code: PostOperationAsyncResponseValidation
+   from: privateLinks.json
+   reason: Tenant level APIs validation failure that are not errors. Suppressing the errors for tenant APIs.
+
+```
