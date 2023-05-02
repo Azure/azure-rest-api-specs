@@ -1362,6 +1362,7 @@
       "description": "The type of attachment.",
       "enum": [
         "teamsInlineImage",
+        "teamsImage",
         "file"
       ],
       "type": "string",
@@ -1382,7 +1383,7 @@
         "id": {
           "description": "Id of the attachment",
           "type": "string",
-          "example": "A27C7079-626F-4D23-8BEE-582F2C376B5A"
+          "example": "f508ce15-e878-431f-b871-f530cac5331d"
         },
         "attachmentType": {
           "$ref": "#/definitions/AttachmentType"
@@ -1418,7 +1419,7 @@
         "message": {
           "description": "Chat message content for messages of types text or html.",
           "type": "string",
-          "example": "<p>Come one guys, lets go for lunch together.</p><img id=\"A27C7079-626F-4D23-8BEE-582F2C376B5A\">"
+          "example": "<p>Come one guys, lets go for lunch together.</p><img id=\"f508ce15-e878-431f-b871-f530cac5331d\">"
         },
         "topic": {
           "description": "Chat message content for messages of type topicUpdated.",
@@ -1437,25 +1438,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChatAttachment"
-          },
-          "example": [
-            {
-              "id": "A27C7079-626F-4D23-8BEE-582F2C376B5A",
-              "attachmentType": "teamsInlineImage",
-              "contentType": "png",
-              "name": "SomeImage.png",
-              "url": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original",
-              "previewUrl": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
-            },
-            {
-              "id": "R47C7079-626F-4D23-8BEE-582F2CS543F",
-              "attachmentType": "file",
-              "contentType": "txt",
-              "name": "document.txt",
-              "url": "https://example.sharepoint.com/gYVRbks8GlpVRbk-PoBs8GlpgYVRbk",
-              "previewUrl": ""
-            }
-          ]
+          }
         },
         "initiatorCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel"
