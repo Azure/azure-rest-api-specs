@@ -2,74 +2,84 @@
   "parameters": {
     "serviceName": "apimService1",
     "resourceGroupName": "rg1",
-    "api-version": "2022-09-01-preview",
+    "api-version": "2023-03-01-preview",
     "subscriptionId": "subid",
     "parameters": {
       "properties": {
-        "publisherEmail": "foo@contoso.com",
-        "publisherName": "foo"
+        "certificates": [
+          {
+            "encodedCertificate": "*******Base64 encoded Certificate******************",
+            "certificatePassword": "Password",
+            "storeName": "CertificateAuthority"
+          }
+        ],
+        "publisherEmail": "apim@autorestsdk.com",
+        "publisherName": "autorestsdk"
       },
       "sku": {
-        "name": "Developer",
+        "name": "Basic",
         "capacity": 1
       },
-      "location": "South Central US",
+      "location": "Central US",
       "tags": {
-        "Name": "Contoso",
-        "Test": "User"
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
       }
     }
   },
   "responses": {
     "201": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2022-09-01-preview&asyncResponse",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2022-09-01-preview&asyncResponse"
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2023-03-01-preview&asyncResponse",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2023-03-01-preview&asyncResponse"
       },
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
-          "api-version": "2022-09-01-preview"
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
         },
-        "location": "East US",
-        "etag": "AAAAAAAmRAM=",
+        "location": "Central US",
+        "etag": "AAAAAAAp3TM=",
         "properties": {
-          "publisherEmail": "samir@microsoft.com",
-          "publisherName": "foo",
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Created",
           "targetProvisioningState": "Activating",
-          "createdAtUtc": "2022-07-11T18:41:01.2506031Z",
-          "gatewayUrl": "https://apimService1.azure-api.net",
+          "createdAtUtc": "2019-12-18T06:33:28.0906918Z",
           "hostnameConfigurations": [
             {
               "type": "Proxy",
               "hostName": "apimService1.azure-api.net",
               "negotiateClientCertificate": false,
-              "defaultSslBinding": true,
-              "certificateSource": "BuiltIn"
+              "defaultSslBinding": true
             }
           ],
           "virtualNetworkType": "None",
+          "certificates": [],
           "disableGateway": false,
-          "publicNetworkAccess": "Enabled",
           "configurationApi": {
             "legacyApiEnabled": false
-          }
+          },
+          "platformVersion": "stv2",
+          "apiVersionConstraint": {}
         },
         "sku": {
-          "name": "Standard",
+          "name": "Basic",
           "capacity": 1
         },
         "systemData": {
-          "createdBy": "user@contoso.com",
-          "createdByType": "User",
-          "createdAt": "2022-07-11T18:41:00.9390609Z",
-          "lastModifiedBy": "user@contoso.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-07-11T18:41:00.9390609Z"
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
         }
       }
     },
@@ -79,19 +89,21 @@
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
-          "api-version": "2022-09-01-preview"
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
         },
-        "location": "East US",
-        "etag": "AAAAAAAmREI=",
+        "location": "Central US",
+        "etag": "AAAAAAAp3UM=",
         "properties": {
-          "publisherEmail": "samir@microsoft.com",
-          "publisherName": "foo",
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2022-07-11T18:41:01.2506031Z",
+          "createdAtUtc": "2019-12-18T06:33:28.0906918Z",
           "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-eastus-01.regional.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-centralus-01.regional.azure-api.net",
           "portalUrl": "https://apimService1.portal.azure-api.net",
           "developerPortalUrl": "https://apimService1.developer.azure-api.net",
           "managementApiUrl": "https://apimService1.management.azure-api.net",
@@ -106,7 +118,7 @@
             }
           ],
           "publicIPAddresses": [
-            "13.90.229.33"
+            "40.113.223.117"
           ],
           "customProperties": {
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
@@ -119,21 +131,25 @@
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
           },
           "virtualNetworkType": "None",
+          "certificates": [],
           "disableGateway": false,
-          "publicNetworkAccess": "Enabled",
-          "platformVersion": "stv1"
+          "configurationApi": {
+            "legacyApiEnabled": true
+          },
+          "platformVersion": "stv2",
+          "apiVersionConstraint": {}
         },
         "sku": {
-          "name": "Standard",
+          "name": "Basic",
           "capacity": 1
         },
         "systemData": {
-          "createdBy": "user@contoso.com",
-          "createdByType": "User",
-          "createdAt": "2022-07-11T18:41:00.9390609Z",
-          "lastModifiedBy": "user@contoso.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-07-11T18:41:00.9390609Z"
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
         }
       }
     }
