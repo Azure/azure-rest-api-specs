@@ -38,7 +38,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TimespanParameter"
+            "$ref": "#/parameters/StartTimeParameter"
+          },
+          {
+            "$ref": "#/parameters/EndTimeParameter"
           },
           {
             "$ref": "#/parameters/IntervalParameter"
@@ -114,12 +117,20 @@
       "description": "The subscription identifier for the resources in this batch.",
       "x-ms-parameter-location": "method"
     },
-    "TimespanParameter": {
-      "name": "timespan",
+    "StartTimeParameter": {
+      "name": "starttime",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The timespan of the query. It is a string in the following format 'startDateTime_ISO/endDateTime_ISO'.",
+      "description": "The start time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'. If you have specified the endtime parameter, then this parameter is required.\nIf only starttime is specified, then endtime defaults to the current time.\nIf no time interval is specified, the default is 1 hour.",
+      "x-ms-parameter-location": "method"
+    },
+    "EndTimeParameter": {
+      "name": "endtime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The end time of the query. It is a string in the format 'yyyy-MM-ddTHH:mm:ss.fffZ'.",
       "x-ms-parameter-location": "method"
     },
     "IntervalParameter": {
@@ -262,9 +273,13 @@
           "items": {
             "type": "object",
             "properties": {
-              "timespan": {
+              "starttime": {
                 "type": "string",
-                "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+                "description": "The start time, in datetime format, for which the data was retrieved."
+              },
+              "endtime": {
+                "type": "string",
+                "description": "The end time, in datetime format, for which the data was retrieved."
               },
               "interval": {
                 "type": "string",
@@ -292,7 +307,8 @@
               }
             },
             "required": [
-              "timespan",
+              "starttime",
+              "endtime",
               "value"
             ]
           }
