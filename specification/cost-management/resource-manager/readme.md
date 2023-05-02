@@ -360,6 +360,12 @@ directive:
   - suppress: NoDuplicatePathsForScopeParameter
     from: costmanagement.budgets.json
     reason: 'Budgets_Get does not use an explicitly defined scope'
+  - suppress: ResourceMustReferenceCommonTypes
+    from: costmanagement.budgets.json
+    reason: 'Budget references CostManagementProxyResource, which references the common type ProxyResource'
+  - suppress: GetCollectionResponseSchema
+    from: common-types.json
+    reason: 'Operations does not contain a path for individual GET'
         
 ```
 
