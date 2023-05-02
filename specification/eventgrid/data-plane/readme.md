@@ -142,7 +142,7 @@ input-file:
 
 ```
 
-### Tag 2023-06-01-preview
+### Tag: package-2023-06
 
 These settings apply only when --tag=package-2023-06` is specified on the command line.
 
