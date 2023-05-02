@@ -83,6 +83,9 @@
           },
           "CustomerBudgetsList-MCA-CSP": {
             "$ref": "./examples/Budgets/List/MCA/CustomerBudgetsList.json"
+          },
+          "CustomerBudgetsList-MCA-CSP-CategoryTypeFilter": {
+            "$ref": "./examples/Budgets/List/MCA/CustomerBudgetsList-CategoryTypeFilter.json"
           }
         },
         "parameters": [
@@ -187,8 +190,17 @@
           "CreateOrUpdate-ReservationUtilization-BillingProfileMCA-AlertRule-ReservedResourceTypeFilter": {
             "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/CreateOrUpdate-ReservationUtilization-BillingProfile-AlertRule-ReservedResourceTypeFilter.json"
           },
-          "CreateOrUpdate-ReservationUtilization-BillingProfile-AlertRule-ReservationIdFilter": {
+          "CreateOrUpdate-ReservationUtilization-BillingProfileMCA-AlertRule-ReservationIdFilter": {
             "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/CreateOrUpdate-ReservationUtilization-BillingProfile-AlertRule-ReservationIdFilter.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-CustomerCSP-AlertRule.json": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/CreateOrUpdate-ReservationUtilization-Customer-AlertRule.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-CustomerCSP-AlertRule-ReservedResourceTypeFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/CreateOrUpdate-ReservationUtilization-Customer-AlertRule-ReservedResourceTypeFilter.json"
+          },
+          "CreateOrUpdate-ReservationUtilization-CustomerCSP-AlertRule-ReservationIdFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/CreateOrUpdate-ReservationUtilization-Customer-AlertRule-ReservationIdFilter.json"
           }
         },
         "parameters": [
@@ -729,7 +741,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with budget operations.\n\n Supported scopes for **CategoryType: Cost**\n\n Azure RBAC Scopes:\n- '/subscriptions/{subscriptionId}/' for subscription scope\n- '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope\n- '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope\n\n  EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope\n\n MCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only)\n\n Supported scopes for **CategoryType: ReservationUtilization**\n\n EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account Scope\n\nMCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "description": "The scope associated with budget operations.\n\n Supported scopes for **CategoryType: Cost**\n\n Azure RBAC Scopes:\n- '/subscriptions/{subscriptionId}/' for subscription scope\n- '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope\n- '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope\n\n EA (Enterprise Agreement) Scopes:\n\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope\n\n MCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only)\n\n Supported scopes for **CategoryType: ReservationUtilization**\n\n EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account Scope\n\nMCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope (non-CSP only)\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only)",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
