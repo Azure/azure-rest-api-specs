@@ -43,7 +43,7 @@
         "description": "Create or Update a Cloud HSM Cluster in the specified subscription.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -384,6 +384,9 @@
               "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CloudHsmClusterPrivateLinkResources_ListByResource_MaximumSet_Gen": {
