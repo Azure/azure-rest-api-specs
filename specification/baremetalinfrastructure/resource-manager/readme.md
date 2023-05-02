@@ -38,6 +38,15 @@ input-file:
   - Microsoft.BareMetalInfrastructure/stable/2023-04-06/baremetalinfrastructure.json
 ```
 
+### Tag: package-2021-08-09
+
+These settings apply only when `--tag=package-2021-08-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-09'
+input-file:
+  - Microsoft.BareMetalInfrastructure/stable/2021-08-09/baremetalinfrastructure.json
+```
+
 ### Tag: package-2020-08-06-preview
 
 These settings apply only when `--tag=package-2020-08-06-preview` is specified on the command line.
