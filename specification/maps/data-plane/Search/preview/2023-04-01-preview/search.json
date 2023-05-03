@@ -648,67 +648,6 @@
                 "$ref": "#/parameters/Accept-Language"
               },
               {
-                  "in": "header",
-                  "name": "X-FD-Market",
-                  "description": "Market of the user based on language and country. Sent in ll-cc format (language-country). This is primarily used to tailor content. Example: en-us",
-                  "type": "string",
-                  "required": false
-              },
-              {
-                  "in": "header",
-                  "name": "X-FD-TrueMarket​",
-                  "description": "​The user's actual market before any market aggregation (e.g. into en-WW)",
-                  "type": "string",
-                  "required": false
-              },
-              {
-                  "in": "header",
-                  "name": "X-FD-UILang",
-                  "description": "The UI language to where strings or other UI components are localized. Example: en-us. Can be set using query string \"setlang\" for session and \"setplang\" + valid UID for persistent. Can be set in the preferences page as well. Presented in ll-cc format (language-country).",
-                  "type": "string",
-                  "required": false
-              },
-              {
-                  "in": "header",
-                  "name": "X-FD-Flight",
-                  "description": "name value pairs, separated by comma",
-                  "type": "string",
-                  "required": false
-              },
-              {
-                  "in": "header",
-                  "name": "X-FD-TraceID",
-                  "description": "The unique ID used to identify each query for logging/debug purposes",
-                  "type": "string",
-                  "required": false
-              },
-              {
-                  "in": "header",
-                  "name": "X-FD-TrustLevel",
-                  "type": "string",
-                    "enum": [
-                        "public",
-                        "microsoft",
-                        "trusted"
-                    ],
-                  "description": "Whether the client IP is one of the MS internal trusted IPs – extensible for secure proxy access for “special” customers. \n\n\"Trusted\" indciates the request comes from the trusted port, port 81. Only Microsoft proxies have access to port 81. Using port 81 usually means we want to enable special debug functionalities.\n\n\"microsoft\" indicates the request comes from a Microsoft proxy, but not through port 81.\n",
-                  "required": false
-              },
-              {
-                  "in": "header",
-                  "name": "X-FD-Location",
-                  "type": "string",
-                  "description": "User set location in the preferences page.\nDefault value derived from X-FD-RevIP. Otherwise overwritten by X-Search-Location or by user preference cookie.\n\n&lt;key1&gt;=&lt;value1&gt;|&lt;key2&gt;=&lt;value2&gt;|… (pairs are '|' seperated). keys values are defined below. The existence of this header implies all the key value pairs.\n\n|Name|Description|Type|\n|:----|:----|:----|\n| lat | Latitude | &lt;float in string&gt; |\n| long | Longitude | &lt;float in string&gt; |\n| disp | Display Name (Encoded) | &lt;string&gt; |\n| source | Source of the location data (e.g. ip, userpref) | \"ip\"&#124;\"userpref\" |\n",
-                  "required": false
-              },
-              {
-                  "in": "header",
-                  "name": "X-FD-RevIP",
-                  "type": "string",
-                  "description": "The reverse IP information of the IP. There are multiple pieces of information, each is represented in name value pair separated by comma.\n\n&lt;key1&gt;=&lt;value1&gt;,&lt;key2&gt;=&lt;value2&gt;,…\n\n|Name|Description|Type|\n|:----|:----|:----|\n| cont | Continent | &lt;string&gt; |\n| country | Country | &lt;string&gt; |\n| Iso | ISO code for Country | &lt;string&gt; |\n| region | Region | &lt;string&gt; |\n| state | State | &lt;string&gt; |\n| city | City | &lt;string&gt; |\n| zip | Zip code | &lt;string&gt; |\n| Tz | Time zone | &lt;float in string, up to 1 decimal place&gt; |\n| lat | Latitude | &lt;float in string, up to 10 sig digits&gt; |\n| long | Longitude | &lt;float in string, up to 10 sig digits&gt; |\n| ac | AreaCode | &lt;integer in string&gt; |\n| dma | Designated Market Areas (television coverage) | &lt;integer in string&gt; |\n Example: cont=asia,country=china,iso=cn,region=,state=beijing shi,city=Beijing,zip=100000,tz=8.0,lat=39.911762,long=116.37923,ac=0,dma=0",
-                  "required": false
-              },
-              {
                   "name": "query",
                   "in": "query",
                   "required": true,
@@ -774,7 +713,7 @@
               "200": {
                   "description": "Successful operation",
                   "schema": {
-                    "$ref": "#/definitions/FeatureCollectionType"
+                    "$ref": "#/definitions/AutosuggestResponse"
                   },
                   "headers": {
                       "x-ms-request-id": {
@@ -783,14 +722,8 @@
                       }
                   }
               },
-              "400": {
-                  "description": "Invalid ID supplied"
-              },
-              "404": {
-                  "description": "not found"
-              },
-              "405": {
-                  "description": "Validation exception"
+              "default": {
+                "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
               }
           }
       }
@@ -814,6 +747,86 @@
             "value": "Route"
           }
         ]
+      }
+    },
+    "AutosuggestResponse": {
+      "description": "This object is returned from a successful autosuggest call",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureCollectionType"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutosuggestFeature"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
+    },
+    "AutosuggestFeature": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutosuggestProperties"
+        }
+      ]
+    },
+    "AutosuggestProperties": {
+      "description": "Properties of Autosuggest Result",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Place or Address",
+          "type": "string",
+          "enum": [
+            "Place",
+            "Address"
+          ],
+          "x-ms-enum": {
+            "name": "AutosuggestResultType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Place",
+                "value": "Place"
+              },
+              {
+                "name": "Address",
+                "value": "Address"
+              }
+            ]
+          }
+        },
+        "address": {
+          "description": "TODO",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Address"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The name of the place.",
+                  "type": "string"
+                },
+                "houseNumber": {
+                  "description": "The house number of the address.",
+                  "type": "string"
+                },
+                "streetNumber": {
+                  "description": "The street number of the address.",
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        }
       }
     },
     "GeocodePoints": {
