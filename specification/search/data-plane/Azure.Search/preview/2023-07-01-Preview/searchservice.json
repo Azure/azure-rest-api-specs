@@ -3194,7 +3194,7 @@
           {
             "value": "Edm.Single",
             "name": "Single",
-            "description": "Indicates that a field contains a single-precision floating point number."
+            "description": "Indicates that a field contains a single-precision floating point number. This is only valid when used with Collection(Edm.Single)."
           }
         ]
       },
@@ -6052,7 +6052,7 @@
       "properties": {
         "defaultConfiguration": {
           "type": "string",
-          "description": "Allows you to set a default semantic configuration in your index, making it optional to pass it on as a query parameter every time."
+          "description": "Allows you to set the name of a default semantic configuration in your index, making it optional to pass it on as a query parameter every time."
         },
         "configurations": {
           "type": "array",
@@ -6152,7 +6152,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "The name of the kind of algorithm being configured for use with vector search.",
+          "description": "The name of the kind of algorithm being configured for use with vector search. Only `hnsw` is supported in the current preview.",
           "x-nullable": false
         },
         "hnswParameters": {
@@ -8642,7 +8642,7 @@
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition"
       },
-      "description": "Text analytics entity recognition.",
+      "description": "This skill is deprecated. Use the V3.EntityRecognitionSkill instead.",
       "x-az-search-deprecated": true
     },
     "SentimentSkill": {
@@ -8661,7 +8661,7 @@
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-sentiment"
       },
-      "description": "Text analytics positive-negative sentiment analysis, scored as a floating point value in a range of zero to 1.",
+      "description": "This skill is deprecated. Use the V3.SentimentSkill instead.",
       "x-az-search-deprecated": true
     },
     "SentimentSkillV3": {
@@ -9353,7 +9353,7 @@
           }
         ]
       },
-      "description": "The language codes supported for input text by SentimentSkill.",
+      "description": "Deprecated. The language codes supported for input text by SentimentSkill.",
       "x-az-search-deprecated": true
     },
     "KeyPhraseExtractionSkillLanguage": {
@@ -10585,7 +10585,7 @@
           }
         ]
       },
-      "description": "The language codes supported for input text by EntityRecognitionSkill.",
+      "description": "Deprecated. The language codes supported for input text by EntityRecognitionSkill.",
       "x-az-search-deprecated": true
     },
     "TextTranslationSkillLanguage": {
