@@ -52,6 +52,18 @@ interface CertificateProfileOperations {
     OperationStatus
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
+  @summary("Gets the sign root certificate on the certificate chain.")
+  @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/rootcert")
+  @doc("Gets the sign root certificate on the certificate chain.")
+  @example(
+    "./examples/CertificateProfile_GetSignRootCert.json",
+    "GetSignRootCertificate"
+  )
+  getSignRootCertificate(
+    ...CodeSignStatus
+  ): BytesBody<"application/x-x509-ca-cert">;
+
   @summary("Gets a list of Extended Key Usage OIDs that are allowed.")
   @doc("Gets a list of Extended Key Usage OIDs that are allowed.")
   @example("./examples/CertificateProfile_GetSignEku.json", "GetSignEku")
@@ -194,4 +206,15 @@ model Eku {
   @visibility("read", "update")
   @doc("The element of eku list.")
   ekus: string[];
+}
+
+@doc("Public root certificate.")
+model BytesBody<ContentType> {
+  @doc("The root certificate.")
+  @body
+  body: bytes;
+
+  @doc("The content type of the x509 cert.")
+  @header
+  contentType: ContentType;
 }

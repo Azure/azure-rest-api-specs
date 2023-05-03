@@ -257,7 +257,7 @@
                   "type": "string",
                   "format": "uri",
                   "description": "The link to the next page of items",
-                  "x-typespec-name": "Rest.ResourceLocation"
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
                 }
               },
               "description": "Paged collection of Eku items",
@@ -286,6 +286,37 @@
         "x-ms-examples": {
           "GetSignEku": {
             "$ref": "./examples/CertificateProfile_GetSignEku.json"
+          }
+        }
+      }
+    },
+    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/rootcert": {
+      "get": {
+        "operationId": "CertificateProfileOperations_GetSignRootCertificate",
+        "summary": "Gets the sign root certificate on the certificate chain.",
+        "description": "Gets the sign root certificate on the certificate chain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CodeSignStatus.codeSigningAccountName"
+          },
+          {
+            "$ref": "#/parameters/CodeSignStatus.certificateProfileName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Public root certificate.",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "produces": [
+          "application/x-x509-ca-cert"
+        ],
+        "x-ms-examples": {
+          "GetSignRootCertificate": {
+            "$ref": "./examples/CertificateProfile_GetSignRootCert.json"
           }
         }
       }
