@@ -129,11 +129,9 @@ to be detected.
   dataSource: url;
 
   @doc("""
-Number of top contributed
-variables for one anomalous time stamp in the response. The default is
-10.
+Number of top contributed variables for one anomalous time stamp in the response.
 """)
-  topContributorCount: int32;
+  topContributorCount?: int32 = 10;
 
   @doc("""
 Start date/time of data for detection, which should
