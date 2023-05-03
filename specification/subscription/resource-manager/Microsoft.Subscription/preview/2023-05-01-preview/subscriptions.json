@@ -149,7 +149,7 @@
         }
       }
     },
-    "BlockSubscriptionsLeavingTenant": {
+    "SubscriptionsLeavingTenant": {
       "description": "Blocks the leaving of subscriptions from user's tenant.",
       "type": "string",
       "x-ms-enum": {
@@ -161,7 +161,7 @@
         "NotAllowed"
       ]
     },
-    "BlockSubscriptionsIntoTenant": {
+    "SubscriptionsIntoTenant": {
       "description": "Blocks the entering of subscriptions into user's tenant.",
       "type": "string",
       "x-ms-enum": {
@@ -177,11 +177,11 @@
       "description": "Put tenant policy request properties.",
       "type": "object",
       "properties": {
-        "blockSubscriptionsLeavingTenant": {
-          "$ref": "#/definitions/BlockSubscriptionsLeavingTenant"
+        "subscriptionsLeavingTenant": {
+          "$ref": "#/definitions/SubscriptionsLeavingTenant"
         },
-        "blockSubscriptionsIntoTenant": {
-          "$ref": "#/definitions/BlockSubscriptionsIntoTenant"
+        "subscriptionsIntoTenant": {
+          "$ref": "#/definitions/subscriptionsIntoTenant"
         },
         "exemptedPrincipals": {
           "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
@@ -252,11 +252,11 @@
           "type": "string",
           "readOnly": true
         },
-        "blockSubscriptionsLeavingTenant": {
-          "$ref": "#/definitions/BlockSubscriptionsLeavingTenant"
+        "subscriptionsLeavingTenant": {
+          "$ref": "#/definitions/SubscriptionsLeavingTenant"
         },
-        "blockSubscriptionsIntoTenant": {
-          "$ref": "#/definitions/BlockSubscriptionsIntoTenant"
+        "subscriptionsIntoTenant": {
+          "$ref": "#/definitions/subscriptionsIntoTenant"
         },
         "exemptedPrincipals": {
           "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
