@@ -262,6 +262,9 @@
           "ApiManagementCreateService": {
             "$ref": "./examples/ApiManagementCreateService.json"
           },
+          "ApiManagementCreateServiceWithDeveloperPortal": {
+            "$ref": "./examples/ApiManagementCreateServiceWithDeveloperPortal.json"
+          },
           "ApiManagementCreateServiceInVnetWithPublicIP": {
             "$ref": "./examples/ApiManagementCreateServiceInVnetWithPublicIP.json"
           },
@@ -1616,6 +1619,16 @@
               }
             ]
           }
+        },
+        "legacyPortalEnabled": {
+          "type": "boolean",
+          "description": "Enable legacy portal for this API Management service.",
+          "default": false
+        },
+        "developerPortalEnabled": {
+          "type": "boolean",
+          "description": "Enable developer portal for this API Management service.",
+          "default": false
         }
       },
       "description": "Base Properties of an API Management service resource description."
