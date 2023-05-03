@@ -8761,6 +8761,73 @@
         "productId"
       ],
       "description": "Tag-product link entity properties."
+    },
+    "GatewayGetDebugCredentialsContract": {
+      "type": "object",
+      "properties": {
+        "credentialsExpireAfter": {
+          "type": "string",
+          "format": "duration",
+          "description": "After what period of time to make credentials expire."
+        },
+        "purposes": {
+          "type": "array",
+          "description": "Purposes of debug credential.",
+          "items": {
+            "type": "string",
+            "description": "Purpose of debug credential.",
+            "enum": [
+              "tracing"
+            ],
+            "x-ms-enum": {
+              "name": "GatewayGetDebugCredentialsContractPurpose",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "tracing",
+                  "description": "The tracing purpose."
+                }
+              ]
+            }
+          }
+        },
+        "apiId": {
+          "type": "string",
+          "description": "Full resource Id of an API."
+        },
+        "required": [
+          "credentialsExpireAfter",
+          "purposes",
+          "apiId"
+        ]
+      },
+      "description": "Get debug credentials properties."
+    },
+    "GatewayDebugCredentialsContract": {
+      "type": "object",
+      "properties": {
+        "token":{
+          "type": "string",
+          "description": "Gateway debug token."
+        }
+      },
+      "description": "Gateway debug credentials."
+    },
+    "GatewayGetTraceContract": {
+      "type": "object",
+      "properties": {
+        "traceId":{
+          "type": "string",
+          "description": "Trace id."
+        }
+      },
+      "description": "Get trace properties."
+    },
+    "GatewayTraceContract": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true,
+      "description": "Trace collected in gateway"
     }
   },
   "parameters": {}

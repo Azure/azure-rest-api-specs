@@ -1318,6 +1318,154 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/invalidateDebugCredentials": {
+      "post": {
+        "tags": [
+          "GatewayInvalidateDebugCredentials"
+        ],
+        "operationId": "Gateway_InvalidateDebugCredentials",
+        "description": "TODO",
+        "x-ms-examples": {
+          "ApiManagementGatewayInvalidateDebugCredentials": {
+            "$ref": "./examples/ApiManagementGatewayInvalidateDebugCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "TODO"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/getDebugCredentials": {
+        "post": {
+          "tags": [
+            "GatewayGetDebugCredentials"
+          ],
+          "operationId": "Gateway_GetDebugCredentials",
+          "description": "TODO",
+          "x-ms-examples": {
+            "ApiManagementGatewayGetDebugCredentials": {
+              "$ref": "./examples/ApiManagementGatewayGetDebugCredentials.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+            },
+            {
+              "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "./definitions.json#/definitions/GatewayGetDebugCredentialsContract"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "TODO",
+              "schema": {
+                "$ref": "./apimanagement.json#/definitions/GatewayDebugCredentialsContract"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/getTrace": {
+        "post": {
+          "tags": [
+            "GatewayGetTrace"
+          ],
+          "operationId": "Gateway_GetTrace",
+          "description": "TODO",
+          "x-ms-examples": {
+            "ApiManagementGatewayGetTrace": {
+              "$ref": "./examples/ApiManagementGatewayGetTrace.json"
+            }
+          },
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+            },
+            {
+              "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "./definitions.json#/definitions/GatewayGetTraceContract"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "TODO",
+              "schema": {
+                "$ref": "./apimanagement.json#/definitions/GatewayTraceContract"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},
