@@ -175,6 +175,25 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AzureStorageAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Anonymous",
+            "AccountKey",
+            "SasUri",
+            "ServicePrincipal",
+            "Msi"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
+        },
+        "containerUri": {
+          "type": "object",
+          "description": "Container uri of the Azure Blob Storage resource only support for anonymous access. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2363,11 +2382,16 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "sasUri": {
+          "description": "SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
         }
-      },
-      "required": [
-        "url"
-      ]
+      }
     },
     "Office365LinkedService": {
       "x-ms-discriminator-value": "Office365",
@@ -2842,6 +2866,10 @@
         "password": {
           "description": "The password used in Basic authentication type.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
         },
         "servicePrincipalId": {
           "description": "The application's client ID used in AadServicePrincipal authentication type.",
@@ -6700,6 +6728,44 @@
       },
       "required": [
         "endpoint"
+      ]
+    },
+    "PowerBIWorkspaceLinkedService": {
+      "x-ms-discriminator-value": "PowerBIWorkspace",
+      "description": "Power BI Workspace linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Power BI Workspace linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerBIWorkspaceLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "PowerBIWorkspaceLinkedServiceTypeProperties": {
+      "description": "Power BI Workspace linked service properties.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Power BI workspace id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to which the Power BI workspace belongs."
+        }
+      },
+      "required": [
+        "workspaceId",
+        "tenantId"
       ]
     }
   }
