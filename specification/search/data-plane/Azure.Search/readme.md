@@ -169,6 +169,18 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+  - where:
+      -  $responses.200.body.value[1].fieldMappings[0].mappingFunction.parameters['delimiter']
+    suppress:
+      - INVALID_TYPE
+  - where:
+      -  $responses.200.body.value[1].fieldMappings[1].mappingFunction.parameters['delimiter']
+    suppress:
+      - INVALID_TYPE
+  - where:
+      -  $response.200/body
+    suppress:
+      - INVALID_TYPE
 ```
 
 ### Tag: package-2023-07-01-preview
