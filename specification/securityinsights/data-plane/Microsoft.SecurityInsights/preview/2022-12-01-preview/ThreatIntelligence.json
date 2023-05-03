@@ -19,7 +19,7 @@
         },
         "summary": "Upload the indicators to the workspace",
         "description": "Upload the list of indicators to the workspace specified",
-        "operationId": "threat-intelligence/indicators:upload",
+        "operationId": "ThreatIntelligenceIndicators_Upload",
         "consumes": [
           "application/json"
         ],
@@ -51,7 +51,7 @@
           "200": {
             "description": "The API returns 200 when one or many indicators are successfully validated and published.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseObject"
+              "$ref": "#/definitions/UploadIndicatorsResponse"
             }
           },
           "429": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "ErrorResponseObject": {
+    "UploadIndicatorsResponse": {
       "description": "Error response object with error details.",
       "type": "object",
       "properties": {
