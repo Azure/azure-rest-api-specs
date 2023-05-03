@@ -34,7 +34,7 @@ model EmbeddingsOptions {
     Unless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,
     as we have observed inferior results when newlines are present.
     """)
-    input: string | string[];
+    input: string[];
 };
 
 @doc("""
