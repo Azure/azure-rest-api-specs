@@ -169,18 +169,20 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
-  - where:
-      -  $responses.200.body.value[1].fieldMappings[0].mappingFunction.parameters['delimiter']
-    suppress:
-      - INVALID_TYPE
-  - where:
-      -  $responses.200.body.value[1].fieldMappings[1].mappingFunction.parameters['delimiter']
-    suppress:
-      - INVALID_TYPE
-  - where:
-      -  $response.200/body
-    suppress:
-      - INVALID_TYPE
+```
+
+### Suppress custom user schema model violations
+Many Search operations return a custom user schema for the documents in an index.  Some of them are incorrectly specified as `"additionalProperties": { "type": "object" }` instead of `"additionalProperties": true`.  We’ve filed https://github.com/Azure/azure-rest-api-specs/issues/23807 to track fixing these, but are temporarily suppressing the model violation warnings to avoid impacting the next release our generated client libraries.
+
+
+``` yaml
+directive:
+  - suppress: INVALID_TYPE
+    from: searchservice.json
+    reason: Temporarily ignore warnings about incorrectly specified custom user schemas.
+  - suppress: INVALID_TYPE
+    from: searchindex.json
+    reason: Temporarily ignore warnings about incorrectly specified custom user schemas.
 ```
 
 ### Tag: package-2023-07-01-preview
