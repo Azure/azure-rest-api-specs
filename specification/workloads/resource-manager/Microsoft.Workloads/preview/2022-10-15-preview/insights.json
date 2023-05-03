@@ -666,7 +666,8 @@
           "description": "Type of the data store.",
           "type": "string",
           "enum": [
-            "AzureLogAnalyticsDataStore"
+            "AzureLogAnalyticsDataStore",
+            "ImpactResourceProviderDataStore"
           ],
           "x-ms-enum": {
             "name": "dataStoreType",
@@ -700,6 +701,15 @@
           "type": "string"
         }
       }
+    },
+    "ImpactResourceProviderDataStore": {
+      "description": "Impact Resource Provider in data store.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStore"
+        }
+      ]
     },
     "InsightInstanceUpdateRequest": {
       "description": "Workload insight instance update request",

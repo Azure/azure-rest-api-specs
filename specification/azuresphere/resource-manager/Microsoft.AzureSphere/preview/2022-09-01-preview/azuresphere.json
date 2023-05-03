@@ -578,7 +578,7 @@
         },
         "x-ms-examples": {
           "Certificates_RetrieveCertChain": {
-            "$ref": "./examples/GetCatalogCertChain.json"
+            "$ref": "./examples/PostRetrieveCatalogCertChain.json"
           }
         }
       }
@@ -2032,13 +2032,23 @@
                 "format": "int32"
               }
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
           "DeviceGroups_ClaimDevices": {
             "$ref": "./examples/PostClaimDevices.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/countDevices": {
@@ -2901,6 +2911,16 @@
               "$ref": "#/definitions/SignedCapabilityImageResponse"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2912,7 +2932,11 @@
           "Devices_GenerateCapabilityImage": {
             "$ref": "./examples/PostGenerateDeviceCapabilityImage.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/generateDefaultDeviceGroups": {
@@ -3170,7 +3194,8 @@
       "enum": [
         "Active",
         "Inactive",
-        "Expired"
+        "Expired",
+        "Revoked"
       ],
       "x-ms-enum": {
         "name": "CertificateStatus",

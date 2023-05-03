@@ -1,0 +1,872 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ManufacturingPlatform",
+    "version": "2023-02-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManufacturingDataServices"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ManufacturingPlatform/operations": {
+      "get": {
+        "tags": [
+          "ManufacturingDataServices",
+          "Operations"
+        ],
+        "operationId": "ManufacturingDataServices_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_List": {
+            "$ref": "./examples/ManufacturingDataServices_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices": {
+      "get": {
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "operationId": "ManufacturingDataServices_ListBySubscription",
+        "description": "List MdsResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListBySubscription": {
+            "$ref": "./examples/ManufacturingDataServices_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices": {
+      "get": {
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "operationId": "ManufacturingDataServices_ListByResourceGroup",
+        "description": "List MdsResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListByResourceGroup": {
+            "$ref": "./examples/ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices/{mdsResourceName}": {
+      "get": {
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "operationId": "ManufacturingDataServices_Get",
+        "description": "Get a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "required": true,
+            "description": "Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Get": {
+            "$ref": "./examples/ManufacturingDataServices_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "operationId": "ManufacturingDataServices_CreateOrUpdate",
+        "description": "Create a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "required": true,
+            "description": "Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_CreateOrUpdate": {
+            "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "operationId": "ManufacturingDataServices_Update",
+        "description": "Update a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "required": true,
+            "description": "Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/MdsResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Update": {
+            "$ref": "./examples/ManufacturingDataServices_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "operationId": "ManufacturingDataServices_Delete",
+        "description": "Delete a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "required": true,
+            "description": "Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Delete": {
+            "$ref": "./examples/ManufacturingDataServices_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices/{mdsResourceName}/listAvailableVersions": {
+      "post": {
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "operationId": "ManufacturingDataServices_ListAvailableVersions",
+        "description": "Returns the list of available versions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "required": true,
+            "description": "Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListAvailableVersions": {
+            "$ref": "./examples/ManufacturingDataServices_ListAvailableVersions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdtProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Adt Resource",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host Name",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Azure Digital Twin (Adt) Resource"
+    },
+    "AdxProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Adx Resource",
+          "readOnly": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "Uri of Adx Resource",
+          "readOnly": true
+        },
+        "dataIngestionUri": {
+          "type": "string",
+          "description": "Data Ingestion Uri of Adx Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Azure Data Explorer (Adx) Resource"
+    },
+    "AksProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of AKS Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Aks Resource"
+    },
+    "AkvProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Akv Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Azure Key Vault (Akv) Resource"
+    },
+    "ApplicationVersion": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Application Version"
+        },
+        "isLatest": {
+          "type": "boolean",
+          "description": "Is Latest"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Is Preview"
+        }
+      },
+      "description": "Information about application versions",
+      "required": [
+        "version",
+        "isLatest",
+        "isPreview"
+      ]
+    },
+    "AvailableVersionListResult": {
+      "type": "object",
+      "properties": {
+        "versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationVersion"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "ApplicationVersion[]",
+          "description": "The list of versions"
+        }
+      },
+      "description": "The list of available versions",
+      "required": [
+        "versions"
+      ]
+    },
+    "DatabaseProfile": {
+      "type": "object",
+      "properties": {
+        "cosmosId": {
+          "type": "string",
+          "description": "Resource Id of Cosmos Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Database Resource"
+    },
+    "EventHubProfile": {
+      "type": "object",
+      "properties": {
+        "ingestionInstanceId": {
+          "type": "string",
+          "description": "Resource Id of Ingestion Instance EventHub Resource",
+          "readOnly": true
+        },
+        "dhInstanceId": {
+          "type": "string",
+          "description": "Resource Id of Data History Instance EventHub Resource",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host Name",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to EventHub Resource"
+    },
+    "FunctionAppProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Azure Function App Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Azure Function App Resource"
+    },
+    "MdsResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MdsResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "description": "A ManufacturingPlatformProviderHub resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MdsResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MdsResource"
+          },
+          "x-cadl-name": "MdsResource[]",
+          "description": "The MdsResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a MdsResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "MdsResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Mds Resource Version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enableTeamsNotification": {
+          "type": "boolean",
+          "description": "Enable Teams Notification.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "aadApplicationId": {
+          "type": "string",
+          "description": "AAD Application Id.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksAdminGroupId": {
+          "type": "string",
+          "description": "AKS Admin Group Id.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "continuousExportPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Continuous Export Period.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceUrl": {
+          "type": "string",
+          "description": "Service Url",
+          "readOnly": true
+        },
+        "aksProfile": {
+          "$ref": "#/definitions/AksProfile",
+          "description": "Profile of AKS Created.",
+          "readOnly": true
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Profile of Storage Created.",
+          "readOnly": true
+        },
+        "databaseProfile": {
+          "$ref": "#/definitions/DatabaseProfile",
+          "description": "Profile of Database Created.",
+          "readOnly": true
+        },
+        "adxProfile": {
+          "$ref": "#/definitions/AdxProfile",
+          "description": "Profile of Adx Created.",
+          "readOnly": true
+        },
+        "adtProfile": {
+          "$ref": "#/definitions/AdtProfile",
+          "description": "Profile of Adt Created.",
+          "readOnly": true
+        },
+        "akvProfile": {
+          "$ref": "#/definitions/AkvProfile",
+          "description": "Profile of Akv Created.",
+          "readOnly": true
+        },
+        "redisProfile": {
+          "$ref": "#/definitions/RedisProfile",
+          "description": "Profile of Azure Redis Created.",
+          "readOnly": true
+        },
+        "synapseProfile": {
+          "$ref": "#/definitions/SynapseProfile",
+          "description": "Profile of Synapse Created.",
+          "readOnly": true
+        },
+        "monitoringProfile": {
+          "$ref": "#/definitions/MonitoringProfile",
+          "description": "Profile of Monitoring Resource Created.",
+          "readOnly": true
+        },
+        "eventHubProfile": {
+          "$ref": "#/definitions/EventHubProfile",
+          "description": "Profile of EventHub Resource.",
+          "readOnly": true
+        },
+        "functionAppProfile": {
+          "$ref": "#/definitions/FunctionAppProfile",
+          "description": "Profile of Function App Resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Details of the ManufacturingPlatform MdsResource.",
+      "required": [
+        "aadApplicationId",
+        "aksAdminGroupId",
+        "continuousExportPeriod"
+      ]
+    },
+    "MdsResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/MdsResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the MdsResource."
+    },
+    "MdsResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Mds Resource Version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enableTeamsNotification": {
+          "type": "boolean",
+          "description": "Enable Teams Notification.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "description": "The updatable properties of the MdsResource."
+    },
+    "MonitoringProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Application Insights Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Monitoring Resource"
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "RedisProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Azure Redis Cache Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Azure Redis Cache Resource"
+    },
+    "StorageProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Storage Resource",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Storage Resource"
+    },
+    "SynapseProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Synapse Resource",
+          "readOnly": true
+        },
+        "devEndpoint": {
+          "type": "string",
+          "description": "Synapse Development Endpoint",
+          "readOnly": true
+        }
+      },
+      "description": "The properties related to Synapse Resource"
+    }
+  },
+  "parameters": {}
+}

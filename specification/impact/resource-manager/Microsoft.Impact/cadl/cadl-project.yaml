@@ -1,7 +1,7 @@
-output-dir: "{project-root}/../"
-emitters:
+emit:
+  - "@azure-tools/cadl-autorest"
+options:
   "@azure-tools/cadl-autorest":
-    emitter-output-dir: "{output-dir}"
-    azure-resource-provider-folder: ../../../impact/resource-manager
+    azure-resource-provider-folder: ./swagger/impact/resource-manager
     examples-directory: ./examples
     output-file: impact.json

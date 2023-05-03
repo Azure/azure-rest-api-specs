@@ -1,4 +1,5 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
 import "@cadl-lang/versioning";
 import "@azure-tools/cadl-autorest";
 import "@azure-tools/cadl-azure-core";
@@ -10,6 +11,7 @@ using Cadl.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -52,12 +54,19 @@ interface DeviceGroups extends ProxyResourceOperationsDeviceGroups<DeviceGroup, 
   @autoRoute
   @armResourceAction(DeviceGroup)
   @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+      "x-ms-long-running-operation-options",
+      {
+        "final-state-via": "location",
+      }
+    )
   @post
   op claimDevices(
     ...ResourceInstanceParameters<DeviceGroup>, 
     @doc("Bulk claim devices request body.")
     @body claimDevicesRequest: ClaimDevicesRequest
-  ): ArmAcceptedResponse;
+  ): ArmAcceptedResponse | ErrorResponse;
 }
 
 @doc("The properties of deviceGroup")

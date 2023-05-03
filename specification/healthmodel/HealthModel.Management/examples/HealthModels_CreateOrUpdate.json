@@ -1,0 +1,174 @@
+{
+  "title": "HealthModels_CreateOrUpdate",
+  "operationId": "HealthModels_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "healthModelName": "myModel1",
+    "api-version": "2022-11-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "activeState": "Active",
+        "refreshInterval": "PT1M",
+        "nodes": [
+          {
+            "nodeType": "AggregationNode",
+            "nodeId": "0",
+            "name": "root",
+            "childNodeIds": [
+              "cec16583-186b-4185-ad9d-4cbf42ce3034"
+            ],
+            "visual": {
+              "x": 0,
+              "y": 0
+            },
+            "healthTargetPercentage": 99
+          },
+          {
+            "nodeType": "AzureResourceNode",
+            "azureResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/sample-rg/providers/Microsoft.Cache/Redis/my-redis-cache",
+            "nodeId": "cec16583-186b-4185-ad9d-4cbf42ce3034",
+            "name": "Redis",
+            "credentialId": "SystemAssigned",
+            "childNodeIds": [],
+            "queries": [
+              {
+                "queryType": "ResourceMetricsQuery",
+                "metricName": "usedmemorypercentage",
+                "metricNamespace": "Microsoft.Cache/Redis",
+                "aggregationType": "Average",
+                "queryId": "02c3c17e-e8ea-45b2-8596-28df3ca8963b",
+                "degradedThreshold": "75",
+                "degradedOperator": "GreaterThan",
+                "unhealthyThreshold": "85",
+                "unhealthyOperator": "GreaterThan",
+                "timeGrain": "PT30M",
+                "dataUnit": "Percent",
+                "enabledState": "Enabled"
+              }
+            ],
+            "visual": {
+              "x": 0,
+              "y": 165
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/myResourceGroup/providers/Microsoft.HealthModel/healthmodels/myModel1",
+        "name": "myModel1",
+        "type": "Microsoft.HealthModel/healthmodels",
+        "location": "eastus2",
+        "properties": {
+          "versionNumber": "1677679737124",
+          "activeState": "Active",
+          "refreshInterval": "PT1M",
+          "nodes": [
+            {
+              "nodeType": "AggregationNode",
+              "nodeId": "0",
+              "name": "root",
+              "childNodeIds": [
+                "cec16583-186b-4185-ad9d-4cbf42ce3034"
+              ],
+              "visual": {
+                "x": 0,
+                "y": 0
+              },
+              "healthTargetPercentage": 99
+            },
+            {
+              "nodeType": "AzureResourceNode",
+              "azureResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/sample-rg/providers/Microsoft.Cache/Redis/my-redis-cache",
+              "nodeId": "cec16583-186b-4185-ad9d-4cbf42ce3034",
+              "name": "Redis",
+              "credentialId": "SystemAssigned",
+              "childNodeIds": [],
+              "queries": [
+                {
+                  "queryType": "ResourceMetricsQuery",
+                  "metricName": "usedmemorypercentage",
+                  "metricNamespace": "Microsoft.Cache/Redis",
+                  "aggregationType": "Average",
+                  "queryId": "02c3c17e-e8ea-45b2-8596-28df3ca8963b",
+                  "degradedThreshold": "75",
+                  "degradedOperator": "GreaterThan",
+                  "unhealthyThreshold": "85",
+                  "unhealthyOperator": "GreaterThan",
+                  "timeGrain": "PT30M",
+                  "dataUnit": "Percent",
+                  "enabledState": "Enabled"
+                }
+              ],
+              "visual": {
+                "x": 0,
+                "y": 165
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourcegroups/myResourceGroup/providers/Microsoft.HealthModel/healthmodels/myModel1",
+        "name": "myModel1",
+        "type": "Microsoft.HealthModel/healthmodels",
+        "location": "eastus2",
+        "properties": {
+          "versionNumber": "1677679737124",
+          "activeState": "Active",
+          "refreshInterval": "PT1M",
+          "nodes": [
+            {
+              "nodeType": "AggregationNode",
+              "nodeId": "0",
+              "name": "root",
+              "childNodeIds": [
+                "cec16583-186b-4185-ad9d-4cbf42ce3034"
+              ],
+              "visual": {
+                "x": 0,
+                "y": 0
+              },
+              "healthTargetPercentage": 99
+            },
+            {
+              "nodeType": "AzureResourceNode",
+              "azureResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/sample-rg/providers/Microsoft.Cache/Redis/my-redis-cache",
+              "nodeId": "cec16583-186b-4185-ad9d-4cbf42ce3034",
+              "name": "Redis",
+              "credentialId": "SystemAssigned",
+              "childNodeIds": [],
+              "queries": [
+                {
+                  "queryType": "ResourceMetricsQuery",
+                  "metricName": "usedmemorypercentage",
+                  "metricNamespace": "Microsoft.Cache/Redis",
+                  "aggregationType": "Average",
+                  "queryId": "02c3c17e-e8ea-45b2-8596-28df3ca8963b",
+                  "degradedThreshold": "75",
+                  "degradedOperator": "GreaterThan",
+                  "unhealthyThreshold": "85",
+                  "unhealthyOperator": "GreaterThan",
+                  "timeGrain": "PT30M",
+                  "dataUnit": "Percent",
+                  "enabledState": "Enabled"
+                }
+              ],
+              "visual": {
+                "x": 0,
+                "y": 165
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

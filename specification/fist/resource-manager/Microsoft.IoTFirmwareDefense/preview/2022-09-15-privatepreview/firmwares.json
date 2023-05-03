@@ -767,6 +767,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups/{firmwareGroupName}/firmwares/{firmwareId}/generatePasswordHashList": {
+      "post": {
+        "tags": [
+          "Firmwares"
+        ],
+        "operationId": "Firmware_GeneratePasswordHashList",
+        "description": "The operation to list all password hashes for a firmware.",
+        "parameters": [
+          {
+            "name": "firmwareGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of firmware group."
+          },
+          {
+            "name": "firmwareId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of firmware."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PasswordHashList"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Generate Password Hash list": {
+            "$ref": "./examples/PostGeneratePasswordHashList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.IoTFirmwareDefense/firmwareGroups/{firmwareGroupName}/firmwares/{firmwareId}/generateCveList": {
       "post": {
         "tags": [
@@ -983,13 +1036,7 @@
     },
     "StatusMessage": {
       "type": "object",
-      "description": "Error status data",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "The error or status message"
-        }
-      }
+      "description": "Error status data"
     },
     "UrlData": {
       "type": "object",
@@ -1326,13 +1373,10 @@
           "type": "string",
           "x-nullable": true
         },
-        "filePaths": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "File paths of the password hash.",
-          "x-ms-identifiers": []
+        "filePath": {
+          "description": "File path of the password hash",
+          "type": "string",
+          "x-nullable": true
         },
         "salt": {
           "description": "Salt of the password hash",
@@ -1349,7 +1393,7 @@
           "type": "string",
           "x-nullable": true
         },
-        "userName": {
+        "username": {
           "description": "User name of password hash",
           "type": "string",
           "x-nullable": true

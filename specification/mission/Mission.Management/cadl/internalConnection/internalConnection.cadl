@@ -26,7 +26,6 @@ enum InternalConnectionState {
   Active
 }
 
-
 @doc("Describes the properties of an Internal Connection.")
 model InternalConnectionProperties {
 
@@ -39,6 +38,9 @@ model InternalConnectionProperties {
 
   @doc("The state of the internalConnection.")
   state: InternalConnectionState;
+
+  @doc("Community Resource Id.")
+  communityResourceId: CommunityResourceId;
 
   @doc("The destination enclave's resource ID.")
   destinationEnclaveId: VirtualEnclaveResourceId;

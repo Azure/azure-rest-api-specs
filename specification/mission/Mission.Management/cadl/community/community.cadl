@@ -19,7 +19,13 @@ model EnclaveListItem {
 	name?: string;
 
 	@doc("virtual enclaves resource id.")
-	resourceId?: VirtualEnclaveResourceId;
+	id?: VirtualEnclaveResourceId;
+
+	@doc("creation datetime.")
+	creationDatetime?: zonedDateTime;
+
+	@doc("created by.")
+	createdBy?: string;
 
 	@doc("Provisioning State.")
 	@visibility("read")
@@ -44,6 +50,9 @@ model CommunityProperties{
   @doc("List of resource ids created by communities.")
   resourceCollection?: string [];
 
-  @doc("List of virtual enclaves that a community contains.")
+  @doc("Dictionary of virtual enclaves that a community contains.")
   virtualEnclaveCollection?: Record<EnclaveListItem>;
+
+  @doc("List of virtual enclaves that a community contains.")
+  virtualEnclaveList?: EnclaveListItem[];
 }

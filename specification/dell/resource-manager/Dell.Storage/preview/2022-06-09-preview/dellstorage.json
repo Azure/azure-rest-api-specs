@@ -363,40 +363,6 @@
     }
   },
   "definitions": {
-    "Company": {
-      "type": "object",
-      "properties": {
-        "companyName": {
-          "type": "string",
-          "description": "Company name"
-        },
-        "officeAddress": {
-          "type": "string",
-          "description": "Office Address"
-        },
-        "country": {
-          "type": "string",
-          "description": "Country of operation"
-        },
-        "domain": {
-          "type": "string",
-          "description": "Domain of the company"
-        },
-        "business": {
-          "type": "string",
-          "description": "Business of the company"
-        },
-        "numberOfEmployees": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of Employees"
-        }
-      },
-      "description": "Company details of Dell FileSystem resource",
-      "required": [
-        "companyName"
-      ]
-    },
     "FileSystemResource": {
       "type": "object",
       "properties": {
@@ -455,6 +421,52 @@
         "value"
       ]
     },
+    "FilesystemResourceProperties": {
+      "type": "object",
+      "properties": {
+        "initialCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Initial capacity for Dell Filesystem in bytes"
+        },
+        "marketplace": {
+          "$ref": "#/definitions/Marketplace",
+          "description": "Marketplace details"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "user": {
+          "$ref": "#/definitions/User",
+          "description": "User Details"
+        },
+        "clusterLoginUrl": {
+          "type": "string",
+          "description": "Cluster login url of the resource"
+        },
+        "privateIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Private IPs of the resource"
+        }
+      },
+      "description": "Properties specific to the Dell File System resource",
+      "required": [
+        "marketplace",
+        "provisioningState",
+        "user",
+        "initialCapacity",
+        "delegatedSubnetId"
+      ]
+    },
     "FileSystemResourceUpdate": {
       "type": "object",
       "properties": {
@@ -478,71 +490,17 @@
     "FileSystemResourceUpdateProperties": {
       "type": "object",
       "properties": {
-        "tenantId": {
+        "delegatedSubnetId": {
           "type": "string",
-          "description": "Azure Tenant Id"
+          "description": "Delegated subnet id for Vnet injection"
         },
         "initialCapacity": {
           "type": "integer",
-          "format": "int32",
-          "description": "Initial capacity for Dell Filesystem"
-        },
-        "marketplace": {
-          "$ref": "#/definitions/Marketplace",
-          "description": "Marketplace details"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State of the resource"
-        },
-        "user": {
-          "$ref": "#/definitions/User",
-          "description": "User Details"
-        },
-        "company": {
-          "$ref": "#/definitions/Company",
-          "description": "Company Details"
+          "format": "int64",
+          "description": "Initial capacity for Dell Filesystem in bytes"
         }
       },
       "description": "The updatable properties of the FileSystemResource."
-    },
-    "FilesystemResourceProperties": {
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "Azure Tenant Id"
-        },
-        "initialCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Initial capacity for Dell Filesystem"
-        },
-        "marketplace": {
-          "$ref": "#/definitions/Marketplace",
-          "description": "Marketplace details"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State of the resource"
-        },
-        "user": {
-          "$ref": "#/definitions/User",
-          "description": "User Details"
-        },
-        "company": {
-          "$ref": "#/definitions/Company",
-          "description": "Company Details"
-        }
-      },
-      "description": "Properties specific to the Dell File System resource",
-      "required": [
-        "tenantId",
-        "marketplace",
-        "provisioningState",
-        "user",
-        "initialCapacity"
-      ]
     },
     "Marketplace": {
       "type": "object",
@@ -559,15 +517,11 @@
           "type": "string",
           "description": "Offer Id"
         },
-        "termId": {
-          "type": "string",
-          "description": "Term Id"
-        },
         "publisherId": {
           "type": "string",
           "description": "Publisher Id"
         },
-        "status": {
+        "marketplaceSubscriptionStatus": {
           "$ref": "#/definitions/MarketplaceSubscriptionStatus",
           "description": "Marketplace subscription status"
         }
@@ -576,7 +530,6 @@
       "required": [
         "planId",
         "offerId",
-        "termId",
         "publisherId"
       ]
     },
@@ -618,7 +571,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "Provisioning State of the storage resource",
+      "description": "Provisioning State of the File system resource",
       "enum": [
         "Accepted",
         "Creating",
@@ -637,47 +590,47 @@
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Storage resource creation request accepted"
+            "description": "File system resource creation request accepted"
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Storage resource creation started"
+            "description": "File system resource creation started"
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Storage resource is being updated"
+            "description": "File system resource is being updated"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Storage resource deletion started"
+            "description": "File system resource deletion started"
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Storage resource creation successful"
+            "description": "File system resource creation successful"
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Storage resource creation failed"
+            "description": "File system resource creation failed"
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Storage resource creation canceled"
+            "description": "File system resource creation canceled"
           },
           {
             "name": "Deleted",
             "value": "Deleted",
-            "description": "Storage resource is deleted"
+            "description": "File system resource is deleted"
           },
           {
             "name": "NotSpecified",
             "value": "NotSpecified",
-            "description": "Storage resource state is unknown"
+            "description": "File system resource state is unknown"
           }
         ]
       }
@@ -685,33 +638,9 @@
     "User": {
       "type": "object",
       "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First name"
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name"
-        },
         "email": {
           "type": "string",
           "description": "User Email"
-        },
-        "alternateEmail": {
-          "type": "string",
-          "description": "Alternate Email address"
-        },
-        "upn": {
-          "type": "string",
-          "description": "UPN of user"
-        },
-        "address": {
-          "type": "string",
-          "description": "Address of user"
-        },
-        "contactPhoneNumber": {
-          "type": "string",
-          "description": "Contact phone number"
         }
       },
       "description": "User Details of Dell FileSystem resource",

@@ -1,0 +1,167 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Foundational ARM Client",
+    "description": "DsmsRootFolder Provider",
+    "version": "2021-08-10-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/dsmsRootFolders/{resourceName}": {
+      "put": {
+        "description": "Create Dsms Root Folder",
+        "x-ms-examples": {
+          "Create a DsmsRootFolder": {
+            "$ref": "./examples/CreateDsmsRootFolder.json"
+          }
+        },
+        "operationId": "DsmsRootFolder_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "DsmsRootFolder",
+            "description": "DsmsRootFolder details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DsmsRootFolder Resource updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderModel"
+            }
+          },
+          "201": {
+            "description": "DsmsRootFolder Resource created successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DsmsRootFolderResource": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "description": "DsmsRootFolder properties",
+      "properties": {
+        "serviceTreeId": {
+          "type": "string",
+          "description": "The ServiceTreeId that owns the new root folder"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the root folder to add. This should be the full folder path starting with a '$', with '$' replacing all '/' characters. Example: '/my-folder/root-folder' should be passed as '$my-folder$root-folder'"
+        },
+        "cloudId": {
+          "type": "string",
+          "description": "The cloud ID where the root folder should be added. Acceptable values: Public, Fairfax, Mooncake, USSec, USNat"
+        }
+      }
+    },
+    "DsmsRootFolderModel": {
+      "type": "object",
+      "description": "DsmsRootFolder Response",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "DsmsRootFolder properties with provisioning state",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/ProvisioningState",
+              "description": "The provisioning State of the resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/DsmsRootFolderResource"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the resource.",
+      "readOnly": true,
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Accepted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
