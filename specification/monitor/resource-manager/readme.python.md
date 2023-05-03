@@ -9,6 +9,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-monitor
 no-namespace-folders: true
 package-version: 1.0.0b1
+python-base-namespace: azure.mgmt.monitor
 python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
 ```
 
