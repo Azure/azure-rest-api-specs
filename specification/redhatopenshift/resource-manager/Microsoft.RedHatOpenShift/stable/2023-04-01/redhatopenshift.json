@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Red Hat OpenShift Client",
     "description": "Rest API for Azure Red Hat OpenShift 4",
-    "version": "2022-09-04"
+    "version": "2023-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1985,6 +1985,10 @@
         "serviceCidr": {
           "description": "The CIDR used for OpenShift/Kubernetes Services.",
           "type": "string"
+        },
+        "outboundType": {
+          "$ref": "#/definitions/OutboundType",
+          "description": "The OutboundType used for egress traffic."
         }
       }
     },
@@ -2207,6 +2211,13 @@
           "type": "string"
         }
       }
+    },
+    "OutboundType": {
+      "enum": [
+        "Loadbalancer",
+        "UserDefinedRouting"
+      ],
+      "type": "string"
     },
     "ProvisioningState": {
       "description": "ProvisioningState represents a provisioning state.",
