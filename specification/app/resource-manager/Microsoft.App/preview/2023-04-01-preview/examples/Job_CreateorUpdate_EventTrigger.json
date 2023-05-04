@@ -14,7 +14,7 @@
           "eventTriggerConfig": {
             "replicaCompletionCount": 1,
             "parallelism": 4,
-            "pollingInterval" : 40,
+            "pollingInterval": 40,
             "scale": {
               "minExecutions": 1,
               "maxExecutions": 5,
@@ -82,12 +82,10 @@
                 "maxExecutions": 5,
                 "rules": [
                   {
-                    "name": "servicebuscalingrule",
-                    "custom": {
-                      "type": "azure-servicebus",
-                      "metadata": {
-                        "concurrentRequests": "50"
-                      }
+                    "name": "githubscalingrule",
+                    "type": "github-runner",
+                    "metadata": {
+                      "githubAPIURL": "https://api.github.com"
                     }
                   }
                 ]

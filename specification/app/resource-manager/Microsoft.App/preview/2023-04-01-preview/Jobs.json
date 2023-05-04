@@ -719,7 +719,7 @@
             "parallelism": {
               "$ref": "#/definitions/Parallelism"
             },
-            "pollingInterval":{
+            "pollingInterval": {
               "$ref": "#/definitions/PollingInterval"
             },
             "scale": {
@@ -944,29 +944,29 @@
       "type": "integer"
     },
     "ScaleRule": {
-          "description": "Scaling rule.",
-          "type": "object",
-          "properties": {
-            "name": {
-              "description": "Scale Rule Name",
-              "type": "string"
-            },
-            "type": {
-              "description": "Type of the scale rule\neg: azure-servicebus, redis etc.",
-              "type": "string"
-            },
-            "metadata": {
-              "description": "Metadata properties to describe the scale rule.",
-              "type": "object"
-            },
-            "auth": {
-              "description": "Authentication secrets for the scale rule.",
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/ScaleRuleAuth"
-              }
-            }
+      "description": "Scaling rule.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Scale Rule Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the scale rule\neg: azure-servicebus, redis etc.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata properties to describe the scale rule.",
+          "type": "object"
+        },
+        "auth": {
+          "description": "Authentication secrets for the scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/ScaleRuleAuth"
           }
+        }
+      }
     },
     "Scale": {
       "description": "Scaling configurations for event driven jobs.",
