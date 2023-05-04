@@ -288,7 +288,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -344,7 +344,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -1066,7 +1066,8 @@
             "in": "formData",
             "name": "file",
             "type": "file",
-            "format": "binary"
+            "format": "binary",
+            "description": "File to be uploaded."
           },
           {
             "in": "formData",
@@ -1323,6 +1324,12 @@
           },
           {
             "in": "query",
+            "name": "type",
+            "description": "Type it belongs to.",
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "parentIds",
             "description": "Parent Ids of the resource.",
             "type": "array",
@@ -1572,7 +1579,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -1628,7 +1635,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -1674,6 +1681,12 @@
             "in": "query",
             "name": "parentType",
             "description": "Type of the parent it belongs to.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Type it belongs to.",
             "type": "string"
           },
           {
@@ -2194,6 +2207,16 @@
             "in": "query",
             "name": "products",
             "description": "Products of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "traits",
+            "description": "Traits of the resource.",
             "type": "array",
             "items": {
               "type": "string"
@@ -3813,7 +3836,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -3869,7 +3892,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -4402,7 +4425,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -4468,7 +4491,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -5179,7 +5202,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -5235,7 +5258,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -5801,6 +5824,9 @@
           },
           "default": {
             "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -6105,7 +6131,8 @@
             "in": "formData",
             "name": "file",
             "type": "file",
-            "format": "binary"
+            "format": "binary",
+            "description": "File to be uploaded."
           },
           {
             "in": "formData",
@@ -6525,7 +6552,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -6581,7 +6608,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -7276,7 +7303,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -7342,7 +7369,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -9275,7 +9302,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -9341,7 +9368,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -9706,7 +9733,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -9765,7 +9792,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -10542,7 +10569,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -10598,7 +10625,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -11215,7 +11242,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -11271,7 +11298,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -11894,7 +11921,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -11960,7 +11987,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -12587,7 +12614,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -12653,7 +12680,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -12716,9 +12743,9 @@
           {
             "in": "query",
             "name": "source",
-            "description": "Source name of scene data, default value Sentinel_2_L2A (Sentinel 2 L2A).",
-            "type": "string",
-            "default": "Sentinel_2_L2A"
+            "description": "Source name of scene data, Available Values: Sentinel_2_L2A, Sentinel_2_L1C.",
+            "required": true,
+            "type": "string"
           },
           {
             "in": "query",
@@ -13014,6 +13041,168 @@
         "x-ms-examples": {
           "Scenes_GetSatelliteDataIngestionJobDetails": {
             "$ref": "./examples/Scenes_GetSatelliteDataIngestionJobDetails.json"
+          }
+        }
+      }
+    },
+    "/scenes/stac-collections/{collectionId}:search": {
+      "post": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Search for STAC features by collection id, bbox, intersecting geometry, start and end datetime.",
+        "operationId": "Scenes_SearchFeatures",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collectionId",
+            "description": "Collection Id to be searched.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Sentinel_2_L2A",
+              "Sentinel_2_L1C"
+            ],
+            "x-ms-enum": {
+              "name": "collectionId",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "Maximum number of features needed (inclusive). Minimum = 1, Maximum = 100, Default value = 10.",
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "maximum": 100,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Skip token for getting next set of results.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "searchFeaturesQuery",
+            "description": "Query filters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_SearchFeatures": {
+            "$ref": "./examples/Scenes_SearchFeatures.json"
+          }
+        }
+      }
+    },
+    "/scenes/stac-collections/{collectionId}/features/{featureId}": {
+      "get": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Get a feature(SpatioTemporal Asset Catalog (STAC) Item) for given collection and feature id.",
+        "operationId": "Scenes_GetStacFeature",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collectionId",
+            "description": "Collection Id to be fetched.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Sentinel_2_L2A",
+              "Sentinel_2_L1C"
+            ],
+            "x-ms-enum": {
+              "name": "collectionId",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "path",
+            "name": "featureId",
+            "description": "Feature Id to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StacFeature"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_GetStacFeature": {
+            "$ref": "./examples/Scenes_GetStacFeature.json"
           }
         }
       }
@@ -13617,7 +13806,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -13683,7 +13872,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -16733,7 +16922,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -16789,7 +16978,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -16906,7 +17095,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/WeatherDataPartyBasedListResponse"
+              "$ref": "#/definitions/WeatherDataListResponse"
             }
           },
           "default": {
@@ -17213,6 +17402,17 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/WeatherDataProviderResponse"
+            },
+            "headers": {
+              "x-ms-cache-hit": {
+                "description": "Indicate whether the request was cache hit or cache miss.",
+                "type": "boolean"
+              },
+              "x-ms-response-latency-in-milliseconds": {
+                "description": "Time taken in milliseconds for processing the request at server side.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "default": {
@@ -17795,7 +17995,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -17861,7 +18061,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/CascadeDeleteJobPartyBased"
+              "$ref": "#/definitions/CascadeDeleteJob"
             }
           },
           "default": {
@@ -18271,7 +18471,8 @@
           "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
           "minLength": 1,
           "enum": [
-            "Sentinel_2_L2A"
+            "Sentinel_2_L2A",
+            "Sentinel_2_L1C"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -18314,6 +18515,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -18571,6 +18777,10 @@
             "modelAsString": true
           }
         },
+        "type": {
+          "description": "Type it belongs to.",
+          "type": "string"
+        },
         "id": {
           "description": "Unique resource ID.",
           "type": "string",
@@ -18724,7 +18934,7 @@
         }
       }
     },
-    "CascadeDeleteJobPartyBased": {
+    "CascadeDeleteJob": {
       "description": "Schema of cascade delete job.",
       "required": [
         "partyId",
@@ -18777,6 +18987,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -19180,8 +19395,7 @@
             "key2": 123.45
           }
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "DeviceDataModel": {
       "description": "DeviceDataModel API model.",
@@ -19278,8 +19492,7 @@
             "key2": 123.45
           }
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "DeviceDataModelListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -19554,6 +19767,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -20017,6 +20235,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -20085,8 +20308,7 @@
         "innererror": {
           "$ref": "#/definitions/InnerError"
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "Insight": {
       "description": "Schema of insight resource.",
@@ -20210,8 +20432,7 @@
             "key2": 123.45
           }
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "InsightAttachment": {
       "description": "Schema of insight attachment resource.",
@@ -20437,32 +20658,6 @@
         }
       }
     },
-    "Locations": {
-      "description": "Schema of Locations data.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/WeatherLocation"
-        },
-        "requestCompletionTime": {
-          "description": "Request Completion Time in Utc of the location.",
-          "type": "string"
-        },
-        "lastRefreshedDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was last requested, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "example": "2020-12-31T11:10:21Z"
-        },
-        "data": {
-          "description": "List of Weather Data returned by the provider.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WeatherDataForPassthrough"
-          }
-        }
-      }
-    },
     "ManagementZone": {
       "description": "Api Model for ManagementZone object.",
       "type": "object",
@@ -20600,6 +20795,26 @@
         }
       }
     },
+    "Measures": {
+      "description": "Schema for storing measurement readings and unit.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "Data unit.",
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string"
+        },
+        "values": {
+          "description": "Data values.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      }
+    },
     "MultiPolygon": {
       "description": "MultiPolygon geometry.",
       "type": "object",
@@ -20608,37 +20823,33 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "$ref": "#/definitions/MultiPolygonCoordinates"
-        }
-      ],
-      "x-ms-discriminator-value": "MultiPolygon"
-    },
-    "MultiPolygonCoordinates": {
-      "description": "Schema of multi polygon coordinates.",
-      "required": [
-        "coordinates"
-      ],
-      "type": "object",
-      "properties": {
-        "coordinates": {
-          "description": "Gets or sets coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-          "minLength": 1,
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
+          "required": [
+            "coordinates"
+          ],
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "description": "Gets or sets Coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+              "minItems": 1,
               "type": "array",
               "items": {
                 "type": "array",
                 "items": {
-                  "format": "double",
-                  "type": "number"
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "format": "double",
+                      "type": "number"
+                    }
+                  }
                 }
               }
             }
           }
         }
-      }
+      ],
+      "x-ms-discriminator-value": "MultiPolygon"
     },
     "NutrientAnalysis": {
       "description": "Api Model for nutrient analysis object.",
@@ -20947,6 +21158,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -21209,8 +21425,8 @@
           "description": "Id of the associated Crop.",
           "type": "string"
         },
-        "cropVarietyId": {
-          "description": "Id of the associated Crop variety.",
+        "cropProductId": {
+          "description": "Id of the associated Crop product.",
           "type": "string"
         },
         "seasonId": {
@@ -21543,29 +21759,25 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "$ref": "#/definitions/PointCoordinates"
+          "required": [
+            "coordinates"
+          ],
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system.",
+              "maximum": 3,
+              "minimum": 2,
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number"
+              }
+            }
+          }
         }
       ],
       "x-ms-discriminator-value": "Point"
-    },
-    "PointCoordinates": {
-      "description": "Schema of the coordinates of a point.",
-      "type": "object",
-      "required": [
-        "coordinates"
-      ],
-      "properties": {
-        "coordinates": {
-          "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system respectively.",
-          "maximum": 3,
-          "minimum": 2,
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        }
-      }
     },
     "Polygon": {
       "description": "Polygon geometry.",
@@ -21575,34 +21787,30 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "$ref": "#/definitions/PolygonCoordinates"
-        }
-      ],
-      "x-ms-discriminator-value": "Polygon"
-    },
-    "PolygonCoordinates": {
-      "description": "Schema of polygon coordinates.",
-      "required": [
-        "coordinates"
-      ],
-      "type": "object",
-      "properties": {
-        "coordinates": {
-          "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-          "minLength": 1,
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
+          "required": [
+            "coordinates"
+          ],
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+              "minItems": 1,
               "type": "array",
               "items": {
-                "format": "double",
-                "type": "number"
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "format": "double",
+                    "type": "number"
+                  }
+                }
               }
             }
           }
         }
-      }
+      ],
+      "x-ms-discriminator-value": "Polygon"
     },
     "Port": {
       "description": "Schema for storing port values.",
@@ -21940,6 +22148,7 @@
         "boundaryId",
         "endDateTime",
         "partyId",
+        "source",
         "startDateTime"
       ],
       "type": "object",
@@ -21991,6 +22200,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -22231,6 +22445,10 @@
             "modelAsString": true
           }
         },
+        "type": {
+          "description": "Type it belongs to.",
+          "type": "string"
+        },
         "parentIds": {
           "description": "Parent Ids of the resource.",
           "type": "array",
@@ -22253,6 +22471,65 @@
         }
       }
     },
+    "SearchFeaturesQuery": {
+      "description": "Search stac Features parameters.",
+      "required": [
+        "endDateTime",
+        "startDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startDateTime": {
+          "format": "date-time",
+          "description": "Start datetime of the time interval in which to search for Features.",
+          "type": "string"
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "description": "End datetime of the time interval in which to search for Features.",
+          "type": "string"
+        },
+        "intersects": {
+          "$ref": "#/definitions/GeoJsonObject"
+        },
+        "bbox": {
+          "description": "Only features that have a geometry that intersects the bounding box are selected.\r\nThe bounding box is provided as four numbers. The coordinate reference system of the values is WGS84 longitude/latitude.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "featureIds": {
+          "description": "Array of feature ids to return.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SearchFeaturesResponse": {
+      "description": "Paged response contains list of features and next property to get the next set of results.",
+      "required": [
+        "features"
+      ],
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "List of features.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StacFeature"
+          }
+        },
+        "nextLink": {
+          "description": "URL to do the POST request with same filters,\r\nto get next set of features.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Season": {
       "description": "Schema of season resource.",
       "type": "object",
@@ -22271,6 +22548,10 @@
           "format": "int32",
           "description": "Season year.",
           "type": "integer"
+        },
+        "geographicIdentifier": {
+          "description": "Geographic Identifier.",
+          "type": "string"
         },
         "id": {
           "description": "Unique resource ID.",
@@ -22386,8 +22667,8 @@
           "description": "Id of the season it belongs to.",
           "type": "string"
         },
-        "cropVarietyIds": {
-          "description": "CropVariety ids.",
+        "cropProductIds": {
+          "description": "CropProduct ids.",
           "uniqueItems": true,
           "type": "array",
           "items": {
@@ -22597,8 +22878,7 @@
             "key2": 123.45
           }
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "SensorDataModel": {
       "description": "SensorModel API model.",
@@ -22698,8 +22978,7 @@
             "key2": 123.45
           }
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "SensorDataModelListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -22945,8 +23224,7 @@
             "key2": 123.45
           }
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "SensorMappingListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -23087,8 +23365,7 @@
             "key2": 123.45
           }
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "SensorPartnerIntegrationModelListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -23170,7 +23447,8 @@
           "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
           "minLength": 1,
           "enum": [
-            "Sentinel_2_L2A"
+            "Sentinel_2_L2A",
+            "Sentinel_2_L1C"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -23205,6 +23483,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -23353,7 +23636,8 @@
           "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
           "minLength": 1,
           "enum": [
-            "Sentinel_2_L2A"
+            "Sentinel_2_L2A",
+            "Sentinel_2_L1C"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -23404,6 +23688,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -23512,12 +23801,144 @@
     "Source": {
       "description": "Source of satellite data.",
       "enum": [
-        "Sentinel_2_L2A"
+        "Sentinel_2_L2A",
+        "Sentinel_2_L1C"
       ],
       "type": "string",
       "x-ms-enum": {
         "name": "Source",
         "modelAsString": true
+      }
+    },
+    "StacFeature": {
+      "description": "Schema of STAC Feature(Item).\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#item-fields.",
+      "required": [
+        "assets",
+        "id",
+        "links",
+        "properties",
+        "stacVersion",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "stacVersion": {
+          "description": "The STAC version the Feature implements.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "stacExtensions": {
+          "description": "A list of extensions the Feature implements.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "description": "Provider identifier. Globally unique ID by Data provider.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the GeoJSON Object. It's value is always Feature.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "geometry": {
+          "description": "Defines the full footprint of the asset represented by this item.\r\nIts a GeoJSON geometry.",
+          "type": "object"
+        },
+        "bbox": {
+          "description": "Bounding box of the feature.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "properties": {
+          "description": "A dictionary of additional metadata for the item.",
+          "type": "object"
+        },
+        "links": {
+          "description": "List of link objects to resources and related URLs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StacFeatureLink"
+          }
+        },
+        "assets": {
+          "description": "Dictionary of asset objects, each with a unique key.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StacFeatureAsset"
+          }
+        },
+        "collection": {
+          "description": "The id of the STAC Collection this Feature references.",
+          "type": "string"
+        }
+      }
+    },
+    "StacFeatureAsset": {
+      "description": "Schema of STAC Feature's Asset.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#asset-object.",
+      "required": [
+        "href"
+      ],
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "Link to the asset object.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "title": {
+          "description": "The displayed title for clients and users.",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the Asset providing additional details, such as how it was processed or created.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Media type of the asset.",
+          "type": "string"
+        },
+        "roles": {
+          "description": "The semantic roles of the asset, similar to the use of rel in links.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StacFeatureLink": {
+      "description": "The Link object describes a relationship of this Feature with another entity.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#link-object.",
+      "required": [
+        "href",
+        "rel"
+      ],
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The actual link in the format of an URL.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "rel": {
+          "description": "Relationship between the current document and the linked document.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "description": "Media type of the referenced entity.",
+          "type": "string"
+        },
+        "title": {
+          "description": "A human readable title to be used in rendered displays of the link.",
+          "type": "string"
+        }
       }
     },
     "TillageData": {
@@ -23723,6 +24144,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -23798,91 +24224,127 @@
       "type": "object",
       "properties": {
         "wetBulbTemperature": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "cloudCover": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "dayOfWeek": {
           "description": "Day of week.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "dayOrNight": {
           "description": "This data field indicates whether it is daytime or nighttime based on the Local Apparent Time of the location.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "expirationTime": {
           "description": "Expiration time in Utc format.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "iconCode": {
           "description": "This number is the key to the weather icon lookup. The data field shows the icon number that is matched to represent the observed weather conditions.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "iconCodeExtend": {
           "description": "Code representing full set sensible weather.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "hasPrecipitation": {
           "description": "Indicates whether there is precipitation or not.",
-          "type": "boolean"
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
         },
         "pressureMeanSeaLevel": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "relativeHumidity": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperature": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureDewPoint": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureFeelsLike": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureHeatIndex": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureWindChill": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "uvDescription": {
           "description": "The UV Index Description which complements the UV Index value by providing an associated level of risk of skin damage due to exposure (-2 = Not Available, -1 = No Report, 0 to 2 = Low, 3 to 5 = Moderate, 6 to 7 = High, 8 to 10 = Very High, 11 to 16 = Extreme).",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "uvIndex": {
           "description": "Hourly maximum UV index.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "validTimeLocal": {
           "description": "Time forecast is valid in local apparent time.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "validTime": {
           "description": "Time forecast is valid in Utc format.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "visibility": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "windDirection": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "windGust": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "windSpeed": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "wxPhraseLong": {
           "description": "Hourly sensible weather phrase containing longer description.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "wxPhraseShort": {
           "description": "Hourly sensible weather phrase containing short description.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "additionalAttributes": {
           "description": "A collection of key value pairs that belongs to the resource. Each pair must not have a key greater than 50 characters and must not have a value greater than 250 characters. Note: A maximum of 100 key value pairs can be provided for a resource and only string and numeral values are supported.",
@@ -23963,6 +24425,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -24020,7 +24487,7 @@
         }
       }
     },
-    "WeatherDataPartyBased": {
+    "WeatherData": {
       "description": "Schema of weather data.",
       "required": [
         "boundaryId",
@@ -24155,7 +24622,7 @@
         }
       }
     },
-    "WeatherDataPartyBasedListResponse": {
+    "WeatherDataListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "required": [
         "value"
@@ -24166,7 +24633,7 @@
           "description": "List of requested objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WeatherDataPartyBased"
+            "$ref": "#/definitions/WeatherData"
           }
         },
         "skipToken": {
@@ -24249,8 +24716,7 @@
         "additionalParams": {
           "$ref": "#/definitions/AdditionalProviderParameters"
         }
-      },
-      "additionalProperties": {}
+      }
     },
     "WeatherDataProviderResponse": {
       "description": "Schema of Weather Data Provider Response.",
@@ -24276,10 +24742,10 @@
           }
         },
         "locations": {
-          "description": "List of locations along with corresponding weather data.",
+          "description": "List of weather data for all the weather locations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Locations"
+            "$ref": "#/definitions/WeatherLocationData"
           }
         },
         "errors": {
@@ -24316,6 +24782,28 @@
           "description": "Location Value eg. \"10,-25\" for LocationType Type \"LatLong\".",
           "minLength": 1,
           "type": "string"
+        }
+      }
+    },
+    "WeatherLocationData": {
+      "description": "Schema of WeatherLocationData data.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/WeatherLocation"
+        },
+        "requestCompletionTime": {
+          "description": "Request Completion Time in Utc of the location.",
+          "type": "string"
+        },
+        "lastRefreshedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last requested, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "example": "2020-12-31T11:10:21Z."
+        },
+        "data": {
+          "$ref": "#/definitions/WeatherDataForPassthrough"
         }
       }
     },

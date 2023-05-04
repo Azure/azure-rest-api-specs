@@ -2382,11 +2382,16 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "sasUri": {
+          "description": "SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
         }
-      },
-      "required": [
-        "url"
-      ]
+      }
     },
     "Office365LinkedService": {
       "x-ms-discriminator-value": "Office365",
