@@ -191,12 +191,6 @@
           },
           {
             "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "maxpagesize",
             "description": "Number of results in response.",
             "type": "integer",
@@ -265,12 +259,11 @@
             "in": "query",
             "name": "fileType",
             "description": "File type",
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
             "enum": [
-              0,
-              1,
-              2
+              "JMX_FILE",
+              "USER_PROPERTIES",
+              "ADDITIONAL_ARTIFACTS"
             ],
             "x-ms-enum": {
               "name": "fileType",
@@ -442,12 +435,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/TestIdPathParameter"
-          },
-          {
-            "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -732,14 +719,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The test run is created.",
+          "200": {
+            "description": "The test run is updated.",
             "schema": {
               "$ref": "#/definitions/TestRun"
             }
           },
-          "200": {
-            "description": "The test run is updated.",
+          "201": {
+            "description": "The test run is created.",
             "schema": {
               "$ref": "#/definitions/TestRun"
             }
@@ -914,12 +901,6 @@
             "in": "query",
             "name": "orderby",
             "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime asc. Supported fields - executedDateTime",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
             "type": "string"
           },
           {
@@ -1633,7 +1614,7 @@
       "type": "object",
       "properties": {
         "isAutoStopEnabled": {
-          "description": "Auto stop is enabled or not ",
+          "description": "Auto stop is enabled or not",
           "type": "boolean"
         },
         "errorRate": {
@@ -1786,14 +1767,13 @@
       "type": "object",
       "properties": {
         "fileType": {
-          "format": "int32",
           "description": "File type",
           "enum": [
-            0,
-            1,
-            2
+            "JMX_FILE",
+            "USER_PROPERTIES",
+            "ADDITIONAL_ARTIFACTS"
           ],
-          "type": "integer",
+          "type": "string",
           "x-ms-enum": {
             "name": "FileType",
             "modelAsString": true,
@@ -2214,7 +2194,7 @@
         },
         "rps": {
           "format": "int32",
-          "description": "Throughput required",
+          "description": "Required throughput",
           "type": "integer"
         },
         "maxResponseTime": {
@@ -3282,6 +3262,7 @@
       "description": "URL to perform data plane API operations on the resource.",
       "required": true,
       "type": "string",
+      "format": "uri",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     }
