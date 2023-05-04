@@ -4,6 +4,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 
 import "./models/completions.create.tsp";
+import "./models/chat.completions.tsp";
 import "./models/embeddings.create.tsp";
 
 using TypeSpec.Rest;
@@ -17,11 +18,26 @@ namespace Azure.OpenAI;
 @TypeSpec.Rest.actionSeparator("/")
 @action("embeddings")
 @convenientAPI(true)
-op getEmbeddings is Azure.Core.ResourceAction<Deployment, Embeddings.EmbeddingsOptions, Embeddings.Embeddings>;
+op getEmbeddings is Azure.Core.ResourceAction<Deployment, EmbeddingsOptions, Embeddings>;
 
 
-@doc("Return the completions for a given prompt.")
+@doc("""
+Gets completions for the provided input prompts.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
 @TypeSpec.Rest.actionSeparator("/")
 @action("completions")
 @convenientAPI(true)
-op getCompletions is Azure.Core.ResourceAction<Deployment, Completions.CompletionsOptions, Completions.Completions>;
+op getCompletions is Azure.Core.ResourceAction<Deployment, CompletionsOptions, Completions>;
+
+
+@doc("""
+Gets chat completions for the provided chat messages.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+@TypeSpec.Rest.actionSeparator("/")
+@action("chat/completions")
+@convenientAPI(true)
+op getChatCompletions is Azure.Core.ResourceAction<Deployment, ChatCompletionsOptions, ChatCompletions>;

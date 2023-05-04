@@ -938,6 +938,62 @@
         "readinessProbe": {
           "description": "The readiness probe.",
           "$ref": "#/definitions/ContainerProbe"
+        },
+        "securityContext": {
+          "description": "The container security properties.",
+          "$ref": "#/definitions/SecurityContextDefinition"
+        }
+      }
+    },
+    "SecurityContextDefinition": {
+      "description": "The security context for the container.",
+      "type": "object",
+      "properties": {
+        "privileged": {
+          "type": "boolean",
+          "description": "The flag to determine if the container permissions is elevated to Privileged."
+        },
+        "allowPrivilegeEscalation": {
+          "type": "boolean",
+          "description": "A boolean value indicating whether the init process can elevate its privileges"
+        },
+        "capabilities": {
+          "description": "The capabilities to add or drop from a container.",
+          "$ref": "#/definitions/SecurityContextCapabilitiesDefinition"
+        },
+        "runAsGroup": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sets the User GID for the container."
+        },
+        "runAsUser": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sets the User UID for the container."
+        },
+        "seccompProfile": {
+          "type": "string",
+          "description": "a base64 encoded string containing the contents of the JSON in the seccomp profile"
+        }
+      }
+    },
+    "SecurityContextCapabilitiesDefinition": {
+      "description": "The capabilities to add or drop from a container.",
+      "type": "object",
+      "properties": {
+        "add": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The capabilities to add to the container."
+        },
+        "drop": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The capabilities to drop from the container."
         }
       }
     },
