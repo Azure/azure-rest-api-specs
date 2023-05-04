@@ -171,20 +171,6 @@ directive:
       - RequiredReadOnlyProperties
 ```
 
-### Suppress custom user schema model violations
-Many Search operations return a custom user schema for the documents in an index.  Some of them are incorrectly specified as `"additionalProperties": { "type": "object" }` instead of `"additionalProperties": true`.  We’ve filed https://github.com/Azure/azure-rest-api-specs/issues/23807 to track fixing these, but are temporarily suppressing the model violation warnings to avoid impacting the next release our generated client libraries.
-
-
-``` yaml
-directive:
-  - suppress: INVALID_TYPE
-    from: searchservice.json
-    reason: Temporarily ignore warnings about incorrectly specified custom user schemas.
-  - suppress: INVALID_TYPE
-    from: searchindex.json
-    reason: Temporarily ignore warnings about incorrectly specified custom user schemas.
-```
-
 ### Tag: package-2023-07-01-preview
 
 These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
@@ -222,6 +208,7 @@ These settings apply only when `--tag=package-2023-07-searchindex-preview` is sp
 ``` yaml $(tag) == 'package-2023-07-searchindex-preview'
 input-file:
 - preview/2023-07-01-Preview/searchindex.json
+```
 
 ### Tag: package-2021-04-30-preview
 
