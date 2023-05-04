@@ -111,12 +111,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -157,11 +152,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "name": "JobEnvelope",
@@ -224,11 +215,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -280,12 +267,8 @@
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
-          {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string"
+         {
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "name": "JobEnvelope",
@@ -345,12 +328,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "name": "template",
@@ -416,20 +394,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
-            "name": "jobExecutionName",
-            "in": "path",
-            "description": "Job execution name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/JobExecutionNameParameter"
           }
         ],
         "responses": {
@@ -480,21 +448,10 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
-            "name": "jobExecutionName",
-            "in": "body",
-            "description": "List of all job executions that should be stopped.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobExecutionNamesCollection"
-            }
+            "$ref": "#/parameters/JobExecutionNameParameter"
           }
         ],
         "responses": {
@@ -545,12 +502,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/JobNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -587,6 +539,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/executions/{jobExecutionName}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Get details of a single job execution",
+        "operationId": "JobsExecution",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobExecutionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobExecution"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Container Apps Job Executions": {
+            "$ref": "./examples/Job_Execution_Get.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/listSecrets": {
       "post": {
         "tags": [
@@ -605,12 +612,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "jobName",
-            "in": "path",
-            "description": "Name of the Container Apps Job.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/JobNameParameter"
           }
         ],
         "responses": {
@@ -633,6 +635,24 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "JobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "description": "Job Name",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
+    },
+    "JobExecutionNameParameter": {
+      "name": "jobExecutionName",
+      "in": "path",
+      "description": "Job execution name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
     }
   },
   "definitions": {
