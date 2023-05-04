@@ -719,14 +719,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The test run is updated.",
+          "201": {
+            "description": "The test run is created.",
             "schema": {
               "$ref": "#/definitions/TestRun"
             }
           },
-          "201": {
-            "description": "The test run is created.",
+          "200": {
+            "description": "The test run is updated.",
             "schema": {
               "$ref": "#/definitions/TestRun"
             }
@@ -2194,12 +2194,12 @@
         },
         "rps": {
           "format": "int32",
-          "description": "Required throughput",
+          "description": "Throughput required (requests per second)",
           "type": "integer"
         },
         "maxResponseTime": {
           "format": "int32",
-          "description": "Maximum response time of the API/hitPoint",
+          "description": "Maximum response time of the API/endpoint",
           "type": "integer"
         },
         "rampUpTime": {
