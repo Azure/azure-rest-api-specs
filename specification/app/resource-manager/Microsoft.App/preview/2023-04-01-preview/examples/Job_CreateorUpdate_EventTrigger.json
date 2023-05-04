@@ -14,17 +14,16 @@
           "eventTriggerConfig": {
             "replicaCompletionCount": 1,
             "parallelism": 4,
+            "pollingInterval" : 40,
             "scale": {
-              "minReplicas": 1,
-              "maxReplicas": 5,
+              "minExecutions": 1,
+              "maxExecutions": 5,
               "rules": [
                 {
                   "name": "servicebuscalingrule",
-                  "custom": {
-                    "type": "azure-servicebus",
-                    "metadata": {
-                      "concurrentRequests": "50"
-                    }
+                  "type": "azure-servicebus",
+                  "metadata": {
+                    "topicName": "my-topic"
                   }
                 }
               ]
@@ -36,24 +35,7 @@
           "containers": [
             {
               "image": "repo/testcontainerAppsJob0:v1",
-              "name": "testcontainerAppsJob0",
-              "probes": [
-                {
-                  "type": "Liveness",
-                  "httpGet": {
-                    "path": "/health",
-                    "port": 8080,
-                    "httpHeaders": [
-                      {
-                        "name": "Custom-Header",
-                        "value": "Awesome"
-                      }
-                    ]
-                  },
-                  "initialDelaySeconds": 5,
-                  "periodSeconds": 3
-                }
-              ]
+              "name": "testcontainerAppsJob0"
             }
           ],
           "initContainers": [
@@ -94,9 +76,10 @@
             "eventTriggerConfig": {
               "replicaCompletionCount": 1,
               "parallelism": 4,
+              "pollingInterval": 20,
               "scale": {
-                "minReplicas": 1,
-                "maxReplicas": 5,
+                "minExecutions": 1,
+                "maxExecutions": 5,
                 "rules": [
                   {
                     "name": "servicebuscalingrule",
@@ -120,24 +103,7 @@
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"
-                },
-                "probes": [
-                  {
-                    "type": "Liveness",
-                    "httpGet": {
-                      "path": "/health",
-                      "port": 8080,
-                      "httpHeaders": [
-                        {
-                          "name": "Custom-Header",
-                          "value": "Awesome"
-                        }
-                      ]
-                    },
-                    "initialDelaySeconds": 3,
-                    "periodSeconds": 3
-                  }
-                ]
+                }
               }
             ],
             "initContainers": [
@@ -180,17 +146,17 @@
             "eventTriggerConfig": {
               "replicaCompletionCount": 1,
               "parallelism": 4,
+              "pollingInterval": 20,
               "scale": {
-                "minReplicas": 1,
-                "maxReplicas": 5,
+                "minExecutions": 1,
+                "maxExecutions": 5,
                 "rules": [
                   {
                     "name": "servicebuscalingrule",
-                    "custom": {
-                      "type": "azure-servicebus",
-                      "metadata": {
-                        "concurrentRequests": "50"
-                      }
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "queueName": "my-queue",
+                      "messageCount": "50"
                     }
                   }
                 ]
@@ -206,24 +172,7 @@
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"
-                },
-                "probes": [
-                  {
-                    "type": "Liveness",
-                    "httpGet": {
-                      "path": "/health",
-                      "port": 8080,
-                      "httpHeaders": [
-                        {
-                          "name": "Custom-Header",
-                          "value": "Awesome"
-                        }
-                      ]
-                    },
-                    "initialDelaySeconds": 3,
-                    "periodSeconds": 3
-                  }
-                ]
+                }
               }
             ],
             "initContainers": [
