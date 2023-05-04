@@ -148,7 +148,7 @@ These settings apply only when --tag=package-2023-06` is specified on the comman
 
 ``` yaml $(tag) == 'package-2023-06'
 input-file:
-- Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
+- Microsoft.EventGrid/preview/2023-06-01-preview/EventGridBeta.json
 ```
 
 ### Suppression
