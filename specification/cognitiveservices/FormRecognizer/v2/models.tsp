@@ -1,49 +1,38 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
 
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Rest;
 using Azure.Core;
+using TypeSpec.Versioning;
 
-// API version enum needs to be contained within the namespace, it would be nice to be able to extract it 
-// outside the namespace for use in other places
-@added(APIVersions.v2_0)
-namespace FormRecognizer.v2;
+namespace FormRecognizer;
 
-enum TextStyleKnownValues {
+@added(APIVersion.v2_1)
+enum TextStyle {
   Other: "other",
   Handwriting: "handwriting",
 }
 
-@knownValues(TextStyleKnownValues)
-model TextStyle is string;
-
-enum SelectionMarkStateKnownValues {
+@added(APIVersion.v2_1)
+enum SelectionMarkState {
   Selected: "selected",
   Unselected: "unselected",
 }
 
-@knownValues(SelectionMarkStateKnownValues)
-model SelectionMarkState is string;
-
-enum KeyValueTypeKnownValues {
+@added(APIVersion.v2_1)
+enum KeyValueType {
   String: "string",
   SelectionMark: "selectionMark",
 }
 
-@added(APIVersions.v2_1)
-@knownValues(KeyValueTypeKnownValues)
-model KeyValueType is string;
-
-enum FieldValueSelectionMarkKnownValues {
+@added(APIVersion.v2_1)
+enum FieldValueSelectionMark {
   Selected: "selected",
   Unselected: "unselected",
 }
 
-@knownValues(FieldValueSelectionMarkKnownValues)
-model FieldValueSelectionMark is string;
-
-enum LocaleKnownValues {
+@added(APIVersion.v2_1)
+enum Locale {
   EnAU: "en-AU",
   EnCA: "en-CA",
   EnGB: "en-GB",
@@ -51,168 +40,160 @@ enum LocaleKnownValues {
   EnUS: "en-US",
 }
 
-@added(APIVersions.v2_1)
-@knownValues(LocaleKnownValues)
-model Locale is string;
-
-// FIXME: this is ugly, most values were added in v2.1. Is there a better way to do this?
-enum LanguageKnownValues {
-  @added(APIVersions.v2_1)
+enum Language {
+  @added(APIVersion.v2_1)
   Af: "af",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ast: "ast",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Bi: "bi",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Br: "br",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ca: "ca",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ceb: "ceb",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ch: "ch",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Co: "co",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Crh: "crh",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Cs: "cs",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Csb: "csb",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Da: "da",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   De: "de",
   En: "en",
   Es: "es",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Et: "et",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Eu: "eu",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Fi: "fi",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Fil: "fil",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Fj: "fj",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Fr: "fr",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Fur: "fur",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Fy: "fy",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ga: "ga",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Gd: "gd",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Gil: "gil",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Gl: "gl",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Gv: "gv",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Hni: "hni",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Hsb: "hsb",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ht: "ht",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Hu: "hu",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ia: "ia",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Id: "id",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   It: "it",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Iu: "iu",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ja: "ja",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Jv: "jv",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Kaa: "kaa",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Kac: "kac",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Kea: "kea",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Kha: "kha",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Kl: "kl",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ko: "ko",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ku: "ku",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Kw: "kw",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Lb: "lb",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Ms: "ms",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Mww: "mww",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Nap: "nap",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Nl: "nl",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   No: "no",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Oc: "oc",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Pl: "pl",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Pt: "pt",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Quc: "quc",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Rm: "rm",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Sco: "sco",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Sl: "sl",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Sq: "sq",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Sv: "sv",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Sw: "sw",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Tet: "tet",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Tr: "tr",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Tt: "tt",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Uz: "uz",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Vo: "vo",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Wae: "wae",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Yua: "yua",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Za: "za",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   ZhHans: "zh-Hans",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   ZhHant: "zh-Hant",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   Zu: "zu",
 }
 
-@knownValues(LanguageKnownValues)
-model Language is string;
-
-enum Enum6KnownValues {
+enum Enum6 {
   Full: "full",
-  Summary: "summary",
 }
 
-@knownValues(Enum6KnownValues)
-model Enum6 is string;
+enum Enum7 {
+  Summary: "summary",
+}
 
 enum ModelStatus {
   Creating: "creating",
@@ -226,9 +207,9 @@ enum TrainStatus {
   Failed: "failed",
 }
 
-enum ContentType {
+union ContentType {
   ApplicationPdf: "application/pdf",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   ImageBmp: "image/bmp",
   ImageJpeg: "image/jpeg",
   ImagePng: "image/png",
@@ -256,12 +237,13 @@ enum FieldValueType {
   Integer: "integer",
   Array: "array",
   Object: "object",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   SelectionMark: "selectionMark",
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   CountryRegion: "countryRegion",
 }
 
+@added(APIVersion.v2_1)
 enum ReadingOrder {
   Basic: "basic",
   Natural: "natural",
@@ -278,8 +260,7 @@ model TrainRequest {
   @doc("Use label file for training a model.")
   useLabelFile?: boolean;
 
-  
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Optional user defined model name (max length: 1024).")
   modelName?: string;
 }
@@ -311,12 +292,9 @@ model ErrorInformation {
 }
 
 @doc("Response to the get custom model operation.")
-@resource("custom/models/{modelId}")
 model Model {
+  // @key
   @doc("Basic custom model information.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
-  @visibility("read")
   modelInfo: ModelInfo;
 
   @doc("Keys extracted by the custom model.")
@@ -325,7 +303,7 @@ model Model {
   @doc("Training result for custom model.")
   trainResult?: TrainResult;
 
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Training result for composed model.")
   composedTrainResults?: TrainResult[];
 }
@@ -333,8 +311,8 @@ model Model {
 @resource("custom/models")
 @doc("Basic custom model information.")
 model ModelInfo {
-  @key
   @doc("Model identifier.")
+  @key
   modelId: string;
 
   @doc("Status of the model.")
@@ -346,17 +324,16 @@ model ModelInfo {
   @doc("Date and time (UTC) when the status was last updated.")
   lastUpdatedDateTime: zonedDateTime;
 
-
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Optional user defined model name (max length: 1024).")
   modelName?: string;
 
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Optional model attributes.")
   attributes?: Attributes;
 }
 
-@added(APIVersions.v2_1)
+@added(APIVersion.v2_1)
 @doc("Optional model attributes.")
 model Attributes {
   @doc("Is this model composed? (default: false).")
@@ -386,7 +363,7 @@ by each.
   @doc("Average accuracy.")
   averageModelAccuracy?: float32;
 
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Model identifier.")
   modelId?: string;
 
@@ -425,11 +402,10 @@ model SourcePath {
 }
 
 @doc("Status and result of the queued analyze operation.")
-// FIXME: not a resource in that sense
-// @resource("{modelId}/analyzeResults")
 model AnalyzeOperationResult {
   @doc("Operation status.")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
   status: OperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
@@ -439,11 +415,11 @@ model AnalyzeOperationResult {
   lastUpdatedDateTime: zonedDateTime;
 
   @doc("Results of the analyze operation.")
-  analyzeResult?: AnalyzeResultV2;
+  analyzeResult?: AnalyzeResult;
 }
 
 @doc("Analyze operation result.")
-model AnalyzeResultV2 {
+model AnalyzeResult {
   @doc("Version of schema used for this result.")
   version: string;
 
@@ -493,13 +469,13 @@ built upon the actual line location instead of order.
 """)
   lines?: TextLine[];
 
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("List of selection marks extracted from the page.")
   selectionMarks?: SelectionMark[];
 
-  @removed(APIVersions.v2_1)
+  @removed(APIVersion.v2_1)
   @doc("The detected language on the page overall.")
-  language?: Language,
+  language?: Language;
 }
 
 @doc("An object representing an extracted text line.")
@@ -513,13 +489,13 @@ model TextLine {
   @doc("List of words in the text line.")
   words: TextWord[];
 
-  @removed(APIVersions.v2_1)
-  @doc("The detected language on the page overall.")
-  language?: Language,
-
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Text appearance properties.")
   appearance?: Appearance;
+
+  @removed(APIVersion.v2_1)
+  @doc("The detected language of this line, if different from the overall page language.")
+  language?: Language;
 }
 
 @doc("An object representing a word.")
@@ -534,14 +510,14 @@ model TextWord {
   confidence?: float32;
 }
 
-@added(APIVersions.v2_1)
+@added(APIVersion.v2_1)
 @doc("An object representing the appearance of the text line.")
 model Appearance {
   @doc("An object representing the style of the text line.")
   style: Style;
 }
 
-@added(APIVersions.v2_1)
+@added(APIVersion.v2_1)
 @doc("An object representing the style of the text line.")
 model Style {
   @doc("The text line style name, including handwriting and other.")
@@ -551,7 +527,7 @@ model Style {
   confidence: float32;
 }
 
-@added(APIVersions.v2_1)
+@added(APIVersion.v2_1)
 @doc("Information about the extracted selection mark.")
 model SelectionMark {
   @doc("Bounding box of the selection mark.")
@@ -596,11 +572,7 @@ model KeyValuePair {
 
 @doc("Information about the extracted key or value in a key-value pair.")
 model KeyValueElement {
-  // FIXME: why did auto generation added a language param here?
-  // @doc("The detected language on the page overall.")
-  // language?: Language,
-
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Semantic data type of the key value element.")
   type?: KeyValueType;
 
@@ -628,7 +600,8 @@ model DataTable {
   @doc("List of cells contained in the table.")
   cells: DataTableCell[];
 
-  @added(APIVersions.v2_1)
+  // FIXME: check this
+  @added(APIVersion.v2_1)
   @doc("Bounding box of the table.")
   boundingBox: float32[];
 }
@@ -674,15 +647,14 @@ model DocumentResult {
   @doc("Document type.")
   docType: string;
 
-  // FIXME: auto generation marked this as optional but x-nullable was false.
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Model identifier.")
-  modelId: string;
+  modelId?: string;
 
   @doc("First and last page number where the document is found.")
   pageRange: int32[];
 
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Predicted document type confidence.")
   docTypeConfidence?: float32;
 
@@ -719,11 +691,11 @@ model FieldValue {
   @doc("Dictionary of named field values.")
   valueObject?: Record<FieldValue>;
 
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("Selection mark value.")
   valueSelectionMark?: FieldValueSelectionMark;
 
-  @added(APIVersions.v2_1)
+  @added(APIVersion.v2_1)
   @doc("3-letter country code (ISO 3166-1 alpha-3).")
   valueCountryRegion?: string;
 
@@ -786,7 +758,6 @@ of seconds from 1970-01-01T0:0:0Z UTC until the expiration time.
 }
 
 @doc("Status and result of the queued copy operation.")
-@resource("custom/models/{modelId}/copyResults/{resultId}")
 model CopyOperationResult {
   @doc("Operation status.")
   // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
@@ -812,7 +783,7 @@ model CopyResult {
   errors?: ErrorInformation[];
 }
 
-@added(APIVersions.v2_1)
+@added(APIVersion.v2_1)
 @doc("Request contract for compose operation.")
 model ComposeRequest {
   @doc("List of model ids to compose.")
@@ -824,7 +795,6 @@ model ComposeRequest {
 
 @doc("Response to the list custom models operation.")
 @pagedResult
-// @resource("custom/models")
 model Models {
   @doc("Summary of all trained custom models.")
   summary?: ModelsSummary;
