@@ -26,6 +26,6 @@ https://westus2.api.cognitive.microsoft.com).
 namespace FormRecognizer;
 
 enum APIVersion {
-  v2023_02_28_preview: "2023-02-28-preview",
-  v2022_08_31: "2022-08-31"
+  v2022_08_31: "2022-08-31",
+  v2023_02_28_preview: "2023-02-28-preview"
 }

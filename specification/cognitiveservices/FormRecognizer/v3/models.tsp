@@ -48,8 +48,8 @@ enum DocumentAnnotationKind {
 enum DocumentBarcodeKind {
   "QRCode",
   "PDF417",
-  Upca: "UPCA",
-  Upce: "UPCE",
+  "UPCA",
+  "UPCE",
   "Code39",
   "Code128",
   "EAN8",
@@ -1102,8 +1102,6 @@ model ClassifyDocumentRequest {
 @doc("General information regarding the current resource.")
 model ResourceDetails {
   @doc("Details regarding custom document models.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
-  @key
   customDocumentModels: CustomDocumentModelsDetails;
 
   @added(APIVersion.v2023_02_28_preview)
