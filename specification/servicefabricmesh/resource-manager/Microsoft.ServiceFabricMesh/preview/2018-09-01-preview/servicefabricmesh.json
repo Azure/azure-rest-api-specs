@@ -1951,6 +1951,9 @@
         "aggregationType": {
           "type": "string"
         },
+        "lockAggregationType": {
+          "type": "string"
+        },
         "supportsInstanceLevelAggregation": {
           "type": "boolean"
         },
@@ -2232,7 +2235,8 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/SecretKind",
-          "description": "Describes the kind of secret."
+          "description": "Describes the kind of secret.",
+          "x-ms-discriminator-value": "secretKind"
         }
       },
       "required": [
