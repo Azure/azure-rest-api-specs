@@ -560,15 +560,9 @@
             ]
           }
         },
-        "deliveryStatusDetails": {
+        "AcsEmailDeliveryStatusDetails": {
           "description": "Detailed information about the status if any",
-          "type": "object",
-          "properties": {
-            "statusMessage": {
-              "description": "Detailed status message",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/AcsEmailDeliveryStatusDetails"
         },
         "deliveryAttemptTimeStamp": {
           "description": "The time at which the email delivery report received timestamp",
@@ -854,6 +848,16 @@
         },
         "deleteLocation": {
           "description": "The location to delete all chunk storage",
+          "type": "string"
+        }
+      }
+    },
+    "AcsEmailDeliveryStatusDetails": {
+      "description": "Detailed information about the status if any",
+      "type": "object",
+      "properties": {
+        "statusMessage": {
+          "description": "Detailed status message",
           "type": "string"
         }
       }
