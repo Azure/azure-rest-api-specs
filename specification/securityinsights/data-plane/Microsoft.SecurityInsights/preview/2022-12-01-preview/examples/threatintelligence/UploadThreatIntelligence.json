@@ -59,17 +59,12 @@
   "responses": {
     "200": {
       "body": {
-        "error": {
-          "code": "UploadIndicatorsValidationErrors",
-          "message": "Some or all of the provided indicators failed to upload because of validation errors.",
-          "details": [
-            {
-              "recordIndex": 1,
-              "message": "Error for Property=id: Required property is missing. Actual value: NULL.",
-              "code": "IndicatorValidationError"
-            }
-          ]
-        }
+        "errors": [
+          {
+            "recordIndex": 1,
+            "validationErrorMessages": "Error for Property=id: Required property is missing. Actual value: NULL."
+          }
+        ]
       }
     },
     "400": {
@@ -82,12 +77,20 @@
       }
     },
     "401": {
-      "statusCode": 401,
-      "message": "Unauthorized. Access token is missing or invalid."
+      "error": {
+        "code": "UnauthorizedRequest",
+        "message": "Unauthorized. Access token is missing or invalid.",
+        "details": [],
+        "target": null,
+        "additionalInfo": null
+      }
     },
     "429": {
-      "statusCode": 429,
-      "message": "Rate limit is exceeded. Try again in 45 seconds."
+      "code": "TooManyRequests",
+      "message": "Rate limit is exceeded. Try again in 45 seconds.",
+      "details": [],
+      "target": null,
+      "additionalInfo": null
     }
   }
 }

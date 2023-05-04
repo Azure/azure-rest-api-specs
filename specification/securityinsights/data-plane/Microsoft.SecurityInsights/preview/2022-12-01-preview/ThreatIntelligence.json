@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/workspaces/{workspaceId}/threat-intelligence/indicators:upload": {
+    "/workspaces/{workspaceId}/indicators:upload": {
       "post": {
         "x-ms-examples": {
           "Upload Threat Intelligence indicators": {
@@ -49,28 +49,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The API returns 200 when one or many indicators are successfully validated and published.",
+            "description": "The API returns 200 when at least one indicator is successfully validated and published.",
             "schema": {
               "$ref": "#/definitions/UploadIndicatorsResponse"
             }
           },
-          "429": {
-            "description": "The API will return HTTP 429, if there are too many requests in a minute per user. The user will have to wait until the next minute before the next request will succeed.",
-            "headers": {
-              "Retry-After": {
-                "description": "How many seconds a user need to wait before retry.",
-                "type": "integer",
-                "format": "int32"
-              }
+          "default": {
+            "description": "Upload Indicators API service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             },
-            "x-ms-error-response": true
-          },
-          "401": {
-            "description": "The API will return 401 if the user does not have enough permissions to the workspace.",
-            "x-ms-error-response": true
-          },
-          "400": {
-            "description": "The API returns 400 if the request is not formatted correctly or does not contain required information.",
             "x-ms-error-response": true
           }
         },
@@ -110,24 +98,7 @@
       "description": "Response object containing more details about the operation.",
       "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorData"
-        }
-      }
-    },
-    "ErrorData": {
-      "description": "Detailed information about the errors from the operation.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Server defined code for the error",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message",
-          "type": "string"
-        },
-        "details": {
+        "errors": {
           "description": "Details of the error. Contains a list of indicator validation errors",
           "type": "array",
           "items": {
@@ -140,18 +111,10 @@
       "description": "Object that stores a list of errors encountered when executing the Upload Indicators operation.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Server defined code for the error",
-          "type": "string"
-        },
         "recordIndex": {
           "format": "int64",
           "description": "Index of the indicator in indicators array from request.",
           "type": "integer"
-        },
-        "message": {
-          "description": "Error message",
-          "type": "string"
         },
         "validationErrorMessages": {
           "description": "List of validation errors for a single indicator.",
@@ -159,6 +122,36 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "The definition of an error object.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorData"
+        }
+      }
+    },
+    "ErrorData": {
+      "description": "Detailed information about the errors from the operation.",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "Server defined code for the error",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message",
+          "type": "string"
         }
       }
     }
