@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace FormRecognizer;
 
@@ -33,12 +35,14 @@ the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").
       @query
       stringIndexType: StringIndexType;
 
+      @added(APIVersion.v2023_02_28_preview)
       @doc("List of optional analysis features.")
-      @query
+      @query({format: "multi"}) // FIXME
       features: DocumentAnalysisFeature[];
 
+      @added(APIVersion.v2023_02_28_preview)
       @doc("List of additional fields to extract.  Ex. \"NumberOfGuests,StoreNumber\"")
-      @query
+      @query({format: "multi"}) // FIXME
       queryFields: string[];
 
       @doc("Analyze request parameters.")
@@ -144,6 +148,7 @@ interface MiscellaneousOperations {
   GetResourceInfo is Azure.Core.Foundations.Operation<{}, ResourceDetails>;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 interface DocumentClassifiersOperations {
   @summary("Build document classifier")
   @doc("Builds a custom document classifier.")

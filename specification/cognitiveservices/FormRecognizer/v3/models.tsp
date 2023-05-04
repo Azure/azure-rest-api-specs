@@ -13,6 +13,7 @@ enum StringIndexType {
   Utf16CodeUnit: "utf16CodeUnit",
 }
 
+@added(APIVersion.v2023_02_28_preview)
 enum DocumentAnalysisFeature {
   OcrHighResolution: "ocr.highResolution",
   OcrFormula: "ocr.formula",
@@ -37,11 +38,13 @@ enum SelectionMarkState {
   Unselected: "unselected",
 }
 
+@added(APIVersion.v2023_02_28_preview)
 enum DocumentAnnotationKind {
   Check: "check",
   Cross: "cross",
 }
 
+@added(APIVersion.v2023_02_28_preview)
 enum DocumentBarcodeKind {
   "QRCode",
   "PDF417",
@@ -62,6 +65,7 @@ enum DocumentBarcodeKind {
   "MaxiCode",
 }
 
+@added(APIVersion.v2023_02_28_preview)
 enum DocumentFormulaKind {
   Inline: "inline",
   Display: "display",
@@ -74,6 +78,7 @@ enum ParagraphRole {
   Title: "title",
   SectionHeading: "sectionHeading",
   Footnote: "footnote",
+  @added(APIVersion.v2023_02_28_preview)
   FormulaBlock: "formulaBlock",
 }
 
@@ -85,11 +90,13 @@ enum DocumentTableCellKind {
   Description: "description",
 }
 
+@added(APIVersion.v2023_02_28_preview)
 enum FontStyle {
   Normal: "normal",
   Italic: "italic",
 }
 
+@added(APIVersion.v2023_02_28_preview)
 enum FontWeight {
   Normal: "normal",
   Bold: "bold",
@@ -109,6 +116,7 @@ enum DocumentFieldType {
   Object: "object",
   Currency: "currency",
   Address: "address",
+  @added(APIVersion.v2023_02_28_preview)
   Boolean: "boolean",
 }
 
@@ -126,6 +134,7 @@ enum OperationKind {
   DocumentModelBuild: "documentModelBuild",
   DocumentModelCompose: "documentModelCompose",
   DocumentModelCopyTo: "documentModelCopyTo",
+  @added(APIVersion.v2023_02_28_preview)
   DocumentClassifierBuild: "documentClassifierBuild",
 }
 
@@ -215,10 +224,10 @@ model AnalyzeResultOperation {
   status: AnalyzeResultOperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the status was last updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: utcDateTime;
 
   @doc("Encountered error during document analysis.")
   error?: Error;
@@ -268,6 +277,7 @@ order.
 
 @doc("Content and layout elements extracted from a page from the input.")
 model DocumentPage {
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Kind of document page.")
   kind: DocumentPageKind;
 
@@ -307,15 +317,19 @@ elements.
 """)
   lines?: DocumentLine[];
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Extracted annotations from the page.")
   annotations?: DocumentAnnotation[];
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Extracted barcodes from the page.")
   barcodes?: DocumentBarcode[];
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Extracted formulas from the page.")
   formulas?: DocumentFormula[];
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Extracted images from the page.")
   images?: DocumentImage[];
 }
@@ -384,6 +398,7 @@ model DocumentLine {
   spans: DocumentSpan[];
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("""
 An annotation object that represents a visual annotation in the document, such
 as checks ✓ and crosses X.
@@ -399,6 +414,7 @@ model DocumentAnnotation {
   confidence: float32;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("A barcode object.")
 model DocumentBarcode {
   @doc("Barcode kind.")
@@ -417,6 +433,7 @@ model DocumentBarcode {
   confidence: float32;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("A formula object.")
 model DocumentFormula {
   @doc("Formula kind.")
@@ -435,6 +452,7 @@ model DocumentFormula {
   confidence: float32;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("An image object detected in the page.")
 model DocumentImage {
   @doc("Bounding polygon of the image.")
@@ -533,6 +551,7 @@ model DocumentKeyValuePair {
   @doc("Field value of the key-value pair.")
   value?: DocumentKeyValueElement;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Common name of the key-value pair.")
   commonName?: string;
 
@@ -557,21 +576,26 @@ model DocumentStyle {
   @doc("Is content handwritten?")
   isHandwritten?: boolean;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("""
 Visually most similar font from among the set of supported font families, with
 fallback fonts following CSS convention (ex. 'Arial, sans-serif').
 """)
   similarFontFamily?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Font style.")
   fontStyle?: FontStyle;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Font weight.")
   fontWeight?: FontWeight;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Foreground color in #rrggbb hexadecimal format.")
   color?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Background color in #rrggbb hexadecimal format..")
   backgroundColor?: string;
 
@@ -662,6 +686,7 @@ model DocumentField {
   @doc("Address value.")
   valueAddress?: AddressValue;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Boolean value.")
   valueBoolean?: boolean;
 
@@ -686,6 +711,7 @@ model CurrencyValue {
   @doc("Currency symbol label, if any.")
   currencySymbol?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Resolved currency code (ISO 4217), if any.")
   currencyCode?: string;
 }
@@ -716,24 +742,30 @@ model AddressValue {
   @doc("Street-level address, excluding city, state, countryRegion, and postalCode.")
   streetAddress?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Apartment or office number")
   unit?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("""
 Districts or boroughs within a city, such as Brooklyn in New York City or City
 of Westminster in London.
 """)
   cityDistrict?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Second-level administrative division used in certain locales.")
   stateDistrict?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Unofficial neighborhood name, like Chinatown.")
   suburb?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Build name, such as World Trade Center.")
   house?: string;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Floor number, such as 3F.")
   level?: string;
 }
@@ -752,6 +784,7 @@ model BuildDocumentModelRequest {
   @doc("Azure Blob Storage location containing the training data.")
   azureBlobSource?: AzureBlobContentSource;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Azure Blob Storage file list specifying the training data.")
   azureBlobFileListSource?: AzureBlobFileListSource;
 
@@ -768,6 +801,7 @@ model AzureBlobContentSource {
   prefix?: string;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("File list in Azure Blob Storage.")
 model AzureBlobFileListSource {
   @doc("Azure Blob Storage container URL.")
@@ -840,7 +874,7 @@ to.
   accessToken: string;
 
   @doc("Date/time when the access token expires.")
-  expirationDateTime: zonedDateTime;
+  expirationDateTime: utcDateTime;
 }
 
 @doc("List Operations response object.")
@@ -861,10 +895,10 @@ model OperationSummary {
   percentCompleted?: int32;
 
   @doc("Date and time (UTC) when the operation was created.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the status was last updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: utcDateTime;
 
   @doc("Type of operation.")
   kind: OperationKind;
@@ -880,7 +914,7 @@ model OperationSummary {
 }
 
 @doc("Get Operation response object.")
-@discriminator("kind")
+// @discriminator("kind") FIXME
 @resource("operations/{operationId}")
 model OperationDetails {
   @doc("Operation ID")
@@ -895,10 +929,10 @@ model OperationDetails {
   percentCompleted?: int32;
 
   @doc("Date and time (UTC) when the operation was created.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the status was last updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: utcDateTime;
 
   @doc("URL of the resource targeted by this operation.")
   resourceLocation: string;
@@ -928,10 +962,11 @@ model DocumentModelSummary {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Date and time (UTC) when the document model will expire.")
-  expirationDateTime?: zonedDateTime;
+  expirationDateTime?: utcDateTime;
 
   @doc("API version used to create this document model.")
   apiVersion?: string;
@@ -952,10 +987,11 @@ model DocumentModelDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document model was created.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Date and time (UTC) when the document model will expire.")
-  expirationDateTime?: zonedDateTime;
+  expirationDateTime?: utcDateTime;
 
   @doc("API version used to create this document model.")
   apiVersion?: string;
@@ -1000,6 +1036,7 @@ model DocumentFieldSchema {
   properties?: Record<DocumentFieldSchema>;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("Request body to build a new custom document classifier.")
 model BuildDocumentClassifierRequest {
   @doc("Unique document classifier name.")
@@ -1012,6 +1049,7 @@ model BuildDocumentClassifierRequest {
   docTypes: Record<ClassifierDocumentTypeDetails>;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("Training data source.")
 model ClassifierDocumentTypeDetails {
   @doc("Azure Blob Storage location containing the training data.")
@@ -1021,10 +1059,12 @@ model ClassifierDocumentTypeDetails {
   azureBlobFileListSource?: AzureBlobFileListSource;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("List document classifiers response object.")
 model GetDocumentClassifiersResponse
   is Azure.Core.Page<DocumentClassifierDetails>;
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("Document classifier info.")
 @resource("documentClassifiers")
 model DocumentClassifierDetails {
@@ -1037,10 +1077,10 @@ model DocumentClassifierDetails {
   description?: string;
 
   @doc("Date and time (UTC) when the document classifier was created.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the document classifier will expire.")
-  expirationDateTime?: zonedDateTime;
+  expirationDateTime?: utcDateTime;
 
   @doc("API version used to create this document classifier.")
   apiVersion: string;
@@ -1049,6 +1089,7 @@ model DocumentClassifierDetails {
   docTypes: Record<ClassifierDocumentTypeDetails>;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("Document classification parameters.")
 model ClassifyDocumentRequest {
   @doc("Document URL to classify")
@@ -1065,6 +1106,7 @@ model ResourceDetails {
   @key
   customDocumentModels: CustomDocumentModelsDetails;
 
+  @added(APIVersion.v2023_02_28_preview)
   @doc("Quota used, limit, and next reset date/time.")
   customNeuralDocumentModelBuilds: QuotaDetails;
 }
@@ -1078,6 +1120,7 @@ model CustomDocumentModelsDetails {
   limit: int32;
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("Quota used, limit, and next reset date/time.")
 model QuotaDetails {
   @doc("Amount of the resource quota used.")
@@ -1087,7 +1130,7 @@ model QuotaDetails {
   quota: int32;
 
   @doc("Date/time when the resource quota usage will be reset.")
-  quotaResetDateTime: zonedDateTime;
+  quotaResetDateTime: utcDateTime;
 }
 
 @doc("Get Operation response object.")
@@ -1117,6 +1160,7 @@ model DocumentModelCopyToOperationDetails extends OperationDetails {
   kind: "documentModelCopyTo";
 }
 
+@added(APIVersion.v2023_02_28_preview)
 @doc("Get Operation response object.")
 model DocumentClassifierBuildOperationDetails extends OperationDetails {
   @doc("Operation result upon success.")
