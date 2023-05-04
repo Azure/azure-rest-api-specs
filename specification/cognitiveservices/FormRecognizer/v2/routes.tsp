@@ -92,7 +92,7 @@ Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
 pages you want to get OCR result. For a range of pages, use a hyphen. Separate
 each page or range with a comma.
 """)
-    @query
+    @query({format: "multi"})
     pages: string[];
 
     @doc("Upload file type")
@@ -217,7 +217,7 @@ Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
 pages you want to get OCR result. For a range of pages, use a hyphen. Separate
 each page or range with a comma.
 """)
-    @query
+    @query({format: "multi"})
     pages: string[];
 
     @doc("Upload file type")
@@ -274,7 +274,7 @@ Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
 pages you want to get OCR result. For a range of pages, use a hyphen. Separate
 each page or range with a comma.
 """)
-    @query
+    @query({format: "multi"})
     pages: string[];
 
     @doc("Upload file type")
@@ -324,7 +324,7 @@ Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
 pages you want to get OCR result. For a range of pages, use a hyphen. Separate
 each page or range with a comma.
 """)
-    @query
+    @query({format: "multi"})
     pages: string[];
 
     @doc("Upload file type")
@@ -382,7 +382,7 @@ Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
 pages you want to get OCR result. For a range of pages, use a hyphen. Separate
 each page or range with a comma.
 """)
-    @query
+    @query({format: "multi"})
     pages: string[];
 
     @doc("Upload file type")
@@ -427,7 +427,7 @@ Custom page numbers for multi-page documents(PDF/TIFF), input the number of the
 pages you want to get OCR result. For a range of pages, use a hyphen. Separate
 each page or range with a comma.
 """)
-    @query
+    @query({format: "multi"})
     pages: string[];
 
     @added(APIVersion.v2_1)

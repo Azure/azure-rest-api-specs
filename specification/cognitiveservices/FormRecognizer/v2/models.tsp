@@ -319,10 +319,10 @@ model ModelInfo {
   status: ModelStatus;
 
   @doc("Date and time (UTC) when the model was created.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the status was last updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: utcDateTime;
 
   @added(APIVersion.v2_1)
   @doc("Optional user defined model name (max length: 1024).")
@@ -409,10 +409,10 @@ model AnalyzeOperationResult {
   status: OperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the status was last updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: utcDateTime;
 
   @doc("Results of the analyze operation.")
   analyzeResult?: AnalyzeResult;
@@ -765,10 +765,10 @@ model CopyOperationResult {
   status: OperationStatus;
 
   @doc("Date and time (UTC) when the copy operation was submitted.")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("Date and time (UTC) when the status was last updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: utcDateTime;
 
   @doc("Results of the copy operation.")
   copyResult?: CopyResult;
@@ -817,5 +817,5 @@ model ModelsSummary {
   limit: int32;
 
   @doc("Date and time (UTC) when the summary was last updated.")
-  lastUpdatedDateTime: zonedDateTime;
+  lastUpdatedDateTime: utcDateTime;
 }
