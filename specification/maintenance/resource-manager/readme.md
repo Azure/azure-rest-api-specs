@@ -190,5 +190,8 @@ directive:
   - suppress: ResourceNameRestriction
     from: maintenance.json
     reason: Maintenance RP accept any string, no special restriction required.
+  - suppress: PutResponseSchemaDescription
+    from: maintenance.json
+    reason: Maintenance RP accept any string, no special restriction required.
 ```
 

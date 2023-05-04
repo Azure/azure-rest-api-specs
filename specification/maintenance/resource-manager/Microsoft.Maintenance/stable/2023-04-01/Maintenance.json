@@ -1611,7 +1611,7 @@
         ],
         "summary": "Get configuration assignment",
         "description": "Get configuration assignment for resource..",
-        "operationId": "ConfigurationAssignmentsForSubscriptions",
+        "operationId": "ConfigurationAssignmentsForSubscriptions_Get",
         "consumes": [
           "application/json"
         ],
@@ -1809,6 +1809,9 @@
           "204": {
             "description": "No Content"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1823,14 +1826,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/resourcegroups/{resourceGroupName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
       "get": {
         "tags": [
           "ConfigurationAssignments"
         ],
         "summary": "Get configuration assignment",
         "description": "Get configuration assignment for resource..",
-        "operationId": "ConfigurationAssignmentsForResourceGroup",
+        "operationId": "ConfigurationAssignmentsForResourceGroup_Get",
         "consumes": [
           "application/json"
         ],
@@ -2056,6 +2059,9 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "BadRequest",
@@ -2467,8 +2473,7 @@
         },
         "filter": {
           "$ref": "#/definitions/ConfigurationAssignmentFilterProperties",
-          "description": "Properties of the configuration assignment",
-          "x-ms-client-flatten": true
+          "description": "Properties of the configuration assignment"
         }
       }
     },
