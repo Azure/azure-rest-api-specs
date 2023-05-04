@@ -22,6 +22,7 @@ azure-arm: true
 ``` yaml $(go) && $(multiapi) 
 batch:
   - tag: package-2023-05
+  - tag: package-preview-2023-05
   - tag: package-2022-11
   - tag: package-2022-07
   - tag: package-preview-2022-04
@@ -45,6 +46,16 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 ```yaml $(tag) == 'package-2023-05' && $(go)
 namespace: kubernetesconfiguration
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2023-05-01/$(namespace)
+```
+
+### Tag: package-preview-2023-05 and go
+
+These settings apply only when `--tag=package-preview-2023-05 --go` is specified on the command line.
+Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-preview-2023-05' && $(go)
+namespace: kubernetesconfiguration
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2023-05-01-preview/$(namespace)
 ```
 
 ### Tag: package-2022-11 and go
