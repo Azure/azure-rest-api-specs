@@ -6129,6 +6129,7 @@
       "description": "A field that is used as part of the semantic configuration."
     },
     "VectorSearch": {
+      "type": "object",
       "properties": {
         "algorithmConfigurations": {
           "type": "array",
@@ -6141,6 +6142,7 @@
       "description": "Contains configuration options related to vector search."
     },
     "VectorSearchAlgorithmConfiguration": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -6167,6 +6169,7 @@
       "description": "Contains configuration options specific to the algorithm used during indexing time."
     },
     "HnswParameters": {
+      "type": "object",
       "properties": {
         "m": {
           "type": "integer",
@@ -6617,9 +6620,7 @@
           "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      },
+      "additionalProperties": true,
       "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
@@ -6795,9 +6796,7 @@
         "parameters": {
           "type": "object",
           "x-nullable": true,
-          "additionalProperties": {
-            "type": "object"
-          },
+          "additionalProperties": true,
           "description": "A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type."
         }
       },
@@ -8947,9 +8946,7 @@
         },
         "configuration": {
           "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
+          "additionalProperties": true,
           "x-nullable": true,
           "description": "A dictionary of configurations for the skill."
         }
