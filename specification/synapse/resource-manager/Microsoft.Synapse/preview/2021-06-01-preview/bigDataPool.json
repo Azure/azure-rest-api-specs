@@ -433,7 +433,8 @@
         "cacheSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The cache size"
+          "description": "The cache size",
+          "readOnly": true
         },
         "dynamicExecutorAllocation": {
           "$ref": "#/definitions/DynamicExecutorAllocation",
@@ -567,20 +568,12 @@
         "minExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of executors alloted",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "description": "The minimum number of executors alloted"
         },
         "maxExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of executors alloted",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "description": "The maximum number of executors alloted"
         }
       }
     },

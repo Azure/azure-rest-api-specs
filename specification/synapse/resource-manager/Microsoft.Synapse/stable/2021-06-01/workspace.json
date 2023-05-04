@@ -890,7 +890,11 @@
       "properties": {
         "tenantId": {
           "description": "Tenant ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "login": {
           "description": "Login of the workspace active directory administrator",
@@ -898,11 +902,19 @@
         },
         "administratorType": {
           "description": "Workspace active directory administrator type",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sid": {
           "description": "Object ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -937,7 +949,11 @@
         },
         "filesystem": {
           "description": "Filesystem name",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "resourceId": {
           "description": "ARM resource Id of this storage account",
@@ -1095,7 +1111,12 @@
         },
         "linkedAccessCheckOnTargetResource": {
           "description": "Linked Access Check On Target Resource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
@@ -1182,7 +1203,11 @@
       "properties": {
         "initialWorkspaceAdminObjectId": {
           "description": "AAD object ID of initial workspace admin",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1242,13 +1267,10 @@
         "connectivityEndpoints": {
           "description": "Connectivity endpoints",
           "additionalProperties": {
-            "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "read"
-            ]
+            "type": "string"
           },
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         },
         "managedVirtualNetwork": {
           "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
@@ -1273,9 +1295,6 @@
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
-          "additionalProperties": {
-            "type": "object"
-          },
           "type": "object",
           "readOnly": true
         },
@@ -1326,7 +1345,7 @@
           "type": "boolean",
           "x-ms-mutability": [
             "create",
-            "read"
+            "update"
           ]
         },
         "trustedServiceBypassEnabled": {

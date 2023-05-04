@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "{apiVersion}",
+    "buildRequest": {
+      "modelId": "{modelId}",
+      "description": "{modelDescription}",
+      "buildMode": "template",
+      "azureBlobSource": {
+        "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
+        "prefix": "{blobNamePrefix}"
+      },
+      "tags": {
+        "createdBy": "{userId}"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/formrecognizer/operations/{operationId}?api-version={apiVersion}"
+      }
+    }
+  }
+}

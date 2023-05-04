@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "scope": "/subscriptions/30d9d527-c409-4507-b861-d60e7fe9e292/resourcegroups/pansharm-rg/providers/microsoft.sql/servers/pansharm-sql",
+    "$filter": "atScope",
+    "api-version": "2023-01-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-correlation-request-id": "f35b289b-7deb-467b-9976-a163926f981f"
+      },
+      "body": {
+        "syncToken": "25251:0",
+        "value": [
+          {
+            "id": "5f448cc9-33cc-47de-910c-c2de1212cb2f",
+            "kind": "Policy",
+            "updatedAt": "2022-04-12T09:43:35.4515155Z",
+            "version": 8,
+            "elementJson": "{\"id\":\"5f448cc9-33cc-47de-910c-c2de1212cb2f\",\"name\":\"test004\",\"kind\":\"policy\",\"version\":8,\"updatedAt\":\"2022-04-12T09:43:35.4515155Z\",\"decisionRules\":[{\"kind\":\"decisionrule\",\"effect\":\"Permit\",\"updatedAt\":\"04/12/2022 09:43:35\",\"cnfCondition\":[[{\"attributeName\":\"resource.azure.path\",\"attributeValueIncludedIn\":[\"/subscriptions/30d9d527-c409-4507-b861-d60e7fe9e292/resourcegroups/pansharm-rg/providers/Microsoft.AzureArcData/SqlServerInstances/pansharm-sql/**\"]}],[{\"attributeName\":\"principal.microsoft.id\",\"attributeValueIncludedIn\":[\"ca4709b3-1fdd-4032-9844-3039025e8ee0\"]}],[{\"fromRule\":\"purviewdatarole_builtin_sqlperfmonitor\",\"attributeName\":\"derived.purview.role\",\"attributeValueIncludes\":\"purviewdatarole_builtin_sqlperfmonitor\"}]]}]}"
+          },
+          {
+            "id": "e870dcfa-d89d-4fc1-90a9-ef758d299e15",
+            "scopes": [
+              "/subscriptions/30d9d527-c409-4507-b861-d60e7fe9e292/resourcegroups/pansharm-rg"
+            ],
+            "kind": "PolicySet",
+            "updatedAt": "2022-03-07T05:21:52.2823168Z",
+            "version": 1,
+            "elementJson": "{\"id\":\"e870dcfa-d89d-4fc1-90a9-ef758d299e15\",\"name\":\"e870dcfa-d89d-4fc1-90a9-ef758d299e15\",\"kind\":\"policyset\",\"version\":1,\"updatedAt\":\"2022-03-07T05:21:52.2823168Z\",\"preconditionRules\":[{\"dnfCondition\":[[{\"attributeName\":\"resource.azure.path\",\"attributeValueIncludedIn\":[\"/subscriptions/30d9d527-c409-4507-b861-d60e7fe9e292/resourcegroups/pansharm-rg/**\"]}]]}],\"policyRefs\":[\"5f448cc9-33cc-47de-910c-c2de1212cb2f\"]}"
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "x-ms-correlation-request-id": "f35b289b-7deb-467b-9976-a163926f981f"
+      },
+      "body": {
+        "error": {
+          "code": "1001",
+          "message": "Simple error message.",
+          "target": "Detailed message or error trace.",
+          "details": []
+        }
+      }
+    }
+  }
+}
