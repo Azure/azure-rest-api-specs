@@ -10,18 +10,14 @@ If your problem is some existing error name that is not a word and need to supre
 
 ## Prettier check
 
-Please run the following command (from an administrator Node.js command prompt if running on Windows):
+To update all the spec files for a given service run the following:
 
 ```
+# To fix a particular service swagger cd to that directory like
+cd specification/contosowidgetmanager
+# to fix all the files in the repo run from the root of the repo
 npm install
-npm run prettier-fix
-```
-
-Or if you want to fix specified service, use the complete path, not relative:
-
-```
-npm install
-npm run prettier -- --write "<path to repo>/azure-rest-api-specs/specification/**/*.json"
+npx prettier -w **/*.json
 ```
 
 Then please commit and push changes made by prettier.
