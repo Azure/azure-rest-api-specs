@@ -2088,6 +2088,7 @@
       "description": "Represents a single Azure resource and its referencing DNS records."
     },
     "Resource": {
+      "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
@@ -2127,6 +2128,7 @@
       "description": "Common properties of an Azure Resource Manager resource"
     },
     "SubResource": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -2164,6 +2166,7 @@
         },
         "details": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },

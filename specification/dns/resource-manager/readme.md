@@ -37,10 +37,11 @@ These settings apply only when `--tag=package-2023-07-preview` is specified on t
 input-file:
   - Microsoft.Network/preview/2023-07-01-preview/dns.json
 directive:
-  - where:
-      - $.paths
-    suppress:
-      - OperationsAPIImplementation
+  - where: $.paths
+    suppress: OperationsAPIImplementation
+    reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
+  - where: $.paths
+    suppress: PathForNestedResource
   - where:
       - $.definitions.RecordSetProperties.properties.TTL
       - $.definitions.RecordSetProperties.properties.ARecords
