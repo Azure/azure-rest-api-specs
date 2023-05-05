@@ -40,6 +40,14 @@
         "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage container.",
         "parameters": [
           {
+            "name": "storageAuthType",
+            "in": "query",
+            "description": "Type of authentication to use",
+            "required": false,
+            "type": "string",
+            "enum": ["sasToken", "managedIdentity"]
+          },
+          {
             "in": "body",
             "name": "azureStorageBlobContainerUri",
             "schema": {
@@ -78,61 +86,6 @@
         "x-ms-examples": {
           "Create full backup": {
             "$ref": "./examples/FullBackup-example.json"
-          }
-        }
-      }
-    },
-    "/managedidentitymodebackup": {
-      "post": {
-        "tags": [
-          "ManagedIdentityModeFullBackup"
-        ],
-        "operationId": "ManagedIdentityModeFullBackup",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "description": "Creates a full backup using a user-provided Azure blob storage container uri.",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "azureStorageBlobContainerUri",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Azure blob storage container uri"
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Started full backup",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/FullBackupOperation"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create full backup": {
-            "$ref": "./examples/ManagedIdentityModeFullBackup-example.json"
           }
         }
       }
@@ -190,6 +143,14 @@
         "description": "Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
+            "name": "storageAuthType",
+            "in": "query",
+            "description": "Type of authentication to use",
+            "required": false,
+            "type": "string",
+            "enum": [ "sasToken", "managedIdentity" ]
+          },
+          {
             "name": "restoreBlobDetails",
             "in": "body",
             "schema": {
@@ -228,61 +189,6 @@
         "x-ms-examples": {
           "Create full restore from backup": {
             "$ref": "./examples/FullRestore-example.json"
-          }
-        }
-      }
-    },
-    "/managedidentitymoderestore": {
-      "put": {
-        "tags": [
-          "ManagedIdentityModeFullRestore"
-        ],
-        "operationId": "ManagedIdentityModeFullRestore",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "description": "Restores all key materials from previously stored Azure Blob storage backup folder",
-        "parameters": [
-          {
-            "name": "restoreBlobDetails",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ManagedIdentityModeRestoreOperationParameters"
-            },
-            "description": "The Azure blob storage account and folder details where the previous successful full backup was stored"
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Started restore operation from the previously stored backup",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/RestoreOperation"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Restore all key materials from a given backup folder": {
-            "$ref": "./examples/ManagedIdentityModeFullRestore-example.json"
           }
         }
       }
@@ -340,6 +246,14 @@
         "description": "Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
+            "name": "storageAuthType",
+            "in": "query",
+            "description": "Type of authentication to use",
+            "required": false,
+            "type": "string",
+            "enum": [ "sasToken", "managedIdentity" ]
+          },
+          {
             "name": "keyName",
             "in": "path",
             "required": true,
@@ -388,68 +302,6 @@
           }
         }
       }
-    },
-    "/keys/{keyName}/managedidentitymoderestore": {
-      "put": {
-        "tags": [
-          "Keys"
-        ],
-        "operationId": "ManagedIdentityModeSelectiveKeyRestoreOperation",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "description": "Restores all key versions of a given key from a previously stored Azure Blob storage backup folder",
-        "parameters": [
-          {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the key to be restored from the user supplied backup"
-          },
-          {
-            "name": "restoreBlobDetails",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/ManagedIdentityModeRestoreOperationParameters"
-            },
-            "description": "The Azure blob storage account and backup folder details where the previous successful full backup was stored"
-          },
-          {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Started selective key restore operation from the previously stored backup",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/SelectiveKeyRestoreOperation"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Selectively restore a given key and its versions from a given backup": {
-            "$ref": "./examples/ManagedIdentityModeSelectiveRestore-example.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -466,22 +318,6 @@
       "required": [
         "folderToRestore",
         "sasTokenParameters"
-      ]
-    },
-    "ManagedIdentityModeRestoreOperationParameters": {
-      "properties": {
-        "blobStorageAccountContainerUri": {
-          "type": "string",
-          "description": "The Azure blob storage account container URI where the previous successful full backup was stored"
-        },
-        "folderToRestore": {
-          "type": "string",
-          "description": "The Folder name of the blob where the previous successful full backup was stored"
-        }
-      },
-      "required": [
-        "blobStorageAccountContainerUri",
-        "folderToRestore"
       ]
     },
     "SelectiveKeyRestoreOperationParameters": {
@@ -543,8 +379,7 @@
         }
       },
       "required": [
-        "storageResourceUri",
-        "token"
+        "storageResourceUri"
       ]
     },
     "FullBackupOperation": {
