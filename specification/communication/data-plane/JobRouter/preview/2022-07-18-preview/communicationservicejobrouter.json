@@ -672,7 +672,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "",
+            "description": "Id of the job",
             "required": true,
             "type": "string"
           },
@@ -953,6 +953,11 @@
               "closed",
               "cancelled",
               "classificationFailed",
+              "created",
+              "pendingSchedule",
+              "scheduled",
+              "scheduleFailed",
+              "waitingForActivation",
               "active"
             ],
             "x-ms-enum": {
@@ -977,6 +982,20 @@
             "name": "classificationPolicyId",
             "description": "(Optional) If specified, filter jobs by classificationPolicy.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "scheduledBefore",
+            "description": "(Optional) If specified, filter on jobs that was scheduled before or at given timestamp. Range: (-Inf, scheduledBefore]",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "scheduledAfter",
+            "description": "(Optional) If specified, filter on jobs that was scheduled at or after given value. Range: [scheduledAfter, +Inf).",
+            "type": "string",
+            "format": "date-time"
           },
           {
             "in": "query",
@@ -1681,14 +1700,17 @@
       "properties": {
         "assignmentId": {
           "description": "The assignment Id that assigns a worker that has accepted an offer to a job.",
+          "minLength": 1,
           "type": "string"
         },
         "jobId": {
           "description": "The Id of the job assigned.",
+          "minLength": 1,
           "type": "string"
         },
         "workerId": {
           "description": "The Id of the worker that has been assigned this job.",
+          "minLength": 1,
           "type": "string"
         }
       }
@@ -2008,6 +2030,7 @@
       "properties": {
         "kind": {
           "description": "The type discriminator describing a sub-type of Mode",
+          "minLength": 1,
           "type": "string"
         },
         "minConcurrentOffers": {
@@ -2266,6 +2289,7 @@
       "properties": {
         "id": {
           "description": "The Id of the job assignment.",
+          "minLength": 1,
           "type": "string"
         },
         "workerId": {
@@ -2333,10 +2357,12 @@
       "properties": {
         "id": {
           "description": "The Id of the offer.",
+          "minLength": 1,
           "type": "string"
         },
         "jobId": {
           "description": "The Id of the job.",
+          "minLength": 1,
           "type": "string"
         },
         "capacityCost": {
@@ -2369,6 +2395,7 @@
       "properties": {
         "jobId": {
           "description": "Id of the job these details are about.",
+          "minLength": 1,
           "type": "string"
         },
         "position": {
@@ -2378,6 +2405,7 @@
         },
         "queueId": {
           "description": "Id of the queue this job is enqueued in.",
+          "minLength": 1,
           "type": "string"
         },
         "queueLength": {
@@ -2695,6 +2723,7 @@
       "properties": {
         "queueId": {
           "description": "Id of the queue these details are about.",
+          "minLength": 1,
           "type": "string"
         },
         "length": {
@@ -2812,7 +2841,11 @@
             "closed",
             "cancelled",
             "classificationFailed",
-            "created"
+            "created",
+            "pendingSchedule",
+            "scheduled",
+            "scheduleFailed",
+            "waitingForActivation"
           ],
           "type": "string",
           "readOnly": true,
@@ -2887,6 +2920,15 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "unavailableForMatching": {
+          "description": "A flag indicating this job is ready for being matched with workers.\r\nWhen set to true, job matching will not be started. If set to false, job matching will start automatically",
+          "type": "boolean"
+        },
+        "scheduledTimeUtc": {
+          "format": "date-time",
+          "description": "If set, job will be scheduled to be enqueued at a given time",
+          "type": "string"
         }
       }
     },
@@ -3159,6 +3201,7 @@
       "properties": {
         "jobId": {
           "description": "The Id of the job unassigned.",
+          "minLength": 1,
           "type": "string"
         },
         "unassignmentCount": {
@@ -3283,10 +3326,12 @@
       "properties": {
         "id": {
           "description": "The Id of the assignment.",
+          "minLength": 1,
           "type": "string"
         },
         "jobId": {
           "description": "The Id of the Job assigned.",
+          "minLength": 1,
           "type": "string"
         },
         "capacityCost": {
