@@ -1,5 +1,3 @@
-// Test change
-
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
