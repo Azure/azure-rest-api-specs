@@ -1117,10 +1117,28 @@
     "ConfigurationApi": {
       "type": "object",
       "properties": {
-        "legacyApiEnabled": {
-          "type": "boolean",
-          "default": true,
-          "description": "Indication whether or not the legacy Configuration API (v1) should be exposed on the API Management service."
+        "legacyApi": {
+          "type": "string",
+          "default": "Enabled",
+          "description": "Indication whether or not the legacy Configuration API (v1) should be exposed on the API Management service. Value is optional but must be 'Enabled' or 'Disabled'. If 'Disabled', legacy Configuration API (v1) will not be available for self-hosted gateways. Default value is 'Enabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "LegacyApiState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Legacy Configuration API (v1) is enabled for the service and self-hosted gateways can connect to it."
+              },
+              {
+                "value": "Disabled",
+                "description": "Legacy Configuration API (v1) is disabled for the service and self-hosted gateways can not connect to it."
+              }
+            ]
+          }
         }
       },
       "description": "Information regarding the Configuration API of the API Management service."
