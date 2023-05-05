@@ -485,52 +485,42 @@
           "readOnly": true,
           "type": "string",
           "description": "The current entity tag for the function. This is an opaque string. You can use it to detect whether the resource has changed between requests. You can also use it in the If-Match or If-None-Match headers for write operations for optimistic concurrency."
+        },
+        "properties": {
+          "$ref": "#/definitions/FunctionConfiguration",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
         "type"
       ]
     },
-    "ScalarFunctionProperties": {
+    "FunctionConfiguration": {
       "type": "object",
-      "description": "The properties that are associated with a scalar function.",
-      "x-ms-discriminator-value": "Scalar",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FunctionProperties"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ScalarFunctionConfiguration",
-          "description": "Describes the configuration of the scalar function.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ScalarFunctionConfiguration": {
-      "type": "object",
-      "description": "Describes the configuration of the scalar function.",
       "properties": {
         "inputs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FunctionInput"
-          },
-          "x-ms-identifiers": [
-            "dataType"
-          ],
-          "description": "A list of inputs describing the parameters of the function."
+          }
         },
         "output": {
-          "$ref": "#/definitions/FunctionOutput",
-          "description": "The output of the function."
+          "$ref": "#/definitions/FunctionOutput"
         },
         "binding": {
-          "$ref": "#/definitions/FunctionBinding",
-          "description": "The physical binding of the function. For example, in the Azure Machine Learning web service’s case, this describes the endpoint."
+          "$ref": "#/definitions/FunctionBinding"
         }
       }
+    },
+    "ScalarFunctionProperties": {
+      "description": "The properties that are associated with a scalar function.",
+      "type": "object",
+      "x-ms-discriminator-value": "Scalar",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionProperties"
+        }
+      ]
     },
     "FunctionInput": {
       "type": "object",
@@ -826,6 +816,16 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "AggregateFunctionProperties": {
+      "description": "The properties that are associated with an aggregate function.",
+      "type": "object",
+      "x-ms-discriminator-value": "Aggregate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FunctionProperties"
+        }
+      ]
     }
   },
   "parameters": {

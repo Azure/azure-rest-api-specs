@@ -5736,7 +5736,11 @@
         },
         "availability": {
           "description": "Properties describing how the cloud is distributed across availability zones",
-          "$ref": "#/definitions/AvailabilityProperties"
+          "$ref": "#/definitions/AvailabilityProperties",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "encryption": {
           "description": "Customer managed key encryption, can be enabled or disabled",

@@ -27,6 +27,11 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/commerce/usageaggregates"
         },
+        "x-ms-examples": {
+          "GetUsageAggregatesList": {
+            "$ref": "./examples/GetUsageAggregatesList.json"
+          }
+        },
         "parameters": [
           {
             "name": "reportedStartTime",
@@ -86,6 +91,12 @@
             "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
             "schema": {
               "$ref": "#/definitions/UsageAggregationListResult"
+            }
+          },
+          "202": {
+            "description": "Response indicating that a request has been accepted for processing. However, the processing has not been completed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -150,12 +161,6 @@
   },
   "definitions": {
     "InfoField": {
-      "properties": {
-        "project": {
-          "type": "string",
-          "description": "Identifies the name of the instance provisioned by the user."
-        }
-      },
       "description": "Key-value pairs of instance details in the legacy format."
     },
     "UsageSample": {

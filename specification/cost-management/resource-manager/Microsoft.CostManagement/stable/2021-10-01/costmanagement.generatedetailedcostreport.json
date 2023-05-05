@@ -69,7 +69,7 @@
             "$ref": "#/parameters/scopeUsageDetailsParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "common-types.json#/parameters/apiVersionParameter"
           },
           {
             "name": "parameters",
@@ -143,7 +143,7 @@
             "$ref": "#/parameters/scopeUsageDetailsParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "common-types.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -159,7 +159,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common-types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -189,7 +189,7 @@
             "$ref": "#/parameters/scopeUsageDetailsParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "common-types.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -202,7 +202,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common-types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -216,7 +216,7 @@
       "properties": {
         "error": {
           "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
+          "$ref": "common-types.json#/definitions/ErrorDetails"
         }
       }
     },
@@ -291,7 +291,7 @@
         },
         "error": {
           "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
+          "$ref": "common-types.json#/definitions/ErrorDetails"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -338,32 +338,6 @@
         }
       }
     },
-    "ErrorDetails": {
-      "description": "The details of the error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
     "Status": {
       "description": "The status of the long running operation.",
       "properties": {
@@ -388,13 +362,6 @@
     }
   },
   "parameters": {
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request."
-    },
     "scopeUsageDetailsParameter": {
       "name": "scope",
       "in": "path",

@@ -17,3 +17,14 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iotcentral/azure/mgmt/iotcentral
 ```
+
+``` yaml $(python)
+directive:
+  - from: iotcentral.json
+    where: $.definitions.NetworkRuleSets["properties"]["applyToDevices"]
+    transform: $['default'] = 'False'
+
+  - from: iotcentral.json
+    where: $.definitions.NetworkRuleSets["properties"]["applyToIoTCentral"]
+    transform: $['default'] = 'False'
+```

@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "OneResourceGroupName",
+    "api-version": "2022-06-15-preview",
+    "resourceName": "samplebotname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "name": "samplebotname",
+        "type": "Microsoft.BotService/botServices",
+        "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname",
+        "kind": "sdk",
+        "etag": "etag1",
+        "properties": {
+          "description": "The description of the bot",
+          "developerAppInsightKey": "appinsightskey",
+          "developerAppInsightsApplicationId": "appinsightsappid",
+          "displayName": "The Name of the bot",
+          "endpoint": "http://mybot.coffee",
+          "endpointVersion": "version",
+          "iconUrl": "http://myicon",
+          "luisAppIds": [
+            "luisappid1",
+            "luisappid2"
+          ],
+          "msaAppType": "UserAssignedMSI",
+          "msaAppId": "msaappid",
+          "msaAppTenantId": "msaapptenantid",
+          "msaAppMSIResourceId": "/subscriptions/foo/resourcegroups/bar/providers/microsoft.managedidentity/userassignedidentities/sampleId",
+          "configuredChannels": [
+            "facebook",
+            "groupme"
+          ],
+          "enabledChannels": [
+            "facebook"
+          ],
+          "isCmekEnabled": true,
+          "cmekKeyVaultUrl": "https://myCmekKey",
+          "publicNetworkAccess": "Enabled",
+          "schemaTransformationVersion": "1.0",
+          "disableLocalAuth": true,
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname/privateEndpointConnections/privatelink",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.Network/privateEndpoints/privatelink"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

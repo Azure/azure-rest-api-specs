@@ -15,6 +15,10 @@ module-name: sdk/resourcemanager/advisor/armadvisor
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- rename-model:
+    from: 'advisorScoreEntity'
+    to: 'ScoreEntityForAdvisor'
 ```
 
 ### Go multi-api

@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.CommunicationServices
   package-name: communicationservices
-  package-version: 2021-05-01-preview
+  package-version: 2023-01-01-preview
   clear-output-folder: true
 ```
 

@@ -11,6 +11,12 @@ typescript:
   generate-metadata: true
   payload-flattening-threshold: 2
   override-client-name: StorageManagementClient
+
+directive:
+  # Constraint doesn't validate in JS since Unicode letters aren't part of \w
+    from: storage.json
+    where: $.parameters.ResourceGroupName
+    transform: delete $.pattern
 ```
 
 ``` yaml $(typescript) && !$(profile-content)
