@@ -402,8 +402,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "The API call is not allowed."
+          "200": {
+            "description": "OK. Successfully create a Azure BareMetalStorage resource.",
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstance"
+            }
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -486,8 +489,8 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "The API call is not allowed."
+          "200": {
+            "description": "OK. The workspace for Grafana resource is deleted."
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
@@ -877,11 +880,6 @@
           "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
       "description": "AzureBareMetalStorageInstance info on Azure (ARM properties and AzureBareMetalStorage properties)"
     },
     "AzureBareMetalStorageInstanceProperties": {
