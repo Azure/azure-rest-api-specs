@@ -405,12 +405,10 @@
               "$ref": "#/definitions/Workload"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+          "201": {
+            "description": "Create successful. The operation returns the resulting Workload resource.",
+            "schema": {
+              "$ref": "#/definitions/Workload"
             }
           },
           "default": {
@@ -420,10 +418,6 @@
             },
             "x-ms-error-response": true
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Update workload": {

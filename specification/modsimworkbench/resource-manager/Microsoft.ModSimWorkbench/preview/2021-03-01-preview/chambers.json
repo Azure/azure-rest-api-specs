@@ -85,14 +85,6 @@
               "$ref": "#/definitions/GetUploadUri"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "",
             "schema": {
@@ -100,10 +92,6 @@
             },
             "x-ms-error-response": true
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Chambers get upload Uri": {
@@ -592,12 +580,10 @@
               "$ref": "#/definitions/Chamber"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+          "201": {
+            "description": "Create successful. The operation returns the resulting Chamber resource.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
             }
           },
           "default": {
@@ -607,10 +593,6 @@
             },
             "x-ms-error-response": true
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Update Chamber": {
@@ -877,7 +859,7 @@
         },
         "enable": {
           "description": "Switch to show if License Service is activated.",
-          "type": "string"
+          "type": "boolean"
         },
         "licenseKey": {
           "description": "EDA License file contents",
@@ -890,7 +872,7 @@
       "description": "Ansys Common Licensing.",
       "properties": {
         "enable": {
-          "type": "string",
+          "type": "boolean",
           "description": "Switch to show if License Service is activated."
         },
         "server": {
@@ -914,7 +896,7 @@
       "description": "Cadence License Manager",
       "properties": {
         "enable": {
-          "type": "string",
+          "type": "boolean",
           "description": "Switch to show if License Service is activated."
         },
         "server": {
@@ -948,7 +930,7 @@
       "description": "Siemens Standard Licensing.",
       "properties": {
         "enable": {
-          "type": "string",
+          "type": "boolean",
           "description": "Switch to show if License Service is activated."
         },
         "server": {
@@ -972,7 +954,7 @@
       "description": "Synopsys Common Licensing",
       "properties": {
         "enable": {
-          "type": "string",
+          "type": "boolean",
           "description": "Switch to show if License Service is activated."
         },
         "server": {
