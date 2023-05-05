@@ -124,6 +124,12 @@
             "description": "The DNSSEC config was not found."
           },
           "202": {
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              }
+            },
             "description": "The DNSSEC config delete operation has been accepted and will complete asynchronously."
           },
           "200": {
@@ -1052,6 +1058,12 @@
             "description": "The DNS zone was not found."
           },
           "202": {
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              }
+            },
             "description": "The DNS zone delete operation has been accepted and will complete asynchronously."
           },
           "200": {
@@ -1879,6 +1891,11 @@
           "type": "string",
           "description": "The etag of the DNSSEC config."
         }
+      },
+      "systemData": {
+        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+        "description": "Metadata pertaining to creation and last modification of the resource.",
+        "readOnly": true
       },
       "description": "Represents the DNSSEC configuration."
     },
