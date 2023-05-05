@@ -52,9 +52,9 @@ directive:
       - $.definitions.RecordSetProperties.properties.TXTRecords
       - $.definitions.RecordSetProperties.properties.CNAMERecord
       - $.definitions.RecordSetProperties.properties.SOARecord
-      - $.definitions.RecordSetProperties.properties.DSRecord
-      - $.definitions.RecordSetProperties.properties.TLSARecord
-      - $.definitions.RecordSetProperties.properties.NAPTRRecord
+      - $.definitions.RecordSetProperties.properties.DSRecords
+      - $.definitions.RecordSetProperties.properties.TLSARecords
+      - $.definitions.RecordSetProperties.properties.NAPTRRecords
       - $.definitions.RecordSetUpdateParameters.properties.RecordSet
     suppress:
       - DefinitionsPropertiesNamesCamelCase
