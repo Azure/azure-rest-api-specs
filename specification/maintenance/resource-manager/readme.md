@@ -193,11 +193,5 @@ directive:
   - suppress: PutResponseSchemaDescription
     from: maintenance.json
     reason: No documentation changes.
-  - suppress: DeleteOperationAsyncResponseValidation
-    from: maintenance.json
-    reason: No async operation supported by Mantenance RP.
-  - suppress: LroLocationHeader
-    from: maintenance.json
-    reason: No async operation supported by Mantenance RP.
 ```
 
