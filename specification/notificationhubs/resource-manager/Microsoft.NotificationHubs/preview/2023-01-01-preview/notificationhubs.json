@@ -395,11 +395,7 @@
             "$ref": "#/parameters/HubName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "description": "Authorization Rule Name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -450,11 +446,7 @@
             "$ref": "#/parameters/HubName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "description": "Authorization Rule Name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -497,11 +489,7 @@
             "$ref": "#/parameters/HubName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "description": "Authorization Rule Name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -547,11 +535,7 @@
             "$ref": "#/parameters/HubName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "description": "Authorization Rule Name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -648,11 +632,7 @@
             "$ref": "#/parameters/HubName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "description": "Authorization Rule Name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -703,11 +683,7 @@
             "$ref": "#/parameters/HubName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "description": "Authorization Rule Name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1155,10 +1131,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1204,10 +1177,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1246,10 +1216,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1291,10 +1258,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1383,10 +1347,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1437,10 +1398,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "authorizationRuleName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AuthorizationRuleName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3461,6 +3419,17 @@
       "maxLength": 265,
       "minLength": 1,
       "pattern": "^[a-zA-Z][a-zA-Z0-9-./_]*$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AuthorizationRuleName": {
+      "in": "path",
+      "name": "authorizationRuleName",
+      "description": "Authorization Rule Name",
+      "required": true,
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9!()*-._]+$",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
