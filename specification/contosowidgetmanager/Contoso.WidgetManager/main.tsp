@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-
+// comment
 @service({
     title: "Contoso Widget Manager",
   })
