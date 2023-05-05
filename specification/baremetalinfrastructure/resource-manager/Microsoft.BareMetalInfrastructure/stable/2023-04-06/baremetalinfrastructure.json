@@ -372,14 +372,13 @@
         "tags": [
           "BareMetalInfrastructure"
         ],
-        "summary": "Create or update an azure baremetalstorage resource.",
-        "operationId": "AzureBareMetalStorageInstances_Put",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Create an azure baremetal storage resource.",
+        "operationId": "AzureBareMetalStorageInstances_Create",
+        "x-ms-examples": {
+          "Put a new AzureBareMetalStorageInstance": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_Create.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -389,19 +388,28 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalStorageInstanceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBodyParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalStorageInstance"
+            }
           }
         ],
         "responses": {
+          "404": {
+            "description": "The API call is not allowed."
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Put a new AzureBareMetalStorageInstance": {
-            "$ref": "./examples/AzureBareMetalStorageInstances_Put.json"
           }
         }
       },
@@ -458,9 +466,11 @@
         ],
         "summary": "Delete an AzureBareMetalStorageInstance.",
         "operationId": "AzureBareMetalStorageInstances_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "x-ms-examples": {
+          "Delete an AzureBareMetalStorageInstance": {
+            "$ref": "./examples/AzureBareMetalStorageInstances_Delete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -476,18 +486,16 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": "The API call is not allowed."
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete an AzureBareMetalStorageInstance": {
-            "$ref": "./examples/AzureBareMetalStorageInstances_Delete.json"
-          }
-        }
+        }        
       }
     }
   },
