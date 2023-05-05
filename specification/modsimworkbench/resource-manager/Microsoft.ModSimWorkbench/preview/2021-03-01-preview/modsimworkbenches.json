@@ -201,14 +201,6 @@
               "$ref": "#/definitions/Workbench"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "",
             "schema": {
@@ -224,10 +216,6 @@
             ]
           }
         ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Workbenches Get": {
             "$ref": "./examples/WorkbenchesGet.json"
@@ -351,10 +339,12 @@
               "$ref": "#/definitions/Workbench"
             }
           },
-          "201": {
-            "description": "Create successful. The operation returns the resulting Workbench resource.",
-            "schema": {
-              "$ref": "#/definitions/Workbench"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -364,6 +354,10 @@
             },
             "x-ms-error-response": true
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Workbenches Update": {
