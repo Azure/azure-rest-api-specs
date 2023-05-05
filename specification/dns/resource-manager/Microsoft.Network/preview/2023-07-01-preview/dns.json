@@ -36,16 +36,10 @@
         "description": "Creates or updates DNSSEC config on a DNS zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "If-Match",
@@ -62,15 +56,17 @@
             "type": "string",
             "x-ms-client-name": "IfNoneMatch",
             "description": "Set to '*' to allow new DNSSEC config to be created, but to prevent updating existing DNSSEC config. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "202": {
-            "description": "The create or update operation has been accepted and will be processed in the background.",
-            "schema": {
-              "$ref": "#/definitions/DnssecConfig"
-            },
-            "x-nullable": true
+            "description": "The create or update operation has been accepted and will be processed in the background."
           },
           "201": {
             "description": "The DNSSEC config has been created.",
@@ -106,16 +102,10 @@
         "description": "Deletes DNSSEC config on a DNS zone. This operation cannot be undone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "If-Match",
@@ -124,6 +114,12 @@
             "type": "string",
             "x-ms-client-name": "IfMatch",
             "description": "The etag of the DNSSEC config. Omit this value to always delete the DNSSEC config. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -158,9 +154,6 @@
         "description": "Gets DNSSEC Config.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -168,6 +161,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -196,12 +192,9 @@
         "tags": [
           "DnssecConfigs"
         ],
-        "operationId": "DnssecConfigs_ListByType",
+        "operationId": "DnssecConfigs_ListByDnsZone",
         "description": "Lists the DNSSEC configs in a DNS zone.",
         "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
@@ -210,6 +203,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -242,9 +238,6 @@
         "description": "Updates a record set within a DNS zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -252,9 +245,6 @@
           },
           {
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "recordType",
@@ -298,6 +288,12 @@
             "type": "string",
             "x-ms-client-name": "IfMatch",
             "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -364,9 +360,6 @@
         "description": "Creates or updates a record set within a DNS zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -374,9 +367,6 @@
           },
           {
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "recordType",
@@ -428,6 +418,12 @@
             "type": "string",
             "x-ms-client-name": "IfNoneMatch",
             "description": "Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -503,9 +499,6 @@
         "description": "Deletes a record set from a DNS zone. This operation cannot be undone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -513,9 +506,6 @@
           },
           {
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "recordType",
@@ -550,6 +540,12 @@
             "type": "string",
             "x-ms-client-name": "IfMatch",
             "description": "The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -613,9 +609,6 @@
         "description": "Gets a record set.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -623,9 +616,6 @@
           },
           {
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "recordType",
@@ -652,6 +642,12 @@
               "name": "RecordType",
               "modelAsString": false
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -720,16 +716,10 @@
         "description": "Lists the record sets of a specified type in a DNS zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "recordType",
@@ -771,6 +761,12 @@
             "required": false,
             "type": "string",
             "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -842,16 +838,10 @@
         "description": "Lists all record sets in a DNS zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$top",
@@ -867,6 +857,12 @@
             "required": false,
             "type": "string",
             "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -902,16 +898,10 @@
         "description": "Lists all record sets in a DNS zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$top",
@@ -928,6 +918,12 @@
             "type": "string",
             "description": "The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .<recordSetNameSuffix>",
             "x-ms-client-name": "recordSetNameSuffix"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -963,16 +959,10 @@
         "description": "Creates or updates a DNS zone. Does not modify DNS records within the zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -998,6 +988,12 @@
             "type": "string",
             "x-ms-client-name": "IfNoneMatch",
             "description": "Set to '*' to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1034,16 +1030,10 @@
         "description": "Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "If-Match",
@@ -1052,6 +1042,12 @@
             "type": "string",
             "x-ms-client-name": "IfMatch",
             "description": "The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1086,9 +1082,6 @@
         "description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
@@ -1096,6 +1089,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1126,16 +1122,10 @@
         "description": "Updates a DNS zone. Does not modify DNS records within the zone.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ZoneNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -1153,6 +1143,12 @@
             "type": "string",
             "x-ms-client-name": "IfMatch",
             "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1185,13 +1181,7 @@
         "description": "Lists the DNS zones within a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "$top",
@@ -1200,6 +1190,12 @@
             "type": "integer",
             "format": "int32",
             "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1746,15 +1742,18 @@
         "digestAlgorithmType": {
           "type": "integer",
           "format": "int64",
-          "description": "The digest algorithm type."
+          "description": "The digest algorithm type.",
+          "readOnly": true
         },
         "digestValue": {
           "type": "string",
-          "description": "The digest value."
+          "description": "The digest value.",
+          "readOnly": true
         },
         "record": {
           "type": "string",
-          "description": "The record."
+          "description": "The record.",
+          "readOnly": true
         }
       },
       "description": "The delegation signer info."
@@ -1766,31 +1765,37 @@
           "items": {
             "$ref": "#/definitions/DelegationSignerInfo"
           },
-          "description": "The delegation signer info."
+          "description": "The delegation signer info.",
+          "readOnly": true
         },
         "flags": {
           "type": "integer",
           "format": "int64",
-          "description": "The flags."
+          "description": "The flags.",
+          "readOnly": true
         },
         "keyTag": {
           "type": "integer",
           "format": "int64",
-          "description": "The key tag."
+          "description": "The key tag.",
+          "readOnly": true
         },
         "protocol": {
           "type": "integer",
           "format": "int64",
-          "description": "The protocol."
+          "description": "The protocol.",
+          "readOnly": true
         },
         "publicKey": {
           "type": "string",
-          "description": "The public key."
+          "description": "The public key.",
+          "readOnly": true
         },
         "securityAlgorithmType": {
           "type": "integer",
           "format": "int64",
-          "description": "The signing algorithm."
+          "description": "The signing algorithm.",
+          "readOnly": true
         }
       },
       "description": "Represents the signing key."
