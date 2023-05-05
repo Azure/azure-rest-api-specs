@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.Versioning;
-
+// Comment
 @service({
   title: "Text Translation",
 })
