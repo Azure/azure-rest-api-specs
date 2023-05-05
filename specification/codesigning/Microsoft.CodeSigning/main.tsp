@@ -61,6 +61,7 @@ interface CertificateProfileOperations {
     "GetSignRootCertificate"
   )
   getSignRootCertificate(
+    ...Foundations.ApiVersionParameter,
     ...CodeSignStatus
   ): BytesBody<"application/x-x509-ca-cert">;
 
