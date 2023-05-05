@@ -719,14 +719,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The test run is created.",
+          "200": {
+            "description": "The test run is updated.",
             "schema": {
               "$ref": "#/definitions/TestRun"
             }
           },
-          "200": {
-            "description": "The test run is updated.",
+          "201": {
+            "description": "The test run is created.",
             "schema": {
               "$ref": "#/definitions/TestRun"
             }
@@ -1136,8 +1136,7 @@
           {
             "in": "query",
             "name": "aggregation",
-            "description": "The list of aggregation types (comma separated) to retrieve.",
-            "required": true,
+            "description": "The aggregation",
             "type": "string"
           },
           {
@@ -1723,7 +1722,6 @@
         },
         "message": {
           "description": "The error message.",
-          "minLength": 1,
           "type": "string"
         },
         "target": {
@@ -2419,7 +2417,6 @@
         },
         "metricNamespace": {
           "description": "Metric name space.",
-          "minLength": 1,
           "type": "string"
         },
         "displayDescription": {
@@ -2428,12 +2425,10 @@
         },
         "name": {
           "description": "The invariant value of metric name",
-          "minLength": 1,
           "type": "string"
         },
         "aggregation": {
-          "description": "Metric aggregation.",
-          "minLength": 1,
+          "description": "The list of aggregation types (comma separated) to retrieve.",
           "type": "string"
         },
         "unit": {
@@ -2442,7 +2437,6 @@
         },
         "resourceType": {
           "description": "Azure resource type.",
-          "minLength": 1,
           "type": "string"
         }
       }
