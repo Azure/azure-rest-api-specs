@@ -493,6 +493,9 @@
           "200": {
             "description": "OK. The workspace for Grafana resource is deleted."
           },
+          "204": {
+            "description": "NoContent"
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
@@ -880,10 +883,6 @@
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
           "description": "The system metadata relating to this resource."
-        },
-        "azureBareMetalStorageInstanceUniqueIdentifier": {
-          "type": "string",
-          "description": "Specifies the AzureBareMetaStorageInstance unique ID."
         }
       },
       "allOf": [
@@ -894,6 +893,20 @@
       "description": "AzureBareMetalStorageInstance info on Azure (ARM properties and AzureBareMetalStorage properties)"
     },
     "AzureBareMetalStorageInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "azureBareMetalStorageInstanceUniqueIdentifier": {
+          "type": "string",
+          "description": "Specifies the AzureBareMetaStorageInstance unique ID."
+        },
+        "storageProperties": {
+          "$ref": "#/definitions/StorageProperties",
+          "description": "Specifies the storage properties for the AzureBareMetalStorage instance."
+        }
+      },
+      "description": "Describes the properties of an AzureBareMetalStorageInstance."
+    },
+    "StorageProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -939,7 +952,7 @@
           "description": "the billing related information for the resource"
         }
       },
-      "description": "Describes the properties of an AzureBareMetalStorageInstance."
+      "description": "described the storage properties of the azure baremetalstorage instance"
     },
     "StorageBillingProperties": {
       "type": "object",
