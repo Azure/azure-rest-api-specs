@@ -9,7 +9,7 @@ fluent: true
 namespace: com.microsoft.azure.management.synapse
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsight-aks
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hdinsightaks
 
 rename-model: 'SubResource:EntityResource'
 ```
@@ -30,7 +30,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-06-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.synapse.v2021_09_15_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsight/aks/mgmt-v2019_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsightaks/mgmt-v2019_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
