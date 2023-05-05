@@ -1359,109 +1359,109 @@
             }
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/getDebugCredentials": {
-        "post": {
-          "tags": [
-            "GatewayGetDebugCredentials"
-          ],
-          "operationId": "Gateway_GetDebugCredentials",
-          "description": "Create new debug credentials for gateway.",
-          "x-ms-examples": {
-            "ApiManagementGatewayGetDebugCredentials": {
-              "$ref": "./examples/ApiManagementGatewayGetDebugCredentials.json"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/getDebugCredentials": {
+      "post": {
+        "tags": [
+          "GatewayGetDebugCredentials"
+        ],
+        "operationId": "Gateway_GetDebugCredentials",
+        "description": "Create new debug credentials for gateway.",
+        "x-ms-examples": {
+          "ApiManagementGatewayGetDebugCredentials": {
+            "$ref": "./examples/ApiManagementGatewayGetDebugCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayGetDebugCredentialsContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains debug credentials to use in gateway.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayDebugCredentialsContract"
             }
           },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-            },
-            {
-              "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "./definitions.json#/definitions/GatewayGetDebugCredentialsContract"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The response body contains debug credentials to use in gateway.",
-              "schema": {
-                "$ref": "./apimanagement.json#/definitions/GatewayDebugCredentialsContract"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-              }
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/getTrace": {
-        "post": {
-          "tags": [
-            "GatewayGetTrace"
-          ],
-          "operationId": "Gateway_GetTrace",
-          "description": "Fetches trace collected by gateway.",
-          "x-ms-examples": {
-            "ApiManagementGatewayGetTrace": {
-              "$ref": "./examples/ApiManagementGatewayGetTrace.json"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/getTrace": {
+      "post": {
+        "tags": [
+          "GatewayGetTrace"
+        ],
+        "operationId": "Gateway_GetTrace",
+        "description": "Fetches trace collected by gateway.",
+        "x-ms-examples": {
+          "ApiManagementGatewayGetTrace": {
+            "$ref": "./examples/ApiManagementGatewayGetTrace.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayGetTraceContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains trace collected by gateway.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayTraceContract"
             }
           },
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-            },
-            {
-              "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "./definitions.json#/definitions/GatewayGetTraceContract"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "The response body contains trace collected by gateway.",
-              "schema": {
-                "$ref": "./apimanagement.json#/definitions/GatewayTraceContract"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-              }
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
