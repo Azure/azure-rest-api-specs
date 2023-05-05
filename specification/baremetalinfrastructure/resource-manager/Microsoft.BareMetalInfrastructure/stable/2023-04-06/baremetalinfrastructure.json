@@ -857,7 +857,8 @@
           "items": {
             "$ref": "#/definitions/AzureBareMetalStorageInstance"
           },
-          "description": "The list of AzureBareMetalStorage instances."
+          "description": "The list of AzureBareMetalStorage instances.",
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -868,6 +869,7 @@
     },
     "AzureBareMetalStorageInstance": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -876,34 +878,24 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
-          "description": "The system metadata relating to this resource.",
-          "readOnly": true
+          "description": "The system metadata relating to this resource."
+        },
+        "azureBareMetalStorageInstanceUniqueIdentifier": {
+          "type": "string",
+          "description": "Specifies the AzureBareMetaStorageInstance unique ID."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
       "description": "AzureBareMetalStorageInstance info on Azure (ARM properties and AzureBareMetalStorage properties)"
     },
     "AzureBareMetalStorageInstanceProperties": {
       "type": "object",
       "properties": {
-        "azureBareMetalStorageInstanceUniqueIdentifier": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Specifies the AzureBareMetaStorageInstance unique ID."
-        },
-        "storageProperties": {
-          "type": "object",
-          "readOnly": true,
-          "$ref": "#/definitions/StorageProperties",
-          "description": "Specifies the storage settings for the AzureBareMetalStorageInstance."
-        }
-      },
-      "description": "Describes the properties of an AzureBareMetalStorageInstance."
-    },
-    "StorageProperties": {
-      "type": "object",
-      "properties": {
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "Accepted",
@@ -922,27 +914,22 @@
           "description": "State of provisioning of the AzureBareMetalStorageInstance"
         },
         "offeringType": {
-          "readOnly": true,
           "type": "string",
           "description": "the offering type for which the resource is getting provisioned"
         },
         "storageType": {
-          "readOnly": true,
           "type": "string",
           "description": "the storage protocol for which the resource is getting provisioned"
         },
         "generation": {
-          "readOnly": true,
           "type": "string",
           "description": "the kind of storage instance"
         },
         "hardwareType": {
-          "readOnly": true,
           "type": "string",
           "description": "the hardware type of the storage instance"
         },
         "workloadType": {
-          "readOnly": true,
           "type": "string",
           "description": "the workload for which the resource is getting provisioned"
         },
@@ -952,18 +939,16 @@
           "description": "the billing related information for the resource"
         }
       },
-      "description": "Specifies the storage settings for the AzureBareMetalStorageInstance disks."
+      "description": "Describes the properties of an AzureBareMetalStorageInstance."
     },
     "StorageBillingProperties": {
       "type": "object",
       "properties": {
         "billingMode": {
-          "readOnly": true,
           "type": "string",
           "description": "the billing mode for the storage instance"
         },
         "azureBareMetalStorageInstanceSize": {
-          "readOnly": true,
           "type": "string",
           "description": "the SKU type that is provisioned"
         }
