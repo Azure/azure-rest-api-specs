@@ -6,15 +6,11 @@
     "subscriptionId": "subid",
     "parameters": {
       "properties": {
-        "certificates": [
-          {
-            "encodedCertificate": "*******Base64 encoded Certificate******************",
-            "certificatePassword": "Password",
-            "storeName": "CertificateAuthority"
-          }
-        ],
         "publisherEmail": "apim@autorestsdk.com",
-        "publisherName": "autorestsdk"
+        "publisherName": "autorestsdk",
+        "configurationApi": {
+          "legacyApi": "Disabled"
+        }
       },
       "sku": {
         "name": "Basic",
@@ -134,7 +130,7 @@
           "certificates": [],
           "disableGateway": false,
           "configurationApi": {
-            "legacyApi": "Enabled"
+            "legacyApi": "Disabled"
           },
           "platformVersion": "stv2",
           "apiVersionConstraint": {}
