@@ -1314,6 +1314,7 @@
   },
   "definitions": {
     "ARecord": {
+      "type": "object",
       "properties": {
         "ipv4Address": {
           "type": "string",
@@ -1323,6 +1324,7 @@
       "description": "An A record."
     },
     "AaaaRecord": {
+      "type": "object",
       "properties": {
         "ipv6Address": {
           "type": "string",
@@ -1332,6 +1334,7 @@
       "description": "An AAAA record."
     },
     "MxRecord": {
+      "type": "object",
       "properties": {
         "preference": {
           "type": "integer",
@@ -1346,6 +1349,7 @@
       "description": "An MX record."
     },
     "NsRecord": {
+      "type": "object",
       "properties": {
         "nsdname": {
           "type": "string",
@@ -1355,6 +1359,7 @@
       "description": "An NS record."
     },
     "PtrRecord": {
+      "type": "object",
       "properties": {
         "ptrdname": {
           "type": "string",
@@ -1364,6 +1369,7 @@
       "description": "A PTR record."
     },
     "SrvRecord": {
+      "type": "object",
       "properties": {
         "priority": {
           "type": "integer",
@@ -1388,6 +1394,7 @@
       "description": "An SRV record."
     },
     "TxtRecord": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1400,6 +1407,7 @@
       "description": "A TXT record."
     },
     "CnameRecord": {
+      "type": "object",
       "properties": {
         "cname": {
           "type": "string",
@@ -1409,6 +1417,7 @@
       "description": "A CNAME record."
     },
     "SoaRecord": {
+      "type": "object",
       "properties": {
         "host": {
           "type": "string",
@@ -1448,6 +1457,7 @@
       "description": "An SOA record."
     },
     "CaaRecord": {
+      "type": "object",
       "properties": {
         "flags": {
           "type": "integer",
@@ -1466,6 +1476,7 @@
       "description": "A CAA record."
     },
     "Digest": {
+      "type": "object",
       "properties": {
         "algorithmType": {
           "type": "integer",
@@ -1480,6 +1491,7 @@
       "description": "A digest."
     },
     "DsRecord": {
+      "type": "object",
       "properties": {
         "keyTag": {
           "type": "integer",
@@ -1499,6 +1511,7 @@
       "description": "A DS record."
     },
     "TlsaRecord": {
+      "type": "object",
       "properties": {
         "usage": {
           "type": "integer",
@@ -1523,6 +1536,7 @@
       "description": "A TLSA record."
     },
     "NaptrRecord": {
+      "type": "object",
       "properties": {
         "order": {
           "type": "integer",
@@ -1554,6 +1568,7 @@
       "description": "A NAPTR record."
     },
     "RecordSetProperties": {
+      "type": "object",
       "properties": {
         "metadata": {
           "type": "object",
@@ -1682,6 +1697,7 @@
       "description": "Represents the properties of the records in the record set."
     },
     "RecordSet": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -1712,6 +1728,7 @@
       "x-ms-azure-resource": true
     },
     "RecordSetUpdateParameters": {
+      "type": "object",
       "properties": {
         "RecordSet": {
           "$ref": "#/definitions/RecordSet",
@@ -1721,6 +1738,7 @@
       "description": "Parameters supplied to update a record set."
     },
     "RecordSetListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1738,6 +1756,7 @@
       "description": "The response to a record set List operation."
     },
     "DelegationSignerInfo": {
+      "type": "object",
       "properties": {
         "digestAlgorithmType": {
           "type": "integer",
@@ -1759,6 +1778,7 @@
       "description": "The delegation signer info."
     },
     "SigningKey": {
+      "type": "object",
       "properties": {
         "delegationSignerInfo": {
           "type": "array",
@@ -1801,6 +1821,7 @@
       "description": "Represents the signing key."
     },
     "DnssecProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -1819,6 +1840,7 @@
       "description": "Represents the DNSSEC properties."
     },
     "DnssecConfig": {
+      "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
@@ -1850,6 +1872,7 @@
       "description": "Represents the DNSSEC configuration."
     },
     "DnssecConfigListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1862,6 +1885,7 @@
       "description": "The response to a DNSSEC config List operation."
     },
     "ZoneProperties": {
+      "type": "object",
       "properties": {
         "maxNumberOfRecordSets": {
           "type": "integer",
@@ -1928,6 +1952,7 @@
       "description": "Represents the properties of the zone."
     },
     "Zone": {
+      "type": "object",
       "properties": {
         "etag": {
           "type": "string",
@@ -1952,6 +1977,7 @@
       "description": "Describes a DNS zone."
     },
     "ZoneUpdate": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -1964,6 +1990,7 @@
       "description": "Describes a request to update a DNS zone."
     },
     "ZoneListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1981,6 +2008,7 @@
       "description": "The response to a Zone List or ListAll operation."
     },
     "DnsResourceReferenceRequest": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1991,6 +2019,7 @@
       "description": "Represents the properties of the Dns Resource Reference Request."
     },
     "DnsResourceReferenceRequestProperties": {
+      "type": "object",
       "properties": {
         "targetResources": {
           "type": "array",
@@ -2003,6 +2032,7 @@
       "description": "Represents the properties of the Dns Resource Reference Request."
     },
     "DnsResourceReferenceResult": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2013,6 +2043,7 @@
       "description": "Represents the properties of the Dns Resource Reference Result."
     },
     "DnsResourceReferenceResultProperties": {
+      "type": "object",
       "properties": {
         "dnsResourceReferences": {
           "type": "array",
@@ -2025,6 +2056,7 @@
       "description": "The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request."
     },
     "DnsResourceReference": {
+      "type": "object",
       "properties": {
         "dnsResources": {
           "type": "array",
