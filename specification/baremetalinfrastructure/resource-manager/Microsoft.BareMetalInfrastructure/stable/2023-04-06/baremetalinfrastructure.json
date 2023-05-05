@@ -398,7 +398,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/AzureBareMetalStorageInstance"
-            }
+            },
+            "description": "request body for put call"
           }
         ],
         "responses": {
@@ -498,7 +499,7 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }        
+        }
       }
     }
   },
@@ -934,7 +935,6 @@
           "description": "the workload for which the resource is getting provisioned"
         },
         "storageBillingProperties": {
-          "readOnly": true,
           "$ref": "#/definitions/StorageBillingProperties",
           "description": "the billing related information for the resource"
         }
