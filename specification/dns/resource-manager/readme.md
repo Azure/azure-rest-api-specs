@@ -20,7 +20,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information
+### General Settings
 
 These are the global settings for the DNS API.
 
