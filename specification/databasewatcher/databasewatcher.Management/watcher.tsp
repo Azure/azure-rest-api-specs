@@ -24,7 +24,7 @@ using OpenAPI;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("A DatabaseWatcherProviderHub resource")
+@doc("A DatabaseWatcherProviderHub resource.")
 model Watcher is TrackedResource<WatcherProperties> {
   @doc("Database watcher name.")
   @key("watcherName")
@@ -35,22 +35,20 @@ model Watcher is TrackedResource<WatcherProperties> {
   ...ManagedServiceIdentity;
 }
 
-@doc("RP specific properties of the resource")
+@doc("RP specific properties of the resource.")
 model WatcherProperties {
   @doc("A data store for collected monitoring data.")
   datastore?: Datastore;
 
-  @visibility("read")
   @doc("The monitoring collection status of the watcher.")
-  @knownValues(WatcherStatus)
-  status?: string;
+  status?: WatcherStatus;
 
   @visibility("read")
-  @doc("The provisioning state of the resource Watcher.")
+  @doc("The provisioning state of the resource watcher.")
   provisioningState?: DatabaseWatcherProvisioningState;
 }
 
-@doc("Properties of data store")
+@doc("Properties of data store.")
 model Datastore {
   @doc("ARM ResourceId of an Azure Data Explorer database.")
   adxDatabaseResourceId: string;
