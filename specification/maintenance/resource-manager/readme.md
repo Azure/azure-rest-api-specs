@@ -193,5 +193,8 @@ directive:
   - suppress: PutResponseSchemaDescription
     from: maintenance.json
     reason: No documentation changes.
+  - suppress: LroErrorContent
+    from: maintenance.json
+    reason: No documentation changes.
 ```
 
