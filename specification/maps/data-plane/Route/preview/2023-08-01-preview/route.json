@@ -350,35 +350,7 @@
             "routeSummary"
           ],
           "items": {
-            "type": "string",
-            "enum": [
-              "routeSummary",
-              "regionTravelSummary",
-              "routePath",
-              "itinerary"
-            ],
-            "x-ms-enum": {
-              "name": "RouteOutputOption",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "routeSummary",
-                  "description": "Include only travel time and distance for the route, and do not provide other information. Only supported for route without waypoints."
-                },
-                {
-                  "value": "regionTravelSummary",
-                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada). `Note`:The parameter is available only for driving and walking mode"
-                },
-                {
-                  "value": "routePath",
-                  "description": "Include a set of point (latitude and longitude) values that describe the route’s path in the response."
-                },
-                {
-                  "value": "itinerary",
-                  "description": "Include detailed directions in the response. Detailed directions are provided as ManeuverPoints and contain details such as written instructions."
-                }
-              ]
-            }
+            "$ref": "#/definitions/RouteOutputOptions"
           }
         },
         "maxRouteCount": {
@@ -448,6 +420,37 @@
             "$ref": "#/definitions/AdminDistrict"
           }
         }
+      }
+    },
+    "RouteOutputOptions": {
+      "type": "string",
+      "enum": [
+        "routeSummary",
+        "regionTravelSummary",
+        "routePath",
+        "itinerary"
+      ],
+      "x-ms-enum": {
+        "name": "RouteOutputOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "routeSummary",
+            "description": "Include only travel time and distance for the route, and do not provide other information. Only supported for route without waypoints."
+          },
+          {
+            "value": "regionTravelSummary",
+            "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada). `Note`:The parameter is available only for driving and walking mode"
+          },
+          {
+            "value": "routePath",
+            "description": "Include a set of point (latitude and longitude) values that describe the route’s path in the response."
+          },
+          {
+            "value": "itinerary",
+            "description": "Include detailed directions in the response. Detailed directions are provided as ManeuverPoints and contain details such as written instructions."
+          }
+        ]
       }
     },
     "FeatureTypeEnum": {
