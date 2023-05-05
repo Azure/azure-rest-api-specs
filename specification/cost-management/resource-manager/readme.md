@@ -48,6 +48,22 @@ input-file:
   - Microsoft.CostManagement/stable/2023-03-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2023-03-01/scheduledActions.json
 ```
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.CostManagement/preview/2023-04-01-preview/common-types.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.budgets.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/scheduledActions.json
+```
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
@@ -350,6 +366,22 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm ' 
+  - suppress: DeleteOperationResponses
+    from: costmanagement.budgets.json
+    reason: 'Consistent with delete api from other versions, modifying it will be a breaking change'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costmanagement.budgets.json
+    reason: 'List by subscription is included in the Budgets_List operation with the scope path parameter'
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: costmanagement.budgets.json
+    reason: 'Budgets_Get does not use an explicitly defined scope'
+  - suppress: ResourceMustReferenceCommonTypes
+    from: costmanagement.budgets.json
+    reason: 'Budget references CostManagementProxyResource, which references the common type ProxyResource'
+  - suppress: GetCollectionResponseSchema
+    from: common-types.json
+    reason: 'Operations does not contain a path for individual GET'
+        
 ```
 
 ### Tag: package-2018-08-preview
@@ -390,7 +422,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node
