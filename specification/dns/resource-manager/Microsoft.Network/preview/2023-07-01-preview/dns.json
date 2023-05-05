@@ -944,7 +944,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List recordsets by zone": {
+          "List all recordsets by zone": {
             "$ref": "./examples/ListRecordSetsByZone.json"
           }
         }
@@ -1258,7 +1258,7 @@
           }
         },
         "x-ms-examples": {
-          "List zones by resource group": {
+          "Get DNS resource reference": {
             "$ref": "./examples/GetDnsResourceReference.json"
           }
         }
@@ -1819,6 +1819,7 @@
       "description": "Represents the DNSSEC properties."
     },
     "DnssecConfig": {
+      "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/DnssecProperties",
@@ -1936,6 +1937,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ZoneProperties",
           "description": "The properties of the zone."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2133,14 +2139,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the resource group."
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
     },
     "ZoneNameParameter": {
       "name": "zoneName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the DNS zone (without a terminating dot)."
+      "description": "The name of the DNS zone (without a terminating dot).",
+      "x-ms-parameter-location": "method"
     },
     "RelativeRecordSetNameParameter": {
       "name": "relativeRecordSetName",
@@ -2148,7 +2156,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the record set, relative to the name of the zone.",
-      "x-ms-skip-url-encoding": true
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",
