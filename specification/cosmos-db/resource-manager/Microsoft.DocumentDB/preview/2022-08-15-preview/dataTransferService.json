@@ -302,6 +302,7 @@
           "type": "string",
           "enum": [
             "CosmosDBCassandra",
+            "CosmosDBMongo",
             "CosmosDBSql",
             "AzureBlobStorage"
           ],
@@ -338,6 +339,28 @@
         "tableName"
       ],
       "x-ms-discriminator-value": "CosmosDBCassandra"
+    },
+    "CosmosMongoDataTransferDataSourceSink": {
+      "type": "object",
+      "description": "A CosmosDB Cassandra API data source/sink",
+      "properties": {
+        "databaseName": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataTransferDataSourceSink"
+        }
+      ],
+      "required": [
+        "databaseName",
+        "collectionName"
+      ],
+      "x-ms-discriminator-value": "CosmosDBMongo"
     },
     "CosmosSqlDataTransferDataSourceSink": {
       "type": "object",

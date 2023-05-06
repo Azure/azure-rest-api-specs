@@ -15,7 +15,9 @@
           "dbName": "dbName",
           "dbPassword": "password",
           "dbPasswordUri": "",
-          "dbPort": "dbPort"
+          "dbPort": "dbPort",
+          "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+          "sslPreference": "ServerCertificate"
         }
       }
     }
@@ -23,9 +25,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
         "name": "myProviderInstance",
-        "type": "Microsoft.Workloads/workloads/providerInstances",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
         "systemData": {
           "createdBy": "user@xyz.com",
           "createdByType": "User",
@@ -43,18 +45,20 @@
             "dbUsername": "Db2OPA",
             "dbName": "OPA",
             "dbPort": "5912",
-            "dbPasswordUri": ""
+            "dbPasswordUri": "",
+            "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+            "sslPreference": "ServerCertificate"
           }
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
         "name": "myProviderInstance",
-        "type": "Microsoft.Workloads/workloads/providerInstances",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
         "properties": {
-          "provisioningState": "Succeeded",
+          "provisioningState": "Accepted",
           "providerSettings": {
             "providerType": "Db2",
             "sapSid": "SID",
@@ -62,7 +66,9 @@
             "dbUsername": "Db2OPA",
             "dbName": "OPA",
             "dbPort": "5912",
-            "dbPasswordUri": ""
+            "dbPasswordUri": "",
+            "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+            "sslPreference": "ServerCertificate"
           }
         }
       }
