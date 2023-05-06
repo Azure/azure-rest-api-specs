@@ -37,8 +37,10 @@ These settings apply only when `--tag=package-2023-07-preview` is specified on t
 input-file:
   - Microsoft.Network/preview/2023-07-01-preview/dns.json
 directive:
-  - where: $.paths
-    suppress: OperationsAPIImplementation
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
     reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
   - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
@@ -72,6 +74,16 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].get
     suppress: ParametersOrder
     reason: It can introduce a breaking change when updating parameter order, since Dns Zones service has already shipped public versions.
+  - where: $.definitions.Zone
+    suppress: TopLevelResourcesListBySubscription
+    reason: List by subscription is included in the Zones_List operation.
+
+suppressions:
+  - code: XmsLongRunningOperationOptions
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  - code: UnSupportedPatchProperties
+    reason: Breaking change to remove name or type properties.
 ```
 
 ### Tag: package-2018-05
