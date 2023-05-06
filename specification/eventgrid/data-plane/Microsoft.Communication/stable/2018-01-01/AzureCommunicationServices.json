@@ -7,6 +7,41 @@
   },
   "paths": {},
   "definitions": {
+    "AcsIncomingCallEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
+      "properties": {
+        "to": {
+          "description": "The communication identifier of the target user.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "x-ms-client-name": "toCommunicationIdentifier"
+        },
+        "from": {
+          "description": "The communication identifier of the user who initiated the call.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "x-ms-client-name": "fromCommunicationIdentifier"
+        },
+        "serverCallId": {
+          "description": "The Id of the server call",
+          "type": "string"
+        },
+        "callerDisplayName": {
+          "description": "Display name of caller.",
+          "type": "string"
+        },
+        "customContext": {
+          "description": "Custom Context of Incoming Call",
+          "$ref": "#/definitions/AcsIncomingCallCustomContext"
+        },
+        "incomingCallContext": {
+          "description": "Signed incoming call context.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "CorrelationId (CallId).",
+          "type": "string"
+        }
+      }
+    },
     "AcsUserDisconnectedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
       "properties": {
@@ -859,6 +894,30 @@
         "statusMessage": {
           "description": "Detailed status message",
           "type": "string"
+        }
+      }
+    },
+    "AcsIncomingCallCustomContext": {
+      "description": "Custom Context of Incoming Call",
+      "type": "object",
+      "properties": {
+        "customHeaders": {
+          "type": "string",
+          "description": "Custom Headers for incoming call"
+        },
+        "sipHeaders": {
+          "type": "object",
+          "description": "Sip Headers for incoming call",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "voipHeaders": {
+          "type": "object",
+          "description": "Voip Headers for incoming call",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }
