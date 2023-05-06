@@ -64,9 +64,6 @@ directive:
       - $.definitions.RecordSetUpdateParameters.properties.RecordSet
     suppress:
       - DefinitionsPropertiesNamesCamelCase
-  - where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs"].get
-    suppress: PageableOperation
-    reason: Pagination not supported. The size of the result list is exactly one.
   - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].patch
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].put
