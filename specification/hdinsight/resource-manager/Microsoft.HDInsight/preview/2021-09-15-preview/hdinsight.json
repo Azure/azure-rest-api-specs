@@ -1614,6 +1614,15 @@
         },
         "coordinator": {
           "$ref": "#/definitions/TrinoCoordinator"
+        },
+        "userPluginsSpec": {
+          "$ref": "#/definitions/TrinoUserPlugins"
+        },
+        "userTelemetrySpec": {
+          "$ref": "#/definitions/TrinoUserTelemetry"
+        },
+        "worker": {
+          "$ref": "#/definitions/TrinoWorker"
         }
       }
     },
@@ -1681,6 +1690,25 @@
         "replicas": {
           "type": "integer",
           "description": "The coordinator replicas number.",
+          "format": "int32",
+          "minimum": 1
+        },
+        "resources": {
+          "$ref": "#/definitions/TrinoReservedResource"
+        }
+      }
+    },
+    "TrinoWorker": {
+      "type": "object",
+      "description": "Trino worker.",
+      "properties": {
+        "debug": {
+          "$ref": "#/definitions/TrinoDebugConfig",
+          "x-ms-client-flatten": true
+        },
+        "replicas": {
+          "type": "integer",
+          "description": "The worker replicas number.",
           "format": "int32",
           "minimum": 1
         },
@@ -1767,6 +1795,41 @@
         }
       }
     },
+    "TrinoUserPlugins": {
+      "type": "object",
+      "description": "Trino user plugins spec",
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "description": "Trino user plugins.",
+          "items": {
+            "$ref": "#/definitions/TrinoUserPlugin"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TrinoUserPlugin": {
+      "type": "object",
+      "description": "Trino user plugin.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Denotes whether the plugin is active or not."
+        },
+        "name": {
+          "type": "string",
+          "description": "This field maps to the sub-directory in trino plugins location, that will contain all the plugins under path.",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "description": "Fully qualified path to the folder containing the plugins.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$"
+        }
+      }
+    },
     "SparkProfile": {
       "type": "object",
       "description": "The spark cluster profile.",
@@ -1821,10 +1884,8 @@
       "description": "The Flink cluster profile.",
       "required": [
         "storage",
-        "numReplicas",
         "jobManager",
-        "taskManager",
-        "historyServer"
+        "taskManager"
       ],
       "properties": {
         "storage": {
