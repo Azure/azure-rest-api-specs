@@ -84,6 +84,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Analyze Image": {
+            "$ref": "./examples/AnalyzeImage.json"
+          }
         }
       }
     },
@@ -141,6 +146,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get All Text Blocklists": {
+            "$ref": "./examples/ListTextBlocklists.json"
+          }
         }
       }
     },
@@ -180,6 +190,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Text Blocklist By blocklistName": {
+            "$ref": "./examples/GetTextBlocklist.json"
           }
         }
       },
@@ -237,7 +252,12 @@
         },
         "consumes": [
           "application/merge-patch+json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Create Or Update Text Blocklist": {
+            "$ref": "./examples/CreateOrUpdateTextBlocklist.json"
+          }
+        }
       },
       "delete": {
         "operationId": "TextBlocklists_DeleteTextBlocklist",
@@ -271,6 +291,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Text Blocklist By blocklistName": {
+            "$ref": "./examples/DeleteTextBlocklist.json"
           }
         }
       }
@@ -319,6 +344,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Add BlockItems To Text Blocklist": {
+            "$ref": "./examples/AddBlockItems.json"
+          }
         }
       }
     },
@@ -362,6 +392,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Remove BlockItems From Text Blocklist": {
+            "$ref": "./examples/RemoveBlockItems.json"
           }
         }
       }
@@ -437,6 +472,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get All BlockItems By blocklistName": {
+            "$ref": "./examples/ListTextBlocklistItems.json"
+          }
         }
       }
     },
@@ -485,6 +525,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get BlockItem By blocklistName And blockItemId": {
+            "$ref": "./examples/GetTextBlocklistItem.json"
+          }
         }
       }
     },
@@ -525,6 +570,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Text": {
+            "$ref": "./examples/AnalyzeText.json"
           }
         }
       }
