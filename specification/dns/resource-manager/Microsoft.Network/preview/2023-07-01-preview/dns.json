@@ -2199,7 +2199,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription."
+      "description": "Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription.",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the API version.",
+      "x-ms-parameter-location": "client"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -2225,13 +2234,6 @@
       "description": "The name of the record set, relative to the name of the zone.",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Specifies the API version."
     }
   }
 }
