@@ -66,7 +66,7 @@ directive:
     suppress: PageableOperation
     reason: Pagination not supported. The size of the result list is exactly one.
   - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
     suppress: ParametersOrder
     reason: It can introduce a breaking change when updating parameter order, since Dns Zones service has already shipped public versions.
 ```
