@@ -40,8 +40,11 @@ directive:
   - where: $.paths
     suppress: OperationsAPIImplementation
     reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
-  - where: $.paths
+  - where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}"]
     suppress: PathForNestedResource
+    reason: DNS Zones API design.
   - where:
       - $.definitions.RecordSetProperties.properties.TTL
       - $.definitions.RecordSetProperties.properties.ARecords
@@ -59,14 +62,11 @@ directive:
       - $.definitions.RecordSetUpdateParameters.properties.RecordSet
     suppress:
       - DefinitionsPropertiesNamesCamelCase
-  - where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs"].get'
+  - where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs"].get
     suppress: PageableOperation
     reason: Pagination not supported. The size of the result list is exactly one.
   - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].patch
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].put
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].delete
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
     suppress: ParametersOrder
     reason: It can introduce a breaking change when updating parameter order, since Dns Zones service has already shipped public versions.
 ```
