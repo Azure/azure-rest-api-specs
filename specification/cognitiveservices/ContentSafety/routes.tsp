@@ -63,7 +63,7 @@ interface TextBlocklists {
   listTextBlocklists is Azure.Core.ResourceList<TextBlocklist>;
 
   @summary("Add BlockItems To Text Blocklist")
-  @doc("Add blockItems to a text blocklist.")
+  @doc("Add blockItems to a text blocklist. You can add at most 100 BlockItems in one request.")
   addBlockItems is ResourceAction<
     TextBlocklist,
     AddBlockItemsOptions,
@@ -71,7 +71,7 @@ interface TextBlocklists {
   >;
 
   @summary("Remove BlockItems From Text Blocklist")
-  @doc("Remove blockItems from a text blocklist.")
+  @doc("Remove blockItems from a text blocklist. You can remove at most 100 BlockItems in one request.")
   removeBlockItems is ResourceAction<
     TextBlocklist,
     RemoveBlockItemsOptions,
