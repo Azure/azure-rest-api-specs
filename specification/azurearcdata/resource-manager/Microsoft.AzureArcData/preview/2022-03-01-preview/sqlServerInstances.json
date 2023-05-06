@@ -119,10 +119,13 @@
           "type": "string",
           "description": "SQL Server license type.",
           "enum": [
-            "Paid",
+            "Undefined",
             "Free",
             "HADR",
-            "Undefined"
+            "ServerCAL",
+            "LicenseOnly",
+            "PAYG",
+            "Paid"
           ],
           "x-ms-enum": {
             "name": "arcSqlServerLicenseType",
@@ -156,6 +159,14 @@
           "type": "string",
           "description": "Type of host for Azure Arc SQL Server",
           "enum": [
+            "Azure Virtual Machine",
+            "Azure VMWare Virtual Machine",
+            "Azure Kubernetes Service",
+            "AWS VMWare Virtual Machine",
+            "AWS Kubernetes Service",
+            "GCP VMWare Virtual Machine",
+            "GCP Kubernetes Service",
+            "Container",
             "Virtual Machine",
             "Physical Server",
             "AWS Virtual Machine",
