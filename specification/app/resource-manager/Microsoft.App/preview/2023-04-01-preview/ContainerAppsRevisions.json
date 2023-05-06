@@ -476,6 +476,23 @@
                 "name": "RevisionProvisioningState",
                 "modelAsString": true
               }
+            },
+            "runningState": {
+              "description": "Current running state of the revision",
+              "enum": [
+                "Running",
+                "Processing",
+                "Stopped",
+                "Degraded",
+                "Failed",
+                "Unknown"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "RevisionRunningState",
+                "modelAsString": true
+              }
             }
           },
           "x-ms-client-flatten": true

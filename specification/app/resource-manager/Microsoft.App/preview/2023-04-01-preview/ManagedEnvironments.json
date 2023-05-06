@@ -1126,6 +1126,16 @@
         }
       }
     },
+    "Mtls": {
+      "type": "object",
+      "description": "Configuration properties for mutual TLS authentication",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating whether the mutual TLS authentication is enabled"
+        }
+      }
+    },
     "ManagedEnvironment": {
       "description": "An environment for hosting container apps",
       "type": "object",
@@ -1239,6 +1249,16 @@
                 "create",
                 "read"
               ]
+            },
+            "peerAuthentication": {
+              "description": "Peer authentication settings for the Managed Environment",
+              "type": "object",
+              "properties": {
+                "mtls": {
+                  "description": "Mutual TLS authentication settings for the Managed Environment",
+                  "$ref": "#/definitions/Mtls"
+                }
+              }
             }
           },
           "x-ms-client-flatten": true
