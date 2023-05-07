@@ -68,6 +68,10 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: aggregations.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
@@ -92,7 +96,7 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-06'
 input-file:
-  - Microsoft.Security/preview/2023-06-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2023-06-01-preview/aggregations.json
 ```
 ### Tag: package-preview-2023-03-only
 
@@ -382,6 +386,7 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+- Microsoft.Security/preview/2023-06-01-preview/aggregations.json
 
 
 # Needed when there is more than one input file

@@ -1,0 +1,189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Aggregations Query",
+    "description": "API spec for Microsoft.Security (Azure Security Center) Aggregations Query",
+    "version": "2023-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Security/aggregations": {
+      "post": {
+        "tags": [
+          "Aggregations"
+        ],
+        "description": "Run pre-defined aggregation query against Microsoft.Security data types for scopes specified in the request.",
+        "operationId": "Aggregations",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "name": "aggregations",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AggregationRequest"
+            },
+            "description": "Request specifying Aggregation type and scopes."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the aggregation query operation",
+            "schema": {
+              "$ref": "#/definitions/AggregationResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred while processing the request. See the error.code parameter to identify the specific error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Basic query": {
+            "$ref": "./examples/BasicResult_example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AggregationRequest": {
+      "description": "Aggregation query type and scopes.",
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "The scopes in which the query will be executed - List of subscription IDs for Azure environments, list of cloud connector IDs for AWS environments and list of GCP connector IDs for GCP environments.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Scope."
+          }
+        },
+        "aggregationtype": {
+          "description": "The aggregation query type",
+          "$ref": "#/definitions/AggregationType"
+        }
+      },
+      "required": [
+        "aggregationType"
+      ]
+    },
+    "AggregationType": {
+      "description": "The aggregation type of query to run",
+      "type": "string",
+      "enum": [
+        "Alerts",
+        "AttackPaths",
+        "UsfulQueries",
+        "AllDataResources",
+        "ScopeDetails"
+      ]
+    },
+    "AggregationResponse": {
+      "description": "Aggregation query result.",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Query output in JObject array.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "ErrorResponse": {
+      "title": "Error response.",
+      "type": "object",
+      "description": "An error response from the API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error information."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Error": {
+      "title": "Error info.",
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+		  "x-ms-identifiers":[]
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorDetails": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code identifying the specific error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  }
+}

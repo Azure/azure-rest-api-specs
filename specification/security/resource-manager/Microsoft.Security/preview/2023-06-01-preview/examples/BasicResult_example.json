@@ -1,0 +1,33 @@
+{
+  "title": "Basic Result",
+  "description": "Result for simple aggregation.",
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "query": {
+      "scopes": [
+        "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6",
+        "/subscriptions/8e22af33-2b2b-4f43-be9a-82aae2f0c2b5/resourcegroups/cus-test-platform/providers/Microsoft.Security/securityConnectors/TestNotifications"
+      ],
+      "aggregationtype": "Alerts"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": 
+          {
+            "Timestamp": "2023-05-07T13:37:27+00:00",
+            "AzureResourcesCount": "5",
+            "AwsResourcesCount": "2",
+            "GcpResourcesCount": "1",
+            "AzureResourcesHist7DaysCount": "4",
+            "AwsResourcesHist7DaysCount": "4",
+            "GcpResourcesHist7DaysCount": "4",
+            "AzureAlertsCount": "10",
+            "AwsAlertsCount": "3",
+            "GcpAlertsCount": "2"
+          }
+      }
+    }
+  }
+}
