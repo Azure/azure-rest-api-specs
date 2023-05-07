@@ -504,6 +504,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/migrate": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "KustoPools_Migrate",
+        "x-ms-examples": {
+          "KustoClusterMigrate": {
+            "$ref": "./examples/KustoPoolMigrate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Migrate data from a Kusto pool to another cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kustoPoolMigrateRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPoolMigrateRequest"
+            },
+            "description": "The kusto pool migrate request parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/skus": {
       "get": {
         "tags": [
@@ -2618,7 +2673,8 @@
             "Stopping",
             "Stopped",
             "Starting",
-            "Updating"
+            "Updating",
+            "Migrated"
           ],
           "x-ms-enum": {
             "name": "State",
@@ -2672,6 +2728,12 @@
             "create",
             "read"
           ]
+        },
+        "migrationCluster": {
+          "description": "Properties of the peer cluster involved in a migration to/from this cluster.",
+          "type": "object",
+          "$ref": "#/definitions/MigrationClusterProperties",
+          "readOnly": true
         }
       },
       "description": "Class representing the Kusto pool properties."
@@ -3528,6 +3590,39 @@
       },
       "description": "The list of language extension objects."
     },
+    "MigrationClusterProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the cluster.",
+          "readOnly": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "The public URL of the cluster.",
+          "readOnly": true
+        },
+        "dataIngestionUri": {
+          "type": "string",
+          "description": "The public data ingestion URL of the cluster.",
+          "readOnly": true
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the cluster in the migration process.",
+          "readOnly": true,
+          "enum": [
+            "Source",
+            "Destination"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationClusterRole",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Represents a properties of a cluster that is part of a migration."
+    },
     "ResourceProvisioningState": {
       "type": "string",
       "readOnly": true,
@@ -3680,6 +3775,19 @@
         "type"
       ],
       "description": "A principal assignment check name availability request."
+    },
+    "KustoPoolMigrateRequest": {
+      "type": "object",
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Resource ID of the destination cluster or kusto pool."
+        }
+      },
+      "required": [
+        "clusterResourceId"
+      ],
+      "description": "A kusto pool migrate request."
     },
     "DatabasePrincipalAssignmentListResult": {
       "type": "object",
