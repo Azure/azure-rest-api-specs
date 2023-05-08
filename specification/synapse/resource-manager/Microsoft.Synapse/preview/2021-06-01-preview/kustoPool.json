@@ -354,6 +354,11 @@
             "description": "Accepted the Kusto Pool creation request.",
             "schema": {
               "$ref": "#/definitions/KustoPool"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -398,7 +403,12 @@
             "description": "OK -- Kusto Pool deleted successfully."
           },
           "202": {
-            "description": "Accepted Kusto Pool deletion request."
+            "description": "Accepted Kusto Pool deletion request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- Kusto Pool does not exist in the subscription."
@@ -447,7 +457,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -493,7 +508,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -516,6 +536,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Migrate data from a Kusto pool to another cluster.",
         "parameters": [
           {
@@ -548,7 +571,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -757,7 +785,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -812,7 +845,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -915,7 +953,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1078,6 +1121,11 @@
             "description": "Accepted the create database request.",
             "schema": {
               "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1125,7 +1173,12 @@
             "description": "Successfully deleted the database."
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified database does not exist."
@@ -1348,6 +1401,11 @@
             "description": "Accepted the database update request.",
             "schema": {
               "$ref": "#/definitions/Database"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1395,7 +1453,12 @@
             "description": "Successfully deleted the database."
           },
           "202": {
-            "description": "Accepted database delete request."
+            "description": "Accepted database delete request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified database does not exist."
@@ -1520,7 +1583,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1751,6 +1819,11 @@
             "description": "Accepted the data connection update request.",
             "schema": {
               "$ref": "#/definitions/DataConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1801,7 +1874,12 @@
             "description": "Successfully deleted the data connection."
           },
           "202": {
-            "description": "Accepted data connection deletion request."
+            "description": "Accepted data connection deletion request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified data connection does not exist."
@@ -2064,7 +2142,12 @@
             "description": "OK -- principalAssignments deleted successfully."
           },
           "202": {
-            "description": "Accepted the delete principalAssignments request."
+            "description": "Accepted the delete principalAssignments request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- principalAssignments does not exist in the subscription."
@@ -2398,7 +2481,12 @@
             "description": "OK -- principalAssignments deleted successfully."
           },
           "202": {
-            "description": "Accepted the delete principalAssignments request."
+            "description": "Accepted the delete principalAssignments request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- principalAssignments does not exist in the subscription."
@@ -4209,7 +4297,8 @@
       "description": "The name of the Kusto pool.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]{3,21}$"
     },
     "OperationIdParameter": {
       "name": "operationId",
@@ -4233,7 +4322,8 @@
       "description": "The name of the database in the Kusto pool.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9_\\-\\. ]{1,260}$"
     },
     "DataConnectionNameParameter": {
       "name": "dataConnectionName",
