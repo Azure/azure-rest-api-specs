@@ -132,7 +132,8 @@ model ImageAnalyzeSeverityResult {
 @doc("Text Blocklist.")
 @resource("text/blocklists")
 model TextBlocklist {
-  @doc("Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~")
+  @doc("Text blocklist name.")
+  @pattern("^[0-9A-Za-z._~-]+$")
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
