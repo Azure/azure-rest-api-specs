@@ -511,52 +511,6 @@
             "$ref": "./examples/NotificationHubs/AuthorizationRuleGet.json"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Hubs"
-        ],
-        "summary": "Gets an authorization rule for a NotificationHub by name, including keys.",
-        "operationId": "NotificationHubs_GetAuthorizationRuleWithKeys",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceName"
-          },
-          {
-            "$ref": "#/parameters/HubName"
-          },
-          {
-            "$ref": "#/parameters/AuthorizationRuleName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
-            }
-          },
-          "default": {
-            "description": "Error code with reason."
-          }
-        },
-        "x-ms-examples": {
-          "NotificationHubs_GetAuthorizationRuleWithKeys": {
-            "$ref": "./examples/NotificationHubs/AuthorizationRuleGetWithKeys.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/authorizationRules": {
@@ -1236,48 +1190,6 @@
         "x-ms-examples": {
           "Namespaces_GetAuthorizationRule": {
             "$ref": "./examples/Namespaces/AuthorizationRuleGet.json"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Namespaces"
-        ],
-        "operationId": "Namespaces_GetAuthorizationRuleWithKeys",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NamespaceName"
-          },
-          {
-            "$ref": "#/parameters/AuthorizationRuleName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
-            }
-          },
-          "default": {
-            "description": "Error code with reason."
-          }
-        },
-        "x-ms-examples": {
-          "Namespaces_GetAuthorizationRuleWithKeys": {
-            "$ref": "./examples/Namespaces/AuthorizationRuleGetWithKeys.json"
           }
         }
       }
