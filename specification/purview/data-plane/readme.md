@@ -193,7 +193,7 @@ input-file:
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-02-15-preview
+tag: package-2023-05-30-preview
 title: PurviewShareClient
 ```
 
