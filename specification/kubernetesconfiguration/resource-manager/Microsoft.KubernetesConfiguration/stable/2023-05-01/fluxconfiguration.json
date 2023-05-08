@@ -1016,6 +1016,17 @@
           "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
           "type": "boolean",
           "x-nullable": true
+        },
+        "wait": {
+          "description": "Enable/disable health check for all Kubernetes objects created by this Kustomization.",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "postBuild": {
+          "description": "Used for variable substitution for this Kustomization after kustomize build.",
+          "type": "object",
+          "$ref": "#/definitions/PostBuildDefinition",
+          "x-nullable": true
         }
       }
     },
