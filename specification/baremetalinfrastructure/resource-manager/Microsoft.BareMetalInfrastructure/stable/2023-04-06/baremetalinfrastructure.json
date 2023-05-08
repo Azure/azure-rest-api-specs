@@ -411,12 +411,6 @@
           },
           "201": {
             "description": "Created. The operation was successfully started and will complete asynchronously.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Operation URI for long running operation.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/AzureBareMetalStorageInstance"
             }
@@ -427,10 +421,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
