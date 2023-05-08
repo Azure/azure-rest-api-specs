@@ -1488,6 +1488,12 @@
         "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/NamespaceName"
           },
           {
@@ -1496,12 +1502,6 @@
             "description": "Name of the Private Endpoint Connection to remove.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3171,8 +3171,7 @@
           "type": "string",
           "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "Sku": {
       "required": [
