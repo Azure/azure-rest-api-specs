@@ -77,14 +77,14 @@
       "get": {
         "x-ms-examples": {
           "Get health report of resource": {
-            "$ref": "./examples/HealthReports/GetHealthReport_example.json"
+            "$ref": "./examples/HealthReports/GetHealthReports_example.json"
           }
         },
         "tags": [
           "HealthReports"
         ],
         "description": "Get health report of resource",
-        "operationId": "HealthReport_Get",
+        "operationId": "HealthReports_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -171,6 +171,13 @@
           "items": {
             "type": "string",
             "description": "plan name"
+          }
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional data for the given health report.",
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "issues": {
@@ -267,17 +274,7 @@
         },
         "scope": {
           "type": "string",
-          "description": "The resource scope of the health report",
-          "enum": [
-            "Connectors",
-            "Clusters",
-            "VirtualMachines",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "scopeName",
-            "modelAsString": true
-          }
+          "description": "The resource scope of the health report"
         }
       }
     },
@@ -297,6 +294,16 @@
             "name": "statusName",
             "modelAsString": true
           }
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of the given status"
+        },
+        "lastTimeScannedDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The date of when the resource was scanned in the last time"
         },
         "statusChangeDate": {
           "type": "string",
