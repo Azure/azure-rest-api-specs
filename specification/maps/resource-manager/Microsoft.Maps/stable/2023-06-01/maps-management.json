@@ -50,6 +50,9 @@
           },
           "Create Account with Managed Identities": {
             "$ref": "./examples/CreateAccountManagedIdentity.json"
+          },
+          "Create Account with Encryption": {
+            "$ref": "./examples/CreateAccountEncryption.json"
           }
         },
         "parameters": [
@@ -89,7 +92,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred.",
+            "description": "An error occurred during creating or updating the Account.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
@@ -114,6 +117,9 @@
           },
           "Update Account Managed Identities": {
             "$ref": "./examples/UpdateAccountManagedIdentity.json"
+          },
+          "Update Account Encryption": {
+            "$ref": "./examples/UpdateAccountEncryption.json"
           }
         },
         "parameters": [
@@ -147,7 +153,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error occurred.",
+            "description": "An error occurred during creating or updating the Account.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
@@ -817,7 +823,7 @@
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       },
       "required": [
@@ -843,14 +849,10 @@
           "$ref": "#/definitions/Kind"
         },
         "systemData": {
-          "readOnly": true,
-          "description": "The system meta data relating to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         },
         "identity": {
-          "type": "object",
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "Sets the identity property for maps account."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "The map account properties.",
@@ -862,7 +864,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "x-ms-azure-resource": true
@@ -887,9 +889,7 @@
           "$ref": "#/definitions/Sku"
         },
         "identity": {
-          "type": "object",
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "Sets the identity property for maps account."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "The map account properties.",
@@ -1045,10 +1045,11 @@
       "properties": {
         "signingKey": {
           "type": "string",
-          "description": "The Map account key to use for signing.",
+          "description": "The Map account key to use for signing. Picking `primaryKey` or `secondaryKey` will use the Map account Shared Keys, and using `managedIdentity` will use the auto-renewed private key to sign the SAS.",
           "enum": [
             "primaryKey",
-            "secondaryKey"
+            "secondaryKey",
+            "managedIdentity"
           ],
           "x-ms-enum": {
             "name": "SigningKey",
@@ -1100,55 +1101,6 @@
           "type": "string",
           "readOnly": true,
           "description": "The shared access signature access token."
-        }
-      }
-    },
-    "ManagedServiceIdentity": {
-      "description": "Identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of resource identity."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "principalId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The principal id of user assigned identity."
-              },
-              "clientId": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The client id of user assigned identity."
-              }
-            }
-          }
         }
       }
     },
@@ -1302,6 +1254,18 @@
         "internalMetricName": {
           "type": "string",
           "description": "Internal metric name."
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "description": "Lock aggregation type for metrics."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "Metrics namespace."
+        },
+        "supportedAggregationTypes": {
+          "type": "string",
+          "description": "Allowed aggregation types for metrics."
         }
       }
     },
@@ -1345,23 +1309,24 @@
           "readOnly": true
         },
         "disableLocalAuth": {
-          "description": "Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys authentication from any usage.",
+          "description": "Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys and Shared Access Signature Token authentication from any usage.",
           "type": "boolean",
           "default": false
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the Map account resource.",
+          "description": "The provisioning state of the Map account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`",
           "readOnly": true
         },
         "linkedResources": {
-          "type": "array",
-          "$ref": "#/definitions/LinkedResources",
-          "description": "Sets the resources to be used for Managed Identities based operations for the Map account resource."
+          "$ref": "#/definitions/LinkedResources"
         },
         "cors": {
           "$ref": "#/definitions/CorsRules",
           "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
+        },
+        "encryption": {
+          "$ref": "../../../../../common-types/resource-management/v4/customermanagedkeys.json#/definitions/encryption"
         }
       }
     },
