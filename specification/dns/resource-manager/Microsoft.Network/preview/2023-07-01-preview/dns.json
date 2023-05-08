@@ -253,30 +253,7 @@
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
           },
           {
-            "name": "recordType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The type of DNS record in this record set.",
-            "enum": [
-              "A",
-              "AAAA",
-              "CAA",
-              "CNAME",
-              "MX",
-              "NS",
-              "PTR",
-              "SOA",
-              "SRV",
-              "TXT",
-              "TLSA",
-              "DS",
-              "NAPTR"
-            ],
-            "x-ms-enum": {
-              "name": "RecordType",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/RecordTypeParameter"
           },
           {
             "name": "parameters",
@@ -363,7 +340,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_CreateOrUpdate",
-        "description": "Creates or updates a record set within a DNS zone.",
+        "description": "Creates or updates a record set within a DNS zone. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created).",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -375,30 +352,7 @@
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
           },
           {
-            "name": "recordType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The type of DNS record in this record set. Record sets of type SOA can be updated but not created (they are created when the DNS zone is created).",
-            "enum": [
-              "A",
-              "AAAA",
-              "CAA",
-              "CNAME",
-              "MX",
-              "NS",
-              "PTR",
-              "SOA",
-              "SRV",
-              "TXT",
-              "TLSA",
-              "DS",
-              "NAPTR"
-            ],
-            "x-ms-enum": {
-              "name": "RecordType",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/RecordTypeParameter"
           },
           {
             "name": "parameters",
@@ -502,7 +456,7 @@
           "RecordSets"
         ],
         "operationId": "RecordSets_Delete",
-        "description": "Deletes a record set from a DNS zone. This operation cannot be undone.",
+        "description": "Deletes a record set from a DNS zone. This operation cannot be undone. Record sets of type SOA cannot be deleted (they are deleted when the DNS zone is deleted).",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -514,30 +468,7 @@
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
           },
           {
-            "name": "recordType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The type of DNS record in this record set. Record sets of type SOA cannot be deleted (they are deleted when the DNS zone is deleted).",
-            "enum": [
-              "A",
-              "AAAA",
-              "CAA",
-              "CNAME",
-              "MX",
-              "NS",
-              "PTR",
-              "SOA",
-              "SRV",
-              "TXT",
-              "TLSA",
-              "DS",
-              "NAPTR"
-            ],
-            "x-ms-enum": {
-              "name": "RecordType",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/RecordTypeParameter"
           },
           {
             "name": "If-Match",
@@ -624,30 +555,7 @@
             "$ref": "#/parameters/RelativeRecordSetNameParameter"
           },
           {
-            "name": "recordType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The type of DNS record in this record set.",
-            "enum": [
-              "A",
-              "AAAA",
-              "CAA",
-              "CNAME",
-              "MX",
-              "NS",
-              "PTR",
-              "SOA",
-              "SRV",
-              "TXT",
-              "TLSA",
-              "DS",
-              "NAPTR"
-            ],
-            "x-ms-enum": {
-              "name": "RecordType",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/RecordTypeParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -728,30 +636,7 @@
             "$ref": "#/parameters/ZoneNameParameter"
           },
           {
-            "name": "recordType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The type of record sets to enumerate.",
-            "enum": [
-              "A",
-              "AAAA",
-              "CAA",
-              "CNAME",
-              "MX",
-              "NS",
-              "PTR",
-              "SOA",
-              "SRV",
-              "TXT",
-              "TLSA",
-              "DS",
-              "NAPTR"
-            ],
-            "x-ms-enum": {
-              "name": "RecordType",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/RecordTypeParameter"
           },
           {
             "name": "$top",
@@ -2156,6 +2041,33 @@
       "type": "string",
       "description": "The name of the record set, relative to the name of the zone.",
       "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "RecordTypeParameter": {
+      "name": "recordType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The type of DNS record in this record set.",
+      "enum": [
+        "A",
+        "AAAA",
+        "CAA",
+        "CNAME",
+        "MX",
+        "NS",
+        "PTR",
+        "SOA",
+        "SRV",
+        "TXT",
+        "TLSA",
+        "DS",
+        "NAPTR"
+      ],
+      "x-ms-enum": {
+        "name": "RecordType",
+        "modelAsString": false
+      },
       "x-ms-parameter-location": "method"
     }
   }
