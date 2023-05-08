@@ -1534,7 +1534,7 @@
           "FetchSecondaryRecoveryPoints"
         ],
         "description": "Returns a list of Secondary Recovery Points for a DataSource in a vault, that can be used for Cross Region Restore.",
-        "operationId": "FetchSecondaryRPs",
+        "operationId": "SecondaryRPs_Fetch",
         "produces": [
           "application/json"
         ],
@@ -1764,7 +1764,7 @@
         "tags": [
           "DppJob"
         ],
-        "operationId": "GetCrossRegionRestoreJob",
+        "operationId": "CrossRegionRestoreJob_Get",
         "produces": [
           "application/json"
         ],
@@ -1820,7 +1820,7 @@
         "tags": [
           "DppJob"
         ],
-        "operationId": "ListCrossRegionRestoreJobs",
+        "operationId": "CrossRegionRestoreJobs_List",
         "produces": [
           "application/json"
         ],
@@ -7932,7 +7932,8 @@
       "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
