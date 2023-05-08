@@ -4,6 +4,24 @@
     "title": "Azure Monitor Metric Batch",
     "version": "2023-05-01-preview"
   },
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "flow": "application",
+      "description": "Azure Active Directory OAuth2 Authentication",
+      "scopes": {
+        "https://metrics.monitor.azure.com/.default": "https://metrics.monitor.azure.com/.default"
+      }
+    }
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://metrics.monitor.azure.com/.default"
+      ]
+    }
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{baseUrl}",
     "useSchemePrefix": false,
