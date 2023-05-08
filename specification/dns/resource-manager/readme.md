@@ -74,6 +74,12 @@ directive:
   - where: $.definitions.Zone
     suppress: TopLevelResourcesListBySubscription
     reason: List by subscription is included in the Zones_List operation.
+  - suppress: CreateOperationAsyncResponseValidation
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  - suppress: DeleteOperationAsyncResponseValidation
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
 
 suppressions:
   - code: XmsLongRunningOperationOptions
