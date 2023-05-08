@@ -80,6 +80,8 @@ directive:
   - suppress: DeleteOperationAsyncResponseValidation
     reason: This option is designed for cases where the server does NOT follow ARM guidelines
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  - suppress: ResourceNameRestriction
+    reason: We already have naming validation at service end.
 
 suppressions:
   - code: XmsLongRunningOperationOptions

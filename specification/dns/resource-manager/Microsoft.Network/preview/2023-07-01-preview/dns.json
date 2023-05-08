@@ -1723,21 +1723,6 @@
     "RecordSet": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the record set.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the record set.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the record set.",
-          "readOnly": true
-        },
         "etag": {
           "type": "string",
           "description": "The etag of the record set."
@@ -1748,8 +1733,12 @@
           "description": "The properties of the record set."
         }
       },
-      "description": "Describes a DNS record set (a collection of DNS records with the same name and type).",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Describes a DNS record set (a collection of DNS records with the same name and type)."
     },
     "RecordSetUpdateParameters": {
       "type": "object",
@@ -1867,27 +1856,11 @@
     },
     "DnssecConfig": {
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/DnssecProperties",
           "x-ms-client-flatten": true,
           "description": "The DNSSEC properties.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the DNSSEC config.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the DNSSEC config.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the DNSSEC config.",
           "readOnly": true
         },
         "etag": {
@@ -1900,6 +1873,11 @@
           "readOnly": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
       "description": "Represents the DNSSEC configuration."
     },
     "DnssecConfigListResult": {
@@ -2011,7 +1989,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes a DNS zone."
@@ -2112,46 +2090,6 @@
         }
       },
       "description": "Represents a single Azure resource and its referencing DNS records."
-    },
-    "Resource": {
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "description": "Common properties of an Azure Resource Manager resource"
     },
     "SubResource": {
       "type": "object",
