@@ -198,7 +198,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/NotificationHubResource"
+              "$ref": "#/definitions/NotificationHubPatchParameter"
             }
           }
         ],
@@ -897,7 +897,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/NamespacePatchParameter"
             }
           }
         ],
@@ -2291,6 +2291,23 @@
         }
       }
     },
+    "NamespacePatchParameter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      }
+    },
     "NamespaceProperties": {
       "type": "object",
       "properties": {
@@ -2465,6 +2482,20 @@
         "nextLink": {
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "NotificationHubPatchParameter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object"
+        },
+        "properties": {
+          "$ref": "#/definitions/NotificationHubProperties"
         }
       }
     },
