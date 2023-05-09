@@ -1212,11 +1212,20 @@
             }
           },
           "202": {
-            "description": "Accepted -- populate availability zone accepted; operation will complete asynchronously"
+            "description": "Accepted -- populate availability zone accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed."
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Volumes_PopulateAvailabilityZones": {
