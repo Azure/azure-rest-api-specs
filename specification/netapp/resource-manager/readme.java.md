@@ -19,6 +19,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-netapp
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-netapp-2022-09-01
+  - 
   - tag: package-netapp-2022-05-01
   - tag: package-netapp-2022-03-01
   - tag: package-netapp-2022-01-01
