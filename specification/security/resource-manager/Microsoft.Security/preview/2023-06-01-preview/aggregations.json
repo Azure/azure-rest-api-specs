@@ -82,8 +82,22 @@
       "description": "Aggregation query type and scopes.",
       "type": "object",
       "properties": {
-        "scopes": {
-          "description": "The scopes in which the query will be executed - List of subscription IDs for Azure environments, list of cloud connector IDs for AWS environments and list of GCP connector IDs for GCP environments.",
+        "azurescopes": {
+          "description": "The azure scopes in which the query will be executed - List of subscription IDs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Scope."
+          },
+        "awsscopes": {
+          "description": "The aws scopes in which the query will be executed - list of cloud connector IDs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Scope."
+          },
+        "gcpscopes": {
+          "description": "The GCP scopes in which the query will be executed - list of GCP connector IDs.",
           "type": "array",
           "items": {
             "type": "string",
