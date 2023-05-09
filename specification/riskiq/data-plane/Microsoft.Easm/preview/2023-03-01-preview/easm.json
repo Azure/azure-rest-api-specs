@@ -202,71 +202,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/assets/{assetId}/observations": {
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AssetIdParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/OrderByParameter"
-          },
-          {
-            "$ref": "#/parameters/SkipParameter"
-          },
-          {
-            "$ref": "#/parameters/MaxPageSizeParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ObservationPageResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "tags": [
-          "Assets"
-        ],
-        "operationId": "Assets_Observations",
-        "summary": "Retrieve observations on an asset.",
-        "x-ms-examples": {
-          "Assets": {
-            "$ref": "./examples/Assets_Observations.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}/dataConnections": {
       "get": {
         "produces": [
@@ -3867,60 +3802,6 @@
         "workspaceId": {
           "description": "log analytics workspace id",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ObservationPageResponse": {
-      "properties": {
-        "nextLink": {
-          "description": "The link to access the next page of results.  Not set if at the end of the result set.",
-          "type": "string"
-        },
-        "totalElements": {
-          "description": "The total number of items available in the full result set.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "value": {
-          "description": "The items in the current page of results.",
-          "items": {
-            "$ref": "#/definitions/ObservationResponse"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ObservationResponse": {
-      "description": "The items in the current page of results.",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "severity": {
-          "enum": [
-            "high",
-            "medium",
-            "low",
-            "none"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ObservationResponseSeverity"
-          }
-        },
-        "type": {
-          "enum": [
-            "cve",
-            "insight"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ObservationResponseType"
-          }
         }
       },
       "type": "object"
