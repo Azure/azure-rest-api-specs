@@ -2038,7 +2038,8 @@
           "items": {
             "$ref": "#/definitions/RegistrationResult"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
         }
       }
     },
@@ -2217,7 +2218,8 @@
           "items": {
             "$ref": "#/definitions/Availability"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
         },
         "metricFilterPattern": {
           "type": "string",
@@ -2454,7 +2456,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpRule"
-          }
+          },
+          "x-ms-identifiers": [ ]
         },
         "publicInternetRule": {
           "$ref": "#/definitions/PublicInternetAuthorizationRule"
@@ -2496,7 +2499,10 @@
             "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
           },
           "readOnly": true,
-          "x-ms-secret": true
+          "x-ms-secret": true,
+          "x-ms-identifiers": [
+            "keyName"
+          ]
         },
         "apnsCredential": {
           "$ref": "#/definitions/ApnsCredential"
@@ -2614,7 +2620,10 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -3067,14 +3076,21 @@
           "items": {
             "$ref": "#/definitions/LogSpecification"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
         }
       }
     },
