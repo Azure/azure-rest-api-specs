@@ -518,12 +518,19 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         },
         "deprecated": false,
         "x-ms-examples": {
