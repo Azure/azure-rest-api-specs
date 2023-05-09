@@ -262,6 +262,78 @@
           "description": "The flag indicating whether property changes dictionary was truncated in this resource",
           "type": "boolean",
           "readOnly": true
+        },
+        "changedBy": {
+          "description": "The entity that made the change(s)",
+          "type": "string",
+          "readOnly": true
+        },
+        "changedByType": {
+          "description": "The entity type that made the change(s)",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Application",
+            "User",
+            "ManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "changedByType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Application",
+                "description": "An application made the change(s)",
+                "name": "Application"
+              },
+              {
+                "value": "User",
+                "description": "A user made the change(s)",
+                "name": "User"
+              },
+              {
+                "value": "ManagedIdentity",
+                "description": "A ManagedIdentity made the change(s)",
+                "name": "ManagedIdentity"
+              }
+            ]
+          }
+        },
+        "clientType": {
+          "description": "How the change was made",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "CLI",
+            "Portal",
+            "SDK"
+          ],
+          "x-ms-enum": {
+            "name": "clientType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CLI",
+                "description": "The change(s) were made through the Command Line Interface",
+                "name": "CLI"
+              },
+              {
+                "value": "Portal",
+                "description": "The change(s) were made through the Portal",
+                "name": "Portal"
+              },
+              {
+                "value": "SDK",
+                "description": "The change(s) were made through a Software Development Kit",
+                "name": "SDK"
+              }
+            ]
+          }
+        },
+        "operation": {
+          "description": "The Azure Resource Provider operation that was invoked to make the change(s). See [here](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations) for a full list of possible values",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
