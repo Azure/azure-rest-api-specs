@@ -82,6 +82,9 @@ directive:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
   - suppress: ResourceNameRestriction
     reason: We already have naming validation at service end.
+  - where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs/default"].get
+    suppress: GetCollectionOnlyHasValueAndNextLink
+    reason: This is just a Get operation and not a List operation.
 
 suppressions:
   - code: XmsLongRunningOperationOptions
