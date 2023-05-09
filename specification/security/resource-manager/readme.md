@@ -393,6 +393,7 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+- Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 
 
 # Needed when there is more than one input file
