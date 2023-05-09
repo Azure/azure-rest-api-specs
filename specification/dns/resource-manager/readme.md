@@ -85,6 +85,10 @@ directive:
   - where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs/default"].get
     suppress: GetCollectionOnlyHasValueAndNextLink
     reason: This is just a Get operation and not a List operation.
+  - suppress: ResourceMustReferenceCommonTypes
+    reason: 'We have already defined Resource which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since Dns Zones service has already shipped public versions'
+  - suppress: LroErrorContent
+    reason: 'We have already defined CloudError which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since Dns Zones service has already shipped public versions'
 
 suppressions:
   - code: XmsLongRunningOperationOptions
