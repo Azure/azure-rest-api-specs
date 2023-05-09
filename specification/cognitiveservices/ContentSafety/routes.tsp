@@ -16,7 +16,6 @@ namespace ContentSafety;
 interface TextOperations {
   @summary("Analyze Text")
   @doc("A sync API for harmful content analysis for text. Currently, we support four categories: Hate, SelfHarm, Sexual, Violence.")
-  @convenientAPI
   @route("/text:analyze")
   @post
   analyzeText is Azure.Core.RpcOperation<
@@ -51,7 +50,6 @@ interface TextBlocklists {
 
   @summary("Create Or Update Text Blocklist")
   @doc("Updates a text blocklist, if blocklistName does not exist, create a new blocklist.")
-  @convenientAPI
   createOrUpdateTextBlocklist is Azure.Core.ResourceCreateOrUpdate<TextBlocklist>;
 
   @summary("Delete Text Blocklist By blocklistName")
