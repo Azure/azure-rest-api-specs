@@ -179,6 +179,37 @@
       },
       "x-ms-azure-resource": true
     },
+    "IdentityMetadata": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "The managed identity associated with the resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of the managed identity associated with the resource."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource identity associated with the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of managed identity associated with the resource.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "DownloadURL": {
       "description": "The URL to download the generated report.",
       "type": "object",
