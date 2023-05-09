@@ -204,7 +204,7 @@ model CorrelationChanges {
 Training result of a model, including its status, errors, and diagnostics
 information.
 """)
-model ModelInfo {
+model ModelDetails {
   @doc("""
 Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
@@ -328,7 +328,7 @@ model AnomalyDetectionModel {
 Training result of a model, including its status, errors, and diagnostics
 information.
 """)
-  modelInfo?: ModelInfo;
+  modelInfo?: ModelDetails;
 }
 
 @doc("Response of listing models.")
