@@ -173,11 +173,12 @@
             "description": "plan name"
           }
         },
-        "additionalData": {
-          "type": "object",
-          "description": "Additional data for the given health report.",
-          "additionalProperties": {
-            "type": "string"
+        "affectedDefendersSubPlans": {
+          "type": "array",
+          "description": "The affected defenders sub plans by unhealthy report",
+          "items": {
+            "type": "string",
+            "description": "sub plan name"
           }
         },
         "issues": {
@@ -297,7 +298,8 @@
         },
         "reason": {
           "type": "string",
-          "description": "The reason of the given status"
+          "description": "The reason of the given status",
+          "readOnly": true
         },
         "lastTimeScannedDate": {
           "type": "string",
