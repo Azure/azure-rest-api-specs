@@ -68,44 +68,45 @@ classDef grey fill:#CCCCCC,color:#555555;
 User((::))-->A
 A["clone Rest-API and SDK repo locally"] --> B
 B["2.1 pre-requsite dependencies installation
-(each language would have a installation script)"] --> C
-C["2.2 TypeSpec-Project-Sync.ps1
-(a.create tsp-location.yaml and drop to temp location
-b.update tsp-location.yaml if existed
-c.fetch specs from remote spec repo or use local spec repo)"] --> D
- D["2.3 TypeSpec-Project-Generate.ps1
+(each language would have a installation script)"] --> F
+F["2.2 TypeSpecProjectPrepare.ps1
+(a.fetch `tspconfig.yaml` from remote if it doesn’t exist locally
+b.parse `tspconfig.yaml`
+c.create sdk project folder if not existing
+d.create/update `tsp-location.yaml`)
+"] --> C
+C["2.3 TypeSpec-Project-Sync.ps1
+(a.fetch specs from remote spec repo or use local spec repo
+b.copy specs to temp location under sdk project folder)"] --> D
+D["2.4 TypeSpec-Project-Generate.ps1
 (a.create scaffolding for new project
-b.update tsp-location.yaml
-c.copy typespec specs to temp folder
-d.generate sdk code)"]
+b.generate sdk code)"]
 D-->E["code build"]
 class A,E grey
-class C,D highlight
+class C,D,F highlight
 ```
-- 2.2 `TypeSpec-Project-Sync.ps1`
+- 2.2 `TypeSpec-Project-Process.ps1`
    - input: 
-     - sdkProjectDirectory
-     - typespecProjectDirectory
-     - repo
-     - commit
-     - additionalDirectories
-     - localMode (use local spec and don't fetch from remote)
-     - localSpecRepoPath
-    Note: we might pull out tsp-location.yaml create/update part as single script to be used by #2 scenario
-   - output:
-     - path of sdkProjectDirectory
+     - typespecProjectDirectory (required)
+       either folder of `tspconfig.yaml` or remoteUrl of `tspconfig.yaml`
+     - commitSha (optional)
+     - repoUrl (optional)
+   - output: n/a
 
-- Function `Get-{Language}-Tsp-Location-Path`
-   - input: sdkProjectDirectory
-   - output: path of tsp-location.yaml
-
-- 2.3 `TypeSpec-Project-Generate.ps1`
+- 2.3 `TypeSpec-Project-Sync.ps1`
    - input: 
-     - projectDirectory
-     - typespecAdditionalOptions (emitter options)
+     - projectDirectory (required)
+     - localSpecRepoPath (optional)
+   - output: n/a
 
-- Function `Generate-{Language}-New-Project-Scaffolding`
-   - input: path of tsp-location.yaml
+- 2.4 `TypeSpec-Project-Generate.ps1`
+   - input: 
+     - projectDirectory (required)
+     - typespecAdditionalOptions (emitter options) (optional)
+
+- 2.4.1 Function `Generate-{Language}-New-Project-Scaffolding`
+  This function is called by generate script(2.4)
+   - input: projectDirectory (required)
 
 ##### Remaining Tasks
 | Step | Step Detail | Assignee | Implemented | Verified |
@@ -113,12 +114,21 @@ class C,D highlight
 | 2.1 | Dependencies scripts | SDK owner | [ ] | [] |
 | 2.2 | common script | EngSys | [ ] | | [ ] |
 | 2.3 | common script | EngSys | [ ] | | [ ] |
-| 2.4 | language script to call common script | SDK owner | [] | []
-| 2.5 | update to dotnet build target | Michael, Crystal | [] | []
+| 2.4 | common script | EngSys | [ ] | | [ ] |
+| 2.4.1 | language function | SDK owner | [ ] | | [ ] |
+| 2.5 | language script to call common script | SDK owner | [] | []
+| 2.6 | update to dotnet build target | Michael, Crystal | [] | []
 
 ##### Details & Open questions
 - 2.1 Optional: Scripts should exists under `\eng\scripts\` folder on all repos.
-- 2.2 would involve more than just creating folder and generate `tsp-location.yaml`. There are other custom steps such as creating `test` folder, `sln` files that would vary between language repos.
+- 2.2 What does this script do?
+  -	fetch `tspconfig.yaml` from remote if it doesn’t exist locally
+  -	parse `tspconfig.yaml`
+  -	create/update `tsp-location.yaml`
+  -	call `TypeSpecProjectSync.ps1`
+  -	call `TypeSpecProjectGenerate.ps1`
+- 2.3 Extends the script to support local spec repo if existed
+- 2.4.1 There are other custom steps such as creating `test` folder, `sln` files that would vary between language repos. Eventually, this project scaffolding would be integrated into language emitter.
 
 #### 3. Inner Dev loop SDK generation local scenario
 ##### Flowchart
@@ -137,11 +147,10 @@ flowchart TD;
   F["docker run
   (a. call `initScript` - 2.1
   b. call `generateScript` 
-  (2.2 + 2.3) )"]-->I  
+  (call 2.2) )"]-->I  
   D-->K
   K["optional:2.1"]-->G
-  G["2.2"]-->H
-  H["2.3"]-->I
+  G["2.2"]-->I
   I["build code and work on test,sample,readme,etc."]-->J
   I-->|loop|B
   J["create sdk PR"]
@@ -236,17 +245,15 @@ A["run `initScript`
 (2.1)"]-->C
 subgraph B["run `generateScript`"]
   C
-  D
   E
   F
   G
 end
-C["2.2
+C["call 2.2
 (a.use existing tsp-location.yaml
 b.fetch specs from remote spec repo
-c.then copy typespec specs to temp folder)"]-->D
-D["2.3
-(generate sdk code)"]-->E
+c.copy typespec specs to temp folder
+d.generate sdk code)"]-->E
 E["package sdk code"]-->F
 F["build code"]-->G
 G["run test"]
