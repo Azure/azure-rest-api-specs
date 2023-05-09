@@ -1,0 +1,167 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLServerManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "version": "2023-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrbackupOperations/{backupName}": {
+      "get": {
+        "tags": [
+          "LongTermRetention"
+        ],
+        "operationId": "Get_Ltrbackupstatus",
+        "x-ms-examples": {
+          "Sample": {
+            "$ref": "./examples/LongTermRetentionOperationGet.json"
+          }
+        },
+        "description": "Gets the result of the give LTR backup for the server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
+          }
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LtrServerBackup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LtrServerBackupProperties": {
+      "type": "object",
+      "properties": {
+        "backupName": {
+          "format": "int64",
+          "description": "Name of the backup",
+          "type": "string"
+        },
+        "datasourceSizeInBytes": {
+          "format": "int64",
+          "description": "Size of datasource in bytes",
+          "type": "integer"
+        },
+        "dataTransferredInBytes": {
+          "format": "int64",
+          "description": "Data transferred in bytes",
+          "type": "integer"
+        },
+        "backupMetadata": {
+          "description": "Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time of the operation.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time of the operation.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "description": "Service-set extensible enum indicating operation?s kind",
+          "enum": [
+            "Running",
+            "Cancelled",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExecutionStatus",
+            "modelAsString": true
+          }
+        },
+        "percentComplete": {
+          "description": "PercentageCompleted",
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "description": "The properties of a server backup."
+    },
+    "LtrServerBackup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LtrServerBackupProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a server backup."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Server backup properties"
+    }
+  },
+  "parameters": {
+    "BackupNameParameter": {
+        "name": "backupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the backup.",
+        "x-ms-parameter-location": "method",
+        "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+      }
+  }
+}
