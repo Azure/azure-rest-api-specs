@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2021-10-01",
+    "version": "2021-12-01-preview",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -288,6 +288,147 @@
         "x-ms-examples": {
           "QuotaLimits": {
             "$ref": "examples/QuotaLimits_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfo": {
+      "get": {
+        "summary": "Describes region specific information.",
+        "description": "Provides storage to network proximity and logical zone mapping information.",
+        "tags": [
+          "NetApp Resource"
+        ],
+        "operationId": "NetAppResource_QueryRegionInfo",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/regionInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "RegionInfo_Query": {
+            "$ref": "examples/RegionInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/queryNetworkSiblingSet": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Describe a network sibling set",
+        "description": "Get details of the specified network sibling set.",
+        "operationId": "NetAppResource_QueryNetworkSiblingSet",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Network sibling set to query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryNetworkSiblingSetRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/networkSiblingSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSiblingSet_Query": {
+            "$ref": "examples/NetworkSiblingSet_Query.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/updateNetworkSiblingSet": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Update the network features of a network sibling set",
+        "description": "Update the network features of the specified network sibling set.",
+        "operationId": "NetAppResource_UpdateNetworkSiblingSet",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update for the specified network sibling set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateNetworkSiblingSetRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/networkSiblingSet"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/cloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkFeatures_Update": {
+            "$ref": "examples/NetworkSiblingSet_Update.json"
           }
         }
       }
@@ -3993,7 +4134,7 @@
         },
         "username": {
           "type": "string",
-          "description": "A domain user account with permission to create machine accounts"
+          "description": "Username of Active Directory domain administrator"
         },
         "password": {
           "type": "string",
@@ -4206,6 +4347,7 @@
     "capacityPool": {
       "description": "Capacity pool resource",
       "type": "object",
+      "x-ms-azure-resource": true,
       "required": [
         "location",
         "properties"
@@ -4430,6 +4572,7 @@
     "volume": {
       "description": "Volume resource",
       "type": "object",
+      "x-ms-azure-resource": true,
       "required": [
         "location",
         "properties"
@@ -4586,29 +4729,7 @@
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
         },
         "networkFeatures": {
-          "title": "Network features",
-          "description": "Basic network, or Standard features available to the volume.",
-          "type": "string",
-          "enum": [
-            "Basic",
-            "Standard"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkFeatures",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Basic",
-                "description": "Basic network feature."
-              },
-              {
-                "value": "Standard",
-                "description": "Standard network feature."
-              }
-            ]
-          },
-          "example": "Standard",
-          "default": "Basic"
+          "$ref": "#/definitions/networkFeatures"
         },
         "networkSiblingSetId": {
           "title": "Network Sibling Set ID",
@@ -5428,6 +5549,7 @@
     "snapshotPolicy": {
       "description": "Snapshot policy information",
       "type": "object",
+      "x-ms-azure-resource": true,
       "required": [
         "location",
         "properties"
@@ -5910,6 +6032,7 @@
     "backupPolicy": {
       "description": "Backup policy information",
       "type": "object",
+      "x-ms-azure-resource": true,
       "required": [
         "location",
         "properties"
@@ -6748,6 +6871,241 @@
           "example": "Available"
         }
       }
+    },
+    "regionInfo": {
+      "description": "Provides region specific information.",
+      "type": "object",
+      "properties": {
+        "storageToNetworkProximity": {
+          "title": "Storage to Network Proximity",
+          "description": "Provides storage to network proximity information in the region.",
+          "type": "string",
+          "enum": [
+            "Default",
+            "T1",
+            "T2",
+            "T1AndT2"
+          ],
+          "x-ms-enum": {
+            "name": "RegionStorageToNetworkProximity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Basic network connectivity."
+              },
+              {
+                "value": "T1",
+                "description": "Standard T1 network connectivity."
+              },
+              {
+                "value": "T2",
+                "description": "Standard T2 network connectivity."
+              },
+              {
+                "value": "T1AndT2",
+                "description": "Standard T1 and T2 network connectivity."
+              }
+            ]
+          },
+          "example": "T2"
+        },
+        "availabilityZoneMappings": {
+          "title": "Logical availability zone mappings.",
+          "description": "Provides logical availability zone mappings for the subscription for a region.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "availabilityZone": {
+                "description": "Logical availability zone.",
+                "type": "string",
+                "example": "1"
+              },
+              "isAvailable": {
+                "description": "Available availability zone",
+                "type": "boolean",
+                "example": true
+              }
+            }
+          },
+          "x-ms-identifiers": [
+            "availabilityZone"
+          ]
+        }
+      }
+    },
+    "networkSiblingSet": {
+      "title": "Network sibling set",
+      "description": "Describes the contents of a network sibling set.",
+      "type": "object",
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        },
+        "networkSiblingSetStateId": {
+          "$ref": "#/definitions/networkSiblingSetStateId"
+        },
+        "networkFeatures": {
+          "$ref": "#/definitions/networkFeatures"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/networkSiblingSetProvisioningState"
+        },
+        "nicInfoList": {
+          "type": "array",
+          "description": "List of NIC information",
+          "items": {
+            "$ref": "#/definitions/nicInfo"
+          },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ]
+        }
+      }
+    },
+    "QueryNetworkSiblingSetRequest": {
+      "title": "QueryNetworkSiblingSetRequest",
+      "description": "Network sibling set query.",
+      "type": "object",
+      "required": [
+        "networkSiblingSetId",
+        "subnetId"
+      ],
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        }
+      }
+    },
+    "UpdateNetworkSiblingSetRequest": {
+      "title": "UpdateNetworkSiblingSetRequest",
+      "description": "Network sibling set update.",
+      "type": "object",
+      "required": [
+        "networkSiblingSetId",
+        "subnetId",
+        "networkSiblingSetStateId",
+        "networkFeatures"
+      ],
+      "properties": {
+        "networkSiblingSetId": {
+          "$ref": "#/definitions/networkSiblingSetId"
+        },
+        "subnetId": {
+          "$ref": "#/definitions/subnetId"
+        },
+        "networkSiblingSetStateId": {
+          "$ref": "#/definitions/networkSiblingSetStateId"
+        },
+        "networkFeatures": {
+          "$ref": "#/definitions/networkFeatures",
+          "description": "Network features available to the volume, some such"
+        }
+      }
+    },
+    "networkFeatures": {
+      "title": "Network features",
+      "description": "Network features available to the volume, or current state of update.",
+      "type": "string",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Basic_Standard",
+        "Standard_Basic"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFeatures",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Basic",
+            "description": "Basic network features."
+          },
+          {
+            "value": "Standard",
+            "description": "Standard network features."
+          },
+          {
+            "value": "Basic_Standard",
+            "description": "Updating from Basic to Standard network features."
+          },
+          {
+            "value": "Standard_Basic",
+            "description": "Updating from Standard to Basic network features."
+          }
+        ]
+      },
+      "example": "Standard",
+      "default": "Basic"
+    },
+    "networkSiblingSetProvisioningState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "Gets the status of the NetworkSiblingSet at the time the operation was called.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false
+      }
+    },
+    "networkSiblingSetId": {
+      "title": "Network Sibling Set ID",
+      "description": "Network Sibling Set ID for a group of volumes sharing networking resources in a subnet.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "maxLength": 36,
+      "minLength": 36,
+      "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+    },
+    "networkSiblingSetStateId": {
+      "title": "Network sibling set state Id",
+      "description": "Network sibling set state Id identifying the current state of the sibling set.",
+      "type": "string",
+      "example": "12345_44420.8001578125"
+    },
+    "nicInfo": {
+      "title": "NIC information",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "$ref": "#/definitions/ipAddress"
+        },
+        "volumeResourceIds": {
+          "$ref": "#/definitions/volumeResourceIds"
+        }
+      }
+    },
+    "ipAddress": {
+      "title": "ipAddress",
+      "type": "string",
+      "readOnly": true,
+      "example": "1.2.3.4"
+    },
+    "volumeResourceIds": {
+      "title": "Volume resource Ids",
+      "type": "array",
+      "items": {
+        "title": "Resource Id of volume",
+        "type": "string"
+      }
+    },
+    "subnetId": {
+      "title": "Subnet resource Id",
+      "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes. Example /subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Network/virtualNetworks/testVnet/subnets/{mySubnet}",
+      "type": "string"
     }
   },
   "parameters": {
