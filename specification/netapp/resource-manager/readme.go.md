@@ -25,6 +25,7 @@ batch:
   - tag: package-netapp-2022-05-01
   - tag: package-netapp-2022-03-01
   - tag: package-netapp-2022-01-01
+  - tag: package-netapp-2021-12-01-preview
   - tag: package-netapp-2021-10-01
   - tag: package-netapp-2021-08-01
   - tag: package-netapp-2021-06-01
@@ -83,6 +84,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-netapp-2022-01-01' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-01-01/$(namespace)
+```
+
+### Tag: package-netapp-2021-12-01-preview and go
+
+These settings apply only when `--tag=package-netapp-2021-12-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-netapp-2021-12-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-12-01-preview/$(namespace)
 ```
 
 ### Tag: package-netapp-2021-10-01 and go
