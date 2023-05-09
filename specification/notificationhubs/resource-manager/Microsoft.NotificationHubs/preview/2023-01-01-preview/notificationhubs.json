@@ -1444,11 +1444,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "Private Endpoint Connection name.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v4/privateLinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1497,11 +1493,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "Name of the Private Endpoint Connection to remove.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v4/privateLinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1543,11 +1535,7 @@
             "$ref": "#/parameters/NamespaceName"
           },
           {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "Private Endpoint Connection name.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v4/privateLinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2759,34 +2747,6 @@
         }
       }
     },
-    "PrivateEndpointConnectionProxy": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "readOnly": true
-        },
-        "remotePrivateEndpoint": {
-          "$ref": "#/definitions/RemotePrivateEndpoint"
-        }
-      }
-    },
     "PrivateEndpointConnectionResource": {
       "type": "object",
       "properties": {
@@ -2951,48 +2911,6 @@
         },
         "outcome": {
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "RemotePrivateEndpoint": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "immutableSubscriptionId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "immutableResourceId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "readOnly": true
-        },
-        "manualPrivateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceConnection"
-          },
-          "readOnly": true
-        },
-        "privateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceConnection"
-          },
-          "readOnly": true
-        },
-        "connectionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectionDetails"
-          },
           "readOnly": true
         }
       }
