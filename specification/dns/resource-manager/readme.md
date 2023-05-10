@@ -88,11 +88,9 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
   - code: UnSupportedPatchProperties
     reason: Breaking change to remove name or type properties.
-  - where: $.paths
-    code: OperationsAPIImplementation
+  - code: OperationsAPIImplementation
     reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
-  - where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs/default"].get.responses["200"].schema
-    code: GetCollectionOnlyHasValueAndNextLink
+  - code: GetCollectionOnlyHasValueAndNextLink
     reason: This is just a Get operation and not a List operation.
 ```
 
