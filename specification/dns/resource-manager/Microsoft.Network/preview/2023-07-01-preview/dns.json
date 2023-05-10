@@ -33,7 +33,7 @@
           "DnssecConfigs"
         ],
         "operationId": "DnssecConfigs_CreateOrUpdate",
-        "description": "Creates or updates DNSSEC config on a DNS zone.",
+        "description": "Creates or updates the DNSSEC configuration on a DNS zone.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -47,7 +47,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNSSEC config. Omit this value to always overwrite the current DNSSEC config. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
+            "description": "The etag of the DNSSEC configuration. Omit this value to always overwrite the DNSSEC configuration. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -55,7 +55,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfNoneMatch",
-            "description": "Set to '*' to allow new DNSSEC config to be created, but to prevent updating existing DNSSEC config. Other values will be ignored."
+            "description": "Set to '*' to allow this DNSSEC configuration to be created, but to prevent updating existing DNSSEC configuration. Other values will be ignored."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -66,13 +66,13 @@
         ],
         "responses": {
           "201": {
-            "description": "The DNSSEC config has been created.",
+            "description": "The DNSSEC configuration has been provisioned.",
             "schema": {
               "$ref": "#/definitions/DnssecConfig"
             }
           },
           "200": {
-            "description": "The DNSSEC config has been updated.",
+            "description": "The DNSSEC configuration has been updated.",
             "schema": {
               "$ref": "#/definitions/DnssecConfig"
             }
@@ -96,7 +96,7 @@
           "DnssecConfigs"
         ],
         "operationId": "DnssecConfigs_Delete",
-        "description": "Deletes DNSSEC config on a DNS zone. This operation cannot be undone.",
+        "description": "Deletes the DNSSEC configuration on a DNS zone. This operation cannot be undone.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -110,7 +110,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNSSEC config. Omit this value to always delete the DNSSEC config. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
+            "description": "The etag of this DNSSEC configuration. Omit this value to always delete the DNSSEC configuration. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -121,7 +121,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The DNSSEC config was not found."
+            "description": "The DNSSEC configuration was not found."
           },
           "202": {
             "headers": {
@@ -130,10 +130,10 @@
                 "type": "string"
               }
             },
-            "description": "The DNSSEC config delete operation has been accepted and will complete asynchronously."
+            "description": "The DNSSEC configuration delete operation has been accepted and will complete asynchronously."
           },
           "200": {
-            "description": "The DNSSEC config has been deleted."
+            "description": "The DNSSEC configuration has been deleted."
           },
           "default": {
             "description": "Default response. It will be deserialized as per the Error definition.",
@@ -154,7 +154,7 @@
           "DnssecConfigs"
         ],
         "operationId": "DnssecConfigs_Get",
-        "description": "Gets DNSSEC Config.",
+        "description": "Gets the DNSSEC configuration.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -196,7 +196,7 @@
           "DnssecConfigs"
         ],
         "operationId": "DnssecConfigs_ListByDnsZone",
-        "description": "Lists the DNSSEC configs in a DNS zone.",
+        "description": "Lists the DNSSEC configurations in a DNS zone.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
@@ -1735,7 +1735,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning State of the DNSSEC config.",
+          "description": "Provisioning State of the DNSSEC configuration.",
           "readOnly": true
         },
         "signingKeys": {
@@ -1761,22 +1761,22 @@
         },
         "id": {
           "type": "string",
-          "description": "The ID of the DNSSEC config.",
+          "description": "The ID of the DNSSEC configuration.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the DNSSEC config.",
+          "description": "The name of the DNSSEC configuration.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "The type of the DNSSEC config.",
+          "description": "The type of the DNSSEC configuration.",
           "readOnly": true
         },
         "etag": {
           "type": "string",
-          "description": "The etag of the DNSSEC config."
+          "description": "The etag of the DNSSEC configuration."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
@@ -1795,7 +1795,7 @@
           "items": {
             "$ref": "#/definitions/DnssecConfig"
           },
-          "description": "Information about the DNSSEC configs in the response."
+          "description": "Information about the DNSSEC configurations in the response."
         },
         "nextLink": {
           "type": "string",
@@ -1803,7 +1803,7 @@
           "readOnly": true
         }
       },
-      "description": "The response to a DNSSEC config List operation."
+      "description": "The response to a List DNSSEC configurations operation."
     },
     "ZoneProperties": {
       "type": "object",
