@@ -13,9 +13,16 @@ using TypeSpec.Http;
 namespace TextTranslation;
 
 @doc("Defines Text Translation custom Operation")
-op CustomOperation<TBody, TParams, TResponse, Traits = {}, TError = ErrorResponse>(
+op CustomOperation<
+  TBody,
+  TParams,
+  TResponse,
+  Traits = {},
+  TError = ErrorResponse
+>(
   ...TParams,
 
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing spec should not be updated"
   @doc("Defines the content of the request")
   @body
   requestBody: TBody,
@@ -34,6 +41,7 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
   apiVersion: string
 ): TResponse | TError;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @get
 @route("languages")
@@ -45,7 +53,7 @@ op GetLanguages is CustomGetOperation<
   {},
   ErrorResponse
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("translate")
@@ -58,7 +66,7 @@ op Translate is CustomOperation<
   {},
   ErrorResponse
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("transliterate")
@@ -71,7 +79,7 @@ op Transliterate is CustomOperation<
   {},
   ErrorResponse
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("breaksentence")
@@ -84,7 +92,7 @@ op FindSentenceBoundaries is CustomOperation<
   {},
   ErrorResponse
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("dictionary/lookup")
@@ -97,7 +105,7 @@ op LookupDictionaryEntries is CustomOperation<
   {},
   ErrorResponse
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("dictionary/examples")
