@@ -36,11 +36,11 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrbackup": {
       "post": {
-        "description": "Start the Backup operation",
+        "description": "Start the Long Term Retention Backup operation",
         "tags": [
           "LongTermRetention"
         ],
-        "operationId": "LtrBackup_Execute",
+        "operationId": "LtrBackup_StartOperation",
         "produces": [
           "application/json"
         ],
@@ -227,16 +227,18 @@
         "backupSettings": {
           "$ref": "#/definitions/BackupSettings",
           "description": "Backup Settings"
-        },
-        "targetDetails": {
-          "$ref": "#/definitions/BackupStoreDetails",
-          "description": "Backup Settings"
         }
       }
     },
     "LtrBackupRequest": {
       "description": "The request that is made for a backup.",
       "type": "object",
+      "properties": {
+        "targetDetails": {
+          "$ref": "#/definitions/BackupStoreDetails",
+          "description": "Backup store detail for target server"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/BackupRequestBase"
@@ -333,16 +335,8 @@
         "startTime"
       ],
       "properties": {
-        "id": {
-          "description": "full rp id",
-          "type": "string"
-        },
-        "name": {
-          "description": "the name of the backup",
-          "type": "string"
-        },
         "status": {
-          "description": "Service-set extensible enum indicating operation?s kind",
+          "description": "Service-set extensible enum indicating the status of operation",
           "enum": [
             "Running",
             "Cancelled",
@@ -376,17 +370,24 @@
         },
         "percentComplete": {
           "description": "PercentageCompleted",
-          "format": "double",
-          "type": "number",
+          "format": "int32",
+          "type": "integer",
           "minimum": 0,
           "maximum": 100
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "LtrPreBackupResponse": {
       "description": "Response for the LTR pre-backup API call",
       "type": "object",
-      "required" : ["properties"],
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "description": "Additional Properties for the pre backup response",

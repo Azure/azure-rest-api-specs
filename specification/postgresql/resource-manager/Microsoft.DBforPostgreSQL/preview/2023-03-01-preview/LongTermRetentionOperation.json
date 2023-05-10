@@ -39,7 +39,7 @@
         "tags": [
           "LongTermRetention"
         ],
-        "operationId": "Get_Ltrbackupstatus",
+        "operationId": "LtrbackupOperation_Get",
         "x-ms-examples": {
           "Sample": {
             "$ref": "./examples/LongTermRetentionOperationGet.json"
@@ -62,13 +62,12 @@
           {
             "$ref": "#/parameters/BackupNameParameter"
           }
-          
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LtrServerBackup"
+              "$ref": "#/definitions/LtrServerBackupOperation"
             }
           },
           "default": {
@@ -82,7 +81,7 @@
     }
   },
   "definitions": {
-    "LtrServerBackupProperties": {
+    "LtrServerBackupOperationProperties": {
       "type": "object",
       "properties": {
         "backupName": {
@@ -130,19 +129,19 @@
         },
         "percentComplete": {
           "description": "PercentageCompleted",
-          "format": "double",
-          "type": "number"
+          "format": "int32",
+          "type": "integer"
         }
       },
       "description": "The properties of a server backup."
     },
-    "LtrServerBackup": {
+    "LtrServerBackupOperation": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/LtrServerBackupProperties",
+          "$ref": "#/definitions/LtrServerBackupOperationProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a server backup."
+          "description": "The properties of a server ltr backup operation."
         }
       },
       "allOf": [
@@ -150,18 +149,18 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Server backup properties"
+      "description": "Server ltr backup properties"
     }
   },
   "parameters": {
     "BackupNameParameter": {
-        "name": "backupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the backup.",
-        "x-ms-parameter-location": "method",
-        "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
-      }
+      "name": "backupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the backup.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+    }
   }
 }
