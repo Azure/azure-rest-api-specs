@@ -44,6 +44,7 @@
           "externalDocs": {
             "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
           },
+          "x-ms-long-running-operation": true,
           "x-ms-examples": {
             "EAPriceSheetForBillingPeriod": {
               "$ref": "./examples/EAPriceSheetForBillingPeriod.json"
@@ -62,7 +63,14 @@
           ],
           "responses": {
             "202": {
-              "$ref": "#/definitions/DownloadAcceptedProperties"
+              "description": "Accepted",
+              "headers": {
+                "Location": {
+                  "type": "string"
+                },
+                "Retry-After": {
+                  "type": "integer"
+                }
               }
             },
             "default": {
@@ -113,19 +121,10 @@
           }
         }
     },
-    "definitions": {    
-      "DownloadAcceptedProperties": {
-        "description": "The properties of the price sheet download call once it is accepted.",
-        "properties": {
-          "downloadUrl": {
-            "description": "The link to OperationStatus URI that in turn will provide the URL to download the Pricesheet.",
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
+    "definitions": {  
       "DownloadProperties": {
         "description": "The properties of the price sheet download.",
+        "type":"object",
         "properties": {
           "downloadUrl": {
             "description": "The link (url) to download the pricesheet.",
@@ -151,6 +150,7 @@
       },
       "ErrorDetails": {
         "description": "The details of the error.",
+        "type":"object",
         "properties": {
           "code": {
             "description": "Error code.",
@@ -179,6 +179,7 @@
         "in": "query",
         "required": true,
         "type": "string",
+        "x-ms-parameter-location": "method",
         "description": "Version of the API to be used with the client request. The current version is 2023-03-01."
       },
       "billingPeriodNameParameter": {
@@ -187,6 +188,7 @@
         "description": "Billing Period Name.",
         "required": true,
         "type": "string",
+        "pattern": "^[a-z][a-z0-9]*$",
         "x-ms-parameter-location": "method"
       },
       "operationStatusIdParameter":{
@@ -198,3 +200,4 @@
       }
     }
   }
+}
