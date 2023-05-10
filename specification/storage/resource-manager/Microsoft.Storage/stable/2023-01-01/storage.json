@@ -251,6 +251,12 @@
           },
           "StorageAccountGetPropertiesCMKVersionExpirationTime": {
             "$ref": "./examples/StorageAccountGetPropertiesCMKVersionExpirationTime.json"
+          },
+          "StorageAccountGetPropertiesGeoReplicationStatscanFailoverTrue": {
+            "$ref": "./examples/StorageAccountGetPropertiesGeoReplicationStatscanFailoverTrue.json"
+          },
+          "StorageAccountGetPropertiesGeoReplicationStatscanFailoverFalse": {
+            "$ref": "./examples/StorageAccountGetPropertiesGeoReplicationStatscanFailoverFalse.json"
           }
         },
         "parameters": [
@@ -3683,6 +3689,39 @@
           "readOnly": true,
           "type": "boolean",
           "description": "A boolean flag which indicates whether or not account failover is supported for the account."
+        },
+        "canPlannedFailover": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether or not planned account failover is supported for the account."
+        },
+        "postFailoverRedundancy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The redundancy type of the account after an account failover is performed.",
+          "enum": [
+            "Standard_LRS",
+            "Standard_ZRS"
+          ],
+          "x-ms-enum": {
+            "name": "postFailoverRedundancy",
+            "modelAsString": true
+          }
+        },
+        "postPlannedFailoverRedundancy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The redundancy type of the account after a planned account failover is performed.",
+          "enum": [
+            "Standard_GRS",
+            "Standard_GZRS",
+            "Standard_RAGRS",
+            "Standard_RAGZRS"
+          ],
+          "x-ms-enum": {
+            "name": "postPlannedFailoverRedundancy",
+            "modelAsString": true
+          }
         }
       },
       "description": "Statistics related to replication for storage account's Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account."
