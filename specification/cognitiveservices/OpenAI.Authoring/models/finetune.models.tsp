@@ -19,10 +19,12 @@ model FineTune {
   @visibility("read")
   status?: State;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
   created_at?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
   updated_at?: int32;
@@ -33,8 +35,9 @@ model FineTune {
   id: string;
 
   @doc("The identifier of the base model used for the fine-tune.")
-  "model": string;
+  `model`: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("""
 The identifier of the resulting fine tuned model. This property is only
 populated for successfully completed fine-tune runs.
@@ -44,12 +47,15 @@ create a deployment for inferencing.
   @visibility("read")
   fine_tuned_model?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("The files that are used for training the fine tuned model.")
   training_files: File[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("The files that are used to evaluate the fine tuned model during training.")
   validation_files?: File[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("""
 The result files containing training and evaluation metrics in csv format.
 The
@@ -65,6 +71,7 @@ running and completed.
   @visibility("read")
   events?: Event[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("""
 The organisation id of this fine tune job. Unused on Azure OpenAI;
 compatibility for OpenAI only.
@@ -72,6 +79,7 @@ compatibility for OpenAI only.
   @visibility("read")
   organisation_id?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("""
 The user id of this fine tune job. Unused on Azure OpenAI; compatibility for
 OpenAI only.
@@ -89,6 +97,7 @@ model Event {
   @visibility("read")
   object?: TypeDiscriminator;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("A timestamp when this event was created (in unix epochs).")
   @visibility("read")
   created_at?: int32;
@@ -104,7 +113,7 @@ enqueued, started, failed or completed, or other events like uploaded results.
   @visibility("read")
   message?: string;
 }
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
 @doc("The hyper parameter settings used in a fine tune job.")
 model HyperParameters {
   @doc("""
@@ -192,11 +201,13 @@ puts more weight on precision and less on recall.
 @doc("Defines the values of a fine tune job.")
 model FineTuneCreation {
   @doc("The identifier of the base model used for this fine-tune.")
-  "model": string;
+  `model`: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("The file that is used for training this fine tuned model.")
   training_file: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("The file that is used to evaluate the fine tuned model during training.")
   validation_file?: string;
 
