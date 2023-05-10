@@ -150,6 +150,7 @@ interface MiscellaneousOperations {
 
 @added(APIVersion.v2023_02_28_preview)
 interface DocumentClassifiersOperations {
+  @added(APIVersion.v2023_02_28_preview)
   @summary("Build document classifier")
   @doc("Builds a custom document classifier.")
   @route("/documentClassifiers:build")
@@ -163,18 +164,22 @@ interface DocumentClassifiersOperations {
     DocumentClassifierDetails
   >;
 
+  @added(APIVersion.v2023_02_28_preview)
   @summary("List document classifiers")
   @doc("List all document classifiers.")
   ListClassifiers is Azure.Core.ResourceList<DocumentClassifierDetails>;
 
+  @added(APIVersion.v2023_02_28_preview)
   @summary("Get document classifier")
   @doc("Gets detailed document classifier information.")
   GetClassifier is Azure.Core.ResourceRead<DocumentClassifierDetails>;
 
+  @added(APIVersion.v2023_02_28_preview)
   @summary("Delete document classifier")
   @doc("Deletes document classifier.")
   DeleteClassifier is Azure.Core.ResourceDelete<DocumentClassifierDetails>;
 
+  @added(APIVersion.v2023_02_28_preview)
   @summary("Classify document")
   @doc("Classifies document with document classifier.")
   @route("/documentClassifiers/{classifierId}:analyze")
@@ -196,6 +201,7 @@ interface DocumentClassifiersOperations {
     AnalyzeResultOperation
   >;
 
+  @added(APIVersion.v2023_02_28_preview)
   @summary("Get document classifier result")
   @doc("Gets the result of document classifier.")
   @route("/documentClassifiers/{classifierId}/analyzeResults/{resultId}")

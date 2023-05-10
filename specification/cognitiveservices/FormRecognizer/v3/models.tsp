@@ -854,7 +854,7 @@ modelId.
 @resource("documentModels:authorizeCopy")
 model CopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @visibility("read")
   @key
   targetResourceId: string;
 
@@ -884,7 +884,7 @@ model GetOperationsResponse is Azure.Core.Page<OperationSummary>;
 @resource("operations")
 model OperationSummary {
   @doc("Operation ID")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @visibility("read")
   @key
   operationId: string;
 
@@ -914,11 +914,11 @@ model OperationSummary {
 }
 
 @doc("Get Operation response object.")
-// @discriminator("kind") FIXME
+// @discriminator("kind") TODO check if this model is complete
 @resource("operations/{operationId}")
 model OperationDetails {
   @doc("Operation ID")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @visibility("read")
   @key
   operationId: string;
 
@@ -954,7 +954,7 @@ model GetDocumentModelsResponse is Azure.Core.Page<DocumentModelSummary>;
 @resource("documentModels")
 model DocumentModelSummary {
   @doc("Unique document model name.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @visibility("read")
   @key
   modelId: string;
 
@@ -979,7 +979,7 @@ model DocumentModelSummary {
 @resource("documentModels/{modelId}")
 model DocumentModelDetails {
   @doc("Unique document model name.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @visibility("read")
   @key
   modelId: string;
 
@@ -1059,17 +1059,17 @@ model ClassifierDocumentTypeDetails {
   azureBlobFileListSource?: AzureBlobFileListSource;
 }
 
-@added(APIVersion.v2023_02_28_preview)
-@doc("List document classifiers response object.")
-model GetDocumentClassifiersResponse
-  is Azure.Core.Page<DocumentClassifierDetails>;
+// @added(APIVersion.v2023_02_28_preview)
+// @doc("List document classifiers response object.")
+// model GetDocumentClassifiersResponse
+//   is Azure.Core.Page<DocumentClassifierDetails>;
 
 @added(APIVersion.v2023_02_28_preview)
 @doc("Document classifier info.")
 @resource("documentClassifiers")
 model DocumentClassifierDetails {
   @doc("Unique document classifier name.")
-  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @visibility("read")
   @key
   classifierId: string;
 
