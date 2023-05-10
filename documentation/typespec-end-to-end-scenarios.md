@@ -69,18 +69,9 @@ User((::))-->A
 A["clone Rest-API and SDK repo locally"] --> B
 B["2.1 pre-requsite dependencies installation
 (each language would have a installation script)"] --> F
-F["2.2 TypeSpec-Project-Prcoess.ps1
-(a.fetch `tspconfig.yaml` from remote if it doesn’t exist locally
-b.parse `tspconfig.yaml`
-c.create sdk project folder if not existing
-d.create/update `tsp-location.yaml`)
-"] --> C
-C["2.3 TypeSpec-Project-Sync.ps1
-(a.fetch specs from remote spec repo or use local spec repo
-b.copy specs to temp location under sdk project folder)"] --> D
-D["2.4 TypeSpec-Project-Generate.ps1
-(a.create scaffolding for new project
-b.generate sdk code)"]
+F["2.2 TypeSpec-Project-Prcoess.ps1"] --> C
+C["2.3 TypeSpec-Project-Sync.ps1"] --> D
+D["2.4 TypeSpec-Project-Generate.ps1"]
 D-->E["code build"]
 class A,E grey
 class C,D,F highlight
@@ -88,7 +79,7 @@ class C,D,F highlight
 - 2.2 `TypeSpec-Project-Process.ps1`
    - input: 
      - typespecProjectDirectory (required)
-       either folder of `tspconfig.yaml` or remoteUrl of `tspconfig.yaml`
+       either a folder of `tspconfig.yaml` or a remoteUrl of `tspconfig.yaml`
      - commitSha (optional)
      - repoUrl (optional)
    - output: n/a
@@ -120,14 +111,21 @@ class C,D,F highlight
 | 2.6 | update to dotnet build target | Michael, Crystal | [] | []
 
 ##### Details & Open questions
-- 2.1 Optional: Scripts should exists under `\eng\scripts\` folder on all repos.
+- 2.1 Optional: Scripts should exist under `\eng\scripts\` folder on all repos.
 - 2.2 What does this script do?
   -	fetch `tspconfig.yaml` from remote if it doesn’t exist locally
   -	parse `tspconfig.yaml`
+  - create an sdk project folder if none exists
   -	create/update `tsp-location.yaml`
   -	call `TypeSpec-Project-Sync.ps1`
   -	call `TypeSpec-Project-Generate.ps1`
-- 2.3 Extends the script to support local spec repo if existed
+- 2.3 What does this script do?
+  - fetch specs from remote spec repo or use a local spec repo
+  - copy specs to temp location under the sdk project folder
+  - support a local spec repo if one exists (TODO)
+- 2.4 What does this script do?
+  - create scaffolding for new project (use the folder created by 2.2)
+  - generate sdk code
 - 2.4.1 There are other custom steps such as creating `test` folder, `sln` files that would vary between language repos. Eventually, this project scaffolding would be integrated into language emitter.
 
 #### 3. Inner Dev loop SDK generation local scenario
@@ -204,10 +202,8 @@ C["run `initScript`
 (2.1)"]-->G
 subgraph D["run `generateScript`"]
   G
-  H
 end
-G["2.2"]-->H
-H["2.3"]-->I
+G["2.2"]-->I
 I["package sdk code"]-->J
 J["optional:build code and run test"]-->K
 K["upload artifacts"]-->L
@@ -249,11 +245,7 @@ subgraph B["run `generateScript`"]
   F
   G
 end
-C["call 2.2
-(a.use existing tsp-location.yaml
-b.fetch specs from remote spec repo
-c.copy typespec specs to temp folder
-d.generate sdk code)"]-->E
+C["call 2.2"]-->E
 E["package sdk code"]-->F
 F["build code"]-->G
 G["run test"]
