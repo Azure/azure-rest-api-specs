@@ -243,7 +243,7 @@ namespace Azure.Messaging.EventGrid {
   }, AcknowledgeResult>;
 
   // Release Operation:
-  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}&eventDeliveryDelayInSeconds={eventDeliveryDelayInSeconds}
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
   
   @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release")
