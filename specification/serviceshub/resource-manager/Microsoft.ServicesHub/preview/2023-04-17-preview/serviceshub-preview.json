@@ -570,7 +570,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1102,6 +1108,10 @@
           "type": "string",
           "description": "Log Analytics Location."
         },
+        "token": {
+          "type": "string",
+          "description": "Log Analytics Workspace AAD token for Orchestration Azure function"
+        },
         "machineType": {
           "type": "integer",
           "format": "int32",
@@ -1223,6 +1233,10 @@
         "machineName": {
           "type": "string",
           "description": "Azure Connected Machine Name."
+        },
+        "token": {
+          "type": "string",
+          "description": "Log Analytics Workspace AAD token for Orchestration Azure function"
         }
       }
     },
