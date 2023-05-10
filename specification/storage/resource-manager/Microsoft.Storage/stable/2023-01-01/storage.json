@@ -893,6 +893,105 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/default": {
+      "post": {
+        "tags": [
+          "AccountMigrations"
+        ],
+        "operationId": "AccountMigrations_Post",
+        "description": "Account Migration request can be triggered for a storage account to change its redundancy level. The migration updates the non-zonal redundant storage account to a zonal redundant account or vice-versa in order to have better reliability and availability. Zone-redundant storage (ZRS) replicates your storage account synchronously across three Azure availability zones in the primary region.",
+        "x-ms-examples": {
+          "StorageAccountPostMigration": {
+            "$ref": "./examples/StorageAccountPostMigration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "validate",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "To specify if it's a 'ValidateMigration' request or an actual migration request; to be used only for cross region migrations currently. It can be either 'true' or 'false'. It will validate the request and return OK or a failure HttpStatusCode based on the validation result."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountMigration"
+            },
+            "description": "The request parameters required to perform storage account migration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Returned when the request is just for validating the migration request, it does not actually initiate migration; applicable in cross region migration currently."
+          },
+          "202": {
+            "description": "Accepted -- Migration request accepted; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "AccountMigrations"
+        ],
+        "operationId": "AccountMigrations_Get",
+        "description": "Gets the status of the ongoing migration for the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountGetMigrationFailed": {
+            "$ref": "./examples/StorageAccountGetMigrationFailed.json"
+          },
+          "StorageAccountGetMigrationInProgress": {
+            "$ref": "./examples/StorageAccountGetMigrationInProgress.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the details of the ongoing or completed migration successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountMigration"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges": {
       "post": {
         "tags": [
@@ -4022,6 +4121,18 @@
             "modelAsString": true
           },
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
+        },
+        "isSkuConversionBlocked": {
+          "type": "boolean",
+          "x-ms-client-name": "IsSkuConversionBlocked",
+          "description": "This property will be set to true or false on an event of ongoing migration. Default value is null.",
+          "readOnly": true
+        },
+        "accountMigrationInProgress": {
+          "type": "boolean",
+          "x-ms-client-name": "AccountMigrationInProgress",
+          "description": "If customer initiated account migration is in progress, the value will be true else it will be null.",
+          "readOnly": true
         }
       },
       "description": "Properties of the storage account."
@@ -5641,6 +5752,59 @@
         }
       },
       "description": "An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional."
+    },
+    "StorageAccountMigration": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Migration Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "current value is 'default' for customer intiated migration"
+        },
+        "type": {
+          "type": "string",
+          "description": "SrpAccountMigrationType in ARM contract which is 'accountMigrations'"
+        },
+        "properties": {
+          "properties": {
+            "targetSkuName": {
+              "$ref": "./common.json#/definitions/SkuName"
+            },
+            "migrationStatus": {
+              "type": "string",
+              "description": "Current status of migration",
+              "enum": [
+                "Invalid",
+                "SubmittedForConversion",
+                "InProgress",
+                "Complete",
+                "Failed"
+              ],
+              "x-ms-enum": {
+                "name": "migrationStatus",
+                "modelAsString": true
+              },
+              "readOnly": true
+            },
+            "migrationFailedReason": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Error code for migration failure"
+            },
+            "migrationFailedDetailedReason": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Reason for migration failure"
+            }
+          },
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "StorageAccountMigrationDetails",
+          "description": "The properties of a storage account’s ongoing or enqueued migration."
+        }
+      },
+      "description": "The paramaters or status associated with an ongoing or enqueued storage account migration in order to update its current SKU or region."
     },
     "ErrorResponseBody": {
       "properties": {
