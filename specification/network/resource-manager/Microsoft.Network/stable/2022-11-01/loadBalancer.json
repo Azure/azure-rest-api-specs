@@ -2002,12 +2002,12 @@
         "numberOfProbes": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in Azure."
+          "description": "The number of consecutive successful or failed probes in order to allow or deny traffic from being delivered to this endpoint. After failing the number of consecutive probes equal to this value, the endpoint will be taken out of rotation and require the same number of successful consecutive probes to be placed back in rotation."
         },
         "probeThreshold": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of consecutive successful or failed probes in order to allow or deny traffic from being delivered to this endpoint. After failing the number of consecutive probes equal to this value, the endpoint will be taken out of rotation and require the same number of successful consecutive probes to be placed back in rotation."
+          "description": "The number of consecutive successful or failed probes in order to allow or deny traffic from being delivered to this endpoint. After failing the number of consecutive probes equal to this value, the endpoint will be taken out of rotation and require the same number of successful consecutive probes to be placed back in rotation. This property is non-functional for any values apart from 1. Leverage numberOfProbes if you need this capability."
         },
         "requestPath": {
           "type": "string",
