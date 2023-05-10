@@ -2911,6 +2911,10 @@
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
         },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
@@ -2936,6 +2940,10 @@
           "description": "Correlation ID for event to call correlation. Also called ChainId or skype chain ID.",
           "type": "string"
         },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
@@ -2957,10 +2965,6 @@
         },
         "tone": {
           "$ref": "#/definitions/Tone"
-        },
-        "participantId": {
-          "description": "The id of participant.",
-          "type": "string"
         }
       }
     },
