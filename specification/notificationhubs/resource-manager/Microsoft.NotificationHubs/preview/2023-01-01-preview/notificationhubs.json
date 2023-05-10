@@ -907,7 +907,7 @@
             "description": "Request content.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
+              "$ref": "#/definitions/NamespaceResource"
             }
           }
         ],
@@ -2429,48 +2429,6 @@
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
-        }
-      }
-    },
-    "NamespaceCreateOrUpdateParameters": {
-      "required": [
-        "location",
-        "properties",
-        "sku"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "minLength": 1,
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "properties": {
-          "$ref": "#/definitions/NamespaceProperties"
         }
       }
     },
