@@ -260,10 +260,6 @@ namespace Azure.Messaging.EventGrid {
     @path
     eventSubscriptionName: string;
 
-    @doc("Delivery delay for the event in seconds. When value is 0, the event is released immediately. It is an optional parameter and if not specified, the default value is 0.")
-    @query
-    eventDeliveryDelayInSeconds?: int32 = 0;
-
     @doc("ReleaseOptions")
     @body    
     lockTokens : ReleaseOptions;
