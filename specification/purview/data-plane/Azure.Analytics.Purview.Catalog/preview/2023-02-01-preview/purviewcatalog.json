@@ -1587,6 +1587,57 @@
         }
       }
     },
+    "/entity/import/operations": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get the import csv operations.",
+        "operationId": "Entity_GetImportCsvOperations",
+        "x-ms-examples": {
+          "Entity_GetImportCsvOperations": {
+            "$ref": "./examples/Entity_GetImportCSVOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "dayRange",
+            "in": "query",
+            "description": "Return the import operations within the day rande. The value will be 7 by default.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "The collection id for the import job. Without this parameter, the service will return the operations imported to all collections.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of import operations.",
+            "schema": {
+              "type": "array",
+              "description": "An array of import jobs.",
+              "items": {
+                "$ref": "#/definitions/EntityImportCSVOperation"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/entity/import/template": {
       "get": {
         "tags": [
