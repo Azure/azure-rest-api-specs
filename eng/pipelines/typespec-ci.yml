@@ -1,0 +1,13 @@
+jobs:
+- job: TypeSpec CI
+  pool:
+    name: azsdk-pool-mms-ubuntu-2204-perf
+    vmImage: ubuntu-22.04
+
+  steps:
+  - script: npm install
+    displayName: npm install
+  
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/contosowidgetmanager/Contoso.WidgetManager

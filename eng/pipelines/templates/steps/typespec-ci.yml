@@ -1,0 +1,8 @@
+parameters:
+- name: Folder
+  type: string
+
+steps:
+- script: tsp compile ${{parameters.Folder}}
+  displayName: ${{ split(parameters.Folder, '/')[length(split(parameters.Folder, '/')) - 1] }}
+  condition: succeededOrFailed()
