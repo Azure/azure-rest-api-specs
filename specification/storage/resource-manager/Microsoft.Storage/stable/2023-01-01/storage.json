@@ -5788,9 +5788,27 @@
         "includeDeleted": {
           "type": "boolean",
           "description": "For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'. For 'Blob' definition.objectType and HNS enabled storage accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for Hns disabled accounts the definition.schemaFields must include 'Deleted and RemainingRetentionDays', else it must be excluded."
+        },
+        "creationTime": {
+          "type": "object",
+          "$ref": "#/definitions/BlobInventoryCreationTime",
+          "description": "This property is used to filter objects based on the object creation time"
         }
       },
       "description": "An object that defines the blob inventory rule filter conditions. For 'Blob' definition.objectType all filter properties are applicable, 'blobTypes' is required and others are optional. For 'Container' definition.objectType only prefixMatch is applicable and is optional."
+    },
+    "BlobInventoryCreationTime": {
+      "type": "object",
+      "properties": {
+        "lastNDays": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 36500,
+          "format": "int32",
+          "description": "When set the policy filters the objects that are created in the last N days. Where N is an integer value between 1 to 36500."
+        }
+      },
+      "description": "This property defines the creation time based filtering condition. Blob Inventory schema parameter 'Creation-Time' is mandatory with this filter."
     },
     "StorageAccountMigration": {
       "properties": {
