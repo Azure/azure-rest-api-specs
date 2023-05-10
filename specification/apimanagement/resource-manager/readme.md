@@ -67,6 +67,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2023-03-01-preview/apimpolicies.json
   - Microsoft.ApiManagement/preview/2023-03-01-preview/apimpolicydescriptions.json
   - Microsoft.ApiManagement/preview/2023-03-01-preview/apimpolicyfragments.json
+  - Microsoft.ApiManagement/preview/2023-03-01-preview/apimpolicyrestriction.json
   - Microsoft.ApiManagement/preview/2023-03-01-preview/apimportalconfigs.json
   - Microsoft.ApiManagement/preview/2023-03-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2023-03-01-preview/apimportalsettings.json
