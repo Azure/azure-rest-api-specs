@@ -1361,16 +1361,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/createDebugCredentials": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/listDebugCredentials": {
       "post": {
         "tags": [
-          "GatewayCreateDebugCredentials"
+          "GatewayListDebugCredentials"
         ],
-        "operationId": "Gateway_CreateDebugCredentials",
+        "operationId": "Gateway_ListDebugCredentials",
         "description": "Create new debug credentials for gateway.",
         "x-ms-examples": {
-          "ApiManagementGatewayCreateDebugCredentials": {
-            "$ref": "./examples/ApiManagementGatewayCreateDebugCredentials.json"
+          "ApiManagementGatewayListDebugCredentials": {
+            "$ref": "./examples/ApiManagementGatewayListDebugCredentials.json"
           }
         },
         "parameters": [
@@ -1394,7 +1394,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/GatewayCreateDebugCredentialsContract"
+              "$ref": "./definitions.json#/definitions/GatewayListDebugCredentialsContract"
             }
           }
         ],
@@ -1414,16 +1414,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/showTrace": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/listTrace": {
       "post": {
         "tags": [
-          "GatewayShowTrace"
+          "GatewayListTrace"
         ],
-        "operationId": "Gateway_ShowTrace",
+        "operationId": "Gateway_ListTrace",
         "description": "Fetches trace collected by gateway.",
         "x-ms-examples": {
-          "ApiManagementGatewayShowTrace": {
-            "$ref": "./examples/ApiManagementGatewayShowTrace.json"
+          "ApiManagementGatewayListTrace": {
+            "$ref": "./examples/ApiManagementGatewayListTrace.json"
           }
         },
         "parameters": [
@@ -1447,7 +1447,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/GatewayShowTraceContract"
+              "$ref": "./definitions.json#/definitions/GatewayListTraceContract"
             }
           }
         ],
