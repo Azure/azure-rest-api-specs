@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-08'
 input-file:
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstances.json
   - Microsoft.Sql/preview/2022-08-01-preview/BackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2022-08-01-preview/BlobAuditing.json
   - Microsoft.Sql/preview/2022-08-01-preview/DataMaskingPolicies.json
