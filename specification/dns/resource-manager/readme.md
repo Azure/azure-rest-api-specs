@@ -38,11 +38,6 @@ input-file:
   - Microsoft.Network/preview/2023-07-01-preview/dns.json
 directive:
   - where:
-      - $.paths
-    suppress:
-      - OperationsAPIImplementation
-    reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
-  - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}"]
     suppress: PathForNestedResource
@@ -82,9 +77,6 @@ directive:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
   - suppress: ResourceNameRestriction
     reason: We already have naming validation at service end.
-  - where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs/default"].get.responses["200"].schema
-    suppress: GetCollectionOnlyHasValueAndNextLink
-    reason: This is just a Get operation and not a List operation.
   - suppress: ResourceMustReferenceCommonTypes
     reason: 'We have already defined Resource which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since Dns Zones service has already shipped public versions'
   - suppress: LroErrorContent
@@ -96,6 +88,12 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
   - code: UnSupportedPatchProperties
     reason: Breaking change to remove name or type properties.
+  - where: $.paths
+    code: OperationsAPIImplementation
+    reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
+  - where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/dnssecConfigs/default"].get.responses["200"].schema
+    code: GetCollectionOnlyHasValueAndNextLink
+    reason: This is just a Get operation and not a List operation.
 ```
 
 ### Tag: package-2018-05
