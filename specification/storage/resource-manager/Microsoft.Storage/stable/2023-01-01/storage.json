@@ -999,6 +999,9 @@
           "StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions": {
             "$ref": "./examples/StorageAccountSetManagementPolicy_LastAccessTimeBasedBlobActions.json"
           },
+          "StorageAccountSetManagementPolicy_AutoUptierWithLastAccessTimeBaseBlobActions": {
+            "$ref": "./examples/StorageAccountSetManagementPolicy_AutoUptierWithLastAccessTimeBaseBlobActions.json"
+          },
           "StorageAccountSetManagementPolicyWithSnapshotAndVersion": {
             "$ref": "./examples/StorageAccountSetManagementPolicyWithSnapshotAndVersion.json"
           },
@@ -1017,7 +1020,7 @@
           "StorageAccountSetManagementPolicyHotTierActions": {
             "$ref": "./examples/StorageAccountSetManagementPolicyHotTierActions.json"
           }
-        },
+          },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupName"
@@ -4800,9 +4803,21 @@
           "multipleOf": 1.0,
           "minimum": 0,
           "description": "Value indicating the age in days after blob creation."
+        },
+        "autoUptier": {
+          "$ref": "#/definitions/AutoUptier",
+          "description": "Automatically up tiers the blob to the account level access tier after the blob is read. This is a generalized implemntation of enableAutoTierToHotFromCool and is mutually exclusive with enableAutoTierToHotFromCool."
         }
       },
       "description": "Object to define the base blob action conditions. Properties daysAfterModificationGreaterThan, daysAfterLastAccessTimeGreaterThan and daysAfterCreationGreaterThan are mutually exclusive. The daysAfterLastTierChangeGreaterThan property is only applicable for tierToArchive actions which requires daysAfterModificationGreaterThan to be set, also it cannot be used in conjunction with daysAfterLastAccessTimeGreaterThan or daysAfterCreationGreaterThan."
+    },
+    "AutoUptier": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean value indicating if auto up tier is enabled. When set to true, the blobs will auto uptier to the account level access tier. The default value is null and the behavior is the same as false."
+        }
+      }
     },
     "DateAfterCreation": {
       "properties": {
