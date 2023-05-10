@@ -92,6 +92,8 @@ suppressions:
     reason: Operation APIs for Microsoft.Network are to be defined in Network swagger.
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: This is just a Get operation and not a List operation.
+  - code: AvoidAdditionalProperties
+    reason: It can introduce a breaking change when updating parameter order, since Dns Zones service has already shipped public versions.
 ```
 
 ### Tag: package-2018-05
