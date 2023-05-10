@@ -69,7 +69,7 @@ User((::))-->A
 A["clone Rest-API and SDK repo locally"] --> B
 B["2.1 pre-requsite dependencies installation
 (each language would have a installation script)"] --> F
-F["2.2 TypeSpecProjectPrepare.ps1
+F["2.2 TypeSpec-Project-Prcoess.ps1
 (a.fetch `tspconfig.yaml` from remote if it doesn’t exist locally
 b.parse `tspconfig.yaml`
 c.create sdk project folder if not existing
