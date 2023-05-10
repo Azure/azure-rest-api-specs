@@ -95,7 +95,7 @@ model ErrorResponse {
 @doc("Variable status.")
 model MultivariateVariableState {
   @doc("Variable name in variable states.")
-  variable?: string;
+  variable: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uppercases common acronyms like NA."
   @doc("Proportion of missing values that need to be filled by fillNAMethod.")
