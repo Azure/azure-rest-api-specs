@@ -56,7 +56,11 @@
           "type": "string"
         }
       },
-      "required": ["SourceConnectionsInfo", "TargetConnectionsInfo", "Policy"]
+      "required": [
+        "SourceConnectionsInfo",
+        "TargetConnectionsInfo",
+        "Policy"
+      ]
     },
     "MapperSourceConnectionsInfo": {
       "description": "A object which contains list of tables and connection details for a source connection.",
@@ -69,7 +73,9 @@
             "type": "object",
             "$ref": "#/definitions/MapperTable"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "Connection": {
           "type": "object",
@@ -88,7 +94,9 @@
             "type": "object",
             "$ref": "#/definitions/MapperTable"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "Connection": {
           "type": "object",
@@ -101,7 +109,10 @@
             "type": "object",
             "$ref": "#/definitions/DataMapperMapping"
           },
-          "x-ms-identifiers": ["targetEntityName", "sourceEntityName"]
+          "x-ms-identifiers": [
+            "targetEntityName",
+            "sourceEntityName"
+          ]
         },
         "Relationships": {
           "description": "List of relationship info among the tables.",
@@ -152,7 +163,9 @@
         "type": {
           "description": "Type of connection via linked service or dataset.",
           "type": "string",
-          "enum": ["linkedservicetype"],
+          "enum": [
+            "linkedservicetype"
+          ],
           "x-ms-enum": {
             "name": "ConnectionType",
             "modelAsString": true
@@ -171,7 +184,9 @@
             "type": "object",
             "$ref": "#/definitions/MapperAttributeMapping"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -186,7 +201,11 @@
         "type": {
           "description": "Type of the CDC attribute mapping. Note: 'Advanced' mapping type is also saved as 'Derived'.",
           "type": "string",
-          "enum": ["Direct", "Derived", "Aggregate"],
+          "enum": [
+            "Direct",
+            "Derived",
+            "Aggregate"
+          ],
           "x-ms-enum": {
             "name": "MappingType",
             "modelAsString": true
@@ -212,7 +231,9 @@
             "type": "object",
             "$ref": "#/definitions/MapperAttributeReference"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -250,7 +271,9 @@
         "type": {
           "description": "Type of connection via linked service or dataset.",
           "type": "string",
-          "enum": ["linkedservicetype"],
+          "enum": [
+            "linkedservicetype"
+          ],
           "x-ms-enum": {
             "name": "ConnectionType",
             "modelAsString": true
@@ -270,7 +293,9 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "MapperTable": {
       "description": "CDC table details.",
@@ -299,7 +324,9 @@
             "type": "object",
             "$ref": "#/definitions/MapperTableSchema"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "dslConnectorProperties": {
           "description": "List of name/value pairs for connection properties.",
@@ -362,7 +389,11 @@
         "frequency": {
           "description": "Frequency of period in terms of 'Hour', 'Minute' or 'Second'.",
           "type": "string",
-          "enum": ["Hour", "Minute", "Second"],
+          "enum": [
+            "Hour",
+            "Minute",
+            "Second"
+          ],
           "x-ms-enum": {
             "name": "FrequencyType",
             "modelAsString": true

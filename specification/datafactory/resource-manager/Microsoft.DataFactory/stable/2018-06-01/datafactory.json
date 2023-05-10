@@ -5,12 +5,20 @@
     "version": "2018-06-01"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -27,7 +35,9 @@
   "paths": {
     "/providers/Microsoft.DataFactory/operations": {
       "get": {
-        "tags": ["operations"],
+        "tags": [
+          "operations"
+        ],
         "operationId": "Operations_List",
         "x-ms-examples": {
           "Operations_List": {
@@ -61,7 +71,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/factories": {
       "get": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_List",
         "x-ms-examples": {
           "Factories_List": {
@@ -98,7 +110,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/configureFactoryRepo": {
       "post": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_ConfigureFactoryRepo",
         "x-ms-examples": {
           "Factories_ConfigureFactoryRepo": {
@@ -144,7 +158,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/getFeatureValue": {
       "post": {
-        "tags": ["exposureControl"],
+        "tags": [
+          "exposureControl"
+        ],
         "operationId": "ExposureControl_GetFeatureValue",
         "x-ms-examples": {
           "ExposureControl_GetFeatureValue": {
@@ -190,7 +206,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue": {
       "post": {
-        "tags": ["exposureControl"],
+        "tags": [
+          "exposureControl"
+        ],
         "operationId": "ExposureControl_GetFeatureValueByFactory",
         "x-ms-examples": {
           "ExposureControl_GetFeatureValueByFactory": {
@@ -239,7 +257,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryFeaturesValue": {
       "post": {
-        "tags": ["exposureControl"],
+        "tags": [
+          "exposureControl"
+        ],
         "operationId": "ExposureControl_QueryFeatureValuesByFactory",
         "x-ms-examples": {
           "ExposureControl_QueryFeatureValuesByFactory": {
@@ -288,7 +308,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_ListByResourceGroup",
         "x-ms-examples": {
           "Factories_ListByResourceGroup": {
@@ -328,7 +350,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}": {
       "put": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_CreateOrUpdate",
         "x-ms-examples": {
           "Factories_CreateOrUpdate": {
@@ -382,7 +406,9 @@
         }
       },
       "patch": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_Update",
         "x-ms-examples": {
           "Factories_Update": {
@@ -429,7 +455,9 @@
         }
       },
       "get": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_Get",
         "x-ms-examples": {
           "Factories_Get": {
@@ -477,7 +505,9 @@
         }
       },
       "delete": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_Delete",
         "x-ms-examples": {
           "Factories_Delete": {
@@ -517,7 +547,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken": {
       "post": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_GetGitHubAccessToken",
         "x-ms-examples": {
           "Factories_GetGitHubAccessToken": {
@@ -566,7 +598,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneAccess": {
       "post": {
-        "tags": ["factories"],
+        "tags": [
+          "factories"
+        ],
         "operationId": "Factories_GetDataPlaneAccess",
         "x-ms-examples": {
           "Factories_GetDataPlaneAccess": {
@@ -615,7 +649,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes": {
       "get": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_ListByFactory",
         "x-ms-examples": {
           "IntegrationRuntimes_ListByFactory": {
@@ -658,7 +694,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}": {
       "put": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_CreateOrUpdate",
         "x-ms-examples": {
           "IntegrationRuntimes_Create": {
@@ -715,7 +753,9 @@
         }
       },
       "get": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_Get",
         "x-ms-examples": {
           "IntegrationRuntimes_Get": {
@@ -766,7 +806,9 @@
         }
       },
       "patch": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_Update",
         "x-ms-examples": {
           "IntegrationRuntimes_Update": {
@@ -816,7 +858,9 @@
         }
       },
       "delete": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_Delete",
         "x-ms-examples": {
           "IntegrationRuntimes_Delete": {
@@ -859,7 +903,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getStatus": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_GetStatus",
         "x-ms-examples": {
           "IntegrationRuntimes_GetStatus": {
@@ -902,7 +948,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/outboundNetworkDependenciesEndpoints": {
       "get": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints",
         "description": "Gets the list of outbound network dependencies for a given Azure-SSIS integration runtime.",
         "x-ms-examples": {
@@ -945,7 +993,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getConnectionInfo": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_GetConnectionInfo",
         "x-ms-examples": {
           "IntegrationRuntimes_GetConnectionInfo": {
@@ -988,7 +1038,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/regenerateAuthKey": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_RegenerateAuthKey",
         "x-ms-examples": {
           "IntegrationRuntimes_RegenerateAuthKey": {
@@ -1040,7 +1092,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/listAuthKeys": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_ListAuthKeys",
         "x-ms-examples": {
           "IntegrationRuntimes_ListAuthKeys": {
@@ -1083,7 +1137,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/start": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_Start",
         "x-ms-examples": {
           "IntegrationRuntimes_Start": {
@@ -1130,7 +1186,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/stop": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_Stop",
         "x-ms-examples": {
           "IntegrationRuntimes_Stop": {
@@ -1174,7 +1232,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/syncCredentials": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_SyncCredentials",
         "x-ms-examples": {
           "IntegrationRuntimes_SyncCredentials": {
@@ -1214,7 +1274,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/monitoringData": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_GetMonitoringData",
         "x-ms-examples": {
           "IntegrationRuntimes_GetMonitoringData": {
@@ -1257,7 +1319,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/upgrade": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_Upgrade",
         "x-ms-examples": {
           "IntegrationRuntimes_Upgrade": {
@@ -1297,7 +1361,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/removeLinks": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_RemoveLinks",
         "x-ms-examples": {
           "IntegrationRuntimes_Upgrade": {
@@ -1346,7 +1412,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/linkedIntegrationRuntime": {
       "post": {
-        "tags": ["integrationRuntimes"],
+        "tags": [
+          "integrationRuntimes"
+        ],
         "operationId": "IntegrationRuntimes_CreateLinkedIntegrationRuntime",
         "x-ms-examples": {
           "IntegrationRuntimes_CreateLinkedIntegrationRuntime": {
@@ -1398,7 +1466,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata": {
       "post": {
-        "tags": ["integrationRuntimeObjectMetadata"],
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
         "operationId": "IntegrationRuntimeObjectMetadata_Refresh",
         "x-ms-examples": {
           "IntegrationRuntimeObjectMetadata_Refresh": {
@@ -1445,7 +1515,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getObjectMetadata": {
       "post": {
-        "tags": ["integrationRuntimeObjectMetadata"],
+        "tags": [
+          "integrationRuntimeObjectMetadata"
+        ],
         "operationId": "IntegrationRuntimeObjectMetadata_Get",
         "x-ms-examples": {
           "IntegrationRuntimeObjectMetadata_Get": {
@@ -1497,7 +1569,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
       "get": {
-        "tags": ["integrationRuntimeNodes"],
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
         "operationId": "IntegrationRuntimeNodes_Get",
         "x-ms-examples": {
           "IntegrationRuntimeNodes_Get": {
@@ -1541,7 +1615,9 @@
         }
       },
       "delete": {
-        "tags": ["integrationRuntimeNodes"],
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
         "operationId": "IntegrationRuntimeNodes_Delete",
         "x-ms-examples": {
           "IntegrationRuntimesNodes_Delete": {
@@ -1585,7 +1661,9 @@
         }
       },
       "patch": {
-        "tags": ["integrationRuntimeNodes"],
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
         "operationId": "IntegrationRuntimeNodes_Update",
         "x-ms-examples": {
           "IntegrationRuntimeNodes_Update": {
@@ -1640,7 +1718,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress": {
       "post": {
-        "tags": ["integrationRuntimeNodes"],
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
         "operationId": "IntegrationRuntimeNodes_GetIpAddress",
         "x-ms-examples": {
           "IntegrationRuntimeNodes_GetIpAddress": {
@@ -1686,7 +1766,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices": {
       "get": {
-        "tags": ["linkedServices"],
+        "tags": [
+          "linkedServices"
+        ],
         "operationId": "LinkedServices_ListByFactory",
         "x-ms-examples": {
           "LinkedServices_ListByFactory": {
@@ -1729,7 +1811,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}": {
       "put": {
-        "tags": ["linkedServices"],
+        "tags": [
+          "linkedServices"
+        ],
         "operationId": "LinkedServices_CreateOrUpdate",
         "x-ms-examples": {
           "LinkedServices_Create": {
@@ -1789,7 +1873,9 @@
         }
       },
       "get": {
-        "tags": ["linkedServices"],
+        "tags": [
+          "linkedServices"
+        ],
         "operationId": "LinkedServices_Get",
         "x-ms-examples": {
           "LinkedServices_Get": {
@@ -1840,7 +1926,9 @@
         }
       },
       "delete": {
-        "tags": ["linkedServices"],
+        "tags": [
+          "linkedServices"
+        ],
         "operationId": "LinkedServices_Delete",
         "x-ms-examples": {
           "LinkedServices_Delete": {
@@ -1883,7 +1971,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets": {
       "get": {
-        "tags": ["datasets"],
+        "tags": [
+          "datasets"
+        ],
         "operationId": "Datasets_ListByFactory",
         "x-ms-examples": {
           "Datasets_ListByFactory": {
@@ -1926,7 +2016,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/datasets/{datasetName}": {
       "put": {
-        "tags": ["datasets"],
+        "tags": [
+          "datasets"
+        ],
         "operationId": "Datasets_CreateOrUpdate",
         "x-ms-examples": {
           "Datasets_Create": {
@@ -1986,7 +2078,9 @@
         }
       },
       "get": {
-        "tags": ["datasets"],
+        "tags": [
+          "datasets"
+        ],
         "operationId": "Datasets_Get",
         "x-ms-examples": {
           "Datasets_Get": {
@@ -2037,7 +2131,9 @@
         }
       },
       "delete": {
-        "tags": ["datasets"],
+        "tags": [
+          "datasets"
+        ],
         "operationId": "Datasets_Delete",
         "x-ms-examples": {
           "Datasets_Delete": {
@@ -2080,7 +2176,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines": {
       "get": {
-        "tags": ["pipelines"],
+        "tags": [
+          "pipelines"
+        ],
         "operationId": "Pipelines_ListByFactory",
         "x-ms-examples": {
           "Pipelines_ListByFactory": {
@@ -2123,7 +2221,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}": {
       "put": {
-        "tags": ["pipelines"],
+        "tags": [
+          "pipelines"
+        ],
         "operationId": "Pipelines_CreateOrUpdate",
         "x-ms-examples": {
           "Pipelines_Create": {
@@ -2183,7 +2283,9 @@
         }
       },
       "get": {
-        "tags": ["pipelines"],
+        "tags": [
+          "pipelines"
+        ],
         "operationId": "Pipelines_Get",
         "x-ms-examples": {
           "Pipelines_Get": {
@@ -2234,7 +2336,9 @@
         }
       },
       "delete": {
-        "tags": ["pipelines"],
+        "tags": [
+          "pipelines"
+        ],
         "operationId": "Pipelines_Delete",
         "x-ms-examples": {
           "Pipelines_Delete": {
@@ -2277,7 +2381,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelines/{pipelineName}/createRun": {
       "post": {
-        "tags": ["pipelines"],
+        "tags": [
+          "pipelines"
+        ],
         "operationId": "Pipelines_CreateRun",
         "x-ms-examples": {
           "Pipelines_CreateRun": {
@@ -2368,7 +2474,9 @@
           }
         },
         "description": "Query pipeline runs in the factory based on input filter conditions.",
-        "tags": ["pipelineruns"],
+        "tags": [
+          "pipelineruns"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2417,7 +2525,9 @@
           }
         },
         "description": "Get a pipeline run by its run ID.",
-        "tags": ["pipelineruns"],
+        "tags": [
+          "pipelineruns"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2460,7 +2570,9 @@
           }
         },
         "description": "Query activity runs based on input filter conditions.",
-        "tags": ["activityruns"],
+        "tags": [
+          "activityruns"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2512,7 +2624,9 @@
           }
         },
         "description": "Cancel a pipeline run by its run ID.",
-        "tags": ["pipelineruns"],
+        "tags": [
+          "pipelineruns"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2552,7 +2666,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers": {
       "get": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_ListByFactory",
         "x-ms-examples": {
           "Triggers_ListByFactory": {
@@ -2595,7 +2711,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querytriggers": {
       "post": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_QueryByFactory",
         "x-ms-examples": {
           "Triggers_QueryByFactory": {
@@ -2644,7 +2762,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}": {
       "put": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_CreateOrUpdate",
         "x-ms-examples": {
           "Triggers_Create": {
@@ -2704,7 +2824,9 @@
         }
       },
       "get": {
-        "tags": ["trigger"],
+        "tags": [
+          "trigger"
+        ],
         "operationId": "Triggers_Get",
         "x-ms-examples": {
           "Triggers_Get": {
@@ -2755,7 +2877,9 @@
         }
       },
       "delete": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_Delete",
         "x-ms-examples": {
           "Triggers_Delete": {
@@ -2798,7 +2922,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/subscribeToEvents": {
       "post": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_SubscribeToEvents",
         "x-ms-examples": {
           "Triggers_SubscribeToEvents": {
@@ -2845,7 +2971,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/getEventSubscriptionStatus": {
       "post": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_GetEventSubscriptionStatus",
         "x-ms-examples": {
           "Triggers_GetEventSubscriptionStatus": {
@@ -2888,7 +3016,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/unsubscribeFromEvents": {
       "post": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_UnsubscribeFromEvents",
         "x-ms-examples": {
           "Triggers_UnsubscribeFromEvents": {
@@ -2935,7 +3065,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/start": {
       "post": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_Start",
         "x-ms-examples": {
           "Triggers_Start": {
@@ -2976,7 +3108,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/stop": {
       "post": {
-        "tags": ["triggers"],
+        "tags": [
+          "triggers"
+        ],
         "operationId": "Triggers_Stop",
         "x-ms-examples": {
           "Triggers_Stop": {
@@ -3017,7 +3151,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun": {
       "post": {
-        "tags": ["triggerruns"],
+        "tags": [
+          "triggerruns"
+        ],
         "operationId": "TriggerRuns_Rerun",
         "x-ms-examples": {
           "Triggers_Rerun": {
@@ -3060,7 +3196,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
       "post": {
-        "tags": ["triggerruns"],
+        "tags": [
+          "triggerruns"
+        ],
         "operationId": "TriggerRuns_Cancel",
         "x-ms-examples": {
           "Triggers_Cancel": {
@@ -3103,7 +3241,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryTriggerRuns": {
       "post": {
-        "tags": ["triggerruns"],
+        "tags": [
+          "triggerruns"
+        ],
         "operationId": "TriggerRuns_QueryByFactory",
         "x-ms-examples": {
           "TriggerRuns_QueryByFactory": {
@@ -3152,7 +3292,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}": {
       "put": {
-        "tags": ["dataFlows"],
+        "tags": [
+          "dataFlows"
+        ],
         "operationId": "DataFlows_CreateOrUpdate",
         "x-ms-examples": {
           "DataFlows_Create": {
@@ -3212,7 +3354,9 @@
         }
       },
       "get": {
-        "tags": ["dataFlows"],
+        "tags": [
+          "dataFlows"
+        ],
         "operationId": "DataFlows_Get",
         "x-ms-examples": {
           "DataFlows_Get": {
@@ -3260,7 +3404,9 @@
         }
       },
       "delete": {
-        "tags": ["dataFlows"],
+        "tags": [
+          "dataFlows"
+        ],
         "operationId": "DataFlows_Delete",
         "x-ms-examples": {
           "DataFlows_Delete": {
@@ -3303,7 +3449,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows": {
       "get": {
-        "tags": ["dataFlows"],
+        "tags": [
+          "dataFlows"
+        ],
         "operationId": "DataFlows_ListByFactory",
         "x-ms-examples": {
           "DataFlows_ListByFactory": {
@@ -3346,7 +3494,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/createDataFlowDebugSession": {
       "post": {
-        "tags": ["dataFlowDebugSession"],
+        "tags": [
+          "dataFlowDebugSession"
+        ],
         "operationId": "DataFlowDebugSession_Create",
         "x-ms-examples": {
           "DataFlowDebugSession_Create": {
@@ -3405,7 +3555,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryDataFlowDebugSessions": {
       "post": {
-        "tags": ["dataFlowDebugSession"],
+        "tags": [
+          "dataFlowDebugSession"
+        ],
         "operationId": "DataFlowDebugSession_QueryByFactory",
         "x-ms-examples": {
           "DataFlowDebugSession_QueryByFactory": {
@@ -3448,7 +3600,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/addDataFlowToDebugSession": {
       "post": {
-        "tags": ["dataFlowDebugSession"],
+        "tags": [
+          "dataFlowDebugSession"
+        ],
         "operationId": "DataFlowDebugSession_AddDataFlow",
         "x-ms-examples": {
           "DataFlowDebugSession_AddDataFlow": {
@@ -3497,7 +3651,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/deleteDataFlowDebugSession": {
       "post": {
-        "tags": ["dataFlowDebugSession"],
+        "tags": [
+          "dataFlowDebugSession"
+        ],
         "operationId": "DataFlowDebugSession_Delete",
         "x-ms-examples": {
           "DataFlowDebugSession_Delete": {
@@ -3543,7 +3699,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/executeDataFlowDebugCommand": {
       "post": {
-        "tags": ["dataFlowDebugSession"],
+        "tags": [
+          "dataFlowDebugSession"
+        ],
         "operationId": "DataFlowDebugSession_ExecuteCommand",
         "x-ms-examples": {
           "DataFlowDebugSession_ExecuteCommand": {
@@ -3602,7 +3760,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks": {
       "get": {
-        "tags": ["managedVirtualNetworks"],
+        "tags": [
+          "managedVirtualNetworks"
+        ],
         "operationId": "ManagedVirtualNetworks_ListByFactory",
         "x-ms-examples": {
           "ManagedVirtualNetworks_ListByFactory": {
@@ -3645,7 +3805,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}": {
       "put": {
-        "tags": ["managedVirtualNetworks"],
+        "tags": [
+          "managedVirtualNetworks"
+        ],
         "operationId": "ManagedVirtualNetworks_CreateOrUpdate",
         "x-ms-examples": {
           "ManagedVirtualNetworks_Create": {
@@ -3702,7 +3864,9 @@
         }
       },
       "get": {
-        "tags": ["managedVirtualNetworks"],
+        "tags": [
+          "managedVirtualNetworks"
+        ],
         "operationId": "ManagedVirtualNetworks_Get",
         "x-ms-examples": {
           "ManagedVirtualNetworks_Get": {
@@ -3752,7 +3916,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints": {
       "get": {
-        "tags": ["managedPrivateEndpoints"],
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
         "operationId": "ManagedPrivateEndpoints_ListByFactory",
         "x-ms-examples": {
           "ManagedPrivateEndpoints_ListByFactory": {
@@ -3798,7 +3964,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials": {
       "get": {
-        "tags": ["credentials"],
+        "tags": [
+          "credentials"
+        ],
         "operationId": "CredentialOperations_ListByFactory",
         "x-ms-examples": {
           "Credentials_ListByFactory": {
@@ -3841,7 +4009,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}": {
       "put": {
-        "tags": ["credentials"],
+        "tags": [
+          "credentials"
+        ],
         "operationId": "CredentialOperations_CreateOrUpdate",
         "x-ms-examples": {
           "Credentials_Create": {
@@ -3898,7 +4068,9 @@
         }
       },
       "get": {
-        "tags": ["credentials"],
+        "tags": [
+          "credentials"
+        ],
         "operationId": "CredentialOperations_Get",
         "x-ms-examples": {
           "Credentials_Get": {
@@ -3949,7 +4121,9 @@
         }
       },
       "delete": {
-        "tags": ["credentials"],
+        "tags": [
+          "credentials"
+        ],
         "operationId": "CredentialOperations_Delete",
         "x-ms-examples": {
           "Credentials_Delete": {
@@ -3992,7 +4166,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/managedVirtualNetworks/{managedVirtualNetworkName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
       "put": {
-        "tags": ["managedPrivateEndpoints"],
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
         "operationId": "ManagedPrivateEndpoints_CreateOrUpdate",
         "x-ms-examples": {
           "ManagedVirtualNetworks_Create": {
@@ -4052,7 +4228,9 @@
         }
       },
       "get": {
-        "tags": ["managedPrivateEndpoints"],
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
         "operationId": "ManagedPrivateEndpoints_Get",
         "x-ms-examples": {
           "ManagedPrivateEndpoints_Get": {
@@ -4103,7 +4281,9 @@
         }
       },
       "delete": {
-        "tags": ["managedPrivateEndpoints"],
+        "tags": [
+          "managedPrivateEndpoints"
+        ],
         "operationId": "ManagedPrivateEndpoints_Delete",
         "x-ms-examples": {
           "ManagedVirtualNetworks_Delete": {
@@ -4149,7 +4329,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndPointConnections": {
       "get": {
-        "tags": ["privateEndPointConnections"],
+        "tags": [
+          "privateEndPointConnections"
+        ],
         "operationId": "privateEndPointConnections_ListByFactory",
         "x-ms-examples": {
           "privateEndPointConnections_ListByFactory": {
@@ -4192,7 +4374,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "put": {
-        "tags": ["privateEndpointConnections"],
+        "tags": [
+          "privateEndpointConnections"
+        ],
         "description": "Approves or rejects a private endpoint connection",
         "operationId": "PrivateEndpointConnection_CreateOrUpdate",
         "x-ms-examples": {
@@ -4248,7 +4432,9 @@
         }
       },
       "get": {
-        "tags": ["privateEndpointConnections"],
+        "tags": [
+          "privateEndpointConnections"
+        ],
         "description": "Gets a private endpoint connection",
         "operationId": "PrivateEndpointConnection_Get",
         "x-ms-examples": {
@@ -4296,7 +4482,9 @@
         }
       },
       "delete": {
-        "tags": ["privateEndpointConnections"],
+        "tags": [
+          "privateEndpointConnections"
+        ],
         "description": "Deletes a private endpoint connection",
         "operationId": "PrivateEndpointConnection_Delete",
         "x-ms-examples": {
@@ -4339,7 +4527,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/privateLinkResources": {
       "get": {
-        "tags": ["privateLinkResources"],
+        "tags": [
+          "privateLinkResources"
+        ],
         "description": "Gets the private link resources",
         "operationId": "privateLinkResources_Get",
         "x-ms-examples": {
@@ -4379,7 +4569,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters": {
       "get": {
-        "tags": ["globalParameters"],
+        "tags": [
+          "globalParameters"
+        ],
         "operationId": "GlobalParameters_ListByFactory",
         "x-ms-examples": {
           "GlobalParameters_ListByFactory": {
@@ -4422,7 +4614,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/globalParameters/{globalParameterName}": {
       "get": {
-        "tags": ["globalParameters"],
+        "tags": [
+          "globalParameters"
+        ],
         "operationId": "GlobalParameters_Get",
         "x-ms-examples": {
           "GlobalParameters_Get": {
@@ -4463,7 +4657,9 @@
         }
       },
       "put": {
-        "tags": ["globalParameters"],
+        "tags": [
+          "globalParameters"
+        ],
         "operationId": "GlobalParameters_CreateOrUpdate",
         "x-ms-examples": {
           "GlobalParameters_Create": {
@@ -4516,7 +4712,9 @@
         }
       },
       "delete": {
-        "tags": ["globalParameters"],
+        "tags": [
+          "globalParameters"
+        ],
         "operationId": "GlobalParameters_Delete",
         "x-ms-examples": {
           "GlobalParameters_Delete": {
@@ -4559,7 +4757,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs": {
       "get": {
-        "tags": ["changeDataCapture"],
+        "tags": [
+          "changeDataCapture"
+        ],
         "operationId": "ChangeDataCapture_ListByFactory",
         "x-ms-examples": {
           "ChangeDataCapture_ListByFactory": {
@@ -4602,7 +4802,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}": {
       "put": {
-        "tags": ["changeDataCapture"],
+        "tags": [
+          "changeDataCapture"
+        ],
         "operationId": "changeDataCapture_CreateOrUpdate",
         "x-ms-examples": {
           "ChangeDataCapture_Create": {
@@ -4662,7 +4864,9 @@
         }
       },
       "get": {
-        "tags": ["changeDataCapture"],
+        "tags": [
+          "changeDataCapture"
+        ],
         "operationId": "ChangeDataCapture_Get",
         "x-ms-examples": {
           "ChangeDataCapture_Get": {
@@ -4710,7 +4914,9 @@
         }
       },
       "delete": {
-        "tags": ["changeDataCapture"],
+        "tags": [
+          "changeDataCapture"
+        ],
         "operationId": "ChangeDataCapture_Delete",
         "x-ms-examples": {
           "ChangeDataCapture_Delete": {
@@ -4753,7 +4959,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/start": {
       "post": {
-        "tags": ["changeDataCapture"],
+        "tags": [
+          "changeDataCapture"
+        ],
         "operationId": "ChangeDataCapture_Start",
         "x-ms-examples": {
           "ChangeDataCapture_Start": {
@@ -4793,7 +5001,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/stop": {
       "post": {
-        "tags": ["changeDataCapture"],
+        "tags": [
+          "changeDataCapture"
+        ],
         "operationId": "ChangeDataCapture_Stop",
         "x-ms-examples": {
           "ChangeDataCapture_Stop": {
@@ -4855,7 +5065,10 @@
         "location": {
           "type": "string",
           "description": "The resource location.",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "type": "object",
@@ -4913,14 +5126,19 @@
         "type": {
           "type": "string",
           "description": "Expression type.",
-          "enum": ["Expression"]
+          "enum": [
+            "Expression"
+          ]
         },
         "value": {
           "type": "string",
           "description": "Expression value."
         }
       },
-      "required": ["type", "value"]
+      "required": [
+        "type",
+        "value"
+      ]
     },
     "SecureString": {
       "x-ms-discriminator-value": "SecureString",
@@ -4937,7 +5155,9 @@
           "description": "Value of secure string."
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "AzureKeyVaultSecretReference": {
       "x-ms-discriminator-value": "AzureKeyVaultSecret",
@@ -4964,7 +5184,10 @@
           "description": "The version of the secret in Azure Key Vault. The default value is the latest version of the secret. Type: string (or Expression with resultType string)."
         }
       },
-      "required": ["store", "secretName"]
+      "required": [
+        "store",
+        "secretName"
+      ]
     },
     "SecretBase": {
       "description": "The base definition of a secret type.",
@@ -4976,12 +5199,16 @@
           "description": "Type of the secret."
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "FactoryListResponse": {
       "description": "A list of factory resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -4999,7 +5226,9 @@
     "IntegrationRuntimeListResponse": {
       "description": "A list of integration runtime resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5020,7 +5249,9 @@
         "type": {
           "type": "string",
           "description": "Type of integration runtime.",
-          "enum": ["IntegrationRuntimeReference"]
+          "enum": [
+            "IntegrationRuntimeReference"
+          ]
         },
         "referenceName": {
           "type": "string",
@@ -5031,7 +5262,10 @@
           "description": "Arguments for integration runtime."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "IntegrationRuntimeResource": {
       "description": "Integration runtime resource type.",
@@ -5046,7 +5280,9 @@
           "description": "Integration runtime properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "IntegrationRuntimeDebugResource": {
       "description": "Integration runtime debug resource.",
@@ -5061,7 +5297,9 @@
           "description": "Integration runtime properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "IntegrationRuntimeStatusResponse": {
       "description": "Integration runtime status response.",
@@ -5076,12 +5314,16 @@
           "description": "Integration runtime properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "IntegrationRuntimeStatusListResponse": {
       "description": "A list of integration runtime status.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5089,7 +5331,9 @@
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
@@ -5132,7 +5376,9 @@
           "x-ms-client-name": "linkedFactoryName"
         }
       },
-      "required": ["factoryName"]
+      "required": [
+        "factoryName"
+      ]
     },
     "CreateLinkedIntegrationRuntimeRequest": {
       "description": "The linked integration runtime information.",
@@ -5159,7 +5405,9 @@
     "LinkedServiceListResponse": {
       "description": "A list of linked service resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5177,7 +5425,9 @@
     "DatasetListResponse": {
       "description": "A list of dataset resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5195,7 +5445,9 @@
     "PipelineListResponse": {
       "description": "A list of pipeline resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5213,7 +5465,9 @@
     "TriggerQueryResponse": {
       "description": "A query of triggers.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5231,7 +5485,9 @@
     "TriggerListResponse": {
       "description": "A list of trigger resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5255,12 +5511,16 @@
           "type": "string"
         }
       },
-      "required": ["runId"]
+      "required": [
+        "runId"
+      ]
     },
     "GlobalParameterListResponse": {
       "description": "A list of Global parameters.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -5286,7 +5546,9 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
-      "required": ["error"]
+      "required": [
+        "error"
+      ]
     },
     "CloudErrorBody": {
       "x-ms-external": true,
@@ -5314,7 +5576,10 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["code", "message"]
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "TriggerSubscriptionOperationStatus": {
       "description": "Defines the response of a trigger subscription operation.",
@@ -5357,7 +5622,11 @@
         "type": {
           "type": "string",
           "description": "Variable type.",
-          "enum": ["String", "Bool", "Array"],
+          "enum": [
+            "String",
+            "Bool",
+            "Array"
+          ],
           "x-ms-enum": {
             "name": "VariableType",
             "modelAsString": true
@@ -5368,7 +5637,9 @@
           "description": "Default value of variable."
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "ParameterDefinitionSpecification": {
       "description": "Definition of all parameters for an entity.",
@@ -5403,7 +5674,9 @@
           "description": "Default value of parameter."
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "ParameterValueSpecification": {
       "description": "An object mapping parameter names to argument values.",
@@ -5483,7 +5756,9 @@
           "type": "string"
         }
       },
-      "required": ["projectName"]
+      "required": [
+        "projectName"
+      ]
     },
     "FactoryGitHubConfiguration": {
       "x-ms-discriminator-value": "FactoryGitHubConfiguration",
@@ -5556,7 +5831,10 @@
           "type": "string"
         }
       },
-      "required": ["gitHubAccessCode", "gitHubAccessTokenBaseUrl"]
+      "required": [
+        "gitHubAccessCode",
+        "gitHubAccessTokenBaseUrl"
+      ]
     },
     "GitHubAccessTokenResponse": {
       "description": "Get GitHub access token response definition.",
@@ -5646,7 +5924,10 @@
         },
         "publicNetworkAccess": {
           "description": "Whether or not public network access is allowed for the data factory.",
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -5661,7 +5942,10 @@
       "properties": {
         "publicNetworkAccess": {
           "description": "Whether or not public network access is allowed for the data factory.",
-          "enum": ["Enabled", "Disabled"],
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
@@ -5690,7 +5974,10 @@
           "description": "User assigned identity to use to authenticate to customer's key vault. If not provided Managed Service Identity will be used."
         }
       },
-      "required": ["keyName", "vaultBaseUrl"]
+      "required": [
+        "keyName",
+        "vaultBaseUrl"
+      ]
     },
     "CMKIdentityDefinition": {
       "description": "Managed Identity used for CMK.",
@@ -5715,7 +6002,14 @@
         "type": {
           "type": "string",
           "description": "Global Parameter type.",
-          "enum": ["Object", "String", "Int", "Float", "Bool", "Array"],
+          "enum": [
+            "Object",
+            "String",
+            "Int",
+            "Float",
+            "Bool",
+            "Array"
+          ],
           "x-ms-enum": {
             "name": "GlobalParameterType",
             "modelAsString": true
@@ -5726,7 +6020,10 @@
           "description": "Value of parameter."
         }
       },
-      "required": ["type", "value"]
+      "required": [
+        "type",
+        "value"
+      ]
     },
     "PipelineResource": {
       "description": "Pipeline resource type.",
@@ -5746,7 +6043,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "PipelineReference": {
       "description": "Pipeline reference type.",
@@ -5754,7 +6053,9 @@
         "type": {
           "type": "string",
           "description": "Pipeline reference type.",
-          "enum": ["PipelineReference"]
+          "enum": [
+            "PipelineReference"
+          ]
         },
         "referenceName": {
           "type": "string",
@@ -5765,7 +6066,10 @@
           "description": "Reference name."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "TriggerPipelineReference": {
       "description": "Pipeline that needs to be triggered with the given parameters.",
@@ -5793,7 +6097,9 @@
           "description": "Properties of the trigger."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "GlobalParameterResource": {
       "description": "Global parameters resource type.",
@@ -5809,7 +6115,9 @@
           "description": "Properties of the global parameter."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "Factory": {
       "description": "Factory resource type.",
@@ -5888,7 +6196,9 @@
           "description": "List of user assigned identities for the factory."
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "UserAssignedIdentitiesDefinitionSpecification": {
       "description": "Definition of all user assigned identities for a factory.",
@@ -5908,7 +6218,9 @@
         "type": {
           "type": "string",
           "description": "Dataset reference type.",
-          "enum": ["DatasetReference"]
+          "enum": [
+            "DatasetReference"
+          ]
         },
         "referenceName": {
           "type": "string",
@@ -5919,7 +6231,10 @@
           "description": "Arguments for dataset."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "DatasetResource": {
       "description": "Dataset resource type.",
@@ -5934,7 +6249,9 @@
           "description": "Dataset properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "DatasetDebugResource": {
       "description": "Dataset debug resource.",
@@ -5949,7 +6266,9 @@
           "description": "Dataset properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
@@ -5958,7 +6277,9 @@
         "type": {
           "type": "string",
           "description": "Linked service reference type.",
-          "enum": ["LinkedServiceReference"],
+          "enum": [
+            "LinkedServiceReference"
+          ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": true
@@ -5973,7 +6294,10 @@
           "description": "Arguments for LinkedService."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "LinkedServiceResource": {
       "description": "Linked service resource type.",
@@ -5988,7 +6312,9 @@
           "description": "Properties of linked service."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "LinkedServiceDebugResource": {
       "description": "Linked service debug resource.",
@@ -6003,7 +6329,9 @@
           "description": "Properties of linked service."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "ChangeDataCaptureResource": {
       "description": "Change data capture resource type.",
@@ -6023,7 +6351,9 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "TriggerFilterParameters": {
       "description": "Query parameters for triggers.",
@@ -6074,7 +6404,10 @@
           "x-ms-identifiers": []
         }
       },
-      "required": ["lastUpdatedAfter", "lastUpdatedBefore"]
+      "required": [
+        "lastUpdatedAfter",
+        "lastUpdatedBefore"
+      ]
     },
     "RunQueryFilter": {
       "description": "Query filter option for listing runs.",
@@ -6105,7 +6438,12 @@
         "operator": {
           "description": "Operator to be used for filter.",
           "type": "string",
-          "enum": ["Equals", "NotEquals", "In", "NotIn"],
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "In",
+            "NotIn"
+          ],
           "x-ms-enum": {
             "name": "RunQueryFilterOperator",
             "modelAsString": true
@@ -6119,7 +6457,11 @@
           }
         }
       },
-      "required": ["operand", "operator", "values"]
+      "required": [
+        "operand",
+        "operator",
+        "values"
+      ]
     },
     "RunQueryOrderBy": {
       "description": "An object to provide order by options for listing runs.",
@@ -6147,19 +6489,27 @@
         "order": {
           "description": "Sorting order of the parameter.",
           "type": "string",
-          "enum": ["ASC", "DESC"],
+          "enum": [
+            "ASC",
+            "DESC"
+          ],
           "x-ms-enum": {
             "name": "RunQueryOrder",
             "modelAsString": true
           }
         }
       },
-      "required": ["orderBy", "order"]
+      "required": [
+        "orderBy",
+        "order"
+      ]
     },
     "PipelineRunsQueryResponse": {
       "description": "A list pipeline runs.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -6167,7 +6517,9 @@
           "items": {
             "$ref": "#/definitions/PipelineRun"
           },
-          "x-ms-identifiers": ["runId"]
+          "x-ms-identifiers": [
+            "runId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -6292,7 +6644,9 @@
     "ActivityRunsQueryResponse": {
       "description": "A list activity runs.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -6300,7 +6654,9 @@
           "items": {
             "$ref": "#/definitions/ActivityRun"
           },
-          "x-ms-identifiers": ["pipelineRunId"]
+          "x-ms-identifiers": [
+            "pipelineRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -6387,7 +6743,9 @@
     "TriggerRunsQueryResponse": {
       "description": "A list of trigger runs.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -6395,7 +6753,9 @@
           "items": {
             "$ref": "#/definitions/TriggerRun"
           },
-          "x-ms-identifiers": ["triggerRunId"]
+          "x-ms-identifiers": [
+            "triggerRunId"
+          ]
         },
         "continuationToken": {
           "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
@@ -6430,7 +6790,11 @@
         },
         "status": {
           "type": "string",
-          "enum": ["Succeeded", "Failed", "Inprogress"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Inprogress"
+          ],
           "x-ms-enum": {
             "name": "TriggerRunStatus",
             "modelAsString": true
@@ -6489,7 +6853,9 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "List of Data Factory operations supported by the Data Factory resource provider.",
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -6558,7 +6924,9 @@
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "Details about operations related to metrics.",
@@ -6566,7 +6934,9 @@
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6638,7 +7008,9 @@
           "items": {
             "$ref": "#/definitions/OperationMetricDimension"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -6709,7 +7081,9 @@
     "ExposureControlBatchRequest": {
       "description": "A list of exposure control features.",
       "type": "object",
-      "required": ["exposureControlRequests"],
+      "required": [
+        "exposureControlRequests"
+      ],
       "properties": {
         "exposureControlRequests": {
           "type": "array",
@@ -6717,7 +7091,9 @@
           "items": {
             "$ref": "#/definitions/ExposureControlRequest"
           },
-          "x-ms-identifiers": ["featureName"]
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       }
     },
@@ -6738,7 +7114,9 @@
     "ExposureControlBatchResponse": {
       "description": "A list of exposure control feature values.",
       "type": "object",
-      "required": ["exposureControlResponses"],
+      "required": [
+        "exposureControlResponses"
+      ],
       "properties": {
         "exposureControlResponses": {
           "type": "array",
@@ -6746,7 +7124,9 @@
           "items": {
             "$ref": "#/definitions/ExposureControlResponse"
           },
-          "x-ms-identifiers": ["featureName"]
+          "x-ms-identifiers": [
+            "featureName"
+          ]
         }
       }
     },
@@ -6769,7 +7149,9 @@
     "DataFlowListResponse": {
       "description": "A list of data flow resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -6787,7 +7169,9 @@
     "ChangeDataCaptureListResponse": {
       "description": "A list of change data capture resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -6887,7 +7271,9 @@
           "items": {
             "$ref": "#/definitions/DataFlowDebugResource"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "datasets": {
           "type": "array",
@@ -6895,7 +7281,9 @@
           "items": {
             "$ref": "#/definitions/DatasetDebugResource"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "linkedServices": {
           "type": "array",
@@ -6903,7 +7291,9 @@
           "items": {
             "$ref": "#/definitions/LinkedServiceDebugResource"
           },
-          "x-ms-identifiers": ["name"]
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "staging": {
           "description": "Staging info for debug session.",
@@ -6919,7 +7309,9 @@
               "items": {
                 "$ref": "#/definitions/DataFlowSourceSetting"
               },
-              "x-ms-identifiers": ["sourceName"]
+              "x-ms-identifiers": [
+                "sourceName"
+              ]
             },
             "parameters": {
               "description": "Data flow parameters.",
@@ -6980,7 +7372,9 @@
           "type": "string"
         }
       },
-      "required": ["streamName"]
+      "required": [
+        "streamName"
+      ]
     },
     "DataFlowDebugCommandRequest": {
       "description": "Request body structure for data flow debug command.",
@@ -7033,7 +7427,10 @@
           "items": {
             "$ref": "#/definitions/DataFlowDebugSessionInfo"
           },
-          "x-ms-identifiers": ["dataFlowName", "sessionId"]
+          "x-ms-identifiers": [
+            "dataFlowName",
+            "sessionId"
+          ]
         },
         "nextLink": {
           "description": "The link to the next page of results, if any remaining results exist.",
@@ -7112,7 +7509,9 @@
           "description": "Data flow properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "DataFlowDebugResource": {
       "description": "Data flow debug resource.",
@@ -7127,7 +7526,9 @@
           "description": "Data flow properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "DataFlowReference": {
       "description": "Data flow reference type.",
@@ -7135,7 +7536,9 @@
         "type": {
           "type": "string",
           "description": "Data flow reference type.",
-          "enum": ["DataFlowReference"],
+          "enum": [
+            "DataFlowReference"
+          ],
           "x-ms-enum": {
             "name": "DataFlowReferenceType",
             "modelAsString": true
@@ -7157,12 +7560,17 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "managedPrivateEndpointListResponse": {
       "description": "A list of managed private endpoint resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -7180,7 +7588,9 @@
     "CredentialListResponse": {
       "description": "A list of credential resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -7208,7 +7618,9 @@
           "description": "Managed private endpoint properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "ManagedIdentityCredentialResource": {
       "description": "Credential resource type.",
@@ -7224,12 +7636,16 @@
           "description": "Managed Identity Credential properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "ManagedVirtualNetworkListResponse": {
       "description": "A list of managed Virtual Network resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -7250,7 +7666,9 @@
         "type": {
           "type": "string",
           "description": "Managed Virtual Network reference type.",
-          "enum": ["ManagedVirtualNetworkReference"],
+          "enum": [
+            "ManagedVirtualNetworkReference"
+          ],
           "x-ms-enum": {
             "name": "ManagedVirtualNetworkReferenceType",
             "modelAsString": true
@@ -7261,7 +7679,10 @@
           "description": "Reference ManagedVirtualNetwork name."
         }
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "ManagedVirtualNetworkResource": {
       "description": "Managed Virtual Network resource type.",
@@ -7276,12 +7697,16 @@
           "description": "Managed Virtual Network properties."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     },
     "PrivateEndpointConnectionListResponse": {
       "description": "A list of linked service resources.",
       "type": "object",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -7396,7 +7821,9 @@
     },
     "PrivateLinkResourcesWrapper": {
       "description": "Wrapper for a collection of private link resources",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -7456,7 +7883,9 @@
         "type": {
           "type": "string",
           "description": "Credential reference type.",
-          "enum": ["CredentialReference"],
+          "enum": [
+            "CredentialReference"
+          ],
           "x-ms-enum": {
             "name": "CredentialReferenceType",
             "modelAsString": true
@@ -7470,7 +7899,10 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["type", "referenceName"]
+      "required": [
+        "type",
+        "referenceName"
+      ]
     },
     "CredentialResource": {
       "description": "Credential resource type.",
@@ -7486,7 +7918,9 @@
           "description": "Properties of credentials."
         }
       },
-      "required": ["properties"]
+      "required": [
+        "properties"
+      ]
     }
   },
   "parameters": {
