@@ -125,8 +125,8 @@ class C,D,F highlight
   -	fetch `tspconfig.yaml` from remote if it doesn’t exist locally
   -	parse `tspconfig.yaml`
   -	create/update `tsp-location.yaml`
-  -	call `TypeSpecProjectSync.ps1`
-  -	call `TypeSpecProjectGenerate.ps1`
+  -	call `TypeSpec-Project-Sync.ps1`
+  -	call `TypeSpec-Project-Generate.ps1`
 - 2.3 Extends the script to support local spec repo if existed
 - 2.4.1 There are other custom steps such as creating `test` folder, `sln` files that would vary between language repos. Eventually, this project scaffolding would be integrated into language emitter.
 
