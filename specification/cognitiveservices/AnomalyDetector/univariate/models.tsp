@@ -31,7 +31,7 @@ enum AnomalyDetectorErrorCodes {
   "InvalidImputeFixedValue",
 }
 
-enum TimeGranularity {
+enum UnivariateTimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
   Weekly: "weekly",
@@ -39,7 +39,7 @@ enum TimeGranularity {
   Hourly: "hourly",
   PerMinute: "minutely",
   PerSecond: "secondly",
-  Microsecond: "microsecond",
+  PerMicrosecond: "microsecond",
   None: "none",
 }
 
@@ -51,14 +51,14 @@ order to match the anomaly detection result. If the data is not sorted
 correctly or there's a duplicated time stamp, the API won't work. In such
 a case, an error message is returned.
 """)
-  series: TimeSeriesPoint[];
+  series: UnivariateTimeSeriesPoint[];
 
   @doc("""
 Argument that indicates time granularity. If granularity is not present, the value
 is none by default. If granularity is none, the time stamp property in the time
 series point can be absent.
 """)
-  granularity?: TimeGranularity;
+  granularity?: UnivariateTimeGranularity;
 
   @doc("""
 A custom interval is used to set a nonstandard time interval. For example, if the
@@ -97,7 +97,7 @@ and imputeMode is \"fixed\".
 }
 
 @doc("Definition of input time series points.")
-model TimeSeriesPoint {
+model UnivariateTimeSeriesPoint {
   @doc("Argument that indicates the time stamp of a data point (ISO8601 format).")
   timestamp?: utcDateTime;
 
@@ -242,12 +242,12 @@ model UnivariateChangePointDetectionOptions {
 Time series data points. Points should be sorted by time stamp in ascending
 order to match the change point detection result.
 """)
-  series: TimeSeriesPoint[];
+  series: UnivariateTimeSeriesPoint[];
 
   @doc("""
 Granularity is used to verify whether the input series is valid.
 """)
-  granularity: TimeGranularity;
+  granularity: UnivariateTimeGranularity;
 
   @doc("""
 A custom interval is used to set a nonstandard time interval. For example, if the

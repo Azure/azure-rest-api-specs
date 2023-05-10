@@ -9,7 +9,7 @@ using Azure.Core;
 namespace AnomalyDetector.Multivariate;
 
 @doc("Field that indicates how missing values will be filled.")
-enum FillNAMethod {
+enum MultivariateFillNaMethod {
   "Previous",
   "Subsequent",
   "Linear",
@@ -25,19 +25,19 @@ enum MultivariateBatchDetectionStatus {
 }
 
 @doc("Data schema of the input data source. The default is OneTable.")
-enum DataSchema {
-  @doc("OneTable means that your input data is in one CSV file, which contains one time stamp column and several variable columns. The default DataSchema value is OneTable.")
+enum MultivariateDataSchema {
+  @doc("OneTable means that your input data is in one CSV file, which contains one time stamp column and several variable columns. The default MultivariateDataSchema value is OneTable.")
   "OneTable",
-  @doc("MultiTable means that your input data is separated in multiple CSV files. Each file contains one time stamp column and one variable column, and the CSV file name should indicate the name of the variable. The default DataSchema value is OneTable.")
+  @doc("MultiTable means that your input data is separated in multiple CSV files. Each file contains one time stamp column and one variable column, and the CSV file name should indicate the name of the variable. The default MultivariateDataSchema value is OneTable.")
   "MultiTable",
 }
 
-enum AlignMode {
+enum MultivariateAlignMode {
   "Inner",
   "Outer",
 }
 
-enum ModelStatus {
+enum MultivariateModelStatus {
   @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
   @doc("The model is being trained.")
@@ -72,7 +72,7 @@ model MultivariateBatchDetectionResultSummary {
   @doc("Error message when detection fails.")
   errors?: ErrorResponse[];
   @doc("Variable status.")
-  variableStates?: VariableState[];
+  variableStates?: MultivariateVariableState[];
 
   @doc("""
 Detection request for batch inference. This is an asynchronous inference that
@@ -93,7 +93,7 @@ model ErrorResponse {
 }
 
 @doc("Variable status.")
-model VariableState {
+model MultivariateVariableState {
   @doc("Variable name in variable states.")
   variable?: string;
 
@@ -151,14 +151,14 @@ model AnomalyState {
   @doc("Time stamp for this anomaly.")
   timestamp: utcDateTime;
   @doc("Detailed value of this anomalous time stamp.")
-  value?: AnomalyValue;
+  value?: DetectionValue;
 
   @doc("Error message for the current time stamp.")
   errors?: ErrorResponse[];
 }
 
 @doc("Detailed information of the anomalous time stamp.")
-model AnomalyValue {
+model DetectionValue {
   @doc("True if an anomaly is detected at the current time stamp.")
   isAnomaly: boolean;
 
@@ -216,7 +216,7 @@ Azure Blob Storage, based on your data schema selection.
 Data schema of the input data source. The default
 is OneTable.
 """)
-  dataSchema?: DataSchema;
+  dataSchema?: MultivariateDataSchema;
 
   @doc("""
 Start date/time of training data, which should be
@@ -248,7 +248,7 @@ detect whether the time stamp is an anomaly or not.
 
   @doc("Model status.")
   @visibility("read")
-  status?: ModelStatus;
+  status?: MultivariateModelStatus;
 
   @doc("Error messages after failure to create a model.")
   @visibility("read")
@@ -256,7 +256,7 @@ detect whether the time stamp is an anomaly or not.
 
   @doc("Diagnostics information to help inspect the states of a model or variable.")
   @visibility("read")
-  diagnosticsInfo?: DiagnosticsInfo;
+  diagnosticsInfo?: AnomalyDetectorDiagnosticDetails;
 }
 
 @doc("Manner of aligning multiple variables.")
@@ -265,28 +265,28 @@ model AlignPolicy {
 Field that indicates how to align different variables to the same
 time range.
 """)
-  alignMode?: AlignMode;
+  alignMode?: MultivariateAlignMode;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uppercases common acronyms like NA."
   @doc("""
 Field that indicates how missing values will be filled.
 """)
-  fillNAMethod?: FillNAMethod;
+  fillNAMethod?: MultivariateFillNaMethod;
 
   @doc("Field that's required when fillNAMethod is Fixed.")
   paddingValue?: float32;
 }
 
 @doc("Diagnostics information to help inspect the states of a model or variable.")
-model DiagnosticsInfo {
+model AnomalyDetectorDiagnosticDetails {
   @doc("Model status.")
-  modelState?: ModelState;
+  modelState?: MultivariateModelState;
   @doc("Variable status.")
-  variableStates?: VariableState[];
+  variableStates?: MultivariateVariableState[];
 }
 
 @doc("Model status.")
-model ModelState {
+model MultivariateModelState {
   @doc("""
 Number of passes of the entire training dataset that the
 algorithm has completed.
@@ -355,7 +355,7 @@ model MultivariateLastDetectionOptions {
 Contains the inference data, including the name, time stamps (ISO 8601), and
 values of variables.
 """)
-  variables: VariableValues[];
+  variables: MultivariateVariableValue[];
 
   @doc("""
 Number of top contributed
@@ -366,7 +366,7 @@ variables for one anomalous time stamp in the response. The default is
 }
 
 @doc("Variable values.")
-model VariableValues {
+model MultivariateVariableValue {
   @doc("Variable name of the last detection request.")
   variable: string;
 
@@ -381,7 +381,7 @@ model VariableValues {
 @doc("Results of the last detection.")
 model MultivariateLastDetectionResult {
   @doc("Variable status.")
-  variableStates?: VariableState[];
+  variableStates?: MultivariateVariableState[];
   @doc("Anomaly status and information.")
   results?: AnomalyState[];
 }
