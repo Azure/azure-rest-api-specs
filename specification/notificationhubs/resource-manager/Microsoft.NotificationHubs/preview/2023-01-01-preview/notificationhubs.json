@@ -139,6 +139,7 @@
           {
             "in": "body",
             "name": "parameters",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
@@ -199,6 +200,7 @@
           {
             "in": "body",
             "name": "parameters",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NotificationHubPatchParameters"
@@ -289,13 +291,13 @@
           {
             "in": "query",
             "name": "$skipToken",
-            "description": "Continuation token",
+            "description": "Continuation token.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$count",
-            "description": "Page size",
+            "description": "Page size.",
             "type": "integer",
             "format": "int32",
             "default": 100
@@ -406,7 +408,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The shared access authorization rule.",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
@@ -649,7 +651,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "Parameters supplied to regenerate the NotificationHub Authorization Rule Key.",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PolicyKeyResource"
@@ -724,6 +726,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
         "operationId": "Namespaces_CheckAvailability",
         "consumes": [
           "application/json"
@@ -741,6 +744,7 @@
           {
             "in": "body",
             "name": "parameters",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CheckAvailabilityParameters"
@@ -770,6 +774,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Returns the given namespace.",
         "operationId": "Namespaces_Get",
         "produces": [
           "application/json"
@@ -787,6 +792,7 @@
           {
             "in": "header",
             "name": "x-ms-client-principal-name",
+            "description": "Azure user name.",
             "type": "string"
           },
           {
@@ -814,6 +820,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Creates / Updates a Notification Hub namespace. This operation is idempotent.",
         "operationId": "Namespaces_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -834,6 +841,7 @@
           {
             "in": "header",
             "name": "x-ms-client-principal-name",
+            "description": "Azure user name.",
             "type": "string"
           },
           {
@@ -842,6 +850,7 @@
           {
             "in": "body",
             "name": "parameters",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
@@ -875,6 +884,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Patches the existing namespace.",
         "operationId": "Namespaces_Patch",
         "consumes": [
           "application/json"
@@ -895,6 +905,7 @@
           {
             "in": "header",
             "name": "x-ms-client-principal-name",
+            "description": "Azure user name.",
             "type": "string"
           },
           {
@@ -903,6 +914,7 @@
           {
             "in": "body",
             "name": "parameters",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NamespacePatchParameters"
@@ -930,6 +942,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Deletes an existing namespace. This operation also removes all associated notificationHubs under the namespace.",
         "operationId": "Namespaces_Delete",
         "parameters": [
           {
@@ -944,6 +957,7 @@
           {
             "in": "header",
             "name": "x-ms-client-principal-name",
+            "description": "Azure user name.",
             "type": "string"
           },
           {
@@ -970,6 +984,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Lists all the available namespaces within the subscription.",
         "operationId": "Namespaces_ListAll",
         "produces": [
           "application/json"
@@ -981,11 +996,13 @@
           {
             "in": "query",
             "name": "$skipToken",
+            "description": "Skip token for subsequent requests.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$count",
+            "description": "Maximum number of results to return.",
             "type": "integer",
             "format": "int32",
             "default": 100
@@ -1021,6 +1038,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Lists the available namespaces within a resource group.",
         "operationId": "Namespaces_List",
         "produces": [
           "application/json"
@@ -1035,11 +1053,13 @@
           {
             "in": "query",
             "name": "$skipToken",
+            "description": "Skip token for subsequent requests.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$count",
+            "description": "Maximum number of results to return.",
             "type": "integer",
             "format": "int32",
             "default": 100
@@ -1075,6 +1095,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Creates an authorization rule for a namespace",
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
         "consumes": [
           "application/json"
@@ -1101,6 +1122,7 @@
           {
             "in": "body",
             "name": "parameters",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
@@ -1128,6 +1150,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Deletes a namespace authorization rule",
         "operationId": "Namespaces_DeleteAuthorizationRule",
         "parameters": [
           {
@@ -1164,6 +1187,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Gets an authorization rule for a namespace by name.",
         "operationId": "Namespaces_GetAuthorizationRule",
         "produces": [
           "application/json"
@@ -1208,6 +1232,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Gets the authorization rules for a namespace.",
         "operationId": "Namespaces_ListAuthorizationRules",
         "produces": [
           "application/json"
@@ -1253,6 +1278,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Gets the Primary and Secondary ConnectionStrings to the namespace.",
         "operationId": "Namespaces_ListKeys",
         "produces": [
           "application/json"
@@ -1297,6 +1323,7 @@
         "tags": [
           "Namespaces"
         ],
+        "summary": "Regenerates the Primary/Secondary Keys to the Namespace Authorization Rule",
         "operationId": "Namespaces_RegenerateKeys",
         "consumes": [
           "application/json"
@@ -1323,6 +1350,7 @@
           {
             "in": "body",
             "name": "parameters",
+            "description": "Request content.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PolicyKeyResource"
