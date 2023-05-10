@@ -198,7 +198,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/NotificationHubPatchParameter"
+              "$ref": "#/definitions/NotificationHubPatchParameters"
             }
           }
         ],
@@ -837,7 +837,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/NamespaceResource"
+              "$ref": "#/definitions/NamespaceCreateOrUpdateParameters"
             }
           }
         ],
@@ -897,7 +897,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/NamespacePatchParameter"
+              "$ref": "#/definitions/NamespacePatchParameters"
             }
           }
         ],
@@ -1459,8 +1459,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
@@ -2276,6 +2276,48 @@
         }
       }
     },
+    "NamespaceCreateOrUpdateParameters": {
+      "required": [
+        "location",
+        "properties",
+        "sku"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "minLength": 1,
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      }
+    },
     "NamespaceListResult": {
       "type": "object",
       "properties": {
@@ -2292,7 +2334,7 @@
         }
       }
     },
-    "NamespacePatchParameter": {
+    "NamespacePatchParameters": {
       "type": "object",
       "properties": {
         "id": {
@@ -2486,7 +2528,7 @@
         }
       }
     },
-    "NotificationHubPatchParameter": {
+    "NotificationHubPatchParameters": {
       "type": "object",
       "properties": {
         "id": {
