@@ -13,7 +13,8 @@
       "properties": {
         "description": "valid description goes here",
         "enclaveVirtualNetwork": {
-          "networkSize": "small"
+          "networkSize": "small",
+          "customCidrRange": "10.0.0.0/24"
         },
         "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
         "enclaveDefaultSettings": {
@@ -23,18 +24,6 @@
         },
         "resourceCollection": [
           "g"
-        ],
-        "sourceEndpointCollection": [
-          {
-            "name": "testendpointsrc1",
-            "resourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/testsrcrg/providers/Microsoft.Network/networkSecurityGroups/testendpointsrc1"
-          }
-        ],
-        "destEndpointCollection": [
-          {
-            "name": "testendpointdest1",
-            "resourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/testdestrg/providers/Microsoft.Network/networkSecurityGroups/testendpointsrc1"
-          }
         ]
       }
     }
@@ -46,7 +35,8 @@
           "description": "valid description goes here",
           "provisioningState": "Succeeded",
           "enclaveVirtualNetwork": {
-            "networkSize": "small"
+            "networkSize": "small",
+            "customCidrRange": "10.0.0.0/24"
           },
           "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
           "enclaveDefaultSettings": {
@@ -56,18 +46,6 @@
           },
           "resourceCollection": [
             "g"
-          ],
-          "sourceEndpointCollection": [
-            {
-              "name": "testendpointsrc1",
-              "resourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/testsrcrg/providers/Microsoft.Network/networkSecurityGroups/testendpointsrc1"
-            }
-          ],
-          "destEndpointCollection": [
-            {
-              "name": "testendpointdest1",
-              "resourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/testdestrg/providers/Microsoft.Network/networkSecurityGroups/testendpointsrc1"
-            }
           ]
         },
         "tags": {
@@ -85,11 +63,6 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2023-03-17T20:43:17.760Z"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
       }
     }
   }
