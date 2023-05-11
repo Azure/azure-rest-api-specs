@@ -78,7 +78,7 @@ model MultivariateBatchDetectionResultSummary {
 Detection request for batch inference. This is an asynchronous inference that
 will need another API to get detection results.
 """)
-  setupInfo: MultivariateBatchDetectionOptions;
+  setupInfo: MultivariateBatchDetectionConfiguration;
 }
 
 @doc("Error information that the API returned.")
@@ -117,7 +117,7 @@ model MultivariateVariableState {
 Detection request for batch inference. This is an asynchronous inference that
 will need another API to get detection results.
 """)
-model MultivariateBatchDetectionOptions {
+model MultivariateBatchDetectionConfiguration {
   @doc("""
 Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
@@ -350,7 +350,7 @@ model ModelList {
 }
 
 @doc("Request of the last detection.")
-model MultivariateLastDetectionOptions {
+model MultivariateLastDetectionConfiguration {
   @doc("""
 Contains the inference data, including the name, time stamps (ISO 8601), and
 values of variables.
