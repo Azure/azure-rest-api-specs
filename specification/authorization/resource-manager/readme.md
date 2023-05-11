@@ -83,17 +83,38 @@ directive:
 ```
 
 
-### Tag: package-preview-2022-05
+### Tag: package-2022-05-01-preview-only
 
-These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+These settings apply only when `--package-2022-05-01-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+```yaml $(tag) == 'package-2022-05-01-preview-only'
 input-file:
-  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-DenyAssignmentCalls.json
-  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-ProviderOperationsCalls.json
-  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleAssignmentsCalls.json
   - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - Microsoft.Authorization/preview/2022-05-01-preview/common-types.json
+```
+### Tag: package-2022-05-01-preview
+
+These settings apply only when `--package-2022-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-01-preview'
+input-file:
+  
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/common-types.json
+  - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 ### Tag: package-2021-12-01-preview-only
 
