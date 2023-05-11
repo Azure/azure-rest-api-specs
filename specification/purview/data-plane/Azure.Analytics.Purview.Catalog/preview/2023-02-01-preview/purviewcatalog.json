@@ -1845,6 +1845,62 @@
         }
       }
     },
+    "/entity/deleteHierarchy/operations": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get the delete hierarchy operations",
+        "operationId": "Entity_GetDeleteHierarchyOperations",
+        "x-ms-examples": {
+          "Entity_GetDeleteHierarchyOperations": {
+            "$ref": "./examples/Entity_GetDeleteHierarchyOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "dayRange",
+            "in": "query",
+            "description": "Return the delete hierarchy operations within the day range. The value will be 7 by default.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "An array of statuses of the delete hierarchy operations. ",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "listOfStatus"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return delete hierarchy operations.",
+            "schema": {
+              "type": "array",
+              "description": "An array of delete hierarchy operations.",
+              "items": {
+                "$ref": "#/definitions/EntityDeleteHierarchyOperation"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/entity/deleteHierarchy/operation/{operationGuid}/cancel": {
       "post": {
         "tags": [
