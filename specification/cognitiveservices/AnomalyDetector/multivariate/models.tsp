@@ -371,7 +371,7 @@ model MultivariateVariableValue {
   variable: string;
 
   @doc("Time stamps of the last detection request.")
-  timestamps: string[];
+  timestamps: utcDateTime[];
 
   @doc("Values of variables.")
   values: float32[];
