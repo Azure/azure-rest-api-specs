@@ -1576,6 +1576,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
@@ -2132,7 +2138,10 @@
         "location": {
           "description": "Location of the notification hub. This property is deprecated\r\nsince version 2023-01-01-preview.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
