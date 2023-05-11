@@ -9,5 +9,9 @@ using Azure.ClientGenerator.Core;
 @@projectedName(AnomalyDetector.Multivariate.ModelDetails.dataSource, "csharp", "dataSourceUri"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Multivariate.ModelDetails.endTime, "csharp", "endsOn"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Multivariate.ModelDetails.startTime, "csharp", "starsOn"); // Prefer a different name for C# only
-@@projectedName(AnomalyDetector.Multivariate.AnomalyValue.interpretation, "csharp", "interpretations"); // Prefer a different name for C# only
+@@projectedName(AnomalyDetector.Multivariate.DetectionValue.interpretation, "csharp", "interpretations"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Univariate.DetectUnivariateLastPoint, "java", "detectUnivariateLastAnomaly"); // Prefer a different name for java only
+@@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isAnomaly, "client", "isAnomalyList"); // Use isAnomalyList in all clients
+@@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isNegativeAnomaly, "client", "isNegativeAnomalyList"); // Use isNegativeAnomalyList in all clients
+@@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isPositiveAnomaly, "client", "isPositiveAnomalyList"); // Use isPositiveAnomalyList in all clients
+@@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.severity, "client", "severities"); // Use severities in all clients
