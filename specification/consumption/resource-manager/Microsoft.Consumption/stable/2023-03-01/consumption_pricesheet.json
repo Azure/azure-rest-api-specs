@@ -40,11 +40,14 @@
           "PriceSheet"
         ],
         "operationId": "PriceSheet_GetByBillingAccountPeriod",
-        "description": "Get the price sheet for a scope by billingAccount and billing period.",
+        "description": "Generates the pricesheet for the provided billing period asynchronously based on the enrollment id",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "EAPriceSheetForBillingPeriod": {
             "$ref": "./examples/EAPriceSheetForBillingPeriod.json"
@@ -62,6 +65,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -77,56 +86,38 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/operationStatus/{operationStatusId}": {
-      "get": {
-        "tags": [
-          "PriceSheet"
-        ],
-        "operationId": "PriceSheet_GetByBillingAccountOperationStatus",
-        "description": "Gets the price sheet URL for a scope by billingAccount and billing period.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "EAPriceSheetOperationStatus": {
-            "$ref": "./examples/EAPriceSheetOperationStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/operationStatusIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Completed.",
-            "schema": {
-              "$ref": "#/definitions/DownloadProperties"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "common-types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     }
-  },
+  },    
   "definitions": {
+    "OperationStatus": {
+      "description": "The status of the long running operation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the long running operation.",
+          "type": "string",
+          "enum": [
+            "Running",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "OperationStatusType",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the resource generated.",
+          "$ref": "#/definitions/DownloadProperties"
+        }
+      }
+    },
     "DownloadProperties": {
       "description": "The properties of the price sheet download.",
       "type": "object",
@@ -140,28 +131,6 @@
           "description": "Download link validity.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The details of the error.",
-          "properties": {
-            "code": {
-              "description": "Error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       }
     }
