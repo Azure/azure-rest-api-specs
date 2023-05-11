@@ -1518,6 +1518,7 @@
         "tags": [
           "Operations"
         ],
+        "summary": "Lists all available Notification Hubs operations.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -2251,6 +2252,7 @@
       }
     },
     "ErrorDetails": {
+      "description": "Represents error details, including message and error code.",
       "required": [
         "code",
         "message"
@@ -2274,6 +2276,7 @@
       }
     },
     "ErrorResponse": {
+      "description": "Represents error response.",
       "required": [
         "error"
       ],
@@ -2379,6 +2382,7 @@
       }
     },
     "LinkedNotification": {
+      "description": "Content of ARM Linked notification.",
       "type": "object",
       "properties": {
         "action": {
@@ -2390,6 +2394,7 @@
       }
     },
     "LinkedNotificationProperties": {
+      "description": "ARM linked notification properties.",
       "type": "object",
       "properties": {
         "id": {
@@ -3047,7 +3052,10 @@
         "location": {
           "description": "Location of the PNS credentials. Always the same as location of the containing namespace.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -3064,6 +3072,7 @@
       }
     },
     "PolicyKeyType": {
+      "description": "Type of Shared Access Policy Key (primary or secondary).",
       "enum": [
         "PrimaryKey",
         "SecondaryKey"
@@ -3129,8 +3138,12 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         },
         "location": {
+          "description": "Location of the Private Endpoint Connection.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-azure-resource": true
@@ -3271,21 +3284,26 @@
       }
     },
     "RegistrationResult": {
+      "description": "Notification result for a single registration.",
       "type": "object",
       "properties": {
         "applicationPlatform": {
+          "description": "PNS type.",
           "type": "string",
           "readOnly": true
         },
         "pnsHandle": {
+          "description": "PNS handle.",
           "type": "string",
           "readOnly": true
         },
         "registrationId": {
+          "description": "Registration id.",
           "type": "string",
           "readOnly": true
         },
         "outcome": {
+          "description": "Notification outcome.",
           "type": "string",
           "readOnly": true
         }
@@ -3513,7 +3531,10 @@
         "location": {
           "description": "Location of the PNS credentials. Always the same as location of the containing namespace.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "x-ms-azure-resource": true
