@@ -83,8 +83,8 @@ subgraph G["run `2.2 TypeSpec-Project-Prcoess.ps1`"]
   D
 end
 F["2.2.1 create/update tsp-location.yaml"]
-C["2.2.2 call 2.3 TypeSpec-Project-Sync.ps1"]
-D["2.2.3 call 2.4 TypeSpec-Project-Generate.ps1"]
+C["2.2.2 call TypeSpec-Project-Sync.ps1"]
+D["2.2.3 call TypeSpec-Project-Generate.ps1"]
 G-->E["code build"]
 class A,E grey
 class C,D,F highlight
@@ -106,7 +106,7 @@ class C,D,F highlight
     - repoUrl (optional)
   - output: n/a
 
-- 2.3 `TypeSpec-Project-Sync.ps1`
+- 2.2.2 `TypeSpec-Project-Sync.ps1`
   - What does this script do?
     - fetch specs from remote spec repo or use a local spec repo
     - copy specs to temp location under the sdk project folder
@@ -116,7 +116,7 @@ class C,D,F highlight
     - localSpecRepoPath (optional)
   - output: n/a
 
-- 2.4 `TypeSpec-Project-Generate.ps1`
+- 2.2.3 `TypeSpec-Project-Generate.ps1`
   - What does this script do?
     - create scaffolding for new project (use the folder created by 2.2)
     - generate sdk code
@@ -124,7 +124,7 @@ class C,D,F highlight
     - projectDirectory (required)
     - typespecAdditionalOptions (emitter options) (optional)
 
-- 2.4.1 Function `Generate-{Language}-New-Project-Scaffolding`
+- 2.2.3.1 Function `Generate-{Language}-New-Project-Scaffolding`
   - What does this function do?
     - Create the folders and the files under SDK project folder, such as creating `test` folder, `sln` files that would vary between language repos. Eventually, this project scaffolding would be integrated into language emitter.
     - Create or update the files outside of the SDK project folder (CI.yml or pom.xml for java, etc.)
@@ -135,12 +135,12 @@ class C,D,F highlight
 | Step | Step Detail | Assignee | Implemented | Verified |
 |--|--|--|--:|--:|
 | 2.1 | Dependencies scripts | SDK owner | [ ] | [] |
-| 2.2 | common script | EngSys | [ ] | | [ ] |
-| 2.3 | common script | EngSys | [ ] | | [ ] |
-| 2.4 | common script | EngSys | [ ] | | [ ] |
-| 2.4.1 | language function | SDK owner | [ ] | | [ ] |
-| 2.5 | language script to call common script | SDK owner | [] | []
-| 2.6 | update to dotnet build target | Michael, Crystal | [] | []
+| 2.2 | TypeSpec-Project-Process.ps1 | EngSys | [ ] | | [ ] |
+| 2.2.2 | TypeSpec-Project-Sync.ps1 | EngSys | [ ] | | [ ] |
+| 2.2.3 | TypeSpec-Project-Generate.ps1 | EngSys | [ ] | | [ ] |
+| 2.2.3.1 | Generate-{Language}-New-Project-Scaffolding | SDK owner | [ ] | | [ ] |
+| 2.3 | Language script to call common script | SDK owner | [] | []
+| 2.4 | Update dotnet build target | Michael, Crystal | [] | []
 
 #### 3. Inner Dev loop SDK generation local scenario
 ##### Flowchart
