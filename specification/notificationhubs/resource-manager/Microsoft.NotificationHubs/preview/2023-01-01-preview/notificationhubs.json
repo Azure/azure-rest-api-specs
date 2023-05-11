@@ -2108,22 +2108,12 @@
     "CheckAvailabilityResult": {
       "description": "Description of a CheckAvailability resource.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -2179,22 +2169,12 @@
     "DebugSendResponse": {
       "description": "Description of a NotificationHub Resource.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -2507,6 +2487,12 @@
       "description": "Patch parameter for NamespaceResource.",
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties"
+        },
         "id": {
           "type": "string"
         },
@@ -2515,12 +2501,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku"
-        },
-        "properties": {
-          "$ref": "#/definitions/NamespaceProperties"
         }
       }
     },
@@ -2636,37 +2616,6 @@
         }
       ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Gets or sets resource location.",
-          "minLength": 1,
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "sku": {
           "$ref": "#/definitions/Sku"
         },
@@ -2745,6 +2694,9 @@
       "description": "Patch parameter for NamespaceResource.",
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/NotificationHubProperties"
+        },
         "id": {
           "type": "string"
         },
@@ -2753,9 +2705,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/NotificationHubProperties"
         }
       }
     },
@@ -2830,37 +2779,6 @@
         }
       ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Gets or sets resource location.",
-          "minLength": 1,
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/NotificationHubProperties"
         }
@@ -2996,22 +2914,12 @@
     "PnsCredentialsResource": {
       "description": "Description of a NotificationHub PNS Credentials. This is a response of the POST requests that return namespace or hubs\r\nPNS credentials.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -3082,21 +2990,6 @@
         }
       ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -3139,22 +3032,12 @@
     "PrivateLinkResource": {
       "description": "A Private Link Arm Resource.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -3469,21 +3352,6 @@
         }
       ],
       "properties": {
-        "id": {
-          "description": "Gets resource Id",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Gets resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Gets resource type",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
