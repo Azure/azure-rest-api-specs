@@ -6,6 +6,9 @@ parameters:
 
 steps:
 - script: |
+    # Log commands before running
+    set -x
+    
     cd ${{parameters.Folder}}
     npx tsp compile .
     cd $(Build.SourcesDirectory)
