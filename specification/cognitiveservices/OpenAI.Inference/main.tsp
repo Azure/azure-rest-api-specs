@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> |
     OAuth2Auth<[{
@@ -37,8 +38,9 @@ namespace Azure.OpenAI;
 enum ServiceApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_12_01: "2022-12-01",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_03_15_Preview: "2023-03-15-preview",
 }
-
 
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
