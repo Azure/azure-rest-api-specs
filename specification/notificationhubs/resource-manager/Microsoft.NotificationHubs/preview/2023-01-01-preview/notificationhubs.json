@@ -2124,13 +2124,6 @@
           "type": "string",
           "readOnly": true
         },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "isAvailiable": {
           "description": "Gets or sets true if the name is available and can be used to\r\ncreate new Namespace/NotificationHub. Otherwise false.",
           "type": "boolean"
@@ -2195,23 +2188,8 @@
           "type": "string",
           "readOnly": true
         },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/DebugSendResult"
-        },
-        "location": {
-          "description": "Location of the Notification Hub.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       }
     },
@@ -2656,13 +2634,6 @@
           "type": "string",
           "readOnly": true
         },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "description": "Gets or sets resource location.",
           "minLength": 1,
@@ -2671,6 +2642,13 @@
             "create",
             "read"
           ]
+        },
+        "tags": {
+          "description": "Gets or sets resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "sku": {
           "$ref": "#/definitions/Sku"
@@ -2823,6 +2801,7 @@
     "NotificationHubResource": {
       "description": "Notification Hub Resource.",
       "required": [
+        "location",
         "properties"
       ],
       "type": "object",
@@ -2847,20 +2826,21 @@
           "type": "string",
           "readOnly": true
         },
+        "location": {
+          "description": "Gets or sets resource location.",
+          "minLength": 1,
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tags": {
           "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         },
         "properties": {
           "$ref": "#/definitions/NotificationHubProperties"
@@ -3013,23 +2993,8 @@
           "type": "string",
           "readOnly": true
         },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/PnsCredentials"
-        },
-        "location": {
-          "description": "Location of the PNS credentials. Always the same as location of the containing namespace.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       }
     },
@@ -3106,23 +3071,8 @@
           "type": "string",
           "readOnly": true
         },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-        },
-        "location": {
-          "description": "Location of the Private Endpoint Connection.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       }
     },
@@ -3171,13 +3121,6 @@
           "description": "Gets resource type",
           "type": "string",
           "readOnly": true
-        },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties"
@@ -3500,13 +3443,6 @@
           "description": "Gets resource type",
           "type": "string",
           "readOnly": true
-        },
-        "tags": {
-          "description": "Gets or sets resource tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "properties": {
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
