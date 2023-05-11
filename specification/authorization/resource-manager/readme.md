@@ -71,6 +71,9 @@ directive:
   - suppress: R1007
     from: authorization-AccessReviewCalls.json
     reason: Fixing warning would create a breaking change
+  - suppress: DeleteResponseBodyEmpty
+    from: authorization-RoleDefinitionsCalls.json
+    reason: Fixing warning would create a S360 flag for us, because our service returns the role definition when deleted.
   - suppress: R2017
     from: authorization-AccessReviewCalls.json
     reason: Request body is a subset of response body. Additional properties in the response are not settable by the user

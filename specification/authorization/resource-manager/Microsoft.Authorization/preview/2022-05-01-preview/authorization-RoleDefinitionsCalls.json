@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions": {
       "get": {
         "tags": [
           "Permissions"
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions": {
       "get": {
         "tags": [
           "Permissions"
@@ -110,6 +110,7 @@
             "name": "resourceName",
             "in": "path",
             "required": true,
+            "pattern": ".+",
             "type": "string",
             "description": "The name of the resource to get the permissions for."
           },
@@ -276,6 +277,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - Returns information about the role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            },
           "201": {
             "description": "OK - Returns information about the role definition.",
             "schema": {
@@ -464,6 +470,7 @@
       "description": "Role definition properties."
     },
     "RoleDefinition": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
