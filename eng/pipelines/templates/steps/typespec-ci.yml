@@ -10,7 +10,7 @@ steps:
     npx tsp compile .
     cd $(Build.SourcesDirectory)
 
-    # Display results of "git diff" (in case there is any diff)
+    # If "tsp compile" generated different swagger than is checked in, display the diff
     git diff
 
     # "git diff-index --quiet HEAD --" returns zero exit code if no diff, nonzero if yes diff
