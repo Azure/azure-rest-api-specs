@@ -181,7 +181,8 @@ namespace Azure.Messaging.EventGrid {
   }, PublishResult>;
 
 
-  @doc("Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")  @route("/topics/{topicName}:publish", {shared: true})
+  @doc("Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")  
+  @route("/topics/{topicName}:publish", {shared: true})
   @post op PublishCloudEvents is Azure.Core.RpcOperation<{
     @doc("content type")
     @header("content-type")
