@@ -26,17 +26,9 @@ These are the global settings for the Azure Maintenance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-04
+tag: package-preview-2022-11
 ```
 
-### Tag: package-2023-04
-
-These settings apply only when `--tag=package-2023-04` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-04'
-input-file:
-  - Microsoft.Maintenance/stable/2023-04-01/Maintenance.json
-```
 
 ### Tag: package-preview-2022-11
 
@@ -46,7 +38,6 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 input-file:
   - Microsoft.Maintenance/preview/2022-11-01-preview/Maintenance.json
 ```
-
 ### Tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
@@ -155,52 +146,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-### Suppression
-
-``` yaml
-directive:
-  - suppress: PathForPutOperation
-    from: maintenance.json
-    reason: Subscription or resource group is passed in request body.
-  - suppress: DeleteResponseBodyEmpty
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: PathContainsResourceType
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: PathContainsResourceType
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: TrackedResourcePatchOperation
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: SubscriptionsAndResourceGroupCasing
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: UnSupportedPatchProperties
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: PathResourceProviderNamePascalCase
-    from: maintenance.json
-    reason: Suppression warning to avoid breaking changes
-  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: maintenance.json
-    reason: False positive. ConfigurationAssignments is proxy resource at subscription/resourceGroup level.
-  - suppress: ResourceNameRestriction
-    from: maintenance.json
-    reason: Maintenance RP accept any string, no special restriction required.
-  - suppress: PutResponseSchemaDescription
-    from: maintenance.json
-    reason: No documentation changes.
-  - suppress: DeleteOperationAsyncResponseValidation
-    from: maintenance.json
-    reason: No async operation supported by Mantenance RP.
-  - suppress: LroLocationHeader
-    from: maintenance.json
-    reason: No async operation supported by Mantenance RP.
-  - suppress: LroErrorContent
-    from: maintenance.json
-    reason: No documentation changes.
-```
-
