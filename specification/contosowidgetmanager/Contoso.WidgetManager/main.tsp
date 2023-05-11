@@ -49,7 +49,7 @@ interface Widgets {
 
   @doc("Delete a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
-  deleteWidget is LongRunningResourceDelete<Widget>;
+  deleteWidget2 is LongRunningResourceDelete<Widget>;
 
   @doc("List Widget resources")
   listWidgets is ResourceList<
