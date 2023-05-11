@@ -3,10 +3,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-enum ServiceApiVersions {
-  v2023_06_01_preview: "2023-06-01-preview"
-}
-
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey">
 )
@@ -42,6 +38,11 @@ namespace Azure.Messaging.EventGrid {
   using TypeSpec.Versioning;
   using Azure.Core;
   using Azure.Core.Foundations;
+
+  enum ServiceApiVersions {
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    v2023_06_01_preview: "2023-06-01-preview"
+  }
 
   @doc("Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.")
   model CloudEvent {
