@@ -69,7 +69,8 @@
                   "type": "string"
                 },
                 "Retry-After": {
-                  "type": "integer"
+                  "type": "integer",
+                  "format": "int64"
                 }
               }
             },
@@ -100,6 +101,9 @@
           "parameters": [          
             {
               "$ref": "#/parameters/billingAccountIdParameter"
+            },
+            {
+              "$ref": "#/parameters/apiVersionParameter"
             },
             {
               "$ref": "#/parameters/operationStatusIdParameter"
@@ -189,7 +193,7 @@
         "description": "Billing Period Name.",
         "required": true,
         "type": "string",
-        "pattern": "^[a-z][a-z0-9]*$",
+        "pattern": "^[0-9]*$",
         "x-ms-parameter-location": "method"
       },
       "operationStatusIdParameter":{
