@@ -154,7 +154,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Udpated",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/NotificationHubResource"
             }
@@ -435,7 +435,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Udpated",
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -895,7 +901,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Udpated",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/NamespaceResource"
             }
@@ -1173,7 +1179,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Udpated",
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -2269,7 +2281,7 @@
           "readOnly": true
         },
         "customerVisibleFqdns": {
-          "description": "List of customer-visible domain names that point to a Notification Hubs namespace. It includes both Service Bus and Notification Hubs FQDNS\r\n(e.g. namespace.servicebus.windows.net and namespace.notificationhub.windows.net for Public Cloud namespace).",
+          "description": "List of customer-visible domain names that point to a Notification Hubs namespace.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2401,7 +2413,7 @@
           "readOnly": true
         },
         "fillGapWithZero": {
-          "description": "Opional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.",
+          "description": "Optional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.",
           "type": "boolean",
           "readOnly": true
         }
