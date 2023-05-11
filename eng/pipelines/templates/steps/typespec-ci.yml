@@ -14,6 +14,7 @@ steps:
     git diff
 
     # "git diff-index --quiet HEAD --" returns zero exit code if no diff, nonzero if yes diff
+    # Should cause step to fail if any diff was detected
     git diff-index --quiet HEAD --
 
     # Revert any changed files
