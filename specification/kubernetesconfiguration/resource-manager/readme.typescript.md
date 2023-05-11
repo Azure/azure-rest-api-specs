@@ -10,4 +10,5 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/kubernetesconfiguration/arm-kubernetesconfiguration"
   override-client-name: SourceControlConfigurationClient
   generate-metadata: true
+  
 ```
