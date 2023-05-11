@@ -13,18 +13,19 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    output-file: "contentsafety.json"
-    azure-resource-provider-folder: ../../../../data-plane
+    emitter-output-dir: "{project-root}/../"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/contentsafety.json"
+    azure-resource-provider-folder: "data-plane"
     examples-directory: ./examples
-  "@azure-tools/typespec-python":
-    package-name: "azure-ai-contentsafety"
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
-    package-mode: dataplane
-  "@azure-tools/typespec-csharp":
-    namespace: "Azure.AI.ContentSafety"
-    clear-output-folder: true
-    model-namespace: false
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+#  "@azure-tools/typespec-python":
+#    package-name: "azure-ai-contentsafety"
+#    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+#    package-mode: dataplane
+#  "@azure-tools/typespec-csharp":
+#    namespace: "Azure.AI.ContentSafety"
+#    clear-output-folder: true
+#    model-namespace: false
+#    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
   # "@azure-tools/cadl-typescript":
   #   emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/contentsafety-rest"
   #   generateMetadata: true
