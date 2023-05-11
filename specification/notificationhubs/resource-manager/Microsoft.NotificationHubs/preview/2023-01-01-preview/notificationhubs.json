@@ -1860,6 +1860,7 @@
   },
   "definitions": {
     "AccessRights": {
+      "description": "Defines values for AccessRights.",
       "enum": [
         "Manage",
         "Send",
@@ -1872,6 +1873,7 @@
       }
     },
     "AdmCredential": {
+      "description": "Description of a NotificationHub AdmCredential.",
       "required": [
         "properties"
       ],
@@ -1884,6 +1886,7 @@
       "x-ms-secret": true
     },
     "AdmCredentialProperties": {
+      "description": "Description of a NotificationHub AdmCredential.",
       "required": [
         "authTokenUrl",
         "clientId",
@@ -1892,16 +1895,19 @@
       "type": "object",
       "properties": {
         "clientId": {
+          "description": "Gets or sets the client identifier.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "clientSecret": {
+          "description": "Gets or sets the credential secret access key.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "authTokenUrl": {
+          "description": "Gets or sets the URL of the authorization token.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
@@ -1909,6 +1915,7 @@
       }
     },
     "ApnsCredential": {
+      "description": "Description of a NotificationHub ApnsCredential.",
       "required": [
         "properties"
       ],
@@ -1921,60 +1928,73 @@
       "x-ms-secret": true
     },
     "ApnsCredentialProperties": {
+      "description": "Description of a NotificationHub ApnsCredential.",
       "required": [
         "endpoint"
       ],
       "type": "object",
       "properties": {
         "apnsCertificate": {
+          "description": "Gets or sets the APNS certificate.",
           "type": "string",
           "x-ms-secret": true
         },
         "certificateKey": {
+          "description": "Gets or sets the certificate key.",
           "type": "string",
           "x-ms-secret": true
         },
         "endpoint": {
+          "description": "Gets or sets the endpoint of this credential.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "thumbprint": {
+          "description": "Gets or sets the APNS certificate Thumbprint",
           "type": "string",
           "x-ms-secret": true
         },
         "keyId": {
+          "description": "Gets or sets a 10-character key identifier (kid) key, obtained from\r\nyour developer account",
           "type": "string",
           "x-ms-secret": true
         },
         "appName": {
+          "description": "Gets or sets the name of the application",
           "type": "string",
           "x-ms-secret": true
         },
         "appId": {
+          "description": "Gets or sets the issuer (iss) registered claim key, whose value is\r\nyour 10-character Team ID, obtained from your developer account",
           "type": "string",
           "x-ms-secret": true
         },
         "token": {
+          "description": "Gets or sets provider Authentication Token, obtained through your\r\ndeveloper account",
           "type": "string",
           "x-ms-secret": true
         }
       }
     },
     "Availability": {
+      "description": "Represents metric availability (part of RP operation descriptions).",
       "type": "object",
       "properties": {
         "timeGrain": {
+          "description": "Time grain of the availability.",
           "type": "string",
           "readOnly": true
         },
         "blobDuration": {
+          "description": "Duration of the availability blob.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "BaiduCredential": {
+      "description": "Description of a NotificationHub BaiduCredential.",
       "required": [
         "properties"
       ],
@@ -1987,6 +2007,7 @@
       "x-ms-secret": true
     },
     "BaiduCredentialProperties": {
+      "description": "Description of a NotificationHub BaiduCredential.",
       "required": [
         "baiduApiKey",
         "baiduEndPoint",
@@ -1995,16 +2016,19 @@
       "type": "object",
       "properties": {
         "baiduApiKey": {
+          "description": "Gets or sets baidu Api Key.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "baiduEndPoint": {
+          "description": "Gets or sets baidu Endpoint.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "baiduSecretKey": {
+          "description": "Gets or sets baidu Secret Key",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
@@ -2012,6 +2036,7 @@
       }
     },
     "BrowserCredential": {
+      "description": "Description of a NotificationHub BrowserCredential.",
       "required": [
         "properties"
       ],
@@ -2024,6 +2049,7 @@
       "x-ms-secret": true
     },
     "BrowserCredentialProperties": {
+      "description": "Description of a NotificationHub BrowserCredential.",
       "required": [
         "subject",
         "vapidPrivateKey",
@@ -2032,16 +2058,19 @@
       "type": "object",
       "properties": {
         "subject": {
+          "description": "Gets or sets web push subject.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "vapidPrivateKey": {
+          "description": "Gets or sets VAPID private key.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "vapidPublicKey": {
+          "description": "Gets or sets VAPID public key.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
@@ -2049,108 +2078,133 @@
       }
     },
     "CheckAvailabilityParameters": {
+      "description": "Parameters supplied to the Check Name Availability for Namespace and\r\nNotificationHubs.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets or sets resource name",
           "minLength": 1,
           "type": "string"
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "location": {
+          "description": "Gets or sets resource location",
           "type": "string"
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "isAvailiable": {
+          "description": "Not used and deprecated since API version 2023-01-01-preview",
           "type": "boolean"
         }
       }
     },
     "CheckAvailabilityResult": {
+      "description": "Description of a CheckAvailability resource.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "isAvailiable": {
+          "description": "Gets or sets true if the name is available and can be used to\r\ncreate new Namespace/NotificationHub. Otherwise false.",
           "type": "boolean"
         },
         "location": {
+          "description": "Location of the notification hub. This property is deprecated\r\nsince version 2023-01-01-preview.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ConnectionDetails": {
+      "description": "Part of Private Endpoint description that stores information about a connection between Private Endpoint and Notification Hubs namespace.\r\nThis is internal class, not visible to customers, and we use it only to discover the link identifier.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "A unique ID of the connection. This is not the ARM id, but rather an internal identifier set by the Networking RP. Notification Hubs code\r\ndoes not analyze it.",
           "type": "string",
           "readOnly": true
         },
         "privateIpAddress": {
+          "description": "IP address of the Private Endpoint. This is not used by Notification Hubs.",
           "type": "string",
           "readOnly": true
         },
         "linkIdentifier": {
+          "description": "Link identifier. This is a string representation of an integer that is also encoded in every IPv6 frame received by Front Door,\r\nand we use it to create implicit authorization rule that allows connection from the associated Private Endpoint.",
           "type": "string",
           "readOnly": true
         },
         "groupId": {
+          "description": "Group name. Always \"namespace\" for Notification Hubs.",
           "type": "string",
           "readOnly": true
         },
         "memberName": {
+          "description": "Member name. Always \"namespace\" for Notification Hubs.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "DebugSendResponse": {
+      "description": "Description of a NotificationHub Resource.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2160,25 +2214,33 @@
           "$ref": "#/definitions/DebugSendResult"
         },
         "location": {
+          "description": "Location of the Notification Hub.",
           "type": "string",
-          "readOnly": true
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
     "DebugSendResult": {
+      "description": "Result of DebugSend operations.",
       "type": "object",
       "properties": {
         "success": {
           "format": "int64",
+          "description": "Gets or sets successful send",
           "type": "integer",
           "readOnly": true
         },
         "failure": {
           "format": "int64",
+          "description": "Gets or sets send failure",
           "type": "integer",
           "readOnly": true
         },
         "results": {
+          "description": "Gets or sets actual failure description",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RegistrationResult"
@@ -2196,14 +2258,17 @@
       "type": "object",
       "properties": {
         "code": {
+          "description": "Error code.",
           "minLength": 1,
           "type": "string"
         },
         "message": {
+          "description": "Error message.",
           "minLength": 1,
           "type": "string"
         },
         "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
           "type": "string"
         }
       }
@@ -2220,6 +2285,7 @@
       }
     },
     "GcmCredential": {
+      "description": "Description of a NotificationHub GcmCredential.",
       "required": [
         "properties"
       ],
@@ -2232,16 +2298,19 @@
       "x-ms-secret": true
     },
     "GcmCredentialProperties": {
+      "description": "Description of a NotificationHub GcmCredential.",
       "required": [
         "googleApiKey"
       ],
       "type": "object",
       "properties": {
         "gcmEndpoint": {
+          "description": "Gets or sets the GCM endpoint.",
           "type": "string",
           "x-ms-secret": true
         },
         "googleApiKey": {
+          "description": "Gets or sets the Google API key.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
@@ -2249,17 +2318,21 @@
       }
     },
     "GroupConnectivityInformation": {
+      "description": "Represents a connectivity information to Notification Hubs namespace. This is part of PrivateLinkService proxy that tell\r\nthe Networking RP how to connect to the Notification Hubs namespace.",
       "type": "object",
       "properties": {
         "groupId": {
+          "description": "Group id. Always set to \"namespace\".",
           "type": "string",
           "readOnly": true
         },
         "memberName": {
+          "description": "Member name. Always set to \"namespace\".",
           "type": "string",
           "readOnly": true
         },
         "customerVisibleFqdns": {
+          "description": "List of customer-visible domain names that point to a Notification Hubs namespace. It includes both Service Bus and Notification Hubs FQDNS\r\n(e.g. namespace.servicebus.windows.net and namespace.notificationhub.windows.net for Public Cloud namespace).",
           "type": "array",
           "items": {
             "type": "string"
@@ -2267,20 +2340,24 @@
           "readOnly": true
         },
         "internalFqdn": {
+          "description": "One of the domain name from the customer-visible names; this is used internally by Private Link service to make connection to Notification Hubs\r\nnamespace.",
           "type": "string",
           "readOnly": true
         },
         "redirectMapId": {
+          "description": "Not used by Notification Hubs.",
           "type": "string",
           "readOnly": true
         },
         "privateLinkServiceArmRegion": {
+          "description": "ARM region for Private Link Service. We use the region that contains the connected Notification Hubs namespace.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "IpRule": {
+      "description": "A network authorization rule that filters traffic based on IP address.",
       "required": [
         "ipMask",
         "rights"
@@ -2288,10 +2365,12 @@
       "type": "object",
       "properties": {
         "ipMask": {
+          "description": "IP mask.",
           "minLength": 1,
           "type": "string"
         },
         "rights": {
+          "description": "List of access rights.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessRights"
@@ -2319,46 +2398,57 @@
       }
     },
     "LogSpecification": {
+      "description": "A single log category specification.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the log category.",
           "type": "string",
           "readOnly": true
         },
         "displayName": {
+          "description": "Display name of the log category.",
           "type": "string",
           "readOnly": true
         },
         "blobDuration": {
+          "description": "Duration of data written to a single blob.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "MetricSpecification": {
+      "description": "A metric specification.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Metric name / id.",
           "type": "string",
           "readOnly": true
         },
         "displayName": {
+          "description": "User-visible metric name.",
           "type": "string",
           "readOnly": true
         },
         "displayDescription": {
+          "description": "Description of the metric.",
           "type": "string",
           "readOnly": true
         },
         "unit": {
+          "description": "Metric unit.",
           "type": "string",
           "readOnly": true
         },
         "aggregationType": {
+          "description": "Type of the aggregation (Average, Minimum, Maximum, Total or Count).",
           "type": "string",
           "readOnly": true
         },
         "availabilities": {
+          "description": "List of availabilities.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Availability"
@@ -2367,16 +2457,19 @@
           "x-ms-identifiers": [ ]
         },
         "metricFilterPattern": {
+          "description": "The matching regex pattern to be applied to the field pointed by the \"metricsFilterPathSelector\" flag in the ARM manifest.",
           "type": "string",
           "readOnly": true
         },
         "fillGapWithZero": {
+          "description": "Opional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.",
           "type": "boolean",
           "readOnly": true
         }
       }
     },
     "MoveResourcesRequest": {
+      "description": "A request for Move Namespace requests.",
       "required": [
         "resources",
         "targetResourceGroup"
@@ -2384,10 +2477,12 @@
       "type": "object",
       "properties": {
         "targetResourceGroup": {
+          "description": "Target resource group URI. All resources will be moved to this group.",
           "minLength": 1,
           "type": "string"
         },
         "resources": {
+          "description": "List of resource URIs to move.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2396,6 +2491,7 @@
       }
     },
     "MpnsCredential": {
+      "description": "Description of a NotificationHub MpnsCredential.",
       "required": [
         "properties"
       ],
@@ -2408,6 +2504,7 @@
       "x-ms-secret": true
     },
     "MpnsCredentialProperties": {
+      "description": "Description of a NotificationHub MpnsCredential.",
       "required": [
         "certificateKey",
         "mpnsCertificate",
@@ -2416,16 +2513,19 @@
       "type": "object",
       "properties": {
         "mpnsCertificate": {
+          "description": "Gets or sets the MPNS certificate.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "certificateKey": {
+          "description": "Gets or sets the certificate key for this credential.",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
         },
         "thumbprint": {
+          "description": "Gets or sets the MPNS certificate Thumbprint",
           "minLength": 1,
           "type": "string",
           "x-ms-secret": true
@@ -2433,9 +2533,11 @@
       }
     },
     "NamespaceListResult": {
+      "description": "The response of the List Namespace operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Gets or sets result of the List Namespace operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NamespaceResource"
@@ -2443,12 +2545,14 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Gets or sets link to the next set of results. Not empty if Value\r\ncontains incomplete list of Namespaces",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "NamespacePatchParameters": {
+      "description": "Patch parameter for NamespaceResource.",
       "type": "object",
       "properties": {
         "id": {
@@ -2466,9 +2570,11 @@
       }
     },
     "NamespaceProperties": {
+      "description": "Represents namespace properties.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the Notification Hubs namespace. This is immutable property, set automatically \r\nby the service when the namespace is created.",
           "type": "string",
           "readOnly": true
         },
@@ -2479,32 +2585,39 @@
           "$ref": "#/definitions/NamespaceStatus"
         },
         "enabled": {
+          "description": "Gets or sets whether or not the namespace is currently enabled.",
           "type": "boolean",
           "readOnly": true
         },
         "critical": {
+          "description": "Gets or sets whether or not the namespace is set as Critical.",
           "type": "boolean",
           "readOnly": true
         },
         "subscriptionId": {
+          "description": "Namespace subscription id.",
           "type": "string",
           "readOnly": true
         },
         "region": {
+          "description": "Region. The value is always set to the same value as Namespace.Location, so we are deprecating\r\nthis property.",
           "type": "string",
           "readOnly": true
         },
         "metricId": {
+          "description": "Azure Insights Metrics id.",
           "type": "string",
           "readOnly": true
         },
         "createdAt": {
           "format": "date-time",
+          "description": "Time when the namespace was created.",
           "type": "string",
           "readOnly": true
         },
         "updatedAt": {
           "format": "date-time",
+          "description": "Time when the namespace was updated.",
           "type": "string",
           "readOnly": true
         },
@@ -2515,6 +2628,7 @@
           "$ref": "#/definitions/ReplicationRegion"
         },
         "zoneRedundant": {
+          "description": "Controls whether the namespace is zone redundant.",
           "type": "boolean",
           "x-ms-mutability": [
             "create",
@@ -2528,10 +2642,12 @@
           "$ref": "#/definitions/PnsCredentials"
         },
         "serviceBusEndpoint": {
+          "description": "Gets or sets endpoint you can use to perform NotificationHub\r\noperations.",
           "type": "string",
           "readOnly": true
         },
         "privateEndpointConnections": {
+          "description": "Private Endpoint Connections for namespace",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionResource"
@@ -2541,6 +2657,7 @@
       }
     },
     "NamespaceResource": {
+      "description": "Notification Hubs Namespace Resource.",
       "required": [
         "location",
         "properties",
@@ -2549,24 +2666,29 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
+          "description": "Gets or sets resource location.",
           "minLength": 1,
           "type": "string",
           "x-ms-mutability": [
@@ -2584,6 +2706,7 @@
       "x-ms-azure-resource": true
     },
     "NamespaceStatus": {
+      "description": "Namespace status.",
       "enum": [
         "Created",
         "Creating",
@@ -2597,6 +2720,7 @@
       }
     },
     "NamespaceType": {
+      "description": "Defines values for NamespaceType.",
       "enum": [
         "Messaging",
         "NotificationHub"
@@ -2608,6 +2732,7 @@
       }
     },
     "NetworkAcls": {
+      "description": "A collection of network authorization rules.",
       "required": [
         "ipRules",
         "publicInternetRule"
@@ -2615,6 +2740,7 @@
       "type": "object",
       "properties": {
         "ipRules": {
+          "description": "List of IP rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpRule"
@@ -2627,9 +2753,11 @@
       }
     },
     "NotificationHubListResult": {
+      "description": "The response of the List NotificationHub operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Gets or sets result of the List NotificationHub operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NotificationHubResource"
@@ -2637,12 +2765,14 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Gets or sets link to the next set of results. Not empty if Value\r\ncontains incomplete list of NotificationHub",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "NotificationHubPatchParameters": {
+      "description": "Patch parameter for NamespaceResource.",
       "type": "object",
       "properties": {
         "id": {
@@ -2657,9 +2787,11 @@
       }
     },
     "NotificationHubProperties": {
+      "description": "NotificationHub properties.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Gets or sets the NotificationHub name.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -2667,9 +2799,11 @@
           ]
         },
         "registrationTtl": {
+          "description": "Gets or sets the RegistrationTtl of the created NotificationHub",
           "type": "string"
         },
         "authorizationRules": {
+          "description": "Gets or sets the AuthorizationRules of the created NotificationHub",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
@@ -2712,30 +2846,36 @@
       }
     },
     "NotificationHubResource": {
+      "description": "Notification Hub Resource.",
       "required": [
         "properties"
       ],
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
+          "description": "Resource location.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -2749,9 +2889,11 @@
       "x-ms-azure-resource": true
     },
     "Operation": {
+      "description": "A NotificationHubs REST API operation",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Gets operation name: {provider}/{resource}/{operation}",
           "type": "string",
           "readOnly": true
         },
@@ -2762,36 +2904,44 @@
           "$ref": "#/definitions/OperationProperties"
         },
         "isDataAction": {
+          "description": "Gets or sets IsDataAction property. It is used to differentiate management and data plane operations.",
           "type": "boolean",
           "readOnly": true
         }
       }
     },
     "OperationDisplay": {
+      "description": "The object that represents the operation.",
       "type": "object",
       "properties": {
         "provider": {
+          "description": "Gets service provider: Microsoft.NotificationHubs",
           "type": "string",
           "readOnly": true
         },
         "resource": {
+          "description": "Gets resource on which the operation is performed: Invoice, etc.",
           "type": "string",
           "readOnly": true
         },
         "operation": {
+          "description": "Gets operation type: Read, write, delete, etc.",
           "type": "string",
           "readOnly": true
         },
         "description": {
+          "description": "Human-friendly operation description.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "OperationListResult": {
+      "description": "Result of the request to list NotificationHubs operations. It contains\r\na list of operations and a URL link to get the next set of results.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Gets list of NotificationHubs operations supported by the\r\nMicrosoft.NotificationHubs resource provider.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
@@ -2802,12 +2952,14 @@
           ]
         },
         "nextLink": {
+          "description": "Gets URL to get the next set of operation list results if there are\r\nany.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "OperationProperties": {
+      "description": "Optional operation properties.",
       "type": "object",
       "properties": {
         "serviceSpecification": {
@@ -2816,6 +2968,7 @@
       }
     },
     "OperationProvisioningState": {
+      "description": "Defines values for OperationProvisioningState.",
       "enum": [
         "Unknown",
         "InProgress",
@@ -2832,6 +2985,7 @@
       }
     },
     "PnsCredentials": {
+      "description": "Collection of Notification Hub or Notification Hub Namespace PNS credentials.",
       "type": "object",
       "properties": {
         "admCredential": {
@@ -2862,21 +3016,26 @@
       "x-ms-secret": true
     },
     "PnsCredentialsResource": {
+      "description": "Description of a NotificationHub PNS Credentials. This is a response of the POST requests that return namespace or hubs\r\nPNS credentials.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2886,12 +3045,14 @@
           "$ref": "#/definitions/PnsCredentials"
         },
         "location": {
+          "description": "Location of the PNS credentials. Always the same as location of the containing namespace.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "PolicyKeyResource": {
+      "description": "Namespace / NotificationHub Regenerate Keys request.",
       "required": [
         "policyKey"
       ],
@@ -2914,9 +3075,11 @@
       }
     },
     "PrivateEndpointConnectionProperties": {
+      "description": "Private Endpoint Connection properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
+          "description": "Provisioning state.",
           "type": "string",
           "readOnly": true
         },
@@ -2924,6 +3087,7 @@
           "$ref": "#/definitions/RemotePrivateEndpointConnection"
         },
         "groupIds": {
+          "description": "List of group ids. For Notification Hubs, it always contains a single \"namespace\" element.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2936,21 +3100,26 @@
       }
     },
     "PrivateEndpointConnectionResource": {
+      "description": "Represents a Private Endpoint Connection ARM resource - a sub-resource of Notification Hubs namespace.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -2967,6 +3136,7 @@
       "x-ms-azure-resource": true
     },
     "PrivateEndpointConnectionResourcePrivateLinkResourceCollection": {
+      "description": "A collection of Private Link Resources.",
       "type": "object",
       "properties": {
         "value": {
@@ -2979,6 +3149,7 @@
       }
     },
     "PrivateLinkConnectionStatus": {
+      "description": "State of Private Link Connection.",
       "enum": [
         "Disconnected",
         "Pending",
@@ -2992,21 +3163,26 @@
       }
     },
     "PrivateLinkResource": {
+      "description": "A Private Link Arm Resource.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -3018,6 +3194,7 @@
       }
     },
     "PrivateLinkResourcePrivateLinkResourceCollection": {
+      "description": "A collection of Private Link Resources.",
       "type": "object",
       "properties": {
         "value": {
@@ -3030,13 +3207,16 @@
       }
     },
     "PrivateLinkResourceProperties": {
+      "description": "Represents properties of Private Link Resource.",
       "type": "object",
       "properties": {
         "groupId": {
+          "description": "A Group Id for Private Link. For Notification Hubs, it is always set to \"namespace\".",
           "type": "string",
           "readOnly": true
         },
         "requiredMembers": {
+          "description": "Required members. For Notification Hubs, it's always a collection with a single \"namespace\" item.",
           "type": "array",
           "items": {
             "type": "string"
@@ -3044,6 +3224,7 @@
           "readOnly": true
         },
         "requiredZoneNames": {
+          "description": "Required DNS zone names. For Notification Hubs, it contains two CNames for Service Bus and Notification Hubs zones.",
           "type": "array",
           "items": {
             "type": "string"
@@ -3053,29 +3234,35 @@
       }
     },
     "PrivateLinkServiceConnection": {
+      "description": "A customer-visible sub-resource of Private Endpoint, which describe the connection between Private Endpoint and Notification Hubs namespace.",
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of the Private Link Service connection.",
           "type": "string"
         },
         "groupIds": {
+          "description": "List of group ids. Always contains a single element - \"namespace\" - for Notification Hub Namespace.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "requestMessage": {
+          "description": "Request message provided by the user that created the connection. This is usually used when the connection requires manual approval.",
           "type": "string"
         }
       }
     },
     "PublicInternetAuthorizationRule": {
+      "description": "A default (public Internet) network authorization rule, which contains rights if no other network rule matches.",
       "required": [
         "rights"
       ],
       "type": "object",
       "properties": {
         "rights": {
+          "description": "List of access rights.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessRights"
@@ -3105,31 +3292,37 @@
       }
     },
     "RemotePrivateEndpointConnection": {
+      "description": "Represents a Private Endpoint that is connected to Notification Hubs namespace using Private Endpoint Connection.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "ARM resource ID of the Private Endpoint. This may belong to different subscription and resource group than a Notification Hubs namespace.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "RemotePrivateLinkServiceConnectionState": {
+      "description": "State of the Private Link Service connection.",
       "type": "object",
       "properties": {
         "status": {
           "$ref": "#/definitions/PrivateLinkConnectionStatus"
         },
         "description": {
+          "description": "Human-friendly description.",
           "type": "string",
           "readOnly": true
         },
         "actionsRequired": {
+          "description": "Human-friendly description of required actions.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ReplicationRegion": {
+      "description": "Allowed replication region",
       "enum": [
         "Default",
         "WestUs2",
@@ -3147,38 +3340,46 @@
       }
     },
     "ResourceListKeys": {
+      "description": "Response for the POST request that returns Namespace or NotificationHub access keys (connection strings).",
       "type": "object",
       "properties": {
         "primaryConnectionString": {
+          "description": "Gets or sets primaryConnectionString of the AuthorizationRule.",
           "type": "string",
           "readOnly": true,
           "x-ms-secret": true
         },
         "secondaryConnectionString": {
+          "description": "Gets or sets secondaryConnectionString of the created\r\nAuthorizationRule",
           "type": "string",
           "readOnly": true,
           "x-ms-secret": true
         },
         "primaryKey": {
+          "description": "Gets or sets primaryKey of the created AuthorizationRule.",
           "type": "string",
           "readOnly": true,
           "x-ms-secret": true
         },
         "secondaryKey": {
+          "description": "Gets or sets secondaryKey of the created AuthorizationRule",
           "type": "string",
           "readOnly": true,
           "x-ms-secret": true
         },
         "keyName": {
+          "description": "Gets or sets keyName of the created AuthorizationRule",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ServiceSpecification": {
+      "description": "Optional service specification used in Operations API.",
       "type": "object",
       "properties": {
         "logSpecifications": {
+          "description": "Log specifications.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
@@ -3189,6 +3390,7 @@
           ]
         },
         "metricSpecifications": {
+          "description": "Metric specification.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
@@ -3202,9 +3404,11 @@
       }
     },
     "SharedAccessAuthorizationRuleListResult": {
+      "description": "The response of the List Namespace operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Gets or sets result of the List AuthorizationRules operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
@@ -3212,76 +3416,92 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Gets or sets link to the next set of results. Not empty if Value\r\ncontains incomplete list of AuthorizationRules",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "SharedAccessAuthorizationRuleProperties": {
+      "description": "SharedAccessAuthorizationRule properties.",
       "required": [
         "rights"
       ],
       "type": "object",
       "properties": {
         "rights": {
+          "description": "Gets or sets the rights associated with the rule.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessRights"
           }
         },
         "primaryKey": {
+          "description": "Gets a base64-encoded 256-bit primary key for signing and\r\nvalidating the SAS token.",
           "type": "string",
           "x-ms-secret": true
         },
         "secondaryKey": {
+          "description": "Gets a base64-encoded 256-bit primary key for signing and\r\nvalidating the SAS token.",
           "type": "string",
           "x-ms-secret": true
         },
         "keyName": {
+          "description": "Gets a string that describes the authorization rule.",
           "type": "string",
           "readOnly": true
         },
         "modifiedTime": {
           "format": "date-time",
+          "description": "Gets the last modified time for this rule",
           "type": "string",
           "readOnly": true
         },
         "createdTime": {
           "format": "date-time",
+          "description": "Gets the created time for this rule",
           "type": "string",
           "readOnly": true
         },
         "claimType": {
+          "description": "Gets a string that describes the claim type",
           "type": "string",
           "readOnly": true
         },
         "claimValue": {
+          "description": "Gets a string that describes the claim value",
           "type": "string",
           "readOnly": true
         },
         "revision": {
           "format": "int32",
+          "description": "Gets the revision number for the rule",
           "type": "integer",
           "readOnly": true
         }
       }
     },
     "SharedAccessAuthorizationRuleResource": {
+      "description": "Response for POST requests that return single SharedAccessAuthorizationRule.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Gets resource Id",
           "type": "string",
           "readOnly": true
         },
         "name": {
+          "description": "Gets resource name",
           "type": "string",
           "readOnly": true
         },
         "type": {
+          "description": "Gets resource type",
           "type": "string",
           "readOnly": true
         },
         "tags": {
+          "description": "Gets or sets resource tags",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -3291,6 +3511,7 @@
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         },
         "location": {
+          "description": "Location of the PNS credentials. Always the same as location of the containing namespace.",
           "type": "string",
           "readOnly": true
         }
@@ -3298,31 +3519,38 @@
       "x-ms-azure-resource": true
     },
     "Sku": {
+      "description": "The Sku description for a namespace",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "name": {
+          "description": "Gets or sets name of the notification hub sku. Possible values\r\ninclude: 'Free', 'Basic', 'Standard'",
           "minLength": 1,
           "type": "string"
         },
         "tier": {
+          "description": "Gets or sets the tier of particular sku",
           "type": "string"
         },
         "size": {
+          "description": "Gets or sets the Sku size",
           "type": "string"
         },
         "family": {
+          "description": "Gets or sets the Sku Family",
           "type": "string"
         },
         "capacity": {
           "format": "int32",
+          "description": "Gets or sets the capacity of the resource",
           "type": "integer"
         }
       }
     },
     "WnsCredential": {
+      "description": "Description of a NotificationHub WnsCredential.",
       "required": [
         "properties"
       ],
@@ -3335,31 +3563,38 @@
       "x-ms-secret": true
     },
     "WnsCredentialProperties": {
+      "description": "Description of a NotificationHub WnsCredential.",
       "type": "object",
       "properties": {
         "packageSid": {
+          "description": "Gets or sets the package ID for this credential.",
           "type": "string",
           "x-ms-secret": true
         },
         "secretKey": {
+          "description": "Gets or sets the secret key.",
           "type": "string",
           "x-ms-secret": true
         },
         "windowsLiveEndpoint": {
+          "description": "Gets or sets the Windows Live endpoint.",
           "type": "string",
           "x-ms-secret": true
         },
         "certificateKey": {
+          "description": "Ges or sets the WNS Certificate Key.",
           "type": "string",
           "x-ms-secret": true
         },
         "wnsCertificate": {
+          "description": "Gets or sets the WNS Certificate.",
           "type": "string",
           "x-ms-secret": true
         }
       }
     },
     "XiaomiCredential": {
+      "description": "Description of a NotificationHub XiaomiCredential.",
       "required": [
         "properties"
       ],
@@ -3372,13 +3607,16 @@
       "x-ms-secret": true
     },
     "XiaomiCredentialProperties": {
+      "description": "Description of a NotificationHub XiaomiCredentialProperties.",
       "type": "object",
       "properties": {
         "appSecret": {
+          "description": "Gets or sets app secret.",
           "type": "string",
           "x-ms-secret": true
         },
         "endpoint": {
+          "description": "Gets or sets xiaomi service endpoint.",
           "type": "string",
           "x-ms-secret": true
         }
