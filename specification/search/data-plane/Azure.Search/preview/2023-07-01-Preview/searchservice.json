@@ -6143,6 +6143,7 @@
     },
     "VectorSearchAlgorithmConfiguration": {
       "type": "object",
+      "discriminator": "kind",
       "properties": {
         "name": {
           "externalDocs": {
@@ -6156,10 +6157,6 @@
           "type": "string",
           "description": "The name of the kind of algorithm being configured for use with vector search. Only `hnsw` is supported in the current preview.",
           "x-nullable": false
-        },
-        "hnswParameters": {
-          "$ref": "#/definitions/HnswParameters",
-          "description": "Contains the parameters specific to hnsw algorithm."
         }
       },
       "required": [
@@ -6167,6 +6164,22 @@
         "kind"
       ],
       "description": "Contains configuration options specific to the algorithm used during indexing time."
+    },
+    "HnswVectorSearchAlgorithmConfiguration": {
+      "x-ms-discriminator-value": "hnsw",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
+        }
+      ],
+      "properties": {
+        "hnswParameters": {
+          "x-ms-client-name": "Parameters",
+          "$ref": "#/definitions/HnswParameters",
+          "description": "Contains the parameters specific to hnsw algorithm."
+        }
+      },
+      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing time."
     },
     "HnswParameters": {
       "type": "object",
