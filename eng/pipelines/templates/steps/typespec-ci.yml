@@ -5,12 +5,18 @@ parameters:
   type: string
 
 steps:
-- script: cd ${{parameters.Folder}}; npx tsp compile .
-  displayName: ${{parameters.DisplayName}} - compile
-  condition: succeededOrFailed()
+- script: |
+    cd ${{parameters.Folder}}
+    npx tsp compile .
+    cd $(Build.SourcesDirectory)
 
-# Display results of "git diff" (in case there is any diff)
-# "git diff-index --quiet HEAD --" returns zero exit code if no diff, nonzero if yes diff
-- script: git diff; git diff-index --quiet HEAD --
-  displayName: ${{parameters.DisplayName}} - compile
+    # Display results of "git diff" (in case there is any diff)
+    git diff
+
+    # "git diff-index --quiet HEAD --" returns zero exit code if no diff, nonzero if yes diff
+    git diff-index --quiet HEAD --
+
+    # Revert any changed files
+    git restore .    
+  displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
