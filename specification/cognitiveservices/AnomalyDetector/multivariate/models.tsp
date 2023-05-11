@@ -38,9 +38,13 @@ enum AlignMode {
 }
 
 enum ModelStatus {
+  @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
+  @doc("The model is being trained.")
   Running: "RUNNING",
+  @doc("The model has been trained and is ready to be used for anomaly detection.")
   Ready: "READY",
+  @doc("The model training failed.")
   Failed: "FAILED",
 }
 
@@ -103,10 +107,10 @@ model VariableState {
   effectiveCount?: int32;
 
   @doc("First valid time stamp with a value of input data.")
-  firstTimestamp?: zonedDateTime;
+  firstTimestamp?: utcDateTime;
 
   @doc("Last valid time stamp with a value of input data.")
-  lastTimestamp?: zonedDateTime;
+  lastTimestamp?: utcDateTime;
 }
 
 @doc("""
@@ -118,34 +122,34 @@ model MultivariateBatchDetectionOptions {
 Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection. The data schema should
-be exactly the same as those used in the training phase.
+be exactly the same as those used in the training phase. The input data must
+contain at least slidingWindow entries preceding the start time of the data
+to be detected.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
-Number of top contributed
-variables for one anomalous time stamp in the response. The default is
-10.
+Number of top contributed variables for one anomalous time stamp in the response.
 """)
-  topContributorCount: int32;
+  topContributorCount?: int32 = 10;
 
   @doc("""
 Start date/time of data for detection, which should
 be in ISO 8601 format.
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 End date/time of data for detection, which should
 be in ISO 8601 format.
 """)
-  endTime: zonedDateTime;
+  endTime: utcDateTime;
 }
 
 @doc("Anomaly status and information.")
 model AnomalyState {
   @doc("Time stamp for this anomaly.")
-  timestamp: zonedDateTime;
+  timestamp: utcDateTime;
   @doc("Detailed value of this anomalous time stamp.")
   value?: AnomalyValue;
 
@@ -206,7 +210,7 @@ Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
 Azure Blob Storage, based on your data schema selection.
 """)
-  dataSource: string;
+  dataSource: url;
 
   @doc("""
 Data schema of the input data source. The default
@@ -218,13 +222,13 @@ is OneTable.
 Start date/time of training data, which should be
 in ISO 8601 format.
 """)
-  startTime: zonedDateTime;
+  startTime: utcDateTime;
 
   @doc("""
 End date/time of training data, which should be
 in ISO 8601 format.
 """)
-  endTime: zonedDateTime;
+  endTime: utcDateTime;
 
   @doc("""
 Display name of the model. Maximum length is 24
@@ -315,10 +319,10 @@ model AnomalyDetectionModel {
   modelId: string;
 
   @doc("Date and time (UTC) when the model was created.")
-  createdTime: zonedDateTime;
+  createdTime: utcDateTime;
 
   @doc("Date and time (UTC) when the model was last updated.")
-  lastUpdatedTime: zonedDateTime;
+  lastUpdatedTime: utcDateTime;
 
   @doc("""
 Training result of a model, including its status, errors, and diagnostics

@@ -13,15 +13,15 @@ alias Response = {
 
   @doc("The date and time when the processing job was created.")
   @visibility("read")
-  createdDateTime: zonedDateTime;
+  createdDateTime: utcDateTime;
 
   @doc("The date and time when the processing job is set to expire.")
   @visibility("read")
-  expirationDateTime: zonedDateTime;
+  expirationDateTime: utcDateTime;
 
   @doc("The date and time when the processing job was last updated.")
   @visibility("read")
-  lastUpdateDateTime: zonedDateTime;
+  lastUpdateDateTime: utcDateTime;
 
   @doc("The status of the processing job.")
   @visibility("read")
