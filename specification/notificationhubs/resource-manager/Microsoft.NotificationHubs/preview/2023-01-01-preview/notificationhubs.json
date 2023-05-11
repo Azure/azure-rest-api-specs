@@ -2613,6 +2613,18 @@
             "$ref": "#/definitions/PrivateEndpointConnectionResource"
           },
           "readOnly": true
+        },
+        "scaleUnit": {
+          "description": "Gets or sets scaleUnit where the namespace gets created",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "dataCenter": {
+          "description": "Deprecated.",
+          "type": "string"
         }
       }
     },
@@ -3501,9 +3513,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Gets or sets name of the notification hub sku. Possible values\r\ninclude: 'Free', 'Basic', 'Standard'",
-          "minLength": 1,
-          "type": "string"
+          "$ref": "#/definitions/SkuName"
         },
         "tier": {
           "description": "Gets or sets the tier of particular sku",
@@ -3522,6 +3532,19 @@
           "description": "Gets or sets the capacity of the resource",
           "type": "integer"
         }
+      }
+    },
+    "SkuName": {
+      "description": "Namespace SKU name.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
       }
     },
     "WnsCredential": {
