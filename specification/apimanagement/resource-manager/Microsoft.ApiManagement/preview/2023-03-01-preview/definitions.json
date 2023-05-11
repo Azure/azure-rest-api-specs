@@ -8768,7 +8768,7 @@
         "credentialsExpireAfter": {
           "type": "string",
           "format": "duration",
-          "description": "After what period of time to make credentials expire."
+          "description": "Credentials expiration in ISO8601 format. Maximum duration of the credentials is PT1H. When property is not specified, them value PT1H is used."
         },
         "purposes": {
           "type": "array",
@@ -8793,11 +8793,21 @@
         },
         "apiId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/apis"
+              },
+              {
+                "type": "Microsoft.ApiManagement/service/workspaces/apis"
+              }
+            ]
+          },
           "description": "Full resource Id of an API."
         }
       },
       "required": [
-        "credentialsExpireAfter",
         "purposes",
         "apiId"
       ],
@@ -8808,6 +8818,7 @@
       "properties": {
         "token": {
           "type": "string",
+          "x-ms-secret": true,
           "description": "Gateway debug token."
         }
       },
