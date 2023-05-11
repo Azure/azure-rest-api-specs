@@ -31,7 +31,6 @@ enum AnomalyDetectorErrorCodes {
   "InvalidImputeFixedValue",
 }
 
-@fixed
 enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
@@ -44,111 +43,110 @@ enum TimeGranularity {
   None: "none",
 }
 
-@doc("The request of entire or last anomaly detection.")
+@doc("Request of the entire or last anomaly detection.")
 model UnivariateDetectionOptions {
   @doc("""
-Time series data points. Points should be sorted by timestamp in ascending
+Time series data points. Points should be sorted by time stamp in ascending
 order to match the anomaly detection result. If the data is not sorted
-correctly or there is duplicated timestamp, the API will not work. In such
-case, an error message will be returned.
+correctly or there's a duplicated time stamp, the API won't work. In such
+a case, an error message is returned.
 """)
   series: TimeSeriesPoint[];
 
   @doc("""
-Optional argument, can be one of yearly, monthly, weekly, daily, hourly,
-minutely, secondly, microsecond or none. If granularity is not present, it will
-be none by default. If granularity is none, the timestamp property in time
+Argument that indicates time granularity. If granularity is not present, the value
+is none by default. If granularity is none, the time stamp property in the time
 series point can be absent.
 """)
   granularity?: TimeGranularity;
 
   @doc("""
-Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {\"granularity\":\"minutely\",
-\"customInterval\":5}.
+A custom interval is used to set a nonstandard time interval. For example, if the
+series is 5 minutes, the request can be set as {"granularity":"minutely",
+"customInterval":5}.
 """)
   customInterval?: int32;
 
   @doc("""
-Optional argument, periodic value of a time series. If the value is null or
-does not present, the API will determine the period automatically.
+Argument that indicates the periodic value of a time series. If the value is null or
+is not present, the API determines the period automatically.
 """)
   period?: int32;
 
-  @doc("Optional argument, advanced model parameter, max anomaly ratio in a time series.")
+  @doc("Argument that indicates an advanced model parameter. It's the maximum anomaly ratio in a time series.")
   maxAnomalyRatio?: float32;
 
   @doc("""
-Optional argument, advanced model parameter, between 0-99, the lower the value
-is, the larger the margin value will be which means less anomalies will be
+Argument that indicates an advanced model parameter between 0 and 99. The lower the value
+is, the larger the margin value is, which means fewer anomalies will be
 accepted.
 """)
   sensitivity?: int32;
 
   @doc("""
-Used to specify how to deal with missing values in the input series, it's used
+Specifies how to deal with missing values in the input series. It's used
 when granularity is not \"none\".
 """)
   imputeMode?: ImputeMode;
 
   @doc("""
-Used to specify the value to fill, it's used when granularity is not \"none\"
+Specifies the value to fill. It's used when granularity is not \"none\"
 and imputeMode is \"fixed\".
 """)
   imputeFixedValue?: float32;
 }
 
-@doc("The definition of input timeseries points.")
+@doc("Definition of input time series points.")
 model TimeSeriesPoint {
-  @doc("Optional argument, timestamp of a data point (ISO8601 format).")
-  timestamp?: zonedDateTime;
+  @doc("Argument that indicates the time stamp of a data point (ISO8601 format).")
+  timestamp?: utcDateTime;
 
-  @doc("The measurement of that point, should be float.")
+  @doc("Measurement of that point.")
   value: float32;
 }
 
-@doc("The response of entire anomaly detection.")
+@doc("Response of the entire anomaly detection.")
 model UnivariateEntireDetectionResult {
   @doc("""
-Frequency extracted from the series, zero means no recurrent pattern has been
+Frequency extracted from the series. Zero means no recurrent pattern has been
 found.
 """)
   period: int32;
 
   @doc("""
-ExpectedValues contain expected value for each input point. The index of the
+Expected value for each input point. The index of the
 array is consistent with the input series.
 """)
   expectedValues: float32[];
 
   @doc("""
-UpperMargins contain upper margin of each input point. UpperMargin is used to
-calculate upperBoundary, which equals to expectedValue + (100 -
-marginScale)*upperMargin. Anomalies in response can be filtered by
-upperBoundary and lowerBoundary. By adjusting marginScale value, less
-significant anomalies can be filtered in client side. The index of the array is
+Upper margin of each input point. UpperMargin is used to
+calculate upperBoundary, which is equal to expectedValue + (100 -
+marginScale)*upperMargin. Anomalies in the response can be filtered by
+upperBoundary and lowerBoundary. Adjusting the marginScale value can help filter less
+significant anomalies on the client side. The index of the array is
 consistent with the input series.
 """)
   upperMargins: float32[];
 
   @doc("""
-LowerMargins contain lower margin of each input point. LowerMargin is used to
-calculate lowerBoundary, which equals to expectedValue - (100 -
+Lower margin of each input point. LowerMargin is used to
+calculate lowerBoundary, which is equal to expectedValue - (100 -
 marginScale)*lowerMargin. Points between the boundary can be marked as normal
-ones in client side. The index of the array is consistent with the input
+ones on the client side. The index of the array is consistent with the input
 series.
 """)
   lowerMargins: float32[];
 
   @doc("""
-IsAnomaly contains anomaly properties for each input point. True means an
-anomaly either negative or positive has been detected. The index of the array
+Anomaly properties for each input point. True means an
+anomaly (either negative or positive) has been detected. The index of the array
 is consistent with the input series.
 """)
   isAnomaly: boolean[];
 
   @doc("""
-IsNegativeAnomaly contains anomaly status in negative direction for each input
+Anomaly status in a negative direction for each input
 point. True means a negative anomaly has been detected. A negative anomaly
 means the point is detected as an anomaly and its real value is smaller than
 the expected one. The index of the array is consistent with the input series.
@@ -156,7 +154,7 @@ the expected one. The index of the array is consistent with the input series.
   isNegativeAnomaly: boolean[];
 
   @doc("""
-IsPositiveAnomaly contain anomaly status in positive direction for each input
+Anomaly status in a positive direction for each input
 point. True means a positive anomaly has been detected. A positive anomaly
 means the point is detected as an anomaly and its real value is larger than the
 expected one. The index of the array is consistent with the input series.
@@ -164,30 +162,30 @@ expected one. The index of the array is consistent with the input series.
   isPositiveAnomaly: boolean[];
 
   @doc("""
-The severity score for each input point. The larger the value is, the more
-sever the anomaly is. For normal points, the \"severity\" is always 0.
+Severity score for each input point. The larger the value is, the more
+severe the anomaly is. For normal points, the severity is always 0.
 """)
   severity?: float32[];
 }
 
-@doc("Error information returned by the API.")
+@doc("Error information that the API returned.")
 @error
 model AnomalyDetectorError {
-  @header
+  @header("x-ms-error-code")
   @doc("Error code.")
-  "x-ms-error-code"?: string,
+  msErrorCode: string,
 
-  @doc("The error code.")
-  code?: AnomalyDetectorErrorCodes;
+  @doc("Error code.")
+  code: AnomalyDetectorErrorCodes;
 
-  @doc("A message explaining the error reported by the service.")
-  message?: string;
+  @doc("Message that explains the error that the service reported.")
+  message: string;
 }
 
-@doc("The response of last anomaly detection.")
+@doc("Response of the last anomaly detection.")
 model UnivariateLastDetectionResult {
   @doc("""
-Frequency extracted from the series, zero means no recurrent pattern has been
+Frequency extracted from the series. Zero means no recurrent pattern has been
 found.
 """)
   period: int32;
@@ -200,102 +198,100 @@ found.
 
   @doc("""
 Upper margin of the latest point. UpperMargin is used to calculate
-upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.
+upperBoundary, which is equal to expectedValue + (100 - marginScale)*upperMargin.
 If the value of latest point is between upperBoundary and lowerBoundary, it
-should be treated as normal value. By adjusting marginScale value, anomaly
-status of latest point can be changed.
+should be treated as a normal value. Adjusting the marginScale value enables the anomaly
+status of the latest point to be changed.
 """)
   upperMargin: float32;
 
   @doc("""
 Lower margin of the latest point. LowerMargin is used to calculate
-lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.
-
+lowerBoundary, which is equal to expectedValue - (100 - marginScale)*lowerMargin.
 """)
   lowerMargin: float32;
 
   @doc("""
-Anomaly status of the latest point, true means the latest point is an anomaly
-either in negative direction or positive direction.
+Anomaly status of the latest point. True means the latest point is an anomaly,
+either in the negative direction or in the positive direction.
 """)
   isAnomaly: boolean;
 
   @doc("""
-Anomaly status in negative direction of the latest point. True means the latest
+Anomaly status of the latest point in a negative direction. True means the latest
 point is an anomaly and its real value is smaller than the expected one.
 """)
   isNegativeAnomaly: boolean;
 
   @doc("""
-Anomaly status in positive direction of the latest point. True means the latest
+Anomaly status of the latest point in a positive direction. True means the latest
 point is an anomaly and its real value is larger than the expected one.
 """)
   isPositiveAnomaly: boolean;
 
   @doc("""
-The severity score for the last input point. The larger the value is, the more
-sever the anomaly is. For normal points, the \"severity\" is always 0.
+Severity score for the last input point. The larger the value is, the more
+severe the anomaly is. For normal points, the severity is always 0.
 """)
   severity?: float32;
 }
 
-@doc("The request of change point detection.")
+@doc("Request of change point detection.")
 model UnivariateChangePointDetectionOptions {
   @doc("""
-Time series data points. Points should be sorted by timestamp in ascending
+Time series data points. Points should be sorted by time stamp in ascending
 order to match the change point detection result.
 """)
   series: TimeSeriesPoint[];
 
   @doc("""
-Can only be one of yearly, monthly, weekly, daily, hourly, minutely or
-secondly. Granularity is used for verify whether input series is valid.
+Granularity is used to verify whether the input series is valid.
 """)
   granularity: TimeGranularity;
 
   @doc("""
-Custom Interval is used to set non-standard time interval, for example, if the
-series is 5 minutes, request can be set as {\"granularity\":\"minutely\",
-\"customInterval\":5}.
+A custom interval is used to set a nonstandard time interval. For example, if the
+series is 5 minutes, the request can be set as {"granularity":"minutely",
+"customInterval":5}.
 """)
   customInterval?: int32;
 
   @doc("""
-Optional argument, periodic value of a time series. If the value is null or
-does not present, the API will determine the period automatically.
+Argument that indicates the periodic value of a time series. If the value is null or
+not present, the API will determine the period automatically.
 """)
   period?: int32;
 
   @doc("""
-Optional argument, advanced model parameter, a default stableTrendWindow will
+Argument that indicates an advanced model parameter. A default stableTrendWindow value will
 be used in detection.
 """)
   stableTrendWindow?: int32;
 
   @doc("""
-Optional argument, advanced model parameter, between 0.0-1.0, the lower the
-value is, the larger the trend error will be which means less change point will
+Argument that indicates an advanced model parameter between 0.0 and 1.0. The lower the
+value is, the larger the trend error is, which means less change point will
 be accepted.
 """)
   threshold?: float32;
 }
 
-@doc("The response of change point detection.")
+@doc("Response of change point detection.")
 model UnivariateChangePointDetectionResult {
   @doc("""
-Frequency extracted from the series, zero means no recurrent pattern has been
+Frequency extracted from the series. Zero means no recurrent pattern has been
 found.
 """)
   @visibility("read")
   period?: int32;
 
   @doc("""
-isChangePoint contains change point properties for each input point. True means
-an anomaly either negative or positive has been detected. The index of the
+Change point properties for each input point. True means
+an anomaly (either negative or positive) has been detected. The index of the
 array is consistent with the input series.
 """)
   isChangePoint?: boolean[];
 
-  @doc("the change point confidence of each point")
+  @doc("Change point confidence of each point.")
   confidenceScores?: float32[];
 }
