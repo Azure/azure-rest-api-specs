@@ -6,8 +6,8 @@ import "./serviceCustomizations.tsp";
 
 namespace Azure.OpenAI;
 
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.Core;
 
 interface Models {
@@ -24,7 +24,7 @@ resource.
 These include base models as well as all successfully completed
 fine-tuned models owned by the Azure OpenAI resource.
 """)
-  @route("/models")
+  @route("/")
   @get
   // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
   ListModels is ServiceCustomizations.OpenAIListOperation<Model, "model">;

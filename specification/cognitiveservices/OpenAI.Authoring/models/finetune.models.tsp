@@ -19,10 +19,12 @@ model FineTune {
   @visibility("read")
   status?: State;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
   created_at?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
   updated_at?: int32;
@@ -33,8 +35,9 @@ model FineTune {
   id: string;
 
   @doc("The identifier of the base model used for the fine-tune.")
-  "model": string;
+  `model`: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The identifier of the resulting fine tuned model. This property is only
 populated for successfully completed fine-tune runs.
@@ -44,12 +47,15 @@ create a deployment for inferencing.
   @visibility("read")
   fine_tuned_model?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("The files that are used for training the fine tuned model.")
   training_files: File[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("The files that are used to evaluate the fine tuned model during training.")
   validation_files?: File[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The result files containing training and evaluation metrics in csv format.
 The
@@ -65,6 +71,7 @@ running and completed.
   @visibility("read")
   events?: Event[];
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The organisation id of this fine tune job. Unused on Azure OpenAI;
 compatibility for OpenAI only.
@@ -72,6 +79,7 @@ compatibility for OpenAI only.
   @visibility("read")
   organisation_id?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The user id of this fine tune job. Unused on Azure OpenAI; compatibility for
 OpenAI only.
@@ -89,6 +97,7 @@ model Event {
   @visibility("read")
   object?: TypeDiscriminator;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("A timestamp when this event was created (in unix epochs).")
   @visibility("read")
   created_at?: int32;
@@ -107,6 +116,7 @@ enqueued, started, failed or completed, or other events like uploaded results.
 
 @doc("The hyper parameter settings used in a fine tune job.")
 model HyperParameters {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The batch size to use for training. The batch size is the number of training
 examples used to train a single forward and backward pass.
@@ -118,6 +128,7 @@ base model.
 """)
   batch_size?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The learning rate multiplier to use for training. The fine-tuning learning rate
 is the original learning rate used for pre-training multiplied by this
@@ -129,12 +140,14 @@ what produces the best results.
 """)
   learning_rate_multiplier?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The number of epochs to train the model for. An epoch refers to one full cycle
 through the training dataset.
 """)
   n_epochs?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The weight to use for loss on the prompt tokens. This controls how much the
 model tries to learn to generate the prompt
@@ -147,6 +160,7 @@ over-prioritizing learning the prompt.
 """)
   prompt_loss_weight?: float32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 A value indicating whether to compute classification metrics.
 If set, we
@@ -161,6 +175,7 @@ classification.
 """)
   compute_classification_metrics?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The number of classes in a classification task.
 This parameter is required for
@@ -168,6 +183,7 @@ multiclass classification.
 """)
   classification_n_classes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The positive class in binary classification.
 This parameter is needed to
@@ -175,6 +191,7 @@ generate precision, recall, and F1 metrics when doing binary classification.
 """)
   classification_positive_class?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The classification beta values. If this is provided, we calculate F-beta scores
 at the specified beta values.
@@ -192,11 +209,13 @@ puts more weight on precision and less on recall.
 @doc("Defines the values of a fine tune job.")
 model FineTuneCreation {
   @doc("The identifier of the base model used for this fine-tune.")
-  "model": string;
+  `model`: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("The file that is used for training this fine tuned model.")
   training_file: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("The file that is used to evaluate the fine tuned model during training.")
   validation_file?: string;
 
