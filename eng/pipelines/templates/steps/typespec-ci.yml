@@ -5,6 +5,6 @@ parameters:
   type: string
 
 steps:
-- script: npx tsp compile ${{parameters.Folder}}
+- script: cd ${{parameters.Folder}}; npx tsp compile .
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
