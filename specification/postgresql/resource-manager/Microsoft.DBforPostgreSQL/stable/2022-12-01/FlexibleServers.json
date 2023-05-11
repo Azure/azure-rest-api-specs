@@ -459,11 +459,7 @@
         "network": {
           "$ref": "#/definitions/Network",
           "default": null,
-          "description": "Network properties of a server.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Network properties of a server."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
@@ -639,6 +635,11 @@
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
           "description": "Replication role of the server"
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "default": null,
+          "description": "Network properties of a server."
         }
       }
     },
@@ -905,12 +906,7 @@
               }
             ]
           },
-          "default": "",
-          "description": "delegated subnet arm resource id.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "delegated subnet arm resource id."
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
@@ -921,12 +917,7 @@
               }
             ]
           },
-          "default": "",
-          "description": "private dns zone arm resource id.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "private dns zone arm resource id."
         }
       },
       "description": "Network properties of a server"
