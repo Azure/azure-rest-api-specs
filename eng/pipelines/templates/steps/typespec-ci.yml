@@ -6,5 +6,11 @@ parameters:
 
 steps:
 - script: cd ${{parameters.Folder}}; npx tsp compile .
-  displayName: ${{parameters.DisplayName}}
+  displayName: ${{parameters.DisplayName}} - compile
+  condition: succeededOrFailed()
+
+# Display results of "git diff" (in case there is any diff)
+# "git diff-index --quiet HEAD --" returns zero exit code if no diff, nonzero if yes diff
+- script: git diff; git diff-index --quiet HEAD --
+  displayName: ${{parameters.DisplayName}} - compile
   condition: succeededOrFailed()
