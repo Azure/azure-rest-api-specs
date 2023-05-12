@@ -73,7 +73,13 @@ directive:
     reason: Fixing warning would create a breaking change
   - suppress: DeleteResponseBodyEmpty
     from: authorization-RoleDefinitionsCalls.json
-    reason: Fixing warning would create a S360 flag for us, because our service returns the role definition when deleted.
+    reason: Fixing error would create a S360 flag for us, because our service returns the role definition when deleted.
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: authorization-RoleDefinitionsCalls.json
+    reason: /{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} and /{scope}/providers/Microsoft.Authorization/roleDefinitions are two different APIs, they are not having the duplicate paths.
+  - suppress: PreviewVersionOverOneYear
+    from: authorization-RoleDefinitionsCalls.json
+    reason: We are still due to go public preview in next quarter. We have also updated status in the ADO for the delay.
   - suppress: R2017
     from: authorization-AccessReviewCalls.json
     reason: Request body is a subset of response body. Additional properties in the response are not settable by the user
