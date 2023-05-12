@@ -1741,7 +1741,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResourcePrivateLinkResourceCollection"
+              "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
             }
           },
           "default": {
@@ -1750,6 +1750,10 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "PrivateEndpointConnections_List": {
@@ -1841,7 +1845,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcePrivateLinkResourceCollection"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -1850,6 +1854,10 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "PrivateEndpointConnections_ListGroupIds": {
@@ -2481,7 +2489,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets result of the List Namespace operation.",
+          "description": "Gets or sets result of the List AuthorizationRules operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NamespaceResource"
@@ -2489,7 +2497,7 @@
           "readOnly": true
         },
         "nextLink": {
-          "description": "Gets or sets link to the next set of results. Not empty if Value\r\ncontains incomplete list of Namespaces",
+          "description": "Gets or sets link to the next set of results.",
           "type": "string",
           "readOnly": true
         }
@@ -2688,7 +2696,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Gets or sets result of the List NotificationHub operation.",
+          "description": "Gets or sets result of the List AuthorizationRules operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NotificationHubResource"
@@ -2696,7 +2704,7 @@
           "readOnly": true
         },
         "nextLink": {
-          "description": "Gets or sets link to the next set of results. Not empty if Value\r\ncontains incomplete list of NotificationHub",
+          "description": "Gets or sets link to the next set of results.",
           "type": "string",
           "readOnly": true
         }
@@ -3014,15 +3022,21 @@
         }
       }
     },
-    "PrivateEndpointConnectionResourcePrivateLinkResourceCollection": {
-      "description": "A collection of Private Link Resources.",
+    "PrivateEndpointConnectionResourceListResult": {
+      "description": "The response of the List Private Endpoint Connections operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Gets or sets result of the List AuthorizationRules operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionResource"
           },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets or sets link to the next set of results.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -3062,15 +3076,21 @@
         }
       }
     },
-    "PrivateLinkResourcePrivateLinkResourceCollection": {
-      "description": "A collection of Private Link Resources.",
+    "PrivateLinkResourceListResult": {
+      "description": "The response of the List Private Link Resources operation.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Gets or sets result of the List AuthorizationRules operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets or sets link to the next set of results.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -3290,7 +3310,7 @@
           "readOnly": true
         },
         "nextLink": {
-          "description": "Gets or sets link to the next set of results. Not empty if Value\r\ncontains incomplete list of AuthorizationRules",
+          "description": "Gets or sets link to the next set of results.",
           "type": "string",
           "readOnly": true
         }
