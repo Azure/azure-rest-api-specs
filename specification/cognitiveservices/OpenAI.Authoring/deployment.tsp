@@ -8,14 +8,18 @@ using TypeSpec.Http;
 using Azure.Core;
 
 interface Deployments {
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("Gets the list of deployments owned by the Azure OpenAI resource.")
   @doc("Gets the list of deployments owned by the Azure OpenAI resource.")
-  @route("/deployments")
+  @route("/")
   @get
   // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
-  ListDeployments is ServiceCustomizations.OpenAIListOperation<Deployment, "deployment">;
+  ListDeployments is ServiceCustomizations.OpenAIListOperation<
+    Deployment,
+    "deployment"
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing spec"
   @summary("""
 Creates a new deployment for the Azure OpenAI resource according to the given
 specification.
@@ -24,12 +28,7 @@ specification.
 Creates a new deployment for the Azure OpenAI resource according to the given
 specification.
 """)
-  CreateDeployment is ResourceCreateWithServiceProvidedName<
-    Deployment,
-    {
-      response: Deployment
-    }
-  >;
+  CreateDeployment is CustomResourceCreateWithServiceProvidedName<Deployment>;
 
   @summary("Gets details for a single deployment specified by the given deployment_id.")
   @doc("Gets details for a single deployment specified by the given deployment_id.")

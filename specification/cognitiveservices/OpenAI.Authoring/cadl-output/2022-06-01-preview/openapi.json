@@ -4,9 +4,9 @@
     "title": "Azure OpenAI API",
     "version": "2022-06-01-preview",
     "description": "API for managing and utilizing Azure Open AI endpoints",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -37,20 +37,24 @@
       "ApiKeyAuth": []
     },
     {
-      "OAuth2Auth": []
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
     "ApiKeyAuth": {
       "type": "apiKey",
       "in": "header",
-      "name": "apiKey"
+      "name": "api-key"
     },
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      "scopes": {}
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
     }
   },
   "tags": [],
@@ -74,6 +78,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -89,26 +99,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
+            "required": true,
+            "description": "The resource instance.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "model": {
-                  "type": "string",
-                  "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
-                },
-                "scale_settings": {
-                  "$ref": "#/definitions/ScaleSettings",
-                  "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
-                }
-              },
-              "description": "The template for adding updateable properties.",
-              "required": [
-                "model",
-                "scale_settings"
-              ],
-              "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrReplaceModel<Deployment>"
+              "$ref": "#/definitions/Deployment"
             }
           }
         ],
@@ -123,62 +119,17 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "object": {
-                  "$ref": "#/definitions/TypeDiscriminator",
-                  "description": "Defines the type of an object.",
-                  "readOnly": true
-                },
-                "status": {
-                  "$ref": "#/definitions/State",
-                  "description": "The state of a job or item.",
-                  "readOnly": true
-                },
-                "created_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was created (in unix epochs).",
-                  "readOnly": true
-                },
-                "updated_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was modified last (in unix epochs).",
-                  "readOnly": true
-                },
-                "id": {
-                  "type": "string",
-                  "description": "The identifier of the deployment",
-                  "readOnly": true
-                },
-                "model": {
-                  "type": "string",
-                  "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
-                },
-                "owner": {
-                  "type": "string",
-                  "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
-                  "readOnly": true
-                },
-                "scale_settings": {
-                  "$ref": "#/definitions/ScaleSettings",
-                  "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
-                }
-              },
-              "required": [
-                "status",
-                "created_at",
-                "updated_at",
-                "id",
-                "model",
-                "scale_settings"
-              ],
-              "x-cadl-name": "Azure.Core.Foundations.CustomResponseFields<(anonymous model)>"
+              "$ref": "#/definitions/Deployment"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -193,14 +144,14 @@
         "description": "Gets details for a single deployment specified by the given deployment_id.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "deploymentId",
             "in": "path",
             "required": true,
             "description": "The identifier of the deployment",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -212,6 +163,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -224,6 +181,9 @@
         "description": "Updates the mutable details of the deployment with the given deployment_id.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "deploymentId",
             "in": "path",
             "required": true,
@@ -231,25 +191,12 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
+            "name": "resource",
             "in": "body",
+            "required": true,
+            "description": "The resource instance.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "model": {
-                  "type": "string",
-                  "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
-                },
-                "scale_settings": {
-                  "$ref": "#/definitions/ScaleSettings",
-                  "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
-                }
-              },
-              "description": "The template for adding optional properties.",
-              "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrUpdateModel<Deployment>"
+              "$ref": "#/definitions/DeploymentUpdate"
             }
           }
         ],
@@ -257,120 +204,23 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "object": {
-                  "$ref": "#/definitions/TypeDiscriminator",
-                  "description": "Defines the type of an object.",
-                  "readOnly": true
-                },
-                "status": {
-                  "$ref": "#/definitions/State",
-                  "description": "The state of a job or item.",
-                  "readOnly": true
-                },
-                "created_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was created (in unix epochs).",
-                  "readOnly": true
-                },
-                "updated_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was modified last (in unix epochs).",
-                  "readOnly": true
-                },
-                "id": {
-                  "type": "string",
-                  "description": "The identifier of the deployment",
-                  "readOnly": true
-                },
-                "model": {
-                  "type": "string",
-                  "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
-                },
-                "owner": {
-                  "type": "string",
-                  "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
-                  "readOnly": true
-                },
-                "scale_settings": {
-                  "$ref": "#/definitions/ScaleSettings",
-                  "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
-                }
-              },
-              "required": [
-                "status",
-                "created_at",
-                "updated_at",
-                "id",
-                "model",
-                "scale_settings"
-              ],
-              "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<Azure.Core.(anonymous model)>"
+              "$ref": "#/definitions/Deployment"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "object": {
-                  "$ref": "#/definitions/TypeDiscriminator",
-                  "description": "Defines the type of an object.",
-                  "readOnly": true
-                },
-                "status": {
-                  "$ref": "#/definitions/State",
-                  "description": "The state of a job or item.",
-                  "readOnly": true
-                },
-                "created_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was created (in unix epochs).",
-                  "readOnly": true
-                },
-                "updated_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was modified last (in unix epochs).",
-                  "readOnly": true
-                },
-                "id": {
-                  "type": "string",
-                  "description": "The identifier of the deployment",
-                  "readOnly": true
-                },
-                "model": {
-                  "type": "string",
-                  "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
-                },
-                "owner": {
-                  "type": "string",
-                  "description": "The owner of this deployment. For Azure OpenAI only \"organization-owner\" is\nsupported.",
-                  "readOnly": true
-                },
-                "scale_settings": {
-                  "$ref": "#/definitions/ScaleSettings",
-                  "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
-                }
-              },
-              "description": "A  resource was successfully created.",
-              "required": [
-                "status",
-                "created_at",
-                "updated_at",
-                "id",
-                "model",
-                "scale_settings"
-              ],
-              "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<Azure.Core.(anonymous model)>"
+              "$ref": "#/definitions/Deployment"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -386,14 +236,14 @@
         "description": "Deletes the deployment specified by the given deployment_id.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "deploymentId",
             "in": "path",
             "required": true,
             "description": "The identifier of the deployment",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -402,6 +252,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -428,6 +284,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -443,26 +305,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
+            "required": true,
+            "description": "The resource instance.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "purpose": {
-                  "$ref": "#/definitions/Purpose",
-                  "description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\nfine-tuning. This allows us to validate the format of the uploaded file."
-                },
-                "filename": {
-                  "type": "string",
-                  "description": "The name of the file."
-                }
-              },
-              "description": "The template for adding updateable properties.",
-              "required": [
-                "purpose",
-                "filename"
-              ],
-              "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrReplaceModel<File>"
+              "$ref": "#/definitions/File"
             }
           }
         ],
@@ -477,60 +325,17 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "object": {
-                  "$ref": "#/definitions/TypeDiscriminator",
-                  "description": "Defines the type of an object.",
-                  "readOnly": true
-                },
-                "status": {
-                  "$ref": "#/definitions/State",
-                  "description": "The state of a job or item.",
-                  "readOnly": true
-                },
-                "created_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was created (in unix epochs).",
-                  "readOnly": true
-                },
-                "updated_at": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "A timestamp when this job or item was modified last (in unix epochs).",
-                  "readOnly": true
-                },
-                "id": {
-                  "type": "string",
-                  "description": "The identity of this item.",
-                  "readOnly": true
-                },
-                "bytes": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "The size of this file when available (can be null). File sizes larger than\n2^53-1 are not supported to ensure compatibility\nwith JavaScript integers.",
-                  "readOnly": true
-                },
-                "purpose": {
-                  "$ref": "#/definitions/Purpose",
-                  "description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\nfine-tuning. This allows us to validate the format of the uploaded file."
-                },
-                "filename": {
-                  "type": "string",
-                  "description": "The name of the file."
-                }
-              },
-              "required": [
-                "id",
-                "purpose",
-                "filename"
-              ],
-              "x-cadl-name": "Azure.Core.Foundations.CustomResponseFields<(anonymous model)>"
+              "$ref": "#/definitions/File"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -545,14 +350,14 @@
         "description": "Gets details for a single file specified by the given file_id including status,\nsize, purpose, etc.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "fileId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -564,6 +369,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -576,14 +387,14 @@
         "description": "Deletes the file with the given file_id.\nDeletion is also allowed if a file\nwas used, e.g., as training file in a fine-tune job.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "fileId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -592,6 +403,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -606,14 +423,14 @@
         "description": "Gets the content of the file specified by the given file_id.\nFiles can be user\nuploaded content or generated by the service like result metrics of a fine-tune\njob.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "fileId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -625,6 +442,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -657,8 +480,8 @@
             "headers": {
               "location": {
                 "description": "Location of the newly created item",
-                "format": "uri",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             },
             "schema": {
@@ -667,6 +490,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -693,6 +522,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -721,8 +556,8 @@
             "headers": {
               "location": {
                 "description": "Location of the newly created item",
-                "format": "uri",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             },
             "schema": {
@@ -731,6 +566,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -745,14 +586,14 @@
         "description": "Gets details for a single fine-tune job specified by the given\nfine_tune_id.\nThe details contain the base model, training and validation\nfiles, hyper parameters, time stamps, status and events.\nEvents are created\nwhen the job status changes, e.g. running or complete, and when results are\nuploaded.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "fineTuneId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -764,6 +605,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -776,14 +623,14 @@
         "description": "Deletes the fine-tune job specified by the given fine_tune_id.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "fineTuneId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -792,6 +639,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -806,14 +659,14 @@
         "description": "Cancels the processing of the fine-tune job specified by the given fine_tune_id.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "fineTuneId",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -825,6 +678,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -839,6 +698,9 @@
         "description": "List events for the fine-tune job specified by the given fine_tune_id.\nEvents are created when the job status changes, e.g. running or\ncomplete, and when results are uploaded.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "fineTuneId",
             "in": "path",
             "required": true,
@@ -851,9 +713,6 @@
             "required": true,
             "description": "A flag indicating whether to stream events for the fine-tune job. If set to true,\nevents will be sent as data-only server-sent events as they become available. The stream will terminate with\na data: [DONE] message when the job is finished (succeeded, cancelled, or failed).\nIf set to false, only events generated so far will be returned..",
             "type": "boolean"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -865,6 +724,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -891,6 +756,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -905,14 +776,14 @@
         "description": "Gets details for the model specified by the given model_id.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "model_id",
             "in": "path",
             "required": true,
             "description": "The identity of this item.",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
         "responses": {
@@ -924,6 +795,12 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -954,7 +831,7 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Azure.Core.Foundations.Error[]",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
           "description": "An array of details about specific errors that led to this reported error."
         },
         "innererror": {
@@ -1027,7 +904,7 @@
           "items": {
             "$ref": "#/definitions/ScaleType"
           },
-          "x-cadl-name": "ScaleType[]",
+          "x-typespec-name": "ScaleType[]",
           "description": "The supported scale types for deployments of this model.",
           "readOnly": true
         }
@@ -1111,10 +988,24 @@
           "items": {
             "$ref": "#/definitions/Deployment"
           },
-          "x-cadl-name": "Deployment[]",
+          "x-typespec-name": "Deployment[]",
           "description": "The list of Deployments"
         }
       }
+    },
+    "DeploymentUpdate": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The OpenAI model to deploy. Can be a base model or a fine tune."
+        },
+        "scale_settings": {
+          "$ref": "#/definitions/ScaleSettings",
+          "description": "The scale settings of a deployment. It defines the modes for scaling and the\nreserved capacity."
+        }
+      },
+      "description": "Deployments manage the reserved quota for Azure OpenAI models and make them\navailable for inference requests."
     },
     "Deprecation": {
       "type": "object",
@@ -1205,7 +1096,7 @@
       ],
       "x-ms-enum": {
         "name": "ErrorCodeKnownValues",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Conflict",
@@ -1286,7 +1177,7 @@
             "$ref": "#/definitions/Event"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Event[]",
+          "x-typespec-name": "Event[]",
           "description": "The list of Events"
         }
       }
@@ -1403,7 +1294,7 @@
           "items": {
             "$ref": "#/definitions/File"
           },
-          "x-cadl-name": "File[]",
+          "x-typespec-name": "File[]",
           "description": "The list of Files"
         }
       }
@@ -1452,7 +1343,7 @@
           "items": {
             "$ref": "#/definitions/File"
           },
-          "x-cadl-name": "File[]",
+          "x-typespec-name": "File[]",
           "description": "The files that are used for training the fine tuned model."
         },
         "validation_files": {
@@ -1460,7 +1351,7 @@
           "items": {
             "$ref": "#/definitions/File"
           },
-          "x-cadl-name": "File[]",
+          "x-typespec-name": "File[]",
           "description": "The files that are used to evaluate the fine tuned model during training."
         },
         "result_files": {
@@ -1468,7 +1359,7 @@
           "items": {
             "$ref": "#/definitions/File"
           },
-          "x-cadl-name": "File[]",
+          "x-typespec-name": "File[]",
           "description": "The result files containing training and evaluation metrics in csv format.\nThe\nfile is only available for successfully completed fine-tune runs.",
           "readOnly": true
         },
@@ -1478,7 +1369,7 @@
             "$ref": "#/definitions/Event"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Event[]",
+          "x-typespec-name": "Event[]",
           "description": "The events that show the progress of the fine-tune run including queued,\nrunning and completed.",
           "readOnly": true
         },
@@ -1548,7 +1439,7 @@
           "items": {
             "$ref": "#/definitions/FineTune"
           },
-          "x-cadl-name": "FineTune[]",
+          "x-typespec-name": "FineTune[]",
           "description": "The list of FineTunes"
         }
       }
@@ -1595,7 +1486,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "The classification beta values. If this is provided, we calculate F-beta scores\nat the specified beta values.\nThe F-beta score is a generalization of F-1\nscore. This is only used for binary classification.\nWith a beta of 1 (i.e.the\nF-1 score), precision and recall are given the same weight.\nA larger beta\nscore puts more weight on recall and less on precision. A smaller beta score\nputs more weight on precision and less on recall."
         }
       },
@@ -1624,7 +1515,7 @@
       ],
       "x-ms-enum": {
         "name": "InnerErrorCodeKnownValues",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "InvalidPayload",
@@ -1642,7 +1533,7 @@
       ],
       "x-ms-enum": {
         "name": "LogLevel",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Info",
@@ -1751,7 +1642,7 @@
           "items": {
             "$ref": "#/definitions/Model"
           },
-          "x-cadl-name": "Model[]",
+          "x-typespec-name": "Model[]",
           "description": "The list of Models"
         }
       }
@@ -1785,7 +1676,7 @@
       ],
       "x-ms-enum": {
         "name": "PurposeKnownValues",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "FineTune",
@@ -1841,7 +1732,7 @@
       ],
       "x-ms-enum": {
         "name": "ScaleTypeKnownValues",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Manual",
@@ -1877,7 +1768,7 @@
       ],
       "x-ms-enum": {
         "name": "State",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "NotRunning",
@@ -1959,7 +1850,7 @@
       ],
       "x-ms-enum": {
         "name": "TypeDiscriminatorKnownValues",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "List",
@@ -1995,7 +1886,7 @@
       ],
       "x-ms-enum": {
         "name": "Versions",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "v2022_06_01_preview",
@@ -2011,6 +1902,7 @@
       "in": "query",
       "required": true,
       "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
       "minLength": 1,
       "type": "string",
       "x-ms-parameter-location": "method"

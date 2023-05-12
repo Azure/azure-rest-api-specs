@@ -3,6 +3,9 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.Core.Traits;
+using Azure.Core.Traits.Private;
 
 namespace Azure.OpenAI;
 
@@ -80,6 +83,22 @@ model CreatedResponse {
 
   @doc("Location of the newly created item")
   @header
-  @format("uri")
-  location: string;
+  location: url;
 }
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Template"
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "This operation signature is not used in Azure Resource Manager operations (yet)"
+@TypeSpec.Rest.createsResource(TResource)
+op CustomResourceCreateWithServiceProvidedName<
+  TResource extends object,
+  Traits extends object = {}
+> is Azure.Core.Foundations.ResourceCollectionOperation<
+  TResource,
+  Azure.Core.Foundations.ResourceBody<TResource> &
+    TraitProperties<Traits, TraitLocation.Parameters, TraitContext.Create>,
+  Azure.Core.Foundations.LocationOfCreatedResourceResponse<TResource> &
+    TResource &
+    TraitProperties<Traits, TraitLocation.Response, TraitContext.Create>,
+  Traits,
+  Azure.Core.Foundations.ErrorResponse
+>;
