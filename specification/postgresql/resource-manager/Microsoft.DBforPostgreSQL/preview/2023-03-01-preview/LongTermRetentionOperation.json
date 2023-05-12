@@ -34,6 +34,187 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup": {
+      "post": {
+        "description": "PreBackup operation performs all the checks that are need for the subsequent Backup to succeed.",
+        "tags": [
+          "LongTermRetention"
+        ],
+        "operationId": "ltrPreBackup_Execute",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LtrPreBackupRequest"
+            }
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A unique ID provided by the client to identify the specific request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. API finished synchronously with Success.",
+            "schema": {
+              "$ref": "#/definitions/LtrPreBackupResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error Scenario 4xx/5xx",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "ErrorCode string in the event of a failure.",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sample_Prebackup": {
+            "$ref": "./examples/LongTermRetentionPreBackup.json"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackup": {
+      "post": {
+        "description": "Start the Long Term Retention Backup operation",
+        "tags": [
+          "LongTermRetention"
+        ],
+        "operationId": "ltrBackup_Execute",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LtrBackupRequest"
+            }
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A unique ID provided by the client to identify the specific request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. API finished synchronously with Success.",
+            "schema": {
+              "$ref": "#/definitions/LtrBackupResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The number of seconds to wait before checking the status of the asynchronous operation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error Scenario 4xx/5xx",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "ErrorCode string in the event of a failure.",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sample_ExecuteBackup": {
+            "$ref": "./examples/LongTermRetentionBackup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}": {
       "get": {
         "tags": [
@@ -78,17 +259,145 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations": {
+      "get": {
+        "tags": [
+          "LongTermRetention"
+        ],
+        "operationId": "ltrBackupOperations_ListByServer",
+        "x-ms-examples": {
+          "Sample": {
+            "$ref": "./examples/LongTermRetentionOperationListByServer.json"
+          }
+        },
+        "description": "Gets the result of the give LTR backup for the server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LtrServerBackupOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
-    "LtrServerBackupOperationProperties": {
+    "BackupRequestBase": {
+      "description": "BackupRequestBase is the base for all backup request.",
+      "required": [
+        "backupSettings"
+      ],
       "type": "object",
       "properties": {
+        "backupSettings": {
+          "$ref": "#/definitions/BackupSettings",
+          "description": "Backup Settings"
+        }
+      }
+    },
+    "LtrBackupRequest": {
+      "description": "The request that is made for a long term retention backup.",
+      "type": "object",
+      "properties": {
+        "targetDetails": {
+          "$ref": "#/definitions/BackupStoreDetails",
+          "description": "Backup store detail for target server"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRequestBase"
+        }
+      ],
+      "required": [
+        "targetDetails"
+      ]
+    },
+    "LtrPreBackupRequest": {
+      "description": "A request that is made for pre-backup.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRequestBase"
+        }
+      ]
+    },
+    "BackupSettings": {
+      "description": "The settings for the long term backup.",
+      "type": "object",
+      "required": [
+        "backupName"
+      ],
+      "properties": {
         "backupName": {
-          "format": "int64",
-          "description": "Name of the backup",
-          "type": "string"
-        },
+          "type": "string",
+          "description": "Backup Name for the current backup"
+        }
+      }
+    },
+    "BackupStoreDetails": {
+      "description": "Details about the target where the backup content will be stored.",
+      "required": [
+        "sasUriList"
+      ],
+      "type": "object",
+      "properties": {
+        "sasUriList": {
+          "description": "SASUriList of storage containers where backup data is to be streamed/copied.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LtrPreBackupResponseProperties": {
+      "description": "Response for the pre-backup request.",
+      "type": "object",
+      "required": [
+        "numberOfContainers"
+      ],
+      "properties": {
+        "numberOfContainers": {
+          "format": "int32",
+          "description": "Number of storage containers the plugin will use during backup. More than one containers may be used for size limitations, parallelism, or redundancy etc.",
+          "type": "integer"
+        }
+      }
+    },
+    "LtrBackupOperationResponseProperties": {
+      "description": "Response for the backup request.",
+      "type": "object",
+      "required": [
+        "status",
+        "startTime"
+      ],
+      "properties": {
         "datasourceSizeInBytes": {
           "format": "int64",
           "description": "Size of datasource in bytes",
@@ -99,22 +408,16 @@
           "description": "Data transferred in bytes",
           "type": "integer"
         },
+        "backupName": {
+          "description": "Name of Backup operation",
+          "type": "string"
+        },
         "backupMetadata": {
           "description": "Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc",
           "type": "string"
         },
-        "startTime": {
-          "description": "Start time of the operation.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "description": "End time of the operation.",
-          "format": "date-time",
-          "type": "string"
-        },
         "status": {
-          "description": "Service-set extensible enum indicating operation?s kind",
+          "description": "Service-set extensible enum indicating the status of operation",
           "enum": [
             "Running",
             "Cancelled",
@@ -127,29 +430,96 @@
             "modelAsString": true
           }
         },
+        "startTime": {
+          "description": "Start time of the operation.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "End time of the operation.",
+          "format": "date-time",
+          "type": "string"
+        },
         "percentComplete": {
           "description": "PercentageCompleted",
-          "format": "int32",
-          "type": "integer"
+          "format": "double",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "errorCode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "errorMessage": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
         }
-      },
-      "description": "The properties of a server backup."
+      }
     },
-    "LtrServerBackupOperation": {
+    "LtrBackupResponse": {
+      "description": "Response for the LTR backup API call",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/LtrServerBackupOperationProperties",
+          "description": "Long Term Retention Backup Operation Resource Properties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a server ltr backup operation."
+          "$ref": "#/definitions/LtrBackupOperationResponseProperties"
+        }
+      }
+    },
+    "LtrServerBackupOperation": {
+      "description": "Response for the LTR backup Operation API call",
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Long Term Retention Backup Operation Resource Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LtrBackupOperationResponseProperties"
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "LtrServerBackupOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LtrServerBackupOperation"
+          },
+          "description": "The list of long term retention server backup operations"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of long term rention backup opeartions for server."
+    },
+    "LtrPreBackupResponse": {
+      "description": "Response for the LTR pre-backup API call",
+      "type": "object",
+      "required": [
+        "properties"
       ],
-      "description": "Server ltr backup properties"
+      "properties": {
+        "properties": {
+          "description": "Additional Properties for the pre backup response",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LtrPreBackupResponseProperties"
+        }
+      }
     }
   },
   "parameters": {

@@ -138,7 +138,12 @@
           "description": "Supported IOPS for this storage tier",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ]
     },
     "StorageMbCapability": {
       "type": "object",
@@ -207,7 +212,7 @@
         },
         "supportedZones": {
           "type": "array",
-          "description": "List of supported Availability Zones",
+          "description": "List of supported Availability Zones. E.g. \"1\", \"2\", \"3\"",
           "items": {
             "type": "string"
           },
@@ -216,7 +221,16 @@
         "supportedHaMode": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "description": "HA mode supported for a server.",
+            "enum": [
+              "SameZone",
+              "ZoneRedundant"
+            ],
+            "x-ms-enum": {
+              "name": "HaMode",
+              "modelAsString": true
+            }
           },
           "description": "Supported high availability mode",
           "readOnly": true
@@ -261,6 +275,11 @@
           "readOnly": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
       "description": "Server version capabilities."
     },
     "StorageEditionCapability": {
@@ -289,6 +308,11 @@
           "readOnly": true
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../types/common-types.json#/definitions/CapabilityBase"
+        }
+      ],
       "description": "Storage edition capability"
     },
     "FastProvisioningEditionCapability": {
