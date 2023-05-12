@@ -4873,7 +4873,7 @@
         },
         "enableAutoTierToHotFromCool": {
           "type": "boolean",
-          "description": "This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan."
+          "description": "This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan. This is mutually exclusive with DateAfterModification.autoUptier"
         }
       },
       "description": "Management policy action for base blob."
@@ -4956,7 +4956,7 @@
         },
         "autoUptier": {
           "$ref": "#/definitions/AutoUptier",
-          "description": "Automatically up tiers the blob to the account level access tier after the blob is read. This is a generalized implemntation of enableAutoTierToHotFromCool and is mutually exclusive with enableAutoTierToHotFromCool."
+          "description": "Automatically up tiers the blob to the account level access tier after the blob is read. Only applicable when daysAfterLastAccessTimeGreaterThan is set. Is applicable with tierToHot, tierToCool, tierToCold and tierToArchive. This is mutually exclusive with enableAutoTierToHotFromCool."
         }
       },
       "description": "Object to define the base blob action conditions. Properties daysAfterModificationGreaterThan, daysAfterLastAccessTimeGreaterThan and daysAfterCreationGreaterThan are mutually exclusive. The daysAfterLastTierChangeGreaterThan property is only applicable for tierToArchive actions which requires daysAfterModificationGreaterThan to be set, also it cannot be used in conjunction with daysAfterLastAccessTimeGreaterThan or daysAfterCreationGreaterThan."
