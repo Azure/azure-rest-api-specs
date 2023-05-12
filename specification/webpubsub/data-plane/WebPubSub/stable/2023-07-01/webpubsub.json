@@ -601,7 +601,7 @@
             "format": "int32",
             "maximum": 300,
             "minimum": 0
-          },
+          }
         ],
         "responses": {
           "202": {
@@ -1499,7 +1499,7 @@
             "format": "int32",
             "maximum": 300,
             "minimum": 0
-          },
+          }
         ],
         "responses": {
           "202": {
@@ -1813,11 +1813,12 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "Endpoint",
+        "name": "endpoint",
         "description": "HTTP or HTTPS endpoint for the Web PubSub service instance.",
         "x-ms-parameter-location": "client",
         "required": true,
         "type": "string",
+        "format": "url",
         "in": "path",
         "x-ms-skip-url-encoding": true
       }
