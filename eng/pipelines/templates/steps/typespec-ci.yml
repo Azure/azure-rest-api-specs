@@ -13,14 +13,14 @@ steps:
     npx tsp compile .
     cd $(Build.SourcesDirectory)
 
-    # If "tsp compile" generated different swagger than is checked in, display the diff
-    git diff
+    # If any files are added, changed, or deleted, print diff and return error
+    if [ -n "$(git status --porcelain)" ]; then
+      git status
+      git diff
+      exit 1
+    else
 
-    # "git diff-index --quiet HEAD --" returns zero exit code if no diff, nonzero if yes diff
-    # Should cause step to fail if any diff was detected
-    git diff-index --quiet HEAD --
-
-    # Revert any changed files
-    git restore .
+    # Revert any changes
+    git clean -df
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
