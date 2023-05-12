@@ -8,6 +8,8 @@ steps:
 - script: |
     # Log commands before running
     set -x
+
+    exitcode=0
     
     cd ${{parameters.Folder}}
     npx tsp compile .
@@ -19,10 +21,12 @@ steps:
     if [ -n "$(git status --porcelain)" ]; then
       git status
       git diff
-      exit 1
+      exit_code=1
     fi
 
     # Revert any changes
     git clean -df
+
+    exit $exit_code
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
