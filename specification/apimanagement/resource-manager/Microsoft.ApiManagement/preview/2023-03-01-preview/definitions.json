@@ -1950,7 +1950,8 @@
             "single",
             "pool"
           ],
-          "description": "Type of the backend. A backend can be either Single or Pool."
+          "description": "Type of the backend. A backend can be either Single or Pool.",
+          "x-apim-code-nillable": true
         }
       },
       "description": "Backend entity base Parameter set."
@@ -2349,6 +2350,31 @@
           "description": "The maximum http status code.",
           "minimum": 200,
           "maximum": 599
+        }
+      }
+    },
+    "BackendPool": {
+      "type": "object",
+      "description": "Backend pool information",
+      "properties": {
+        "services": {
+          "type": "array",
+          "description": "The list of backend entities belonging to a pool.",
+          "items": {
+            "$ref": "#/definitions/BackendPoolItem.json"
+          },
+          "minItems": 2
+        }
+      }
+    },
+    "BackendPoolItem": {
+      "type": "object",
+      "description": "Pool service information",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique id of the backend entity. The ID should refer to an already existing backend entity.",
+          "x-apim-code-resourceId": "/backends/{backendId}"
         }
       }
     },
