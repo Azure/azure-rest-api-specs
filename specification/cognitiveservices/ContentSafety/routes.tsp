@@ -49,7 +49,7 @@ interface BlockOps
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
   @doc("Returns text blocklist details.")
-  getTextBlocklist is Azure.Core.ResourceRead<TextBlocklist>;
+  getTextBlocklist is BlockOps.ResourceRead<TextBlocklist>;
 
   @summary("Create Or Update Text Blocklist")
   @doc("Updates a text blocklist, if blocklistName does not exist, create a new blocklist.")
