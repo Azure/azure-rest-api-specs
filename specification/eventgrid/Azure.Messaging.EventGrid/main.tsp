@@ -83,7 +83,7 @@ namespace Azure.Messaging.EventGrid {
     lockToken: string;
 
     @doc("The attempt count for deliverying the event.")
-    deliveryAttemptCount: int32;
+    deliveryCount: int32;
   }
 
   @doc("Receive operation details per Cloud Event.")
