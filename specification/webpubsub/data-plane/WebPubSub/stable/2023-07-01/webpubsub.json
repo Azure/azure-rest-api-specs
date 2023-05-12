@@ -36,6 +36,73 @@
         }
       }
     },
+    "/api/hubs/{hub}/:addToGroup": {
+      "post": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Add filtered connections to multiple groups.",
+        "operationId": "WebPubSub_AddConnectionsToGroups",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "message",
+            "description": "Target groups and connection filter.",
+            "schema": {
+              "$ref": "#/definitions/MultiGroupJoinRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "x-ms-long-running-operation": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_AddConnectionsToGroups": {
+            "$ref": "./examples/WebPubSub_AddConnectionsToGroups.json"
+          }
+        }
+      }
+    },
     "/api/hubs/{hub}/:closeConnections": {
       "post": {
         "tags": [
@@ -196,6 +263,73 @@
         }
       }
     },
+    "/api/hubs/{hub}/:removeFromGroup": {
+      "post": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Remove filtered connections from multiple groups.",
+        "operationId": "WebPubSub_RemoveConnectionsFromGroups",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "message",
+            "description": "Target groups and connection filter.",
+            "schema": {
+              "$ref": "#/definitions/MultiGroupLeaveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "x-ms-long-running-operation": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveConnectionsFromGroups": {
+            "$ref": "./examples/WebPubSub_RemoveConnectionsFromGroups.json"
+          }
+        }
+      }
+    },
     "/api/hubs/{hub}/:send": {
       "post": {
         "tags": [
@@ -252,11 +386,21 @@
             "name": "filter",
             "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "messageTtlSeconds",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300,
+            "minimum": 0
           }
         ],
         "responses": {
           "202": {
-            "description": "The message is accepted. The service follows fire-and-forget pattern when sending messages."
+            "description": "The message is accepted. The service follows fire-and-forget pattern when sending messages.",
+            "x-ms-long-running-operation": true
           },
           "default": {
             "description": "Error response",
@@ -448,11 +592,21 @@
               "format": "binary",
               "type": "string"
             }
-          }
+          },
+          {
+            "in": "query",
+            "name": "messageTtlSeconds",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300,
+            "minimum": 0
+          },
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "x-ms-long-running-operation": true
           },
           "default": {
             "description": "Error response",
@@ -738,11 +892,21 @@
             "name": "filter",
             "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "messageTtlSeconds",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300,
+            "minimum": 0
           }
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "x-ms-long-running-operation": true
           },
           "default": {
             "description": "Error response",
@@ -1326,11 +1490,21 @@
             "name": "filter",
             "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
             "type": "string"
-          }
+          },
+          {
+            "in": "query",
+            "name": "messageTtlSeconds",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300,
+            "minimum": 0
+          },
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "x-ms-long-running-operation": true
           },
           "default": {
             "description": "Error response",
@@ -1600,6 +1774,36 @@
         },
         "inner": {
           "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "MultiGroupJoinRequest": {
+      "description": "The request object containing targets groups and connection filter",
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "connectionFilter": {
+          "type": "string"
+        }
+      }
+    },
+    "MultiGroupLeaveRequest": {
+      "description": "The request object containing targets groups and connection filter",
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "connectionFilter": {
+          "type": "string"
         }
       }
     }

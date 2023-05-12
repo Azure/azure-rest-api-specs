@@ -26,7 +26,7 @@ These are the global settings for the Web PubSub Service API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-07
+tag: package-2023-07-01
 ```
 
 ### Suppression
@@ -40,11 +40,11 @@ directive:
 ```
 
 
-### Tag: package-2023-07
+### Tag: package-2023-07-01
 
-These settings apply only when `--tag=package-2023-07` is specified on the command line.
+These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+```yaml $(tag) == 'package-2023-07-01'
 input-file:
   - WebPubSub/stable/2023-07-01/webpubsub.json
 ```
