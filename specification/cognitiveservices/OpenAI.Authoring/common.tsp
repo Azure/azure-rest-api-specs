@@ -80,6 +80,5 @@ model CreatedResponse {
 
   @doc("Location of the newly created item")
   @header
-  @format("uri")
-  location: string;
+  location: url;
 }

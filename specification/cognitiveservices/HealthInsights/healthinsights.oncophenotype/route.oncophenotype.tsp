@@ -14,17 +14,30 @@ using Autorest;
 namespace AzureHealthInsights;
 
 interface OncoPhenotype {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
   @summary("Get Onco Phenotype job details")
   @tag("OncoPhenotype")
   @doc("Gets the status and details of the Onco Phenotype job.")
-  @example("./examples/SuccessfulOncoPhenotypeResponse.json", "SuccessfulOncoPhenotypeGetAnalyzeStatus")
+  @example(
+    "./examples/SuccessfulOncoPhenotypeResponse.json",
+    "SuccessfulOncoPhenotypeGetAnalyzeStatus"
+  )
   GetJob is Azure.Core.ResourceRead<OncoPhenotypeResult>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No LRO RPC Operation"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec should not be updated"
   @summary("Create Onco Phenotype job")
   @tag("OncoPhenotype")
   @doc("Creates an Onco Phenotype job with the given request body.")
   @pollingOperation(OncoPhenotype.GetJob)
   @route("/oncophenotype/jobs")
-  @example("./examples/SuccessfulOncoPhenotypeRequest.json", "SuccessfulOncoPhenotypeAnalyzeRequest")
-  CreateJob is LongRunningRpcOperation<OncoPhenotypeData, OncoPhenotypeResult, RepeatabilityRequestHeaders>;
+  @example(
+    "./examples/SuccessfulOncoPhenotypeRequest.json",
+    "SuccessfulOncoPhenotypeAnalyzeRequest"
+  )
+  CreateJob is LongRunningRpcOperation<
+    OncoPhenotypeData,
+    OncoPhenotypeResult,
+    Azure.Core.Traits.SupportsRepeatableRequests
+  >;
 }

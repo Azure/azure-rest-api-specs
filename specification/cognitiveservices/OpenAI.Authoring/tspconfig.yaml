@@ -1,7 +1,10 @@
 emit:
   - "@azure-tools/typespec-autorest"
   - "@azure-tools/cadl-apiview"
-# options:
+options:
+ "@azure-tools/typespec-autorest":
+   emitter-output-dir: "{project-root}/cadl-output"
+   output-file: "{version}/openapi.json"
 # Uncomment this line and add "@azure-tools/cadl-python" to your package.json to generate Python code
 # "@azure-tools/cadl-python":
 #   "basic-setup-py": true

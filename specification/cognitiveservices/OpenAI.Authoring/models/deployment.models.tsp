@@ -20,10 +20,12 @@ model Deployment {
   @visibility("read")
   status: State;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
   created_at: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
   updated_at: int32;
@@ -34,7 +36,7 @@ model Deployment {
   id: string;
 
   @doc("The OpenAI model to deploy. Can be a base model or a fine tune.")
-  "model": string;
+  `model`: string;
 
   @doc("""
 The owner of this deployment. For Azure OpenAI only \"organization-owner\" is
@@ -43,6 +45,7 @@ supported.
   @visibility("read")
   owner?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("""
 The scale settings of a deployment. It defines the modes for scaling and the
 reserved capacity.

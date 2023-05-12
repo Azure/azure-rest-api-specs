@@ -15,6 +15,7 @@ op UnivariateServiceAction<TParams, TResponse>(
   ...TParams
 ): TResponse | AnomalyDetectorError;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
 @route("timeseries/entire/detect")
@@ -29,11 +30,14 @@ op DetectUnivariateEntireSeries is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateDetectionOptions,
+    @body
+    options: UnivariateDetectionOptions;
   },
   // TResponse
-  UnivariateEntireDetectionResult>;
+  UnivariateEntireDetectionResult
+>;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
 @route("timeseries/last/detect")
@@ -46,11 +50,14 @@ op DetectUnivariateLastPoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateDetectionOptions,
+    @body
+    options: UnivariateDetectionOptions;
   },
   // TResponse
-  UnivariateLastDetectionResult>;
+  UnivariateLastDetectionResult
+>;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
 @route("timeseries/changepoint/detect")
@@ -60,7 +67,9 @@ op DetectUnivariateChangePoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body options: UnivariateChangePointDetectionOptions,
+    @body
+    options: UnivariateChangePointDetectionOptions;
   },
   // TResponse
-  UnivariateChangePointDetectionResult>;
+  UnivariateChangePointDetectionResult
+>;

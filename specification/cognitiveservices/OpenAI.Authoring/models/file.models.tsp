@@ -21,10 +21,12 @@ model File {
   @visibility("read")
   status?: State;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
   created_at?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
   updated_at?: int32;
@@ -72,6 +74,7 @@ examples.
 """)
   filename: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service spec"
   @doc("""
 The url to download the document from (can be SAS url of a blob or any other
 external url accessible with a GET request).

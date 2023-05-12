@@ -19,6 +19,7 @@ op MultivariateServiceAction<TParams, TResponse>(
 
 // Operations
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably GetResourceOperationStatus, but that can't be used because
@@ -34,9 +35,11 @@ resultId value that the BatchDetectAnomaly API returns.
 op GetMultivariateBatchDetectionResult(
   @format("uuid")
   @doc("ID of a batch detection result.")
-  @path resultId: string,
+  @path
+  resultId: string
 ): MultivariateDetectionResult | ResponseError;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795
 @route("/multivariate/models")
@@ -57,16 +60,21 @@ op TrainMultivariateModel is MultivariateServiceAction<
   // TParams
   {
     @doc("Model information.")
-    @body modelInfo: ModelInfo,
+    @body
+    modelInfo: ModelInfo;
   },
   // TResponse
   {
-    @statusCode statusCode: 201,
-    @doc("Location and ID of the model.")
-    @header location: string,
-    @body result: AnomalyDetectionModel
-  }>;
+    @statusCode statusCode: 201;
 
+    @doc("Location and ID of the model.")
+    @header
+    location: string;
+    @body result: AnomalyDetectionModel;
+  }
+>;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably ResourceList, but that can't be used because
@@ -79,10 +87,10 @@ op TrainMultivariateModel is MultivariateServiceAction<
 @doc("List models of a resource.")
 op ListMultivariateModels(
   ...SkipQueryParameter,
-  ...TopQueryParameter,
+  ...TopQueryParameter
 ): ModelList | ResponseError;
 
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably ResourceDelete, but that can't be used because
@@ -94,14 +102,14 @@ op ListMultivariateModels(
 op DeleteMultivariateModel(
   @doc("Model identifier.")
   @path
-  modelId: string,
+  modelId: string
 ): {
   @doc("Delete model successfully.")
   @statusCode
-  statusCode: 204
-  } | ResponseError;
+  statusCode: 204;
+} | ResponseError;
 
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably ResourceGet, but that can't be used because
@@ -116,9 +124,10 @@ and variables used in the model.
 op GetMultivariateModel(
   @doc("Model identifier.")
   @path
-  modelId: string,
+  modelId: string
 ): AnomalyDetectionModel | ResponseError;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably LongRunningResourceAction, but that can't be used because
@@ -138,18 +147,24 @@ op DetectMultivariateBatchAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
+
   @doc("Request of multivariate anomaly detection.")
-  @body options: MultivariateBatchDetectionOptions,
+  @body
+  options: MultivariateBatchDetectionOptions
 ): {
-  @statusCode statusCode: 202,
+  @statusCode statusCode: 202;
+
   @doc("ID of the detection result.")
-  @header("Operation-Id") operationId: string,
+  @header("Operation-Id")
+  operationId: string;
+
   @doc("Location of the detection result.")
-  @header("Operation-Location") operationLocation: string,
-  @body result: MultivariateDetectionResult,
+  @header("Operation-Location")
+  operationLocation: string;
+  @body result: MultivariateDetectionResult;
 } | ResponseError;
 
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Created before this rule was enforced"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably ResourceAction, but that can't be used because
@@ -166,6 +181,8 @@ op DetectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
+
   @doc("Request of the last detection.")
-  @body options: MultivariateLastDetectionOptions,
+  @body
+  options: MultivariateLastDetectionOptions
 ): MultivariateLastDetectionResult | ResponseError;
