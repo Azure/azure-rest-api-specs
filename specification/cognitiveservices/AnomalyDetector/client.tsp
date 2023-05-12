@@ -10,6 +10,7 @@ using Azure.ClientGenerator.Core;
 @@projectedName(AnomalyDetector.Multivariate.ModelDetails.endTime, "csharp", "endsOn"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Multivariate.ModelDetails.startTime, "csharp", "starsOn"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Multivariate.DetectionValue.interpretation, "csharp", "interpretations"); // Prefer a different name for C# only
+@@projectedName(AnomalyDetector.Multivariate.DetectionValue.interpretation, "java", "interpretations"); // Prefer a different name for java only
 @@projectedName(AnomalyDetector.Univariate.DetectUnivariateLastPoint, "java", "detectUnivariateLastAnomaly"); // Prefer a different name for java only
 @@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isAnomaly, "client", "isAnomalyList"); // Use isAnomalyList in all clients
 @@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isNegativeAnomaly, "client", "isNegativeAnomalyList"); // Use isNegativeAnomalyList in all clients
