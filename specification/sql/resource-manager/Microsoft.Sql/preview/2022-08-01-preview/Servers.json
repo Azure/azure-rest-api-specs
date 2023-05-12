@@ -1078,6 +1078,18 @@
           "description": "A CMK URI of the key to use for encryption.",
           "type": "string"
         },
+        "isIPv6Enabled": {
+          "description": "Whether or not IPv6 firewall rule is enabled for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerIPv6EnabledFlag",
+            "modelAsString": true
+          }
+        },
         "administrators": {
           "$ref": "#/definitions/ServerExternalAdministrator",
           "description": "The Azure Active Directory administrator of the server. This can only be used at server create time. If used for server update, it will be ignored or it will result in an error. For updates individual APIs will need to be used.",
