@@ -9,13 +9,13 @@ steps:
     # Log commands before running
     set -x
 
-    exitcode=0
+    exit_code=0
 
-    cd ${{parameters.Folder}}
-    npx tsp compile .
+    pushd ${{parameters.Folder}}
+    npx tsp compile . || exit_code=1
     # Format parent folder to include shared files (disabled until formatting diffs are fixed)
     # npx tsp format ../**/*.tsp
-    cd $(Build.SourcesDirectory)
+    popd
 
     # If any files are added, changed, or deleted, print diff and return error
     if [ -n "$(git status --porcelain)" ]; then
