@@ -77,6 +77,9 @@ directive:
   - suppress: NoDuplicatePathsForScopeParameter
     from: authorization-RoleDefinitionsCalls.json
     reason: /{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} and /{scope}/providers/Microsoft.Authorization/roleDefinitions are two different APIs, they are not having the duplicate paths.
+  - suppress: TopLevelResourcesListBySubscription
+    from: authorization-RoleDefinitionsCalls.json
+    reason: The resource 'RoleDefinition' has scope parameter, which includes the subscruotuib scope as well.
   - suppress: PreviewVersionOverOneYear
     reason: We are still due to go public preview in next quarter. We have also updated status in the ADO for the delay.
   - suppress: R2017
