@@ -904,7 +904,7 @@
         "tags": [
           "AccountMigrations"
         ],
-        "operationId": "AccountMigrations_Post",
+        "operationId": "StorageAccounts_CustomerInitiatedMigration",
         "description": "Account Migration request can be triggered for a storage account to change its redundancy level. The migration updates the non-zonal redundant storage account to a zonal redundant account or vice-versa in order to have better reliability and availability. Zone-redundant storage (ZRS) replicates your storage account synchronously across three Azure availability zones in the primary region.",
         "x-ms-examples": {
           "StorageAccountPostMigration": {
@@ -964,7 +964,7 @@
         "tags": [
           "AccountMigrations"
         ],
-        "operationId": "AccountMigrations_Get",
+        "operationId": "StorageAccounts_GetCustomerInitiatedMigration",
         "description": "Gets the status of the ongoing migration for the specified storage account.",
         "x-ms-examples": {
           "StorageAccountGetMigrationFailed": {
@@ -5567,6 +5567,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "Migration Resource Id"
         },
         "name": {
