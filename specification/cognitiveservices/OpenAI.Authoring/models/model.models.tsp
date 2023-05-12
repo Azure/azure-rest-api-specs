@@ -35,6 +35,7 @@ model Model {
   @key("model_id")
   id: string;
 
+  @projectedName("csharp", "modelProperty")
   @doc("The base model ID if this is a fine tune model; otherwise `null`.")
   @visibility("read")
   `model`?: string;

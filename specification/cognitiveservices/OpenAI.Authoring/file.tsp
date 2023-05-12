@@ -30,7 +30,7 @@ corresponding fine-tune job.
   @route("/")
   @get
   // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
-  ListFiles is ServiceCustomizations.OpenAIListOperation<File, "file">;
+  listFiles is ServiceCustomizations.OpenAIListOperation<File, "file">;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing spec"
   @summary("""
@@ -41,7 +41,7 @@ files can, for example, be used for training or evaluating fine-tuned models.
 Creates a new file entity by uploading data from a local machine. Uploaded
 files can, for example, be used for training or evaluating fine-tuned models.
 """)
-  UploadFile is CustomResourceCreateWithServiceProvidedName<File>;
+  uploadFile is CustomResourceCreateWithServiceProvidedName<File>;
 
   @summary("""
 Gets details for a single file specified by the given file_id including status,
@@ -51,7 +51,7 @@ size, purpose, etc.
 Gets details for a single file specified by the given file_id including status,
 size, purpose, etc.
 """)
-  GetFile is ResourceRead<File>;
+  getFile is ResourceRead<File>;
 
   @summary("""
 Deletes the file with the given file_id.
@@ -63,7 +63,7 @@ Deletes the file with the given file_id.
 Deletion is also allowed if a file
 was used, e.g., as training file in a fine-tune job.
 """)
-  DeleteFile is ResourceDelete<File>;
+  deleteFile is ResourceDelete<File>;
 
   @summary("""
 Gets the content of the file specified by the given file_id.
@@ -80,7 +80,7 @@ job.
   @get
   @action("content")
   @actionSeparator("/")
-  GetFileContent is ResourceAction<File, {}, FileContent>;
+  getFileContent is ResourceAction<File, {}, FileContent>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("""
@@ -93,7 +93,7 @@ can, for example, be used for training or evaluating fine-tuned models.
 """)
   @route("/files/import")
   @post
-  ImportFile is Foundations.Operation<
+  importFile is Foundations.Operation<
     {
       @doc("expected schema for the body of the completion post request")
       @body

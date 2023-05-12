@@ -29,7 +29,7 @@ changes, e.g. running or complete, and when results are uploaded.
   @route("/")
   @get
   // TODO: enum value types not supported in csharp emitter, change string literal to TypeDiscriminatorKnownValues enum when fixed
-  ListFineTunes is ServiceCustomizations.OpenAIListOperation<
+  listFineTunes is ServiceCustomizations.OpenAIListOperation<
     FineTune,
     "fine-tune"
   >;
@@ -53,7 +53,7 @@ once complete.
 """)
   @route("/fine-tunes")
   @post
-  CreateFineTune is Foundations.Operation<
+  createFineTune is Foundations.Operation<
     FineTuneCreation,
     FineTune & CreatedResponse
   >;
@@ -76,11 +76,11 @@ Events are created
 when the job status changes, e.g. running or complete, and when results are
 uploaded.
 """)
-  GetFineTune is ResourceRead<FineTune>;
+  getFineTune is ResourceRead<FineTune>;
 
   @summary("Deletes the fine-tune job specified by the given fine_tune_id.")
   @doc("Deletes the fine-tune job specified by the given fine_tune_id.")
-  DeleteFineTune is ResourceDelete<FineTune>;
+  deleteFineTune is ResourceDelete<FineTune>;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
   @summary("""
@@ -95,7 +95,7 @@ complete, and when results are uploaded.
 """)
   @TypeSpec.Rest.actionSeparator("/")
   @get
-  ListFineTuneEvents is Azure.Core.ResourceAction<
+  listFineTuneEvents is Azure.Core.ResourceAction<
     FineTune,
     {
       @doc("A flag indicating whether to stream events for the fine-tune job. If set to true,\nevents will be sent as data-only server-sent events as they become available. The stream will terminate with\na data: [DONE] message when the job is finished (succeeded, cancelled, or failed).\nIf set to false, only events generated so far will be returned..")
@@ -111,5 +111,5 @@ complete, and when results are uploaded.
   @post
   @action("cancel")
   @actionSeparator("/")
-  CancelFineTune is ResourceAction<FineTune, {}, FineTune>;
+  cancelFineTune is ResourceAction<FineTune, {}, FineTune>;
 }
