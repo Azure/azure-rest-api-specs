@@ -39,13 +39,17 @@
       "type": "object",
       "properties": {
         "url": {
-          "description": "Token URL for creating or accessing a blob file.",
+          "description": "SAS URL for creating or accessing a blob file.",
           "type": "string",
+          "format": "uri",
+          "readOnly": true,
           "x-nullable": true
         },
         "uploadUrl": {
-          "description": "Url for file uploading. Kept for backwards compatibility",
+          "description": "SAS Url for file uploading. Kept for backwards compatibility",
           "type": "string",
+          "format": "uri",
+          "readOnly": true,
           "x-nullable": true
         }
       },
@@ -157,14 +161,6 @@
     }
   },
   "parameters": {
-    "FirmwareGroupNameParameter": {
-      "name": "firmwareGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the firmware group.",
-      "x-ms-parameter-location": "method"
-    },
     "FirmwareIdParameter": {
       "name": "firmwareId",
       "in": "path",
