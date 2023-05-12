@@ -85,6 +85,14 @@
               "$ref": "#/definitions/GetUploadUri"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "",
             "schema": {
@@ -580,10 +588,12 @@
               "$ref": "#/definitions/Chamber"
             }
           },
-          "201": {
-            "description": "Create successful. The operation returns the resulting Chamber resource.",
-            "schema": {
-              "$ref": "#/definitions/Chamber"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {

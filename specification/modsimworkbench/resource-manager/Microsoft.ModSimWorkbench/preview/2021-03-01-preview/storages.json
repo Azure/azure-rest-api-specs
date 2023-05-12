@@ -183,10 +183,12 @@
               "$ref": "#/definitions/Storage"
             }
           },
-          "201": {
-            "description": "Create successful. The operation returns the resulting storage resource.",
-            "schema": {
-              "$ref": "#/definitions/Storage"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -325,7 +327,12 @@
             "description": "Request is successful. Resource with the specified name does not exist."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Default Error Response",
