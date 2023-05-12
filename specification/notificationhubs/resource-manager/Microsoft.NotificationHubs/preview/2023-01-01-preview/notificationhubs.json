@@ -2134,6 +2134,10 @@
         }
       ],
       "properties": {
+        "isAvailiable": {
+          "description": "Gets or sets true if the name is available and can be used to\r\ncreate new Namespace/NotificationHub. Otherwise false.",
+          "type": "boolean"
+        },
         "location": {
           "description": "Deprecated - only for compatibility.",
           "type": "string",
@@ -2148,10 +2152,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "isAvailiable": {
-          "description": "Gets or sets true if the name is available and can be used to\r\ncreate new Namespace/NotificationHub. Otherwise false.",
-          "type": "boolean"
         }
       }
     },
@@ -2195,6 +2195,9 @@
         }
       ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/DebugSendResult"
+        },
         "location": {
           "description": "Deprecated - only for compatibility.",
           "type": "string",
@@ -2209,9 +2212,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/DebugSendResult"
         }
       }
     },
@@ -2948,6 +2948,9 @@
         }
       ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/PnsCredentials"
+        },
         "location": {
           "description": "Deprecated - only for compatibility.",
           "type": "string",
@@ -2962,9 +2965,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/PnsCredentials"
         }
       }
     },
@@ -3026,21 +3026,6 @@
         }
       ],
       "properties": {
-        "location": {
-          "description": "Deprecated - only for compatibility.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "description": "Deprecated - only for compatibility.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties"
         }
@@ -3088,21 +3073,6 @@
         }
       ],
       "properties": {
-        "location": {
-          "description": "Deprecated - only for compatibility.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "description": "Deprecated - only for compatibility.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties"
         }
@@ -3416,6 +3386,9 @@
         }
       ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
+        },
         "location": {
           "description": "Deprecated - only for compatibility.",
           "type": "string",
@@ -3430,9 +3403,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
         }
       }
     },
