@@ -1933,6 +1933,24 @@
         "circuitBreaker": {
           "$ref": "#/definitions/BackendCircuitBreaker",
           "description": "Backend Circuit Breaker Configuration"
+        },
+        "pool": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BackendPool.json"
+            },
+            {
+              "description": "Backend Pool Properties"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "single",
+            "pool"
+          ],
+          "description": "Type of the backend. A backend can be either Single or Pool."
         }
       },
       "description": "Backend entity base Parameter set."
