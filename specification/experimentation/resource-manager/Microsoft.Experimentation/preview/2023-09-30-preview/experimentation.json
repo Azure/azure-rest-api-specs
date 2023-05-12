@@ -44,24 +44,20 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Experimentation resource provider API",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -93,16 +89,16 @@
         "description": "Create an experiment workspace, or update an existing workspace",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/experimentWorkspaceParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parameters",
@@ -130,7 +126,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -148,16 +144,16 @@
         "description": "Patch an experiment workspace",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/experimentWorkspaceParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "parameters",
@@ -179,7 +175,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -197,16 +193,16 @@
         "description": "Deletes an experiment workspace",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/experimentWorkspaceParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -222,7 +218,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -240,16 +236,16 @@
         "description": "Gets an experiment workspace",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/experimentWorkspaceParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -262,7 +258,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -282,13 +278,13 @@
         "description": "Gets all experiment workspaces in a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -301,7 +297,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -324,10 +320,10 @@
         "description": "Gets all experiment workspaces in the specified subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -340,7 +336,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -378,7 +374,7 @@
       "description": "An experiment workspace.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -388,18 +384,12 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         },
         "identity": {
           "description": "The identity of the workspace",
           "$ref": "#/definitions/ManagedIdentity"
-        },
-        "variantAssignmentConfigPublishing": {
-          "$ref": "#/definitions/VariantAssignmentConfigPublishing"
-        },
-        "remoteVariantAssignment": {
-          "$ref": "#/definitions/RemoteVariantAssignment"
         }
       }
     },
@@ -424,10 +414,17 @@
         },
         "managementGroups": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ManagementGroup"
           },
           "description": "Management Groups"
+        },
+        "variantAssignmentConfigPublishing": {
+          "$ref": "#/definitions/VariantAssignmentConfigPublishing"
+        },
+        "remoteVariantAssignment": {
+          "$ref": "#/definitions/RemoteVariantAssignment"
         }
       }
     },
@@ -435,6 +432,11 @@
       "type": "object",
       "description": "An experiment workspace.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentWorkspaceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
         "location": {
           "description": "Location of the resource.",
           "type": "string"
@@ -457,34 +459,6 @@
         "identity": {
           "description": "The identity of the workspace",
           "$ref": "#/definitions/ManagedIdentity"
-        },
-        "variantAssignmentConfigPublishing": {
-          "$ref": "#/definitions/VariantAssignmentConfigPublishing"
-        },
-        "remoteVariantAssignment": {
-          "$ref": "#/definitions/RemoteVariantAssignment"
-        }
-      }
-    },
-    "ExperimentWorkspaceCreateProperties": {
-      "type": "object",
-      "description": "An experiment workspace properties.",
-      "properties": {
-        "tasEndpoint": {
-          "description": "A treatment assignment service endpoint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "tasCustomSubscriptionId": {
-          "description": "Treatment Assignment Service custom subscription Id.",
-          "type": "string"
-        },
-        "tasClusters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TASCluster"
-          },
-          "description": "Treatment Assignment Clusters"
         }
       }
     },
@@ -545,98 +519,6 @@
       },
       "description": "The response of list experiment workspace operation."
     },
-    "OperationListResult": {
-      "description": "Describes the result of the request to list Service Fabric operations.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of Experimentation operations supported by the Microsoft.Experimentation resource provider.",
-          "items": {
-            "$ref": "#/definitions/OperationResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationResult": {
-      "description": "Available operation list result",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation."
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
-        "display": {
-          "$ref": "#/definitions/AvailableOperationDisplay",
-          "description": "The object that represents the operation."
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin result"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      }
-    },
-    "AvailableOperationDisplay": {
-      "description": "Operation supported by Experimentation resource provider",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "The name of the provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "The resource on which the operation is performed"
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that can be performed."
-        },
-        "description": {
-          "type": "string",
-          "description": "Operation description"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
-    "ErrorDetails": {
-      "description": "The details of the error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "ManagedIdentity": {
       "description": "The workspace managed identity",
       "type": "object",
@@ -655,36 +537,12 @@
         },
         "userAssignedIdentities": {
           "description": "The user assigned managed identities.",
-          "$ref": "#/definitions/UserAssignedManagedIdentities"
-        }
-      }
-    },
-    "UserAssignedManagedIdentities": {
-      "type": "object",
-      "description": "The User Assigned Managed Identities.",
-      "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedManagedIdentity"
-      }
-    },
-    "UserAssignedManagedIdentity": {
-      "description": "User Assigned Managed Identity",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The client ID.",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "principalId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The principal ID.",
-          "readOnly": true,
-          "x-nullable": true
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentities"
         }
       },
-      "type": "object"
+      "required": [
+        "type"
+      ]
     },
     "VariantAssignmentConfigPublishing": {
       "type": "object",
@@ -744,28 +602,6 @@
     }
   },
   "parameters": {
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "required": true,
-      "type": "string"
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request."
-    },
-    "resourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "client"
-    },
     "experimentWorkspaceParameter": {
       "name": "experimentWorkspaceName",
       "in": "path",
