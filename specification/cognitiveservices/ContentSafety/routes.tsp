@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-azure-core";
-//import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
@@ -9,7 +8,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-//using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
