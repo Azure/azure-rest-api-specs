@@ -149,10 +149,6 @@
               "$ref": "#/definitions/BuilderResource"
             }
           },
-          "404": {
-            "description": "Not found.",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Common error response.",
             "schema": {
@@ -213,6 +209,11 @@
             "description": "ARM create or update operation has been started.",
             "schema": {
               "$ref": "#/definitions/BuilderResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           },
           "default": {
