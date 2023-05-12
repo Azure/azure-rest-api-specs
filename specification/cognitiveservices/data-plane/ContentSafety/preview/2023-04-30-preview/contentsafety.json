@@ -121,7 +121,7 @@
                   "type": "string",
                   "format": "uri",
                   "description": "The link to the next page of items",
-                  "x-typespec-name": "Rest.ResourceLocation"
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
                 }
               },
               "description": "Paged collection of TextBlocklist items",
@@ -155,50 +155,6 @@
       }
     },
     "/text/blocklists/{blocklistName}": {
-      "get": {
-        "operationId": "TextBlocklists_GetTextBlocklist",
-        "summary": "Get Text Blocklist By blocklistName",
-        "description": "Returns text blocklist details.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "blocklistName",
-            "in": "path",
-            "required": true,
-            "description": "Text blocklist name.",
-            "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TextBlocklist"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Text Blocklist By blocklistName": {
-            "$ref": "./examples/GetTextBlocklist.json"
-          }
-        }
-      },
       "patch": {
         "operationId": "TextBlocklists_CreateOrUpdateTextBlocklist",
         "summary": "Create Or Update Text Blocklist",
@@ -453,7 +409,7 @@
                   "type": "string",
                   "format": "uri",
                   "description": "The link to the next page of items",
-                  "x-typespec-name": "Rest.ResourceLocation"
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
                 }
               },
               "description": "Paged collection of TextBlockItem items",
@@ -1057,6 +1013,7 @@
       "in": "query",
       "required": false,
       "description": "The number of result items to skip.",
+      "default": 0,
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
