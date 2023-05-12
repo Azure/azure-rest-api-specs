@@ -781,7 +781,7 @@
           "Namespaces"
         ],
         "summary": "Checks the availability of the given service namespace across all Azure subscriptions. This is useful because the domain name is created based on the service namespace name.",
-        "operationId": "Namespaces_CheckNamespaceAvailability",
+        "operationId": "Namespaces_CheckAvailability",
         "consumes": [
           "application/json"
         ],
@@ -820,7 +820,7 @@
           }
         },
         "x-ms-examples": {
-          "Namespaces_CheckNamespaceAvailability": {
+          "Namespaces_CheckAvailability": {
             "$ref": "./examples/Namespaces/CheckAvailability.json"
           }
         }
@@ -2134,6 +2134,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Deprecated - only for compatibility.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -2144,14 +2152,6 @@
         "isAvailiable": {
           "description": "Gets or sets true if the name is available and can be used to\r\ncreate new Namespace/NotificationHub. Otherwise false.",
           "type": "boolean"
-        },
-        "location": {
-          "description": "Location of the notification hub. This property is deprecated\r\nsince version 2023-01-01-preview.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       }
     },
@@ -2195,6 +2195,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Deprecated - only for compatibility.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -2940,6 +2948,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Deprecated - only for compatibility.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -3010,6 +3026,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Deprecated - only for compatibility.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -3064,6 +3088,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Deprecated - only for compatibility.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -3384,6 +3416,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Deprecated - only for compatibility.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "tags": {
           "description": "Deprecated - only for compatibility.",
           "type": "object",
@@ -3393,14 +3433,6 @@
         },
         "properties": {
           "$ref": "#/definitions/SharedAccessAuthorizationRuleProperties"
-        },
-        "location": {
-          "description": "Location of the PNS credentials. Always the same as location of the containing namespace.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       }
     },
