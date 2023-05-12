@@ -1526,7 +1526,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1986,6 +1986,22 @@
         }
       }
     },
+    "Availability": {
+      "description": "Represents metric availability (part of RP operation descriptions).",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Time grain of the availability.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "Duration of the availability blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "BaiduCredential": {
       "description": "Description of a NotificationHub BaiduCredential.",
       "required": [
@@ -2330,6 +2346,77 @@
       "properties": {
         "id": {
           "type": "string"
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "A single log category specification.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log category.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the log category.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "Duration of data written to a single blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "A metric specification.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metric name / id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "User-visible metric name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "description": "Description of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Metric unit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "description": "Type of the aggregation (Average, Minimum, Maximum, Total or Count).",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilities": {
+          "description": "List of availabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "metricFilterPattern": {
+          "description": "The matching regex pattern to be applied to the field pointed by the \"metricsFilterPathSelector\" flag in the ARM manifest.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fillGapWithZero": {
+          "description": "Optional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
@@ -2717,6 +2804,85 @@
         }
       }
     },
+    "Operation": {
+      "description": "A NotificationHubs REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets operation name: {provider}/{resource}/{operation}",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties"
+        },
+        "isDataAction": {
+          "description": "Gets or sets IsDataAction property. It is used to differentiate management and data plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Gets service provider: Microsoft.NotificationHubs",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Gets resource on which the operation is performed: Invoice, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Gets operation type: Read, write, delete, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Human-friendly operation description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list NotificationHubs operations. It contains\r\na list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets list of NotificationHubs operations supported by the\r\nMicrosoft.NotificationHubs resource provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "Gets URL to get the next set of operation list results if there are\r\nany.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Optional operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
     "OperationProvisioningState": {
       "description": "Defines values for OperationProvisioningState.",
       "enum": [
@@ -3099,6 +3265,35 @@
           "description": "Gets or sets keyName of the created AuthorizationRule",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Optional service specification used in Operations API.",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Log specifications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "metricSpecifications": {
+          "description": "Metric specification.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
         }
       }
     },
