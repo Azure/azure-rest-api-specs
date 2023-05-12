@@ -117,6 +117,7 @@ input-file:
   - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
   - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - Microsoft.Authorization/preview/2022-05-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
   - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
   - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
   - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
