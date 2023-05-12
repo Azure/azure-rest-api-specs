@@ -1,0 +1,38 @@
+parameters:
+  python-sdk-folder:
+    default: "{cwd}/azure-sdk-for-python/"
+  # java-sdk-folder:
+  #   default: "{cwd}/azure-sdk-for-java/"
+  # js-sdk-folder:
+  #   default: "{cwd}/azure-sdk-for-js/"
+  csharp-sdk-folder:
+    default: "{cwd}/azure-sdk-for-csharp/"
+  service-directory-name:
+    default: "contentsafety"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    output-file: "contentsafety.json"
+    azure-resource-provider-folder: ../../../../data-plane
+    examples-directory: ./examples
+  "@azure-tools/typespec-python":
+    package-name: "azure-ai-contentsafety"
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.AI.ContentSafety"
+    clear-output-folder: true
+    model-namespace: false
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+  # "@azure-tools/cadl-typescript":
+  #   emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/contentsafety-rest"
+  #   generateMetadata: true
+  #   generateTest: true
+  #   azureSdkForJs: true
+  #   packageDetails:
+  #     name: "@azure-rest/contentsafety-rest"
+  #     description: "ContentSafety Service"
+  # "@azure-tools/cadl-java":
+  #   emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/contentsafety"
+  #   namespace: com.contentsafety

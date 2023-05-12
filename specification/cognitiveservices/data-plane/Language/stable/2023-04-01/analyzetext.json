@@ -2076,7 +2076,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/ExtractedSummaryDocumentResult"
           }
         }
       },
@@ -2113,17 +2113,6 @@
           }
         ]
       }
-    },
-    "ExtractedSummaryDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExtractedSummaryDocumentResult"
-        },
-        {
-          "$ref": "#/definitions/DocumentDetectedLanguage"
-        }
-      ]
     },
     "ExtractedSummaryDocumentResult": {
       "type": "object",
@@ -2657,15 +2646,6 @@
         "statistics": {
           "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
-        }
-      }
-    },
-    "DocumentDetectedLanguage": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       }
     },
