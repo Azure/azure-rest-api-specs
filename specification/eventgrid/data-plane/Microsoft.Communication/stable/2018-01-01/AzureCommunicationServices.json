@@ -7,6 +7,41 @@
   },
   "paths": {},
   "definitions": {
+    "AcsIncomingCallEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
+      "properties": {
+        "to": {
+          "description": "The communication identifier of the target user.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "x-ms-client-name": "toCommunicationIdentifier"
+        },
+        "from": {
+          "description": "The communication identifier of the user who initiated the call.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel",
+          "x-ms-client-name": "fromCommunicationIdentifier"
+        },
+        "serverCallId": {
+          "description": "The Id of the server call",
+          "type": "string"
+        },
+        "callerDisplayName": {
+          "description": "Display name of caller.",
+          "type": "string"
+        },
+        "customContext": {
+          "description": "Custom Context of Incoming Call",
+          "$ref": "#/definitions/AcsIncomingCallCustomContext"
+        },
+        "incomingCallContext": {
+          "description": "Signed incoming call context.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "CorrelationId (CallId).",
+          "type": "string"
+        }
+      }
+    },
     "AcsUserDisconnectedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
       "properties": {
@@ -519,18 +554,50 @@
           "type": "string"
         },
         "status": {
-          "description": "The status of the email",
+          "description": "The status of the email. Any value other than Delivered is considered failed.",
           "type": "string",
           "enum": [
-            "Failed",
+            "Bounced",
             "Delivered",
+            "Failed",
             "FilteredSpam",
-            "Quarantined"
+            "Quarantined",
+            "Suppressed"
           ],
           "x-ms-enum": {
             "name": "AcsEmailDeliveryReportStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Bounced",
+                "description": "Hard bounce detected while sending the email"
+              },
+              {
+                "value": "Delivered",
+                "description": "The email was delivered"
+              },
+              {
+                "value": "Failed",
+                "description": "The email failed to be delivered"
+              },
+              {
+                "value": "FilteredSpam",
+                "description": "The message was identified spam and was rejected or blocked (not quarantined)."
+              },
+              {
+                "value": "Quarantined",
+                "description": "The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION)."
+              },
+              {
+                "value": "Suppressed",
+                "description": "The email was suppressed"
+              }
+            ]
           }
+        },
+        "deliveryStatusDetails": {
+          "description": "Detailed information about the status if any",
+          "$ref": "#/definitions/AcsEmailDeliveryReportStatusDetails"
         },
         "deliveryAttemptTimeStamp": {
           "description": "The time at which the email delivery report received timestamp",
@@ -817,6 +884,36 @@
         "deleteLocation": {
           "description": "The location to delete all chunk storage",
           "type": "string"
+        }
+      }
+    },
+    "AcsEmailDeliveryReportStatusDetails": {
+      "description": "Detailed information about the status if any",
+      "type": "object",
+      "properties": {
+        "statusMessage": {
+          "description": "Detailed status message",
+          "type": "string"
+        }
+      }
+    },
+    "AcsIncomingCallCustomContext": {
+      "description": "Custom Context of Incoming Call",
+      "type": "object",
+      "properties": {
+        "sipHeaders": {
+          "type": "object",
+          "description": "Sip Headers for incoming call",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "voipHeaders": {
+          "type": "object",
+          "description": "Voip Headers for incoming call",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

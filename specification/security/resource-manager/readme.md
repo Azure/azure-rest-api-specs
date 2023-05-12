@@ -112,6 +112,18 @@ input-file:
   - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
   - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 ```
+
+### Tag: package-preview-2023-02-only
+
+These settings apply only when `--tag=package-preview-2023-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-02-only'
+input-file:
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+```
+
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
@@ -122,6 +134,7 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
+  - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
 
 ### Tag: package-preview-2022-11
@@ -356,6 +369,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
