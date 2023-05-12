@@ -71,28 +71,21 @@
           "description": "String of the kind of this Capability Type.",
           "readOnly": true
         },
-        "permissionsNecessary": {
-          "type": "object",
-          "description": "Array of control and data plane actions necessary to execute capability type.",
-          "properties": {
-            "actions": {
-              "type": "array",
-              "description": "Control plane actions necessary to execute capability type.",
-              "items": {
-                "type": "string",
-                "description": "Control plane action necessary to execute capability type."
-              }
-            },
-            "dataActions": {
-              "type": "array",
-              "description": "Control plane actions necessary to execute capability type.",
-              "items": {
-                "type": "string",
-                "description": "Data plane action necessary to execute capability type."
-              }
-            }
-          },
-          "readOnly": true
+        "azureRBACActions": {
+          "type": "array",
+          "description": "Control plane actions necessary to execute capability type.",
+          "items": {
+            "type": "string",
+            "description": "Control plane action necessary to execute capability type."
+          }
+        },
+        "azureRBACDataActions": {
+          "type": "array",
+          "description": "Data plane actions necessary to execute capability type.",
+          "items": {
+            "type": "string",
+            "description": "Data plane action necessary to execute capability type."
+          }
         },
         "runtimeProperties": {
           "type": "object",

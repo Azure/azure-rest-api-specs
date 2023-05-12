@@ -936,7 +936,8 @@
         "topContributorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of top contributed\nvariables for one anomalous time stamp in the response. The default is\n10."
+          "description": "Number of top contributed variables for one anomalous time stamp in the response.",
+          "default": 10
         },
         "startTime": {
           "type": "string",
@@ -952,7 +953,6 @@
       "description": "Detection request for batch inference. This is an asynchronous inference that\nwill need another API to get detection results.",
       "required": [
         "dataSource",
-        "topContributorCount",
         "startTime",
         "endTime"
       ]
