@@ -98,7 +98,7 @@ model MultivariateVariableState {
   variable: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uppercases common acronyms like NA."
-  @doc("Proportion of missing values that need to be filled by fillNAMethod.")
+  @doc("Proportion of missing values that need to be filled by FillNaMethod.")
   @minValue(0.0)
   @maxValue(1.0)
   filledNARatio?: float32;
