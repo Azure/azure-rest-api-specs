@@ -3,6 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@internal(Azure.Messaging.EventGrid.PublishCloudEvents);
-@@internal(Azure.Messaging.EventGrid.PublishCloudEvent);
-@@internal(Azure.Messaging.EventGrid.ReceiveCloudEvents);
+@@internal(Azure.Messaging.EventGrid.publishCloudEvents);
+@@internal(Azure.Messaging.EventGrid.publishCloudEvent);
+@@internal(Azure.Messaging.EventGrid.receiveCloudEvents);
+
