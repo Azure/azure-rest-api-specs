@@ -2831,6 +2831,18 @@
         "allowRemoteVnetTraffic": {
           "type": "boolean",
           "description": "Configure this gateway to accept traffic from other Azure Virtual Networks. This configuration does not support connectivity to Azure Virtual WAN."
+        },
+        "adminState": {
+          "type": "string",
+          "description": "Configures this gateway to serve traffic in Express Route gateway migration scenario.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "adminState",
+            "modelAsString": true
+          }
         }
       },
       "description": "VirtualNetworkGateway properties."
