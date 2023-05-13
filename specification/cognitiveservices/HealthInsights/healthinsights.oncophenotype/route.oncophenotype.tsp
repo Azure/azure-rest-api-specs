@@ -23,7 +23,7 @@ interface OncoPhenotype {
   )
   GetJob is Azure.Core.ResourceRead<OncoPhenotypeResult>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-runnign RPC template in Azure.Core"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
   @summary("Create Onco Phenotype job")
   @tag("OncoPhenotype")
   @doc("Creates an Onco Phenotype job with the given request body.")
