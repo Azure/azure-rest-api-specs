@@ -19,23 +19,28 @@ model Model {
   @visibility("read")
   status?: State;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("A timestamp when this job or item was created (in unix epochs).")
   @visibility("read")
   created_at?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("A timestamp when this job or item was modified last (in unix epochs).")
   @visibility("read")
   updated_at?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("The identity of this item.")
   @visibility("read")
   @key("model_id")
   id: string;
 
+  @projectedName("csharp", "modelProperty")
   @doc("The base model ID if this is a fine tune model; otherwise `null`.")
   @visibility("read")
-  "model"?: string;
+  `model`?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("The fine tune job ID if this is a fine tune model; otherwise `null`.")
   @visibility("read")
   fine_tune?: string;
@@ -56,6 +61,7 @@ models. The exact dates are specified in the properties.
 
 @doc("The capabilities of a base or fine tune model.")
 model Capabilities {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("A value indicating whether a model can be used for fine tuning.")
   @visibility("read")
   fine_tune?: boolean;
@@ -72,6 +78,7 @@ model Capabilities {
   @visibility("read")
   embeddings?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("The supported scale types for deployments of this model.")
   @visibility("read")
   scale_types?: ScaleType[];
@@ -86,6 +93,7 @@ fine tuned
 models. The exact dates are specified in the properties.
 """)
 model Deprecation {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("""
 The end date of fine tune support of this model. Will be `null` for fine tune
 models.
@@ -103,10 +111,12 @@ model ManualScaleSettings extends ScaleSettings {
   @doc("The constant reserved capacity of the inference endpoint for this deployment.")
   capacity: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
   @doc("Defines how scaling operations will be executed.")
   scale_type: "manual";
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
 @doc("Settings for the standard scale type.")
 model StandardScaleSettings extends ScaleSettings {
   @doc("Defines how scaling operations will be executed.")

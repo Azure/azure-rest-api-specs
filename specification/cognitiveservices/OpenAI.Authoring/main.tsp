@@ -11,14 +11,19 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing spec"
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> |
-    OAuth2Auth<[{
+  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+    {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"]
-    }]>)
-@service({title: "Azure OpenAI API"})
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
+@service({
+  title: "Azure OpenAI API",
+})
 @versioned(Azure.OpenAI.Versions)
 @server(
   "{endpoint}/openai",
