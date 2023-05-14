@@ -526,6 +526,15 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MigrateToStv2Contract"
+            },
+            "description": "Optional parameters supplied to migrate service."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -926,6 +935,37 @@
         }
       },
       "description": "Describes scaling information of a SKU."
+    },
+    "MigrateToStv2Contract": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Mode of Migration to stv2. Default is PreserveIp.",
+          "externalDocs": {
+            "url": "https://aka.ms/apim-migrate-stv2"
+          },
+          "enum": [
+            "PreserveIp",
+            "NewIP"
+          ],
+          "x-ms-enum": {
+            "name": "MigrateToStv2Mode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PreserveIp",
+                "description": "Migrate API Management service to stv2 from stv1, by reserving the IP Address of the service. This will have a downtime of upto 15 minutes, while the IP address is getting migrate to new infrastructure."
+              },
+              {
+                "value": "NewIP",
+                "description": "Migrate API Management service to stv2 from stv1. This will have no downtime as the service configuration will be migrated to new infrastructure, but the IP address will changed."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes an available API Management SKU."
     },
     "ResourceSku": {
       "type": "object",
