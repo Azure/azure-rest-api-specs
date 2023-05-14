@@ -386,7 +386,7 @@
         },
         "format": {
           "type": "string",
-          "description": "Format of the Content in which the API is getting imported.",
+          "description": "Format of the Content in which the API is getting imported. New formats can be added in the future",
           "enum": [
             "wadl-xml",
             "wadl-link-json",
@@ -477,7 +477,7 @@
         },
         "apiType": {
           "type": "string",
-          "description": "Type of API to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API \n * `graphql` creates GraphQL API.",
+          "description": "Type of API to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API \n * `graphql` creates GraphQL API. \n New types can be added in the future.",
           "enum": [
             "http",
             "soap",
@@ -573,7 +573,8 @@
             "http",
             "soap",
             "websocket",
-            "graphql"
+            "graphql",
+            "odata"
           ],
           "x-ms-client-name": "ApiType",
           "x-ms-enum": {
