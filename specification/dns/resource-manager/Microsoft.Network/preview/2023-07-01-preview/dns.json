@@ -1379,11 +1379,11 @@
         "algorithmType": {
           "type": "integer",
           "format": "int32",
-          "description": "The digest algorithm type."
+          "description": "The digest algorithm type represents the standard digest algorithm number used to construct the digest. See: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml"
         },
         "value": {
           "type": "string",
-          "description": "The digest value."
+          "description": "The digest value is a cryptographic hash value of the referenced DNSKEY Resource Record."
         }
       },
       "description": "A digest."
@@ -1394,19 +1394,19 @@
         "keyTag": {
           "type": "integer",
           "format": "int32",
-          "description": "The key tag."
+          "description": "The key tag value is used to determine which DNSKEY Resource Record is used for signature verification."
         },
         "algorithm": {
           "type": "integer",
           "format": "int32",
-          "description": "The algorithm."
+          "description": "The algorithm represents the standard security algorithm number of the DNSKEY Resource Record to which this DS record refers. See: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml"
         },
         "digest": {
           "$ref": "#/definitions/Digest",
-          "description": "The digest."
+          "description": "The digest entity."
         }
       },
-      "description": "A DS record."
+      "description": "A DS record. For more information about the DS record format, see RFC 4034: https://www.rfc-editor.org/rfc/rfc4034"
     },
     "TlsaRecord": {
       "type": "object",
@@ -1414,24 +1414,24 @@
         "usage": {
           "type": "integer",
           "format": "int32",
-          "description": "The usage."
+          "description": "The usage specifies the provided association that will be used to match the certificate presented in the TLS handshake."
         },
         "selector": {
           "type": "integer",
           "format": "int32",
-          "description": "The selector."
+          "description": "The selector specifies which part of the TLS certificate presented by the server will be matched against the association data."
         },
         "matchingType": {
           "type": "integer",
           "format": "int32",
-          "description": "The matchingType."
+          "description": "The matching type specifies how the certificate association is presented."
         },
         "certAssociationData": {
           "type": "string",
-          "description": "The certAssociationData."
+          "description": "This specifies the certificate association data to be matched."
         }
       },
-      "description": "A TLSA record."
+      "description": "A TLSA record. For more information about the TLSA record format, see RFC 6698: https://www.rfc-editor.org/rfc/rfc6698"
     },
     "NaptrRecord": {
       "type": "object",
@@ -1439,31 +1439,31 @@
         "order": {
           "type": "integer",
           "format": "int32",
-          "description": "The order."
+          "description": "The order in which the NAPTR records MUST be processed in order to accurately represent the ordered list of rules. The ordering is from lowest to highest. Valid values: 0-65535."
         },
         "preference": {
           "type": "integer",
           "format": "int32",
-          "description": "The preference."
+          "description": "The preference specifies the order in which NAPTR records with equal 'order' values should be processed, low numbers being processed before high numbers. Valid values: 0-65535."
         },
         "flags": {
           "type": "string",
-          "description": "The flags."
+          "description": "The flags specific to DDDS applications. Values currently defined in RFC 3404 are uppercase and lowercase letters \"A\", \"P\", \"S\", and \"U\", and the empty string, \"\". Enclose Flags in quotation marks."
         },
         "services": {
           "type": "string",
-          "description": "The services."
+          "description": "The services specific to DDDS applications. Enclose Services in quotation marks."
         },
         "regexp": {
           "type": "string",
-          "description": "The regexp."
+          "description": "The regular expression that the DDDS application uses to convert an input value into an output value. For example: an IP phone system might use a regular expression to convert a phone number that is entered by a user into a SIP URI. Enclose the regular expression in quotation marks. Specify either a value for 'regexp' or a value for 'replacement'."
         },
         "replacement": {
           "type": "string",
-          "description": "The replacement."
+          "description": "The replacement is a fully qualified domain name (FQDN) of the next domain name that you want the DDDS application to submit a DNS query for. The DDDS application replaces the input value with the value specified for replacement. Specify either a value for 'regexp' or a value for 'replacement'. If you specify a value for 'regexp', specify a dot (.) for 'replacement'."
         }
       },
-      "description": "A NAPTR record."
+      "description": "A NAPTR record. For more information about the NAPTR record format, see RFC 3403: https://www.rfc-editor.org/rfc/rfc3403"
     },
     "RecordSetProperties": {
       "type": "object",
@@ -1669,22 +1669,22 @@
       "properties": {
         "digestAlgorithmType": {
           "type": "integer",
-          "format": "int64",
-          "description": "The digest algorithm type.",
+          "format": "int32",
+          "description": "The digest algorithm type represents the standard digest algorithm number used to construct the digest. See: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml",
           "readOnly": true
         },
         "digestValue": {
           "type": "string",
-          "description": "The digest value.",
+          "description": "The digest value is a cryptographic hash value of the referenced DNSKEY Resource Record.",
           "readOnly": true
         },
         "record": {
           "type": "string",
-          "description": "The record.",
+          "description": "The record represents a delegation signer (DS) record.",
           "readOnly": true
         }
       },
-      "description": "The delegation signer info."
+      "description": "The delegation signer information."
     },
     "SigningKey": {
       "type": "object",
@@ -1695,36 +1695,36 @@
           "items": {
             "$ref": "#/definitions/DelegationSignerInfo"
           },
-          "description": "The delegation signer info.",
+          "description": "The delegation signer information.",
           "readOnly": true
         },
         "flags": {
           "type": "integer",
-          "format": "int64",
-          "description": "The flags.",
+          "format": "int32",
+          "description": "The flags specifies how the key is used.",
           "readOnly": true
         },
         "keyTag": {
           "type": "integer",
-          "format": "int64",
-          "description": "The key tag.",
+          "format": "int32",
+          "description": "The key tag value of the DNSKEY Resource Record.",
           "readOnly": true
         },
         "protocol": {
           "type": "integer",
-          "format": "int64",
-          "description": "The protocol.",
+          "format": "int32",
+          "description": "The protocol value. The value is always 3.",
           "readOnly": true
         },
         "publicKey": {
           "type": "string",
-          "description": "The public key.",
+          "description": "The public key, represented as a Base64 encoding.",
           "readOnly": true
         },
         "securityAlgorithmType": {
           "type": "integer",
-          "format": "int64",
-          "description": "The signing algorithm.",
+          "format": "int32",
+          "description": "The security algorithm type represents the standard security algorithm number of the DNSKEY Resource Record. See: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml",
           "readOnly": true
         }
       },
