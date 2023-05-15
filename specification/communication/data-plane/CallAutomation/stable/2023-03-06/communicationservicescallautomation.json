@@ -999,7 +999,7 @@
           "type": "string"
         },
         "sourceIdentity": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The identifier of the source of the call"
         },
         "operationContext": {
@@ -1009,10 +1009,6 @@
         "callbackUri": {
           "description": "The callback URI.",
           "type": "string"
-        },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
         }
       }
     },
@@ -1062,23 +1058,6 @@
       "properties": {
         "value": {
           "type": "string"
-        }
-      }
-    },
-    "CustomContext": {
-      "type": "object",
-      "properties": {
-        "voipHeaders": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sipHeaders": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1211,6 +1190,14 @@
         "sourceIdentity": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "Source identity."
+        },
+        "correlationId": {
+          "description": "The correlation ID.",
+          "type": "string"
+        },
+        "answeredByIdentifier": {
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "Identity of the answering entity. Only populated when identity is provided in the request."
         }
       }
     },
@@ -1230,9 +1217,13 @@
           "description": "The callback uri.",
           "type": "string"
         },
+        "operationContext": {
+          "description": "A customer set value used to track the answering of a call.",
+          "type": "string"
+        },
         "answeredByIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The identifier of the contoso app which answers the call"
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "The identifier of the call automation entity which answers the call"
         }
       }
     },
@@ -1251,10 +1242,6 @@
         "target": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The target identity to redirect the call to."
-        },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
         }
       }
     },
@@ -1297,10 +1284,6 @@
         "targetParticipant": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The identity of the target where call should be transferred to."
-        },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
@@ -1575,10 +1558,6 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
-        },
-        "customContext": {
-          "$ref": "#/definitions/CustomContext",
-          "description": "Used by customer to send custom context to targets"
         }
       }
     },
@@ -2045,7 +2024,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "description": "Correlation ID for event to call correlation.",
           "type": "string"
         },
         "recordingId": {
@@ -2076,7 +2055,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "description": "Correlation ID for event to call correlation.",
           "type": "string"
         },
         "operationContext": {
@@ -2085,7 +2064,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -2101,7 +2080,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "description": "Correlation ID for event to call correlation.",
           "type": "string"
         },
         "operationContext": {
@@ -2110,7 +2089,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -2126,7 +2105,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "description": "Correlation ID for event to call correlation.",
           "type": "string"
         },
         "operationContext": {
@@ -2158,7 +2137,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "description": "Correlation ID for event to call correlation.",
           "type": "string"
         },
         "operationContext": {
@@ -2167,7 +2146,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+          "description": "Contains the resulting SIP code, sub-code and message."
         },
         "recognitionType": {
           "$ref": "#/definitions/RecognitionType"
@@ -2202,7 +2181,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "description": "Correlation ID for event to call correlation.",
           "type": "string"
         },
         "operationContext": {
@@ -2211,7 +2190,7 @@
         },
         "resultInformation": {
           "$ref": "#/definitions/ResultInformation",
-          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
@@ -2227,7 +2206,7 @@
           "type": "string"
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "description": "Correlation ID for event to call correlation.",
           "type": "string"
         },
         "operationContext": {
