@@ -432,6 +432,14 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.Security/stable/2023-05-01/serverVulnerabilityAssessmentsSettings.json
+
 ---
 
 # Code Generation
