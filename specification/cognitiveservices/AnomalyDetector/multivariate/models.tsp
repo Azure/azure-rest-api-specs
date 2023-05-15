@@ -81,17 +81,6 @@ will need another API to get detection results.
   setupInfo: MultivariateBatchDetectionSettings;
 }
 
-@doc("Error information that the API returned.")
-@error
-model ErrorResponse {
-
-  @doc("Error code.")
-  code: string;
-
-  @doc("Message that explains the error that the service reported.")
-  message: string;
-}
-
 @doc("Variable status.")
 model MultivariateVariableState {
   @doc("Variable name in variable states.")
@@ -392,5 +381,5 @@ model ResponseError {
   @header("x-ms-error-code")
   @doc("Error code.")
   msErrorCode?: string,
-  ...ErrorResponse
+  ...Foundations.Error
 }
