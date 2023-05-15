@@ -1,13 +1,14 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "@azure-tools/cadl-providerhub";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-autorest";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
@@ -211,6 +212,45 @@ model CarbonEmissionItemDetailData extends CarbonEmissionData {
 
   @doc("Item category")
   categoryType: CategoryTypeEnum;
+}
+
+@doc("Response for Resource detailed carbon emissions")
+model ResourceCarbonEmissionItemDetailData extends CarbonEmissionData {
+  @doc("Item details data")
+  dataType: "ResourceItemDetailsData";
+
+  @doc("Item name")
+  itemName: string;
+
+  @doc("Item group name")
+  groupName: string;
+
+  @doc("Item category")
+  categoryType: CategoryTypeEnum;
+
+  @doc("Subscription Id")
+  subscriptionId: string;
+
+  @doc("Resource Group")
+  resourceGroup: string
+}
+
+@doc("Response for Resource Group detailed carbon emissions")
+model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
+  @doc("Item details data")
+  dataType: "ResourceGroupItemDetailsData";
+
+  @doc("Item name")
+  itemName: string;
+
+  @doc("Item group name")
+  groupName: string;
+
+  @doc("Item category")
+  categoryType: CategoryTypeEnum;
+
+  @doc("Subscription Id")
+  subscriptionId: string;
 }
 
 @doc("List of carbon emission results")
