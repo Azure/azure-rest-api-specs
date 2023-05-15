@@ -79,7 +79,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response",
@@ -100,10 +106,7 @@
             "$ref": "./examples/WebPubSub_AddConnectionsToGroups.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/api/hubs/{hub}/:closeConnections": {
@@ -309,7 +312,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response",
@@ -330,10 +339,7 @@
             "$ref": "./examples/WebPubSub_RemoveConnectionsFromGroups.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/api/hubs/{hub}/:send": {
@@ -405,7 +411,13 @@
         ],
         "responses": {
           "202": {
-            "description": "The message is accepted. The service follows fire-and-forget pattern when sending messages."
+            "description": "The message is accepted. The service follows fire-and-forget pattern when sending messages.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response",
@@ -426,10 +438,7 @@
             "$ref": "./examples/WebPubSub_SendToAll.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/api/hubs/{hub}/connections/{connectionId}": {
@@ -601,20 +610,17 @@
               "format": "binary",
               "type": "string"
             }
-          },
-          {
-            "in": "query",
-            "name": "messageTtlSeconds",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
-            "type": "integer",
-            "format": "int32",
-            "maximum": 300,
-            "minimum": 0
           }
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response",
@@ -635,10 +641,7 @@
             "$ref": "./examples/WebPubSub_SendToConnection.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/api/hubs/{hub}/connections/{connectionId}/groups": {
@@ -917,7 +920,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response",
@@ -938,10 +947,7 @@
             "$ref": "./examples/WebPubSub_SendToGroup.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/api/hubs/{hub}/groups/{group}/connections/{connectionId}": {
@@ -1518,7 +1524,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response",
@@ -1539,10 +1551,7 @@
             "$ref": "./examples/WebPubSub_SendToUser.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/api/hubs/{hub}/users/{userId}/groups": {
