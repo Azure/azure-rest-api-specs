@@ -4,22 +4,30 @@
 
 It is crucial having simple and smooth processes that allow developer to easily:
 
-1. [Scaffolding TypeSpec project in `rest-api-specs` repo](#1-typespec-project-scaffolding)
-2. [Scaffolding SDK projects in SDK repos](#2-sdk-project-scaffolding)
-   1. All SDK required information (SDK path, namespace etc) should be set in `tspconfig.yaml`.
-   2. Single call via `eng/scripts` in each language repo to complete the task
-   3. Optional, intelligent CI pipeline component to create related PRs when a new service API PR is submitted.
-3. [TypeSpec inner dev loop](#3-inner-dev-loop-sdk-generation-local-scenario)
-   1. For spec writers:
-      1. locally preview generated Swagger file
-      2. gather relevant files to generate rest-api-spec PRs with green CI results
-   2. For SDK writers or testing
-      1. locally preview generated SDK files
-      2. generating SDK PRs from checked in TypeSpec files in rest-api-spec with APIView
-   3. any CI failures can be reproduced locally
-4. [Typespec outer dev loop `rest-api-specs`](#4-outer-loop-overall-status-and-tracking).
-   1. [Spec repo outer dev loop](#41-outer-dev-loop-azure-rest-api-specs-pipeline)
-   2. [SDK outer dev loop](#42-outer-dev-loop-sdk-repo-pipeline)
+- [TypeSpec end to end scenarios](#typespec-end-to-end-scenarios)
+  - [Scenario definitions](#scenario-definitions)
+  - [Four main user scenarios to support](#four-main-user-scenarios-to-support)
+      - [1. TypeSpec project scaffolding](#1-typespec-project-scaffolding)
+        - [Flowchart](#flowchart)
+        - [Remaining Tasks](#remaining-tasks)
+        - [Details \& Open questions](#details--open-questions)
+      - [2. SDK code generation](#2-sdk-code-generation)
+        - [Flowchart](#flowchart-1)
+        - [Remaining Tasks](#remaining-tasks-1)
+      - [3. Inner Dev loop SDK generation local scenario](#3-inner-dev-loop-sdk-generation-local-scenario)
+        - [Flowchart](#flowchart-2)
+        - [Remaining Tasks](#remaining-tasks-2)
+        - [Details \& Open questions](#details--open-questions-1)
+      - [4.Dev Outer loop](#4dev-outer-loop)
+        - [Use case](#use-case)
+        - [4.1 Outer Dev loop azure-rest-api-specs pipeline](#41-outer-dev-loop-azure-rest-api-specs-pipeline)
+          - [Flowchart](#flowchart-3)
+          - [Details \& Open questions](#details--open-questions-2)
+        - [4.2 Outer Dev loop SDK repo pipeline](#42-outer-dev-loop-sdk-repo-pipeline)
+          - [Flowchart](#flowchart-4)
+          - [Details \& Open questions](#details--open-questions-3)
+      - [4. Outer loop Overall Status and tracking](#4-outer-loop-overall-status-and-tracking)
+          - [Remaining Tasks](#remaining-tasks-3)
 
 Aside from the developer process, we have a few goals on managing repo package version
 - Should adopt a centralized package version control to avoid chaos
@@ -58,7 +66,7 @@ class A,G,D,F grey
 
 ##### Details & Open questions
 
-#### 2. SDK project scaffolding
+#### 2. SDK code generation
 
 ##### Flowchart
 ```mermaid
@@ -68,25 +76,71 @@ classDef grey fill:#CCCCCC,color:#555555;
 User((::))-->A
 A["clone Rest-API and SDK repo locally"] --> B
 B["2.1 pre-requsite dependencies installation
-(each language would have a installation script)"] --> C
-C["2.2 create sdk project scaffolding
- (e.g. Invoke-TypeSpecDataPlaneGenerateSDKPackage.ps1)"<br>This should create tsp_location.yaml from referencing the source tspconfig.yaml] --> D
- D["- tsp-location.yaml is created.<br> - User update commit hash
- (need a new script)"]
-D-->E[2.3 Running Sync & Generate script]
-E-->F[SDK code can be compiled and PR submitted]
-class A,D,F grey
+(each language would have a installation script)"] --> G
+subgraph G["run `2.2 TypeSpec-Project-Prcoess.ps1`"]
+  F
+  C
+  D
+end
+F["2.2.1 create/update tsp-location.yaml"]
+C["2.2.2 call TypeSpec-Project-Sync.ps1"]
+D["2.2.3 call TypeSpec-Project-Generate.ps1"]
+G-->E["code build"]
+class A,E grey
+class C,D,F highlight
 ```
+- 2.1 Optional: Scripts should exist under `\eng\scripts\` folder on all repos.
+
+- 2.2 `TypeSpec-Project-Process.ps1`
+  - What does this script do?
+    -	fetch `tspconfig.yaml` from remote if it doesn’t exist locally
+    -	parse `tspconfig.yaml`
+    - create an sdk project folder if none exists
+    -	create/update `tsp-location.yaml`
+    -	call `TypeSpec-Project-Sync.ps1`
+    -	call `TypeSpec-Project-Generate.ps1`
+  - input: 
+    - typespecProjectDirectory (required)
+      either a folder of `tspconfig.yaml` or a remoteUrl of `tspconfig.yaml`
+    - commitSha (optional)
+    - repoUrl (optional)
+  - output: n/a
+
+- 2.2.2 `TypeSpec-Project-Sync.ps1`
+  - What does this script do?
+    - fetch specs from remote spec repo or use a local spec repo
+    - copy specs to temp location under the sdk project folder
+    - support a local spec repo if one exists (TODO)
+  - input: 
+    - projectDirectory (required)
+    - localSpecRepoPath (optional)
+  - output: n/a
+
+- 2.2.3 `TypeSpec-Project-Generate.ps1`
+  - What does this script do?
+    - create scaffolding for new project (use the folder created by 2.2)
+    - generate sdk code
+  - input: 
+    - projectDirectory (required)
+    - typespecAdditionalOptions (emitter options) (optional)
+
+- 2.2.3.1 Function `Generate-{Language}-New-Project-Scaffolding`
+  - What does this function do?
+    - Create the folders and the files under SDK project folder, such as creating `test` folder, `sln` files that would vary between language repos. Eventually, this project scaffolding would be integrated into language emitter.
+    - Create or update the files outside of the SDK project folder (CI.yml or pom.xml for java, etc.)
+    - This function is called by generate script(2.4)
+  - input: projectDirectory (required)
+
 ##### Remaining Tasks
 | Step | Step Detail | Assignee | Implemented | Verified |
 |--|--|--|--:|--:|
 | 2.1 | Dependencies scripts | SDK owner | [ ] | [] |
-| 2.2 | creating SDK folder & `tsp-location.yaml` | Michael, EngSys | [ ] | | [ ] |
-| 2.3 | Sync & Generate script | Michael, EngSys | [ ] | | [ ] |
-
-##### Details & Open questions
-- 2.1 Optional: Scripts should exists under `\eng\scripts\` folder on all repos.
-- 2.2 would involve more than just creating folder and generate `tsp-location.yaml`. There are other custom steps such as creating `test` folder, `sln` files that would vary between language repos.
+| 2.2 | TypeSpec-Project-Process.ps1 | EngSys | [ ] | | [ ] |
+| 2.2.2 | TypeSpec-Project-Sync.ps1 | EngSys | [ ] | | [ ] |
+| 2.2.3 | TypeSpec-Project-Generate.ps1 | EngSys | [ ] | | [ ] |
+| 2.2.3.1 | Generate-{Language}-New-Project-Scaffolding | SDK owner | [ ] | | [ ] |
+| 2.3 | Language script to call common script | SDK owner | [] | []
+| 2.4 | Update dotnet build target | Michael, Crystal | [] | []
 
 #### 3. Inner Dev loop SDK generation local scenario
 ##### Flowchart
@@ -94,23 +148,30 @@ class A,D,F grey
 flowchart TD;
   classDef highlight fill:#ffd700
   User((::))-->A
+  A
   A["clone spec repo and clone sdk repo"]-->B
-  B-->B
   B["... iterate on .tsp specs"]-->C
   C["tsp compile ."]-->D
-  D["copy all related files to spec repo folder
+  D["optional:copy all related files to spec repo folder if it's not there
   (*.tsp,*.json,tspconfig.yaml)"]-->E
   D-->F
-  E["create API spec PR"]
-  F["docker run ..."]-->I
-  D-->G
-  G["TypeSpec-Project-Sync.ps1
-  (on cloned sdk repo folder)"]-->H
-  H["TypeSpec-Project-Generate.ps1"]-->I
+  E["create API spec PR"]-->|loop|B
+  F["docker run
+  (a. call `initScript` - 2.1
+  b. call `generateScript` 
+  (call 2.2) )"]-->I  
+  D-->K
+  K["optional:2.1"]-->G
+  G["2.2"]-->I
   I["build code and work on test,sample,readme,etc."]-->J
+  I-->|loop|B
   J["create sdk PR"]
-  class G,H highlight
+  class F,G,H highlight
 ```
+- Note: docker run command is
+  ```
+  docker run -it --privileged -v {local_spec_repo_path}:/spec-repo -v {local_work_folder}:/work-dir -v sdkgeneration.azurecr.io/sdk-generation:latest --typespec-project={relative_typespec_project} --sdk={sdk_to_generate}
+  ```
 ##### Remaining Tasks
 | Step | Step Detail | Assignee | Implemented | Verified |
 |--|--|--|--:|--:|
@@ -152,20 +213,11 @@ A["filter SDK languages to be generated
 B["get language scripts path for `initScript` and `generateScript`
 (from codegen_to_sdk_config.json)"]-->C
 C["run `initScript`
-(dependencies installation)"]-->E
+(2.1)"]-->G
 subgraph D["run `generateScript`"]
-  E
   G
-  H
 end
-E["create sdk project scaffolding if it's a new service
-(e.g. Invoke-TypeSpecDataPlaneGenerateSDKPackage.ps1)"]-->G
-G["TypeSpec-Project-Sync.ps1
-(a.create/update tsp-location.yaml
-b.fetch specs from remote spec repo or use local spec repo
-c.then copy typespec specs to temp folder)"]-->H
-H["TypeSpec-Project-Generate.ps1
-(generate sdk code)"]-->I
+G["2.2"]-->I
 I["package sdk code"]-->J
 J["optional:build code and run test"]-->K
 K["upload artifacts"]-->L
@@ -192,21 +244,6 @@ M["generate apiView"]
    - changelog
    - artifacts
 
-- `TypeSpec-Project-Sync.ps1`
-   - input: 
-     - projectDirectory
-     - repo
-     - commit
-     - additionalDirectories
-     - localMode (use local spec and don't fetch from remote)
-     - localSpecRepoPath
-Note: we might pull out tsp-location.yaml create/update part as single script to be used by #2 scenario
-
-- `TypeSpec-Project-Generate.ps1`
-   - input: 
-     - projectDirectory
-     - typespecAdditionalOptions (emitter options)
-
 ##### 4.2 Outer Dev loop SDK repo pipeline
 ###### Flowchart
 ```mermaid
@@ -215,20 +252,14 @@ flowchart TD;
   classDef automationStep fill:#7de188
   Pipeline((::))-->A
 A["run `initScript`
-(dependencies installation)"]-->C
+(2.1)"]-->C
 subgraph B["run `generateScript`"]
   C
-  D
   E
   F
   G
 end
-C["TypeSpec-Project-Sync.ps1
-(a.use existing tsp-location.yaml
-b.fetch specs from remote spec repo
-c.then copy typespec specs to temp folder)"]-->D
-D["TypeSpec-Project-Generate.ps1
-(generate sdk code)"]-->E
+C["call 2.2"]-->E
 E["package sdk code"]-->F
 F["build code"]-->G
 G["run test"]
