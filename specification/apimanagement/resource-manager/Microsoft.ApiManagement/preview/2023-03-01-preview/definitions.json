@@ -5044,17 +5044,23 @@
             "$ref": "#/definitions/PolicyRestrictionContract"
           }
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number."
-        },
         "nextLink": {
           "type": "string",
           "description": "Next page link if any."
         }
       },
       "description": "The response of the get policy restrictions operation."
+    },
+    "PolicyRestrictionUpdateContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyRestrictionContractProperties",
+          "description": "Properties of the Policy Restriction."
+        }
+      },
+      "description": "Policy restriction contract details."
     },
     "PolicyRestrictionContract": {
       "type": "object",
