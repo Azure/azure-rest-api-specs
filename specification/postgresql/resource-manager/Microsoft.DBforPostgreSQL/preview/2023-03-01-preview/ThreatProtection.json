@@ -63,7 +63,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation of advanced threat protection on the flexible server failed."
+            "description": "Error response describing why the operation of advanced threat protection on the flexible server failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -108,7 +111,10 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation of threat protection on the flexible server failed."
+            "description": "Error response describing why the operation of threat protection on the flexible server failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -142,13 +148,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully set the server Threat Protection settings.",
+            "description": "Successfully set or update the server Threat Protection settings.",
             "schema": {
               "$ref": "#/definitions/ServerThreatProtectionSettingsModel"
             }
           },
           "default": {
-            "description": "Error response describing why the operation of setting Threat Protection failed."
+            "description": "Error response describing why the operation of setting Threat Protection failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           },
           "201": {
             "description": "Successfully created the server Threat Protection settings.",
