@@ -618,7 +618,7 @@
           ]
         },
         "serviceBinds": {
-          "description": "Configuration to bind a ContainerApp to a dev ContainerApp Service.",
+          "description": "List of container app services bound to the app",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceBind"
@@ -1161,11 +1161,11 @@
       }
     },
     "ServiceBind": {
-      "definition": "List of services bound to the app",
+      "description": "Configuration to bind a ContainerApp to a dev ContainerApp Service",
       "type": "object",
       "properties": {
         "serviceId": {
-          "description": "Id of the service",
+          "description": "Resource id of the target service",
           "type": "string"
         },
         "name": {
