@@ -45,3 +45,17 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
+
+### Tag: package-2023-06-01-preview and java
+
+These settings apply only when `--tag=package-2023-06-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-03-15-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.quota.v2023_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/quota/mgmt-v2023_06_01_preview
+regenerate-manager: true
+generate-interface: true
+```
