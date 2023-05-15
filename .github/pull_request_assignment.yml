@@ -67,14 +67,20 @@
 
 - rule:
     paths:
-        - "specification/**/*Management/**/*.cadl"
-        - "specification/**/*Management.Shared/**/*.cadl"
-        - "specification/**/resource-management/**/*.cadl"
-        - "specification/**/*Management/**/*.tsp"
-        - "specification/**/*Management.Shared/**/*.tsp"
-        - "specification/**/resource-management/**/*.tsp"
+      - "specification/**/*Management/**/*.cadl"
+      - "specification/**/*Management.Shared/**/*.cadl"
+      - "specification/**/resource-manager/**/*.cadl"
+      - "specification/**/*Management/**/*.tsp"
+      - "specification/**/*Management.Shared/**/*.tsp"
+      - "specification/**/resource-manager/**/*.tsp"
     reviewers:
-        - raych1
+      - JackTn
+      - keryul
+      - zedy-wj
+      - v-jiaodi
+      - Wzb123456789
+      - kazrael2119
+      - v-xuto
 
 - rule:
     paths:
@@ -90,74 +96,116 @@
     paths:
       - "specification/network/**"
     reviewers:
-      - lirenhe
-      - raych1
+      - JackTn
+      - keryul
     branches:
-      - network-
+      - release-network-Microsoft.Network-official
 
 
 - rule:
     paths: "specification/common-types/**"
     reviewers:
-      - raych1
-      - weidongxu-microsoft
-      - lirenhe
-   
-      
-- rule:
-    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc|containerservice|azure-kusto)/**"
-    reviewers:
-      - raych1
-      
-- rule:
-    paths: "specification/voiceservices/**"
-    reviewers:
-      - raych1
+      - v-xuto
+      - weshaggard
 
 
 - rule:
     paths: "specification/sql/**"
     reviewers:
-      - raych1
+      - v-xuto
     branches:
       - dev-sql-
-
 
 - rule:
     paths: "specification/@(financialdataservices|standbypool)/**"
     reviewers:
-      - raych1
+      - JackTn
+      - keryul
     branches:
       - RPSaaSDev
-      
-  
+
 - rule:
     paths: "specification/compute/**"
     reviewers:
-      - ArcturusZhang
+      - JackTn
+      - keryul
 
 - rule:
     paths:
       - "specification/machinelearningservices/**"
     reviewers:
-      - ArcturusZhang
+      - zedy-wj
+      - v-jiaodi
 
 - rule:
     paths:
       - "specification/monitor/**"
     reviewers:
-      - ArcturusZhang
-
-      
+      - zedy-wj
+      - v-jiaodi
 
 - rule:
     paths:
-      - "specification/web/**"
+      - "specification/@(azurestackhci|security)/**"
     reviewers:
-      - weidongxu-microsoft
-      
-      
-      
+      - Wzb123456789
+      - kazrael2119
+
+- rule:
+    paths:
+      - "specification/@(web|app)/**"
+    reviewers:
+      - Wzb123456789
+      - kazrael2119
+
+- rule:
+    paths: "specification/@(synapse|azurearcdata)/**"
+    reviewers:
+      - zedy-wj
+      - v-jiaodi
+
+- rule:
+    paths: "specification/@(workloads|apimanagement)/**"
+    reviewers:
+      - zedy-wj
+      - v-jiaodi
+
+- rule:
+    paths: "specification/@(securityinsights|impact)/**"
+    reviewers:
+      - JackTn
+      - keryul
+
+- rule:
+    paths: "specification/@(appcomplianceautomation|hybridnetwork)/**"
+    reviewers:
+      - zedy-wj
+      - v-jiaodi
+
+- rule:
+    paths: "specification/@(cost-management|hybridconnectivity)/**"
+    reviewers:
+      - JackTn
+      - keryul
+
+- rule:
+    paths: "specification/@(billing|resources)/**"
+    reviewers:
+      - Wzb123456789
+      - kazrael2119
+
+- rule:
+    paths: "specification/@(testbase|appplatform)/**"
+    reviewers:
+      - JackTn
+      - keryul
+
+- rule:
+    paths: "specification/@(containerservice|paloaltonetworks)/**"
+    reviewers:
+      - zedy-wj
+      - v-jiaodi
+
 - rule:
     paths:
       - "documentation/**"
@@ -181,14 +229,10 @@
     paths:
       - "**"
     reviewers:
-      - lirenhe
-      - weidongxu-microsoft
-      - ArcturusZhang
-      - chunyu3
-      - msyyc
-      - live1206
-      - tadelesh
-      - haolingdong-msft
-      - archerzz
-      - XiaofeiCao
-      - MaryGao
+      - JackTn
+      - keryul
+      - zedy-wj
+      - v-jiaodi
+      - Wzb123456789
+      - kazrael2119
+      - v-xuto
