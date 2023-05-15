@@ -262,7 +262,7 @@ Field that indicates how missing values will be filled.
 """)
   fillNAMethod?: MultivariateFillNaMethod;
 
-  @doc("Field that's required when FillNaMethod is Fixed.")
+  @doc("Field that's required when fillNAMethod is Fixed.")
   paddingValue?: float32;
 }
 
