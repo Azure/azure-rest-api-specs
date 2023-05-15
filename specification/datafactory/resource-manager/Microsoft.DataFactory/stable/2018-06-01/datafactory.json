@@ -4988,7 +4988,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Change data capture has been started successfully."
+            "description": "Change data capture has been started successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureStartResponse"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -5030,7 +5033,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Change data capture has been stopped successfully."
+            "description": "Change data capture has been stopped successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureStopResponse"
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
@@ -5534,6 +5540,16 @@
           "type": "string"
         }
       }
+    },
+    "ChangeDataCaptureStartResponse": {
+      "description": "Response body of CDC start",
+      "type": "object",
+      "properties": {}
+    },
+    "ChangeDataCaptureStopResponse": {
+      "description": "Response body of CDC stop",
+      "type": "object",
+      "properties": {}
     },
     "CloudError": {
       "x-ms-external": true,
