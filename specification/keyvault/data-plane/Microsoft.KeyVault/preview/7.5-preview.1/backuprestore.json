@@ -45,7 +45,21 @@
             "description": "Specifies the authentication type used to authenticate Managed HSM with Azure Storage. The default option, sasToken, uses the provided SAS token for authentication/authorization. managedIdentity uses the user-assigned managed identity that was assigned to the managed HSM resource.",
             "required": false,
             "type": "string",
-            "enum": ["sasToken", "managedIdentity"]
+            "enum": [ "sasToken", "managedIdentity" ],
+            "x-ms-enum": {
+              "name": "storageAuthType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "sasToken",
+                  "description": "Denotes the Shared Access signature authentication mechanism to be used at Azure Managed HSM service side to access customer Azure Storage service."
+                },
+                {
+                  "value": "managedIdentity",
+                  "description": "Denotes user-assigned managed identity to be used at Azure Managed HSM service side to access customer Azure Storage service."
+                }
+              ]
+            }
           },
           {
             "in": "body",
@@ -148,7 +162,21 @@
             "description": "Specifies the authentication type used to authenticate Managed HSM with Azure Storage. The default option, sasToken, uses the provided SAS token for authentication/authorization. managedIdentity uses the user-assigned managed identity that was assigned to the managed HSM resource.",
             "required": false,
             "type": "string",
-            "enum": [ "sasToken", "managedIdentity" ]
+            "enum": [ "sasToken", "managedIdentity" ],
+            "x-ms-enum": {
+              "name": "storageAuthType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "sasToken",
+                  "description": "Denotes the Shared Access signature authentication mechanism to be used at Azure Managed HSM service side to access customer Azure Storage service."
+                },
+                {
+                  "value": "managedIdentity",
+                  "description": "Denotes user-assigned managed identity to be used at Azure Managed HSM service side to access customer Azure Storage service."
+                }
+              ]
+            }
           },
           {
             "name": "restoreBlobDetails",
@@ -251,7 +279,22 @@
             "description": "Specifies the authentication type used to authenticate Managed HSM with Azure Storage. The default option, sasToken, uses the provided SAS token for authentication/authorization. managedIdentity uses the user-assigned managed identity that was assigned to the managed HSM resource.",
             "required": false,
             "type": "string",
-            "enum": [ "sasToken", "managedIdentity" ]
+            "enum": [ "sasToken", "managedIdentity" ],
+            "x-ms-enum":
+            {
+              "name": "storageAuthType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "sasToken",
+                  "description": "Denotes the Shared Access signature authentication mechanism to be used at Azure Managed HSM service side to access customer Azure Storage service."
+                },
+                {
+                  "value": "managedIdentity",
+                  "description": "Denotes user-assigned managed identity to be used at Azure Managed HSM service side to access customer Azure Storage service."
+                }
+              ]
+            }
           },
           {
             "name": "keyName",
