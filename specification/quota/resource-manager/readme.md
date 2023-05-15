@@ -30,6 +30,16 @@ tag: package-2023-02-01
 ```
 
 
+### Tag: package-2023-06-01-preview
+
+These settings apply only when `--tag=package-2023-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-01-preview'
+input-file:
+  - Microsoft.Quota/stable/2023-02-01/quota.json
+  - Microsoft.Quota/preview/2023-06-01/groupquota.json
+```
+
 ### Tag: package-2023-02-01
 
 These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
