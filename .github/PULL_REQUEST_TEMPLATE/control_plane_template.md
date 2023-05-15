@@ -1,4 +1,4 @@
-## ARM API Information (Control Plane)
+## ARM API Information (Control Plane) 
 
 ### Changelog
 Add a changelog entry for this PR by answering the following questions:
