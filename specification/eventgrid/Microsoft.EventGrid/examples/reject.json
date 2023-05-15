@@ -1,0 +1,76 @@
+{
+    "url":  "https://{topicHostName}/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject",
+    "parameters": {
+        "topicHostname": "mytopic.westcentralus-1.eventgrid.azure.net",
+        "topicName": "mytopic",
+        "eventSubscriptionName": "sub-1",
+        "content-type": "application/json",
+        "authorization": "SharedAccessKey 123",
+        "api-version": "2023-06-01-preview",
+        "body": {
+            "lockTokens": ["CgMKATESCQoHdG9rZW4tMQ=="]
+        },
+    },
+    "responses": {
+        "200": {
+            "failedLockTokens": [],
+            "succeededLockTokens": [
+                "CgMKATESCQoHdG9rZW4tMQ=="
+            ]
+        },
+        "400": {"error": {
+            "code": "BadRequest",
+            "message": "Json deserialize error",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "400": {"error": {
+            "code": "BadRequest",
+            "message": "Unknown api version",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "401": {"error": {
+            "code": "Unauthenticated",
+            "message": "Provided Shared Access Key is not authorized",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "401": {"error": {
+            "code": "Unauthenticated",
+            "message": "Cannot decode provided sas key",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "401": {"error": {
+            "code": "Unauthenticated",
+            "message": "SAS Key or SAS Signature must be provided",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "401": {"error": {
+            "code": "Unauthenticated",
+            "message": "Unknown sas prefix",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "401": {"error": {
+            "code": "Unauthenticated",
+            "message": "Invalid signature",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "404": {"error": {
+            "code": "NotFound",
+            "message": "Event subscription is not found",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        },
+        "500": {"error": {
+            "code": "ServerError",
+            "message": "Unexpected server error",
+            "timestamp_utc": "2023-05-15T06:37:39.385878+00:00",
+            "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5",
+        }
+    }
+}
