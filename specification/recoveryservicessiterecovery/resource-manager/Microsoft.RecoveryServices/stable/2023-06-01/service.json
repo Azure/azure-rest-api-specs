@@ -12417,6 +12417,10 @@
         "recoveryPointId": {
           "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
           "type": "string"
+        },
+        "osUpgradeVersion": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -12666,6 +12670,33 @@
           "items": {
             "$ref": "#/definitions/HyperVReplicaAzureManagedDiskDetails"
           }
+        },
+        "supportedOSVersions": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allAvailableOSUpgradeConfigurations": {
+          "description": "A value indicating all available inplace OS Upgrade configurations.",
+          "type": "object",
+          "additionalProperties": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "osName": {
+          "description": "The name of the OS on the VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osUpgradeMonitoringDetails": {
+          "$ref": "#/definitions/OSUpgradeMonitoringDetails",
+          "description": "A value indicating the inplace OS Upgrade monitoring details."
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -12725,6 +12756,10 @@
         },
         "recoveryPointId": {
           "description": "The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        },
+        "osUpgradeVersion": {
+          "description": "A value indicating the inplace OS Upgrade version.",
           "type": "string"
         }
       },
@@ -14305,6 +14340,33 @@
         "switchProviderDetails": {
           "$ref": "#/definitions/InMageAzureV2SwitchProviderDetails",
           "description": "The switch provider blocking error information."
+        },
+        "supportedOSVersions": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allAvailableOSUpgradeConfigurations": {
+          "description": "A value indicating all available inplace OS Upgrade configurations.",
+          "type": "object",
+          "additionalProperties": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "osName": {
+          "description": "The name of the OS on the VM.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osUpgradeMonitoringDetails": {
+          "$ref": "#/definitions/OSUpgradeMonitoringDetails",
+          "description": "A value indicating the inplace OS Upgrade monitoring details."
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -14461,6 +14523,10 @@
         "recoveryPointId": {
           "description": "The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.",
           "type": "string"
+        },
+        "osUpgradeVersion": {
+          "description": "A value indicating the inplace OS Upgrade version.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -14476,6 +14542,10 @@
       "properties": {
         "recoveryPointId": {
           "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
+          "type": "string"
+        },
+        "osUpgradeVersion": {
+          "description": "A value indicating the inplace OS Upgrade version.",
           "type": "string"
         }
       },
@@ -18818,6 +18888,39 @@
         "vhdName": {
           "description": "The OS disk VHD name.",
           "type": "string"
+        }
+      }
+    },
+    "OSUpgradeMonitoringDetails": {
+      "description": "OS upgrade details of the migraton item.",
+      "type": "object",
+      "properties": {
+        "currentJobName": {
+          "description": "The job name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentJobFriendlyName": {
+          "description": "The friendly job name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osUpgradeProgressPercentage": {
+          "format": "int32",
+          "description": "The OS upgrade progress percentage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "osUpgradeRebootCount": {
+          "format": "int32",
+          "description": "The OS upgrade reboot count.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "targetBootDiagnosticStorageAccountSAS": {
+          "description": "The target boot diagnostics storage account.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -24119,6 +24222,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "osUpgradeMonitoringDetails": {
+          "$ref": "#/definitions/OSUpgradeMonitoringDetails",
+          "description": "A value indicating the inplace OS Upgrade monitoring details."
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
