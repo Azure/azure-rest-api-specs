@@ -218,6 +218,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
+- Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -432,11 +433,11 @@ override-info:
   title: SecurityCenter
 ```
 
-### Tag: package-preview-2023-05
+### Tag: package-2023-05
 
-These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-05'
+```yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.Security/stable/2023-05-01/serverVulnerabilityAssessmentsSettings.json
 
