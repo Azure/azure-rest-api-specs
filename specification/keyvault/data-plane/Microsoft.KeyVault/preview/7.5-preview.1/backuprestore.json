@@ -40,28 +40,6 @@
         "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage container.",
         "parameters": [
           {
-            "name": "storageAuthType",
-            "in": "query",
-            "description": "Specifies the authentication type used to authenticate Managed HSM with Azure Storage. The default option, sasToken, uses the provided SAS token for authentication/authorization. managedIdentity uses the user-assigned managed identity that was assigned to the managed HSM resource.",
-            "required": false,
-            "type": "string",
-            "enum": [ "sasToken", "managedIdentity" ],
-            "x-ms-enum": {
-              "name": "storageAuthType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "sasToken",
-                  "description": "Denotes the Shared Access signature authentication mechanism to be used at Azure Managed HSM service side to access customer Azure Storage service."
-                },
-                {
-                  "value": "managedIdentity",
-                  "description": "Denotes user-assigned managed identity to be used at Azure Managed HSM service side to access customer Azure Storage service."
-                }
-              ]
-            }
-          },
-          {
             "in": "body",
             "name": "azureStorageBlobContainerUri",
             "schema": {
@@ -157,28 +135,6 @@
         "description": "Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
-            "name": "storageAuthType",
-            "in": "query",
-            "description": "Specifies the authentication type used to authenticate Managed HSM with Azure Storage. The default option, sasToken, uses the provided SAS token for authentication/authorization. managedIdentity uses the user-assigned managed identity that was assigned to the managed HSM resource.",
-            "required": false,
-            "type": "string",
-            "enum": [ "sasToken", "managedIdentity" ],
-            "x-ms-enum": {
-              "name": "storageAuthType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "sasToken",
-                  "description": "Denotes the Shared Access signature authentication mechanism to be used at Azure Managed HSM service side to access customer Azure Storage service."
-                },
-                {
-                  "value": "managedIdentity",
-                  "description": "Denotes user-assigned managed identity to be used at Azure Managed HSM service side to access customer Azure Storage service."
-                }
-              ]
-            }
-          },
-          {
             "name": "restoreBlobDetails",
             "in": "body",
             "schema": {
@@ -273,29 +229,6 @@
         },
         "description": "Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
-          {
-            "name": "storageAuthType",
-            "in": "query",
-            "description": "Specifies the authentication type used to authenticate Managed HSM with Azure Storage. The default option, sasToken, uses the provided SAS token for authentication/authorization. managedIdentity uses the user-assigned managed identity that was assigned to the managed HSM resource.",
-            "required": false,
-            "type": "string",
-            "enum": [ "sasToken", "managedIdentity" ],
-            "x-ms-enum":
-            {
-              "name": "storageAuthType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "sasToken",
-                  "description": "Denotes the Shared Access signature authentication mechanism to be used at Azure Managed HSM service side to access customer Azure Storage service."
-                },
-                {
-                  "value": "managedIdentity",
-                  "description": "Denotes user-assigned managed identity to be used at Azure Managed HSM service side to access customer Azure Storage service."
-                }
-              ]
-            }
-          },
           {
             "name": "keyName",
             "in": "path",
@@ -419,6 +352,11 @@
         "token": {
           "type": "string",
           "description": "The SAS token pointing to an Azure Blob storage container"
+        },
+        "useManagedIdentityStorageAuthentication": {
+          "type": "boolean",
+          "default": false,
+          "description": "This boolean parameter needs to set when storage authentication through user-assigned managed identity to Managed HSM resource has been setup. When this flag is set, the sas token is ignored."
         }
       },
       "required": [
