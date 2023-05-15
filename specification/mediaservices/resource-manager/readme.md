@@ -60,6 +60,12 @@ directive:
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateEndpointConnections/{name}"].put'
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/privateLinkResources/{name}"].get'
     from: Accounts.json
+
+  - suppress: INVALID_TYPE
+    reason: This is a error in validation. When the ContentKeyPolicyRestrictionTokenKey is null, the validator should not expect a value of '@odata.type'
+    where:
+      - $.definitions.ContentKeyPolicyRestrictionTokenKey.@odata.type
+    from: ContentKeyPolicies.json
 ```
 
 ### Tag: package-metadata-2023-01
