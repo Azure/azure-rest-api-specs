@@ -1,26 +1,58 @@
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+These settings apply only when `--track2` is specified on the command line.
 
 ``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.recoveryservicesbackup
-  package-name: azure-mgmt-recoveryservicesbackup
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-recoveryservicesbackup
+package-version: 1.0.0b1
+no-namespace-folders: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
+
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python)
+clear-output-folder: true
+batch:
+  - tag: package-passivestamp-2021-11-15
+  - tag: package-2023-02
 ```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup
+
+### Tag: package-passivestamp-2021-11-15 and python
+
+These settings apply only when `--tag=package-passivestamp-2021-11-15 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-passivestamp-2021-11-15'
+title: Recovery Services Backup Passive Client
+namespace: azure.mgmt.recoveryservicesbackup.passivestamp
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/passivestamp
+```
+
+### Tag: package-2023-02 and python
+
+These settings apply only when `--package-2023-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-02'
+namespace: azure.mgmt.recoveryservicesbackup.activestamp
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/activestamp
+```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+directive:
+  - from: swagger-document
+    where: $.definitions.ProtectionIntent
+    transform: >
+        $['required'] = ['protectionIntentItemType'];
+  - from: swagger-document
+    where: $.definitions.FeatureSupportRequest
+    transform: >
+        $['required'] = ['featureType'];
+
 ```

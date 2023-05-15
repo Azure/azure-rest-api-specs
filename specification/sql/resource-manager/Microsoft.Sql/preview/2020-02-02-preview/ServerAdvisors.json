@@ -572,6 +572,11 @@
     "RecommendedAction": {
       "description": "Database, Server or Elastic Pool Recommended Action.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "kind": {
           "description": "Resource kind.",
@@ -587,21 +592,6 @@
           "$ref": "#/definitions/RecommendedActionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },

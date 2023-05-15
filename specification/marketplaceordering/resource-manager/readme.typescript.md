@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-marketplaceordering"
   output-folder: "$(typescript-sdks-folder)/sdk/marketplaceordering/arm-marketplaceordering"
-  clear-output-folder: true
   generate-metadata: true
 ```

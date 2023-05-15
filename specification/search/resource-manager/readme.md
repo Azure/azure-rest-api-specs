@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for SearchManagementClient.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for SearchManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,23 +15,33 @@ To build the SDK for SearchManagementClient, simply [Install AutoRest](https://a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the SearchManagementClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-08
+tag: package-2022-09
 ```
 
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.Search/stable/2022-09-01/search.json
+```
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2020-08'
 input-file:
 - Microsoft.Search/stable/2020-08-01/search.json
@@ -40,6 +50,7 @@ input-file:
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
 - Microsoft.Search/stable/2020-03-13/search.json
@@ -63,6 +74,15 @@ input-file:
 - Microsoft.Search/stable/2015-02-28/search.json
 ```
 
+### Tag: package-2021-04-preview
+
+These settings apply only when `--tag=package-2021-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-preview'
+input-file:
+- Microsoft.Search/preview/2021-04-01-preview/search.json
+```
+
 ### Tag: package-2020-08-preview
 
 These settings apply only when `--tag=package-2020-08-preview` is specified on the command line.
@@ -81,10 +101,9 @@ input-file:
 - Microsoft.Search/preview/2019-10-01-preview/search.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -93,8 +112,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -103,10 +122,8 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_search']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js search/resource-manager
+  - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -125,6 +142,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -201,9 +222,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

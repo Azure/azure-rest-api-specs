@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-maps"
   output-folder: "$(typescript-sdks-folder)/sdk/maps/arm-maps"
-  clear-output-folder: true
   generate-metadata: true
 ```

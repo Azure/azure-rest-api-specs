@@ -26,23 +26,77 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-2023-04
 ```
 
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.Cache/preview/2023-05-01-preview/redis.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Cache/stable/2023-04-01/redis.json
+```
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06'
+input-file:
+  - Microsoft.Cache/stable/2022-06-01/redis.json
+```
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.Cache/stable/2022-05-01/redis.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Cache/stable/2021-06-01/redis.json
+```
+
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12'
+input-file:
+  - Microsoft.Cache/stable/2020-12-01/redis.json
+```
 
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.Cache/stable/2020-06-01/redis.json
 ```
+
 ### Tag: package-2019-07-preview
 
 These settings apply only when `--tag=package-2019-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-07-preview'
+``` yaml $(tag) == 'package-2019-07-preview'
 input-file:
   - Microsoft.Cache/preview/2019-07-01/redis.json
 ```
@@ -103,8 +157,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -112,9 +166,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
+  - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js redis/resource-manager
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -134,47 +188,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python) && !$(track2)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.redis
-  package-name: azure-mgmt-redis
-  package-version: 5.0.0
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(track2)
-python-mode: update
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.redis
-package-name: azure-mgmt-redis
-package-version: 5.0.0
-clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -182,51 +196,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.redis
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-redis
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-03
-  - tag: package-2017-10
-```
-
-### Tag: package-2018-03 and java
-
-These settings apply only when `--tag=package-2018-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.redis.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2018_03_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-10 and java
-
-These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.redis.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2017_10_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 # Validation
 
@@ -244,6 +214,21 @@ directive:
       - $.definitions.RedisCommonProperties.properties.enableNonSslPort
     from: redis.json
     reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isMaster."
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isMaster
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isPrimary"
+    where:
+      - $.definitions.RedisInstanceDetails.properties.isPrimary
+    from: redis.json
+    reason: this will result in breaking change
+  - suppress: R3018  # Booleans are not descriptive and make them hard to use. Consider using string enums with allowed set of values defined. Property: isDataAction"
+    where:
+      - $.definitions.Operation.properties.isDataAction
+    from: types.json
+    reason: its per the RPC specification
   - suppress: R2017  # PUT request and response should be of same type "
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/linkedServers/{linkedServerName}"].put
@@ -257,8 +242,3 @@ directive:
     from: redis.json
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

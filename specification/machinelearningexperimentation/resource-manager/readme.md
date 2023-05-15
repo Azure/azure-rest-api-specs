@@ -55,8 +55,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js machinelearningexperimentation/resource-manager
+  - repo: azure-powershell
 ```
 
 
@@ -114,7 +113,5 @@ generate-interface: true
 
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

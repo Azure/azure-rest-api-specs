@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-11
+tag: package-preview-2023-03
 ```
 
 ### Suppression
@@ -44,20 +44,114 @@ directive:
   - suppress: R3021
     from: appplatform.json
     reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
-    #where: 
+    #where:
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
     #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
 ```
 
 
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.AppPlatform/preview/2023-03-01-preview/appplatform.json
+```
+
+### Tag: package-preview-2023-01
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.AppPlatform/preview/2023-01-01-preview/appplatform.json
+```
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.AppPlatform/stable/2022-12-01/appplatform.json
+```
+
+### Tag: package-preview-2022-11
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.AppPlatform/preview/2022-11-01-preview/appplatform.json
+```
+
+### Tag: package-preview-2022-09
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.AppPlatform/preview/2022-09-01-preview/appplatform.json
+```
+
+### Tag: package-preview-2022-05
+These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-05'
+input-file:
+  - Microsoft.AppPlatform/preview/2022-05-01-preview/appplatform.json
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.AppPlatform/stable/2022-04-01/appplatform.json
+```
+
+### Tag: package-preview-2022-03
+These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-03'
+input-file:
+  - Microsoft.AppPlatform/preview/2022-03-01-preview/appplatform.json
+```
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.AppPlatform/preview/2022-01-01-preview/appplatform.json
+```
+
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.AppPlatform/preview/2021-09-01-preview/appplatform.json
+```
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.AppPlatform/preview/2021-06-01-preview/appplatform.json
+```
+
 ### Tag: package-preview-2020-11
 
 These settings apply only when `--tag=package-preview-2020-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-11'
+``` yaml $(tag) == 'package-preview-2020-11'
 input-file:
   - Microsoft.AppPlatform/preview/2020-11-01-preview/appplatform.json
 ```
+
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
@@ -65,15 +159,6 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 ``` yaml $(tag) == 'package-2020-07'
 input-file:
   - Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
-```
-
-### Tag: package-2019-05-01-preview
-
-These settings apply only when `--tag=package-2019-05-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-01-preview'
-input-file:
-- Microsoft.AppPlatform/preview/2019-05-01-preview/appplatform.json
 ```
 
 ---
@@ -87,25 +172,27 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-appplatform
+  - repo: azure-powershell
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_appplatform']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js appplatform/resource-manager
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -125,7 +212,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/appplatform/Microsoft.Azure.Management.AppPlatform/src/Generated
   clear-output-folder: true
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

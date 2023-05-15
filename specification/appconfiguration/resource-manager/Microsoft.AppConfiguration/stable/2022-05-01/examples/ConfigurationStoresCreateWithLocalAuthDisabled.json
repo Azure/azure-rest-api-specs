@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "resourceGroupName": "myResourceGroup",
+    "configStoreName": "contoso",
+    "api-version": "2022-05-01",
+    "configStoreCreationParameters": {
+      "location": "westus",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "disableLocalAuth": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AppConfiguration/configurationStores",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "endpoint": "https://contoso.azconfig.io",
+          "encryption": {
+            "keyVaultProperties": {
+              "keyIdentifier": null,
+              "identityClientId": null
+            }
+          },
+          "disableLocalAuth": true,
+          "privateEndpointConnections": []
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
+        "name": "contoso",
+        "location": "westus",
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AppConfiguration/configurationStores",
+        "properties": {
+          "provisioningState": "Creating",
+          "creationDate": "2018-04-24T16:30:55+00:00",
+          "endpoint": "https://contoso.azconfig.io",
+          "encryption": {
+            "keyVaultProperties": {
+              "keyIdentifier": null,
+              "identityClientId": null
+            }
+          },
+          "disableLocalAuth": true,
+          "privateEndpointConnections": []
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
+        "name": "contoso",
+        "location": "westus",
+        "tags": {}
+      }
+    }
+  }
+}

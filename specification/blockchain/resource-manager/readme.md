@@ -50,7 +50,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
@@ -60,8 +60,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_blockchain']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js blockchain/resource-manager
+  - repo: azure-powershell
 ```
 
 ## C# 
@@ -89,7 +88,5 @@ See configuration in [readme.node.md](./readme.node.md)
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

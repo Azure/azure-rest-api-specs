@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-datacatalog"
   output-folder: "$(typescript-sdks-folder)/sdk/datacatalog/arm-datacatalog"
-  clear-output-folder: true
   generate-metadata: true
 ```

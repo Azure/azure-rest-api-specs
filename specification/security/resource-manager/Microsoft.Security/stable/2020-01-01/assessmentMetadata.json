@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "version": "2020-01-01"
   },
   "host": "management.azure.com",
@@ -314,11 +314,11 @@
           "type": "string",
           "description": "Human readable description of what you should do to mitigate this security issue"
         },
-        "category": {
+        "categories": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "The category of resource that is at risk when the assessment is unhealthy",
+            "description": "The categories of resource that is at risk when the assessment is unhealthy",
             "enum": [
               "Compute",
               "Networking",
@@ -327,7 +327,7 @@
               "IoT"
             ],
             "x-ms-enum": {
-              "name": "category",
+              "name": "categories",
               "modelAsString": true,
               "values": [
                 {
@@ -487,15 +487,15 @@
             "values": [
               {
                 "value": "BuiltIn",
-                "description": "Azure Security Center managed assessments"
+                "description": "Microsoft Defender for Cloud managed assessments"
               },
               {
                 "value": "CustomPolicy",
-                "description": "User defined policies that are automatically ingested from Azure Policy to Azure Security Center"
+                "description": "User defined policies that are automatically ingested from Azure Policy to Microsoft Defender for Cloud"
               },
               {
                 "value": "CustomerManaged",
-                "description": "User assessments pushed directly by the user or other third party to Azure Security Center"
+                "description": "User assessments pushed directly by the user or other third party to Microsoft Defender for Cloud"
               },
               {
                 "value": "VerifiedPartner",

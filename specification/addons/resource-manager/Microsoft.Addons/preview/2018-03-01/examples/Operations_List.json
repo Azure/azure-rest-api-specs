@@ -1,56 +1,58 @@
 {
   "parameters": {
-    "api-version": "2017-05-15"
+    "api-version": "2018-03-01"
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "name": "Microsoft.Addons/supportProviders/supportPlanTypes/read",
-          "display": {
-            "provider": "Microsoft Addons",
-            "resource": "supportPlanTypes",
-            "operation": "Get Canonical support plan state",
-            "description": "Get the specified Canonical support plan state."
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Addons/supportProviders/supportPlanTypes/read",
+            "display": {
+              "provider": "Microsoft Addons",
+              "resource": "supportPlanTypes",
+              "operation": "Get Canonical support plan state",
+              "description": "Get the specified Canonical support plan state."
+            }
+          },
+          {
+            "name": "Microsoft.Addons/supportProviders/supportPlanTypes/write",
+            "display": {
+              "provider": "Microsoft Addons",
+              "resource": "supportPlanTypes",
+              "operation": "Adds a Canonical support plan.",
+              "description": "Adds the Canonical support plan type specified."
+            }
+          },
+          {
+            "name": "Microsoft.Addons/supportProviders/supportPlanTypes/delete",
+            "display": {
+              "provider": "Microsoft Addons",
+              "resource": "supportPlanTypes",
+              "operation": "Removes the Canonical support plan",
+              "description": "Removes the specified Canonical support plan"
+            }
+          },
+          {
+            "name": "Microsoft.Addons/supportProviders/canonical/supportPlanTypes/get",
+            "display": {
+              "provider": "Microsoft Addons",
+              "resource": "supportProviders",
+              "operation": "Gets available Canonical support plan types.",
+              "description": "Gets the available Canonical support plan types as well as some extra metadata on their enabled status."
+            }
+          },
+          {
+            "name": "Microsoft.Addons/register/action",
+            "display": {
+              "provider": "Microsoft Addons",
+              "resource": "register",
+              "operation": "Register for Microsoft.Addons",
+              "description": "Register the specified subscription with Microsoft.Addons"
+            }
           }
-        },
-        {
-          "name": "Microsoft.Addons/supportProviders/supportPlanTypes/write",
-          "display": {
-            "provider": "Microsoft Addons",
-            "resource": "supportPlanTypes",
-            "operation": "Adds a Canonical support plan.",
-            "description": "Adds the Canonical support plan type specified."
-          }
-        },
-        {
-          "name": "Microsoft.Addons/supportProviders/supportPlanTypes/delete",
-          "display": {
-            "provider": "Microsoft Addons",
-            "resource": "supportPlanTypes",
-            "operation": "Removes the Canonical support plan",
-            "description": "Removes the specified Canonical support plan"
-          }
-        },
-        {
-          "name": "Microsoft.Addons/supportProviders/canonical/supportPlanTypes/get",
-          "display": {
-            "provider": "Microsoft Addons",
-            "resource": "supportProviders",
-            "operation": "Gets available Canonical support plan types.",
-            "description": "Gets the available Canonical support plan types as well as some extra metadata on their enabled status."
-          }
-        },
-        {
-          "name": "Microsoft.Addons/register/action",
-          "display": {
-            "provider": "Microsoft Addons",
-            "resource": "register",
-            "operation": "Register for Microsoft.Addons",
-            "description": "Register the specified subscription with Microsoft.Addons"
-          }
-        }
-      ]
+        ]
+      }
     }
   }
 }

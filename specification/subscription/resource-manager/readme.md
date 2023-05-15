@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: R2059
@@ -31,7 +31,19 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-09
+tag: package-2021-10
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/stable/2021-10-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
 ```
 
 ### Tag: package-2020-09
@@ -127,17 +139,19 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js subscription/resource-manager
+  - repo: azure-powershell
 ```
 
+## Pyhton
+
+See configuration in [readme.pyhton.md](./readme.python.md)
 
 ## Go
 
@@ -203,7 +217,5 @@ description: The subscription client
 ```
 
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

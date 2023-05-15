@@ -46,7 +46,8 @@
             "description": "Client sent unknown metadata name",
             "schema": {
               "$ref": "#/definitions/ARMErrorResponseBody"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -494,6 +495,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListRecommendations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     },
@@ -589,7 +595,8 @@
             "description": "Suppression name is not specified or Suppression Id not found.",
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -657,7 +664,8 @@
             "description": "Recommendation to be suppressed is not found.",
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
-            }
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -933,7 +941,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DigestConfig"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1101,19 +1112,6 @@
           "description": "The recommendation-type GUID.",
           "type": "string"
         },
-        "risk": {
-          "description": "The potential risk of not implementing the recommendation.",
-          "enum": [
-            "Error",
-            "Warning",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "risk",
-            "modelAsString": true
-          }
-        },
         "shortDescription": {
           "$ref": "#/definitions/ShortDescription",
           "description": "A summary of the recommendation."
@@ -1136,6 +1134,47 @@
         "resourceMetadata": {
           "$ref": "#/definitions/ResourceMetadata",
           "description": "Metadata of resource that was assessed"
+        },
+        "description": {
+          "description": "The detailed description of recommendation.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label of recommendation.",
+          "type": "string"
+        },
+        "learnMoreLink": {
+          "description": "The link to learn more about recommendation and generation logic.",
+          "type": "string"
+        },
+        "potentialBenefits": {
+          "description": "The potential benefit of implementing recommendation.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of recommended actions to implement recommendation.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "remediation": {
+          "description": "The automated way to apply recommendation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "exposedMetadataProperties": {
+          "description": "The recommendation metadata properties exposed to customer to provide additional information.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -1165,11 +1204,11 @@
       "type": "object",
       "properties": {
         "problem": {
-          "description": "The issue or opportunity identified by the recommendation.",
+          "description": "The issue or opportunity identified by the recommendation and proposed solution.",
           "type": "string"
         },
         "solution": {
-          "description": "The remediation action suggested by the recommendation.",
+          "description": "The issue or opportunity identified by the recommendation and proposed solution.",
           "type": "string"
         }
       }
@@ -1184,6 +1223,21 @@
         },
         "source": {
           "description": "Source from which recommendation is generated",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action to view resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "singular": {
+          "description": "The singular user friendly name of resource type. eg: virtual machine",
+          "type": "string"
+        },
+        "plural": {
+          "description": "The plural user friendly name of resource type. eg: virtual machines",
           "type": "string"
         }
       }
@@ -1201,7 +1255,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

@@ -5,23 +5,14 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.storageimportexport
-  package-name: azure-mgmt-storageimportexport
-  clear-output-folder: true
-  package-version: 0.1.0
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-storageimportexport
+namespace: azure.mgmt.storageimportexport
+package-version: 1.0.0b1
+clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/storageimportexport/azure-mgmt-storageimportexport/azure/mgmt/storageimportexport
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/storageimportexport/azure-mgmt-storageimportexport
+``` yaml $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storageimportexport/azure/mgmt/storageimportexport
 ```

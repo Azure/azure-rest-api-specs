@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2023-02-01-preview",
+    "accessControlListName": "aclOne",
+    "body": {
+      "properties": {
+        "addressFamily": "ipv4",
+        "conditions": [
+          {
+            "sequenceNumber": 4,
+            "action": "allow",
+            "destinationAddress": "1.1.1.2",
+            "destinationPort": "21",
+            "sourceAddress": "2.2.2.3",
+            "sourcePort": "65000",
+            "protocol": 6
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "addressFamily": "ipv4",
+          "conditions": [
+            {
+              "sequenceNumber": 4,
+              "action": "allow",
+              "destinationAddress": "1.1.1.2",
+              "destinationPort": "21",
+              "sourceAddress": "2.2.2.3",
+              "sourcePort": "65000",
+              "protocol": 6
+            }
+          ]
+        },
+        "location": "EastUs",
+        "id": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "aaaaaaaaaaaaaa",
+        "type": "aaaaaa",
+        "systemData": {
+          "createdBy": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "createdByType": "User",
+          "createdAt": "2022-06-15T07:15:42.793Z",
+          "lastModifiedBy": "aaaaaaaaaaaaaaaaaaaa",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-06-15T07:15:42.793Z"
+        }
+      }
+    }
+  }
+}

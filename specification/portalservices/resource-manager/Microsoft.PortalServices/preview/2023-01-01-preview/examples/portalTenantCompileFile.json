@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "portalTenantCompileFile": {
+      "contents": {
+        "$schema": "../../Definitions/dx.schema.json#",
+        "stringSource": "Resources/MyStrings.resjson",
+        "view": {
+          "kind": "Markdown",
+          "export": true,
+          "properties": {
+            "content": {
+              "property": "markdownContent"
+            }
+          }
+        }
+      },
+      "stringSource": {
+        "markdownContent": "# This is an example of a markdown view!"
+      },
+      "files": {
+        "myFile.json": {
+          "contentField": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "http://azure.async.operation/status"
+      },
+      "body": {}
+    }
+  }
+}

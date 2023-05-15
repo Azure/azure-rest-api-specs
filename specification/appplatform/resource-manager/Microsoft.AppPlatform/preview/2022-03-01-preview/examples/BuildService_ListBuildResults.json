@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "buildServiceName": "default",
+    "buildName": "mybuild"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "name": "123",
+              "provisioningState": "Succeeded",
+              "buildPodName": "mybuild-default-1",
+              "buildStages": [
+                {
+                  "name": "prepare",
+                  "status": "Running"
+                },
+                {
+                  "name": "detect",
+                  "status": "NotStarted"
+                },
+                {
+                  "name": "analyze",
+                  "status": "NotStarted"
+                },
+                {
+                  "name": "restore",
+                  "status": "NotStarted"
+                },
+                {
+                  "name": "build",
+                  "status": "NotStarted"
+                },
+                {
+                  "name": "export",
+                  "status": "NotStarted"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "sample-user",
+              "createdByType": "User",
+              "createdAt": "2021-08-11T03:16:03.944Z",
+              "lastModifiedBy": "sample-user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+            },
+            "type": "Microsoft.AppPlatform/Spring/buildServices/builds/results",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builds/mybuild/results/123",
+            "name": "123"
+          }
+        ],
+        "nextLink": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/buildServices/default/builds/mybuild/results?$page=2"
+      }
+    }
+  }
+}

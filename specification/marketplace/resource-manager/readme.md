@@ -26,17 +26,78 @@ These are the global settings for the Marketplace API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-01-01
+tag: package-2023-01-01
 ```
 
+### Composite packages
 
-### Tag: package-2019-12-01
+The following packages may be composed from multiple api-versions.
 
-These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
+### Tag: package-2023-01-01
 
-``` yaml $(tag) == 'package-2019-12-01'
+These settings apply only when `--tag=package-2023-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-01'
 input-file:
-  - Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
+  - Microsoft.Marketplace/stable/2023-01-01/Marketplace.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.Marketplace/stable/2022-09-01/Marketplace.json
+```
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.Marketplace/stable/2022-03-01/Marketplace.json
+```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+  - Microsoft.Marketplace/stable/2021-12-01/Marketplace.json
+```
+
+### Tag: package-composite-v2
+
+These settings apply only when `--tag=package-composite-v2` is specified on the command line.
+
+This section contains the "composite-v2" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v1" clients.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+``` yaml $(tag) == 'package-composite-v2'
+input-file:
+- Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
+```
+
+### Tag: package-composite-v1
+
+These settings apply only when `--tag=package-composite-v1` is specified on the command line.
+
+This section contains the "composite-v1" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v1" clients.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+``` yaml $(tag) == 'package-composite-v1'
+input-file:
+- Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
+- Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
+
+# Needed when there is more than one input file
+override-info:
+  title: MarketplaceManagementClient
 ```
 
 ### Tag: package-2020-01-01
@@ -48,6 +109,24 @@ input-file:
   - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 ```
 
+### Tag: package-2020-12-01
+
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01'
+input-file:
+  - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
+```
+
+### Tag: package-2021-06-01
+
+These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-01'
+input-file:
+  - Microsoft.Marketplace/stable/2021-06-01/Marketplace.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -57,12 +136,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace']
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js marketplace/resource-manager
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -77,9 +154,6 @@ csharp:
   namespace: Microsoft.Azure.Management.Marketplace
   output-folder: $(csharp-sdks-folder)/marketplace/Microsoft.Azure.Management.Marketplace/src/Generated
   clear-output-folder: true
+  modelerfour:
+    lenient-model-deduplication: true
 ```
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

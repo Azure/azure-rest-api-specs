@@ -256,7 +256,7 @@
           }
         },
         "userWhitelistedIpRanges": {
-          "description": "User added ip ranges to whitelist on ASE db",
+          "description": "User added list of IP Ranges allowed on ASE db",
           "type": "array",
           "items": {
             "type": "string"
@@ -1527,7 +1527,7 @@
               "type": "boolean"
             },
             "tagWhitelistJson": {
-              "description": "Gets or sets a JSON string containing a list of tags that are whitelisted for use by the push registration endpoint.",
+              "description": "Gets or sets a JSON string containing a list of tags that are in the allowed list for use by the push registration endpoint.",
               "type": "string"
             },
             "tagsRequiringAuth": {
@@ -1991,6 +1991,14 @@
         "httpLoggingEnabled": {
           "description": "<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.",
           "type": "boolean"
+        },
+        "acrUseManagedIdentityCreds": {
+          "description": "Flag to use Managed Identity Creds for ACR pull",
+          "type": "boolean"
+        },
+        "acrUserManagedIdentityID": {
+          "description": "If using user managed identity, the user managed identity ClientId",
+          "type": "string"
         },
         "logsDirectorySizeLimit": {
           "format": "int32",

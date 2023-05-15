@@ -771,10 +771,6 @@
           "$ref": "#/definitions/ServiceExportConfigurationInfo",
           "description": "The settings for the export operation of the service instance."
         },
-        "acrConfiguration": {
-          "$ref": "#/definitions/ServiceAcrConfigurationInfo",
-          "description": "The azure container registry settings used for convert data operation of the service instance."
-        },
         "privateEndpointConnections": {
           "description": "The list of private endpoint connections that are set up for this resource.",
           "type": "array",
@@ -793,6 +789,10 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
+        },
+        "acrConfiguration": {
+          "$ref": "#/definitions/ServiceAcrConfigurationInfo",
+          "description": "The azure container registry settings used for convert data operation of the service instance."
         }
       }
     },
@@ -824,8 +824,7 @@
           "type": "integer",
           "description": "The provisioned throughput for the backing database.",
           "readOnly": false,
-          "minimum": 400,
-          "maximum": 10000
+          "minimum": 400
         },
         "keyVaultKeyUri": {
           "type": "string",

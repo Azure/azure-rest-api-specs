@@ -57,8 +57,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_cloudshell']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js cloudshell/resource-manager
+  - repo: azure-powershell
 ```
 
 ## Go
@@ -149,7 +148,5 @@ csharp:
   namespace: Microsoft.CloudShell
   output-folder: $(csharp-sdks-folder)/CloudShell/management/Microsoft.CloudShell/GeneratedProtocol
 ```
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

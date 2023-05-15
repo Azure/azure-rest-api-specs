@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "v1.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {
+      "inputs": [
+        {
+          "source": {
+            "sourceUrl": "https://myblob.blob.core.windows.net/sourceContainer",
+            "filter": {
+              "prefix": "pre",
+              "suffix": ".txt"
+            },
+            "language": "en",
+            "storageSource": "AzureBlob"
+          },
+          "targets": [
+            {
+              "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer1",
+              "category": "general",
+              "language": "fr",
+              "glossaries": [
+                {
+                  "glossaryUrl": "https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf",
+                  "format": "XLIFF",
+                  "storageSource": "AzureBlob"
+                }
+              ],
+              "options": {
+                "pdfOutputAdditionalFormat": "None"
+              },
+              "storageSource": "AzureBlob"
+            },
+            {
+              "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer2",
+              "category": "general",
+              "language": "es",
+              "options": {
+                "pdfOutputAdditionalFormat": "None"
+              },
+              "storageSource": "AzureBlob"
+            }
+          ],
+          "storageType": "Folder"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55"
+      }
+    }
+  }
+}

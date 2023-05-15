@@ -10,6 +10,5 @@ typescript:
   payload-flattening-threshold: 2
   package-name: "@azure/arm-peering"
   output-folder: "$(typescript-sdks-folder)/sdk/peering/arm-peering"
-  clear-output-folder: true
   generate-metadata: true
 ```

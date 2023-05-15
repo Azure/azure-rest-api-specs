@@ -179,14 +179,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Module"
             }
           },
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Module"
             }
@@ -353,6 +353,7 @@
           "items": {
             "$ref": "#/definitions/ActivityParameterValidationSet"
           },
+          "x-ms-identifiers": [],
           "description": "Gets or sets the validation set of activity parameter."
         }
       },
@@ -369,6 +370,7 @@
           "items": {
             "$ref": "#/definitions/ActivityParameter"
           },
+          "x-ms-identifiers": [],
           "description": "Gets or sets the parameters of the activity parameter set."
         }
       },
@@ -407,6 +409,9 @@
           "items": {
             "$ref": "#/definitions/ActivityParameterSet"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Gets or sets the parameter sets of the activity."
         },
         "outputTypes": {
@@ -414,6 +419,9 @@
           "items": {
             "$ref": "#/definitions/ActivityOutputType"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Gets or sets the output types of the activity."
         },
         "creationTime": {
@@ -693,6 +701,9 @@
           "items": {
             "$ref": "#/definitions/TypeField"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Gets or sets a list of fields."
         }
       },

@@ -45,6 +45,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -86,6 +89,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -714,7 +720,8 @@
         },
         "status": {
           "description": "SaaS Offer Status",
-          "$ref": "#/definitions/SaaSOfferStatus"
+          "$ref": "#/definitions/SaaSOfferStatus",
+          "readOnly": true
         }
       }
     },
@@ -751,7 +758,8 @@
         },
         "provisioningState": {
           "description": "Provision states for confluent RP",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "organizationId": {
           "description": "Id of the Confluent organization.",

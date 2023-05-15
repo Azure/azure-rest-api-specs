@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "xxxx-xxxx-xxxx-xxxx",
+    "resourceGroup": "myResourceGroup",
+    "fluidRelayServerName": "myFluidRelayServer",
+    "api-version": "2022-04-21",
+    "resource": {
+      "location": "west-us",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {},
+          "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {}
+        }
+      },
+      "tags": {
+        "Category": "sales"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer",
+        "name": "myFluidRelayServer",
+        "type": "Microsoft.FluidRelay/fluidRelayServers",
+        "location": "west-us",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            },
+            "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "frsTenantId": "yyyy-yyyy-yyyyy-yyyy",
+          "fluidRelayEndpoints": {
+            "ordererEndpoints": [
+              "https://www.contoso.org/orderer"
+            ],
+            "storageEndpoints": [
+              "https://www.contoso.org/storage"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

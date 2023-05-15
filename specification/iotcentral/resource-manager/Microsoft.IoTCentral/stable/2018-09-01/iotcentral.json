@@ -513,8 +513,40 @@
             "create",
             "read"
           ]
+        },
+        "state": {
+          "description": "The current state of the application.",
+          "$ref": "#/definitions/AppState"
+        },
+        "geography": {
+          "description": "The geography the application is in.",
+          "type": "string",
+          "readOnly": true
+        },
+        "thumbnailUrl": {
+          "description": "The URI for the thumbnail image used in the application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenant": {
+          "description": "The tenant ID the application belongs to.",
+          "type": "string",
+          "readOnly": true
         }
       }
+    },
+    "AppState": {
+      "description": "The current state of the application.",
+      "type": "string",
+      "enum": [
+        "created",
+        "suspended"
+      ],
+      "x-ms-enum": {
+        "name": "AppState",
+        "modelAsString": true
+      },
+      "readOnly": true
     },
     "AppSkuInfo": {
       "description": "Information about the SKU of the IoT Central application.",
@@ -822,6 +854,35 @@
         },
         "description": {
           "description": "The description of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "industry": {
+          "description": "The industry of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "A list of locations that support the template.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AppTemplateLocations"
+          }
+        }
+      }
+    },
+    "AppTemplateLocations": {
+      "description": "IoT Central Application Template Locations.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the location.",
           "type": "string",
           "readOnly": true
         }

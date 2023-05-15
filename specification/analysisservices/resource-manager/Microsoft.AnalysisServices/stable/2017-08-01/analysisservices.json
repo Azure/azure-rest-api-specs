@@ -190,11 +190,11 @@
           "200": {
             "description": "OK."
           },
-          "204": {
-            "description": "No Content."
-          },
           "202": {
             "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -869,7 +869,10 @@
                   "readOnly": true,
                   "items": {
                     "$ref": "#/definitions/MetricSpecifications"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 },
                 "logSpecifications": {
                   "description": "The log specifications.",
@@ -877,7 +880,10 @@
                   "readOnly": true,
                   "items": {
                     "$ref": "#/definitions/LogSpecifications"
-                  }
+                  },
+                  "x-ms-identifiers": [
+                    "name"
+                  ]
                 }
               }
             }
@@ -920,7 +926,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/MetricDimensions"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -970,7 +979,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1265,6 +1277,9 @@
             "$ref": "#/definitions/IPv4FirewallRule",
             "description": "The content of firewall rule."
           },
+          "x-ms-identifiers": [
+            "firewallRuleName"
+          ],
           "description": "An array of firewall rules."
         },
         "enablePowerBIService": {
@@ -1342,26 +1357,7 @@
     "GatewayError": {
       "description": "Detail of gateway errors.",
       "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code of list gateway."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message of list gateway."
-        },
-        "subCode": {
-          "description": "The error sub code",
-          "type": "integer",
-          "format": "int32"
-        },
-        "httpStatusCode": {
-          "description": "The http status code",
-          "type": "integer",
-          "format": "int32"
-        }
-      }
+      "$ref": "#/definitions/ErrorDetail"
     },
     "CheckServerNameAvailabilityParameters": {
       "description": "Details of server name request body.",
@@ -1426,7 +1422,7 @@
         "error": {
           "type": "object",
           "description": "The error detail of the operation if any.",
-          "$ref": "#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     },
@@ -1439,6 +1435,9 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The collection of available SKUs for new resources."
         }
       }
@@ -1452,6 +1451,9 @@
           "items": {
             "$ref": "#/definitions/SkuDetailsForExistingResource"
           },
+          "x-ms-identifiers": [
+            "sku/name"
+          ],
           "description": "The collection of available SKUs for existing resources."
         }
       }
@@ -1488,12 +1490,33 @@
           "type": "string",
           "description": "The error target."
         },
+        "subCode": {
+          "readOnly": true,
+          "description": "The error sub code",
+          "type": "integer",
+          "format": "int32"
+        },
+        "httpStatusCode": {
+          "readOnly": true,
+          "description": "The http status code",
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeStamp": {
+          "readOnly": true,
+          "description": "the timestamp for the error.",
+          "type": "string"
+        },
         "details": {
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "The error details."
         },
         "additionalInfo": {
@@ -1502,6 +1525,7 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
+          "x-ms-identifiers": [],
           "description": "The error additional info."
         }
       }
@@ -1526,41 +1550,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "type": "object",
           "description": "The error object",
-          "properties": {
-            "code": {
-              "description": "Error code",
-              "type": "string"
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string"
-            },
-            "subCode": {
-              "description": "The error sub code",
-              "type": "integer",
-              "format": "int32"
-            },
-            "httpStatusCode": {
-              "description": "The http status code",
-              "type": "integer",
-              "format": "int32"
-            },
-            "timeStamp": {
-              "description": "the timestamp for the error.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorDetail"
-              },
-              "description": "The error details."
-            }
-          }
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     }

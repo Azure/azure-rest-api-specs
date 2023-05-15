@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "dataSetId": "01234567-8901-2345-6789-012345678901",
+    "Content-Type": "application/json",
+    "body": {
+      "granularity": "daily",
+      "customInterval": 1,
+      "dimensionKeys": [
+        "Region",
+        "Platform"
+      ],
+      "aggregatedIdentifier": "__AGG__",
+      "measures": [
+        {
+          "displayName": "Failure Rate"
+        },
+        {
+          "displayName": "Error Count"
+        },
+        {
+          "displayName": "Total Count"
+        }
+      ],
+      "displayName": "Sample Multidimensional Root Cause Analysis Dataset Name",
+      "kind": "multidimensional"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": ""
+      }
+    }
+  }
+}

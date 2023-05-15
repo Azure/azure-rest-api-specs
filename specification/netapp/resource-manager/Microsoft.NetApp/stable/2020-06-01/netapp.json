@@ -63,6 +63,11 @@
           "default": {
             "description": "Error response describing why the operation failed."
           }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "examples/OperationList.json"
+          }
         }
       }
     },
@@ -2868,11 +2873,12 @@
       "properties": {
         "activeDirectoryId": {
           "type": "string",
+          "default": "guid id",
           "description": "Id of the Active Directory"
         },
         "username": {
           "type": "string",
-          "description": "Username of Active Directory domain administrator"
+          "description": "A domain user account with permission to create machine accounts"
         },
         "password": {
           "type": "string",
@@ -2938,6 +2944,7 @@
         },
         "organizationalUnit": {
           "type": "string",
+          "default": "CN=Computers",
           "description": "The Organizational Unit (OU) within the Windows Active Directory"
         },
         "site": {
@@ -3357,7 +3364,7 @@
         },
         "protocolTypes": {
           "title": "protocolTypes",
-          "description": "Set of protocol types",
+          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
           "type": "array",
           "items": {
             "type": "string"
@@ -3374,6 +3381,7 @@
         "snapshotId": {
           "title": "Snapshot ID",
           "type": "string",
+          "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
           "maxLength": 36,
@@ -3406,6 +3414,7 @@
         "mountTargets": {
           "title": "mountTargets",
           "type": "array",
+          "readOnly": true,
           "description": "List of mount targets",
           "items": {
             "$ref": "#/definitions/mountTargetProperties"
@@ -3445,6 +3454,7 @@
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
+          "default": true,
           "description": "If enabled (true) the volume will contain a read-only .snapshot directory which provides access to each of the volume's snapshots (default to true)."
         },
         "kerberosEnabled": {
@@ -3455,7 +3465,8 @@
         },
         "securityStyle": {
           "type": "string",
-          "description": "The security style of volume",
+          "description": "The security style of volume, default unix, defaults to ntfs for dual protocol or CIFS protocol",
+          "default": "unix",
           "enum": [
             "ntfs",
             "unix"
@@ -3468,9 +3479,10 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
           "type": "number",
-          "example": "128.22",
+          "default": 0.0,
+          "example": 128.22,
           "maximum": 4500,
-          "minimum": 1,
+          "minimum": 0,
           "multipleOf": 0.001
         }
       }
@@ -3486,6 +3498,7 @@
         },
         "unixReadOnly": {
           "type": "boolean",
+          "default": false,
           "description": "Read only access"
         },
         "unixReadWrite": {
@@ -3530,6 +3543,7 @@
         },
         "cifs": {
           "type": "boolean",
+          "default": false,
           "description": "Allows CIFS protocol"
         },
         "nfsv3": {
@@ -3770,7 +3784,7 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
           "type": "number",
-          "example": "128.22",
+          "example": 128.22,
           "maximum": 4500,
           "minimum": 1,
           "multipleOf": 0.001
@@ -4154,7 +4168,7 @@
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4176,13 +4190,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4209,13 +4223,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4242,13 +4256,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4407,9 +4421,29 @@
           "description": "Label for backup"
         },
         "backupType": {
+          "title": "backupType",
           "type": "string",
           "readOnly": true,
-          "description": "Type of backup adhoc or scheduled"
+          "description": "Type of backup Manual or Scheduled",
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "backupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Manual backup"
+              },
+              {
+                "value": "Scheduled",
+                "description": "Scheduled backup"
+              }
+            ]
+          },
+          "example": "Manual"
         }
       }
     },
@@ -4733,7 +4767,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the mount target",
+      "description": "The name of the snapshot",
       "x-ms-parameter-location": "method"
     },
     "SnapshotPolicyName": {
@@ -4741,7 +4775,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the snapshot policy target",
+      "description": "The name of the snapshot policy",
       "x-ms-parameter-location": "method"
     },
     "BackupName": {
