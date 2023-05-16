@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-01-01",
+    "version": "2023-09-01",
     "title": "Schema of Azure VMware Solution events published to Azure Event Grid",
     "description": "Describes the schema of the Azure VMware Solution events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
   },
@@ -12,7 +12,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SddcEventData"
+          "$ref": "#/definitions/SddcEventProperties"
         }
       ],
       "properties": {}
@@ -22,7 +22,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SddcEventData"
+          "$ref": "#/definitions/SddcEventProperties"
         }
       ],
       "properties": {}
@@ -32,7 +32,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/SddcEventData"
+          "$ref": "#/definitions/SddcEventProperties"
         }
       ],
       "properties": {
@@ -47,7 +47,17 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ClusterEventData"
+          "$ref": "#/definitions/ClusterEventProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "ClusterDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterDeleted event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterEventProperties"
         }
       ],
       "properties": {}
@@ -57,7 +67,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ClusterEventData"
+          "$ref": "#/definitions/ClusterEventProperties"
         }
       ],
       "properties": {}
@@ -67,7 +77,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ClusterEventData"
+          "$ref": "#/definitions/ClusterEventProperties"
         }
       ],
       "properties": {}
@@ -77,7 +87,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ClusterEventData"
+          "$ref": "#/definitions/ClusterEventProperties"
         }
       ],
       "properties": {
@@ -92,7 +102,17 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreEventData"
+          "$ref": "#/definitions/DatastoreEventProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "DatastoreDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.DatastoreDeleted event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatastoreEventProperties"
         }
       ],
       "properties": {}
@@ -102,7 +122,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreEventData"
+          "$ref": "#/definitions/DatastoreEventProperties"
         }
       ],
       "properties": {}
@@ -112,7 +132,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreEventData"
+          "$ref": "#/definitions/DatastoreEventProperties"
         }
       ],
       "properties": {}
@@ -122,7 +142,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DatastoreEventData"
+          "$ref": "#/definitions/DatastoreEventProperties"
         }
       ],
       "properties": {
@@ -137,7 +157,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ScriptExecutionEventData"
+          "$ref": "#/definitions/ScriptExecutionEventProperties"
         }
       ],
       "properties": {}
@@ -147,7 +167,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ScriptExecutionEventData"
+          "$ref": "#/definitions/ScriptExecutionEventProperties"
         }
       ],
       "properties": {
@@ -162,7 +182,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ScriptExecutionEventData"
+          "$ref": "#/definitions/ScriptExecutionEventProperties"
         }
       ],
       "properties": {}
@@ -172,7 +192,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ScriptExecutionEventData"
+          "$ref": "#/definitions/ScriptExecutionEventProperties"
         }
       ],
       "properties": {
@@ -182,8 +202,8 @@
         }
       }
     },
-    "SddcEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS/privateClouds events.",
+    "SddcEventProperties": {
+      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/privateClouds events.",
       "type": "object",
       "properties": {
         "operationId": {
@@ -192,8 +212,8 @@
         }
       }
     },
-    "ClusterEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS/clusters events.",
+    "ClusterEventProperties": {
+      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/clusters events.",
       "type": "object",
       "properties": {
         "operationId": {
@@ -223,8 +243,8 @@
         }
       }
     },
-    "DatastoreEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS/datastores events.",
+    "DatastoreEventProperties": {
+      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/datastores events.",
       "type": "object",
       "properties": {
         "operationId": {
@@ -237,8 +257,8 @@
         }
       }
     },
-    "ScriptExecutionEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS/scriptExecutions events.",
+    "ScriptExecutionEventProperties": {
+      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/scriptExecutions events.",
       "type": "object",
       "properties": {
         "operationId": {
