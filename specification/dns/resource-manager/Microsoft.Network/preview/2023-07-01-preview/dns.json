@@ -1373,13 +1373,21 @@
       },
       "description": "A CAA record."
     },
+    "DigestAlgorithmType": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The digest algorithm type represents the standard digest algorithm number used to construct the digest. See: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml"
+    },
+    "SecurityAlgorithmType": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The security algorithm type represents the standard security algorithm number of the DNSKEY Resource Record. See: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml"
+    },
     "Digest": {
       "type": "object",
       "properties": {
         "algorithmType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The digest algorithm type represents the standard digest algorithm number used to construct the digest. See: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml"
+          "$ref": "#/definitions/DigestAlgorithmType"
         },
         "value": {
           "type": "string",
@@ -1397,9 +1405,7 @@
           "description": "The key tag value is used to determine which DNSKEY Resource Record is used for signature verification."
         },
         "algorithm": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The algorithm represents the standard security algorithm number of the DNSKEY Resource Record to which this DS record refers. See: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml"
+          "$ref": "#/definitions/SecurityAlgorithmType"
         },
         "digest": {
           "$ref": "#/definitions/Digest",
@@ -1668,9 +1674,7 @@
       "type": "object",
       "properties": {
         "digestAlgorithmType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The digest algorithm type represents the standard digest algorithm number used to construct the digest. See: https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml",
+          "$ref": "#/definitions/DigestAlgorithmType",
           "readOnly": true
         },
         "digestValue": {
@@ -1722,9 +1726,7 @@
           "readOnly": true
         },
         "securityAlgorithmType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The security algorithm type represents the standard security algorithm number of the DNSKEY Resource Record. See: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml",
+          "$ref": "#/definitions/SecurityAlgorithmType",
           "readOnly": true
         }
       },
