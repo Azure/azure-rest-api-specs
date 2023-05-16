@@ -720,13 +720,13 @@ directive:
   - suppress: PutRequestResponseSchemeArm
     from: cosmos-db.json
     reason: Temporarily suppressing linter errors and will be fixed later
- - suppress: PutRequestResponseSchemeArm
+  - suppress: PutRequestResponseSchemeArm
     from: dataTransferService.json
     reason: Temporarily suppressing linter errors and will be fixed later
- - suppress: PutResponseSchemaDescription
+  - suppress: PutResponseSchemaDescription
     from: dataTransferService.json
     reason: Temporarily suppressing linter errors and will be fixed later
- - suppress: GetCollectionOnlyHasValueAndNextLink
+  - suppress: GetCollectionOnlyHasValueAndNextLink
     from: managedCassandra.json
     reason: Temporarily suppressing linter errors and will be fixed later
   - suppress: PutResponseSchemaDescription
