@@ -2628,6 +2628,9 @@
         "dataCenter": {
           "description": "Deprecated.",
           "type": "string"
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
         }
       }
     },
@@ -2682,7 +2685,7 @@
       "description": "A collection of network authorization rules.",
       "required": [
         "ipRules",
-        "publicInternetRule"
+        "publicNetworkRule"
       ],
       "type": "object",
       "properties": {
@@ -2694,7 +2697,7 @@
           },
           "x-ms-identifiers": []
         },
-        "publicInternetRule": {
+        "publicNetworkRule": {
           "$ref": "#/definitions/PublicInternetAuthorizationRule"
         }
       }
@@ -3159,6 +3162,18 @@
             "$ref": "#/definitions/AccessRights"
           }
         }
+      }
+    },
+    "PublicNetworkAccess": {
+      "description": "Type of public network access.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
       }
     },
     "RegistrationResult": {
