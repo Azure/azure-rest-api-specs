@@ -1114,6 +1114,69 @@
       },
       "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
     },
+    "VMApplicationProxyResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMGalleryApplication",
+          "description": "The properties of a Gallery Application Version"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The entity representing a Gallery Application Version assigned with a VM or VMSS"
+    },
+    "VMApplicationProxyResourceWithInstanceView": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMGalleryApplicationWithInstanceView",
+          "description": "The properties of a Gallery Application Version",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The entity representing a Gallery Application Version assigned with a VM or VMSS"
+    },
+    "VMGalleryApplicationWithInstanceView": {
+      "type": "object",
+      "properties": {
+        "instanceView": {
+          "$ref": "#/definitions/VMGalleryApplicationInstanceView",
+          "description": "The instance view of Gallery Application Version assigned to the VM or VMSS",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/VMGalleryApplication"
+        }
+      ],
+      "description": "The entity representing a Gallery Application Version assigned with a VM or VMSS with instance view"
+    },
+    "VirtualMachineApplicationsProxyResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMApplicationProxyResource"
+          },
+          "x-ms-identifiers": [
+            "packageReferenceId"
+          ],
+          "description": "The list of extensions"
+        }
+      },
+      "description": "The List Extension operation response"
+    },
     "VMGalleryApplication": {
       "type": "object",
       "properties": {
@@ -1147,6 +1210,49 @@
         "packageReferenceId"
       ],
       "description": "Specifies the required information to reference a compute gallery application version"
+    },
+    "VMGalleryApplicationInstanceView": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The application name",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The application version",
+          "readOnly": true
+        },
+        "result": {
+          "type": "string",
+          "description": "The current status of the application",
+          "readOnly": true
+        },
+        "actionsPerformed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMGalleryApplicationInstanceViewAction"
+          },
+          "x-ms-identifiers": [],
+          "description": "actions performed on the application"
+        }
+      }
+    },
+    "VMGalleryApplicationInstanceViewAction": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The action performed",
+          "readOnly": true
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the operation",
+          "readOnly": true
+        }
+      }
     },
     "ApplicationProfile": {
       "type": "object",
