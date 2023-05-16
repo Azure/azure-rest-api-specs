@@ -548,6 +548,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/zoneRedundant/usages": {
+      "get": {
+        "summary": "Gets zone Redundant subscription core usages for location.",
+        "description": "Gets the usage in cores for a subscription in a given location, with zone redundance.",
+        "operationId": "GetUsagesInLocation",
+        "parameters": [
+          {
+            "name": "location",
+            "description": "The location for which to check ZR usages",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CsmUsageQuotaCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get usages in location for subscription": {
+            "$ref": "./examples/GetZoneRedundantUsagesInLocation.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/verifyHostingEnvironmentVnet": {
       "post": {
         "summary": "Verifies if this VNET is compatible with an App Service Environment by analyzing the Network Security Group rules.",
