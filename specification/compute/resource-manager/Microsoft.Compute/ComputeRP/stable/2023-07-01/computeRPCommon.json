@@ -1918,6 +1918,7 @@
       "properties": {
         "attachDataDisks": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/AttachDataDisk"
           },
@@ -1925,6 +1926,7 @@
         },
         "detachDataDisks": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/DetachDataDisk"
           },
@@ -1969,7 +1971,7 @@
         },
         "detachOption": {
           "$ref": "#/definitions/DetachOption",
-          "description": "Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values: **ForceDetach**. <br><br> detachOption: **ForceDetach**. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. <br><br> This feature is still in preview mode and is not supported for VirtualMachineScaleSet."
+          "description": "Supported options available for Detach of a disk from a VM. Refer to DetachOption object reference for more details"
         }
       },
       "required": [
@@ -1983,11 +1985,6 @@
           "type": "string",
           "readOnly": true,
           "description": "ID of the managed data disk."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the extension."
         },
         "lun": {
           "type": "integer",
