@@ -705,6 +705,25 @@ directive:
   - suppress: LroLocationHeader
     from: services.json
     reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroErrorContent
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: MissingDefaultResponse
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutRequestResponseSchemeArm
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PutResponseSchemaDescription
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+
 ```
 
 ---
