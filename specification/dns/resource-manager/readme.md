@@ -66,7 +66,7 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].get
     suppress: ParametersOrder
-    reason: It can introduce a breaking change when updating parameter order, since Dns Zones service has already shipped public versions.
+    reason: This rule demands changing order of the parameters, but we cannot do it. Changing the order would introduce a breaking change, since Dns Zones service has already shipped public versions.
   - where: $.definitions.Zone
     suppress: TopLevelResourcesListBySubscription
     reason: List by subscription is included in the Zones_List operation.
@@ -94,7 +94,7 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: This is just a Get operation and not a List operation.
   - code: AvoidAdditionalProperties
-    reason: It can introduce a breaking change when updating parameter order, since Dns Zones service has already shipped public versions.
+    reason: This rule demands removing additional properties, but we cannot do it. Removing additional properties would introduce a breaking change, since Dns Zones service has already shipped public versions.
 ```
 
 ### Tag: package-2018-05
