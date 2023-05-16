@@ -1732,6 +1732,14 @@
         "osImageNotificationProfile": {
           "$ref": "#/definitions/OSImageNotificationProfile",
           "description": "Specifies OS Image Scheduled Event related configurations."
+        },
+		"redeployNotificationProfile": {
+          "$ref": "#/definitions/RedeployNotificationProfile",
+          "description": "Specifies Redeply Scheduled Event related configurations."
+        },
+		"rebootNotificationProfile": {
+          "$ref": "#/definitions/RebootNotificationProfile",
+          "description": "Specifies Reboot Scheduled Event related configurations."
         }
       }
     },
@@ -1758,6 +1766,32 @@
         "enable": {
           "type": "boolean",
           "description": "Specifies whether the OS Image Scheduled event is enabled or disabled."
+        }
+      }
+    },
+	"RedeployNotificationProfile": {
+      "type": "object",
+      "properties": {
+        "notBeforeTimeout": {
+          "type": "string",
+          "description": "Length of time a Virtual Machine being redeployed will have to potentially approve the redeploy Scheduled Event before the event is auto approved (timed out). The configuration is specified in ISO 8601 format, and the value must be 15 minutes (PT15M)"
+        },
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies whether the Redeploy Scheduled event is enabled or disabled."
+        }
+      }
+    },
+	"RebootNotificationProfile": {
+      "type": "object",
+      "properties": {
+        "notBeforeTimeout": {
+          "type": "string",
+          "description": "Length of time a Virtual Machine being rebooted will have to potentially approve the reboot Scheduled Event before the event is auto approved (timed out). The configuration is specified in ISO 8601 format, and the value must be 15 minutes (PT15M)"
+        },
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies whether the Reboot Scheduled event is enabled or disabled."
         }
       }
     },
