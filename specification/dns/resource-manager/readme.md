@@ -41,7 +41,7 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}"]
     suppress: PathForNestedResource
-    reason: Dns Zones API design.
+    reason: DNS Zones API design.
   - where:
       - $.definitions.RecordSetProperties.properties.TTL
       - $.definitions.RecordSetProperties.properties.ARecords
@@ -59,14 +59,14 @@ directive:
       - $.definitions.RecordSetUpdateParameters.properties.RecordSet
     suppress:
       - DefinitionsPropertiesNamesCamelCase
-    reason: Dns Zones API design. We cannot update this since Dns Zones service has already shipped public versions.
+    reason: DNS Zones API design. We cannot update this since DNS Zones service has already shipped public versions.
   - where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].patch
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}"].get
     suppress: ParametersOrder
-    reason: This rule demands changing order of the parameters, but we cannot do it. Changing the order would introduce a breaking change, since Dns Zones service has already shipped public versions.
+    reason: This rule demands changing order of the parameters, but we cannot do it. Changing the order would introduce a breaking change, since DNS Zones service has already shipped public versions.
   - where: $.definitions.Zone
     suppress: TopLevelResourcesListBySubscription
     reason: List by subscription is included in the Zones_List operation.
@@ -79,9 +79,9 @@ directive:
   - suppress: ResourceNameRestriction
     reason: We already have naming validation at service end.
   - suppress: ResourceMustReferenceCommonTypes
-    reason: 'We have already defined Resource which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since Dns Zones service has already shipped public versions'
+    reason: 'We have already defined Resource which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since DNS Zones service has already shipped public versions'
   - suppress: LroErrorContent
-    reason: 'We have already defined CloudError which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since Dns Zones service has already shipped public versions'
+    reason: 'We have already defined CloudError which has exactly same json structure. Not referencing from common-types here to avoid breaking change, since DNS Zones service has already shipped public versions'
 
 suppressions:
   - code: XmsLongRunningOperationOptions
@@ -94,7 +94,7 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: This is just a Get operation and not a List operation.
   - code: AvoidAdditionalProperties
-    reason: This rule demands removing additional properties, but we cannot do it. Removing additional properties would introduce a breaking change, since Dns Zones service has already shipped public versions.
+    reason: This rule demands removing additional properties, but we cannot do it. Removing additional properties would introduce a breaking change, since DNS Zones service has already shipped public versions.
 ```
 
 ### Tag: package-2018-05
