@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Communication Services Management API",
-    "version": "2023-03-31",
+    "version": "2023-04-01-preview",
     "description": "REST API for Azure Communication Services"
   },
   "consumes": [
@@ -319,6 +319,9 @@
         "x-ms-examples": {
           "Update resource": {
             "$ref": "./examples/communicationServices/update.json"
+          },
+          "Update resource to remove identity": {
+            "$ref": "./examples/communicationServices/updateRemoveSystemIdentity.json"
           }
         }
       },
@@ -669,6 +672,9 @@
           "$ref": "#/definitions/CommunicationServiceProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -820,6 +826,9 @@
           "$ref": "#/definitions/CommunicationServiceUpdateProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     }
