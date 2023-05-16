@@ -8761,6 +8761,84 @@
         "productId"
       ],
       "description": "Tag-product link entity properties."
+    },
+    "GatewayListDebugCredentialsContract": {
+      "type": "object",
+      "properties": {
+        "credentialsExpireAfter": {
+          "type": "string",
+          "format": "duration",
+          "description": "Credentials expiration in ISO8601 format. Maximum duration of the credentials is PT1H. When property is not specified, them value PT1H is used."
+        },
+        "purposes": {
+          "type": "array",
+          "description": "Purposes of debug credential.",
+          "items": {
+            "type": "string",
+            "description": "Purpose of debug credential.",
+            "enum": [
+              "tracing"
+            ],
+            "x-ms-enum": {
+              "name": "GatewayListDebugCredentialsContractPurpose",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "tracing",
+                  "description": "The tracing purpose."
+                }
+              ]
+            }
+          }
+        },
+        "apiId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/apis"
+              },
+              {
+                "type": "Microsoft.ApiManagement/service/workspaces/apis"
+              }
+            ]
+          },
+          "description": "Full resource Id of an API."
+        }
+      },
+      "required": [
+        "purposes",
+        "apiId"
+      ],
+      "description": "List debug credentials properties."
+    },
+    "GatewayDebugCredentialsContract": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Gateway debug token."
+        }
+      },
+      "description": "Gateway debug credentials."
+    },
+    "GatewayListTraceContract": {
+      "type": "object",
+      "properties": {
+        "traceId": {
+          "type": "string",
+          "description": "Trace id."
+        }
+      },
+      "description": "List trace properties."
+    },
+    "GatewayTraceContract": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true,
+      "description": "Trace collected in gateway."
     }
   },
   "parameters": {}

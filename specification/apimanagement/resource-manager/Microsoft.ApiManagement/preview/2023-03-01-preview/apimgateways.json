@@ -1318,6 +1318,154 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/invalidateDebugCredentials": {
+      "post": {
+        "tags": [
+          "GatewayInvalidateDebugCredentials"
+        ],
+        "operationId": "Gateway_InvalidateDebugCredentials",
+        "description": "Action is invalidating all debug credentials issued for gateway.",
+        "x-ms-examples": {
+          "ApiManagementGatewayInvalidateDebugCredentials": {
+            "$ref": "./examples/ApiManagementGatewayInvalidateDebugCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "All debug credentials for gateway are now invalidated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/listDebugCredentials": {
+      "post": {
+        "tags": [
+          "GatewayListDebugCredentials"
+        ],
+        "operationId": "Gateway_ListDebugCredentials",
+        "description": "Create new debug credentials for gateway.",
+        "x-ms-examples": {
+          "ApiManagementGatewayListDebugCredentials": {
+            "$ref": "./examples/ApiManagementGatewayListDebugCredentials.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayListDebugCredentialsContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains debug credentials to use in gateway.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayDebugCredentialsContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/listTrace": {
+      "post": {
+        "tags": [
+          "GatewayListTrace"
+        ],
+        "operationId": "Gateway_ListTrace",
+        "description": "Fetches trace collected by gateway.",
+        "x-ms-examples": {
+          "ApiManagementGatewayListTrace": {
+            "$ref": "./examples/ApiManagementGatewayListTrace.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayListTraceContract"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains trace collected by gateway.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayTraceContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},
