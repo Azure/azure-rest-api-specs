@@ -385,6 +385,11 @@ input-file:
 - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ### Tag: package-dotnet-sdk
 
 These settings apply only when `--tag=package-dotnet-sdk` is specified on the command line.
@@ -437,11 +442,6 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
 
 # Needed when there is more than one input file
 override-info:
