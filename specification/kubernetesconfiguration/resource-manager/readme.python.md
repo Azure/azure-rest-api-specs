@@ -24,6 +24,7 @@ default-api-version: "2023-05-01"
 clear-output-folder: true
 batch: 
   - tag: package-2023-05
+  - tag: package-preview-2023-05-only
   - tag: package-2022-11
   - tag: package-2022-07
   - tag: package-preview-2022-04-only
@@ -52,6 +53,15 @@ These settings apply only when `--tag=package-2023-05 --python` is specified on 
 ``` yaml $(tag) == 'package-2023-05'
 namespace: azure.mgmt.kubernetesconfiguration.v2023_05_01
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2023_05_01
+```
+
+### Tag: package-preview-2023-05-only and python
+
+These settings apply only when `--tag=package-preview-2023-05-only --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-05-only'
+namespace: azure.mgmt.kubernetesconfiguration.v2023_05_01_preview
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2023_05_01_preview
 ```
 
 ### Tag: package-2022-11 and python
