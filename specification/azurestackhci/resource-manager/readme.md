@@ -48,6 +48,7 @@ directive:
       - storageContainers.json
       - virtualHardDisks.json
       - virtualMachines.json
+      - virtualMachineInstances.json
       - virtualNetworks.json
       - offers.json
       - publishers.json
@@ -58,6 +59,20 @@ directive:
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
+### Tag: package-preview-2023-07-01
+
+These settings apply only when `--tag=package-preview-2023-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07-01'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualMachineInstances.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/virtualNetworks.json
+```
 
 ### Tag: package-2023-03
 
