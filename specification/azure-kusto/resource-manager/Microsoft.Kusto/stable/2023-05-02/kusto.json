@@ -1214,21 +1214,21 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "$top",
             "description": "limit the number of results",
             "in": "query",
             "required": false,
             "type": "integer",
             "format": "int32",
-            "minimum": 1,
+            "minimum": 5,
             "maximum": 1000
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3804,6 +3804,7 @@
   },
   "definitions": {
     "ClusterProperties": {
+      "type": "object",
       "properties": {
         "state": {
           "type": "string",
@@ -3998,6 +3999,7 @@
       "description": "Class representing the Kusto cluster properties."
     },
     "MigrationClusterProperties": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -4031,6 +4033,7 @@
       "description": "Represents a properties of a cluster that is part of a migration."
     },
     "TrustedExternalTenant": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -4040,6 +4043,7 @@
       "description": "Represents a tenant ID that is trusted by the cluster."
     },
     "AzureResourceSku": {
+      "type": "object",
       "properties": {
         "resourceType": {
           "type": "string",
@@ -4372,6 +4376,7 @@
       "description": "A class that contains database statistics information."
     },
     "AttachedDatabaseConfigurationProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4429,6 +4434,7 @@
       ]
     },
     "ReadWriteDatabaseProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4470,6 +4476,7 @@
       "description": "Class representing the Kusto database properties."
     },
     "ReadOnlyFollowingDatabaseProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -4540,6 +4547,7 @@
       "description": "Class representing the Kusto database properties."
     },
     "EventHubConnectionProperties": {
+      "type": "object",
       "properties": {
         "eventHubResourceId": {
           "type": "string",
@@ -4612,6 +4620,7 @@
       "description": "Class representing the Kusto event hub connection properties."
     },
     "IotHubConnectionProperties": {
+      "type": "object",
       "properties": {
         "iotHubResourceId": {
           "type": "string",
@@ -4779,6 +4788,7 @@
       "default": "None"
     },
     "EventGridConnectionProperties": {
+      "type": "object",
       "properties": {
         "storageAccountResourceId": {
           "type": "string",
@@ -4904,6 +4914,7 @@
       "description": "Class representing the Kusto CosmosDb data connection properties."
     },
     "Cluster": {
+      "type": "object",
       "required": [
         "sku"
       ],
@@ -4943,6 +4954,7 @@
       "description": "Class representing a Kusto cluster."
     },
     "ClusterUpdate": {
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -4982,6 +4994,7 @@
       "description": "Class representing an update to a Kusto cluster."
     },
     "AttachedDatabaseConfigurationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4994,6 +5007,7 @@
       "description": "The list attached database configurations operation response."
     },
     "AttachedDatabaseConfiguration": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -5013,6 +5027,7 @@
       "description": "Class representing an attached database configuration."
     },
     "Database": {
+      "type": "object",
       "required": [
         "kind"
       ],
@@ -5043,6 +5058,7 @@
       "discriminator": "kind"
     },
     "ReadWriteDatabase": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5059,6 +5075,7 @@
       "x-ms-discriminator-value": "ReadWrite"
     },
     "ReadOnlyFollowingDatabase": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5339,6 +5356,7 @@
       "description": "A class representing the properties of a managed private endpoint object."
     },
     "DatabasePrincipalAssignment": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5354,6 +5372,7 @@
       "description": "Class representing a database principal assignment."
     },
     "ClusterPrincipalAssignment": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5369,6 +5388,7 @@
       "description": "Class representing a cluster principal assignment."
     },
     "ScriptListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5381,6 +5401,7 @@
       "description": "The list Kusto database script operation response."
     },
     "Script": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5676,6 +5697,7 @@
       }
     },
     "ClusterListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5688,7 +5710,12 @@
       "description": "The list Kusto clusters operation response."
     },
     "DatabaseListResult": {
+      "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "Link to the next page of results",
+          "type": "string"
+        },
         "value": {
           "type": "array",
           "items": {
@@ -5700,6 +5727,7 @@
       "description": "The list Kusto databases operation response."
     },
     "DatabasePrincipalAssignmentListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5712,6 +5740,7 @@
       "description": "The list Kusto database principal assignments operation response."
     },
     "ClusterPrincipalAssignmentListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5724,6 +5753,7 @@
       "description": "The list Kusto cluster principal assignments operation response."
     },
     "DatabasePrincipalListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5736,6 +5766,7 @@
       "description": "The list Kusto database principals operation response."
     },
     "FollowerDatabaseListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5748,6 +5779,7 @@
       "description": "The list Kusto database principals operation response."
     },
     "DataConnection": {
+      "type": "object",
       "required": [
         "kind"
       ],
@@ -5790,6 +5822,7 @@
       "description": "The result returned from a data connection validation request."
     },
     "DatabasePrincipalListRequest": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5834,6 +5867,7 @@
       "description": "A class representing follower database request."
     },
     "DiagnoseVirtualNetworkResult": {
+      "type": "object",
       "properties": {
         "findings": {
           "type": "array",
@@ -5845,6 +5879,7 @@
       }
     },
     "DataConnectionValidation": {
+      "type": "object",
       "properties": {
         "dataConnectionName": {
           "type": "string",
@@ -5858,6 +5893,7 @@
       "description": "Class representing an data connection validation."
     },
     "EventHubDataConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5874,6 +5910,7 @@
       "x-ms-discriminator-value": "EventHub"
     },
     "IotHubDataConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5890,6 +5927,7 @@
       "x-ms-discriminator-value": "IotHub"
     },
     "EventGridDataConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -5935,6 +5973,7 @@
       "description": "The list Kusto data connection validation result."
     },
     "DataConnectionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -5947,6 +5986,7 @@
       "description": "The list Kusto data connections operation response."
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -6242,6 +6282,7 @@
       }
     },
     "CloudErrorBody": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "code": {
@@ -6267,6 +6308,7 @@
       "description": "An error response from Kusto."
     },
     "OperationListResult": {
+      "type": "object",
       "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
       "properties": {
         "value": {
@@ -6292,6 +6334,7 @@
           "type": "string"
         },
         "display": {
+          "type": "object",
           "title": "The object that describes the operation.",
           "properties": {
             "provider": {
@@ -6325,6 +6368,7 @@
       }
     },
     "Identity": {
+      "type": "object",
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -6376,6 +6420,7 @@
       "description": "Identity for the resource."
     },
     "KeyVaultProperties": {
+      "type": "object",
       "description": "Properties of the key vault.",
       "properties": {
         "keyName": {
@@ -6402,6 +6447,7 @@
     },
     "SuspensionDetails": {
       "description": "The database suspension details. If the database is suspended, this object contains information related to the database's suspension state.",
+      "type": "object",
       "properties": {
         "suspensionStartDate": {
           "description": "The starting date and time of the suspension state.",
@@ -6450,6 +6496,7 @@
       }
     },
     "LanguageExtensionsList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -6542,6 +6589,7 @@
       }
     },
     "OperationResultProperties": {
+      "type": "object",
       "properties": {
         "operationKind": {
           "type": "string",
@@ -6560,6 +6608,7 @@
       "description": "Operation result properties"
     },
     "OperationResultErrorProperties": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -6573,6 +6622,7 @@
       "description": "Operation result error properties"
     },
     "TableLevelSharingProperties": {
+      "type": "object",
       "properties": {
         "tablesToInclude": {
           "type": "array",
