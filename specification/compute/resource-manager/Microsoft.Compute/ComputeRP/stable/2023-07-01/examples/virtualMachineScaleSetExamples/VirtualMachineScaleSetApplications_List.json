@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVMSS",
+    "api-version": "2023-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "golang_linux",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS/Applications/golang_linux",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/Applications",
+            "properties": {
+              "packageReferenceId": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/bhbrahma_testing/providers/Microsoft.Compute/galleries/gallery1/applications/golang_linux/versions/1.20.1",
+              "treatFailureAsDeploymentFailure": false,
+              "enableAutomaticUpgrade": false
+            }
+          },
+          {
+            "name": "powershell7-linux",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS/Applications/powershell7-linux",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/Applications",
+            "properties": {
+              "packageReferenceId": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/bhbrahma_testing/providers/Microsoft.Compute/galleries/gallery1/applications/powershell7-linux/versions/7.3.2",
+              "treatFailureAsDeploymentFailure": false
+            }
+          },
+          {
+            "name": "badapp_linux",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMSS/Applications/badapp_linux",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/Applications",
+            "properties": {
+              "packageReferenceId": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/bhbrahma_testing/providers/Microsoft.Compute/galleries/gallery1/applications/badapp_linux/versions/1.0.0",
+              "treatFailureAsDeploymentFailure": true,
+              "enableAutomaticUpgrade": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

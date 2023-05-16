@@ -1027,6 +1027,249 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/applications": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetApplications"
+        ],
+        "operationId": "VirtualMachineScaleSetApplications_List",
+        "description": "Gets a list of all applications in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VirtualMachineApplicationsProxyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineApplications_List": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetApplications_List.json"
+          },
+          "VirtualMachineApplications_ListMinimalSet": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetApplications_ListMinimalSet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/applications/{applicationName}": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetApplications"
+        ],
+        "operationId": "VirtualMachineScaleSetApplications_Get",
+        "description": "Gets an application in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to query."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMApplicationProxyResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineApplication_Get": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetApplications_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineScaleSetApplications"
+        ],
+        "operationId": "VirtualMachineScaleSetApplications_Delete",
+        "description": "Removes an application from a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to query."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSetApplication_Delete": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetApplications_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualMachineScaleSetApplications"
+        ],
+        "operationId": "VirtualMachineScaleSetApplications_Put",
+        "description": "Adds an application to a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to query."
+          },
+          {
+            "name": "application",
+            "in": "body",
+            "required": true,
+            "description": "The definition of the VMApplication to add the virtual machine",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMApplicationProxyResource"
+            }
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMApplicationProxyResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMApplicationProxyResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachineScaleSetApplication_Put": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetApplications_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets": {
       "get": {
         "tags": [
@@ -3486,6 +3729,151 @@
         "x-ms-examples": {
           "Simulate Eviction a virtual machine.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVM_SimulateEviction.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetApplications"
+        ],
+        "operationId": "VirtualMachineScaleSetVirtualMachineApplications_Get",
+        "description": "Gets an application in a VM scale set instance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to query."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationInstanceView",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMApplicationProxyResourceWithInstanceView"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSetVirtualMachineApplication_Get": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVirtualMachinesApplications_Get.json"
+          },
+          "VirtualMachineScaleSetVirtualMachineApplication_GetWithInstanceView": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVirtualMachinesApplications_GetWithInstanceView.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}/instanceView": {
+      "get": {
+        "tags": [
+          "VirtualMachineScaleSetApplications"
+        ],
+        "operationId": "VirtualMachineScaleSetVirtualMachineApplications_GetInstanceView",
+        "description": "Gets an application in a VM scale set instance with instanceView.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set containing the extension."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application to query."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VMApplicationProxyResourceWithInstanceView"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSetVirtualMachineApplication_GetWithInstanceView": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetVirtualMachinesApplications_GetWithInstanceView.json"
           }
         }
       }
