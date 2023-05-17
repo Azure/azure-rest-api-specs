@@ -181,6 +181,10 @@
             "$ref": "./examples/UpdateVirtualMachine.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -212,12 +216,6 @@
           },
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachines"
-            }
-          },
-          "201": {
-            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachines"
             }
@@ -784,8 +782,8 @@
               "$ref": "#/definitions/MachineExtension"
             }
           },
-          "201": {
-            "description": "Created",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/MachineExtension"
             }
