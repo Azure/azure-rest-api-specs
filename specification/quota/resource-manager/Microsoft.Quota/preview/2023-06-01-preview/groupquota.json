@@ -717,7 +717,7 @@
           "200": {
             "description": "Request status details.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+              "$ref": "#/definitions/SubscriptionQuotaLimit"
             }
           },
           "202": {
@@ -744,7 +744,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -795,7 +795,7 @@
           "200": {
             "description": "Request status details.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+              "$ref": "#/definitions/SubscriptionQuotaLimit"
             }
           },
           "202": {
@@ -822,7 +822,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1295,6 +1295,11 @@
           "items": {
             "$ref": "#/definitions/SubscriptionQuotaLimit"
           }
+        },
+        "@nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1349,6 +1354,11 @@
           "items": {
             "$ref": "#/definitions/SubscriptionQuotaLimit"
           }
+        },
+        "@nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1448,6 +1458,11 @@
           "items": {
             "$ref": "#/definitions/SharedQuotaEntity"
           }
+        },
+        "@nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
