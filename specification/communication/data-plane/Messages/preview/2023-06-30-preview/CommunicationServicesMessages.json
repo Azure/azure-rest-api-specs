@@ -1,0 +1,256 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "CommunicationMessagesClient",
+      "description": "Azure Communication Messages Service",
+      "version": "2023-06-30-preview"
+    },
+    "paths": {
+      "/messages/channel/{channelId}/templates": {
+        "get": {
+          "tags": [
+            "Template"
+          ],
+          "summary": "List all templates for given ACS resource",
+          "operationId": "TemplateV2_List",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "channelId",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK - Returns the list of waTemplatesInternal.",
+              "schema": {
+                "$ref": "#/definitions/ListTemplatesResponse"
+              }
+            },
+            "default": {
+              "description": "Communication Error Response",
+              "schema": {
+                "$ref": "#/definitions/CommunicationErrorResponse"
+              },
+              "x-ms-error-response": true
+            }
+          }
+        }
+      },
+      "/messages/channel/{channelId}/template/{templateId}": {
+        "get": {
+          "tags": [
+            "Template"
+          ],
+          "summary": "Get the template given its templateId",
+          "operationId": "TemplateV2_Get",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "channelId",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "in": "path",
+              "name": "templateId",
+              "description": "The template's ID",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK - Returns the requested template.",
+              "schema": {
+                "$ref": "#/definitions/WhatsAppTemplateResponse"
+              }
+            },
+            "404": {
+              "description": "NotFound - The template could not be found",
+              "schema": {
+                "$ref": "#/definitions/CommunicationErrorResponse"
+              }
+            },
+            "default": {
+              "description": "Communication Error Response",
+              "schema": {
+                "$ref": "#/definitions/CommunicationErrorResponse"
+              },
+              "x-ms-error-response": true
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "ChannelType": {
+        "enum": [
+          "whatsApp"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelType",
+          "modelAsString": true
+        }
+      },
+      "CommunicationError": {
+        "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+      },
+      "CommunicationErrorResponse": {
+        "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+      },
+      "ListTemplatesResponse": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TemplateResponse"
+            }
+          },
+          "maxItems": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "@nextLink": {
+            "type": "string"
+          }
+        }
+      },
+      "TemplateResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "description": "Get the Template's Id",
+            "type": "string"
+          },
+          "channelId": {
+            "format": "uuid",
+            "description": "Get the template's associated channels\r\nSupports only a single Channel.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Get the template's Name",
+            "type": "string"
+          },
+          "language": {
+            "description": "Get the template's language",
+            "type": "string"
+          },
+          "channelType": {
+            "$ref": "#/definitions/ChannelType"
+          },
+          "status": {
+            "$ref": "#/definitions/TemplateStatus"
+          }
+        }
+      },
+      "TemplateStatus": {
+        "enum": [
+          "active",
+          "inactive"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TemplateStatus",
+          "modelAsString": true
+        }
+      },
+      "WhatsAppTemplateResponse": {
+        "description": "The WhatsApp-specific template response contract",
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "description": "WhatsApp platform's template id",
+            "type": "string"
+          },
+          "content": {
+            "description": "WhatsApp platform's template content\r\nThis is the payload returned from WhatsApp API."
+          },
+          "whatsAppStatus": {
+            "description": "WhatsApp platform's template status",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "description": "Get the Template's Id",
+            "type": "string"
+          },
+          "channelId": {
+            "format": "uuid",
+            "description": "Get the template's associated channels\r\nSupports only a single Channel.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Get the template's Name",
+            "type": "string"
+          },
+          "language": {
+            "description": "Get the template's language",
+            "type": "string"
+          },
+          "channelType": {
+            "$ref": "#/definitions/ChannelType"
+          },
+          "status": {
+            "$ref": "#/definitions/TemplateStatus"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "ApiVersionParameter": {
+        "in": "query",
+        "name": "api-version",
+        "description": "Version of API to invoke.",
+        "required": true,
+        "type": "string"
+      }
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "x-ms-parameterized-host": {
+      "hostTemplate": "{endpoint}",
+      "useSchemePrefix": false,
+      "parameters": [
+        {
+          "name": "endpoint",
+          "description": "The communication resource, for example https://my-resource.communication.azure.com",
+          "required": true,
+          "type": "string",
+          "in": "path",
+          "x-ms-skip-url-encoding": true,
+          "x-ms-parameter-location": "client"
+        }
+      ]
+    }
+  }
