@@ -1,3 +1,19 @@
+trigger:
+  branches:
+    include:
+    - main
+
+pr:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - package.json
+    - package-lock.json
+    - eng/pipelines/typespec-ci.yml
+    - eng/pipelines/templates/specs/typespec-ci.yml
+
 jobs:
 - job: TypeSpecCI
   pool:
@@ -25,18 +41,8 @@ jobs:
 
   - template: templates/steps/typespec-ci.yml
     parameters:
-      Folder: specification/cognitiveservices/HealthInsights/healthinsights.oncophenotype
-      DisplayName: healthinsights.oncophenotype
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
       Folder: specification/cognitiveservices/HealthInsights/healthinsights.openapi
       DisplayName: healthinsights.openapi
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/HealthInsights/healthinsights.trialmatcher
-      DisplayName: healthinsights.trialmatcher
 
   - template: templates/steps/typespec-ci.yml
     parameters:
