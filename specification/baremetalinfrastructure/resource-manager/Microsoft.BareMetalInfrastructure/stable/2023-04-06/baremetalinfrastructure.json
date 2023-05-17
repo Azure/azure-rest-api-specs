@@ -198,6 +198,81 @@
           }
         }
       },
+      "delete": {
+        "tags": [
+          "BareMetalInfrastructure"
+        ],
+        "operationId": "AzureBareMetalInstances_Delete",
+        "summary":"Deletes an Azure BareMetal instance.",
+        "description": "Deletes an Azure BareMetal instance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "501": {
+            "description": "This action must be performed through our operations team."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BareMetalInfrastructure"
+        ],
+        "operationId": "AzureBareMetalInstances_Put",
+        "summary":"Adds an Azure BareMetal Instance.",
+        "description": "Adds an Azure BareMetal instance for the specified subscription, resource group, and instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureBareMetalInstanceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "requestBodyParameters",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AzureBareMetalInstance"
+            },
+            "description": "request body for put call"
+          }
+        ],
+        "responses": {
+          "501": {
+            "description": "This action must be performed through our operations team."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "BareMetalInfrastructure"
