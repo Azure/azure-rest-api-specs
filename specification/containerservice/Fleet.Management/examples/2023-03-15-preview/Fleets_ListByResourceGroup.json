@@ -1,17 +1,18 @@
 {
-  "operationId": "Fleets_ListBySubscription",
-  "title": "Lists the Fleet resources in a subscription.",
+  "operationId": "Fleets_ListByResourceGroup",
+  "title": "Lists the Fleet resources in a resource group.",
   "parameters": {
-    "api-version": "2022-09-02-preview",
-    "subscriptionId": "subid1"
+    "api-version": "2023-03-15-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1",
-            "name": "fleet-1",
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1",
+            "name": "fleet1",
             "type": "Microsoft.ContainerService/fleets",
             "systemData": {
               "createdBy": "someUser",

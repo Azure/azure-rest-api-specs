@@ -1,11 +1,18 @@
 {
-  "operationId": "Fleets_Get",
-  "title": "Gets a Fleet resource.",
+  "operationId": "Fleets_Update",
+  "title": "Update a Fleet.",
   "parameters": {
-    "api-version": "2022-09-02-preview",
+    "api-version": "2023-03-15-preview",
     "subscriptionId": "subid1",
     "resourceGroupName": "rg1",
-    "fleetName": "fleet1"
+    "fleetName": "fleet1",
+    "If-Match": "dfjkwelr7384",
+    "properties": {
+      "tags": {
+        "tier": "secure",
+        "env": "prod"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -25,8 +32,8 @@
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
         },
         "tags": {
-          "tier": "production",
-          "archv2": ""
+          "tier": "secure",
+          "env": "prod"
         },
         "location": "East US",
         "eTag": "23ujdflewrj3=",
