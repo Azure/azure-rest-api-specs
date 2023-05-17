@@ -36,9 +36,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrPreBackup": {
       "post": {
-        "description": "PreBackup operation performs all the checks that are need for the subsequent Backup to succeed.",
+        "description": "PreBackup operation performs all the checks that are needed for the subsequent long term retention backup operation to succeed.",
         "tags": [
-          "LongTermRetention"
+          "LongTermRetentionBackup"
         ],
         "operationId": "FlexibleServer_TriggerLtrPreBackup",
         "produces": [
@@ -112,13 +112,13 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startLtrBackup": {
       "post": {
         "description": "Start the Long Term Retention Backup operation",
         "tags": [
-          "LongTermRetention"
+          "LongTermRetentionBackup"
         ],
-        "operationId": "FlexibleServer_TakeLtrBackup",
+        "operationId": "FlexibleServer_StartLtrBackup",
         "produces": [
           "application/json"
         ],
@@ -218,7 +218,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations/{backupName}": {
       "get": {
         "tags": [
-          "LongTermRetention"
+          "LongTermRetentionBackup"
         ],
         "operationId": "ltrBackupOperations_Get",
         "x-ms-examples": {
@@ -226,7 +226,7 @@
             "$ref": "./examples/LongTermRetentionOperationGet.json"
           }
         },
-        "description": "Gets the result of the give LTR backup for the server.",
+        "description": "Gets the result of the give long term retention backup operation for the flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -263,7 +263,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/ltrBackupOperations": {
       "get": {
         "tags": [
-          "LongTermRetention"
+          "LongTermRetentionBackup"
         ],
         "operationId": "ltrBackupOperations_ListByServer",
         "x-ms-examples": {
@@ -271,7 +271,7 @@
             "$ref": "./examples/LongTermRetentionOperationListByServer.json"
           }
         },
-        "description": "Gets the result of the give LTR backup for the server.",
+        "description": "Gets the result of the give long term retention backup operations for the flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
