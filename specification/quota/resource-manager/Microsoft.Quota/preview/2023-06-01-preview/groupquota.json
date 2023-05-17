@@ -138,8 +138,8 @@
               "$ref": "#/definitions/SharedQuotaEntity"
             }
           },
-          "202": {
-            "description": "Request Accepted",
+          "201": {
+            "description": "Request Created",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -327,8 +327,8 @@
               "$ref": "#/definitions/GroupQuotaLimit"
             }
           },
-          "202": {
-            "description": "Request Accepted",
+          "201": {
+            "description": "Request Created",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -401,8 +401,8 @@
               "$ref": "#/definitions/GroupQuotaLimit"
             }
           },
-          "202": {
-            "description": "Request Accepted",
+          "201": {
+            "description": "Request Created",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -720,8 +720,8 @@
               "$ref": "#/definitions/SubscriptionQuotaLimit"
             }
           },
-          "202": {
-            "description": "Request Accepted",
+          "201": {
+            "description": "Request Created",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -798,8 +798,8 @@
               "$ref": "#/definitions/SubscriptionQuotaLimit"
             }
           },
-          "202": {
-            "description": "Request Accepted",
+          "201": {
+            "description": "Request Created",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -1040,6 +1040,7 @@
       "description": "Request status.",
       "enum": [
         "Accepted",
+        "Created",
         "Invalid",
         "Succeeded",
         "Failed",
@@ -1180,6 +1181,11 @@
           "items": {
             "$ref": "#/definitions/GroupQuotaLimit"
           }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1222,6 +1228,11 @@
           "items": {
             "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
           }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1396,7 +1407,7 @@
             "$ref": "#/definitions/Filters"
           },
           "provisioningState": {
-            "description": "provisioning state of the operation.",
+            "description": "Provisioning state of the operation.",
             "$ref": "#/definitions/RequestState",
             "readOnly": true
           }
