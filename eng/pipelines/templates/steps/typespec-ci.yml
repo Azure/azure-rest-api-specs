@@ -1,0 +1,33 @@
+parameters:
+- name: Folder
+  type: string
+- name: DisplayName
+  type: string
+
+steps:
+- script: |
+    # Log commands before running
+    set -x
+
+    exit_code=0
+
+    pushd ${{parameters.Folder}}
+    npx tsp compile . || exit_code=1
+    # Format parent folder to include shared files (disabled until formatting diffs are fixed)
+    # npx tsp format ../**/*.tsp
+    popd
+
+    # If any files are added, changed, or deleted, print diff and return error
+    if [ -n "$(git status --porcelain)" ]; then
+      git status
+      git diff
+      exit_code=1
+    fi
+
+    # Revert any changes
+    git restore .
+    git clean -df
+
+    exit $exit_code
+  displayName: ${{parameters.DisplayName}}
+  condition: succeededOrFailed()

@@ -26,7 +26,18 @@ These are the global settings for the communicationservices.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2020-07-20-preview1
+tag: package-phonenumber-2022-12-01
+```
+
+### Tag: package-phonenumber-2022-12-01
+
+These settings apply only when `--tag=package-phonenumber-2022-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-phonenumber-2022-12-01'
+input-file:
+  - stable/2022-12-01/phonenumbers.json
+title:
+  Azure Communication Services
 ```
 
 ### Tag: package-phonenumber-2021-03-07
@@ -64,13 +75,11 @@ title:
 
 ## Supression
 ``` yaml
-directive:
-  - from:
-    - phonenumbers.json
-    suppress:
-    - R2005 #Long running operation status code
-    reason:
-      Approval from Azure review board that Long Running Operations can return 202s.
+suppressions:
+ - code: OperationIdNounVerb
+   from: phonenumbers.json
+   reason: Approval from Azure review board that Long Running Operations can return 202s. Cannot rename operation names without breaking changes.
+
 ```
 
 ---

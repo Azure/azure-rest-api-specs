@@ -636,6 +636,14 @@
           },
           {
             "$ref": "#/parameters/AccessTokenExpirationParameter"
+          },
+          {
+            "name": "ListIngressGatewayCredentialsRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ListIngressGatewayCredentialsRequest"
+            },
+            "description": "Object of type ListIngressGatewayCredentialsRequest"
           }
         ],
         "responses": {
@@ -1040,6 +1048,24 @@
         "serviceName": {
           "type": "string",
           "description": "The name of the service. If not provided, the request will by pass the generation of service configuration token ",
+          "enum": [
+            "SSH",
+            "WAC"
+          ],
+          "x-ms-enum": {
+            "name": "serviceName",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ListIngressGatewayCredentialsRequest": {
+      "type": "object",
+      "description": "Represent ListIngressGatewayCredentials Request object.",
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service.",
           "enum": [
             "SSH",
             "WAC"
