@@ -21,8 +21,8 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
-  - script: npm ci
-    displayName: npm ci
+  - script: npm ci --force
+    displayName: npm ci --force
   
   - template: templates/steps/typespec-ci.yml
     parameters:
