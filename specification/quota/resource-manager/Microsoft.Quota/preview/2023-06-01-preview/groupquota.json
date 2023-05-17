@@ -677,6 +677,7 @@
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
         "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, which means the maximum unused quota assigned back to MG groupQuota will be the groupQuota assigned to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_Create",
+        "x-ms-azure-resource": true,
         "x-ms-examples": {
           "ShareQuotaOrder_Subscription_Allocation_Put_ForCompute": {
             "$ref": "./examples/PutQuotaAllocation-Compute.json"
@@ -738,12 +739,12 @@
             },
             "schema": {
               "$ref": "#/definitions/OperationsStatus"
-            },
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "#/definitions/ErrorContent"
-              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
             }
           }
         }
