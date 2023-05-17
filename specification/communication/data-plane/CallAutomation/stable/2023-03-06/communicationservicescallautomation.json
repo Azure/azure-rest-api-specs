@@ -51,7 +51,7 @@
             }
           },
           "201": {
-            "description": "Returns the create call response.",
+            "description": "Returns details of the call properties once the CreateCall request is recieved by service. You will receive CallConnected event at your specified callback URI, once the call is connected.",
             "schema": {
               "$ref": "#/definitions/CallConnectionProperties"
             }
@@ -100,7 +100,7 @@
             }
           },
           "200": {
-            "description": "Returns the answer call response.",
+            "description": "Returns details of the call properties once the AnswerCall request is recieved by service. You will receive CallConnected event at your specified callback URI, once the call is connected.",
             "schema": {
               "$ref": "#/definitions/CallConnectionProperties"
             }
@@ -149,7 +149,7 @@
             }
           },
           "204": {
-            "description": "Returns the redirect call response."
+            "description": "The service has redirected the call to specified endpoint."
           }
         },
         "x-ms-examples": {
@@ -195,7 +195,7 @@
             }
           },
           "204": {
-            "description": "Returns the reject call response."
+            "description": "The service has rejected the call."
           }
         },
         "x-ms-examples": {
@@ -210,7 +210,7 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Get call connection.",
+        "summary": "Get the detail properties of an ongoing call.",
         "operationId": "CallConnection_GetCall",
         "parameters": [
           {
@@ -232,7 +232,7 @@
             }
           },
           "200": {
-            "description": "Returns the get call response.",
+            "description": "Returns details of the call properties.",
             "schema": {
               "$ref": "#/definitions/CallConnectionProperties"
             }
@@ -248,8 +248,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Hangup the call.",
-        "description": "Hangup the call.",
+        "summary": "Hang up call automation service from the call. This will make call automation service leave the call, but does not terminate if there are more than 1 caller in the call.",
+        "description": "Hang up call automation service from the call. This will make call automation service leave the call, but does not terminate if there are more than 1 caller in the call.",
         "operationId": "CallConnection_HangupCall",
         "parameters": [
           {
@@ -271,7 +271,7 @@
             }
           },
           "204": {
-            "description": "Returns the hangup call response."
+            "description": "Call automation service has left the call."
           }
         },
         "x-ms-examples": {
@@ -315,7 +315,7 @@
             }
           },
           "204": {
-            "description": "Returns the terminate call response."
+            "description": "The call is terminated."
           }
         },
         "x-ms-examples": {
@@ -368,7 +368,7 @@
             }
           },
           "202": {
-            "description": "Returns the transfer call response.",
+            "description": "The service has accepted the transfer request and will begin processing it. You will receive either CallTransferAccepted or CallTransferFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/TransferCallResponse"
             }
@@ -418,7 +418,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the play request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+            "description": "The service has accepted the play request and will begin processing it. You will receive either PlayCompleted or PlayFailed event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
@@ -456,7 +456,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the cancel request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+            "description": "The service has accepted the cancel request and will begin processing it. RecognizeCanceled and/or PlayCanceled at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
           }
         },
         "x-ms-examples": {
@@ -503,7 +503,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+            "description": "The service has accepted the recognize request and will begin processing it. You will receive either RecognizeCompleted or RecognizeFailed event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
@@ -563,8 +563,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Add participants to the call.",
-        "description": "Add participants to the call.",
+        "summary": "Add a participant to the call.",
+        "description": "Add a participant to the call.",
         "operationId": "CallConnection_AddParticipant",
         "parameters": [
           {
@@ -600,7 +600,7 @@
             }
           },
           "202": {
-            "description": "Returns the add participant response.",
+            "description": "The service has accepted the add participant request and will begin processing it. You will receive either AddParticipantSucceeded or AddParticipantFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/AddParticipantResponse"
             }
@@ -618,8 +618,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Remove participant from the call using identifier.",
-        "description": "Remove participant from the call using identifier.",
+        "summary": "Remove a participant from the call using identifier.",
+        "description": "Remove a participant from the call using identifier.",
         "operationId": "CallConnection_RemoveParticipant",
         "parameters": [
           {
@@ -656,7 +656,7 @@
             }
           },
           "202": {
-            "description": "Returns the remove participant response.",
+            "description": "The service has accepted the remove participant request and will begin processing it. You will receive either RemoveParticipantSucceeded or RemoveParticipantFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/RemoveParticipantResponse"
             }
@@ -704,7 +704,7 @@
             }
           },
           "200": {
-            "description": "Returns the get participant response.",
+            "description": "Returns the detail of the requested participant.",
             "schema": {
               "$ref": "#/definitions/CallParticipant"
             }
@@ -867,7 +867,7 @@
             }
           },
           "202": {
-            "description": "Returns the pause call recording response."
+            "description": "The service has accepted the pause request and will begin processing it."
           }
         },
         "x-ms-examples": {
@@ -904,7 +904,7 @@
             }
           },
           "202": {
-            "description": "Returns the resume call recording response."
+            "description": "The service has accepted the resume request and will begin processing it."
           }
         },
         "x-ms-examples": {
@@ -953,9 +953,6 @@
         }
       }
     },
-    "CommunicationIdentifierModelKind": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModelKind"
-    },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
     },
@@ -965,17 +962,8 @@
     "CommunicationUserIdentifierModel": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationUserIdentifierModel"
     },
-    "CommunicationCloudEnvironmentModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationCloudEnvironmentModel"
-    },
-    "MicrosoftTeamsUserIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
-    },
     "CommunicationErrorResponse": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-    },
-    "CommunicationError": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
@@ -1342,11 +1330,11 @@
     "GetParticipantsResponse": {
       "description": "The response payload for getting participants of the call.",
       "required": [
-        "values"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "values": {
+        "value": {
           "description": "List of the current participants in the call.",
           "type": "array",
           "items": {
@@ -1629,13 +1617,16 @@
       "properties": {
         "code": {
           "format": "int32",
+          "description": "Code of the current result. This can be helpful to Call Automation team to troubleshoot the issue if this result was unexpected.",
           "type": "integer"
         },
         "subCode": {
           "format": "int32",
+          "description": "Subcode of the current result. This can be helpful to Call Automation team to troubleshoot the issue if this result was unexpected.",
           "type": "integer"
         },
         "message": {
+          "description": "Detail message that describes the current result.",
           "type": "string"
         }
       }
@@ -2090,44 +2081,8 @@
       "name": "Repeatability-First-Sent",
       "in": "header",
       "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
-      "type": "string"
-    }
-  },
-  "responses": {
-    "400": {
-      "description": "BadRequest",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "401": {
-      "description": "Unauthorized",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "403": {
-      "description": "Forbidden",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "404": {
-      "description": "NotFound",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
-    },
-    "500": {
-      "description": "InternalServerError",
-      "schema": {
-        "$ref": "#/definitions/CommunicationErrorResponse"
-      },
-      "x-ms-error-response": true
+      "type": "string",
+      "format": "date-time-rfc1123"
     }
   },
   "securityDefinitions": {
