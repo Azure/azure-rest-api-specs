@@ -232,6 +232,9 @@
           "200": {
             "description": "OK."
           },
+          "204": {
+            "description": "No Content."
+          },
           "default": {
             "description": "Error",
             "schema": {
@@ -1462,6 +1465,9 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
       "description": "Resource name.",
       "x-ms-parameter-location": "method"
     },
