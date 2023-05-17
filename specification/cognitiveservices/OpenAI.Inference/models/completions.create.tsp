@@ -136,8 +136,8 @@ model CompletionsOptions {
     """)
     @projectedName("json", "model")
     @projectedName("csharp", "InternalNonAzureModelName")
-    "model"?: string;
-};
+    `model`?: string;
+}
 
 @doc("""
 Representation of the response data from a completions request.
@@ -189,11 +189,11 @@ model Choice {
     @doc("The log probabilities model for tokens associated with this completions choice.")
     @projectedName("json", "logprobs")
     @projectedName("csharp", "LogProbabilityModel")
-    logprobs: CompletionsLogProbabilityModel | null;
+    logprobs?: CompletionsLogProbabilityModel;
 
     @doc("Reason for finishing")
     @projectedName("json", "finish_reason")
-    finishReason: CompletionsFinishReason | null;
+    finishReason?: CompletionsFinishReason;
 }
 
 alias NullableFloat = float32 | null;

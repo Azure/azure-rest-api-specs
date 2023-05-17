@@ -1,9 +1,5 @@
 ## ARM API Information (Control Plane)
 
-<i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow.
-</i>
-Azure 1st Party Service can try out the [Shift Left](https://aka.ms/ShiftLeft) experience to initiate API design review from ADO code repo.  If you are interested, may request engineering support by filling in with the form https://aka.ms/ShiftLeftSupportForm.
-
 ### Changelog
 Add a changelog entry for this PR by answering the following questions:
   1. What's the purpose of the update?
@@ -37,7 +33,7 @@ Otherwise your PR may be subject to ARM review requirements. Complete the follow
   - Adding a new service
   - Adding new API(s)
   - Adding a new API version
-    -[ ] To review changes efficiently, ensure you copy the existing version into the new directory structure for first commit and then push new changes, including version updates, in separate commits. You can use OpenAPIHub to initialize the PR for adding a new version. For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
+    -[ ] To review changes efficiently, ensure you copy the existing version into the new directory structure for first commit and then push new changes, including version updates, in separate commits. You can use OpenAPIHub to initialize the PR for adding a new version. For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version). Note that this doesn't apply if you are trying to merge a PR that was previously in the private repository.
 
 - [ ] Ensure you've reviewed following [guidelines](https://aka.ms/rpguidelines) including [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). Estimated time (4 hours). This is required before you can request review from ARM API Review board.
 
@@ -46,8 +42,8 @@ Otherwise your PR may be subject to ARM review requirements. Complete the follow
 ### Breaking Change Review Checklist
 If you have any breaking changes as defined in the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy/), request approval from the Breaking Change Review Board.
 
-**Action**: to initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Additional details on the process and office hours are on the [Breaking Change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).
+**Action**: to initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Additional details on the process and office hours are on the [Breaking Change Wiki](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/overview_breakingchanges).
 
-NOTE: To update API(s) in public preview for over 1 year (refer to [Retirement of Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews))
+NOTE: To update API(s) in public preview for over 1 year (refer to [Retirement of Previews](http://aka.ms/aprwiki))
 
 Please follow the link to find more details on [PR review process](https://aka.ms/SwaggerPRReview).
