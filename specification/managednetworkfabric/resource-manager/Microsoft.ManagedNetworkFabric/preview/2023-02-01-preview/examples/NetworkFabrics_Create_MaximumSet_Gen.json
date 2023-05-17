@@ -14,13 +14,13 @@
         "fabricASN": 29249,
         "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
         "terminalServerConfiguration": {
-          "username": "username",
-          "password": "xxxx",
-          "serialNumber": "123456",
           "primaryIpv4Prefix": "20.0.0.12/30",
           "primaryIpv6Prefix": "3FFE:FFFF:0:CD30::a8/126",
           "secondaryIpv4Prefix": "20.0.0.13/30",
-          "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126"
+          "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126",
+          "username": "username",
+          "password": "xxxx",
+          "serialNumber": "123456"
         },
         "managementNetworkConfiguration": {
           "infrastructureVpnConfiguration": {
@@ -33,11 +33,27 @@
                 "65046:10039"
               ]
             },
-            "optionAProperties": null
+            "optionAProperties": {
+              "mtu": 5892,
+              "vlanId": 2724,
+              "peerASN": 42666,
+              "primaryIpv4Prefix": "20.0.0.12/30",
+              "primaryIpv6Prefix": "3FFE:FFFF:0:CD30::a8/126",
+              "secondaryIpv4Prefix": "20.0.0.13/30",
+              "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126"
+            }
           },
           "workloadVpnConfiguration": {
             "peeringOption": "OptionA",
-            "optionAProperties": null,
+            "optionAProperties": {
+              "mtu": 5892,
+              "vlanId": 2724,
+              "peerASN": 42666,
+              "primaryIpv4Prefix": "10.0.0.14/30",
+              "primaryIpv6Prefix": "2FFE:FFFF:0:CD30::a7/126",
+              "secondaryIpv4Prefix": "10.0.0.15/30",
+              "secondaryIpv6Prefix": "2FFE:FFFF:0:CD30::ac/126"
+            },
             "optionBProperties": {
               "importRouteTargets": [
                 "65046:10050"
@@ -47,9 +63,13 @@
               ]
             }
           }
-        }
+        },
+        "annotation": "annotationValue"
       },
-      "location": "eastus"
+      "tags": {
+        "key6468": ""
+      },
+      "location": "eastuseuap"
     }
   },
   "responses": {
@@ -66,17 +86,17 @@
           "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
           "terminalServerConfiguration": {
             "networkDeviceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName",
-            "username": "username",
-            "serialNumber": "123456",
             "primaryIpv4Prefix": "20.0.0.12/30",
             "primaryIpv6Prefix": "3FFE:FFFF:0:CD30::a8/126",
             "secondaryIpv4Prefix": "20.0.0.14/30",
-            "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126"
+            "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126",
+            "username": "username",
+            "serialNumber": "123456"
           },
           "managementNetworkConfiguration": {
             "infrastructureVpnConfiguration": {
               "administrativeState": "Enabled",
-              "networkToNetworkInterconnectId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName/networkToNetworkInterconnect/DefaultNNI",
+              "networkToNetworkInterconnectId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName/networkToNetworkInterconnects/DefaultNNI",
               "peeringOption": "OptionA",
               "optionBProperties": {
                 "importRouteTargets": [
@@ -86,25 +106,50 @@
                   "65046:10039"
                 ]
               },
-              "optionAProperties": null
+              "optionAProperties": {
+                "mtu": 5892,
+                "vlanId": 2724,
+                "peerASN": 42666,
+                "bfdConfiguration": {
+                  "interval": 8,
+                  "multiplier": 29
+                },
+                "primaryIpv4Prefix": "20.0.0.12/30",
+                "primaryIpv6Prefix": "3FFE:FFFF:0:CD30::a8/126",
+                "secondaryIpv4Prefix": "20.0.0.13/30",
+                "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126"
+              }
             },
             "workloadVpnConfiguration": {
               "administrativeState": "Enabled",
               "peeringOption": "OptionA",
               "networkToNetworkInterconnectId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName/networkToNetworkInterconnect/DefaultNNI",
-              "optionAProperties": null,
+              "optionAProperties": {
+                "mtu": 5892,
+                "vlanId": 2724,
+                "peerASN": 42666,
+                "bfdConfiguration": {
+                  "interval": 8,
+                  "multiplier": 29
+                },
+                "primaryIpv4Prefix": "10.0.0.14/30",
+                "primaryIpv6Prefix": "2FFE:FFFF:0:CD30::a7/126",
+                "secondaryIpv4Prefix": "10.0.0.15/30",
+                "secondaryIpv6Prefix": "2FFE:FFFF:0:CD30::ac/126"
+              },
               "optionBProperties": {
                 "importRouteTargets": [
                   "65046:10050"
                 ],
                 "exportRouteTargets": [
-                  "65046:10050"
+                  "65047:10080"
                 ]
               }
             }
           },
           "operationalState": "Provisioning",
           "provisioningState": "Succeeded",
+          "annotation": "annotationValue",
           "racks": [
             "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3AggRack",
             "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack1",
@@ -117,6 +162,9 @@
             "/subscriptions/xxxxx/resourceGroups/resourecegroupname/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
           ]
         },
+        "tags": {
+          "key6468": ""
+        },
         "location": "eastuseuap",
         "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
         "name": "FabricName",
@@ -124,10 +172,10 @@
         "systemData": {
           "createdBy": "User@email.com",
           "createdByType": "User",
-          "createdAt": "2023-02-11T04:17:22.639Z",
+          "createdAt": "2023-03-17T11:01:18.007Z",
           "lastModifiedBy": "User",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-02-11T04:17:22.639Z"
+          "lastModifiedAt": "2023-03-17T11:01:18.007Z"
         }
       }
     },
@@ -147,33 +195,57 @@
           "networkFabricControllerId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
           "terminalServerConfiguration": {
             "networkDeviceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkDevices/networkDeviceName",
-            "username": "username",
-            "serialNumber": "123456",
             "primaryIpv4Prefix": "20.0.0.12/30",
             "primaryIpv6Prefix": "3FFE:FFFF:0:CD30::a8/126",
             "secondaryIpv4Prefix": "20.0.0.14/30",
-            "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126"
+            "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126",
+            "username": "username",
+            "serialNumber": "123456"
           },
           "managementNetworkConfiguration": {
             "infrastructureVpnConfiguration": {
               "administrativeState": "Enabled",
-              "networkToNetworkInterconnectId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName/networkToNetworkInterconnect/DefaultNNI",
+              "networkToNetworkInterconnectId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName/networkToNetworkInterconnects/DefaultNNI",
               "peeringOption": "OptionA",
               "optionBProperties": {
                 "importRouteTargets": [
                   "65046:10039"
                 ],
                 "exportRouteTargets": [
-                  "65046:10039"
+                  "65047:10040"
                 ]
               },
-              "optionAProperties": null
+              "optionAProperties": {
+                "mtu": 5892,
+                "vlanId": 2724,
+                "peerASN": 42666,
+                "bfdConfiguration": {
+                  "interval": 8,
+                  "multiplier": 29
+                },
+                "primaryIpv4Prefix": "20.0.0.12/30",
+                "primaryIpv6Prefix": "3FFE:FFFF:0:CD30::a8/126",
+                "secondaryIpv4Prefix": "20.0.0.13/30",
+                "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126"
+              }
             },
             "workloadVpnConfiguration": {
               "administrativeState": "Enabled",
               "peeringOption": "OptionA",
-              "networkToNetworkInterconnectId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName/networkToNetworkInterconnect/DefaultNNI",
-              "optionAProperties": null,
+              "networkToNetworkInterconnectId": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName/networkToNetworkInterconnects/DefaultNNI",
+              "optionAProperties": {
+                "mtu": 5892,
+                "vlanId": 2724,
+                "peerASN": 42666,
+                "bfdConfiguration": {
+                  "interval": 8,
+                  "multiplier": 29
+                },
+                "primaryIpv4Prefix": "20.0.0.13/30",
+                "primaryIpv6Prefix": "3FFE:FFFF:0:CD30::a1/126",
+                "secondaryIpv4Prefix": "20.0.0.13/30",
+                "secondaryIpv6Prefix": "3FFE:FFFF:0:CD30::ac/126"
+              },
               "optionBProperties": {
                 "importRouteTargets": [
                   "65046:10050"
@@ -186,6 +258,7 @@
           },
           "operationalState": "Provisioning",
           "provisioningState": "Succeeded",
+          "annotation": "annotationValue",
           "racks": [
             "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3AggRack",
             "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkRacks/fab3CompRack1",
@@ -198,6 +271,9 @@
             "/subscriptions/xxxxx/resourceGroups/resourecegroupname/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/l3IsolationDomainName"
           ]
         },
+        "tags": {
+          "key6468": ""
+        },
         "location": "eastuseuap",
         "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/FabricName",
         "name": "FabricName",
@@ -205,10 +281,10 @@
         "systemData": {
           "createdBy": "User@email.com",
           "createdByType": "User",
-          "createdAt": "2023-02-11T04:17:22.639Z",
+          "createdAt": "2023-03-17T11:01:18.007Z",
           "lastModifiedBy": "User",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-02-11T04:17:22.639Z"
+          "lastModifiedAt": "2023-03-17T11:01:18.007Z"
         }
       }
     }

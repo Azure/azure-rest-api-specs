@@ -373,6 +373,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -392,7 +396,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -746,6 +750,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -765,7 +773,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -815,7 +823,7 @@
           "description": "URI of an Azure Data Explorer Cluster."
         }
       },
-      "description": "Properties of data store",
+      "description": "Properties of data store.",
       "required": [
         "adxDatabaseResourceId",
         "adxClusterUri"
@@ -833,26 +841,26 @@
           "description": "URI of an Azure Data Explorer Cluster."
         }
       },
-      "description": "Properties of data store"
+      "description": "Properties of data store."
     },
     "SqlDbElasticPoolTargetProperties": {
       "type": "object",
       "properties": {
         "sqlEpResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL DB elastic pool target"
+          "description": "ARM ResourceId of an Azure SQL DB elastic pool target."
         },
         "anchorDatabaseResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of the anchor database used to connect to an elastic pool"
+          "description": "ARM ResourceId of the anchor database used to connect to an elastic pool."
         },
         "readIntent": {
           "type": "boolean",
-          "description": "Set to true to monitor a high availability replica of specified target, if any",
+          "description": "Set to true to monitor a high availability replica of specified target, if any.",
           "default": false
         }
       },
-      "description": "Properties specific to elastic pool in Azure SQL Database",
+      "description": "Properties specific to elastic pool in Azure SQL Database.",
       "required": [
         "sqlEpResourceId",
         "anchorDatabaseResourceId"
@@ -869,15 +877,15 @@
       "properties": {
         "sqlDbResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL DB single database target"
+          "description": "ARM ResourceId of an Azure SQL DB single database target."
         },
         "readIntent": {
           "type": "boolean",
-          "description": "Set to true to monitor a high availability replica of specified target, if any",
+          "description": "Set to true to monitor a high availability replica of specified target, if any.",
           "default": false
         }
       },
-      "description": "Properties specific to single database in Azure SQL Database",
+      "description": "Properties specific to single database in Azure SQL Database.",
       "required": [
         "sqlDbResourceId"
       ],
@@ -893,21 +901,21 @@
       "properties": {
         "sqlMiResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL Managed Instance target"
+          "description": "ARM ResourceId of an Azure SQL Managed Instance target."
         },
         "connectionTcpPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target",
+          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target.",
           "default": 1433
         },
         "readIntent": {
           "type": "boolean",
-          "description": "Set to true to monitor a high availability replica of specified target, if any",
+          "description": "Set to true to monitor a high availability replica of specified target, if any.",
           "default": false
         }
       },
-      "description": "Properties specific to Azure SQL Managed Instance targets",
+      "description": "Properties specific to Azure SQL Managed Instance targets.",
       "required": [
         "sqlMiResourceId"
       ],
@@ -923,20 +931,20 @@
       "properties": {
         "sqlVmResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of an Azure SQL VM target"
+          "description": "ARM ResourceId of an Azure SQL VM target."
         },
         "connectionTcpPort": {
           "type": "integer",
           "format": "int32",
-          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target",
+          "description": "The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target.",
           "default": 1433
         },
         "sqlNamedInstanceName": {
           "type": "string",
-          "description": "The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target"
+          "description": "The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target."
         }
       },
-      "description": "Properties specific to Azure SQL VM targets",
+      "description": "Properties specific to Azure SQL VM targets.",
       "required": [
         "sqlVmResourceId"
       ],
@@ -969,7 +977,7 @@
     },
     "TargetCollectionStatus": {
       "type": "string",
-      "description": "Target states",
+      "description": "Target states.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -994,7 +1002,7 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Target list operation.",
@@ -1011,7 +1019,7 @@
         },
         "targetVault": {
           "$ref": "#/definitions/VaultSecret",
-          "description": "To use SQL authentication for targets, specify the vault where username and password secrets are stored"
+          "description": "To use SQL authentication for targets, specify the vault where username and password secrets are stored."
         },
         "connectionServerName": {
           "type": "string",
@@ -1020,7 +1028,7 @@
         },
         "targetCollectionStatus": {
           "type": "string",
-          "description": "Target collection status",
+          "description": "Target collection status.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1036,7 +1044,7 @@
           "readOnly": true
         }
       },
-      "description": "Generic properties of a target",
+      "description": "Generic properties of a target.",
       "discriminator": "targetType",
       "required": [
         "targetType",
@@ -1048,18 +1056,18 @@
       "properties": {
         "akvResourceId": {
           "type": "string",
-          "description": "ARM ResourceId of the Key Vault instance storing database authentication secrets"
+          "description": "ARM ResourceId of the Key Vault instance storing database authentication secrets."
         },
         "akvTargetUser": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target"
+          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target."
         },
         "akvTargetPassword": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the password for authentication to a target"
+          "description": "The path to the Key Vault secret storing the password for authentication to a target."
         }
       },
-      "description": "Vault specific details required if using SQL authentication to connect to a target"
+      "description": "Vault specific details required if using SQL authentication to connect to a target."
     },
     "Watcher": {
       "type": "object",
@@ -1078,7 +1086,7 @@
           "description": "The managed service identities assigned to this resource."
         }
       },
-      "description": "A DatabaseWatcherProviderHub resource",
+      "description": "A DatabaseWatcherProviderHub resource.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -1100,7 +1108,7 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Watcher list operation.",
@@ -1116,25 +1124,16 @@
           "description": "A data store for collected monitoring data."
         },
         "status": {
-          "type": "string",
-          "description": "The monitoring collection status of the watcher.",
-          "enum": [
-            "Running",
-            "Stopped"
-          ],
-          "x-ms-enum": {
-            "name": "string",
-            "modelAsString": true
-          },
-          "readOnly": true
+          "$ref": "#/definitions/WatcherStatus",
+          "description": "The monitoring collection status of the watcher."
         },
         "provisioningState": {
           "$ref": "#/definitions/DatabaseWatcherProvisioningState",
-          "description": "The provisioning state of the resource Watcher.",
+          "description": "The provisioning state of the resource watcher.",
           "readOnly": true
         }
       },
-      "description": "RP specific properties of the resource"
+      "description": "RP specific properties of the resource."
     },
     "WatcherStatus": {
       "type": "string",
@@ -1176,6 +1175,10 @@
         "datastore": {
           "$ref": "#/definitions/DatastoreUpdate",
           "description": "A data store for collected monitoring data."
+        },
+        "status": {
+          "$ref": "#/definitions/WatcherStatus",
+          "description": "The monitoring collection status of the watcher."
         }
       },
       "description": "The updatable properties of the Watcher."

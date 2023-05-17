@@ -145,12 +145,86 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "telemetryDataFeed2",
+              "dataFeedType": "AzureDataExplorerDataFeed",
+              "dataFeedClass": "Raw",
+              "details": {
+                "query": "kustoBasedQuery2"
+              },
+              "dataStore": {
+                "dataStoreType": "AzureDataExplorerDataStore",
+                "uri": "https://myKustoUri.centralus.kusto.windows.net",
+                "database": "myDatabase"
+              },
+              "trigger": {
+                "triggerType": "ScheduleTrigger",
+                "granularity": "seconds",
+                "value": 60,
+                "startFrom": "2021-08-19T15:10:46.196Z"
+              },
+              "schema": {
+                "datasets": [
+                  {
+                    "name": "dataset21",
+                    "impactCategory": "Unavailability",
+                    "datasetType": "StaticDataset",
+                    "resourceIdColumns": [
+                      {
+                        "name": "resourceIdColumnName21",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      },
+                      {
+                        "name": "resourceIdColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      }
+                    ],
+                    "dimensionColumns": [
+                      {
+                        "name": "dimensionColumnName21",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      },
+                      {
+                        "name": "dimensionColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "string"
+                      },
+                      {
+                        "name": "dimensionColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "float"
+                      },
+                      {
+                        "name": "dimensionColumnName22",
+                        "alias": "columnAlias",
+                        "columnType": "boolean"
+                      }
+                    ],
+                    "timestampColumn": {
+                      "name": "timestampColumnName2",
+                      "alias": "columnAlias",
+                      "columnType": "date"
+                    }
+                  }
+                ]
+              }
             }
           ],
           "outputDataStores": [
             {
               "dataStoreType": "AzureLogAnalyticsDataStore",
               "workspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace"
+            },
+            {
+              "dataStoreType": "ImpactResourceProviderDataStore"
+            },
+            {
+              "dataStoreType": "EventHubDataStore",
+              "eventHubArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.EventHub/namespaces/myEventHub"
             }
           ]
         }

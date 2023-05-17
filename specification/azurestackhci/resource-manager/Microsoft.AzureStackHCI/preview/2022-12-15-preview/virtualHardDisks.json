@@ -175,6 +175,10 @@
             "$ref": "./examples/UpdateVirtualHardDisk.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -206,12 +210,6 @@
           },
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
-            }
-          },
-          "201": {
-            "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualHardDisks"
             }

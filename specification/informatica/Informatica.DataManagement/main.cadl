@@ -39,6 +39,20 @@ model InformaticaOrganizationResource is TrackedResource<OrganizationProperties>
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("Single sign-on configurations for a Informatica resource")
+@parentResource(InformaticaOrganizationResource)
+model SingleSignOn is ProxyResource<InformaticaSingleSignOnProperties> {
+  @key("configurationName")
+  @segment("singleSignOnConfigurations")
+  @doc("Name of the SSO Configuration")
+  @path
+  name: string; 
+}
+
+@armResourceOperations
+interface SingleSignOnOperations extends ProxyResourceOperations<SingleSignOn>{
+}
+
 @doc("Properties specific to the Informatica DataManagement Organization resource")
 model OrganizationProperties {
   @visibility("read")
@@ -99,7 +113,23 @@ model InformaticaProperties{
   organizationId?: string;
   
   @doc("The login URL specific to this Informatica Organization")
+  singleSignOnProperties?: InformaticaSingleSignOnProperties;
+}
+
+@doc("Single sign on Info of the SolarWinds account")
+model InformaticaSingleSignOnProperties{
+
+  @doc("Single sign-on state")
+  singleSignOnState?: SingleSignOnStates;
+
+  @doc("The Id of the Enterprise App used for Single sign-on.")
+  enterpriseAppId?: string;
+
+  @doc("The login URL specific to this SolarWinds Organization")
   singleSignOnUrl?: string;
+  
+  @doc("Provisioning state")
+  provisioningState?: ProvisioningState;
 }
 
 @doc("User Info of Informatica Organization resource")
@@ -143,4 +173,12 @@ enum ProvisioningState {
   "Deleted",
   @doc("Organization resource state is unknown")
   "NotSpecified"
+}
+
+@doc("Various states of the SSO resource")
+enum SingleSignOnStates {
+  "Initial",
+  "Enable",
+  "Disable",
+  "Existing"
 }

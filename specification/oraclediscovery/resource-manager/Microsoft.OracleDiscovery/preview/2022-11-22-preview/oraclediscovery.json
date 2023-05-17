@@ -787,7 +787,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]*$",
             "minLength": 3,
             "maxLength": 63,
             "description": "The name of Database"
@@ -2022,6 +2022,14 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "machineId": {
+          "description": "List of the discovery Machine Ids.",
+          "type": "array",
+          "items": {
+            "description": "discovery Machine Id",
+            "type": "string"
+          }
         }
       }
     },
@@ -2212,11 +2220,17 @@
         "isDBLevelErrorExist": {
           "type": "boolean",
           "description": "True if there is any error encountered in DB discovery."
+        },
+        "fqdnAndIpAddressList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The alternative FQDN or IP addresses to discover for this server"
         }
       },
       "required": [
         "serviceId",
-        "portNumber",
         "hostName"
       ]
     },

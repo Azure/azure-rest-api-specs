@@ -4,9 +4,9 @@
     "title": "Carbon",
     "version": "2023-04-01-preview",
     "description": "Carbon Report Resource Provider query API.",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -167,7 +167,7 @@
             "$ref": "#/definitions/CarbonEmissionData"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "CarbonEmissionData[]",
+          "x-typespec-name": "CarbonEmissionData[]",
           "description": "The CarbonEmissionData items on this page"
         },
         "nextLink": {
@@ -305,6 +305,79 @@
       ],
       "x-ms-discriminator-value": "TopItemsSummaryData"
     },
+    "ResourceCarbonEmissionItemDetailData": {
+      "type": "object",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Item group name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource Group"
+        }
+      },
+      "description": "Response for Resource detailed carbon emissions",
+      "required": [
+        "itemName",
+        "groupName",
+        "categoryType",
+        "subscriptionId",
+        "resourceGroup"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceItemDetailsData"
+    },
+    "ResourceGroupCarbonEmissionItemDetailData": {
+      "type": "object",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Item group name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        }
+      },
+      "description": "Response for Resource Group detailed carbon emissions",
+      "required": [
+        "itemName",
+        "groupName",
+        "categoryType",
+        "subscriptionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGroupItemDetailsData"
+    },
     "CategoryTypeEnum": {
       "type": "string",
       "description": "Supported category types to be used with QueryParameter",
@@ -431,7 +504,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
+          "x-typespec-name": "string[]",
           "description": "SubscriptionId list for carbon emissions data",
           "x-ms-identifiers": []
         },
@@ -440,7 +513,7 @@
           "items": {
             "$ref": "#/definitions/EmissionScopeEnum"
           },
-          "x-cadl-name": "EmissionScopeEnum[]",
+          "x-typespec-name": "EmissionScopeEnum[]",
           "description": "Carbon emission scope for carbon emissions data",
           "x-ms-identifiers": []
         }

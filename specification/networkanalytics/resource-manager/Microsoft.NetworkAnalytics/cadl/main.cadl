@@ -497,6 +497,18 @@ model MetricsIngestionEndpointProperties {
     @doc("Key Vault URL where the connection string exists for authentication")
     keyVaultUrl?: string;
 
+    @visibility("read")
+    @doc("Resource id of KeyVault")
+    keyVaultResourceId?: string;
+
+    @visibility("read")
+    @doc("Resource id of user assigned managed identity")
+    userManagedIdentityResourceId?: string;
+
+    @visibility("read")
+    @doc("Principal id of user assigned managed identity created under managed resource group")
+    userManagedIdentityPrincipalId?: string;
+
     @doc("The status of the last operation")
     @visibility("read")
     provisioningState?: ProvisioningState;
