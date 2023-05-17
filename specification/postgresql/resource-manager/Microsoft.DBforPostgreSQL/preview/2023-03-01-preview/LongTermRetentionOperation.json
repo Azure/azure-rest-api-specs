@@ -368,10 +368,12 @@
       "type": "object",
       "properties": {
         "sasUriList": {
-          "description": "SASUriList of storage containers where backup data is to be streamed/copied.",
+          "description": "List of SAS uri of storage containers where backup data is to be streamed/copied.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "description": "SAS URI of Azure Storage Account Container.",
+            "x-ms-secret": true
           }
         }
       }
