@@ -322,6 +322,15 @@
           "description": "Context path",
           "type": "string"
         },
+        "githubPersonalAccessToken": {
+          "description": "One time Github PAT to configure github environment",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        },
         "image": {
           "description": "Image name",
           "type": "string"
@@ -397,6 +406,14 @@
             "update"
           ],
           "x-ms-secret": true
+        },
+        "kind": {
+          "description": "Kind of auth github does for deploying the template",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "subscriptionId": {
           "description": "Subscription Id.",
