@@ -459,7 +459,7 @@
         "network": {
           "$ref": "#/definitions/Network",
           "default": null,
-          "description": "Network properties of a server."
+          "description": "Network properties of a server. This Network property is required to be passed only in case you want the server to be Private access server."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
@@ -639,7 +639,7 @@
         "network": {
           "$ref": "#/definitions/Network",
           "default": null,
-          "description": "Network properties of a server."
+          "description": "Network properties of a server. These are required to be passed only in case if server is a private access server."
         }
       }
     },
@@ -906,7 +906,7 @@
               }
             ]
           },
-          "description": "delegated subnet arm resource id."
+          "description": "Delegated subnet arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
@@ -917,10 +917,10 @@
               }
             ]
           },
-          "description": "private dns zone arm resource id."
+          "description": "Private dns zone arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
         }
       },
-      "description": "Network properties of a server"
+      "description": "Network properties of a server."
     },
     "HighAvailability": {
       "type": "object",
