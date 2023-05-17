@@ -37,7 +37,7 @@
         ],
         "summary": "Creates a new sharedQuotaEntity for the name passed.",
         "description": "Creates a new sharedQuotaEntity for the name passed. A sharedQuotaEntityRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
-        "operationId": "SharedQuotaEntity_Create",
+        "operationId": "SharedQuotaEntity_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
             "$ref": "./examples/PutSharedQuotaEntity.json"
@@ -83,7 +83,7 @@
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -151,7 +151,7 @@
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -288,7 +288,7 @@
         ],
         "summary": "Creates a new Group Quota request for a specific resources.",
         "description": "Creates a new Group Quota request for a specific resources. A groupQuotaRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
-        "operationId": "GroupQuotaLimits_Create",
+        "operationId": "GroupQuotaLimits_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
             "$ref": "./examples/PutGroupQuotaLimits-Compute.json"
@@ -340,7 +340,7 @@
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -414,7 +414,7 @@
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -676,7 +676,7 @@
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
         "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, which means the maximum unused quota assigned back to MG groupQuota will be the groupQuota assigned to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription.",
-        "operationId": "GroupQuotaSubscriptionQuotaAllocation_Create",
+        "operationId": "GroupQuotaSubscriptionQuotaAllocation_CreateOrUpdate",
         "x-ms-azure-resource": true,
         "x-ms-examples": {
           "ShareQuotaOrder_Subscription_Allocation_Put_ForCompute": {
@@ -733,7 +733,7 @@
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -811,7 +811,7 @@
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -1171,7 +1171,7 @@
       }
     },
     "GroupQuotaList": {
-      "type": "object",
+      "description": "List of Group Quotas at MG level.",
       "properties": {
         "value": {
           "type": "array",
@@ -1287,7 +1287,7 @@
       }
     },
     "SubscriptionQuotaDetailsList": {
-      "type": "object",
+      "description": "Subscription quota list.",
       "properties": {
         "value": {
           "type": "array",
@@ -1341,7 +1341,7 @@
       }
     },
     "SubmittedResourceRequestStatusList": {
-      "type": "object",
+      "description": "Share Quota Entity list.",
       "properties": {
         "value": {
           "type": "array",
@@ -1440,7 +1440,7 @@
       }
     },
     "SharedQuotaEntityList": {
-      "type": "object",
+      "description": "Share Quota Entity list.",
       "properties": {
         "value": {
           "type": "array",
