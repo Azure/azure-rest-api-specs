@@ -38,7 +38,28 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-11'
 input-file:
+  - Microsoft.Sql/preview/2023-02-01-preview/FailoverManagedInstance.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ListOutboundNetworkDependenciesByManagedInstance.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceCreateMax.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceCreateMin.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceDelete.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceGet.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceGetWithExpandEqualsAdministrators.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceList.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceListByInstancePool.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceListByInstancePoolWithExpandEqualsAdministrators.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceListByResourceGroup.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceListByResourceGroupWithExpandEqualsAdministrators.json   
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceListWithExpandEqualsAdministrators.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceRemoveMaintenanceConfiguration.json
   - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstances.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceTopQueriesList.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceTopQueriesListMax.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceTopQueriesListMin.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceUpdateMax.json
+  - Microsoft.Sql/preview/2023-02-01-preview/ManagedInstanceUpdateMin.json
+  - Microsoft.Sql/preview/2023-02-01-preview/StartManagedInstance.json
+  - Microsoft.Sql/preview/2023-02-01-preview/StopManagedInstance.json
   - Microsoft.Sql/preview/2022-11-01-preview/BackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2022-11-01-preview/BlobAuditing.json
   - Microsoft.Sql/preview/2022-11-01-preview/DataMaskingPolicies.json
