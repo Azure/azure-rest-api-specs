@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 input-file:
   - Microsoft.Consumption/stable/2023-03-01/consumption.json
   - Microsoft.Consumption/stable/2023-03-01/consumption_pricesheet.json
+  - Microsoft.Consumption/stable/2023-03-01/common-types.json
 ```
 ### Tag: package-2022-09
 
