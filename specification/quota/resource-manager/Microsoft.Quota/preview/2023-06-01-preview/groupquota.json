@@ -75,7 +75,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               },
               "Location": {
                 "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
@@ -142,7 +143,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               },
               "Location": {
                 "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
@@ -229,27 +231,6 @@
         "responses": {
           "200": {
             "description": "OK."
-          },
-          "400": {
-            "description": "Bad Request",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            }
-          },
-          "429": {
-            "description": "Too many Request",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            }
           },
           "default": {
             "description": "Error",
@@ -348,7 +329,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               },
               "Location": {
                 "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
@@ -421,7 +403,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               },
               "Location": {
                 "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
@@ -773,7 +756,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               },
               "Location": {
                 "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
@@ -850,7 +834,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               },
               "Location": {
                 "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
@@ -1215,10 +1200,15 @@
       }
     },
     "GroupQuotaList": {
-      "type": "array",
-      "description": "List of Group Quotas at MG level.",
-      "items": {
-        "$ref": "#/definitions/GroupQuotaLimit"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Group Quotas at MG level.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaLimit"
+          }
+        }
       }
     },
     "SubscriptionQuotaAllocationRequest": {
@@ -1252,10 +1242,15 @@
       }
     },
     "SubscriptionQuotaAllocationRequestList": {
-      "type": "array",
-      "description": "Assigned Group Quota to subscriptions.",
-      "items": {
-        "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Assigned Group Quota to subscriptions.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
+          }
+        }
       }
     },
     "SubscriptionGroupQuotaAssignment": {
@@ -1320,10 +1315,15 @@
       }
     },
     "SubscriptionQuotaDetailsList": {
-      "type": "array",
-      "description": "Subscription quota list.",
-      "items": {
-        "$ref": "#/definitions/SubscriptionQuotaLimit"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Subscription quota list.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaLimit"
+          }
+        }
       }
     },
     "ResourceBaseRequest": {
@@ -1398,6 +1398,11 @@
         "subscriptionFilters": {
           "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand.",
           "$ref": "#/definitions/Filters"
+        },
+        "provisioningState": {
+          "description": "Provisioing state of the operation.",
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
         }
       }
     },
@@ -1456,10 +1461,15 @@
       }
     },
     "SharedQuotaEntityList": {
-      "type": "array",
-      "description": "Share Quota Entity list.",
-      "items": {
-        "$ref": "#/definitions/SharedQuotaEntity"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Share Quota Entity list.",
+          "items": {
+            "$ref": "#/definitions/SharedQuotaEntity"
+          }
+        }
       }
     }
   },
