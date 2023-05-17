@@ -39,7 +39,7 @@ interface Subscriptions {
     @doc("User subscription create model.")
     @body
     userSubscriptionCreate: UserSubscriptionCreate
-  ): OkResponse | Azure.Core.Foundations.ErrorResponse;
+  ): CreatedResponse | Azure.Core.Foundations.ErrorResponse;
 
   @route("/users/{userId}/subscriptions/{subscriptionId}")
   @doc("Update user subscription.")
