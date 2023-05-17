@@ -76,8 +76,12 @@
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
                 "type": "integer"
               },
+			  "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -93,6 +97,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -144,8 +154,12 @@
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
                 "type": "integer"
               },
+             "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -170,7 +184,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
-          }
+          },
+		   "default": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
         }
       },
       "get": {
@@ -217,6 +237,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		   "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -267,6 +293,12 @@
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
+          },
+		   "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
           }
         }
       }
@@ -313,6 +345,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		   "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -372,8 +410,12 @@
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
                 "type": "integer"
               },
+               "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -389,6 +431,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		   "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -446,8 +494,12 @@
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
                 "type": "integer"
               },
+               "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -463,6 +515,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -513,6 +571,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -568,6 +632,12 @@
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
+          },
+		  "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
           }
         }
       }
@@ -614,6 +684,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -666,6 +742,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -724,6 +806,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -787,8 +875,12 @@
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
                 "type": "integer"
               },
+               "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -822,6 +914,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -883,8 +981,12 @@
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
                 "type": "integer"
               },
+               "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
               "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             },
@@ -918,6 +1020,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
@@ -980,6 +1088,12 @@
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
+          },
+		  "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
           }
         }
       }
@@ -1035,6 +1149,12 @@
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
+          },
+		  "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
           }
         }
       }
@@ -1084,6 +1204,12 @@
           },
           "429": {
             "description": "Too many Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          },
+		  "default": {
+            "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorContent"
             }
