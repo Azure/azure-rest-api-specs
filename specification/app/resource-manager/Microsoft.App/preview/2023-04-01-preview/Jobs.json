@@ -720,7 +720,7 @@
               "$ref": "#/definitions/Parallelism"
             },
             "scale": {
-              "$ref": "#/definitions/Scale"
+              "$ref": "#/definitions/JobScale"
             }
           }
         },
@@ -940,7 +940,7 @@
       "format": "int32",
       "type": "integer"
     },
-    "ScaleRule": {
+    "JobScaleRule": {
       "description": "Scaling rule.",
       "type": "object",
       "properties": {
@@ -965,7 +965,7 @@
         }
       }
     },
-    "Scale": {
+    "JobScale": {
       "description": "Scaling configurations for event driven jobs.",
       "type": "object",
       "properties": {
@@ -988,7 +988,7 @@
           "description": "Scaling rules.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ScaleRule"
+            "$ref": "#/definitions/JobScaleRule"
           }
         }
       }
