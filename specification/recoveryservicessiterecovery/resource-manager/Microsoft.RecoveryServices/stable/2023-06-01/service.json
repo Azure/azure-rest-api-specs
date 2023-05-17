@@ -12680,13 +12680,9 @@
         },
         "allAvailableOSUpgradeConfigurations": {
           "description": "A value indicating all available inplace OS Upgrade configurations.",
-          "type": "object",
-          "additionalProperties": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/OSUpgradeSupportedVersions"
           }
         },
         "osName": {
@@ -14350,13 +14346,9 @@
         },
         "allAvailableOSUpgradeConfigurations": {
           "description": "A value indicating all available inplace OS Upgrade configurations.",
-          "type": "object",
-          "additionalProperties": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/OSUpgradeSupportedVersions"
           }
         },
         "osName": {
@@ -18916,10 +18908,24 @@
           "description": "The OS upgrade reboot count.",
           "type": "integer",
           "readOnly": true
-        },
-        "targetBootDiagnosticStorageAccountSAS": {
-          "description": "The target boot diagnostics storage account.",
+        }
+      }
+    },
+    "OSUpgradeSupportedVersions": {
+      "description": "Supported OS upgrade versions.",
+      "type": "object",
+      "properties": {
+        "supportedSourceOsVersion": {
+          "description": "The source OS version name.",
           "type": "string",
+          "readOnly": true
+        },
+        "supportedTargetOsVersions": {
+          "description": "The target OS version names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         }
       }
