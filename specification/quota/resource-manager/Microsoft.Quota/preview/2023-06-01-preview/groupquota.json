@@ -65,13 +65,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
+            "description": "OK, Create or Update",
             "schema": {
               "$ref": "#/definitions/SharedQuotaEntity"
             }
           },
           "201": {
-            "description": "Request Accepted",
+            "description": "Request Accepted, , Create or Update",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -322,13 +322,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns the quota details.",
+            "description": "OK. Create or Update",
             "schema": {
               "$ref": "#/definitions/GroupQuotaLimit"
             }
           },
           "201": {
-            "description": "Request Created",
+            "description": "Request Created. Create or Update",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -555,19 +555,6 @@
               "$ref": "#/definitions/SubmittedResourceRequestStatusList"
             }
           },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            }
-          },
-          "429": {
-            "description": "Too many Request",
-            "x-ms-error-response": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorContent"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -715,13 +702,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Request status details.",
+            "description": "OK. , Create or Update",
             "schema": {
               "$ref": "#/definitions/SubscriptionQuotaLimit"
             }
           },
           "201": {
-            "description": "Request Created",
+            "description": "Request Created. Create or Update",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
