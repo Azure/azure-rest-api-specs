@@ -6,241 +6,6 @@
     "version": "2023-07-01-preview"
   },
   "paths": {
-    "/chat/botmanagement/findexpiringregs": {
-      "post": {
-        "tags": [
-          "BotManagement"
-        ],
-        "operationId": "FindExpiringBotRegistrations",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "findOrphans",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/chat/botmanagement/refreshBot": {
-      "post": {
-        "tags": [
-          "BotManagement"
-        ],
-        "operationId": "RefreshBot",
-        "consumes": [
-          "application/json",
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "botInfo",
-            "schema": {
-              "$ref": "#/definitions/BotInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/chat/botmanagement/getRegistration": {
-      "get": {
-        "tags": [
-          "BotManagement"
-        ],
-        "operationId": "getRegistration",
-        "consumes": [
-          "application/json",
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "botInfo",
-            "schema": {
-              "$ref": "#/definitions/BotInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/chat/botmanagement/getBot": {
-      "get": {
-        "tags": [
-          "BotManagement"
-        ],
-        "operationId": "getBot",
-        "consumes": [
-          "application/json",
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "botInfo",
-            "schema": {
-              "$ref": "#/definitions/BotInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
     "/chat/threads/{chatThreadId}/readReceipts": {
       "get": {
         "tags": [
@@ -492,7 +257,7 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "description": "The maximum number of messages to be returned per page. The limit can be found from https://docs.microsoft.com/en-us/azure/communication-services/concepts/service-limits.",
+            "description": "The maximum number of messages to be returned per page.",
             "type": "integer",
             "format": "int32"
           },
@@ -1007,78 +772,6 @@
         }
       }
     },
-    "/chat/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/{viewType}": {
-      "get": {
-        "tags": [
-          "TeamsInterop"
-        ],
-        "operationId": "GetImageWithType",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chatThreadId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "chatMessageId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "imageId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "viewType",
-            "required": true
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
     "/chat/threads": {
       "post": {
         "tags": [
@@ -1505,87 +1198,252 @@
     }
   },
   "definitions": {
-    "AddChatParticipantsRequest": {
-      "description": "Participants to be added to the thread.",
+    "CommunicationUserIdentifierModel": {
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationUserIdentifierModel"
+    },
+    "CommunicationCloudEnvironment": {
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationCloudEnvironmentModel"
+    },
+    "MicrosoftTeamsUserIdentifierModel": {
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+    },
+    "CommunicationIdentifierModel": {
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+    },
+    "ChatMessageReadReceipt": {
+      "description": "A chat message read receipt indicates the time a chat message was read by a recipient.",
       "required": [
-        "participants"
+        "chatMessageId",
+        "readOn",
+        "senderCommunicationIdentifier"
       ],
       "type": "object",
       "properties": {
-        "participants": {
-          "description": "Participants to add to a chat thread.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatParticipant"
-          }
+        "senderCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "chatMessageId": {
+          "description": "Id of the chat message that has been read. This id is generated by the server.",
+          "type": "string",
+          "example": "1591137790240"
+        },
+        "readOn": {
+          "format": "date-time",
+          "description": "The time at which the message was read. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "example": "2020-10-30T10:50:50Z"
         }
       }
     },
-    "AddChatParticipantsResult": {
-      "description": "Result of the add chat participants operation.",
+    "ChatMessageReadReceiptsCollection": {
+      "description": "A paged collection of chat message read receipts.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
-        "invalidParticipants": {
-          "description": "The participants that failed to be added to the chat thread.",
+        "value": {
+          "description": "Collection of chat message read receipts.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CommunicationError"
-          },
+            "$ref": "#/definitions/ChatMessageReadReceipt"
+          }
+        },
+        "nextLink": {
+          "description": "If there are more chat message read receipts that can be retrieved, the next link will be populated.",
+          "type": "string",
           "readOnly": true
         }
       }
     },
-    "BotInfo": {
+    "CommunicationError": {
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
+    },
+    "CommunicationErrorResponse": {
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+    },
+    "SendReadReceiptRequest": {
+      "description": "Request payload for sending a read receipt.",
+      "required": [
+        "chatMessageId"
+      ],
       "type": "object",
       "properties": {
-        "botAppId": {
-          "format": "uuid",
-          "type": "string"
+        "chatMessageId": {
+          "description": "Id of the latest chat message read by the user.",
+          "type": "string",
+          "example": "1592435762364"
+        }
+      }
+    },
+    "ChatMessageType": {
+      "description": "The chat message type.",
+      "enum": [
+        "text",
+        "html",
+        "topicUpdated",
+        "participantAdded",
+        "participantRemoved"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChatMessageType",
+        "modelAsString": true
+      }
+    },
+    "SendChatMessageRequest": {
+      "description": "Details of the message to send.",
+      "required": [
+        "content"
+      ],
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "Chat message content.",
+          "type": "string",
+          "example": "Come one guys, lets go for lunch together."
         },
-        "botMri": {
+        "senderDisplayName": {
+          "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
+          "type": "string",
+          "example": "Bob Admin"
+        },
+        "type": {
+          "$ref": "#/definitions/ChatMessageType"
+        },
+        "metadata": {
+          "description": "Message metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SendChatMessageResult": {
+      "description": "Result of the send message operation.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "A server-generated message id.",
+          "type": "string",
+          "example": "123456789"
+        }
+      }
+    },
+    "ChatParticipant": {
+      "description": "A participant of the chat thread.",
+      "required": [
+        "communicationIdentifier"
+      ],
+      "type": "object",
+      "properties": {
+        "communicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "displayName": {
+          "description": "Display name for the chat participant.",
+          "type": "string",
+          "example": "Bob"
+        },
+        "shareHistoryTime": {
+          "format": "date-time",
+          "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "example": "2020-10-30T10:50:50Z"
+        },
+        "metadata": {
+          "description": "Contextual metadata for the chat participant.",
           "type": "string"
         }
       }
     },
+    "AttachmentType": {
+      "description": "The type of attachment.",
+      "enum": [
+        "teamsInlineImage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AttachmentType",
+        "modelAsString": true
+      }
+    },
     "ChatAttachment": {
+      "description": "An attachment in a chat message.",
+      "required": [
+        "id",
+        "attachmentType",
+        "url"
+      ],
       "type": "object",
       "properties": {
         "id": {
           "description": "Id of the attachment",
-          "type": "string"
+          "type": "string",
+          "example": "A27C7079-626F-4D23-8BEE-582F2C376B5A"
         },
         "attachmentType": {
-          "$ref": "#/definitions/ChatAttachmentType"
+          "$ref": "#/definitions/AttachmentType"
         },
         "contentType": {
-          "description": "The attachment's content type (Mime type?)",
-          "type": "string"
+          "description": "The type of content of the attachment, if available",
+          "type": "string",
+          "example": "png"
         },
         "name": {
-          "description": "Name of attachment",
-          "type": "string"
+          "description": "The name of the attachment content.",
+          "type": "string",
+          "example": "SomeImage.png"
         },
         "url": {
-          "description": "The location of the attachment",
-          "type": "string"
+          "description": "The URL where the attachment can be downloaded",
+          "type": "string",
+          "format": "uri",
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original"
         },
         "previewUrl": {
-          "description": "The location of a preview for the attachment",
-          "type": "string"
+          "description": "The URL where the preview of attachment can be downloaded",
+          "type": "string",
+          "format": "uri",
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
         }
       }
     },
-    "ChatAttachmentType": {
-      "description": "The chat message type.",
-      "enum": [
-        "teamsInlineImage",
-        "teamsImage",
-        "file"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ChatAttachmentType",
-        "modelAsString": true
+    "ChatMessageContent": {
+      "description": "Content of a chat message.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Chat message content for messages of types text or html.",
+          "type": "string",
+          "example": "Come one guys, lets go for lunch together."
+        },
+        "topic": {
+          "description": "Chat message content for messages of type topicUpdated.",
+          "type": "string",
+          "example": "Lunch Chat thread"
+        },
+        "participants": {
+          "description": "Chat message content for messages of types participantAdded or participantRemoved.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatParticipant"
+          }
+        },
+        "attachments": {
+          "description": "List of attachments for this message",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatAttachment"
+          }
+        },
+        "initiatorCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        }
       }
     },
     "ChatMessage": {
@@ -1601,7 +1459,6 @@
       "properties": {
         "id": {
           "description": "The id of the chat message. This id is server generated.",
-          "minLength": 1,
           "type": "string",
           "example": "123456789"
         },
@@ -1610,12 +1467,10 @@
         },
         "sequenceId": {
           "description": "Sequence of the chat message in the conversation.",
-          "minLength": 1,
           "type": "string"
         },
         "version": {
           "description": "Version of the chat message.",
-          "minLength": 1,
           "type": "string"
         },
         "content": {
@@ -1656,101 +1511,6 @@
         }
       }
     },
-    "ChatMessageContent": {
-      "description": "Content of a chat message.",
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Chat message content for messages of types text or html.",
-          "type": "string",
-          "example": "Come one guys, lets go for lunch together."
-        },
-        "topic": {
-          "description": "Chat message content for messages of type topicUpdated.",
-          "type": "string",
-          "example": "Lunch Chat thread"
-        },
-        "participants": {
-          "description": "Chat message content for messages of types participantAdded or participantRemoved.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatParticipant"
-          }
-        },
-        "initiatorCommunicationIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "attachments": {
-          "description": "List of attachments to this chat message.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatAttachment"
-          }
-        }
-      }
-    },
-    "ChatMessageReadReceipt": {
-      "description": "A chat message read receipt indicates the time a chat message was read by a recipient.",
-      "required": [
-        "chatMessageId",
-        "readOn",
-        "senderCommunicationIdentifier"
-      ],
-      "type": "object",
-      "properties": {
-        "senderCommunicationIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "chatMessageId": {
-          "description": "Id of the chat message that has been read. This id is generated by the server.",
-          "minLength": 1,
-          "type": "string",
-          "example": "1591137790240"
-        },
-        "readOn": {
-          "format": "date-time",
-          "description": "The time at which the message was read. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
-          "type": "string",
-          "example": "2020-10-30T10:50:50Z"
-        }
-      }
-    },
-    "ChatMessageReadReceiptsCollection": {
-      "description": "A paged collection of chat message read receipts.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of chat message read receipts.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatMessageReadReceipt"
-          }
-        },
-        "nextLink": {
-          "description": "If there are more chat message read receipts that can be retrieved, the next link will be populated.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ChatMessageType": {
-      "description": "The chat message type.",
-      "enum": [
-        "text",
-        "html",
-        "topicUpdated",
-        "participantAdded",
-        "participantRemoved"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ChatMessageType",
-        "modelAsString": true
-      }
-    },
     "ChatMessagesCollection": {
       "description": "Collection of chat messages for a particular chat thread.",
       "required": [
@@ -1772,30 +1532,21 @@
         }
       }
     },
-    "ChatParticipant": {
-      "description": "A participant of the chat thread.",
-      "required": [
-        "communicationIdentifier"
-      ],
+    "UpdateChatMessageRequest": {
+      "description": "Request payload for updating a chat message.",
       "type": "object",
       "properties": {
-        "communicationIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "displayName": {
-          "description": "Display name for the chat participant.",
+        "content": {
+          "description": "Chat message content.",
           "type": "string",
-          "example": "Bob"
-        },
-        "shareHistoryTime": {
-          "format": "date-time",
-          "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
-          "type": "string",
-          "example": "2020-10-30T10:50:50Z"
+          "example": "Let's go for lunch together."
         },
         "metadata": {
-          "description": "Contextual metadata for the chat participant.",
-          "type": "string"
+          "description": "Message metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1820,38 +1571,58 @@
         }
       }
     },
-    "ChatThreadItem": {
-      "description": "Summary information of a chat thread.",
+    "AddChatParticipantsRequest": {
+      "description": "Participants to be added to the thread.",
       "required": [
-        "id",
+        "participants"
+      ],
+      "type": "object",
+      "properties": {
+        "participants": {
+          "description": "Participants to add to a chat thread.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatParticipant"
+          }
+        }
+      }
+    },
+    "AddChatParticipantsResult": {
+      "description": "Result of the add chat participants operation.",
+      "type": "object",
+      "properties": {
+        "invalidParticipants": {
+          "description": "The participants that failed to be added to the chat thread.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CreateChatThreadRequest": {
+      "description": "Request payload for creating a chat thread.",
+      "required": [
         "topic"
       ],
       "type": "object",
       "properties": {
-        "id": {
-          "description": "Chat thread id.",
-          "minLength": 1,
-          "type": "string",
-          "example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
-        },
         "topic": {
-          "description": "Chat thread topic.",
-          "minLength": 1,
+          "description": "The chat thread topic.",
           "type": "string",
-          "example": "Lunch Chat thread"
+          "example": "Lunch Thread"
         },
-        "deletedOn": {
-          "format": "date-time",
-          "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
-          "type": "string",
-          "example": "2020-10-30T10:50:50Z"
+        "participants": {
+          "description": "Participants to be added to the chat thread.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatParticipant"
+          }
         },
-        "lastMessageReceivedOn": {
-          "format": "date-time",
-          "description": "The timestamp when the last message arrived at the server. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
-          "type": "string",
-          "readOnly": true,
-          "example": "2020-10-30T10:50:50Z"
+        "metadata": {
+          "description": "Contextual metadata for the thread.",
+          "type": "string"
         }
       }
     },
@@ -1867,13 +1638,11 @@
       "properties": {
         "id": {
           "description": "Chat thread id.",
-          "minLength": 1,
           "type": "string",
           "example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
         },
         "topic": {
           "description": "Chat thread topic.",
-          "minLength": 1,
           "type": "string",
           "example": "Lunch Chat thread"
         },
@@ -1898,6 +1667,56 @@
         }
       }
     },
+    "CreateChatThreadResult": {
+      "description": "Result of the create chat thread operation.",
+      "type": "object",
+      "properties": {
+        "chatThread": {
+          "$ref": "#/definitions/ChatThreadProperties"
+        },
+        "invalidParticipants": {
+          "description": "The participants that failed to be added to the chat thread.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ChatThreadItem": {
+      "description": "Summary information of a chat thread.",
+      "required": [
+        "id",
+        "topic"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Chat thread id.",
+          "type": "string",
+          "example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
+        },
+        "topic": {
+          "description": "Chat thread topic.",
+          "type": "string",
+          "example": "Lunch Chat thread"
+        },
+        "deletedOn": {
+          "format": "date-time",
+          "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "example": "2020-10-30T10:50:50Z"
+        },
+        "lastMessageReceivedOn": {
+          "format": "date-time",
+          "description": "The timestamp when the last message arrived at the server. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-10-30T10:50:50Z"
+        },
+      }
+    },
     "ChatThreadsItemCollection": {
       "description": "Collection of chat threads.",
       "required": [
@@ -1919,123 +1738,14 @@
         }
       }
     },
-    "CommunicationCloudEnvironment": {
-      "$ref": "https://github.com/Azure/azure-rest-api-specs/tree/4b3d05177ad63685fbbb69f147ab104b85ecd7f4/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationCloudEnvironmentModel"
-    },
-    "CommunicationError": {
-      "$ref": "https://github.com/Azure/azure-rest-api-specs/tree/4b3d05177ad63685fbbb69f147ab104b85ecd7f4/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
-    },
-    "CommunicationErrorResponse": {
-      "$ref": "https://github.com/Azure/azure-rest-api-specs/tree/4b3d05177ad63685fbbb69f147ab104b85ecd7f4/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-    },
-    "CommunicationIdentifierModel": {
-      "$ref": "https://github.com/Azure/azure-rest-api-specs/tree/4b3d05177ad63685fbbb69f147ab104b85ecd7f4/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
-    },
-    "CommunicationUserIdentifierModel": {
-      "$ref": "https://github.com/Azure/azure-rest-api-specs/tree/4b3d05177ad63685fbbb69f147ab104b85ecd7f4/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/CommunicationUserIdentifierModel"
-    },
-    "CreateChatThreadRequest": {
-      "description": "Request payload for creating a chat thread.",
-      "required": [
-        "topic"
-      ],
+    "UpdateChatThreadRequest": {
+      "description": "Request payload for updating a chat thread.",
       "type": "object",
       "properties": {
         "topic": {
-          "description": "The chat thread topic.",
-          "minLength": 1,
+          "description": "Chat thread topic.",
           "type": "string",
           "example": "Lunch Thread"
-        },
-        "metadata": {
-          "description": "Contextual metadata for the thread.",
-          "type": "string"
-        },
-        "participants": {
-          "description": "Participants to be added to the chat thread.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatParticipant"
-          }
-        }
-      }
-    },
-    "CreateChatThreadResult": {
-      "description": "Result of the create chat thread operation.",
-      "type": "object",
-      "properties": {
-        "chatThread": {
-          "$ref": "#/definitions/ChatThreadProperties"
-        },
-        "invalidParticipants": {
-          "description": "The participants that failed to be added to the chat thread.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "MicrosoftTeamsUserIdentifierModel": {
-      "$ref": "https://github.com/Azure/azure-rest-api-specs/tree/4b3d05177ad63685fbbb69f147ab104b85ecd7f4/specification/communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
-    },
-    "SendChatMessageRequest": {
-      "description": "Details of the message to send.",
-      "required": [
-        "content"
-      ],
-      "type": "object",
-      "properties": {
-        "content": {
-          "description": "Chat message content.",
-          "type": "string",
-          "example": "Come one guys, lets go for lunch together."
-        },
-        "senderDisplayName": {
-          "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
-          "type": "string",
-          "example": "Bob Admin"
-        },
-        "type": {
-          "$ref": "#/definitions/ChatMessageType"
-        },
-        "metadata": {
-          "description": "Message metadata.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SendChatMessageResult": {
-      "description": "Result of the send message operation.",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "A server-generated message id.",
-          "minLength": 1,
-          "type": "string",
-          "example": "123456789"
-        }
-      }
-    },
-    "SendReadReceiptRequest": {
-      "description": "Request payload for sending a read receipt.",
-      "required": [
-        "chatMessageId"
-      ],
-      "type": "object",
-      "properties": {
-        "chatMessageId": {
-          "description": "Id of the latest chat message read by the user.",
-          "minLength": 1,
-          "type": "string",
-          "example": "1592435762364"
         }
       }
     },
@@ -2050,46 +1760,6 @@
         }
       }
     },
-    "TeamsInteropViewType": {
-      "enum": [
-        "original",
-        "small"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "TeamsInteropViewType",
-        "modelAsString": true
-      }
-    },
-    "UpdateChatMessageRequest": {
-      "description": "Request payload for updating a chat message.",
-      "type": "object",
-      "properties": {
-        "content": {
-          "description": "Chat message content.",
-          "type": "string",
-          "example": "Let's go for lunch together."
-        },
-        "metadata": {
-          "description": "Message metadata.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "UpdateChatThreadRequest": {
-      "description": "Request payload for updating a chat thread.",
-      "type": "object",
-      "properties": {
-        "topic": {
-          "description": "Chat thread topic.",
-          "type": "string",
-          "example": "Lunch Thread"
-        }
-      }
-    }
   },
   "parameters": {
     "ApiVersionParameter": {
@@ -2120,7 +1790,7 @@
   },
   "security": [
     {
-      "Authorization": [ ]
+      "Authorization": []
     }
   ],
   "x-ms-parameterized-host": {
