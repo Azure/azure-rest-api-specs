@@ -3367,6 +3367,7 @@
         "outputColumns": {
           "type": "object",
           "x-ms-format": "dfe-list-generic",
+          "x-ms-format-element-type": "object",
           "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
         }
       }
@@ -8368,6 +8369,32 @@
           "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide. Type: integer (or Expression with resultType integer).",
           "type": "object",
           "x-ms-format": "dfe-int"
+        },
+        "configurationType": {
+          "enum": [
+            "Default",
+            "Customized",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationParametrizationReference"
+        },
+        "sparkConfig": {
+          "description": "Spark configuration property.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [

@@ -16,6 +16,7 @@ namespace TextTranslation;
 op CustomOperation<TBody, TParams, TResponse, Traits = {}, TError = ErrorResponse>(
   ...TParams,
 
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing spec"
   @doc("Defines the content of the request")
   @body
   requestBody: TBody,
@@ -39,7 +40,7 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
-op GetLanguages is CustomGetOperation<
+op getLanguages is CustomGetOperation<
   GetLanguageParameters,
   GetLanguagesResult,
   {},
@@ -51,7 +52,7 @@ op GetLanguages is CustomGetOperation<
 @route("translate")
 @summary("Translate Text")
 @doc("Translate Text")
-op Translate is CustomOperation<
+op translate is CustomOperation<
   InputTextItem[],
   TranslateParameters,
   TranslationResult,
@@ -64,7 +65,7 @@ op Translate is CustomOperation<
 @route("transliterate")
 @summary("Transliterate Text")
 @doc("Transliterate Text")
-op Transliterate is CustomOperation<
+op transliterate is CustomOperation<
   InputTextItem[],
   TransliterateParameters,
   TransliterateResult,
@@ -77,7 +78,7 @@ op Transliterate is CustomOperation<
 @route("breaksentence")
 @summary("Find Sentence Boundaries")
 @doc("Find Sentence Boundaries")
-op FindSentenceBoundaries is CustomOperation<
+op findSentenceBoundaries is CustomOperation<
   InputTextItem[],
   BreakSentenceParameters,
   BreakSentenceResult,
@@ -90,7 +91,7 @@ op FindSentenceBoundaries is CustomOperation<
 @route("dictionary/lookup")
 @summary("Lookup Dictionary Entries")
 @doc("Lookup Dictionary Entries")
-op LookupDictionaryEntries is CustomOperation<
+op lookupDictionaryEntries is CustomOperation<
   InputTextItem[],
   DictionaryLookupParameters,
   DictionaryLookupResult,
@@ -103,7 +104,7 @@ op LookupDictionaryEntries is CustomOperation<
 @route("dictionary/examples")
 @summary("Lookup Dictionary Examples")
 @doc("Lookup Dictionary Examples")
-op LookupDictionaryExamples is CustomOperation<
+op lookupDictionaryExamples is CustomOperation<
   DictionaryExampleTextItem[],
   DictionaryExamplesParameters,
   DictionaryExamplesResult,
