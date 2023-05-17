@@ -2091,8 +2091,8 @@
           ]
         },
         "credentials": {
-          "description": "The secrets URIs which store the required credentials to access the SMB share.",
-          "$ref": "#/definitions/Credentials"
+          "description": "The Azure Key Vault secret URIs which store the required credentials to access the SMB share.",
+          "$ref": "#/definitions/AzureKeyVaultSmbCredentials"
         }
       },
       "required": [
@@ -2111,8 +2111,8 @@
       "description": "The properties of SMB share endpoint to update.",
       "properties": {
         "credentials": {
-          "description": "The secrets URIs which store the required credentials to access the SMB share.",
-          "$ref": "#/definitions/Credentials"
+          "description": "The Azure Key Vault secret URIs which store the required credentials to access the SMB share.",
+          "$ref": "#/definitions/AzureKeyVaultSmbCredentials"
         }
       },
       "allOf": [
@@ -2135,21 +2135,56 @@
         "modelAsString": true
       }
     },
+    "CredentialType": {
+      "description": "The Credentials type.",
+      "enum": [
+        "AzureKeyVaultSmb"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CredentialType",
+        "modelAsString": true
+      }
+    },
     "Credentials": {
-      "description": "The secrets URIs which store the credentials.",
+      "description": "The Credentials.",
       "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "The Credentials type.",
+          "$ref": "#/definitions/CredentialType",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureKeyVaultSmbCredentials": {
+      "description": "The Azure Key Vault secret URIs which store the credentials.",
+      "type": "object",
+      "x-ms-discriminator-value": "AzureKeyVaultSmb",
       "properties": {
         "usernameUri": {
-          "description": "The secret URI which stores the username. Use empty string to clean-up existing value.",
+          "description": "The Azure Key Vault secret URI which stores the username. Use empty string to clean-up existing value.",
           "type": "string",
           "format": "uri"
         },
         "passwordUri": {
-          "description": "The secret URI which stores the password. Use empty string to clean-up existing value.",
+          "description": "The Azure Key Vault secret URI which stores the password. Use empty string to clean-up existing value.",
           "type": "string",
           "format": "uri"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Credentials"
+        }
+      ]
     },
     "JobDefinitionProperties": {
       "description": "Job definition properties.",
