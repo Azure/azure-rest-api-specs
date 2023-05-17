@@ -3,9 +3,244 @@
   "info": {
     "title": "Azure Communication Chat Service",
     "description": "Azure Communication Chat Service",
-    "version": "2021-03-07"
+    "version": "2023-07-01-preview"
   },
   "paths": {
+    "/chat/botmanagement/findexpiringregs": {
+      "post": {
+        "tags": [
+          "BotManagement"
+        ],
+        "operationId": "FindExpiringBotRegistrations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "findOrphans",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/chat/botmanagement/refreshBot": {
+      "post": {
+        "tags": [
+          "BotManagement"
+        ],
+        "operationId": "RefreshBot",
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "botInfo",
+            "schema": {
+              "$ref": "#/definitions/BotInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/chat/botmanagement/getRegistration": {
+      "get": {
+        "tags": [
+          "BotManagement"
+        ],
+        "operationId": "getRegistration",
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "botInfo",
+            "schema": {
+              "$ref": "#/definitions/BotInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/chat/botmanagement/getBot": {
+      "get": {
+        "tags": [
+          "BotManagement"
+        ],
+        "operationId": "getBot",
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "botInfo",
+            "schema": {
+              "$ref": "#/definitions/BotInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
     "/chat/threads/{chatThreadId}/readReceipts": {
       "get": {
         "tags": [
@@ -537,68 +772,6 @@
         }
       }
     },
-    "/chat/threads/{chatThreadId}/typing": {
-      "post": {
-        "tags": [
-          "Messages"
-        ],
-        "summary": "Posts a typing event to a thread, on behalf of a user.",
-        "operationId": "ChatThread_SendTypingNotification",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chatThreadId",
-            "description": "Id of the thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful."
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Post typing event to a thread": {
-            "$ref": "./examples/Messages_SendTypingNotification.json"
-          }
-        }
-      }
-    },
     "/chat/threads/{chatThreadId}/participants": {
       "get": {
         "tags": [
@@ -830,6 +1003,78 @@
         "x-ms-examples": {
           "Add participants": {
             "$ref": "./examples/Participants_AddChatParticipants.json"
+          }
+        }
+      }
+    },
+    "/chat/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/{viewType}": {
+      "get": {
+        "tags": [
+          "TeamsInterop"
+        ],
+        "operationId": "GetImageWithType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chatThreadId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chatMessageId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "imageId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "viewType",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -1183,6 +1428,80 @@
           }
         }
       }
+    },
+    "/chat/threads/{chatThreadId}/typing": {
+      "post": {
+        "tags": [
+          "TypingNotifications"
+        ],
+        "summary": "Posts a typing event to a thread, on behalf of a user.",
+        "operationId": "ChatThread_SendTypingNotification",
+        "consumes": [
+          "application/json",
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chatThreadId",
+            "description": "Id of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "sendTypingNotificationRequest",
+            "description": "Details of the typing notification request.",
+            "schema": {
+              "$ref": "#/definitions/SendTypingNotificationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful."
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Post typing event to a thread": {
+            "$ref": "./examples/Messages_SendTypingNotification.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1214,6 +1533,59 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "BotInfo": {
+      "type": "object",
+      "properties": {
+        "botAppId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "botMri": {
+          "type": "string"
+        }
+      }
+    },
+    "ChatAttachment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the attachment",
+          "type": "string"
+        },
+        "attachmentType": {
+          "$ref": "#/definitions/ChatAttachmentType"
+        },
+        "contentType": {
+          "description": "The attachment's content type (Mime type?)",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of attachment",
+          "type": "string"
+        },
+        "url": {
+          "description": "The location of the attachment",
+          "type": "string"
+        },
+        "previewUrl": {
+          "description": "The location of a preview for the attachment",
+          "type": "string"
+        }
+      }
+    },
+    "ChatAttachmentType": {
+      "description": "The chat message type.",
+      "enum": [
+        "teamsInlineImage",
+        "teamsImage",
+        "file"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChatAttachmentType",
+        "modelAsString": true
       }
     },
     "ChatMessage": {
@@ -1274,6 +1646,13 @@
           "description": "The last timestamp (if applicable) when the message was edited. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "metadata": {
+          "description": "Message metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1300,6 +1679,13 @@
         },
         "initiatorCommunicationIdentifier": {
           "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "attachments": {
+          "description": "List of attachments to this chat message.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatAttachment"
+          }
         }
       }
     },
@@ -1406,6 +1792,10 @@
           "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "metadata": {
+          "description": "Contextual metadata for the chat participant.",
+          "type": "string"
         }
       }
     },
@@ -1501,6 +1891,10 @@
           "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "metadata": {
+          "description": "Contextual metadata for the thread.",
+          "type": "string"
         }
       }
     },
@@ -1553,6 +1947,10 @@
           "type": "string",
           "example": "Lunch Thread"
         },
+        "metadata": {
+          "description": "Contextual metadata for the thread.",
+          "type": "string"
+        },
         "participants": {
           "description": "Participants to be added to the chat thread.",
           "type": "array",
@@ -1601,6 +1999,13 @@
         },
         "type": {
           "$ref": "#/definitions/ChatMessageType"
+        },
+        "metadata": {
+          "description": "Message metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1634,6 +2039,28 @@
         }
       }
     },
+    "SendTypingNotificationRequest": {
+      "description": "Request payload for typing notifications.",
+      "type": "object",
+      "properties": {
+        "senderDisplayName": {
+          "description": "The display name of the typing notification sender. This property is used to populate sender name for push notifications.",
+          "type": "string",
+          "example": "Bob Admin"
+        }
+      }
+    },
+    "TeamsInteropViewType": {
+      "enum": [
+        "original",
+        "small"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TeamsInteropViewType",
+        "modelAsString": true
+      }
+    },
     "UpdateChatMessageRequest": {
       "description": "Request payload for updating a chat message.",
       "type": "object",
@@ -1642,6 +2069,13 @@
           "description": "Chat message content.",
           "type": "string",
           "example": "Let's go for lunch together."
+        },
+        "metadata": {
+          "description": "Message metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
