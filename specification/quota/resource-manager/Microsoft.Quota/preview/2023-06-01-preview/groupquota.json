@@ -627,7 +627,7 @@
         ],
         "summary": "Gets all the quota assigned to a subscription for the specific Resource Provider, Location.",
         "description": "Gets all the quota assigned to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
-        "operationId": "ShareQuota_MG_Subscription_List",
+        "operationId": "ShareQuotaMGSubscription_List",
         "x-ms-examples": {
           "GroupQuota_Put_Request_ForCompute": {
             "$ref": "./examples/PutQuotaAllocation-Compute.json"
@@ -673,7 +673,7 @@
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
         "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, which means the maximum unused quota assigned back to MG groupQuota will be the groupQuota assigned to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription.",
-        "operationId": "GroupQuotaSubscription_QuotaAllocation_Create",
+        "operationId": "GroupQuotaSubscriptionQuotaAllocation_Create",
         "x-ms-examples": {
           "ShareQuotaOrder_Subscription_Allocation_Put_ForCompute": {
             "$ref": "./examples/PutQuotaAllocation-Compute.json"
@@ -751,9 +751,9 @@
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern with 202 response and status polling API.",
         "description": "Request to assign quota from group quota to a specific Subscription. The subscriptions and reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, using this API. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription(s).",
-        "operationId": "GroupQuotaSubscription_QuotaAllocation_Update",
+        "operationId": "GroupQuotaSubscriptionQuotaAllocation_Update",
         "x-ms-examples": {
-          "ShareQuotaOrder_Subscription_Allocation_Patch_ForCompute": {
+          "SharedQuota_Subscription_Allocation_Patch_ForCompute": {
             "$ref": "./examples/PatchQuotaAllocation-Compute.json"
           }
         },
@@ -829,7 +829,7 @@
         ],
         "summary": "Gets Quota assigned to a subscription for the specific Resource Provider, Location, ResourceName.",
         "description": "Gets Quota assigned to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
-        "operationId": "GroupQuotaSubscription_QuotaAllocation_Get",
+        "operationId": "GroupQuotaSubscriptionQuotaAllocation_Get",
         "x-ms-examples": {
           "ShareQuotaOrder_Subscription_Allocation_Get_ForCompute": {
             "$ref": "./examples/GetQuotaAllocation-Compute.json"
@@ -876,7 +876,7 @@
         "tags": [
           "Subscription-Quota-Allocation-Requests"
         ],
-        "operationId": "GroupQuotaSubscription_QuotaAllocationRequests_Get",
+        "operationId": "GroupQuotaSubscriptionQuotaAllocationRequests_Get",
         "summary": "Get the status of the quota allocation request for the subscriptionId.",
         "description": "Get the quota allocation request status for the subscriptionId by allocationId.",
         "x-ms-examples": {
@@ -925,7 +925,7 @@
         "tags": [
           "Subscription-Quota-Allocation-Requests"
         ],
-        "operationId": "SubscriptionGroupQuota-Allocation_Request_List",
+        "operationId": "SubscriptionGroupQuotaAllocationRequest_List",
         "summary": "Lists all the quota allocation requests.to subscriptions",
         "description": "Lists all the allocation requests.",
         "x-ms-examples": {
@@ -988,7 +988,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1091,7 +1092,8 @@
       "description": "Assigned Group Quota to subscriptions.",
       "items": {
         "$ref": "#/definitions/AssignedToSubscription"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "GroupQuotaLimit": {
       "type": "object",
@@ -1232,7 +1234,8 @@
       "description": "Assigned Group Quota to subscriptions.",
       "items": {
         "$ref": "#/definitions/SubscriptionGroupQuotaAssignment"
-      }
+      },
+      "x-ms-identifiers": []
     },
     "SubscriptionQuotaLimit": {
       "type": "object",
@@ -1334,10 +1337,15 @@
       }
     },
     "SubmittedResourceRequestStatusList": {
-      "type": "array",
-      "description": "Subscription groupQuotaRequests list.",
-      "items": {
-        "$ref": "#/definitions/SubscriptionQuotaLimit"
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Subscription groupQuotaRequests list.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaLimit"
+          }
+        }
       }
     },
     "SharedQuotaEntity": {
@@ -1360,14 +1368,16 @@
           "description": "The entity name. The entity name is provided in the request, so it is not needed in the request body. The response will include it.",
           "readOnly": true
         },
-        "subscriptionFilters": {
-          "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand.",
-          "$ref": "#/definitions/Filters"
-        },
-        "provisioningState": {
-          "description": "provisioning state of the operation.",
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
+        "properties": {
+          "subscriptionFilters": {
+            "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand.",
+            "$ref": "#/definitions/Filters"
+          },
+          "provisioningState": {
+            "description": "provisioning state of the operation.",
+            "$ref": "#/definitions/RequestState",
+            "readOnly": true
+          }
         }
       }
     },
@@ -1483,6 +1493,9 @@
       "name": "sharedQuotaEntityName",
       "in": "path",
       "required": true,
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
       "type": "string",
       "description": "The SharedQuotaEntity name. The name should be unique for the provided context tenantId/MgId.",
       "x-ms-parameter-location": "method"
@@ -1491,6 +1504,7 @@
       "name": "api-version",
       "in": "query",
       "required": true,
+      "x-ms-parameter-location": "client",
       "type": "string",
       "description": "Version of the API to be used with the client request. The current version is 2023-06-01-preview.",
       "minLength": 1
@@ -1500,9 +1514,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-z][a-z0-9]*$",
-      "minLength": 3,
-      "maxLength": 63,
       "description": "Scope for the resource. Some resources do not require location parameter, such as CosmosDb, so can be skipped in scope. For most of the resources require - providers/Microsoft.Compute/locations/{locationName}. Some Rps such as Batch requires batchAccountName - providers/Microsoft.Batch/locations/{locationName}/accountName/{batchAccountName}. This extension enables to specify resources for any all the RPs.",
       "x-ms-parameter-location": "method"
     }
