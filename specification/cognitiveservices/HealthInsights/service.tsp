@@ -3,7 +3,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-
 @service({title: "Azure Health Insights"})
 @versioned(ApiVersion)
 @doc("Azure Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.")
