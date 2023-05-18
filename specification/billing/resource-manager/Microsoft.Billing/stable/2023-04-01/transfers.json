@@ -579,13 +579,6 @@
         "parameters": [
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -698,6 +691,7 @@
       "type": "string",
       "description": "The type of product that is transferred.",
       "enum": [
+        "Unknown",
         "AzureSubscription",
         "AzureReservation",
         "SavingsPlan"
@@ -802,6 +796,7 @@
       "type": "string",
       "description": "Type of the products that can be transferred.",
       "enum": [
+        "Unknown",
         "DevTestAzureSubscription",
         "StandardAzureSubscription",
         "AzureReservation",
@@ -985,6 +980,7 @@
       "type": "string",
       "description": "The status of a transfer.",
       "enum": [
+        "Unknown",
         "Pending",
         "InProgress",
         "Completed",
@@ -1002,6 +998,7 @@
       "type": "string",
       "description": "The status of a transfer.",
       "enum": [
+        "Unknown",
         "NotStarted",
         "InProgress",
         "Completed",
@@ -1142,6 +1139,7 @@
       "type": "string",
       "description": "The supported account types.",
       "enum": [
+        "Unknown",
         "Partner",
         "Individual",
         "Enterprise"
@@ -1170,7 +1168,7 @@
       "required": true,
       "type": "string",
       "description": "The ID that uniquely identifies a transfer request.",
-	  "pattern": "^[a-z0-9]*$"
+      "pattern": "^[a-z0-9]*$"
     }
   },
   "security": [
