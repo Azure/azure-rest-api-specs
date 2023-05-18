@@ -139,8 +139,8 @@ model ChatCompletionsOptions {
     """)
     @projectedName("json", "model")
     @projectedName("csharp", "InternalNonAzureModelName")
-    "model"?: string;
-};
+    `model`?: string;
+}
 
 @doc("""
 The representation of a single prompt completion as part of an overall chat completions request.
@@ -158,7 +158,7 @@ model ChatChoice {
 
     @doc("The reason that this chat completions choice completed its generated.")
     @projectedName("json", "finish_reason")
-    finishReason: CompletionsFinishReason | null;
+    finishReason?: CompletionsFinishReason;
 
     @doc("The delta message content for a streaming response.")
     @projectedName("json", "delta")

@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
@@ -9,7 +8,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
@@ -43,26 +41,31 @@ interface ImageOperations {
   >;
 }
 
+interface BlockOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
   @doc("Returns text blocklist details.")
-  getTextBlocklist is Azure.Core.ResourceRead<TextBlocklist>;
+  getTextBlocklist is BlockOps.ResourceRead<TextBlocklist>;
 
   @summary("Create Or Update Text Blocklist")
   @doc("Updates a text blocklist, if blocklistName does not exist, create a new blocklist.")
-  createOrUpdateTextBlocklist is Azure.Core.ResourceCreateOrUpdate<TextBlocklist>;
+  createOrUpdateTextBlocklist is BlockOps.ResourceCreateOrUpdate<TextBlocklist>;
 
   @summary("Delete Text Blocklist By blocklistName")
   @doc("Deletes a text blocklist.")
-  deleteTextBlocklist is Azure.Core.ResourceDelete<TextBlocklist>;
+  deleteTextBlocklist is BlockOps.ResourceDelete<TextBlocklist>;
 
   @summary("Get All Text Blocklists")
   @doc("Get all text blocklists details.")
-  listTextBlocklists is Azure.Core.ResourceList<TextBlocklist>;
+  listTextBlocklists is BlockOps.ResourceList<TextBlocklist>;
 
   @summary("Add BlockItems To Text Blocklist")
   @doc("Add blockItems to a text blocklist. You can add at most 100 BlockItems in one request.")
-  addBlockItems is ResourceAction<
+  addBlockItems is BlockOps.ResourceAction<
     TextBlocklist,
     AddBlockItemsOptions,
     AddBlockItemsResult
@@ -70,7 +73,7 @@ interface TextBlocklists {
 
   @summary("Remove BlockItems From Text Blocklist")
   @doc("Remove blockItems from a text blocklist. You can remove at most 100 BlockItems in one request.")
-  removeBlockItems is ResourceAction<
+  removeBlockItems is BlockOps.ResourceAction<
     TextBlocklist,
     RemoveBlockItemsOptions,
     NoContentResponse
@@ -78,11 +81,11 @@ interface TextBlocklists {
 
   @summary("Get BlockItem By blocklistName And blockItemId")
   @doc("Get blockItem By blockItemId from a text blocklist.")
-  getTextBlocklistItem is Azure.Core.ResourceRead<TextBlockItem>;
+  getTextBlocklistItem is BlockOps.ResourceRead<TextBlockItem>;
 
   @summary("Get All BlockItems By blocklistName")
   @doc("Get all blockItems in a text blocklist")
-  listTextBlocklistItems is Azure.Core.ResourceList<
+  listTextBlocklistItems is BlockOps.ResourceList<
     TextBlockItem,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
