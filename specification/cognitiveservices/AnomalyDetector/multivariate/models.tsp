@@ -274,7 +274,7 @@ model AnomalyDetectorDiagnosticDetails {
   variableStates?: MultivariateVariableState[];
 }
 
-@doc("Model status.")
+@doc("Model state.")
 model MultivariateModelState {
   @doc("""
 Number of passes of the entire training dataset that the
