@@ -1544,11 +1544,12 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "format": "url",
           "description": "The Url of next result page.",
           "type": "string"
         },
         "value": {
-          "description": "Collection of items of type DataTransferObjects.",
+          "description": "Collection of items of type ReceivedShare",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReceivedShare"
@@ -1618,11 +1619,12 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "format": "url",
           "description": "The Url of next result page.",
           "type": "string"
         },
         "value": {
-          "description": "Collection of items of type DataTransferObjects.",
+          "description": "Collection of items of type SentShareInvitation",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SentShareInvitation"
@@ -1638,11 +1640,12 @@
       "type": "object",
       "properties": {
         "nextLink": {
+          "format": "url",
           "description": "The Url of next result page.",
           "type": "string"
         },
         "value": {
-          "description": "Collection of items of type DataTransferObjects.",
+          "description": "Collection of items of type SentShare",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SentShare"
@@ -1722,22 +1725,6 @@
         }
       }
     },
-    "ShareCounts": {
-      "description": "A ShareCounts Data Transfer Object.",
-      "type": "object",
-      "properties": {
-        "receivedSharesCount": {
-          "format": "int32",
-          "description": "A count of Received Shares associated with the Microsoft.Azure.Purview.Share.ApiService.V3.DataTransferObjects.ShareResource.",
-          "type": "integer"
-        },
-        "sentSharesCount": {
-          "format": "int32",
-          "description": "A count of Sent Shares associated with the Microsoft.Azure.Purview.Share.ApiService.V3.DataTransferObjects.ShareResource.",
-          "type": "integer"
-        }
-      }
-    },
     "ShareKind": {
       "description": "Defines the supported types for share.",
       "enum": [
@@ -1765,8 +1752,15 @@
         }
       ],
       "properties": {
-        "shareCounts": {
-          "$ref": "#/definitions/ShareCounts"
+        "receivedSharesCount": {
+          "format": "int32",
+          "description": "A count of Received Shares associated with the Microsoft.Azure.Purview.Share.ApiService.V3.DataTransferObjects.ShareResource.",
+          "type": "integer"
+        },
+        "sentSharesCount": {
+          "format": "int32",
+          "description": "A count of Sent Shares associated with the Microsoft.Azure.Purview.Share.ApiService.V3.DataTransferObjects.ShareResource.",
+          "type": "integer"
         },
         "storeKind": {
           "$ref": "#/definitions/StoreKind"
@@ -1777,18 +1771,19 @@
       }
     },
     "ShareResourceList": {
-      "description": "A page of Microsoft.Azure.Purview.Share.ApiService.V3.DataTransferObjects.ShareResource results.",
+      "description": "A page of ShareResource results.",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "nextLink": {
+          "format": "url",
           "description": "The Url of next result page.",
           "type": "string"
         },
         "value": {
-          "description": "Collection of items of type DataTransferObjects.",
+          "description": "Collection of items of type ShareResource",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ShareResource"
