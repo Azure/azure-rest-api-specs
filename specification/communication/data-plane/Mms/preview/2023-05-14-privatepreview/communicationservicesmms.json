@@ -1,18 +1,18 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Communication MMS Service",
-    "description": "Azure Communication Mms Service",
+    "title": "Azure Communication Telco Messaging Service",
+    "description": "Azure Communication Telco Messaging Service",
     "version": "2023-05-14-privatepreview"
   },
   "paths": {
-    "/mms": {
+    "/telco-messaging": {
       "post": {
         "tags": [
-          "Mms"
+          "TelcoMessaging"
         ],
-        "summary": "Sends MMS message from a phone number that belongs to the authenticated account.",
-        "operationId": "Mms_Send",
+        "summary": "Sends an SMS or MMS message from a phone number that belongs to the authenticated account.",
+        "operationId": "Message_Send",
         "x-ms-examples": {
           "SuccessfulSend": {
             "$ref": "./examples/send.json"
@@ -31,7 +31,7 @@
             "description": "Represents the body of the send message request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MmsSendMessageRequest"
+              "$ref": "#/definitions/SendMessageRequest"
             }
           },
           {
@@ -46,7 +46,7 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/MmsSendResponse"
+              "$ref": "#/definitions/SendMessageResponse"
             }
           }
         }
@@ -54,61 +54,7 @@
     }
   },
   "definitions": {
-    "MmsSendMessageRequest": {
-      "description": "Represents the properties of a send message request.",
-      "required": [
-        "attachments",
-        "from",
-        "recipients"
-      ],
-      "type": "object",
-      "properties": {
-        "from": {
-          "description": "The from identifier that is owned by the authenticated account. Typically in E.164 phone number format.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "recipients": {
-          "description": "The to phone numbers in E.164 format.",
-          "maxItems": 100,
-          "minItems": 1,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MmsSendRecipient"
-          }
-        },
-        "message": {
-          "description": "The contents of the message that will be sent to the recipient.",
-          "maxLength": 1000,
-          "minLength": 0,
-          "type": "string"
-        },
-        "attachments": {
-          "description": "A list of media attachments to include as part of the MMS. You can have maximum 10 attachments.",
-          "maxItems": 10,
-          "minItems": 0,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MmsSendRequestAttachment"
-          }
-        }
-      }
-    },
-    "MmsSendRecipient": {
-      "description": "Represents properties for a single recipient",
-      "required": [
-        "to"
-      ],
-      "type": "object",
-      "properties": {
-        "to": {
-          "description": "The recipient's phone number in E.164 format.",
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "MmsSendRequestAttachment": {
+    "SendMessageAttachment": {
       "description": "Represents the properties of a send request attachment.",
       "required": [
         "content",
@@ -130,7 +76,59 @@
         }
       }
     },
-    "MmsSendResponse": {
+    "SendMessageRecipient": {
+      "description": "Represents properties for a single recipient",
+      "required": [
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "SendMessageRequest": {
+      "description": "Represents the properties of a send message request.",
+      "required": [
+        "from",
+        "recipients"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The from identifier that is owned by the authenticated account. Typically in E.164 phone number format.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "recipients": {
+          "description": "The to phone numbers in E.164 format.",
+          "maxItems": 100,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SendMessageRecipient"
+          }
+        },
+        "message": {
+          "description": "The contents of the message that will be sent to the recipient.",
+          "maxLength": 1000,
+          "minLength": 0,
+          "type": "string"
+        },
+        "attachments": {
+          "description": "A list of media attachments to include as part of the message. You can have maximum 10 attachments.",
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SendMessageAttachment"
+          }
+        }
+      }
+    },
+    "SendMessageResponse": {
       "description": "Response for a successful or multi status send request.",
       "type": "object",
       "properties": {
@@ -138,12 +136,12 @@
           "description": "Gets or sets the outgoing recipient phone number, message id,\r\nresponse status code and human-readable message",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MmsSendResponseItem"
+            "$ref": "#/definitions/SendMessageResponseItem"
           }
         }
       }
     },
-    "MmsSendResponseItem": {
+    "SendMessageResponseItem": {
       "description": "Response for a single recipient.",
       "type": "object",
       "properties": {
