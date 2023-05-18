@@ -11,6 +11,7 @@ using Azure.ClientGenerator.Core;
 @@projectedName(AnomalyDetector.Multivariate.ModelDetails.startTime, "csharp", "startsOn"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Multivariate.DetectionValue.interpretation, "csharp", "interpretations"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Multivariate.DetectionValue.interpretation, "java", "interpretations"); // Prefer a different name for java only
+@@projectedName(AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary.setupInfo, "java", "batchDetectionSettings"); // Prefer a different name for java only
 @@projectedName(AnomalyDetector.Univariate.DetectUnivariateLastPoint, "client", "detectUnivariateLastAnomaly"); // Use detectUnivariateLastAnomaly in all clients
 @@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isAnomaly, "client", "isAnomalyList"); // Use isAnomalyList in all clients
 @@projectedName(AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isNegativeAnomaly, "client", "isNegativeAnomalyList"); // Use isNegativeAnomalyList in all clients
