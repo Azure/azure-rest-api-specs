@@ -1,0 +1,117 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  configStoreName:
+    type: string
+    prefix: configstor
+  privateEndpointConnectionName:
+    type: string
+    prefix: privateend
+  keyValueName:
+    type: string
+    prefix: keyvaluena
+  groupName: configurationStores
+
+prepareSteps:
+  - step: createVirtualNetwork
+    operationId: VirtualNetworks_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md
+    parameters:
+      virtualNetworkName: $(configStoreName)-vnet
+      parameters:
+        location: $(location)
+        properties:
+          addressSpace:
+            addressPrefixes:
+              - 10.0.0.0/16
+          subnets:
+            - name: subnet-1
+              properties:
+                addressPrefix: 10.0.0.0/24
+    outputVariables:
+      subnetId:
+        type: string
+        fromResponse: /properties/subnets/0/id
+
+  - step: createPublicIPAddress
+    operationId: PublicIPAddresses_CreateOrUpdate
+    readmeTag: ../../../../../../network/resource-manager/readme.md
+    parameters:
+      publicIpAddressName: $(configStoreName)-ip
+      parameters:
+        location: $(location)
+
+scenarios:
+  - steps:
+      - step: Operations_List
+        operationId: Operations_List
+      - step: Operations_CheckNameAvailability
+        exampleFile: ../examples/CheckNameAvailable.json
+      - step: Operations_RegionalCheckNameAvailability
+        exampleFile: ../examples/RegionalCheckNameAvailable.json
+      - step: ConfigurationStores_Create
+        exampleFile: ../examples/ConfigurationStoresCreate.json
+        outputVariables:
+          configurationStoreId:
+            type: string
+            fromResponse: /id
+      - step: ConfigurationStores_List
+        exampleFile: ../examples/ConfigurationStoresList.json
+      - step: ConfigurationStores_ListByResourceGroup
+        exampleFile: ../examples/ConfigurationStoresListByResourceGroup.json
+      - step: ConfigurationStores_ListDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresList.json
+      - step: ConfigurationStores_Get
+        exampleFile: ../examples/ConfigurationStoresGet.json
+      - step: ConfigurationStores_Update
+        exampleFile: ../examples/ConfigurationStoresUpdate.json
+      - step: ConfigurationStores_ListKeys
+        exampleFile: ../examples/ConfigurationStoresListKeys.json
+        outputVariables:
+          keyId:
+            fromResponse: /value/0/id
+      - step: ConfigurationStores_RegenerateKey
+        exampleFile: ../examples/ConfigurationStoresRegenerateKey.json
+        requestUpdate:
+          - replace: /regenerateKeyParameters/id
+            value: $(keyId)
+      - step: KeyValues_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresCreateKeyValue.json
+      - step: KeyValues_Get
+        exampleFile: ../examples/ConfigurationStoresGetKeyValue.json
+      - step: createPrivateEndpoints
+        operationId: PrivateEndpoints_CreateOrUpdate
+        readmeTag: ../../../../../../network/resource-manager/readme.md
+        parameters:
+          privateEndpointName: $(privateEndpointConnectionName)-endpoint
+          parameters:
+            location: $(location)
+            properties:
+              subnet:
+                id: $(subnetId)
+              privateLinkServiceConnections:
+                - name: $(privateEndpointConnectionName)
+                  properties:
+                    privateLinkServiceId: $(configurationStoreId)
+                    groupIds:
+                      - $(groupName)
+      - step: PrivateEndpointConnections_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresUpdatePrivateEndpointConnection.json
+      - step: PrivateEndpointConnections_ListByConfigurationStore
+        exampleFile: ../examples/ConfigurationStoresListPrivateEndpointConnections.json
+      - step: PrivateEndpointConnections_Get
+        exampleFile: ../examples/ConfigurationStoresGetPrivateEndpointConnection.json
+      - step: PrivateLinkResources_ListByConfigurationStore
+        exampleFile: ../examples/PrivateLinkResourcesListByConfigurationStore.json
+      - step: PrivateLinkResources_Get
+        exampleFile: ../examples/PrivateLinkResourceGet.json
+      - step: PrivateEndpointConnections_Delete
+        exampleFile: ../examples/ConfigurationStoresDeletePrivateEndpointConnection.json
+      - step: KeyValues_Delete
+        exampleFile: ../examples/ConfigurationStoresDeleteKeyValue.json
+      - step: ConfigurationStores_Delete
+        exampleFile: ../examples/ConfigurationStoresDelete.json
+      - step: ConfigurationStores_GetDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresGet.json
+      - step: ConfigurationStores_PurgeDeleted
+        exampleFile: ../examples/DeletedConfigurationStoresPurge.json
