@@ -297,6 +297,18 @@
               "$ref": "#/definitions/FileSystemResource"
             }
           },
+          "201": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "202": {
+            "description": "ARM create operation Accepted successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
@@ -308,7 +320,11 @@
           "FileSystems_Update_MaximumSet_Gen": {
             "$ref": "./examples/FileSystems_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
