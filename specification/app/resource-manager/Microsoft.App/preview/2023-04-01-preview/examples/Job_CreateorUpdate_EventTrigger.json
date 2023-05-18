@@ -15,16 +15,15 @@
             "replicaCompletionCount": 1,
             "parallelism": 4,
             "scale": {
-              "minReplicas": 1,
-              "maxReplicas": 5,
+              "pollingInterval": 40,
+              "minExecutions": 1,
+              "maxExecutions": 5,
               "rules": [
                 {
                   "name": "servicebuscalingrule",
-                  "custom": {
-                    "type": "azure-servicebus",
-                    "metadata": {
-                      "concurrentRequests": "50"
-                    }
+                  "type": "azure-servicebus",
+                  "metadata": {
+                    "topicName": "my-topic"
                   }
                 }
               ]
@@ -36,24 +35,7 @@
           "containers": [
             {
               "image": "repo/testcontainerAppsJob0:v1",
-              "name": "testcontainerAppsJob0",
-              "probes": [
-                {
-                  "type": "Liveness",
-                  "httpGet": {
-                    "path": "/health",
-                    "port": 8080,
-                    "httpHeaders": [
-                      {
-                        "name": "Custom-Header",
-                        "value": "Awesome"
-                      }
-                    ]
-                  },
-                  "initialDelaySeconds": 5,
-                  "periodSeconds": 3
-                }
-              ]
+              "name": "testcontainerAppsJob0"
             }
           ],
           "initContainers": [
@@ -95,16 +77,15 @@
               "replicaCompletionCount": 1,
               "parallelism": 4,
               "scale": {
-                "minReplicas": 1,
-                "maxReplicas": 5,
+                "pollingInterval": 20,
+                "minExecutions": 1,
+                "maxExecutions": 5,
                 "rules": [
                   {
-                    "name": "servicebuscalingrule",
-                    "custom": {
-                      "type": "azure-servicebus",
-                      "metadata": {
-                        "concurrentRequests": "50"
-                      }
+                    "name": "githubscalingrule",
+                    "type": "github-runner",
+                    "metadata": {
+                      "githubAPIURL": "https://api.github.com"
                     }
                   }
                 ]
@@ -120,24 +101,7 @@
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"
-                },
-                "probes": [
-                  {
-                    "type": "Liveness",
-                    "httpGet": {
-                      "path": "/health",
-                      "port": 8080,
-                      "httpHeaders": [
-                        {
-                          "name": "Custom-Header",
-                          "value": "Awesome"
-                        }
-                      ]
-                    },
-                    "initialDelaySeconds": 3,
-                    "periodSeconds": 3
-                  }
-                ]
+                }
               }
             ],
             "initContainers": [
@@ -181,16 +145,16 @@
               "replicaCompletionCount": 1,
               "parallelism": 4,
               "scale": {
-                "minReplicas": 1,
-                "maxReplicas": 5,
+                "minExecutions": 1,
+                "maxExecutions": 5,
+                "pollingInterval": 20,
                 "rules": [
                   {
                     "name": "servicebuscalingrule",
-                    "custom": {
-                      "type": "azure-servicebus",
-                      "metadata": {
-                        "concurrentRequests": "50"
-                      }
+                    "type": "azure-servicebus",
+                    "metadata": {
+                      "queueName": "my-queue",
+                      "messageCount": "50"
                     }
                   }
                 ]
@@ -206,24 +170,7 @@
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"
-                },
-                "probes": [
-                  {
-                    "type": "Liveness",
-                    "httpGet": {
-                      "path": "/health",
-                      "port": 8080,
-                      "httpHeaders": [
-                        {
-                          "name": "Custom-Header",
-                          "value": "Awesome"
-                        }
-                      ]
-                    },
-                    "initialDelaySeconds": 3,
-                    "periodSeconds": 3
-                  }
-                ]
+                }
               }
             ],
             "initContainers": [

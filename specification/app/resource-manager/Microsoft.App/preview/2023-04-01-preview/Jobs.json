@@ -711,7 +711,7 @@
         },
         "eventTriggerConfig": {
           "type": "object",
-          "description": "Manual trigger configuration for a single execution job. Properties replicaCompletionCount and parallelism would be set to 1 by default",
+          "description": "Trigger configuration of an event driven job.",
           "properties": {
             "replicaCompletionCount": {
               "$ref": "#/definitions/ReplicaCompletionCount"
@@ -720,7 +720,7 @@
               "$ref": "#/definitions/Parallelism"
             },
             "scale": {
-              "$ref": "./CommonDefinitions.json#/definitions/Scale"
+              "$ref": "#/definitions/JobScale"
             }
           }
         },
@@ -934,6 +934,64 @@
       "description": "Number of parallel replicas of a job that can run at a given time.",
       "format": "int32",
       "type": "integer"
+    },
+    "PollingInterval": {
+      "description": "Interval to check each event source in seconds. Defaults to 30s",
+      "format": "int32",
+      "type": "integer"
+    },
+    "JobScaleRule": {
+      "description": "Scaling rule.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Scale Rule Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the scale rule\neg: azure-servicebus, redis etc.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata properties to describe the scale rule.",
+          "type": "object"
+        },
+        "auth": {
+          "description": "Authentication secrets for the scale rule.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/ScaleRuleAuth"
+          }
+        }
+      }
+    },
+    "JobScale": {
+      "description": "Scaling configurations for event driven jobs.",
+      "type": "object",
+      "properties": {
+        "pollingInterval": {
+          "$ref": "#/definitions/PollingInterval"
+        },
+        "minExecutions": {
+          "format": "int32",
+          "description": "Minimum number of job executions that are created for a trigger, default 0",
+          "type": "integer",
+          "default": 0
+        },
+        "maxExecutions": {
+          "format": "int32",
+          "description": "Maximum number of job executions that are created for a trigger, default 100.",
+          "type": "integer",
+          "default": 100
+        },
+        "rules": {
+          "description": "Scaling rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobScaleRule"
+          }
+        }
+      }
     },
     "JobExecutionBase": {
       "description": "Container App's Job execution name.",
