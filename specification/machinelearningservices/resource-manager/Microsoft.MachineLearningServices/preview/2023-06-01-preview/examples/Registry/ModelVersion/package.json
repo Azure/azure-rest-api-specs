@@ -8,28 +8,34 @@
     "api-version": "2023-06-01-preview",
     "body": {
       "baseEnvironmentSource": {
-        "baseEnvironmentSourceType": "EnvironmentAsset"
+        "baseEnvironmentSourceType": "EnvironmentAsset",
+        "resourceId": "string"
+      },
+      "inferencingServer": {
+        "serverType": "AzureMLBatch",
+        "codeConfiguration": {
+          "codeId": "string",
+          "scoringScript": "string"
+        }
       },
       "environmentVariables": {
         "string": "string"
       },
-      "inferencingServer": {
-        "serverType": "AzureMLOnline"
+      "modelConfiguration": {
+        "mode": "ReadOnlyMount",
+        "mountPath": "string"
       },
       "inputs": [
         {
           "inputType": "UriFile",
-          "mode": "Copy",
-          "mountPath": "string",
+          "mode": "Download",
           "path": {
-            "inputPathType": "Url"
-          }
+            "inputPathType": "Url",
+            "url": "string"
+          },
+          "mountPath": "string"
         }
       ],
-      "modelConfiguration": {
-        "mode": "Copy",
-        "mountPath": "string"
-      },
       "tags": {
         "string": "string"
       },
@@ -38,41 +44,49 @@
   },
   "responses": {
     "200": {
-      "baseEnvironmentSource": {
-        "baseEnvironmentSourceType": "EnvironmentAsset"
-      },
-      "buildId": "string",
-      "buildState": "NotStarted",
-      "environmentVariables": {
-        "string": "string"
-      },
-      "inferencingServer": {
-        "serverType": "AzureMLOnline"
-      },
-      "inputs": [
-        {
-          "inputType": "UriFile",
-          "mode": "Copy",
-          "mountPath": "string",
-          "path": {
-            "inputPathType": "Url"
+      "headers": {},
+      "body": {
+        "baseEnvironmentSource": {
+          "baseEnvironmentSourceType": "EnvironmentAsset",
+          "resourceId": "string"
+        },
+        "inferencingServer": {
+          "serverType": "AzureMLBatch",
+          "codeConfiguration": {
+            "codeId": "string",
+            "scoringScript": "string"
           }
-        }
-      ],
-      "logUrl": "string",
-      "modelConfiguration": {
-        "mode": "Copy",
-        "mountPath": "string"
-      },
-      "tags": {
-        "string": "string"
-      },
-      "targetEnvironmentId": "string"
+        },
+        "environmentVariables": {
+          "string": "string"
+        },
+        "modelConfiguration": {
+          "mode": "ReadOnlyMount",
+          "mountPath": "string"
+        },
+        "inputs": [
+          {
+            "inputType": "UriFile",
+            "mode": "Download",
+            "path": {
+              "inputPathType": "Url",
+              "url": "string"
+            },
+            "mountPath": "string"
+          }
+        ],
+        "tags": {
+          "string": "string"
+        },
+        "targetEnvironmentId": "string",
+        "logUrl": "string",
+        "buildId": "string",
+        "buildState": "NotStarted"
+      }
     },
     "202": {
       "headers": {
-        "Location": "example_location",
-        "Retry-After": 100
+        "Location": "example_location"
       }
     }
   }
