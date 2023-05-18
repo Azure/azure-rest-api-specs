@@ -2362,7 +2362,7 @@
           "items": {
             "$ref": "#/definitions/BackendPoolItem"
           },
-          "minItems": 2
+          "minItems": 1
         }
       }
     },
@@ -2372,7 +2372,10 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique id of the backend entity. The ID should refer to an already existing backend entity."
+          "description": "The unique ARM id of the backend entity. The ARM id should refer to an already existing backend entity.",
+          "example":{
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend"
+          }
         }
       }
     },
