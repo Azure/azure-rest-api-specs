@@ -83,6 +83,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v5
@@ -119,6 +120,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v4
@@ -155,6 +157,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v3
@@ -190,6 +193,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v2
@@ -224,6 +228,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v1
@@ -258,6 +263,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-2021-06-01-preview
@@ -344,6 +350,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-monitoring-2020-12-01
