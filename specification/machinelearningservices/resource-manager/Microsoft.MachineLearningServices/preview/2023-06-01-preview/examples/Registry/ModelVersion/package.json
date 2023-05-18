@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "registryName": "my-aml-registry",
+    "modelName": "string",
+    "version": "string",
+    "api-version": "2023-06-01-preview",
+    "body": {
+      "baseEnvironmentSource": {
+        "baseEnvironmentSourceType": "EnvironmentAsset"
+      },
+      "environmentVariables": {
+        "string": "string"
+      },
+      "inferencingServer": {
+        "serverType": "AzureMLOnline"
+      },
+      "inputs": [
+        {
+          "inputType": "UriFile",
+          "mode": "Copy",
+          "mountPath": "string",
+          "path": {
+            "inputPathType": "Url"
+          }
+        }
+      ],
+      "modelConfiguration": {
+        "mode": "Copy",
+        "mountPath": "string"
+      },
+      "tags": {
+        "string": "string"
+      },
+      "targetEnvironmentId": "string"
+    }
+  },
+  "responses": {
+    "200": {
+      "baseEnvironmentSource": {
+        "baseEnvironmentSourceType": "EnvironmentAsset"
+      },
+      "buildId": "string",
+      "buildState": "NotStarted",
+      "environmentVariables": {
+        "string": "string"
+      },
+      "inferencingServer": {
+        "serverType": "AzureMLOnline"
+      },
+      "inputs": [
+        {
+          "inputType": "UriFile",
+          "mode": "Copy",
+          "mountPath": "string",
+          "path": {
+            "inputPathType": "Url"
+          }
+        }
+      ],
+      "logUrl": "string",
+      "modelConfiguration": {
+        "mode": "Copy",
+        "mountPath": "string"
+      },
+      "tags": {
+        "string": "string"
+      },
+      "targetEnvironmentId": "string"
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location",
+        "Retry-After": 100
+      }
+    }
+  }
+}
