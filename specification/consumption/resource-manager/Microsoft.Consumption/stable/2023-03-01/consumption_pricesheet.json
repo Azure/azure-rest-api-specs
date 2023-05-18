@@ -39,7 +39,7 @@
         "tags": [
           "PriceSheet"
         ],
-        "operationId": "PriceSheet_GetByBillingAccountPeriod",
+        "operationId": "PriceSheet_DownloadByBillingAccountPeriod",
         "description": "Generates the pricesheet for the provided billing period asynchronously based on the enrollment id",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -58,7 +58,7 @@
             "$ref": "#/parameters/billingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingPeriodNameParameter"
@@ -86,7 +86,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "common-types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -143,14 +143,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Version of the API to be used with the client request. The current version is 2023-03-01."
     },
     "billingPeriodNameParameter": {
       "name": "billingPeriodName",
