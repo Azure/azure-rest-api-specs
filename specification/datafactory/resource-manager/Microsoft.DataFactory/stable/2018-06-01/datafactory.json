@@ -4805,7 +4805,7 @@
         "tags": [
           "changeDataCapture"
         ],
-        "operationId": "changeDataCapture_CreateOrUpdate",
+        "operationId": "ChangeDataCapture_CreateOrUpdate",
         "x-ms-examples": {
           "ChangeDataCapture_Create": {
             "$ref": "./examples/ChangeDataCapture_Create.json"
@@ -5044,6 +5044,54 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/adfcdcs/{changeDataCaptureName}/status": {
+      "get": {
+        "tags": [
+          "changeDataCapture"
+        ],
+        "operationId": "ChangeDataCapture_Status",
+        "x-ms-examples": {
+          "ChangeDataCapture_Start": {
+            "$ref": "./examples/ChangeDataCapture_Status.json"
+          }
+        },
+        "description": "Gets the current status for the change data capture resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/changeDataCaptureName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChangeDataCaptureStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -7201,6 +7249,10 @@
           "type": "string"
         }
       }
+    },
+    "ChangeDataCaptureStatusResponse": {
+      "description": "Current status of the change data capture resource.",
+      "type": "string"
     },
     "CreateDataFlowDebugSessionRequest": {
       "description": "Request body structure for creating data flow debug session.",
