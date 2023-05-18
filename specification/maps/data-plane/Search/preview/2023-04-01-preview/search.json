@@ -641,9 +641,15 @@
     },
     "/autosuggest": {
       "get": {
-          "summary": "top level API for autosuggest",
-          "description": "top level API for autosuggest",
+          "description": "Given a request with a user’s location and a partial query (called a query prefix), the Azure Maps Autosuggest API returns a list of suggested entities which the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.",
+          "operationId": "Search_Autosuggest",
+          "produces": [
+            "application/geo+json"
+          ],
           "parameters": [
+              {
+                "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+              },
               {
                 "$ref": "#/parameters/Accept-Language"
               },
@@ -655,12 +661,9 @@
                   "type": "string"
               },
               {
-                "$ref": "#/parameters/Location"
-              },
-              {
                   "name": "circularMapView",
                   "in": "query",
-                  "description": "Optional. A circular geographic region specified by a comma separated list of the latitude and longitude of the center of the circle, and the radius of the circle, in meters.\n\nExample: 48.604311,-122.981998,5000\n\nNote. Mutually exclusive from userMapView.\n",
+                  "description": "A circular geographic region specified by a comma separated list of the latitude and longitude of the center of the circle, and the radius of the circle, in meters.\n\nExample: 48.604311,-122.981998,5000\n\nNote. Mutually exclusive from bbox.\n",
                   "type": "array",
                     "items": {
                       "type": "number"
@@ -673,9 +676,9 @@
                 "$ref": "#/parameters/Top"
               },
               {
-                "name": "resultTypes",
+                "name": "AutosuggestResultTypeEnum",
                 "in": "query",
-                "description": "A comma separated list of returned entity types. The possible values are \n\n- Address\n- Place\n\n. These types are mutually inclusive. Place represents points of interest, like natural landmarks.",
+                "description": "A comma separated list of returned entity types. The possible values are \n\n- Address\n- Place\n\nThese types are mutually inclusive. Place represents points of interest, like natural landmarks.",
                   "type": "array",
                   "items": {
                     "type": "string",
@@ -705,7 +708,7 @@
               {
                   "name": "countryRegionSet",
                   "in": "query",
-                  "description": "Optional. Used to constrain entity suggestions to a single country denoted by a 2-letter country code abbreviation.\n\nExample: `DE`.\n",
+                  "description": "Used to constrain entity suggestions to a single country denoted by a 2-letter country code abbreviation.\n\nExample: `DE`.\n",
                   "required": false,
                   "type": "string",
                   "default": "none"
