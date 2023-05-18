@@ -93,6 +93,15 @@ input-file:
   - preview/2022-12-01-preview/search.json
 ```
 
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - preview/2023-04-01-preview/search.json
+```
+
 # Code Generation
 
 ## Python
