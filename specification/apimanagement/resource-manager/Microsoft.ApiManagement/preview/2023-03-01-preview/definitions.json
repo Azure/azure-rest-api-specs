@@ -386,7 +386,7 @@
         },
         "format": {
           "type": "string",
-          "description": "Format of the Content in which the API is getting imported.",
+          "description": "Format of the Content in which the API is getting imported. New formats can be added in the future",
           "enum": [
             "wadl-xml",
             "wadl-link-json",
@@ -398,7 +398,9 @@
             "openapi+json",
             "openapi-link",
             "openapi+json-link",
-            "graphql-link"
+            "graphql-link",
+            "odata",
+            "odata-link"
           ],
           "x-ms-enum": {
             "name": "ContentFormat",
@@ -447,6 +449,14 @@
               {
                 "value": "graphql-link",
                 "description": "The GraphQL API endpoint hosted on a publicly accessible internet address."
+              },
+              {
+                "value": "odata",
+                "description": "The contents are inline and Content Type is a OData XML Document."
+              },
+              {
+                "value": "odata-link",
+                "description": "The OData metadata document hosted on a publicly accessible internet address."
               }
             ]
           }
@@ -467,12 +477,13 @@
         },
         "apiType": {
           "type": "string",
-          "description": "Type of API to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API \n * `graphql` creates GraphQL API.",
+          "description": "Type of API to create. \n * `http` creates a REST API \n * `soap` creates a SOAP pass-through API  \n * `websocket` creates websocket API \n * `graphql` creates GraphQL API. \n New types can be added in the future.",
           "enum": [
             "http",
             "soap",
             "websocket",
-            "graphql"
+            "graphql",
+            "odata"
           ],
           "x-ms-client-name": "SoapApiType",
           "x-ms-enum": {
@@ -498,6 +509,11 @@
                 "value": "graphql",
                 "description": "Imports the API having a GraphQL front end.",
                 "name": "GraphQL"
+              },
+              {
+                "value": "odata",
+                "description": "Imports the API having a OData front end.",
+                "name": "OData"
               }
             ]
           }
@@ -557,7 +573,8 @@
             "http",
             "soap",
             "websocket",
-            "graphql"
+            "graphql",
+            "odata"
           ],
           "x-ms-client-name": "ApiType",
           "x-ms-enum": {
@@ -6274,7 +6291,7 @@
       "properties": {
         "contentType": {
           "type": "string",
-          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`."
+          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml` </br> - `OData Schema` use `application/vnd.ms-azure-apim.odata.schema`."
         },
         "document": {
           "x-ms-client-flatten": true,
