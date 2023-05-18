@@ -123,11 +123,11 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "SharedQuotaEntityRequest",
+            "name": "SharedQuotaEntityPatchRequest",
             "in": "body",
-            "description": "The SharedQuotaEntity Request.",
+            "description": "The SharedQuotaEntity Patch Request.",
             "schema": {
-              "$ref": "#/definitions/SharedQuotaEntity"
+              "$ref": "#/definitions/SharedQuotaEntityBase"
             }
           }
         ],
@@ -1383,6 +1383,25 @@
         }
       }
     },
+    "SharedQuotaEntityBase": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "title": "Properties",
+        "x-ms-client-flatten": true,
+        "type": "object",
+        "subscriptionFilters": {
+          "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand.",
+          "$ref": "#/definitions/Filters"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the operation.",
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        }
+      }
+    },
     "SharedQuotaEntity": {
       "type": "object",
       "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
@@ -1416,16 +1435,7 @@
           "title": "Properties",
           "x-ms-client-flatten": true,
           "type": "object",
-          "subscriptionFilters": {
-            "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand.",
-            "$ref": "#/definitions/Filters"
-          },
-          "provisioningState": {
-            "description": "Provisioning state of the operation.",
-            "$ref": "#/definitions/RequestState",
-            "readOnly": true
-          }
-        }
+         "$ref" : "#/definitions/SharedQuotaEntityBase",
       }
     },
     "Filter": {
