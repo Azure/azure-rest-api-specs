@@ -218,6 +218,7 @@ namespace Azure.Messaging.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
+  @autoRoute
   @action("receive")
   op ReceiveCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
@@ -272,19 +273,11 @@ namespace Azure.Messaging.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
 
   @doc("Reject batch of Cloud Events.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject")
-  @post op RejectCloudEvents is Azure.Core.RpcOperation<{
+  @action("reject")
+  @post op RejectCloudEvents is Azure.Core.ResourceAction< EventSubscription{
     @doc("content type")
     @header("content-type")
     contentType: "application/json; charset=utf-8";
-
-    @doc("Topic Name.")
-    @path
-    topicName: string;
-
-    @doc("Event Subscription Name.")
-    @path
-    eventSubscriptionName: string;
 
     @doc("RejectOptions")
     @body
