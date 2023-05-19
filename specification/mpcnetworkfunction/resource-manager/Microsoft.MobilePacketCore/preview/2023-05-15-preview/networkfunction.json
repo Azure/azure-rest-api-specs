@@ -1,0 +1,590 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.MobilePacketCore Network Function resource",
+    "version": "2023-05-15-preview",
+    "description": "Mobile Packet Core Network Function Management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "NetworkFunctions"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.MobilePacketCore/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobilePacketCore/networkFunctions": {
+      "get": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_ListBySubscription",
+        "description": "List NetworkFunctionResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkFunctions_ListBySubscription": {
+            "$ref": "./examples/NetworkFunctions_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/networkFunctions": {
+      "get": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_ListByResourceGroup",
+        "description": "List NetworkFunctionResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkFunctions_ListByResourceGroup": {
+            "$ref": "./examples/NetworkFunctions_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/networkFunctions/{networkFunctionName}": {
+      "get": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_Get",
+        "description": "Get a NetworkFunctionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the network function",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFunctions_Get": {
+            "$ref": "./examples/NetworkFunctions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_CreateOrUpdate",
+        "description": "Create a NetworkFunctionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the network function",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFunctions_CreateOrUpdate": {
+            "$ref": "./examples/NetworkFunctions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_Update",
+        "description": "Update a NetworkFunctionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the network function",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkFunctionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFunctions_Update": {
+            "$ref": "./examples/NetworkFunctions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkFunctions"
+        ],
+        "operationId": "NetworkFunctions_Delete",
+        "description": "Delete a NetworkFunctionResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkFunctionName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the network function",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkFunctions_Delete": {
+            "$ref": "./examples/NetworkFunctions_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkFunctionAdministrativeState": {
+      "type": "string",
+      "description": "Network Function Administrative State enumerations",
+      "enum": [
+        "Commissioned",
+        "Decommissioned"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionAdministrativeState",
+        "modelAsString": true
+      }
+    },
+    "NetworkFunctionOperationalStatus": {
+      "type": "string",
+      "description": "Network Function Operational Status enumerations",
+      "enum": [
+        "Inactive",
+        "InstantiatedNotProvisioned",
+        "InstantiatedProvisioned",
+        "Active"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFunctionOperationalStatus",
+        "modelAsString": true
+      }
+    },
+    "NetworkFunctionResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkFunctionResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "AO5GC Network Function Resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkFunctionResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkFunctionResource"
+          },
+          "x-typespec-name": "NetworkFunctionResource[]",
+          "description": "The NetworkFunctionResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a NetworkFunctionResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkFunctionResourceProperties": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "Provisioned SKU Value.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workloadTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkloadType"
+          },
+          "x-typespec-name": "WorkloadType[]",
+          "description": "Types of workloads co-located in the same infrastructure",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "networkFunctionAdministrativeState": {
+          "$ref": "#/definitions/NetworkFunctionAdministrativeState",
+          "description": "Administrative state of the network function"
+        },
+        "networkFunctionOperationalStatus": {
+          "$ref": "#/definitions/NetworkFunctionOperationalStatus",
+          "description": "Operational state of the network function",
+          "readOnly": true
+        },
+        "infrastructureElementCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of infrastructure elements (kubernetes nodes for containerized network functions, virtual machines for virtual network functions)",
+          "readOnly": true
+        },
+        "userDescription": {
+          "type": "string",
+          "description": "User provided description"
+        },
+        "deploymentNotes": {
+          "type": "string",
+          "description": "User provided deployment notes.  This is used to optionally provide details about the NF deployment"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "description": "Network Function Properties.",
+      "required": [
+        "sku",
+        "workloadTypes",
+        "networkFunctionAdministrativeState"
+      ]
+    },
+    "NetworkFunctionResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkFunctionResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the NetworkFunctionResource."
+    },
+    "NetworkFunctionResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "networkFunctionAdministrativeState": {
+          "$ref": "#/definitions/NetworkFunctionAdministrativeState",
+          "description": "Administrative state of the network function"
+        },
+        "userDescription": {
+          "type": "string",
+          "description": "User provided description"
+        },
+        "deploymentNotes": {
+          "type": "string",
+          "description": "User provided deployment notes.  This is used to optionally provide details about the NF deployment"
+        }
+      },
+      "description": "The updatable properties of the NetworkFunctionResource."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "2023-05-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_05_15_preview",
+            "value": "2023-05-15-preview"
+          }
+        ]
+      }
+    },
+    "WorkloadType": {
+      "type": "string",
+      "description": "Type of Workload",
+      "enum": [
+        "AMF",
+        "SMF",
+        "UPF",
+        "NRF",
+        "NSSF",
+        "MME",
+        "SGWControlPlane",
+        "PGWControlPlane",
+        "SGWUserPlane",
+        "PGWUserPlane",
+        "GGSN",
+        "SGSN",
+        "ePDG",
+        "N3IWF",
+        "PaaS",
+        "EMS",
+        "OperationsPolicyManager"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {}
+}
