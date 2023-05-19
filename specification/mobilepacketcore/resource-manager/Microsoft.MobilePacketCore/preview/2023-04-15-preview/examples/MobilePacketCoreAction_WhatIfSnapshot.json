@@ -6,10 +6,19 @@
     "mobilePacketCoreName": "testMobilePacketCore"
   },
   "responses": {
-    "200": {},
-    "202": {
-      "headers": {
-        "azure-AsyncOperation": "http://azure.async.operation/status"
+    "200": {
+      "body": {
+        "summaryOfChanges": [
+          {
+            "resourceId": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobilePacketCore/mobilePacketCores/testMobilePacketCore/resourceType/resourceName"
+            },
+            "action": "change"
+          }
+        ],
+        "activeSnapshot": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobilePacketCore/mobilePacketCores/testMobilePacketCore/resourceType/resourceName"
+        }
       }
     }
   }

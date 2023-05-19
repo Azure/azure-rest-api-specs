@@ -231,16 +231,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/mobilePacketCores/{mobilePacketCoreName}/configSnapshots/{configSnapshotName}/compare": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/mobilePacketCores/{mobilePacketCoreName}/configSnapshots/{configSnapshotName}/getResource": {
       "post": {
         "tags": [
           "ConfigSnapshots"
         ],
-        "summary": "Compare specific resources against the latest or another snapshot.",
-        "operationId": "ConfigSnapshots_Compare",
+        "summary": "Retrieve specific resources from snapshot.",
+        "operationId": "ConfigSnapshots_GetResource",
         "x-ms-examples": {
-          "ConfigSnapshotAction_Compare": {
-            "$ref": "./examples/ConfigSnapshotAction_Compare.json"
+          "ConfigSnapshotAction_GetResource": {
+            "$ref": "./examples/ConfigSnapshotAction_GetResource.json"
           }
         },
         "parameters": [
@@ -261,14 +261,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the configSnapshot object."
+            "description": "The name of the config snapshot object."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConfigSnapshotCompareRequest"
+              "$ref": "#/definitions/ConfigSnapshotGetResourceRequest"
             },
             "description": "Parameters supplied to the compare action."
           }
@@ -277,11 +277,8 @@
           "200": {
             "description": "Ok.",
             "schema": {
-              "$ref": "#/definitions/ConfigSnapshotCompareResponse"
+              "$ref": "#/definitions/ConfigSnapshotGetResourceResponse"
             }
-          },
-          "202": {
-            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -289,11 +286,7 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/mobilePacketCores/{mobilePacketCoreName}/configSnapshots/{configSnapshotName}/getSummaryOfChanges": {
@@ -345,20 +338,13 @@
               "$ref": "#/definitions/ConfigSnapshotSummaryResponse"
             }
           },
-          "202": {
-            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobilePacketCore/mobilePacketCores/{mobilePacketCoreName}/configSnapshots/{configSnapshotName}/getManifest": {
@@ -401,51 +387,17 @@
               "$ref": "#/definitions/ConfigSnapshotManifestResponse"
             }
           },
-          "202": {
-            "description": "Accepted. The header contains 'Azure-AsyncOperation' header which can be used to monitor the progress of the operation."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },
   "definitions": {
-    "SummaryOfResources": {
-      "readOnly": true,
-      "type": "array",
-      "description": "List of objects that are present or have changed (added/delete/modified)",
-      "items": {
-        "type": "object",
-        "properties": {
-          "resourceId": {
-            "$ref": "./common.json#/definitions/ReferencedResource",
-            "description": "The reference to the changed object"
-          },
-          "action": {
-            "description": "The action applied to the object.  Used when getting change lists.  Not used in the manifest response",
-            "type": "string",
-            "enum": [
-              "Create",
-              "Update",
-              "Delete"
-            ],
-            "x-ms-enum": {
-              "name": "SummaryChangeAction",
-              "modelAsString": true
-            }
-          }
-        }
-      }
-    },
     "ConfigSnapshotProperties": {
       "type": "object",
       "description": "The Configuration Snapshot resource definition.",
@@ -465,11 +417,11 @@
           "enum": [
             "Active",
             "InProgress",
-            "RollingBack",
             "Failed",
-            "InactiveNeverActivated",
+            "Inactive",
             "InactivePreviouslyActivated",
-            "InactivePreviouslyPartiallyActivated"
+            "InactivePreviouslyFailed",
+            "InactivePreviouslyInProgress"
           ],
           "x-ms-enum": {
             "name": "ActivationState",
@@ -478,7 +430,7 @@
           "description": "Current activation state of the configuration snapshot"
         },
         "summaryOfChanges": {
-          "$ref": "#/definitions/SummaryOfResources",
+          "$ref": "./common.json#/definitions/SummaryOfResources",
           "description": "List of objects that have changed (added/delete/modified) from the previous snapshot"
         },
         "details": {
@@ -535,22 +487,18 @@
       },
       "description": "Response for Mobile Packet Core Configuration Snapshot API service call."
     },
-    "ConfigSnapshotCompareRequest": {
+    "ConfigSnapshotGetResourceRequest": {
       "type": "object",
       "properties": {
         "resourceId": {
           "$ref": "./common.json#/definitions/ReferencedResource",
-          "description": "The reference to the changed object"
-        },
-        "otherSnapshot": {
-          "$ref": "./common.json#/definitions/ReferencedResource",
-          "description": "Optional.  If specified, the other snapshot to compare against.  If not present, latest"
+          "description": "The reference to the object"
         }
       },
       "required": [
         "resourceId"
       ],
-      "description": "Request to compare a resource in the current snapshot to the latest or the version present in another snapshot"
+      "description": "Request to retrieve a resource in the current snapshot"
     },
     "ConfigSnapshotSummaryRequest": {
       "type": "object",
@@ -562,12 +510,12 @@
       },
       "description": "Request to list resources in the current snapshot that differ from the latest or the versions present in another snapshot"
     },
-    "ConfigSnapshotCompareResponse": {
+    "ConfigSnapshotGetResourceResponse": {
       "type": "object",
       "properties": {
         "details": {
           "type": "string",
-          "description": "Details of the difference between the two instances of the resource"
+          "description": "Contents of the resource"
         }
       },
       "description": "Response to a request to compare a resource in the current snapshot to the latest or the version present in another snapshot"
@@ -576,7 +524,7 @@
       "type": "object",
       "properties": {
         "summaryOfChanges": {
-          "$ref": "#/definitions/SummaryOfResources",
+          "$ref": "./common.json#/definitions/SummaryOfResources",
           "description": "List of objects that are different (added/delete/modified) in this snapshot"
         }
       },
@@ -586,7 +534,7 @@
       "type": "object",
       "properties": {
         "resourceList": {
-          "$ref": "#/definitions/SummaryOfResources",
+          "$ref": "./common.json#/definitions/SummaryOfResources",
           "description": "List of objects that are present in this snapshot"
         }
       },
