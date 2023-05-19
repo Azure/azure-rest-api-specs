@@ -238,7 +238,7 @@ namespace Azure.Messaging.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
 
-  @doc("Acknowledge Cloud Events.")
+  @doc("Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully acknowledged. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
   @action("acknowledge")
   op AcknowledgeCloudEvents is standardOperations.ResourceAction<
     EventSubscription,
@@ -257,7 +257,7 @@ namespace Azure.Messaging.EventGrid {
   // Release Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
   
-  @doc("Release Cloud Events.")
+  @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
   @action("release")
   op ReleaseCloudEvents is standardOperations.ResourceAction<
     EventSubscription,
