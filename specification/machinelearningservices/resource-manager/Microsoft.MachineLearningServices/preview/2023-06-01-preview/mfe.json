@@ -161,7 +161,8 @@
             "name": "codeName",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2238,7 +2239,8 @@
             "name": "environmentName",
             "description": "Container name. This is case-sensitive.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2730,7 +2732,8 @@
             "name": "modelName",
             "description": "Container name. This is case-sensitive.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -5030,12 +5033,6 @@
           },
           {
             "in": "query",
-            "name": "stage",
-            "description": "Component stage.",
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "listViewType",
             "description": "View type for including/excluding (for example) archived entities.",
             "type": "string",
@@ -5060,6 +5057,12 @@
                 }
               ]
             }
+          },
+          {
+            "in": "query",
+            "name": "stage",
+            "description": "Component stage.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -5581,12 +5584,6 @@
           },
           {
             "in": "query",
-            "name": "stage",
-            "description": "data stage",
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "listViewType",
             "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
             "type": "string",
@@ -5611,6 +5608,12 @@
                 }
               ]
             }
+          },
+          {
+            "in": "query",
+            "name": "stage",
+            "description": "data stage",
+            "type": "string"
           }
         ],
         "responses": {
@@ -9635,13 +9638,6 @@
           },
           {
             "in": "query",
-            "name": "offset",
-            "description": "Number of initial results to skip.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
             "name": "tags",
             "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
             "type": "string"
@@ -9650,18 +9646,6 @@
             "in": "query",
             "name": "properties",
             "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "feed",
-            "description": "Name of the feed.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "stage",
-            "description": "Model stage",
             "type": "string"
           },
           {
@@ -9690,6 +9674,25 @@
                 }
               ]
             }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Number of initial results to skip.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "feed",
+            "description": "Name of the feed.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stage",
+            "description": "Model stage",
+            "type": "string"
           }
         ],
         "responses": {
