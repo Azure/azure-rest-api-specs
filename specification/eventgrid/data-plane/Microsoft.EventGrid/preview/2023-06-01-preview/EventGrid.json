@@ -123,7 +123,7 @@
             "name": "eventSubscriptionName",
             "in": "path",
             "required": true,
-            "description": "Event subscription name.",
+            "description": "Event Subscription Name.",
             "type": "string"
           },
           {
@@ -170,7 +170,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge": {
       "post": {
         "operationId": "AcknowledgeCloudEvents",
-        "description": "Acknowledge Cloud Events.",
+        "description": "Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully acknowledged. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -186,7 +186,7 @@
             "name": "eventSubscriptionName",
             "in": "path",
             "required": true,
-            "description": "Event subscription name.",
+            "description": "Event Subscription Name.",
             "type": "string"
           },
           {
@@ -227,7 +227,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
       "post": {
         "operationId": "ReleaseCloudEvents",
-        "description": "Release Cloud Events.",
+        "description": "Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -243,7 +243,7 @@
             "name": "eventSubscriptionName",
             "in": "path",
             "required": true,
-            "description": "Event subscription name.",
+            "description": "Event Subscription Name.",
             "type": "string"
           },
           {
@@ -300,7 +300,7 @@
             "name": "eventSubscriptionName",
             "in": "path",
             "required": true,
-            "description": "Event subscription name.",
+            "description": "Event Subscription Name.",
             "type": "string"
           },
           {
