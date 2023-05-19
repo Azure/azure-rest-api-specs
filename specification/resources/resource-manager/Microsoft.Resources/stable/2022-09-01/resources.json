@@ -4651,6 +4651,54 @@
       ],
       "description": "Deployment properties."
     },
+    "DeploymentParameter": {
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "Input value to the parameter ."
+        },
+        "reference": {
+          "$ref": "#/definitions/KeyVaultParameterReference",
+          "description": "Azure Key Vault parameter reference."
+        }
+      },
+      "required": [
+      ],
+      "description": "Deployment parameter for the template."
+    },
+    "KeyVaultParameterReference": {
+      "properties": {
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "Azure Key Vault reference."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "Azure Key Vault secret name."
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Azure Key Vault secret version."
+        }
+      },
+      "required": [
+        "keyVault",
+        "secretName"
+      ],
+      "description": "Azure Key Vault parameter reference."
+    },
+    "KeyVaultReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure Key Vault resource id."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Azure Key Vault reference."
+    },
     "DebugSetting": {
       "properties": {
         "detailLevel": {
