@@ -17336,7 +17336,7 @@
           "WeatherData"
         ],
         "description": "Returns a list of WeatherData.",
-        "operationId": "WeatherData_GetWeatherData",
+        "operationId": "WeatherData_Get",
         "consumes": [
           "application/json"
         ],
@@ -17383,8 +17383,8 @@
           }
         },
         "x-ms-examples": {
-          "WeatherData_GetWeatherData": {
-            "$ref": "./examples/WeatherData_GetWeatherData.json"
+          "WeatherData_Get": {
+            "$ref": "./examples/WeatherData_Get.json"
           }
         }
       }
@@ -18044,6 +18044,27 @@
     }
   },
   "definitions": {
+    "ApiKeyAuthCredentials": {
+      "description": "ApiKeyAuthCredentials.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        },
+        {
+          "required": [
+            "apiKey"
+          ],
+          "type": "object",
+          "properties": {
+            "apiKey": {
+              "$ref": "#/definitions/KeyVaultProperties"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKeyAuth"
+    },
     "AdditionalProviderParameters": {
       "description": "Schema of additional parameters for weather data provider request.",
       "type": "object",
@@ -18370,6 +18391,33 @@
         "name": "AuthCredentialsEnum",
         "modelAsString": true
       }
+    },
+    "BasicAuthCredentials": {
+      "description": "BasicAuthCredentials.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        },
+        {
+          "required": [
+            "password",
+            "username"
+          ],
+          "type": "object",
+          "properties": {
+            "username": {
+              "description": "UserName.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "password": {
+              "$ref": "#/definitions/KeyVaultProperties"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "BasicAuth"
     },
     "BiomassModelJob": {
       "description": "Schema of biomass model job.",
@@ -22285,8 +22333,8 @@
         }
       },
       "example": {
-            "key1": "value1",
-            "key2": 123.45,
+        "key1": "value1",
+        "key2": 123.45,
         "credentials": {
           "authType": "string",
           "username": "string",
