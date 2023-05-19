@@ -817,7 +817,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the types of identities associated with this resource; currently restricted to 'SystemAssigned and UserAssigned'",
+          "description": "the types of identities associated with this resource; currently restricted to 'None and UserAssigned'",
           "enum": [
             "None",
             "UserAssigned"
@@ -826,6 +826,10 @@
             "name": "IdentityType",
             "modelAsString": true
           }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id of the server."
         }
       },
       "required": [
