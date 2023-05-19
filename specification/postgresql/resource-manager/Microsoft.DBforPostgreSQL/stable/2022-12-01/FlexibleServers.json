@@ -459,11 +459,7 @@
         "network": {
           "$ref": "#/definitions/Network",
           "default": null,
-          "description": "Network properties of a server.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Network properties of a server. This Network property is required to be passed only in case you want the server to be Private access server."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
@@ -639,6 +635,11 @@
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
           "description": "Replication role of the server"
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "default": null,
+          "description": "Network properties of a server. These are required to be passed only in case if server is a private access server."
         }
       }
     },
@@ -905,12 +906,7 @@
               }
             ]
           },
-          "default": "",
-          "description": "delegated subnet arm resource id.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Delegated subnet arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
@@ -921,15 +917,10 @@
               }
             ]
           },
-          "default": "",
-          "description": "private dns zone arm resource id.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Private dns zone arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
         }
       },
-      "description": "Network properties of a server"
+      "description": "Network properties of a server."
     },
     "HighAvailability": {
       "type": "object",
