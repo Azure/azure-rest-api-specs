@@ -287,6 +287,4 @@ namespace Azure.Messaging.EventGrid {
     @body
     lockTokens : RejectOptions;
   }, RejectResult>;
-
-  // op helloLibba(): string;
 }
