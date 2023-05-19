@@ -274,7 +274,9 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Reject batch of Cloud Events.")
   @action("reject")
-  @post op RejectCloudEvents is Azure.Core.ResourceAction< EventSubscription{
+  @post op RejectCloudEvents is Azure.Core.ResourceAction< 
+  EventSubscription,
+  {
     @doc("content type")
     @header("content-type")
     contentType: "application/json; charset=utf-8";
