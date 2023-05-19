@@ -161,6 +161,8 @@ namespace Azure.Messaging.EventGrid {
     lockTokens: string[];
   }
 
+  alias standardOperations = Azure.Core.StandardResourceOperations;
+
   @doc("Topic Resource.")
   @resource("topics")
   model Topic {
@@ -185,12 +187,13 @@ namespace Azure.Messaging.EventGrid {
   @doc("Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")
   @sharedRoute
   @action("publish")
-  op PublishCloudEvent is Azure.Core.ResourceAction<
+  op PublishCloudEvent is standardOperations.ResourceAction<
     Topic,
     {
       @doc("content type")
       @header("content-type")
       contentType: "application/cloudevents+json; charset=utf-8";
+      
       @doc("Single Cloud Event being published.")
       @body 
       event: CloudEvent;
@@ -201,7 +204,7 @@ namespace Azure.Messaging.EventGrid {
   @doc("Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")  
   @sharedRoute
   @action("publish")
-  op PublishCloudEvents is Azure.Core.ResourceAction<
+  op PublishCloudEvents is standardOperations.ResourceAction<
     Topic,
     {
       @doc("content type")
@@ -218,9 +221,8 @@ namespace Azure.Messaging.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
-  @autoRoute
   @action("receive")
-  op ReceiveCloudEvents is Azure.Core.ResourceAction<
+  op ReceiveCloudEvents is standardOperations.ResourceAction<
     EventSubscription,
     {
       @doc("Max Events count to be received. Minimum value is 1, while maximum value is 100 events. If not specified, the default value is 1.")
@@ -238,7 +240,7 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Acknowledge Cloud Events.")
   @action("acknowledge")
-  op AcknowledgeCloudEvents is Azure.Core.ResourceAction<
+  op AcknowledgeCloudEvents is standardOperations.ResourceAction<
     EventSubscription,
     {
       @doc("content type")
@@ -257,7 +259,7 @@ namespace Azure.Messaging.EventGrid {
   
   @doc("Release Cloud Events.")
   @action("release")
-  op ReleaseCloudEvents is Azure.Core.ResourceAction<
+  op ReleaseCloudEvents is standardOperations.ResourceAction<
     EventSubscription,
     {
       @doc("content type")
@@ -274,7 +276,7 @@ namespace Azure.Messaging.EventGrid {
 
   @doc("Reject batch of Cloud Events.")
   @action("reject")
-  @post op RejectCloudEvents is Azure.Core.ResourceAction< 
+  op RejectCloudEvents is standardOperations.ResourceAction< 
   EventSubscription,
   {
     @doc("content type")
@@ -285,4 +287,6 @@ namespace Azure.Messaging.EventGrid {
     @body
     lockTokens : RejectOptions;
   }, RejectResult>;
+
+  // op helloLibba(): string;
 }
