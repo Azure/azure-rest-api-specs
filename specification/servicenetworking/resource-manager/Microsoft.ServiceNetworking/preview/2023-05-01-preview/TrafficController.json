@@ -60,11 +60,6 @@
         ],
         "operationId": "Operations_List",
         "description": "List the operations for the provider",
-        "x-ms-examples": {
-          "Get Operations List": {
-            "$ref": "../../cadl/examples/OperationsList.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -96,11 +91,6 @@
         ],
         "operationId": "TrafficControllerInterface_ListBySubscription",
         "description": "List TrafficController resources by subscription ID",
-        "x-ms-examples": {
-          "Get Traffic Controllers List": {
-            "$ref": "../../cadl/examples/TrafficControllersGetList.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -135,11 +125,6 @@
         ],
         "operationId": "TrafficControllerInterface_ListByResourceGroup",
         "description": "List TrafficController resources by resource group",
-        "x-ms-examples": {
-          "Get Traffic Controllers": {
-            "$ref": "../../cadl/examples/TrafficControllersGet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -177,11 +162,6 @@
         ],
         "operationId": "TrafficControllerInterface_Get",
         "description": "Get a TrafficController",
-        "x-ms-examples": {
-          "Get Traffic Controller": {
-            "$ref": "../../cadl/examples/TrafficControllerGet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -196,9 +176,8 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -222,11 +201,6 @@
         ],
         "operationId": "TrafficControllerInterface_CreateOrUpdate",
         "description": "Create a TrafficController",
-        "x-ms-examples": {
-          "Put Traffic Controller": {
-            "$ref": "../../cadl/examples/TrafficControllerPut.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -241,9 +215,8 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "resource",
@@ -266,7 +239,7 @@
             "description": "ARM create operation completed successfully.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
                 "type": "integer",
                 "format": "int32"
               }
@@ -293,11 +266,6 @@
         ],
         "operationId": "TrafficControllerInterface_Update",
         "description": "Update a TrafficController",
-        "x-ms-examples": {
-          "Patch Traffic Controller": {
-            "$ref": "../../cadl/examples/TrafficControllerPatch.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -312,9 +280,8 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "properties",
@@ -347,11 +314,6 @@
         ],
         "operationId": "TrafficControllerInterface_Delete",
         "description": "Delete a TrafficController",
-        "x-ms-examples": {
-          "Delete Traffic Controller": {
-            "$ref": "../../cadl/examples/TrafficControllerDelete.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -366,9 +328,8 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -378,14 +339,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              },
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "A sequence of textual characters.",
+                "type": "string"
               }
             }
           },
@@ -412,11 +373,6 @@
         ],
         "operationId": "AssociationsInterface_ListByTrafficController",
         "description": "List Association resources by TrafficController",
-        "x-ms-examples": {
-          "Get Associations": {
-            "$ref": "../../cadl/examples/AssociationsGet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -431,9 +387,8 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -462,11 +417,6 @@
         ],
         "operationId": "AssociationsInterface_Get",
         "description": "Get a Association",
-        "x-ms-examples": {
-          "Get Association": {
-            "$ref": "../../cadl/examples/AssociationGet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -481,17 +431,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "Name of Association",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -515,11 +463,6 @@
         ],
         "operationId": "AssociationsInterface_CreateOrUpdate",
         "description": "Create a Association",
-        "x-ms-examples": {
-          "Put Association": {
-            "$ref": "../../cadl/examples/AssociationPut.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -534,17 +477,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "Name of Association",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "resource",
@@ -567,7 +508,7 @@
             "description": "ARM create operation completed successfully.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
                 "type": "integer",
                 "format": "int32"
               }
@@ -594,11 +535,6 @@
         ],
         "operationId": "AssociationsInterface_Update",
         "description": "Update a Association",
-        "x-ms-examples": {
-          "Update Association": {
-            "$ref": "../../cadl/examples/AssociationPatch.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -613,17 +549,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "Name of Association",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "properties",
@@ -656,11 +590,6 @@
         ],
         "operationId": "AssociationsInterface_Delete",
         "description": "Delete a Association",
-        "x-ms-examples": {
-          "Delete Association": {
-            "$ref": "../../cadl/examples/AssociationDelete.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -675,17 +604,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "Name of Association",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -696,12 +623,12 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
                 "type": "integer",
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "description": "A sequence of textual characters.",
                 "type": "string"
               }
             }
@@ -729,11 +656,6 @@
         ],
         "operationId": "FrontendsInterface_ListByTrafficController",
         "description": "List Frontend resources by TrafficController",
-        "x-ms-examples": {
-          "Get Frontends": {
-            "$ref": "../../cadl/examples/FrontendsGet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -748,9 +670,8 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -779,11 +700,6 @@
         ],
         "operationId": "FrontendsInterface_Get",
         "description": "Get a Frontend",
-        "x-ms-examples": {
-          "Get Frontend": {
-            "$ref": "../../cadl/examples/FrontendGet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -798,17 +714,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "Frontends",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -832,11 +746,6 @@
         ],
         "operationId": "FrontendsInterface_CreateOrUpdate",
         "description": "Create a Frontend",
-        "x-ms-examples": {
-          "Put Frontend": {
-            "$ref": "../../cadl/examples/FrontendPut.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -851,17 +760,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "Frontends",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "resource",
@@ -884,7 +791,7 @@
             "description": "ARM create operation completed successfully.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
                 "type": "integer",
                 "format": "int32"
               }
@@ -911,11 +818,6 @@
         ],
         "operationId": "FrontendsInterface_Update",
         "description": "Update a Frontend",
-        "x-ms-examples": {
-          "Update Frontend": {
-            "$ref": "../../cadl/examples/FrontendPatch.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -930,17 +832,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "Frontends",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "properties",
@@ -973,11 +873,6 @@
         ],
         "operationId": "FrontendsInterface_Delete",
         "description": "Delete a Frontend",
-        "x-ms-examples": {
-          "Delete Frontend": {
-            "$ref": "../../cadl/examples/FrontendDelete.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -992,17 +887,15 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "traffic controller name for path",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "Frontends",
-            "type": "string",
-            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
+            "description": "A sequence of textual characters.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1013,12 +906,12 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
                 "type": "integer",
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "description": "A sequence of textual characters.",
                 "type": "string"
               }
             }
@@ -1069,8 +962,8 @@
           "items": {
             "$ref": "#/definitions/Association"
           },
-          "x-typespec-name": "Association[]",
-          "description": "The Association items on this page"
+          "description": "The Association items on this page",
+          "x-typespec-name": "Association[]"
         },
         "nextLink": {
           "type": "string",
@@ -1145,10 +1038,11 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "A sequence of textual characters."
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties",
@@ -1199,8 +1093,8 @@
           "items": {
             "$ref": "#/definitions/Frontend"
           },
-          "x-typespec-name": "Frontend[]",
-          "description": "The Frontend items on this page"
+          "description": "The Frontend items on this page",
+          "x-typespec-name": "Frontend[]"
         },
         "nextLink": {
           "type": "string",
@@ -1228,7 +1122,10 @@
           "readOnly": true
         }
       },
-      "description": "Frontend Properties."
+      "description": "Frontend Properties.",
+      "required": [
+        "fqdn"
+      ]
     },
     "FrontendUpdate": {
       "type": "object",
@@ -1236,10 +1133,11 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "A sequence of textual characters."
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "The type used for update operations of the Frontend."
@@ -1301,8 +1199,8 @@
           "items": {
             "$ref": "#/definitions/TrafficController"
           },
-          "x-typespec-name": "TrafficController[]",
-          "description": "The TrafficController items on this page"
+          "description": "The TrafficController items on this page",
+          "x-typespec-name": "TrafficController[]"
         },
         "nextLink": {
           "type": "string",
@@ -1322,10 +1220,11 @@
         "configurationEndpoints": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "description": "A sequence of textual characters."
           },
-          "x-typespec-name": "string[]",
           "description": "Configuration Endpoints.",
+          "x-typespec-name": "string[]",
           "readOnly": true
         },
         "frontends": {
@@ -1333,8 +1232,8 @@
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "x-typespec-name": "ResourceId[]",
           "description": "Frontends References List",
+          "x-typespec-name": "ResourceId[]",
           "readOnly": true
         },
         "associations": {
@@ -1342,8 +1241,8 @@
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "x-typespec-name": "ResourceId[]",
           "description": "Associations References List",
+          "x-typespec-name": "ResourceId[]",
           "readOnly": true
         },
         "provisioningState": {
@@ -1360,10 +1259,11 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "A sequence of textual characters."
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "The type used for update operations of the TrafficController."
