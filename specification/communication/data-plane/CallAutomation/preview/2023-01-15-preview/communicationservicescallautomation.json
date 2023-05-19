@@ -1681,8 +1681,11 @@
       "type": "object",
       "properties": {
         "playSourceInfo": {
-          "$ref": "#/definitions/PlaySource",
-          "description": "The source of the audio to be played."
+          "description": "The source of the audio to be played.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaySource"
+          }
         },
         "playTo": {
           "description": "The list of call participants play provided audio to.\r\nPlays to everyone in the call when not provided.",
@@ -1723,7 +1726,7 @@
         "sourceType": {
           "$ref": "#/definitions/PlaySourceType"
         },
-        "playSourceId": {
+        "playSourceCacheId": {
           "description": "Defines the identifier to be used for caching related media",
           "type": "string"
         },
