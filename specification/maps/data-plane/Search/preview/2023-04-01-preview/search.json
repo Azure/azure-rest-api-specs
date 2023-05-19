@@ -641,104 +641,104 @@
     },
     "/autosuggest": {
       "get": {
-          "description": "Given a request with a user’s location and a partial query (called a query prefix), the Azure Maps Autosuggest API returns a list of suggested entities which the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.",
-          "operationId": "Search_Autosuggest",
-          "x-ms-examples": {
-            "Autosuggest API call to search for a place to eat where the user’s location is in the Ballard neighborhood of Seattle, e.g. at the location 47.668697,-122.376373": {
-              "$ref": "./examples/Autosuggest.json"
+        "description": "Given a request with a user’s location and a partial query (called a query prefix), the Azure Maps Autosuggest API returns a list of suggested entities which the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.",
+        "operationId": "Search_Autosuggest",
+        "x-ms-examples": {
+          "Autosuggest API call to search for a place to eat where the user’s location is in the Ballard neighborhood of Seattle, e.g. at the location 47.668697,-122.376373": {
+            "$ref": "./examples/Autosuggest.json"
+          }
+        },
+        "produces": [
+          "application/geo+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "description": "Required. The user's query prefix.\n\nExample: \"1 Micro\" or \"El Gaucho\".\n",
+            "type": "string"
+          },
+          {
+            "name": "circularMapView",
+            "in": "query",
+            "description": "A circular geographic region specified by a comma separated list of the latitude and longitude of the center of the circle, and the radius of the circle, in meters.\n\nExample: 48.604311,-122.981998,5000\n\nNote. Mutually exclusive from bbox.\n",
+            "type": "array",
+            "items": {
+              "type": "number"
             }
           },
-          "produces": [
-            "application/geo+json"
-          ],
-          "parameters": [
-              {
-                "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
-              },
-              {
-                "$ref": "#/parameters/Accept-Language"
-              },
-              {
-                  "name": "query",
-                  "in": "query",
-                  "required": true,
-                  "description": "Required. The user's query prefix.\n\nExample: \"1 Micro\" or \"El Gaucho\".\n",
-                  "type": "string"
-              },
-              {
-                  "name": "circularMapView",
-                  "in": "query",
-                  "description": "A circular geographic region specified by a comma separated list of the latitude and longitude of the center of the circle, and the radius of the circle, in meters.\n\nExample: 48.604311,-122.981998,5000\n\nNote. Mutually exclusive from bbox.\n",
-                  "type": "array",
-                    "items": {
-                      "type": "number"
-                    }
-              },
-              {
-                "$ref": "#/parameters/Bbox"
-              },
-              {
-                "$ref": "#/parameters/Top"
-              },
-              {
-                "name": "AutosuggestResultTypeEnum",
-                "in": "query",
-                "description": "A comma separated list of returned entity types. The possible values are \n\n- Address\n- Place\n\nThese types are mutually inclusive. Place represents points of interest, like natural landmarks.",
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "enum": [
-                      "Address",
-                      "Place"
-                    ],
-                    "x-ms-enum": {
-                      "name": "ResultTypeEnum",
-                      "modelAsString": true,
-                      "values": [
-                        {
-                          "name": "Address",
-                          "value": "Address"
-                        },
-                        {
-                          "name": "Place",
-                          "value": "Place"
-                        }
-                      ]
-                    }
-                  }
-                },
-              {
-                "$ref": "#/parameters/View"
-              },
-              {
-                  "name": "countryRegionSet",
-                  "in": "query",
-                  "description": "Used to constrain entity suggestions to a single country denoted by a 2-letter country code abbreviation.\n\nExample: `DE`.\n",
-                  "required": false,
-                  "type": "string",
-                  "default": "none"
-              },
-              {
-                "$ref": "#/parameters/ApiVersion"
-              }
-          ],
-          "responses": {
-              "200": {
-                  "description": "Successful operation",
-                  "schema": {
-                    "$ref": "#/definitions/AutosuggestResponse"
+          {
+            "$ref": "#/parameters/Bbox"
+          },
+          {
+            "$ref": "#/parameters/Top"
+          },
+          {
+            "name": "AutosuggestResultTypeEnum",
+            "in": "query",
+            "description": "A comma separated list of returned entity types. The possible values are \n\n- Address\n- Place\n\nThese types are mutually inclusive. Place represents points of interest, like natural landmarks.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Address",
+                "Place"
+              ],
+              "x-ms-enum": {
+                "name": "ResultTypeEnum",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "Address",
+                    "value": "Address"
                   },
-                  "headers": {
-                      "x-ms-request-id": {
-                          "description": "The autosuggest service request ID.",
-                          "type": "string"
-                      }
+                  {
+                    "name": "Place",
+                    "value": "Place"
                   }
-              },
-              "default": {
-                "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+                ]
               }
+            }
+          },
+          {
+            "$ref": "#/parameters/View"
+          },
+          {
+            "name": "countryRegionSet",
+            "in": "query",
+            "description": "Used to constrain entity suggestions to a single country denoted by a 2-letter country code abbreviation.\n\nExample: `DE`.\n",
+            "required": false,
+            "type": "string",
+            "default": "none"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/AutosuggestResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "The autosuggest service request ID.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+          }
+        }
       }
     }
   },
@@ -841,8 +841,8 @@
           ]
         },
         "name": {
-           "description": "The name of the place.",
-           "type": "string"
+          "description": "The name of the place.",
+          "type": "string"
         }
       }
     },
