@@ -177,7 +177,7 @@ namespace Azure.Messaging.EventGrid {
   @parentResource(Topic)
   model EventSubscription {
     @key
-    @doc("Event subscription name.")
+    @doc("Event Subscription Name.")
     @visibility("read")
     eventSubscriptionName: string;
   }
