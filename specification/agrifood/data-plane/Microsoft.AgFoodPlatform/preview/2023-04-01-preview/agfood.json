@@ -1071,31 +1071,37 @@
           },
           {
             "in": "formData",
-            "name": "resourceId",
+            "name": "ResourceId",
             "description": "Associated Resource id for this attachment.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "resourceType",
+            "name": "ResourceType",
             "description": "Associated Resource type for this attachment.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "originalFileName",
+            "name": "OriginalFileName",
             "description": "Original File Name for this attachment.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "id",
+            "name": "PartyId",
+            "description": "PartyId id for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Id",
             "description": "Unique id.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "status",
+            "name": "Status",
             "description": "Status of the resource.",
             "type": "string",
             "maxLength": 100,
@@ -1103,21 +1109,21 @@
           },
           {
             "in": "formData",
-            "name": "createdDateTime",
+            "name": "CreatedDateTime",
             "description": "Date when resource was created.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "formData",
-            "name": "modifiedDateTime",
+            "name": "ModifiedDateTime",
             "description": "Date when resource was last modified.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "formData",
-            "name": "source",
+            "name": "Source",
             "description": "Source of the resource.",
             "type": "string",
             "maxLength": 100,
@@ -1125,7 +1131,7 @@
           },
           {
             "in": "formData",
-            "name": "name",
+            "name": "Name",
             "description": "Name to identify resource.",
             "type": "string",
             "maxLength": 100,
@@ -1133,7 +1139,7 @@
           },
           {
             "in": "formData",
-            "name": "description",
+            "name": "Description",
             "description": "Textual description of resource.",
             "type": "string",
             "maxLength": 500,
@@ -1141,14 +1147,20 @@
           },
           {
             "in": "formData",
-            "name": "createdBy",
+            "name": "CreatedBy",
             "description": "Created by user/tenant id.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "modifiedBy",
+            "name": "ModifiedBy",
             "description": "Modified by user/tenant id.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ETag",
+            "description": "The ETag value to implement optimistic concurrency.",
             "type": "string"
           }
         ],
@@ -6136,26 +6148,50 @@
           },
           {
             "in": "formData",
-            "name": "insightId",
+            "name": "InsightId",
             "description": "InsightID for this InsightAttachment.",
             "required": true,
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "originalFileName",
+            "name": "ModelId",
+            "description": "ModelID for this InsightAttachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ResourceType",
+            "description": "Associated Resource type for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ResourceId",
+            "description": "Associated Resource id for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "OriginalFileName",
             "description": "Original File Name for this attachment.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "id",
+            "name": "PartyId",
+            "description": "PartyId id for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "Id",
             "description": "Unique id.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "status",
+            "name": "Status",
             "description": "Status of the resource.",
             "type": "string",
             "maxLength": 100,
@@ -6163,21 +6199,21 @@
           },
           {
             "in": "formData",
-            "name": "createdDateTime",
+            "name": "CreatedDateTime",
             "description": "Date when resource was created.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "formData",
-            "name": "modifiedDateTime",
+            "name": "ModifiedDateTime",
             "description": "Date when resource was last modified.",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "formData",
-            "name": "source",
+            "name": "Source",
             "description": "Source of the resource.",
             "type": "string",
             "maxLength": 100,
@@ -6185,7 +6221,7 @@
           },
           {
             "in": "formData",
-            "name": "name",
+            "name": "Name",
             "description": "Name to identify resource.",
             "type": "string",
             "maxLength": 100,
@@ -6193,7 +6229,7 @@
           },
           {
             "in": "formData",
-            "name": "description",
+            "name": "Description",
             "description": "Textual description of resource.",
             "type": "string",
             "maxLength": 500,
@@ -6201,14 +6237,20 @@
           },
           {
             "in": "formData",
-            "name": "createdBy",
+            "name": "CreatedBy",
             "description": "Created by user/tenant id.",
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "modifiedBy",
+            "name": "ModifiedBy",
             "description": "Modified by user/tenant id.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ETag",
+            "description": "The ETag value to implement optimistic concurrency.",
             "type": "string"
           }
         ],
@@ -12722,7 +12764,7 @@
           {
             "in": "query",
             "name": "provider",
-            "description": "Provider name of scene data.",
+            "description": "Provider name of scene data. Supported value: SentinelHub.",
             "required": true,
             "type": "string"
           },
@@ -13132,91 +13174,9 @@
           }
         },
         "x-ms-examples": {
+          "SearchFeaturesQuery": null,
           "Scenes_SearchFeatures": {
             "$ref": "./examples/Scenes_SearchFeatures.json"
-          }
-        }
-      }
-    },
-    "/scenes/stac-collections/{collectionId}/features/{featureId}": {
-      "get": {
-        "tags": [
-          "Scenes"
-        ],
-        "description": "Get a feature(SpatioTemporal Asset Catalog (STAC) Item) for given collection and feature id.",
-        "operationId": "Scenes_GetStacFeature",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "collectionId",
-            "description": "Collection Id to be fetched.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Sentinel_2_L2A",
-              "Sentinel_2_L1C"
-            ],
-            "x-ms-enum": {
-              "name": "collectionId",
-              "modelAsString": true
-            }
-          },
-          {
-            "in": "path",
-            "name": "featureId",
-            "description": "Feature Id to be fetched.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "providerClientId",
-            "description": "Provider client id for authenticating to provider to pull satellite data.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "providerClientSecret",
-            "description": "Provider client secret for authenticating to provider to pull satellite data.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/StacFeature"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Scenes_GetStacFeature": {
-            "$ref": "./examples/Scenes_GetStacFeature.json"
           }
         }
       }
@@ -17376,7 +17336,7 @@
           "WeatherData"
         ],
         "description": "Returns a list of WeatherData.",
-        "operationId": "WeatherData_Get",
+        "operationId": "WeatherData_GetWeatherData",
         "consumes": [
           "application/json"
         ],
@@ -17406,17 +17366,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/WeatherDataProviderResponse"
-            },
-            "headers": {
-              "x-ms-cache-hit": {
-                "description": "Indicate whether the request was cache hit or cache miss.",
-                "type": "boolean"
-              },
-              "x-ms-response-latency-in-milliseconds": {
-                "description": "Time taken in milliseconds for processing the request at server side.",
-                "type": "integer",
-                "format": "int32"
-              }
             }
           },
           "default": {
@@ -17434,8 +17383,8 @@
           }
         },
         "x-ms-examples": {
-          "WeatherData_Get": {
-            "$ref": "./examples/WeatherData_Get.json"
+          "WeatherData_GetWeatherData": {
+            "$ref": "./examples/WeatherData_GetWeatherData.json"
           }
         }
       }
@@ -18396,6 +18345,30 @@
           "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string"
         }
+      }
+    },
+    "AuthCredentials": {
+      "description": "ConnectorCredentials.",
+      "required": [
+        "authType"
+      ],
+      "type": "object",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/AuthCredentialsEnum"
+        }
+      }
+    },
+    "AuthCredentialsEnum": {
+      "description": "CredentialTypeEnum.",
+      "enum": [
+        "BasicAuth",
+        "ApiKeyAuth"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AuthCredentialsEnum",
+        "modelAsString": true
       }
     },
     "BiomassModelJob": {
@@ -22201,6 +22174,9 @@
       ],
       "type": "object",
       "properties": {
+        "credential": {
+          "$ref": "#/definitions/AuthCredentials"
+        },
         "partyId": {
           "description": "Party Id.",
           "minLength": 1,
@@ -22229,14 +22205,6 @@
         },
         "data": {
           "$ref": "#/definitions/SatelliteData"
-        },
-        "providerClientId": {
-          "description": "Provider client id for authenticating to provider to pull satellite data.",
-          "type": "string"
-        },
-        "providerClientSecret": {
-          "description": "Provider client secret for authenticating to provider to pull satellite data.",
-          "type": "string"
         },
         "id": {
           "description": "Unique job id.",
@@ -22313,10 +22281,19 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
-          "example": {
+          "additionalProperties": {}
+        }
+      },
+      "example": {
             "key1": "value1",
-            "key2": 123.45
+            "key2": 123.45,
+        "credentials": {
+          "authType": "string",
+          "username": "string",
+          "password": {
+            "keyVaultUri": "string",
+            "keyName": "string",
+            "keyVersion": "string"
           }
         }
       }
@@ -22531,12 +22508,13 @@
       "description": "Search stac Features parameters.",
       "required": [
         "endDateTime",
-        "startDateTime",
-        "providerClientId",
-        "providerClientSecret"
+        "startDateTime"
       ],
       "type": "object",
       "properties": {
+        "credential": {
+          "$ref": "#/definitions/AuthCredentials"
+        },
         "startDateTime": {
           "format": "date-time",
           "description": "Start datetime of the time interval in which to search for Features.",
@@ -22564,16 +22542,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "providerClientId": {
-          "description": "Provider client id for authenticating to provider to pull satellite data.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "providerClientSecret": {
-          "description": "Provider client secret for authenticating to provider to pull satellite data.",
-          "minLength": 1,
-          "type": "string"
         }
       }
     },
@@ -24324,14 +24292,16 @@
           "description": "This number is the key to the weather icon lookup. The data field shows the icon number that is matched to represent the observed weather conditions.",
           "type": "array",
           "items": {
-            "type": "string"
+            "format": "int32",
+            "type": "integer"
           }
         },
         "iconCodeExtend": {
           "description": "Code representing full set sensible weather.",
           "type": "array",
           "items": {
-            "type": "string"
+            "format": "int32",
+            "type": "integer"
           }
         },
         "hasPrecipitation": {
@@ -24373,7 +24343,8 @@
           "description": "Hourly maximum UV index.",
           "type": "array",
           "items": {
-            "type": "string"
+            "format": "double",
+            "type": "number"
           }
         },
         "validTimeLocal": {
@@ -24721,11 +24692,13 @@
       "required": [
         "extensionApiName",
         "extensionId",
-        "providerApiKey",
         "units"
       ],
       "type": "object",
       "properties": {
+        "credential": {
+          "$ref": "#/definitions/AuthCredentials"
+        },
         "locations": {
           "description": "List of locations for which weather data need to be fetched from the provider.",
           "type": "array",
@@ -24735,12 +24708,6 @@
         },
         "providerAppId": {
           "description": "App id of the weather data provider.",
-          "maxLength": 200,
-          "minLength": 2,
-          "type": "string"
-        },
-        "providerApiKey": {
-          "description": "Api key of the weather data provider.",
           "maxLength": 200,
           "minLength": 2,
           "type": "string"
@@ -24768,7 +24735,7 @@
         },
         "endTimeHours": {
           "format": "int32",
-          "description": "End of time range. Supported ranges are from 0 to 240. (Only applicable for DTN.ClearAg extension.)",
+          "description": "End of time range. (Only applicable for DTN.ClearAg extension.)",
           "maximum": 240,
           "minimum": 0,
           "type": "integer"
@@ -24870,7 +24837,7 @@
           "format": "date-time",
           "description": "Date-time when resource was last requested, sample format: yyyy-MM-ddTHH:mm:ssZ.",
           "type": "string",
-          "example": "2020-12-31T11:10:21Z."
+          "example": "2020-12-31T11:10:21Z"
         },
         "data": {
           "$ref": "#/definitions/WeatherDataForPassthrough"
