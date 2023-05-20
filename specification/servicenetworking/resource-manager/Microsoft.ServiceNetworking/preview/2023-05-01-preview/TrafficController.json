@@ -81,6 +81,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Operations List": {
+            "$ref": "./examples/OperationsList.json"
+          }
         }
       }
     },
@@ -115,6 +120,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Traffic Controllers List": {
+            "$ref": "./examples/TrafficControllersGetList.json"
+          }
         }
       }
     },
@@ -152,6 +162,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Traffic Controllers": {
+            "$ref": "./examples/TrafficControllersGet.json"
+          }
         }
       }
     },
@@ -176,7 +191,7 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           }
         ],
@@ -192,6 +207,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Traffic Controller": {
+            "$ref": "./examples/TrafficControllerGet.json"
           }
         }
       },
@@ -215,7 +235,7 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
@@ -239,7 +259,7 @@
             "description": "ARM create operation completed successfully.",
             "headers": {
               "Retry-After": {
-                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               }
@@ -253,6 +273,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Put Traffic Controller": {
+            "$ref": "./examples/TrafficControllerPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -280,7 +305,7 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
@@ -306,6 +331,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch Traffic Controller": {
+            "$ref": "./examples/TrafficControllerPatch.json"
+          }
         }
       },
       "delete": {
@@ -328,7 +358,7 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           }
         ],
@@ -340,12 +370,12 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               },
               "Location": {
-                "description": "A sequence of textual characters.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -358,6 +388,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Traffic Controller": {
+            "$ref": "./examples/TrafficControllerDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -387,7 +422,7 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           }
         ],
@@ -407,6 +442,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Associations": {
+            "$ref": "./examples/AssociationsGet.json"
+          }
         }
       }
     },
@@ -431,14 +471,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Name of Association",
             "type": "string"
           }
         ],
@@ -454,6 +494,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Association": {
+            "$ref": "./examples/AssociationGet.json"
           }
         }
       },
@@ -477,14 +522,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Name of Association",
             "type": "string"
           },
           {
@@ -508,7 +553,7 @@
             "description": "ARM create operation completed successfully.",
             "headers": {
               "Retry-After": {
-                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               }
@@ -522,6 +567,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Put Association": {
+            "$ref": "./examples/AssociationPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -549,14 +599,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Name of Association",
             "type": "string"
           },
           {
@@ -582,6 +632,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update Association": {
+            "$ref": "./examples/AssociationPatch.json"
+          }
         }
       },
       "delete": {
@@ -604,14 +659,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "associationName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Name of Association",
             "type": "string"
           }
         ],
@@ -623,12 +678,12 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               },
               "Location": {
-                "description": "A sequence of textual characters.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -641,6 +696,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Association": {
+            "$ref": "./examples/AssociationDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -670,7 +730,7 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           }
         ],
@@ -690,6 +750,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Frontends": {
+            "$ref": "./examples/FrontendsGet.json"
+          }
         }
       }
     },
@@ -714,14 +779,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Frontends",
             "type": "string"
           }
         ],
@@ -737,6 +802,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Frontend": {
+            "$ref": "./examples/FrontendGet.json"
           }
         }
       },
@@ -760,14 +830,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Frontends",
             "type": "string"
           },
           {
@@ -791,7 +861,7 @@
             "description": "ARM create operation completed successfully.",
             "headers": {
               "Retry-After": {
-                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               }
@@ -805,6 +875,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Put Frontend": {
+            "$ref": "./examples/FrontendPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -832,14 +907,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Frontends",
             "type": "string"
           },
           {
@@ -865,6 +940,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update Frontend": {
+            "$ref": "./examples/FrontendPatch.json"
+          }
         }
       },
       "delete": {
@@ -887,14 +967,14 @@
             "name": "trafficControllerName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "traffic controller name for path",
             "type": "string"
           },
           {
             "name": "frontendName",
             "in": "path",
             "required": true,
-            "description": "A sequence of textual characters.",
+            "description": "Frontends",
             "type": "string"
           }
         ],
@@ -906,12 +986,12 @@
             "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
-                "description": "A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
               },
               "Location": {
-                "description": "A sequence of textual characters.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -924,6 +1004,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Frontend": {
+            "$ref": "./examples/FrontendDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -962,8 +1047,8 @@
           "items": {
             "$ref": "#/definitions/Association"
           },
-          "description": "The Association items on this page",
-          "x-typespec-name": "Association[]"
+          "x-typespec-name": "Association[]",
+          "description": "The Association items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -1038,11 +1123,10 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string",
-            "description": "A sequence of textual characters."
+            "type": "string"
           },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
         },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties",
@@ -1093,8 +1177,8 @@
           "items": {
             "$ref": "#/definitions/Frontend"
           },
-          "description": "The Frontend items on this page",
-          "x-typespec-name": "Frontend[]"
+          "x-typespec-name": "Frontend[]",
+          "description": "The Frontend items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -1133,11 +1217,10 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string",
-            "description": "A sequence of textual characters."
+            "type": "string"
           },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
         }
       },
       "description": "The type used for update operations of the Frontend."
@@ -1199,8 +1282,8 @@
           "items": {
             "$ref": "#/definitions/TrafficController"
           },
-          "description": "The TrafficController items on this page",
-          "x-typespec-name": "TrafficController[]"
+          "x-typespec-name": "TrafficController[]",
+          "description": "The TrafficController items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -1220,11 +1303,10 @@
         "configurationEndpoints": {
           "type": "array",
           "items": {
-            "type": "string",
-            "description": "A sequence of textual characters."
+            "type": "string"
           },
-          "description": "Configuration Endpoints.",
           "x-typespec-name": "string[]",
+          "description": "Configuration Endpoints.",
           "readOnly": true
         },
         "frontends": {
@@ -1232,8 +1314,8 @@
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "description": "Frontends References List",
           "x-typespec-name": "ResourceId[]",
+          "description": "Frontends References List",
           "readOnly": true
         },
         "associations": {
@@ -1241,8 +1323,8 @@
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "description": "Associations References List",
           "x-typespec-name": "ResourceId[]",
+          "description": "Associations References List",
           "readOnly": true
         },
         "provisioningState": {
@@ -1259,11 +1341,10 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string",
-            "description": "A sequence of textual characters."
+            "type": "string"
           },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
         }
       },
       "description": "The type used for update operations of the TrafficController."
