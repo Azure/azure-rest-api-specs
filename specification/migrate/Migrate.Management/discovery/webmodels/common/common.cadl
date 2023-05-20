@@ -81,10 +81,18 @@ model SpringBootDiscovery {
 // model HypervCluster {
 //   @doc("Gets or sets the type of the operating system.")
 //   osType?: string;
+// @doc("hyperv cluster")
+// model HypervCluster {
+//   @doc("Gets or sets the type of the operating system.")
+//   osType?: string;
 
 //   @doc("Gets or sets the Name of the operating system.")
 //   osName?: string;
+//   @doc("Gets or sets the Name of the operating system.")
+//   osName?: string;
 
+//   @doc("Gets or sets the Version of the operating system.")
+//   osVersion?: string;
 //   @doc("Gets or sets the Version of the operating system.")
 //   osVersion?: string;
 
@@ -360,6 +368,7 @@ model DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest {
 
   @doc("optional filters")
   filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+
 }
 
 @doc("DependencyMap ServiceMap Extensions Client GroupMembers Request")
@@ -381,6 +390,7 @@ model DependencyMapServiceMapExtensionsClientGroupMembersRequest {
 
   @doc("optional filters")
   filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+
 }
 
 @doc("DependencyMap ServiceMap Extensions ServerGroup Members Request")
@@ -396,7 +406,9 @@ model DependencyMapServiceMapExtensionsServerGroupMembersRequest {
 
   @doc("optional filters")
   filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+
 }
+
 @doc("DependencyMap ServiceMapExtensions Scope MapRequest")
 model DependencyMapServiceMapExtensionsScopeMapRequest {
   @doc("start time")
@@ -769,6 +781,7 @@ model ErrorDetails {
 @doc("The list of Machine MetaData.")
 model MachineMetadataList {
   @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", [])
   @doc("The list of Machine MetaData.")
   value: MachineMetadata[];
 }
@@ -777,7 +790,6 @@ model MachineMetadataList {
 model MachineMetadata {
   @doc("arm id of the machine.")
   machineArmId: string;
-
   @doc("value representing state of dependency mapping (enabled/disabled).")
   dependencyMapping: string;
 
@@ -983,6 +995,8 @@ model SiteUsageResponse {
   @doc("Gets or sets the number of clusters part of the site.")
   clusterCount: int32;
 
+  // @doc("The status of the last operation.")
+  // provisioningState?: ProvisioningState;
   // @doc("The status of the last operation.")
   // provisioningState?: ProvisioningState;
 }
@@ -1375,9 +1389,6 @@ model IisWebApplicationProperties {
   @visibility("read")
   applications?: IisApplicationUnit[];
 
-  @doc("Gets or sets the tags on IIS Web application.")
-  tags?: Record<object>;
-
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Gets the list of application units for the web site.")
   @visibility("read")
@@ -1422,6 +1433,10 @@ model IisWebApplicationProperties {
   @doc("Gets the display name.")
   @visibility("read")
   displayName?: string;
+
+  
+  @doc("Gets or sets tags on the resource.")
+  tags?: Record<object>;
 
   @doc("Gets a value indicating whether application is deleted.")
   @visibility("read")
@@ -2325,189 +2340,4 @@ model OtherDatabase {
   @doc("Gets or sets Version of the OtherDatabase.")
   @visibility("read")
   version?: string;
-}
-
-@doc("""
-Defines class that represents input to enable or disable DMP on machine
-      
-      for cosmos entity operation.
-""")
-model UpdateMachineRunAsAccount {
-  @doc("Gets or sets the machine collection.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  machines?: UpdateMachineRunAsAccountRunAsAccountMachineInput[];
-}
-
-@doc("Machine class.")
-model UpdateMachineRunAsAccountRunAsAccountMachineInput {
-  @doc("Gets or sets the ARM id of the machine.")
-  machineId?: string;
-
-  @doc("Gets or sets a run as account to be associated with machine.")
-  runAsAccountId?: string;
-}
-
-@doc("Defines class that represents input to update list of tags on machine.")
-model UpdateMachineTags {
-  @doc("Gets or sets the machine collection.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  machines?: UpdateMachineTagsMachineInput[];
-}
-
-@doc("Machine class.")
-model UpdateMachineTagsMachineInput {
-  @doc("Gets or sets the ARM id of the machine.")
-  machineId?: string;
-
-  @doc("Gets or sets Tags.")
-  tags?: Record<string>;
-}
-@doc("PrivateEndpoint Models PrivateEndpoint Details")
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails {
-  @doc("manual PrivateLink Service Connections")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  manualPrivateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
-
-  @doc("private Link ServiceConnections")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  privateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
-
-  @doc("privateLink Service Proxies")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  privateLinkServiceProxies?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy[];
-
-  @doc("connection Details")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  connectionDetails?: MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration[];
-
-  @doc("provisioning state enum")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
-@doc("PrivateEndpoint Models Private LinkServiceConnection")
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection {
-  @doc("name values")
-  name?: string;
-
-  @doc("group ids")
-  groupIds?: string[];
-
-  @doc("request Message")
-  requestMessage?: string;
-}
-
-@doc("PrivateEndpoint Models PrivateLink Service Proxy")
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy {
-  @doc("id value")
-  id?: string;
-
-  @doc("group Connectivity Information")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  groupConnectivityInformation?: MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation[];
-
-  @doc("remote PrivateEndpoint Connection")
-  remotePrivateEndpointConnection?: MicrosoftAzureMigratePrivateEndpointModelsResourceId;
-
-  @doc("remote PrivateLink ServiceConnection State")
-  remotePrivateLinkServiceConnectionState?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState;
-}
-
-@doc("PrivateEndpoint Models Ip Configuration")
-model MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration {
-  @doc("id value")
-  id?: string;
-
-  @doc("private Ip Address")
-  privateIpAddress?: string;
-
-  @doc("link Identifier")
-  linkIdentifier?: string;
-
-  @doc("group Id")
-  groupId?: string;
-
-  @doc("member Name")
-  memberName?: string;
-}
-
-@doc("PrivateEndpoint ModelsGroup Connectivity Information")
-model MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation {
-  @doc("group Id")
-  groupId?: string;
-
-  @doc("member Name")
-  memberName?: string;
-
-  @doc("customer Visible Fqdns")
-  customerVisibleFqdns?: string[];
-
-  @doc("internal Fqdn")
-  internalFqdn?: string;
-
-  @doc("redirect Map Id")
-  redirectMapId?: string;
-
-  @doc("privateLink ServiceArm Region")
-  privateLinkServiceArmRegion?: string;
-}
-
-@doc("PrivateEndpoint Models ResourceId")
-model MicrosoftAzureMigratePrivateEndpointModelsResourceId {
-  @visibility("read")
-  @doc("id value")
-  id?: string;
-}
-
-@doc("PrivateEndpoint Models PrivateLink ServiceConnection State")
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState {
-  @doc("status value")
-  status?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus;
-
-  @doc("description value")
-  description?: string;
-
-  @doc("actions Required")
-  actionsRequired?: string;
-}
-
-/**
- * Represent any structured model.(With properties)
- */
-
-#suppress "@azure-tools/cadl-azure-core/casing-style"
-@doc("an object")
-model object {}
-
-@knownValues(
-  MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusValues
-)
-@doc("Value indicating whether the VM is highly available")
-scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus
-  extends string;
-
-@doc("PrivateLinkServiceConnectionStateStatus")
-enum MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusValues {
-  "Approved",
-  "Pending",
-  "Rejected",
-  "Disconnected",
-}
-@doc("Server machine software inventory REST resource.")
-model ServerSoftwareInventory {
-  @doc("Gets the relative URL to get this Server machine.")
-  @visibility("read")
-  id?: string;
-
-  @doc("Handled by resource provider.")
-  @visibility("read")
-  type?: string;
-
-  @doc("Gets the Name of the machine.")
-  @visibility("read")
-  name?: string;
-
-  @doc("Gets or sets software inventory properties.")
-  @OpenAPI.extension("x-ms-client-flatten", true)
-  properties?: MachineSoftwareInventoryProperties;
 }

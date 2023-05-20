@@ -53,6 +53,10 @@ model ImportMachineProperties {
     @visibility("read")
     firmware?: string;
 
+    #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-duplicate-property"
+    @doc("Gets or sets tags on the resource.")
+    tags?: Record<object>;
+
     @doc("CPU utilization.")
     @visibility("read")
     percentageCpuUtilization?: float32;

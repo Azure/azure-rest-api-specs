@@ -245,19 +245,19 @@ site.
     UpdateMachineDepMapStatus
   >;
 
-  @added(Versions.v2019_05_01_preview)
-  @doc("Method to associate Run as account to machine\r\n            in a site.")
-  UpdateRunAsAccount is ArmResourceActionNoContentAsyncCustomUpdateRunAsAccount<
-    VmwareSite,
-    UpdateMachineRunAsAccount
-  >;
+  // @added(Versions.v2019_05_01_preview)
+  // @doc("Method to associate Run as account to machine\r\n            in a site.")
+  // UpdateRunAsAccount is ArmResourceActionNoContentAsyncCustomUpdateRunAsAccount<
+  //   VmwareSite,
+  //   UpdateMachineRunAsAccount
+  // >;
 
-  @added(Versions.v2019_05_01_preview)
-  @doc("Method to associate Run as account to machine\r\n            in a site.")
-  UpdateTags is ArmResourceActionNoContentAsyncCustomUpdateMachineTags<
-    VmwareSite,
-    UpdateMachineTags
-  >;
+  // @added(Versions.v2019_05_01_preview)
+  // @doc("Method to associate Run as account to machine\r\n            in a site.")
+  // UpdateTags is ArmResourceActionNoContentAsyncCustomUpdateMachineTags<
+  //   VmwareSite,
+  //   UpdateMachineTags
+  // >;
 
   @added(Versions.v2019_05_01_preview)
   @doc("Method to update properties for machines   in a site.")
@@ -372,7 +372,7 @@ interface VmwareSites {
   ): ArmResponse<SiteHealthSummaryCollection>;
 }
 
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+//#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("An machine resource belonging to a site resource.")
 @parentResource(VmwareSite)
 model MachineResource is ProxyResource<VmwareMachineProperties> {
@@ -383,10 +383,9 @@ model MachineResource is ProxyResource<VmwareMachineProperties> {
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
-  @doc("Gets tags that can be used with ODATA")
-  @visibility("read")
-  @added(Versions.v2020_07_10)
-  tags?: Record<object>;
+  // @doc("Gets tags that can be used with ODATA")
+  // @added(Versions.v2020_07_10)
+  // tags?: Record<object>;
 }
 
 @armResourceOperations
@@ -395,10 +394,13 @@ interface MachinesController {
   @operationId("Machines_Get")
   get is ArmResourceReadNoError<MachineResource>;
 
-  @doc("Patches the VMware machine tags.")
   @added(Versions.v2022_10_27)
   @operationId("Machines_UpdateTags")
-  update is ArmResourcePatchSyncNoError<MachineResource,VmwareMachineProperties>;
+  update is ArmResourcePatchSyncNoError<
+  MachineResource,
+  VmwareMachineProperties
+  >;
+
 
   @added(Versions.v2018_05_01_preview)
   @operationId("Machines_ListAsync")
@@ -426,6 +428,7 @@ interface MachinesController {
       totalRecordCount?: int32;
     }
   >;
+
 
   @doc("Method to stop a machine.")
   @added(Versions.v2018_05_01_preview)
@@ -459,7 +462,6 @@ interface VmwareMachinesController {
     ...ResourceInstanceParameters<MachineResource>
   ): ArmResponse<MachineResource>;
 }
-
 @doc("A vcenter resource belonging to a site resource.")
 @parentResource(VmwareSite)
 model Vcenter is ProxyResource<VcenterProperties> {
@@ -562,18 +564,16 @@ interface JobsController {
   listByParent is ArmResourceListByParentUpdated<VmwareJobResource>;
 }
 
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars"
+ #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("A HyperV SiteResource")
 model HypervSite is TrackedResource<SiteProperties> {
-  @doc("Gets the relative ARM name to get Web app server instance.")
-  "id": string;
 
   @key("siteName")
   @segment("hypervSites")
   @doc("Site name")
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @visibility("read")
   name: string;
 
   @doc("Gets or sets the eTag for concurrency control.")
@@ -639,7 +639,7 @@ interface HypervDependencyMapController {
 interface HypervSitesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_Get")
-  get is ArmResourceReadNoError<HypervSite>;
+  get is ArmResourceRead<HypervSite>;
 
   @operationId("HyperVSites_Create")
   @added(Versions.v2018_05_01_preview)
@@ -648,7 +648,7 @@ interface HypervSitesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_Update")
   @doc("Update a HypervSite")
-  update is ArmResourcePatchSyncNoError<
+  update is ArmResourcePatchSync<
   HypervSite,
   SiteProperties
   >;
@@ -843,6 +843,13 @@ interface HypervMachinesController {
   @operationId("HyperVMachines_Get")
   get is ArmResourceReadNoError<HypervMachine>;
 
+  @added(Versions.v2022_10_27)
+  @operationId("HyperVMachines_UpdateTags")
+  update is ArmResourcePatchSyncNoError<
+  HypervMachine,
+  HypervMachineProperties
+  >;
+
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVMachines_List")
   listByParent is ArmResourceListByParentUpdated<
@@ -997,14 +1004,14 @@ interface ServersController {
     ...ResourceInstanceParameters<ServerSiteResource>
   ): ArmResponse<SiteErrorSummary>;
 
-  @doc("Method to get a machines software inventory like applications and roles.")
-  @armResourceRead(InnerError)
-  @get
-  @added(Versions.v2022_10_27)
-  @segment("softwareInventory/default")
-  GetServerSoftwareInventory(
-    ...ResourceInstanceParameters<ServerMachineResource>
-  ): ArmResponse<ServerSoftwareInventory>;
+  // @doc("Method to get a machines software inventory like applications and roles.")
+  // @armResourceRead(InnerError)
+  // @get
+  // @added(Versions.v2022_10_27)
+  // @segment("softwareInventory/default")
+  // GetServerSoftwareInventory(
+  //   ...ResourceInstanceParameters<ServerMachineResource>
+  // ): ArmResponse<ServerSoftwareInventory>;
 
   @doc("Method to enable disable dependency map status for machines\r\n            in a site.")
   @added(Versions.v2020_08_01_preview)
@@ -1110,7 +1117,6 @@ interface ServerDependencyMapController {
   >;
 }
 //*** Server Machine Proxy Resource ***/
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("A machine resource belonging to a site resource.")
 @parentResource(ServerSiteResource)
 model ServerMachineResource is ProxyResource<ServerProperties> {
@@ -1121,10 +1127,10 @@ model ServerMachineResource is ProxyResource<ServerProperties> {
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
   
-  @doc("Gets tags that can be used with ODATA")
-  @visibility("read")
-  @added(Versions.v2020_07_10)
-  tags?: Record<object>;
+  // @doc("Gets tags that can be used with ODATA")
+  // @visibility("read")
+  // @added(Versions.v2020_07_10)
+  // tags?: Record<object>;
 }
 
 //*** Server RunAsAccount Proxy Resource ***/
@@ -1172,14 +1178,12 @@ interface ServerJobsController {
 @doc("A ImportSiteResource")
 model ImportSiteResource is TrackedResource<ImportSitesProperties> {
 
-  @doc("Gets the relative ARM name to get Web app server instance.")
-  id: string;
-
   @key("siteName")
   @segment("importSites")
   @doc("Site name")
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @visibility("read")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -1393,15 +1397,12 @@ interface ImportSitesController {
 @doc("A MasterSite")
 model MasterSite is TrackedResource<MasterSiteProperties> {
 
-  @doc("Gets the relative ARM name to get Web app server instance.")
-  id: string;
-
-
   @key("siteName")
   @segment("masterSites")
   @doc("Site name")
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @visibility("read")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -1432,7 +1433,7 @@ interface MasterSitesController {
   delete is ArmResourceDeleteSyncNoError<MasterSite>;
 
   @added(Versions.v2020_07_07)
-  @doc("Get all the sites in the subscription.")
+  @summary("Get all the sites in the subscription.")
   @operationId("MasterSites_ListBySubscription")
   listBySubscription is ArmListBySubscriptionNoError<MasterSite>;
 
@@ -1530,63 +1531,63 @@ interface PrivateEndpointConnectionController {
   listByParent is ArmResourceListByParentUpdated<PrivateEndpointConnection>;
 }
 
-@doc("A vcenter resource belonging to a site resource.")
-@parentResource(MasterSite)
-model PrivateEndpointConnectionProxy
-  is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails> {
-  @doc(" Private endpoint connection proxy name.")
-  @key("pecProxyName")
-  @segment("privateEndpointConnectionProxies")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @path
-  name: string;
-}
+// @doc("A vcenter resource belonging to a site resource.")
+// @parentResource(MasterSite)
+// model PrivateEndpointConnectionProxy
+//   is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails> {
+//   @doc(" Private endpoint connection proxy name.")
+//   @key("pecProxyName")
+//   @segment("privateEndpointConnectionProxies")
+//   @pattern("^[a-zA-Z0-9-]{3,24}$")
+//   @path
+//   name: string;
+// }
 
-@armResourceOperations
-interface PrivateEndpointConnectionProxyController {
-  @doc("Gets the private endpoint connection proxy.")
-  @added(Versions.v2020_07_07)
-  @operationId("PrivateEndpointConnectionProxyController_Get")
-  get is ArmResourceReadNoError<PrivateEndpointConnectionProxy>;
+// @armResourceOperations
+// interface PrivateEndpointConnectionProxyController {
+//   @doc("Gets the private endpoint connection proxy.")
+//   @added(Versions.v2020_07_07)
+//   @operationId("PrivateEndpointConnectionProxyController_Get")
+//   get is ArmResourceReadNoError<PrivateEndpointConnectionProxy>;
 
-  @doc("Deletes the private endpoint connection proxy.")
-  @added(Versions.v2020_07_07)
-  @operationId("PrivateEndpointConnectionProxyController_Delete")
-  delete is ArmResourceDeleteAsyncNoError<PrivateEndpointConnectionProxy>;
+//   @doc("Deletes the private endpoint connection proxy.")
+//   @added(Versions.v2020_07_07)
+//   @operationId("PrivateEndpointConnectionProxyController_Delete")
+//   delete is ArmResourceDeleteAsyncNoError<PrivateEndpointConnectionProxy>;
 
-  @doc("Creates  the private endpoint connection proxy.")
-  @added(Versions.v2020_07_07)
-  @operationId("PrivateEndpointConnectionProxyController_Create")
-  create is ArmResourceCreateOrUpdateSyncNoError<PrivateEndpointConnectionProxy>;
+//   @doc("Creates  the private endpoint connection proxy.")
+//   @added(Versions.v2020_07_07)
+//   @operationId("PrivateEndpointConnectionProxyController_Create")
+//   create is ArmResourceCreateOrUpdateSyncNoError<PrivateEndpointConnectionProxy>;
 
-  @added(Versions.v2020_07_07)
-  @doc("Gets the private endpoint connection proxy resource.")
-  @operationId("PrivateEndpointConnectionProxyController_List")
-  listByParent is ArmResourceListByParentUpdated<PrivateEndpointConnectionProxy>;
+//   @added(Versions.v2020_07_07)
+//   @doc("Gets the private endpoint connection proxy resource.")
+//   @operationId("PrivateEndpointConnectionProxyController_List")
+//   listByParent is ArmResourceListByParentUpdated<PrivateEndpointConnectionProxy>;
 
-  @doc("Gets the private endpoint connection proxy.")
-  @armResourceRead(InnerError)
-  @get
-  @added(Versions.v2020_07_07)
-  @operationId("PrivateEndpointConnectionProxyController_GetOperationStatus")
-  @segment("operationsStatus")
-  PecOperationStatus(
-    ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>
-  ): ArmResponse<IarmAsyncOperationStatus>;
+//   @doc("Gets the private endpoint connection proxy.")
+//   @armResourceRead(InnerError)
+//   @get
+//   @added(Versions.v2020_07_07)
+//   @operationId("PrivateEndpointConnectionProxyController_GetOperationStatus")
+//   @segment("operationsStatus")
+//   PecOperationStatus(
+//     ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>
+//   ): ArmResponse<IarmAsyncOperationStatus>;
 
-  @doc("Gets the private endpoint connection proxy.")
-  @added(Versions.v2020_07_07)
-  @armResourceAction(InnerError)
-  @post
-  @operationId("PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy")
-  Validate(
-    ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>,
+//   @doc("Gets the private endpoint connection proxy.")
+//   @added(Versions.v2020_07_07)
+//   @armResourceAction(InnerError)
+//   @post
+//   @operationId("PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy")
+//   Validate(
+//     ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>,
 
-    @doc("Request body.")
-    @body
-    body: MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody
-  ): ArmResponse<MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody>;
-}
+//     @doc("Request body.")
+//     @body
+//     body: MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody
+//   ): ArmResponse<MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody>;
+// }
 
 @doc("REST model used to encapsulate Private Link properties for tracked resources.")
 @parentResource(MasterSite)
@@ -1786,8 +1787,7 @@ interface WebAppSitesController {
   refresh is ArmResourceActionAsyncNoError<
     WebAppSite,
     ProxySiteRefreshBody,
-    {}
-  >;
+    {}>;
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars"
@@ -1808,6 +1808,14 @@ interface TomcatWebApplicationsController {
   @added(Versions.v2020_11_11_preview)
   @operationId("TomcatWebApplicationsController_GetWebApplication")
   get is ArmResourceReadNoError<TomcatWebApplications>;
+
+  @doc("Updates the Tomcat web application tags.")
+  @added(Versions.v2022_10_27)
+  @operationId("TomcatWebApplicationsController_UpdateWebApplicationTags")
+  update is ArmResourcePatchSyncNoError<
+  TomcatWebApplications,
+  TomcatWebApplicationProperties
+  >;
 
   // #suppress "order is different"
   @added(Versions.v2020_11_11_preview)
@@ -1905,6 +1913,12 @@ interface IisWebApplicationsController {
   @added(Versions.v2020_11_11_preview)
   @operationId("IISWebApplicationsController_GetWebApplication")
   get is ArmResourceReadNoError<IisWebApplications>;
+
+  @summary("Method to update tags on IIS web application.")
+  @doc("Method to update tags on IIS web application.")
+  @added(Versions.v2022_10_27)
+  @operationId("IISWebApplicationsController_UpdateWebApplicationTags")
+  update is ArmResourcePatchSyncNoError<IisWebApplications, IisWebApplicationProperties>;
 
   // #suppress "order is different"
   @added(Versions.v2020_11_11_preview)
@@ -2231,6 +2245,12 @@ interface SqlServersController {
   @added(Versions.v2020_11_11_preview)
   @operationId("SqlServersController_GetSqlServer")
   get is ArmResourceReadNoError<SqlServer>;
+
+  @summary("Updates the sql server tags.")
+  @doc("Updates the sql server tags.")
+  @added(Versions.v2022_10_27)
+  @operationId("SqlServersController_UpdateSqlServerTags")
+  update is ArmResourcePatchSyncNoError<SqlServer, SqlServerProperties>;
 
   @added(Versions.v2020_11_11_preview)
   @doc("Gets the sql servers.")

@@ -139,9 +139,6 @@
       "name": "PrivateEndpointConnectionController"
     },
     {
-      "name": "PrivateEndpointConnectionProxyController"
-    },
-    {
       "name": "PrivateLinkResourcesController"
     },
     {
@@ -312,7 +309,8 @@
           "MasterSitesController"
         ],
         "operationId": "MasterSites_ListBySubscription",
-        "description": "Get all the sites in the subscription.",
+        "summary": "Get all the sites in the subscription.",
+        "description": "List MasterSite resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -487,6 +485,12 @@
             "schema": {
               "$ref": "#/definitions/HypervSite"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -574,7 +578,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -588,6 +592,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1621,7 +1631,7 @@
           "HypervMachinesController"
         ],
         "operationId": "HyperVMachines_UpdateTags",
-        "description": "Patches the Hyper-V machine tags.",
+        "description": "Update a HypervMachine",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3629,338 +3639,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnectionProxies": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "PrivateEndpointConnectionProxyController_List",
-        "description": "Gets the private endpoint connection proxy resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxyCollection"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnectionProxyController_List_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_List_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnectionProxyController_List_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_List_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "PrivateEndpointConnectionProxyController_Get",
-        "description": "Gets the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "pecProxyName",
-            "in": "path",
-            "required": true,
-            "description": " Private endpoint connection proxy name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnectionProxyController_Get_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_Get_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnectionProxyController_Get_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_Get_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "PrivateEndpointConnectionProxyController_Delete",
-        "description": "Deletes the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "pecProxyName",
-            "in": "path",
-            "required": true,
-            "description": " Private endpoint connection proxy name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PrivateEndpointConnectionProxyController_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_Delete_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnectionProxyController_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_Delete_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "PrivateEndpointConnectionProxyController_Create",
-        "description": "Creates  the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "pecProxyName",
-            "in": "path",
-            "required": true,
-            "description": " Private endpoint connection proxy name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "Resource create parameters.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnectionProxyController_Create_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_Create_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnectionProxyController_Create_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_Create_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}/operationsStatus": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "PrivateEndpointConnectionProxyController_GetOperationStatus",
-        "description": "Gets the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "pecProxyName",
-            "in": "path",
-            "required": true,
-            "description": " Private endpoint connection proxy name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/IarmAsyncOperationStatus"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnectionProxyController_GetOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_GetOperationStatus_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnectionProxyController_GetOperationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_GetOperationStatus_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}/validate": {
-      "post": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
-        "description": "Gets the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "pecProxyName",
-            "in": "path",
-            "required": true,
-            "description": " Private endpoint connection proxy name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "Request body.",
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -5752,7 +5430,8 @@
           "SqlServersController"
         ],
         "operationId": "SqlServersController_UpdateSqlServerTags",
-        "description": "Patches the sql server tags.",
+        "summary": "Updates the sql server tags.",
+        "description": "Updates the sql server tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6836,7 +6515,8 @@
           "IisWebApplicationsController"
         ],
         "operationId": "IisWebApplicationsController_UpdateWebApplicationTags",
-        "description": "Method to patch tags on IIS web application.",
+        "summary": "Method to update tags on IIS web application.",
+        "description": "Method to update tags on IIS web application.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -7435,7 +7115,7 @@
           "TomcatWebApplicationsController"
         ],
         "operationId": "TomcatWebApplicationsController_UpdateWebApplicationTags",
-        "description": "Patches the Tomcat web application tags.",
+        "description": "Updates the Tomcat web application tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -7875,45 +7555,6 @@
           },
           "WebServersController_ListWebServers_MinimumSet_Gen": {
             "$ref": "./examples/WebServersController_ListWebServers_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites": {
-      "get": {
-        "tags": [
-          "ServersController"
-        ],
-        "operationId": "ServersController_ListByResourceGroup",
-        "description": "Get all server sites.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServerSiteResourceCollection"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ServersController_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "ServersController_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -8875,65 +8516,6 @@
             "$ref": "./examples/ServersController_DeleteMachine_MinimumSet_Gen.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "ServersController"
-        ],
-        "operationId": "ServersController_UpdateMachineTags",
-        "description": "Patches the server machine tags.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": " A server machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The resource properties to be updated.",
-            "schema": {
-              "$ref": "#/definitions/ServerMachineResourceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServerMachineResource"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServersController_UpdateMachineTags_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_UpdateMachineTags_MaximumSet_Gen.json"
-          },
-          "ServersController_UpdateMachineTags_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_UpdateMachineTags_MinimumSet_Gen.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/applications": {
@@ -8984,58 +8566,6 @@
           },
           "ServersController_GetHyperVMachineApplications_MinimumSet_Gen": {
             "$ref": "./examples/ServersController_GetHyperVMachineApplications_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/machines/{machineName}/softwareInventory/default": {
-      "get": {
-        "tags": [
-          "ServersController"
-        ],
-        "operationId": "ServersController_GetServerSoftwareInventory",
-        "description": "Method to get a machines software inventory like applications and roles.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "description": " A server machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ServerSoftwareInventory"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ServersController_GetServerSoftwareInventory_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_GetServerSoftwareInventory_MaximumSet_Gen.json"
-          },
-          "ServersController_GetServerSoftwareInventory_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_GetServerSoftwareInventory_MinimumSet_Gen.json"
           }
         }
       }
@@ -10577,7 +10107,7 @@
           "MachinesController"
         ],
         "operationId": "Machines_UpdateTags",
-        "description": "Patches the VMware machine tags.",
+        "description": "Update a MachineResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11282,128 +10812,6 @@
           },
           "VmwarePropertiesController_UpdateProperties_MinimumSet_Gen": {
             "$ref": "./examples/VmwarePropertiesController_UpdateProperties_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateRunAsAccount": {
-      "post": {
-        "tags": [
-          "VmwarePropertiesController"
-        ],
-        "operationId": "VmwarePropertiesController_UpdateRunAsAccount",
-        "description": "Method to associate Run as account to machine\r\n            in a site.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "updateMachineRunAsAccount",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "$ref": "#/definitions/UpdateMachineRunAsAccount"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "VmwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen": {
-            "$ref": "./examples/VmwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen.json"
-          },
-          "VmwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen": {
-            "$ref": "./examples/VmwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateTags": {
-      "post": {
-        "tags": [
-          "VmwarePropertiesController"
-        ],
-        "operationId": "VmwarePropertiesController_UpdateTags",
-        "description": "Method to associate Run as account to machine\r\n            in a site.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "updateMachineTags",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "$ref": "#/definitions/UpdateMachineTags"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "VmwarePropertiesController_UpdateTags_MaximumSet_Gen": {
-            "$ref": "./examples/VmwarePropertiesController_UpdateTags_MaximumSet_Gen.json"
-          },
-          "VmwarePropertiesController_UpdateTags_MinimumSet_Gen": {
-            "$ref": "./examples/VmwarePropertiesController_UpdateTags_MinimumSet_Gen.json"
           }
         }
       }
@@ -12579,40 +11987,6 @@
       },
       "description": "Frontend bindings for a web application."
     },
-    "GroupConnectivityInformation": {
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "group id"
-        },
-        "memberName": {
-          "type": "string",
-          "description": "member name"
-        },
-        "customerVisibleFqdns": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "customer visible Fqdns array"
-        },
-        "internalFqdn": {
-          "type": "string",
-          "description": "internal Fqdn"
-        },
-        "redirectMapId": {
-          "type": "string",
-          "description": "redirect Map Id"
-        },
-        "privateLinkServiceArmRegion": {
-          "type": "string",
-          "description": "private link service Arm Region"
-        }
-      },
-      "description": "group connectivity information model"
-    },
     "GuestOsDetails": {
       "type": "object",
       "properties": {
@@ -13035,6 +12409,15 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets tags that can be used with ODATA",
+          "readOnly": true
         }
       },
       "description": "A machine resource belonging to a site resource.",
@@ -13076,9 +12459,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/LocalObject"
+            "$ref": "#/definitions/object"
           },
-          "x-cadl-name": "Record<LocalObject>",
+          "x-cadl-name": "Record<object>",
           "description": "Gets or sets tags on HyperV machine."
         },
         "instanceUuid": {
@@ -13387,9 +12770,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/LocalObject"
+            "$ref": "#/definitions/object"
           },
-          "x-cadl-name": "Record<LocalObject>",
+          "x-cadl-name": "Record<object>",
           "description": "Gets or sets tags on HyperV machine."
         },
         "firmware": {
@@ -13553,10 +12936,6 @@
             "create"
           ]
         },
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -13571,9 +12950,6 @@
         }
       },
       "description": "A HyperV SiteResource",
-      "required": [
-        "id"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -13604,10 +12980,6 @@
     "HypervSiteUpdate": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -13705,17 +13077,6 @@
       },
       "description": "HyperV VM software inventory REST resource."
     },
-    "IarmAsyncOperationStatus": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Gets the status of the operation. ARM expects the terminal status to be one\nof\n            Succeeded/ Failed/ Canceled. All other values imply that the\noperation is still running.",
-          "readOnly": true
-        }
-      },
-      "description": "ARM async operation status response model."
-    },
     "IisApplicationUnit": {
       "type": "object",
       "properties": {
@@ -13787,14 +13148,6 @@
           "x-cadl-name": "IisApplicationUnit[]",
           "description": "Gets the list of application units for the web site.",
           "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/LocalObject"
-          },
-          "x-cadl-name": "Record<LocalObject>",
-          "description": "Gets or sets the tags on IIS Web application."
         },
         "virtualApplications": {
           "type": "array",
@@ -13870,6 +13223,14 @@
           "type": "string",
           "description": "Gets the display name.",
           "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets or sets tags on the resource."
         },
         "isDeleted": {
           "type": "boolean",
@@ -13979,10 +13340,10 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/LocalObject"
+            "$ref": "#/definitions/object"
           },
-          "x-cadl-name": "Record<LocalObject>",
-          "description": "Gets or sets the tags on IIS Web application."
+          "x-cadl-name": "Record<object>",
+          "description": "Gets or sets tags on the resource."
         }
       },
       "description": "The updatable properties of the IisWebApplications."
@@ -14233,6 +13594,14 @@
           "type": "string",
           "description": "Firmware of the machine.",
           "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets or sets tags on the resource."
         },
         "percentageCpuUtilization": {
           "type": "number",
@@ -14522,19 +13891,12 @@
             "create"
           ]
         },
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
         }
       },
       "description": "A ImportSiteResource",
-      "required": [
-        "id"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -14565,10 +13927,6 @@
     "ImportSiteResourceUpdate": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -14625,32 +13983,6 @@
         }
       },
       "description": "The properties of ImportSiteResource"
-    },
-    "IpConfiguration": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id value"
-        },
-        "privateIpAddress": {
-          "type": "string",
-          "description": "private Ip Address"
-        },
-        "linkIdentifier": {
-          "type": "string",
-          "description": "link identifier"
-        },
-        "groupId": {
-          "type": "string",
-          "description": "group id"
-        },
-        "memberName": {
-          "type": "string",
-          "description": "member name"
-        }
-      },
-      "description": "ip configuration model"
     },
     "JobProperties": {
       "type": "object",
@@ -14807,7 +14139,7 @@
             "$ref": "#/definitions/object"
           },
           "x-cadl-name": "Record<object>",
-          "description": "Gets or sets tags on VMware machine."
+          "description": "Gets or sets tags on the VMware machine."
         },
         "firmware": {
           "type": "string",
@@ -14869,10 +14201,6 @@
             "create"
           ]
         },
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -14887,9 +14215,6 @@
         }
       },
       "description": "A MasterSite",
-      "required": [
-        "id"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -14969,10 +14294,6 @@
     "MasterSiteUpdate": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -15031,230 +14352,6 @@
         "modelAsString": true
       }
     },
-    "MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Relative URL to get this resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets the name of the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets the resource type.",
-          "readOnly": true
-        },
-        "remotePrivateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointDetails",
-          "description": "private endpoint details"
-        }
-      },
-      "description": "Private Endpoint Connection Proxy Request Body"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation": {
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "group Id"
-        },
-        "memberName": {
-          "type": "string",
-          "description": "member Name"
-        },
-        "customerVisibleFqdns": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "customer Visible Fqdns"
-        },
-        "internalFqdn": {
-          "type": "string",
-          "description": "internal Fqdn"
-        },
-        "redirectMapId": {
-          "type": "string",
-          "description": "redirect Map Id"
-        },
-        "privateLinkServiceArmRegion": {
-          "type": "string",
-          "description": "privateLink ServiceArm Region"
-        }
-      },
-      "description": "PrivateEndpoint ModelsGroup Connectivity Information"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id value"
-        },
-        "privateIpAddress": {
-          "type": "string",
-          "description": "private Ip Address"
-        },
-        "linkIdentifier": {
-          "type": "string",
-          "description": "link Identifier"
-        },
-        "groupId": {
-          "type": "string",
-          "description": "group Id"
-        },
-        "memberName": {
-          "type": "string",
-          "description": "member Name"
-        }
-      },
-      "description": "PrivateEndpoint Models Ip Configuration"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails": {
-      "type": "object",
-      "properties": {
-        "manualPrivateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[]",
-          "description": "manual PrivateLink Service Connections"
-        },
-        "privateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[]",
-          "description": "private Link ServiceConnections"
-        },
-        "privateLinkServiceProxies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy"
-          },
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy[]",
-          "description": "privateLink Service Proxies",
-          "x-ms-identifiers": []
-        },
-        "connectionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration"
-          },
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration[]",
-          "description": "connection Details",
-          "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "provisioning state enum",
-          "readOnly": true
-        }
-      },
-      "description": "PrivateEndpoint Models PrivateEndpoint Details"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "name values"
-        },
-        "groupIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "group ids"
-        },
-        "requestMessage": {
-          "type": "string",
-          "description": "request Message"
-        }
-      },
-      "description": "PrivateEndpoint Models Private LinkServiceConnection"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus",
-          "description": "status value"
-        },
-        "description": {
-          "type": "string",
-          "description": "description value"
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "actions Required"
-        }
-      },
-      "description": "PrivateEndpoint Models PrivateLink ServiceConnection State"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus": {
-      "type": "string",
-      "description": "PrivateLinkServiceConnectionStateStatus",
-      "enum": [
-        "Approved",
-        "Pending",
-        "Rejected",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus",
-        "modelAsString": true
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id value"
-        },
-        "groupConnectivityInformation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation[]",
-          "description": "group Connectivity Information"
-        },
-        "remotePrivateEndpointConnection": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsResourceId",
-          "description": "remote PrivateEndpoint Connection"
-        },
-        "remotePrivateLinkServiceConnectionState": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState",
-          "description": "remote PrivateLink ServiceConnection State"
-        }
-      },
-      "description": "PrivateEndpoint Models PrivateLink Service Proxy"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsResourceId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id value",
-          "readOnly": true
-        }
-      },
-      "description": "PrivateEndpoint Models ResourceId"
-    },
     "NonceRequest": {
       "type": "object",
       "properties": {
@@ -15264,11 +14361,6 @@
         }
       },
       "description": "Nonce Request REST Resource."
-    },
-    "LocalObject": {
-      "type": "object",
-      "properties": {},
-      "description": "an object"
     },
     "OperatingSystem": {
       "type": "object",
@@ -15559,91 +14651,6 @@
       },
       "description": "PrivateEndpointConnectionProperties V2"
     },
-    "PrivateEndpointConnectionProxy": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "A vcenter resource belonging to a site resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionProxyCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
-          },
-          "x-cadl-name": "PrivateEndpointConnectionProxy[]",
-          "description": "The PrivateEndpointConnectionProxy items on this page",
-          "x-ms-identifiers": [],
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "description": "The response of a PrivateEndpointConnectionProxy list operation."
-    },
-    "PrivateEndpointDetails": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "idvalue"
-        },
-        "manualPrivateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceConnection"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "PrivateLinkServiceConnection[]",
-          "description": "PrivateLinkServiceConnection array"
-        },
-        "privateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceConnection"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "PrivateLinkServiceConnection[]",
-          "description": "PrivateLinkServiceConnection array"
-        },
-        "privateLinkServiceProxies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkServiceProxy"
-          },
-          "x-cadl-name": "PrivateLinkServiceProxy[]",
-          "description": "PrivateLinkServiceProxy array"
-        },
-        "connectionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IpConfiguration"
-          },
-          "x-cadl-name": "IpConfiguration[]",
-          "description": "IpConfiguration array"
-        }
-      },
-      "description": "priate endpoint details"
-    },
     "PrivateLinkResource": {
       "type": "object",
       "properties": {
@@ -15716,28 +14723,6 @@
       },
       "description": "private link resource properties model"
     },
-    "PrivateLinkServiceConnection": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "name value"
-        },
-        "groupIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "group ids"
-        },
-        "requestMessage": {
-          "type": "string",
-          "description": "request message"
-        }
-      },
-      "description": "private link service connection model"
-    },
     "PrivateLinkServiceConnectionState": {
       "type": "object",
       "properties": {
@@ -15769,33 +14754,6 @@
         "name": "PrivateLinkServiceConnectionStateStatus",
         "modelAsString": true
       }
-    },
-    "PrivateLinkServiceProxy": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id value"
-        },
-        "groupConnectivityInformation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GroupConnectivityInformation"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "GroupConnectivityInformation[]",
-          "description": "group connectivity information"
-        },
-        "remotePrivateEndpointConnection": {
-          "$ref": "#/definitions/ResourceId",
-          "description": "remote private endpoint connection"
-        },
-        "remotePrivateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "remote private link service connection state"
-        }
-      },
-      "description": "private link service proxy model"
     },
     "ProcessorInfo": {
       "type": "object",
@@ -16093,93 +15051,6 @@
       },
       "description": "The response of a ServerMachineResource list operation."
     },
-    "ServerMachineResourceUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServerMachineResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the ServerMachineResource."
-    },
-    "ServerMachineResourceUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/object"
-          },
-          "x-cadl-name": "Record<object>",
-          "description": "Gets or ses tags on Server machine."
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "Gets or sets the FQDN/IPAddress of the server."
-        },
-        "networkAdapters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerNetworkAdapter"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "ServerNetworkAdapter[]",
-          "description": "Gets or sets the network adapters of the server."
-        },
-        "hydratedFqdn": {
-          "type": "string",
-          "description": "Gets or sets the FQDN of machine which can be changed."
-        },
-        "disks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerDisk"
-          },
-          "x-cadl-name": "ServerDisk[]",
-          "description": "Gets or sets the disk details of server."
-        },
-        "validationRequired": {
-          "type": "string",
-          "description": "Gets or sets the validation required for the machine."
-        },
-        "firmware": {
-          "type": "string",
-          "description": "Gets or sets the firmware."
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the run as account ID of the machine."
-        },
-        "numberOfProcessorCore": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
-        },
-        "allocatedMemoryInMb": {
-          "type": "number",
-          "format": "float",
-          "description": "Gets or sets the allocated Memory in MB."
-        },
-        "operatingSystemDetails": {
-          "$ref": "#/definitions/OperatingSystem",
-          "description": "Gets or sets the Operating System Details installed on the machine."
-        },
-        "biosSerialNumber": {
-          "type": "string",
-          "description": "Gets or sets the Machine BIOS serial number."
-        },
-        "biosGuid": {
-          "type": "string",
-          "description": "Gets or sets the BIOS GUID."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the server resource."
-        }
-      },
-      "description": "The updatable properties of the ServerMachineResource."
-    },
     "ServerNetworkAdapter": {
       "type": "object",
       "properties": {
@@ -16225,7 +15096,7 @@
             "$ref": "#/definitions/object"
           },
           "x-cadl-name": "Record<object>",
-          "description": "Gets or ses tags on Server machine."
+          "description": "Gets or sets tags on the Server machine."
         },
         "fqdn": {
           "type": "string",
@@ -16576,32 +15447,6 @@
         "runAsAccounts",
         "serverCount"
       ]
-    },
-    "ServerSoftwareInventory": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative URL to get this Server machine.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets the Name of the machine.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/MachineSoftwareInventoryProperties",
-          "description": "Gets or sets software inventory properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "Server machine software inventory REST resource."
     },
     "SharePointServer": {
       "type": "object",
@@ -17649,18 +16494,18 @@
           "description": "Gets the Machine Overview properties of all machines on which the SQL server is deployed.",
           "readOnly": true
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets or sets tags on the resource."
+        },
         "numberOfAgDatabases": {
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the number of databases part of availability group on this SQL instance."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/LocalObject"
-          },
-          "x-cadl-name": "Record<LocalObject>",
-          "description": "Gets or sets the tags on SQL server."
         },
         "fciProperties": {
           "$ref": "#/definitions/FciProperties",
@@ -17829,18 +16674,18 @@
     "SqlServerUpdateProperties": {
       "type": "object",
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets or sets tags on the resource."
+        },
         "numberOfAgDatabases": {
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the number of databases part of availability group on this SQL instance."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/LocalObject"
-          },
-          "x-cadl-name": "Record<LocalObject>",
-          "description": "Gets or sets the tags on SQL server."
         },
         "fciProperties": {
           "$ref": "#/definitions/FciProperties",
@@ -18563,68 +17408,6 @@
         "isDependencyMapToBeEnabled": {
           "type": "boolean",
           "description": "Gets or sets a value indicating whether\n            dependency mapping is to\nbe enabled or not."
-        }
-      },
-      "description": "Machine class."
-    },
-    "UpdateMachineRunAsAccount": {
-      "type": "object",
-      "properties": {
-        "machines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateMachineRunAsAccountRunAsAccountMachineInput"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "UpdateMachineRunAsAccountRunAsAccountMachineInput[]",
-          "description": "Gets or sets the machine collection."
-        }
-      },
-      "description": "Defines class that represents input to enable or disable DMP on machine\n      \n      for cosmos entity operation."
-    },
-    "UpdateMachineRunAsAccountRunAsAccountMachineInput": {
-      "type": "object",
-      "properties": {
-        "machineId": {
-          "type": "string",
-          "description": "Gets or sets the ARM id of the machine."
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets a run as account to be associated with machine."
-        }
-      },
-      "description": "Machine class."
-    },
-    "UpdateMachineTags": {
-      "type": "object",
-      "properties": {
-        "machines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UpdateMachineTagsMachineInput"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "UpdateMachineTagsMachineInput[]",
-          "description": "Gets or sets the machine collection."
-        }
-      },
-      "description": "Defines class that represents input to update list of tags on machine."
-    },
-    "UpdateMachineTagsMachineInput": {
-      "type": "object",
-      "properties": {
-        "machineId": {
-          "type": "string",
-          "description": "Gets or sets the ARM id of the machine."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Gets or sets Tags."
         }
       },
       "description": "Machine class."
@@ -19360,7 +18143,7 @@
             "$ref": "#/definitions/object"
           },
           "x-cadl-name": "Record<object>",
-          "description": "Gets or sets tags on VMware machine."
+          "description": "Gets or sets tags on the VMware machine."
         },
         "vCenterFqdn": {
           "type": "string",
@@ -20510,9 +19293,9 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/LocalObject"
+            "$ref": "#/definitions/object"
           },
-          "x-cadl-name": "Record<LocalObject>",
+          "x-cadl-name": "Record<object>",
           "description": "Gets tags that can be used with ODATA.",
           "readOnly": true
         },

@@ -135,6 +135,9 @@ model VmwareMachineProperties {
   @added(Versions.v2020_07_10)
   hostProcessorInfo?: ProcessorInfo;
 
+  @doc("Gets or sets tags on the VMware machine.")
+  tags?: Record<object>;
+
   @doc("VCenter FQDN/IPAddress.")
   @visibility("read")
   vCenterFqdn?: string;
