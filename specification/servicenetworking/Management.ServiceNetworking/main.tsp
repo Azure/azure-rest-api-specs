@@ -31,6 +31,7 @@ model Frontend is TrackedResource<FrontendProperties>{
   @visibility("read")
   @path
   @segment("frontends")
+  @pattern("[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+")
   name : string;
 }
 
@@ -38,7 +39,7 @@ model Frontend is TrackedResource<FrontendProperties>{
 model FrontendProperties {
   @visibility("read")
   @doc("The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.")
-  fqdn : string;
+  fqdn? : string;
 
   @visibility("read")
   @doc("Provisioning State of Traffic Controller Frontend Resource")
@@ -54,6 +55,7 @@ model Association is TrackedResource<AssociationProperties> {
   @doc("Name of Association")
   @path
   @segment("associations")
+  @pattern("[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+")
   name: string;
 }
 
@@ -86,6 +88,7 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
   @path
   @segment("trafficControllers")
   @doc("traffic controller name for path")
+  @pattern("[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+")
   name: string;
 }
 
