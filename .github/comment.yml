@@ -3,11 +3,37 @@
     type: checkbox
     keywords:
       - "WaitForARMFeedback"
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit||BreakingChangeReviewRequired)"
+    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit||BreakingChangeReviewRequired||NewApiVersionRequired)"
     onCheckedLabels:
       - WaitForARMFeedback
       - ARMReview
-    onCheckedComments: "Hi, @${PRAuthor} your PR are labelled with <b> WaitForARMFeedback</b>. A notification email will be sent out shortly afterwards to notify ARM review board(armapireview@microsoft.com)."
+    onCheckedComments: >-
+      Hi @${PRAuthor}!<br/>
+      <br/>
+      The automation detected that in the `ARM API Review Checklist` you denoted that this PR requires an ARM review. As a result, the automation labelled your PR with `ARMReview` and `WaitForARMFeedback` labels. A notification email will be sent out shortly to notify ARM review board (armapireview@microsoft.com) to review your PR.
+      <br/><br/>
+      **ACTION ITEM** for you: wait until either `ARMChangesRequested` or `ARMSignedOff` labels are added to your PR by an ARM review board member.
+      <br/><br/>
+      For more information, please refer to https://aka.ms/specprreview
+
+- rule:
+    type: checkbox
+    keywords:
+      - "WaitForARMFeedback"
+    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit||BreakingChangeReviewRequired)&&NewApiVersionRequired"
+    onCheckedLabels:
+      - ARMChangesRequested
+      - ARMReview
+    onCheckedComments: >-
+      Hi @${PRAuthor}!<br/>
+      <br/>
+      The automation detected that in the `ARM API Review Checklist` you denoted that this PR requires an ARM review. As a result, the automation has added the `ARMReview` label to this PR. The automation has also detected this PR has the label `NewApiVersionRequired`, which you must address before any ARM review can take place. To denote this, the automation added the `ARMChangesRequested` label.
+      <br/><br/>
+      **ACTION ITEMS** for you:<br/>
+      - Follow the guidance provided in the comment explaining why `NewApiVersionRequired` label was added.<br/>
+      - Manually remove the `ARMChangesRequested` label once the `NewApiVersionRequired` has been removed by automation.
+      <br/><br/>
+      For more information, please refer to https://aka.ms/specprreview
 
 - rule:
     type: label
@@ -39,7 +65,19 @@
 - rule:
     type: label
     label: NewApiVersionRequired
-    onLabeledComments: "The automation detected this Pull Request introduces breaking changes to an existing API version and hence it added the <code>NewApiVersionRequired</code> label. This means you cannot proceed with merging this PR until you complete one of the following action items:<br/><br/>- A) Submit a new PR instead of this one, or modify this PR, so that it introduces a new API version instead of introducing breaking changes to an existing API version. The automation will remove the label once it detects there are no more breaking changes.<br/>- B) OR you can request an approval of the breaking changes, get it reviewed, and approved. The reviewer will add <code>Approved-BreakingChange</code> label if they approve.<br/><br/>For additional guidance, please see https://aka.ms/NewApiVersionRequired<br/>  "
+    onLabeledComments: >-
+      The automation detected that this PR introduces breaking changes to an existing API version and hence it added the `NewApiVersionRequired` label. This means you cannot proceed with merging this PR until you complete one of the following action items:
+      <br/><br/>
+      **ACTION ITEM** for you:
+      <br/><br/>
+      - A) Submit a new PR instead of this one, or modify this PR, so that it introduces a new API version instead of introducing breaking changes to an existing API version. The automation will remove the label once it detects there are no more breaking changes.<br/>
+      - B) OR you can request an approval of the breaking changes, get it reviewed, and approved. The reviewer will add `Approved-BreakingChange` label if they approve.
+      <br/><br/>
+      For more information, please refer to https://aka.ms/specprreview
+    onLabeledRemoveLabels:
+        - WaitForARMFeedback
+    onLabeledAddLabels:
+        - ARMChangesRequested
 
 - rule:
     type: label
@@ -105,7 +143,7 @@
 - rule:
     type: label
     label: ARMChangesRequested
-    onLabeledComments: "Please ensure to respond feedbacks from the ARM API reviewer. When you are ready to continue the ARM API review, please remove `ARMChangesRequested`"
+    onLabeledComments: "Please ensure to respond to feedback from the ARM API reviewer. When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label. This will notify the reviewer to have another look."
     onLabeledRemoveLabels:
         - WaitForARMFeedback
 
@@ -116,7 +154,6 @@
     onLabeledAddLabels:
         - WaitForARMFeedback
       
-        
 - rule:
     type: unlabeled
     label: ARMChangesRequested
