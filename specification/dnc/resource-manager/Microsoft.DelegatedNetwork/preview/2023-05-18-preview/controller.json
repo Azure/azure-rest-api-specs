@@ -337,6 +337,18 @@
             "type": "string"
           },
           "description": "The resource tags."
+        },
+        "purpose": {
+          "type": "string",
+          "enum": [
+            "test",
+            "prod"
+          ],
+          "x-ms-enum": {
+            "name": "ControllerPurpose",
+            "modelAsString": true
+          },
+          "description": "The purpose of the dnc controller resource."
         }
       },
       "x-ms-azure-resource": true
