@@ -45,7 +45,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PutTenantPolicyRequestProperties"
+              "$ref": "#/definitions/PutTenantPolicyRequest"
             }
           },
           {
@@ -172,6 +172,16 @@
         "Allowed",
         "NotAllowed"
       ]
+    },
+    "PutTenantPolicyRequest": {
+      "description": "The parameters required to add or update tenant policy.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PutTenantPolicyRequestProperties",
+          "description": "Put tenant policy request properties."
+        }
+      }
     },
     "PutTenantPolicyRequestProperties": {
       "description": "Put tenant policy request properties.",
