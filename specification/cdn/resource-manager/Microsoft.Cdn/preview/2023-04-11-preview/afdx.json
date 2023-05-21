@@ -1980,362 +1980,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/l4routes": {
-      "get": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Lists all of the L4 routes within a profile.",
-        "operationId": "L4Routes_ListByEndpoint",
-        "x-ms-examples": {
-          "Routes_ListByEndpoint": {
-            "$ref": "./examples/L4Routes_ListByEndpoint.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/L4RouteListResult"
-            }
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/l4routes/{routeName}": {
-      "get": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Gets an existing route with the specified route name for L4 under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Get",
-        "x-ms-examples": {
-          "Routes_Get": {
-            "$ref": "./examples/L4Routes_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the L4 route.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Creates a new route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Create",
-        "x-ms-examples": {
-          "Routes_Create": {
-            "$ref": "./examples/L4Routes_Create.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the routing rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "route",
-            "in": "body",
-            "description": "Route properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "201": {
-            "description": "Created. The request has been fulfilled and a new endpoint has been created.",
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Update",
-        "x-ms-examples": {
-          "Routes_Update": {
-            "$ref": "./examples/L4Routes_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the routing rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeUpdateProperties",
-            "in": "body",
-            "description": "Route update properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/L4RouteUpdatePropertiesParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/L4Route"
-            }
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "delete": {
-        "tags": [
-          "L4Routes"
-        ],
-        "description": "Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
-        "operationId": "L4Routes_Delete",
-        "x-ms-examples": {
-          "Routes_Delete": {
-            "$ref": "./examples/L4Routes_Delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "routeName",
-            "in": "path",
-            "description": "Name of the routing rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Azure Front Door error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/routes": {
       "get": {
         "tags": [
@@ -5157,7 +4801,7 @@
             "modelAsString": true
           }
         },
-        "DedicatedVIP": {
+        "dedicatedvip": {
           "description": "A reference to the origin group. The dedicated vip is created as a separate resource. The dedicated vip will be linked to an endpoint for L4 profiles",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
@@ -5553,22 +5197,6 @@
           "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure Front Door origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint",
           "type": "string"
         },
-        "OriginPorts": {
-          "description": "The ports used for the TCP/UDP connection to the customer's backend. Must be between 1024 and 65535 excluding reserved ports. The ports can be a comma separated list or a valid range like 5050-5090",
-          "type": "string"
-        },
-        "ClientIPPreservationState": {
-          "description": "Preserves the client side source IP allowing the back-end to see the IP address of the client. This can then be used by applications for applying any rules. Valid options are 'Enabled' or 'Disabled'",
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ClientIPPreservationState",
-            "modelAsString": true
-          }
-        },
         "priority": {
           "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5",
           "type": "integer",
@@ -5716,6 +5344,12 @@
           "type": "object",
           "$ref": "./cdn.json#/definitions/HealthProbeParameters"
         },
+        "originProtocolSettings": {
+          "description": "Origin protocol settings that determine how the origin is accessed.",
+          "type": "object",
+          "$ref": "#/definitions/OriginProtocolSettingsParameters"
+        },
+
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
           "type": "integer",
@@ -5732,30 +5366,6 @@
           "type": "string",
           "x-ms-enum": {
             "name": "EnabledState",
-            "modelAsString": true
-          }
-        },
-        "SessionAffinityType": {
-          "description": "The type of L4 session affinity to use for this origin group. Valid options are 'SourceIP' or 'None'",
-          "enum": [
-            "SourceIP",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SessionAffinityType",
-            "modelAsString": true
-          }
-        },
-       "RouteType": {
-          "description": "The type of L7 or L4 route to use for this origin group. Valid options are 'L7Route' or 'L4Route'. This will help validate L4 origin groups with L4 routes",
-          "enum": [
-            "L7Route",
-            "L4Route"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RouteType",
             "modelAsString": true
           }
         }
@@ -5779,6 +5389,48 @@
           "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "OriginProtocolSettingsParameters": {
+      "description": "Origin protocol settings that determine how the origin is accessed.",
+      "type": "object",
+      "properties": {
+        "protocolType":{
+          "$ref": "#/definitions/ProtocolType"
+        },
+        "sessionAffinityType": {
+          "description": "Session affinity to use for origins under the origin groups. Valid options are 'SourceIP' or 'None'",
+              "enum": [
+                "SourceIP",
+                "None"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "sessionAffinityType",
+                "modelAsString": true
+              }
+        },
+        "originPort": {
+          "description": "The ports used for the TCP/UDP connection to the customer's backend. Must be between 1 and 65535. The ports can be a comma separated list or a valid range like 5050-5090",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          }
+        },
+        "clientIPPreservationState": {
+          "description": "Preserves the client side IP allowing the back-end to see the IP address of the client. This can then be used by applications for applying any rules. Valid options are 'Enabled' or 'Disabled'",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "clientIPPreservationState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5817,8 +5469,28 @@
       }
     },
     "Route": {
+      "description": "Based on the protocoltype the route can have either L4 or L7 properties.",
+      "type": "object",
+      "discriminator": "protocolType",
+      "properties": {
+        "protocolType": {
+          "description": "the protocol type of the route.",
+          "$ref": "#/definitions/ProtocolType"
+        }
+      },
+      "oneOf": [
+        {
+          "$ref": "#/definitions/L7Route"
+        },
+        {
+          "$ref": "#/definitions/L4Route"
+        }
+      ]
+    },
+    "L7Route": {
       "description": "Friendly Routes name mapping to the any Routes or secret related information.",
       "type": "object",
+      "x-ms-discriminator-value": "Layer7",
       "allOf": [
         {
           "$ref": "./cdn.json#/definitions/ProxyResource"
@@ -6099,26 +5771,10 @@
         }
       }
     },
-    "L4RouteListResult": {
-      "description": "Result of the request to list L4 routes. It contains a list of L4 route objects and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/L4Route"
-          },
-          "description": "List of AzureFrontDoor L4 routes within a profile."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of route objects if there are any."
-        }
-      }
-    },
     "L4Route": {
-      "description": "Friendly Routes name mapping to the any Routes or secret related information.",
+      "description": "Friendly Routes name mapping to L4 Routes",
       "type": "object",
+      "x-ms-discriminator-value": "Layer4",
       "allOf": [
         {
           "$ref": "./cdn.json#/definitions/ProxyResource"
@@ -6149,18 +5805,6 @@
       "description": "L4 Route.",
       "type": "object",
       "properties": {
-        "RoutingMethod": {
-          "description": "Routing method for TCP/UDP routes based on SNI or Ports division, if it is SNI based then the we can read SNI header to get the origin name or if its based on the ports then we can have port division to connect to specific origin for example port range 2000-2050 belongs to origin group 1 and port range 3000-3050 belongs to origin group 2.",
-          "type": "string",
-          "enum": [
-            "SNIBased",
-            "PortBased"
-          ],
-          "x-ms-enum": {
-            "name": "RoutingMethod",
-            "modelAsString": true
-          }
-        },
         "customDomains": {
           "description": "Domains referenced by this endpoint.",
           "type": "array",
@@ -6186,7 +5830,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "EnabledState",
+            "name": "enabledState",
             "modelAsString": true
           }
         }
@@ -6196,35 +5840,53 @@
       "description": "Base class for all L4 route settings.",
       "type": "object",
       "properties": {
-        "FrontendProtocol": {
-          "description": "Frontend protocol for TCP/UDP routes.",
+        "listenerProtocol": {
+          "description": "Listerner/Frontend protocol for TCP/UDP routes, to accept connection from client.",
           "type": "string",
           "enum": [
             "TCP",
             "UDP"
           ],
           "x-ms-enum": {
-            "name": "FrontendProtocol",
+            "name": "listenerProtocol",
             "modelAsString": true
           }
         },
-        "BackendProtocol": {
-          "description": "Backend protocol used to establish connection with customer's backend.",
+        "originProtocol": {
+          "description": "Origin/Backend protocol used to establish connection with customer's origin.",
           "type": "string",
           "enum": [
             "TCP",
             "UDP"
           ],
           "x-ms-enum": {
-            "name": "BackendProtocol",
+            "name": "originProtocol",
             "modelAsString": true
           }
         },
-        "Ports": {
-          "description": "The ports used for the TCP/UDP connection. Must be between 1024 and 65535 excluding reserved ports. The ports can be a comma separated list or a valid range like 5050-5090",
-          "type": "string"
+       "ports": {
+          "description": "The ports used for the TCP/UDP connection. Must be between 1 and 65535. The ports can be a comma separated list or a valid range like 5050-5090",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          }
         }
       }
+    },
+    "ProtocolType": {
+      "description": "Protocol type for this route for example Layer7 or Layer4 by default Layer7 will be considered. This will help in configuring the route correctly for the given protocol type.",
+      "type": "string",
+      "enum": [
+        "Layer7",
+        "Layer4"
+      ],
+      "x-ms-enum": {
+        "name": "ProtocolType",
+        "modelAsString": true
+      },
+      "default": "Layer7"
     },
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",

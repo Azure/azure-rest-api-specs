@@ -5862,12 +5862,12 @@
             "modelAsString": false
           }
         },
-        "ProbePort": {
-          "description": "The valid range of ports for health probes for TCP/UDP would typically be from 1024-65535. This range excludes the reserved ports and allows for a wide range of available ports to use for health probes",
+        "probePort": {
+          "description": "The valid port number of the origin that is used to determine the health of the origin.",
           "type": "integer",
           "format": "int32",
           "maximum": 65535,
-          "minimum": 1024
+          "minimum": 1
         },
         "probeIntervalInSeconds": {
           "description": "The number of seconds between health probes.Default is 240sec.",
