@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "ContainerRegistryManagementClient",
+    "description": "Admin Container Registry Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacities/{capacityName}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns container registry capacity properties.": {
+            "$ref": "./examples/Configuration/GetCapacity.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryCapacity"
+        ],
+        "description": "Returns container registry capacity property.",
+        "operationId": "ContainerRegistryCapacity_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CapacityNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Container registry capacity property is being returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryCapacity"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry.Admin/locations/{location}/capacities": {
+      "get": {
+        "x-ms-examples": {
+          "Returns container registry capacity properties.": {
+            "$ref": "./examples/Configuration/ListCapacity.json"
+          }
+        },
+        "tags": [
+          "ContainerRegistryCapacities"
+        ],
+        "description": "Returns a list of container registry capacity properties.",
+        "operationId": "ContainerRegistryCapacity_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Container registry capacity properties are being returned.",
+            "schema": {
+              "$ref": "#/definitions/ContainerRegistryCapacityList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerRegistryCapacity": {
+      "description": "Container registry capacity property.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Container registry capacity property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ContainerRegistryCapacityProperty"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ContainerRegistryCapacityProperty": {
+      "description": "Container registry capacity property.",
+      "type": "object",
+      "properties": {
+        "maximumCapacityInGiB": {
+          "description": "Total storage capacity (GiB) which can used by the registry.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "allowPush": {
+          "description": "Flag denotes if pushes are blocked for all registries.",
+          "type": "boolean"
+        },
+        "registriesConsumptionInGiB": {
+          "description": "Total storage capacity (GiB) consumed by the registry.",
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "ContainerRegistryCapacityList": {
+      "description": "List of capacity property.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of capacity property.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerRegistryCapacity"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CapacityNameParameter": {
+      "description": "The name of the capacity parameter.",
+      "name": "capacityName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

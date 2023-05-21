@@ -26,7 +26,61 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-2022-06
+```
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06'
+input-file:
+- Microsoft.EventGrid/stable/2022-06-15/EventGrid.json
+```
+
+### Tag: package-2021-10-preview
+
+These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-preview'
+input-file:
+- Microsoft.EventGrid/preview/2021-10-15-preview/EventGrid.json
+```
+
+### Tag: package-2021-12
+
+These settings apply only when `--tag=package-2021-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12'
+input-file:
+- Microsoft.EventGrid/stable/2021-12-01/EventGrid.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationsApiResponseSchema
+    from: EventGrid.json
+    reason: Error is complaining about a section that already exists in all previous stable and preview swaggers.
+```
+
+### Tag: package-2021-06-preview
+
+These settings apply only when `--tag=package-2021-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06-preview'
+input-file:
+- Microsoft.EventGrid/preview/2021-06-01-preview/EventGrid.json
+```
+
+### Tag: package-2020-10-preview
+
+These settings apply only when `--tag=package-2020-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-preview'
+input-file:
+- Microsoft.EventGrid/preview/2020-10-15-preview/EventGrid.json
 ```
 
 ### Tag: package-2020-06
@@ -164,8 +218,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -174,8 +228,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_grid']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js eventgrid/resource-manager
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -193,6 +246,10 @@ csharp:
   clear-output-folder: true
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -201,7 +258,5 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

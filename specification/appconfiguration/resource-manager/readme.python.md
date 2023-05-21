@@ -1,42 +1,61 @@
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml !$(track2)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.appconfiguration
-  package-name: azure-mgmt-appconfiguration
-  package-version: 0.1.0
-  clear-output-folder: true
-```
-
-These settings apply only when `--track2` is specified on the command line.
-
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-appconfiguration
+package-version: 1.0.0b1
 no-namespace-folders: true
-package-version: 0.1.0
 ```
 
-``` yaml $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python)
+clear-output-folder: true
+default-api-version: "2023-03-01"
+multiapi: true
+batch:
+  - tag: package-2023-03-01
+  - tag: package-2022-05-01
+  - tag: package-2022-03-01-preview
+  - multiapiscript: true
 ```
-``` yaml $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration/
+perform-load: false
+```
+
+### Tag: package-2023-03-01 and python
+
+These settings apply only when `--tag=package-2023-03-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-03-01' && $(python)
+namespace: azure.mgmt.appconfiguration.v2023_03_01
+output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration/v2023_03_01
+```
+
+### Tag: package-2022-05-01 and python
+
+These settings apply only when `--tag=package-2022-05-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-05-01' && $(python)
+namespace: azure.mgmt.appconfiguration.v2022_05_01
+output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration/v2022_05_01
+```
+
+### Tag: package-2022-03-01-preview and python
+
+These settings apply only when `--tag=package-2022-03-01-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-03-01-preview' && $(python)
+namespace: azure.mgmt.appconfiguration.v2022_03_01_preview
+output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration/v2022_03_01_preview
 ```

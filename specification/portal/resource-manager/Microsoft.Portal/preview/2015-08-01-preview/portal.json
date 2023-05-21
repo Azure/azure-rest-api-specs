@@ -395,6 +395,11 @@
       },
       "description": "List of dashboards."
     },
+    "DashboardPartMetadata": {
+      "description": "A dashboard part metadata.",
+      "type": "object",
+      "additionalProperties": true
+    },
     "DashboardParts": {
       "type": "object",
       "description": "A dashboard part.",
@@ -438,11 +443,7 @@
           }
         },
         "metadata": {
-          "description": "The dashboard part's metadata.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "$ref": "#/definitions/DashboardPartMetadata"
         }
       }
     },

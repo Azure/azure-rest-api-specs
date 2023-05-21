@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "name": "testcontainerenv",
+    "api-version": "2022-01-01-preview",
+    "location": "East US",
+    "environmentEnvelope": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv",
+        "name": "testcontainerenv",
+        "type": "Microsoft.App/managedEnvironments",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "defaultDomain": "testcontainerenv.k4apps.io",
+          "staticIp": "1.2.3.4",
+          "appLogsConfiguration": {
+            "logAnalyticsConfiguration": {
+              "customerId": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

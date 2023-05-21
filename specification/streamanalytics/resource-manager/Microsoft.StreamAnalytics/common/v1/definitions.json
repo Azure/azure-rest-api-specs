@@ -35,9 +35,12 @@
       "x-ms-enum": {
         "name": "AuthenticationMode",
         "modelAsString": true
-      }
+      },
+      "default": "ConnectionString"
     },
     "Resource": {
+      "type": "object",
+      "description": "The base resource definition",
       "properties": {
         "id": {
           "readOnly": true,
@@ -58,6 +61,7 @@
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -88,6 +92,7 @@
       ]
     },
     "ProxyResource": {
+      "type": "object",
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
       "allOf": [
         {
@@ -96,8 +101,10 @@
       ]
     },
     "Error": {
+      "type": "object",
       "properties": {
         "error": {
+          "type": "object",
           "properties": {
             "code": {
               "type": "string",
@@ -116,6 +123,7 @@
               "items": {
                 "$ref": "#/definitions/ErrorDetails"
               },
+              "x-ms-identifiers": [],
               "description": "Error details."
             }
           },
@@ -125,6 +133,7 @@
       "description": "Common error representation."
     },
     "ErrorDetails": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -192,6 +201,14 @@
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The region to which the request is sent. You can find out which regions Azure Stream Analytics is supported in here: https://azure.microsoft.com/en-us/regions/",
       "x-ms-parameter-location": "method"
     }
   }

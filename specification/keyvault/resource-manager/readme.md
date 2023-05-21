@@ -26,7 +26,135 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-09
+tag: package-2023-02
+```
+
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.KeyVault/stable/2023-02-01/common.json
+  - Microsoft.KeyVault/stable/2023-02-01/keys.json
+  - Microsoft.KeyVault/stable/2023-02-01/keysManagedHsm.json
+  - Microsoft.KeyVault/stable/2023-02-01/keyvault.json
+  - Microsoft.KeyVault/stable/2023-02-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2023-02-01/providers.json
+  - Microsoft.KeyVault/stable/2023-02-01/secrets.json
+```
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.KeyVault/stable/2022-11-01/common.json
+  - Microsoft.KeyVault/stable/2022-11-01/keys.json
+  - Microsoft.KeyVault/stable/2022-11-01/keyvault.json
+  - Microsoft.KeyVault/stable/2022-11-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2022-11-01/keysManagedHsm.json
+  - Microsoft.KeyVault/stable/2022-11-01/providers.json
+  - Microsoft.KeyVault/stable/2022-11-01/secrets.json
+
+```
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.KeyVault/preview/2022-02-01-preview/common.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/secrets.json
+
+```
+
+### Tag: package-2022-07
+
+These settings apply only when `--tag=package-2022-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07'
+input-file:
+  - Microsoft.KeyVault/stable/2022-07-01/common.json
+  - Microsoft.KeyVault/stable/2022-07-01/keys.json
+  - Microsoft.KeyVault/stable/2022-07-01/keyvault.json
+  - Microsoft.KeyVault/stable/2022-07-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2022-07-01/providers.json
+  - Microsoft.KeyVault/stable/2022-07-01/secrets.json
+```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.KeyVault/preview/2021-11-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-11-01-preview/secrets.json
+```
+
+### Tag: package-2021-10
+
+These settings apply only when `--tag=package-2021-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10'
+input-file:
+  - Microsoft.KeyVault/stable/2021-10-01/common.json
+  - Microsoft.KeyVault/stable/2021-10-01/keys.json
+  - Microsoft.KeyVault/stable/2021-10-01/keyvault.json
+  - Microsoft.KeyVault/stable/2021-10-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2021-10-01/providers.json
+  - Microsoft.KeyVault/stable/2021-10-01/secrets.json
+```
+
+### Tag: package-preview-2021-06
+
+These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-06'
+input-file:
+  - Microsoft.KeyVault/preview/2021-06-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-06-01-preview/secrets.json
+```
+
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
+```
+
+### Tag: package-preview-2021-04-full
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-04-full'
+input-file:
+  - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/secrets.json
 ```
 
 ### Tag: package-preview-2020-04
@@ -34,7 +162,7 @@ tag: package-2019-09
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
 This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
 
-```yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-preview-2020-04'
 input-file:
   - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
   - Microsoft.KeyVault/stable/2019-09-01/providers.json
@@ -45,8 +173,9 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-04-full` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-04-full'
+``` yaml $(tag) == 'package-preview-2020-04-full'
 input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keys.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
@@ -115,13 +244,29 @@ input-file:
 - Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
-### Supressions
+### Suppression
 
 ``` yaml
 directive:
 - suppress:
     - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
     - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
+    - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
+    - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team.
+    - R4009 # Vault object is the only one that need to be tracked with SystemData
+
+- suppress: DefinitionsPropertiesNamesCamelCase
+  where: 
+    - $.definitions.ManagedHsmKeyProperties.properties.release_policy
+  from: keysManagedHsm.json
+  reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
+
+- suppress: INVALID_REQUEST_PARAMETER
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
 ---
@@ -135,10 +280,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-keyvault
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -148,19 +290,17 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_key_vault']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js keyvault/resource-manager
+  - repo: azure-powershell
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

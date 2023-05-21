@@ -28,7 +28,7 @@ These are the global settings for the Kubernetes Connect RP.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-01-01-preview
+tag: package-2021-10-01
 ```
 
 ### Tag: package-2020-01-01-preview
@@ -39,7 +39,46 @@ These settings apply only when `--tag=package-2020-01-01-preview` is specified o
 input-file:
 - Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
 ```
+### Tag: package-2021-04-01-preview
 
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+- Microsoft.Kubernetes/preview/2021-04-01-preview/connectedClusters.json
+```
+### Tag: package-2021-03-01
+
+These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01'
+input-file:
+- Microsoft.Kubernetes/stable/2021-03-01/connectedClusters.json
+```
+### Tag: package-2021-10-01
+
+These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-10-01'
+input-file:
+- Microsoft.Kubernetes/stable/2021-10-01/connectedClusters.json
+```
+### Tag: package-2022-05-01-preview
+
+These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-01-preview'
+input-file:
+- Microsoft.Kubernetes/preview/2022-05-01-preview/connectedClusters.json
+```
+### Tag: package-2022-10-01-preview
+
+These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10-01-preview'
+input-file:
+- Microsoft.Kubernetes/preview/2022-10-01-preview/connectedClusters.json
+```
 ---
 
 # Code Generation
@@ -51,16 +90,15 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybridkubernetes']
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hybridkubernetes/resource-manager
+  - repo: azure-powershell
 ```
 
 ## Go
@@ -83,7 +121,5 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

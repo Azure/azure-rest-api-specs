@@ -1940,7 +1940,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.This API is hereby deprecated in favor of https://docs.microsoft.com/en-us/rest/api/cost-management/2022-02-01-preview/price-sheet/download-by-billing-profile. We highly recommend you move to the new preview version, as the csv file in the current preview version will have 500k max size that cannot scale with Azure product growth.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -7319,6 +7319,12 @@
         "nextLink": {
           "description": "The link (url) to the next page of results.",
           "type": "string",
+          "readOnly": true
+        },
+        "totalCount": {
+          "description": "Total number of records.",
+          "type": "number",
+          "format": "int32",
           "readOnly": true
         }
       }

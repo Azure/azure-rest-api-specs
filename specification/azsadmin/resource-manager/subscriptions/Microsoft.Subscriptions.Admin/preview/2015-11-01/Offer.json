@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/OfferList"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -77,6 +83,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OfferList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         },
@@ -117,6 +129,12 @@
             "schema": {
               "$ref": "#/definitions/Offer"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       },
@@ -149,16 +167,22 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Offer"
             }
           },
-          "200": {
-            "description": "OK",
+          "default": {
+            "description": "Unexpected Error",
             "schema": {
-              "$ref": "#/definitions/Offer"
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -194,6 +218,12 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -230,6 +260,12 @@
             "schema": {
               "$ref": "Subscriptions.json#/definitions/MetricList"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -265,6 +301,12 @@
             "description": "OK",
             "schema": {
               "$ref": "Subscriptions.json#/definitions/MetricDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -305,6 +347,12 @@
             "schema": {
               "$ref": "#/definitions/Offer"
             }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
+            }
           }
         }
       }
@@ -343,6 +391,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Unexpected Error",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/Error"
             }
           }
         }
@@ -392,11 +446,13 @@
         },
         "subscriptionCount": {
           "description": "Current subscription count.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "maxSubscriptionsPerAccount": {
           "description": "Maximum subscriptions per account.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "basePlanIds": {
           "description": "Identifiers of the base plans that become available to the tenant immediately when a tenant subscribes to the offer.",
@@ -410,7 +466,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddonPlanDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         }
       }
     },
@@ -454,7 +513,8 @@
         },
         "maxAcquisitionCount": {
           "description": "Maximum number of instances that can be acquired by a single subscription. If not specified, the assumed value is 1.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -489,7 +549,8 @@
         },
         "maxAcquisitionCount": {
           "description": "The maximum acquisition count by subscribers",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

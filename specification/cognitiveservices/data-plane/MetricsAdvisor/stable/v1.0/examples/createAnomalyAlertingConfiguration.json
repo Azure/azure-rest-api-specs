@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "body": {
+      "name": "alerting configuration name",
+      "crossMetricsOperator": "AND",
+      "hookIds": [
+        "00000000-0000-0000-0000-000000000001"
+      ],
+      "metricAlertingConfigurations": [
+        {
+          "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+          "anomalyScopeType": "All",
+          "negationOperation": false,
+          "severityFilter": {
+            "minAlertSeverity": "Medium",
+            "maxAlertSeverity": "High"
+          },
+          "snoozeFilter": {
+            "autoSnooze": 0,
+            "snoozeScope": "Series",
+            "onlyForSuccessive": true
+          }
+        },
+        {
+          "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
+          "anomalyScopeType": "Dimension",
+          "negationOperation": false,
+          "dimensionAnomalyScope": {
+            "dimension": {
+              "city": "Beijing"
+            }
+          },
+          "severityFilter": {
+            "minAlertSeverity": "Low",
+            "maxAlertSeverity": "High"
+          },
+          "snoozeFilter": {
+            "autoSnooze": 0,
+            "snoozeScope": "Series",
+            "onlyForSuccessive": true
+          },
+          "valueFilter": {
+            "lower": 0.0,
+            "upper": 1000.0,
+            "direction": "Both",
+            "type": "Value"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": ""
+      }
+    }
+  }
+}

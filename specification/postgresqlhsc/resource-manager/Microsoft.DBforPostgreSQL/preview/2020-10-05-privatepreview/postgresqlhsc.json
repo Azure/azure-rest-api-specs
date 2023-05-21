@@ -129,6 +129,9 @@
           },
           "Create a new server group as a point in time restore": {
             "$ref": "./examples/ServerGroupCreatePITR.json"
+          },
+          "Create a new server group as a read replica": {
+            "$ref": "./examples/ServerGroupCreateReadReplica.json"
           }
         },
         "parameters": [
@@ -1304,6 +1307,9 @@
       "items": {
         "$ref": "#/definitions/ServerRoleGroup"
       },
+      "x-ms-identifiers": [
+        "name"
+      ],
       "minItems": 1,
       "maxItems": 2,
       "uniqueItems": true
@@ -1335,6 +1341,9 @@
           "items": {
             "$ref": "#/definitions/ServerNameItem"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true,
           "uniqueItems": true
         }
@@ -1544,7 +1553,8 @@
           "description": "The mode to create a new server group.",
           "enum": [
             "Default",
-            "PointInTimeRestore"
+            "PointInTimeRestore",
+            "ReadReplica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1653,30 +1663,53 @@
             }
           }
         },
+        "privateDnsZoneArguments": {
+          "description": "The private dns zone arguments for a server group.",
+          "properties": {
+            "privateDnsZoneArmResourceId": {
+              "type": "string",
+              "description": "private dns zone arm resource id."
+            }
+          }
+        },
+        "readReplicas": {
+          "type": "array",
+          "description": "The array of read replica server groups.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "sourceServerGroup": {
+          "type": "string",
+          "description": "The source server group id for read replica server groups.",
+          "readOnly": true
+        },
         "sourceSubscriptionId": {
           "type": "string",
-          "description": "The source subscription id to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source subscription id to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
         },
         "sourceResourceGroupName": {
           "type": "string",
-          "description": "The source resource group name to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source resource group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
         },
         "sourceServerGroupName": {
           "type": "string",
-          "description": "The source server group name to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source server group name to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
         },
         "sourceLocation": {
           "type": "string",
-          "description": "The source server group location to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "description": "The source server group location to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'ReadReplica'",
           "x-ms-mutability": [
             "create"
           ]
@@ -1769,6 +1802,7 @@
           "items": {
             "$ref": "#/definitions/ServerRoleGroupConfiguration"
           },
+          "x-ms-identifiers": [],
           "uniqueItems": true
         }
       },
@@ -2082,7 +2116,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -2167,7 +2204,10 @@
           "description": "A list of additional details about the error.",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       }
     }

@@ -14,17 +14,21 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
 
 2. Get the PR changed file list. For each changed file, find the nearest readme.md in parent folder. Get list of related readme.md.
 
-3. Filter the list of readme.md with: find the `swagger-to-sdk` section in the readme.md, and see if the specified language is configured for that readme.md. Example of `swagger-to-sdk` in SDK Automation:
-```
-```yaml $(swagger-to-sdk)
-swagger-to-sdk:
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-``` <EOL>
-```
-If the configured language is not found here, generation for this readme.md will be skipped.
+3. Filter which sdk will be generated:
+
+    1. For Swagger PR, filter the list of readme.md with: find the `swagger-to-sdk` section in the readme.md, and see if the specified language is configured for that readme.md. Example of `swagger-to-sdk` in SDK Automation:
+        ```
+        ```yaml $(swagger-to-sdk)
+        swagger-to-sdk:
+          - repo: azure-sdk-for-python
+          - repo: azure-sdk-for-java
+          - repo: azure-sdk-for-go
+          - repo: azure-sdk-for-js
+        ``` <EOL>
+        ```
+    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language is configure for that tsp-location.yaml.
+    
+    If the configured language is not found here, generation for this typespec project will be skipped.
 
 4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 
@@ -34,7 +38,7 @@ If the configured language is not found here, generation for this readme.md will
 
 7. Launch __initScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig). All the script's working directory is root folder of cloned SDK repository.
 
-8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-configs__) ___loop the rest steps___ with each `readme.md`.
+8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-config__) ___loop the rest steps___ with each `readme.md`.
 
 9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). The script should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true. If dryRun is set to true then first run of __generateScript__ will be used to collect package information , then loop each package info and checkout package related branch and launch __generateScript__ with package related readmeMd and dryRun set to false.
 
@@ -250,7 +254,7 @@ Output file for generate script.
         "full": "To install something...",
         "lite": "dotnet something"
       },
-      "result": "success"
+      "result": "succeeded"
     }
   ]
 }

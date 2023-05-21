@@ -46,9 +46,6 @@
             "$ref": "examples/ListLocations.json"
           }
         },
-        "externalDocs": {
-          "url": ""
-        },
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -87,9 +84,6 @@
           "Get locations": {
             "$ref": "examples/GetLocation.json"
           }
-        },
-        "externalDocs": {
-          "url": ""
         },
         "parameters": [
           {
@@ -134,16 +128,14 @@
             "$ref": "examples/ListJobsInSubscription.json"
           }
         },
-        "externalDocs": {
-          "url": ""
-        },
         "parameters": [
           {
             "name": "$top",
             "in": "query",
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -193,16 +185,14 @@
             "$ref": "examples/ListJobsInResourceGroup.json"
           }
         },
-        "externalDocs": {
-          "url": ""
-        },
         "parameters": [
           {
             "name": "$top",
             "in": "query",
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -258,9 +248,6 @@
             "$ref": "examples/GetExportJob.json"
           }
         },
-        "externalDocs": {
-          "url": ""
-        },
         "parameters": [
           {
             "name": "jobName",
@@ -310,9 +297,6 @@
           "Update export job": {
             "$ref": "examples/UpdateExportJob.json"
           }
-        },
-        "externalDocs": {
-          "url": ""
         },
         "parameters": [
           {
@@ -372,9 +356,6 @@
           "Create export job": {
             "$ref": "examples/CreateExportJob.json"
           }
-        },
-        "externalDocs": {
-          "url": ""
         },
         "parameters": [
           {
@@ -441,9 +422,6 @@
             "$ref": "examples/DeleteJob.json"
           }
         },
-        "externalDocs": {
-          "url": ""
-        },
         "parameters": [
           {
             "name": "jobName",
@@ -489,9 +467,6 @@
           "List BitLocker Keys for drives in a job": {
             "$ref": "examples/ListBitLockerKeys.json"
           }
-        },
-        "externalDocs": {
-          "url": ""
         },
         "parameters": [
           {
@@ -544,9 +519,6 @@
           "List available operations": {
             "$ref": "examples/ListOperations.json"
           }
-        },
-        "externalDocs": {
-          "url": ""
         },
         "parameters": [
           {
@@ -614,7 +586,8 @@
                     "description": "Provides information about the error message."
                   }
                 }
-              }
+              },
+              "x-ms-identifiers": []
             },
             "innererror": {
               "type": "object",
@@ -682,18 +655,22 @@
         },
         "backupDriveManifest": {
           "type": "boolean",
-          "description": "Default value is false. Indicates whether the manifest files on the drives should be copied to block blobs."
+          "description": "Default value is false. Indicates whether the manifest files on the drives should be copied to block blobs.",
+          "default": false
         },
         "state": {
           "type": "string",
-          "description": "Current state of the job."
+          "description": "Current state of the job.",
+          "default": "Creating"
         },
         "cancelRequested": {
           "type": "boolean",
-          "description": "Indicates whether a request has been submitted to cancel the job."
+          "description": "Indicates whether a request has been submitted to cancel the job.",
+          "default": false
         },
         "percentComplete": {
           "type": "integer",
+          "format": "int32",
           "description": "Overall percentage completed for the job."
         },
         "incompleteBlobListUri": {
@@ -705,7 +682,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DriveStatus"
-          }
+          },
+          "x-ms-identifiers": [
+            "driveId"
+          ]
         },
         "export": {
           "description": "A property containing information about the blobs to be exported for an export job. This property is included for export jobs only.",
@@ -731,7 +711,11 @@
           "enum": [
             "MicrosoftManaged",
             "CustomerManaged"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKekType",
+            "modelAsString": true
+          }
         },
         "kekUrl": {
           "description": "Specifies the url for kek encryption key. ",
@@ -754,7 +738,11 @@
             "None",
             "SystemAssigned",
             "UserAssigned"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
         },
         "principalId": {
           "description": "Specifies the principal id for the identity for the job. ",
@@ -780,7 +768,8 @@
           "properties": {
             "cancelRequested": {
               "type": "boolean",
-              "description": "If specified, the value must be true. The service will attempt to cancel the job. "
+              "description": "If specified, the value must be true. The service will attempt to cancel the job. ",
+              "default": false
             },
             "state": {
               "type": "string",
@@ -804,14 +793,18 @@
             },
             "backupDriveManifest": {
               "type": "boolean",
-              "description": "Indicates whether the manifest files on the drives should be copied to block blobs."
+              "description": "Indicates whether the manifest files on the drives should be copied to block blobs.",
+              "default": false
             },
             "driveList": {
               "description": "List of drives that comprise the job.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DriveStatus"
-              }
+              },
+              "x-ms-identifiers": [
+                "driveId"
+              ]
             }
           },
           "description": "Specifies the properties of a UpdateJob."
@@ -838,6 +831,11 @@
       "x-ms-azure-resource": true,
       "description": "Contains the job information.",
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "SystemData of ImportExport Jobs.",
+          "readOnly": true
+        },
         "id": {
           "type": "string",
           "description": "Specifies the resource identifier of the job.",
@@ -957,6 +955,10 @@
               "description": "The phone number for the Azure data center. ",
               "type": "string"
             },
+            "additionalShippingInformation": {
+              "description": "Additional shipping information for customer, specific to datacenter to which customer should send their disks.",
+              "type": "string"
+            },
             "supportedCarriers": {
               "type": "array",
               "description": "A list of carriers that are supported at this location. ",
@@ -1044,14 +1046,6 @@
     },
     "ShippingInformation": {
       "description": "Contains information about the Microsoft datacenter to which the drives should be shipped.",
-      "required": [
-        "recipientName",
-        "streetAddress1",
-        "city",
-        "stateOrProvince",
-        "postalCode",
-        "countryOrRegion"
-      ],
       "properties": {
         "recipientName": {
           "type": "string",
@@ -1181,6 +1175,7 @@
             "CompletedMoreInfo",
             "ShippedBack"
           ],
+          "default": "Specified",
           "x-ms-enum": {
             "name": "DriveState",
             "modelAsString": true
@@ -1192,6 +1187,7 @@
         },
         "percentComplete": {
           "type": "integer",
+          "format": "int32",
           "description": "Percentage completed for the drive. "
         },
         "verboseLogUri": {
@@ -1262,7 +1258,10 @@
           "description": "drive status",
           "items": {
             "$ref": "#/definitions/DriveBitLockerKey"
-          }
+          },
+          "x-ms-identifiers": [
+            "driveId"
+          ]
         }
       }
     },
@@ -1287,7 +1286,10 @@
           "description": "operations",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     }
@@ -1298,10 +1300,7 @@
       "in": "query",
       "description": "Specifies the API version to use for this request.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2020-08-01"
-      ]
+      "type": "string"
     },
     "subscriptionId": {
       "name": "subscriptionId",

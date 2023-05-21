@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for HDInsight.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for HDInsight, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for HDInsight, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the HDInsight API.
 
 ``` yaml
@@ -29,17 +29,18 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2018-06-preview
+tag: package-preview-2023-04
 ```
 
-## Suppression
+### Suppression
+
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
     from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
     where:
-      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.CapabilitiesResult.properties.vmsize_filters
       - $.definitions.RegionalQuotaCapability.properties.cores_available
       - $.definitions.RegionalQuotaCapability.properties.cores_used
       - $.definitions.RegionalQuotaCapability.properties.region_name
@@ -50,15 +51,19 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
 ```
- 
+
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
     from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
     where:
-      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.CapabilitiesResult.properties.vmsize_filters
       - $.definitions.RegionalQuotaCapability.properties.cores_available
       - $.definitions.RegionalQuotaCapability.properties.cores_used
       - $.definitions.RegionalQuotaCapability.properties.region_name
@@ -69,6 +74,22 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
+```
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: 
+      - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+      - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
+      - Microsoft.HDInsight/stable/2021-06-01/cluster.json
+    where:
+      - $.definitions.Role.properties.VMGroupName
 ```
 
 ``` yaml
@@ -80,6 +101,48 @@ directive:
       - $..["restAuthCredential.isEnabled"]
       - $..["restAuthCredential.username"]
       - $..["restAuthCredential.password"]
+```
+
+``` yaml
+directive:
+  - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
+    reason: Update the default error response to a new format would be a braking change for service.
+```
+
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - Microsoft.HDInsight/preview/2023-04-15-preview/applications.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/configurations.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/extensions.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/locations.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/operations.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/privateEndpointConnections.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/privateLinkResources.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
+  - Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
+```
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+- Microsoft.HDInsight/stable/2021-06-01/cluster.json
+- Microsoft.HDInsight/stable/2021-06-01/applications.json
+- Microsoft.HDInsight/stable/2021-06-01/locations.json
+- Microsoft.HDInsight/stable/2021-06-01/configurations.json
+- Microsoft.HDInsight/stable/2021-06-01/extensions.json
+- Microsoft.HDInsight/stable/2021-06-01/scriptActions.json
+- Microsoft.HDInsight/stable/2021-06-01/operations.json
+- Microsoft.HDInsight/stable/2021-06-01/virtualMachines.json
+- Microsoft.HDInsight/stable/2021-06-01/privateEndpointConnections.json
+- Microsoft.HDInsight/stable/2021-06-01/privateLinkResources.json
 ```
 
 ### Tag: package-2018-06-preview
@@ -98,7 +161,6 @@ input-file:
 - Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
 ```
 
-
 ### Tag: package-2015-03-preview
 
 These settings apply only when `--tag=package-2015-03-preview` is specified on the command line.
@@ -112,12 +174,12 @@ input-file:
 - Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
+- Microsoft.HDInsight/preview/2015-03-01-preview/virtualMachines.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -126,15 +188,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js hdinsight/resource-manager
+  - repo: azure-powershell
 ```
 
 ## Python
@@ -158,7 +219,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -181,7 +241,6 @@ batch:
   - tag: package-2015-03-preview
 ```
 
-
 ### Tag: package-2018-06-preview and java
 
 These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
@@ -195,7 +254,6 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
 ### Tag: package-2015-03-preview and java
 
 These settings apply only when `--tag=package-2015-03-preview --java` is specified on the command line.
@@ -208,10 +266,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

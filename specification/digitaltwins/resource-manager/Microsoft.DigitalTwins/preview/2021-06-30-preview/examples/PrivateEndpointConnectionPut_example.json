@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "50016170-c839-41ba-a724-51e9df440b9e",
+    "resourceGroupName": "resRg",
+    "resourceName": "myDigitalTwinsService",
+    "api-version": "2021-06-30-preview",
+    "privateEndpointConnectionName": "myPrivateConnection",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approved by johndoe@company.com."
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection",
+        "name": "myPrivateConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "groupIds": [
+            "digitalTwinsInstance"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by johndoe@company.com."
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourcegroups/resRg/providers/Microsoft.DigitalTwins/digitalTwinsInstances/myDigitalTwinsService/privateEndpointConnections/myPrivateConnection",
+        "name": "myPrivateConnection",
+        "type": "Microsoft.DigitalTwins/digitalTwinsInstances/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/50016170-c839-41ba-a724-51e9df440b9e/resourceGroups/resRg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "groupIds": [
+            "digitalTwinsInstance"
+          ],
+          "privateLinkServiceConnectionState": {
+            "status": "Pending",
+            "description": "Awaiting approval."
+          }
+        }
+      }
+    }
+  }
+}

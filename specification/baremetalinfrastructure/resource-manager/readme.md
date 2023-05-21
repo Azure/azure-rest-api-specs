@@ -26,7 +26,25 @@ These are the global settings for the BareMetalInfrastructure API.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-08-06-preview
+tag: package-2023-04-06
+```
+
+### Tag: package-2023-04-06
+
+These settings apply only when `--tag=package-2023-04-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04-06'
+input-file:
+  - Microsoft.BareMetalInfrastructure/stable/2023-04-06/baremetalinfrastructure.json
+```
+
+### Tag: package-2021-08-09
+
+These settings apply only when `--tag=package-2021-08-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-08-09'
+input-file:
+  - Microsoft.BareMetalInfrastructure/stable/2021-08-09/baremetalinfrastructure.json
 ```
 
 ### Tag: package-2020-08-06-preview
@@ -49,7 +67,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -57,6 +74,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_baremetalinfrastructure']
+  - repo: azure-powershell
 ```
 
 ## Go

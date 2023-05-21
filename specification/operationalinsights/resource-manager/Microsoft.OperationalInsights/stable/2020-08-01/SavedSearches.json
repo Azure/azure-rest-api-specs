@@ -252,6 +252,9 @@
           "items": {
             "$ref": "#/definitions/Tag"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The tags attached to the saved search."
         }
       },
@@ -266,7 +269,7 @@
       "properties": {
         "etag": {
           "type": "string",
-          "description": "The ETag of the saved search."
+          "description": "The ETag of the saved search. To override an existing saved search, use \"*\" or specify the current Etag"
         },
         "properties": {
           "x-ms-client-flatten": true,

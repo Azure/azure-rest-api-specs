@@ -4,28 +4,30 @@
     "providerNamespace": "Microsoft.Contoso",
     "api-version": "2020-11-20",
     "notificationRegistrationName": "fooNotificationRegistration",
-    "NotificationRegistrationProperties": {
-      "notificationMode": "EventHub",
-      "messageScope": "RegisteredSubscriptions",
-      "includedEvents": [
-        "*/write",
-        "Microsoft.Contoso/employees/delete"
-      ],
-      "notificationEndpoints": [
-        {
-          "locations": [
-            "",
-            "East US"
-          ],
-          "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications"
-        },
-        {
-          "locations": [
-            "North Europe"
-          ],
-          "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications"
-        }
-      ]
+    "properties": {
+      "properties": {
+        "notificationMode": "EventHub",
+        "messageScope": "RegisteredSubscriptions",
+        "includedEvents": [
+          "*/write",
+          "Microsoft.Contoso/employees/delete"
+        ],
+        "notificationEndpoints": [
+          {
+            "locations": [
+              "",
+              "East US"
+            ],
+            "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-eastus/providers/Microsoft.EventHub/namespaces/unitedstates-mgmtexpint/eventhubs/armlinkednotifications"
+          },
+          {
+            "locations": [
+              "North Europe"
+            ],
+            "notificationDestination": "/subscriptions/ac6bcfb5-3dc1-491f-95a6-646b89bf3e88/resourceGroups/mgmtexp-northeurope/providers/Microsoft.EventHub/namespaces/europe-mgmtexpint/eventhubs/armlinkednotifications"
+          }
+        ]
+      }
     }
   },
   "responses": {

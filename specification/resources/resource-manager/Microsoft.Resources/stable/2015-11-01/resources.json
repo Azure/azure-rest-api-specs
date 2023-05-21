@@ -864,7 +864,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Query parameters. If null is passed returns all resource groups."
+            "description": "The number of results to return. If null is passed, returns all resources."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2519,6 +2519,11 @@
             "name": "DeploymentMode",
             "modelAsString": false
           }
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The deployment error."
         }
       },
       "description": "Deployment properties with additional details."

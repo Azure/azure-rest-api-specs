@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-12345678abc",
+    "resourceGroupName": "exampleResourceGroup",
+    "factoryName": "exampleFactoryName",
+    "api-version": "2018-06-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Mon, 22 Apr 2019 18:33:52 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-reads": "11989",
+        "x-ms-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870",
+        "x-ms-correlation-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/globalParameters/default",
+            "name": "default",
+            "type": "Microsoft.DataFactory/factories/globalParameters",
+            "properties": {
+              "url": {
+                "value": "https://testuri.test",
+                "type": "String"
+              },
+              "waitTime": {
+                "value": 5,
+                "type": "Int"
+              },
+              "validADFOffice365Uris": {
+                "value": [
+                  "https://testuri.test",
+                  "https://testuri.test"
+                ],
+                "type": "Array"
+              },
+              "mySourceDatasetFolderPath": {
+                "value": "input",
+                "type": "String"
+              },
+              "copyPipelineTest": {
+                "value": {
+                  "mySourceDatasetFolderPath": "exampleInput/",
+                  "mySinkDatasetFolderPath": "exampleOutput",
+                  "testingEmptyContextParams": ""
+                },
+                "type": "Object"
+              }
+            },
+            "etag": "da00a1c3-0000-0400-0000-6241f3290000"
+          }
+        ]
+      }
+    }
+  }
+}

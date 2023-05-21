@@ -26,7 +26,7 @@ These are the global settings for the Purview API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-12-01-preview
+tag: package-2021-07-01
 ```
 
 
@@ -37,6 +37,16 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 ``` yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
 - Microsoft.Purview/preview/2020-12-01-preview/purview.json
+```
+
+
+### Tag: package-2021-07-01
+
+These settings apply only when `--tag=package-2021-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-07-01'
+input-file:
+- Microsoft.Purview/stable/2021-07-01/purview.json
 ```
 
 ---
@@ -50,8 +60,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 
@@ -65,75 +77,31 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Purview
-  output-folder: $(csharp-sdks-folder)/Purview/Management.Purview/Generated
+  output-folder: $(csharp-sdks-folder)/Purview/Microsoft.Azure.Management.Purview/src/Generated
   clear-output-folder: true
 ```
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.purview
-  package-name: azure-mgmt-purview
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview/azure/mgmt/purview
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview
-```
-
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: purview
-  clear-output-folder: true
-```
 ## Suppression
 
 ``` yaml
 directive:
+  - suppress: SECRET_PROPERTY
+    where:
+      - $.definitions.AccessKeys.properties.atlasKafkaPrimaryEndpoint
+      - $.definitions.AccessKeys.properties.atlasKafkaSecondaryEndpoint
+    reason: Secrets are OK to return in a POST response.
   - suppress: R3018  # EnumInsteadOfBoolean
     where:
       - $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
       - $.definitions.DimensionProperties.properties.toBeExportedForCustomer
     reason:
-      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests  
-  - suppress: R4009  # RequiredSystemDataInNewApiVersions
-    reason:
-      - We do not yet support systemdata
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2020-12-01-preview
-```
-
-### Tag: package-2020-12-01-preview and go
-
-These settings apply only when `--tag=package-2020-12-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2020-12-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/purview/mgmt/2020-12-01-preview/$(namespace)
+      - Check name model is set by ARM team https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#check-name-availability-requests
 ```

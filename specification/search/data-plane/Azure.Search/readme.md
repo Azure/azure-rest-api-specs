@@ -1,12 +1,12 @@
 # SearchServiceClient and SearchIndexClient
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for SearchServiceClient and SearchIndexClient.
 
 
 ---
-## Getting Started 
+## Getting Started
 
 To build the SDK for SearchServiceClient and SearchIndexClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
@@ -19,13 +19,14 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for SearchServiceClient and SearchIndexClient.
 
 ``` yaml
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
+tag: package-2023-07-01-preview
 
 directive:
   - where:
@@ -113,6 +114,10 @@ directive:
     suppress:
       - RequiredReadOnlyProperties
   - where:
+      -  $.definitions.ListAliasesResult.properties.value
+    suppress:
+      - RequiredReadOnlyProperties
+  - where:
       -  $.definitions.ListSkillsetsResult.properties.value
     suppress:
       - RequiredReadOnlyProperties
@@ -164,6 +169,84 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+```
+
+### Tag: package-2023-07-01-preview
+
+These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-01-preview'
+input-file:
+- preview/2023-07-01-Preview/searchservice.json
+- preview/2023-07-01-Preview/searchindex.json
+```
+
+#### Rename one of SearchError definitions
+
+SearchError is duplicated between two swaggers, rename one of them
+
+``` yaml $(tag) == 'package-2023-07-01-preview'
+directive:
+- from: preview/2023-07-01-Preview/searchservice.json
+  where: $.definitions.SearchError
+  transform: $["x-ms-client-name"] = "SearchServiceError"
+```
+
+### Tag: package-2023-07-searchservice-preview
+
+These settings apply only when `--tag=package-2023-07-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-searchservice-preview'
+input-file:
+- preview/2023-07-01-Preview/searchservice.json
+```
+
+### Tag: package-2023-07-searchindex-preview
+
+These settings apply only when `--tag=package-2023-07-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-searchindex-preview'
+input-file:
+- preview/2023-07-01-Preview/searchindex.json
+```
+
+### Tag: package-2021-04-30-preview
+
+These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-30-preview'
+input-file:
+- preview/2021-04-30-Preview/searchservice.json
+- preview/2021-04-30-Preview/searchindex.json
+```
+
+#### Rename one of SearchError definitions
+
+SearchError is duplicated between two swaggers, rename one of them
+
+``` yaml $(tag) == 'package-2021-04-30-preview'
+directive:
+- from: preview/2021-04-30-Preview/searchservice.json
+  where: $.definitions.SearchError
+  transform: $["x-ms-client-name"] = "SearchServiceError"
+```
+
+### Tag: package-2021-04-searchservice-preview
+
+These settings apply only when `--tag=package-2021-04-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-searchservice-preview'
+input-file:
+- preview/2021-04-30-Preview/searchservice.json
+```
+
+### Tag: package-2021-04-searchindex-preview
+
+These settings apply only when `--tag=package-2021-04-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-searchindex-preview'
+input-file:
+- preview/2021-04-30-Preview/searchindex.json
 ```
 
 ### Tag: package-2020-06-searchservice-preview
@@ -417,7 +500,7 @@ directive:
           return $
           .replace(/(getAdditionalProperties)/g, "getDocument")
           .replace(/(setAdditionalProperties)/g, "setDocument")
-      reason: Provides a better description of the getter/setter for addtionalProperties
+      reason: Provides a better description of the getter/setter for additionalProperties
 
     - from:
           - SearchResult.java
@@ -492,7 +575,7 @@ directive:
           .replace(/(COSMOS_DB)/g, "COSMOS")
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -505,7 +588,7 @@ csharp:
   clear-output-folder: true
   output-folder: $(csharp-sdks-folder)/search/Azure.Search/src/Generated
 
-directive: 
+directive:
   # TODO: Simplify all the below regexes once we gain the ability to target them at specific files.
 
   # Rename the IDocumentsOperations interface and implementation, then make the interface internal so we can version it freely.
@@ -676,10 +759,10 @@ directive:
   - from: source-file-csharp
     where: $
     transform: >-
-      if ($.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") || 
+      if ($.includes("class DataSourcesOperations") || $.includes("class IndexersOperations") ||
         $.includes("class IndexesOperations") ||  $.includes("class SynonymMapsOperations") ||
-        $.includes("class SkillsetsOperations")) 
-        
+        $.includes("class SkillsetsOperations"))
+
         return $.
           replace( /this.SearchServiceName/g, "Client.SearchServiceName" ).
           replace( /this.SearchDnsSuffix/g, "Client.SearchDnsSuffix" ).
@@ -691,7 +774,7 @@ directive:
   # that we've had in the Azure Search .NET SDK since it was first released. We've decided to keep the custom behavior of
   # Field just for .NET for the sake of backward compatibility, but for other languages the client behavior will conform
   # to the REST API.
-  # 
+  #
   # To achieve this, we need to make the generated constructors internal, as well as some of the generated properties.
   - from: source-file-csharp
     where: $
@@ -707,7 +790,7 @@ directive:
           replace( /public (bool\? Facetable { get; set; })/g, "internal $1" );
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -719,6 +802,10 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/2023-07-01-Preview/searchservice.json
+  - $(this-folder)/preview/2023-07-01-Preview/searchindex.json
+  - $(this-folder)/preview/2021-04-30-Preview/searchservice.json
+  - $(this-folder)/preview/2021-04-30-Preview/searchindex.json
   - $(this-folder)/preview/2020-06-30-Preview/searchservice.json
   - $(this-folder)/preview/2020-06-30-Preview/searchindex.json
   - $(this-folder)/preview/2020-06-30/searchservice.json
@@ -730,10 +817,22 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+
+# Code Generation
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+``` yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-net-track2
 ```

@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "dicomServiceName": "blue",
+    "api-version": "2022-01-31-preview",
+    "dicomservicePatchResource": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "blue",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/dicomservices/blue",
+        "type": "Microsoft.HealthcareApis/workspaces/dicomservices",
+        "tags": {
+          "tagKey": "tagValue"
+        },
+        "properties": {
+          "authenticationConfiguration": {
+            "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audiences": [
+              "https://azurehealthcareapis.com/",
+              "https://azurehealthcareapis.com"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "serviceUrl": "https://workspace1-blue.dicom.azurehealthcareapis.com"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/westus/operationresults/f7eb8g4f1ncj3jgk6bg8jlqf8?api-version=2021-11-01"
+      },
+      "body": {
+        "name": "blue",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/dicomservices/blue",
+        "type": "Microsoft.HealthcareApis/workspaces/dicomservices",
+        "tags": {
+          "tagKey": "tagValue"
+        },
+        "properties": {
+          "authenticationConfiguration": {
+            "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audiences": [
+              "https://azurehealthcareapis.com/",
+              "https://azurehealthcareapis.com"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "serviceUrl": "https://workspace1-blue.dicom.azurehealthcareapis.com"
+        }
+      }
+    }
+  }
+}

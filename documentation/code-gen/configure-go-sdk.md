@@ -1,6 +1,6 @@
 # Readme Configuration Guide for Azure SDK for Go
 
-This file describe how to configure readme files to make it available for Azure SDK for Go code generation.
+This doc describe how to configure readme files to make it available for Azure SDK for Go code generation. Also, this doc will introduce how to generate and test Go SDK by yourself.
 
 ## Common Configuration
 
@@ -20,7 +20,7 @@ tag: package-xxxx-xx-xx
 ```
 ~~~~
 
-### tag
+### Tag
 
 Tags are used to define what swagger files are used in specific client SDK. In Single-API client, only one tag can be used to generate SDK client.
 A tag can contains a bunch of swagger files which are used to generate the SDK. 
@@ -79,10 +79,8 @@ See configuration in [readme.go.md](./readme.go.md)
 
 Go dedicated configurations are configured in `readme.go.md`.
 
-The typical namespace/package-name in azure-sdk-for-go must start with a lower case letter and can only contain lower case letters and numbers. 
-And the typical output-folder in the azure-sdk-for-go is like `$(typescript-sdk-folder)/services/$(namespace)/mgmt/yyyy-mm-dd/$(namespace)` where the `yyyy-mm-dd` is the version of this package.
-
-Go SDK supports multi-api by default, therefore you must add a batch section in the `readme.go.md`.
+The typical module name in azure-sdk-for-go has prefix `sdk/`. Data plane packages always use pattern `sdk/$(rp)/az$(namespace)` as module name while management packages use pattern `sdk/resourcemanager/$(rp)/arm$(namespace)`.
+Full module path in azure-sdk-for-go is like `github.com/Azure/azure-sdk-for-go/$(module-name)` and the typical output-folder in the azure-sdk-for-go is like `$(go-sdk-folder)/$(module-name)`.
 
 A typical readme.go.md is like this: 
 ~~~
@@ -92,200 +90,64 @@ A typical readme.go.md is like this:
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2019-12-01
-```
-
-### Tag: package-2019-12-01 and go
-
-These settings apply only when `--tag=package-2019-12-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-2019-12-01' && $(go)
-namespace: yourservicename
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-12-01/$(namespace)
+```yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/agrifood/armagrifood
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+module-version: 0.1.0
 ```
 ~~~
-
-## Preview package and stable package
-
-Preview tags and stable tags are defined as the following:
-
-- A tag is a preview tag when there is at least one input swagger file is preview. 
-- A tag is a stable tag when all of its swagger files are stable.
-
-A stable tag generates a stable package in `azure-sdk-for-go`, and its `output-folder` must be in this pattern:
-```
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/yyyy-mm-dd/$(namespace)
-```
-The `output-folder` here must not be under the `preview` subdirectory.
-
-A preview tag generates a preview package in `azure-sdk-for-go`, and its `output-folder` must be in this pattern:
-```
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/yyyy-mm-dd-preview/$(namespace)
-```
-The `output-folder` here must be under the `preview` subdirectory.
-
-These rules must be applied, otherwise the go code generator will throw exceptions.
-
-## Multi-packages 
-
-The batch is a tag list which are used in the one RP has multi-package scenarios. For example, 
-the Resources RP has several independent packages like features, lock, policy.  
-First of all, you need to have different yaml block for each package to define the default tag for that specific package.
-~~~
-// file: readme.md
-## Configuration
-
-### Basic Information
-
-These are the global settings for the Resource API.
-
-``` yaml
-openapi-type: arm
-```
-
-``` yaml $(package-features)
-tag: package-features-2015-12
-```
-
-``` yaml $(package-locks)
-tag: package-locks-2016-09
-```
-
-``` yaml $(package-policy)
-tag: package-policy-2019-09
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2020-06
-```
-
-~~~
-Then for each default tag, you can define the input swagger like normal tag.
-~~~
-
-### Tag: package-features-2015-12
-
-These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-features-2015-12'
-input-file:
-- Microsoft.Features/stable/2015-12-01/features.json
-```
-
-### Tag: package-locks-2016-09-preview
-
-These settings apply only when `--tag=package-locks-2016-09-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-locks-2016-09-preview'
-input-file:
-- Microsoft.Authorization/preview/2016-09-01/locks.json
-```
-
-### Tag: package-policy-2019-09
-
-These settings apply only when `--tag=package-policy-2019-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-policy-2019-09'
-input-file:
-- Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
-- Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
-- Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json
-
-# Needed when there is more than one input file
-override-info:
-  title: PolicyClient
-```
-
-### Tag: package-resources-2020-06
-
-These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2020-06'
-input-file:
-- Microsoft.Resources/stable/2020-06-01/resources.json
-```
-~~~
-
-Finally, in your readme.go.md you should include what packages you want to include in the Azure SDK for Go.
-And in each package's section define the default package name output folder in azure-sdk-for-go repo etc.
-
-~~~
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-```yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-features-2015-12
-  - tag: package-locks-2016-09-preview
-  - tag: package-policy-2019-09
-  - tag: package-resources-2020-06
-```
-
-### Tag: package-features-2015-12 and go
-
-These settings apply only when `--tag=package-features-2015-12 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-features-2015-12' && $(go)
-namespace: features
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-12-01-preview/$(namespace)
-```
-
-### Tag: package-locks-2016-09-preview and go
-
-These settings apply only when `--tag=package-locks-2016-09-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-locks-2016-09-preview' && $(go)
-namespace: locks
-output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2016-09-01-preview/$(namespace)
-```
-
-### Tag: package-policy-2019-09 and go
-
-These settings apply only when `--tag=package-policy-2019-09 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-policy-2019-09' && $(go)
-namespace: policy
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-09-01/$(namespace)
-```
-
-### Tag: package-resources-2020-06 and go
-
-These settings apply only when `--tag=package-resources-2020-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-```yaml $(tag) == 'package-resources-2020-06' && $(go)
-namespace: resources
-output-folder: $(go-sdk-folder)/services/resources/mgmt/2020-06-01/$(namespace)
-```
-~~~
-
 
 ## Run codegen
 
 After configure all the readme files, autorest can be used to generate SDK.
 ~~~
-autorest --go --use="@microsoft.azure/autorest.go@~2.1.156" --multiapi --preview-chk --use-onever --go-sdk-folder=/path/to/azure-sdk-for-go /path/to/azure-rest-api-specs/specification/storage/resource-manager/readme.md
+autorest --use=@autorest/go@latest --go --track2 --go-sdk-folder=/path/to/azure-sdk-for-go /path/to/azure-rest-api-specs/specification/agrifood/resource-manager/readme.md
 ~~~
+
+## Test with the generated Go SDK
+
+When you have a generated Go SDK either from swagger PR's automation or from local autorest execution, you could import them locally to test with your own test cases.
+
+For example, here is a [SDK PR](https://github.com/Azure/azure-sdk-for-go/pull/17811) which comes from [swagger PR's automation](https://github.com/Azure/azure-rest-api-specs/pull/19468). You could follow the following steps to test it.
+
+1. Clone the PR code to local
+```sh
+cd $WORKSPACE
+git clone git@github.com:azure-sdk/azure-sdk-for-go.git
+cd azure-sdk-for-go
+git checkout -t origin/sdkAuto/armcompute
+```
+
+2. Copy the generated package to your test project
+
+Shell:
+```sh
+cp -r sdk/resourcemanager/compute/armcompute $WORKSPACE/test-project
+```
+
+PowerShell:
+```pwsh
+Copy-Item -Path sdk/resourcemanager/compute/armcompute -Destination $WORKSPACE/test-project -Recurse
+```
+
+3. Change go.mod in your test project to replace the `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute` module with local code
+
+Shell:
+```sh
+cd $WORKSPACE/test-project
+echo "
+replace github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute => ../armcompute" >> go.mod
+go mod tidy
+```
+
+PowerShell:
+```pwsh
+cd $WORKSPACE/test-project
+Add-Content go.mod "`nreplace github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute => ../armcompute"
+go mod tidy
+```
+
+4. Now you could reuse or write new tests to test the generated packages.

@@ -110,7 +110,7 @@ batch:
  - tag: profile-hybrid-2019-03-01
  ```
 
- ### Profile: hybrid_2020_09_01
+### Profile: hybrid_2020_09_01
 
 These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
 
@@ -120,4 +120,28 @@ output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Authorization/Management.
 
 batch:
  - tag: profile-hybrid-2020-09-01
+ ```
+
+### Profile: profile_2020_10_01_preview
+
+These settings apply only when `--csharp-profile=profile_2020_10_01_preview` is specified on the command line.
+
+ ``` yaml $(csharp-profile)=='profile_2020_10_01_preview'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/$(csharp-profile)/Generated
+
+batch:
+ - tag: package-2020-10-01-preview
+ ```
+
+### Profile: profile_2022_04_01
+
+These settings apply only when `--csharp-profile=profile_2022_04_01` is specified on the command line.
+
+ ``` yaml $(csharp-profile)=='profile_2022_04_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/$(csharp-profile)/Generated
+
+batch:
+ - tag: package-2022-04-01
  ```
