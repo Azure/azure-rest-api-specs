@@ -40,10 +40,10 @@
           "StandardAssignments"
         ],
         "operationId": "StandardAssignments_Delete",
-        "summary": "Deletes a standard assignmnet.",
-        "description": "This operation deletes a standard assignmnet, given its name and the scope it was created in. The scope of a standard assignmnet is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
+        "summary": "Deletes a standard assignment.",
+        "description": "This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
         "x-ms-examples": {
-          "Delete a standard assignmnet": {
+          "Delete a standard assignment": {
             "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
           }
         },
@@ -75,13 +75,13 @@
           "StandardAssignments"
         ],
         "operationId": "StandardAssignments_Create",
-        "summary": "Creates or updates a standard assignmnet.",
-        "description": " This operation creates or updates a standard assignmnet with the given scope and name. standard assignmnets apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+        "summary": "Creates or updates a standard assignment.",
+        "description": " This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
         "x-ms-examples": {
-          "Put an audit standard assignmnet": {
+          "Put an audit standard assignment": {
             "$ref": "./examples/StandardAssignments/PutStandardAssignment.json"
           },
-          "Put exemption standard assignmnet": {
+          "Put exemption standard assignment": {
             "$ref": "./examples/StandardAssignments/PutExemptionStandardAssignment.json"
           }
         },
@@ -98,7 +98,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created - Returns information about the new standard assignmnet.",
+            "description": "Created - Returns information about the new standard assignment.",
             "schema": {
               "$ref": "#/definitions/StandardAssignment"
             }
@@ -116,10 +116,10 @@
           "StandardAssignments"
         ],
         "operationId": "StandardAssignments_Get",
-        "summary": "Retrieves a standard assignmnet.",
-        "description": "This operation retrieves a single standard assignmnet, given its name and the scope it was created at.",
+        "summary": "Retrieves a standard assignment.",
+        "description": "This operation retrieves a single standard assignment, given its name and the scope it was created at.",
         "x-ms-examples": {
-          "Retrieve a standard assignmnet": {
+          "Retrieve a standard assignment": {
             "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
           }
         },
@@ -136,7 +136,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the standard assignmnet.",
+            "description": "OK - Returns information about the standard assignment.",
             "schema": {
               "$ref": "#/definitions/StandardAssignment"
             }
