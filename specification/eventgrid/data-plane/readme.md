@@ -151,6 +151,7 @@ input-file:
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
 - Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
