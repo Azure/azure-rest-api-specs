@@ -38,7 +38,7 @@ Complete the following questionnaire to determine if the mandatory ARM review is
   - This PR is adding a new API version
 
 - [ ] If this PR is adding a new API version, you have ensured that you copied an existing API version into a new directory structure for first commit and then pushed new changes, including version updates, in separate commits. 
-    - You can use OpenAPIHub to initialize the PR for adding a new version. For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
+  - You can use OpenAPIHub to initialize the PR for adding a new version. For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
   - Note that this doesn't apply if you are trying to merge a PR that was previously in the private repository.
 
 - [ ] Ensure you've reviewed following [guidelines](https://aka.ms/rpguidelines) including [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). Estimated time: 4 hours.
