@@ -116,6 +116,31 @@
           "description": "Activity description.",
           "type": "string"
         },
+        "state": {
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityState",
+            "modelAsString": true
+          }
+        },
+        "onInactiveMarkAs": {
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityOnInactiveMarkAs",
+            "modelAsString": true
+          }
+        },
         "dependsOn": {
           "type": "array",
           "description": "Activity depends on condition.",
@@ -3392,8 +3417,18 @@
         "outputColumns": {
           "type": "object",
           "x-ms-format": "dfe-list-generic",
-          "x-ms-format-element-type": "object",
-          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+          "x-ms-format-element-type": "OutputColumn",
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). itemType: OutputColumn. Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+        }
+      }
+    },
+    "OutputColumn": {
+      "description": "The columns to be read out from the Office 365 table.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the table column. Type: string."
         }
       }
     },
