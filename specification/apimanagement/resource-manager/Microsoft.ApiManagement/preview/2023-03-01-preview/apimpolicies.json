@@ -70,7 +70,25 @@
             "name": "includeAllPolicies",
             "in": "query",
             "required": false,
-            "type": "boolean",
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "includeAllPoliciesValues",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "true",
+                  "description": "Includes all tenant policies."
+                },
+                {
+                  "value": "false",
+                  "description": "Display on tenant level policy"
+                }
+              ]
+            },
             "description": "Include all policies for the tenant in response"
           }
         ],
