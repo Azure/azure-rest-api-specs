@@ -4567,6 +4567,114 @@
       ],
       "description": "Policy contract Properties."
     },
+    "PolicyWithComplianceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyWithComplianceContract"
+          },
+          "description": "Policy Contract value."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the list policy operation."
+    },
+    "PolicyWithComplianceContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyWithComplianceContractProperties",
+          "description": "Properties of the Policy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Policy Contract details."
+    },
+    "PolicyWithComplianceContractProperties": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Contents of the Policy as defined by the format."
+        },
+        "format": {
+          "type": "string",
+          "description": "Format of the policyContent.",
+          "enum": [
+            "xml",
+            "xml-link",
+            "rawxml",
+            "rawxml-link"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyContentFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "xml",
+                "description": "The contents are inline and Content type is an XML document."
+              },
+              {
+                "value": "xml-link",
+                "description": "The policy XML document is hosted on a HTTP endpoint accessible from the API Management service."
+              },
+              {
+                "value": "rawxml",
+                "description": "The contents are inline and Content type is a non XML encoded policy document."
+              },
+              {
+                "value": "rawxml-link",
+                "description": "The policy document is not XML encoded and is hosted on a HTTP endpoint accessible from the API Management service."
+              }
+            ]
+          },
+          "default": "xml"
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy Identifier"
+        },
+        "complianceState": {
+          "type": "string",
+          "description": "Policy Restriction Compliance State",
+          "enum": [      
+            "Pending",
+            "NonCompliant",
+            "Compliant"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyComplianceState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "description": "The policy restriction compliance state has not yet been determined."
+              },
+              {
+                "value": "NonCompliant",
+                "description": "The scope in restriction is out of compliance."
+              },
+              {
+                "value": "Compliant",
+                "description": "The scope in restriction is in compliance."
+              }
+            ]
+          },
+          "default": "Pending"
+        }
+      },
+      "description": "Policy contract Properties."
+    },
     "PolicyDescriptionContract": {
       "type": "object",
       "properties": {
@@ -5086,8 +5194,27 @@
           "description": "Path to the policy document."
         },
         "requireBase": {
-          "type": "boolean",
-          "description": "Indicates if base policy should be enforced for the policy document."
+          "type": "string",
+          "description": "Indicates if base policy should be enforced for the policy document.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "PolicyRestrictionRequireBase",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "true",
+                "description": "The policy is required to have base policy"
+              },
+              {
+                "value": "false",
+                "description": "The policy does not require to have base policy"
+              }
+            ]
+          },
+          "default": "false"
         }
       },
       "description": "Policy restrictions contract properties."
