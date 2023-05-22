@@ -211,7 +211,10 @@
             "description": "No Content - security standard does not exist"
           },
           "default": {
-            "description": "Error response describing why the operation failed"
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -279,7 +282,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StandardComponentProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "cloudProviders": {
           "description": "List of all standard supported clouds.",
@@ -355,6 +359,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The Security Standard key - unique key for the standard type",
       "x-ms-parameter-location": "method"
     },
