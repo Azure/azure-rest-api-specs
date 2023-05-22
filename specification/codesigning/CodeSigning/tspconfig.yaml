@@ -1,10 +1,38 @@
 parameters:
-  service-directory-name:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-csharp/"
+  "service-directory-name":
     default: "codesigning"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    output-file: "azure.codesigning.json"
-    azure-resource-provider-folder: "../data-plane/Azure.CodeSigning"
+    azure-resource-provider-folder: "./data-plane"
+    emitter-output-dir: "{project-root}/.."
     examples-directory: "./examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure.codesigning.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-mode: "dataplane"
+    package-name: "azure-codesigning"
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: true
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+    model-namespace: false
+    namespace: Azure.CodeSigning
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/azurecodesigning-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/azure-codesigning-rest"
+      description: "Azure Codesigning Service"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-codesigning"
+    namespace: com.azure.codesigning
