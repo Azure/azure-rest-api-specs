@@ -607,7 +607,7 @@
           "$ref": "#/definitions/FeatureProperties"
         },
         {
-          "$ref": "#/definitions/ManeuverPointProperties"
+          "$ref": "#/definitions/NavigationPointProperties"
         }
       ]
     },
@@ -620,62 +620,66 @@
           "$ref": "#/definitions/FeatureProperties"
         },
         {
-          "description": "ManeuverPoint Properties",
-          "type": "object",
-          "properties": {
-            "legPointIndex": {
-              "$ref": "#/definitions/LegPointIndex"
-            },
-            "compassDirection": {
-              "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
-              "type": "string",
-              "readOnly": true
-            },
-            "steps": {
-              "description": "steps between two consecutive maneuver points",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Step"
-              }
-            },
-            "instruction": {
-              "$ref": "#/definitions/Instruction"
-            },
-            "sideOfStreet": {
-              "$ref": "#/definitions/SideOfStreetEnum"
-            },
-            "signs": {
-              "description": "Signage text for the route. There may be more than one sign value",
-              "type": "array",
-              "readOnly": true,
-              "items": {
-                "type": "string"
-              }
-            },
-            "towardsRoadName": {
-              "description": "The name of the street that the route goes towards in the first ManeuverPoint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "exitIdentifier": {
-              "description": "The name or number of the exit associated with this route step.",
-              "type": "string",
-              "readOnly": true
-            },
-            "distanceInMeters": {
-              "description": "The physical distance in meters covered by this route step.",
-              "type": "number",
-              "readOnly": true
-            },
-            "durationInSeconds": {
-              "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
-              "format": "int64",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/NavigationPointProperties"
         }
       ]
+    },
+    "NavigationPointProperties": {
+      "description": "ManeuverPoint Properties",
+      "type": "object",
+      "properties": {
+        "legPointIndex": {
+          "$ref": "#/definitions/LegPointIndex"
+        },
+        "compassDirection": {
+          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
+          "type": "string",
+          "readOnly": true
+        },
+        "steps": {
+          "description": "steps between two consecutive maneuver points",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        },
+        "instruction": {
+          "$ref": "#/definitions/Instruction"
+        },
+        "sideOfStreet": {
+          "$ref": "#/definitions/SideOfStreetEnum"
+        },
+        "signs": {
+          "description": "Signage text for the route. There may be more than one sign value",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "towardsRoadName": {
+          "description": "The name of the street that the route goes towards in the first ManeuverPoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "exitIdentifier": {
+          "description": "The name or number of the exit associated with this route step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "distanceInMeters": {
+          "description": "The physical distance in meters covered by this route step.",
+          "type": "number",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+
     },
     "ViaWaypointProperties": {
       "x-ms-discriminator-value": "ViaWaypoint",
