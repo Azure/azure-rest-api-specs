@@ -6015,8 +6015,8 @@
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "resource": {
-          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
-          "type": "string"
+          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [
@@ -6898,8 +6898,12 @@
           "type": "string"
         },
         "value": {
-          "description": "Value to be set. Could be a static value or Expression",
+          "description": "Value to be set. Could be a static value or Expression.",
           "type": "object"
+        },
+        "setSystemVariable": {
+          "description": "If set to true, it sets the pipeline run return value.",
+          "type": "boolean"
         }
       }
     },

@@ -5,6 +5,7 @@ using TypeSpec.Rest;
 namespace AzureHealthInsights;
 
 alias Response = {
+  #suppress "@azure-tools/typespec-azure-core/no-format" "This is an old spec"
   @doc("A processing job identifier.")
   @visibility("read")
   @key
@@ -31,7 +32,6 @@ alias Response = {
   @visibility("read")
   errors?: Azure.Core.Foundations.Error[];
 };
-
 
 @doc("An inference made by the model regarding a patient.")
 model Inference {

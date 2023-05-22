@@ -406,15 +406,28 @@
           "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
         },
         "type": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "enum": [
-            "BuiltInRole",
-            "CustomRole"
+            0,
+            1
           ],
           "description": "Indicates whether the Role Definition was built-in or user created.",
           "x-ms-enum": {
             "name": "MongoRoleDefinitionType",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": 0,
+                "description": "The BuiltInRole",
+                "name": "BuiltInRole"
+              },
+              {
+                "value": 1,
+                "description": "The CustomRole",
+                "name": "CustomRole"
+              }
+            ]
           }
         },
         "databaseName": {

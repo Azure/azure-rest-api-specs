@@ -146,6 +146,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "ElasticVersions_List": {
             "$ref": "./examples/ElasticVersions_List.json"
@@ -2005,6 +2008,25 @@
         }
       }
     },
+    "ElasticVersionListFormat": {
+      "description": "Elastic Version List Format",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticVersionListProperties"
+        }
+      }
+    },
+    "ElasticVersionListProperties": {
+      "description": "Elastic Version Properties",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Available elastic version of the given region",
+          "type": "string"
+        }
+      }
+    },
     "ElasticVersionsListResponse": {
       "description": "List of elastic versions available in a region.",
       "type": "object",
@@ -2013,7 +2035,7 @@
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ElasticVersionListFormat"
           }
         },
         "nextLink": {
@@ -2424,9 +2446,17 @@
       "description": "The User Api Key created for the Organization associated with the User Email Id that was passed in the request",
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserApiKeyResponseProperties"
+        }
+      }
+    },
+    "UserApiKeyResponseProperties": {
+      "type": "object",
+      "properties": {
         "apiKey": {
+          "description": "The User Api Key Generated based on GenerateApiKey flag. This is applicable for non-Portal clients only.",
           "type": "string",
-          "description": "The User Api Key Generated based on ReturnApiKey flag. This is applicable for non-Portal clients only.",
           "x-ms-secret": true
         }
       }
