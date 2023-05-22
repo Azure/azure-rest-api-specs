@@ -491,15 +491,16 @@
               }
             ]
           },
-          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'.",
+          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica' or 'ReviveDropped'. This property is returned only for Replica server",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         },
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore'.",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'ReviveDropped'.",
           "x-ms-mutability": [
             "create"
           ]
@@ -899,7 +900,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the types of identities associated with this resource; currently restricted to 'SystemAssigned and UserAssigned'",
+          "description": "the types of identities associated with this resource; currently restricted to 'None and UserAssigned'",
           "enum": [
             "None",
             "UserAssigned"
