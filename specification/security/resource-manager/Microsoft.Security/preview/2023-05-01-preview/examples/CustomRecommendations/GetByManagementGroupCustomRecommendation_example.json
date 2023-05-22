@@ -1,13 +1,14 @@
 {
   "parameters": {
     "api-version": "2023-05-01-preview",
-    "scope": "providers/Microsoft.Management/managementGroups/contoso"
+    "scope": "providers/Microsoft.Management/managementGroups/contoso",
+    "recommendationId": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Security/customRecommendations/MycustomRecommendation1",
-        "name": "MycustomRecommendation1",
+        "id": "/providers/Microsoft.Management/managementGroups/contoso/providers/Microsoft.Security/customRecommendations/1f3afdf9-d0c9-4c3d-847f-89da613e70a8",
+        "name": "1f3afdf9-d0c9-4c3d-847f-89da613e70a8",
         "type": "Microsoft.Security/customRecommendations",
         "properties": {
           "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
