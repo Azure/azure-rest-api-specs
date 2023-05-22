@@ -206,7 +206,7 @@ input-file:
 - Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
 - Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 - Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
 - Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json

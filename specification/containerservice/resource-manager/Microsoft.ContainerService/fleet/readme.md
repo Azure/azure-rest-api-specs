@@ -27,7 +27,16 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-09-preview
+tag: package-2023-03-preview
+```
+
+### Tag: package-2023-03-preview
+
+These settings apply only when `--tag=package-2023-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03-preview'
+input-file:
+  - preview/2023-03-15-preview/fleets.json
 ```
 
 ### Tag: package-2022-09-preview
@@ -68,30 +77,19 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  # - repo: azure-sdk-for-python-track2
-  # - repo: azure-sdk-for-java
-  # - repo: azure-sdk-for-go
-  # - repo: azure-sdk-for-js
-  # - repo: azure-sdk-for-net-track2
-  # - repo: azure-sdk-for-node
-  # - repo: azure-resource-manager-schemas
-  # - repo: azure-powershell
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ContainerServiceFleet
-  payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/containerservice/Microsoft.Azure.Management.ContainerServiceFleet/src/Generated
-  clear-output-folder: true
-```
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
@@ -107,6 +105,3 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
 
-``` yaml
-directive:
-```
