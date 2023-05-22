@@ -59,7 +59,6 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Replicas.json
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerLogs.json
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ThreatProtection.json
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/VirtualNetwork.json
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/LongTermRetentionOperation.json
 ```
