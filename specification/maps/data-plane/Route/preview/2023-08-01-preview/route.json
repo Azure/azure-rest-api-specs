@@ -668,6 +668,9 @@
           "format": "int64",
           "type": "integer",
           "readOnly": true
+        },
+        "travelMode": {
+          "$ref": "#/definitions/TravelMode"
         }
       }
     },
@@ -1721,6 +1724,39 @@
           "description": "id of the request which would show in corresponding batchItem",
           "type": "string"
         }
+      }
+    },
+    "TravelMode": {
+      "description": "The mode of travel for the route",
+      "type": "string",
+      "default": "driving",
+      "enum": [
+        "driving",
+        "truck",
+        "walking",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "TravelMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "driving",
+            "description": "driving"
+          },
+          {
+            "value": "truck",
+            "description": "truck"
+          },
+          {
+            "value": "walking",
+            "description": "walking"
+          },
+          {
+            "value": "other",
+            "description": "Other"
+          }
+        ]
       }
     },
     "DirectionsBatchRequestItem": {
