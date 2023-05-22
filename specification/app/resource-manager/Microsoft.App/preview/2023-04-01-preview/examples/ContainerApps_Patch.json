@@ -61,7 +61,10 @@
             "logLevel": "debug",
             "enableApiLogging": true
           },
-          "maxInactiveRevisions": 10
+          "maxInactiveRevisions": 10,
+          "service": {
+            "type": "redis"
+          }
         },
         "template": {
           "containers": [
@@ -111,7 +114,13 @@
                 }
               }
             ]
-          }
+          },
+          "serviceBinds": [
+            {
+              "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/service",
+              "name": "service"
+            }
+          ]
         }
       }
     }
