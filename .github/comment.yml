@@ -2,15 +2,13 @@
 - rule:
     type: checkbox
     keywords:
-      - "WaitForARMFeedback"
+      - "ARMReview"
     booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit||BreakingChangeReviewRequired||NewApiVersionRequired)"
     onCheckedLabels:
       - WaitForARMFeedback
       - ARMReview
     onCheckedComments: >-
-      Hi @${PRAuthor}!<br/>
-      <br/>
-      The automation detected that in the `ARM API Review Checklist` you denoted that this PR requires an ARM review. As a result, the automation labelled your PR with `ARMReview` and `WaitForARMFeedback` labels. A notification email will be sent out shortly to notify ARM review board (armapireview@microsoft.com) to review your PR.
+      Hi @${PRAuthor}! The automation detected that in the `ARM API Review Checklist` you denoted that this PR requires an ARM review. As a result, the automation labelled your PR with `ARMReview` and `WaitForARMFeedback` labels. The ARM review board will review your PR in first-come, first-served manner. Your PR is going to be added to one of the ARM PR review queues. You can see the queues here: [US + China](https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AWaitForARMFeedback+-label%3AIDCDevDiv+draft%3Afalse) and [IDC DevDiv](https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AWaitForARMFeedback+label%3AIDCDevDiv+draft%3Afalse). If you are not getting a review in a timely manner, you can [mailto: ARM review board](mailto:armapireview@microsoft.com).
       <br/><br/>
       **ACTION ITEM** for you: wait until either `ARMChangesRequested` or `ARMSignedOff` labels are added to your PR by an ARM review board member.
       <br/><br/>
