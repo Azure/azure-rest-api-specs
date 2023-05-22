@@ -100,7 +100,9 @@ These settings apply only when `--tag=package-preview-2023-03-only` is specified
 
 ``` yaml $(tag) == 'package-preview-2023-03-only'
 input-file:
-  - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2023-03-01-preview/customRecommedations.json
+  - Microsoft.Security/preview/2023-03-01-preview/securityStandards.json
+  - Microsoft.Security/preview/2023-03-01-preview/standardAssignments.json
 ```
 
 ### Tag: package-preview-2023-01-only
@@ -382,6 +384,9 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+- Microsoft.Security/preview/2023-03-01-preview/customRecommedations.json
+- Microsoft.Security/preview/2023-03-01-preview/securityStandards.json
+- Microsoft.Security/preview/2023-03-01-preview/standardAssignments.json
 
 
 # Needed when there is more than one input file
