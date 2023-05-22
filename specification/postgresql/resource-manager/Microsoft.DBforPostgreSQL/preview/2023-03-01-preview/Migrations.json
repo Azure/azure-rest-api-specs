@@ -147,6 +147,9 @@
         "x-ms-examples": {
           "Migrations_Update": {
             "$ref": "./examples/Migrations_Update.json"
+          },
+          "Cancel migration": {
+            "$ref": "./examples/Migrations_Cancel.json"
           }
         },
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
@@ -432,7 +435,7 @@
             "name": "OverwriteDbsInTargetEnum",
             "modelAsString": true
           },
-          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to Disabled, the migration workflow will wait for a confirmation, if it detects that the database already exists."
+          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to False, the migration workflow will wait for a confirmation, if it detects that the database already exists."
         },
         "migrationWindowStartTimeInUtc": {
           "format": "date-time",
@@ -466,14 +469,14 @@
             "name": "TriggerCutoverEnum",
             "modelAsString": true
           },
-          "description": "To trigger cutover for entire migration we need to send this flag as Enabled"
+          "description": "To trigger cutover for entire migration we need to send this flag as True"
         },
         "dbsToTriggerCutoverOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as Enabled and database names in this array"
+          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as True and database names in this array"
         },
         "cancel": {
           "type": "string",
@@ -485,14 +488,14 @@
             "name": "CancelEnum",
             "modelAsString": true
           },
-          "description": "To trigger cancel for entire migration we need to send this flag as Enabled"
+          "description": "To trigger cancel for entire migration we need to send this flag as True"
         },
         "dbsToCancelMigrationOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cancel for specific databases send cancel flag as Enabled and database names in this array"
+          "description": "When you want to trigger cancel for specific databases send cancel flag as True and database names in this array"
         }
       },
       "description": "Migration resource properties."
@@ -583,7 +586,7 @@
             "name": "OverwriteDbsInTargetEnum",
             "modelAsString": true
           },
-          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to Disabled, the migration workflow will wait for a confirmation, if it detects that the database already exists."
+          "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to False, the migration workflow will wait for a confirmation, if it detects that the database already exists."
         },
         "migrationWindowStartTimeInUtc": {
           "format": "date-time",
@@ -612,14 +615,14 @@
             "name": "TriggerCutoverEnum",
             "modelAsString": true
           },
-          "description": "To trigger cutover for entire migration we need to send this flag as Enabled"
+          "description": "To trigger cutover for entire migration we need to send this flag as True"
         },
         "dbsToTriggerCutoverOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as Enabled and database names in this array"
+          "description": "When you want to trigger cutover for specific databases send triggerCutover flag as True and database names in this array"
         },
         "cancel": {
           "type": "string",
@@ -631,14 +634,14 @@
             "name": "CancelEnum",
             "modelAsString": true
           },
-          "description": "To trigger cancel for entire migration we need to send this flag as Enabled"
+          "description": "To trigger cancel for entire migration we need to send this flag as True"
         },
         "dbsToCancelMigrationOn": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "When you want to trigger cancel for specific databases send cancel flag as Enabled and database names in this array"
+          "description": "When you want to trigger cancel for specific databases send cancel flag as True and database names in this array"
         },
         "migrationMode": {
           "$ref": "#/definitions/MigrationMode",
