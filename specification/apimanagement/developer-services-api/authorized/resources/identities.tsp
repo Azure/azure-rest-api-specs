@@ -21,7 +21,7 @@ interface Identities {
   @route("/users/{userId}/identities/{provider}/{identity}")
   @doc("Creates or updates the given user identity.")
   @put
-  CreateOrUpdateUserIdentityProvider(
+  createOrUpdateUserIdentityProvider(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("User identifier.")

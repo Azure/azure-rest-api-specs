@@ -16,7 +16,7 @@ interface Users {
   @route("/users/{userId}")
   @doc("Get a user profile by its identifier.")
   @get
-  GetUser(
+  getUser(
     ...ApiVersionParameter,
 
     @doc("User identifier.")
@@ -27,20 +27,24 @@ interface Users {
   @route("/users/{userId}")
   @doc("Update a user by its identifier.")
   @patch
-  UpdateUser(
+  updateUser(
     ...ApiVersionParameter,
 
     @doc("User identifier.")
     @path
     userId: string,
-    @header @friendlyName("If-Match") ifMatch?: string,
+
+    @doc("If-Match header.")
+    @header
+    @friendlyName("If-Match")
+    ifMatch?: string,
     @body userUpdate: UserUpdate
   ): ApiResponse<User>;
 
   @route("/users/{userId}")
   @doc("Delete a user by its identifier.")
   @delete
-  DeleteUser(
+  deleteUser(
     ...ApiVersionParameter,
 
     @doc("User identifier.")
@@ -51,7 +55,7 @@ interface Users {
   @route("/users/{userId}/token/revoke")
   @doc("Revoke the token of a user by its identifier.")
   @post
-  RevokeToken(
+  revokeToken(
     ...ApiVersionParameter,
 
     @doc("User identifier.")

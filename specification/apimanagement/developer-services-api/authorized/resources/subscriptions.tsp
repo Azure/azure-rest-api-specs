@@ -25,7 +25,7 @@ interface Subscriptions {
   @route("/users/{userId}/subscriptions/{subscriptionId}")
   @doc("Create user subscription.")
   @post
-  CreateUserSubscription(
+  createUserSubscription(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("Subscription identifier.")
@@ -44,7 +44,7 @@ interface Subscriptions {
   @route("/users/{userId}/subscriptions/{subscriptionId}")
   @doc("Update user subscription.")
   @patch
-  UpdateUserSubscription(
+  updateUserSubscription(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("Subscription identifier.")
@@ -63,7 +63,7 @@ interface Subscriptions {
   @route("/users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey")
   @doc("Regenerate subscription primary key.")
   @post
-  RegenerateUserSubscriptionPrimaryKey(
+  regenerateUserSubscriptionPrimaryKey(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("Subscription identifier.")
@@ -78,7 +78,7 @@ interface Subscriptions {
   @route("/users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey")
   @doc("Regenerate subscription secondary key.")
   @post
-  RegenerateUserSubscriptionSecondaryKey(
+  regenerateUserSubscriptionSecondaryKey(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     @doc("Subscription identifier.")

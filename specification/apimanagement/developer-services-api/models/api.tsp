@@ -42,6 +42,7 @@ model Api {
 
   @doc("Type of API.")
   type?: ApiType;
+  //todo: add new object
 
   @doc("API version name")
   apiVersion?: string;

@@ -12,7 +12,7 @@ interface Delegations {
   @route("/delegation/urls/users/{userId}/{action}")
   @doc("User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).")
   @post
-  CreateUserDelegationUrl(
+  createUserDelegationUrl(
     ...ApiVersionParameter,
 
     @doc("User identifier.")

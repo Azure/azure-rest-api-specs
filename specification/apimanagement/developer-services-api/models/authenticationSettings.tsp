@@ -2,8 +2,11 @@ namespace DeveloperServicesApi.Models;
 
 @doc("Authentication settings.")
 model AuthenticationSettings {
+  //todo: rename to oAuth2
   @doc("Collection of OAuth2 authentication settings included into this API.")
   oAuth2AuthenticationSettings: OAuth2AuthenticationSettings[];
+  //todo: rename to openidConnect
+
 
   @doc("Collection of OpenID Connect authentication settings included into this API.")
   openidAuthenticationSettings: OpenidAuthenticationSettings[];
@@ -19,6 +22,8 @@ model OAuth2AuthenticationSettings {
 
   @doc("Operations scope.")
   scope: string;
+  //todo: check if we need, we dont return (export)?
+
 
   @doc("OAuth2 authorization server.")
   authorizationServer?: OAuth2AuthorizationServer;
@@ -88,6 +93,7 @@ model OpenidAuthenticationSettings {
 
   @doc("How to send token to the server.")
   bearerTokenSendingMethods: BearerTokenSendingMethod[];
+  //todo: check if we need, we dont return (export)?
 
   @doc("OpenID Connect provider.")
   openidConnectProvider?: OpenidConnectProvider;

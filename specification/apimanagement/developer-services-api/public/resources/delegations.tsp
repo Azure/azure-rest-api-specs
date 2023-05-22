@@ -18,7 +18,7 @@ interface Delegations {
   @route("/delegation/urls/{action}")
   @doc("Unauthorized delegation URLs (Signin, Signup).")
   @post
-  CreateDelegationSigninUrl(
+  createDelegationSigninUrl(
     ...ApiVersionParameter,
 
     @doc("The action to perform.")

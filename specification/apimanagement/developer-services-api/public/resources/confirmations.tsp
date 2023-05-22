@@ -14,7 +14,7 @@ interface Confirmations {
   @route("/confirmations/password")
   @doc("Password reset confirmation.")
   @post
-  CreatePasswordConfirmation(
+  createPasswordConfirmation(
     ...ApiVersionParameter,
 
     @doc("The password confirmation request.")
@@ -25,7 +25,7 @@ interface Confirmations {
   @route("/confirmations/identities/basic")
   @doc("Basic identity (Email) confirmation.")
   @post
-  CreateBasicIdentityConfirmation(
+  createBasicIdentityConfirmation(
     ...ApiVersionParameter,
 
     @doc("The identity confirmation request.")

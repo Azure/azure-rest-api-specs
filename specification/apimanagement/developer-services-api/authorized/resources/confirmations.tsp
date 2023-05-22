@@ -14,7 +14,7 @@ interface Confirmations {
   @route("/confirmations/users/{userId}/identities/basic")
   @doc("Basic identity (Email) confirmation for a User.")
   @post
-  CreateUserBasicIdentityConfirmation(
+  createUserBasicIdentityConfirmation(
     ...ApiVersionParameter,
 
     @doc("User identifier.")
