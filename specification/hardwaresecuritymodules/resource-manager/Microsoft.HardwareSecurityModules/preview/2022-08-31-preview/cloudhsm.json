@@ -816,11 +816,6 @@
           "x-ms-client-flatten": true,
           "description": "Resource properties."
         },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "etag": {
           "type": "string",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
@@ -848,6 +843,14 @@
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
           "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "groupIds": {
+          "description": "The group ids for the private endpoint resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
