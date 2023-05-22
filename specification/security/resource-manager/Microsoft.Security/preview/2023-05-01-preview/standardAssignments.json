@@ -44,7 +44,7 @@
         "description": "This operation deletes a standard assignmnet, given its name and the scope it was created in. The scope of a standard assignmnet is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.",
         "x-ms-examples": {
           "Delete a standard assignmnet": {
-            "$ref": "./examples/deletestandardAssignment.json"
+            "$ref": "./examples/StandardAssignments/DeleteStandardAssignment.json"
           }
         },
         "parameters": [
@@ -60,19 +60,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the deleted assignment.",
-            "schema": {
-              "$ref": "#/definitions/standardAssignment"
-            }
+            "description": "OK - standard assignments was deleted"
           },
           "204": {
-            "description": "No Content - the standard assignmnet doesn't exist."
+            "description": "No Content - standard assignments does not exist"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
+            "description": "Error response describing why the operation failed"
           }
         }
       },
@@ -84,26 +78,11 @@
         "summary": "Creates or updates a standard assignmnet.",
         "description": " This operation creates or updates a standard assignmnet with the given scope and name. standard assignmnets apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
         "x-ms-examples": {
-          "Create or update a standard assignmnet": {
-            "$ref": "./examples/createstandardAssignment.json"
+          "Put an audit standard assignmnet": {
+            "$ref": "./examples/StandardAssignments/PutStandardAssignment.json"
           },
-          "Create or update a standard assignmnet with multiple non-compliance messages": {
-            "$ref": "./examples/createstandardAssignmentNonComplianceMessages.json"
-          },
-          "Create or update a standard assignmnet with a system assigned identity": {
-            "$ref": "./examples/createstandardAssignmentWithIdentity.json"
-          },
-          "Create or update a standard assignmnet with a user assigned identity": {
-            "$ref": "./examples/createstandardAssignmentWithUserAssignedIdentity.json"
-          },
-          "Create or update a standard assignmnet without enforcing policy effect during resource creation or update.": {
-            "$ref": "./examples/createstandardAssignmentWithoutEnforcement.json"
-          },
-          "Create or update a standard assignmnet with resource selectors": {
-            "$ref": "./examples/createstandardAssignmentWithResourceSelectors.json"
-          },
-          "Create or update a standard assignmnet with overrides": {
-            "$ref": "./examples/createstandardAssignmentWithOverrides.json"
+          "Put exemption standard assignmnet": {
+            "$ref": "./examples/StandardAssignments/PutExemptionStandardAssignment.json"
           }
         },
         "parameters": [
@@ -141,19 +120,7 @@
         "description": "This operation retrieves a single standard assignmnet, given its name and the scope it was created at.",
         "x-ms-examples": {
           "Retrieve a standard assignmnet": {
-            "$ref": "./examples/getstandardAssignment.json"
-          },
-          "Retrieve a standard assignmnet with a system assigned identity": {
-            "$ref": "./examples/getstandardAssignmentWithIdentity.json"
-          },
-          "Retrieve a standard assignmnet with a user assigned identity": {
-            "$ref": "./examples/getstandardAssignmentWithUserAssignedIdentity.json"
-          },
-          "Retrieve a standard assignmnet with resource selectors": {
-            "$ref": "./examples/getstandardAssignmentWithResourceSelectors.json"
-          },
-          "Retrieve a standard assignmnet with overrides": {
-            "$ref": "./examples/getstandardAssignmentWithOverrides.json"
+            "$ref": "./examples/StandardAssignments/GetStandardAssignment.json"
           }
         },
         "parameters": [
@@ -186,20 +153,14 @@
     "/{scope}/providers/Microsoft.Security/standardAssignments": {
       "get": {
         "x-ms-examples": {
-          "List security standards by subscription scope": {
-            "$ref": "./examples/standardAssignments/ListBySubscriptionstandardAssignments_example.json"
-          },
-          "List security standards by security connector scope": {
-            "$ref": "./examples/standardAssignments/ListBySecurityConnectorstandardAssignments_example.json"
-          },
-          "List security standards by management group scope": {
-            "$ref": "./examples/standardAssignments/ListByManagementGroupstandardAssignments_example.json"
+          "List standard assignments": {
+            "$ref": "./examples/StandardAssignments/ListStandardAssignments.json"
           }
         },
         "tags": [
           "standardAssignments"
         ],
-        "description": "Get a list of all relevant security standards over a scope",
+        "description": "Get a list of all relevant standard assignmentss over a scope",
         "operationId": "standardAssignments_List",
         "parameters": [
           {
@@ -230,7 +191,7 @@
     }
   },
   "definitions": {
-    "StandardAssignmentList": {
+    "StandardAssignmentsList": {
       "type": "object",
       "description": "Page of a standard assignment list",
       "properties": {
@@ -239,7 +200,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StandardsAssignment"
+            "$ref": "#/definitions/StandardAssignment"
           }
         },
         "nextLink": {
@@ -249,12 +210,12 @@
         }
       }
     },
-    "StandardsAssignment": {
+    "StandardAssignment": {
       "type": "object",
       "description": "Security Assignment on a resource group over a given scope",
       "properties": {
         "properties": {
-          "description": "Properties of a security standard assignment",
+          "description": "Properties of a standard assignments assignment",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StandardAssignmentProperties"
         }
@@ -352,7 +313,7 @@
     },
     "AssignedStandardItem": {
       "type": "object",
-      "description": "describe the properties of a of a security standard object reference",
+      "description": "describe the properties of a of a standard assignments object reference",
       "properties": {
         "id": {
           "description": "full resourceId of the Microsoft.Security/standard object",
@@ -377,7 +338,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The security standard assignment key - unique key for the standard assignment",
+      "description": "The standard assignments assignment key - unique key for the standard assignment",
       "x-ms-parameter-location": "method"
     },
     "StandardsAssignmentBody": {
@@ -385,7 +346,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/StandardsAssignment"
+        "$ref": "#/definitions/StandardAssignments"
       },
       "description": "Custom standard assignment over a pre-defined scope",
       "x-ms-parameter-location": "method"
@@ -399,3 +360,4 @@
       "x-ms-parameter-location": "method"
     }
   }
+}
