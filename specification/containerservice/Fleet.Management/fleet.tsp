@@ -106,10 +106,8 @@ interface Fleets {
   @doc("Gets a Fleet.")
   get is ArmResourceRead<Fleet>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Override default Fleets_Create"
   @doc("Creates or updates a Fleet.")
-  @operationId("Fleets_CreateOrUpdate")
-  create is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     Fleet,
     BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
