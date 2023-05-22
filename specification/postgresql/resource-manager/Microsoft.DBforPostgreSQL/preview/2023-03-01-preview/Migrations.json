@@ -43,6 +43,9 @@
         "x-ms-examples": {
           "Migrations_Create": {
             "$ref": "./examples/Migrations_Create.json"
+          },
+          "Migrations Create by passing user names": {
+            "$ref": "./examples/Migrations_Create_With_Other_Users.json"
           }
         },
         "description": "Creates a new migration.",
@@ -410,11 +413,11 @@
         "setupLogicalReplicationOnSourceDbIfNeeded": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "LogicalReplicationOnSourceDbEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "Indicates whether to setup LogicalReplicationOnSourceDb, if needed"
@@ -422,11 +425,11 @@
         "overwriteDbsInTarget": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "OverwriteDbsInTargetEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to Disabled, the migration workflow will wait for a confirmation, if it detects that the database already exists."
@@ -444,11 +447,11 @@
         "startDataMigration": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "StartDataMigrationEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "Indicates whether the data migration should start right away"
@@ -456,11 +459,11 @@
         "triggerCutover": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "TriggerCutoverEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "To trigger cutover for entire migration we need to send this flag as Enabled"
@@ -475,11 +478,11 @@
         "cancel": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "CancelEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "To trigger cancel for entire migration we need to send this flag as Enabled"
@@ -561,11 +564,11 @@
         "setupLogicalReplicationOnSourceDbIfNeeded": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "LogicalReplicationOnSourceDbEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "Indicates whether to setup LogicalReplicationOnSourceDb, if needed"
@@ -573,11 +576,11 @@
         "overwriteDbsInTarget": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "OverwriteDbsInTargetEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "Indicates whether the databases on the target server can be overwritten, if already present. If set to Disabled, the migration workflow will wait for a confirmation, if it detects that the database already exists."
@@ -590,11 +593,11 @@
         "startDataMigration": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "StartDataMigrationEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "Indicates whether the data migration should start right away"
@@ -602,11 +605,11 @@
         "triggerCutover": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "TriggerCutoverEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "To trigger cutover for entire migration we need to send this flag as Enabled"
@@ -621,11 +624,11 @@
         "cancel": {
           "type": "string",
           "enum": [
-            "Enabled",
-            "Disabled"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "CancelEnum",
+            "name": "BooleanStatus",
             "modelAsString": true
           },
           "description": "To trigger cancel for entire migration we need to send this flag as Enabled"
@@ -655,6 +658,22 @@
           "x-ms-external": true,
           "$ref": "#/definitions/AdminCredentials",
           "description": "Admin credentials for source and target servers"
+        },
+        "sourceServerUsername": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "Gets or sets the username for the source server. This user need not be an admin."
+        },
+        "targetServerUsername": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "Gets or sets the username for the target server. This user need not be an admin."
         }
       },
       "description": "Migration secret parameters."
