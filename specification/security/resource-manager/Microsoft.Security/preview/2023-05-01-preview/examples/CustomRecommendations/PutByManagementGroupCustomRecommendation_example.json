@@ -2,8 +2,8 @@
   "parameters": {
     "api-version": "2023-05-01-preview",
     "scope": "providers/Microsoft.Management/managementGroups/contoso",
-    "recommendationId": "33e7cc6e-a139-4723-a0e5-76993aee0771",
-    "customAssessmentAutomationBody": {
+    "customRecommendationName": "33e7cc6e-a139-4723-a0e5-76993aee0771",
+    "customRecommendationBody": {
       "properties": {
         "query": "RawEntityMetadata | where Environment == 'GCP' and Identifiers.Type == 'compute.firewalls' | extend IslogConfigEnabled = tobool(Record.logConfig.enable) | extend HealthStatus = iff(IslogConfigEnabled, 'HEALTHY', 'UNHEALTHY')",
         "cloudProviders": [
