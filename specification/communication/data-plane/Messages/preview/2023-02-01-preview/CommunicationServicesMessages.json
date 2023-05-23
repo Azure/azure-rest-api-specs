@@ -25,9 +25,8 @@
           {
             "in": "body",
             "name": "body",
-            "required": true,
             "schema": {
-              "$ref": "#/definitions/SendMessageRequest"
+              "$ref": "#/definitions/SendNotificationRequest"
             }
           }
         ],
@@ -45,11 +44,6 @@
             },
             "x-ms-error-response": true
           }
-        },
-        "x-ms-examples": {
-          "Send Message": {
-            "$ref": "./examples/SendMessage.json"
-          }
         }
       }
     },
@@ -58,14 +52,16 @@
         "tags": [
           "Stream"
         ],
+        "summary": "Download the Media payload from a User to Business message.",
         "operationId": "Stream_DownloadMedia",
         "produces": [
-          "application/octet-stream"
+          "application/json"
         ],
         "parameters": [
           {
             "in": "path",
             "name": "id",
+            "description": "The Media Identifier contained in the User to Business message event.",
             "required": true,
             "type": "string"
           },
@@ -77,7 +73,14 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object"
+              "format": "binary",
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "default": {
@@ -87,16 +90,113 @@
             },
             "x-ms-error-response": true
           }
-        },
-        "x-ms-examples": {
-          "Send Message": {
-            "$ref": "./examples/DownloadMedia.json"
+        }
+      }
+    },
+    "/messages/channel/{channelId}/templates": {
+      "get": {
+        "tags": [
+          "Template"
+        ],
+        "summary": "List all templates for given ACS channel",
+        "operationId": "TemplateV2_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the list of waTemplatesInternal.",
+            "schema": {
+              "$ref": "#/definitions/ListTemplatesResponse"
+            }
+          },
+          "default": {
+            "description": "Communication Error Response",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/messages/channel/{channelId}/template/{templateId}": {
+      "get": {
+        "tags": [
+          "Template"
+        ],
+        "summary": "Get the template given its templateId",
+        "operationId": "TemplateV2_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "channelId",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "templateId",
+            "description": "The template's ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the requested template.",
+            "schema": {
+              "$ref": "#/definitions/WhatsAppTemplateResponse"
+            }
+          },
+          "404": {
+            "description": "NotFound - The template could not be found",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Communication Error Response",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
           }
         }
       }
     }
   },
   "definitions": {
+    "ChannelType": {
+      "enum": [
+        "whatsApp"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChannelType",
+        "modelAsString": true
+      }
+    },
     "CommunicationError": {
       "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
     },
@@ -114,6 +214,27 @@
       "x-ms-enum": {
         "name": "CommunicationMessageType",
         "modelAsString": true
+      }
+    },
+    "ListTemplatesResponse": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateResponse"
+          }
+        },
+        "maxItems": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "@nextLink": {
+          "type": "string"
+        }
       }
     },
     "MessageReceipt": {
@@ -166,7 +287,23 @@
         }
       }
     },
-    "SendMessageRequest": {
+    "SendMessageResult": {
+      "description": "Result of the send message operation.",
+      "required": [
+        "receipts"
+      ],
+      "type": "object",
+      "properties": {
+        "receipts": {
+          "description": "Receipts of the send message operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageReceipt"
+          }
+        }
+      }
+    },
+    "SendNotificationRequest": {
       "description": "Details of the message to send.",
       "required": [
         "channelRegistrationId",
@@ -207,19 +344,77 @@
         }
       }
     },
-    "SendMessageResult": {
-      "description": "Result of the send message operation.",
-      "required": [
-        "receipts"
-      ],
+    "TemplateResponse": {
       "type": "object",
       "properties": {
-        "receipts": {
-          "description": "Receipts of the send message operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MessageReceipt"
-          }
+        "id": {
+          "format": "uuid",
+          "description": "Get the Template's Id",
+          "type": "string"
+        },
+        "channelId": {
+          "format": "uuid",
+          "description": "Get the template's channel",
+          "type": "string"
+        },
+        "name": {
+          "description": "Get the template's Name",
+          "type": "string"
+        },
+        "language": {
+          "description": "Get the template's language",
+          "type": "string"
+        },
+        "channelType": {
+          "$ref": "#/definitions/ChannelType"
+        },
+        "status": {
+          "$ref": "#/definitions/TemplateStatus"
+        }
+      }
+    },
+    "TemplateStatus": {
+      "description": "The aggregated template status.",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TemplateStatus",
+        "modelAsString": true
+      }
+    },
+    "WhatsAppTemplateResponse": {
+      "description": "The WhatsApp-specific template response contract",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "WhatsApp platform's template content\r\nThis is the payload returned from WhatsApp API."
+        },
+        "id": {
+          "format": "uuid",
+          "description": "Get the Template's Id",
+          "type": "string"
+        },
+        "channelId": {
+          "format": "uuid",
+          "description": "Get the template's channel",
+          "type": "string"
+        },
+        "name": {
+          "description": "Get the template's Name",
+          "type": "string"
+        },
+        "language": {
+          "description": "Get the template's language",
+          "type": "string"
+        },
+        "channelType": {
+          "$ref": "#/definitions/ChannelType"
+        },
+        "status": {
+          "$ref": "#/definitions/TemplateStatus"
         }
       }
     }
