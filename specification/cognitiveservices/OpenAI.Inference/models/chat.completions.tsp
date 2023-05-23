@@ -156,9 +156,9 @@ model ChatChoice {
     @projectedName("json", "index")
     index: int32;
 
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
     @doc("The reason that this chat completions choice completed its generated.")
     @projectedName("json", "finish_reason")
-    #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
     finishReason: CompletionsFinishReason | null;
 
     @doc("The delta message content for a streaming response.")
