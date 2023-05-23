@@ -501,18 +501,19 @@
               "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResultMI"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v2/types.json#/definitions/CloudError"
-            }
-          },
           "202": {
             "description": "Refreshing external governance enablement status.",
             "headers": {
               "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/types.json#/definitions/CloudError"
             }
           }
         },
