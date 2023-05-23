@@ -7995,11 +7995,19 @@
           "x-nullable": false,
           "readOnly": true,
           "description": "The amount of storage in bytes consumed by the index."
+        },
+        "vectorIndexSize": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The amount of storage in bytes consumed by vectors in the index."
         }
       },
       "required": [
         "documentCount",
-        "storageSize"
+        "storageSize",
+        "vectorIndexSize"
       ],
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
@@ -11444,15 +11452,23 @@
           "x-ms-client-name": "skillsetCounter",
           "$ref": "#/definitions/ResourceCounter",
           "description": "Total number of skillsets."
+        },
+        "vectorIndexSize": {
+          "x-ms-client-name": "vectorIndexSize",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total size of used storage for vectors in bytes."
         }
       },
       "required": [
+        "aliasesCount",
         "documentCount",
         "indexesCount",
         "indexersCount",
         "dataSourcesCount",
         "storageSize",
-        "synonymMaps"
+        "synonymMaps",
+        "skillsetCount",
+        "vectorIndexSize"
       ],
       "description": "Represents service-level resource counters and quotas."
     },
