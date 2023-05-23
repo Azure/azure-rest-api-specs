@@ -23,7 +23,7 @@
         "required": true,
         "description": "The host name of the namespace, e.g. namespaceName1.westus-1.eventgrid.azure.net",
         "type": "string",
-        "format": "uri",
+        "format": "url",
         "x-ms-skip-url-encoding": true
       }
     ]
@@ -48,6 +48,62 @@
   },
   "tags": [],
   "paths": {
+    "/topics/{topicName}:publish": {
+      "post": {
+        "operationId": "PublishCloudEvents",
+        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "description": "Topic Name.",
+            "type": "string"
+          },
+          {
+            "name": "events",
+            "in": "body",
+            "required": true,
+            "description": "Array of Cloud Events being published.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEvent"
+              },
+              "x-typespec-name": "CloudEvent[]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ]
+      }
+    },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive": {
       "post": {
         "operationId": "ReceiveCloudEvents",
@@ -85,7 +141,7 @@
             "required": false,
             "description": "Max wait time value for receive operation in Seconds. It is the time in seconds that the server approximately waits for the availability of an event and responds to the request. If an event is available, the broker responds immediately to the client. Minimum value is 10 seconds, while maximum value is 120 seconds. If not specified, the default value is 60 seconds.",
             "type": "integer",
-            "format": "int32"
+            "format": "seconds"
           }
         ],
         "responses": {
@@ -278,62 +334,6 @@
         },
         "consumes": [
           "application/json; charset=utf-8"
-        ]
-      }
-    }
-  },
-  "x-ms-paths": {
-    "/topics/{topicName}:publish?api-version={apiVersion}": {
-      "post": {
-        "operationId": "PublishCloudEvents",
-        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "description": "Topic Name.",
-            "type": "string"
-          },
-          {
-            "name": "events",
-            "in": "body",
-            "required": true,
-            "description": "Array of Cloud Events being published.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudEvent"
-              },
-              "x-typespec-name": "CloudEvent[]"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PublishResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        },
-        "consumes": [
-          "application/cloudevents-batch+json; charset=utf-8"
         ]
       }
     }
@@ -544,11 +544,6 @@
         "errorDescription"
       ]
     },
-    "PublishResult": {
-      "type": "object",
-      "properties": {},
-      "description": "The result of the Publish operation."
-    },
     "ReceiveDetails": {
       "type": "object",
       "properties": {
@@ -681,8 +676,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
