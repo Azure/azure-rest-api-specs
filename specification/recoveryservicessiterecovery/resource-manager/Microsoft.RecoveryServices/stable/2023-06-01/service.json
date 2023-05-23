@@ -10164,6 +10164,42 @@
         }
       }
     },
+    "ApplianceMonitoringDetails": {
+      "description": "Appliance details of the migraton item.",
+      "type": "object",
+      "properties": {
+        "cpuDetails": {
+          "$ref": "#/definitions/ApplianceResourceDetails",
+          "description": "The appliance CPU details.",
+          "readOnly": true
+        },
+        "ramDetails": {
+          "$ref": "#/definitions/ApplianceResourceDetails",
+          "description": "The appliance RAM details.",
+          "readOnly": true
+        },
+        "datastoreSnapshot": {
+          "$ref": "#/definitions/ApplianceResourceDetails",
+          "description": "The appliance datastore snapshot details.",
+          "readOnly": true
+        },
+        "disksReplicationDetails": {
+          "$ref": "#/definitions/ApplianceResourceDetails",
+          "description": "The disk replication details.",
+          "readOnly": true
+        },
+        "esxiNFCBuffer": {
+          "$ref": "#/definitions/ApplianceResourceDetails",
+          "description": "The ESXi NFC buffer details.",
+          "readOnly": true
+        },
+        "networkBandwidth": {
+          "$ref": "#/definitions/ApplianceResourceDetails",
+          "description": "The appliance network bandwidth details.",
+          "readOnly": true
+        }
+      }
+    },
     "ApplianceQueryParameter": {
       "description": "Query parameter to get appliance.",
       "type": "object",
@@ -10171,6 +10207,35 @@
         "providerType": {
           "description": "The providerType to be used for fetching appliance details.",
           "type": "string"
+        }
+      }
+    },
+    "ApplianceResourceDetails": {
+      "description": "Details of the appliance resource.",
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "format": "int64",
+          "description": "A value indicating the total capacity of appliance resource.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "processUtilization": {
+          "format": "double",
+          "description": "A value indicating the utilization percentage by gateway agent on appliance.",
+          "type": "number",
+          "readOnly": true
+        },
+        "totalUtilization": {
+          "format": "double",
+          "description": "A value indicating the total utilization percentage for all processes on the appliance.",
+          "type": "number",
+          "readOnly": true
+        },
+        "status": {
+          "description": "A value indicating the status of appliance resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -11856,6 +11921,52 @@
           "format": "date-time",
           "description": "The recovery point time.",
           "type": "string"
+        }
+      }
+    },
+    "GatewayOperationDetails": {
+      "description": "Details of the gateway operation.",
+      "type": "object",
+      "properties": {
+        "operationName": {
+          "description": "A value indicating the gateway operation name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "progressPercentage": {
+          "description": "A value indicating the progress percentage of gateway operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timeElapsed": {
+          "format": "int64",
+          "description": "A value indicating the time elapsed for the operation.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "timeRemaining": {
+          "format": "int64",
+          "description": "A value indicating the time remaining for the operation.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "uploadSpeed": {
+          "format": "int64",
+          "description": "A value indicating the upload speed in Mbps.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "dataStore": {
+          "description": "A value indicating the datastore.",
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "vmwareReadThroughput": {
+          "format": "int64",
+          "description": "A value indicating the VMware read throughput in Mbps.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -24167,6 +24278,17 @@
           "type": "integer",
           "readOnly": true
         },
+        "deltaSyncProgressPercentage": {
+          "format": "int32",
+          "description": "The delta sync progress percentage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isCheckSumResyncCycle": {
+          "description": "A value indicating whether checksum resync cycle is in progress.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "initialSeedingRetryCount": {
           "format": "int64",
           "description": "The initial seeding retry count.",
@@ -24182,6 +24304,12 @@
         "resumeRetryCount": {
           "format": "int64",
           "description": "The resume retry count.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "deltaSyncRetryCount": {
+          "format": "int64",
+          "description": "The delta sync retry count.",
           "type": "integer",
           "readOnly": true
         },
@@ -24231,7 +24359,23 @@
         },
         "osUpgradeMonitoringDetails": {
           "$ref": "#/definitions/OSUpgradeMonitoringDetails",
-          "description": "A value indicating the inplace OS Upgrade monitoring details."
+          "description": "A value indicating the inplace OS Upgrade monitoring details.",
+          "readOnly": true
+        },
+        "applianceMonitoringDetails": {
+          "$ref": "#/definitions/ApplianceMonitoringDetails",
+          "description": "A value indicating the appliance monitoring details.",
+          "readOnly": true
+        },
+        "gatewayOperationDetails": {
+          "$ref": "#/definitions/GatewayOperationDetails",
+          "description": "A value indicating the gateway operation details.",
+          "readOnly": true
+        },
+        "operationName": {
+          "description": "A value indicating the SRS operation name.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -24503,6 +24647,11 @@
         "targetDiskName": {
           "description": "The name for the target managed disk.",
           "type": "string"
+        },
+        "gatewayOperationDetails": {
+          "$ref": "#/definitions/GatewayOperationDetails",
+          "description": "A value indicating the gateway operation details.",
+          "readOnly": true
         }
       }
     },
