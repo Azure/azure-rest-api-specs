@@ -2,16 +2,824 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure AgFoodPlatform RP Service",
-    "description": "APIs documentation for Azure AgFoodPlatform Resource Provider Service.",
+    "description": "APIs documentation for Microsoft Azure Data Manager for Agriculture Service.",
     "version": "2023-06-01-preview"
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions/{extensionId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckNameAvailability"
+        ],
+        "description": "Checks the name availability of the resource with requested resource name.",
+        "operationId": "CheckNameAvailability_CheckNameAvailability",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "nameAvailabilityRequest",
+            "description": "NameAvailabilityRequest object.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability_CheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/CheckNameAvailability_CheckNameAvailability_AlreadyExists.json"
+          },
+          "CheckNameAvailability_CheckNameAvailability_Available": {
+            "$ref": "./examples/CheckNameAvailability_CheckNameAvailability_Available.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}": {
+      "get": {
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Get specific Credential for resource by credentialId.",
+        "operationId": "DataConnectors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataConnectorName",
+            "description": "Connector name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnectors_Get": {
+            "$ref": "./examples/DataConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Create or update Data Manager For Agriculture resource.",
+        "operationId": "DataConnectors_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataConnectorName",
+            "description": "Connector name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnectors_CreateOrUpdate": {
+            "$ref": "./examples/DataConnectors_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Delete a Data Manager For Agriculture resource.",
+        "operationId": "DataConnectors_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataConnectorName",
+            "description": "Connector name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 63,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnectors_Delete": {
+            "$ref": "./examples/DataConnectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors": {
+      "get": {
+        "tags": [
+          "DataConnectors"
+        ],
+        "description": "Lists the Credential instances for a subscription.",
+        "operationId": "DataConnectors_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "$maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorsResponseListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataConnectors_List": {
+            "$ref": "./examples/DataConnectors_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions": {
+      "get": {
+        "tags": [
+          "DataManagerForAgricultureExtensions"
+        ],
+        "description": "Get list of Data Manager For Agriculture extension.",
+        "operationId": "DataManagerForAgricultureExtensions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "farmBeatsExtensionIds",
+            "description": "DataManagerForAgricultureExtension ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "farmBeatsExtensionNames",
+            "description": "DataManagerForAgriculture extension names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "extensionCategories",
+            "description": "Extension categories.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "publisherIds",
+            "description": "Publisher ids.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "$maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureExtensionListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureExtensions_List": {
+            "$ref": "./examples/DataManagerForAgricultureExtensions_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}": {
+      "get": {
+        "tags": [
+          "DataManagerForAgricultureExtensions"
+        ],
+        "description": "Get Data Manager For Agriculture extension.",
+        "operationId": "DataManagerForAgricultureExtensions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataManagerForAgricultureExtensionId",
+            "description": "dataManagerForAgricultureExtensionId to be queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureExtension"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureExtensions_Get": {
+            "$ref": "./examples/DataManagerForAgricultureExtensions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}": {
+      "get": {
+        "tags": [
+          "DataManagerForAgricultureResources"
+        ],
+        "description": "Get DataManagerForAgriculture resource.",
+        "operationId": "DataManagerForAgricultureResources_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_Get": {
+            "$ref": "./examples/DataManagerForAgricultureResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataManagerForAgricultureResources"
+        ],
+        "description": "Create or update Data Manager For Agriculture resource.",
+        "operationId": "DataManagerForAgricultureResources_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Data Manager For Agriculture resource create or update request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_CreateOrUpdate": {
+            "$ref": "./examples/DataManagerForAgricultureResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataManagerForAgricultureResources"
+        ],
+        "description": "Update a Data Manager For Agriculture resource.",
+        "operationId": "DataManagerForAgricultureResources_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "Request object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureUpdateRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgriculture"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_Update": {
+            "$ref": "./examples/DataManagerForAgricultureResources_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataManagerForAgricultureResources"
+        ],
+        "description": "Delete a Data Manager For Agriculture resource.",
+        "operationId": "DataManagerForAgricultureResources_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_Delete": {
+            "$ref": "./examples/DataManagerForAgricultureResources_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/farmBeats": {
+      "get": {
+        "tags": [
+          "DataManagerForAgricultureResources"
+        ],
+        "description": "Lists the DataManagerForAgriculture instances for a subscription.",
+        "operationId": "DataManagerForAgricultureResources_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_ListBySubscription": {
+            "$ref": "./examples/DataManagerForAgricultureResources_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats": {
+      "get": {
+        "tags": [
+          "DataManagerForAgricultureResources"
+        ],
+        "description": "Lists the DataManagerForAgriculture instances for a resource group.",
+        "operationId": "DataManagerForAgricultureResources_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$maxPageSize",
+            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 1000,
+            "minimum": 10
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token for getting next set of results.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataManagerForAgricultureListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataManagerForAgricultureResources_ListByResourceGroup": {
+            "$ref": "./examples/DataManagerForAgricultureResources_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "description": "Get operationResults for a Data Manager For Agriculture resource.",
+        "operationId": "OperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "locations",
+            "description": "Location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationResultsId",
+            "description": "operationResultsId for a specific location.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}": {
       "put": {
         "tags": [
           "Extensions"
         ],
-        "description": "Install or Update extension. AdditionalApiProperties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from AdditionalApiProperties.",
+        "description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.",
         "operationId": "Extensions_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -27,7 +835,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionIdParameter"
@@ -45,12 +853,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Extension"
-            }
-          },
           "201": {
             "description": "Created",
             "schema": {
@@ -87,7 +889,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionIdParameter"
@@ -133,7 +935,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ExtensionIdParameter"
@@ -147,7 +949,7 @@
             "description": "Success"
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error",
@@ -163,13 +965,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/extensions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions": {
       "get": {
         "tags": [
           "Extensions"
         ],
         "description": "Get installed extensions details.",
-        "operationId": "Extensions_ListByFarmBeats",
+        "operationId": "Extensions_ListByDataManagerForAgriculture",
         "produces": [
           "application/json"
         ],
@@ -181,7 +983,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -241,587 +1043,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Extensions_ListByFarmBeats": {
-            "$ref": "./examples/Extensions_ListByFarmBeats.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions": {
-      "get": {
-        "tags": [
-          "FarmBeatsExtensions"
-        ],
-        "description": "Get list of farmBeats extension.",
-        "operationId": "FarmBeatsExtensions_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "farmBeatsExtensionIds",
-            "description": "FarmBeatsExtension ids.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "in": "query",
-            "name": "farmBeatsExtensionNames",
-            "description": "FarmBeats extension names.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "in": "query",
-            "name": "extensionCategories",
-            "description": "Extension categories.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "in": "query",
-            "name": "publisherIds",
-            "description": "Publisher ids.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "in": "query",
-            "name": "$maxPageSize",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "maximum": 1000,
-            "minimum": 10
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeatsExtensionListResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "FarmBeatsExtensions_List": {
-            "$ref": "./examples/FarmBeatsExtensions_List.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions/{farmBeatsExtensionId}": {
-      "get": {
-        "tags": [
-          "FarmBeatsExtensions"
-        ],
-        "description": "Get farmBeats extension.",
-        "operationId": "FarmBeatsExtensions_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "farmBeatsExtensionId",
-            "description": "farmBeatsExtensionId to be queried.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeatsExtension"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FarmBeatsExtensions_Get": {
-            "$ref": "./examples/FarmBeatsExtensions_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}": {
-      "get": {
-        "tags": [
-          "FarmBeatsModels"
-        ],
-        "description": "Get FarmBeats resource.",
-        "operationId": "FarmBeatsModels_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeats"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FarmBeatsModels_Get": {
-            "$ref": "./examples/FarmBeatsModels_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "FarmBeatsModels"
-        ],
-        "description": "Create or update FarmBeats resource.",
-        "operationId": "FarmBeatsModels_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "FarmBeats resource create or update request object.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FarmBeats"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeats"
-            }
-          },
-          "201": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeats"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FarmBeatsModels_CreateOrUpdate": {
-            "$ref": "./examples/FarmBeatsModels_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "FarmBeatsModels"
-        ],
-        "description": "Update a FarmBeats resource.",
-        "operationId": "FarmBeatsModels_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Request object.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FarmBeatsUpdateRequestModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeats"
-            }
-          },
-          "202": {
-            "description": "accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "FarmBeatsModels_Update": {
-            "$ref": "./examples/FarmBeatsModels_Update.json"
-          },
-          "FarmBeatsModels_UpdateWithSensor": {
-            "$ref": "./examples/FarmBeatsModels_UpdateWithSensor.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "FarmBeatsModels"
-        ],
-        "description": "Delete a FarmBeats resource.",
-        "operationId": "FarmBeatsModels_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FarmBeatsModels_Delete": {
-            "$ref": "./examples/FarmBeatsModels_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/farmBeats": {
-      "get": {
-        "tags": [
-          "FarmBeatsModels"
-        ],
-        "description": "Lists the FarmBeats instances for a subscription.",
-        "operationId": "FarmBeatsModels_ListBySubscription",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$maxPageSize",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "maximum": 1000,
-            "minimum": 10
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Skip token for getting next set of results.",
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeatsListResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "FarmBeatsModels_ListBySubscription": {
-            "$ref": "./examples/FarmBeatsModels_ListBySubscription.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats": {
-      "get": {
-        "tags": [
-          "FarmBeatsModels"
-        ],
-        "description": "Lists the FarmBeats instances for a resource group.",
-        "operationId": "FarmBeatsModels_ListByResourceGroup",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$maxPageSize",
-            "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "maximum": 1000,
-            "minimum": 10
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Continuation token for getting next set of results.",
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FarmBeatsListResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "FarmBeatsModels_ListByResourceGroup": {
-            "$ref": "./examples/FarmBeatsModels_ListByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
-      "get": {
-        "tags": [
-          "OperationResults"
-        ],
-        "description": "Get operationResults for a FarmBeats resource.",
-        "operationId": "OperationResults_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "locations",
-            "description": "Location.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "operationResultsId",
-            "description": "operation Results Id.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ArmAsyncOperation"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "OperationResults_Get": {
-            "$ref": "./examples/OperationResults_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Locations"
-        ],
-        "description": "Checks the name availability of the resource with requested resource name.",
-        "operationId": "Locations_CheckNameAvailability",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "NameAvailabilityRequest object.",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/CheckNameAvailabilityResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Locations_CheckNameAvailability_AlreadyExists": {
-            "$ref": "./examples/Locations_CheckNameAvailability_AlreadyExists.json"
-          },
-          "Locations_CheckNameAvailability_Available": {
-            "$ref": "./examples/Locations_CheckNameAvailability_Available.json"
+          "Extensions_ListByDataManagerForAgriculture": {
+            "$ref": "./examples/Extensions_ListByDataManagerForAgriculture.json"
           }
         }
       }
@@ -865,7 +1088,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "put": {
         "tags": [
           "PrivateEndpointConnections"
@@ -886,7 +1109,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "in": "path",
@@ -900,7 +1123,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "request",
             "description": "Request object.",
             "required": true,
             "schema": {
@@ -913,6 +1136,12 @@
             "description": "Success",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -945,7 +1174,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "in": "path",
@@ -969,8 +1198,7 @@
             "description": "Not Found",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           },
           "default": {
             "description": "Error",
@@ -1002,7 +1230,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "in": "path",
@@ -1028,7 +1256,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error",
@@ -1039,7 +1267,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "PrivateEndpointConnections_Delete": {
@@ -1048,7 +1276,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -1066,7 +1294,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1090,13 +1318,10 @@
           "PrivateEndpointConnections_ListByResource": {
             "$ref": "./examples/PrivateEndpointConnections_ListByResource.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -1114,7 +1339,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1138,13 +1363,10 @@
           "PrivateLinkResources_ListByResource": {
             "$ref": "./examples/PrivateLinkResources_ListByResource.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/privateLinkResources/{subResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources/{subResourceName}": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -1162,7 +1384,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "in": "path",
@@ -1186,8 +1408,7 @@
             "description": "Not Found",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
+            }
           },
           "default": {
             "description": "Error",
@@ -1203,7 +1424,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions/{solutionId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}": {
       "put": {
         "tags": [
           "Solutions"
@@ -1224,17 +1445,22 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/SolutionId"
+            "in": "path",
+            "name": "solutionId",
+            "description": "SolutionId for Data Manager For Agriculture Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "requestBody",
             "description": "Solution resource request body.",
             "schema": {
               "$ref": "#/definitions/SolutionInstallationRequest"
@@ -1284,10 +1510,15 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/SolutionId"
+            "in": "path",
+            "name": "solutionId",
+            "description": "SolutionId for Data Manager For Agriculture Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1330,10 +1561,15 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/SolutionId"
+            "in": "path",
+            "name": "solutionId",
+            "description": "SolutionId for Data Manager For Agriculture Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1360,7 +1596,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/solutions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions": {
       "get": {
         "tags": [
           "Solutions"
@@ -1378,7 +1614,10 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "query",
@@ -1473,9 +1712,6 @@
             "name": "$skipToken",
             "description": "Skip token for getting next set of results.",
             "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1507,7 +1743,7 @@
         "tags": [
           "SolutionsDiscoverability"
         ],
-        "description": "Get list of farmBeats solutions.",
+        "description": "Get list of Data Manager For Agriculture solutions.",
         "operationId": "SolutionsDiscoverability_List",
         "produces": [
           "application/json"
@@ -1516,7 +1752,7 @@
           {
             "in": "query",
             "name": "farmBeatsSolutionIds",
-            "description": "Ids of FarmBeats Solutions which the customer requests to fetch.",
+            "description": "Ids of Data Manager For Agriculture Solutions which the customer requests to fetch.",
             "type": "array",
             "items": {
               "type": "string"
@@ -1526,7 +1762,7 @@
           {
             "in": "query",
             "name": "farmBeatsSolutionNames",
-            "description": "Names of FarmBeats Solutions which the customer requests to fetch.",
+            "description": "Names of Data Manager For Agriculture Solutions which the customer requests to fetch.",
             "type": "array",
             "items": {
               "type": "string"
@@ -1551,7 +1787,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/FarmBeatsSolutionListResponse"
+              "$ref": "#/definitions/DataManagerForAgricultureSolutionListResponse"
             }
           },
           "default": {
@@ -1571,12 +1807,12 @@
         }
       }
     },
-    "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{farmBeatsSolutionId}": {
+    "/providers/Microsoft.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}": {
       "get": {
         "tags": [
           "SolutionsDiscoverability"
         ],
-        "description": "Get farmBeats solution by id.",
+        "description": "Get Data Manager For Agriculture solution by id.",
         "operationId": "SolutionsDiscoverability_Get",
         "produces": [
           "application/json"
@@ -1584,8 +1820,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "farmBeatsSolutionId",
-            "description": "farmBeatsSolutionId to be queried.",
+            "name": "dataManagerForAgricultureSolutionId",
+            "description": "dataManagerForAgricultureSolutionId to be queried.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
@@ -1598,7 +1834,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/FarmBeatsSolution"
+              "$ref": "#/definitions/DataManagerForAgricultureSolution"
             }
           },
           "default": {
@@ -1617,7 +1853,28 @@
     }
   },
   "definitions": {
-    "ApiProperties": {
+      "ApiKeyAuthCredentials": {
+          "description": "ApiKeyAuthCredentials.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AuthCredentials"
+            },
+            {
+              "required": [
+                "apiKey"
+              ],
+              "type": "object",
+              "properties": {
+                "apiKey": {
+                  "$ref": "#/definitions/KeyVaultProperties"
+                }
+              }
+            }
+          ],
+          "x-ms-discriminator-value": "ApiKeyAuth"
+      },
+      "ApiProperties": {
       "description": "Api properties.",
       "type": "object",
       "properties": {
@@ -1630,44 +1887,572 @@
         }
       }
     },
-    "ExtensionProperties": {
-      "description": "Extension resource properties.",
+    "ArmAsyncOperation": {
+      "description": "Arm async operation class.\r\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
       "type": "object",
       "properties": {
-        "extensionId": {
-          "description": "Extension Id.",
+        "status": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ArmAsyncOperationError"
+        }
+      }
+    },
+    "ArmAsyncOperationError": {
+      "description": "Arm async operation error class.\r\nRef: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        }
+      }
+    },
+    "AuthCredentials": {
+      "description": "ConnectorCredentials.",
+      "required": [
+        "authType"
+      ],
+      "type": "object",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/AuthCredentialsEnum"
+        }
+      },
+      "discriminator": "authType"
+    },
+    "AuthCredentialsEnum": {
+      "description": "CredentialTypeEnum.",
+      "enum": [
+        "BasicAuth",
+        "ApiKeyAuth"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AuthCredentialsEnum",
+        "modelAsString": true
+      }
+    },
+    "BasicAuthCredentials": {
+      "description": "BasicAuthCredentials.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        },
+        {
+          "required": [
+            "password",
+            "username"
+          ],
+          "type": "object",
+          "properties": {
+            "username": {
+              "description": "UserName.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "password": {
+              "$ref": "#/definitions/KeyVaultProperties"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "BasicAuth"
+    },
+    "DataConnectorRequest": {
+      "description": "DataConnectorRequest.",
+      "required": [
+        "credential"
+      ],
+      "type": "object",
+      "properties": {
+        "credential": {
+          "$ref": "#/definitions/AuthCredentials"
+        }
+      },
+      "example": {
+        "credential": {
+          "authType": "string",
+          "username": "string",
+          "password": {
+            "keyVaultUri": "string",
+            "keyName": "string",
+            "keyVersion": "string"
+          }
+        }
+      }
+    },
+    "DataConnectorsResponse": {
+      "description": "DataConnectorsResponse.",
+      "required": [
+        "credential",
+        "dataConnectorName"
+      ],
+      "type": "object",
+      "properties": {
+        "dataConnectorName": {
+          "description": "ConnectorName.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "#/definitions/AuthCredentials"
+        }
+      },
+      "example": {
+        "credential": {
+          "authType": "string",
+          "username": "string",
+          "password": {
+            "keyVaultUri": "string",
+            "keyName": "string",
+            "keyVersion": "string"
+          }
+        },
+        "dataConnectorName": "string"
+      }
+    },
+    "DataConnectorsResponseListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectorsResponse"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },  
+    "DataManagerForAgriculture": {
+      "description": "Data Manager For Agriculture ARM Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DataManagerForAgricultureExtension": {
+      "description": "DataManagerForAgriculture extension resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureExtensionProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DataManagerForAgricultureExtensionListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataManagerForAgricultureExtension"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgricultureExtensionProperties": {
+      "description": "DataManagerForAgricultureExtension properties.",
+      "type": "object",
+      "properties": {
+        "targetResourceType": {
+          "description": "Target ResourceType of the Data Manager For Agriculture Extension.",
+          "type": "string",
+          "readOnly": true
+        },
+        "farmBeatsExtensionId": {
+          "description": "Data Manager For Agriculture Extension ID.",
+          "maxLength": 100,
+          "minLength": 2,
           "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
           "type": "string",
           "readOnly": true
         },
-        "extensionCategory": {
-          "description": "Extension category. e.g. weather/sensor/satellite.",
+        "farmBeatsExtensionName": {
+          "description": "Data Manager For Agriculture Extension name.",
+          "maxLength": 100,
+          "minLength": 2,
           "type": "string",
           "readOnly": true
         },
-        "installedExtensionVersion": {
-          "description": "Installed extension version.",
+        "farmBeatsExtensionVersion": {
+          "description": "Data Manager For Agriculture Extension version.",
+          "maxLength": 100,
+          "minLength": 2,
           "pattern": "^([1-9]|10).\\d$",
           "type": "string",
           "readOnly": true
         },
+        "publisherId": {
+          "description": "Publisher ID.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Textual description.",
+          "maxLength": 500,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
+        "extensionCategory": {
+          "description": "Category of the extension. e.g. weather/sensor/satellite.",
+          "maxLength": 100,
+          "minLength": 2,
+          "type": "string",
+          "readOnly": true
+        },
         "extensionAuthLink": {
-          "description": "Extension auth link.",
+          "description": "Data Manager For Agriculture Extension auth link.",
           "type": "string",
           "readOnly": true
         },
         "extensionApiDocsLink": {
-          "description": "Extension api docs link.",
+          "description": "Data Manager For Agriculture Extension api docs link.",
           "type": "string",
           "readOnly": true
         },
-        "additionalApiProperties": {
-          "description": "Additional api properties.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ApiProperties"
+        "detailedInformation": {
+          "description": "Detailed information which shows summary of requested data.\r\nUsed in descriptive get extension metadata call.\r\nInformation for weather category per api included are apisSupported,\r\ncustomParameters, PlatformParameters and Units supported.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DetailedInformation"
           },
           "readOnly": true
+        }
+      }
+    },
+    "DataManagerForAgricultureListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataManagerForAgriculture"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgricultureProperties": {
+      "description": "Data Manager For Agriculture ARM Resource properties.",
+      "type": "object",
+      "properties": {
+        "instanceUri": {
+          "format": "uri",
+          "description": "Uri of the Data Manager For Agriculture instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Data Manager For Agriculture instance provisioning state.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Running"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "sensorIntegration": {
+          "$ref": "#/definitions/SensorIntegration"
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DataManagerForAgricultureSolution": {
+      "description": "DataManagerForAgriculture solution resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureSolutionProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DataManagerForAgricultureSolutionListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataManagerForAgricultureSolution"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgricultureSolutionProperties": {
+      "description": "DataManagerForAgricultureSolution properties.",
+      "type": "object",
+      "properties": {
+        "partnerId": {
+          "description": "Solution Partner Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerTenantId": {
+          "description": "Solution Partner Tenant Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataAccessScopes": {
+          "description": "Gets scope of the Data manager For Agriculture data access that's required for processing solution request to partner.\r\nExample: For gdd they might need weatherScope and satelliteScope.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "marketplaceOfferDetails": {
+          "$ref": "#/definitions/MarketplaceOfferDetails"
+        },
+        "inputParametersValidationScopes": {
+          "description": "Gets or sets scope of the Data Manager For Agriculture related parameters that need to\r\nbe validated in solutionInference trigger request.\r\nExample. [{ \"resourceIdName\" :\"boundaryId\", \"resourceType\" :\r\n\"Boundary\" }].",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceParameter"
+          },
+          "readOnly": true
+        },
+        "openAPISpecsDictionary": {
+          "description": "Gets api-version Swagger Document Dictionary to capture all api-versions of swagger exposed by partner to Data Manager For Agriculture.",
+          "type": "object",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "evaluatedOutputsDictionary": {
+          "description": "Gets example name: insight sample response Dictionary to capture all variations of computed results ingested by partner.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SolutionEvaluatedOutput"
+          },
+          "readOnly": true
+        },
+        "accessFBApplicationId": {
+          "format": "uuid",
+          "description": "Application id of the multi tenant application to be used by partner to access Data Manager For Agriculture data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "saaSApplicationId": {
+          "format": "uuid",
+          "description": "Application id of the SaaS multi tenant application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionIds": {
+          "description": "List of ActionIds needed to make the SaaS multi tenant application access relevant fb data.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "roleId": {
+          "description": "Role Id of the SaaS multi tenant application to access relevant fb data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleName": {
+          "description": "Role Name of the SaaS multi tenant application to access relevant fb data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessFBApplicationName": {
+          "description": "Application name of the multi tenant application to be used by partner to access Data Manager For Agriculture Data.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataManagerForAgricultureUpdateProperties": {
+      "description": "Data Manager For Agriculture ARM Resource properties.",
+      "type": "object",
+      "properties": {
+        "sensorIntegration": {
+          "$ref": "#/definitions/SensorIntegration"
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess"
+        }
+      }
+    },
+    "DataManagerForAgricultureUpdateRequestModel": {
+      "description": "DataManagerForAgriculture update request.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Geo-location where the resource lives.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataManagerForAgricultureUpdateProperties"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DetailedInformation": {
+      "description": "Model to capture detailed information for Data Manager For AgricultureExtensions.",
+      "type": "object",
+      "properties": {
+        "apiName": {
+          "description": "ApiName available for the Data Manager For Agriculture Extension.",
+          "type": "string",
+          "example": "dailyforecast, dailyhistorical."
+        },
+        "apiDocsLink": {
+          "description": "Extension provider's API documentation link.",
+          "type": "string"
+        },
+        "apiType": {
+          "description": "Type of Api in Extension.",
+          "type": "string",
+          "example": "passthrough,load."
+        },
+        "customParameters": {
+          "description": "List of customParameters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "platformParameters": {
+          "description": "List of platformParameters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apiDefaultInputParameters": {
+          "description": "List of defaultParameters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unitsSupported": {
+          "$ref": "#/definitions/UnitSystemsInfo"
+        },
+        "apiInputParameters": {
+          "description": "List of apiInputParameters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1717,6 +2502,9 @@
     },
     "ExtensionListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -1726,486 +2514,55 @@
             "$ref": "#/definitions/Extension"
           }
         },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "UnitSystemsInfo": {
-      "description": "Unit systems info for the data provider.",
-      "required": [
-        "key",
-        "values"
-      ],
-      "type": "object",
-      "properties": {
-        "key": {
-          "description": "UnitSystem key sent as part of ProviderInput.",
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string"
-        },
-        "values": {
-          "description": "List of unit systems supported by this data provider.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "DetailedInformation": {
-      "description": "Model to capture detailed information for farmBeatsExtensions.",
-      "type": "object",
-      "properties": {
-        "apiName": {
-          "description": "ApiName available for the farmBeatsExtension.",
-          "type": "string",
-          "example": "dailyforecast, dailyhistorical."
-        },
-        "customParameters": {
-          "description": "List of customParameters.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "platformParameters": {
-          "description": "List of platformParameters.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "unitsSupported": {
-          "$ref": "#/definitions/UnitSystemsInfo"
-        },
-        "apiInputParameters": {
-          "description": "List of apiInputParameters.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "FarmBeatsExtensionProperties": {
-      "description": "FarmBeatsExtension properties.",
-      "type": "object",
-      "properties": {
-        "targetResourceType": {
-          "description": "Target ResourceType of the farmBeatsExtension.",
-          "type": "string",
-          "readOnly": true
-        },
-        "farmBeatsExtensionId": {
-          "description": "FarmBeatsExtension ID.",
-          "maxLength": 100,
-          "minLength": 2,
-          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
-          "type": "string",
-          "readOnly": true
-        },
-        "farmBeatsExtensionName": {
-          "description": "FarmBeatsExtension name.",
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string",
-          "readOnly": true
-        },
-        "farmBeatsExtensionVersion": {
-          "description": "FarmBeatsExtension version.",
-          "maxLength": 100,
-          "minLength": 2,
-          "pattern": "^([1-9]|10).\\d$",
-          "type": "string",
-          "readOnly": true
-        },
-        "publisherId": {
-          "description": "Publisher ID.",
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "Textual description.",
-          "maxLength": 500,
-          "minLength": 2,
-          "type": "string",
-          "readOnly": true
-        },
-        "extensionCategory": {
-          "description": "Category of the extension. e.g. weather/sensor/satellite.",
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string",
-          "readOnly": true
-        },
-        "extensionAuthLink": {
-          "description": "FarmBeatsExtension auth link.",
-          "type": "string",
-          "readOnly": true
-        },
-        "extensionApiDocsLink": {
-          "description": "FarmBeatsExtension api docs link.",
-          "type": "string",
-          "readOnly": true
-        },
-        "detailedInformation": {
-          "description": "Detailed information which shows summary of requested data.\r\nUsed in descriptive get extension metadata call.\r\nInformation for weather category per api included are apisSupported,\r\ncustomParameters, PlatformParameters and Units supported.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DetailedInformation"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "FarmBeatsExtension": {
-      "description": "FarmBeats extension resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FarmBeatsExtensionProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "FarmBeatsExtensionListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of requested objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FarmBeatsExtension"
-          }
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ArmAsyncOperation": {
-      "description": "Arm async operation class.\r\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of the async operation.",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/ArmAsyncOperationError"
-        }
-      }
-    },
-    "ArmAsyncOperationError": {
-      "description": "Arm async operation error class.\r\nRef: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Status of the async operation.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Status of the async operation.",
-          "type": "string"
-        }
-      }
-    },
-    "SensorIntegration": {
-      "description": "Sensor integration request model.",
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "description": "Sensor integration enable state. Allowed values are True, None",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "Sensor integration instance provisioning state.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "provisioningInfo": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "PublicNetworkAccess": {
-      "description": "Property to allow or block public traffic for an Azure FarmBeats resource.",
-      "enum": [
-        "Enabled",
-        "Hybrid"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "PublicNetworkAccess",
-        "modelAsString": true
-      }
-    },
-    "FarmBeatsProperties": {
-      "description": "FarmBeats ARM Resource properties.",
-      "type": "object",
-      "properties": {
-        "instanceUri": {
-          "format": "uri",
-          "description": "Uri of the FarmBeats instance.",
-          "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "FarmBeats instance provisioning state.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "sensorIntegration": {
-          "$ref": "#/definitions/SensorIntegration"
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess"
-        },
-        "privateEndpointConnections": {
-          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection",
-          "readOnly": true
-        }
-      }
-    },
-    "FarmBeats": {
-      "description": "FarmBeats ARM Resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/FarmBeatsProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "FarmBeatsUpdateProperties": {
-      "description": "FarmBeats ARM Resource properties.",
-      "type": "object",
-      "properties": {
-        "sensorIntegration": {
-          "$ref": "#/definitions/SensorIntegration"
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess"
-        }
-      }
-    },
-    "FarmBeatsUpdateRequestModel": {
-      "description": "FarmBeats update request.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Geo-location where the resource lives.",
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/FarmBeatsUpdateProperties"
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "FarmBeatsListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of requested objects.",
-          "type": "array",
-          "uniqueItems": false,
-          "items": {
-            "$ref": "#/definitions/FarmBeats"
-          }
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SolutionProperties": {
-      "description": "Solution resource properties.",
-      "required": [
-        "offerId",
-        "planId",
-        "marketplacePublisherId",
-        "saasSubscriptionId",
-        "saasSubscriptionName",
-        "termId"
-      ],
-      "type": "object",
-      "properties": {
-        "solutionId": {
-          "description": "Solution Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "partnerId": {
-          "description": "Partner Id of the Solution.",
-          "type": "string",
-          "readOnly": true
-        },
-        "saasSubscriptionId": {
-          "description": "SaaS subscriptionId of the installed SaaS application.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "saasSubscriptionName": {
-          "description": "SaaS subscription name of the installed SaaS application.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "marketplacePublisherId": {
-          "description": "SaaS application Publisher Id.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "planId": {
-          "description": "SaaS application Plan Id.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "offerId": {
-          "description": "SaaS application Offer Id.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "termId": {
-          "description": "SaaS application Term Id.",
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "SolutionInstallationRequest": {
-      "description": "Solution Installation Request Body.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SolutionProperties"
-        }
-      }
-    },
-    "Solution": {
-      "description": "Solution resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
-        },
-        "properties": {
-          "$ref": "#/definitions/SolutionProperties"
-        },
-        "eTag": {
-          "description": "The ETag value to implement optimistic concurrency.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "SolutionListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of requested objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Solution"
-          }
-        },
         "$skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
           "type": "string"
         },
         "nextLink": {
           "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "Measure": {
+    "ExtensionProperties": {
+      "description": "Extension resource properties.",
       "type": "object",
       "properties": {
-        "unit": {
-          "type": "string"
+        "extensionId": {
+          "description": "Extension Id.",
+          "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
+          "type": "string",
+          "readOnly": true
         },
-        "value": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
-    "ResourceParameter": {
-      "type": "object",
-      "properties": {
-        "resourceIdName": {
-          "type": "string"
+        "extensionCategory": {
+          "description": "Extension category. e.g. weather/sensor/satellite.",
+          "type": "string",
+          "readOnly": true
         },
-        "resourceType": {
-          "type": "string"
+        "installedExtensionVersion": {
+          "description": "Installed extension version.",
+          "pattern": "^([1-9]|10).\\d$",
+          "type": "string",
+          "readOnly": true
+        },
+        "extensionAuthLink": {
+          "description": "Extension auth link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extensionApiDocsLink": {
+          "description": "Extension api docs link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalApiProperties": {
+          "description": "Additional Api Properties.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApiProperties"
+          },
+          "readOnly": true
         }
       }
     },
@@ -2264,6 +2621,12 @@
         "description": {
           "type": "string"
         },
+        "createdBy": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
         "properties": {
           "type": "object",
           "additionalProperties": {}
@@ -2308,16 +2671,150 @@
           "format": "date-time",
           "type": "string"
         },
+        "source": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
         "description": {
           "type": "string"
         },
+        "createdBy": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
         "eTag": {
           "type": "string"
         }
       }
+    },
+    "KeyVaultProperties": {
+      "description": "KeyVaultProperties.",
+      "required": [
+        "keyName",
+        "keyVaultUri",
+        "keyVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "keyVaultUri": {
+          "description": "KeyVaultUri.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "keyName": {
+          "description": "KeyName.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "keyVersion": {
+          "description": "KeyVersion.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },  
+    "MarketplaceOfferDetails": {
+      "type": "object",
+      "properties": {
+        "saasOfferId": {
+          "type": "string"
+        },
+        "publisherId": {
+          "type": "string"
+        }
+      }
+    },
+    "Measure": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "value": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "PublicNetworkAccess": {
+      "description": "Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true
+      }
+    },
+    "ResourceParameter": {
+      "type": "object",
+      "properties": {
+        "resourceIdName": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        }
+      }
+    },
+    "SensorIntegration": {
+      "description": "Sensor integration request model.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Sensor integration enable state.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Sensor integration instance provisioning state.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Running"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningInfo": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "Solution": {
+      "description": "Solution resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "SolutionEvaluatedOutput": {
       "type": "object",
@@ -2330,131 +2827,27 @@
         }
       }
     },
-    "FarmBeatsSolutionProperties": {
-      "description": "FarmBeatsSolution properties.",
+    "SolutionInstallationRequest": {
+      "description": "Solution Installation Request Body.",
       "type": "object",
       "properties": {
-        "partnerId": {
-          "description": "Solution Partner Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "partnerTenantId": {
-          "description": "Solution Partner Tenant Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "dataAccessScopes": {
-          "description": "Gets scope of the FarmBeats data access that's required for processing solution request to partner.\r\nExample: For gdd they might need weatherScope and satelliteScope.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "marketplaceOfferDetails": {
-          "$ref": "#/definitions/MarketplaceOfferDetails"
-        },
-        "inputParametersValidationScopes": {
-          "description": "Gets scope of the FarmBeats related parameters that need to be validated in apiInputParameters.\r\nExample: For if 'FarmHierarchy' is the input scope for 'WeatherScope' data access\r\nFor working with WeatherScope we need FarmHierarchy info implies 'farmerId', 'resourceId', 'resourceType' in request body.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceParameter"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "openApiSpecsDictionary": {
-          "description": "Gets apiVersion: Swagger Document Dictionary to capture all api versions of swagger exposed by partner to farmbeats.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "readOnly": true
-        },
-        "evaluatedOutputsDictionary": {
-          "description": "Gets example name: insight sample response Dictionary to capture all variations of computed results ingested by partner.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/SolutionEvaluatedOutput"
-          },
-          "readOnly": true
-        },
-        "accessFBApplicationId": {
-          "format": "uuid",
-          "description": "Application id of the multi tenant application to be used by partner to access FarmBeats data.",
-          "type": "string",
-          "readOnly": true
-        },
-        "saaSApplicationId": {
-          "format": "uuid",
-          "description": "Application id of the SaaS multi tenant application.",
-          "type": "string",
-          "readOnly": true
-        },
-        "actionIds": {
-          "description": "List of ActionIds needed to make the SaaS multi tenant application access relevant fb data.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "roleId": {
-          "description": "Role Id of the SaaS multi tenant application to access relevant fb data.",
-          "type": "string",
-          "readOnly": true
-        },
-        "roleName": {
-          "description": "Role Name of the SaaS multi tenant application to access relevant fb data.",
-          "type": "string",
-          "readOnly": true
-        },
-        "accessFBApplicationName": {
-          "description": "Application name of the multi tenant application to be used by partner to access FarmBeatsData.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "FarmBeatsSolution": {
-      "description": "FarmBeats solution resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
-        },
         "properties": {
-          "$ref": "#/definitions/FarmBeatsSolutionProperties"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "MarketplaceOfferDetails": {
-      "type": "object",
-      "properties": {
-        "saasOfferId": {
-          "type": "string"
-        },
-        "publisherId": {
-          "type": "string"
+          "$ref": "#/definitions/SolutionProperties"
         }
       }
     },
-    "FarmBeatsSolutionListResponse": {
+    "SolutionListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
           "description": "List of requested objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FarmBeatsSolution"
+            "$ref": "#/definitions/Solution"
           }
         },
         "$skipToken": {
@@ -2466,16 +2859,97 @@
           "type": "string"
         }
       }
+    },
+    "SolutionProperties": {
+      "description": "Solution resource properties.",
+      "required": [
+        "marketplacePublisherId",
+        "offerId",
+        "planId",
+        "saasSubscriptionId",
+        "saasSubscriptionName",
+        "termId"
+      ],
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerId": {
+          "description": "Partner Id of the Solution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "saasSubscriptionId": {
+          "description": "SaaS subscriptionId of the installed SaaS application.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "saasSubscriptionName": {
+          "description": "SaaS subscription name of the installed SaaS application.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "marketplacePublisherId": {
+          "description": "SaaS application Marketplace Publisher Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "planId": {
+          "description": "SaaS application Plan Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "offerId": {
+          "description": "SaaS application Offer Id.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "termId": {
+          "description": "SaaS application Term Id.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "UnitSystemsInfo": {
+      "description": "Unit systems info for the data provider.",
+      "required": [
+        "key",
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "UnitSystem key sent as part of ProviderInput.",
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "values": {
+          "description": "List of unit systems supported by this data provider.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
-    "FarmBeatsResourceNameParameter": {
+    "DataManagerForAgricultureResourceNameParameter": {
       "in": "path",
-      "name": "farmBeatsResourceName",
-      "description": "FarmBeats resource name.",
+      "name": "dataManagerForAgricultureResourceName",
+      "description": "DataManagerForAgriculture resource name.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 63
     },
     "ExtensionIdParameter": {
       "in": "path",
@@ -2483,15 +2957,6 @@
       "description": "Id of extension resource.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SolutionId": {
-      "in": "path",
-      "name": "solutionId",
-      "description": "Solution Id of the solution.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
       "x-ms-parameter-location": "method"
     }
   },

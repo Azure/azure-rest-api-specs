@@ -1,11 +1,11 @@
 {
   "parameters": {
-    "api-version": "2023-06-01-preview",
+    "api-version": "2021-09-01-preview",
     "subscriptionId": "11111111-2222-3333-4444-555555555555",
     "resourceGroupName": "examples-rg",
-    "farmBeatsResourceName": "examples-farmbeatsResourceName",
+    "dataManagerForAgricultureResourceName": "examples-farmbeatsResourceName",
     "privateEndpointConnectionName": "privateEndpointConnectionName",
-    "body": {
+    "request": {
       "properties": {
         "privateLinkServiceConnectionState": {
           "status": "Approved",
@@ -31,6 +31,24 @@
           },
           "provisioningState": "Succeeded"
         }
+      }
+    },
+    "400": {
+      "error": {
+        "code": "ModelValidationFailed",
+        "message": "Request input validation failed.",
+        "details": [
+          {
+            "code": "ModelValidationFailed",
+            "message": "The Payload field is required.",
+            "target": "Payload"
+          },
+          {
+            "code": "ModelValidationFailed",
+            "message": "Error converting value \"InvalidStatus\" to type 'PrivateEndpointState'. Path 'properties.privateLinkServiceConnectionState.status', line 1, position 624. Refer path description for more information.",
+            "target": "Payload.properties.privateLinkServiceConnectionState.status"
+          }
+        ]
       }
     }
   }
