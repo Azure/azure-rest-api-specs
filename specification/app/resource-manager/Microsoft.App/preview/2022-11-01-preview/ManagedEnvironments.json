@@ -1049,11 +1049,11 @@
       "type": "object",
       "properties": {
         "destination": {
-          "description": "Logs destination",
+          "description": "Logs destination, can be 'log-analytics', 'azure-monitor' or 'none'",
           "type": "string"
         },
         "logAnalyticsConfiguration": {
-          "description": "Log Analytics configuration",
+          "description": "Log Analytics configuration, must only be provided when destination is configured as 'log-analytics'",
           "$ref": "#/definitions/LogAnalyticsConfiguration"
         }
       }
