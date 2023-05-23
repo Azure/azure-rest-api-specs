@@ -67,7 +67,7 @@ enum CategoryEnum {
   "Hate",
   "Sexual",
   "Violence",
-  "Self-harm" 
+  "SelfHarm" 
 }
 
 @doc("Severity level. The higher the value, the more risk it is.")
@@ -98,17 +98,17 @@ model CountPerTimestamp {
   count: int32;
 }
 
-@doc("Response of calls.")
-@pagedResult
-model CallList {
-  @doc("List of request count.")
-  @items
-  value: CountPerTimestamp[];
+// @doc("Response of calls.")
+// @pagedResult
+// model CallList {
+//   @doc("List of request count.")
+//   @items
+//   value: CountPerTimestamp[];
 
-  @doc("Link to fetch more.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("Link to fetch more.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 @doc("API request latency at a timestamp.")
 @resource("requestLatencies")
@@ -122,17 +122,17 @@ model LatencyPerTimestamp {
   latency: int32;
 }
 
-@doc("Response of latencies.")
-@pagedResult
-model LatencyList {
-  @doc("List of latency.")
-  @items
-  value: LatencyPerTimestamp[];
+// @doc("Response of latencies.")
+// @pagedResult
+// model LatencyList {
+//   @doc("List of latency.")
+//   @items
+//   value: LatencyPerTimestamp[];
 
-  @doc("Link to fetch more.")
-  @nextLink
-  nextLink?: string;
-}
+//   @doc("Link to fetch more.")
+//   @nextLink
+//   nextLink?: string;
+// }
 
 @doc("Popular term and it's API count.")
 @resource("blocklistTopTerms")
@@ -154,9 +154,9 @@ model TermList {
   @items
   value: TopTermCount[];
 
-  @doc("Link to fetch more terms.")
-  @nextLink
-  nextLink?: string;
+  // @doc("Link to fetch more terms.")
+  // @nextLink
+  // nextLink?: string;
 }
 
 @doc("Blocklist hit call counts at a timestamp")
@@ -302,14 +302,21 @@ model AggregationQueryParameter {
   aggregation: Aggregation;
 }
 
-@doc("Provides the most common query parameters for list operations.")
-model CommonListQueryParameters {
-  ...TopQueryParameter;
-  ...SkipQueryParameter;
-  ...MaxPageSizeQueryParameter;
-  ...StartTimeQueryParameter;
-  ...EndTimeQueryParameter;
+
+@doc("Provides the 'top' query parameter for list top terms.")
+model TopTermQueryParameter {
+  @query
+  @doc("The number of result items to return. ")
+  top: int32;
 }
+// @doc("Provides the most common query parameters for list operations.")
+// model CommonListQueryParameters {
+//   ...TopQueryParameter;
+//   ...SkipQueryParameter;
+//   ...MaxPageSizeQueryParameter;
+//   ...StartTimeQueryParameter;
+//   ...EndTimeQueryParameter;
+// }
 
 interface Metrics {
 
@@ -362,7 +369,8 @@ interface Metrics {
     ...EndTimeQueryParameter,
     ...TimeGranularityQueryParameter,
     ...ContentSafetyVersionQueryParameter,
-    ...ContentSafetyOperationQueryParameter
+    ...ContentSafetyOperationQueryParameter,
+    ...AggregationQueryParameter
   }>
 >;
 
@@ -467,37 +475,37 @@ interface Metrics {
     }>
   >;
 
-  // @route("/metrics/blocklistTopTerms")
-  // @summary("List top terms hit in blocklist at different timestamps.")
-  // @doc("List top terms hit in blocklist at different timestamps.")
-  // op listBlocklistTopTerms is RpcOperation<
-  //   {
-  //     ...SkipQueryParameter,
-  //     ...TopQueryParameter,
-  //     ...MaxPageSizeQueryParameter,
-  //     ...StartTimeQueryParameter,
-  //     ...EndTimeQueryParameter,
-  //     ...ContentSafetyVersionQueryParameter,
-  //   },
-  //   TermList  ,
-  //   ServiceTraits,
-  //   Error
-  // >;
-
-  @route("/metrics")
+  @route("/metrics/blocklistTopTerms")
   @summary("List top terms hit in blocklist at different timestamps.")
   @doc("List top terms hit in blocklist at different timestamps.")
-  op listBlocklistTopterms is ResourceList<
-  TopTermCount,
-  ListQueryParametersTrait<{
-    ...SkipQueryParameter,
-    ...TopQueryParameter,
-    ...MaxPageSizeQueryParameter,
-    ...StartTimeQueryParameter,
-    ...EndTimeQueryParameter,
-    ...ContentSafetyVersionQueryParameter,
-    }>
+  op listBlocklistTopTerms is RpcOperation<
+    {
+      // ...SkipQueryParameter,
+      ...TopTermQueryParameter,
+      // ...MaxPageSizeQueryParameter,
+      ...StartTimeQueryParameter,
+      ...EndTimeQueryParameter,
+      ...ContentSafetyVersionQueryParameter,
+    },
+    TermList  ,
+    ServiceTraits,
+    Azure.Core.Foundations.ErrorResponse
   >;
+
+  // @route("/metrics")
+  // @summary("List top terms hit in blocklist at different timestamps.")
+  // @doc("List top terms hit in blocklist at different timestamps.")
+  // op listBlocklistTopterms is ResourceList<
+  // TopTermCount,
+  // ListQueryParametersTrait<{
+  //   ...SkipQueryParameter,
+  //   ...TopQueryParameter,
+  //   ...MaxPageSizeQueryParameter,
+  //   ...StartTimeQueryParameter,
+  //   ...EndTimeQueryParameter,
+  //   ...ContentSafetyVersionQueryParameter,
+  //   }>
+  // >;
 
   @route("/metrics")
   @summary("Show blocklist hit request count at different timestamps.")
