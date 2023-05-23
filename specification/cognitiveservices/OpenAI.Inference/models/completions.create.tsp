@@ -136,8 +136,8 @@ model CompletionsOptions {
     """)
     @projectedName("json", "model")
     @projectedName("csharp", "InternalNonAzureModelName")
-    "model"?: string;
-};
+    `model`?: string;
+}
 
 @doc("""
 Representation of the response data from a completions request.

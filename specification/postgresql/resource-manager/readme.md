@@ -39,12 +39,34 @@ tag: package-flexibleserver-2022-12-01
 tag: package-2020-01-01
 ```
 
+### Tag: package-flexibleserver-2023-03-01-preview
 
+These settings apply only when `--tag=package-flexibleserver-2023-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2023-03-01-preview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Administrators.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Backups.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Configuration.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Replicas.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerLogs.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/LongTermRetentionOperation.json
+```
 ### Tag: package-flexibleserver-2022-12-01
 
 These settings apply only when `--tag=package-flexibleserver-2022-12-01` is specified on the command line.
 
-```yaml $(tag) == 'package-flexibleserver-2022-12-01'
+``` yaml $(tag) == 'package-flexibleserver-2022-12-01'
 input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-12-01/Administrators.json
   - Microsoft.DBforPostgreSQL/stable/2022-12-01/Backups.json
@@ -65,7 +87,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-flexibleserver-2022-05-01-preview-only'
+``` yaml $(tag) == 'package-flexibleserver-2022-05-01-preview-only'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Migrations.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Operations.json
@@ -75,7 +97,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-flexibleserver-2022-03-preview'
+``` yaml $(tag) == 'package-flexibleserver-2022-03-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Backups.json

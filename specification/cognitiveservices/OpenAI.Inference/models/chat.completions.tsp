@@ -139,8 +139,8 @@ model ChatCompletionsOptions {
     """)
     @projectedName("json", "model")
     @projectedName("csharp", "InternalNonAzureModelName")
-    "model"?: string;
-};
+    `model`?: string;
+}
 
 @doc("""
 The representation of a single prompt completion as part of an overall chat completions request.
