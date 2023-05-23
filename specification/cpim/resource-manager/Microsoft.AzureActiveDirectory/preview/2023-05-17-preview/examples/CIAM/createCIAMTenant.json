@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2023-05-17-preview",
+    "resourceGroupName": "contosoResourceGroup",
+    "resourceName": "contoso.onmicrosoft.com",
+    "createTenantRequestBody": {
+      "location": "United States",
+      "sku": {
+        "name": "Standard",
+        "tier": "A0"
+      },
+      "properties": {
+        "createTenantProperties": {
+          "displayName": "Contoso",
+          "countryCode": "US"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/e70a6dd9-57ab-481e-9668-a6899e3f13f6/providers/Microsoft.AzureActiveDirectory/operationsStatuses/f57cbcaf-5d23-495e-8414-43fe19cb9e82",
+        "name": "5658b9dc-bf31-489b-ae18-d90d6d168166",
+        "status": "Succeeded",
+        "startTime": "2023-05-23T00:03:14.9856629+00:00",
+        "endTime": "2023-05-23T00:03:27.5978764+00:00"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e70a6dd9-57ab-481e-9668-a6899e3f13f6/providers/Microsoft.AzureActiveDirectory/operationsStatuses/f57cbcaf-5d23-495e-8414-43fe19cb9e82?api-version=2023-05-17-preview",
+        "Retry-After": "60"
+      },
+      "body": {
+        "location": "United States",
+        "sku": {
+          "name": "Standard",
+          "tier": "A0"
+        },
+        "properties": {
+          "createTenantProperties": {
+            "displayName": "Contoso",
+            "countryCode": "US"
+          }
+        }
+      }
+    }
+  }
+}

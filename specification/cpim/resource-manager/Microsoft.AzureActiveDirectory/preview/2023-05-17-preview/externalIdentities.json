@@ -671,6 +671,304 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
+      "get": {
+        "description": "Get all the Azure AD for customers tenants resources in a resource group.",
+        "operationId": "CIAMTenants_ListByResourceGroup",
+        "tags": [
+          "CIAMTenants"
+        ],
+        "x-ms-examples": {
+          "CIAMTenants_ListByResourceGroup": {
+            "$ref": "./examples/CIAM/listCIAMTenantsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Azure AD for customers tenants in resource group successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/CIAMTenantResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
+      "get": {
+        "description": "Get all the Azure AD for customers tenant resources in a subscription.",
+        "operationId": "CIAMTenants_ListBySubscription",
+        "tags": [
+          "CIAMTenants"
+        ],
+        "x-ms-examples": {
+          "CIAMTenants_ListBySubscription": {
+            "$ref": "./examples/CIAM/listCIAMTenantsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure AD for customers tenant resources in subscription successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/CIAMTenantResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories/{resourceName}": {
+      "get": {
+        "description": "Get the Azure AD for customers tenant resource.",
+        "operationId": "CIAMTenants_Get",
+        "tags": [
+          "CIAMTenants"
+        ],
+        "x-ms-examples": {
+          "Get tenant": {
+            "$ref": "./examples/CIAM/getCIAMTenant.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure AD for customers tenant resource successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/CIAMTenantResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "CIAMTenants_Create",
+        "description": "Initiates an async request to create both the Azure AD for customers tenant and the corresponding Azure resource linked to a subscription.",
+        "x-ms-examples": {
+          "Create tenant": {
+            "$ref": "./examples/CIAM/createCIAMTenant.json"
+          }
+        },
+        "tags": [
+          "CIAMTenants"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "createCIAMTenantRequestBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCIAMTenantRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Successfully created an Azure AD for customers tenant.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "201": {
+            "description": "Azure AD for customers tenant create request was successfully started and will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              },
+              "Retry-After": {
+                "description": "Contains the number of seconds to wait before polling the location.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CreateCIAMTenantRequestBody"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Update the Azure AD for customers tenant resource.",
+        "operationId": "CIAMTenants_Update",
+        "tags": [
+          "CIAMTenants"
+        ],
+        "x-ms-examples": {
+          "Update tenant": {
+            "$ref": "./examples/CIAM/updateCIAMTenant.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "updateCIAMTenantRequestBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CIAMTenantUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the Azure AD for customers tenant resource.",
+            "schema": {
+              "$ref": "#/definitions/CIAMTenantResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CIAMTenants_Delete",
+        "description": "Initiates an async operation to delete the Azure AD for customers tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://learn.microsoft.com/azure/active-directory/enterprise-users/directory-delete-howto). ",
+        "x-ms-examples": {
+          "Delete tenant": {
+            "$ref": "./examples/CIAM/deleteCIAMTenant.json"
+          }
+        },
+        "tags": [
+          "CIAMTenants"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of the URL in Azure-AsyncOperation header if the asynchronous operation is successful. Resource will no longer exist.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource deletion request accepted. The Azure-AsyncOperation header indicates the URL/location in which to poll for a result of the asynchronous operation. ",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              },
+              "Retry-After": {
+                "description": "Contains the number of seconds to wait before checking the deletion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent - Azure AD for customers tenant resource successfully deleted or didn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -1131,6 +1429,333 @@
         }
       }
     },
+    "CIAMTenantResourceList": {
+      "description": "The collection of Azure AD for customers tenant resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Azure AD for customers tenant resources",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CIAMTenantResource"
+          }
+        }
+      }
+    },
+    "CIAMTenantResource": {
+      "type": "object",
+      "required": [
+        "location",
+        "sku",
+        "properties"
+      ],
+      "x-ms-azure-resource": true,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the Azure AD for customers tenant resource.",
+          "readOnly": true,
+          "enum": [
+            "Microsoft.AzureActiveDirectory/ciamDirectories"
+          ],
+          "x-ms-enum": {
+            "name": "TypeValue",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Microsoft.AzureActiveDirectory/ciamDirectories",
+                "description": "The resource type for Azure AD for customers tenant resource."
+              }
+            ]
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/CIAMResourceSKU"
+        },
+        "properties": {
+          "$ref": "#/definitions/CIAMTenantResourceProperties",
+          "x-ms-client-flatten": true,
+          "description": "The Azure AD for customers tenant resource properties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the Azure AD for customers tenant resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the Azure AD for customers tenant resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia'. Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateCIAMTenantProperties": {
+      "type": "object",
+      "description": "These properties are used to create the Azure AD for customers tenant. These properties are not part of the Azure resource.",
+      "required": [
+        "displayName",
+        "countryCode"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The display name of the Azure AD for customers tenant.",
+          "type": "string"
+        },
+        "countryCode": {
+          "$ref": "#/definitions/CountryCode"
+        }
+      }
+    },
+    "CIAMResourceSKU": {
+      "description": "SKU properties of the Azure AD for customers tenant. Learn more about Azure AD for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cBilling).",
+      "type": "object",
+      "required": [
+        "name",
+        "tier"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU for the tenant.",
+          "enum": [
+            "Standard",
+            "PremiumP1",
+            "PremiumP2"
+          ],
+          "x-ms-enum": {
+            "name": "CAIMResourceSKUName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+              },
+              {
+                "value": "PremiumP1",
+                "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses number of authentications based billing."
+              },
+              {
+                "value": "PremiumP2",
+                "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses number of authentications based billing."
+              }
+            ]
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the tenant.",
+          "enum": [
+            "A0"
+          ],
+          "x-ms-enum": {
+            "name": "CIAMResourceSKUTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "A0",
+                "description": "The SKU tier used for all Azure AD for customers tenants."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "CIAMTenantResourceProperties": {
+      "description": "Properties of the Azure AD for customers tenant Azure resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "title": "Provisioning State",
+          "type": "string"
+        },
+        "billingConfig": {
+          "type": "object",
+          "description": "The billing configuration for the tenant.",
+          "properties": {
+            "billingType": {
+              "type": "string",
+              "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about Azure AD for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
+              "enum": [
+                "MAU"
+              ],
+              "x-ms-enum": {
+                "name": "BillingType",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "MAU",
+                    "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+                  }
+                ]
+              }
+            },
+            "effectiveStartDateUtc": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The data from which the billing type took effect"
+            }
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier of the Azure AD for customers tenant."
+        }
+      }
+    },
+    "CIAMUpdateTenantResourceProperties": {
+      "description": "Properties of the Azure AD for customers tenant Azure resource.",
+      "type": "object",
+      "properties": {
+        "billingConfig": {
+          "type": "object",
+          "description": "The billing configuration for the tenant.",
+          "properties": {
+            "billingType": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about Azure AD for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
+              "enum": [
+                "MAU"
+              ],
+              "x-ms-enum": {
+                "name": "BillingType",
+                "modelAsString": true,
+                "readOnly": true,
+                "values": [
+                  {
+                    "value": "MAU",
+                    "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+                  }
+                ]
+              }
+            },
+            "effectiveStartDateUtc": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The data from which the billing type took effect"
+            }
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier of the Azure AD for customers."
+        }
+      }
+    },
+    "CIAMTenantUpdateRequest": {
+      "type": "object",
+      "description": "The request body to update the Azure AD for customers tenant resource.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/CIAMResourceSKU"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Tags"
+        }
+      }
+    },
+    "CreateCIAMTenantRequestBody": {
+      "type": "object",
+      "description": "The information needed to create the Azure AD for customers tenant and corresponding Azure resource, which is used for billing purposes.",
+      "required": [
+        "location",
+        "sku",
+        "properties"
+      ],
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia'. Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information."
+        },
+        "properties": {
+          "required": [
+            "createTenantProperties"
+          ],
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "createTenantProperties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/CreateCIAMTenantProperties"
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "An identifier of the Azure AD for customers tenant."
+            }
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/CIAMResourceSKU"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Tags"
+        }
+      }
+    },
+    "OperationStatusResult": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time of the async operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "End time of the async operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "x-nullable": true,
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
     "CloudError": {
       "x-ms-external": true,
       "type": "object",
@@ -1163,7 +1788,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The initial domain name of the Azure AD B2C tenant.",
+      "description": "The initial domain name of the tenant.",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
