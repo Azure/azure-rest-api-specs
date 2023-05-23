@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2023-04-11-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "routeName": "route1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "route1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/l4routes/route1",
+        "type": "Microsoft.Cdn/profiles/afdendpoints/L4Route",
+        "properties": {
+          "customDomains": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+            }
+          ],
+          "originGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+          },
+          "RoutingMethod": "SNIBased",
+          "L4RouteBaseSettings":{
+            "FrontendProtocol":"TCP",
+            "BackendProtocol":"TCP",
+            "Ports": "2098"
+          },
+          "enabledState": "Enabled",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}
