@@ -512,7 +512,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Container App started successfully."
+            "description": "Container App started successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
           },
           "202": {
             "description": "Start operation is in progress.",
@@ -525,8 +528,8 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }}
           }
         },
         "x-ms-examples": {
@@ -568,7 +571,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Container App stopped successfully."
+            "description": "Container App stopped successfully.",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
           },
           "202": {
             "description": "Stop operation is in progress.",
@@ -581,7 +587,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
