@@ -189,10 +189,12 @@ model Choice {
     @doc("The log probabilities model for tokens associated with this completions choice.")
     @projectedName("json", "logprobs")
     @projectedName("csharp", "LogProbabilityModel")
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
     logprobs: CompletionsLogProbabilityModel | null;
 
     @doc("Reason for finishing")
     @projectedName("json", "finish_reason")
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
     finishReason: CompletionsFinishReason | null;
 }
 
