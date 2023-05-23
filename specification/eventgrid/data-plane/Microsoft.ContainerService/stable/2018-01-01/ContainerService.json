@@ -27,6 +27,14 @@
           "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event",
           "type": "string"
         }
+      },
+      "x-ms-examples": {
+        "newKubernetesVersionAvailableCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/new_kubernetes_version_available.json"
+        },
+        "newKubernetesVersionAvailableEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/new_kubernetes_version_available.json"
+        }
       }
     },
     "ContainerServiceClusterOutOfSupportEventData": {
@@ -41,6 +49,14 @@
           "description": "Indicates if the Kubernetes version of the ManagedCluster resource is out of support",
           "type": "boolean"
         }
+      },
+      "x-ms-examples": {
+        "clusterOutOfSupportCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/cluster_out_of_support.json"
+        },
+        "clusterOutOfSupportEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/cluster_out_of_support.json"
+        }
       }
     },
     "ContainerServiceNodePoolRollingProgressEventData": {
@@ -54,6 +70,14 @@
         "progressState": {
           "description": "Indicates the progress of the node pool rolling process. Possible values are: \"Started\", \"Succeeded\", \"Failed\"",
           "type": "string"
+        }
+      },
+      "x-ms-examples": {
+        "nodePoolRollingProgressCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/node_pool_rolling_progress.json"
+        },
+        "nodePoolRollingProgressEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/node_pool_rolling_progress.json"
         }
       }
     }
