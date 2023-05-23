@@ -44,16 +44,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "201": {
             "description": "Returns details of the call properties once the CreateCall request is received by service. You will receive CallConnected event at your specified callback URI, once the call is connected.",
             "schema": {
               "$ref": "#/definitions/CallConnectionProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -93,16 +93,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns details of the call properties once the AnswerCall request is received by service. You will receive CallConnected event at your specified callback URI, once the call is connected.",
             "schema": {
               "$ref": "#/definitions/CallConnectionProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -142,14 +142,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "The service has redirected the call to specified endpoint."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "204": {
-            "description": "The service has redirected the call to specified endpoint."
           }
         },
         "x-ms-examples": {
@@ -188,14 +188,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "The service has rejected the call."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "204": {
-            "description": "The service has rejected the call."
           }
         },
         "x-ms-examples": {
@@ -225,16 +225,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns details of the call properties.",
             "schema": {
               "$ref": "#/definitions/CallConnectionProperties"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -264,14 +264,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Call automation service has left the call."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "204": {
-            "description": "Call automation service has left the call."
           }
         },
         "x-ms-examples": {
@@ -308,14 +308,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "The call is terminated."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "204": {
-            "description": "The call is terminated."
           }
         },
         "x-ms-examples": {
@@ -361,16 +361,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "The service has accepted the transfer request and will begin processing it. You will receive either CallTransferAccepted or CallTransferFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/TransferCallResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -411,14 +411,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The service has accepted the play request and will begin processing it. You will receive either PlayCompleted or PlayFailed event at your specified callback URI to update you on the status of the request."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "202": {
-            "description": "The service has accepted the play request and will begin processing it. You will receive either PlayCompleted or PlayFailed event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
@@ -449,14 +449,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The service has accepted the cancel request and will begin processing it. RecognizeCanceled and/or PlayCanceled at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "202": {
-            "description": "The service has accepted the cancel request and will begin processing it. RecognizeCanceled and/or PlayCanceled at your specified callback URI to update you on the status of the request, based on which media operation has been canceled by it."
           }
         },
         "x-ms-examples": {
@@ -496,14 +496,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The service has accepted the recognize request and will begin processing it. You will receive either RecognizeCompleted or RecognizeFailed event at your specified callback URI to update you on the status of the request."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "202": {
-            "description": "The service has accepted the recognize request and will begin processing it. You will receive either RecognizeCompleted or RecognizeFailed event at your specified callback URI to update you on the status of the request."
           }
         },
         "x-ms-examples": {
@@ -534,16 +534,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the get participants response.",
             "schema": {
               "$ref": "#/definitions/GetParticipantsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -593,16 +593,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "The service has accepted the add participant request and will begin processing it. You will receive either AddParticipantSucceeded or AddParticipantFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/AddParticipantResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -649,16 +649,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "202": {
             "description": "The service has accepted the remove participant request and will begin processing it. You will receive either RemoveParticipantSucceeded or RemoveParticipantFailed event at your specified callback URI to update you on the status of the request.",
             "schema": {
               "$ref": "#/definitions/RemoveParticipantResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -697,16 +697,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the detail of the requested participant.",
             "schema": {
               "$ref": "#/definitions/CallParticipant"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -745,16 +745,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the start call recording response.",
             "schema": {
               "$ref": "#/definitions/RecordingStateResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -785,16 +785,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "200": {
             "description": "Returns the recording properties.",
             "schema": {
               "$ref": "#/definitions/RecordingStateResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -823,14 +823,14 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Returns the stop call recording response."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "204": {
-            "description": "Returns the stop call recording response."
           }
         },
         "x-ms-examples": {
@@ -860,14 +860,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The service has accepted the pause request and will begin processing it."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "202": {
-            "description": "The service has accepted the pause request and will begin processing it."
           }
         },
         "x-ms-examples": {
@@ -897,14 +897,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "The service has accepted the resume request and will begin processing it."
+          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          },
-          "202": {
-            "description": "The service has accepted the resume request and will begin processing it."
           }
         },
         "x-ms-examples": {
@@ -1132,13 +1132,16 @@
     },
     "PlayRequest": {
       "required": [
-        "playSourceInfo"
+        "playSources"
       ],
       "type": "object",
       "properties": {
-        "playSourceInfo": {
-          "$ref": "#/definitions/PlaySource",
-          "description": "The source of the audio to be played."
+        "playSources": {
+          "description": "The source of the audio to be played.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaySource"
+          }
         },
         "playTo": {
           "description": "The list of call participants play provided audio to.\r\nPlays to everyone in the call when not provided.",
@@ -1170,18 +1173,18 @@
     },
     "PlaySource": {
       "required": [
-        "sourceType"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "sourceType": {
+        "kind": {
           "$ref": "#/definitions/PlaySourceType"
         },
-        "playSourceId": {
+        "playSourceCacheId": {
           "description": "Defines the identifier to be used for caching related media",
           "type": "string"
         },
-        "fileSource": {
+        "file": {
           "$ref": "#/definitions/FileSource",
           "description": "Defines the file source info to be used for play"
         }
