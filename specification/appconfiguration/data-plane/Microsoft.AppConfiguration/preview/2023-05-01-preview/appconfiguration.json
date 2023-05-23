@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-11-01-preview",
+    "version": "2023-05-01-preview",
     "title": "Azure App Configuration"
   },
   "schemes": [
@@ -182,6 +182,18 @@
             "in": "query",
             "description": "A filter used get key-values for a snapshot. The value should be the name of the snapshot. Not valid when used with 'key' and 'label' filters.",
             "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
+            "type": "string"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -193,6 +205,10 @@
             "headers": {
               "Sync-Token": {
                 "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
+                "type": "string"
+              },
+              "ETag": {
+                "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
               }
             }
@@ -207,6 +223,12 @@
         "x-ms-examples": {
           "GetKeyValues": {
             "$ref": "./examples/GetKeyValues.json"
+          },
+          "GetKeyValues_IfMatch": {
+            "$ref": "./examples/GetKeyValues_IfMatch.json"
+          },
+          "GetKeyValues_IfNoneMatch": {
+            "$ref": "./examples/GetKeyValues_IfNoneMatch.json"
           }
         },
         "x-ms-pageable": {
@@ -261,6 +283,18 @@
             "in": "query",
             "description": "A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.",
             "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
+            "type": "string"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -269,6 +303,10 @@
             "headers": {
               "Sync-Token": {
                 "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
+                "type": "string"
+              },
+              "ETag": {
+                "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
               }
             }
@@ -280,6 +318,12 @@
         "x-ms-examples": {
           "CheckKeyValues": {
             "$ref": "./examples/CheckKeyValues.json"
+          },
+          "CheckKeyValues_IfMatch": {
+            "$ref": "./examples/CheckKeyValues_IfMatch.json"
+          },
+          "CheckKeyValues_IfNoneMatch": {
+            "$ref": "./examples/CheckKeyValues_IfNoneMatch.json"
           }
         }
       }
@@ -1399,6 +1443,10 @@
               "Sync-Token": {
                 "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
                 "type": "string"
+              },
+              "ETag": {
+                "description": "An identifier representing the returned state of the resource.",
+                "type": "string"
               }
             }
           },
@@ -1468,6 +1516,10 @@
             "headers": {
               "Sync-Token": {
                 "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
+                "type": "string"
+              },
+              "ETag": {
+                "description": "An identifier representing the returned state of the resource.",
                 "type": "string"
               }
             }
@@ -1870,6 +1922,10 @@
           "items": {
             "$ref": "#/definitions/KeyValue"
           }
+        },
+        "ETag": {
+          "description": "An identifier representing the returned state of the resource.",
+          "type": "string"
         },
         "@nextLink": {
           "description": "The URI that can be used to request the next set of paged results.",
