@@ -37,7 +37,7 @@
         ],
         "summary": "Creates a new sharedQuotaEntity for the name passed.",
         "description": "Creates a new sharedQuotaEntity for the name passed. A sharedQuotaEntityRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
-        "operationId": "SharedQuotaEntity_CreateOrUpdate",
+        "operationId": "SharedQuotaEntities_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
             "$ref": "./examples/PutSharedQuotaEntity.json"
@@ -105,7 +105,7 @@
         ],
         "summary": "Updates a new sharedQuotaEntity for the name passed.",
         "description": "Updates the sharedQuotaEntity for the name passed. A sharedQuotaEntityRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked. \n Any change in the filters will be applicable to the future quota assignments, existing quota assigned to subscriptions from the sharedQuotaEntity remains unchanged.",
-        "operationId": "SharedQuotaEntity_Update",
+        "operationId": "SharedQuotaEntities_Update",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
             "$ref": "./examples/PatchSharedQuotaEntity.json"
@@ -173,7 +173,7 @@
         ],
         "summary": "Gets sharedQuotaEntity for the name passed.",
         "description": "Gets the sharedQuotaEntity for the name passed. It will display the SharedQuotaEntity properties only.The details on groupQuota can be access from the groupQuota APIs.",
-        "operationId": "SharedQuotaEntity_Get",
+        "operationId": "SharedQuotaEntities_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
             "$ref": "./examples/GetSharedQuotaEntity.json"
@@ -211,7 +211,7 @@
         ],
         "summary": "Deletes sharedQuotaEntity for the name passed.",
         "description": "Deletes the sharedQuotaEntity for the name passed. All the remaining shareQuota in the sharedQuotaEntity will be lost.",
-        "operationId": "SharedQuotaEntity_Delete",
+        "operationId": "SharedQuotaEntities_Delete",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
             "$ref": "./examples/DeleteSharedQuotaEntity.json"
@@ -251,7 +251,7 @@
         ],
         "summary": "Lists sharedQuotaEntities for the scope passed.",
         "description": "Lists sharedQuotaEntities for the scope passed. It will display the SharedQuotaEntity properties only.The details on groupQuota can be access from the groupQuota APIs.",
-        "operationId": "SharedQuotaEntity_List",
+        "operationId": "SharedQuotaEntities_List",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
             "$ref": "./examples/GetSharedQuotaEntityList.json"
