@@ -10,7 +10,10 @@
       }
     },
     "identity": {
-      "type": "None"
+      "type": "UserAssigned",
+      "userAssignedIdentities": {
+        "/user/assigned/resource/id": {}
+      }
     }
   },
   "responses": {
@@ -26,7 +29,17 @@
         "properties": {
           "provisioningState": "Succeeded",
           "dataLocation": "United States",
-          "hostName": "mycommunicationresource.communication.azure.com"
+          "hostName": "mycommunicationresource.communications.azure.com",
+          "version": "0.2.0"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/user/assigned/resource/id": {
+              "principalId": "11112222-3333-4444-5555-666677778888",
+              "clientId": "11112222-3333-4444-5555-666677778888"
+            }
+          }
         }
       }
     }
