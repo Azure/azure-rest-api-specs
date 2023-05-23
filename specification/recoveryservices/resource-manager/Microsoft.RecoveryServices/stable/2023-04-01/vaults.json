@@ -1739,6 +1739,21 @@
         "securitySettings": {
           "description": "Security Settings of the vault",
           "$ref": "#/definitions/SecuritySettings"
+        },
+        "secureScore": {
+          "description": "Secure Score of Recovery Services Vault",
+          "type": "string",
+          "enum": [
+            "None",
+            "Minimum",
+            "Adequate",
+            "Maximum"
+        ],
+        "readOnly": true,
+        "x-ms-enum": {
+          "name": "SecureScoreLevel",
+          "modelAsString": true
+         }
         }
       }
     },
