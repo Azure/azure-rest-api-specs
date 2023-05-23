@@ -6876,7 +6876,7 @@
           {
             "in": "query",
             "name": "description",
-            "description": "description.",
+            "description": "Description of the featureset.",
             "type": "string"
           }
         ],
@@ -11512,6 +11512,7 @@
       "additionalProperties": false
     },
     "AmlTokenComputeIdentity": {
+      "description": "AML token compute identity definition.",
       "type": "object",
       "allOf": [
         {
@@ -14157,6 +14158,7 @@
           "description": "Monitoring assets to take as input. Key is the component input port name, value is the data asset.",
           "type": "object",
           "additionalProperties": {
+            "description": "Monitoring input data base definition.",
             "$ref": "#/definitions/MonitoringInputDataBase",
             "x-nullable": true
           },
@@ -15857,6 +15859,7 @@
           "description": "[Required] The data which drift will be calculated for.",
           "type": "array",
           "items": {
+            "description": "Monitoring input data base definition.",
             "$ref": "#/definitions/MonitoringInputDataBase"
           },
           "x-ms-mutability": [
@@ -16551,6 +16554,7 @@
       "additionalProperties": false
     },
     "FixedInputData": {
+      "description": "Fixed input data definition.",
       "type": "object",
       "allOf": [
         {
@@ -16953,6 +16957,7 @@
       "additionalProperties": false
     },
     "GenerationSafetyQualityMetricThreshold": {
+      "description": "Generation safety quality metric threshold definition.",
       "required": [
         "metric"
       ],
@@ -16979,6 +16984,7 @@
       "additionalProperties": false
     },
     "GenerationSafetyQualityMonitoringSignal": {
+      "description": "Generation safety quality monitoring signal definition.",
       "required": [
         "metricThresholds",
         "samplingRate"
@@ -17006,6 +17012,7 @@
           "description": "Gets or sets the target data for computing metrics.",
           "type": "array",
           "items": {
+            "description": "Monitoring input data base definition.",
             "$ref": "#/definitions/MonitoringInputDataBase"
           },
           "x-ms-mutability": [
@@ -17038,6 +17045,7 @@
       "additionalProperties": false
     },
     "GenerationTokenStatisticsMetric": {
+      "description": "Generation token statistics metric enum.",
       "enum": [
         "TotalTokenCount",
         "TotalTokenCountPerGroup"
@@ -17058,6 +17066,7 @@
       "additionalProperties": false
     },
     "GenerationTokenStatisticsMetricThreshold": {
+      "description": "Generation token statistics metric threshold definition.",
       "required": [
         "metric"
       ],
@@ -17084,6 +17093,7 @@
       "additionalProperties": false
     },
     "GenerationTokenStatisticsSignal": {
+      "description": "Generation token statistics signal definition.",
       "required": [
         "metricThresholds",
         "samplingRate"
@@ -19840,6 +19850,7 @@
       "additionalProperties": false
     },
     "ManagedComputeIdentity": {
+      "description": "Managed compute identity definition.",
       "type": "object",
       "allOf": [
         {
@@ -20147,6 +20158,7 @@
       "discriminator": "modelType"
     },
     "ModelPerformanceSignal": {
+      "description": "Model performance signal definition.",
       "required": [
         "metricThreshold",
         "productionData",
@@ -20180,6 +20192,7 @@
           "description": "[Required] The data produced by the production service which drift will be calculated for.",
           "type": "array",
           "items": {
+            "description": "Monitoring input data base definition.",
             "$ref": "#/definitions/MonitoringInputDataBase"
           },
           "x-ms-mutability": [
@@ -20239,6 +20252,7 @@
       "additionalProperties": false
     },
     "ModelTaskType": {
+      "description": "Model task type enum.",
       "enum": [
         "Classification",
         "Regression",
@@ -20360,6 +20374,7 @@
       "additionalProperties": false
     },
     "MonitorComputeConfigurationBase": {
+      "description": "Monitor compute configuration base definition.",
       "required": [
         "computeType"
       ],
@@ -20377,13 +20392,14 @@
       "discriminator": "computeType"
     },
     "MonitorComputeIdentityBase": {
+      "description": "Monitor compute identity base definition.",
       "required": [
         "computeIdentityType"
       ],
       "type": "object",
       "properties": {
         "computeIdentityType": {
-          "description": "[Required] ",
+          "description": "[Required] Monitor compute identity type enum.",
           "$ref": "#/definitions/MonitorComputeIdentityType",
           "x-ms-mutability": [
             "create",
@@ -20394,6 +20410,7 @@
       "discriminator": "computeIdentityType"
     },
     "MonitorComputeIdentityType": {
+      "description": "Monitor compute identity type enum.",
       "enum": [
         "AmlToken",
         "ManagedIdentity"
@@ -20416,6 +20433,7 @@
       "additionalProperties": false
     },
     "MonitorComputeType": {
+      "description": "Monitor compute type enum.",
       "enum": [
         "ServerlessSpark"
       ],
@@ -20481,6 +20499,7 @@
       "additionalProperties": false
     },
     "MonitorServerlessSparkCompute": {
+      "description": "Monitor serverless spark compute definition.",
       "required": [
         "computeIdentity",
         "instanceType",
@@ -20658,6 +20677,7 @@
       "additionalProperties": false
     },
     "MonitoringInputDataBase": {
+      "description": "Monitoring input data base definition.",
       "required": [
         "inputDataType",
         "jobInputType",
@@ -20717,6 +20737,7 @@
       "discriminator": "inputDataType"
     },
     "MonitoringInputDataType": {
+      "description": "Monitoring input data type enum.",
       "enum": [
         "Static",
         "Trailing",
@@ -20875,6 +20896,7 @@
       "additionalProperties": false
     },
     "MonitoringTarget": {
+      "description": "Monitoring target definition.",
       "required": [
         "taskType"
       ],
@@ -20926,6 +20948,7 @@
       "additionalProperties": false
     },
     "MonitoringWorkspaceConnection": {
+      "description": "Monitoring workspace connection definition.",
       "type": "object",
       "properties": {
         "environmentVariables": {
@@ -24652,6 +24675,7 @@
       "additionalProperties": false
     },
     "StaticInputData": {
+      "description": "Static input data definition.",
       "required": [
         "windowEnd",
         "windowStart"
@@ -25706,6 +25730,7 @@
       "additionalProperties": false
     },
     "TrailingInputData": {
+      "description": "Trailing input data definition.",
       "required": [
         "windowOffset",
         "windowSize"
