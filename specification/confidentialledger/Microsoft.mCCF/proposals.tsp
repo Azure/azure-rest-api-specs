@@ -116,7 +116,7 @@ interface Proposals {
   >;
 
   @doc("Withdraw an existing proposal. Only the original proposer is permitted to withdraw.")
-  withdraw is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  withdraw is Azure.Core.StandardResourceOperations.ResourceAction<
     Proposal,
     CoseSigned,
     Proposal,
@@ -130,7 +130,6 @@ interface Proposals {
   >;
 
   @doc("Returns all current proposed changes to the service. Note that non-open proposals (ie - those which have already been accepted, rejected, withdrawn, etc) are not returned.")
-  // TODO: Remove nextLink
   listOpenProposals is Azure.Core.StandardResourceOperations.ResourceList<
     Proposal,
     TxIdReadHeader

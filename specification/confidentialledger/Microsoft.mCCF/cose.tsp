@@ -6,7 +6,7 @@ model CoseSignature {
   @TypeSpec.Http.header("Content-type")
   contentType: "application/cose";
 
-  @doc("A raw CoseSign1 signature. See CCF docs for required headers and body schema: https://microsoft.github.io/CCF/main/use_apps/issue_commands.html#cose-sign1")
+  @doc("A raw CoseSign1 signature. See CCF docs for required headers and body schema: https://microsoft.github.io/CCF/main/use_apps/issue_commands.html#cose-schemas")
   @TypeSpec.Http.body
   body: bytes;
 }

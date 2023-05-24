@@ -21,21 +21,17 @@ alias TxIdReadHeader = Azure.Core.Traits.ResponseHeadersTrait<{
 
 @doc("Hex encoding of SHA-256 of a node's public key.")
 // @format("hex") is emitted correctly, but fails Azure Swagger validation (oav)
-@pattern("^[a-f0-9]+$")
-@maxLength(64)
+@pattern("^[a-f0-9]{64}$")
 scalar nodeId extends string;
 
 @doc("Hex encoding of SHA-256 of a member certificate's fingerprint.")
-@pattern("^[a-f0-9]+$")
-@maxLength(64)
+@pattern("^[a-f0-9]{64}$")
 scalar memberId extends string;
 
 @doc("Hex encoding of SHA-256 of user certificate's fingerprint.")
-@pattern("^[a-f0-9]+$")
-@maxLength(64)
+@pattern("^[a-f0-9]{64}$")
 scalar userId extends string;
 
 @doc("Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.")
-@pattern("^[a-f0-9]+$")
-@maxLength(64)
+@pattern("^[a-f0-9]{64}$")
 scalar proposalId extends string;

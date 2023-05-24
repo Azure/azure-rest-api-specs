@@ -185,11 +185,10 @@ model JsOperations extends Record<JsEndpointInfo> {}
 @TypeSpec.Rest.resource("service")
 @doc("Describes the currently installed JavaScript application.")
 model JsApp {
-  @doc("Singleton key for accessing javaScriptApp.")
+  @doc("Singleton key for accessing javascript-app.")
   @visibility("read")
   @key
-  // TODO: javascript-app?
-  id: "javascriptApp";
+  id: "javascript-app";
 
   @doc("The collection of endpoints exposed by the application. Keyed by path.")
   endpoints: Record<JsOperations>;
@@ -223,11 +222,10 @@ model SnpJoinPolicy {
 @TypeSpec.Rest.resource("service")
 @doc("Collection of all policies which determine currently acceptable nodes, across multiple platforms.")
 model JoinPolicies {
-  @doc("Singleton key for accessing joinPolicy")
+  @doc("Singleton key for accessing join-policy")
   @visibility("read")
   @key
-  // TODO: join-policy?
-  id: "joinPolicy";
+  id: "join-policy";
 
   @doc("Policy applied to nodes running in SGX enclaves.")
   sgx: JoinPolicy;
