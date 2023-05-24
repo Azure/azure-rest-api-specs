@@ -1395,11 +1395,36 @@
           "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand.",
           "$ref": "#/definitions/Filters"
         },
+        "subsscriptionIds": {
+          "description": "List of subscriptions included in the ShareQuotaEntity.",
+          "$ref": "#/definitions/subscriptionIdList"
+        },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
           "$ref": "#/definitions/RequestState",
           "readOnly": true
         }
+      }
+    },
+    "AttributeType": {
+      "type": "string",
+      "description": "Name of the entity for filter, such as offerType.",
+      "enum": [
+        "billingId",
+        "serviceTreeId",
+        "subscriptionType"
+      ],
+      "x-ms-enum": {
+        "name": "SharedQuotaAttributeType",
+        "modelAsString": true
+      }
+    },
+    "subscriptionIdList": {
+      "type": "array",
+      "description": "List of subscrtionIds.",
+      "items": {
+        "type": "string",
+        "description": "SubscriptionId."
       }
     },
     "SharedQuotaEntity": {
@@ -1445,11 +1470,9 @@
       "properties": {
         "filterEntity": {
           "type": "string",
-          "description": "Name of the entity for filter, such as billingId, offerType, subscriptionIds )List of subscriptions), the list of subscriptions can be modified - add new subscriptions or remove previously added subscriptions. The operation will be get the sharedQuotaEntity, update the list of subscriptions - add or remove or update the list of subscriptions - add new subscriptions and remove old subscriptions, thus it will overwrite the list of subscrpitions to keep it consistent with other properties. we can add an API to add or remove subscriptions from list, if it helps the user. Alternatively, we can add a exclusion and inclusion list, where exclusion overrides the inclusion, similar to RBAC - deny overrides the allow. It may be bit hard for the user to understand, but power users can use it. By default all the subscriptions under the scope with the filters will be included, ease of use, else user can use advanced filters and use subscription list or inclusion and exclusion rules. We need to focus these ARMP APIs for 3P customers, where it's easier to use out of the box. The 1P customer user use case can be addressed by advanced filters. I would suggest to address the 1P customer use case in Capacity Order Growth APIs and have special handing based on each group's requirement, but let's keep the 3P APIs clean, easy to adpot and compliant with ARM RBAC.",
+          "description": "Name of the entity for filter, such as offerType.",
           "enum": [
-            "billingId",
-            "offerType",
-            "subscriptionIds"
+            "offerType"
           ],
           "x-ms-enum": {
             "name": "SubscriptionFilterType",
@@ -1472,7 +1495,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Values for the filterEntity for comparison. Such as billingId, offerType, subscriptionIds value."
+            "description": "Values for the filterEntity for comparison. Such as offerType values."
           }
         }
       },
