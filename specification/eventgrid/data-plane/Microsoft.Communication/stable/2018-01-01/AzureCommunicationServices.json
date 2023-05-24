@@ -381,11 +381,12 @@
     },
     "AcsRouterWorkerDeregisteredEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AcsRouterWorkerEventBaseProperties"
+      "properties": {
+        "workerId": {
+          "description": "Router Worker Deregistered Worker Id",
+          "type": "string"
         }
-      ]
+      }
     },
     "AcsRouterWorkerOfferAcceptedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event",
