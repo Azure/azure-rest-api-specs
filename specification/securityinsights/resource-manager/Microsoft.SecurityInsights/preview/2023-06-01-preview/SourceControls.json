@@ -163,10 +163,6 @@
               "$ref": "#/definitions/SourceControl"
             }
           },
-          "404": {
-            "description": "Not Found",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -259,10 +255,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Operation succeeded with warnings.",
+            "schema": {
+              "$ref": "#/definitions/Warning"
+            }
           },
           "204": {
-            "description": "No Content"
+            "description": "Operation succeeded without warnings."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
           }
         }
       }
@@ -419,16 +424,19 @@
     },
     "RepositoryAccess": {
       "type": "object",
+      "description": "Credentials to access repository.",
       "properties": {
         "kind": {
           "description": "The kind of repository access credentials",
           "$ref": "#/definitions/RepositoryAccessKind"
         },
         "code": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "OAuth Code. Required when `kind` is `OAuth`"
         },
         "state": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "OAuth State. Required when `kind` is `OAuth`"
         },
@@ -437,6 +445,7 @@
           "description": "OAuth ClientId. Required when `kind` is `OAuth`"
         },
         "token": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Personal Access Token. Required when `kind` is `PAT`"
         },
@@ -530,6 +539,7 @@
           "readOnly": true
         },
         "webhookSecretUpdateTime": {
+          "format": "date-time",
           "description": "Time when the webhook secret was updated.",
           "type": "string",
           "readOnly": true
@@ -828,6 +838,34 @@
           }
         ]
       }
+    },
+    "Warning": {
+      "description": "Warning response structure.",
+      "x-ms-external": true,
+      "properties": {
+        "warning": {
+          "$ref": "#/definitions/WarningBody",
+          "description": "Warning data"
+        }
+      },
+      "type": "object"
+    },
+    "WarningBody": {
+      "x-ms-external": true,
+      "description": "Warning details.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the warning. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "A message describing the warning, intended to be suitable for display in a user interface.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
