@@ -116,17 +116,17 @@ output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/key
 
 These settings apply only when `--tag=package-2016-10 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-10' && $(python)
+``` yaml $(tag) == 'package-2016-10'
 namespace: azure.mgmt.keyvault.v2016_10_01
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
-directive:
-  - from: keyvault.json
-    where: $.definitions.Sku.properties.family
-    transform: >
-        $['default'] = 'A';
 ```
 
 ``` yaml $(python)
 modelerfour:
   seal-single-value-enum-by-default: true
+directive:
+  - from: keyvault.json
+    where: $.definitions.Sku.properties.family
+    transform: >
+        $['default'] = 'A';
 ```
