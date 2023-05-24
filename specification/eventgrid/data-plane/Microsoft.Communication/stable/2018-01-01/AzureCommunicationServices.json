@@ -200,11 +200,17 @@
         },
         "attachedWorkerSelectors": {
           "description": "Router Job Queued Attached Worker Selector",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         },
         "requestedWorkerSelectors": {
           "description": "Router Job Queued Requested Worker Selector",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         }
       }
     },
@@ -231,7 +237,10 @@
         },
         "requestedWorkerSelectors": {
           "description": "Router Job Received Requested Worker Selectors",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         },
         "scheduledTimeUtc": {
           "description": "Router Job Received Scheduled Time in UTC",
@@ -259,11 +268,17 @@
         },
         "attachedWorkerSelectorsExpired": {
           "description": "Router Job Scheduling Failed Attached Worker Selector Expired",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         },
         "requestedWorkerSelectorsExpired": {
           "description": "Router Job Scheduling Failed Requested Worker Selector Expired",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         },
         "scheduledTimeUtc": {
           "description": "Router Job Scheduling Failed Scheduled Time in UTC",
@@ -309,11 +324,17 @@
         },
         "attachedWorkerSelectorsExpired": {
           "description": "Router Job Waiting For Activation Worker Selector Expired",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         },
         "requestedWorkerSelectorsExpired": {
           "description": "Router Job Waiting For Activation Requested Worker Selector Expired",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         },
         "scheduledTimeUtc": {
           "description": "Router Job Waiting For Activation Scheduled Time in UTC",
@@ -336,11 +357,17 @@
       "properties": {
         "requestedWorkerSelectorsExpired": {
           "description": "Router Job Worker Selectors Expired Requested Worker Selectors",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         },
-        "attachedWorkerSelectors": {
+        "attachedWorkerSelectorsExpired": {
           "description": "Router Job Worker Selectors Expired Attached Worker Selectors",
-          "$ref": "#/definitions/AcsRouterWorkerSelector"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
+          }
         }
       }
     },
