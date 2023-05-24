@@ -829,9 +829,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Successfully created an Azure AD for customers tenant.",
+            "description": "OK - Successfully updated an existing Azure AD for customers tenant resource.",
+            "x-ms-azure-resource": true,
             "schema": {
-              "$ref": "#/definitions/OperationStatusResult"
+              "$ref": "#/definitions/CIAMTenantResource"
             }
           },
           "201": {
@@ -847,7 +848,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CreateCIAMTenantResponseBody"
+              "$ref": "#/definitions/CIAMTenantResource"
             }
           },
           "default": {
@@ -1440,6 +1441,12 @@
           "items": {
             "$ref": "#/definitions/CIAMTenantResource"
           }
+        },
+        "nextLink": {
+          "description": "The URL to get the next set of Azure AD for customers tenant resources.",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
@@ -1864,6 +1871,8 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]{1,}(?:\\.[a-zA-Z]{2,})",
+      "maxLength": 43,
       "description": "The initial domain name of the tenant.",
       "x-ms-parameter-location": "method"
     },
