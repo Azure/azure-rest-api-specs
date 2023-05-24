@@ -459,11 +459,7 @@
         "network": {
           "$ref": "#/definitions/Network",
           "default": null,
-          "description": "Network properties of a server.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Network properties of a server. This Network property is required to be passed only in case you want the server to be Private access server."
         },
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
@@ -488,9 +484,10 @@
               }
             ]
           },
-          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'.",
+          "description": "The source server resource ID to restore from. It's required when 'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'. This property is returned only for Replica server",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         },
         "pointInTimeUTC": {
@@ -517,7 +514,8 @@
         "replicaCapacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Replicas allowed for a server."
+          "description": "Replicas allowed for a server.",
+          "readOnly": true
         },
         "createMode": {
           "type": "string",
@@ -639,6 +637,11 @@
         "replicationRole": {
           "$ref": "#/definitions/ReplicationRole",
           "description": "Replication role of the server"
+        },
+        "network": {
+          "$ref": "#/definitions/Network",
+          "default": null,
+          "description": "Network properties of a server. These are required to be passed only in case if server is a private access server."
         }
       }
     },
@@ -815,7 +818,7 @@
         },
         "type": {
           "type": "string",
-          "description": "the types of identities associated with this resource; currently restricted to 'SystemAssigned and UserAssigned'",
+          "description": "the types of identities associated with this resource; currently restricted to 'None and UserAssigned'",
           "enum": [
             "None",
             "UserAssigned"
@@ -824,6 +827,11 @@
             "name": "IdentityType",
             "modelAsString": true
           }
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id of the server.",
+          "readOnly": true
         }
       },
       "required": [
@@ -905,12 +913,7 @@
               }
             ]
           },
-          "default": "",
-          "description": "delegated subnet arm resource id.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Delegated subnet arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
         },
         "privateDnsZoneArmResourceId": {
           "type": "string",
@@ -921,15 +924,10 @@
               }
             ]
           },
-          "default": "",
-          "description": "private dns zone arm resource id.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Private dns zone arm resource id. This is required to be passed during create, in case we want the server to be VNET injected, i.e. Private access server. During update, pass this only if we want to update the value for Private DNS zone."
         }
       },
-      "description": "Network properties of a server"
+      "description": "Network properties of a server."
     },
     "HighAvailability": {
       "type": "object",
