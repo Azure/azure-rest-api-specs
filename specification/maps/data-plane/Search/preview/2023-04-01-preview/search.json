@@ -775,15 +775,26 @@
       }
     },
     "AutosuggestFeature": {
-      "description": "`GeoJSON GeocodingFeature` object",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonFeature"
-        },
-        {
-          "$ref": "#/definitions/AutosuggestProperties"
-        }
+      "properties": {
+          "type": {
+              "type": "string",
+              "enum": [ "Feature"]
+          },
+          "properties": {
+              "$ref": "#/definitions/AutosuggestProperties"
+          },
+          "geometry": {
+              "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonGeometry"
+          },
+          "bbox": {
+              "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/BoundingBox"
+          }
+      },
+      "required": [
+          "type",
+          "geometry",
+          "properties"
       ]
     },
     "AutosuggestProperties": {
@@ -813,30 +824,64 @@
           }
         },
         "address": {
-          "description": "Address",
+          "description": "The address of the result",
           "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Address"
+          "properties": {
+            "addressLine": {
+              "description": "AddressLine that includes Street Name and Number",
+              "type": "string"
             },
-            {
+            "locality": {
+              "description": "locality property",
+              "type": "string"
+            },
+            "adminDistricts": {
+              "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                  "type": "string",
+                  "description": "The name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be full name of state such as Washington, \nFor adminDistrict[1], this could be the full name of the county"
+                  },
+                  "shortName": {
+                    "type": "string",
+                    "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA, \nFor adminDistrict[1], this could be the short name of the county"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "The type of the adminDistrict. For example: adminDistrict, adminDistrict2"
+                  }
+                }
+              }
+            },
+            "countryRegion": {
               "type": "object",
               "properties": {
-                "houseNumber": {
-                  "description": "The house number of the address.",
+                "ISO": {
+                  "description": "ISO of country/region",
                   "type": "string"
                 },
-                "streetNumber": {
-                  "description": "The street number of the address.",
+                "name": {
+                  "description": "name of country/region",
                   "type": "string"
                 }
               }
+            },
+            "postalCode": {
+              "description": "Postal Code property",
+              "type": "string"
+            },
+            "formattedAddress": {
+              "description": "Formatted Address property",
+              "type": "string"
             }
-          ]
+          }
         },
         "name": {
-          "description": "The name of the place.",
-          "type": "string"
+              "description": "The name of the place.",
+              "type": "string"
         }
       }
     },
