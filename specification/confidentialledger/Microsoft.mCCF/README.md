@@ -1,4 +1,4 @@
-# Contoso.WidgetManager
+# Microsoft.mCCF
 
 > see https://aka.ms/autorest
 
