@@ -102,9 +102,6 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
-          },
-          "Successful Dynamic Classification Request": {
-            "$ref": "./examples/text/SuccessfuDynamicClassificationRequest.json"
           }
         }
       }
@@ -273,8 +270,7 @@
         "PiiEntityRecognition",
         "KeyPhraseExtraction",
         "LanguageDetection",
-        "EntityLinking",
-        "DynamicClassification"
+        "EntityLinking"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskKind",
@@ -311,8 +307,7 @@
         "PiiEntityRecognitionResults",
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
-        "EntityLinkingResults",
-        "DynamicClassificationResults"
+        "EntityLinkingResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
@@ -504,23 +499,6 @@
         }
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
-    },
-    "AnalyzeTextDynamicClassificationInput": {
-      "type": "object",
-      "properties": {
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
-        },
-        "parameters": {
-          "$ref": "#/definitions/DynamicClassificationTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTask"
-        }
-      ],
-      "x-ms-discriminator-value": "DynamicClassification"
     },
     "AnalyzeTextJobsInput": {
       "type": "object",
@@ -766,25 +744,6 @@
       ],
       "required": [
         "class"
-      ]
-    },
-    "DynamicClassificationDocumentResult": {
-      "type": "object",
-      "properties": {
-        "classifications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassificationResult"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ],
-      "required": [
-        "classifications"
       ]
     },
     "HealthcareTaskParameters": {
@@ -3121,81 +3080,6 @@
           }
         }
       }
-    },
-    "DynamicClassificationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Zero Shot Classification task.",
-      "properties": {
-        "classificationType": {
-          "type": "string",
-          "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
-          "default": "Multi",
-          "enum": [
-            "Single",
-            "Multi"
-          ],
-          "x-ms-enum": {
-            "name": "ClassificationType",
-            "modelAsString": true
-          }
-        },
-        "categories": {
-          "type": "array",
-          "description": "a list of categories to which input is classified to.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        }
-      ],
-      "required": [
-        "categories"
-      ]
-    },
-    "DynamicClassificationTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/DynamicClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "DynamicClassificationResults"
-    },
-    "DynamicClassificationResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/DynamicClassificationDocumentResult"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
     },
     "AnalyzeTextJobState": {
       "allOf": [
