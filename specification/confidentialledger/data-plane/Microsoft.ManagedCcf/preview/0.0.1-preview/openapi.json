@@ -1,0 +1,2094 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Managed CCF Governance",
+    "version": "0.0.1-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/gov/members/encrypted-recovery-shares/{memberId}": {
+      "get": {
+        "operationId": "GovMembers_GetEncryptedShare",
+        "description": "Retrieve a member's recovery share, encrypted with that member's share-encryption key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Recovery.EncryptedRecoveryShare"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/members/members/{memberId}:recover": {
+      "post": {
+        "operationId": "GovMembers_SubmitRecoveryShare",
+        "description": "Provide a recovery share for the purpose of completing a service recovery.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Recovery.RecoveryShare"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Recovery.RecoveryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/members/proposals": {
+      "get": {
+        "operationId": "GovMembers_ListOpenProposals",
+        "description": "Returns all current proposed changes to the service. Note that non-open proposals (ie - those which have already been accepted, rejected, withdrawn, etc) are not returned.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Proposals.Proposal"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Proposals.Proposal[]",
+                  "description": "The Proposal items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of Proposal items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Proposals.Proposal, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/gov/members/proposals/{proposalId}": {
+      "get": {
+        "operationId": "GovMembers_GetProposal",
+        "description": "Returns a summary of a single proposed change to the service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "proposalId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Proposals.Proposal"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/members/proposals/{proposalId}/actions": {
+      "get": {
+        "operationId": "GovMembers_GetActions",
+        "description": "Returns actions contained in a proposal.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "proposalId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Proposals.ProposalActions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/members/proposals/{proposalId}/ballots/{memberId}:submit": {
+      "post": {
+        "operationId": "GovMembers_Submit",
+        "description": "Submit an executable ballot for a specific proposal. This may be as simple as `return true` to vote in favour, or contain reads from the KV and conditions on the proposal contents.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "proposalId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/CoseSignature.body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Proposals.Proposal"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cose"
+        ]
+      }
+    },
+    "/gov/members/proposals/{proposalId}/ballots/{memberId}": {
+      "get": {
+        "operationId": "GovMembers_GetBallot",
+        "description": "Returns a member's submitted ballot.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "proposalId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Proposals.Ballot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/members/proposals:propose": {
+      "post": {
+        "operationId": "GovMembers_Propose",
+        "description": "Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be handled idempotently, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CoseSignature.body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Proposals.Proposal"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cose"
+        ]
+      }
+    },
+    "/gov/members/proposals:withdraw": {
+      "post": {
+        "operationId": "GovMembers_Withdraw",
+        "description": "Withdraw an existing proposal. Only the original proposer is permitted to withdraw.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CoseSignature.body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Proposals.Proposal"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cose"
+        ]
+      }
+    },
+    "/gov/members/state-digests/{memberId}:update": {
+      "post": {
+        "operationId": "GovMembers_UpdateStateDigest",
+        "description": "Request that this member's stateDigest is updated to a fresher value. Only this member may update their own stateDigest. Returns the refreshed value.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/CoseSignature.body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Acks.StateDigest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cose"
+        ]
+      }
+    },
+    "/gov/members/state-digests/{memberId}:ack": {
+      "post": {
+        "operationId": "GovMembers_AckStateDigest",
+        "description": "Submit a signed acknowledgement of a recent digest of the service status, to transition the member to Active.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/CoseSignature.body"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cose"
+        ]
+      }
+    },
+    "/gov/members/state-digests/{memberId}": {
+      "get": {
+        "operationId": "GovMembers_GetStateDigest",
+        "description": "Get the stateDigest assigned to the given member, which that member must sign to become active.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Acks.StateDigest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/constitution": {
+      "get": {
+        "operationId": "GovState_GetConstitution",
+        "description": "Retrieve the constitution which controls governance changes on this service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceState.ConstitutionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/info": {
+      "get": {
+        "operationId": "GovState_GetServiceInfo",
+        "description": "Returns general information about the service, including whether it is a recovery or original service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceState.ServiceInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/javascriptApp": {
+      "get": {
+        "operationId": "GovState_GetJsApp",
+        "description": "Retrieve details of Javascript application and execution engine.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceState.JsApp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/joinPolicy": {
+      "get": {
+        "operationId": "GovState_GetJoinPolicies",
+        "description": "Retrieve policy data which determines whether new nodes are permitted to join the service. This describes the hardware attestations which are acceptable to the service, demonstrating a joining node is running approved code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceState.JoinPolicies"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/jwk": {
+      "get": {
+        "operationId": "GovState_GetJwkInfo",
+        "description": "Returns information about OpenID Connect identity providers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceState.JwkInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/members": {
+      "get": {
+        "operationId": "GovState_GetAllMembers",
+        "description": "Retrieve list of all members who govern this service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ServiceState.Member"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "ServiceState.Member[]",
+                  "description": "The Member items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of Member items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<ServiceState.Member, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/gov/service/members/{memberId}": {
+      "get": {
+        "operationId": "GovState_GetMember",
+        "description": "Retrieve a single governing member, by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceState.Member"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/nodes": {
+      "get": {
+        "operationId": "GovState_GetAllNodes",
+        "description": "Retrieve list of all nodes participating in this service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ServiceState.Node"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "ServiceState.Node[]",
+                  "description": "The Node items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of Node items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<ServiceState.Node, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/gov/service/nodes/{nodeId}": {
+      "get": {
+        "operationId": "GovState_GetNode",
+        "description": "Retrieve a single node, by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of a node's public key.",
+            "type": "string",
+            "format": "hex",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceState.Node"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/transactions/{transactionId}/status": {
+      "get": {
+        "operationId": "GovService_GetTransactionStatus",
+        "description": "Get status of transaction by transaction ID, to determine whether it has committed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Transactions.Transaction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/gov/service/transactions/commit": {
+      "get": {
+        "operationId": "GovService_GetCommit",
+        "description": "Get latest committed transaction.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Transactions.Transaction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Acks.StateDigest": {
+      "type": "object",
+      "properties": {
+        "memberId": {
+          "$ref": "#/definitions/memberId",
+          "description": "Identifier for member this stateDigest applies to.",
+          "readOnly": true
+        },
+        "stateDigest": {
+          "type": "string",
+          "description": "Hex-encoding of SHA-256 hash of the root of the service's merkle tree. This should be signed by a new member and submitted as an ACK to mark that member as Active.",
+          "format": "hex",
+          "maxLength": 64
+        }
+      },
+      "description": "A compact summary of the service's state up to a certain point in time, updated and signed by members to indicate their participation in and approval of the service.",
+      "required": [
+        "memberId",
+        "stateDigest"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
+          "description": "An array of details about specific errors that led to this reported error."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message",
+        "details"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      },
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
+    },
+    "Proposals.Action": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the action to perform. This should match an action defined in the service's constitution, so that it can be invoked by the `apply` function of the constitution if the proposal is accepted."
+        },
+        "args": {
+          "description": "Arguments to modify the behaviour of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution."
+        }
+      },
+      "description": "A single step in a proposed change to the service.",
+      "required": [
+        "name",
+        "args"
+      ]
+    },
+    "Proposals.Ballot": {
+      "type": "object",
+      "properties": {
+        "memberId": {
+          "$ref": "#/definitions/memberId",
+          "description": "ID of CCF member who signed and submitted this ballot.",
+          "readOnly": true
+        },
+        "ballot": {
+          "type": "string",
+          "description": "The script to execute, returning the voter's support of this proposal.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "description": "The source script of an executable vote from a member, regarding a proposed change to the service.",
+      "required": [
+        "memberId",
+        "ballot"
+      ]
+    },
+    "Proposals.FailureInfo": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Error message describing reason for failure."
+        },
+        "trace": {
+          "type": "string",
+          "description": "Callstack showing where failure occurred, if available."
+        }
+      },
+      "description": "Description of why governance execution failed.",
+      "required": [
+        "reason"
+      ]
+    },
+    "Proposals.MemberVotes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "description": "Each key is a memberId, and the corresponding value is the result of their ballot."
+    },
+    "Proposals.Proposal": {
+      "type": "object",
+      "properties": {
+        "proposalId": {
+          "$ref": "#/definitions/proposalId",
+          "description": "Unique ID assigned to this proposal at its submission, by the service.",
+          "readOnly": true
+        },
+        "proposerId": {
+          "$ref": "#/definitions/memberId",
+          "description": "ID of CCF member who signed and created this proposal.",
+          "readOnly": true
+        },
+        "proposalState": {
+          "$ref": "#/definitions/Proposals.ProposalState",
+          "description": "Current state of this proposal."
+        },
+        "ballotCount": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Count of how many ballots have been submitted for this proposal."
+        },
+        "finalVotes": {
+          "$ref": "#/definitions/Proposals.MemberVotes",
+          "description": "If a proposal is not open, then this contains the result of each ballot when the proposal transitioned from open."
+        },
+        "voteFailures": {
+          "$ref": "#/definitions/Proposals.VoteFailures",
+          "description": "This will be populated with a description of any ballots which failed to execute."
+        },
+        "failure": {
+          "$ref": "#/definitions/Proposals.FailureInfo",
+          "description": "If proposalState is Failure, then this will describe why the proposal failed."
+        }
+      },
+      "description": "Description of a proposed change to the service.",
+      "required": [
+        "proposalId",
+        "proposerId",
+        "proposalState",
+        "ballotCount"
+      ]
+    },
+    "Proposals.ProposalActions": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Proposals.Action"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "Proposals.Action[]",
+          "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically."
+        }
+      },
+      "description": "The actions contained in a proposal, describing the proposal's changes.",
+      "required": [
+        "actions"
+      ]
+    },
+    "Proposals.ProposalState": {
+      "type": "string",
+      "description": "Possible states for a proposal.",
+      "enum": [
+        "Open",
+        "Accepted",
+        "Withdrawn",
+        "Rejected",
+        "Failed",
+        "Dropped"
+      ],
+      "x-ms-enum": {
+        "name": "ProposalState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Open",
+            "value": "Open",
+            "description": "Proposal is active and can be voted on."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Proposal passed a successful vote and was enacted."
+          },
+          {
+            "name": "Withdrawn",
+            "value": "Withdrawn",
+            "description": "Proposal was removed by proposing member. Will never be enacted."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "Proposal was rejected by vote. Will never be enacted."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Proposal passed a successful vote, but its proposed actions failed. Will never be enacted."
+          },
+          {
+            "name": "Dropped",
+            "value": "Dropped",
+            "description": "Proposal was open when its semantics were potentially changed (code or constitution were modified), so it was automatically invalidated."
+          }
+        ]
+      }
+    },
+    "Proposals.VoteFailures": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/Proposals.FailureInfo"
+      },
+      "description": "Each key is a memberId, and the corresponding value explains why execution of their ballot failed."
+    },
+    "Recovery.EncryptedRecoveryShare": {
+      "type": "object",
+      "properties": {
+        "memberId": {
+          "$ref": "#/definitions/memberId",
+          "description": "ID of CCF member who this recovery share belongs to.",
+          "readOnly": true
+        }
+      },
+      "description": "A share of a recovery key, granted for a specific recovery member, and encrypted with that member's share-encryption key. This is safe to share in the ledger or amongst untrusted callers, as only the intended member will be able to decrypt and access the secret content.",
+      "required": [
+        "memberId"
+      ]
+    },
+    "Recovery.RecoveryResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Human-readable description of current recovery progress."
+        },
+        "submittedCount": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Count of how many accepted member shares have been submitted, including the current request."
+        },
+        "recoveryThreshold": {
+          "type": "integer",
+          "format": "uint64",
+          "description": "Count of how many member shares are required to initiate the end-of-recovery procedure."
+        }
+      },
+      "description": "Response to a submitted recovery share.",
+      "required": [
+        "message",
+        "submittedCount",
+        "recoveryThreshold"
+      ]
+    },
+    "Recovery.RecoveryShare": {
+      "type": "object",
+      "properties": {
+        "share": {
+          "type": "string",
+          "description": "Base-64 encoding of a member's raw recovery share (unencrypted).",
+          "format": "base64"
+        }
+      },
+      "description": "Container for a member's raw recovery share. This should be carefully guarded, and only submitted to a trusted service over a secure channel, for the purposes of recovery.",
+      "required": [
+        "share"
+      ]
+    },
+    "ServiceState.ConstitutionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "constitution"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "Singleton key for accessing constitution",
+          "readOnly": true
+        },
+        "constitution": {
+          "type": "string",
+          "description": "Javascript source code of constitution."
+        }
+      },
+      "description": "Constitution used to make governance decisions on the service. All governance changes are presented as proposals which must be validated, approved, and applied by the code in this constitution.",
+      "required": [
+        "id",
+        "constitution"
+      ]
+    },
+    "ServiceState.ForwardingRequired": {
+      "type": "string",
+      "description": "Describes the forwarding behaviour of a specific endpoint. Write requests cannot be executed on a backup, so will generally be forwarded by any backup node which receives them to the current primary. Future requests on the same session may then be forwarded to maintain session consistency.",
+      "enum": [
+        "Sometimes",
+        "Always",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "ForwardingRequired",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sometimes",
+            "value": "Sometimes",
+            "description": "Indicates that this request should be forwarded if-and-only-if it is needed to maintain session consistency. If stale reads are acceptable then they can be completed on a backup, and the request will not be forwarded. This should be the default behaviour for read-only endpoints."
+          },
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Indicates that this request should always be forwarded. This will trigger forwarding of any additional requests on the same session, even those marked ForwardRequired::Sometimes. This should be the default behaviour for any endpoint which writes to the Key-Value store."
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Indicates endpoints which will never be forwarded, even when this will result in a break of session consistency. This should be used only to access node-local information, or when weaker consistency is acceptable."
+          }
+        ]
+      }
+    },
+    "ServiceState.JoinPolicies": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "joinPolicy"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "Singleton key for accessing joinPolicy",
+          "readOnly": true
+        },
+        "sgx": {
+          "$ref": "#/definitions/ServiceState.JoinPolicy",
+          "description": "Policy applied to nodes running in SGX enclaves."
+        },
+        "snp": {
+          "$ref": "#/definitions/ServiceState.SnpJoinPolicy",
+          "description": "Policy applied to nodes running in AMD SEV-SNP containers."
+        }
+      },
+      "description": "Collection of all policies which determine currently acceptable nodes, across multiple platforms.",
+      "required": [
+        "id",
+        "sgx",
+        "snp"
+      ]
+    },
+    "ServiceState.JoinPolicy": {
+      "type": "object",
+      "properties": {
+        "measurements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "Code measurements of acceptable enclaves."
+        }
+      },
+      "description": "Describes what a joining node must present, in order to join the service.",
+      "required": [
+        "measurements"
+      ]
+    },
+    "ServiceState.JsApp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "javascriptApp"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "Singleton key for accessing javaScriptApp.",
+          "readOnly": true
+        },
+        "endpoints": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceState.JsOperations"
+          },
+          "x-typespec-name": "Record<ServiceState.JsOperations>",
+          "description": "The collection of endpoints exposed by the application. Keyed by path."
+        }
+      },
+      "description": "Describes the currently installed JavaScript application.",
+      "required": [
+        "id",
+        "endpoints"
+      ]
+    },
+    "ServiceState.JsEndpointInfo": {
+      "type": "object",
+      "properties": {
+        "jsModule": {
+          "type": "string",
+          "description": "The name of the module where the endpoint function is located."
+        },
+        "jsFunction": {
+          "type": "string",
+          "description": "The name of the exported function which implements this endpoint."
+        },
+        "forwardingRequired": {
+          "$ref": "#/definitions/ServiceState.ForwardingRequired",
+          "description": "Describes whether requests to this endpoint should be forwarded to the primary or executed on backups."
+        },
+        "authnPolicies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "The authentication policies which restrict access to this endpoint"
+        },
+        "mode": {
+          "$ref": "#/definitions/ServiceState.JsExecMode",
+          "description": "Describes how this endpoint should be executed."
+        },
+        "openApi": {
+          "type": "object",
+          "properties": {},
+          "description": "TODO",
+          "x-typespec-name": "{}"
+        }
+      },
+      "description": "Describes an endpoint implemented by a Javascript handler.",
+      "required": [
+        "jsModule",
+        "jsFunction",
+        "forwardingRequired",
+        "authnPolicies",
+        "mode",
+        "openApi"
+      ]
+    },
+    "ServiceState.JsExecMode": {
+      "type": "string",
+      "description": "Describes the execution requirements of a specific endpoint.",
+      "enum": [
+        "ReadWrite",
+        "ReadOnly",
+        "Historical"
+      ],
+      "x-ms-enum": {
+        "name": "JsExecMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "Indicates that the endpoint does (or may) produces writes to the Key-Value store."
+          },
+          {
+            "name": "ReadOnly",
+            "value": "ReadOnly",
+            "description": "Indicates that the endpoint is a pure read, and will never write to the Key-Value store. Note that this includes endpoints which only access node-local state, and do not read from the Key-Value store at all."
+          },
+          {
+            "name": "Historical",
+            "value": "Historical",
+            "description": "Indicates that the endpoint operates over a historical write to the Key-Value store rather than the latest, current state. These endpoints are also read-only, and may not produce writes."
+          }
+        ]
+      }
+    },
+    "ServiceState.JsOperations": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ServiceState.JsEndpointInfo"
+      },
+      "description": "The collection of operations available on each path. Keyed by HTTP method."
+    },
+    "ServiceState.JwkInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "jwk"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "Singleton key for accessing jwk",
+          "readOnly": true
+        },
+        "issuers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceState.JwtIssuer"
+          },
+          "x-typespec-name": "Record<ServiceState.JwtIssuer>",
+          "description": "Collection of JWT issuers. Keyed by issuer ID."
+        },
+        "caCertBundles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceState.caCertBundle"
+          },
+          "x-typespec-name": "Record<ServiceState.caCertBundle>",
+          "description": "Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names."
+        }
+      },
+      "description": "Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.",
+      "required": [
+        "id",
+        "issuers",
+        "caCertBundles"
+      ]
+    },
+    "ServiceState.JwtIssuer": {
+      "type": "object",
+      "properties": {},
+      "description": "TODO"
+    },
+    "ServiceState.Member": {
+      "type": "object",
+      "properties": {
+        "memberId": {
+          "$ref": "#/definitions/memberId",
+          "description": "ID of CCF member who this object refers to.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ServiceState.MemberStatus",
+          "description": "Current status of this member."
+        },
+        "memberData": {
+          "type": "object",
+          "properties": {},
+          "description": "Arbitrary service-defined metadata about this member. May be used by constitution or application code, but will not affect any core framework decisions.",
+          "x-typespec-name": "{}"
+        },
+        "certificate": {
+          "$ref": "#/definitions/ServiceState.pem",
+          "description": "x509 certificate used as this member's identity."
+        }
+      },
+      "description": "Information on individual members within a consortium.",
+      "required": [
+        "memberId",
+        "status",
+        "memberData",
+        "certificate"
+      ]
+    },
+    "ServiceState.MemberStatus": {
+      "type": "string",
+      "description": "Possible states for a CCF governing member.",
+      "enum": [
+        "Accepted",
+        "Active"
+      ],
+      "x-ms-enum": {
+        "name": "MemberStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Member has been approved to join the service, but have not yet submitted an ACK to indicate their participation. These members should not be considered by constitutions in quorum calculations, and their signed requests will be rejected until they become Active."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Member has submitted a valid ACK and is a full voting participant."
+          }
+        ]
+      }
+    },
+    "ServiceState.NetworkInterface": {
+      "type": "object",
+      "properties": {
+        "publishedAddress": {
+          "type": "string",
+          "description": "The network address where this node believes it is publically accessible, in the format <host>[:<port>]."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The application layer protocol which the node expects on this interface. Currently supports \"http1\" and \"http2\", more protocols may be added in future."
+        }
+      },
+      "description": "Details of how to contact a CCF node. Each node may listen on multiple interfaces, for different kinds of traffic.",
+      "required": [
+        "publishedAddress",
+        "protocol"
+      ]
+    },
+    "ServiceState.Node": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "$ref": "#/definitions/nodeId",
+          "description": "ID of CCF node who this object refers to.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ServiceState.NodeStatus",
+          "description": "Current status of this node."
+        },
+        "nodeData": {
+          "type": "object",
+          "properties": {},
+          "description": "Arbitrary service-defined metadata about this node. May be used by constitution or application code, but will not affect any core framework decisions.",
+          "x-typespec-name": "{}"
+        },
+        "certificate": {
+          "$ref": "#/definitions/ServiceState.pem",
+          "description": "x509 certificate containing this node's identity."
+        },
+        "retiredCommitted": {
+          "type": "boolean",
+          "description": "This is false during node's normal operation. It transitions to true once the node has been retired, and that retirement has been committed by the service. At this point it is safe to terminate a node. Terminating a node any earlier may affect liveness of the service."
+        },
+        "quoteInfo": {
+          "$ref": "#/definitions/ServiceState.QuoteInfo",
+          "description": "Contains this node's hardware attesation. This is generated during node startup, and must meet the current join policy restrictions for the node to successfully join a service."
+        },
+        "rpcInterfaces": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceState.NetworkInterface"
+          },
+          "x-typespec-name": "Record<ServiceState.NetworkInterface>",
+          "description": "A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator."
+        }
+      },
+      "description": "Information on individual nodes within a service.",
+      "required": [
+        "nodeId",
+        "status",
+        "nodeData",
+        "certificate",
+        "retiredCommitted",
+        "quoteInfo",
+        "rpcInterfaces"
+      ]
+    },
+    "ServiceState.NodeStatus": {
+      "type": "string",
+      "description": "Lifecycle state of a CCF node. Nodes will generally start as Pending, then transition to Trusted, then to Retired. They are only full participants in the service while they are Trusted.",
+      "enum": [
+        "Pending",
+        "Trusted",
+        "Retired"
+      ],
+      "x-ms-enum": {
+        "name": "NodeStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Indicates a node which has successfully completed a join request to the service (including attestation checks), but has not yet been approved by governance."
+          },
+          {
+            "name": "Trusted",
+            "value": "Trusted",
+            "description": "Indicates a node which has been approved by governance, and is a full participant in the service."
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "Indicates a node which has been removed from a service by a reconfiguration."
+          }
+        ]
+      }
+    },
+    "ServiceState.QuoteInfo": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Names the platform and version of the contained info."
+        }
+      },
+      "description": "Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.",
+      "discriminator": "format",
+      "required": [
+        "format"
+      ]
+    },
+    "ServiceState.ServiceInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "info"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "Singleton key for accessing info.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ServiceState.ServiceStatus",
+          "description": "Lifetime stage of the service."
+        },
+        "certificate": {
+          "$ref": "#/definitions/ServiceState.pem",
+          "description": "The current service identity. This is the public face of a secret key shared only by the nodes within the service, and should be used to authenticate TLS sessions with this service."
+        },
+        "recoveryCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Records how many predecessors this service has. While the service identity certificate will change on any recovery, this allows users to determine exactly how many such recoveries have occurred."
+        },
+        "creationTransactionId": {
+          "$ref": "#/definitions/transactionId",
+          "description": "Transaction ID at which this service was first created. If this is a recovery of a previous service, this will indicate when the current service was recovered."
+        },
+        "previousServiceCreationTransactionId": {
+          "$ref": "#/definitions/ServiceState.pem",
+          "description": "Transaction ID at which the predecessor service was created, if this service is a recovery. If this is an original service rather than a recovery, this will be omitted."
+        },
+        "serviceData": {
+          "type": "object",
+          "properties": {},
+          "description": "Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions.",
+          "x-typespec-name": "{}"
+        },
+        "configuration": {
+          "type": "object",
+          "properties": {
+            "maximumNodeCertificateValidityDays": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "recentCoseProposalsWindowSize": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "description": "Summarises governance-controlled configuration parameters of this service, which will be used by core framework code.",
+          "required": [
+            "maximumNodeCertificateValidityDays",
+            "recentCoseProposalsWindowSize"
+          ],
+          "x-typespec-name": "ServiceState.(anonymous model)"
+        }
+      },
+      "description": "General information about the current service.",
+      "required": [
+        "id",
+        "status",
+        "certificate",
+        "recoveryCount",
+        "creationTransactionId",
+        "serviceData",
+        "configuration"
+      ]
+    },
+    "ServiceState.ServiceStatus": {
+      "type": "string",
+      "description": "State machine values for current service lifetime. New services start in Opening, and transitition to Open via a governance proposal. They will only accept user transactions on the `/app` endpoints once they are Open. Recovery services have additional states where they must wait for members to submit sufficient recovery shares to access the previous ledger secrets, and while they are decrypting and replaying the previous ledger contents.",
+      "enum": [
+        "Opening",
+        "Open",
+        "WaitingForRecoveryShares",
+        "Recovering"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Opening",
+            "value": "Opening",
+            "description": "Services which have not yet passed a `transition_service_to_open` proposal."
+          },
+          {
+            "name": "Open",
+            "value": "Open",
+            "description": "Services which are operating normally and accepting user transactions."
+          },
+          {
+            "name": "WaitingForRecoveryShares",
+            "value": "WaitingForRecoveryShares",
+            "description": "Recovered services which cannot yet access private state."
+          },
+          {
+            "name": "Recovering",
+            "value": "Recovering",
+            "description": "Recovered services which are actively replaying transactions from previous service, to reach the same state."
+          }
+        ]
+      }
+    },
+    "ServiceState.SnpJoinPolicy": {
+      "type": "object",
+      "properties": {
+        "measurements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "Code measurements of acceptable enclaves."
+        },
+        "hostData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "TODO"
+        },
+        "uvmEndorsements": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "TODO"
+        }
+      },
+      "description": "Join policy fields specific to nodes running on AMD SEV-SNP hardware.",
+      "required": [
+        "measurements",
+        "hostData",
+        "uvmEndorsements"
+      ]
+    },
+    "ServiceState.caCertBundle": {
+      "type": "string",
+      "description": "Chain of endorsed certificates (PEM format) leading to a CA."
+    },
+    "ServiceState.pem": {
+      "type": "string",
+      "description": "PEM encoding of a cryptographic identifier. Contains a base64-encoded payload wrapped in content type identifiers."
+    },
+    "Transactions.Transaction": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Transactions.TransactionStatus",
+          "description": "Status of this transaction."
+        },
+        "transactionId": {
+          "$ref": "#/definitions/transactionId",
+          "description": "Identifier of the requested transaction.",
+          "readOnly": true
+        }
+      },
+      "description": "Description of a transaction's current state.",
+      "required": [
+        "status",
+        "transactionId"
+      ]
+    },
+    "Transactions.TransactionStatus": {
+      "type": "string",
+      "description": "Possible states for a CCF transaction. See docs for details: https://microsoft.github.io/CCF/main/use_apps/verify_tx.html#checking-for-commit",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Committed",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "TransactionStatus",
+        "modelAsString": true
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "0.0.1-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true
+      }
+    },
+    "memberId": {
+      "type": "string",
+      "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+      "format": "hex",
+      "maxLength": 64
+    },
+    "nodeId": {
+      "type": "string",
+      "description": "Hex encoding of SHA-256 of a node's public key.",
+      "format": "hex",
+      "maxLength": 64
+    },
+    "proposalId": {
+      "type": "string",
+      "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+      "format": "hex",
+      "maxLength": 64
+    },
+    "transactionId": {
+      "type": "string",
+      "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
+      "minLength": 1,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CoseSignature.body": {
+      "name": "body",
+      "in": "body",
+      "required": true,
+      "description": "A raw CoseSign1 signature. See CCF docs for required headers and body schema: https://microsoft.github.io/CCF/main/use_apps/issue_commands.html#cose-sign1",
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
