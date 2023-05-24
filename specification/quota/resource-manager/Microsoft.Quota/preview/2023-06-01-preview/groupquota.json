@@ -1470,15 +1470,18 @@
             "modelAsString": true
           }
         },
-        "filterValue": {
-          "type": "string",
-          "description": "Value for the filterEntity for comparison. Such as billingId, offerType value."
+        "filterValues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Values for the filterEntity for comparison. Such as billingId, offerType, subscriptionIds value."
+          }
         }
       },
       "required": [
         "filterEntity",
         "operator",
-        "filterValue"
+        "filterValues"
       ]
     },
     "Filters": {
