@@ -21,6 +21,7 @@ using TypeSpec.Versioning;
 namespace AzureHealthInsights;
 
 enum ApiVersion {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_03_01_preview: "2023-03-01-preview"
 }
 

@@ -99,7 +99,7 @@ model PatientDocument {
   language?: string;
 
   @doc("The date and time when the document was created.")
-  createdDateTime?: zonedDateTime;
+  createdDateTime?: utcDateTime;
 
   @doc("The content of the patient document.")
   content: DocumentContent;
