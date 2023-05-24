@@ -820,6 +820,7 @@
           },
           {
             "name": "createCIAMTenantRequestBody",
+            "description": "Request body to create an Azure AD for customers tenant",
             "in": "body",
             "required": true,
             "schema": {
@@ -889,6 +890,7 @@
           },
           {
             "name": "updateCIAMTenantRequestBody",
+            "description": "Request body to update Azure AD for customers tenant resource.",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/CIAMTenantUpdateRequest"
@@ -946,6 +948,10 @@
                 "type": "string",
                 "description": "The URL to retrieve the status of the asynchronous operation."
               },
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              },
               "Retry-After": {
                 "description": "Contains the number of seconds to wait before checking the deletion status.",
                 "type": "string"
@@ -958,7 +964,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
