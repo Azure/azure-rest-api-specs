@@ -37,22 +37,22 @@ These settings apply only when `--tag=package-flexibleserver-2023-03-01-preview`
 
 ```yaml $(tag) == 'package-flexibleserver-2023-03-01-preview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerLogs.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/VirtualNetwork.json
-  - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/LongTermRetentionOperation.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Administrators.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Backups.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Configuration.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Migrations.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/Replicas.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/ServerLogs.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2023-03-01-preview/LongTermRetentionOperation.json
 ```
 ### Tag: package-flexibleserver-2022-12-01
 
@@ -60,19 +60,19 @@ These settings apply only when `--tag=package-flexibleserver-2022-12-01` is spec
 
 ``` yaml $(tag) == 'package-flexibleserver-2022-12-01'
 input-file:
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Administrators.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Backups.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Capabilities.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Configuration.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Databases.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Operations.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Replicas.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/ServerStartStopRestart.json
-  - Microsoft.DBforPostgreSQL/stable/2022-12-01/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/Administrators.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/Backups.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/Capabilities.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/Configuration.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/Databases.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/Operations.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/Replicas.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2022-12-01/VirtualNetwork.json
 ```
 
 ### Tag: package-flexibleserver-2022-05-01-preview-only
@@ -81,8 +81,8 @@ These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview-
 
 ``` yaml $(tag) == 'package-flexibleserver-2022-05-01-preview-only'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Migrations.json
-  - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-05-01-preview/Migrations.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-05-01-preview/Operations.json
 ```
 
 ### Tag: package-flexibleserver-2022-03-preview
@@ -91,19 +91,19 @@ These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is
 
 ``` yaml $(tag) == 'package-flexibleserver-2022-03-preview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Administrators.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Backups.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Capabilities.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/CheckNameAvailability.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Configuration.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FlexibleServers.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Replicas.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
-  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/Administrators.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/Backups.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/Configuration.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/Replicas.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-preview/ServerStartStopRestart.json
 ```
 
 ### Tag: package-flexibleserver-2022-03-privatepreview
@@ -112,10 +112,10 @@ These settings apply only when `--tag=package-flexibleserver-2022-03-privateprev
 
 ``` yaml $(tag) == 'package-flexibleserver-2022-03-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-03-08-privatepreview/getCachedServerName.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-01-20-preview/Databases.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-01-20-preview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-01-20-preview/postgresql.json
 ```
 
 ### Tag: package-flexibleserver-2022-01-preview
@@ -124,9 +124,9 @@ These settings apply only when `--tag=package-flexibleserver-2022-01-preview` is
 
 ``` yaml $(tag) == 'package-flexibleserver-2022-01-preview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
-  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
-  - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/postgresql.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-01-20-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-01-20-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2022-01-20-preview/postgresql.json
 ```
 
 ### Tag: package-2021-06-15-privatepreview
@@ -135,8 +135,8 @@ These settings apply only when `--tag=package-2021-06-15-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2021-06-15-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/Migrations.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-15-privatepreview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-06-15-privatepreview/Migrations.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-06-15-privatepreview/postgresql.json
 ```
 
 ### Tag: package-flexibleserver-2021-06
@@ -145,9 +145,9 @@ These settings apply only when `--tag=package-flexibleserver-2021-06` is specifi
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-06'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2021-06-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2021-06-01/Databases.json
-- Microsoft.DBforPostgreSQL/stable/2021-06-01/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2021-06-01/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2021-06-01/Databases.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/stable/2021-06-01/PrivateDnsZone.json
 ```
 
 ### Tag: package-flexibleserver-2021-06-preview
@@ -156,11 +156,11 @@ These settings apply only when `--tag=package-flexibleserver-2021-06-preview` is
 
 ``` yaml $(tag) == 'package-flexibleserver-2021-06-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/IntelligentPerformance.json
-- Microsoft.DBforPostgreSQL/preview/2021-06-01-preview/QueryPerformanceInsights.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-06-01-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-06-01-preview/Databases.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-06-01-preview/IntelligentPerformance.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-06-01-preview/QueryPerformanceInsights.json
 ```
 
 ### Tag: package-2021-04-10-privatepreview
@@ -169,9 +169,9 @@ These settings apply only when `--tag=package-2021-04-10-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2021-04-10-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
-- Microsoft.DBforPostgreSQL/preview/2021-04-10-privatepreview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2020-11-05-preview/Databases.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-04-10-privatepreview/postgresql.json
 ```
 
 ### Tag: package-2021-03-31-privatepreview
@@ -180,9 +180,9 @@ These settings apply only when `--tag=package-2021-03-31-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2021-03-31-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
-- Microsoft.DBforPostgreSQL/preview/2021-03-31-privatepreview/PrivateDnsZone.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2020-02-14-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2020-11-05-preview/Databases.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2021-03-31-privatepreview/PrivateDnsZone.json
 ```
 
 ### Tag: package-2020-11-05-preview
@@ -191,8 +191,8 @@ These settings apply only when `--tag=package-2020-11-05-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-11-05-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
-- Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2020-02-14-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2020-11-05-preview/Databases.json
 ```
 
 ### Tag: package-2020-02-14-preview
@@ -201,7 +201,7 @@ These settings apply only when `--tag=package-2020-02-14-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-02-14-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2020-02-14-preview/postgresql.json
 ```
 
 ### Tag: package-2020-02-14-privatepreview
@@ -210,7 +210,7 @@ These settings apply only when `--tag=package-2020-02-14-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-02-14-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-flexibleserver/preview/2020-02-14-privatepreview/postgresql.json
 ```
 
 ## Suppression

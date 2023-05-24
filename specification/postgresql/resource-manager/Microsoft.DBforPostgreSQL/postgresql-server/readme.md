@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+- Microsoft.DBforPostgreSQL/postgresql-server/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
 ### Tag: package-2020-01-01
@@ -46,11 +46,11 @@ These settings apply only when `--tag=package-2020-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2017-12-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2020-01-01/DataEncryptionKeys.json
 ```
 
 ### Tag: package-2018-06-01-privatepreview
@@ -59,8 +59,8 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+- Microsoft.DBforPostgreSQL/postgresql-server/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- Microsoft.DBforPostgreSQL/postgresql-server/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
 ### Tag: package-2018-06-01
@@ -69,12 +69,12 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
-- Microsoft.DBforPostgreSQL/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2017-12-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2018-06-01/PerformanceRecommendations.json
 
 ```
 
@@ -84,7 +84,7 @@ These settings apply only when `--tag=package-2017-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2017-12-01-preview'
 input-file:
-- Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-server/preview/2017-12-01-preview/postgresql.json
 ```
 
 ### Tag: package-2017-12-01
@@ -93,8 +93,8 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
-- Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/postgresql-server/stable/2017-12-01/ServerSecurityAlertPolicies.json
 ```
 
 ## Suppression
