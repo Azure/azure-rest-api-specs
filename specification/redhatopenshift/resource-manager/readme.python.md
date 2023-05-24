@@ -15,16 +15,14 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python)
-multiapi: true
-default-api-version: "2022-09-04"
+```yaml $(python) && $(multiapi)
 batch:
   - tag: package-2020-04-30
   - tag: package-2021-09-01-preview
   - tag: package-2022-04-01
   - tag: package-2022-09-04
   - tag: package-2023-04-01
-- multiapiscript: true
+  - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
