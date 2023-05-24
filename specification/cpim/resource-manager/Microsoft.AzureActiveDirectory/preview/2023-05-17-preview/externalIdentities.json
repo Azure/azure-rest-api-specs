@@ -1711,6 +1711,10 @@
           "type": "object",
           "x-ms-client-flatten": true,
           "properties": {
+            "provisioningState": {
+              "title": "Provisioning State",
+              "type": "string"
+            },
             "createTenantProperties": {
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/CreateCIAMTenantProperties"
@@ -1816,13 +1820,11 @@
         },
         "startTime": {
           "description": "Start time of the async operation.",
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         },
         "endTime": {
           "description": "End time of the async operation.",
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         },
         "error": {
           "x-nullable": true,
