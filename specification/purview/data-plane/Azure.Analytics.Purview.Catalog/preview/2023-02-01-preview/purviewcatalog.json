@@ -1937,6 +1937,76 @@
         }
       }
     },
+    "/entity/guid/{guid}/sensitivityLabel/{labelId}": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Set sensitivity label on an existing entity represented by a GUID",
+        "operationId": "Entity_SetSensitivityLabel",
+        "x-ms-examples": {
+          "Entity_GetClassification": {
+            "$ref": "./examples/Entity_UpdateSensitivityLabel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/labelId"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Remove sensitivity label from an existing entity represented by a GUID",
+        "operationId": "Entity_RemoveSensitivityLabel",
+        "x-ms-examples": {
+          "Entity_DeleteClassification": {
+            "$ref": "./examples/Entity_UpdateSensitivityLabel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/labelId"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -8602,6 +8672,16 @@
     "guid": {
       "name": "guid",
       "description": "The globally unique identifier of the entity.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "labelId": {
+      "name": "labelId",
+      "description": "The id of the sensitivity labels defined for the tenant",
       "in": "path",
       "required": true,
       "type": "string",
