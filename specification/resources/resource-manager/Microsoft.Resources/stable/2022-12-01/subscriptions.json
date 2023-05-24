@@ -76,7 +76,7 @@
         "description": "This operation provides all the locations that are available for resource providers; however, each resource provider may support a subset of this list.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -126,7 +126,7 @@
         "description": "Gets details about a specified subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -234,7 +234,7 @@
         "description": "Compares a subscriptions logical zone mapping",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -934,6 +934,14 @@
     }
   },
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "method"
+    },
     "CheckResourceNameParameter": {
       "description": "Resource object with values for resource name and resource type",
       "in": "body",
