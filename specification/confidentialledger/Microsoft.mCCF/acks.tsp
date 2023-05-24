@@ -34,7 +34,7 @@ interface Acks {
 
   @doc("Submit a signed acknowledgement of a recent digest of the service status, to transition the member to Active.")
   @TypeSpec.Rest.action("ack")
-  ackStateDigest is Azure.Core.StandardResourceOperations.ResourceAction<
+  acknowledgeStateDigest is Azure.Core.StandardResourceOperations.ResourceAction<
     StateDigest,
     CoseSigned<StateDigest>,
     TypeSpec.Http.NoContentResponse,

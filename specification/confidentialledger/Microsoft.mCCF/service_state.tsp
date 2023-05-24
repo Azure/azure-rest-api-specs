@@ -328,7 +328,7 @@ model ServiceInfo {
 
 interface ServiceState {
   @doc("Retrieve list of all members who govern this service.")
-  getAllMembers is Azure.Core.StandardResourceOperations.ResourceList<
+  getMembers is Azure.Core.StandardResourceOperations.ResourceList<
     Member,
     TxIdReadHeader
   >;
@@ -340,7 +340,7 @@ interface ServiceState {
   >;
 
   @doc("Retrieve list of all nodes participating in this service.")
-  getAllNodes is Azure.Core.StandardResourceOperations.ResourceList<
+  getNodes is Azure.Core.StandardResourceOperations.ResourceList<
     Node,
     TxIdReadHeader
   >;

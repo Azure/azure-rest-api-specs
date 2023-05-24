@@ -108,7 +108,7 @@ model Ballot {
 interface Proposals {
   // https://github.com/microsoft/CCF/issues/5230
   @doc("Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be treated as a single idempotent operation, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.")
-  propose is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  createProposal is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
     Proposal,
     CoseSigned<ProposalActions>,
     Proposal,
@@ -116,7 +116,7 @@ interface Proposals {
   >;
 
   @doc("Withdraw an existing proposal. Only the original proposer is permitted to withdraw.")
-  withdraw is Azure.Core.StandardResourceOperations.ResourceAction<
+  withdrawProposal is Azure.Core.StandardResourceOperations.ResourceAction<
     Proposal,
     CoseSigned,
     Proposal,
@@ -149,7 +149,7 @@ interface Proposals {
 
 interface Ballots {
   @doc("Submit an executable ballot for a specific proposal. This may be as simple as `return true` to vote in favour, or contain reads from the KV and conditions on the proposal contents.")
-  submit is Azure.Core.StandardResourceOperations.ResourceAction<
+  submitBallot is Azure.Core.StandardResourceOperations.ResourceAction<
     Ballot,
     CoseSigned<Ballot>,
     Proposal,
