@@ -65,11 +65,11 @@ model SgxQuoteInfo {
   @doc("Fixed identifier for SGX information.")
   format: "OE_SGX_v1";
 
-  @doc("TODO")
-  quote: string; // base64
+  @doc("Base-64 encoded SGX quote.")
+  quote: string;
 
-  @doc("TODO")
-  endorsements: string; // base64
+  @doc("Base-64 encoded SGX endorsements.")
+  endorsements: string;
 }
 
 @doc("Attestation information for AMD SEV-SNP containers.")
@@ -77,11 +77,11 @@ model SnpQuoteInfo {
   @doc("Fixed identifier for SNP information.")
   format: "AMD_SEV_SNP_v1";
 
-  @doc("TODO")
-  uvmEndorsements: string; // base64
+  @doc("Base-64 encoded SNP UVM endorsements.")
+  uvmEndorsements: string;
 
-  @doc("TODO")
-  endorsedTcb: string; // base64
+  @doc("Base-64 encoded SNP TCB endorsements.")
+  endorsedTcb: string;
 }
 
 @doc("Details of how to contact a CCF node. Each node may listen on multiple interfaces, for different kinds of traffic.")
@@ -175,7 +175,7 @@ model JsEndpointInfo {
   @doc("Describes how this endpoint should be executed.")
   mode: JsExecMode;
 
-  @doc("TODO")
+  @doc("An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API.")
   openApi: {};
 }
 
@@ -212,10 +212,11 @@ model SnpJoinPolicy {
   ...JoinPolicy;
   // TODO: Work out what the actual types of these are
 
-  @doc("TODO")
+
+  @doc("Collection of acceptable host data values.")
   hostData: Record<string>;
 
-  @doc("TODO")
+  @doc("Collection of acceptable UVM endorsements.")
   uvmEndorsements: Record<string>;
 }
 
@@ -235,9 +236,27 @@ model JoinPolicies {
 }
 
 /// JWK/JWT types
-@doc("TODO")
+enum JwtIssuerKeyFilter {
+  @doc("Accepts any JWT issuer.")
+  All,
+
+  @doc("Only accepts JWTs issued by a token provider running in SGX, which provides a suitable attestation and additional claims.")
+  Sgx,
+}
+
+@doc("Description of a JWT issuer or identity provider that the current service will trust tokens from.")
 model JwtIssuer {
-  // TODO
+  @doc("Adds restrictions on whether keys should be accepted from this issuer.")
+  keyFilter: JwtIssuerKeyFilter;
+
+  @doc("Collection of claims which must be present in SGX attestation to permit updates from this issuer.")
+  keyPolicy?: Record<string>;
+
+  @doc("Whether this issuer's keys are periodically refreshed with a fetch from the current primary. If false, these will only be updated by governance.")
+  autoRefresh: boolean;
+
+  @doc("Name of bundle used to authenticate issuer when auto-refreshing.")
+  caCertBundleName?: string;
 }
 
 @doc("Chain of endorsed certificates (PEM format) leading to a CA.")

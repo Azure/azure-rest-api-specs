@@ -34,8 +34,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           }
         ],
         "responses": {
@@ -74,8 +73,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           },
           {
             "name": "body",
@@ -177,6 +175,58 @@
         }
       }
     },
+    "/gov/members/proposals/{proposalId}:withdraw": {
+      "post": {
+        "operationId": "GovMembers_Withdraw",
+        "description": "Withdraw an existing proposal. Only the original proposer is permitted to withdraw.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "proposalId",
+            "in": "path",
+            "required": true,
+            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          {
+            "$ref": "#/parameters/CoseSignature.body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+$"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Proposals.Proposal"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cose"
+        ]
+      }
+    },
     "/gov/members/proposals/{proposalId}": {
       "get": {
         "operationId": "GovMembers_GetProposal",
@@ -191,8 +241,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           }
         ],
         "responses": {
@@ -238,8 +287,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           }
         ],
         "responses": {
@@ -285,8 +333,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           },
           {
             "name": "memberId",
@@ -294,8 +341,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           },
           {
             "$ref": "#/parameters/CoseSignature.body"
@@ -347,8 +393,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           },
           {
             "name": "memberId",
@@ -356,8 +401,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           }
         ],
         "responses": {
@@ -433,50 +477,6 @@
         ]
       }
     },
-    "/gov/members/proposals:withdraw": {
-      "post": {
-        "operationId": "GovMembers_Withdraw",
-        "description": "Withdraw an existing proposal. Only the original proposer is permitted to withdraw.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/CoseSignature.body"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
-                "type": "string",
-                "pattern": "^[0-9]+\\.[0-9]+$"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Proposals.Proposal"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        },
-        "consumes": [
-          "application/cose"
-        ]
-      }
-    },
     "/gov/members/state-digests/{memberId}:update": {
       "post": {
         "operationId": "GovMembers_UpdateStateDigest",
@@ -491,8 +491,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           },
           {
             "$ref": "#/parameters/CoseSignature.body"
@@ -544,8 +543,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           },
           {
             "$ref": "#/parameters/CoseSignature.body"
@@ -594,8 +592,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           }
         ],
         "responses": {
@@ -703,7 +700,7 @@
         }
       }
     },
-    "/gov/service/javascriptApp": {
+    "/gov/service/javascript-app": {
       "get": {
         "operationId": "GovState_GetJsApp",
         "description": "Retrieve details of Javascript application and execution engine.",
@@ -741,7 +738,7 @@
         }
       }
     },
-    "/gov/service/joinPolicy": {
+    "/gov/service/join-policy": {
       "get": {
         "operationId": "GovState_GetJoinPolicies",
         "description": "Retrieve policy data which determines whether new nodes are permitted to join the service. This describes the hardware attestations which are acceptable to the service, demonstrating a joining node is running approved code.",
@@ -894,8 +891,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           }
         ],
         "responses": {
@@ -1004,8 +1000,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a node's public key.",
             "type": "string",
-            "pattern": "^[a-f0-9]+$",
-            "maxLength": 64
+            "pattern": "^[a-f0-9]{64}$"
           }
         ],
         "responses": {
@@ -1120,8 +1115,7 @@
         "stateDigest": {
           "type": "string",
           "description": "Hex-encoding of SHA-256 hash of the root of the service's merkle tree. This should be signed by a new member and submitted as an ACK to mark that member as Active.",
-          "pattern": "^[a-f0-9]+$",
-          "maxLength": 64
+          "pattern": "^[a-f0-9]{64}$"
         }
       },
       "description": "A compact summary of the service's state up to a certain point in time, updated and signed by members to indicate their participation in and approval of the service.",
@@ -1488,12 +1482,12 @@
         "id": {
           "type": "string",
           "enum": [
-            "joinPolicy"
+            "join-policy"
           ],
           "x-ms-enum": {
             "modelAsString": false
           },
-          "description": "Singleton key for accessing joinPolicy",
+          "description": "Singleton key for accessing join-policy",
           "readOnly": true
         },
         "sgx": {
@@ -1535,12 +1529,12 @@
         "id": {
           "type": "string",
           "enum": [
-            "javascriptApp"
+            "javascript-app"
           ],
           "x-ms-enum": {
             "modelAsString": false
           },
-          "description": "Singleton key for accessing javaScriptApp.",
+          "description": "Singleton key for accessing javascript-app.",
           "readOnly": true
         },
         "endpoints": {
@@ -1588,7 +1582,7 @@
         "openApi": {
           "type": "object",
           "properties": {},
-          "description": "TODO",
+          "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API.",
           "x-typespec-name": "{}"
         }
       },
@@ -1679,8 +1673,56 @@
     },
     "ServiceState.JwtIssuer": {
       "type": "object",
-      "properties": {},
-      "description": "TODO"
+      "properties": {
+        "keyFilter": {
+          "$ref": "#/definitions/ServiceState.JwtIssuerKeyFilter",
+          "description": "Adds restrictions on whether keys should be accepted from this issuer."
+        },
+        "keyPolicy": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Collection of claims which must be present in SGX attestation to permit updates from this issuer."
+        },
+        "autoRefresh": {
+          "type": "boolean",
+          "description": "Whether this issuer's keys are periodically refreshed with a fetch from the current primary. If false, these will only be updated by governance."
+        },
+        "caCertBundleName": {
+          "type": "string",
+          "description": "Name of bundle used to authenticate issuer when auto-refreshing."
+        }
+      },
+      "description": "Description of a JWT issuer or identity provider that the current service will trust tokens from.",
+      "required": [
+        "keyFilter",
+        "autoRefresh"
+      ]
+    },
+    "ServiceState.JwtIssuerKeyFilter": {
+      "type": "string",
+      "enum": [
+        "All",
+        "Sgx"
+      ],
+      "x-ms-enum": {
+        "name": "JwtIssuerKeyFilter",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Accepts any JWT issuer."
+          },
+          {
+            "name": "Sgx",
+            "value": "Sgx",
+            "description": "Only accepts JWTs issued by a token provider running in SGX, which provides a suitable attestation and additional claims."
+          }
+        ]
+      }
     },
     "ServiceState.Member": {
       "type": "object",
@@ -1974,7 +2016,7 @@
             "type": "string"
           },
           "x-typespec-name": "Record<string>",
-          "description": "TODO"
+          "description": "Collection of acceptable host data values."
         },
         "uvmEndorsements": {
           "type": "object",
@@ -1982,7 +2024,7 @@
             "type": "string"
           },
           "x-typespec-name": "Record<string>",
-          "description": "TODO"
+          "description": "Collection of acceptable UVM endorsements."
         }
       },
       "description": "Join policy fields specific to nodes running on AMD SEV-SNP hardware.",
@@ -2046,20 +2088,17 @@
     "memberId": {
       "type": "string",
       "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
-      "pattern": "^[a-f0-9]+$",
-      "maxLength": 64
+      "pattern": "^[a-f0-9]{64}$"
     },
     "nodeId": {
       "type": "string",
       "description": "Hex encoding of SHA-256 of a node's public key.",
-      "pattern": "^[a-f0-9]+$",
-      "maxLength": 64
+      "pattern": "^[a-f0-9]{64}$"
     },
     "proposalId": {
       "type": "string",
       "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
-      "pattern": "^[a-f0-9]+$",
-      "maxLength": 64
+      "pattern": "^[a-f0-9]{64}$"
     },
     "transactionId": {
       "type": "string",
@@ -2082,7 +2121,7 @@
       "name": "body",
       "in": "body",
       "required": true,
-      "description": "A raw CoseSign1 signature. See CCF docs for required headers and body schema: https://microsoft.github.io/CCF/main/use_apps/issue_commands.html#cose-sign1",
+      "description": "A raw CoseSign1 signature. See CCF docs for required headers and body schema: https://microsoft.github.io/CCF/main/use_apps/issue_commands.html#cose-schemas",
       "schema": {
         "type": "string",
         "format": "binary"
