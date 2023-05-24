@@ -686,13 +686,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -705,7 +705,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -728,10 +728,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -744,7 +744,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -761,19 +761,19 @@
           "CIAMTenants"
         ],
         "x-ms-examples": {
-          "Get tenant": {
+          "Get_CIAM_tenant": {
             "$ref": "./examples/CIAM/getCIAMTenant.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -789,7 +789,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -798,7 +798,7 @@
         "operationId": "CIAMTenants_Create",
         "description": "Initiates an async request to create both the Azure AD for customers tenant and the corresponding Azure resource linked to a subscription.",
         "x-ms-examples": {
-          "Create tenant": {
+          "Create_CIAM_tenant": {
             "$ref": "./examples/CIAM/createCIAMTenant.json"
           }
         },
@@ -854,7 +854,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -870,19 +870,19 @@
           "CIAMTenants"
         ],
         "x-ms-examples": {
-          "Update tenant": {
+          "Update_CIAM_tenant": {
             "$ref": "./examples/CIAM/updateCIAMTenant.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -914,7 +914,7 @@
         "operationId": "CIAMTenants_Delete",
         "description": "Initiates an async operation to delete the Azure AD for customers tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://learn.microsoft.com/azure/active-directory/enterprise-users/directory-delete-howto). ",
         "x-ms-examples": {
-          "Delete tenant": {
+          "Delete_CIAM_tenant": {
             "$ref": "./examples/CIAM/deleteCIAMTenant.json"
           }
         },
@@ -923,13 +923,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -937,10 +937,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Response of the URL in Azure-AsyncOperation header if the asynchronous operation is successful. Resource will no longer exist.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResult"
-            }
+            "description": "Response of the URL in Azure-AsyncOperation header if the asynchronous operation is successful. Resource will no longer exist."
           },
           "202": {
             "description": "Resource deletion request accepted. The Azure-AsyncOperation header indicates the URL/location in which to poll for a result of the asynchronous operation. ",
@@ -967,7 +964,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     }
@@ -1467,7 +1464,7 @@
             "Microsoft.AzureActiveDirectory/ciamDirectories"
           ],
           "x-ms-enum": {
-            "name": "TypeValue",
+            "name": "ciamTypeValue",
             "modelAsString": true,
             "values": [
               {
@@ -1606,7 +1603,7 @@
                 "MAU"
               ],
               "x-ms-enum": {
-                "name": "BillingType",
+                "name": "ciamBillingType",
                 "modelAsString": true,
                 "values": [
                   {
@@ -1645,7 +1642,7 @@
                 "MAU"
               ],
               "x-ms-enum": {
-                "name": "BillingType",
+                "name": "ciamBillingType",
                 "modelAsString": true,
                 "values": [
                   {
@@ -1701,7 +1698,7 @@
             "Microsoft.AzureActiveDirectory/ciamDirectories"
           ],
           "x-ms-enum": {
-            "name": "TypeValue",
+            "name": "ciamTypeValue",
             "modelAsString": true,
             "values": [
               {
