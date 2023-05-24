@@ -34,7 +34,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           }
         ],
@@ -74,7 +74,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           },
           {
@@ -191,7 +191,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           }
         ],
@@ -238,7 +238,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           }
         ],
@@ -285,7 +285,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           },
           {
@@ -294,7 +294,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           },
           {
@@ -347,7 +347,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           },
           {
@@ -356,7 +356,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           }
         ],
@@ -392,7 +392,7 @@
     "/gov/members/proposals:propose": {
       "post": {
         "operationId": "GovMembers_Propose",
-        "description": "Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be handled idempotently, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.",
+        "description": "Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be treated as a single idempotent operation, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -491,7 +491,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           },
           {
@@ -544,7 +544,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           },
           {
@@ -594,7 +594,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           }
         ],
@@ -894,7 +894,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           }
         ],
@@ -1004,7 +1004,7 @@
             "required": true,
             "description": "Hex encoding of SHA-256 of a node's public key.",
             "type": "string",
-            "format": "hex",
+            "pattern": "^[a-f0-9]+$",
             "maxLength": 64
           }
         ],
@@ -1120,7 +1120,7 @@
         "stateDigest": {
           "type": "string",
           "description": "Hex-encoding of SHA-256 hash of the root of the service's merkle tree. This should be signed by a new member and submitted as an ACK to mark that member as Active.",
-          "format": "hex",
+          "pattern": "^[a-f0-9]+$",
           "maxLength": 64
         }
       },
@@ -1204,7 +1204,7 @@
           "description": "The name of the action to perform. This should match an action defined in the service's constitution, so that it can be invoked by the `apply` function of the constitution if the proposal is accepted."
         },
         "args": {
-          "description": "Arguments to modify the behaviour of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution."
+          "description": "Arguments to modify the behavior of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution."
         }
       },
       "description": "A single step in a proposed change to the service.",
@@ -1244,7 +1244,7 @@
         },
         "trace": {
           "type": "string",
-          "description": "Callstack showing where failure occurred, if available."
+          "description": "Call stack showing where failure occurred, if available."
         }
       },
       "description": "Description of why governance execution failed.",
@@ -1278,7 +1278,7 @@
         },
         "ballotCount": {
           "type": "integer",
-          "format": "uint64",
+          "format": "int64",
           "description": "Count of how many ballots have been submitted for this proposal."
         },
         "finalVotes": {
@@ -1398,12 +1398,12 @@
         },
         "submittedCount": {
           "type": "integer",
-          "format": "uint64",
+          "format": "int64",
           "description": "Count of how many accepted member shares have been submitted, including the current request."
         },
         "recoveryThreshold": {
           "type": "integer",
-          "format": "uint64",
+          "format": "int64",
           "description": "Count of how many member shares are required to initiate the end-of-recovery procedure."
         }
       },
@@ -1419,8 +1419,7 @@
       "properties": {
         "share": {
           "type": "string",
-          "description": "Base-64 encoding of a member's raw recovery share (unencrypted).",
-          "format": "base64"
+          "description": "Base-64 encoding of a member's raw recovery share (unencrypted)."
         }
       },
       "description": "Container for a member's raw recovery share. This should be carefully guarded, and only submitted to a trusted service over a secure channel, for the purposes of recovery.",
@@ -1455,7 +1454,7 @@
     },
     "ServiceState.ForwardingRequired": {
       "type": "string",
-      "description": "Describes the forwarding behaviour of a specific endpoint. Write requests cannot be executed on a backup, so will generally be forwarded by any backup node which receives them to the current primary. Future requests on the same session may then be forwarded to maintain session consistency.",
+      "description": "Describes the forwarding behavior of a specific endpoint. Write requests cannot be executed on a backup, so will generally be forwarded by any backup node which receives them to the current primary. Future requests on the same session may then be forwarded to maintain session consistency.",
       "enum": [
         "Sometimes",
         "Always",
@@ -1468,12 +1467,12 @@
           {
             "name": "Sometimes",
             "value": "Sometimes",
-            "description": "Indicates that this request should be forwarded if-and-only-if it is needed to maintain session consistency. If stale reads are acceptable then they can be completed on a backup, and the request will not be forwarded. This should be the default behaviour for read-only endpoints."
+            "description": "Indicates that this request should be forwarded if-and-only-if it is needed to maintain session consistency. If stale reads are acceptable then they can be completed on a backup, and the request will not be forwarded. This should be the default behavior for read-only endpoints."
           },
           {
             "name": "Always",
             "value": "Always",
-            "description": "Indicates that this request should always be forwarded. This will trigger forwarding of any additional requests on the same session, even those marked ForwardRequired::Sometimes. This should be the default behaviour for any endpoint which writes to the Key-Value store."
+            "description": "Indicates that this request should always be forwarded. This will trigger forwarding of any additional requests on the same session, even those marked ForwardRequired::Sometimes. This should be the default behavior for any endpoint which writes to the Key-Value store."
           },
           {
             "name": "Never",
@@ -1743,7 +1742,7 @@
       "properties": {
         "publishedAddress": {
           "type": "string",
-          "description": "The network address where this node believes it is publically accessible, in the format <host>[:<port>]."
+          "description": "The network address where this node believes it is publicly accessible, in the format <host>[:<port>]."
         },
         "protocol": {
           "type": "string",
@@ -1784,7 +1783,7 @@
         },
         "quoteInfo": {
           "$ref": "#/definitions/ServiceState.QuoteInfo",
-          "description": "Contains this node's hardware attesation. This is generated during node startup, and must meet the current join policy restrictions for the node to successfully join a service."
+          "description": "Contains this node's hardware attestation. This is generated during node startup, and must meet the current join policy restrictions for the node to successfully join a service."
         },
         "rpcInterfaces": {
           "type": "object",
@@ -1903,7 +1902,7 @@
               "format": "int64"
             }
           },
-          "description": "Summarises governance-controlled configuration parameters of this service, which will be used by core framework code.",
+          "description": "Lists governance-controlled configuration parameters of this service, which will be used by core framework code.",
           "required": [
             "maximumNodeCertificateValidityDays",
             "recentCoseProposalsWindowSize"
@@ -1924,7 +1923,7 @@
     },
     "ServiceState.ServiceStatus": {
       "type": "string",
-      "description": "State machine values for current service lifetime. New services start in Opening, and transitition to Open via a governance proposal. They will only accept user transactions on the `/app` endpoints once they are Open. Recovery services have additional states where they must wait for members to submit sufficient recovery shares to access the previous ledger secrets, and while they are decrypting and replaying the previous ledger contents.",
+      "description": "State machine values for current service lifetime. New services start in Opening, and transition to Open via a governance proposal. They will only accept user transactions on the `/app` endpoints once they are Open. Recovery services have additional states where they must wait for members to submit sufficient recovery shares to access the previous ledger secrets, and while they are decrypting and replaying the previous ledger contents.",
       "enum": [
         "Opening",
         "Open",
@@ -2047,19 +2046,19 @@
     "memberId": {
       "type": "string",
       "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
-      "format": "hex",
+      "pattern": "^[a-f0-9]+$",
       "maxLength": 64
     },
     "nodeId": {
       "type": "string",
       "description": "Hex encoding of SHA-256 of a node's public key.",
-      "format": "hex",
+      "pattern": "^[a-f0-9]+$",
       "maxLength": 64
     },
     "proposalId": {
       "type": "string",
       "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
-      "format": "hex",
+      "pattern": "^[a-f0-9]+$",
       "maxLength": 64
     },
     "transactionId": {

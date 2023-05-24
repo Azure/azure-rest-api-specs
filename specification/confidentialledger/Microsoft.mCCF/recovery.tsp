@@ -19,7 +19,6 @@ model EncryptedRecoveryShare {
 @doc("Container for a member's raw recovery share. This should be carefully guarded, and only submitted to a trusted service over a secure channel, for the purposes of recovery.")
 model RecoveryShare {
   @doc("Base-64 encoding of a member's raw recovery share (unencrypted).")
-  @format("base64")
   share: string;
 }
 
@@ -29,10 +28,11 @@ model RecoveryResponse {
   message: string;
 
   @doc("Count of how many accepted member shares have been submitted, including the current request.")
-  submittedCount: uint64;
+  submittedCount: int64;
 
   @doc("Count of how many member shares are required to initiate the end-of-recovery procedure.")
-  recoveryThreshold: uint64;
+  // Should be uint64, but that fails Azure Swagger validation (oav)
+  recoveryThreshold: int64;
 }
 
 @doc("Recovery-specific details for a given member.")
