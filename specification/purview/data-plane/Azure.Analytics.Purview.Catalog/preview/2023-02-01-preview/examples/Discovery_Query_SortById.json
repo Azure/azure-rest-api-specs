@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "limit": 10,
+      "filter": {
+        "id": {
+          "operator": "gt",
+          "value": "20059b0b-112c-4d5b-b6c1-a7140fd38690"
+        }
+      },
+      "orderby": [
+        {
+          "id": "asc"
+        }
+      ]
+    },
+    "api-version": "2023-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 1,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "20059b0b-112c-4d5b-b6c1-a7140fd38691",
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplepath/exampledata.txt",
+            "name": "exampledata.txt",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_path",
+            "classification": [],
+            "label": [],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [],
+            "contact": []
+          }
+        ]
+      }
+    }
+  }
+}
