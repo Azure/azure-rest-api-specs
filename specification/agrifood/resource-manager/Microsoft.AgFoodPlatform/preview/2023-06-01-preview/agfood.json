@@ -72,6 +72,15 @@
         ],
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
             "in": "path",
             "name": "dataConnectorName",
             "description": "Connector name.",
@@ -80,15 +89,6 @@
             "maxLength": 63,
             "minLength": 1,
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          },
-          {
-            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -112,7 +112,7 @@
         "tags": [
           "DataConnectors"
         ],
-        "description": "Create or update Data Manager For Agriculture resource.",
+        "description": "Create or update Data Connector Credentials For MADMA resource.",
         "operationId": "DataConnectors_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -121,6 +121,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
           {
             "in": "path",
             "name": "dataConnectorName",
@@ -132,21 +141,12 @@
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
           },
           {
-            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "Body.",
+            "description": "Body must be valid DataConnector request.",
             "schema": {
               "$ref": "#/definitions/DataConnectorRequest"
             }
@@ -176,12 +176,21 @@
         "tags": [
           "DataConnectors"
         ],
-        "description": "Delete a Data Manager For Agriculture resource.",
+        "description": "Delete a Data Connectors with given dataConnector name.",
         "operationId": "DataConnectors_Delete",
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
           {
             "in": "path",
             "name": "dataConnectorName",
@@ -191,15 +200,6 @@
             "maxLength": 63,
             "minLength": 1,
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
-          },
-          {
-            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -231,7 +231,7 @@
         "tags": [
           "DataConnectors"
         ],
-        "description": "Lists the Credential instances for a subscription.",
+        "description": "Lists the Data Connector Credentials for a MADMA instance.",
         "operationId": "DataConnectors_List",
         "produces": [
           "application/json"
@@ -1854,7 +1854,7 @@
   },
   "definitions": {
       "ApiKeyAuthCredentials": {
-          "description": "ApiKeyAuthCredentials.",
+          "description": "ApiKeyAuthCredentials represents ApiKey credentals authentication.",
           "type": "object",
           "allOf": [
             {
@@ -1872,7 +1872,7 @@
               }
             }
           ],
-          "x-ms-discriminator-value": "ApiKeyAuth"
+          "x-ms-discriminator-value": "ApiKeyAuthCredentials"
       },
       "ApiProperties": {
       "description": "Api properties.",
@@ -1917,21 +1917,21 @@
     "AuthCredentials": {
       "description": "ConnectorCredentials.",
       "required": [
-        "authType"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "authType": {
+        "kind": {
           "$ref": "#/definitions/AuthCredentialsEnum"
         }
       },
-      "discriminator": "authType"
+      "discriminator": "kind"
     },
     "AuthCredentialsEnum": {
       "description": "CredentialTypeEnum.",
       "enum": [
-        "BasicAuth",
-        "ApiKeyAuth"
+        "BasicAuthCredentials",
+        "ApiKeyAuthCredentials"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1940,7 +1940,7 @@
       }
     },
     "BasicAuthCredentials": {
-      "description": "BasicAuthCredentials.",
+      "description": "BasicAuthCredentials represents username password auth.",
       "type": "object",
       "allOf": [
         {
@@ -1954,7 +1954,7 @@
           "type": "object",
           "properties": {
             "username": {
-              "description": "UserName.",
+              "description": "UserName for auth.",
               "minLength": 1,
               "type": "string"
             },
@@ -1964,10 +1964,10 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "BasicAuth"
+      "x-ms-discriminator-value": "BasicAuthCredentials"
     },
     "DataConnectorRequest": {
-      "description": "DataConnectorRequest.",
+      "description": "DataConnector request.",
       "required": [
         "credential"
       ],
@@ -1998,7 +1998,7 @@
       "type": "object",
       "properties": {
         "dataConnectorName": {
-          "description": "ConnectorName.",
+          "description": "Data ConnectorName.",
           "minLength": 1,
           "type": "string"
         },
