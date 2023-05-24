@@ -420,40 +420,6 @@
         }
       }
     },
-    "FreeLimitExhaustionBehaviorCapability": {
-      "description": "Supported free limit exhaustion behavior options",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Free limit exhaustion behavior name",
-          "enum": [
-            "AutoPause",
-            "BillOverUsage"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "FreeLimitExhaustionBehavior",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "Free limit exhaustion behavior status",
-          "enum": [
-            "Visible",
-            "Available",
-            "Default",
-            "Disabled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CapabilityStatus",
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "InstancePoolEditionCapability": {
       "description": "The instance pool capability",
       "type": "object",
@@ -748,6 +714,11 @@
           },
           "readOnly": true
         },
+        "zoneRedundant": {
+          "description": "Whether or not zone redundancy is supported for the edition.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "status": {
           "description": "The status of the capability.",
           "enum": [
@@ -781,11 +752,6 @@
         "sku": {
           "description": "SKU name.",
           "type": "string",
-          "readOnly": true
-        },
-        "zoneRedundant": {
-          "description": "Whether or not zone redundancy is supported for the famiily.",
-          "type": "boolean",
           "readOnly": true
         },
         "supportedLicenseTypes": {
@@ -1342,14 +1308,6 @@
         "zonePinning": {
           "description": "Whether or not zone pinning is supported.",
           "type": "boolean",
-          "readOnly": true
-        },
-        "supportedFreeLimitExhaustionBehaviors": {
-          "description": "List of supported free limit exhaustion behaviors",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FreeLimitExhaustionBehaviorCapability"
-          },
           "readOnly": true
         },
         "status": {

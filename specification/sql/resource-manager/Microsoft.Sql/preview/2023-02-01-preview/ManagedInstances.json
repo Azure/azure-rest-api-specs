@@ -473,52 +473,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/refreshExternalGovernanceStatus": {
-      "post": {
-        "tags": [
-          "ManagedInstances"
-        ],
-        "description": "Refresh external governance enablement status.",
-        "operationId": "ManagedInstances_RefreshStatus",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully refreshed external governance enablement status.",
-            "schema": {
-              "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResultMI"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SubnetMissingRequiredDelegation - Selected subnet is not delegated for SQL Managed Instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
-          },
-          "202": {
-            "description": "Refreshing external governance enablement status."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Refresh external governance enablement status.": {
-            "$ref": "./examples/RefreshExternalGovernanceStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/start": {
       "post": {
         "tags": [
@@ -756,6 +710,7 @@
           "items": {
             "$ref": "#/definitions/EndpointDetail"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -999,7 +954,15 @@
         },
         "subnetId": {
           "description": "Subnet resource ID for the managed instance.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         },
         "state": {
           "description": "The state of the managed instance.",
@@ -1015,31 +978,6 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedInstanceLicenseType",
-            "modelAsString": true
-          }
-        },
-        "hybridSecondaryUsage": {
-          "description": "Hybrid secondary usage. Possible values are 'Active' (default value) and 'Passive' (customer uses the secondary as Passive DR).",
-          "enum": [
-            "Active",
-            "Passive"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HybridSecondaryUsage",
-            "modelAsString": true
-          }
-        },
-        "hybridSecondaryUsageDetected": {
-          "description": "Hybrid secondary usage detected. Possible values are 'Active' (customer does not meet the requirements to use the secondary as Passive DR) and 'Passive' (customer meets the requirements to use the secondary as Passive DR).",
-          "enum": [
-            "Active",
-            "Passive"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "HybridSecondaryUsageDetected",
             "modelAsString": true
           }
         },
@@ -1078,6 +1016,7 @@
         },
         "dnsZonePartner": {
           "description": "The resource id of another managed instance whose DNS zone this managed instance will share after creation.",
+          "format": "arm-id",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -1090,6 +1029,7 @@
         "sourceManagedInstanceId": {
           "description": "The resource identifier of the source managed instance associated with create operation of this instance.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1182,7 +1122,15 @@
         },
         "primaryUserAssignedIdentityId": {
           "description": "The resource id of a user assigned identity to be used by default.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         },
         "keyId": {
           "description": "A CMK URI of the key to use for encryption.",
@@ -1265,6 +1213,7 @@
           "items": {
             "$ref": "#/definitions/EndpointDependency"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -1279,6 +1228,7 @@
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "nextLink": {
@@ -1422,59 +1372,6 @@
           "items": {
             "$ref": "#/definitions/QueryMetricInterval"
           }
-        }
-      }
-    },
-    "RefreshExternalGovernanceStatusOperationResultMI": {
-      "description": "An RefreshExternalGovernanceStatus operation result resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResultPropertiesMI",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RefreshExternalGovernanceStatusOperationResultPropertiesMI": {
-      "description": "Contains the operation result properties for refresh external governance status operation.",
-      "type": "object",
-      "properties": {
-        "requestId": {
-          "format": "uuid",
-          "description": "Request Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requestType": {
-          "description": "Request type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "queuedTime": {
-          "description": "Queued time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "managedInstanceName": {
-          "description": "Managed instance name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "Operation status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "errorMessage": {
-          "description": "Error message.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
