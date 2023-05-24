@@ -14,7 +14,7 @@ model Action {
   @doc("The name of the action to perform. This should match an action defined in the service's constitution, so that it can be invoked by the `apply` function of the constitution if the proposal is accepted.")
   name: string;
 
-  @doc("Arguments to modify the behaviour of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution.")
+  @doc("Arguments to modify the behavior of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution.")
   args: unknown;
 }
 
@@ -44,7 +44,7 @@ model FailureInfo {
   @doc("Error message describing reason for failure.")
   reason: string;
 
-  @doc("Callstack showing where failure occurred, if available.")
+  @doc("Call stack showing where failure occurred, if available.")
   trace?: string;
 }
 
@@ -107,7 +107,7 @@ model Ballot {
 
 interface Proposals {
   // https://github.com/microsoft/CCF/issues/5230
-  @doc("Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be handled idempotently, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.")
+  @doc("Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be treated as a single idempotent operation, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.")
   propose is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
     Proposal,
     CoseSigned<ProposalActions>,

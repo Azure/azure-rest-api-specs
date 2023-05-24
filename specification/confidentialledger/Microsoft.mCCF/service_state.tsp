@@ -86,7 +86,7 @@ model SnpQuoteInfo {
 
 @doc("Details of how to contact a CCF node. Each node may listen on multiple interfaces, for different kinds of traffic.")
 model NetworkInterface {
-  @doc("The network address where this node believes it is publically accessible, in the format <host>[:<port>].")
+  @doc("The network address where this node believes it is publicly accessible, in the format <host>[:<port>].")
   publishedAddress: string;
 
   @doc("The application layer protocol which the node expects on this interface. Currently supports \"http1\" and \"http2\", more protocols may be added in future.")
@@ -113,7 +113,7 @@ model Node {
   @doc("This is false during node's normal operation. It transitions to true once the node has been retired, and that retirement has been committed by the service. At this point it is safe to terminate a node. Terminating a node any earlier may affect liveness of the service.")
   retiredCommitted: boolean;
 
-  @doc("Contains this node's hardware attesation. This is generated during node startup, and must meet the current join policy restrictions for the node to successfully join a service.")
+  @doc("Contains this node's hardware attestation. This is generated during node startup, and must meet the current join policy restrictions for the node to successfully join a service.")
   quoteInfo: QuoteInfo;
 
   @doc("A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator.")
@@ -134,12 +134,12 @@ model ConstitutionResponse {
 }
 
 /// JS app types
-@doc("Describes the forwarding behaviour of a specific endpoint. Write requests cannot be executed on a backup, so will generally be forwarded by any backup node which receives them to the current primary. Future requests on the same session may then be forwarded to maintain session consistency.")
+@doc("Describes the forwarding behavior of a specific endpoint. Write requests cannot be executed on a backup, so will generally be forwarded by any backup node which receives them to the current primary. Future requests on the same session may then be forwarded to maintain session consistency.")
 enum ForwardingRequired {
-  @doc("Indicates that this request should be forwarded if-and-only-if it is needed to maintain session consistency. If stale reads are acceptable then they can be completed on a backup, and the request will not be forwarded. This should be the default behaviour for read-only endpoints.")
+  @doc("Indicates that this request should be forwarded if-and-only-if it is needed to maintain session consistency. If stale reads are acceptable then they can be completed on a backup, and the request will not be forwarded. This should be the default behavior for read-only endpoints.")
   Sometimes,
 
-  @doc("Indicates that this request should always be forwarded. This will trigger forwarding of any additional requests on the same session, even those marked ForwardRequired::Sometimes. This should be the default behaviour for any endpoint which writes to the Key-Value store.")
+  @doc("Indicates that this request should always be forwarded. This will trigger forwarding of any additional requests on the same session, even those marked ForwardRequired::Sometimes. This should be the default behavior for any endpoint which writes to the Key-Value store.")
   Always,
 
   @doc("Indicates endpoints which will never be forwarded, even when this will result in a break of session consistency. This should be used only to access node-local information, or when weaker consistency is acceptable.")
@@ -261,7 +261,7 @@ model JwkInfo {
 }
 
 /// Service info types
-@doc("State machine values for current service lifetime. New services start in Opening, and transitition to Open via a governance proposal. They will only accept user transactions on the `/app` endpoints once they are Open. Recovery services have additional states where they must wait for members to submit sufficient recovery shares to access the previous ledger secrets, and while they are decrypting and replaying the previous ledger contents.")
+@doc("State machine values for current service lifetime. New services start in Opening, and transition to Open via a governance proposal. They will only accept user transactions on the `/app` endpoints once they are Open. Recovery services have additional states where they must wait for members to submit sufficient recovery shares to access the previous ledger secrets, and while they are decrypting and replaying the previous ledger contents.")
 enum ServiceStatus {
   @doc("Services which have not yet passed a `transition_service_to_open` proposal.")
   Opening,
@@ -302,7 +302,7 @@ model ServiceInfo {
   @doc("Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions.")
   serviceData: {};
 
-  @doc("Summarises governance-controlled configuration parameters of this service, which will be used by core framework code.")
+  @doc("Lists governance-controlled configuration parameters of this service, which will be used by core framework code.")
   configuration: {
     maximumNodeCertificateValidityDays: safeint;
     recentCoseProposalsWindowSize: safeint;
