@@ -1682,6 +1682,9 @@
           },
           {
             "$ref": "#/parameters/IfUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Paginated"
           }
         ],
         "responses": {
@@ -3235,6 +3238,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Specifies the encryption context to set on the file."
+    },
+    "Paginated": {
+      "name": "paginated",
+      "in": "query",
+      "description": "If true, paginated behavior will be seen. Pagination is for the recursive ACL checks as a POSIX requirement in the server and Delete in an atomic operation once the ACL checks are completed. If false or missing, normal default behavior will kick in, which may timeout in case of very large directories due to recursive ACL checks. This new parameter is introduced for backward compatibility. ",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "boolean"
     }
   },
   "definitions": {
