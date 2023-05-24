@@ -2007,6 +2007,170 @@
         }
       }
     },
+    "uniqueAttribute/type/{typeName}/rating": {
+    },
+    "/entity/guid/{guid}/rating": {
+      "get": {
+        "tags": [
+          "Collaboration"
+        ],
+        "description": "List ratings for an existing entity represented by a GUID",
+        "operationId": "Collaboration_ListRatingsByEntityGuid",
+        "x-ms-examples": {
+          "Collaboration_ListRatingsByEntityGuid": {
+            "$ref": "./examples/Collaboration_ListRatingsByEntityGuid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "name": "limit",
+            "description": "The page size for pagination purpose.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "offset",
+            "description": "The offset for pagination purpose.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "score",
+            "description": "The score filter",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "sortBy",
+            "description": "The sort by, createTime (default), updateTime or score.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "createTime",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "sortOrder",
+            "description": "The sort order, desc (default) or asc.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. If the listing operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ListRatingsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Collaboration"
+        ],
+        "description": "Create or update a rating on an existing entity represented by a GUID",
+        "operationId": "Collaboration_CreateOrUpdateRatingByEntityGuid",
+        "x-ms-examples": {
+          "Collaboration_CreateOrUpdateRatingByEntityGuid": {
+            "$ref": "./examples/Collaboration_CreateOrUpdateRatingByEntityGuid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "createOrUpdateRatingRequest",
+            "description": "The request body to create or update a rating.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateRatingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. If create or update operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/RatingResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entity/guid/{guid}/rating/{ratingId}": {
+      "delete": {
+        "tags": [
+          "Collaboration"
+        ],
+        "description": "Delete a rating from an existing entity represented by a GUID",
+        "operationId": "Collaboration_DeleteRatingByEntityGuid",
+        "x-ms-examples": {
+          "Collaboration_DeleteRatingByEntityGuid": {
+            "$ref": "./examples/Collaboration_DeleteRatingByEntityGuid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/ratingId"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK. If the rating deletion is successful."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -8654,6 +8818,82 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "CreateOrUpdateRatingRequest": {
+      "title": "CreateOrUpdateRatingRequest",
+      "description": "The request payload to create or update a rating.",
+      "type": "object",
+      "required": [
+        "score"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the rating. It must be a GUID. If not specified, service will generate one."
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The score of the rating, ranging from 1 to 5. 1 star implies that the asset is quite useless or there's something wrong with it, while 5 means the asset is very accurate and helpful."
+        },
+        "content": {
+          "type": "string",
+          "description": "It describes the reason why the user gave the score. It's limited to 1KB and optional."
+        }
+      }
+    },
+    "RatingResponse": {
+      "title": "RatingResponse",
+      "description": "The response payload of a single rating.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the rating."
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The score of the rating."
+        },
+        "content": {
+          "type": "string",
+          "description": "The description of the rating."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the record."
+        },
+        "createTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The create time of the rating."
+        },
+        "updateTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The last update time of the rating."
+        }
+      }
+    },
+    "ListRatingsResponse": {
+      "title": "ListRatingsRequest",
+      "description": "The response payload to list ratings for a given entity.",
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ID of the rating. It must be a GUID. If not specified, service will generate one."
+        },
+        "results": {
+          "type": "array",
+          "description": "ratings of the pagination results",
+          "items": {
+            "$ref": "#/definitions/RatingResponse"
           }
         }
       }
