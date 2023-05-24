@@ -1,13 +1,24 @@
-Installation:
+# Contoso.WidgetManager
 
-- For the generic TypeSpec API, follow the instructions here https://microsoft.github.io/typespec/introduction/installation to install and run the TypeSpec code
-- For Azure Specific TypeSpec API, follow this guide: https://azure.github.io/typespec-azure/docs/getstarted/installation
+> see https://aka.ms/autorest
 
-Since we need to emit OpenAPI2, follow `npm install` instructions from both the above links (i.e. must install `@azure-tools/typespec-autorest`).
+This is the AutoRest configuration file for Microsoft.mCCF governance data-plane.
 
-To build:
+## Configuration
 
+Default to building latest tag.
+
+```yaml
+openapi-type: data-plane
+tag: 0.0.1-preview
 ```
-npm install
-npx tsp compile . --emit @azure-tools/typespec-autorest
+
+### Tag: 0.0.1-preview
+
+These settings apply only when `--tag=0.0.1-preview` is specified on the command line.
+
+```yaml $(tag) == '0.0.1-preview'
+openapi-type: data-plane
+input-file:
+  - ../data-plane/Microsoft.ManagedCcf/preview/0.0.1-preview/openapi.json
 ```
