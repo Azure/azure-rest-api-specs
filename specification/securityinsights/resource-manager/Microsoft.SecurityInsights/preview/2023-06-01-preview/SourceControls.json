@@ -164,7 +164,8 @@
             }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -262,12 +263,6 @@
           },
           "204": {
             "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
           }
         }
       }
@@ -453,7 +448,7 @@
     },
     "Repository": {
       "type": "object",
-      "required":[
+      "required": [
         "url",
         "branch"
       ],
