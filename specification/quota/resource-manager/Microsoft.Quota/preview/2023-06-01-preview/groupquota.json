@@ -310,7 +310,7 @@
             "in": "body",
             "description": "TThe List of  subscriptions to add  to SharedQuotaEntity.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionList"
+              "$ref": "#/definitions/subscriptionIdList"
             }
           }
         ],
@@ -378,7 +378,7 @@
             "in": "body",
             "description": "The List of  subscriptions to add  to SharedQuotaEntity.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionList"
+              "$ref": "#/definitions/subscriptionIdList"
             }
           }
         ],
@@ -386,7 +386,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SharedQuotaEntity"
+              "$ref": "#/definitions/subscriptionIdList"
             }
           },
           "202": {
@@ -445,7 +445,7 @@
             "in": "body",
             "description": "The List of  subscriptions to remove  from SharedQuotaEntity.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionList"
+              "$ref": "#/definitions/subscriptionIdList"
             }
           }
         ],
@@ -453,7 +453,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SharedQuotaEntity"
+              "$ref": "#/definitions/subscriptionIdList"
             }
           },
           "default": {
@@ -463,7 +463,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/subscriptionsToSharedQuotaEntity/{subscriptionId}": {
       "delete": {
         "tags": [
           "SharedQuotaEntities-Subscriptions"
@@ -487,12 +489,8 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "SharedQuotaEntityPatchRequest",
-            "in": "body",
-            "description": "The List of  subscriptions to remove from SharedQuotaEntity.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionList"
-            }
+            "$ref": "#/parameters/SubscriptionIdInParameters" {
+              "
           }
         ],
         "responses": {
