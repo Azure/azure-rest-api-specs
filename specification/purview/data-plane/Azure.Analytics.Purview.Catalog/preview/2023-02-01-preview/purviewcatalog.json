@@ -551,135 +551,6 @@
         }
       }
     },
-    "/attachment": {
-      "post": {
-        "tags": [
-          "Entity"
-        ],
-        "summary": "Upload an attachment.",
-        "description": "To upload an attachment, specify the content type multipart/form-data in the request headers and encode the file as form-data in the request body.",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "Entity_UploadAttachment",
-        "x-ms-examples": {
-          "Entity_UploadAttachment": {
-            "$ref": "./examples/Entity_UploadAttachment.json"
-          }
-        },
-        "parameters": [
-          {
-            "in": "formData",
-            "name": "file",
-            "description": "The attachment to be uploaded",
-            "required": true,
-            "type": "file"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. On successful upload the attachment",
-            "schema": {
-              "$ref": "#/definitions/AttachmentUploadResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Download an attachment.",
-        "produces": [
-          "application/octet-stream"
-        ],
-        "operationId": "Entity_DownloadAttachment",
-        "x-ms-examples": {
-          "Entity_DownloadAttachment": {
-            "$ref": "./examples/Entity_DownloadAttachment.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "description": "The download image unique name (returned by image upload API)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceId",
-            "in": "query",
-            "description": "If the image is not assigned to any entity, this parameter is not required, only the user that uploaded the image can download it.\nIf the image has been assigned to an entity, the parameter is required, it should be the assigned entity GUID.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. On successful download the attachment",
-            "schema": {
-              "format": "binary",
-              "type": "file"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Delete an attachment.",
-        "operationId": "Entity_DeleteAttachment",
-        "x-ms-examples": {
-          "Entity_DeleteAttachment": {
-            "$ref": "./examples/Entity_DeleteAttachment.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "description": "The image unique name (returned by image upload API)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceId",
-            "in": "query",
-            "description": "If the image is not assigned to any entity, this parameter is not required, only the user that uploaded the image can delete it.\nIf the image has been assigned to an entity, the parameter is required, it should be the assigned entity GUID.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/atlas/v2/entity/uniqueAttribute/type/{typeName}": {
       "get": {
         "tags": [
@@ -5438,6 +5309,135 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/attachment": {
+      "post": {
+        "tags": [
+          "Attachment"
+        ],
+        "summary": "Upload an attachment.",
+        "description": "To upload an attachment, specify the content type multipart/form-data in the request headers and encode the file as form-data in the request body.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "Attachment_UploadAttachment",
+        "x-ms-examples": {
+          "Entity_UploadAttachment": {
+            "$ref": "./examples/Attachment_UploadAttachment.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "description": "The attachment to be uploaded",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful upload the attachment",
+            "schema": {
+              "$ref": "#/definitions/AttachmentUploadResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Attachment"
+        ],
+        "description": "Download an attachment.",
+        "produces": [
+          "application/octet-stream"
+        ],
+        "operationId": "Attachment_DownloadAttachment",
+        "x-ms-examples": {
+          "Entity_DownloadAttachment": {
+            "$ref": "./examples/Attachment_DownloadAttachment.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The download image unique name (returned by image upload API)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceId",
+            "in": "query",
+            "description": "If the image is not assigned to any entity, this parameter is not required, only the user that uploaded the image can download it.\nIf the image has been assigned to an entity, the parameter is required, it should be the assigned entity GUID.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful download the attachment",
+            "schema": {
+              "format": "binary",
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Attachment"
+        ],
+        "description": "Delete an attachment.",
+        "operationId": "Attachment_DeleteAttachment",
+        "x-ms-examples": {
+          "Entity_DeleteAttachment": {
+            "$ref": "./examples/Attachment_DeleteAttachment.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The image unique name (returned by image upload API)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceId",
+            "in": "query",
+            "description": "If the image is not assigned to any entity, this parameter is not required, only the user that uploaded the image can delete it.\nIf the image has been assigned to an entity, the parameter is required, it should be the assigned entity GUID.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
