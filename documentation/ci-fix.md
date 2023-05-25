@@ -31,6 +31,9 @@ npm install
 # Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
 npx tsc 
 
+# As of 5/25/2023, the prettier version should be 2.1.2
+npx prettier --version
+
 # Run 'prettier --check' to verify the problems can be reproduced locally
 npx prettier --check **/*.json
 
