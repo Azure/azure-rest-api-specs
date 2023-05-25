@@ -57,7 +57,7 @@ op TrainMultivariateModel is MultivariateServiceAction<
   // TParams
   {
     @doc("Model information.")
-    @body modelInfo: ModelInfo,
+    @body modelInfo: ModelDetails,
   },
   // TResponse
   {
@@ -139,7 +139,7 @@ op DetectMultivariateBatchAnomaly(
   @path
   modelId: string,
   @doc("Request of multivariate anomaly detection.")
-  @body options: MultivariateBatchDetectionOptions,
+  @body options: MultivariateBatchDetectionSettings,
 ): {
   @statusCode statusCode: 202,
   @doc("ID of the detection result.")
@@ -167,5 +167,5 @@ op DetectMultivariateLastAnomaly(
   @path
   modelId: string,
   @doc("Request of the last detection.")
-  @body options: MultivariateLastDetectionOptions,
+  @body options: MultivariateLastDetectionSettings,
 ): MultivariateLastDetectionResult | ResponseError;
