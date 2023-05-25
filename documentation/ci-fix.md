@@ -31,10 +31,14 @@ npm install
 # Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
 npx tsc 
 
-# Run 'prettier --list-different' to understand what is the problem.
+# Run 'prettier --check' to verify the problems can be reproduced locally
+npx prettier --check **/*.json
+
+# Run 'prettier --list-different' to understand which files have problems.
+# Note: there is no way to view the problems without actually changing the file. See https://github.com/prettier/prettier/issues/6069.
 npx prettier --list-different **/*.json
 
-# Run 'prettier --write' to fix the problem.
+# Run 'prettier --write' to fix the problems.
 npx prettier --write **/*.json
 ```
 
