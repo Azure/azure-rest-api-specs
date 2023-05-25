@@ -5396,8 +5396,8 @@
       "description": "Origin protocol settings that determine how the origin is accessed.",
       "type": "object",
       "properties": {
-        "protocolType":{
-          "$ref": "#/definitions/ProtocolType"
+        "proxyType":{
+          "$ref": "#/definitions/ProxyType"
         },
         "sessionAffinityType": {
           "description": "Session affinity to use for origins under the origin groups. Valid options are 'SourceIP' or 'None'",
@@ -5469,29 +5469,24 @@
       }
     },
     "Route": {
-      "description": "Based on the protocoltype the route can have either L4 or L7 properties.",
+      "description": "Based on the ProxyType the route can have either L4 or L7 properties.",
       "type": "object",
-      "discriminator": "protocolType",
+      "discriminator": "proxyType",
       "properties": {
-        "protocolType": {
+        "proxyType": {
           "description": "the protocol type of the route.",
-          "$ref": "#/definitions/ProtocolType"
+          "$ref": "#/definitions/ProxyType"
         }
-      },
-      "oneOf": [
-        {
-          "$ref": "#/definitions/L7Route"
-        },
-        {
-          "$ref": "#/definitions/L4Route"
-        }
-      ]
+      }
     },
     "L7Route": {
       "description": "Friendly Routes name mapping to the any Routes or secret related information.",
       "type": "object",
       "x-ms-discriminator-value": "Layer7",
       "allOf": [
+        {
+          "$ref": "#/definitions/Route"
+        },
         {
           "$ref": "./cdn.json#/definitions/ProxyResource"
         }
@@ -5777,6 +5772,9 @@
       "x-ms-discriminator-value": "Layer4",
       "allOf": [
         {
+          "$ref": "#/definitions/Route"
+        },
+        {
           "$ref": "./cdn.json#/definitions/ProxyResource"
         }
       ],
@@ -5875,15 +5873,15 @@
         }
       }
     },
-    "ProtocolType": {
-      "description": "Protocol type for this route for example Layer7 or Layer4 by default Layer7 will be considered. This will help in configuring the route correctly for the given protocol type.",
+    "ProxyType": {
+      "description": "ProxyType type for this route for example Layer7 or Layer4 by default Layer7 will be considered. This will help in configuring the route correctly for the given ProxyType type.",
       "type": "string",
       "enum": [
         "Layer7",
         "Layer4"
       ],
       "x-ms-enum": {
-        "name": "ProtocolType",
+        "name": "ProxyType",
         "modelAsString": true
       },
       "default": "Layer7"
