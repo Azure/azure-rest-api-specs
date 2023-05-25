@@ -2138,7 +2138,7 @@
         "tags": [
           "Collaboration"
         ],
-        "description": "Delete a rating from an existing entity represented by a GUID",
+        "description": "Delete a rating by its ID from an existing entity represented by a GUID",
         "operationId": "Collaboration_DeleteRatingByEntityGuid",
         "x-ms-examples": {
           "Collaboration_DeleteRatingByEntityGuid": {
@@ -2150,10 +2150,10 @@
             "$ref": "#/parameters/guid"
           },
           {
-            "$ref": "#/parameters/ratingId"
+            "$ref": "#/parameters/purviewAPIVersion"
           },
           {
-            "$ref": "#/parameters/purviewAPIVersion"
+            "$ref": "#/parameters/ratingId"
           }
         ],
         "responses": {
@@ -8920,6 +8920,16 @@
     "labelId": {
       "name": "labelId",
       "description": "The id of the sensitivity labels defined for the tenant",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "ratingId": {
+      "name": "ratingId",
+      "description": "The ID of a rating, which must be a GUID",
       "in": "path",
       "required": true,
       "type": "string",
