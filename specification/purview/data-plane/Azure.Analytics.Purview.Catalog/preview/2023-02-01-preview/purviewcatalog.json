@@ -2027,51 +2027,19 @@
             "$ref": "#/parameters/purviewAPIVersion"
           },
           {
-            "name": "limit",
-            "description": "The page size for pagination purpose.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100,
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ratingLimit"
           },
           {
-            "name": "offset",
-            "description": "The offset for pagination purpose.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 0,
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ratingOffset"
           },
           {
-            "name": "score",
-            "description": "The score filter",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ratingScoreFilter"
           },
           {
-            "name": "sortBy",
-            "description": "The sort by, createTime (default), updateTime or score.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "createTime",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ratingSortBy"
           },
           {
-            "name": "sortOrder",
-            "description": "The sort order, desc (default) or asc.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ratingSortOrder"
           }
         ],
         "responses": {
@@ -8835,11 +8803,15 @@
         "score": {
           "type": "integer",
           "format": "int32",
-          "description": "The score of the rating, ranging from 1 to 5. 1 star implies that the asset is quite useless or there's something wrong with it, while 5 means the asset is very accurate and helpful."
+          "minimum": 1,
+          "maximum": 5,
+          "description": "The score of the rating. 1 star implies that the asset is quite useless or there's something wrong with it, while 5 means the asset is very accurate and helpful."
         },
         "content": {
           "type": "string",
-          "description": "It describes the reason why the user gave the score. It's limited to 1KB and optional."
+          "minLength": 0,
+          "maxLength": 1024,
+          "description": "It describes the reason why the user gave the score."
         }
       }
     },
@@ -8920,16 +8892,6 @@
     "labelId": {
       "name": "labelId",
       "description": "The id of the sensitivity labels defined for the tenant",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 4096,
-      "x-ms-parameter-location": "method"
-    },
-    "ratingId": {
-      "name": "ratingId",
-      "description": "The ID of a rating, which must be a GUID",
       "in": "path",
       "required": true,
       "type": "string",
@@ -9423,6 +9385,63 @@
       "required": false,
       "type": "boolean",
       "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "ratingId": {
+      "name": "ratingId",
+      "description": "The ID of a rating, which must be a GUID",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "x-ms-parameter-location": "method"
+    },
+    "ratingLimit": {
+      "name": "limit",
+      "description": "The page size for pagination purpose.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "ratingOffset": {
+      "name": "offset",
+      "description": "The offset for pagination purpose.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "ratingScoreFilter": {
+      "name": "score",
+      "description": "The score to filter ratings during listing.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ratingSortBy": {
+      "name": "sortBy",
+      "description": "The sort by, createTime (default), updateTime or score.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "default": "createTime",
+      "x-ms-parameter-location": "method"
+    },
+    "ratingSortOrder": {
+      "name": "sortOrder",
+      "description": "The sort order, desc (default) or asc.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "default": "desc",
       "x-ms-parameter-location": "method"
     }
   }
