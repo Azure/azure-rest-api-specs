@@ -16,6 +16,7 @@ batch:
   - tag: package-migrate-2020-07
   - tag: package-hubmigrate-2020-05
   - tag: package-migrateengine-2022-05
+  - tag: package-hubmigrate-2018-09-preview
 ```
 
 ### Tag: package-migrate-2018-02 and java
@@ -96,6 +97,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-hubmigrate-2018-09-preview and java
+
+These settings apply only when `--tag=package-hubmigrate-2018-09-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-hubmigrate-2018-09-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.V2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-V2018_09_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Getting Started
 
 To build the SDK for Migrate, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -153,6 +167,15 @@ These settings apply only when `--tag=package-hubmigrate-2020-05` is specified o
 ``` yaml $(tag) == 'package-hubmigrate-2020-05'
 input-file:
 - Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
+```
+
+### Tag: package-hubmigrate-2018-09-preview
+
+These settings apply only when `--tag=package-hubmigrate-2018-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-hubmigrate-2018-09-preview'
+input-file:
+- Microsoft.Migrate/preview/2018-09-01-preview/hubmigrate.json
 ```
 
 ### Tag: package-migrate-2020-07
