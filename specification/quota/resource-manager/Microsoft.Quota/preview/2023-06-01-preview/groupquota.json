@@ -281,6 +281,236 @@
         }
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/subscriptions": {
+      "put": {
+        "tags": [
+          "SharedQuotaEntities-Subscriptions"
+        ],
+        "summary": "Adds subscription(s) to the sharedQuotaEntity.",
+        "description": "Adds list of subscriptions to sharedQuotaEntity.",
+        "operationId": "SharedQuotaEntitiesSubscriptionsAdd_CreateOrUpdate",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Subscriptions": {
+            "$ref": "./examples/PutSharedQuotaEntitySubscriptions.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "SubscriptionListForSharedQuotaEntity",
+            "in": "body",
+            "description": "TThe List of  subscriptions to add  to SharedQuotaEntity.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Create or Update",
+            "schema": {
+              "$ref": "#/definitions/SharedQuotaEntity"
+            }
+          },
+          "201": {
+            "description": "Request Accepted, , Create or Update",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers.  New guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#131-resource-based-long-running-operations-relo",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/OperationsStatus"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SharedQuotaEntities-Subscriptions"
+        ],
+        "summary": "Updates a the sharedQuotaEntity with the subscriptions to add to the subscriptions list.",
+        "description": "Updates a the sharedQuotaEntity with the subscriptions to add to the subscriptions list.",
+        "operationId": "SharedQuotaEntitiesSubscriptions_Update",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Request_ForCompute": {
+            "$ref": "./examples/PatchSharedQuotaEntitySubscriptionsAdd.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "SharedQuotaEntityPatchRequest",
+            "in": "body",
+            "description": "The List of  subscriptions to add  to SharedQuotaEntity.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SharedQuotaEntity"
+            }
+          },
+          "202": {
+            "description": "Request Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/OperationsStatus"
+            }
+          },
+          "default": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SharedQuotaEntities-Subscriptions"
+        ],
+        "summary": "Gets sharedQuotaEntity Subscription List for the SharedQuotaEntity name passed.",
+        "description": "Gets sharedQuotaEntity Subscription List for the SharedQuotaEntity name passed.",
+        "operationId": "SharedQuotaEntitiesSubscriptions_GetList",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Request_ForCompute": {
+            "$ref": "./examples/GetSharedQuotaEntitySubscriptions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "SharedQuotaEntitySubscriptionDeleteequest",
+            "in": "body",
+            "description": "The List of  subscriptions to remove  from SharedQuotaEntity.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SharedQuotaEntity"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SharedQuotaEntities-Subscriptions"
+        ],
+        "summary": "Removes the subscription from sharedQuotaEntity.",
+        "description": "Removes the subscription from sharedQuotaEntity. It will return the remaining subscriptions in the sharedQuotaEntity.",
+        "operationId": "SharedQuotaEntities_Delete",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Request_ForCompute": {
+            "$ref": "./examples/DeleteSharedQuotaEntitySubscriptions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "SharedQuotaEntityPatchRequest",
+            "in": "body",
+            "description": "The List of  subscriptions to remove from SharedQuotaEntity.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorContent"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/groupQuotaLimits/{resourceName}": {
       "put": {
         "tags": [
@@ -1371,7 +1601,6 @@
       "type": "object",
       "description": "Share Quota Entity list.",
       "properties": {
-        "type": "object",
         "value": {
           "type": "array",
           "description": "Subscription groupQuotaRequests list.",
@@ -1392,12 +1621,16 @@
       "x-ms-azure-resource": true,
       "properties": {
         "subscriptionFilters": {
-          "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand.",
+          "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand. Based on the filter the subscriptions will be automatically added to SharedQuotaEntity.",
           "$ref": "#/definitions/Filters"
         },
         "subsscriptionIds": {
-          "description": "List of subscriptions included in the ShareQuotaEntity.",
+          "description": "List of subscriptions included in the ShareQuotaEntity. It can be null at the time of creation or a list of subscriptions can be passed.",
           "$ref": "#/definitions/subscriptionIdList"
+        },
+        "attributes": {
+          "description": "List of atrribute included in the ShareQuotaEntity. The attributes will validate the subscriptions to add to the SharedQuotaEntity, if they satisfy the conditions, else an error will be returned.",
+          "$ref": "#/definitions/AttributeList"
         },
         "provisioningState": {
           "description": "Provisioning state of the operation.",
@@ -1417,6 +1650,27 @@
       "x-ms-enum": {
         "name": "SharedQuotaAttributeType",
         "modelAsString": true
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "properties": {
+        "attribute": {
+          "$ref": "#/definitions/AttributeType",
+          "description": "The attribute type."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for the attribute."
+        }
+      }
+    },
+    "AttributeList": {
+      "type": "array",
+      "description": "Attributes List for the SharedQuotaEntity.",
+      "items": {
+        "$ref": "#/definitions/Attribute",
+        "description": "The attribute type and corresponding value."
       }
     },
     "subscriptionIdList": {
