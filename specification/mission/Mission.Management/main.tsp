@@ -1,4 +1,5 @@
 import "@typespec/rest";
+import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
@@ -12,6 +13,7 @@ import "./resourcetypes/workload/workload.tsp";
 import "./resourcetypes/catalog/catalog.tsp";
 import "./resourcetypes/endpoint/endpoint.tsp";
 import "./resourcetypes/internalConnection/internalConnection.tsp";
+import "./resourcetypes/externalConnection/externalConnection.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -84,32 +86,88 @@ model InternalConnection is TrackedResource<InternalConnectionProperties> {
   name: string;
 }
 
+@doc("Describes an External Connection.")
+model ExternalConnection is TrackedResource<ExternalConnectionProperties> {
+  @key("externalConnectionName")
+  @segment("externalConnections")
+  @doc("The name of the external connection.")
+  @path
+  name: string;
+}
+
 @doc("Workload Interface")
 @armResourceOperations
-interface Workload
-  extends TrackedResourceOperations<WorkloadResource, WorkloadProperties> {}
+interface Workload {
+    get is ArmResourceRead<WorkloadResource>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<WorkloadResource>;
+    update is ArmResourcePatchAsync<WorkloadResource, WorkloadProperties>;
+    delete is ArmResourceDeleteAsync<WorkloadResource>;
+    listByParent is ArmResourceListByParent<WorkloadResource>;
+    listBySubscription is ArmListBySubscription<WorkloadResource>;
+  }
 
 @doc("Endpoint Interface")
 @armResourceOperations
-interface Endpoint
-  extends TrackedResourceOperations<EndpointResource, EndpointProperties> {}
+interface Endpoint {
+    get is ArmResourceRead<EndpointResource>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<EndpointResource>;
+    update is ArmResourcePatchAsync<EndpointResource, EndpointProperties>;
+    delete is ArmResourceDeleteAsync<EndpointResource>;
+    listByParent is ArmResourceListByParent<EndpointResource>;
+    listBySubscription is ArmListBySubscription<EndpointResource>;
+  }
 
 @doc("Virtual Enclave Interface")
 @armResourceOperations
-interface VirtualEnclave
-  extends TrackedResourceOperations<EnclaveResource, VirtualEnclaveProperties> {}
+interface VirtualEnclave {
+    get is ArmResourceRead<EnclaveResource>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<EnclaveResource>;
+    update is ArmResourcePatchAsync<EnclaveResource, VirtualEnclaveProperties>;
+    delete is ArmResourceDeleteAsync<EnclaveResource>;
+    listByParent is ArmResourceListByParent<EnclaveResource>;
+    listBySubscription is ArmListBySubscription<EnclaveResource>;
+  }
 
 @doc("Community Interface")
 @armResourceOperations
-interface Community 
-  extends TrackedResourceOperations<CommunityResource, CommunityProperties> {}
+interface Community {
+    get is ArmResourceRead<CommunityResource>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<CommunityResource>;
+    update is ArmResourcePatchAsync<CommunityResource, CommunityProperties>;
+    delete is ArmResourceDeleteAsync<CommunityResource>;
+    listByParent is ArmResourceListByParent<CommunityResource>;
+    listBySubscription is ArmListBySubscription<CommunityResource>;
+  }
 
 @doc("Catalog Interface")
 @armResourceOperations
-interface Catalog
-  extends TrackedResourceOperations<CatalogResource, CatalogProperties> {}
+interface Catalog {
+    get is ArmResourceRead<CatalogResource>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<CatalogResource>;
+    update is ArmResourcePatchAsync<CatalogResource, CatalogProperties>;
+    delete is ArmResourceDeleteAsync<CatalogResource>;
+    listByParent is ArmResourceListByParent<CatalogResource>;
+    listBySubscription is ArmListBySubscription<CatalogResource>;
+  }
 
 @doc("Internal Connections")
 @armResourceOperations
-interface InternalConnections
-  extends TrackedResourceOperations<InternalConnection, InternalConnectionProperties> {}
+interface InternalConnections {
+    get is ArmResourceRead<InternalConnection>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<InternalConnection>;
+    update is ArmResourcePatchAsync<InternalConnection, InternalConnectionProperties>;
+    delete is ArmResourceDeleteAsync<InternalConnection>;
+    listByParent is ArmResourceListByParent<InternalConnection>;
+    listBySubscription is ArmListBySubscription<InternalConnection>;
+  }
+
+@doc("External Connections")
+@armResourceOperations
+interface ExternalConnections {
+    get is ArmResourceRead<ExternalConnection>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<ExternalConnection>;
+    update is ArmResourcePatchAsync<ExternalConnection, ExternalConnectionProperties>;
+    delete is ArmResourceDeleteAsync<ExternalConnection>;
+    listByParent is ArmResourceListByParent<ExternalConnection>;
+    listBySubscription is ArmListBySubscription<ExternalConnection>;
+  }

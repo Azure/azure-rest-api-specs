@@ -52,4 +52,7 @@ model InternalConnectionProperties {
 
   @doc("The source CIDR IP addresses.")
   sourceCidrs: string[];
+
+  @doc("List of resource ids modified by internalConnections.")
+  resourceCollection?: string[];
 }
