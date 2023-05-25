@@ -1738,7 +1738,8 @@
       ],
       "properties": {
         "kind": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "scoringRule": {
           "$ref": "#/definitions/RouterRule"
@@ -2463,7 +2464,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "exceptionPolicyId": {
           "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
@@ -2494,7 +2495,8 @@
       ],
       "properties": {
         "kind": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "longest-idle"
@@ -2813,7 +2815,7 @@
         "labelsToUpsert": {
           "description": "(optional) Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       },
       "x-ms-discriminator-value": "reclassify"
@@ -2836,7 +2838,8 @@
       ],
       "properties": {
         "kind": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "round-robin"
@@ -2922,7 +2925,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
@@ -2935,7 +2938,7 @@
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
@@ -3000,7 +3003,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "WorkerState",
+            "name": "RouterWorkerState",
             "modelAsString": false
           }
         },
