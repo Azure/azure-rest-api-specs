@@ -35,7 +35,7 @@ npx tsc
 npx prettier --check **/*.json
 
 # Run 'prettier --list-different' to understand which files have problems.
-# Note: there is no way to view the problems without actually changing the file. See https://github.com/prettier/prettier/issues/6069.
+# Note: there is no way to view the exact problems without actually changing the affected files. See https://github.com/prettier/prettier/issues/6069.
 npx prettier --list-different **/*.json
 
 # Run 'prettier --write' to fix the problems.
