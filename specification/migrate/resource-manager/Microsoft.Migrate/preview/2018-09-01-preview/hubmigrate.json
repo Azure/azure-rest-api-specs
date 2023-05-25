@@ -1213,7 +1213,7 @@
         "tags": [
           "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebserversController"
         ],
-        "summary": "Gets a list of webservers in the migrate project.",
+        "summary": "Gets a list of WebServers in the migrate project.",
         "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebserversController_EnumerateWebServers",
         "parameters": [
           {
@@ -3253,6 +3253,492 @@
         "publisherSasUri": {
           "description": "Gets or sets the publisher sas uri for the solution.",
           "type": "string"
+        }
+      }
+    },
+    "VirtualDesktopUserCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDesktopUser"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualDesktopUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualDesktopUserProperties"
+        }
+      }
+    },
+    "VirtualDesktopUserProperties": {
+      "type": "object",
+      "properties": {
+        "assessmentData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDesktopUserAssessmentDetails"
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "VirtualDesktopUserAssessmentDetails": {
+      "type": "object",
+      "properties": {
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "enqueueTime": {
+          "type": "string"
+        },
+        "solutionName": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "userAccount": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "devicesUsed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualization": {
+          "type": "string"
+        },
+        "totalApplicationsCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "criticalApplications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "osUsed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "multiUserWindows10": {
+          "type": "boolean"
+        },
+        "windows7": {
+          "type": "boolean"
+        },
+        "persona": {
+          "type": "string"
+        },
+        "assessmentId": {
+          "type": "string"
+        },
+        "targetLocation": {
+          "type": "string"
+        },
+        "isReadyForMigration": {
+          "type": "boolean"
+        },
+        "targetAzureVmSize": {
+          "type": "string"
+        },
+        "targetStorageType": {
+          "type": "string"
+        },
+        "activeWeeklyHours": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "userExperienceScore": {
+          "format": "double",
+          "type": "number"
+        },
+        "egressBandwidthWeekly": {
+          "format": "double",
+          "type": "number"
+        },
+        "extendedInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WebServerCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebServer"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "WebServer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/WebServerProperties"
+        }
+      }
+    },
+    "WebServerProperties": {
+      "type": "object",
+      "properties": {
+        "discoveryData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebServerDiscoveryDetails"
+          }
+        },
+        "summary": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WebServerSummary"
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "WebServerDiscoveryDetails": {
+      "type": "object",
+      "properties": {
+        "osName": {
+          "type": "string"
+        },
+        "osVersion": {
+          "type": "string"
+        },
+        "cpuCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "memoryInMb": {
+          "type": "string"
+        },
+        "webServerType": {
+          "type": "string"
+        },
+        "webServerVersion": {
+          "type": "string"
+        },
+        "portList": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "enqueueTime": {
+          "type": "string"
+        },
+        "solutionName": {
+          "type": "string"
+        },
+        "webServerId": {
+          "type": "string"
+        },
+        "webServerName": {
+          "type": "string"
+        },
+        "extendedInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WebServerSummary": {
+      "type": "object",
+      "properties": {
+        "discoveredCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "assessedCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "readyForMigration": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "migratingCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "migratedCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "WebSiteCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebSite"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "WebSite": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/WebSiteProperties"
+        }
+      }
+    },
+    "WebSiteProperties": {
+      "type": "object",
+      "properties": {
+        "discoveryData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebSiteDiscoveryDetails"
+          }
+        },
+        "assessmentData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebSiteAssessmentDetails"
+          }
+        },
+        "migrationData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebSiteMigrationDetails"
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "WebSiteDiscoveryDetails": {
+      "type": "object",
+      "properties": {
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "webServerId": {
+          "type": "string"
+        },
+        "webServerType": {
+          "type": "string"
+        },
+        "webSiteName": {
+          "type": "string"
+        },
+        "enqueueTime": {
+          "type": "string"
+        },
+        "solutionName": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "extendedInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WebSiteAssessmentDetails": {
+      "type": "object",
+      "properties": {
+        "assessmentId": {
+          "type": "string"
+        },
+        "isReadyForMigration": {
+          "type": "boolean"
+        },
+        "assessmentTargetType": {
+          "type": "string"
+        },
+        "migrationBlockersCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "successList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warningList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errorList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "framework": {
+          "type": "string"
+        },
+        "frameworkVersion": {
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "webServerId": {
+          "type": "string"
+        },
+        "webServerType": {
+          "type": "string"
+        },
+        "webSiteName": {
+          "type": "string"
+        },
+        "enqueueTime": {
+          "type": "string"
+        },
+        "solutionName": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "extendedInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WebSiteMigrationDetails": {
+      "type": "object",
+      "properties": {
+        "migrationPhase": {
+          "type": "string"
+        },
+        "progressPercentage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "targetAppServiceArmId": {
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "webServerId": {
+          "type": "string"
+        },
+        "webServerType": {
+          "type": "string"
+        },
+        "webSiteName": {
+          "type": "string"
+        },
+        "enqueueTime": {
+          "type": "string"
+        },
+        "solutionName": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "extendedInfo": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

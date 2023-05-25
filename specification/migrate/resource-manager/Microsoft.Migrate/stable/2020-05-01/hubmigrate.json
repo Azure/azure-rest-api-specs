@@ -1343,6 +1343,161 @@
         }
       }
     },
+    "PrivateEndpointConnectionProxy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "type": "string"
+        },
+        "remotePrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointDetails",
+          "readOnly": true
+        },
+        "status": {
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Running"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyRequestBody": {
+      "type": "object",
+      "properties": {
+        "remotePrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointDetails"
+        }
+      }
+    },
+    "PrivateEndpointDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "manualPrivateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "privateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          }
+        },
+        "privateLinkServiceProxies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceProxy"
+          }
+        },
+        "connectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpConfiguration"
+          }
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceProxy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "groupConnectivityInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          }
+        },
+        "remotePrivateEndpointConnection": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "remotePrivateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "IpConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "type": "string"
+        },
+        "linkIdentifier": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "memberName": {
+          "type": "string"
+        }
+      }
+    },
+    "GroupConnectivityInformation": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "memberName": {
+          "type": "string"
+        },
+        "customerVisibleFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "internalFqdn": {
+          "type": "string"
+        },
+        "redirectMapId": {
+          "type": "string"
+        },
+        "privateLinkServiceArmRegion": {
+          "type": "string"
+        }
+      }
+    },
     "AvailableOperations": {
       "description": "Available operations of the service",
       "type": "object",
