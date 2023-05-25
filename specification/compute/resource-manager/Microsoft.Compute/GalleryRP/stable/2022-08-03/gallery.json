@@ -2095,7 +2095,7 @@
       "description": "The security profile of a gallery image version",
       "properties": {
         "uefiSettings": {
-          "$ref": "#/definitions/uefiSettings"
+          "$ref": "#/definitions/UefiSettings"
         }
       }
     },
@@ -3161,7 +3161,7 @@
         }
       }
     },
-    "uefiSettings": {
+    "UefiSettings": {
       "type": "object",
       "description": "The UEFI settings of the image version.",
       "properties": {
@@ -3169,7 +3169,7 @@
           "type": "array",
           "description": "The name of the template(s) that contains default UEFI key signatures that will be added to the image.",
           "items": {
-            "$ref": "#/definitions/uefiSignatureTemplateName"
+            "$ref": "#/definitions/UefiSignatureTemplateName"
           },
           "x-ms-identifiers": []
         },
@@ -3178,7 +3178,7 @@
         }
       }
     },
-    "uefiSignatureTemplateName": {
+    "UefiSignatureTemplateName": {
       "type": "string",
       "description": "The name of the signature template that contains default UEFI keys.",
       "enum": [
