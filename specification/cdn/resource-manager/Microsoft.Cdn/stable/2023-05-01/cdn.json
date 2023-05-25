@@ -2881,31 +2881,38 @@
       "type": "object",
       "description": "Result for canMigrate operation.",
       "properties": {
-        "canMigrate": {
+        "migratedProfileResourceId": {
           "readOnly": true,
-          "description": "Flag that says if the profile can be migrated",
-          "type": "boolean"
+          "description": "Arm resource id of the migrated profile",
+          "$ref": "#/definitions/ResourceReference"
         },
-        "defaultSku": {
-          "readOnly": true,
-          "description": "Recommended sku for the migration",
-          "type": "string",
-          "enum": [
-            "Standard_AzureFrontDoor",
-            "Premium_AzureFrontDoor"
-          ],
-          "x-ms-enum": {
-            "name": "CanMigrateDefaultSku",
-            "modelAsString": true
-          }
-        },
-        "errors": {
-          "items": {
-            "description": "List of migration errors",
-            "$ref": "#/definitions/MigrationErrorType"
+        "properties": {
+          "canMigrate": {
+            "readOnly": true,
+            "description": "Flag that says if the profile can be migrated",
+            "type": "boolean"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "defaultSku": {
+            "readOnly": true,
+            "description": "Recommended sku for the migration",
+            "type": "string",
+            "enum": [
+              "Standard_AzureFrontDoor",
+              "Premium_AzureFrontDoor"
+            ],
+            "x-ms-enum": {
+              "name": "CanMigrateDefaultSku",
+              "modelAsString": true
+            }
+          },
+          "errors": {
+            "items": {
+              "description": "List of migration errors",
+              "$ref": "#/definitions/MigrationErrorType"
+            },
+            "type": "array",
+            "x-ms-identifiers": []
+          }
         }
       },
       "x-ms-azure-resource": true
