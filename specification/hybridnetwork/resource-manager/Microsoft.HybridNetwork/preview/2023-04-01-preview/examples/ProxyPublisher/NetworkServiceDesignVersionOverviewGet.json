@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "subid",
+    "publisherScopeName": "public",
+    "publisherLocationName": "eastus",
+    "proxyPublisherName": "TestPublisher",
+    "networkServiceDesignGroupName": "TestNSDG",
+    "networkServiceDesignVersionName": "1.0.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1.0.0",
+        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/proxyPublishers/TestPublisher/networkServiceDesignGroups/TestNetworkServiceDesignGroupName/networkServiceDesignVersions/1.0.0",
+        "type": "Microsoft.HybridNetwork/proxyPublishers/networkServiceDesignGroups/networkServiceDesignVersions",
+        "properties": {
+          "versionState": "Active",
+          "description": "Test NSD.",
+          "configurationGroupSchemaReferences": {
+            "cgs1": {
+              "publisherName": "Testpublisher",
+              "publisherScope": "Private",
+              "configurationGroupSchemaName": "Testcgschema",
+              "configurationGroupSchemaOfferingLocation": "eastus"
+            }
+          },
+          "nfvisFromSite": {
+            "nfvi1": {
+              "name": "{configurationparameters('cgs1').nfviNameFromSite}",
+              "type": "AzureCore"
+            }
+          }
+        }
+      }
+    }
+  }
+}
