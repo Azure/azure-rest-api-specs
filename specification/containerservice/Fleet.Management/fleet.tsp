@@ -107,8 +107,7 @@ interface Fleets {
   get is ArmResourceRead<Fleet>;
 
   @doc("Creates or updates a Fleet.")
-  @operationId("Fleets_CreateOrUpdate")
-  create is ArmResourceCreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     Fleet,
     BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
@@ -121,12 +120,6 @@ interface Fleets {
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
   >;
 
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      "final-state-via": "location",
-    }
-  )
   delete is ArmResourceDeleteAsync<
     Fleet,
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
@@ -135,7 +128,6 @@ interface Fleets {
   @doc("Lists fleets in the specified subscription and resource group.")
   listByResourceGroup is ArmResourceListByParent<Fleet>;
 
-  @operationId("Fleets_ListBySubscription")
   @doc("Lists fleets in the specified subscription.")
   listBySubscription is ArmListBySubscription<Fleet>;
 
