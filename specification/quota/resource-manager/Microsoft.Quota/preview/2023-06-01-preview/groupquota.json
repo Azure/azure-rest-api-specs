@@ -281,13 +281,13 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/subscriptions": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/subscriptionsToSharedQuotaEntity": {
       "put": {
         "tags": [
           "SharedQuotaEntities-Subscriptions"
         ],
         "summary": "Adds subscription(s) to the sharedQuotaEntity.",
-        "description": "Adds list of subscriptions to sharedQuotaEntity.",
+        "description": "Adds list of subscriptions to sharedQuotaEntity. Should it overwrite the exitsing subscritionList, as per put? Patch is to add, delete is for removing the subscripting from list.",
         "operationId": "SharedQuotaEntitiesSubscriptionsAdd_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Subscriptions": {
