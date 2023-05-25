@@ -4,5 +4,5 @@ These settings apply only when `--tag=package-2023-05-18-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-05-18-preview'
 test-resources:
-- Microsoft.DelegatedNetwork/preview/2023-05-18-preview/scenarios/basic.yaml
+- Microsoft.DelegatedNetwork/preview/2023-05-18-preview/scenarios/operationsList.yaml
 ```
