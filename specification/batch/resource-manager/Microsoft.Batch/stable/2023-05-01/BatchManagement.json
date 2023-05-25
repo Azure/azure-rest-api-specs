@@ -2157,6 +2157,9 @@
           },
           "CreatePool - VirtualMachineConfiguration Extensions": {
             "$ref": "./examples/PoolCreate_VirtualMachineConfiguration_Extensions.json"
+          },
+          "CreatePool - accelerated networking": {
+            "$ref": "./examples/PoolCreate_AcceleratedNetworking.json"
           }
         },
         "parameters": [
@@ -2367,6 +2370,9 @@
           },
           "GetPool - VirtualMachineConfiguration Extensions": {
             "$ref": "./examples/PoolGet_VirtualMachineConfiguration_Extensions.json"
+          },
+          "GetPool - AcceleratedNetworking": {
+            "$ref": "./examples/PoolGet_AcceleratedNetworking.json"
           }
         },
         "parameters": [
@@ -3115,7 +3121,7 @@
       "properties": {
         "keyIdentifier": {
           "type": "string",
-          "description": "Full path to the versioned secret. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. To be usable the following prerequisites must be met:\n\n The Batch Account has a System Assigned identity\n The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions\n The KeyVault has soft-delete and purge protection enabled"
+          "description": "Full path to the secret with or without version. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. or https://mykeyvault.vault.azure.net/keys/testkey. To be usable the following prerequisites must be met:\n\n The Batch Account has a System Assigned identity\n The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions\n The KeyVault has soft-delete and purge protection enabled"
         }
       },
       "description": "KeyVault configuration when using an encryption KeySource of Microsoft.KeyVault."
@@ -4754,15 +4760,20 @@
           "type": "string",
           "title": "The container technology to be used.",
           "enum": [
-            "DockerCompatible"
+            "DockerCompatible",
+            "CriCompatible"
           ],
           "x-ms-enum": {
             "name": "ContainerType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "DockerCompatible",
                 "description": "A Docker compatible container technology will be used to launch the containers."
+              },
+              {
+                "value": "CriCompatible",
+                "description": "A CRI based technology will be used to launch the containers."
               }
             ]
           }
@@ -4850,6 +4861,10 @@
         "autoUpgradeMinorVersion": {
           "type": "boolean",
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
         },
         "settings": {
           "type": "object",
@@ -5500,6 +5515,15 @@
           "$ref": "#/definitions/PublicIPAddressConfiguration",
           "title": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
           "description": "This property is only supported on Pools with the virtualMachineConfiguration property."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "title": "Whether this pool should enable accelerated networking.",
+          "description": "Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.",
+          "externalDocs": {
+            "url": "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview",
+            "description": "Create a VM with Accelerated Networking."
+          }
         }
       },
       "description": "The network configuration for a pool."
