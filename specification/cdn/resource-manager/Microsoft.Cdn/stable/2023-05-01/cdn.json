@@ -2881,41 +2881,43 @@
       "type": "object",
       "description": "Result for canMigrate operation.",
       "properties": {
-        "migratedProfileResourceId": {
-          "readOnly": true,
-          "description": "Arm resource id of the migrated profile",
-          "$ref": "#/definitions/ResourceReference"
-        },
         "properties": {
-          "canMigrate": {
-            "readOnly": true,
-            "description": "Flag that says if the profile can be migrated",
-            "type": "boolean"
-          },
-          "defaultSku": {
-            "readOnly": true,
-            "description": "Recommended sku for the migration",
-            "type": "string",
-            "enum": [
-              "Standard_AzureFrontDoor",
-              "Premium_AzureFrontDoor"
-            ],
-            "x-ms-enum": {
-              "name": "CanMigrateDefaultSku",
-              "modelAsString": true
-            }
-          },
-          "errors": {
-            "items": {
-              "description": "List of migration errors",
-              "$ref": "#/definitions/MigrationErrorType"
-            },
-            "type": "array",
-            "x-ms-identifiers": []
-          }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CanMigrateProperties"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "CanMigrateProperties": {
+      "type": "object",
+      "properties": {
+        "canMigrate": {
+          "readOnly": true,
+          "description": "Flag that says if the profile can be migrated",
+          "type": "boolean"
+        },
+        "defaultSku": {
+          "readOnly": true,
+          "description": "Recommended sku for the migration",
+          "type": "string",
+          "enum": [
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "x-ms-enum": {
+            "name": "CanMigrateDefaultSku",
+            "modelAsString": true
+          }
+        },
+        "errors": {
+          "items": {
+            "description": "List of migration errors",
+            "$ref": "#/definitions/MigrationErrorType"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
+        }
+      }
     },
     "MigrationErrorType": {
       "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
