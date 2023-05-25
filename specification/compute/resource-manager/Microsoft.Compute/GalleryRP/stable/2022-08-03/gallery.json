@@ -627,6 +627,9 @@
           },
           "Create or update a simple gallery image version with target extended locations specified.": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithTargetExtendedLocations.json"
+          },
+          "Create or update a simple Gallery Image Version using vhd as a source with custom UEFI keys.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithVHD_UefiSettings.json"
           }
         }
       },
@@ -3192,10 +3195,10 @@
       "type": "object",
       "description": "Additional UEFI key signatures that will be added to the image in addition to the signature templates",
       "properties": {
-        "PK": {
+        "pk": {
           "$ref": "#/definitions/uefiKey"
         },
-        "KEK": {
+        "kek": {
           "type": "array",
           "description": "The Key Encryption Keys of this image version.",
           "items": {
@@ -3203,7 +3206,7 @@
           },
           "x-ms-identifiers": []
         },
-        "DB": {
+        "db": {
           "type": "array",
           "description": "The database of UEFI keys for this image version.",
           "items": {
@@ -3211,7 +3214,7 @@
           },
           "x-ms-identifiers": []
         },
-        "DBX": {
+        "dbx": {
           "type": "array",
           "description": "The database of revoked UEFI keys for this image version.",
           "items": {
