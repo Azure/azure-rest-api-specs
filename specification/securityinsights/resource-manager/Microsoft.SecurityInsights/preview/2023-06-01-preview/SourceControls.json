@@ -173,7 +173,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates a source control.": {
+          "Creates or updates a source control.": {
             "$ref": "./examples/sourcecontrols/CreateSourceControl.json"
           }
         },
@@ -204,7 +204,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/SourceControl"
             }
@@ -255,13 +255,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation succeeded with warnings.",
+            "description": "Source control deleted.",
             "schema": {
               "$ref": "#/definitions/Warning"
             }
-          },
-          "204": {
-            "description": "Operation succeeded without warnings."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -398,7 +395,8 @@
           "$ref": "#/definitions/ServicePrincipal"
         },
         "repositoryAccess": {
-          "description": "Repository access credentials.",
+          "description": "Repository access credentials. This is write-only object and it never returns back to a user.",
+          "x-ms-mutability": ["create", "update"],
           "$ref": "#/definitions/RepositoryAccess"
         },
         "repositoryResourceInfo": {
@@ -418,13 +416,17 @@
         "displayName",
         "repoType",
         "contentTypes",
-        "repository"
+        "repository",
+        "repositoryAccess"
       ],
       "type": "object"
     },
     "RepositoryAccess": {
       "type": "object",
       "description": "Credentials to access repository.",
+      "required": [
+        "kind"
+      ],
       "properties": {
         "kind": {
           "description": "The kind of repository access credentials",
@@ -483,7 +485,13 @@
       }
     },
     "ServicePrincipal": {
+      "readOnly": true,
       "type": "object",
+      "required": [
+        "id",
+        "tenantId",
+        "appId"
+      ],
       "description": "Service principal metadata.",
       "properties": {
         "id": {
@@ -666,7 +674,7 @@
       "description": "The type of repository.",
       "enum": [
         "Github",
-        "DevOps"
+        "AzureDevOps"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -807,15 +815,21 @@
       "readOnly": true,
       "description": "Information regarding pull request for protected branches.",
       "type": "object",
+      "required": [
+        "url",
+        "state"
+      ],
       "properties": {
         "url": {
           "description": "URL of pull request",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/PullRequestState",
           "description": "State of the pull request",
-          "type": "object"
+          "type": "object",
+          "readOnly": true
         }
       }
     },
@@ -845,27 +859,74 @@
       "properties": {
         "warning": {
           "$ref": "#/definitions/WarningBody",
-          "description": "Warning data"
+          "description": "Warning data."
         }
       },
       "type": "object"
     },
     "WarningBody": {
+      "readOnly": true,
       "x-ms-external": true,
       "description": "Warning details.",
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "description": "An identifier for the warning. Codes are invariant and are intended to be consumed programmatically.",
           "readOnly": true,
-          "type": "string"
+          "type": "object",
+          "$ref": "#/definitions/WarningCode"
         },
         "message": {
           "description": "A message describing the warning, intended to be suitable for display in a user interface.",
           "readOnly": true,
           "type": "string"
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WarningBody"
+          },
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
+    },
+    "WarningCode": {
+      "readOnly": true,
+      "description": "The type of repository.",
+      "enum": [
+        "SourceControlWarning_DeleteServicePrincipal",
+        "SourceControlWarning_DeletePipelineFromAzureDevOps",
+        "SourceControlWarning_DeleteWorkflowAndSecretFromGitHub",
+        "SourceControlWarning_DeleteRoleAssignment",
+        "SourceControl_DeletedWithWarnings"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "WarningCode",
+        "values": [
+          {
+            "value": "SourceControlWarning_DeleteServicePrincipal"
+          },
+          {
+            "value": "SourceControlWarning_DeletePipelineFromAzureDevOps"
+          },
+          {
+            "value": "SourceControlWarning_DeleteWorkflowAndSecretFromGitHub"
+          },
+          {
+            "value": "SourceControlWarning_DeleteRoleAssignment"
+          },
+          {
+            "value": "SourceControl_DeletedWithWarnings"
+          }
+        ]
+      }
     }
   },
   "parameters": {
