@@ -287,7 +287,7 @@
           "SharedQuotaEntities-Subscriptions"
         ],
         "summary": "Adds subscription(s) to the sharedQuotaEntity.",
-        "description": "Adds list of subscriptions to sharedQuotaEntity. Should it overwrite the exitsing subscritionList, as per put? Patch is to add, delete is for removing the subscripting from list.",
+        "description": "Adds list of subscriptions to sharedQuotaEntity. Should it overwrite the existing subscriptionList, as per put? Patch is to add, delete is for removing the subscripting from list.",
         "operationId": "SharedQuotaEntitiesSubscriptionsAdd_CreateOrUpdate",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Subscriptions": {
@@ -1622,12 +1622,12 @@
           "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand. Based on the filter the subscriptions will be automatically added to SharedQuotaEntity.",
           "$ref": "#/definitions/Filters"
         },
-        "subsscriptionIds": {
+        "subscriptionIds": {
           "description": "List of subscriptions included in the ShareQuotaEntity. It can be null at the time of creation or a list of subscriptions can be passed.",
           "$ref": "#/definitions/subscriptionIdList"
         },
         "attributes": {
-          "description": "List of atrribute included in the ShareQuotaEntity. The attributes will validate the subscriptions to add to the SharedQuotaEntity, if they satisfy the conditions, else an error will be returned.",
+          "description": "List of attribute included in the ShareQuotaEntity. The attributes will validate the subscriptions to add to the SharedQuotaEntity, if they satisfy the conditions, else an error will be returned.",
           "$ref": "#/definitions/AttributeList"
         },
         "provisioningState": {
@@ -1673,7 +1673,7 @@
     },
     "subscriptionIdList": {
       "type": "array",
-      "description": "List of subscrtionIds.",
+      "description": "List of subscriptionIds.",
       "items": {
         "type": "string",
         "description": "SubscriptionId."
