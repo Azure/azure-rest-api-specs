@@ -2101,6 +2101,114 @@
         }
       }
     },
+    "/entity/uniqueAttribute/type/{typeName}/rating": {
+      "get": {
+        "tags": [
+          "Collaboration"
+        ],
+        "description": "List ratings for an existing entity represented by its type and unique attribute",
+        "operationId": "Collaboration_ListRatingsByEntityUniqueAttribute",
+        "x-ms-examples": {
+          "Collaboration_ListRatingsByEntityUniqueAttribute": {
+            "$ref": "./examples/Collaboration_ListRatingsByEntityUniqueAttribute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/typeName"
+          },
+          {
+            "name": "attr:qualifiedName",
+            "in": "query",
+            "description": "The qualified name of the entity. (This is only an example. qualifiedName can be changed to other unique attributes)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "$ref": "#/parameters/ratingLimit"
+          },
+          {
+            "$ref": "#/parameters/ratingOffset"
+          },
+          {
+            "$ref": "#/parameters/ratingScoreFilter"
+          },
+          {
+            "$ref": "#/parameters/ratingSortBy"
+          },
+          {
+            "$ref": "#/parameters/ratingSortOrder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. If the listing operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/ListRatingsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Collaboration"
+        ],
+        "description": "Create or update a rating on an existing entity represented by its type and unique attribute. One user can only create one rating on one entity. Users can only update or delete ratings created by their own.",
+        "operationId": "Collaboration_CreateOrUpdateRatingByEntityUniqueAttribute",
+        "x-ms-examples": {
+          "Collaboration_CreateOrUpdateRatingByEntityUniqueAttribute": {
+            "$ref": "./examples/Collaboration_CreateOrUpdateRatingByEntityUniqueAttribute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/typeName"
+          },
+          {
+            "name": "attr:qualifiedName",
+            "in": "query",
+            "description": "The qualified name of the entity. (This is only an example. qualifiedName can be changed to other unique attributes)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "createOrUpdateRatingRequest",
+            "description": "The request body to create or update a rating.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateRatingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. If create or update operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/RatingResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/entity/guid/{guid}/rating/{ratingId}": {
       "delete": {
         "tags": [
@@ -2116,6 +2224,49 @@
         "parameters": [
           {
             "$ref": "#/parameters/guid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "$ref": "#/parameters/ratingId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK. If the rating deletion is successful."
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entity/uniqueAttribute/type/{typeName}/rating/{ratingId}": {
+      "delete": {
+        "tags": [
+          "Collaboration"
+        ],
+        "description": "Delete a rating by its ID from an existing entity represented by its type and unique attribute.",
+        "operationId": "Collaboration_DeleteRatingByEntityUniqueAttribute",
+        "x-ms-examples": {
+          "Collaboration_DeleteRatingByEntityUniqueAttribute": {
+            "$ref": "./examples/Collaboration_DeleteRatingByEntityUniqueAttribute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/typeName"
+          },
+          {
+            "name": "attr:qualifiedName",
+            "in": "query",
+            "description": "The qualified name of the entity. (This is only an example. qualifiedName can be changed to other unique attributes)",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/purviewAPIVersion"
