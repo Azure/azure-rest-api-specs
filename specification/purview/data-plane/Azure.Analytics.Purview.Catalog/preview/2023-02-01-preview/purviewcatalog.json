@@ -3912,6 +3912,9 @@
           },
           "Discovery_Query_ObjectType": {
             "$ref": "./examples/Discovery_Query_ObjectType.json"
+          },
+          "Discovery_Query_RatingScore": {
+            "$ref": "./examples/Discovery_Query_RatingScore.json"
           }
         },
         "parameters": [
@@ -8258,6 +8261,16 @@
         "longDescription": {
           "type": "string",
           "description": "The definition of the term."
+        },
+        "ratingScore": {
+          "type": "number",
+          "format": "float",
+          "description": "The average rating score of an entity if there's any rating."
+        },
+        "ratingCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total rating count of an entity if there's any rating."
         }
       },
       "title": "SearchResultValue",
