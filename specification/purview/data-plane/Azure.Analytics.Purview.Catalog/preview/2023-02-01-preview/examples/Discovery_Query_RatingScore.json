@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "searchRequest": {
+      "keywords": null,
+      "limit": 10,
+      "filter": {
+        "and": [
+          [
+            {
+              "ratingScore": {
+                "operator": "ge",
+                "value": 4
+              }
+            },
+            {
+              "ratingScore": {
+                "operator": "lt",
+                "value": 5
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "api-version": "2023-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 2,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "objectType": "Tables",
+            "ratingScore": 4.5,
+            "ratingCount": 2,
+            "id": "24c16e53-1bfd-4d6c-b4ce-b1f6f6f60000",
+            "entityType": "azure_sql_mi_table",
+            "name": "exampledata1",
+            "qualifiedName": "mssql://exampleaccount.database.windows.net:3342/examplesqlmidb/dbo/exampledata1",
+            "assetType": [
+              "Azure SQL Managed Instance"
+            ]
+          },
+          {
+            "@search.score": 1.0,
+            "id": "bfecbcc3-1838-45fe-96d6-112de8a170f9",
+            "ratingScore": 4.0,
+            "ratingCount": 1,
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplepath/exampledata.txt",
+            "name": "exampledata.txt",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_path",
+            "classification": [],
+            "label": [],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [],
+            "contact": []
+          }
+        ]
+      }
+    }
+  }
+}
