@@ -1455,6 +1455,7 @@
     },
     "CIAMTenantResource": {
       "type": "object",
+      "description": "The Azure AD for customers resource.",
       "required": [
         "location",
         "sku",
@@ -1514,7 +1515,7 @@
           "description": "Resource Tags"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1601,6 +1602,7 @@
         "billingConfig": {
           "type": "object",
           "description": "The billing configuration for the tenant.",
+          "x-ms-client-flatten": true,
           "properties": {
             "billingType": {
               "type": "string",
@@ -1637,6 +1639,7 @@
       "type": "object",
       "properties": {
         "billingConfig": {
+          "x-ms-client-flatten": true,
           "type": "object",
           "description": "The billing configuration for the tenant.",
           "properties": {
@@ -1687,85 +1690,6 @@
         }
       }
     },
-    "CreateCIAMTenantResponseBody": {
-      "type": "object",
-      "required": [
-        "location",
-        "sku",
-        "properties"
-      ],
-      "x-ms-azure-resource": true,
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the Azure AD for customers tenant resource.",
-          "readOnly": true,
-          "enum": [
-            "Microsoft.AzureActiveDirectory/ciamDirectories"
-          ],
-          "x-ms-enum": {
-            "name": "ciamTypeValue",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Microsoft.AzureActiveDirectory/ciamDirectories",
-                "description": "The resource type for Azure AD for customers tenant resource."
-              }
-            ]
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/CIAMResourceSKU"
-        },
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "properties": {
-            "provisioningState": {
-              "title": "Provisioning State",
-              "type": "string"
-            },
-            "createTenantProperties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/CreateCIAMTenantProperties"
-            },
-            "tenantId": {
-              "type": "string",
-              "description": "An identifier of the Azure AD for customers tenant."
-            }
-          }
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "An identifier that represents the Azure AD for customers tenant resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the Azure AD for customers tenant resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia'. Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource Tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
-    },
     "CreateCIAMTenantRequestBody": {
       "type": "object",
       "description": "The information needed to create the Azure AD for customers tenant and corresponding Azure resource, which is used for billing purposes.",
@@ -1777,6 +1701,10 @@
       "x-ms-azure-resource": true,
       "properties": {
         "location": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "type": "string",
           "description": "The location in which the resource is hosted and data resides. Can be one of 'United States', 'Europe', 'Asia Pacific', or 'Australia'. Refer to [this documentation](https://aka.ms/B2CDataResidency) for more information."
         },
