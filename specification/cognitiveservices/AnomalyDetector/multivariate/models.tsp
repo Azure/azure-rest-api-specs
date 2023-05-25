@@ -146,7 +146,7 @@ model AnomalyState {
   errors?: ErrorResponse[];
 }
 
-@doc("Detailed information of the anomalous time stamp.")
+@doc("Detailed information of the data point.")
 model DetectionValue {
   @doc("True if an anomaly is detected at the current time stamp.")
   isAnomaly: boolean;
