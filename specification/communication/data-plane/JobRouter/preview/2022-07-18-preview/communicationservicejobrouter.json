@@ -1184,6 +1184,11 @@
         ],
         "summary": "Declines an offer to work on a job.",
         "operationId": "JobRouter_DeclineJobAction",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -1204,6 +1209,14 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "declineOfferRequest",
+            "description": "Request model for declining offer",
+            "schema": {
+              "$ref": "#/definitions/DeclineOfferRequest"
+            }
           }
         ],
         "responses": {
@@ -1725,8 +1738,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "scoringRule": {
           "$ref": "#/definitions/RouterRule"
@@ -2004,6 +2016,17 @@
     "DeclineJobOfferResult": {
       "description": "Response payload from declining a job",
       "type": "object"
+    },
+    "DeclineOfferRequest": {
+      "description": "Request payload for declining offers",
+      "type": "object",
+      "properties": {
+        "reofferTimeUtc": {
+          "format": "date-time",
+          "description": "If the reoffer time is not provided, then this job will not be re-offered to the worker who declined this job unless\r\nthe worker is de-registered and re-registered.  If a reoffer time is provided, then the job will be re-matched to\r\neligible workers after the reoffer time.  The worker that declined the job will also be eligible for the job at that time.",
+          "type": "string"
+        }
+      }
     },
     "DirectMapRule": {
       "description": "A rule that return the same labels as the input labels.",
@@ -2471,8 +2494,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "longest-idle"
@@ -2814,8 +2836,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "round-robin"
