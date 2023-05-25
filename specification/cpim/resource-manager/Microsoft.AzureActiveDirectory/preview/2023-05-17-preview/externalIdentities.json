@@ -1612,7 +1612,12 @@
           "type": "string"
         },
         "properties": {
-          "provisioningState": {}
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          }
         },
         "startTime": {
           "description": "Start time of the async operation.",
