@@ -23,7 +23,10 @@ jobs:
   steps:
   - script: npm ci
     displayName: npm ci
-  
+
+  - script: npm ls -a
+    displayName: npm ls -a
+
   - template: templates/steps/typespec-ci.yml
     parameters:
       Folder: specification/contosowidgetmanager/Contoso.WidgetManager
