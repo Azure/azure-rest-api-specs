@@ -274,6 +274,9 @@ model AnomalyDetectorDiagnosticDetails {
   variableStates?: MultivariateVariableState[];
 }
 
+@encode("seconds", float32)
+scalar float32Duration extends duration;
+
 @doc("Model state.")
 model MultivariateModelState {
   @doc("""
@@ -295,7 +298,7 @@ epoch.
   validationLosses?: float32[];
 
   @doc("Latency for each epoch.")
-  latenciesInSeconds?: float32[];
+  latenciesInSeconds?: float32Duration[];
 }
 
 @doc("Response of getting a model.")
