@@ -2678,7 +2678,8 @@
       ],
       "properties": {
         "kind": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "threshold": {
           "format": "int32",
@@ -3022,12 +3023,12 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
@@ -3254,7 +3255,8 @@
       ],
       "properties": {
         "kind": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "thresholdSeconds": {
           "format": "double",
