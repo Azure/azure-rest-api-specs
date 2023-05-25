@@ -5,8 +5,8 @@ import "@azure-tools/typespec-azure-core";
 
 import "./common.tsp";
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace ServiceState;
+@TypeSpec.Http.route("/gov")
+namespace Microsoft.ManagedCcf.ServiceState;
 
 /// Common types
 @doc("PEM encoding of a cryptographic identifier. Contains a base64-encoded payload wrapped in content type identifiers.")
@@ -66,10 +66,10 @@ model SgxQuoteInfo {
   format: "OE_SGX_v1";
 
   @doc("Base-64 encoded SGX quote.")
-  quote: string;
+  quote: bytes;
 
   @doc("Base-64 encoded SGX endorsements.")
-  endorsements: string;
+  endorsements: bytes;
 }
 
 @doc("Attestation information for AMD SEV-SNP containers.")
@@ -78,10 +78,10 @@ model SnpQuoteInfo {
   format: "AMD_SEV_SNP_v1";
 
   @doc("Base-64 encoded SNP UVM endorsements.")
-  uvmEndorsements: string;
+  uvmEndorsements: bytes;
 
   @doc("Base-64 encoded SNP TCB endorsements.")
-  endorsedTcb: string;
+  endorsedTcb: bytes;
 }
 
 @doc("Details of how to contact a CCF node. Each node may listen on multiple interfaces, for different kinds of traffic.")
@@ -328,7 +328,7 @@ model ServiceInfo {
 
 interface ServiceState {
   @doc("Retrieve list of all members who govern this service.")
-  getMembers is Azure.Core.StandardResourceOperations.ResourceList<
+  listMembers is Azure.Core.StandardResourceOperations.ResourceList<
     Member,
     TxIdReadHeader
   >;
@@ -340,7 +340,7 @@ interface ServiceState {
   >;
 
   @doc("Retrieve list of all nodes participating in this service.")
-  getNodes is Azure.Core.StandardResourceOperations.ResourceList<
+  listNodes is Azure.Core.StandardResourceOperations.ResourceList<
     Node,
     TxIdReadHeader
   >;

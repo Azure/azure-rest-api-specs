@@ -6,8 +6,8 @@ import "@azure-tools/typespec-azure-core";
 import "./cose.tsp";
 import "./common.tsp";
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace Proposals;
+@TypeSpec.Http.route("/gov/members")
+namespace Microsoft.ManagedCcf.Proposals;
 
 @doc("A single step in a proposed change to the service.")
 model Action {
@@ -101,8 +101,7 @@ model Ballot {
 
   @doc("The script to execute, returning the voter's support of this proposal.")
   @visibility("create")
-  @projectedName("csharp", "BallotScript")
-  ballot: string;
+  script: string;
 }
 
 interface Proposals {
