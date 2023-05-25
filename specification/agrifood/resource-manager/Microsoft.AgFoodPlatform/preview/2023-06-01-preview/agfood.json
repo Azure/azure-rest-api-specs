@@ -65,7 +65,7 @@
         "tags": [
           "DataConnectors"
         ],
-        "description": "Get specific Credential for resource by credentialId.",
+        "description": "Get specific Data Connector Credential for resource by DataConnectorName.",
         "operationId": "DataConnectors_Get",
         "produces": [
           "application/json"
@@ -98,7 +98,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DataConnectorsResponse"
+              "$ref": "#/definitions/DataConnector"
             }
           }
         },
@@ -147,6 +147,7 @@
             "in": "body",
             "name": "body",
             "description": "Body must be valid DataConnector request.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/DataConnectorRequest"
             }
@@ -156,7 +157,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DataConnectorsResponse"
+              "$ref": "#/definitions/DataConnector"
             }
           },
           "default": {
@@ -182,16 +183,16 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
-          },
-          {
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+        },
+        {
             "in": "path",
             "name": "dataConnectorName",
             "description": "Connector name.",
@@ -231,7 +232,7 @@
         "tags": [
           "DataConnectors"
         ],
-        "description": "Lists the Data Connector Credentials for a MADMA instance.",
+        "description": "Lists the Data Connector Credentials for MADMA instance.",
         "operationId": "DataConnectors_List",
         "produces": [
           "application/json"
@@ -270,7 +271,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DataConnectorsResponseListResponse"
+              "$ref": "#/definitions/DataConnectorListResponse"
             }
           },
           "default": {
@@ -1853,27 +1854,27 @@
     }
   },
   "definitions": {
-      "ApiKeyAuthCredentials": {
-          "description": "ApiKeyAuthCredentials represents ApiKey credentals authentication.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AuthCredentials"
-            },
-            {
-              "required": [
-                "apiKey"
-              ],
-              "type": "object",
-              "properties": {
-                "apiKey": {
-                  "$ref": "#/definitions/KeyVaultProperties"
-                }
-              }
-            }
+    "ApiKeyAuthCredentials": {
+      "description": "ApiKeyAuthCredentials represents ApiKey credentals authentication.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        },
+        {
+          "required": [
+            "apiKey"
           ],
-          "x-ms-discriminator-value": "ApiKeyAuthCredentials"
-      },
+          "type": "object",
+          "properties": {
+            "apiKey": {
+              "$ref": "#/definitions/KeyVaultProperties"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKeyAuthCredentials"
+    },
       "ApiProperties": {
       "description": "Api properties.",
       "type": "object",
@@ -1966,8 +1967,55 @@
       ],
       "x-ms-discriminator-value": "BasicAuthCredentials"
     },
-    "DataConnectorRequest": {
-      "description": "DataConnector request.",
+    "DataConnector": {
+      "description": "DataConnector Model.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/SystemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnectorProperties"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DataConnectorListResponse": {
+      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of requested objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnector"
+          }
+        },
+        "$skipToken": {
+          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "type": "string"
+        }
+      }
+    },
+    "DataConnectorProperties": {
+      "description": "DataConnector Properties.",
       "required": [
         "credential"
       ],
@@ -1989,60 +2037,15 @@
         }
       }
     },
-    "DataConnectorsResponse": {
-      "description": "DataConnectors response object.",
-      "required": [
-        "credential",
-        "dataConnectorName"
-      ],
+    "DataConnectorRequest": {
+      "description": "DataConnector Request.",
       "type": "object",
       "properties": {
-        "dataConnectorName": {
-          "description": "Data ConnectorName.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "credential": {
-          "$ref": "#/definitions/AuthCredentials"
+        "properties": {
+          "$ref": "#/definitions/DataConnectorProperties"
         }
-      },
-      "example": {
-        "credential": {
-          "authType": "string",
-          "username": "string",
-          "password": {
-            "keyVaultUri": "string",
-            "keyName": "string",
-            "keyVersion": "string"
-          }
-        },
-        "dataConnectorName": "string"
       }
     },
-    "DataConnectorsResponseListResponse": {
-      "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of requested objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataConnectorsResponse"
-          }
-        },
-        "$skipToken": {
-          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "Continuation link (absolute URI) to the next page of results in the list.",
-          "type": "string"
-        }
-      }
-    },  
     "DataManagerForAgriculture": {
       "description": "Data Manager For Agriculture ARM Resource.",
       "type": "object",
