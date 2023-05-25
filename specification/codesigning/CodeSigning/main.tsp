@@ -19,14 +19,15 @@ using Autorest;
   ]>
 )
 @service({
-  title: "Azure.CodeSigning service",
+  title: "Azure CodeSigning",
+  summary: "Azure CodeSigning is a service that provides managed code signing for all.",
 })
 @versioned(Azure.CodeSigning.Versions)
 @server(
   "https://{region}.codesigning.azure.net/",
-  "Azure CodeSigning is a service that provides managed code signing for all.",
+  "CodeSign and retrieve relevant information pertaining signing process.",
   {
-    @doc("The region where we will sign code.")
+    @doc("The Azure region wherein requests for signing will be sent.")
     region: string,
   }
 )
@@ -40,44 +41,43 @@ enum Versions {
 
 interface CertificateProfileOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
-  @summary("Gets the status of a sign operation.")
-  @doc("Gets the status of a sign operation.")
+  @summary("Gets the status of a codesign operation.")
+  @doc("Retrieves the status of the codesign operation long running operation.")
   @example(
-    "./examples/CertificateProfile_GetSignOperation.json",
-    "GetSignOperation"
+    "./examples/CertificateProfile_GetSigningOperationStatus.json",
+    "GetSigningOperationStatus"
   )
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
-  getSignOperation is Foundations.GetOperationStatus<
-    CodeSignStatus,
-    OperationStatus
+  getCodeSigningStatus is Foundations.GetOperationStatus<
+    CodeSignRequestStatus,
+    CodeSignOperationStatus
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
-  @summary("Gets the sign root certificate on the certificate chain.")
+  @summary("Gets the codesigning root certificate on the certificate chain for that account and profile name.")
+  @doc("Retrieve the codesigning root certificate on the certificate chain for that account and profile name.")
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/rootcert")
-  @doc("Gets the sign root certificate on the certificate chain.")
   @example(
     "./examples/CertificateProfile_GetSignRootCert.json",
     "GetSignRootCertificate"
   )
-  getSignRootCertificate(
-    ...Foundations.ApiVersionParameter,
-    ...CodeSignStatus
-  ): BytesBody<"application/x-x509-ca-cert">;
+  getSignRootCertificate is RpcOperation<
+    CodeSignRequestStatus,
+    BytesBody<"application/x-x509-ca-cert">
+  >;
 
-  @summary("Gets a list of Extended Key Usage OIDs that are allowed.")
-  @doc("Gets a list of Extended Key Usage OIDs that are allowed.")
+  @summary("Gets a list of extended key usage object identifiers that are allowed.")
+  @doc("Retrieve a list of extended key usage object identifierss that are allowed for this account and profile name.")
   @example("./examples/CertificateProfile_GetSignEku.json", "GetSignEku")
-  listSignEku is StandardResourceOperations.ResourceList<Eku>;
+  listSignEkus is StandardResourceOperations.ResourceList<ExtendedKeyUsage>;
 
-  @summary("Initiates a sign operation.")
-  @doc("Initiates a sign operation.")
+  @summary("Submit a codesign operation.")
+  @doc("Submit a codesign operation under the specified account and profile name.")
   @example("./examples/CertificateProfile_Sign.json", "Sign")
-  @pollingOperation(CertificateProfileOperations.getSignOperation)
+  @pollingOperation(CertificateProfileOperations.getCodeSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfile,
-    SignRequest,
-    OperationStatus
+    CodeSignRequest,
+    CodeSignOperationStatus
   >;
 }
 
@@ -114,83 +114,67 @@ enum SignatureAlgorithm {
   ES256K,
 }
 
-@doc("Sign status of the operation.")
-@lroStatus
-enum Status {
-  NotStarted,
-  Running,
-  Succeeded,
-  Failed,
-  Canceled,
-}
-
-@doc("Code Signing Account")
+@doc("Azure CodeSigning customer account created upon registration on the service.")
 @resource("codesigningaccounts")
 model CodeSigningAccount {
   @key("codeSigningAccountName")
   @visibility("read", "update")
-  @doc("Azure Code Signing account name.")
+  @doc("Azure CodeSigning account name.")
   codeSigningAccountName: string;
 }
 
-@doc("Certificate Profile")
+@doc("Azure CodeSigning certificate profile configured on a codesign account.")
 @resource("certificateprofiles")
 @parentResource(CodeSigningAccount)
 model CertificateProfile {
   @key("certificateProfileName")
   @visibility("read", "update")
-  @doc("Azure Code Signing certificate profile name.")
+  @doc("Azure Codesigning certificate profile name under a codesign account.")
   certificateProfileName: string;
 }
 
-@doc("The sign request information to be signed.")
-model SignRequest {
-  @doc("The following algorithm identifiers are supported.")
+@doc("The codesign request information to be signed by the service.")
+model CodeSignRequest {
+  @doc("The supported signature algorithm identifiers.")
   signatureAlgorithm: SignatureAlgorithm;
 
-  @doc("Digest to sign.")
+  @doc("Content digest to codesign.")
   digest: bytes;
 
-  @doc("List of full file hash.")
+  @doc("List of full file digital signatures.")
   fileHashList?: bytes[];
 
-  @doc("List of authenticode hash.")
+  @doc("List of authenticode digital signatures.")
   authenticodeHashList?: bytes[];
 }
 
-@doc("The operation status response model.")
-model OperationStatus {
-  @doc("Unique ID of the operation.")
+@doc("The codesign operation status response.")
+model CodeSignOperationStatus {
+  @doc("Unique Id of the operation.")
   id: string;
 
-  @doc("The status of the sign operation.")
-  status?: Status;
-
-  @doc("The resulting sign operation including the signature and signing certificate.")
-  signStatus?: SignStatus;
+  @doc("The result of the codesign operation including the signature and signing certificate.")
+  signResult?: CodeSignResult;
 }
 
 @doc("The sign status model.")
-model SignStatus {
-  @doc("ID of the operation.")
+model CodeSignResult {
+  @doc("Response Id of the codesign operation.")
   operationId: string;
 
-  @doc("The status of the sign operation.")
-  status: Status;
-
-  @doc("Signature of the requested digest.")
+  @doc("Digital signature of the requested content digest.")
   signature?: bytes;
 
   @doc("""
-Signing certificate corresponding to the private key used to sign the requested
+Signing certificate corresponding to the private key used to codesign the requested
 digest.
 """)
   signingCertificate?: bytes;
 }
 
-@doc("Sign status request parameters")
-model CodeSignStatus {
-  @doc("Azure Code Signing account name.")
+@doc("Codesign request status parameters corresponding to the account and certificate profile name.")
+model CodeSignRequestStatus {
+  @doc("CodeSigning account name.")
   @path
   codeSigningAccountName: string;
 
@@ -199,19 +183,19 @@ model CodeSignStatus {
   certificateProfileName: string;
 }
 
-@doc("Extended Key Usage OIDs that are allowed.")
+@doc("Extended key usage object identifier that are allowed.")
 @resource("sign/eku")
 @parentResource(CertificateProfile)
-model Eku {
-  @key("eku")
+model ExtendedKeyUsage {
+  @key("ekus")
   @visibility("read", "update")
-  @doc("The element of eku list.")
+  @doc("An element of ekus.")
   ekus: string[];
 }
 
-@doc("Public root certificate.")
+@doc("Public root certificate from the certificate chain.")
 model BytesBody<ContentType> {
-  @doc("The root certificate.")
+  @doc("The root certificate of the certificate chain of this profile.")
   @body
   body: bytes;
 
