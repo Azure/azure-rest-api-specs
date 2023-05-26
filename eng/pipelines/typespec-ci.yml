@@ -21,6 +21,11 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
+  - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+    parameters:
+      Paths:
+      - '/*'
+
   - script: npm ci
     displayName: npm ci
 
