@@ -1672,11 +1672,22 @@
       }
     },
     "subscriptionIdList": {
-      "type": "array",
-      "description": "List of subscriptionIds.",
-      "items": {
-        "type": "string",
-        "description": "SubscriptionId."
+      "x-ms-azure-resource": true,
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state",
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        },
+        "subscriptionIds": {
+          "type": "array",
+          "description": "List of subscriptionIds.",
+          "items": {
+            "type": "string",
+            "description": "SubscriptionId."
+          }
+        }
       }
     },
     "SharedQuotaEntity": {
