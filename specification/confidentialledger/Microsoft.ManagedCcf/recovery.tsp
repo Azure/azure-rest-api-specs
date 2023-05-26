@@ -28,11 +28,10 @@ model RecoveryResponse {
   message: string;
 
   @doc("Count of how many accepted member shares have been submitted, including the current request.")
-  submittedCount: int64;
+  submittedCount: safeuint;
 
   @doc("Count of how many member shares are required to initiate the end-of-recovery procedure.")
-  // Should be uint64, but that fails Azure Swagger validation (oav)
-  recoveryThreshold: int64;
+  recoveryThreshold: safeuint;
 }
 
 @doc("Recovery-specific details for a given member.")

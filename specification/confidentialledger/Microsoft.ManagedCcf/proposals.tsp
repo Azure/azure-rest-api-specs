@@ -71,7 +71,7 @@ model Proposal {
   proposalState: ProposalState;
 
   @doc("Count of how many ballots have been submitted for this proposal.")
-  ballotCount: int64;
+  ballotCount: safeuint;
 
   @doc("If a proposal is not open, then this contains the result of each ballot when the proposal transitioned from open.")
   finalVotes?: MemberVotes;

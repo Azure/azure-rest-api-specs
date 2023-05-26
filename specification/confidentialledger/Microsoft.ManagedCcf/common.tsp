@@ -1,6 +1,8 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
+namespace Microsoft.ManagedCcf;
+
 alias transactionIdHeaderField = "x-ms-ccf-transaction-id";
 
 @doc("Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.")
@@ -20,7 +22,6 @@ alias TxIdReadHeader = Azure.Core.Traits.ResponseHeadersTrait<{
 }>;
 
 @doc("Hex encoding of SHA-256 of a node's public key.")
-// @format("hex") is emitted correctly, but fails Azure Swagger validation (oav)
 @pattern("^[a-f0-9]{64}$")
 scalar nodeId extends string;
 
@@ -35,3 +36,7 @@ scalar userId extends string;
 @doc("Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.")
 @pattern("^[a-f0-9]{64}$")
 scalar proposalId extends string;
+
+@doc("A non-negative JSON-safe integer (ie max is 2^53 - 1)")
+@minValue(0)
+scalar safeuint extends safeint;

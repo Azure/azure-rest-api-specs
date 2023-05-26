@@ -33,8 +33,9 @@ model Member {
   @doc("Current status of this member.")
   status: MemberStatus;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This is arbitrary JSON"
   @doc("Arbitrary service-defined metadata about this member. May be used by constitution or application code, but will not affect any core framework decisions.")
-  memberData: {};
+  memberData: unknown;
 
   @doc("x509 certificate used as this member's identity.")
   certificate: pem;
@@ -104,8 +105,9 @@ model Node {
   @doc("Current status of this node.")
   status: NodeStatus;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This is arbitrary JSON"
   @doc("Arbitrary service-defined metadata about this node. May be used by constitution or application code, but will not affect any core framework decisions.")
-  nodeData: {};
+  nodeData: unknown;
 
   @doc("x509 certificate containing this node's identity.")
   certificate: pem;
@@ -175,8 +177,9 @@ model JsEndpointInfo {
   @doc("Describes how this endpoint should be executed.")
   mode: JsExecMode;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Multiple value types"
   @doc("An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API.")
-  openApi: {};
+  openApi: Record<unknown>;
 }
 
 @doc("The collection of operations available on each path. Keyed by HTTP method.")
@@ -308,7 +311,7 @@ model ServiceInfo {
   certificate: pem;
 
   @doc("Records how many predecessors this service has. While the service identity certificate will change on any recovery, this allows users to determine exactly how many such recoveries have occurred.")
-  recoveryCount: safeint;
+  recoveryCount: safeuint;
 
   @doc("Transaction ID at which this service was first created. If this is a recovery of a previous service, this will indicate when the current service was recovered.")
   creationTransactionId: transactionId;
@@ -316,13 +319,14 @@ model ServiceInfo {
   @doc("Transaction ID at which the predecessor service was created, if this service is a recovery. If this is an original service rather than a recovery, this will be omitted.")
   previousServiceCreationTransactionId?: pem;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "This is arbitrary JSON"
   @doc("Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions.")
-  serviceData: {};
+  serviceData: unknown;
 
   @doc("Lists governance-controlled configuration parameters of this service, which will be used by core framework code.")
   configuration: {
-    maximumNodeCertificateValidityDays: safeint;
-    recentCoseProposalsWindowSize: safeint;
+    maximumNodeCertificateValidityDays: safeuint;
+    recentCoseProposalsWindowSize: safeuint;
   };
 }
 
