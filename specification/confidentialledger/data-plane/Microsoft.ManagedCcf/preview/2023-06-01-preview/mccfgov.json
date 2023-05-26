@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Managed CCF Governance",
-    "version": "0.0.1-preview",
+    "version": "2023-06-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1271,8 +1271,7 @@
           "description": "Current state of this proposal."
         },
         "ballotCount": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/safeuint",
           "description": "Count of how many ballots have been submitted for this proposal."
         },
         "finalVotes": {
@@ -1405,13 +1404,11 @@
           "description": "Human-readable description of current recovery progress."
         },
         "submittedCount": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/safeuint",
           "description": "Count of how many accepted member shares have been submitted, including the current request."
         },
         "recoveryThreshold": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/safeuint",
           "description": "Count of how many member shares are required to initiate the end-of-recovery procedure."
         }
       },
@@ -1596,9 +1593,9 @@
         },
         "openApi": {
           "type": "object",
-          "properties": {},
-          "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API.",
-          "x-typespec-name": "{}"
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
+          "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API."
         }
       },
       "description": "Describes an endpoint implemented by a Javascript handler.",
@@ -1752,10 +1749,7 @@
           "description": "Current status of this member."
         },
         "memberData": {
-          "type": "object",
-          "properties": {},
-          "description": "Arbitrary service-defined metadata about this member. May be used by constitution or application code, but will not affect any core framework decisions.",
-          "x-typespec-name": "{}"
+          "description": "Arbitrary service-defined metadata about this member. May be used by constitution or application code, but will not affect any core framework decisions."
         },
         "certificate": {
           "$ref": "#/definitions/ServiceState.pem",
@@ -1825,10 +1819,7 @@
           "description": "Current status of this node."
         },
         "nodeData": {
-          "type": "object",
-          "properties": {},
-          "description": "Arbitrary service-defined metadata about this node. May be used by constitution or application code, but will not affect any core framework decisions.",
-          "x-typespec-name": "{}"
+          "description": "Arbitrary service-defined metadata about this node. May be used by constitution or application code, but will not affect any core framework decisions."
         },
         "certificate": {
           "$ref": "#/definitions/ServiceState.pem",
@@ -1929,8 +1920,7 @@
           "description": "The current service identity. This is the public face of a secret key shared only by the nodes within the service, and should be used to authenticate TLS sessions with this service."
         },
         "recoveryCount": {
-          "type": "integer",
-          "format": "int64",
+          "$ref": "#/definitions/safeuint",
           "description": "Records how many predecessors this service has. While the service identity certificate will change on any recovery, this allows users to determine exactly how many such recoveries have occurred."
         },
         "creationTransactionId": {
@@ -1942,21 +1932,16 @@
           "description": "Transaction ID at which the predecessor service was created, if this service is a recovery. If this is an original service rather than a recovery, this will be omitted."
         },
         "serviceData": {
-          "type": "object",
-          "properties": {},
-          "description": "Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions.",
-          "x-typespec-name": "{}"
+          "description": "Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions."
         },
         "configuration": {
           "type": "object",
           "properties": {
             "maximumNodeCertificateValidityDays": {
-              "type": "integer",
-              "format": "int64"
+              "$ref": "#/definitions/safeuint"
             },
             "recentCoseProposalsWindowSize": {
-              "type": "integer",
-              "format": "int64"
+              "$ref": "#/definitions/safeuint"
             }
           },
           "description": "Lists governance-controlled configuration parameters of this service, which will be used by core framework code.",
@@ -2191,7 +2176,7 @@
     "Versions": {
       "type": "string",
       "enum": [
-        "0.0.1-preview"
+        "2023-06-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -2213,10 +2198,21 @@
       "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
       "pattern": "^[a-f0-9]{64}$"
     },
+    "safeuint": {
+      "type": "integer",
+      "format": "int64",
+      "description": "A non-negative JSON-safe integer (ie max is 2^53 - 1)",
+      "minimum": 0
+    },
     "transactionId": {
       "type": "string",
       "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
       "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "userId": {
+      "type": "string",
+      "description": "Hex encoding of SHA-256 of user certificate's fingerprint.",
+      "pattern": "^[a-f0-9]{64}$"
     }
   },
   "parameters": {
