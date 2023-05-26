@@ -46,9 +46,6 @@
     },
     {
       "name": "TagRules"
-    },
-    {
-      "name": "SingleSignOnOperations"
     }
   ],
   "paths": {
@@ -445,250 +442,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}/singleSignOnConfigurations": {
-      "get": {
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "operationId": "SingleSignOnOperations_ListBySolarWindsOrganizationResource",
-        "description": "List SingleSignOn resources by SolarWindsOrganizationResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "required": true,
-            "description": "Name of the Organizations resource",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOnListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_ListBySolarWindsOrganizationResource": {
-            "$ref": "./examples/SingleSignOnOperations_ListBySolarWindsOrganizationResource_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}/singleSignOnConfigurations/{configurationName}": {
-      "get": {
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "operationId": "SingleSignOnOperations_Get",
-        "description": "Get a SingleSignOn",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "required": true,
-            "description": "Name of the Organizations resource",
-            "type": "string"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "description": "Name of the SSO Configuration",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_Get": {
-            "$ref": "./examples/SingleSignOnOperations_Get_MinimumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "operationId": "SingleSignOnOperations_CreateOrUpdate",
-        "description": "Create a SingleSignOn",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "required": true,
-            "description": "Name of the Organizations resource",
-            "type": "string"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "description": "Name of the SSO Configuration",
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "required": true,
-            "description": "Resource create parameters.",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            }
-          },
-          "201": {
-            "description": "ARM create operation completed successfully.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/SingleSignOn"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_CreateOrUpdate": {
-            "$ref": "./examples/SingleSignOnOperations_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "SingleSignOnOperations"
-        ],
-        "operationId": "SingleSignOnOperations_Delete",
-        "description": "Delete a SingleSignOn",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "organizationName",
-            "in": "path",
-            "required": true,
-            "description": "Name of the Organizations resource",
-            "type": "string"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "description": "Name of the SSO Configuration",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SingleSignOnOperations_Delete": {
-            "$ref": "./examples/SingleSignOnOperations_Delete_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SolarWinds.Observability/organizations/{organizationName}/tagRules": {
       "get": {
         "tags": [
@@ -1060,12 +813,7 @@
           "description": "Number of employees in the company"
         }
       },
-      "description": "Details of the company",
-      "required": [
-        "domain",
-        "business",
-        "numberOfEmployees"
-      ]
+      "description": "Details of the company"
     },
     "FilteringTag": {
       "type": "object",
@@ -1589,77 +1337,6 @@
         "modelAsString": false
       }
     },
-    "SingleSignOn": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SolarWindsSingleSignOnProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "Single sign-on configurations for a SolarWinds resource",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SingleSignOnListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SingleSignOn"
-          },
-          "x-cadl-name": "SingleSignOn[]",
-          "description": "The SingleSignOn items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items",
-          "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<SingleSignOn>"
-        }
-      },
-      "description": "The response of a SingleSignOn list operation.",
-      "required": [
-        "value"
-      ]
-    },
-    "SingleSignOnStates": {
-      "type": "string",
-      "description": "Various states of the SSO resource",
-      "enum": [
-        "Initial",
-        "Enable",
-        "Disable",
-        "Existing"
-      ],
-      "x-ms-enum": {
-        "name": "SingleSignOnStates",
-        "modelAsString": true
-      }
-    },
-    "SingleSignOnStatesValues": {
-      "type": "string",
-      "description": "Various states of the SSO resource",
-      "enum": [
-        "Initial",
-        "Enable",
-        "Disable",
-        "Existing"
-      ],
-      "x-ms-enum": {
-        "name": "SingleSignOnStatesValues",
-        "modelAsString": false
-      }
-    },
     "SolarWindsOrganizationProperties": {
       "type": "object",
       "properties": {
@@ -1674,10 +1351,6 @@
         "tagRule": {
           "$ref": "#/definitions/TagRule",
           "description": "A tag rule belonging to SolarWinds account"
-        },
-        "singleSignOnProperties": {
-          "$ref": "#/definitions/SolarWindsSingleSignOnProperties",
-          "description": "date when plan was applied"
         }
       },
       "description": "Properties of the SolarWinds account"
@@ -1771,28 +1444,6 @@
         }
       },
       "description": "The updatable properties of the SolarWindsOrganizationResource."
-    },
-    "SolarWindsSingleSignOnProperties": {
-      "type": "object",
-      "properties": {
-        "singleSignOnState": {
-          "$ref": "#/definitions/SingleSignOnStates",
-          "description": "Single sign-on state"
-        },
-        "enterpriseAppId": {
-          "type": "string",
-          "description": "The Id of the Enterprise App used for Single sign-on."
-        },
-        "singleSignOnUrl": {
-          "type": "string",
-          "description": "The login URL specific to this SolarWinds Organization"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state"
-        }
-      },
-      "description": "Single sign on Info of the SolarWinds account"
     },
     "TagAction": {
       "type": "string",
