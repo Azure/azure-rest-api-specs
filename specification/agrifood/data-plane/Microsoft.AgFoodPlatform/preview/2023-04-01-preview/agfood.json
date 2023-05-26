@@ -1089,12 +1089,6 @@
           },
           {
             "in": "formData",
-            "name": "partyId",
-            "description": "PartyId id for this attachment.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
             "name": "id",
             "description": "Unique id.",
             "type": "string"
@@ -6155,32 +6149,8 @@
           },
           {
             "in": "formData",
-            "name": "modelId",
-            "description": "ModelID for this InsightAttachment.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "resourceType",
-            "description": "Associated Resource type for this attachment.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "resourceId",
-            "description": "Associated Resource id for this attachment.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
             "name": "originalFileName",
             "description": "Original File Name for this attachment.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "partyId",
-            "description": "PartyId id for this attachment.",
             "type": "string"
           },
           {
@@ -18044,6 +18014,21 @@
     }
   },
   "definitions": {
+    "AdditionalProviderParameters": {
+      "description": "Schema of additional parameters for weather data provider request.",
+      "type": "object",
+      "properties": {
+        "iconResolution": {
+          "description": "Icon Resolution (Only applicable for AzureWeatherMaps).",
+          "type": "string"
+        },
+        "details": {
+          "description": "Details (Only applicable for AzureWeatherMaps).",
+          "default": true,
+          "type": "boolean"
+        }
+      }
+    },
     "ApiKeyAuthCredentials": {
       "description": "ApiKeyAuthCredentials.",
       "type": "object",
@@ -18063,22 +18048,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "ApiKeyAuth"
-    },
-    "AdditionalProviderParameters": {
-      "description": "Schema of additional parameters for weather data provider request.",
-      "type": "object",
-      "properties": {
-        "iconResolution": {
-          "description": "Icon Resolution (Only applicable for AzureWeatherMaps).",
-          "type": "string"
-        },
-        "details": {
-          "description": "Details (Only applicable for AzureWeatherMaps).",
-          "default": true,
-          "type": "boolean"
-        }
-      }
+      "x-ms-discriminator-value": "ApiKeyAuthCredentials"
     },
     "ApplicationData": {
       "description": "Schema of application data resource.",
@@ -18371,20 +18341,21 @@
     "AuthCredentials": {
       "description": "ConnectorCredentials.",
       "required": [
-        "authType"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "authType": {
+        "kind": {
           "$ref": "#/definitions/AuthCredentialsEnum"
         }
-      }
+      },
+      "discriminator": "kind"
     },
     "AuthCredentialsEnum": {
       "description": "CredentialTypeEnum.",
       "enum": [
-        "BasicAuth",
-        "ApiKeyAuth"
+        "BasicAuthCredentials",
+        "ApiKeyAuthCredentials"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -18417,7 +18388,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "BasicAuth"
+      "x-ms-discriminator-value": "BasicAuthCredentials"
     },
     "BiomassModelJob": {
       "description": "Schema of biomass model job.",
@@ -20672,6 +20643,32 @@
         }
       }
     },
+    "KeyVaultProperties": {
+      "description": "KeyVaultProperties.",
+      "required": [
+        "keyName",
+        "keyVaultUri",
+        "keyVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "keyVaultUri": {
+          "description": "KeyVaultUri.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "keyName": {
+          "description": "KeyName.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "keyVersion": {
+          "description": "KeyVersion.",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
     "LabDetails": {
       "description": "Model for representing LabDetails object.",
       "type": "object",
@@ -22223,7 +22220,7 @@
       "type": "object",
       "properties": {
         "credential": {
-          "$ref": "#/definitions/AuthCredentials"
+          "$ref": "#/definitions/BasicAuthCredentials"
         },
         "partyId": {
           "description": "Party Id.",
@@ -22328,21 +22325,7 @@
         },
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
-          "type": "object",
-          "additionalProperties": {}
-        }
-      },
-      "example": {
-        "key1": "value1",
-        "key2": 123.45,
-        "credentials": {
-          "authType": "string",
-          "username": "string",
-          "password": {
-            "keyVaultUri": "string",
-            "keyName": "string",
-            "keyVersion": "string"
-          }
+          "type": "object"
         }
       }
     },
@@ -22561,7 +22544,7 @@
       "type": "object",
       "properties": {
         "credential": {
-          "$ref": "#/definitions/AuthCredentials"
+          "$ref": "#/definitions/BasicAuthCredentials"
         },
         "startDateTime": {
           "format": "date-time",
@@ -24165,6 +24148,141 @@
         }
       }
     },
+    "WeatherData": {
+      "description": "Schema of weather data.",
+      "required": [
+        "boundaryId",
+        "dateTime",
+        "extensionId",
+        "extensionVersion",
+        "granularity",
+        "location",
+        "partyId",
+        "weatherDataType"
+      ],
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party ID.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "boundaryId": {
+          "description": "Boundary ID.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "extensionId": {
+          "description": "ID of the weather extension.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "dateTime": {
+          "format": "date-time",
+          "description": "Date-time of the weather data, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "unitSystemCode": {
+          "description": "Unit System like US/SI etc.",
+          "type": "string"
+        },
+        "extensionVersion": {
+          "description": "Version of the weather data extension.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "weatherDataType": {
+          "description": "Type of weather data (forecast/historical).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "granularity": {
+          "description": "Granularity of weather data (daily/hourly).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "cloudCover": {
+          "$ref": "#/definitions/Measure"
+        },
+        "dewPoint": {
+          "$ref": "#/definitions/Measure"
+        },
+        "growingDegreeDay": {
+          "$ref": "#/definitions/Measure"
+        },
+        "precipitation": {
+          "$ref": "#/definitions/Measure"
+        },
+        "pressure": {
+          "$ref": "#/definitions/Measure"
+        },
+        "relativeHumidity": {
+          "$ref": "#/definitions/Measure"
+        },
+        "soilMoisture": {
+          "$ref": "#/definitions/Measure"
+        },
+        "soilTemperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "temperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "visibility": {
+          "$ref": "#/definitions/Measure"
+        },
+        "wetBulbTemperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windChill": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windDirection": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windGust": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windSpeed": {
+          "$ref": "#/definitions/Measure"
+        },
+        "id": {
+          "description": "Weather data ID.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 250 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
     "WeatherDataDeleteJob": {
       "description": "Schema of weather data delete job.",
       "required": [
@@ -24576,141 +24694,6 @@
         }
       }
     },
-    "WeatherData": {
-      "description": "Schema of weather data.",
-      "required": [
-        "boundaryId",
-        "dateTime",
-        "extensionId",
-        "extensionVersion",
-        "granularity",
-        "location",
-        "partyId",
-        "weatherDataType"
-      ],
-      "type": "object",
-      "properties": {
-        "partyId": {
-          "description": "Party ID.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "boundaryId": {
-          "description": "Boundary ID.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "extensionId": {
-          "description": "ID of the weather extension.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/Location"
-        },
-        "dateTime": {
-          "format": "date-time",
-          "description": "Date-time of the weather data, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string"
-        },
-        "unitSystemCode": {
-          "description": "Unit System like US/SI etc.",
-          "type": "string"
-        },
-        "extensionVersion": {
-          "description": "Version of the weather data extension.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "weatherDataType": {
-          "description": "Type of weather data (forecast/historical).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "granularity": {
-          "description": "Granularity of weather data (daily/hourly).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "cloudCover": {
-          "$ref": "#/definitions/Measure"
-        },
-        "dewPoint": {
-          "$ref": "#/definitions/Measure"
-        },
-        "growingDegreeDay": {
-          "$ref": "#/definitions/Measure"
-        },
-        "precipitation": {
-          "$ref": "#/definitions/Measure"
-        },
-        "pressure": {
-          "$ref": "#/definitions/Measure"
-        },
-        "relativeHumidity": {
-          "$ref": "#/definitions/Measure"
-        },
-        "soilMoisture": {
-          "$ref": "#/definitions/Measure"
-        },
-        "soilTemperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "temperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "visibility": {
-          "$ref": "#/definitions/Measure"
-        },
-        "wetBulbTemperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windChill": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windDirection": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windGust": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windSpeed": {
-          "$ref": "#/definitions/Measure"
-        },
-        "id": {
-          "description": "Weather data ID.",
-          "type": "string"
-        },
-        "eTag": {
-          "description": "The ETag value to implement optimistic concurrency.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true,
-          "example": "2020-12-31T11:10:21Z"
-        },
-        "modifiedDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true,
-          "example": "2020-12-31T11:10:21Z"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 250 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {},
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
     "WeatherDataListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "required": [
@@ -24745,7 +24728,7 @@
       "type": "object",
       "properties": {
         "credential": {
-          "$ref": "#/definitions/AuthCredentials"
+          "$ref": "#/definitions/ApiKeyAuthCredentials"
         },
         "locations": {
           "description": "List of locations for which weather data need to be fetched from the provider.",
@@ -24753,12 +24736,6 @@
           "items": {
             "$ref": "#/definitions/WeatherLocation"
           }
-        },
-        "providerAppId": {
-          "description": "App id of the weather data provider.",
-          "maxLength": 200,
-          "minLength": 2,
-          "type": "string"
         },
         "extensionId": {
           "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",

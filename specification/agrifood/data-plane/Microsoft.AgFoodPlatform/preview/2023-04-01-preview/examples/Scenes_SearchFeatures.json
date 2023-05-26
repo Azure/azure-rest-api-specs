@@ -5,8 +5,15 @@
     "skip": 15,
     "api-version": "2023-04-01-preview",
     "searchFeaturesQuery": {
-      "providerClientId": "client_id",
-      "providerClientSecret": "client_secret",
+      "credential": {
+        "kind": "BasicAuthCredentials",
+        "username": "string",
+        "password": {
+          "keyVaultUri": "https://keyVaultUri",
+          "keyName": "string",
+          "keyVersion": "string"
+        }
+      },
       "startDateTime": "2022-01-26T14:53:23.825Z",
       "endDateTime": "2023-01-26T14:53:23.825Z",
       "intersects": {
