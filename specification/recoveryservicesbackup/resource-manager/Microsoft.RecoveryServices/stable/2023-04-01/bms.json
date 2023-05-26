@@ -5943,6 +5943,14 @@
           "additionalProperties": {
             "$ref": "#/definitions/KPIResourceHealthDetails"
           }
+        },
+        "nodesList": {
+          "description": "List of the nodes in case of distributed container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DistributedNodesInfo"
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
@@ -10109,6 +10117,10 @@
         "prebackupvalidation": {
           "$ref": "#/definitions/PreBackupValidation",
           "description": "Pre-backup validation for protectable objects"
+        },
+        "isProtectable": {
+          "description": "Indicates if item is protectable",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectableItem"
@@ -10211,6 +10223,16 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
+      "properties": {
+        "nodesList": {
+          "description": "List of the nodes in case of distributed container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DistributedNodesInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      }, 
       "x-ms-discriminator-value": "SQLAvailabilityGroupContainer"
     },
     "AzureVmWorkloadSQLDatabaseProtectableItem": {
@@ -11545,6 +11567,10 @@
         "errorDetail": {
           "$ref": "#/definitions/ErrorDetail",
           "description": "Error Details if the Status is non-success."
+        },
+        "sourceResourceId": {
+          "description": "ARM resource id of the node",
+          "type": "string"
         }
       }
     },
