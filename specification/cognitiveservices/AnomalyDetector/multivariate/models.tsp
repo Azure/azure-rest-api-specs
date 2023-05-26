@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Foundations;
 
 namespace AnomalyDetector.Multivariate;
 
@@ -140,14 +141,14 @@ model AnomalyState {
   @doc("Time stamp for this anomaly.")
   timestamp: utcDateTime;
   @doc("Detailed value of this anomalous time stamp.")
-  value?: DetectionValue;
+  value?: DataPointDetails;
 
   @doc("Error message for the current time stamp.")
   errors?: ErrorResponse[];
 }
 
 @doc("Detailed information of the data point.")
-model DetectionValue {
+model DataPointDetails {
   @doc("True if an anomaly is detected at the current time stamp.")
   isAnomaly: boolean;
 
@@ -193,7 +194,7 @@ model CorrelationChanges {
 Training result of a model, including its status, errors, and diagnostics
 information.
 """)
-model ModelDetails {
+model MultivariateModelDetails {
   @doc("""
 Source link to the input data to indicate an accessible Azure Storage URI.
 It either points to an Azure Blob Storage folder or points to a CSV file in
@@ -320,7 +321,7 @@ model MultivariateModel {
 Training result of a model, including its status, errors, and diagnostics
 information.
 """)
-  modelInfo?: ModelDetails;
+  modelInfo?: MultivariateModelDetails;
 }
 
 @doc("Response of listing models.")
