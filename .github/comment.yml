@@ -4,7 +4,21 @@
     label: BreakingChangeReviewRequired
     variables:
         openapiHub: https://portal.azure-devex-tools.com
-    onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Please check out the breaking change(s), and provide business justification in the PR comment and @ PR assignee why you must have these change(s), and how external customer impact can be mitigated. Please ensure to follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. </br>**Action**: To initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Addition details on the process and office hours are on the [Breaking change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).</br> If you want to know the production traffic statistic, please see [ARM Traffic statistic](${openapiHub}/api/pr/query-traffic?pr=${owner}/${repo}/${PRNumber}&days=5). </br> If you think it is false positive breaking change, please provide the reasons in the PR comment, report to Swagger Tooling Team via https://aka.ms/swaggerfeedback. </br> **Note**: To avoid breaking change, you can refer to [Shift Left Solution](https://aka.ms/shiftleft) for detecting breaking change in early phase at your service code repository."
+    onLabeledComments: >-
+      Hi @${PRAuthor}, The automation detected breaking changes in this PR.
+      As a result, it added the `BreakingChangeReviewRequired` label.
+      You cannot proceed with merging this PR until you do one of the following:
+      <br/><br/>
+      **ACTION ITEM A**: To get your breaking changes approved,
+      please follow the process described in the
+      [High-level Breaking Change Process doc](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/overview_breakingchanges#high-level-breaking-change-process).
+      <br/><br/>
+      **ACTION ITEM B**:
+      Alternatively, if you think the breaking changes are false positives,
+      please explain why in a PR comment and @ the PR assignee.
+      <br/><br/>
+      If you want to know the production traffic statistics,
+      please see the [ARM Traffic statistics](${openapiHub}/api/pr/query-traffic?pr=${owner}/${repo}/${PRNumber}&days=5).
 
 - rule:
     type: label
