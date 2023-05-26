@@ -245,7 +245,7 @@ detect whether the time stamp is an anomaly or not.
 
   @doc("Diagnostics information to help inspect the states of a model or variable.")
   @visibility("read")
-  diagnosticsInfo?: AnomalyDetectorDiagnosticDetails;
+  diagnosticsInfo?: MultivariateDiagnosticDetails;
 }
 
 @doc("Manner of aligning multiple variables.")
@@ -267,7 +267,7 @@ Field that indicates how missing values will be filled.
 }
 
 @doc("Diagnostics information to help inspect the states of a model or variable.")
-model AnomalyDetectorDiagnosticDetails {
+model MultivariateDiagnosticDetails {
   @doc("Model status.")
   modelState?: MultivariateModelState;
   @doc("Variable status.")
@@ -303,7 +303,7 @@ epoch.
 
 @doc("Response of getting a model.")
 @resource("multivariate/models")
-model AnomalyDetectionModel {
+model MultivariateModel {
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Model identifier.")
   @key
@@ -328,7 +328,7 @@ information.
 model ModelList {
   @doc("List of models.")
   @items
-  models: AnomalyDetectionModel[];
+  models: MultivariateModel[];
 
   @doc("Number of trained multivariate models.")
   currentCount: int32;
