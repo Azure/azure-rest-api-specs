@@ -781,12 +781,22 @@
           "type": "string",
           "enum": [
             "Feature"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "AutosuggestFeature",
+            "modelAsString": true,
+            "values": {
+              "value": "Feature",
+              "description": "Locally redundant storage.",
+              "name": "Feature"
+            }
+          }
         },
         "properties": {
           "$ref": "#/definitions/AutosuggestProperties"
         },
         "geometry": {
+          "default": null,
           "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonGeometry"
         },
         "bbox": {
