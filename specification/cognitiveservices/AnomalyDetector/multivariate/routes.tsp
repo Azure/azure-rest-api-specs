@@ -57,14 +57,14 @@ op TrainMultivariateModel is MultivariateServiceAction<
   // TParams
   {
     @doc("Model information.")
-    @body modelInfo: ModelDetails,
+    @body modelInfo: MultivariateModelDetails,
   },
   // TResponse
   {
     @statusCode statusCode: 201,
     @doc("Location and ID of the model.")
     @header location: string,
-    @body result: AnomalyDetectionModel
+    @body result: MultivariateModel
   }>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
