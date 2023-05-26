@@ -117,7 +117,7 @@ op GetMultivariateModel(
   @doc("Model identifier.")
   @path
   modelId: string,
-): AnomalyDetectionModel | ResponseError;
+): MultivariateModel | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
