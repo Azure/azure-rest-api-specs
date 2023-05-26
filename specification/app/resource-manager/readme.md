@@ -55,6 +55,7 @@ input-file:
   - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2023-05-02-preview/SourceControls.json
+  - Microsoft.App/preview/2023-05-02-preview/Subscriptions.json
 directive:
   - suppress: OperationIdNounVerb
     from: Builds.json
