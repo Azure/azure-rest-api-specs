@@ -79,8 +79,7 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/ChatCompletionsOptions"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -102,8 +101,7 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
-        },
-        "deprecated": true
+        }
       }
     },
     "/deployments/{deploymentId}/completions": {
@@ -126,8 +124,7 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/CompletionsOptions"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -149,8 +146,7 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
-        },
-        "deprecated": true
+        }
       }
     },
     "/deployments/{deploymentId}/embeddings": {
@@ -173,8 +169,7 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/EmbeddingsOptions"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -196,8 +191,7 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
-        },
-        "deprecated": true
+        }
       }
     }
   },
@@ -234,7 +228,8 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message"
+        "message",
+        "details"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -262,7 +257,10 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
     },
     "ChatChoice": {
       "type": "object",
@@ -841,8 +839,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "type": "string",
       "minLength": 1,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
