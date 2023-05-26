@@ -20,11 +20,14 @@
         "tags": [
           "Subscriptions"
         ],
-        "description": "Get the verficiation id of a subscription used for verifying custom domains",
+        "description": "Get the verification id of a subscription used for verifying custom domains",
         "operationId": "Subscriptions_GetVerificationId",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -68,10 +71,10 @@
     }
   },
   "security": [
-      {
+    {
       "azure_auth": [
-          "user_impersonation"
+        "user_impersonation"
       ]
-      }
+    }
   ]
 }
