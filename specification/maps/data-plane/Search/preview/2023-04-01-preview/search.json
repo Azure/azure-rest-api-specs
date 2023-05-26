@@ -777,24 +777,26 @@
     "AutosuggestFeature": {
       "type": "object",
       "properties": {
-          "type": {
-              "type": "string",
-              "enum": [ "Feature"]
-          },
-          "properties": {
-              "$ref": "#/definitions/AutosuggestProperties"
-          },
-          "geometry": {
-              "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonGeometry"
-          },
-          "bbox": {
-              "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/BoundingBox"
-          }
+        "type": {
+          "type": "string",
+          "enum": [
+            "Feature"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AutosuggestProperties"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonGeometry"
+        },
+        "bbox": {
+          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/BoundingBox"
+        }
       },
       "required": [
-          "type",
-          "geometry",
-          "properties"
+        "type",
+        "geometry",
+        "properties"
       ]
     },
     "AutosuggestProperties": {
@@ -842,8 +844,8 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                  "type": "string",
-                  "description": "The name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be full name of state such as Washington, \nFor adminDistrict[1], this could be the full name of the county"
+                    "type": "string",
+                    "description": "The name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be full name of state such as Washington, \nFor adminDistrict[1], this could be the full name of the county"
                   },
                   "shortName": {
                     "type": "string",
@@ -880,8 +882,8 @@
           }
         },
         "name": {
-              "description": "The name of the place. This field will not appear if the returned type is Address.",
-              "type": "string"
+          "description": "The name of the place. This field will not appear if the returned type is Address.",
+          "type": "string"
         }
       }
     },
