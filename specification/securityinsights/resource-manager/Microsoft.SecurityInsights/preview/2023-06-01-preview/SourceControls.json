@@ -396,7 +396,10 @@
         },
         "repositoryAccess": {
           "description": "Repository access credentials. This is write-only object and it never returns back to a user.",
-          "x-ms-mutability": ["create", "update"],
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "$ref": "#/definitions/RepositoryAccess"
         },
         "repositoryResourceInfo": {
@@ -416,8 +419,7 @@
         "displayName",
         "repoType",
         "contentTypes",
-        "repository",
-        "repositoryAccess"
+        "repository"
       ],
       "type": "object"
     },
@@ -487,11 +489,6 @@
     "ServicePrincipal": {
       "readOnly": true,
       "type": "object",
-      "required": [
-        "id",
-        "tenantId",
-        "appId"
-      ],
       "description": "Service principal metadata.",
       "properties": {
         "id": {
@@ -815,10 +812,6 @@
       "readOnly": true,
       "description": "Information regarding pull request for protected branches.",
       "type": "object",
-      "required": [
-        "url",
-        "state"
-      ],
       "properties": {
         "url": {
           "description": "URL of pull request",
@@ -868,10 +861,6 @@
       "readOnly": true,
       "x-ms-external": true,
       "description": "Warning details.",
-      "required": [
-        "code",
-        "message"
-      ],
       "properties": {
         "code": {
           "description": "An identifier for the warning. Codes are invariant and are intended to be consumed programmatically.",
