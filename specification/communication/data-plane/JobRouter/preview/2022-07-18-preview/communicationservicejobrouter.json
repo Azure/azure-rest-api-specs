@@ -1212,10 +1212,10 @@
           },
           {
             "in": "body",
-            "name": "declineOfferRequest",
+            "name": "declineJobOfferRequest",
             "description": "Request model for declining offer",
             "schema": {
-              "$ref": "#/definitions/DeclineOfferRequest"
+              "$ref": "#/definitions/DeclineJobOfferRequest"
             }
           }
         ],
@@ -2014,11 +2014,7 @@
       },
       "x-ms-discriminator-value": "conditional"
     },
-    "DeclineJobOfferResult": {
-      "description": "Response payload from declining a job",
-      "type": "object"
-    },
-    "DeclineOfferRequest": {
+    "DeclineJobOfferRequest": {
       "description": "Request payload for declining offers",
       "type": "object",
       "properties": {
@@ -2028,6 +2024,10 @@
           "type": "string"
         }
       }
+    },
+    "DeclineJobOfferResult": {
+      "description": "Response payload from declining a job",
+      "type": "object"
     },
     "DirectMapRule": {
       "description": "A rule that return the same labels as the input labels.",
