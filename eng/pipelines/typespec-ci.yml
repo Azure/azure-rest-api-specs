@@ -21,8 +21,11 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
-  - script: npm ci --force
-    displayName: npm ci --force
+  - script: rm package-lock.json
+    displayName: rm package-lock.json
+
+  - script: npm install
+    displayName: npm install
 
   - script: npm ls -a
     displayName: npm ls -a
