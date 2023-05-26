@@ -69,7 +69,16 @@
         },
         "progressState": {
           "description": "Indicates the progress of the node pool rolling process. Possible values are: \"Started\", \"Succeeded\", \"Failed\"",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Started",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "progressState",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-examples": {
