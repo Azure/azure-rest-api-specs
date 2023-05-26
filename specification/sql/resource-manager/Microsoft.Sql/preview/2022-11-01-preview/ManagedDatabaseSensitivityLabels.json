@@ -280,19 +280,7 @@
             "type": "string"
           },
           {
-            "name": "sensitivityLabelSource",
-            "in": "path",
-            "description": "The source of the sensitivity label.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current",
-              "recommended"
-            ],
-            "x-ms-enum": {
-              "name": "SensitivityLabelSource",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/SensitivityLabelSourceParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -360,18 +348,7 @@
             "type": "string"
           },
           {
-            "name": "sensitivityLabelSource",
-            "in": "path",
-            "description": "The source of the sensitivity label.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "WritableSensitivityLabelSource",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/SensitivityLabelSourceParameter"
           },
           {
             "name": "parameters",
@@ -454,18 +431,7 @@
             "type": "string"
           },
           {
-            "name": "sensitivityLabelSource",
-            "in": "path",
-            "description": "The source of the sensitivity label.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "current"
-            ],
-            "x-ms-enum": {
-              "name": "WritableSensitivityLabelSource",
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/SensitivityLabelSourceParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -485,6 +451,73 @@
         "x-ms-examples": {
           "Deletes the sensitivity label of a given column in a managed database": {
             "$ref": "./examples/ManagedDatabaseColumnSensitivityLabelDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/recommended": {
+      "get": {
+        "tags": [
+          "ManagedDatabaseSensitivityLabels"
+        ],
+        "description": "Gets the sensitivity label recommendations for a given column",
+        "operationId": "ManagedDatabaseSensitivityLabels_GetRecommended",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity label.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabel"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
+          }
+        },
+        "x-ms-examples": {
+          "Gets the sensitivity label of a given column in a managed database": {
+            "$ref": "./examples/ManagedDatabaseColumnSensitivityLabelGetRecommended.json"
           }
         }
       }
@@ -941,6 +974,20 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "SensitivityLabelSourceParameter": {
+      "name": "sensitivityLabelSource",
+      "in": "path",
+      "description": "The source of the sensitivity label.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "current"
+      ],
+      "x-ms-enum": {
+        "name": "SensitivityLabelSource",
+        "modelAsString": false
+      }
     }
   },
   "securityDefinitions": {
