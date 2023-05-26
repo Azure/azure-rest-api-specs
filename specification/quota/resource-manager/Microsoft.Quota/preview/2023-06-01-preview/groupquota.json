@@ -439,14 +439,6 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "SharedQuotaEntitySubscriptionDeleteequest",
-            "in": "body",
-            "description": "The List of  subscriptions to remove  from SharedQuotaEntity.",
-            "schema": {
-              "$ref": "#/definitions/subscriptionIdList"
-            }
           }
         ],
         "responses": {
@@ -1391,6 +1383,10 @@
         },
         "assignedToSubscriptions": {
           "$ref": "#/definitions/AssignedQuotaToSubscriptionList"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
         }
       }
     },
@@ -1442,7 +1438,7 @@
         },
         "properties": {
           "type": "object",
-          "status": {
+          "provisioningState ": {
             "$ref": "#/definitions/RequestState",
             "readOnly": true
           },
