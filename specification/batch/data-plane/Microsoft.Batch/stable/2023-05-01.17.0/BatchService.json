@@ -681,212 +681,9 @@
         }
       }
     },
-    "/lifetimepoolstats": {
-      "get": {
-        "tags": [
-          "Pools"
-        ],
-        "operationId": "Pool_GetAllLifetimeStatistics",
-        "x-ms-examples": {
-          "Pool get lifetime statistics": {
-            "$ref": "./examples/PoolGetLifetimeStatistics.json"
-          }
-        },
-        "summary": "Gets lifetime summary statistics for all of the Pools in the specified Account.",
-        "description": "Statistics are aggregated across all Pools that have ever existed in the Account, from Account creation to the last update time of the statistics. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
-        "x-ms-request-id": "request-id",
-        "parameters": [
-          {
-            "name": "timeout",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30,
-            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            }
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            },
-            "x-ms-client-request-id": true
-          },
-          {
-            "name": "return-client-request-id",
-            "default": false,
-            "in": "header",
-            "required": false,
-            "type": "boolean",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            }
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "headers": {
-              "client-request-id": {
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
-                "type": "string",
-                "format": "uuid"
-              },
-              "request-id": {
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
-                "type": "string",
-                "format": "uuid"
-              },
-              "ETag": {
-                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
-                "type": "string"
-              },
-              "Last-Modified": {
-                "description": "The time at which the resource was last modified.",
-                "type": "string",
-                "format": "date-time-rfc1123"
-              }
-            },
-            "description": "A response containing the Pool statistics for the lifetime of the Batch Account.",
-            "schema": {
-              "$ref": "#/definitions/PoolStatistics"
-            }
-          },
-          "default": {
-            "description": "The error from the Batch service.",
-            "schema": {
-              "$ref": "#/definitions/BatchError"
-            }
-          }
-        }
-      }
-    },
-    "/lifetimejobstats": {
-      "get": {
-        "tags": [
-          "Jobs"
-        ],
-        "operationId": "Job_GetAllLifetimeStatistics",
-        "x-ms-examples": {
-          "Job get lifetime statistics": {
-            "$ref": "./examples/JobGetLifetimeStatistics.json"
-          }
-        },
-        "summary": "Gets lifetime summary statistics for all of the Jobs in the specified Account.",
-        "description": "Statistics are aggregated across all Jobs that have ever existed in the Account, from Account creation to the last update time of the statistics. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.",
-        "x-ms-request-id": "request-id",
-        "parameters": [
-          {
-            "name": "timeout",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 30,
-            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            }
-          },
-          {
-            "name": "client-request-id",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            },
-            "x-ms-client-request-id": true
-          },
-          {
-            "name": "return-client-request-id",
-            "default": false,
-            "in": "header",
-            "required": false,
-            "type": "boolean",
-            "description": "Whether the server should return the client-request-id in the response.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            }
-          },
-          {
-            "name": "ocp-date",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "format": "date-time-rfc1123",
-            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
-            "x-ms-parameter-grouping": {
-              "postfix": "Options"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "headers": {
-              "client-request-id": {
-                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
-                "type": "string",
-                "format": "uuid"
-              },
-              "request-id": {
-                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
-                "type": "string",
-                "format": "uuid"
-              },
-              "ETag": {
-                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
-                "type": "string"
-              },
-              "Last-Modified": {
-                "description": "The time at which the resource was last modified.",
-                "type": "string",
-                "format": "date-time-rfc1123"
-              }
-            },
-            "description": "A response containing the Job statistics for the lifetime of the Batch Account.",
-            "schema": {
-              "$ref": "#/definitions/JobStatistics"
-            }
-          },
-          "default": {
-            "description": "The error from the Batch service.",
-            "schema": {
-              "$ref": "#/definitions/BatchError"
-            }
-          }
-        }
-      }
-    },
     "/certificates": {
       "post": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -897,6 +694,7 @@
           }
         },
         "summary": "Adds a Certificate to the specified Account.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -996,6 +794,7 @@
         }
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1009,6 +808,7 @@
           }
         },
         "summary": "Lists all of the Certificates that have been added to the specified Account.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -1135,6 +935,7 @@
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete": {
       "post": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1145,7 +946,7 @@
           }
         },
         "summary": "Cancels a failed deletion of a Certificate from the specified Account.",
-        "description": "If you try to delete a Certificate that is being used by a Pool or Compute Node, the status of the Certificate changes to deleteFailed. If you decide that you want to continue using the Certificate, you can use this operation to set the status of the Certificate back to active. If you intend to delete the Certificate, you do not need to run this operation after the deletion failed. You must make sure that the Certificate is not being used by any resources, and then you can try again to delete the Certificate.",
+        "description": "If you try to delete a Certificate that is being used by a Pool or Compute Node, the status of the Certificate changes to deleteFailed. If you decide that you want to continue using the Certificate, you can use this operation to set the status of the Certificate back to active. If you intend to delete the Certificate, you do not need to run this operation after the deletion failed. You must make sure that the Certificate is not being used by any resources, and then you can try again to delete the Certificate.\n\nWarning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -1252,6 +1053,7 @@
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})": {
       "delete": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1262,7 +1064,7 @@
           }
         },
         "summary": "Deletes a Certificate from the specified Account.",
-        "description": "You cannot delete a Certificate if a resource (Pool or Compute Node) is using it. Before you can delete a Certificate, you must therefore make sure that the Certificate is not associated with any existing Pools, the Certificate is not installed on any Nodes (even if you remove a Certificate from a Pool, it is not removed from existing Compute Nodes in that Pool until they restart), and no running Tasks depend on the Certificate. If you try to delete a Certificate that is in use, the deletion fails. The Certificate status changes to deleteFailed. You can use Cancel Delete Certificate to set the status back to active if you decide that you want to continue using the Certificate.",
+        "description": "You cannot delete a Certificate if a resource (Pool or Compute Node) is using it. Before you can delete a Certificate, you must therefore make sure that the Certificate is not associated with any existing Pools, the Certificate is not installed on any Nodes (even if you remove a Certificate from a Pool, it is not removed from existing Compute Nodes in that Pool until they restart), and no running Tasks depend on the Certificate. If you try to delete a Certificate that is in use, the deletion fails. The Certificate status changes to deleteFailed. You can use Cancel Delete Certificate to set the status back to active if you decide that you want to continue using the Certificate.\n\nWarning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -1363,6 +1165,7 @@
         }
       },
       "get": {
+        "deprecated": true,
         "tags": [
           "Certificates"
         ],
@@ -1372,7 +1175,8 @@
             "$ref": "./examples/CertificateGet.json"
           }
         },
-        "description": "Gets information about the specified Certificate.",
+        "summary": "Gets information about the specified Certificate.",
+        "description": "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -5981,6 +5785,9 @@
           },
           "Add a pool with mount drive specified": {
             "$ref": "./examples/PoolAdd_MountConfiguration.json"
+          },
+          "Add a pool with accelerated networking": {
+            "$ref": "./examples/PoolAdd_AcceleratedNetworking.json"
           }
         },
         "summary": "Adds a Pool to the specified Account.",
@@ -6526,6 +6333,9 @@
           },
           "Get a VirtualMachineConfiguration pool with extensions": {
             "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithExtensions.json"
+          },
+          "Get a pool with AcceleratedNetworking": {
+            "$ref": "./examples/PoolGet_AcceleratedNetworking.json"
           }
         },
         "description": "Gets information about the specified Pool.",
@@ -11647,7 +11457,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
+          "description": "Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries Tasks without limit. The default value is 0 (no retries)."
         }
       },
       "title": "The execution constraints for a Job."
@@ -12081,7 +11891,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
+          "description": "Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)."
         }
       },
       "title": "Execution constraints to apply to a Task."
@@ -12367,7 +12177,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the Task may be retried.",
-          "description": "The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
+          "description": "The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)."
         },
         "waitForSuccess": {
           "type": "boolean",
@@ -12461,6 +12271,7 @@
         "thumbprint",
         "thumbprintAlgorithm"
       ],
+      "description": "Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
       "title": "A reference to a Certificate to be installed on Compute Nodes in a Pool."
     },
     "MetadataItem": {
@@ -12569,7 +12380,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "A list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -14006,15 +13817,20 @@
           "type": "string",
           "title": "The container technology to be used.",
           "enum": [
-            "dockerCompatible"
+            "dockerCompatible",
+            "criCompatible"
           ],
           "x-ms-enum": {
             "name": "ContainerType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "dockerCompatible",
                 "description": "A Docker compatible container technology will be used to launch the containers."
+              },
+              {
+                "value": "criCompatible",
+                "description": "A CRI based technology will be used to launch the containers."
               }
             ]
           }
@@ -14136,6 +13952,10 @@
         "autoUpgradeMinorVersion": {
           "type": "boolean",
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
         },
         "settings": {
           "type": "object",
@@ -14399,6 +14219,15 @@
           "$ref": "#/definitions/PublicIPAddressConfiguration",
           "title": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
           "description": "Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property."
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "title": "Whether this pool should enable accelerated networking.",
+          "description": "Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.",
+          "externalDocs": {
+            "url": "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview",
+            "description": "Create a VM with Accelerated Networking."
+          }
         }
       },
       "description": "The network configuration for a Pool."
@@ -14612,7 +14441,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "The list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -14769,7 +14598,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "The list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -15902,7 +15731,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "The list of Certificates installed on the Compute Node.",
-          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "errors": {
           "type": "array",
@@ -16449,7 +16278,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "A list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "This list replaces any existing Certificate references configured on the Pool. If you specify an empty collection, any existing Certificate references are removed from the Pool. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "This list replaces any existing Certificate references configured on the Pool. If you specify an empty collection, any existing Certificate references are removed from the Pool. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -16494,7 +16323,7 @@
             "$ref": "#/definitions/CertificateReference"
           },
           "title": "A list of Certificates to be installed on each Compute Node in the Pool.",
-          "description": "If this element is present, it replaces any existing Certificate references configured on the Pool. If omitted, any existing Certificate references are left unchanged. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+          "description": "If this element is present, it replaces any existing Certificate references configured on the Pool. If omitted, any existing Certificate references are left unchanged. For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\n\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
         },
         "applicationPackageReferences": {
           "type": "array",

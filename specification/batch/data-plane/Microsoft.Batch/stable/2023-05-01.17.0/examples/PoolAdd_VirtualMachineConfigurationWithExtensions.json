@@ -17,12 +17,12 @@
         "extensions": [
           {
             "name": "batchextension1",
-            "type": "SecurityMonitoringForLinux",
-            "publisher": "Microsoft.Azure.Security.Monitoring",
-            "typeHandlerVersion": "1.0",
+            "type": "KeyVaultForLinux",
+            "publisher": "Microsoft.Azure.KeyVault",
+            "typeHandlerVersion": "2.0",
             "autoUpgradeMinorVersion": true,
-            "settings": "{\"settingsKey\":\"settingsValue\"}",
-            "protectedSettings": "{\"protectedSettingsKey\":\"protectedSettingsValue\"}"
+            "enableAutomaticUpgrade": true,
+            "settings": "{\"secretsManagementSettingsKey\":\"secretsManagementSettingsValue\",\"authenticationSettingsKey\":\"authenticationSettingsValue\"}"
           }
         ]
       },
