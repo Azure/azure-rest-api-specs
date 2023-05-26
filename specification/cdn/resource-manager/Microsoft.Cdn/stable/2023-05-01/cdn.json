@@ -469,7 +469,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -3010,6 +3010,16 @@
       "type": "object",
       "description": "Result for migrate operation.",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MigrateResultProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MigrateResultProperties": {
+      "type": "object",
+      "properties": {
         "migratedProfileResourceId": {
           "readOnly": true,
           "description": "Arm resource id of the migrated profile",
@@ -3023,8 +3033,7 @@
           "type": "array",
           "x-ms-identifiers": []
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "SsoUri": {
       "description": "The URI required to login to the supplemental portal from the Azure portal.",
