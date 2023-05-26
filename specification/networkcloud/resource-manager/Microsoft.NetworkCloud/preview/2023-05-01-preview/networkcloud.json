@@ -3348,6 +3348,18 @@
               "$ref": "#/definitions/KubernetesCluster"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/KubernetesCluster"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3359,6 +3371,10 @@
           "Patch Kubernetes cluster": {
             "$ref": "./examples/KubernetesClusters_Patch.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -6335,7 +6351,7 @@
         },
         "attachedNetworkConfiguration": {
           "$ref": "#/definitions/AttachedNetworkConfiguration",
-          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster. These networks are in addition to the networks connected in the Kubernetes cluster attached network configuration.",
+          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6487,7 +6503,7 @@
         },
         "attachedNetworkConfiguration": {
           "$ref": "#/definitions/AttachedNetworkConfiguration",
-          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster. These networks are in addition to the networks connected in the Kubernetes cluster attached network configuration.",
+          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9102,7 +9118,7 @@
         },
         "attachedNetworkConfiguration": {
           "$ref": "#/definitions/AttachedNetworkConfiguration",
-          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster. These networks are in addition to the networks connected in the Kubernetes cluster attached network configuration.",
+          "description": "The configuration of networks being attached to the agent pool for use by the workloads that run on this Kubernetes cluster.",
           "x-ms-mutability": [
             "read",
             "create"
