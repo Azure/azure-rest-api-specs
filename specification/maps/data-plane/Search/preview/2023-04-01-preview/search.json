@@ -787,7 +787,7 @@
             "modelAsString": true,
             "values": {
               "value": "Feature",
-              "description": "Locally redundant storage.",
+              "description": "Autosuggest features.",
               "name": "Feature"
             }
           }
@@ -836,60 +836,7 @@
           }
         },
         "address": {
-          "description": "The address of the result",
-          "type": "object",
-          "properties": {
-            "addressLine": {
-              "description": "AddressLine that includes Street Name and Number.",
-              "type": "string"
-            },
-            "locality": {
-              "description": "locality property",
-              "type": "string"
-            },
-            "adminDistricts": {
-              "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "The name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be full name of state such as Washington, \nFor adminDistrict[1], this could be the full name of the county"
-                  },
-                  "shortName": {
-                    "type": "string",
-                    "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA, \nFor adminDistrict[1], this could be the short name of the county"
-                  },
-                  "type": {
-                    "type": "string",
-                    "description": "The type of the adminDistrict. For example: adminDistrict, adminDistrict2"
-                  }
-                }
-              }
-            },
-            "countryRegion": {
-              "type": "object",
-              "properties": {
-                "ISO": {
-                  "description": "ISO of country/region",
-                  "type": "string"
-                },
-                "name": {
-                  "description": "name of country/region",
-                  "type": "string"
-                }
-              }
-            },
-            "postalCode": {
-              "description": "Postal Code property",
-              "type": "string"
-            },
-            "formattedAddress": {
-              "description": "Formatted Address property",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/Address"
         },
         "name": {
           "description": "The name of the place. This field will not appear if the returned type is Address.",
