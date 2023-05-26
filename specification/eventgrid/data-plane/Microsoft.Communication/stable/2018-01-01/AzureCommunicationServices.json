@@ -113,7 +113,7 @@
         "attachedWorkerSelectors": {
           "description": "Router Job Attached Worker Selector",
           "type": "array",
-          "format": {
+          "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         }
@@ -1609,7 +1609,8 @@
         },
         "value": {
           "description": "Router Job Worker Selector Value",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": true
         },
         "ttlSeconds": {
           "description": "Router Job Worker Selector TTLSeconds",
