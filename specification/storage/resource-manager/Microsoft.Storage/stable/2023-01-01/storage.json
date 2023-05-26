@@ -899,7 +899,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/default": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/{migrationName}": {
       "post": {
         "tags": [
           "AccountMigrations"
@@ -923,6 +923,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationName"
           },
           {
             "name": "validate",
@@ -5566,7 +5569,8 @@
         "properties": {
           "properties": {
             "targetSkuName": {
-              "$ref": "./common.json#/definitions/SkuName"
+              "$ref": "./common.json#/definitions/SkuName",
+              "description":  "Target sku name for the account"
             },
             "migrationStatus": {
               "type": "string",
@@ -5600,6 +5604,10 @@
           "description": "The properties of a storage account’s ongoing or enqueued migration."
         }
       },
+      "required": [
+        "properties",
+        "targetSkuName"
+      ],
       "description": "The paramaters or status associated with an ongoing or enqueued storage account migration in order to update its current SKU or region."
     },
     "ErrorResponseBody": {
@@ -5668,6 +5676,21 @@
       ],
       "x-ms-enum": {
         "name": "ManagementPolicyName",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationName": {
+      "name": "migrationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Storage Account Migration. It should always be 'default'",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationName",
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
