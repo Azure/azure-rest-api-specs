@@ -9,62 +9,56 @@
   "responses": {
     "200": {
       "body": {
+        "jobId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "createdDateTime": "2021-11-26T17:22:27.386Z",
+        "expirationDateTime": "2021-11-26T17:22:27.386Z",
+        "lastUpdateDateTime": "2021-11-26T17:22:27.386Z",
+        "status": "succeeded",
         "results": {
           "patients": [
             {
-              "id": "patient1",
+              "id": "Patient ID Example 1",
               "inferences": [
                 {
-                  "type": "tumorSite",
-                  "value": "C50.2",
-                  "description": "BREAST",
-                  "confidenceScore": 0.9214
-                },
-                {
                   "type": "histology",
-                  "value": "8500",
-                  "confidenceScore": 0.9973
+                  "value": "8561",
+                  "description": "Adenolymphoma",
+                  "confidenceScore": 0.85,
+                  "evidence": [
+                    {
+                      "patientDataEvidence": {
+                        "id": "1",
+                        "text": "string",
+                        "offset": 70,
+                        "length": 135
+                      },
+                      "importance": 1
+                    }
+                  ]
                 },
                 {
                   "type": "clinicalStageT",
                   "value": "T3",
-                  "confidenceScore": 0.9956
-                },
-                {
-                  "type": "clinicalStageN",
-                  "value": "N0",
-                  "confidenceScore": 0.9931
-                },
-                {
-                  "type": "clinicalStageM",
-                  "value": "None",
-                  "confidenceScore": 0.5217
-                },
-                {
-                  "type": "pathologicStageT",
-                  "value": "T1",
-                  "confidenceScore": 0.9477
-                },
-                {
-                  "type": "pathologicStageN",
-                  "value": "N0",
-                  "confidenceScore": 0.7927
-                },
-                {
-                  "type": "pathologicStageM",
-                  "value": "M0",
-                  "confidenceScore": 0.9208
+                  "description": "Locally advanced disease at risk for micrometastases",
+                  "confidenceScore": 0.88,
+                  "evidence": [
+                    {
+                      "patientDataEvidence": {
+                        "id": "2",
+                        "text": "string",
+                        "offset": 12,
+                        "length": 9
+                      },
+                      "importance": 1
+                    }
+                  ],
+                  "caseId": "1"
                 }
               ]
             }
           ],
-          "modelVersion": "2023-03-01-preview"
-        },
-        "jobId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "createdDateTime": "2023-03-08T17:02:46Z",
-        "expirationDateTime": "2023-03-08T17:19:26Z",
-        "lastUpdateDateTime": "2023-03-08T17:02:46Z",
-        "status": "succeeded"
+          "modelVersion": "2021-11-26"
+        }
       }
     }
   }
