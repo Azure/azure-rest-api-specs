@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01-privatepreview",
+    "version": "2023-05-01-preview",
     "title": "Azure Alerts Management Service Resource Provider",
     "description": "APIs for Azure alert processing rules CRUD operations."
   },
@@ -36,7 +36,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -81,7 +81,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/52/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -133,7 +133,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/52/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -189,7 +189,7 @@
             }
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/52/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -266,7 +266,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/52/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -328,7 +328,7 @@
             "description": "Parameters supplied to the operation."
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../../../../common-types/resource-management/52/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -375,21 +375,7 @@
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
-    },
-    "api-version": {
-      "name": "api-version",
-      "description": "Client API version.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "enum": [
-        "2023-05-01-privatepreview"
-      ],
-      "x-ms-enum": {
-        "name": "api-version",
-        "modelAsString": true
-      }
-    }
+    }    
   },
   "definitions": {
     "errorResponse": {
