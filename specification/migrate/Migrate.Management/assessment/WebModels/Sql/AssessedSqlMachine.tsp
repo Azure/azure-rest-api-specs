@@ -1,6 +1,6 @@
-import "../Common/SqlEnums.cadl";
-import "../Common/CommonModels.cadl";
-import "../Common/AzureResourceProperties.cadl";
+import "../Common/SqlEnums.tsp";
+import "../Common/CommonModels.tsp";
+import "../Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -35,7 +35,7 @@ model AssessedSqlMachineProperties extends AzureResourceProperties {
 
   @doc("Gets the list of SQL instances discovered on the machine.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   sqlInstances?: AssessedSqlInstanceSummary[];
 
   @doc("""
@@ -87,7 +87,7 @@ evaluation.
 
   @doc("Gets the list of migration guidelines applicable.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   migrationGuidelines?: SqlMigrationGuideline[];
 
   @doc("Boot type of machine discovered in private data center.")

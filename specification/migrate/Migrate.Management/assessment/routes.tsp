@@ -1,39 +1,39 @@
-import "./ApiVersions.cadl";
+import "./ApiVersions.tsp";
 
-import "../operationsTemp.cadl";
+import "../operationsTemp.tsp";
 
-import "./WebModels/Common/DownloadUrl.cadl";
+import "./WebModels/Common/DownloadUrl.tsp";
 
-import "./WebModels/AssessmentProject.cadl";
-import "./WebModels/AssessmentProjectSummary.cadl";
-import "./WebModels/AssessmentOptions.cadl";
-import "./WebModels/AvsAssessmentOptions.cadl";
+import "./WebModels/AssessmentProject.tsp";
+import "./WebModels/AssessmentProjectSummary.tsp";
+import "./WebModels/AssessmentOptions.tsp";
+import "./WebModels/AvsAssessmentOptions.tsp";
 
-import "./WebModels/Collectors/HyperVCollector.cadl";
-import "./WebModels/Collectors/VmwareCollector.cadl";
-import "./WebModels/Collectors/ServerCollector.cadl";
-import "./WebModels/Collectors/SqlCollector.cadl";
+import "./WebModels/Collectors/HyperVCollector.tsp";
+import "./WebModels/Collectors/VmwareCollector.tsp";
+import "./WebModels/Collectors/ServerCollector.tsp";
+import "./WebModels/Collectors/SqlCollector.tsp";
 
-import "./WebModels/Group.cadl";
+import "./WebModels/Group.tsp";
 
-import "./WebModels/PrivateEndpointConnection.cadl";
-import "./WebModels/PrivateLinkResource.cadl";
+import "./WebModels/PrivateEndpointConnection.tsp";
+import "./WebModels/PrivateLinkResource.tsp";
 
-import "./WebModels/AssessibleEntities/Machine.cadl";
+import "./WebModels/AssessibleEntities/Machine.tsp";
 
-import "./WebModels/Assessments/Assessment.cadl";
-import "./WebModels/Assessments/AvsAssessment.cadl";
+import "./WebModels/Assessments/Assessment.tsp";
+import "./WebModels/Assessments/AvsAssessment.tsp";
 
-import "./WebModels/AssessedEntities/AssessedMachine.cadl";
-import "./WebModels/AssessedEntities/AvsAssessedMachine.cadl";
+import "./WebModels/AssessedEntities/AssessedMachine.tsp";
+import "./WebModels/AssessedEntities/AvsAssessedMachine.tsp";
 
-import "./WebModels/Sql/AssessedSqlDatabaseV2.cadl";
-import "./WebModels/Sql/AssessedSqlInstanceV2.cadl";
-import "./WebModels/Sql/AssessedSqlMachine.cadl";
-import "./WebModels/Sql/AssessedSqlRecommendedEntity.cadl";
-import "./WebModels/Sql/SqlAssessmentV2.cadl";
-import "./WebModels/Sql/SqlAssessmentV2Summary.cadl";
-import "./WebModels/Sql/SqlAssessmentOptions.cadl";
+import "./WebModels/Sql/AssessedSqlDatabaseV2.tsp";
+import "./WebModels/Sql/AssessedSqlInstanceV2.tsp";
+import "./WebModels/Sql/AssessedSqlMachine.tsp";
+import "./WebModels/Sql/AssessedSqlRecommendedEntity.tsp";
+import "./WebModels/Sql/SqlAssessmentV2.tsp";
+import "./WebModels/Sql/SqlAssessmentV2Summary.tsp";
+import "./WebModels/Sql/SqlAssessmentOptions.tsp";
 
 using Autorest;
 using TypeSpec.Http;

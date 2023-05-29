@@ -1,4 +1,4 @@
-import "./Common/AzureResourceProperties.cadl";
+import "./Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;

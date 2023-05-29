@@ -1,7 +1,24 @@
-import "../common/machinePropertiesInternal.cadl";
 
+import "../common/machinePropertiesInternal.tsp";
+import "../../../operationsTemp.tsp";
+import "@azure-tools/typespec-azure-core";
+import "../../../operationsTemp.tsp";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-@doc("replica type")
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
+
 enum ReplicaType {
     "Unknown", "DatabaseReplica", "AvailabilityGroupReplica"
 }
@@ -51,11 +68,11 @@ model SqlServerProperties {
 @doc("Gets the Machine Overview properties of all machines on which the SQL server is deployed.")
 
 @visibility("read")
-extension("x-ms-identifiers", [])
+@extension("x-ms-identifiers", [])
 "machineOverviewList"?: SqlMachineOverview[];
 
 @doc("Gets or sets tags on the resource.")
-tags?: Record<object>;
+tags?: Record<Object>;
 
 @doc("Gets or sets the number of databases part of availability group on this SQL instance.")
 "numberOfAgDatabases"?: int32;
@@ -186,7 +203,7 @@ model SqlDatabaseProperties {
 
 @doc("Gets the file metadata list.")
 @visibility("read")
-extension("x-ms-identifiers", [])
+@extension("x-ms-identifiers", [])
 "fileMetadataList"?: FileMetaData[];
 
 @doc("Gets or sets the hostname.")

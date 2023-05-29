@@ -1,6 +1,6 @@
-import "../Common/SqlEnums.cadl";
-import "../Common/CommonModels.cadl";
-import "../Common/AzureResourceProperties.cadl";
+import "../Common/SqlEnums.tsp";
+import "../Common/CommonModels.tsp";
+import "../Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -59,7 +59,7 @@ model AssessedSqlInstanceV2Properties extends AzureResourceProperties {
 
   @doc("Gets the storage details.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   storageTypeBasedDetails?: AssessedSqlInstanceStorageDetails[];
 
   @doc("Gets the FCI metadata if this instance represents an FCI instance.")
@@ -83,7 +83,7 @@ commit mode and read type.
 
   @doc("Gets the list of recommended target reasoning.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   recommendedTargetReasonings?: SqlRecommendationReasoning[];
 
   @doc("Machine arm id.")
@@ -122,7 +122,7 @@ commit mode and read type.
 
   @doc("The logical disk details.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   logicalDisks?: AssessedSqlInstanceDiskDetails[];
 
   @doc("The databases summary.")

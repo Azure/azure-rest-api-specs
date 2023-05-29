@@ -1,5 +1,21 @@
-import "../common/machinePropertiesInternal.cadl";
+import "@azure-tools/typespec-azure-core";
+import "../../../operationsTemp.tsp";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "../common/machinePropertiesInternal.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
 
 @versioned(Versions)
 @doc("Azure OffAzure Resource Provider management API.")
@@ -51,7 +67,7 @@ Microsoft.OffAzure/VMWareSites/RunAsAccounts.
 
   @doc("Gets nested properties.")
   @visibility("read")
-  extension("x-ms-client-flatten", true)
+  //@extension("x-ms-client-flatten", true)
   properties?: RunAsAccountRunAsAccountProperties;
 }
 
@@ -136,7 +152,7 @@ model VmwareMachineProperties {
   hostProcessorInfo?: ProcessorInfo;
 
   @doc("Gets or sets tags on the VMware machine.")
-  tags?: Record<object>;
+  tags?: Record<Object>;
 
   @doc("VCenter FQDN/IPAddress.")
   @visibility("read")
@@ -160,7 +176,7 @@ model VmwareMachineProperties {
 
   @doc("Disks attached to the machine.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   disks?: VmwareDisk[];
 
   @doc("Indicates whether the host is in maintenance mode.")
@@ -181,7 +197,7 @@ model VmwareMachineProperties {
 
   @doc("Network adapters attached to the machine.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   networkAdapters?: VmwareNetworkAdapter[];
 
   @doc("VMware tools status.")
@@ -374,6 +390,6 @@ model VmwareMachineSoftwareInventory {
   name?: string;
 
   @doc("Gets or sets software inventory properties.")
-  extension("x-ms-client-flatten", true)
+  //@extension("x-ms-client-flatten", true)
   properties?: MachineSoftwareInventoryProperties;
 }

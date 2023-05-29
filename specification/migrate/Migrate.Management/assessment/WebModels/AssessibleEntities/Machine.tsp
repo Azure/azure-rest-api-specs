@@ -1,4 +1,4 @@
-import "../Common/CommonEnums.cadl";
+import "../Common/CommonEnums.tsp";
 
 using Autorest;
 using TypeSpec.Http;

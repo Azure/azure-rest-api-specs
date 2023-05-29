@@ -1,4 +1,4 @@
-import "../Common/SqlEnums.cadl";
+import "../Common/SqlEnums.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -18,7 +18,7 @@ model SqlAssessmentV2PaasSuitabilityData {
 
     @doc("Gets the replica azure SQL PAAS SKU.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     replicaAzureSqlSku?: AzureSqlPaasSkuDTO[];
 
     @doc("Gets the shared resources.")
@@ -43,12 +43,12 @@ model SqlAssessmentV2PaasSuitabilityData {
 
     @doc("Gets the list of migration guidelines applicable to this target.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     migrationGuidelines?: SqlMigrationGuideline[];
 
     @doc("Gets the list of SQL recommendation Reasoning.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     recommendationReasonings?: SqlRecommendationReasoning[];
 
     @doc("Gets the migration target platform.")
@@ -61,7 +61,7 @@ model SqlAssessmentV2PaasSuitabilityData {
 
     @doc("Gets the list of migrations issues.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     migrationIssues?: SqlAssessmentMigrationIssue[];
 }
 
@@ -115,17 +115,17 @@ model AzureSqlPaasSkuDTO {
 model SharedResourcesDTO {
     @doc("Gets the list of shared data disks.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     sharedDataDisks?: AzureManagedDiskSkuDTO[];
 
     @doc("Gets the list of shared log disks.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     sharedLogDisks?: AzureManagedDiskSkuDTO[];
 
     @doc("Gets the list of shared Temporary database disks.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     sharedTempDbDisks?: AzureManagedDiskSkuDTO[];
 
     @doc("Gets number of mounts of shared disks.")
@@ -177,7 +177,7 @@ model SqlAssessmentMigrationIssue {
 
     @doc("Gets the list of impacted objects.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     impactedObjects?: ImpactedAssessmentObject[];
 }
 
@@ -205,7 +205,7 @@ model SqlRecommendationReasoning {
 
     @doc("Gets the Sql recommended reasoning parameters.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     contextParameters?: SqlRecommendationReasoningContext[];
 }
 
@@ -227,7 +227,7 @@ model SqlAssessmentV2IaasSuitabilityData {
 
     @doc("Gets the replica azure SQL IAAS SKU.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     replicaAzureSqlSku?: AzureSqlIaasSkuDTO[];
 
     @doc("Gets the shared resources.")
@@ -252,12 +252,12 @@ model SqlAssessmentV2IaasSuitabilityData {
 
     @doc("Gets the list of migration guidelines applicable to this target.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     migrationGuidelines?: SqlMigrationGuideline[];
 
     @doc("Gets the list of SQL recommendation Reasoning.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     recommendationReasonings?: SqlRecommendationReasoning[];
 
     @doc("Gets the migration target platform.")
@@ -270,7 +270,7 @@ model SqlAssessmentV2IaasSuitabilityData {
 
     @doc("Gets the list of migrations issues.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     migrationIssues?: SqlAssessmentMigrationIssue[];
 }
 
@@ -283,12 +283,12 @@ model AzureSqlIaasSkuDTO {
 
     @doc("Gets the The list of data disk sizes.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     dataDiskSizes?: AzureManagedDiskSkuDTO[];
 
     @doc("Gets the The list of log disk sizes.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     logDiskSizes?: AzureManagedDiskSkuDTO[];
 
     @doc("Gets the target type.")
@@ -437,7 +437,7 @@ model AssessedNetworkAdapter {
 
     @doc("Gets the ip addresses.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     ipAddresses?: string[];
 
     @doc("Gets the megabytes per second received.")
@@ -458,7 +458,7 @@ model SqlMigrationGuideline {
 
     @doc("Gets the migration guideline context.")
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     migrationGuidelineContext?: MigrationGuidelineContext[];
 }
 
@@ -488,7 +488,7 @@ model SqlPaaSTargetOptions {
     serviceTier?: AzureSqlServiceTier;
 
     @doc("Gets or sets the target location.")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     targetLocations?: AzureLocation[];
 }
 
@@ -532,7 +532,7 @@ model SqlVmSettings {
     Gets or sets the Azure VM families (calling instance series to keep it
     consistent with other targets).
     """)
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     instanceSeries?: AzureVmFamily[];
 }
 

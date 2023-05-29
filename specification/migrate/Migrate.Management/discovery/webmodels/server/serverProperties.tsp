@@ -1,12 +1,25 @@
-
-
 import "@azure-tools/typespec-azure-core";
+import "../../../operationsTemp.tsp";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
 
 @doc("Gets or sets the list of server machine inventory.")
 @pagedResult
 model ServerPropertiesCollection {
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets or sets the list of server machine inventory.")
   serverList?: ServerProperties[];
 
@@ -28,13 +41,13 @@ same.
   displayName?: string;
 
   @doc("Gets or sets tags on the Server machine.")
-  tags?: Record<object>;
+  tags?: Record<Object>;
 
   @doc("Gets or sets the FQDN/IPAddress of the server.")
   fqdn?: string;
 
   @doc("Gets or sets the network adapters of the server.")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   networkAdapters?: ServerNetworkAdapter[];
 
   @doc("Gets or sets the FQDN of machine which can be changed.")

@@ -1,10 +1,25 @@
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
 
 @doc("inner error")
 model InnerError {
   @doc("code string ")
   code: string;
 
+  @projectedName("csharp", "innerErrorr")
   @doc("inner error")
   innererror: InnerError;
 }
@@ -347,16 +362,17 @@ model GuestOsDetails {
   osArchitecture?: string;
 }
 
-@doc("DependencyMap Service Map Extensions Dependency Map Request Filters")
-model DependencyMapServiceMapExtensionsDependencyMapRequestFilters {
+@doc("DependencyMap Service Map extensions Dependency Map Request Filters")
+model DependencyMapServiceMapextensionsDependencyMapRequestFilters {
   @doc("array of machine ids")
   machineIds?: string[];
 
   @doc("array of process Ids")
   processIds?: string[];
-}
-@doc("DependencyMap ServiceMap Extensions SingleMachine DetailedMap Request")
-model DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest {
+};
+
+@doc("DependencyMap ServiceMap extensions SingleMachine DetailedMap Request")
+model DependencyMapServiceMapextensionsSingleMachineDetailedMapRequest {
   @doc("id of machine")
   machineId?: string;
 
@@ -367,12 +383,12 @@ model DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest {
   endTime?: utcDateTime;
 
   @doc("optional filters")
-  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+  filters?: DependencyMapServiceMapextensionsDependencyMapRequestFilters;
 
 }
 
-@doc("DependencyMap ServiceMap Extensions Client GroupMembers Request")
-model DependencyMapServiceMapExtensionsClientGroupMembersRequest {
+@doc("DependencyMap ServiceMap extensions Client GroupMembers Request")
+model DependencyMapServiceMapextensionsClientGroupMembersRequest {
   @doc("id of machine")
   machineId?: string;
 
@@ -389,12 +405,12 @@ model DependencyMapServiceMapExtensionsClientGroupMembersRequest {
   endTime?: utcDateTime;
 
   @doc("optional filters")
-  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+  filters?: DependencyMapServiceMapextensionsDependencyMapRequestFilters;
 
 }
 
-@doc("DependencyMap ServiceMap Extensions ServerGroup Members Request")
-model DependencyMapServiceMapExtensionsServerGroupMembersRequest {
+@doc("DependencyMap ServiceMap extensions ServerGroup Members Request")
+model DependencyMapServiceMapextensionsServerGroupMembersRequest {
   @doc("port of server")
   serverPort?: int32;
 
@@ -405,12 +421,12 @@ model DependencyMapServiceMapExtensionsServerGroupMembersRequest {
   endTime?: utcDateTime;
 
   @doc("optional filters")
-  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+  filters?: DependencyMapServiceMapextensionsDependencyMapRequestFilters;
 
 }
 
-@doc("DependencyMap ServiceMapExtensions Scope MapRequest")
-model DependencyMapServiceMapExtensionsScopeMapRequest {
+@doc("DependencyMap ServiceMapextensions Scope MapRequest")
+model DependencyMapServiceMapextensionsScopeMapRequest {
   @doc("start time")
   startTime?: utcDateTime;
 
@@ -418,7 +434,7 @@ model DependencyMapServiceMapExtensionsScopeMapRequest {
   endTime?: utcDateTime;
 
   @doc("optional filters")
-  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+  filters?: DependencyMapServiceMapextensionsDependencyMapRequestFilters;
 }
 
 @doc("""
@@ -427,8 +443,8 @@ Defines class that represents input to enable or disable DMP on machine
       for cosmos entity operation.
 """)
 model UpdateMachineDepMapStatus {
-  extension("x-ms-identifiers", [])
   @doc("Gets or sets the machine collection.")
+  @extension("x-ms-identifiers", [])
   machines?: UpdateMachineDepMapStatusDependencyMapMachineInput[];
 }
 
@@ -445,8 +461,8 @@ be enabled or not.
   isDependencyMapToBeEnabled?: boolean;
 }
 
-@doc("DependencyMap ServiceMap Extensions ExportDependencies Request")
-model DependencyMapServiceMapExtensionsExportDependenciesRequest {
+@doc("DependencyMap ServiceMap extensions ExportDependencies Request")
+model DependencyMapServiceMapextensionsExportDependenciesRequest {
   @doc("start time")
   startTime?: utcDateTime;
 
@@ -457,7 +473,7 @@ model DependencyMapServiceMapExtensionsExportDependenciesRequest {
 @doc("The body of export machine errors request.")
 model VersionedV202001ExportMachineErrorsRequest {
   @doc("Gets or sets the properties.")
-  extension("x-ms-client-flatten", true)
+  //@extension("x-ms-client-flatten", true)
   properties?: VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties;
 }
 
@@ -560,7 +576,7 @@ model PendpointConnection {
 
   @doc("Gets the properties of the object.")
   @visibility("read")
-  extension("x-ms-client-flatten", true)
+  //@extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionPropertiesV2;
 }
 
@@ -645,11 +661,11 @@ model PrivateEndpointDetails {
   id?: string;
 
   @doc("PrivateLinkServiceConnection array")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   @doc("PrivateLinkServiceConnection array")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   privateLinkServiceConnections?: PrivateLinkServiceConnection[];
   @doc("PrivateLinkServiceProxy array")
   privateLinkServiceProxies?: PrivateLinkServiceProxy[];
@@ -671,7 +687,7 @@ model PrivateLinkServiceProxy {
   @doc("id value")
   id?: string;
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("group connectivity information")
   groupConnectivityInformation?: GroupConnectivityInformation[];
   @doc("remote private endpoint connection")
@@ -780,8 +796,8 @@ model ErrorDetails {
 }
 @doc("The list of Machine MetaData.")
 model MachineMetadataList {
-  extension("x-ms-identifiers", [])
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("The list of Machine MetaData.")
   value: MachineMetadata[];
 }
@@ -868,7 +884,7 @@ model SiteHealthErrorDetails {
 model SiteHealthSummaryCollection {
   @doc("Gets the list of SiteHealthSummary.")
   @visibility("read")
-  extension("x-ms-identifiers", ["applianceName"])
+  @extension("x-ms-identifiers", ["applianceName"])
   value?: SiteHealthSummary[];
 
   @doc("Gets the value of next link.")
@@ -984,10 +1000,10 @@ the
 @doc("Hyper-V site usage.")
 model SiteUsageResponse {
   @doc("Gets or sets the number of machines discovered in the site.")
-  machineCount: int32; //TODO
+  machineCount: int32;
 
   @doc("Gets or sets the number of run as accounts in the site.")
-  runAsAccountCount: int32; //TODO
+  runAsAccountCount: int32;
 
   @doc("Gets or sets the number of hosts part of the site.")
   hostCount: int32;
@@ -1009,7 +1025,7 @@ model NonceRequest {
 @doc("AgentManifestNonce REST Resource.")
 model ApplianceNonce {
   @doc("Gets or sets the nested properties.")
-  extension("x-ms-client-flatten", true)
+  //@extension("x-ms-client-flatten", true)
   properties?: ApplianceNonceValueProperties;
 }
 
@@ -1050,7 +1066,7 @@ Gets or sets the appliance details used by service to communicate
            
 to the appliance.
 """)
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   siteAppliancePropertiesCollection?: SiteApplianceProperties[];
 
   @doc("Gets or sets the discovery scenario.")
@@ -1119,7 +1135,7 @@ model SqlAvailabilityGroupProperties {
 
   @doc("Gets the list of availability replica properties which together forms this availability group.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   availabilityReplicas?: SqlAvailabilityGroupSqlAvailabilityReplicaProperties[];
 
   @doc("""
@@ -1132,7 +1148,7 @@ since discovery and linking of DAG(Distributed Availability Group) is not
 implemented.
 """)
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   parentReplicaOverviewList?: SqlAvailabilityReplicaOverview[];
 
   @doc("""
@@ -1340,7 +1356,7 @@ Gets or sets the appliance details used by service to communicate
            
 to the appliance.
 """)
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   siteAppliancePropertiesCollection?: SiteApplianceProperties[];
 
   @doc("Gets or sets the discovery scenario.")
@@ -1384,12 +1400,12 @@ model ProxySiteRefreshBody {
 
 @doc("Class for web application properties.")
 model IisWebApplicationProperties {
-  extension("x-ms-identifiers", [])
   @doc("Gets the list of application units for the web site.")
+  @extension("x-ms-identifiers", [])
   @visibility("read")
   applications?: IisApplicationUnit[];
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets the list of application units for the web site.")
   @visibility("read")
   virtualApplications?: IisVirtualApplicationUnit[];
@@ -1410,22 +1426,22 @@ model IisWebApplicationProperties {
   @visibility("read")
   physicalPath?: string;
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets the front end bindings for the application.")
   @visibility("read")
   bindings?: FrontEndBinding[];
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets the Error details.")
   @visibility("read")
   frameworks?: WebApplicationFramework[];
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets the configuration.")
   @visibility("read")
   configurations?: WebApplicationConfigurationUnit[];
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets the directories.")
   @visibility("read")
   directories?: WebApplicationDirectoryUnit[];
@@ -1436,7 +1452,7 @@ model IisWebApplicationProperties {
 
   
   @doc("Gets or sets tags on the resource.")
-  tags?: Record<object>;
+  tags?: Record<Object>;
 
   @doc("Gets a value indicating whether application is deleted.")
   @visibility("read")
@@ -1494,7 +1510,7 @@ on 64 bit.
   @doc("Gets or sets the path of the directory.")
   path?: DirectoryPath;
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets or sets the list of directories.")
   directories?: DirectoryPath[];
 }
@@ -1520,7 +1536,7 @@ model IisVirtualApplicationUnit {
   @doc("Gets or sets the path of the directory.")
   path?: DirectoryPath;
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets or sets the list of directories.")
   directories?: DirectoryPath[];
 }
@@ -1688,17 +1704,17 @@ model TomcatWebApplicationProperties {
 
   @doc("Gets the front end bindings for the application.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   bindings?: FrontEndBinding[];
 
   @doc("Gets the Error details.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   frameworks?: WebApplicationFramework[];
 
   @doc("Gets the configuration.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   configurations?: WebApplicationConfigurationUnit[];
 
   @doc("Gets the directories.")
@@ -1711,7 +1727,7 @@ model TomcatWebApplicationProperties {
 
   @doc("Gets tags that can be used with ODATA.")
   @visibility("read")
-  tags?: Record<object>;
+  tags?: Record<Object>;
 
   @doc("Gets a value indicating whether application is deleted.")
   @visibility("read")
@@ -1749,7 +1765,7 @@ model TomcatWebApplicationProperties {
 @doc("Class for web server properties.")
 model TomcatWebServerProperties {
   @doc("Gets or sets the services defined in the server.")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   services?: TomcatServiceUnit[];
 
   @doc("Gets the configuration location.")
@@ -1818,7 +1834,7 @@ model TomcatServiceUnit {
   @doc("Gets or sets the name of the service.")
   name?: string;
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets or sets the connectors defined for the service component.")
   connectors?: ConnectorUnit[];
 
@@ -1828,7 +1844,7 @@ model TomcatServiceUnit {
 
 @doc("The connectors of the web server.")
 model ConnectorUnit {
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Gets or sets the bindings for the connector.")
   bindings?: FrontEndBinding[];
 }
@@ -1839,7 +1855,7 @@ model TomcatEngineUnit {
   name?: string;
 
   @doc("Gets or sets the hosts defined for the engine.")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   hosts?: TomcatHostUnit[];
 }
 
@@ -1928,22 +1944,22 @@ model WebRoleV202011PreviewWebApplicationProperties {
 
   @doc("Gets the front end bindings for the application.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   bindings?: FrontEndBinding[];
 
   @doc("Gets the Error details.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   frameworks?: WebApplicationFramework[];
 
   @doc("Gets the configuration.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   configurations?: WebApplicationConfigurationUnit[];
 
   @doc("Gets the directories.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   directories?: WebApplicationDirectoryUnit[];
 
   @doc("Gets the display name.")
@@ -1952,7 +1968,7 @@ model WebRoleV202011PreviewWebApplicationProperties {
 
   @doc("Gets tags that can be used with ODATA.")
   @visibility("read")
-  tags?: Record<object>;
+  tags?: Record<Object>;
 
   @doc("Gets a value indicating whether application is deleted.")
   @visibility("read")
@@ -2079,7 +2095,7 @@ model WebServerProperties {
 @doc("Collection of web app properties.")
 model WebAppPropertiesCollection {
   @doc("Gets or sets the list of web app properties.")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   webApps?: WebAppProperties[];
 }
 @doc("Class representing web app properties web model.")
@@ -2088,7 +2104,7 @@ model WebAppProperties {
   webAppArmId?: string;
 
   @doc("Gets or sets Tags.")
-  tags?: Record<object>;
+  tags?: Record<Object>;
 }
 
 @doc("Processor Information.")
@@ -2118,7 +2134,7 @@ model HypervVmSoftwareInventory {
   name?: string;
 
   @doc("Gets or sets software inventory properties.")
-  extension("x-ms-client-flatten", true)
+  //@extension("x-ms-client-flatten", true)
   properties?: MachineSoftwareInventoryProperties;
 }
 
@@ -2133,47 +2149,47 @@ model MachineSoftwareInventoryProperties {
 model AppsAndRoles {
   @doc("Gets or sets Applications of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   applications?: Application[];
 
   @doc("Gets or sets WebApplications of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   webApplications?: WebApplicationAppsAndRolesModel[];
 
   @doc("Gets or sets Features of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   features?: Feature[];
 
   @doc("Gets or sets SQLServers of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   sqlServers?: SqlServerApplication[];
 
   @doc("Gets or sets SharePointServers of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   sharePointServers?: SharePointServer[];
 
   @doc("Gets or sets SystemCenters of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   systemCenters?: SystemCenter[];
 
   @doc("Gets or sets BizTalkServers of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   bizTalkServers?: BizTalkServer[];
 
   @doc("Gets or sets ExchangeServers of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   exchangeServers?: ExchangeServer[];
 
   @doc("Gets or sets OtherDatabaseServers of the AppsAndRoles.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   otherDatabases?: OtherDatabase[];
 }
 

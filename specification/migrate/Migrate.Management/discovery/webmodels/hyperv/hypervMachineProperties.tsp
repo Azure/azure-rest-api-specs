@@ -1,4 +1,5 @@
 using TypeSpec.Versioning;
+using OpenAPI;
 
 @versioned(Versions)
 @doc("Azure OffAzure Resource Provider management API.")
@@ -21,11 +22,7 @@ model HypervMachineProperties {
   @doc("Gets the Information about Host Processor.")
   @visibility("read")
   hostProcessorInfo?: ProcessorInfo;
-
-  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-duplicate-property"
-  @doc("Gets or sets tags on HyperV machine.")
-  tags?: Record<object>;
-
+  
   @doc("On-premise Instance UUID of the machine.")
   @visibility("read")
   instanceUuid?: string;
@@ -66,12 +63,12 @@ model HypervMachineProperties {
   @visibility("read")
   isDynamicMemoryEnabled?: boolean;
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Disks attached to the machine.")
   @visibility("read")
   disks?: HypervDisk[];
 
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   @doc("Network adapters attached to the machine.")
   @visibility("read")
   networkAdapters?: HypervNetworkAdapter[];

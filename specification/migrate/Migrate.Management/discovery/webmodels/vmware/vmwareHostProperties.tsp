@@ -1,4 +1,5 @@
 
+using OpenAPI;
 @doc("Class for host properties.")
 model VmwareHostProperties {
   @doc("Gets the timestamp marking VMware host creation.")
@@ -11,7 +12,7 @@ model VmwareHostProperties {
 
   @doc("Gets the data stores.")
   @visibility("read")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   datastores?: VmwareDatastore[];
 
   @doc("Gets the V-center ID.")

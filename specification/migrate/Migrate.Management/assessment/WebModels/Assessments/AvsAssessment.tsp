@@ -1,6 +1,6 @@
-import "../Common/CommonAssessmentPropertiesEnums.cadl";
-import "../Common/AvsEnums.cadl";
-import "../Common/AzureResourceProperties.cadl";
+import "../Common/CommonAssessmentPropertiesEnums.tsp";
+import "../Common/AvsEnums.tsp";
+import "../Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;

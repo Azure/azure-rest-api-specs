@@ -1,5 +1,5 @@
-import "../Common/CommonModels.cadl";
-import "../Common/AzureResourceProperties.cadl";
+import "../Common/CommonModels.tsp";
+import "../Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;

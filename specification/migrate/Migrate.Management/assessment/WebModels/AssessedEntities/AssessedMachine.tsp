@@ -1,8 +1,8 @@
-import "../Common/CommonEnums.cadl";
-import "../Common/AzureResourceProperties.cadl";
-import "../Common/CommonAssessmentPropertiesEnums.cadl";
-import "../Common/CostComponent.cadl";
-import "../Common/CommonModels.cadl";
+import "../Common/CommonEnums.tsp";
+import "../Common/AzureResourceProperties.tsp";
+import "../Common/CommonAssessmentPropertiesEnums.tsp";
+import "../Common/CostComponent.tsp";
+import "../Common/CommonModels.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -46,7 +46,7 @@ model AssessedMachineProperties extends AzureResourceProperties {
 
     @doc("Gets or sets the collection of cost components.")
     @added(ApiVersions.v2020_01_01)
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     costComponents?: CostComponent[];
 
     @doc("Monthly networking cost.")

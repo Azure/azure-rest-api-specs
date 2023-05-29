@@ -1,4 +1,4 @@
-import "../Common/AzureResourceProperties.cadl";
+import "../Common/AzureResourceProperties.tsp";
 
 @doc("Collector properties class.")
 model CollectorPropertiesBaseWithAgent extends AzureResourceProperties {

@@ -1,3 +1,4 @@
+using OpenAPI;
 @doc("Second level object returned as part of Machine REST resource.")
 model WebRoleOperatingSystem {
     @doc("Gets or sets the type of the operating system.")
@@ -52,10 +53,6 @@ model ImportMachineProperties {
     @doc("Firmware of the machine.")
     @visibility("read")
     firmware?: string;
-
-    #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-duplicate-property"
-    @doc("Gets or sets tags on the resource.")
-    tags?: Record<object>;
 
     @doc("CPU utilization.")
     @visibility("read")
@@ -127,7 +124,7 @@ model ImportMachineProperties {
 
     @doc("Disks attached to the machine.")
     @visibility("read")
-    extension("x-ms-identifiers", ["name"])
+    @extension("x-ms-identifiers", ["name"])
     disks?: WebRoleImportDisk[];
 
     @doc("Server FQDN.")

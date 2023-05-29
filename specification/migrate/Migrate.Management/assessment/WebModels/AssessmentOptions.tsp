@@ -1,4 +1,4 @@
-import "./Common/AzureResourceProperties.cadl";
+import "./Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -27,7 +27,7 @@ Dictionary of VM families grouped by vm family name describing the targeted
 azure locations of VM family and the category of the family.
 """)
     @visibility("read")
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     vmFamilies?: VmFamilyOptions[];
 
     @doc("List of supported VM Families.")
@@ -49,7 +49,7 @@ azure locations of VM family and the category of the family.
     @doc("Ultra disk related assessment options.")
     @visibility("read")
     @added(ApiVersions.v2020_01_01)
-    extension("x-ms-identifiers", [])
+    @extension("x-ms-identifiers", [])
     ultraDiskVmFamilies?: UltraDiskAssessmentOptions[];
 
     @doc("List of VM Families that support premium disks for assessments.")

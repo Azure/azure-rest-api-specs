@@ -24,7 +24,7 @@ model V20200201DeleteImportMachinesJob {
     type?: string;
 
     @doc("Gets or sets the delete import machines job properties.")
-    extension("x-ms-client-flatten", true)
+    //@extension("x-ms-client-flatten", true)
     properties?: CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties;
 
     @doc("Gets or sets the relative ARM name to get job.")
@@ -33,17 +33,18 @@ model V20200201DeleteImportMachinesJob {
     @doc("Gets or sets the Job ID.")
     name?: string;
 
-    @doc("Gets or sets the Job status.")
-    status?: string;
+    // TODO in code , remove this property
+    // @doc("Gets or sets the Job status.")
+    // status?: string;
 
-    @doc("Gets or sets the Job start time.")
-    startTime?: string;
+    // @doc("Gets or sets the Job start time.")
+    // startTime?: string;
 
-    @doc("Gets or sets the Job end time.")
-    endTime?: string;
+    // @doc("Gets or sets the Job end time.")
+    // endTime?: string;
 
-    @doc("Gets or sets the Display name.")
-    displayName?: string;
+    // @doc("Gets or sets the Display name.")
+    // displayName?: string;
 }
 
 @doc("Delete Imported Machines Job Properties")
@@ -78,7 +79,7 @@ model ImportDeleteImportMachinesJob {
     type?: string;
 
     @doc("Gets or sets the delete import machines job properties.")
-    extension("x-ms-client-flatten", true)
+    //@extension("x-ms-client-flatten", true)
     properties?: CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties;
 
     @doc("Gets or sets the relative ARM name to get job.")
@@ -140,7 +141,7 @@ model V20200201ExportImportedMachinesJob {
     type?: string;
 
     @doc("Gets or sets the export machines job properties.")
-    extension("x-ms-client-flatten", true)
+    //@extension("x-ms-client-flatten", true)
     properties?: CosmosDbExportImportedMachinesJobEntityExportImportedMachinesJobEntityProperties;
 
     @doc("Gets or sets the relative ARM name to get job.")
@@ -227,7 +228,7 @@ Microsoft.OffAzure/ImportSites/jobs/importJobs.
     type?: string;
 
     @doc("Gets or sets the import job properties.")
-    extension("x-ms-client-flatten", true)
+    //@extension("x-ms-client-flatten", true)
     properties?: ImportMachinesJobEntityImportMachinesJobProperties;
 
     @doc("Gets or sets the relative ARM name to get job.")

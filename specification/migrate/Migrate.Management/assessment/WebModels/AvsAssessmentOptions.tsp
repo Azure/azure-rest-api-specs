@@ -1,4 +1,4 @@
-import "./Common/AzureResourceProperties.cadl";
+import "./Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -23,7 +23,7 @@ model AvsAssessmentOptions is ProxyResource<AvsAssessmentOptionsProperties> {
 @doc("AVS Assessment options properties.")
 model AvsAssessmentOptionsProperties extends AzureResourceProperties {
   @doc("AVS SKU Nodes.")
-  extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", [])
   avsNodes?: AvsSkuOptions[];
 
   @doc("FTT and Raid level values.")

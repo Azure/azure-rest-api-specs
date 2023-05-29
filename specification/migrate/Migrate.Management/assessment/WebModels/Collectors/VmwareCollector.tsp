@@ -1,4 +1,4 @@
-import "./CollectorProperties.cadl";
+import "./CollectorProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;

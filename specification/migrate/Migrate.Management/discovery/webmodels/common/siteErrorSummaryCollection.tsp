@@ -3,7 +3,7 @@ using Azure.Core;
 // @doc("Gets or sets the list of site error summary.")
 // @pagedResult
 // model SiteErrorSummaryCollection {
-//   extension("x-ms-identifiers", ["applianceName"])
+//   @extension("x-ms-identifiers", ["applianceName"])
 //   @doc("Gets or sets the list of site error summary.")
 //   siteErrorSummary?: SiteErrorSummary[];
 
@@ -23,8 +23,7 @@ enum DiscoveryScopes {
 @doc("The site error summary model.")
 model DiscoveryScopeErrorSummary {
   @doc("Gets or sets the affected resource type.")
-  affectedResourceType: string; //TODO
-
+  affectedResourceType: string; 
   @doc("Count of affected objects.")
   affectedObjectsCount: int64;
 

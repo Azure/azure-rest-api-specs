@@ -1,4 +1,4 @@
-import "./operationsCore.cadl";
+import "./operationsCore.tsp";
 
 //namespace Azure.Core;
 using TypeSpec.Http;
@@ -36,7 +36,7 @@ op ArmResourceActionAsyncNoRequestBody<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    "final-state-via": "location",
   }
 )
 @armResourceAction(TResource)
@@ -54,7 +54,7 @@ op ArmResourceActionNoContentNoBodyAsync<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    "final-state-via": "location",
   }
 )
 @armResourceAction(TResource)
@@ -112,29 +112,29 @@ op ArmResourceListByParentUpdatedOk<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    "final-state-via": "location",
   }
 )
 @armResourceAction(TResource)
 @post
-op ArmResourceActionNoContentAsyncCustomMapRequest<
+op ArmResourceActionAsyncCustomMapRequest<
   TResource extends ArmResource,
   TRequest extends object,
+  TResponse extends object,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
-
   @doc("The content of the action request")
   @body
   mapRequest: TRequest
-): ArmAcceptedResponse ;
+):  ArmAcceptedLroResponse | ArmResponse<TResponse> | ErrorResponse ;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    "final-state-via": "location",
   }
 )
 @armResourceAction(TResource)
@@ -156,7 +156,7 @@ op ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    "final-state-via": "location",
   }
 )
 @armResourceAction(TResource)
@@ -178,7 +178,7 @@ op ArmResourceActionNoContentAsyncCustomUpdateRunAsAccount<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    "final-state-via": "location",
   }
 )
 @armResourceAction(TResource)
@@ -202,7 +202,7 @@ op ArmResourceActionNoContentAsyncCustomUpdateMachineTags<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    "final-state-via": "location",
   }
 )
 @armResourceCreateOrUpdate(TResource)
@@ -216,7 +216,7 @@ op ArmResourceCreateOrUpdateAsyncCustom<
   @doc("Resource create parameters.")
   @body
   body: TResource
-):  ArmAcceptedResponse<"Accepted."> ;
+):  ArmAcceptedResponse<"Accepted.">  | ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 @autoRoute
 @doc("Create a {name}", TResource)
@@ -231,7 +231,27 @@ op ArmResourceCreateOrUpdateSyncCustom<
   @doc("Resource create parameters.")
   @body
   body: TResource
-): ArmResponse<TResource> ;
+): ArmResponse<TResource> | ArmCreatedResponse<TResource> ;
+
+/**
+ * A resource CreateOrUpdate (PUT)
+ * @template TResource the resource being patched
+ * @template TBaseParameters Optional. Allows overriding the operation parameters
+ */
+@autoRoute
+@doc("Create a {name}", TResource)
+@armResourceCreateOrUpdate(TResource)
+@put
+op ArmResourceCreateOrUpdateSync201<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  body: TResource
+): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 @autoRoute
 @armResourceAction(TResource)
@@ -257,7 +277,7 @@ interface OperationsCustom {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
-  @operationId("Operations_List")
+  
   list(
     ...ApiVersionParameter,
 
@@ -282,5 +302,9 @@ op OperationCustom<
   ...TParams
 ): ArmDeletedResponse | TResponse ;
 
-
+/**
+ * Represent any structured model.(With properties)
+ */
+@doc("object model")
+model Object {}
 

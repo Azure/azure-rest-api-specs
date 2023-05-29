@@ -1,7 +1,7 @@
-import "../Common/CommonAssessmentPropertiesEnums.cadl";
-import "../Common/VmUptime.cadl";
-import "../Common/CostComponent.cadl";
-import "../Common/AzureResourceProperties.cadl";
+import "../Common/CommonAssessmentPropertiesEnums.tsp";
+import "../Common/VmUptime.tsp";
+import "../Common/CostComponent.tsp";
+import "../Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;

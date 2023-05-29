@@ -1,3 +1,19 @@
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.Core.Traits;
+using OpenAPI;
+
 @doc("Job REST Resource.")
 model JobProperties {
   @doc("Gets operation status.")
@@ -24,8 +40,9 @@ model JobProperties {
   @visibility("read")
   activityId?: string;
 
-  extension("x-ms-identifiers", [])
+  
   @doc("Gets the errors.")
+  @extension("x-ms-identifiers", [])
   @visibility("read")
   errors?: ErrorDetails[];
 

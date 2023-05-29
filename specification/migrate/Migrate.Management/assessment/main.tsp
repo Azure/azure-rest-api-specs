@@ -6,8 +6,8 @@ import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
 import "@azure-tools/cadl-azure-resource-manager";
 
-import "./ApiVersions.cadl";
-import "./routes.cadl";
+import "./ApiVersions.tsp";
+import "./routes.tsp";
 
 using Autorest;
 using TypeSpec.Http;

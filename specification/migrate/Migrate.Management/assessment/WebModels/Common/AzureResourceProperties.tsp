@@ -1,4 +1,4 @@
-import "./CommonEnums.cadl";
+import "./CommonEnums.tsp";
 
 @doc("Common properties for all azure tracked and proxy resources.")
 model AzureResourceProperties {

@@ -1,5 +1,5 @@
-import "./Common/PrivateEndpointEnums.cadl";
-import "./Common/AzureResourceProperties.cadl";
+import "./Common/PrivateEndpointEnums.tsp";
+import "./Common/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;
