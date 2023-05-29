@@ -1,0 +1,528 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "2023-07-01-preview",
+      "title": "Azure Spring Apps API Client"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/apps": {
+        "get": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Get the Apps in a given subscription.",
+          "operationId": "Apps_ListBySubscription",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/AppCollection"
+              }
+            },
+            "default": {
+              "description": "Error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps": {
+        "get": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Get the Apps in a given resource group.",
+          "operationId": "Apps_ListByResourceGroup",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/AppCollection"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}": {
+        "get": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Get the properties of an App.",
+          "operationId": "Apps_Get",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK.",
+              "schema": {
+                "$ref": "#/definitions/App"
+              }
+            },
+            "404": {
+              "description": "Not found.",
+              "x-ms-error-response": true
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Create or update an App.",
+          "description": "Create or update an App.",
+          "operationId": "Apps_CreateOrUpdate",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppEnvelopeParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "No change performed on the App.",
+              "schema": {
+                "$ref": "#/definitions/App"
+              }
+            },
+            "201": {
+              "description": "App create or update has been started.",
+              "schema": {
+                "$ref": "#/definitions/App"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "azure-async-operation"
+          }
+        },
+        "delete": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Delete an App.",
+          "description": "Delete an App.",
+          "operationId": "Apps_Delete",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "App deleted successfully."
+            },
+            "202": {
+              "description": "Delete operation is in progress.",
+              "headers": {
+                "Location": {
+                  "type": "string"
+                }
+              }
+            },
+            "204": {
+              "description": "App does not exist."
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location"
+          }
+        },
+        "patch": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Update properties of an App",
+          "description": "Patches an App using JSON Merge Patch",
+          "operationId": "Apps_Update",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppEnvelopeParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ok",
+              "schema": {
+                "$ref": "#/definitions/App"
+              }
+            },
+            "202": {
+              "description": "Patch operation is in progress.",
+              "headers": {
+                "Location": {
+                  "type": "string"
+                }
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/listCustomHostNameAnalysis": {
+        "post": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Analyzes a custom hostname for an App",
+          "operationId": "Apps_ListCustomHostNameAnalysis",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/CustomHostnameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerApps.json#/definitions/CustomHostnameAnalysisResult"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/listSecrets": {
+        "post": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "List secrets for an app",
+          "operationId": "Apps_ListSecrets",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/SecretsCollection"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/getAuthtoken": {
+        "post": {
+          "tags": [
+            "Apps"
+          ],
+          "summary": "Get auth token for an app",
+          "operationId": "Apps_GetAuthToken",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/AppAuthToken"
+              }
+            },
+            "404": {
+              "description": "Not found.",
+              "x-ms-error-response": true
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "AppCollection": {
+        "description": "App collection ARM resource.",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Collection of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/App"
+            }
+          },
+          "nextLink": {
+            "description": "Link to next page of resources.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "App": {
+        "description": "App",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerApps.json#/definitions/ContainerApp"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "type": "object",
+            "properties": {
+              
+            }
+          }
+        }      
+      },
+      "SecretsCollection": {
+        "description": "App Secrets Collection ARM resource.",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Collection of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/AppSecret"
+            },
+            "x-ms-identifiers": [
+              "name"
+            ]
+          }
+        }
+      },
+      "AppSecret": {
+        "description": "App Secret.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerApps.json#/definitions/ContainerAppSecret"
+          }
+        ],
+        "properties": {
+          "keyVaultUrl": {
+            "description": "Azure Key Vault URL pointing to the secret referenced by the app.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "parameters": {
+      "AppNameParameter": {
+        "name": "appName",
+        "in": "path",
+        "description": "Name of the App.",
+        "required": true,
+        "type": "string"
+      },
+      "AppEnvelopeParameter": {
+        "name": "appEnvelope",
+        "in": "body",
+        "description": "Properties used to create an app",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/App"
+        }
+      },
+      "CustomHostnameParameter": {
+        "name": "customHostname",
+        "in": "query",
+        "description": "Custom hostname.",
+        "type": "string"
+      },
+      "ContainerAppAuthToken": {
+        "description": "App Auth Token.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerApps.json#/definitions/ContainerAppAuthToken"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "description": "App auth token resource specific properties",
+            "type": "object",
+            "properties": {},
+            "x-ms-client-flatten": true
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "flow": "implicit",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        },
+        "type": "oauth2",
+        "description": "Azure Active Directory OAuth2 Flow"
+      }
+    },
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
+      }
+    ]
+  }
