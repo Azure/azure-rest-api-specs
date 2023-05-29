@@ -251,6 +251,9 @@
           },
           {
             "$ref": "#/parameters/SourceControlIdParameter"
+          },
+          {
+            "$ref": "#/parameters/RepositoryAccess"
           }
         ],
         "responses": {
@@ -944,6 +947,23 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/SourceControl"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RepositoryAccess": {
+      "description": "The repository access credentials.",
+      "in": "body",
+      "name": "repositoryAccess",
+      "required": true,
+      "schema": {
+        "required": [
+          "repositoryAccess"
+        ],
+        "properties": {
+          "repositoryAccess": {
+            "$ref": "#/definitions/RepositoryAccess"
+          }
+        }
       },
       "x-ms-parameter-location": "method"
     }
