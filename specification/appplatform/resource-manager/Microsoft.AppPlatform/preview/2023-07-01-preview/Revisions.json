@@ -14,9 +14,385 @@
     "produces": [
       "application/json"
     ],
-    "paths": {},
-    "definitions": {},
-    "parameters": {},
+    "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions": {
+        "get": {
+          "tags": [
+            "Revisions"
+          ],
+          "summary": "Get the Revisions for a given App.",
+          "operationId": "Revisions_ListRevisions",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/FilterParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/RevisionCollection"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          },
+          "x-ms-odata": "#/definitions/Revision"
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}": {
+        "get": {
+          "tags": [
+            "Revisions"
+          ],
+          "summary": "Get a revision of an App.",
+          "operationId": "Revisions_GetRevision",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/RevisionNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Revision"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/activate": {
+        "post": {
+          "tags": [
+            "Revisions"
+          ],
+          "summary": "Activates a revision for an App",
+          "operationId": "Revisions_ActivateRevision",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/RevisionNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Revision was activated"
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/deactivate": {
+        "post": {
+          "tags": [
+            "Revisions"
+          ],
+          "summary": "Deactivates a revision for an App",
+          "operationId": "Revisions_DeactivateRevision",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/RevisionNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Revision was deactivated"
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/replicas/{replicaName}": {
+        "get": {
+          "tags": [
+            "RevisionReplicas"
+          ],
+          "summary": "Get a replica for a Revision.",
+          "operationId": "RevisionReplicas_GetReplica",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/RevisionNameParameter"
+            },
+            {
+              "$ref": "#/parameters/ReplicaNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Replica"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/replicas": {
+        "get": {
+          "tags": [
+            "RevisionReplicas"
+          ],
+          "summary": "List replicas for a Revision.",
+          "operationId": "RevisionReplicas_ListReplicas",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/RevisionNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ReplicaCollection"
+              }
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/restart": {
+        "post": {
+          "tags": [
+            "Revisions"
+          ],
+          "summary": "Restarts a revision for an App",
+          "operationId": "Revisions_RestartRevision",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/AppNameParameter"
+            },
+            {
+              "$ref": "#/parameters/RevisionNameParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Container App revision was restarted"
+            },
+            "default": {
+              "description": "Common error response.",
+              "schema": {
+                "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "RevisionCollection": {
+        "description": "Azure Spring Apps Revision collection ARM resource.",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Collection of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Revision"
+            }
+          },
+          "nextLink": {
+            "description": "Link to next page of resources.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "Revision": {
+        "description": "Azure Spring Apps Revision",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json#/definitions/Revision"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "type": "object",
+            "properties": {}
+          }
+        }      
+      },
+      "Replica": {
+        "description": "Azure Spring Apps Revision Replica",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json#/definitions/Replica"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "type": "object",
+            "properties": {}
+          }
+        }      
+      },
+      "ReplicaCollection": {
+        "description": "Azure Spring Apps Revision Replicas collection ARM resource.",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Collection of resources.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Replica"
+            }
+          }
+        }
+      },
+    },
+    "parameters": {
+      "AppNameParameter": {
+        "name": "appName",
+        "in": "path",
+        "description": "Name of the App.",
+        "required": true,
+        "type": "string"
+      },
+      "FilterParameter": {
+        "name": "$filter",
+        "in": "query",
+        "description": "The filter to apply on the operation.",
+        "required": false,
+        "type": "string"
+      },
+      "RevisionNameParameter": {
+        "name": "revisionName",
+        "in": "path",
+        "description": "Name of the Revision.",
+        "required": true,
+        "type": "string"
+      },
+      "ReplicaNameParameter": {
+        "name": "replicaName",
+        "in": "path",
+        "description": "Name of the Revision Replica.",
+        "required": true,
+        "type": "string"
+      },
+    },
     "securityDefinitions": {
       "azure_auth": {
         "flow": "implicit",
