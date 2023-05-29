@@ -464,6 +464,23 @@
             "readOnly": true
           }
         }
+      },
+      "AppAuthToken": {
+        "description": "App Auth Token.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerApps.json#/definitions/ContainerAppAuthToken"
+          }
+        ],
+        "properties": {
+          "properties": {
+            "description": "App auth token resource specific properties",
+            "type": "object",
+            "properties": {},
+            "x-ms-client-flatten": true
+          }
+        }
       }
     },
     "parameters": {
@@ -488,23 +505,6 @@
         "in": "query",
         "description": "Custom hostname.",
         "type": "string"
-      },
-      "AppAuthToken": {
-        "description": "App Auth Token.",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerApps.json#/definitions/ContainerAppAuthToken"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "description": "App auth token resource specific properties",
-            "type": "object",
-            "properties": {},
-            "x-ms-client-flatten": true
-          }
-        }
       }
     },
     "securityDefinitions": {
