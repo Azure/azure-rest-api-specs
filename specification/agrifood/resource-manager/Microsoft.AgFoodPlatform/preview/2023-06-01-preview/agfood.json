@@ -1935,49 +1935,22 @@
       "type": "object",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/AuthCredentialsEnum"
+          "$ref": "#/definitions/AuthCredentialsKind"
         }
       },
       "discriminator": "kind"
     },
-    "AuthCredentialsEnum": {
+    "AuthCredentialsKind": {
       "description": "CredentialTypeEnum.",
       "enum": [
-        "BasicAuthCredentials",
+        "OAuthClientCredentials",
         "ApiKeyAuthCredentials"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "AuthCredentialsEnum",
+        "name": "AuthCredentialsKind.",
         "modelAsString": true
       }
-    },
-    "BasicAuthCredentials": {
-      "description": "BasicAuthCredentials represents username password auth.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AuthCredentials"
-        },
-        {
-          "required": [
-            "password",
-            "username"
-          ],
-          "type": "object",
-          "properties": {
-            "username": {
-              "description": "UserName for auth.",
-              "minLength": 1,
-              "type": "string"
-            },
-            "password": {
-              "$ref": "#/definitions/KeyVaultProperties"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "BasicAuthCredentials"
     },
     "DataConnector": {
       "description": "DataConnector Model.",
@@ -2029,22 +2002,24 @@
     "DataConnectorProperties": {
       "description": "DataConnector Properties.",
       "required": [
-        "credential"
+        "credentials"
       ],
       "type": "object",
       "properties": {
-        "credential": {
+        "credentials": {
           "$ref": "#/definitions/AuthCredentials"
         }
       },
       "example": {
-        "credential": {
-          "authType": "string",
-          "username": "string",
-          "password": {
-            "keyVaultUri": "string",
-            "keyName": "string",
-            "keyVersion": "string"
+        "properties": {
+          "credentials": {
+            "kind": "OAuthClientCredentials",
+            "clientId": "string",
+            "clientSecret": {
+              "keyVaultUri": "string",
+              "keyName": "string",
+              "keyVersion": "string"
+            }
           }
         }
       }
@@ -2733,6 +2708,33 @@
           "type": "string"
         }
       }
+    },
+    "OAuthClientCredentials": {
+      "description": "OAuthClientCredentials.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        },
+        {
+          "required": [
+            "clientId",
+            "clientSecret"
+          ],
+          "type": "object",
+          "properties": {
+            "clientId": {
+              "description": "UserName.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "clientSecret": {
+              "$ref": "#/definitions/KeyVaultProperties"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "OAuthClientCredentials"
     },
     "Measure": {
       "type": "object",
