@@ -1151,7 +1151,7 @@
           "$ref": "common.json#/definitions/SystemData"
         },
         "identity": {
-          "$ref": "#/definitions/Identity"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         }
       },
       "description": "Managed HSM resource",
@@ -1700,35 +1700,6 @@
         }
       },
       "description": "The security domain properties of the managed hsm."
-    },
-    "Identity": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The identity type. Only UserAssigned is currently supported."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "Object containing details of the user assigned identities associated with the resource. The key is the ARM resource identifier of the identity.",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          }
-        }
-      }
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "readOnly": true,
-      "description": "Detail information about the user assigned identity",
-      "properties": {
-        "principalId": {
-          "type": "string"
-        },
-        "clientId": {
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
