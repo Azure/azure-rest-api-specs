@@ -68,11 +68,10 @@ input-file:
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-02'
+```yaml $(tag) == 'package-2023-02'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-02-01/bms.json
 ```
-
 ### Tag: package-passivestamp-2023-01-15
 
 These settings apply only when `--tag=package-passivestamp-2023-01-15` is specified on the command line.
@@ -104,7 +103,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-09'
+```yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/bms.json
 ```
