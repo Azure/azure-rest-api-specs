@@ -11928,25 +11928,26 @@
       "description": "Details of the gateway operation.",
       "type": "object",
       "properties": {
-        "operationName": {
-          "description": "A value indicating the gateway operation name.",
+        "state": {
+          "description": "A value indicating the state of gateway operation.",
           "type": "string",
           "readOnly": true
         },
         "progressPercentage": {
+          "format": "int32",
           "description": "A value indicating the progress percentage of gateway operation.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "timeElapsed": {
           "format": "int64",
-          "description": "A value indicating the time elapsed for the operation.",
+          "description": "A value indicating the time elapsed for the operation in seconds.",
           "type": "integer",
           "readOnly": true
         },
         "timeRemaining": {
           "format": "int64",
-          "description": "A value indicating the time remaining for the operation.",
+          "description": "A value indicating the time remaining for the operation in seconds.",
           "type": "integer",
           "readOnly": true
         },
@@ -11954,6 +11955,11 @@
           "format": "int64",
           "description": "A value indicating the upload speed in Mbps.",
           "type": "integer",
+          "readOnly": true
+        },
+        "hostName": {
+          "description": "A value indicating the ESXi host name.",
+          "type": "string",
           "readOnly": true
         },
         "dataStore": {
