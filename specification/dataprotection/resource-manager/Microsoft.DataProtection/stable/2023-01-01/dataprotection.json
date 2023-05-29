@@ -4063,6 +4063,11 @@
           "readOnly": true,
           "type": "string"
         },
+		"rehydrationPriority": {
+          "description": "Priority to be used for rehydration",
+          "readOnly": true,
+          "type": "string"
+        },
         "restoreType": {
           "description": "It indicates the sub type of operation i.e. in case of Restore it can be ALR/OLR",
           "readOnly": true,
@@ -4917,6 +4922,21 @@
       "title": "BasePolicyRule",
       "type": "object"
     },
+    "BaseResourceProperties": {
+      "description": "Properties which are specific to datasource/datasourcesets",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
     "CheckNameAvailabilityRequest": {
       "description": "CheckNameAvailability Request",
       "properties": {
@@ -5173,6 +5193,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source"
         }
       },
       "required": [
@@ -5211,6 +5235,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source set"
         }
       },
       "required": [
