@@ -97,6 +97,9 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StandardsAssignmentBody"
           }
         ],
         "responses": {
@@ -253,7 +256,15 @@
         },
         "effect": {
           "description": "expected effect of this assignment (Audit/Exempt)",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Audit",
+            "Exempt"
+          ],
+          "x-ms-enum": {
+            "name": "effect",
+            "modelAsString": true
+          }
         },
         "excludedScopes": {
           "type": "array",
@@ -275,7 +286,15 @@
           "properties": {
             "exemptionCategory": {
               "description": "Exemption category of this assignment",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Waiver",
+                "Mitigated"
+              ],
+              "x-ms-enum": {
+                "name": "exemptionCategory",
+                "modelAsString": true
+              }
             },
             "assignedAssessment": {
               "description": "Component item with key as applied to this standard assignment over the given scope",
@@ -288,7 +307,9 @@
           }
         },
         "metadata": {
-          "$ref": "#/definitions/StandardAssignmentMetadata"
+          "$ref": "#/definitions/StandardAssignmentMetadata",
+          "description": "The standard assignment metadata."
+
         }
       }
     },

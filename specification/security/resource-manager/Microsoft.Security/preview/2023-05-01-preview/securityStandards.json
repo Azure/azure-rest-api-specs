@@ -271,7 +271,15 @@
         "standardType": {
           "description": "standard type (Custom or BuiltIn only currently)",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Custom",
+            "BuiltIn"
+          ],
+          "x-ms-enum": {
+            "name": "standardType",
+            "modelAsString": true
+          }
         },
         "description": {
           "description": "description of the standard",
@@ -281,7 +289,7 @@
           "description": "List of assessment keys to apply to standard scope.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StandardComponentProperties"
+            "$ref": "#/definitions/AssessmentProperties"
           },
           "x-ms-identifiers": []
         },
@@ -289,7 +297,7 @@
           "description": "List of all standard supported clouds.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StandardSupportedClouds"
+            "$ref": "#/definitions/StandardSupportedCloud"
           }
         },
         "policySetDefinitionId": {
@@ -297,7 +305,8 @@
           "type": "string"
         },
         "metadata": {
-          "$ref": "#/definitions/StandardMetadata"
+          "$ref": "#/definitions/StandardMetadata",
+          "description": "The security standard metadata."
         }
       }
     },
@@ -316,12 +325,12 @@
           "format": "date-time",
           "readOnly": true
         },
-        "updatedBy": {
+        "lastUpdatedBy": {
           "description": "standard last updated by object id (GUID)",
           "type": "string",
           "readOnly": true
         },
-        "updatedOn": {
+        "lastUpdatedOn": {
           "description": "standard last update date",
           "type": "string",
           "format": "date-time",
@@ -329,9 +338,9 @@
         }
       }
     },
-    "StandardComponentProperties": {
+    "AssessmentProperties": {
       "type": "object",
-      "description": "Describes properties of an component as related to the standard",
+      "description": "Describes properties of an assessment as related to the standard",
       "properties": {
         "assessmentKey": {
           "description": "the assessment key",
@@ -339,7 +348,7 @@
         }
       }
     },
-    "StandardSupportedClouds": {
+    "StandardSupportedCloud": {
       "type": "string",
       "description": "The cloud that the standard is supported on.",
       "enum": [
@@ -348,8 +357,8 @@
         "GCP"
       ],
       "x-ms-enum": {
-        "name": "StandardSupportedClouds",
-        "modelAsString": false
+        "name": "StandardSupportedCloud",
+        "modelAsString": true
       }
     }
   },

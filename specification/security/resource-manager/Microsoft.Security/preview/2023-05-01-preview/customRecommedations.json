@@ -271,7 +271,7 @@
           "description": "List of all standard supported clouds.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RecommendationSupportedClouds"
+            "$ref": "#/definitions/RecommendationSupportedCloud"
           }
         },
         "severity": {
@@ -325,12 +325,12 @@
           "format": "date-time",
           "readOnly": true
         },
-        "updatedBy": {
+        "lastUpdatedBy": {
           "description": "recommendation last updated by object id (GUID)",
           "type": "string",
           "readOnly": true
         },
-        "updatedOn": {
+        "lastUpdatedOn": {
           "description": "recommendation last update date",
           "type": "string",
           "format": "date-time",
@@ -338,7 +338,7 @@
         }
       }
     },
-    "RecommendationSupportedClouds": {
+    "RecommendationSupportedCloud": {
       "type": "string",
       "description": "The cloud that the recommendation is supported on.",
       "enum": [
@@ -348,7 +348,7 @@
       ],
       "x-ms-enum": {
         "name": "RecommendationSupportedClouds",
-        "modelAsString": false
+        "modelAsString": true
       }
     }
   },
