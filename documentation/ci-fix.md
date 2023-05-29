@@ -2,25 +2,52 @@
 
 Here are guides to fix some of the CI failure.
 
+## Prerequisites
+
+Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
+
 ## Spell check
 
 Please add your words to `./custom-words.txt` if you think you have the correct spell.
 
-If your problem is some existing error name that is not a word and need to supress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
+If your problem is some existing error name that is not a word and need to suppress the error in that file (and don't want to add to custom-words.txt), you can add it to `./cSpell.txt`.
 
 ## Prettier check
+
+First, ensure you have fulfilled `Prerequisites` as explained above.
 
 To update all the spec files for a given service run the following:
 
 ```
-# To fix a particular service swagger cd to that directory like
+# To fix all the files in the repo run from the root of the repo
+cd <local_repo_clone_root>
+
+# OPTIONAL STEP: To fix a particular service swagger cd to that directory like
 cd specification/contosowidgetmanager
-# to fix all the files in the repo run from the root of the repo
+
+# Install the dependencies to the local 'node_modules' folder.
 npm install
-npx prettier -w **/*.json
+
+# Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
+npx tsc 
+
+# As of 5/25/2023, the prettier version should be 2.1.2
+npx prettier --version
+
+# Run 'prettier --check' to verify the problems can be reproduced locally
+npx prettier --check **/*.json
+
+# Run 'prettier --list-different' to understand which files have problems.
+# Note: there is no way to view the exact problems without actually changing the affected files. See https://github.com/prettier/prettier/issues/6069.
+npx prettier --list-different **/*.json
+
+# Run 'prettier --write' to fix the problems.
+npx prettier --write **/*.json
 ```
 
 Then please commit and push changes made by prettier.
+
+Reference: [prettier](https://www.npmjs.com/package/prettier).
 
 ## Model Validation
 
@@ -35,6 +62,7 @@ Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azur
 Refer to [Swagger-Example-Generation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/393/Swagger-Example-Generation) for example automatic generation.
 
 ## Semantic Validation
+
 Run Semantic Validation locally:
 ```
 npm install -g oav

@@ -34,7 +34,7 @@ tag: package-spark-2020-12-01
 ```
 
 ``` yaml $(package-artifacts)
-tag: package-artifacts-composite-v6
+tag: package-artifacts-composite-v7
 ```
 
 ``` yaml $(package-access-control)
@@ -47,6 +47,42 @@ tag: package-vnet-2020-12-01
 
 ``` yaml $(package-monitoring)
 tag: package-monitoring-2020-12-01
+```
+
+### Tag: package-artifacts-composite-v7
+
+These settings apply only when `--tag=package-artifacts-composite-v7` is specified on the command line.
+
+``` yaml $(tag) == 'package-artifacts-composite-v7'
+input-file:
+  - Microsoft.Synapse/preview/2023-04-18-preview/linkConnections.json
+  - Microsoft.Synapse/preview/2021-11-01-preview/kqlScripts.json
+  - Microsoft.Synapse/preview/2021-07-01-preview/symsSync.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfigurations.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/entityTypes/SparkConfiguration.json
+  - Microsoft.Synapse/stable/2020-12-01/artifacts.json
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPools.json
+  - Microsoft.Synapse/stable/2020-12-01/dataflows.json
+  - Microsoft.Synapse/stable/2020-12-01/datasets.json
+  - Microsoft.Synapse/stable/2020-12-01/gitintegration.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntimes.json
+  - Microsoft.Synapse/stable/2020-12-01/library.json
+  - Microsoft.Synapse/stable/2020-12-01/linkedServices.json
+  - Microsoft.Synapse/stable/2020-12-01/notebooks.json
+  - Microsoft.Synapse/stable/2020-12-01/pipelines.json
+  - Microsoft.Synapse/stable/2020-12-01/sparkJobDefinitions.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPools.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlScripts.json
+  - Microsoft.Synapse/stable/2020-12-01/triggers.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/DataFlow.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Dataset.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/LinkedService.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Notebook.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Pipeline.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
 ```
 
 ### Tag: package-artifacts-composite-v6
@@ -83,6 +119,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v5
@@ -119,6 +156,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v4
@@ -155,6 +193,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v3
@@ -190,6 +229,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v2
@@ -224,6 +264,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-composite-v1
@@ -258,6 +299,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-artifacts-2021-06-01-preview
@@ -344,6 +386,7 @@ input-file:
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SparkJobDefinition.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/SqlScript.json
   - Microsoft.Synapse/stable/2020-12-01/entityTypes/Trigger.json
+  - Microsoft.Synapse/stable/2020-12-01/entityTypes/Credential.json
 ```
 
 ### Tag: package-monitoring-2020-12-01
