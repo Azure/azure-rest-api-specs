@@ -30,11 +30,15 @@ directive:
 
     where:
       - $.definitions.AccessToken.properties.accessToken
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.SpeechCognitiveServicesPrimaryKey
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.SpeechCognitiveServicesSecondaryKey
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.TranslatorCognitiveServicesPrimaryKey
-      - $.definitions.CognitiveServicesTranslatorSecret.properties.TranslatorCognitiveServicesSecondaryKey
+      - $.definitions.CognitiveServicesTranslatorSecret.properties.speechCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesTranslatorSecret.properties.speechCognitiveServicesSecondaryKey
+      - $.definitions.CognitiveServicesTranslatorSecret.properties.translatorCognitiveServicesPrimaryKey
+      - $.definitions.CognitiveServicesTranslatorSecret.properties.translatorCognitiveServicesSecondaryKey
     reason: Secrets are OK to return in a POST response.
+
+    suppressions:
+  - code: BreakingChange
+    reason: Tis repos is not exposed to customers and therefore cannot introduce breaking changes, this repo only serves us for testing RPaaS changes.
 ```
 ---
 
