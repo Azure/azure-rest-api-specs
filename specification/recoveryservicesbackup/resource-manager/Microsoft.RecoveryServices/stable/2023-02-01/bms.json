@@ -9644,7 +9644,8 @@
           "enum": [
             "Invalid",
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "AlwaysON"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -9652,6 +9653,11 @@
             "modelAsString": true
           }
         },
+        "softDeleteRetentionPeriod": {
+          "format": "int32",
+          "description": "Soft delete retention period in days",
+          "type": "integer"
+        }
         "resourceGuardOperationRequests": {
           "description": "ResourceGuard Operation Requests",
           "type": "array",
@@ -11816,6 +11822,11 @@
         "additionalDetail": {
           "description": "Error Additional Detail in case the status is non-success.",
           "type": "string",
+          "readOnly": true
+        },
+        "protectableItemCount": {
+          "description": "Dictionary to store the count of ProtectableItems with key POType.",
+          "type": "object",
           "readOnly": true
         }
       }
