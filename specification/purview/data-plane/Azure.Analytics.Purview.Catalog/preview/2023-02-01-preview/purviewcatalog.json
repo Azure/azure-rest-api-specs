@@ -5740,6 +5740,48 @@
           }
         }
       }
+    },
+    "/audit/query": {
+      "post": {
+        "tags": [
+          "Audit"
+        ],
+        "description": "Query audit logs for an asset, glossaryTerm, classificationDef, etc.",
+        "operationId": "Audit_Query",
+        "x-ms-examples": {
+          "Audit_Query": {
+            "$ref": "./examples/Audit_Query.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "auditLogQueryRequest",
+            "description": "An object specifying the search criteria.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuditLogQueryRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. On successful lookup of audit logs within the search criteria.",
+            "schema": {
+              "$ref": "#/definitions/AuditLogQueryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -9187,6 +9229,236 @@
       },
       "title": "AttachmentUploadResponse",
       "description": "The response of attachment upload."
+    },
+    "AuditLogQueryRequest": {
+      "type": "object",
+      "properties": {
+        "Category": {
+          "$ref": "#/definitions/AuditCategory"
+        },
+        "Guid": {
+          "type": "string",
+          "description": "GUID of the targe asset, glossary term or classification definition."
+        },
+        "TypeName": {
+          "type": "string",
+          "description": "Only applied to asset; specifies the asset type name."
+        },
+        "QualifiedName": {
+          "type": "string",
+          "description": "Only applied to asset; specifies the asset qualified name."
+        },
+        "OperationType": {
+          "$ref": "#/definitions/AuditOperationType"
+        },
+        "UserId": {
+          "type": "string",
+          "description": "User principal name or service principle object ID."
+        },
+        "Keywords": {
+          "type": "string",
+          "description": "Any keywords contained in audit log old value or new value part."
+        },
+        "StartTime": {
+          "type": "string",
+          "description": "Start time of audit log; ISO-8601 representation. Default value is 1970-01-01T00:00:00Z."
+        },
+        "EndTime": {
+          "type": "string",
+          "description": "End time of audit log; ISO-8601 representation. Default value is UTC now."
+        },
+        "SortBy": {
+          "type": "string",
+          "description": "Property to sort by. The value should be one of the audit log schema field. Must be used with \"SortOrder\". CreationTime is suggested."
+        },
+        "SortOrder": {
+          "$ref": "#/definitions/AuditSortOrder"
+        },
+        "PageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items we hope to return in one page. The maximum value is 1000."
+        },
+        "WaterMark": {
+          "type": "string",
+          "description": "The continuous token to retrieve the next page."
+        }
+      },
+      "title": "AuditLogQueryRequest",
+      "description": "Audit log query request body."
+    },
+    "AuditCategory": {
+      "type": "string",
+      "title": "AuditCategory",
+      "description": "Audit category in audit log query request.",
+      "enum": [
+        "Asset",
+        "GlossaryTerm",
+        "ClassificationDef"
+      ],
+      "x-ms-enum": {
+        "name": "AuditCategory",
+        "modelAsString": true
+      }
+    },
+    "AuditOperationType": {
+      "type": "string",
+      "title": "AuditOperationType",
+      "description": "Audit operation type.",
+      "enum": [
+        "EntityCreated",
+        "EntityUpdated",
+        "EntityDeleted",
+        "ClassificationAdded",
+        "ClassificationUpdated",
+        "ClassificationDeleted",
+        "SensitivityLabelChanged",
+        "GlossaryTermAssigned",
+        "GlossaryTermDisassociated",
+        "ClassificationDefinitionCreated",
+        "ClassificationDefinitionUpdated",
+        "ClassificationDefinitionDeleted",
+        "GlossaryTermCreated",
+        "GlossaryTermUpdated",
+        "GlossaryTermDeleted"
+      ],
+      "x-ms-enum": {
+        "name": "AuditOperationType",
+        "modelAsString": true
+      }
+    },
+    "AuditSortOrder": {
+      "type": "string",
+      "title": "AuditSortOrder",
+      "description": "Audit query result sort order.",
+      "enum": [
+        "Ascending",
+        "Descending"
+      ],
+      "x-ms-enum": {
+        "name": "AuditSortOrder",
+        "modelAsString": true
+      }
+    },
+    "AuditLogQueryResponse": {
+      "type": "object",
+      "properties": {
+        "WaterMark": {
+          "type": "string",
+          "description": "The continuous token to retrieve the next page. When \"LastPage\" is false. Client uses this token in the query payload to retrieve the next page."
+        },
+        "LastPage": {
+          "type": "boolean",
+          "description": "Indicates whether it's the last page."
+        },
+        "TotalResultCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total items that qualified for the search criteria."
+        },
+        "RecordCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of items in current page."
+        },
+        "ResultData": {
+          "type": "array",
+          "description": "An array of audit logs.",
+          "items": {
+            "$ref": "#/definitions/AuditLog"
+          }
+        }
+      },
+      "title": "AuditLogQueryResponse",
+      "description": "Audit log query response."
+    },
+    "AuditLog": {
+      "type": "object",
+      "properties": {
+        "Workload": {
+          "type": "string",
+          "description": "Log metadata. Indicates workload type of audit log."
+        },
+        "RecordType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Log metadata. Indicates record type of audit log."
+        },
+        "Id": {
+          "type": "string",
+          "description": "Log ID."
+        },
+        "CreationTime": {
+          "type": "string",
+          "description": "Timestamp when the audit log was created."
+        },
+        "Operation": {
+          "$ref": "#/definitions/AuditOperationType"
+        },
+        "OrganizationId": {
+          "type": "string",
+          "description": "Customer tenant ID."
+        },
+        "UserType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Type of user that performed the operation."
+        },
+        "UserKey": {
+          "type": "string",
+          "description": "User identity."
+        },
+        "UserId": {
+          "type": "string",
+          "description": "User principal name."
+        },
+        "ClientIP": {
+          "type": "string",
+          "description": "Client IP address."
+        },
+        "AccountId": {
+          "type": "string",
+          "description": "Purview account ID."
+        },
+        "CatalogId": {
+          "type": "string",
+          "description": "Purview catalog ID."
+        },
+        "ChangeRequestId": {
+          "type": "string",
+          "description": "Correlation ID."
+        },
+        "ObjectId": {
+          "type": "string",
+          "description": "GUID of the targe asset, glossary term or classification definition."
+        },
+        "ObjectName": {
+          "type": "string",
+          "description": "Object name."
+        },
+        "ObjectFullyQualifiedName": {
+          "type": "string",
+          "description": "Object fully qualified name."
+        },
+        "ObjectType": {
+          "type": "string",
+          "description": "Object type name."
+        },
+        "ObjectCollectionId": {
+          "type": "string",
+          "description": "Object collection ID."
+        },
+        "OldValue": {
+          "type": "string",
+          "description": "Old data value."
+        },
+        "NewValue": {
+          "type": "string",
+          "description": "New data value."
+        }
+      },
+      "title": "AuditLog",
+      "description": "Data map audit log."
     }
   },
   "parameters": {
