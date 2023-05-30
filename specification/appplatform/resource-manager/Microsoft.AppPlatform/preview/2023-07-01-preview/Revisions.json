@@ -321,7 +321,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json#/definitions/Revision"
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2023-04-01-prevew/ContainerAppsRevisions.json#/definitions/Revision"
           }
         ],
         "properties": {
@@ -336,13 +336,19 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json#/definitions/Replica"
+            "$ref": "../../../../../app/resource-manager/Microsoft.App/preview/2023-04-01-prevew/ContainerAppsRevisions.json#/definitions/Replica"
           }
         ],
         "properties": {
           "properties": {
             "type": "object",
-            "properties": {}
+            "properties": {
+              "discoveryStatus": {
+                "description": "Discovery status of the revision replica",
+                "type": "string",
+                "readOnly": true
+              }
+            }
           }
         }      
       },
@@ -361,7 +367,7 @@
             }
           }
         }
-      },
+      }
     },
     "parameters": {
       "AppNameParameter": {
@@ -391,7 +397,7 @@
         "description": "Name of the Revision Replica.",
         "required": true,
         "type": "string"
-      },
+      }
     },
     "securityDefinitions": {
       "azure_auth": {

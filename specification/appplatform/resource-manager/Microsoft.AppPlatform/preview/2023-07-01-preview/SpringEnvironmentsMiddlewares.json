@@ -83,8 +83,8 @@
               "$ref": "#/definitions/ConfigServer"
             }
           },
-          "202": {
-            "description": "Accepted. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
+          "201": {
+            "description": "Created. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
             "schema": {
               "$ref": "#/definitions/ConfigServer"
             }
@@ -431,6 +431,10 @@
                 "name": "EurekaServerState",
                 "modelAsString": true
               }
+            },
+            "dashboardUri": {
+              "type": "string",
+              "description": "The uri to visit the eureka server dashboard"
             },
             "enabledState": {
               "type": "string",
