@@ -1462,7 +1462,8 @@
         },
         "count": {
           "description": "Distribution count.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "sortKeys": {
           "description": "Distribution sort keys.",
@@ -1499,15 +1500,18 @@
         },
         "length": {
           "description": "Length.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "precision": {
           "description": "Precision.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "scale": {
           "description": "Scale.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "properties": {
           "description": "Property bag.",
@@ -2190,6 +2194,7 @@
     "Endpoint": {
       "name": "endpoint",
       "type": "string",
+      "format": "url",
       "in": "path",
       "required": true,
       "x-ms-skip-url-encoding": true,
