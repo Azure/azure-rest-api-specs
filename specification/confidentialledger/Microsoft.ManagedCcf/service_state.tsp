@@ -56,8 +56,7 @@ enum NodeStatus {
 
 @doc("Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.")
 @discriminator("format")
-model QuoteInfo {
-}
+model QuoteInfo {}
 
 @doc("Attestation information for Intel SGX enclaves.")
 model SgxQuoteInfo extends QuoteInfo {
@@ -72,7 +71,7 @@ model SgxQuoteInfo extends QuoteInfo {
 }
 
 @doc("Attestation information for AMD SEV-SNP containers.")
-model SnpQuoteInfo extends QuoteInfo  {
+model SnpQuoteInfo extends QuoteInfo {
   @doc("Fixed identifier for SNP information.")
   format: "AMD_SEV_SNP_v1";
 
@@ -356,7 +355,7 @@ interface ServiceState {
   @doc("Retrieve the constitution which controls governance changes on this service.")
   getConstitution is Azure.Core.StandardResourceOperations.ResourceRead<
     ConstitutionResponse,
-    TxIdReadHeader
+    Azure.Core.Traits.ResponseHeadersTrait<TxIdReadHdr & JavaScriptSource>
   >;
 
   @doc("Retrieve details of Javascript application and execution engine.")

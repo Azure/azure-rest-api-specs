@@ -99,7 +99,6 @@ model Ballot {
   memberId: memberId;
 
   @doc("The script to execute, returning the voter's support of this proposal.")
-  @visibility("create")
   script: string;
 }
 
@@ -157,6 +156,6 @@ interface Ballots {
   @doc("Returns a member's submitted ballot.")
   getBallot is Azure.Core.StandardResourceOperations.ResourceRead<
     Ballot,
-    TxIdReadHeader
+    Azure.Core.Traits.ResponseHeadersTrait<TxIdReadHdr & JavaScriptSource>
   >;
 }

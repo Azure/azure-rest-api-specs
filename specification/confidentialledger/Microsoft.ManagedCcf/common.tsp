@@ -7,19 +7,29 @@ alias transactionIdHeaderField = "x-ms-ccf-transaction-id";
 
 @doc("Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.")
 @pattern("^[0-9]+\\.[0-9]+$")
-scalar transactionId extends string; 
+scalar transactionId extends string;
 
-alias TxIdWriteHeader = Azure.Core.Traits.ResponseHeadersTrait<{
+alias TxIdWriteHdr = {
   @doc("Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.")
   @TypeSpec.Http.header(transactionIdHeaderField)
   transactionId: transactionId;
-}>;
+};
 
-alias TxIdReadHeader = Azure.Core.Traits.ResponseHeadersTrait<{
+alias TxIdWriteHeader = Azure.Core.Traits.ResponseHeadersTrait<TxIdWriteHdr>;
+
+alias TxIdReadHdr = {
   @doc("Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.")
   @TypeSpec.Http.header(transactionIdHeaderField)
   transactionId: transactionId;
-}>;
+};
+
+alias TxIdReadHeader = Azure.Core.Traits.ResponseHeadersTrait<TxIdReadHdr>;
+
+alias JavaScriptSource = {
+  @doc("This contains raw JavaScript source code, not escaped into a JSON object.")
+  @TypeSpec.Http.header("content-type")
+  contentType: "text/javascript";
+};
 
 @doc("Hex encoding of SHA-256 of a node's public key.")
 @pattern("^[a-f0-9]{64}$")
