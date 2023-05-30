@@ -15,7 +15,7 @@ model Action {
   name: string;
 
   @doc("Arguments to modify the behavior of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution.")
-  args: unknown;
+  args?: unknown;
 }
 
 @doc("Possible states for a proposal.")

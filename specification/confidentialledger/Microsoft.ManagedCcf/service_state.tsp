@@ -35,7 +35,7 @@ model Member {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "This is arbitrary JSON"
   @doc("Arbitrary service-defined metadata about this member. May be used by constitution or application code, but will not affect any core framework decisions.")
-  memberData: unknown;
+  memberData?: unknown;
 
   @doc("x509 certificate used as this member's identity.")
   certificate: pem;
@@ -57,12 +57,10 @@ enum NodeStatus {
 @doc("Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.")
 @discriminator("format")
 model QuoteInfo {
-  @doc("Names the platform and version of the contained info.")
-  format: string;
 }
 
 @doc("Attestation information for Intel SGX enclaves.")
-model SgxQuoteInfo {
+model SgxQuoteInfo extends QuoteInfo {
   @doc("Fixed identifier for SGX information.")
   format: "OE_SGX_v1";
 
@@ -74,7 +72,7 @@ model SgxQuoteInfo {
 }
 
 @doc("Attestation information for AMD SEV-SNP containers.")
-model SnpQuoteInfo {
+model SnpQuoteInfo extends QuoteInfo  {
   @doc("Fixed identifier for SNP information.")
   format: "AMD_SEV_SNP_v1";
 
@@ -107,7 +105,7 @@ model Node {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "This is arbitrary JSON"
   @doc("Arbitrary service-defined metadata about this node. May be used by constitution or application code, but will not affect any core framework decisions.")
-  nodeData: unknown;
+  nodeData?: unknown;
 
   @doc("x509 certificate containing this node's identity.")
   certificate: pem;
@@ -321,7 +319,7 @@ model ServiceInfo {
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "This is arbitrary JSON"
   @doc("Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions.")
-  serviceData: unknown;
+  serviceData?: unknown;
 
   @doc("Lists governance-controlled configuration parameters of this service, which will be used by core framework code.")
   configuration: {

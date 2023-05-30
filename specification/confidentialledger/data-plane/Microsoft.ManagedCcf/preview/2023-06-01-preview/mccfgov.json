@@ -1311,8 +1311,7 @@
       },
       "description": "A single step in a proposed change to the service.",
       "required": [
-        "name",
-        "args"
+        "name"
       ]
     },
     "Proposals.Ballot": {
@@ -1826,7 +1825,6 @@
       "required": [
         "memberId",
         "status",
-        "memberData",
         "certificate"
       ]
     },
@@ -1912,7 +1910,6 @@
       "required": [
         "nodeId",
         "status",
-        "nodeData",
         "certificate",
         "retiredCommitted",
         "quoteInfo",
@@ -1954,7 +1951,7 @@
       "properties": {
         "format": {
           "type": "string",
-          "description": "Names the platform and version of the contained info."
+          "description": "Discriminator property for QuoteInfo."
         }
       },
       "description": "Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.",
@@ -2013,7 +2010,6 @@
         "certificate",
         "recoveryCount",
         "creationTransactionId",
-        "serviceData",
         "configuration"
       ]
     },
@@ -2056,16 +2052,6 @@
     "ServiceState.SgxQuoteInfo": {
       "type": "object",
       "properties": {
-        "format": {
-          "type": "string",
-          "enum": [
-            "OE_SGX_v1"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "Fixed identifier for SGX information."
-        },
         "quote": {
           "type": "string",
           "format": "byte",
@@ -2079,10 +2065,15 @@
       },
       "description": "Attestation information for Intel SGX enclaves.",
       "required": [
-        "format",
         "quote",
         "endorsements"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceState.QuoteInfo"
+        }
+      ],
+      "x-ms-discriminator-value": "OE_SGX_v1"
     },
     "ServiceState.SnpJoinPolicy": {
       "type": "object",
@@ -2125,16 +2116,6 @@
     "ServiceState.SnpQuoteInfo": {
       "type": "object",
       "properties": {
-        "format": {
-          "type": "string",
-          "enum": [
-            "AMD_SEV_SNP_v1"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "Fixed identifier for SNP information."
-        },
         "uvmEndorsements": {
           "type": "string",
           "format": "byte",
@@ -2148,10 +2129,15 @@
       },
       "description": "Attestation information for AMD SEV-SNP containers.",
       "required": [
-        "format",
         "uvmEndorsements",
         "endorsedTcb"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceState.QuoteInfo"
+        }
+      ],
+      "x-ms-discriminator-value": "AMD_SEV_SNP_v1"
     },
     "ServiceState.caCertBundle": {
       "type": "string",
