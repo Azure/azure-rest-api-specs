@@ -14,6 +14,9 @@ model EncryptedRecoveryShare {
   @visibility("read")
   @key
   memberId: memberId;
+
+  @doc("Base-64 encoding of a member's encrypted share.")
+  encryptedShare: bytes;
 }
 
 @doc("Container for a member's raw recovery share. This should be carefully guarded, and only submitted to a trusted service over a secure channel, for the purposes of recovery.")

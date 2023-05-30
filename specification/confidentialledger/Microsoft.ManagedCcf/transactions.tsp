@@ -35,13 +35,6 @@ model Transaction {
   transactionId: transactionId;
 }
 
-@doc("Description of the latest committed transaction on the service.")
-model CommitInfo {
-  @doc("Identifier of latest committed transaction.")
-  @visibility("read")
-  transactionId: transactionId;
-}
-
 interface Transactions {
   @doc("Get status of transaction by transaction ID, to determine whether it has committed.")
   @TypeSpec.Rest.action("status")

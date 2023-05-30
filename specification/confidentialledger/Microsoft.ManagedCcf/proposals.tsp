@@ -64,7 +64,6 @@ model Proposal {
   proposalId: proposalId;
 
   @doc("ID of CCF member who signed and created this proposal.")
-  @visibility("read")
   proposerId: memberId;
 
   @doc("Current state of this proposal.")

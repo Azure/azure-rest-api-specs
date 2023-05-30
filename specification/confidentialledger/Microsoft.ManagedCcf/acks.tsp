@@ -12,7 +12,7 @@ namespace Microsoft.ManagedCcf.Acks;
 @TypeSpec.Rest.resource("state-digests")
 model StateDigest {
   @doc("Identifier for member this stateDigest applies to.")
-  @visibility("read")
+  @visibility("query")
   @key
   memberId: memberId;
 

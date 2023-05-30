@@ -1222,11 +1222,6 @@
     "Acks.StateDigest": {
       "type": "object",
       "properties": {
-        "memberId": {
-          "$ref": "#/definitions/memberId",
-          "description": "Identifier for member this stateDigest applies to.",
-          "readOnly": true
-        },
         "digest": {
           "type": "string",
           "description": "Hex-encoding of SHA-256 hash of the root of the service's merkle tree. This should be signed by a new member and submitted as an ACK to mark that member as Active.",
@@ -1235,7 +1230,6 @@
       },
       "description": "A compact summary of the service's state up to a certain point in time, updated and signed by members to indicate their participation in and approval of the service.",
       "required": [
-        "memberId",
         "digest"
       ]
     },
@@ -1378,8 +1372,7 @@
         },
         "proposerId": {
           "$ref": "#/definitions/memberId",
-          "description": "ID of CCF member who signed and created this proposal.",
-          "readOnly": true
+          "description": "ID of CCF member who signed and created this proposal."
         },
         "proposalState": {
           "$ref": "#/definitions/Proposals.ProposalState",
@@ -1490,11 +1483,17 @@
           "$ref": "#/definitions/memberId",
           "description": "ID of CCF member who this recovery share belongs to.",
           "readOnly": true
+        },
+        "encryptedShare": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base-64 encoding of a member's encrypted share."
         }
       },
       "description": "A share of a recovery key, granted for a specific recovery member, and encrypted with that member's share-encryption key. This is safe to share in the ledger or amongst untrusted callers, as only the intended member will be able to decrypt and access the secret content.",
       "required": [
-        "memberId"
+        "memberId",
+        "encryptedShare"
       ]
     },
     "Recovery.Member": {
@@ -1551,17 +1550,6 @@
     "ServiceState.ConstitutionResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "enum": [
-            "constitution"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "Singleton key for accessing constitution",
-          "readOnly": true
-        },
         "constitution": {
           "type": "string",
           "description": "Javascript source code of constitution."
@@ -1569,7 +1557,6 @@
       },
       "description": "Constitution used to make governance decisions on the service. All governance changes are presented as proposals which must be validated, approved, and applied by the code in this constitution.",
       "required": [
-        "id",
         "constitution"
       ]
     },
@@ -1606,17 +1593,6 @@
     "ServiceState.JoinPolicies": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "enum": [
-            "join-policy"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "Singleton key for accessing join-policy",
-          "readOnly": true
-        },
         "sgx": {
           "$ref": "#/definitions/ServiceState.JoinPolicy",
           "description": "Policy applied to nodes running in SGX enclaves."
@@ -1628,7 +1604,6 @@
       },
       "description": "Collection of all policies which determine currently acceptable nodes, across multiple platforms.",
       "required": [
-        "id",
         "sgx",
         "snp"
       ]
@@ -1653,17 +1628,6 @@
     "ServiceState.JsApp": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "enum": [
-            "javascript-app"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "Singleton key for accessing javascript-app.",
-          "readOnly": true
-        },
         "endpoints": {
           "type": "object",
           "additionalProperties": {
@@ -1675,7 +1639,6 @@
       },
       "description": "Describes the currently installed JavaScript application.",
       "required": [
-        "id",
         "endpoints"
       ]
     },
@@ -1763,17 +1726,6 @@
     "ServiceState.JwkInfo": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "enum": [
-            "jwk"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "Singleton key for accessing jwk",
-          "readOnly": true
-        },
         "issuers": {
           "type": "object",
           "additionalProperties": {
@@ -1793,7 +1745,6 @@
       },
       "description": "Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.",
       "required": [
-        "id",
         "issuers",
         "caCertBundles"
       ]
@@ -2015,17 +1966,6 @@
     "ServiceState.ServiceInfo": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "enum": [
-            "info"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "Singleton key for accessing info.",
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/ServiceState.ServiceStatus",
           "description": "Lifetime stage of the service."
@@ -2069,7 +2009,6 @@
       },
       "description": "General information about the current service.",
       "required": [
-        "id",
         "status",
         "certificate",
         "recoveryCount",
@@ -2218,20 +2157,6 @@
     "ServiceState.pem": {
       "type": "string",
       "description": "PEM encoding of a cryptographic identifier. Contains a base64-encoded payload wrapped in content type identifiers."
-    },
-    "Transactions.CommitInfo": {
-      "type": "object",
-      "properties": {
-        "transactionId": {
-          "$ref": "#/definitions/transactionId",
-          "description": "Identifier of latest committed transaction.",
-          "readOnly": true
-        }
-      },
-      "description": "Description of the latest committed transaction on the service.",
-      "required": [
-        "transactionId"
-      ]
     },
     "Transactions.Transaction": {
       "type": "object",
