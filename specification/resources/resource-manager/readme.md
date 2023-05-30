@@ -118,6 +118,19 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-policy-2022-06-only
+
+These settings apply only when `--tag=package-policy-2022-06-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2022-06-only'
+input-file:
+- Microsoft.Authorization/stable/2022-06-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2022-06
 
 These settings apply only when `--tag=package-policy-2022-06` is specified on the command line.

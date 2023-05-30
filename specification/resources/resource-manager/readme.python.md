@@ -36,7 +36,7 @@ batch:
   - multiapiscript-managedapplications: true
   - tag: package-policy-2022-08-preview-only
   - tag: package-policy-2022-07-preview-only
-  - tag: package-policy-2022-06
+  - tag: package-policy-2022-06-only
   - tag: package-policy-2021-06-only
   - tag: package-policy-2020-09-only
   - tag: package-policy-2020-07-preview-only
@@ -273,12 +273,12 @@ namespace: azure.mgmt.resource.policy.v2022_07_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2022_07_01_preview
 ```
 
-### Tag: package-policy-2022-06 and python
+### Tag: package-policy-2022-06-only and python
 
-These settings apply only when `--tag=package-policy-2022-06 --python` is specified on the command line.
+These settings apply only when `--tag=package-policy-2022-06-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-policy-2022-06'
+``` yaml $(tag) == 'package-policy-2022-06-only'
 namespace: azure.mgmt.resource.policy.v2022_06_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2022_06_01
 ```
