@@ -771,27 +771,39 @@
       "x-ms-discriminator-value": "CorrelateAlerts",
       "type": "object",
       "description": "Add logic for alerts correlation.",
-      "correlateBy": {
-        "type": "array",
-        "items": {
-          "type": "#/definitions/CorrelateBy"
+      "required": [
+        "correlateBy",
+        "correlationInterval",
+        "priority"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "properties": {
+        "correlateBy": {
+          "type": "array",
+          "items": {
+            "type": "#/definitions/CorrelateBy"
+          },
+          "description": "The list of conditions for the alerts correlations."
         },
-        "description": "The list of conditions for the alerts correlations."
-      },
-      "correlationInterval": {
-        "type": "string",
-        "format": "duration",
-        "description": "The required duration (in ISO8601 format) for the alerts correlation."
-      },
-      "priority": {
-        "type": "integer",
-        "format": "int32",
-        "description": "The priority of this correlation."
-      },
-      "suppressNotificationForChildAlerts": {
-        "type": "boolean",
-        "default": true,
-        "description": "Indicates whether child alerts notifications should be suppressed."
+        "correlationInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The required duration (in ISO8601 format) for the alerts correlation."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of this correlation."
+        },
+        "suppressNotificationForChildAlerts": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indicates whether child alerts notifications should be suppressed."
+        }
       }
     },
     "CorrelateBy": {
