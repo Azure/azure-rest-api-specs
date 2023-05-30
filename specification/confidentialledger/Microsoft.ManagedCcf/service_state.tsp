@@ -207,7 +207,7 @@ model JsApp {
 @doc("Describes what a joining node must present, in order to join the service.")
 model JoinPolicy {
   @doc("Code measurements of acceptable enclaves.")
-  measurements: string[];
+  measurements: bytes[];
 }
 
 @doc("Join policy fields specific to nodes running on AMD SEV-SNP hardware.")
@@ -217,10 +217,10 @@ model SnpJoinPolicy {
 
 
   @doc("Collection of acceptable host data values.")
-  hostData: Record<string>;
+  hostData: Record<bytes>;
 
   @doc("Collection of acceptable UVM endorsements.")
-  uvmEndorsements: Record<string>;
+  uvmEndorsements: Record<bytes>;
 }
 
 @TypeSpec.Rest.resource("service")
