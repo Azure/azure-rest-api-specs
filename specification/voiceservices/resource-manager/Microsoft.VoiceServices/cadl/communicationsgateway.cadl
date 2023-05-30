@@ -101,6 +101,8 @@ model CommunicationsGateway
   @visibility("Read")
   @path
   name: string;
+
+  ...ManagedServiceIdentity;
 }
 
 @doc("The status of the current CommunicationsGateway resource.")
@@ -239,6 +241,11 @@ model CommunicationsGatewayProperties is ResourceProperties {
   @doc("Whether an on-premises Mobile Control Point is in use.")
   @visibility("read", "update", "create")
   onPremMcpEnabled?: boolean = false;
+
+  @added(Versions.v2023_04_03)
+  @doc("Whether an integrated Mobile Control Point is in use.")
+  @visibility("read", "update", "create")
+  integratedMcpEnabled?: boolean = false;
 
   @added(Versions.v2023_01_31)
   @doc("A list of dial strings used for emergency calling.")
