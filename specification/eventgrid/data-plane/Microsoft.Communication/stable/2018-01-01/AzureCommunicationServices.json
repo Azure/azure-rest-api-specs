@@ -65,7 +65,11 @@
         },
         "dispositionCode": {
           "description": "Router Job Disposition Code",
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dispositionCodeType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -137,7 +141,11 @@
         },
         "dispositionCode": {
           "description": "Router Job Closed Disposition Code",
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dispositionCodeType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -266,14 +274,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "attachedWorkerSelectorsExpired": {
+        "expiredAttachedWorkerSelectors": {
           "description": "Router Job Scheduling Failed Attached Worker Selector Expired",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         },
-        "requestedWorkerSelectorsExpired": {
+        "expiredRequestedWorkerSelectors": {
           "description": "Router Job Scheduling Failed Requested Worker Selector Expired",
           "type": "array",
           "items": {
@@ -322,14 +330,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "attachedWorkerSelectorsExpired": {
+        "expiredAttachedWorkerSelectors": {
           "description": "Router Job Waiting For Activation Worker Selector Expired",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         },
-        "requestedWorkerSelectorsExpired": {
+        "expiredRequestedWorkerSelectors": {
           "description": "Router Job Waiting For Activation Requested Worker Selector Expired",
           "type": "array",
           "items": {
@@ -355,14 +363,14 @@
         }
       ],
       "properties": {
-        "requestedWorkerSelectorsExpired": {
+        "expiredRequestedWorkerSelectors": {
           "description": "Router Job Worker Selectors Expired Requested Worker Selectors",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           }
         },
-        "attachedWorkerSelectorsExpired": {
+        "expiredAttachedWorkerSelectors": {
           "description": "Router Job Worker Selectors Expired Attached Worker Selectors",
           "type": "array",
           "items": {
