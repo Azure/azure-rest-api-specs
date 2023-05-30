@@ -92,6 +92,15 @@ input-file:
 - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
+### Tag: package-2021-12-01-preview-python-only
+
+These settings apply only when `--tag=package-2021-12-01-preview-python-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-12-01-preview-python-only'
+input-file:
+- Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+```
+
 ### Tag: package-2020-10-01
 
 These settings apply only when `--tag=package-2020-10-01` is specified on the command line.

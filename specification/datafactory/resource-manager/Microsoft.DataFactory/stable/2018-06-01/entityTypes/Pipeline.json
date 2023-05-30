@@ -3417,8 +3417,18 @@
         "outputColumns": {
           "type": "object",
           "x-ms-format": "dfe-list-generic",
-          "x-ms-format-element-type": "object",
-          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+          "x-ms-format-element-type": "OutputColumn",
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). itemType: OutputColumn. Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+        }
+      }
+    },
+    "OutputColumn": {
+      "description": "The columns to be read out from the Office 365 table.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the table column. Type: string."
         }
       }
     },

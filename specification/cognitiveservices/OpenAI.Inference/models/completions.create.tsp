@@ -186,14 +186,16 @@ model Choice {
     @projectedName("json", "index")
     index: int32;
 
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
     @doc("The log probabilities model for tokens associated with this completions choice.")
     @projectedName("json", "logprobs")
     @projectedName("csharp", "LogProbabilityModel")
-    logprobs?: CompletionsLogProbabilityModel;
+    logprobs: CompletionsLogProbabilityModel | null;
 
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
     @doc("Reason for finishing")
     @projectedName("json", "finish_reason")
-    finishReason?: CompletionsFinishReason;
+    finishReason: CompletionsFinishReason | null;
 }
 
 alias NullableFloat = float32 | null;
