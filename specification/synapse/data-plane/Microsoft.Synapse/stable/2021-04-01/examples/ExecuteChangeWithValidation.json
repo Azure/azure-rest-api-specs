@@ -1,7 +1,6 @@
 {
   "parameters": {
     "endpoint": "exampleWorkspace.dev.azuresynapse.net",
-    "operationId": "exampleOperationId",
     "createArtifactsPayload": {
       "ddls": [
         {
@@ -18,7 +17,11 @@
     "api-version": "2021-04-01"
   },
   "responses": {
-    "202": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2020-07-01"
+      }
+    },
     "default": {
       "body": {
         "error": {
