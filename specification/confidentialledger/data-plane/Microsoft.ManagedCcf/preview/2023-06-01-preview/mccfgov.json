@@ -81,11 +81,7 @@
             "pattern": "^[a-f0-9]{64}$"
           },
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Recovery.RecoveryShare"
-            }
+            "$ref": "#/parameters/CoseSignature.body"
           }
         ],
         "responses": {
@@ -115,6 +111,9 @@
             }
           }
         },
+        "consumes": [
+          "application/cose"
+        ],
         "x-ms-examples": {
           "Recovery_SubmitRecoveryShare_MaximumSet_Gen": {
             "$ref": "./examples/Recovery_SubmitRecoveryShare_MaximumSet_Gen.json"

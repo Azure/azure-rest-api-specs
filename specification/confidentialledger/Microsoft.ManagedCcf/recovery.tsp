@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
+import "./cose.tsp";
 import "./common.tsp";
 
 @TypeSpec.Http.route("/gov/members")
@@ -54,7 +55,7 @@ interface Recovery {
   @TypeSpec.Rest.action("recover")
   submitRecoveryShare is Azure.Core.StandardResourceOperations.ResourceAction<
     Member,
-    RecoveryShare,
+    CoseSigned<RecoveryShare>,
     RecoveryResponse,
     TxIdReadHeader
   >;
