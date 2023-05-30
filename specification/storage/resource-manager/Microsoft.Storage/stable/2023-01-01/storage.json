@@ -899,7 +899,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/{migrationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/{migrationName}": {
       "post": {
         "tags": [
           "AccountMigrations"
@@ -949,7 +949,12 @@
             "description": "OK -- Returned when the request is just for validating the migration request, it does not actually initiate migration; applicable in cross region migration currently."
           },
           "202": {
-            "description": "Accepted -- Migration request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Migration request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5515,6 +5520,7 @@
       "description": "This property defines the creation time based filtering condition. Blob Inventory schema parameter 'Creation-Time' is mandatory with this filter."
     },
     "StorageAccountMigration": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -5530,6 +5536,7 @@
           "description": "SrpAccountMigrationType in ARM contract which is 'accountMigrations'"
         },
         "properties": {
+          "type": "object",
           "properties": {
             "targetSkuName": {
               "$ref": "./common.json#/definitions/SkuName",
