@@ -222,7 +222,7 @@
         }
       }
     },
-    "AcsRouterJobRecievedEventData": {
+    "AcsRouterJobReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event",
       "allOf": [
         {
@@ -256,7 +256,7 @@
           "format": "date-time"
         },
         "unavailableForMatching": {
-          "description": "Unavailable For Matching for Router Job Recieved",
+          "description": "Unavailable For Matching for Router Job Received",
           "type": "boolean"
         }
       }
@@ -1613,7 +1613,11 @@
         },
         "labelOperator": {
           "description": "Router Job Worker Selector Label Operator",
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "labelOperatorType",
+            "modelAsString": true
+          }
         },
         "value": {
           "description": "Router Job Worker Selector Value",
