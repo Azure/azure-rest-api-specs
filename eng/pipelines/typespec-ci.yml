@@ -31,6 +31,9 @@ jobs:
   - script: npm ls -a
     displayName: npm ls -a
 
+  - script: git restore package-lock.json
+    displayName: Revert package-lock.json
+
   - template: templates/steps/typespec-ci.yml
     parameters:
       Folder: specification/contosowidgetmanager/Contoso.WidgetManager
