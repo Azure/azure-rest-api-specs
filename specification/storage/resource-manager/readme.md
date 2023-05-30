@@ -588,19 +588,6 @@ These settings apply only when `--tag=package-2018-07-only` is specified on the 
 input-file:
 - Microsoft.Storage/stable/2018-07-01/storage.json
 - Microsoft.Storage/stable/2018-07-01/blob.json
-
-directive:
-  - suppress: R3018
-    reason: Existing boolean properties
-    approved-by: "@fearthecowboy"
-
-  - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
-    suppress: R1003
-    reason: APIs return array of values, is not actually a 'list' operation
-    approved-by: "@fearthecowboy"
 ```
 
 ### Tag: package-2018-03
