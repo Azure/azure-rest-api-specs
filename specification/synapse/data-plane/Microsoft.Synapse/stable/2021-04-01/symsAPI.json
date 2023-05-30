@@ -74,6 +74,7 @@
       "post": {
         "summary": "Batch execution of DDL Payload.",
         "operationId": "ExecuteChangeWithValidation",
+        "x-ms-long-running-operation": true,
         "description": "Batch execution of DDL Payload",
         "x-ms-examples": {
           "Batch execution of DDL Payload": {
@@ -117,8 +118,7 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/databases": {
@@ -2181,6 +2181,7 @@
       "type": "string",
       "in": "query",
       "required": true,
+      "x-ms-parameter-location": "client",
       "description": "The Synapse client API Version."
     },
     "UserAgentParameter": {
