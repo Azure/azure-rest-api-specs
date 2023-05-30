@@ -45,7 +45,7 @@ batch:
   - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
-  - tag: package-pure-policy-2017-06
+  - tag: package-policy-2017-06-preview-only
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
@@ -363,12 +363,12 @@ namespace: azure.mgmt.resource.policy.v2018_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2018_03_01
 ```
 
-### Tag: package-pure-policy-2017-06 and python
+### Tag: package-policy-2017-06-preview-only and python
 
-These settings apply only when `--tag=package-pure-policy-2017-06 --python` is specified on the command line.
+These settings apply only when `--tag=package-policy-2017-06-preview-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-pure-policy-2017-06'
+``` yaml $(tag) == 'package-policy-2017-06-preview-only'
 namespace: azure.mgmt.resource.policy.v2017_06_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2017_06_01_preview
 ```

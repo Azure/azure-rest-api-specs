@@ -496,6 +496,20 @@ override-info:
   title: PolicyClient
 ```
 
+### Tag: package-policy-2017-06-preview-only
+
+These settings apply only when `--tag=package-policy-2017-06-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2017-06-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2017-06-01-preview/policyAssignments.json
+- Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-templatespecs-2022-02
 
 These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
