@@ -1084,6 +1084,11 @@
         ],
         "summary": "Un-assign a job.",
         "operationId": "JobRouter_UnassignJobAction",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -1104,6 +1109,14 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "unassignJobRequest",
+            "description": "Request body for unassign route",
+            "schema": {
+              "$ref": "#/definitions/UnassignJobRequest"
+            }
           }
         ],
         "responses": {
@@ -2464,7 +2477,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "exceptionPolicyId": {
           "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
@@ -2816,7 +2829,7 @@
         "labelsToUpsert": {
           "description": "(optional) Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         }
       },
       "x-ms-discriminator-value": "reclassify"
@@ -2926,7 +2939,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
@@ -2939,7 +2952,7 @@
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
@@ -3023,12 +3036,12 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": { }
+          "additionalProperties": {}
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
@@ -3221,6 +3234,16 @@
         }
       },
       "x-ms-discriminator-value": "static"
+    },
+    "UnassignJobRequest": {
+      "description": "Request payload for unassigning a job.",
+      "type": "object",
+      "properties": {
+        "waitForActivation": {
+          "description": "If WaitForActivation is true, then the job is not queued for re-matching with a worker.",
+          "type": "boolean"
+        }
+      }
     },
     "UnassignJobResult": {
       "description": "Response payload after a job has been successfully unassigned.",
