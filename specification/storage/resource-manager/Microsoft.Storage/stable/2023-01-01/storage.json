@@ -962,6 +962,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges": {
       "post": {
@@ -5532,7 +5533,7 @@
           "properties": {
             "targetSkuName": {
               "$ref": "./common.json#/definitions/SkuName",
-              "description":  "Target sku name for the account"
+              "description": "Target sku name for the account"
             },
             "migrationStatus": {
               "type": "string",
@@ -5563,12 +5564,14 @@
           },
           "x-ms-client-flatten": true,
           "x-ms-client-name": "StorageAccountMigrationDetails",
-          "description": "The properties of a storage account’s ongoing or enqueued migration."
+          "description": "The properties of a storage account’s ongoing or enqueued migration.",
+          "required": [
+            "targetSkuName"
+          ]
         }
       },
       "required": [
-        "properties",
-        "targetSkuName"
+        "properties"
       ],
       "description": "The paramaters or status associated with an ongoing or enqueued storage account migration in order to update its current SKU or region."
     },
