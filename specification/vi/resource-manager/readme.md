@@ -37,8 +37,13 @@ directive:
     reason: Secrets are OK to return in a POST response.
 
     suppressions:
-  - code: BreakingChange
-    reason: Tis repos is not exposed to customers and therefore cannot introduce breaking changes, this repo only serves us for testing RPaaS changes.
+  - code: AddedOptionalProperty
+    reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
+  - code: AddedReadOnlyPropertyInResponse
+    reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
+  - code: RemovedProperty
+    reason: Design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
+
 ```
 ---
 
