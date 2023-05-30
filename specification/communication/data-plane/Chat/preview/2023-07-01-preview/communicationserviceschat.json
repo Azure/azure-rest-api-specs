@@ -1289,7 +1289,8 @@
       "x-ms-enum": {
         "name": "ChatMessageType",
         "modelAsString": true
-      }
+      },
+      "example": "html"
     },
     "SendChatMessageRequest": {
       "description": "Details of the message to send.",
@@ -1301,7 +1302,7 @@
         "content": {
           "description": "Chat message content.",
           "type": "string",
-          "example": "Come one guys, lets go for lunch together."
+          "example": "<p>Come one guys, lets go for lunch together.</p>"
         },
         "senderDisplayName": {
           "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
@@ -1360,7 +1361,9 @@
     "AttachmentType": {
       "description": "The type of attachment.",
       "enum": [
-        "teamsInlineImage"
+        "teamsInlineImage",
+        "teamsImage",
+        "file"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1380,7 +1383,7 @@
         "id": {
           "description": "Id of the attachment",
           "type": "string",
-          "example": "A27C7079-626F-4D23-8BEE-582F2C376B5A"
+          "example": "f508ce15-e878-431f-b871-f530cac5331d"
         },
         "attachmentType": {
           "$ref": "#/definitions/AttachmentType"
@@ -1416,7 +1419,7 @@
         "message": {
           "description": "Chat message content for messages of types text or html.",
           "type": "string",
-          "example": "Come one guys, lets go for lunch together."
+          "example": "<p>Come one guys, lets go for lunch together.</p><img id=\"f508ce15-e878-431f-b871-f530cac5331d\">"
         },
         "topic": {
           "description": "Chat message content for messages of type topicUpdated.",
