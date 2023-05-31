@@ -80,6 +80,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Proposals_List": {
+            "$ref": "./examples/Proposals_List.json"
+          }
         }
       }
     },
@@ -132,7 +137,12 @@
         },
         "consumes": [
           "application/cose"
-        ]
+        ],
+        "x-ms-examples": {
+          "Proposals_Withdraw": {
+            "$ref": "./examples/Proposals_Withdraw.json"
+          }
+        }
       }
     },
     "/gov/members/proposals/{proposalId}": {
@@ -177,6 +187,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Proposals_Get": {
+            "$ref": "./examples/Proposals_Get.json"
           }
         }
       }
@@ -289,7 +304,12 @@
         },
         "consumes": [
           "application/cose"
-        ]
+        ],
+        "x-ms-examples": {
+          "Ballots_Submit": {
+            "$ref": "./examples/Ballots_Submit.json"
+          }
+        }
       }
     },
     "/gov/members/proposals/{proposalId}/ballots/{memberId}": {
@@ -347,7 +367,12 @@
         "produces": [
           "text/javascript",
           "application/json"
-        ]
+        ],
+        "x-ms-examples": {
+          "Ballots_Get": {
+            "$ref": "./examples/Ballots_Get.json"
+          }
+        }
       }
     },
     "/gov/members/proposals:create": {
@@ -391,7 +416,12 @@
         },
         "consumes": [
           "application/cose"
-        ]
+        ],
+        "x-ms-examples": {
+          "Proposals_Create": {
+            "$ref": "./examples/Proposals_Create.json"
+          }
+        }
       }
     },
     "/gov/members/state-digests/{memberId}:update": {
@@ -443,7 +473,12 @@
         },
         "consumes": [
           "application/cose"
-        ]
+        ],
+        "x-ms-examples": {
+          "StateDigests_Update": {
+            "$ref": "./examples/StateDigests_Update.json"
+          }
+        }
       }
     },
     "/gov/members/state-digests/{memberId}:ack": {
@@ -492,7 +527,12 @@
         },
         "consumes": [
           "application/cose"
-        ]
+        ],
+        "x-ms-examples": {
+          "StateDigests_Acknowledge": {
+            "$ref": "./examples/StateDigests_Acknowledge.json"
+          }
+        }
       }
     },
     "/gov/members/state-digests/{memberId}": {
@@ -538,6 +578,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "StateDigests_Get": {
+            "$ref": "./examples/StateDigests_Get.json"
+          }
         }
       }
     },
@@ -576,6 +621,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "EncryptedShares_Get": {
+            "$ref": "./examples/EncryptedShares_Get.json"
           }
         }
       }
@@ -629,7 +679,12 @@
         },
         "consumes": [
           "application/cose"
-        ]
+        ],
+        "x-ms-examples": {
+          "Shares_Submit": {
+            "$ref": "./examples/Shares_Submit.json"
+          }
+        }
       }
     },
     "/gov/service/constitution": {
@@ -1124,6 +1179,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Transactions_Get": {
+            "$ref": "./examples/Transactions_Get.json"
           }
         }
       }
