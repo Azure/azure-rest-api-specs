@@ -1,64 +1,68 @@
 {
   "parameters": {
-    "searchQuery": "a",
+    "searchQuery": "check",
     "top": 2,
     "language": "en",
-    "gallery": "Azure",
     "publishingStage": "Public",
     "market": "US",
     "select": [
       "UniqueProductId",
-      "ProductType"
+      "ProductType",
+      "RatingCount ",
+      "RatingAverage"
     ],
     "pricingTypes": [
-      "Byol"
+      "Payg"
     ],
     "orderBy": [
-      "Popularity desc",
-      "RatingAverage asc"
+      "RatingAverage desc",
+      "RatingCount desc"
     ],
     "facets": [
       "PricingTypes"
     ],
-    "api-version": "2022-09-25-preview",
+    "api-version": "2023-01-01-preview",
     "x-ms-app": "MyApplication"
   },
   "responses": {
     "200": {
       "body": {
         "facets": {
-          "PricingTypes": {
-            "facetValues": {
-              "Payg": {
-                "count": 57690
-              },
-              "Byol": {
-                "count": 14472
-              },
-              "Free": {
-                "count": 10962
-              },
-              "FreeTrial": {
-                "count": 3492
-              },
-              "Ri": {
-                "count": 630
-              }
+            "PricingTypes": {
+                "facetValues": {
+                    "Payg": {
+                        "count": 296
+                    },
+                    "Free": {
+                        "count": 62
+                    },
+                    "FreeTrial": {
+                        "count": 56
+                    },
+                    "Byol": {
+                        "count": 34
+                    },
+                    "Ri": {
+                        "count": 20
+                    }
+                }
             }
-          }
         },
         "results": [
           {
-            "uniqueProductId": "sendgrid.tsg-saas-offer",
-            "productType": "SaaS"
+              "uniqueProductId": "apps-4-rent.shotcut-on-windows-server-2019",
+              "productType": "VirtualMachine",
+              "ratingAverage": 5,
+              "ratingCount": 4
           },
           {
-            "uniqueProductId": "sendgrid.tsg-saas-offer",
-            "productType": "SaaS"
+              "uniqueProductId": "apps-4-rent.shotcut-on-windows2016",
+              "productType": "VirtualMachine",
+              "ratingAverage": 5,
+              "ratingCount": 3
           }
-        ],
-        "totalCount": 14472,
-        "nextLink": "nextLink"
+      ],
+      "totalCount": 296
       }
     }
   }
