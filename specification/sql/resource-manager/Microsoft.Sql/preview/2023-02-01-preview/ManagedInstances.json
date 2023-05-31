@@ -1248,6 +1248,24 @@
             "name": "ExternalGovernanceStatus",
             "modelAsString": true
           }
+        },
+        "pricingModel": {
+          "description": "Weather or not Managed Instance is freemium.",
+          "enum": [
+            "Regular",
+            "Freemium"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FreemiumType",
+            "modelAsString": true
+          }
+        },
+        "createTime": {
+          "format": "date-time",
+          "description": "Specifies the point in time (ISO8601 format) of the Managed Instance creation.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
