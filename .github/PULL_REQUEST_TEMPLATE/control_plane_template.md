@@ -26,10 +26,10 @@ and followed the instructions by checking all the boxes:
 If you have any breaking changes as defined in the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy/), 
 follow the process outlined in the [High-level Breaking Change Process doc](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/overview_breakingchanges#high-level-breaking-change-process).
       
-## In case you need help
+## Getting help
 
-- For general guidance for the spec PR review workflow, see https://aka.ms/specprreview and [FAQ](https://aka.ms/faqinprreview).
+- For general guidance on the spec PR review process, see https://aka.ms/specprreview and [FAQ](https://aka.ms/faqinprreview).
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.
 - For help adding new API version using OpenAPI Hub, see [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
-- For asking for further help, see https://aka.ms/azsdk/support/spectools.
+- For seeking additional help, see https://aka.ms/azsdk/support/spectools.
