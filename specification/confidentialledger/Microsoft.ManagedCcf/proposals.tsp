@@ -105,7 +105,7 @@ model Ballot {
 interface Proposals {
   // https://github.com/microsoft/CCF/issues/5230
   @doc("Submit a proposed change to the service. This will be assigned an ID by the service. Submitting the same signature (including signed COSE headers such as created_at) multiple times will be treated as a single idempotent operation, returning a single created proposal (or an error if it is no longer available). Any change to the request body will be treated as a new, separate proposal.")
-  createProposal is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  create is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
     Proposal,
     CoseSigned<ProposalActions>,
     Proposal,
@@ -113,7 +113,7 @@ interface Proposals {
   >;
 
   @doc("Withdraw an existing proposal. Only the original proposer is permitted to withdraw.")
-  withdrawProposal is Azure.Core.StandardResourceOperations.ResourceAction<
+  withdraw is Azure.Core.StandardResourceOperations.ResourceAction<
     Proposal,
     CoseSigned,
     Proposal,
@@ -121,13 +121,13 @@ interface Proposals {
   >;
 
   @doc("Returns a summary of a single proposed change to the service.")
-  getProposal is Azure.Core.StandardResourceOperations.ResourceRead<
+  get is Azure.Core.StandardResourceOperations.ResourceRead<
     Proposal,
     TxIdReadHeader
   >;
 
   @doc("Returns all current proposed changes to the service. Note that non-open proposals (ie - those which have already been accepted, rejected, withdrawn, etc) are not returned.")
-  listOpenProposals is Azure.Core.StandardResourceOperations.ResourceList<
+  list is Azure.Core.StandardResourceOperations.ResourceList<
     Proposal,
     TxIdReadHeader
   >;
@@ -146,7 +146,7 @@ interface Proposals {
 
 interface Ballots {
   @doc("Submit an executable ballot for a specific proposal. This may be as simple as `return true` to vote in favour, or contain reads from the KV and conditions on the proposal contents.")
-  submitBallot is Azure.Core.StandardResourceOperations.ResourceAction<
+  submit is Azure.Core.StandardResourceOperations.ResourceAction<
     Ballot,
     CoseSigned<Ballot>,
     Proposal,
@@ -154,7 +154,7 @@ interface Ballots {
   >;
 
   @doc("Returns a member's submitted ballot.")
-  getBallot is Azure.Core.StandardResourceOperations.ResourceRead<
+  get is Azure.Core.StandardResourceOperations.ResourceRead<
     Ballot,
     Azure.Core.Traits.ResponseHeadersTrait<TxIdReadHdr & JavaScriptSource>
   >;

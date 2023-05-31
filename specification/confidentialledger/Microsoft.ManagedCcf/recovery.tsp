@@ -5,11 +5,11 @@ import "@azure-tools/typespec-azure-core";
 import "./cose.tsp";
 import "./common.tsp";
 
-@TypeSpec.Http.route("/gov/members")
+@TypeSpec.Http.route("/gov/recovery")
 namespace Microsoft.ManagedCcf.Recovery;
 
 @doc("A share of a recovery key, granted for a specific recovery member, and encrypted with that member's share-encryption key. This is safe to share in the ledger or amongst untrusted callers, as only the intended member will be able to decrypt and access the secret content.")
-@TypeSpec.Rest.resource("encrypted-recovery-shares")
+@TypeSpec.Rest.resource("encrypted-shares")
 model EncryptedRecoveryShare {
   @doc("ID of CCF member who this recovery share belongs to.")
   @visibility("read")
@@ -47,13 +47,16 @@ model Member {
   memberId: memberId;
 }
 
-interface Recovery {
+interface EncryptedShares
+{
   @doc("Retrieve a member's recovery share, encrypted with that member's share-encryption key.")
-  getEncryptedShare is Azure.Core.StandardResourceOperations.ResourceRead<EncryptedRecoveryShare>;
+  get is Azure.Core.StandardResourceOperations.ResourceRead<EncryptedRecoveryShare>;
+}
 
+interface Shares {
   @doc("Provide a recovery share for the purpose of completing a service recovery.")
   @TypeSpec.Rest.action("recover")
-  submitRecoveryShare is Azure.Core.StandardResourceOperations.ResourceAction<
+  submit is Azure.Core.StandardResourceOperations.ResourceAction<
     Member,
     CoseSigned<RecoveryShare>,
     RecoveryResponse,

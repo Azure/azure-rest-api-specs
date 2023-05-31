@@ -21,10 +21,10 @@ model StateDigest {
   digest: string;
 }
 
-interface Acks {
+interface StateDigests {
   @doc("Request that this member's stateDigest is updated to a fresher value. Only this member may update their own stateDigest. Returns the refreshed value.")
   @TypeSpec.Rest.action("update")
-  updateStateDigest is Azure.Core.StandardResourceOperations.ResourceAction<
+  update is Azure.Core.StandardResourceOperations.ResourceAction<
     StateDigest,
     CoseSigned,
     StateDigest,
@@ -33,7 +33,7 @@ interface Acks {
 
   @doc("Submit a signed acknowledgement of a recent digest of the service status, to transition the member to Active.")
   @TypeSpec.Rest.action("ack")
-  acknowledgeStateDigest is Azure.Core.StandardResourceOperations.ResourceAction<
+  acknowledge is Azure.Core.StandardResourceOperations.ResourceAction<
     StateDigest,
     CoseSigned<StateDigest>,
     TypeSpec.Http.NoContentResponse,
@@ -41,7 +41,7 @@ interface Acks {
   >;
 
   @doc("Get the stateDigest assigned to the given member, which that member must sign to become active.")
-  getStateDigest is Azure.Core.StandardResourceOperations.ResourceRead<
+  get is Azure.Core.StandardResourceOperations.ResourceRead<
     StateDigest,
     TxIdReadHeader
   >;

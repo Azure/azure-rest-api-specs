@@ -15,7 +15,7 @@ enum TransactionStatus {
 
   @doc("This transaction is known on the current node, but has not yet been committed. This is expected to be a temporary state.")
   Pending,
-  
+
   @doc("This transaction is known on the current node, and known to be committed. This means it has been replicated to a quorum of nodes, so will persist through future elections. Committed is a terminal state of this state machine.")
   Committed,
 
@@ -23,38 +23,40 @@ enum TransactionStatus {
   Invalid,
 }
 
-@doc("Description of a transaction's current state.")
-@TypeSpec.Rest.resource("transactions")
+@doc("Common transaction information.")
 model Transaction {
   @doc("Status of this transaction.")
   status: TransactionStatus;
+}
 
+@doc("Description of a named transaction's current state.")
+@TypeSpec.Rest.resource("transactions")
+model NamedTransaction {
   @doc("Identifier of the requested transaction.")
-  @visibility("read")
+  @visibility("query")
   @key
   transactionId: transactionId;
+
+  ...Transaction;
+}
+
+@doc("Description of latest committed transaction.")
+@TypeSpec.Rest.resource("transactions")
+model CommittedTransaction {
+  @doc("Singleton key for accessing commit.")
+  @visibility("query")
+  @key
+  id: "commit";
+
+  ...Transaction;
 }
 
 interface Transactions {
   @doc("Get status of transaction by transaction ID, to determine whether it has committed.")
-  @TypeSpec.Rest.action("status")
-  @TypeSpec.Rest.actionSeparator("/")
-  @TypeSpec.Http.get
-  getTransactionStatus is Azure.Core.StandardResourceOperations.ResourceAction<
-    Transaction,
-    {},
-    Transaction
-  >;
+  get is Azure.Core.StandardResourceOperations.ResourceRead<NamedTransaction>;
 
   @doc("Get latest committed transaction.")
-  @TypeSpec.Rest.action("commit")
-  @TypeSpec.Rest.actionSeparator("/")
-  @TypeSpec.Http.get
-  getCommit is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
-    Transaction,
-    {},
-    Transaction
-  >;
+  getCommit is Azure.Core.StandardResourceOperations.ResourceRead<CommittedTransaction>;
 
   // To add:
   // - /transactions/{transactionId}/receipt (Long-running)
