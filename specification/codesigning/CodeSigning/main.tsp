@@ -36,7 +36,7 @@ namespace Azure.CodeSigning;
 
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2022_06_15_preview: "2022-06-15-preview",
+  v2023_06_15_preview: "2023-06-15-preview",
 }
 
 interface CertificateProfileOperations {
