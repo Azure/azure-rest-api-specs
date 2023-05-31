@@ -526,6 +526,11 @@ directive:
     from: checkAccessSynapseRbac.json
     where:
       - $.definitions.CheckPrincipalAccessResponse.properties.AccessDecisions
+  - suppress: INVALID_TYPE
+    reason: This property is of the correct type. False Alarm
+    from: symsAPI.json
+    where:
+      - $.definitions.DataSource.properties.additionalProperties
 ```
 
 ---
