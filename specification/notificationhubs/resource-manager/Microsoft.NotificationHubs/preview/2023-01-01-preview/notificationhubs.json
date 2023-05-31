@@ -2597,12 +2597,7 @@
           "$ref": "#/definitions/ReplicationRegion"
         },
         "zoneRedundant": {
-          "description": "Controls whether the namespace is zone redundant.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "$ref": "#/definitions/ZoneRedundancyPreference"
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkAcls"
@@ -2689,10 +2684,6 @@
     },
     "NetworkAcls": {
       "description": "A collection of network authorization rules.",
-      "required": [
-        "ipRules",
-        "publicNetworkRule"
-      ],
       "type": "object",
       "properties": {
         "ipRules": {
@@ -3178,6 +3169,7 @@
     },
     "PublicNetworkAccess": {
       "description": "Type of public network access.",
+      "default": "Enabled",
       "enum": [
         "Enabled",
         "Disabled"
@@ -3546,6 +3538,19 @@
           "type": "string",
           "x-ms-secret": true
         }
+      }
+    },
+    "ZoneRedundancyPreference": {
+      "description": "Namespace SKU name.",
+      "default": "Disabled",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ZoneRedundancyPreference",
+        "modelAsString": true
       }
     }
   },
