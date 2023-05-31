@@ -261,6 +261,10 @@
             "collectionFormat": "csv",
             "items": {
               "$ref": "#/definitions/VmArchitectureType"
+            },
+            "x-ms-enum": {
+              "name": "VmArchitectureType",
+              "modelAsString": true
             }
           },
           {
@@ -347,6 +351,7 @@
           }
         ],
         "responses": {
+          "x-nullable": false,
           "200": {
             "description": "Returns a list of Azure Marketplace catalog offers and total count and facets",
             "schema": {
@@ -998,8 +1003,10 @@
   "definitions": {
     "FacetsResponse": {
       "type": "object",
+      "description": "The facets response",
       "properties": {
         "value": {
+          "description": "The facet items results",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/FacetsItem"
@@ -1009,10 +1016,11 @@
     },
     "FacetsItem": {
       "type": "object",
+      "description": "The facets item",
       "properties": {
         "facetValues": {
           "type": "object",
-          "description": "The facets item",
+          "description": "The facet values",
           "additionalProperties": {
             "$ref": "#/definitions/FacetValue"
           }
@@ -1021,10 +1029,11 @@
     },
     "FacetValue": {
       "type": "object",
+      "description": "The facet value",
       "properties": {
         "count": {
           "type": "integer",
-          "description": "The facet value",
+          "description": "The facet count",
           "format": "int64"
         }
       }
@@ -1218,7 +1227,7 @@
     },
     "SearchFieldName": {
       "type": "string",
-      "description": "",
+      "description": "The search field name",
       "enum": [
         "All",
         "ApplicableProducts",
@@ -1260,6 +1269,7 @@
       }
     },
     "SearchResponse": {
+      "description": "Search response object",
       "type": "object",
       "required": [
         "results"
@@ -1680,43 +1690,51 @@
     },
     "SuggestionsResponse": {
       "type": "object",
+      "description": "The suggestion response",
       "required": [
         "value",
         "totalCount"
       ],
       "properties": {
         "value": {
+          "description": "The suggestion items results",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SuggestionsItem"
           }
         },
         "totalCount": {
+          "description": "The suggestion count",
           "type": "integer",
           "format": "int64"
         }
       }
     },
     "SuggestionsItem": {
+      "description": "The suggestion item",
       "type": "object",
       "required": [
         "displayText"
       ],
       "properties": {
         "suggestionType": {
+          "description": "The suggestion type",
           "$ref": "#/definitions/SuggestionType"
         },
         "displayText": {
+          "description": "The suggestion display text",
           "type": "string"
         },
         "id": {
+          "description": "The suggestion item id",
           "type": "string"
         },
         "iconUrl": {
+          "description": "The suggestion icon url",
           "type": "string"
         },
         "productType": {
-          "description": "The delivery method or deployment model",
+          "description": "The suggestion supported product types",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -1724,6 +1742,7 @@
           ]
         },
         "linkedAddInsTypes": {
+          "description": "The suggestion linked add-in types",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -1733,7 +1752,7 @@
     },
     "SuggestionType": {
       "type": "string",
-      "description": "",
+      "description": "The type of the suggestion",
       "enum": [
         "WordSearch",
         "Entity"
@@ -1745,7 +1764,7 @@
     },
     "SuggestionsFieldName": {
       "type": "string",
-      "description": "",
+      "description": "The suggestions field name",
       "enum": [
         "DisplayText",
         "Id",
