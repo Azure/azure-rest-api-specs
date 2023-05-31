@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-07-01-preview",
+    "version": "2023-08-01-preview",
     "title": "Azure Spring Apps API Client"
   },
   "host": "management.azure.com",
@@ -180,7 +180,7 @@
           "202": {
             "description": "Accepted. The response indicates the ConfigServerSetting is validating.",
             "schema": {
-              "$ref": "../2023-05-01-preview/appplatform.json#/definitions/ConfigServerSettingsValidateResult"
+              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
             }
           },
           "default": {
@@ -397,7 +397,7 @@
               }
             },
             "configServer": {
-              "$ref": "../2023-05-01-preview/appplatform.json#/definitions/ConfigServerSettings",
+              "$ref": "#/definitions/ConfigServerSettings",
               "description": "Settings of config server."
             }
           }
@@ -458,6 +458,173 @@
                 ]
               }
             }
+          }
+        }
+      }
+    },
+    "ConfigServerSettings": {
+      "description": "The settings of config server.",
+      "type": "object",
+      "properties": {
+        "gitProperty": {
+          "$ref": "#/definitions/ConfigServerGitProperty",
+          "description": "Property of git environment."
+        }
+      }
+    },
+    "ConfigServerGitProperty": {
+      "description": "Property of git.",
+      "required": [
+        "uri"
+      ],
+      "type": "object",
+      "properties": {
+        "repositories": {
+          "description": "Repositories of git.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitPatternRepository"
+          }
+        },
+        "uri": {
+          "description": "URI of the repository",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label of the repository",
+          "type": "string"
+        },
+        "searchPaths": {
+          "description": "Searching path of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "description": "Username of git repository basic auth.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password of git repository basic auth.",
+          "type": "string"
+        },
+        "hostKey": {
+          "description": "Public sshKey of git repository.",
+          "type": "string"
+        },
+        "hostKeyAlgorithm": {
+          "description": "SshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "Private sshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "strictHostKeyChecking": {
+          "description": "Strict host key checking or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "GitPatternRepository": {
+      "description": "Git repository property payload for config server",
+      "required": [
+        "name",
+        "uri"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the repository",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Collection of pattern of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uri": {
+          "description": "URI of the repository",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label of the repository",
+          "type": "string"
+        },
+        "searchPaths": {
+          "description": "Searching path of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "description": "Username of git repository basic auth.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password of git repository basic auth.",
+          "type": "string"
+        },
+        "hostKey": {
+          "description": "Public sshKey of git repository.",
+          "type": "string"
+        },
+        "hostKeyAlgorithm": {
+          "description": "SshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "Private sshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "strictHostKeyChecking": {
+          "description": "Strict host key checking or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ConfigServerSettingsValidateResult": {
+      "description": "Validation result for config server settings",
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "description": "Indicate if the config server settings are valid",
+          "type": "boolean"
+        },
+        "details": {
+          "description": "The detail validation results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigServerSettingsErrorRecord"
+          }
+        }
+      }
+    },
+    "ConfigServerSettingsErrorRecord": {
+      "description": "Error record of the config server settings",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the config server settings error record",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The uri of the config server settings error record",
+          "type": "string"
+        },
+        "messages": {
+          "description": "The detail error messages of the record",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
