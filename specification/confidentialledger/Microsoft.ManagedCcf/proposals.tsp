@@ -58,9 +58,9 @@ model VoteFailures is Record<FailureInfo>;
 @doc("Description of a proposed change to the service.")
 @TypeSpec.Rest.resource("proposals")
 model Proposal {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Read visibility produces linter-breaking readOnly"
   @key
   @doc("Unique ID assigned to this proposal at its submission, by the service.")
-  @visibility("read")
   proposalId: proposalId;
 
   @doc("ID of CCF member who signed and created this proposal.")
@@ -94,7 +94,7 @@ model ProposalActions {
 @TypeSpec.Rest.parentResource(Proposal)
 model Ballot {
   @doc("ID of CCF member who signed and submitted this ballot.")
-  @visibility("read")
+  @visibility("query")
   @key
   memberId: memberId;
 

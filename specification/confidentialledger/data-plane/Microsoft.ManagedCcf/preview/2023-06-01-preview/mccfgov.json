@@ -1265,11 +1265,6 @@
     "Proposals.Ballot": {
       "type": "object",
       "properties": {
-        "memberId": {
-          "$ref": "#/definitions/memberId",
-          "description": "ID of CCF member who signed and submitted this ballot.",
-          "readOnly": true
-        },
         "script": {
           "type": "string",
           "description": "The script to execute, returning the voter's support of this proposal."
@@ -1277,7 +1272,6 @@
       },
       "description": "The source script of an executable vote from a member, regarding a proposed change to the service.",
       "required": [
-        "memberId",
         "script"
       ]
     },
@@ -1310,8 +1304,7 @@
       "properties": {
         "proposalId": {
           "$ref": "#/definitions/proposalId",
-          "description": "Unique ID assigned to this proposal at its submission, by the service.",
-          "readOnly": true
+          "description": "Unique ID assigned to this proposal at its submission, by the service."
         },
         "proposerId": {
           "$ref": "#/definitions/memberId",
@@ -1422,11 +1415,6 @@
     "Recovery.EncryptedRecoveryShare": {
       "type": "object",
       "properties": {
-        "memberId": {
-          "$ref": "#/definitions/memberId",
-          "description": "ID of CCF member who this recovery share belongs to.",
-          "readOnly": true
-        },
         "encryptedShare": {
           "type": "string",
           "format": "byte",
@@ -1435,23 +1423,13 @@
       },
       "description": "A share of a recovery key, granted for a specific recovery member, and encrypted with that member's share-encryption key. This is safe to share in the ledger or amongst untrusted callers, as only the intended member will be able to decrypt and access the secret content.",
       "required": [
-        "memberId",
         "encryptedShare"
       ]
     },
     "Recovery.Member": {
       "type": "object",
-      "properties": {
-        "memberId": {
-          "$ref": "#/definitions/memberId",
-          "description": "Identifier for member this recovery state applies to.",
-          "readOnly": true
-        }
-      },
-      "description": "Recovery-specific details for a given member.",
-      "required": [
-        "memberId"
-      ]
+      "properties": {},
+      "description": "Recovery-specific details for a given member."
     },
     "Recovery.RecoveryResponse": {
       "type": "object",
@@ -1751,8 +1729,7 @@
       "properties": {
         "memberId": {
           "$ref": "#/definitions/memberId",
-          "description": "ID of CCF member who this object refers to.",
-          "readOnly": true
+          "description": "ID of CCF member who this object refers to."
         },
         "status": {
           "$ref": "#/definitions/ServiceState.MemberStatus",
@@ -1820,8 +1797,7 @@
       "properties": {
         "nodeId": {
           "$ref": "#/definitions/nodeId",
-          "description": "ID of CCF node who this object refers to.",
-          "readOnly": true
+          "description": "ID of CCF node who this object refers to."
         },
         "status": {
           "$ref": "#/definitions/ServiceState.NodeStatus",

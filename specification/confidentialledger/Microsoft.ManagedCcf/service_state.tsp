@@ -25,8 +25,8 @@ enum MemberStatus {
 @doc("Information on individual members within a consortium.")
 @TypeSpec.Rest.resource("service/members")
 model Member {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Read visibility produces linter-breaking readOnly"
   @doc("ID of CCF member who this object refers to.")
-  @visibility("read")
   @key
   memberId: memberId;
 
@@ -94,8 +94,8 @@ model NetworkInterface {
 @doc("Information on individual nodes within a service.")
 @TypeSpec.Rest.resource("service/nodes")
 model Node {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Read visibility produces linter-breaking readOnly"
   @doc("ID of CCF node who this object refers to.")
-  @visibility("read")
   @key
   nodeId: nodeId;
 
