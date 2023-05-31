@@ -1,4 +1,4 @@
-# ARM API Information (Control Plane)
+# ARM (Control Plane) API Specification Update Pull Request 
 
 ## Purpose of this PR
 
@@ -27,7 +27,7 @@ and followed the instructions by checking all the boxes:
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can request review from an ARM API Review board.
 
-### ARM API review
+### ARM API changes review
 
 - If you want for the ARM team to review this PR, you must add the `ARMReview` label. 
 - The automation may automatically add the `ARMReview` label, if appropriate.
@@ -43,4 +43,4 @@ follow the process outlined in the [High-level Breaking Change Process doc](http
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.
 - For help adding new API version using OpenAPI Hub, see [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
-- For seeking additional help, see https://aka.ms/azsdk/support/spectools.
+- For additional help, see https://aka.ms/azsdk/support/spectools.
