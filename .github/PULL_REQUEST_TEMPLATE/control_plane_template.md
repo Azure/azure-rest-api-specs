@@ -11,7 +11,7 @@ What's the purpose of this PR? Check all that apply. This is **mandatory**!
   - [ ] other, please clarify:
     - _edit this with your clarification_
 
-## Due dilligence checklist
+## Due diligence checklist
 
 To merge this PR, you **must** go through the following checklist and confirm you understood 
 and followed the instructions by checking all the boxes:
