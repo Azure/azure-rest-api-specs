@@ -78,7 +78,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/CodeSignRequest"
+              "$ref": "#/definitions/CodeSigningSubmissionOptions"
             }
           }
         ],
@@ -157,10 +157,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CodeSignRequestStatus.codeSigningAccountName"
+            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
           },
           {
-            "$ref": "#/parameters/CodeSignRequestStatus.certificateProfileName"
+            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
           }
         ],
         "responses": {
@@ -300,10 +300,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/CodeSignRequestStatus.codeSigningAccountName"
+            "$ref": "#/parameters/CodeSigningOptions.codeSigningAccountName"
           },
           {
-            "$ref": "#/parameters/CodeSignRequestStatus.certificateProfileName"
+            "$ref": "#/parameters/CodeSigningOptions.certificateProfileName"
           }
         ],
         "responses": {
@@ -452,43 +452,6 @@
         "id"
       ]
     },
-    "CodeSignRequest": {
-      "type": "object",
-      "properties": {
-        "signatureAlgorithm": {
-          "$ref": "#/definitions/SignatureAlgorithm",
-          "description": "The supported signature algorithm identifiers."
-        },
-        "digest": {
-          "type": "string",
-          "format": "byte",
-          "description": "Content digest to codesign."
-        },
-        "fileHashList": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          },
-          "x-typespec-name": "bytes[]",
-          "description": "List of full file digital signatures."
-        },
-        "authenticodeHashList": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          },
-          "x-typespec-name": "bytes[]",
-          "description": "List of authenticode digital signatures."
-        }
-      },
-      "description": "The codesign request information to be signed by the service.",
-      "required": [
-        "signatureAlgorithm",
-        "digest"
-      ]
-    },
     "CodeSignResult": {
       "type": "object",
       "properties": {
@@ -527,6 +490,43 @@
       "description": "Azure CodeSigning customer account created upon registration on the service.",
       "required": [
         "codeSigningAccountName"
+      ]
+    },
+    "CodeSigningSubmissionOptions": {
+      "type": "object",
+      "properties": {
+        "signatureAlgorithm": {
+          "$ref": "#/definitions/SignatureAlgorithm",
+          "description": "The supported signature algorithm identifiers."
+        },
+        "digest": {
+          "type": "string",
+          "format": "byte",
+          "description": "Content digest to codesign."
+        },
+        "fileHashList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "x-typespec-name": "bytes[]",
+          "description": "List of full file digital signatures."
+        },
+        "authenticodeHashList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          },
+          "x-typespec-name": "bytes[]",
+          "description": "List of authenticode digital signatures."
+        }
+      },
+      "description": "The codesign request information to be signed by the service.",
+      "required": [
+        "signatureAlgorithm",
+        "digest"
       ]
     },
     "ExtendedKeyUsage": {
@@ -650,7 +650,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "CodeSignRequestStatus.certificateProfileName": {
+    "CodeSigningOptions.certificateProfileName": {
       "name": "certificateProfileName",
       "in": "path",
       "required": true,
@@ -658,7 +658,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "CodeSignRequestStatus.codeSigningAccountName": {
+    "CodeSigningOptions.codeSigningAccountName": {
       "name": "codeSigningAccountName",
       "in": "path",
       "required": true,

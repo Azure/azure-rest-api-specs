@@ -49,7 +49,7 @@ interface CertificateProfileOperations {
   )
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
   getCodeSigningStatus is Foundations.GetOperationStatus<
-    CodeSignRequestStatus,
+    CodeSigningOptions,
     CodeSignOperationStatus
   >;
 
@@ -61,7 +61,7 @@ interface CertificateProfileOperations {
     "GetSignRootCertificate"
   )
   getSignRootCertificate is RpcOperation<
-    CodeSignRequestStatus,
+    CodeSigningOptions,
     BytesBody<"application/x-x509-ca-cert">
   >;
 
@@ -76,7 +76,7 @@ interface CertificateProfileOperations {
   @pollingOperation(CertificateProfileOperations.getCodeSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfile,
-    CodeSignRequest,
+    CodeSigningSubmissionOptions,
     CodeSignOperationStatus
   >;
 }
@@ -134,7 +134,7 @@ model CertificateProfile {
 }
 
 @doc("The codesign request information to be signed by the service.")
-model CodeSignRequest {
+model CodeSigningSubmissionOptions {
   @doc("The supported signature algorithm identifiers.")
   signatureAlgorithm: SignatureAlgorithm;
 
@@ -172,8 +172,8 @@ digest.
   signingCertificate?: bytes;
 }
 
-@doc("Codesign request status parameters corresponding to the account and certificate profile name.")
-model CodeSignRequestStatus {
+@doc("Codesigning option parameters corresponding to the account and certificate profile name.")
+model CodeSigningOptions {
   @doc("CodeSigning account name.")
   @path
   codeSigningAccountName: string;
