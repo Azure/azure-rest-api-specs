@@ -24,7 +24,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Managed Network Fabric.
 
-```yaml
+``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2023-02-01-preview
@@ -38,8 +38,9 @@ These settings apply only when `--tag=package-2023-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-02-01-preview'
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/AccessControlLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpCommunityLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpPrefixLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpExtendedCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpPrefixes.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/L2IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/L3IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/NetworkDeviceSkus.json
@@ -53,6 +54,30 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/RoutePolicies.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
 ```
+### Tag: package-2022-01-15-privatepreview
+
+These settings apply only when `--tag=package-2022-01-15-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-15-privatepreview'
+input-file:
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/common.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/Operations.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricControllers.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabrics.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDevices.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRacks.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L2IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L3IsolationDomains.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/RoutePolicies.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/AccessControlLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpCommunityLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpPrefixLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRackSkus.json
+  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDeviceSkus.json
+```
+
+---
 
 # Code Generation
 
