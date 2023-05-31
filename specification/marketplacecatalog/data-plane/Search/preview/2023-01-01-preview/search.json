@@ -63,11 +63,15 @@
             "description": "Products that contains any of the given publisher types, If no value provided, this filter is ignored. Possible values: Microsoft, ThirdParty. Default: Microsoft. \n- `Microsoft`: Microsoft.\n- `ThirdParty`: Third Party.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PublisherType"
-            },
-            "x-ms-enum": {
-              "name": "PublisherType",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "Microsoft",
+                "ThirdParty"
+              ],
+              "x-ms-enum": {
+                "name": "PublisherType",
+                "modelAsString": true
+              }
             }
           },
           {
