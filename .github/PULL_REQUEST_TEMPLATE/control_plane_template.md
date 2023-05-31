@@ -1,6 +1,17 @@
-## ARM API Information (Control Plane)
+# ARM API Information (Control Plane)
 
-## MANDATORY CHECKLIST
+## Purpose of this PR
+
+What's the purpose of this PR? Check all that apply. This is **mandatory**!
+
+  - [ ] new service onboarding
+  - [ ] new API version
+  - [ ] update existing version for new feature
+  - [ ] update existing version to fix swagger quality issue in s360
+  - [ ] other, please clarify:
+    - _edit this with your clarification_
+
+## Due dilligence checklist
 
 To merge this PR, you **must** go through the following checklist and confirm you understood 
 and followed the instructions by checking all the boxes:
