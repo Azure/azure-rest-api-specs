@@ -5,17 +5,18 @@
     variables:
         openapiHub: https://portal.azure-devex-tools.com
     onLabeledComments: >-
-      Hi @${PRAuthor}, The automation detected breaking changes in this PR.
+      Hi @${PRAuthor}! The automation detected breaking changes in this pull request.
       As a result, it added the `BreakingChangeReviewRequired` label.
-      You cannot proceed with merging this PR until you do one of the following:
+      <br/><br/>
+      You cannot proceed with merging this PR until you complete one of the following action items:
       <br/><br/>
       **ACTION ITEM A**: To get your breaking changes approved,
       please follow the process described in the
       [High-level Breaking Change Process doc](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/overview_breakingchanges#high-level-breaking-change-process).
       <br/><br/>
       **ACTION ITEM B**:
-      Alternatively, if you think the breaking changes are false positives,
-      please explain why in a PR comment and @ the PR assignee.
+      Alternatively, if you think the breaking changes are false positives 
+      (false alarms), please explain why in a PR comment and @ the PR assignee.
       <br/><br/>
       If you want to know the production traffic statistics,
       please see the [ARM Traffic statistics](${openapiHub}/api/pr/query-traffic?pr=${owner}/${repo}/${PRNumber}&days=5).
@@ -24,7 +25,22 @@
     type: label
     label: NewApiVersionRequired
     booleanFilterExpression:
-    onLabeledComments: "The automation detected this Pull Request introduces breaking changes to an existing API version and hence it added the <code>NewApiVersionRequired</code> label. This means you cannot proceed with merging this PR until you complete one of the following action items:<br/><br/>- A) Submit a new PR instead of this one, or modify this PR, so that it introduces a new API version instead of introducing breaking changes to an existing API version. The automation will remove the label once it detects there are no more breaking changes.<br/>- B) OR you can request an approval of the breaking changes, get it reviewed, and approved. The reviewer will add <code>Approved-BreakingChange</code> label if they approve.<br/><br/>For additional guidance, please see https://aka.ms/NewApiVersionRequired<br/>  "
+    onLabeledComments: >-
+      Hi @${PRAuthor}! The automation detected this pull request introduces breaking changes 
+      to an existing API version that can be avoided by creating a new API version instead.
+      As a result, the automation added the `NewApiVersionRequired` label.
+      <br/><br/> 
+      You cannot proceed with merging this PR until you complete one of the following action items:
+      <br/><br/>
+      **ACTION ITEM A**: Submit a new PR instead of this one, or modify this PR, 
+      so that it adds a new API version instead of introducing breaking changes to an existing API version. 
+      The automation will remove the label once it detects there are no more breaking changes.
+      <br/><br/>
+      **ACTION ITEM B**:
+      Alternatively, you can request an approval of the breaking changes, get it reviewed, and approved.
+      The reviewer will add `Approved-BreakingChange` label if they approve.
+      <br/><br/>
+      For additional guidance, please see https://aka.ms/NewApiVersionRequired
 
 - rule:
     type: label
@@ -110,7 +126,10 @@
 - rule:
     type: label
     label: ARMChangesRequested
-    onLabeledComments: "Please ensure to respond to feedback from the ARM API reviewer. When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label. This will notify the reviewer to have another look."
+    onLabeledComments: >-
+      Please ensure to respond to feedback from the ARM API reviewer.
+      When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label.
+      This will notify the reviewer to have another look.
     onLabeledRemoveLabels:
         - WaitForARMFeedback
 
