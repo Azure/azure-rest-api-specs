@@ -5,7 +5,7 @@
     "description": "Speech Services API v3.2-preview.1.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
-      "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
+      "url": "https://learn.microsoft.com/azure/cognitive-services/speech-service/support"
     },
     "version": "v3.2-preview.1"
   },
@@ -5245,46 +5245,46 @@
       "title": "EvaluationProperties",
       "type": "object",
       "properties": {
-        "tokenErrorRate2": {
+        "wordErrorRate1": {
           "format": "double",
-          "description": "The token error rate of recognition with model2.",
+          "description": "The word error rate of recognition with model1.",
           "type": "number",
+          "readOnly": true
+        },
+        "wordCount1": {
+          "format": "int32",
+          "description": "The number of processed words by model1.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "correctWordCount1": {
+          "format": "int32",
+          "description": "The number of correctly recognized words by model1.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "wordSubstitutionCount1": {
+          "format": "int32",
+          "description": "The number of recognized words by model1, that are substitutions.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "wordDeletionCount1": {
+          "format": "int32",
+          "description": "The number of recognized words by model1, that are deletions.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "wordInsertionCount1": {
+          "format": "int32",
+          "description": "The number of recognized words by model1, that are insertions.",
+          "type": "integer",
           "readOnly": true
         },
         "tokenErrorRate1": {
           "format": "double",
           "description": "The token error rate of recognition with model1.",
           "type": "number",
-          "readOnly": true
-        },
-        "tokenCount2": {
-          "format": "int32",
-          "description": "The number of processed tokens by model2.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "correctTokenCount2": {
-          "format": "int32",
-          "description": "The number of correctly recognized tokens by model2.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenSubstitutionCount2": {
-          "format": "int32",
-          "description": "The number of recognized words by model2, that are substitutions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenDeletionCount2": {
-          "format": "int32",
-          "description": "The number of recognized tokens by model2, that are deletions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenInsertionCount2": {
-          "format": "int32",
-          "description": "The number of recognized tokens by model2, that are insertions.",
-          "type": "integer",
           "readOnly": true
         },
         "tokenCount1": {
@@ -5317,35 +5317,22 @@
           "type": "integer",
           "readOnly": true
         },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
+        "sentenceErrorRate1": {
+          "format": "double",
+          "description": "The sentence error rate of recognition with model1.",
+          "type": "number",
+          "readOnly": true
         },
-        "error": {
-          "$ref": "#/definitions/EntityError"
+        "sentenceCount1": {
+          "format": "int32",
+          "description": "The number of processed sentences by model1.",
+          "type": "integer",
+          "readOnly": true
         },
         "wordErrorRate2": {
           "format": "double",
           "description": "The word error rate of recognition with model2.",
           "type": "number",
-          "readOnly": true
-        },
-        "wordErrorRate1": {
-          "format": "double",
-          "description": "The word error rate of recognition with model1.",
-          "type": "number",
-          "readOnly": true
-        },
-        "sentenceErrorRate2": {
-          "format": "double",
-          "description": "The sentence error rate of recognition with model2.",
-          "type": "number",
-          "readOnly": true
-        },
-        "sentenceCount2": {
-          "format": "int32",
-          "description": "The number of processed sentences by model2.",
-          "type": "integer",
           "readOnly": true
         },
         "wordCount2": {
@@ -5378,47 +5365,60 @@
           "type": "integer",
           "readOnly": true
         },
-        "sentenceErrorRate1": {
+        "tokenErrorRate2": {
           "format": "double",
-          "description": "The sentence error rate of recognition with model1.",
+          "description": "The token error rate of recognition with model2.",
           "type": "number",
           "readOnly": true
         },
-        "sentenceCount1": {
+        "tokenCount2": {
           "format": "int32",
-          "description": "The number of processed sentences by model1.",
+          "description": "The number of processed tokens by model2.",
           "type": "integer",
           "readOnly": true
         },
-        "wordCount1": {
+        "correctTokenCount2": {
           "format": "int32",
-          "description": "The number of processed words by model1.",
+          "description": "The number of correctly recognized tokens by model2.",
           "type": "integer",
           "readOnly": true
         },
-        "correctWordCount1": {
+        "tokenSubstitutionCount2": {
           "format": "int32",
-          "description": "The number of correctly recognized words by model1.",
+          "description": "The number of recognized tokens by model2, that are substitutions.",
           "type": "integer",
           "readOnly": true
         },
-        "wordSubstitutionCount1": {
+        "tokenDeletionCount2": {
           "format": "int32",
-          "description": "The number of recognized words by model1, that are substitutions.",
+          "description": "The number of recognized tokens by model2, that are deletions.",
           "type": "integer",
           "readOnly": true
         },
-        "wordDeletionCount1": {
+        "tokenInsertionCount2": {
           "format": "int32",
-          "description": "The number of recognized words by model1, that are deletions.",
+          "description": "The number of recognized tokens by model2, that are insertions.",
           "type": "integer",
           "readOnly": true
         },
-        "wordInsertionCount1": {
+        "sentenceErrorRate2": {
+          "format": "double",
+          "description": "The sentence error rate of recognition with model2.",
+          "type": "number",
+          "readOnly": true
+        },
+        "sentenceCount2": {
           "format": "int32",
-          "description": "The number of recognized words by model1, that are insertions.",
+          "description": "The number of processed sentences by model2.",
           "type": "integer",
           "readOnly": true
+        },
+        "email": {
+          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
         }
       },
       "readOnly": true
@@ -6891,7 +6891,7 @@
     "sasValidityQueryParameter": {
       "in": "query",
       "name": "sasValidityInSeconds",
-      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours. When using BYOS (https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
+      "description": "The duration in seconds that an SAS url should be valid. The default duration is 12 hours. When using BYOS (https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/speech-encryption-of-data-at-rest#bring-your-own-storage-byos-for-customization-and-logging): A value of 0 means that a plain blob URI without SAS token will be generated.",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
