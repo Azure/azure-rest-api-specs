@@ -2596,7 +2596,7 @@
         "replicationRegion": {
           "$ref": "#/definitions/ReplicationRegion"
         },
-        "zoneRedundant": {
+        "zoneRedundancy": {
           "$ref": "#/definitions/ZoneRedundancyPreference"
         },
         "networkAcls": {
@@ -3551,7 +3551,11 @@
       "x-ms-enum": {
         "name": "ZoneRedundancyPreference",
         "modelAsString": true
-      }
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
     }
   },
   "parameters": {
