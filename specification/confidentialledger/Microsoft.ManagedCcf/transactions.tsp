@@ -48,6 +48,9 @@ model CommittedTransaction {
   @key
   id: "commit";
 
+  @doc("Identifier of committed transaction.")
+  transactionId: transactionId;
+
   ...Transaction;
 }
 
