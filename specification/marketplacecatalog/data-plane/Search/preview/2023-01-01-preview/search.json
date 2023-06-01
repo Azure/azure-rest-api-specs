@@ -64,6 +64,7 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
+              "description": "A value indicating whether this is a Microsoft or third party product",
               "enum": [
                 "Microsoft",
                 "ThirdParty"
@@ -82,6 +83,7 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
+              "description": "Badge type",
               "enum": [
                 "PreferredSolution",
                 "PowerBICertified",
@@ -186,11 +188,39 @@
             "description": "Products that contains any of the given product types, Such as 'VirtualMachine'. If no value provided, this filter is ignored.\n- `AADApps`: Azure Active Directory Apps.\n- `AzureApplication`: Azure Application.\n- `AzureServices`: Azure Services.\n- `ConsultingServices`: Consulting Services.\n- `Container`: Container.\n- `ContainerApps`: Container Apps.\n- `CoreVirtualMachine`: Core Virtual Machine.\n- `CosellOnly`: Cosell Only.\n- `DevService`: Dev Service.\n- `DynamicsBC`: Dynamics BC.\n- `DynamicsCE`: Dynamics CE.\n- `DynamicsOps`: Dynamics Ops.\n- `IotEdgeModules`: Iot Edge Modules.\n- `ManagedApplication`: Managed Application.\n- `ManagedServices`: Managed Services.\n- `None`: None.\n- `Office365`: Office365.\n- `PowerBI`: PowerBI.\n- `PowerBIVisuals`: PowerBI Visuals.\n- `SaaS`: SaaS.\n- `SolutionTemplate`: Solution Template.\n- `VirtualMachine`: Virtual Machine.\n- `VisualStudioExtension`: Visual Studio Extension.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/ProductType"
-            },
-            "x-ms-enum": {
-              "name": "ProductType",
-              "modelAsString": true
+              "type": "string",
+              "description": "The delivery method or deployment model",
+              "enum": [
+                "None",
+                "DevService",
+                "ManagedApplication",
+                "VirtualMachine",
+                "AzureApplication",
+                "Container",
+                "SaaS",
+                "SolutionTemplate",
+                "IotEdgeModules",
+                "ManagedServices",
+                "ContainerApps",
+                "VisualStudioExtension",
+                "DynamicsOps",
+                "DynamicsCE",
+                "DynamicsBC",
+                "PowerBI",
+                "ConsultingServices",
+                "CosellOnly",
+                "CoreVirtualMachine",
+                "PowerBIVisuals",
+                "Office365",
+                "AADApps",
+                "AzureServices",
+                "AppService",
+                "LogAnalytics"
+              ],
+              "x-ms-enum": {
+                "name": "ProductType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -200,11 +230,19 @@
             "description": "Products that contains any of the given pricing types. If no value provided, this filter is ignored. \n- `Byol`: The product has at least one plan that is bring your own license.\n- `Free`: The product has at least one plan that is free of charge.\n- `FreeTrial`: The product has at least one plan that is free trial.\n- `Payg`: The product has at least one plan that is Pay as you go, usage based billing model.\n- `RI`: The product has at least one plan that is Reserved Instance billing model.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PricingType"
-            },
-            "x-ms-enum": {
-              "name": "PricingType",
-              "modelAsString": true
+              "type": "string",
+              "description": "Pricing type",
+              "enum": [
+                "Free",
+                "FreeTrial",
+                "Byol",
+                "Payg",
+                "Ri"
+              ],
+              "x-ms-enum": {
+                "name": "PricingType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -291,11 +329,18 @@
             "description": "Products that contains any of the given rating buckets. Such as 'Above1'. If no value provided, this filter is ignored. \n- `AboveOne`: Above One.\n- `AboveTwo`: Above Two.\n- `AboveThree`: Above Three.\n- `AboveFour`: Above Four",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/RatingBucket"
-            },
-            "x-ms-enum": {
-              "name": "RatingBucket",
-              "modelAsString": true
+              "type": "string",
+              "description": "Rating Bucket",
+              "enum": [
+                "AboveOne",
+                "AboveTwo",
+                "AboveThree",
+                "AboveFour"
+              ],
+              "x-ms-enum": {
+                "name": "RatingBucket",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -305,11 +350,17 @@
             "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/VmArchitectureType"
-            },
-            "x-ms-enum": {
-              "name": "VmArchitectureType",
-              "modelAsString": true
+              "type": "string",
+              "description": "VM Architecture Type",
+              "enum": [
+                "X64Gen1",
+                "X64Gen2",
+                "Arm64"
+              ],
+              "x-ms-enum": {
+                "name": "VmArchitectureType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -519,11 +570,39 @@
             "description": "Products that contains any of the given product types, Such as 'VirtualMachine'. If no value provided, this filter is ignored.\n- `AADApps`: Azure Active Directory Apps.\n- `AzureApplication`: Azure Application.\n- `AzureServices`: Azure Services.\n- `ConsultingServices`: Consulting Services.\n- `Container`: Container.\n- `ContainerApps`: Container Apps.\n- `CoreVirtualMachine`: Core Virtual Machine.\n- `CosellOnly`: Cosell Only.\n- `DevService`: Dev Service.\n- `DynamicsBC`: Dynamics BC.\n- `DynamicsCE`: Dynamics CE.\n- `DynamicsOps`: Dynamics Ops.\n- `IotEdgeModules`: Iot Edge Modules.\n- `ManagedApplication`: Managed Application.\n- `ManagedServices`: Managed Services.\n- `None`: None.\n- `Office365`: Office365.\n- `PowerBI`: PowerBI.\n- `PowerBIVisuals`: PowerBI Visuals.\n- `SaaS`: SaaS.\n- `SolutionTemplate`: Solution Template.\n- `VirtualMachine`: Virtual Machine.\n- `VisualStudioExtension`: Visual Studio Extension.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/ProductType"
-            },
-            "x-ms-enum": {
-              "name": "ProductType",
-              "modelAsString": true
+              "type": "string",
+              "description": "The delivery method or deployment model",
+              "enum": [
+                "None",
+                "DevService",
+                "ManagedApplication",
+                "VirtualMachine",
+                "AzureApplication",
+                "Container",
+                "SaaS",
+                "SolutionTemplate",
+                "IotEdgeModules",
+                "ManagedServices",
+                "ContainerApps",
+                "VisualStudioExtension",
+                "DynamicsOps",
+                "DynamicsCE",
+                "DynamicsBC",
+                "PowerBI",
+                "ConsultingServices",
+                "CosellOnly",
+                "CoreVirtualMachine",
+                "PowerBIVisuals",
+                "Office365",
+                "AADApps",
+                "AzureServices",
+                "AppService",
+                "LogAnalytics"
+              ],
+              "x-ms-enum": {
+                "name": "ProductType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -533,11 +612,19 @@
             "description": "Products that contains any of the given pricing types. If no value provided, this filter is ignored. \n- `Byol`: The product has at least one plan that is bring your own license.\n- `Free`: The product has at least one plan that is free of charge.\n- `FreeTrial`: The product has at least one plan that is free trial.\n- `Payg`: The product has at least one plan that is Pay as you go, usage based billing model.\n- `RI`: The product has at least one plan that is Reserved Instance billing model.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PricingType"
-            },
-            "x-ms-enum": {
-              "name": "PricingType",
-              "modelAsString": true
+              "type": "string",
+              "description": "Pricing type",
+              "enum": [
+                "Free",
+                "FreeTrial",
+                "Byol",
+                "Payg",
+                "Ri"
+              ],
+              "x-ms-enum": {
+                "name": "PricingType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -624,11 +711,18 @@
             "description": "Products that contains any of the given rating buckets. Such as 'Above1'. If no value provided, this filter is ignored. \n- `AboveOne`: Above One.\n- `AboveTwo`: Above Two.\n- `AboveThree`: Above Three.\n- `AboveFour`: Above Four",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/RatingBucket"
-            },
-            "x-ms-enum": {
-              "name": "RatingBucket",
-              "modelAsString": true
+              "type": "string",
+              "description": "Rating Bucket",
+              "enum": [
+                "AboveOne",
+                "AboveTwo",
+                "AboveThree",
+                "AboveFour"
+              ],
+              "x-ms-enum": {
+                "name": "RatingBucket",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -638,11 +732,17 @@
             "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/VmArchitectureType"
-            },
-            "x-ms-enum": {
-              "name": "VmArchitectureType",
-              "modelAsString": true
+              "type": "string",
+              "description": "VM Architecture Type",
+              "enum": [
+                "X64Gen1",
+                "X64Gen2",
+                "Arm64"
+              ],
+              "x-ms-enum": {
+                "name": "VmArchitectureType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -839,11 +939,39 @@
             "description": "Products that contains any of the given product types, Such as 'VirtualMachine'. If no value provided, this filter is ignored.\n- `AADApps`: Azure Active Directory Apps.\n- `AzureApplication`: Azure Application.\n- `AzureServices`: Azure Services.\n- `ConsultingServices`: Consulting Services.\n- `Container`: Container.\n- `ContainerApps`: Container Apps.\n- `CoreVirtualMachine`: Core Virtual Machine.\n- `CosellOnly`: Cosell Only.\n- `DevService`: Dev Service.\n- `DynamicsBC`: Dynamics BC.\n- `DynamicsCE`: Dynamics CE.\n- `DynamicsOps`: Dynamics Ops.\n- `IotEdgeModules`: Iot Edge Modules.\n- `ManagedApplication`: Managed Application.\n- `ManagedServices`: Managed Services.\n- `None`: None.\n- `Office365`: Office365.\n- `PowerBI`: PowerBI.\n- `PowerBIVisuals`: PowerBI Visuals.\n- `SaaS`: SaaS.\n- `SolutionTemplate`: Solution Template.\n- `VirtualMachine`: Virtual Machine.\n- `VisualStudioExtension`: Visual Studio Extension.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/ProductType"
-            },
-            "x-ms-enum": {
-              "name": "ProductType",
-              "modelAsString": true
+              "type": "string",
+              "description": "The delivery method or deployment model",
+              "enum": [
+                "None",
+                "DevService",
+                "ManagedApplication",
+                "VirtualMachine",
+                "AzureApplication",
+                "Container",
+                "SaaS",
+                "SolutionTemplate",
+                "IotEdgeModules",
+                "ManagedServices",
+                "ContainerApps",
+                "VisualStudioExtension",
+                "DynamicsOps",
+                "DynamicsCE",
+                "DynamicsBC",
+                "PowerBI",
+                "ConsultingServices",
+                "CosellOnly",
+                "CoreVirtualMachine",
+                "PowerBIVisuals",
+                "Office365",
+                "AADApps",
+                "AzureServices",
+                "AppService",
+                "LogAnalytics"
+              ],
+              "x-ms-enum": {
+                "name": "ProductType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -853,11 +981,19 @@
             "description": "Products that contains any of the given pricing types. If no value provided, this filter is ignored. \n- `Byol`: The product has at least one plan that is bring your own license.\n- `Free`: The product has at least one plan that is free of charge.\n- `FreeTrial`: The product has at least one plan that is free trial.\n- `Payg`: The product has at least one plan that is Pay as you go, usage based billing model.\n- `RI`: The product has at least one plan that is Reserved Instance billing model.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PricingType"
-            },
-            "x-ms-enum": {
-              "name": "PricingType",
-              "modelAsString": true
+              "type": "string",
+              "description": "Pricing type",
+              "enum": [
+                "Free",
+                "FreeTrial",
+                "Byol",
+                "Payg",
+                "Ri"
+              ],
+              "x-ms-enum": {
+                "name": "PricingType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -927,11 +1063,18 @@
             "description": "Products that contains any of the given rating buckets. Such as 'Above1'. If no value provided, this filter is ignored. \n- `AboveOne`: Above One.\n- `AboveTwo`: Above Two.\n- `AboveThree`: Above Three.\n- `AboveFour`: Above Four",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/RatingBucket"
-            },
-            "x-ms-enum": {
-              "name": "RatingBucket",
-              "modelAsString": true
+              "type": "string",
+              "description": "Rating Bucket",
+              "enum": [
+                "AboveOne",
+                "AboveTwo",
+                "AboveThree",
+                "AboveFour"
+              ],
+              "x-ms-enum": {
+                "name": "RatingBucket",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -941,11 +1084,17 @@
             "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/VmArchitectureType"
-            },
-            "x-ms-enum": {
-              "name": "VmArchitectureType",
-              "modelAsString": true
+              "type": "string",
+              "description": "VM Architecture Type",
+              "enum": [
+                "X64Gen1",
+                "X64Gen2",
+                "Arm64"
+              ],
+              "x-ms-enum": {
+                "name": "VmArchitectureType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -1470,7 +1619,18 @@
           "type": "array",
           "description": "Rating buckets, Above1, Above2, Above3, Above4",
           "items": {
-            "$ref": "#/definitions/RatingBucket"
+            "type": "string",
+            "description": "Rating Bucket",
+            "enum": [
+              "AboveOne",
+              "AboveTwo",
+              "AboveThree",
+              "AboveFour"
+            ],
+            "x-ms-enum": {
+              "name": "RatingBucket",
+              "modelAsString": true
+            }
           }
         },
         "ratingAverage": {
