@@ -77,7 +77,7 @@ batch:
   - tag: package-2018-08-preview-only
   - tag: package-2018-03-only
   - tag: package-2019-09-preview-only
-  - tag: package-2017-07-only-extended
+  - tag: package-2017-07
   - multiapiscript: true
 ```
 
@@ -669,15 +669,15 @@ namespace: azure.mgmt.containerservice.v2019_09_30_preview
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_09_30_preview
 ```
 
-### Tag: package-2017-07-only-extended and python
+### Tag: package-2017-07 and python
 
-These settings apply only when `--tag=package-2017-07-only-extended --python` is specified on the command line.
+These settings apply only when `--tag=package-2017-07 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 This is a special tag used only by python sdk generation. To avoid introducing breaking changes in compatibility to the
 v2017_07_01 namespace of python SDK, DO NOT MODIFY THIS TAG.
 
-``` yaml $(tag) == 'package-2017-07-only-extended' && $(python)
+``` yaml $(tag) == 'package-2017-07' && $(python)
 namespace: azure.mgmt.containerservice.v2017_07_01
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2017_07_01
 ```

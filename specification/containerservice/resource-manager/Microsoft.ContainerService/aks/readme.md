@@ -835,6 +835,7 @@ These settings apply only when `--tag=package-2019-04-01-only` is specified on t
 ``` yaml $(tag) == 'package-2019-04-01-only'
 input-file:
 - stable/2019-04-01/managedClusters.json
+- stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2019-02-only
