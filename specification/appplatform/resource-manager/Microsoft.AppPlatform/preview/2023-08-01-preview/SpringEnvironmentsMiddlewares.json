@@ -50,6 +50,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Config Servers": {
+            "$ref": "./examples/v2/SpringEnvironmentsMiddlewares/ConfigServers_Get.json"
+          }
         }
       },
       "put": {
@@ -94,6 +99,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Config Servers": {
+            "$ref": "./examples/v2/SpringEnvironmentsMiddlewares/ConfigServers_UpdatePut.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -142,7 +152,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Config Servers": {
+            "$ref": "./examples/v2/SpringEnvironmentsMiddlewares/ConfigServers_UpdatePatch.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/validate": {
@@ -164,7 +179,7 @@
             "$ref": "#/parameters/SpringEnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/ConfigServerEnvelopeParameter"
+            "$ref": "#/parameters/ConfigServerSettingsParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -193,6 +208,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Validate Config Servers": {
+            "$ref": "./examples/v2/SpringEnvironmentsMiddlewares/ConfigServers_Validate.json"
+          }
         }
       }
     },
@@ -230,6 +250,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Eureka Servers": {
+            "$ref": "./examples/v2/SpringEnvironmentsMiddlewares/EurekaServers_Get.json"
           }
         }
       },
@@ -286,6 +311,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update Eureka Servers": {
+            "$ref": "./examples/v2/SpringEnvironmentsMiddlewares/EurekaServers_UpdatePut.json"
+          }
         }
       },
       "patch": {
@@ -340,6 +370,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update Eureka Servers": {
+            "$ref": "./examples/v2/SpringEnvironmentsMiddlewares/EurekaServers_UpdatePatch.json"
+          }
         }
       }
     }
@@ -645,6 +680,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/ConfigServer"
+      }
+    },
+    "ConfigServerSettingsParameter":
+    {
+      "name": "configServerSettings",
+      "in": "body",
+      "description": "Config server settings to be validated",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ConfigServerSettings"
       }
     },
     "EurekaServerEnvelopeParameter": {
