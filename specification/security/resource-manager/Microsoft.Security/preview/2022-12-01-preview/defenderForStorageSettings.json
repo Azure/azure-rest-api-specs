@@ -71,7 +71,7 @@
               }
             }
           }
-        }, // Salam - Add partial Success
+        },
         "put": {
           "x-ms-examples": {
             "Creates or updates the Defender for Storage settings on a specified resource.": {
@@ -164,40 +164,40 @@
       "MalwareScanningProperties": {
         "type": "object",
         "properties": {
-            "onUpload": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/OnUploadProperties"
-            },
-            "operationStatus": {
-              "type": "object",
-              "$ref": "#/definitions/OperationStatus",
-              "readOnly": true,
-              "description": "Optional. A status describing the success/failure of Malware Scanning's enablement/disablement operation."
-            }
+          "onUpload": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/OnUploadProperties"
           },
-          "description": "" // Salam
+          "operationStatus": {
+            "type": "object",
+            "$ref": "#/definitions/OperationStatus",
+            "readOnly": true,
+            "description": "Optional. A status describing the success/failure of Malware Scanning's enablement/disablement operation."
+          }
+        },
+        "description": "Properties of Malware Scanning." // Salam
       },
       "OnUploadProperties": {
         "type": "object",
         "properties": {
           "isEnabled": {
             "type": "boolean",
-            "description": "" // Salam
+            "description": "Indicates whether On Upload malware scanning should be enabled." // Salam
           },
           "capGBPerMonth": {
             "type": "integer", // Salam
             "format": "int32",
-            "description": "" // Salam
+            "description": "Defines the max GB to be scanned per Month. Set to -1 if no capping is needed." // Salam
           }
         },
-        "description": "" // Salam
+        "description": "Properties of On Upload malware scanning." // Salam
       },
       "SensitiveDataDiscoveryProperties": {
         "type": "object",
         "properties": {
             "isEnabled": {
               "type": "boolean",
-              "description": "" // Salam
+              "description": "Indicates whether Sensitive Data Discovery should be enabled." // Salam
             },
             "operationStatus": {
               "type": "object",
@@ -206,7 +206,7 @@
               "description": "Optional. A status describing the success/failure of Sensitive Data Discovery's enablement/disablement operation."
             }
           },
-          "description": "" // Salam
+          "description": "Properties of Sensitive Data Discovery." // Salam
       },
       "OperationStatus": {
         "type": "object",
