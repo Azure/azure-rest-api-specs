@@ -863,6 +863,15 @@
     }
   },
   "parameters": {
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "description": "Name of Azure Machine Learning workspace.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$",
+      "x-ms-parameter-location": "method"
+    },
     "ComputeNameParameter": {
       "name": "computeName",
       "description": "Name of the Azure Machine Learning compute.",
