@@ -70,6 +70,7 @@ namespace EventGrid.Web {
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event.")
   model WebAppServicePlanUpdatedEventData {
+    @doc("Detail of action on the app service plan.")
     appServicePlanEventTypeDetail?: AppServicePlanEventTypeDetail;
 
     @doc("name of the app service plan that had this event.")
@@ -137,6 +138,8 @@ namespace EventGrid.Web {
 
     @doc("Type of action on the app service plan.")
     action?: AppServicePlanAction;
+
+    @doc("Asynchronous operation status of the operation on the app service plan.")
     status?: AsyncStatus;
   }
 
@@ -152,6 +155,7 @@ namespace EventGrid.Web {
   }
 
   alias WebAppBaseEventData = {
+    @doc("Detail of action on the app.")
     appEventTypeDetail?: AppEventTypeDetail;
 
     @doc("name of the web site that had this event.")
@@ -177,15 +181,19 @@ namespace EventGrid.Web {
     @doc("name of app service plan sku.")
     name?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     @doc("tier of app service plan sku.")
     Tier?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     @doc("size of app service plan sku.")
     Size?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     @doc("family of app service plan sku.")
     Family?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after original service swagger."
     @doc("capacity of app service plan sku.")
     Capacity?: string;
   };
