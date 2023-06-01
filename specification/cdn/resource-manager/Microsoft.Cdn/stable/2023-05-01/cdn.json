@@ -395,6 +395,9 @@
               "location": {
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/CanMigrateResult"
             }
           },
           "default": {
@@ -2881,6 +2884,16 @@
       "type": "object",
       "description": "Result for canMigrate operation.",
       "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "readOnly": true,
+          "type": "string"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CanMigrateProperties"
