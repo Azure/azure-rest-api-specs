@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2023-04-27` is specified on the co
 ```yaml $(tag) == 'package-2023-04-27'
 input-file:
   - Dynatrace.Observability/stable/2023-04-27/dynatrace.json
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: swagger.yaml
+    reason: API path is not needed anymore.
 ```
 
 ### Tag: package-2021-09-01
