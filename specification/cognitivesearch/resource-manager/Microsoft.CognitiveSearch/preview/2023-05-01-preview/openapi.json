@@ -3,10 +3,10 @@
   "info": {
     "title": "IndexManagementClient",
     "version": "2023-05-01-preview",
-    "description": "Microsoft.CognitiveSearch resource management API.",
-    "x-cadl-generated": [
+    "description": "CognitiveSearch Resource Provider management API.",
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -30,9 +30,9 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -40,10 +40,10 @@
   },
   "tags": [
     {
-      "name": "IndexOperations"
+      "name": "Operations"
     },
     {
-      "name": "Operations"
+      "name": "IndexOperations"
     }
   ],
   "paths": {
@@ -67,7 +67,7 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -106,7 +106,7 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -148,7 +148,7 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -182,7 +182,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Index.name"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the index resource.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -193,7 +197,7 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -222,7 +226,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Index.name"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the index resource.",
+            "type": "string"
           },
           {
             "name": "resource",
@@ -255,7 +263,7 @@
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -276,7 +284,7 @@
           "IndexOperations"
         ],
         "operationId": "IndexOperations_Update",
-        "description": "Patch a search index",
+        "description": "Update a Index",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -288,7 +296,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Index.name"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the index resource.",
+            "type": "string"
           },
           {
             "name": "properties",
@@ -314,11 +326,15 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -330,7 +346,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -339,7 +355,7 @@
           "IndexOperations"
         ],
         "operationId": "IndexOperations_Delete",
-        "description": "Delete a search index",
+        "description": "Delete a Index",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -351,22 +367,36 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/Index.name"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the index resource.",
+            "type": "string"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
-            "description": "Resource delete request accepted.",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
           "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -399,7 +429,8 @@
           "description": "The maximum number of vCores that the index can consume. Represented with discrete values: 1, 2, 3, … to 16."
         },
         "autoPause": {
-          "$ref": "#/definitions/Pause"
+          "$ref": "#/definitions/Pause",
+          "description": "Pausing strategy for the index"
         }
       },
       "description": "The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.",
@@ -408,6 +439,26 @@
         "maxVCores",
         "autoPause"
       ]
+    },
+    "CapacityUpdate": {
+      "type": "object",
+      "properties": {
+        "minVCores": {
+          "type": "number",
+          "format": "float",
+          "description": "The minimum number of vCores that the index will consume. Represented with discrete values: 1, 2, 3, … to 16."
+        },
+        "maxVCores": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum number of vCores that the index can consume. Represented with discrete values: 1, 2, 3, … to 16."
+        },
+        "autoPause": {
+          "$ref": "#/definitions/Pause",
+          "description": "Pausing strategy for the index"
+        }
+      },
+      "description": "The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index."
     },
     "DelayPause": {
       "type": "object",
@@ -435,17 +486,14 @@
         "properties": {
           "$ref": "#/definitions/IndexProperties",
           "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "x-ms-client-flatten": true
+          ]
         }
       },
-      "description": "An index resource.",
-      "required": [
-        "properties"
-      ],
+      "description": "An index resource",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -460,12 +508,14 @@
           "items": {
             "$ref": "#/definitions/Index"
           },
-          "x-cadl-name": "Index[]",
-          "description": "The items on this page"
+          "x-typespec-name": "Index[]",
+          "description": "The Index items on this page"
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items"
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Index list operation.",
@@ -509,10 +559,12 @@
           "additionalProperties": {
             "type": "string"
           },
+          "x-typespec-name": "Record<string>",
           "description": "Resource tags."
         },
         "properties": {
-          "$ref": "#/definitions/IndexUpdateProperties"
+          "$ref": "#/definitions/IndexUpdateProperties",
+          "x-ms-client-flatten": true
         }
       },
       "description": "The type used for update operations of the Index."
@@ -521,11 +573,11 @@
       "type": "object",
       "properties": {
         "queryCapacity": {
-          "$ref": "#/definitions/Capacity",
+          "$ref": "#/definitions/CapacityUpdate",
           "description": "The capacity allocated to the index for querying."
         },
         "indexingCapacity": {
-          "$ref": "#/definitions/Capacity",
+          "$ref": "#/definitions/CapacityUpdate",
           "description": "The capacity allocated to the index for indexing documents."
         }
       },
@@ -550,6 +602,7 @@
           "description": "Discriminator property for Pause."
         }
       },
+      "description": "Pausing strategy for the index",
       "discriminator": "type",
       "required": [
         "type"
@@ -557,14 +610,13 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "The current provisioning state of the index.",
       "enum": [
-        "Accepted",
-        "Provisioning",
         "Succeeded",
         "Failed",
         "Canceled",
-        "Deleting"
+        "Provisioning",
+        "Deleting",
+        "Accepted"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -572,14 +624,5 @@
       }
     }
   },
-  "parameters": {
-    "Index.name": {
-      "name": "name",
-      "in": "path",
-      "required": true,
-      "description": "The name of the index resource.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
