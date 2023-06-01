@@ -2,7 +2,7 @@
 namespace EventGrid.RedisCache {
   alias RedisBaseEventData = {
     @doc("The time at which the event occurred.")
-    timestamp?: zonedDateTime;
+    timestamp?: utcDateTime;
 
     @doc("The name of this event.")
     name?: string;

@@ -21,7 +21,7 @@ namespace EventGrid.ContainerRegistry {
     id?: string;
 
     @doc("The time at which the event occurred.")
-    timestamp?: zonedDateTime;
+    timestamp?: utcDateTime;
 
     @doc("The action that encompasses the provided event.")
     action?: string;

@@ -34,7 +34,7 @@ model AcsChatMessageEditedEventData extends AcsChatMessageEventBaseProperties {
   ...AcsChatMessageBaseEventData;
 
   @doc("The time at which the message was edited")
-  editTime?: zonedDateTime;
+  editTime?: utcDateTime;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.")
@@ -43,20 +43,20 @@ model AcsChatMessageEditedInThreadEventData
   ...AcsChatMessageBaseEventData;
 
   @doc("The time at which the message was edited")
-  editTime?: zonedDateTime;
+  editTime?: utcDateTime;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.")
 model AcsChatMessageDeletedEventData extends AcsChatMessageEventBaseProperties {
   @doc("The time at which the message was deleted")
-  deleteTime?: zonedDateTime;
+  deleteTime?: utcDateTime;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.")
 model AcsChatMessageDeletedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   @doc("The time at which the message was deleted")
-  deleteTime?: zonedDateTime;
+  deleteTime?: utcDateTime;
 }
 
 alias AcsChatThreadBaseEventData = {
@@ -87,7 +87,7 @@ alias AcsChatThreadDeletedBaseEventData = {
   deletedByCommunicationIdentifier?: CommunicationIdentifierModel;
 
   @doc("The deletion time of the thread")
-  deleteTime?: zonedDateTime;
+  deleteTime?: utcDateTime;
 };
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.")
@@ -107,7 +107,7 @@ alias AcsChatThredPropertiesBaseEventData = {
   editedByCommunicationIdentifier?: CommunicationIdentifierModel;
 
   @doc("The time at which the properties of the thread were updated")
-  editTime?: zonedDateTime;
+  editTime?: utcDateTime;
 
   @doc("The updated thread properties")
   properties?: Record<string>;
@@ -127,7 +127,7 @@ model AcsChatThreadPropertiesUpdatedEventData
 
 alias AcsChatParticipantBaseEventData = {
   @doc("The time at which the user was added to the thread")
-  time?: zonedDateTime;
+  time?: utcDateTime;
 
   @doc("The communication identifier of the user who added the user")
   addedByCommunicationIdentifier?: CommunicationIdentifierModel;
@@ -146,7 +146,7 @@ model AcsChatParticipantAddedToThreadWithUserEventData
 model AcsChatParticipantRemovedFromThreadWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   @doc("The time at which the user was removed to the thread")
-  time?: zonedDateTime;
+  time?: utcDateTime;
 
   @doc("The communication identifier of the user who removed the user")
   removedByCommunicationIdentifier?: CommunicationIdentifierModel;
@@ -168,7 +168,7 @@ model AcsChatParticipantAddedToThreadEventData
 model AcsChatParticipantRemovedFromThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   @doc("The time at which the user was removed to the thread")
-  time?: zonedDateTime;
+  time?: utcDateTime;
 
   @doc("The communication identifier of the user who removed the user")
   removedByCommunicationIdentifier?: CommunicationIdentifierModel;
@@ -192,7 +192,7 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   deliveryAttempts?: AcsSmsDeliveryAttemptProperties[];
 
   @doc("The time at which the SMS delivery report was received")
-  receivedTimestamp?: zonedDateTime;
+  receivedTimestamp?: utcDateTime;
 
   @doc("Customer Content")
   tag?: string;
@@ -204,7 +204,7 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   message?: string;
 
   @doc("The time at which the SMS was received")
-  receivedTimestamp?: zonedDateTime;
+  receivedTimestamp?: utcDateTime;
 }
 
 // @knownValues(recordingContentTypeKV)
@@ -232,7 +232,7 @@ model AcsRecordingFileStatusUpdatedEventData {
   recordingStorageInfo?: AcsRecordingStorageInfoProperties;
 
   @doc("The time at which the recording started")
-  recordingStartTime?: zonedDateTime;
+  recordingStartTime?: utcDateTime;
 
   @doc("The recording duration in milliseconds")
   recordingDurationMs?: int64;
@@ -253,7 +253,7 @@ model AcsRecordingFileStatusUpdatedEventData {
 @doc("Schema of common properties of all chat thread events")
 model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   @doc("The original creation time of the thread")
-  createTime?: zonedDateTime;
+  createTime?: utcDateTime;
 
   @doc("The version of the thread")
   version?: int64;
@@ -263,7 +263,7 @@ model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
 model AcsChatThreadEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   @doc("The original creation time of the thread")
-  createTime?: zonedDateTime;
+  createTime?: utcDateTime;
 
   @doc("The version of the thread")
   version?: int64;
@@ -281,7 +281,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   senderDisplayName?: string;
 
   @doc("The original compose time of the message")
-  composeTime?: zonedDateTime;
+  composeTime?: utcDateTime;
 
   @doc("The type of the message")
   type?: string;
@@ -303,7 +303,7 @@ model AcsChatMessageEventInThreadBaseProperties
   senderDisplayName?: string;
 
   @doc("The original compose time of the message")
-  composeTime?: zonedDateTime;
+  composeTime?: utcDateTime;
 
   @doc("The type of the message")
   type?: string;
@@ -352,7 +352,7 @@ model AcsSmsEventBaseProperties {
 @doc("Schema for details of a delivery attempt")
 model AcsSmsDeliveryAttemptProperties {
   @doc("TimeStamp when delivery was attempted")
-  timestamp?: zonedDateTime;
+  timestamp?: utcDateTime;
 
   @doc("Number of segments that were successfully delivered")
   segmentsSucceeded?: integer;

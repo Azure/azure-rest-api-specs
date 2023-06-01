@@ -25,8 +25,8 @@ model EventHubCaptureFileCreatedEventData {
   lastSequenceNumber?: int64;
 
   @doc("The first time from the queue.")
-  firstEnqueueTime?: zonedDateTime;
+  firstEnqueueTime?: utcDateTime;
 
   @doc("The last time from the queue.")
-  lastEnqueueTime?: zonedDateTime;
+  lastEnqueueTime?: utcDateTime;
 }

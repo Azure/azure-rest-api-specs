@@ -51,13 +51,13 @@ namespace EventGrid {
     subject: string;
 
     @doc("Event data specific to the event type.")
-    data: object;
+    data: unknown;
 
     @doc("The type of the event that occurred.")
     eventType: string;
 
     @doc("The time (in UTC) the event was generated.")
-    eventTime: zonedDateTime;
+    eventTime: utcDateTime;
 
     @doc("The schema version of the event metadata.")
     @visibility("read")
@@ -85,7 +85,7 @@ namespace EventGrid {
     type: string;
 
     @doc("The time (in UTC) the event was generated, in RFC3339 format.")
-    time?: zonedDateTime;
+    time?: utcDateTime;
 
     @doc("The version of the CloudEvents specification which the event uses.")
     specversion: string;

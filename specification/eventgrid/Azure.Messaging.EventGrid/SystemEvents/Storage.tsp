@@ -98,7 +98,7 @@ namespace EventGrid.Storage {
   @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event.")
   model StorageBlobInventoryPolicyCompletedEventData {
     @doc("The time at which inventory policy was scheduled.")
-    scheduleDateTime?: zonedDateTime;
+    scheduleDateTime?: utcDateTime;
 
     @doc("The account name for which inventory policy is registered.")
     accountName?: string;
