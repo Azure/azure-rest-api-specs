@@ -37,6 +37,11 @@ These settings apply only when `--tag=package-2023-04-27` is specified on the co
 ```yaml $(tag) == 'package-2023-04-27'
 input-file:
   - Dynatrace.Observability/stable/2023-04-27/dynatrace.json
+directive:
+  - where:
+      - $.paths["/subscriptions/{}/resourceGroups/{}/providers/Dynatrace.Observability/monitors/{}/getAccountCredentials"]
+    suppress: The API path is not in the default tag
+    reason: API path is not needed anymore.
 ```
 
 ### Tag: package-2021-09-01
