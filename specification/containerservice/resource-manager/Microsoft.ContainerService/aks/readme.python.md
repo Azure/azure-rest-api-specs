@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 default-api-version: "2023-04-01"
 multiapi: true
 batch:
+  - tag: package-preview-2023-05
   - tag: package-2023-04
   - tag: package-preview-2023-04
   - tag: package-2023-03
@@ -83,6 +84,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/
 perform-load: false
+```
+
+### Tag: package-preview-2023-05 and python
+
+These settings apply only when `--tag=package-preview-2023-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-05' && $(python)
+namespace: azure.mgmt.containerservice.v2023_05_02_preview
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2023_05_02_preview
 ```
 
 ### Tag: package-2023-04 and python
