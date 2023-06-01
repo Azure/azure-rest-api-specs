@@ -17,7 +17,7 @@ namespace EventGrid.PolicyInsights {
 
   alias PolicyInsightsBaseEventData = {
     @doc("The time that the resource was scanned by Azure Policy in the Universal ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ.")
-    timestamp?: zonedDateTime;
+    timestamp?: utcDateTime;
 
     @doc("The resource ID of the policy assignment.")
     policyAssignmentId?: string;

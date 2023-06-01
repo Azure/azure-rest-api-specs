@@ -15,7 +15,7 @@ namespace EventGrid.SignalRService {
 
   alias SignalRServiceBaseEventdata = {
     @doc("The time at which the event occurred.")
-    timestamp?: zonedDateTime;
+    timestamp?: utcDateTime;
 
     @doc("The hub of connected client connection.")
     hubName?: string;
