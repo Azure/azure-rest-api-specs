@@ -39,7 +39,6 @@
     },
     "ContainerServiceClusterSupportEndedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceClusterSupportBaseProperties"
@@ -56,7 +55,6 @@
     },
     "ContainerServiceClusterSupportEndingEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceClusterSupportBaseProperties"
@@ -73,7 +71,6 @@
     },
     "ContainerServiceNodePoolRollingStartedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
@@ -90,7 +87,6 @@
     },
     "ContainerServiceNodePoolRollingSucceededEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
@@ -107,7 +103,6 @@
     },
     "ContainerServiceNodePoolRollingFailedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
@@ -124,6 +119,7 @@
     },
     "ContainerServiceClusterSupportBaseProperties": {
       "description": "Schema of common properties of cluster support events",
+      "type": "object",
       "properties": {
         "kubernetesVersion": {
           "description": "The Kubernetes version of the ManagedCluster resource",
@@ -133,6 +129,7 @@
     },
     "ContainerServiceNodePoolRollingBaseProperties": {
       "description": "Schema of common properties of node pool rolling events",
+      "type": "object",
       "properties": {
         "nodePoolName": {
           "description": "The name of the node pool in the ManagedCluster resource",
