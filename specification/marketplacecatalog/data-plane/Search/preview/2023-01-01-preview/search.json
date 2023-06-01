@@ -64,7 +64,6 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
-              "description": "A value indicating whether this is a Microsoft or third party product",
               "enum": [
                 "Microsoft",
                 "ThirdParty"
@@ -83,7 +82,6 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
-              "description": "Badge type",
               "enum": [
                 "PreferredSolution",
                 "PowerBICertified",
@@ -129,7 +127,6 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
-              "description": "The search field name",
               "enum": [
                 "All",
                 "ApplicableProducts",
@@ -189,7 +186,6 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
-              "description": "The delivery method or deployment model",
               "enum": [
                 "None",
                 "DevService",
@@ -231,7 +227,6 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
-              "description": "Pricing type",
               "enum": [
                 "Free",
                 "FreeTrial",
@@ -330,7 +325,6 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
-              "description": "Rating Bucket",
               "enum": [
                 "AboveOne",
                 "AboveTwo",
@@ -351,7 +345,6 @@
             "collectionFormat": "csv",
             "items": {
               "type": "string",
-              "description": "VM Architecture Type",
               "enum": [
                 "X64Gen1",
                 "X64Gen2",
@@ -370,11 +363,16 @@
             "description": "Products that contains any of the given vm security types. Such as 'Trusted'. If no value provided, this filter is ignored. \n- `None`: None.\n- `Trusted`: Trusted.\n- `Confidential`: Confidential",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/VmSecurityType"
-            },
-            "x-ms-enum": {
-              "name": "VmSecurityType",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "None",
+                "Trusted",
+                "Confidential"
+              ],
+              "x-ms-enum": {
+                "name": "VmSecurityType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -401,11 +399,46 @@
             "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `ApplicableProducts`: Applicable Products.\n- `CategoryIds`: Category Ids.\n- `SupportedProducts`: Supported Products. \n- `PublisherId`: Publisher Id.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/SearchFieldName"
-            },
-            "x-ms-enum": {
-              "name": "SearchFieldName",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "All",
+                "ApplicableProducts",
+                "LastModifiedDateTime",
+                "IndustryIds",
+                "CategoryIds",
+                "Market",
+                "LinkedAddInTypes",
+                "SupportedProducts",
+                "HideKeys",
+                "PublisherId",
+                "DisplayName",
+                "AzureBenefit",
+                "Badges",
+                "SmallIconUri",
+                "IndustryCloud",
+                "PublisherType",
+                "PublishingState",
+                "Language",
+                "UniqueProductId",
+                "ProductType",
+                "Plans",
+                "OperatingSystems",
+                "PricingTypes",
+                "PublisherDisplayName",
+                "Summary",
+                "LongSummary",
+                "VmImageGenerations",
+                "VmSecurityTypes",
+                "VmArchitectureTypes",
+                "Description",
+                "RatingBuckets",
+                "RatingAverage",
+                "RatingCount"
+              ],
+              "x-ms-enum": {
+                "name": "SearchFieldName",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -517,11 +550,15 @@
             "description": "Products that contains any of the given publisher types, If no value provided, this filter is ignored. Possible values: Microsoft, ThirdParty. Default: Microsoft. \n- `Microsoft`: Microsoft.\n- `ThirdParty`: Third Party.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PublisherType"
-            },
-            "x-ms-enum": {
-              "name": "PublisherType",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "Microsoft",
+                "ThirdParty"
+              ],
+              "x-ms-enum": {
+                "name": "PublisherType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -531,11 +568,16 @@
             "description": "Products that contains any of the given badges. If no value provided, this filter is ignored. The following product badges are available: \n- `PreferredSolution`: Preferred Solution.\n- `PowerBICertified`: power BI Certified.\n- `AdditionalPurchaseRequirement`: Additional Purchase Requirement.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/Badge"
-            },
-            "x-ms-enum": {
-              "name": "Badge",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "PreferredSolution",
+                "PowerBICertified",
+                "AdditionalPurchaseRequirement"
+              ],
+              "x-ms-enum": {
+                "name": "Badge",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -752,11 +794,16 @@
             "description": "Products that contains any of the given vm security types. Such as 'Trusted'. If no value provided, this filter is ignored. \n- `None`: None.\n- `Trusted`: Trusted.\n- `Confidential`: Confidential",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/VmSecurityType"
-            },
-            "x-ms-enum": {
-              "name": "VmSecurityType",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "None",
+                "Trusted",
+                "Confidential"
+              ],
+              "x-ms-enum": {
+                "name": "VmSecurityType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -783,11 +830,46 @@
             "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `ApplicableProducts`: Applicable Products.\n- `CategoryIds`: Category Ids.\n- `SupportedProducts`: Supported Products. \n- `PublisherId`: Publisher Id.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/SearchFieldName"
-            },
-            "x-ms-enum": {
-              "name": "SearchFieldName",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "All",
+                "ApplicableProducts",
+                "LastModifiedDateTime",
+                "IndustryIds",
+                "CategoryIds",
+                "Market",
+                "LinkedAddInTypes",
+                "SupportedProducts",
+                "HideKeys",
+                "PublisherId",
+                "DisplayName",
+                "AzureBenefit",
+                "Badges",
+                "SmallIconUri",
+                "IndustryCloud",
+                "PublisherType",
+                "PublishingState",
+                "Language",
+                "UniqueProductId",
+                "ProductType",
+                "Plans",
+                "OperatingSystems",
+                "PricingTypes",
+                "PublisherDisplayName",
+                "Summary",
+                "LongSummary",
+                "VmImageGenerations",
+                "VmSecurityTypes",
+                "VmArchitectureTypes",
+                "Description",
+                "RatingBuckets",
+                "RatingAverage",
+                "RatingCount"
+              ],
+              "x-ms-enum": {
+                "name": "SearchFieldName",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -886,11 +968,15 @@
             "description": "Products that contains any of the given publisher types, If no value provided, this filter is ignored. Possible values: Microsoft, ThirdParty. Default: Microsoft. \n- `Microsoft`: Microsoft.\n- `ThirdParty`: Third Party.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/PublisherType"
-            },
-            "x-ms-enum": {
-              "name": "PublisherType",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "Microsoft",
+                "ThirdParty"
+              ],
+              "x-ms-enum": {
+                "name": "PublisherType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -900,11 +986,16 @@
             "description": "Products that contains any of the given badges. If no value provided, this filter is ignored. The following product badges are available: \n- `PreferredSolution`: Preferred Solution.\n- `PowerBICertified`: power BI Certified.\n- `AdditionalPurchaseRequirement`: Additional Purchase Requirement.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/Badge"
-            },
-            "x-ms-enum": {
-              "name": "Badge",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "PreferredSolution",
+                "PowerBICertified",
+                "AdditionalPurchaseRequirement"
+              ],
+              "x-ms-enum": {
+                "name": "Badge",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -1104,11 +1195,16 @@
             "description": "Products that contains any of the given vm security types. Such as 'Trusted'. If no value provided, this filter is ignored. \n- `None`: None.\n- `Trusted`: Trusted.\n- `Confidential`: Confidential",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/VmSecurityType"
-            },
-            "x-ms-enum": {
-              "name": "VmSecurityType",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "None",
+                "Trusted",
+                "Confidential"
+              ],
+              "x-ms-enum": {
+                "name": "VmSecurityType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -1118,11 +1214,15 @@
             "description": "Suggestion types. \n- `WordSearch`: WordSearch.\n- `Entity`: Entity.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/SuggestionType"
-            },
-            "x-ms-enum": {
-              "name": "SuggestionType",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "WordSearch",
+                "Entity"
+              ],
+              "x-ms-enum": {
+                "name": "SuggestionType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -1139,11 +1239,18 @@
             "description": "Array of fields to return. Such as 'displayText'. \n- `DisplayText`: Display text.\n- `Id`: Id.\n- `IconUrl`: Icon Url.\n- `ProductType`: Product type.\n- `LinkedAddInsTypes`: Linked AddIns types.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/SuggestionsFieldName"
-            },
-            "x-ms-enum": {
-              "name": "SuggestionsFieldName",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "DisplayText",
+                "Id",
+                "IconUrl",
+                "ProductType",
+                "LinkedAddInsTypes"
+              ],
+              "x-ms-enum": {
+                "name": "SuggestionsFieldName",
+                "modelAsString": true
+              }
             }
           },
           {
