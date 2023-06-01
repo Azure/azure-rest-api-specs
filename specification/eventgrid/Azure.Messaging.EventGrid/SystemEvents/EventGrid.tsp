@@ -67,7 +67,7 @@ namespace EventGrid {
     dataVersion: string;
   }
 
-  @doc("Properties of an event published to an Event Grid topic using the CloudEvent 1.0 Schema")
+  @doc("Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.")
   model CloudEventEvent {
     @doc("An identifier for the event. The combination of id and source must be unique for each distinct event.")
     id: string;
@@ -75,12 +75,14 @@ namespace EventGrid {
     @doc("Identifies the context in which an event happened. The combination of id and source must be unique for each distinct event.")
     source: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Using 'unknown' for data is intentional. Following CloudEvent spec."
     @doc("Event data specific to the event type.")
-    data?: object;
+    data?: unknown;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Using 'data_base64' is intentional. Following CloudEvent spec."
     @doc("Event data specific to the event type, encoded as a base64 string.")
     data_base64?: bytes;
-
+    
     @doc("Type of event related to the originating occurrence.")
     type: string;
 
@@ -129,11 +131,10 @@ namespace EventGrid {
 
  // USE SHARED ROUTES
 
-  alias EventType = EventGridEvent[] | CloudEventEvent[];
-
   @doc("Publish CloudEvents")
-  @route("/send", { shared: true})
-  op PublishCloudEvent is Azure.Core.RpcOperation<{
+  @route("/send")
+  @sharedRoute
+  op publishCloudEvent is Azure.Core.RpcOperation<{
     
     @doc("content type")
     @header("content-type")
@@ -143,18 +144,21 @@ namespace EventGrid {
     @header("aeg-channel-name")
     channelName?: string,
 
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
     @doc("Events being published.")
     @body
     events: CloudEventEvent[],
   }, {} >;
 
   @doc("Publish EventGridEvents")
-  @route("/send", { shared: true})
-  op PublishEventGridEvent is Azure.Core.RpcOperation<{
+  @route("/send")
+  @sharedRoute
+  op publishEventGridEvent is Azure.Core.RpcOperation<{
     @doc("content type")
     @header("content-type")
     contentType: "application/json",
 
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Events is a valid request body."
     @doc("Events being published.")
     @body
     events: EventGridEvent[],
