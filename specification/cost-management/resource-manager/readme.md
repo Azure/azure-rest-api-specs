@@ -287,7 +287,13 @@ input-file:
 directive:
   - suppress: R4011
     from: costmanagement.exports.json
-    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
+    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'
+  - suppress: TrackedResourcePatchOperation
+    from: costmanagement.exports.json
+    reason: False alarm, Export is a proxy resource
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: costmanagement.exports.json
+    reason: False alarm, Export is a proxy resource  
   - suppress: R3023
     from: costmanagement.generatedetailedcostreport.json    
     reason: 'API change needed, Operations API must be implemented for operations'
