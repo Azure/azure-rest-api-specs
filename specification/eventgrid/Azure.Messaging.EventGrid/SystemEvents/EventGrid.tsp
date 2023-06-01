@@ -4,10 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
-enum ServiceApiVersions {
-  v2018_01_01: "2018-01-01",
-}
-
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "aeg-sas-key"> | OAuth2Auth<[
     {
@@ -19,7 +15,6 @@ enum ServiceApiVersions {
 )
 @service({
   title: "EventGridClient",
-  version: "2018-01-01",
 })
 @server(
   "{endpoint}",
@@ -38,6 +33,11 @@ namespace EventGrid {
   using TypeSpec.Versioning;
   using Azure.Core;
   using Azure.Core.Foundations;
+
+  enum ServiceApiVersions {
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    v2018_01_01: "2018-01-01",
+  }
 
   @doc("Properties of an event published to an Event Grid topic using the EventGrid Schema.")
   model EventGridEvent {
