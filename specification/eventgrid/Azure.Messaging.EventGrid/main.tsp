@@ -54,9 +54,11 @@ namespace Azure.Messaging.EventGrid {
     @doc("Identifies the context in which an event happened. The combination of id and source must be unique for each distinct event.")
     source: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Using 'unknown' for data is intentional. Following CloudEvent spec."
     @doc("Event data specific to the event type.")
     data?: unknown;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Using 'data_base64' is intentional. Following CloudEvent spec."
     @doc("Event data specific to the event type, encoded as a base64 string.")
     data_base64?: bytes;
     
@@ -212,6 +214,7 @@ namespace Azure.Messaging.EventGrid {
       @header("content-type")
       contentType: "application/cloudevents-batch+json; charset=utf-8";
 
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Not using a container model for CloudEvent is intentional. Went through Stewardship Board review (#21880)."
       @doc("Array of Cloud Events being published.")
       @body
       events: CloudEvent[];
