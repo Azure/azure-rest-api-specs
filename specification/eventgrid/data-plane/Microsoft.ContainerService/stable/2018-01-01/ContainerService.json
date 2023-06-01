@@ -40,12 +40,11 @@
     "ContainerServiceClusterSupportEndedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
       "type": "object",
-      "properties": {
-        "kubernetesVersion": {
-          "description": "The Kubernetes version of the ManagedCluster resource",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportBaseProperties"
         }
-      },
+      ],
       "x-ms-examples": {
         "clusterSupportEndedCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/cluster_support_ended.json"
@@ -58,12 +57,11 @@
     "ContainerServiceClusterSupportEndingEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
       "type": "object",
-      "properties": {
-        "kubernetesVersion": {
-          "description": "The Kubernetes version of the ManagedCluster resource",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportBaseProperties"
         }
-      },
+      ],
       "x-ms-examples": {
         "clusterSupportEndingCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/cluster_support_ending.json"
@@ -76,12 +74,11 @@
     "ContainerServiceNodePoolRollingStartedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
       "type": "object",
-      "properties": {
-        "nodePoolName": {
-          "description": "The name of the node pool in the ManagedCluster resource",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
         }
-      },
+      ],
       "x-ms-examples": {
         "nodePoolRollingStartedCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/node_pool_rolling_started.json"
@@ -94,12 +91,11 @@
     "ContainerServiceNodePoolRollingSucceededEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
       "type": "object",
-      "properties": {
-        "nodePoolName": {
-          "description": "The name of the node pool in the ManagedCluster resource",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
         }
-      },
+      ],
       "x-ms-examples": {
         "nodePoolRollingSucceededCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/node_pool_rolling_succeeded.json"
@@ -112,18 +108,35 @@
     "ContainerServiceNodePoolRollingFailedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
       "type": "object",
-      "properties": {
-        "nodePoolName": {
-          "description": "The name of the node pool in the ManagedCluster resource",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
         }
-      },
+      ],
       "x-ms-examples": {
         "nodePoolRollingFailedCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/node_pool_rolling_failed.json"
         },
         "nodePoolRollingFailedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/node_pool_rolling_failed.json"
+        }
+      }
+    },
+    "ContainerServiceClusterSupportBaseProperties": {
+      "description": "Schema of common properties of cluster support events",
+      "properties": {
+        "kubernetesVersion": {
+          "description": "The Kubernetes version of the ManagedCluster resource",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingBaseProperties": {
+      "description": "Schema of common properties of node pool rolling events",
+      "properties": {
+        "nodePoolName": {
+          "description": "The name of the node pool in the ManagedCluster resource",
+          "type": "string"
         }
       }
     }
