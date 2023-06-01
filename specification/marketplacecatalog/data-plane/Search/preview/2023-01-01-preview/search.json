@@ -81,11 +81,16 @@
             "description": "Products that contains any of the given badges. If no value provided, this filter is ignored. The following product badges are available: \n- `PreferredSolution`: Preferred Solution.\n- `PowerBICertified`: power BI Certified.\n- `AdditionalPurchaseRequirement`: Additional Purchase Requirement.",
             "collectionFormat": "csv",
             "items": {
-              "$ref": "#/definitions/Badge"
-            },
-            "x-ms-enum": {
-              "name": "Badge",
-              "modelAsString": true
+              "type": "string",
+              "enum": [
+                "PreferredSolution",
+                "PowerBICertified",
+                "AdditionalPurchaseRequirement"
+              ],
+              "x-ms-enum": {
+                "name": "Badge",
+                "modelAsString": true
+              }
             }
           },
           {
