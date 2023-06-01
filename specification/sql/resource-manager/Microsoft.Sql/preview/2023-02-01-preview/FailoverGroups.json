@@ -547,7 +547,15 @@
           "description": "List of databases in the failover group.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Sql/servers/databases"
+                }
+              ]
+            }
           }
         }
       }
@@ -570,7 +578,15 @@
         },
         "targetServer": {
           "description": "The target partner server where the read-only endpoint points to.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers"
+              }
+            ]
+          }
         }
       }
     },
@@ -634,7 +650,15 @@
           "description": "List of databases in the failover group.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Sql/servers/databases"
+                }
+              ]
+            }
           }
         },
         "partnerServers": {
@@ -655,7 +679,15 @@
       "properties": {
         "id": {
           "description": "Resource identifier of the partner server.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers"
+              }
+            ]
+          }
         },
         "location": {
           "description": "Geo location of the partner server.",
