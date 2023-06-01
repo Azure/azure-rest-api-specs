@@ -1,0 +1,272 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventGridClient",
+    "version": "2018-01-01",
+    "description": "Azure EventGrid Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "description": "The host name of the topic, e.g. topic1.westus2-1.eventgrid.azure.net",
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://eventgrid.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "aeg-sas-key"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://eventgrid.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/foo": {
+      "get": {
+        "operationId": "ApiManagement_Foo",
+        "description": "Send Operation",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          }
+        }
+      }
+    },
+    "/send": {
+      "post": {
+        "operationId": "PublishCloudEvent",
+        "description": "Publish CloudEvents",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "aeg-channel-name",
+            "in": "header",
+            "required": false,
+            "description": "Required only when publishing to partner namespaces with partner topic routing mode ChannelNameHeader.",
+            "x-ms-client-name": "channelName",
+            "type": "string"
+          },
+          {
+            "name": "events",
+            "in": "body",
+            "required": true,
+            "description": "Events being published.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEventEvent"
+              },
+              "x-typespec-name": "CloudEventEvent[]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
+          "description": "An array of details about specific errors that led to this reported error."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message",
+        "details"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      },
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
+    },
+    "CloudEventEvent": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "An identifier for the event. The combination of id and source must be unique for each distinct event."
+        },
+        "source": {
+          "type": "string",
+          "description": "Identifies the context in which an event happened. The combination of id and source must be unique for each distinct event."
+        },
+        "data": {
+          "$ref": "#/definitions/object",
+          "description": "Event data specific to the event type."
+        },
+        "data_base64": {
+          "type": "string",
+          "format": "byte",
+          "description": "Event data specific to the event type, encoded as a base64 string."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of event related to the originating occurrence."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time (in UTC) the event was generated, in RFC3339 format."
+        },
+        "specversion": {
+          "type": "string",
+          "description": "The version of the CloudEvents specification which the event uses."
+        },
+        "dataschema": {
+          "type": "string",
+          "description": "Identifies the schema that data adheres to."
+        },
+        "datacontenttype": {
+          "type": "string",
+          "description": "Content type of data value."
+        },
+        "subject": {
+          "type": "string",
+          "description": "This describes the subject of the event in the context of the event producer (identified by source)."
+        }
+      },
+      "description": "Properties of an event published to an Event Grid topic using the CloudEvent 1.0 Schema",
+      "required": [
+        "id",
+        "source",
+        "type",
+        "specversion"
+      ]
+    },
+    "object": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
+      "minLength": 1,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
