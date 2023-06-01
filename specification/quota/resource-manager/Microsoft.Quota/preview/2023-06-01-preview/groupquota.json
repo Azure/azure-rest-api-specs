@@ -1618,9 +1618,9 @@
       "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
       "x-ms-azure-resource": true,
       "properties": {
-        "subscriptionFilters": {
-          "description": "Placeholder for filter. It will be expanded to include the list of operator, condition, operand. Based on the filter the subscriptions will be automatically added to SharedQuotaEntity.",
-          "$ref": "#/definitions/Filters"
+        "sdditionalAttributes": {
+          "description": "Additional attributes to allow subscription, which can be added to the subscriptionIds.",
+          "$ref": "#/definitions/AdditionalAttributes"
         },
         "subscriptionIds": {
           "description": "List of subscriptions included in the ShareQuotaEntity. It can be null at the time of creation or a list of subscriptions can be passed.",
@@ -1695,6 +1695,7 @@
           "readOnly": true
         },
         "properties": {
+          "type": "object",
           "provisioningState": {
             "type": "string",
             "description": "Provisioning state",
@@ -1748,6 +1749,73 @@
         }
       }
     },
+    "BillingAccountId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "EnvironmentType": {
+      "type": "string",
+      "description": "Environment name.",
+      "enum": [
+        "Non Production",
+        "Production"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true
+      }
+    },
+    "Environment": {
+      "type": "object",
+      "$ref": "#/definitions/EnvironmentType"
+    },
+    "GroupingIdType": {
+      "type": "string",
+      "description": "GroupingId type.",
+      "enum": [
+        "MangmentGroupId",
+        "ServiceTreeId"
+      ],
+      "x-ms-enum": {
+        "name": "GroupingIdType",
+        "modelAsString": true
+      }
+    },
+    "GroupingId": {
+      "description": "The grouping Id for the group quota. It can be MangmentGroup Id or ServiceTreeId if applicable. ",
+      "type": "object",
+      "properties": {
+        "groupingIdType": {
+          "$ref": "#/definitions/GroupingIdType"
+        },
+        "value": {
+          "description": "GroupId value based on the groupingType selected - ManagmentGroup Id or ServiceTreeId.",
+          "type": "string"
+        }
+      }
+    },
+    "AdditionalAttributes": {
+      "description": "Additional attribute to allow subscriptions to be part of the GroupQuota.",
+      "type": "object",
+      "properties": {
+        "billingAccountId": {
+          "$ref": "#/definitions/BillingAccountId"
+        },
+        "groupId": {
+          "$ref": "#/definitions/GroupingId"
+        },
+        "enviornment": {
+          "$ref": "#/definitions/Environment"
+        }
+      },
+      "required": [
+        "billingAccountId"
+      ]
+    },
     "Filter": {
       "type": "object",
       "description": "Filter for SharedQuota Entity.",
@@ -1756,7 +1824,9 @@
           "type": "string",
           "description": "Name of the entity for filter, such as offerType.",
           "enum": [
-            "offerType"
+            "billingId",
+            "groupId",
+            "environment"
           ],
           "x-ms-enum": {
             "name": "SubscriptionFilterType",
@@ -1775,12 +1845,9 @@
             "modelAsString": true
           }
         },
-        "filterValues": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Values for the filterEntity for comparison. Such as offerType values."
-          }
+        "filterValue": {
+          "type": "string",
+          "description": "Values for the filterEntity for comparison."
         }
       },
       "required": [
