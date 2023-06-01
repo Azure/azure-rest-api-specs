@@ -64,8 +64,14 @@ namespace EventGrid.Storage {
   model StorageLifecyclePolicyCompletedEventData {
     @doc("The time the policy task was scheduled.")
     scheduleTime?: string;
+
+    @doc( "Execution statistics of a specific policy action in a Blob Management cycle.")
     deleteSummary?: StorageLifecyclePolicyActionSummaryDetail;
+
+    @doc( "Execution statistics of a specific policy action in a Blob Management cycle.")
     tierToCoolSummary?: StorageLifecyclePolicyActionSummaryDetail;
+
+    @doc( "Execution statistics of a specific policy action in a Blob Management cycle.")
     tierToArchiveSummary?: StorageLifecyclePolicyActionSummaryDetail;
   }
 
