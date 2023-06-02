@@ -1771,9 +1771,8 @@
     },
     "GroupingIdType": {
       "type": "string",
-      "description": "GroupingId type.",
+      "description": "GroupingId type. More types of groupIds can be supported in future. MGID is already in the URI, so it's not needed and cause errors, if the MGId in Uri is different properties.'",
       "enum": [
-        "MangmentGroupId",
         "ServiceTreeId"
       ],
       "x-ms-enum": {
@@ -1799,6 +1798,7 @@
       "type": "object",
       "properties": {
         "billingAccountId": {
+          "description": "BillingAccountId. The customer can make mistake and select a billing account ID not belonging to MG. Let us think from the end user perspective. Make it simpler and less error prone, where the customer is struggling to provide the right configuration.",
           "$ref": "#/definitions/BillingAccountId"
         },
         "groupId": {
