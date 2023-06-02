@@ -56,6 +56,7 @@ model FleetMemberProperties {
   provisioningState?: FleetMemberProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy Spec"
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
 enum FleetMemberProvisioningState {
