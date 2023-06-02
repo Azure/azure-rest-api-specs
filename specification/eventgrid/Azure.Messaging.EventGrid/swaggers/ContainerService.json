@@ -1,3 +1,76 @@
-{"ContainerServiceNewKubernetesVersionAvailableEventData": {"type": "object", "properties": {"latestSupportedKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource"}, "latestStableKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version for the MINOR version considered stable for the ManagedCluster resource"}, "lowestMinorKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version for the lowest applicable MINOR version available for the ManagedCluster resource"}, "latestPreviewKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event"}},
-{"ContainerServiceNewKubernetesVersionAvailableEventData": {"type": "object", "properties": {}, "description": "Properties of an event published to an Event Grid topic using a custom schema"}},
-{"ContainerServiceNewKubernetesVersionAvailableEventData": {"type": "object", "properties": {"id": {"type": "string", "description": "An unique identifier for the event."}, "topic": {"type": "string", "description": "The resource path of the event source."}, "subject": {"type": "string", "description": "A resource path relative to the topic path."}, "data": {"description": "Event data specific to the event type."}, "eventType": {"type": "string", "description": "The type of the event that occurred."}, "eventTime": {"type": "string", "format": "date-time", "description": "The time (in UTC) the event was generated."}, "metadataVersion": {"type": "string", "description": "The schema version of the event metadata.", "readOnly": true}, "dataVersion": {"type": "string", "description": "The schema version of the data object."}}, "description": "Properties of an event published to an Event Grid topic using the EventGrid Schema.", "required": ["id", "subject", "data", "eventType", "eventTime", "dataVersion"]}},
+{
+  "ContainerServiceNewKubernetesVersionAvailableEventData": {
+    "type": "object",
+    "properties": {
+      "latestSupportedKubernetesVersion": {
+        "type": "string",
+        "description": "The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource"
+      },
+      "latestStableKubernetesVersion": {
+        "type": "string",
+        "description": "The highest PATCH Kubernetes version for the MINOR version considered stable for the ManagedCluster resource"
+      },
+      "lowestMinorKubernetesVersion": {
+        "type": "string",
+        "description": "The highest PATCH Kubernetes version for the lowest applicable MINOR version available for the ManagedCluster resource"
+      },
+      "latestPreviewKubernetesVersion": {
+        "type": "string",
+        "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"
+      }
+    },
+    "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event"
+  },
+  "ContainerServiceNewKubernetesVersionAvailableEventData": {
+    "type": "object",
+    "properties": {},
+    "description": "Properties of an event published to an Event Grid topic using a custom schema"
+  },
+  "ContainerServiceNewKubernetesVersionAvailableEventData": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "An unique identifier for the event."
+      },
+      "topic": {
+        "type": "string",
+        "description": "The resource path of the event source."
+      },
+      "subject": {
+        "type": "string",
+        "description": "A resource path relative to the topic path."
+      },
+      "data": {
+        "description": "Event data specific to the event type."
+      },
+      "eventType": {
+        "type": "string",
+        "description": "The type of the event that occurred."
+      },
+      "eventTime": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The time (in UTC) the event was generated."
+      },
+      "metadataVersion": {
+        "type": "string",
+        "description": "The schema version of the event metadata.",
+        "readOnly": true
+      },
+      "dataVersion": {
+        "type": "string",
+        "description": "The schema version of the data object."
+      }
+    },
+    "description": "Properties of an event published to an Event Grid topic using the EventGrid Schema.",
+    "required": [
+      "id",
+      "subject",
+      "data",
+      "eventType",
+      "eventTime",
+      "dataVersion"
+    ]
+  }
+}
