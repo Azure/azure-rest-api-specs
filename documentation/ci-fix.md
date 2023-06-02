@@ -31,7 +31,8 @@ npm install
 # Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
 npx tsc 
 
-# As of 5/25/2023, the prettier version should be 2.1.2
+# As of 6/2/2023, the prettier version should be 2.1.2 (this is coming from openapi-alps repo)
+# If it is not, run 'npm install prettier@2.1.2'
 npx prettier --version
 
 # Run 'prettier --check' to verify the problems can be reproduced locally
@@ -48,6 +49,21 @@ npx prettier --write **/*.json
 Then please commit and push changes made by prettier.
 
 Reference: [prettier](https://www.npmjs.com/package/prettier).
+
+### Troubleshotting `npx prettier`
+
+If you see failure like the following upon running `npx prettier --check` or `npx prettier --write`:
+```
+[error] Cannot find module 'prettier/parser-babylon'
+[error] Require stack:
+[error] - azure-rest-api-specs-pr\scripts\prettier-swagger-plugin.js
+[error] - azure-rest-api-specs-pr\node_modules\prettier\index.js
+[error] - azure-rest-api-specs-pr\node_modules\prettier\cli.js
+[error] - azure-rest-api-specs-pr\node_modules\prettier\bin-prettier.js
+```
+
+then ensure you ran `npx tsc` from `main` branch and did not run `npx tsc` from any other branch, like `RPSaaSDev`.
+
 
 ## Model Validation
 
