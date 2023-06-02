@@ -235,16 +235,8 @@
     },
     "CarbonEmissionOverallSummaryData": {
       "type": "object",
-      "properties": {
-        "lastDataRefreshDate": {
-          "type": "string",
-          "description": "Date when the data was refreshed"
-        }
-      },
+      "properties": {},
       "description": "Response for Overall Carbon Emissions Summary",
-      "required": [
-        "lastDataRefreshDate"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/CarbonEmissionData"
@@ -377,6 +369,142 @@
         }
       ],
       "x-ms-discriminator-value": "ResourceGroupItemDetailsData"
+    },
+    "ResourceCarbonEmissionTopItemMonthlySummaryData": {
+      "type": "object",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "date": {
+          "type": "string",
+          "description": "Month date"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource Group"
+        }
+      },
+      "description": "Response for Top Items Carbon Emissions by Month for ResourceType",
+      "required": [
+        "itemName",
+        "categoryType",
+        "date",
+        "subscriptionId",
+        "resourceGroup"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceTopItemsMonthlySummaryData"
+    },
+    "ResourceGroupCarbonEmissionTopItemMonthlySummaryData": {
+      "type": "object",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "date": {
+          "type": "string",
+          "description": "Month date"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        }
+      },
+      "description": "Response for Top Items Carbon Emissions by Month for ResourceGroupType",
+      "required": [
+        "itemName",
+        "categoryType",
+        "date",
+        "subscriptionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGroupTopItemsMonthlySummaryData"
+    },
+    "ResourceGroupCarbonEmissionTopItemsSummaryData": {
+      "type": "object",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        }
+      },
+      "description": "Response for Top Items For ResourceGroup",
+      "required": [
+        "itemName",
+        "categoryType",
+        "subscriptionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceGroupTopItemsSummaryData"
+    },
+    "ResourceCarbonEmissionTopItemsSummaryData": {
+      "type": "object",
+      "properties": {
+        "itemName": {
+          "type": "string",
+          "description": "Item name"
+        },
+        "categoryType": {
+          "$ref": "#/definitions/CategoryTypeEnum",
+          "description": "Item category"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource Group"
+        }
+      },
+      "description": "Response for Top Items For Resource",
+      "required": [
+        "itemName",
+        "categoryType",
+        "subscriptionId",
+        "resourceGroup"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CarbonEmissionData"
+        }
+      ],
+      "x-ms-discriminator-value": "ResourceTopItemsSummaryData"
     },
     "CategoryTypeEnum": {
       "type": "string",
