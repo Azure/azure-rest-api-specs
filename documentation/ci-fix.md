@@ -100,7 +100,7 @@ The [LintDiff validation tool](https://github.com/Azure/azure-openapi-validator)
 Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.  
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
-To reproduce LintDiff failure locally, see [CONTRIBUTING.md / How to run LintDiff locally](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-run-lintdiff-locally).
+To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to run LintDiff locally](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-run-lintdiff-locally).
 
 ## Avocado
 
