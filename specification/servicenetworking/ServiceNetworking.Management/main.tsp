@@ -31,7 +31,7 @@ model Frontend is TrackedResource<FrontendProperties>{
   @visibility("read")
   @path
   @segment("frontends")
-  @pattern("[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   name : string;
 }
 
@@ -55,7 +55,7 @@ model Association is TrackedResource<AssociationProperties> {
   @doc("Name of Association")
   @path
   @segment("associations")
-  @pattern("[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   name: string;
 }
 
@@ -71,6 +71,7 @@ model AssociationProperties {
 
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy Spec"
 enum AssociationType {
   "subnets",
 }
@@ -88,7 +89,7 @@ model TrafficController is TrackedResource<TrafficControllerProperties> {
   @path
   @segment("trafficControllers")
   @doc("traffic controller name for path")
-  @pattern("[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   name: string;
 }
 
@@ -108,6 +109,7 @@ model TrafficControllerProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy Spec"
 @lroStatus
 enum ProvisioningState{
   Provisioning,
