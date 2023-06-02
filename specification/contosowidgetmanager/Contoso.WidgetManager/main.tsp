@@ -16,8 +16,10 @@ using Azure.Core;
 
 namespace Azure.Contoso.WidgetManager;
 
+@doc("The service")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @doc("The initial service version")
   v2022_11_01_Preview: "2022-11-01-preview",
 }
 
@@ -36,23 +38,24 @@ model Widget {
   sharedModel?: FakedSharedModel;
 }
 
+interface StandardOperations extends Azure.Core.ResourceOperations<Azure.Core.Traits.NoClientRequestId & Azure.Core.Traits.NoConditionalRequests & Azure.Core.Traits.NoRepeatableRequests, Azure.Core.Foundations.ErrorResponse> {}
 interface Widgets {
   @doc("Fetch a Widget by name.")
-  getWidget is ResourceRead<Widget>;
+  getWidget is StandardOperations.ResourceRead<Widget>;
 
   @doc("Gets status of a Widget operation.")
-  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
+  getWidgetOperationStatus is StandardOperations.GetResourceOperationStatus<Widget>;
 
   @doc("Creates or updates a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
-  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
+  createOrUpdateWidget is StandardOperations.LongRunningResourceCreateOrUpdate<Widget>;
 
   @doc("Delete a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
-  deleteWidget is LongRunningResourceDelete<Widget>;
+  deleteWidget is StandardOperations.LongRunningResourceDelete<Widget>;
 
   @doc("List Widget resources")
-  listWidgets is ResourceList<
+  listWidgets is StandardOperations.ResourceList<
     Widget,
     {
       parameters: StandardListQueryParameters;
