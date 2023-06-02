@@ -623,7 +623,7 @@ input-file:
 - Microsoft.Storage/preview/2018-03-01-preview/storage.json
 - Microsoft.Storage/preview/2018-03-01-preview/blob.json
 - Microsoft.Storage/preview/2018-03-01-preview/managementpolicy.json
-- 
+
 directive:
   - suppress: R3018
     reason: Existing boolean properties
