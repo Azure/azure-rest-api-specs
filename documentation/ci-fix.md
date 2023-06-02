@@ -64,7 +64,6 @@ If you see failure like the following upon running `npx prettier --check` or `np
 
 then ensure you ran `npx tsc` from `main` branch and did not run `npx tsc` from any other branch, like `RPSaaSDev`.
 
-
 ## Model Validation
 
 Run Model Validation locally:
