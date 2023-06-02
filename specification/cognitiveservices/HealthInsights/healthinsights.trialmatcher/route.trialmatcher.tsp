@@ -21,7 +21,7 @@ interface TrialMatcher {
     "./examples/SuccessfulTrialMatcherResponse.json",
     "SuccessfulTrialMatcherGetAnalyzeStatus"
   )
-  getJob is Azure.Core.ResourceRead<TrialMatcherResult>;
+  getJob is StandardOperations.ResourceRead<TrialMatcherResult>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
   @summary("Create Trial Matcher job")

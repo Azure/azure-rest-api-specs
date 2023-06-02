@@ -330,6 +330,7 @@ model ClinicalTrialResearchFacility {
   ...GeographicLocation;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("Possible values for the Sex eligibility criterion as accepted by clinical trials, which indicates the sex of people who may participate in a clinical study.")
 enum ClinicalTrialAcceptedSex {
   All: "all",
@@ -337,6 +338,7 @@ enum ClinicalTrialAcceptedSex {
   Male: "male"
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("Possible units for a person's age.")
 enum AgeUnit {
   Years: "years",
@@ -344,6 +346,7 @@ enum AgeUnit {
   Days: "days",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("Possible phases of a clinical trial.")
 enum ClinicalTrialPhase {
   NotApplicable: "notApplicable",
@@ -354,6 +357,7 @@ enum ClinicalTrialPhase {
   Phase4: "phase4",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("Possible study types of a clinical trial.")
 enum ClinicalTrialStudyType {
   Interventional: "interventional",
@@ -362,6 +366,7 @@ enum ClinicalTrialStudyType {
   PatientRegistries: "patientRegistries",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("Possible recruitment status of a clinical trial.")
 enum ClinicalTrialRecruitmentStatus {
   UnknownStatus: "unknownStatus",
@@ -369,7 +374,7 @@ enum ClinicalTrialRecruitmentStatus {
   Recruiting: "recruiting",
   EnrollingByInvitation: "enrollingByInvitation",
 }
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("Possible purposes of a clinical trial.")
 enum ClinicalTrialPurpose {
   NotApplicable: "notApplicable",
@@ -384,27 +389,32 @@ enum ClinicalTrialPurpose {
   Other: "other",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("Possible sources of a clinical trial.")
 enum ClinicalTrialSource {
   Custom: "custom",
   ClinicaltrialsGov: "clinicaltrials.gov",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("`GeoJSON` type.")
 enum GeoJsonType {
   Feature: "Feature",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("`GeoJSON` geometry type.")
 enum GeoJsonGeometryType {
   Point: "Point",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("`GeoJSON` object sub-type.")
 enum GeoJsonPropertiesSubType {
   Circle: "Circle",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("The type of the Trial Matcher inference.")
 enum TrialMatcherInferenceType {
   TrialEligibility: "trialEligibility",

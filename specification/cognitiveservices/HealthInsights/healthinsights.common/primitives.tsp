@@ -1,4 +1,6 @@
+import "@azure-tools/typespec-azure-core";
 using Azure.Core;
+using Azure.Core.Traits;
 using TypeSpec.Http;
 namespace AzureHealthInsights;
 
@@ -15,3 +17,5 @@ op LongRunningRpcOperation<
   RepeatabilityRequestHeaders & RepeatabilityResponseHeaders,
   Azure.Core.Foundations.ErrorResponse
 >;
+
+interface StandardOperations extends Azure.Core.ResourceOperations<NoClientRequestId & NoConditionalRequests & NoRepeatableRequests> {}

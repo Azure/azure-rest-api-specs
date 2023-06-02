@@ -73,7 +73,7 @@ An indication whether to perform a preliminary step on the patient's documents t
 }
 
 
-
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy API"
 @doc("The type of the Onco Phenotype inference.")
 enum OncoPhenotypeInferenceType {
   TumorSite: "tumorSite",

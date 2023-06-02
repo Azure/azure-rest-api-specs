@@ -78,7 +78,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/OncoPhenotypeData"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -92,7 +93,7 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               },
@@ -151,8 +152,8 @@
             "in": "path",
             "required": true,
             "description": "A processing job identifier.",
-            "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -208,7 +209,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/TrialMatcherData"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -222,7 +224,7 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               },
@@ -281,8 +283,8 @@
             "in": "path",
             "required": true,
             "description": "A processing job identifier.",
-            "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -469,8 +471,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -498,10 +499,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "ClinicalCodedElement": {
       "type": "object",
@@ -1387,8 +1385,7 @@
       "items": {
         "$ref": "#/definitions/ExtendedClinicalCodedElement"
       },
-      "x-ms-identifiers": [],
-      "description": "Clinical information which is needed to provide better trial matching results for the patient."
+      "x-ms-identifiers": []
     },
     "OncoPhenotypeData": {
       "type": "object",
@@ -2005,8 +2002,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {

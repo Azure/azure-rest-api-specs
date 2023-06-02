@@ -13,6 +13,7 @@ using Autorest;
 
 namespace AzureHealthInsights;
 
+
 interface OncoPhenotype {
   @summary("Get Onco Phenotype job details")
   @tag("OncoPhenotype")
@@ -21,7 +22,8 @@ interface OncoPhenotype {
     "./examples/SuccessfulOncoPhenotypeResponse.json",
     "SuccessfulOncoPhenotypeGetAnalyzeStatus"
   )
-  getJob is Azure.Core.ResourceRead<OncoPhenotypeResult>;
+  getJob is StandardOperations.ResourceRead<OncoPhenotypeResult>;
+
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
   @summary("Create Onco Phenotype job")
