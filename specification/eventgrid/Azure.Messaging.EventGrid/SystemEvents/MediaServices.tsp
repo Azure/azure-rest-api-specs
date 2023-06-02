@@ -125,6 +125,7 @@ namespace EventGrid.MediaServices {
   @doc("The event data for a Job output.")
   @discriminator("@odata.type")
   model MediaJobOutput {
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after service swagger."
     @doc("The discriminator for derived types.")
     @projectedName("json", "@odata.type")
     OdataType?: string;
