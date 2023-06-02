@@ -2,6 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
+using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
@@ -140,7 +142,6 @@ numeric, underscore or hyphen characters.
 
       @doc("The file content as application/octet-stream.")
       @body
-      @format("binary")
       body: bytes;
     },
     FileInfo
@@ -278,36 +279,6 @@ numeric, underscore or hyphen characters.
 }
 
 interface LoadTestRunOperations {
-  @summary("Create and start a new test run with the given name.")
-  @doc("Create and start a new test run with the given name.")
-  @route("/test-runs/{testRunId}")
-  @patch
-  CreateOrUpdateTestRun is Azure.Core.Foundations.Operation<
-    {
-      @header contentType: "application/merge-patch+json",
-      @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-      @path
-      testRunId: string;
-
-      @doc("""
-Existing test run identifier that should be rerun, if this is provided, the
-test will run with the JMX file, configuration and app components from the
-existing test run. You can override the configuration values for new test run
-in the request body.
-""")
-      @query
-      oldTestRunId?: string;
-
-      @doc("Load test run model")
-      @body
-      body: TestRun;
-    },
-    TestRun
-  >;
-
   @summary("Get test run details by name.")
   @doc("Get test run details by name.")
   @route("/test-runs/{testRunId}")
@@ -323,6 +294,10 @@ numeric, underscore or hyphen characters.
     },
     TestRun
   >;
+
+  @summary("Create and start a new test run with the given name.")
+  @doc("Create and start a new test run with the given name.")
+  CreateOrUpdateTestRun is LongRunningResourceCreateOrUpdate<TestRun>;
 
   @summary("Delete a test run by its name.")
   @doc("Delete a test run by its name.")
@@ -501,10 +476,8 @@ The timespan of the query. It is a string with the following format
 
   // @summary("List the dimension values for the given metric dimension name.")
   // @doc("List the dimension values for the given metric dimension name.")
-  // @route("/test-runs/{testRunId}/metric-dimensions/{name}")
   // ListMetricDimensionValues is Azure.Core.ResourceList<
-  //   DimensionValueList,
-  //   MetricDimensionsRequest
+  //   DimensionValueList, QueryParametersTrait<MetricDimensions>
   // >;
 
   @summary("Associate an app component (collection of azure resources) to a test run")
