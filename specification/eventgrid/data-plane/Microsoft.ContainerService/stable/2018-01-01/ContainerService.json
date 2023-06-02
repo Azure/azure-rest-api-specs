@@ -37,56 +37,103 @@
         }
       }
     },
-    "ContainerServiceClusterOutOfSupportEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterOutOfSupport event",
+    "ContainerServiceClusterSupportEndedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportBaseProperties"
+        }
+      ],
+      "x-ms-examples": {
+        "clusterSupportEndedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/cluster_support_ended.json"
+        },
+        "clusterSupportEndedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/cluster_support_ended.json"
+        }
+      }
+    },
+    "ContainerServiceClusterSupportEndingEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportBaseProperties"
+        }
+      ],
+      "x-ms-examples": {
+        "clusterSupportEndingCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/cluster_support_ending.json"
+        },
+        "clusterSupportEndingEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/cluster_support_ending.json"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingStartedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
+        }
+      ],
+      "x-ms-examples": {
+        "nodePoolRollingStartedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/node_pool_rolling_started.json"
+        },
+        "nodePoolRollingStartedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/node_pool_rolling_started.json"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingSucceededEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
+        }
+      ],
+      "x-ms-examples": {
+        "nodePoolRollingSucceededCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/node_pool_rolling_succeeded.json"
+        },
+        "nodePoolRollingSucceededEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/node_pool_rolling_succeeded.json"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingFailedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingBaseProperties"
+        }
+      ],
+      "x-ms-examples": {
+        "nodePoolRollingFailedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/node_pool_rolling_failed.json"
+        },
+        "nodePoolRollingFailedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/node_pool_rolling_failed.json"
+        }
+      }
+    },
+    "ContainerServiceClusterSupportBaseProperties": {
+      "description": "Schema of common properties of cluster support events",
       "type": "object",
       "properties": {
         "kubernetesVersion": {
           "description": "The Kubernetes version of the ManagedCluster resource",
           "type": "string"
-        },
-        "isOutOfSupport": {
-          "description": "Indicates if the Kubernetes version of the ManagedCluster resource is out of support",
-          "type": "boolean"
-        }
-      },
-      "x-ms-examples": {
-        "clusterOutOfSupportCloudEventsSchema": {
-          "$ref": "./examples/cloud-events-schema/cluster_out_of_support.json"
-        },
-        "clusterOutOfSupportEventGridSchema": {
-          "$ref": "./examples/event-grid-schema/cluster_out_of_support.json"
         }
       }
     },
-    "ContainerServiceNodePoolRollingProgressEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingProgress event",
+    "ContainerServiceNodePoolRollingBaseProperties": {
+      "description": "Schema of common properties of node pool rolling events",
       "type": "object",
       "properties": {
         "nodePoolName": {
           "description": "The name of the node pool in the ManagedCluster resource",
           "type": "string"
-        },
-        "progressState": {
-          "description": "Indicates the progress of the node pool rolling process. Possible values are: \"Started\", \"Succeeded\", \"Failed\"",
-          "type": "string",
-          "enum": [
-            "Started",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "progressState",
-            "modelAsString": true
-          }
-        }
-      },
-      "x-ms-examples": {
-        "nodePoolRollingProgressCloudEventsSchema": {
-          "$ref": "./examples/cloud-events-schema/node_pool_rolling_progress.json"
-        },
-        "nodePoolRollingProgressEventGridSchema": {
-          "$ref": "./examples/event-grid-schema/node_pool_rolling_progress.json"
         }
       }
     }
