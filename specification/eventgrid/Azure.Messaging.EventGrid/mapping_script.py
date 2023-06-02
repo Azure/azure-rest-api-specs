@@ -26,6 +26,9 @@ for definition_name, definition_body in fileContent["definitions"].items():
     except:
         name = old_name
     with open(f'swaggers\\{name}.json', 'a') as f:
-        body = {event: definition_body}
-        json.dump(body, f)
+        if file_names.count(name) == 0:
+            f.write("{\n")
+        f.write('"'+event+'"' + " : ")
+        json.dump(definition_body,f)
         f.write(",\n")
+        file_names.append(name)
