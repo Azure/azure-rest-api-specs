@@ -47,6 +47,12 @@
               "$ref": "#/definitions/ClassificationPolicy"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ClassificationPolicy"
+            }
+          },
           "default": {
             "description": "Error",
             "schema": {
@@ -156,11 +162,10 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Maximum page size",
             "type": "integer",
-            "format": "int32",
-            "default": -1
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -228,6 +233,12 @@
         "responses": {
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DistributionPolicy"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/DistributionPolicy"
             }
@@ -341,11 +352,10 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Maximum page size",
             "type": "integer",
-            "format": "int32",
-            "default": -1
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -413,6 +423,12 @@
         "responses": {
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExceptionPolicy"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ExceptionPolicy"
             }
@@ -526,11 +542,10 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
-            "format": "int32",
-            "default": -1
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -598,6 +613,12 @@
         "responses": {
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RouterJob"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/RouterJob"
             }
@@ -709,9 +730,7 @@
         "summary": "Reclassify a job.",
         "operationId": "JobRouter_ReclassifyJobAction",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -944,7 +963,7 @@
           {
             "in": "query",
             "name": "status",
-            "description": "(Optional) If specified, filter jobs by status.",
+            "description": "If specified, filter jobs by status.",
             "type": "string",
             "default": "all",
             "enum": [
@@ -965,48 +984,47 @@
             ],
             "x-ms-enum": {
               "name": "JobStateSelector",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
             "in": "query",
             "name": "queueId",
-            "description": "(Optional) If specified, filter jobs by queue.",
+            "description": "If specified, filter jobs by queue.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "channelId",
-            "description": "(Optional) If specified, filter jobs by channel.",
+            "description": "If specified, filter jobs by channel.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "classificationPolicyId",
-            "description": "(Optional) If specified, filter jobs by classificationPolicy.",
+            "description": "If specified, filter jobs by classificationPolicy.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "scheduledBefore",
-            "description": "(Optional) If specified, filter on jobs that was scheduled before or at given timestamp. Range: (-Inf, scheduledBefore]",
+            "description": "If specified, filter on jobs that was scheduled before or at given timestamp. Range: (-Inf, scheduledBefore]",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
             "name": "scheduledAfter",
-            "description": "(Optional) If specified, filter on jobs that was scheduled at or after given value. Range: [scheduledAfter, +Inf).",
+            "description": "If specified, filter on jobs that was scheduled at or after given value. Range: [scheduledAfter, +Inf).",
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
-            "format": "int32",
-            "default": -1
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1088,9 +1106,7 @@
         "summary": "Un-assign a job.",
         "operationId": "JobRouter_UnassignJobAction",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1201,9 +1217,7 @@
         "summary": "Declines an offer to work on a job.",
         "operationId": "JobRouter_DeclineJobAction",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1293,6 +1307,12 @@
         "responses": {
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/JobQueue"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/JobQueue"
             }
@@ -1406,11 +1426,10 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
-            "format": "int32",
-            "default": -1
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1521,6 +1540,12 @@
         "responses": {
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RouterWorker"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/RouterWorker"
             }
@@ -1644,7 +1669,7 @@
           {
             "in": "query",
             "name": "status",
-            "description": "(Optional) If specified, select workers by worker status.",
+            "description": "If specified, select workers by worker status.",
             "type": "string",
             "default": "all",
             "enum": [
@@ -1655,34 +1680,33 @@
             ],
             "x-ms-enum": {
               "name": "WorkerStateSelector",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
             "in": "query",
             "name": "channelId",
-            "description": "(Optional) If specified, select workers who have a channel configuration with this channel",
+            "description": "If specified, select workers who have a channel configuration with this channel",
             "type": "string"
           },
           {
             "in": "query",
             "name": "queueId",
-            "description": "(Optional) If specified, select workers who are assigned to this queue",
+            "description": "If specified, select workers who are assigned to this queue",
             "type": "string"
           },
           {
             "in": "query",
             "name": "hasCapacity",
-            "description": "(Optional) If set to true, select only workers who have capacity for the channel specified by `channelId` or for any channel\r\n            if `channelId` not specified. If set to false, then will return all workers including workers without any capacity for jobs. Defaults to false.",
+            "description": "If set to true, select only workers who have capacity for the channel specified by `channelId` or for any channel\r\n            if `channelId` not specified. If set to false, then will return all workers including workers without any capacity for jobs. Defaults to false.",
             "type": "boolean"
           },
           {
             "in": "query",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "description": "Number of objects to return per page",
             "type": "integer",
-            "format": "int32",
-            "default": -1
+            "format": "int32"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2257,7 +2281,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ExpressionLanguage",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "expression": {
@@ -2605,7 +2629,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "LabelOperator",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -2647,7 +2671,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "LabelOperator",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "ttlSeconds": {
@@ -2732,7 +2756,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "LabelOperator",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "value": {
@@ -2894,7 +2918,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "RouterJobStatus",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "enqueueTimeUtc": {
@@ -3021,7 +3045,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "RouterWorkerState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "queueAssignments": {
@@ -3159,7 +3183,7 @@
             "type": "string",
             "x-ms-enum": {
               "name": "ScoringRuleParameterSelector",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         },
@@ -3450,7 +3474,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "LabelOperator",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "value": {
@@ -3476,7 +3500,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "WorkerSelectorState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "expireTime": {
