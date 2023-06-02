@@ -376,11 +376,7 @@
       "properties": {
         "server": {
           "type": "string",
-          "description": "Login server of the container registry that the final image should be uploaded to."
-        },
-        "identityResourceId": {
-          "type": "string",
-          "description": "Full user-assigned identity Resource ID for the managed identity that should be used to connect to the container registry."
+          "description": "Login server of the container registry that the final image should be uploaded to. Builder needs to have an identity mapping with this container registry to determine which identity to use."
         },
         "image": {
           "type": "string",
@@ -389,8 +385,7 @@
       },
       "description": "Container registry that the final image will be uploaded to.",
       "required": [
-        "server",
-        "identityResourceId"
+        "server"
       ]
     },
     "EnvironmentVariable": {

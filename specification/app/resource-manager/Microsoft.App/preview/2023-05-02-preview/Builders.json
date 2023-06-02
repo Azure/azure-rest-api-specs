@@ -356,6 +356,14 @@
           "type": "string",
           "description": "Resource ID of the compute that the patching will be performed on.",
           "readOnly": true
+        },
+        "identityMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentityMappings"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of mappings of managed identities to the container registry that they allow access to."
         }
       },
       "description": "The builder properties.",
@@ -438,6 +446,24 @@
         }
       },
       "description": "The updatable properties of the BuilderResource."
+    },
+    "IdentityMappings": {
+      "type": "object",
+      "properties": {
+        "identityResourceId": {
+          "type": "string",
+          "description": "Resource ID of the managed identity."
+        },
+        "containerRegistryServer": {
+          "type": "string",
+          "description": "Login server of the container registry."
+        }
+      },
+      "description": "Model representing an environment variable.",
+      "required": [
+        "identityResourceId",
+        "containerRegistryServer"
+      ]
     },
     "ProvisioningState": {
       "type": "string",
