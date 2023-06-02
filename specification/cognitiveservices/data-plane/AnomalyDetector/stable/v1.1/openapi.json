@@ -28,6 +28,7 @@
         "name": "ApiVersion",
         "in": "path",
         "required": true,
+        "description": "Api Version",
         "type": "string",
         "enum": [
           "v1.1"
@@ -38,7 +39,8 @@
           "values": [
             {
               "name": "v1_1",
-              "value": "v1.1"
+              "value": "v1.1",
+              "description": "Version 1.1"
             }
           ]
         }
@@ -77,8 +79,8 @@
             "in": "path",
             "required": true,
             "description": "ID of a batch detection result.",
-            "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
