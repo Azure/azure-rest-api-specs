@@ -168,9 +168,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -212,9 +212,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "resource",
@@ -274,9 +274,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -317,16 +317,17 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/AddBlockItemsOptions"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -370,16 +371,17 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/RemoveBlockItemsOptions"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -420,9 +422,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -500,17 +502,17 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "blockItemId",
             "in": "path",
             "required": true,
             "description": "Block Item Id. It will be uuid.",
-            "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -761,8 +763,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -790,10 +791,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "ImageAnalyzeSeverityResult": {
       "type": "object",
@@ -1039,8 +1037,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.MaxPageSizeQueryParameter": {
