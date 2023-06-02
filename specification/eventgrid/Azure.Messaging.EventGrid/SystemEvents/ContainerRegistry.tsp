@@ -16,7 +16,8 @@ namespace EventGrid.ContainerRegistry {
   model ContainerRegistryChartDeletedEventData
     extends ContainerRegistryArtifactEventData {}
 
-  model ContainerRegistryBaseEventData {
+  
+  alias ContainerRegistryBaseEventData = {
     @doc("The event ID.")
     id?: string;
 
@@ -28,10 +29,11 @@ namespace EventGrid.ContainerRegistry {
 
     @doc("The location of the event.")
     location?: string;
-  }
+  };
 
   @doc("The content of the event request message.")
   model ContainerRegistryEventData {
+  
     ...ContainerRegistryBaseEventData;
 
     @doc("The target of the event.")
@@ -124,6 +126,7 @@ namespace EventGrid.ContainerRegistry {
     @doc("The IP or hostname and the port of the registry node that generated the event. Generally, this will be resolved by os.Hostname() along with the running port.")
     addr?: string;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
     @doc("The running instance of an application. Changes after each restart.")
     instanceID?: string;
   }

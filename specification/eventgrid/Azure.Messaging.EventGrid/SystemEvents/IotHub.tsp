@@ -1,3 +1,4 @@
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Modeling after the existing service swagger."
 @doc("Describes the schema of the Azure IoT Hub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid.IoTHub;
 
@@ -125,6 +126,7 @@ model IotHubDeviceTelemetryEventData {
   ...DeviceTelemetryEventProperties;
 }
 
+@doc("Properties JSON element.")
 model PropertiesJson {
   @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
   desired?: IoTHub.DeviceTwinProperties;
@@ -133,6 +135,7 @@ model PropertiesJson {
   reported?: IoTHub.DeviceTwinProperties;
 }
 
+@doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
 model ThumbPrintValue {
   @doc("Primary thumbprint for the x509 certificate.")
   primaryThumbprint?: string;
