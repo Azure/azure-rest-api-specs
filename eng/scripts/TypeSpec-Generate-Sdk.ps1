@@ -25,7 +25,7 @@ try {
     }
   }
   else {
-    Write-Error "Cannot find $commonScript"
+    Write-Error "Cannot find $commonScript at $SdkRepoRootDirectory"
   }
 }
 finally {
