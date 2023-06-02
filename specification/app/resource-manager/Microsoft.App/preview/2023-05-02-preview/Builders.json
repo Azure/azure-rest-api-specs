@@ -42,10 +42,10 @@
         "description": "List BuilderResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -81,13 +81,13 @@
         "description": "List BuilderResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -123,23 +123,16 @@
         "description": "Get a BuilderResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/BuilderNameParameter"
           }
         ],
         "responses": {
@@ -170,23 +163,16 @@
         "description": "Create or update a BuilderResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/BuilderNameParameter"
           },
           {
             "name": "builderEnvelope",
@@ -241,23 +227,16 @@
         "description": "Update a BuilderResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/BuilderNameParameter"
           },
           {
             "name": "builderEnvelope",
@@ -309,23 +288,16 @@
         "description": "Delete a BuilderResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/BuilderNameParameter"
           }
         ],
         "responses": {
@@ -404,14 +376,14 @@
           ]
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "description": "Information about the SourceToCloud builder resource.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -440,7 +412,7 @@
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -474,7 +446,7 @@
         "Succeeded",
         "Failed",
         "Canceled",
-        "InProgress",
+        "Creating",
         "Deleting"
       ],
       "x-ms-enum": {
@@ -484,5 +456,16 @@
       "readOnly": true
     }
   },
-  "parameters": {}
+  "parameters": {
+    "BuilderName": {
+      "name": "builderName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the builder.",
+      "minLength": 2,
+      "maxLength": 32,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
+    }
+  }
 }

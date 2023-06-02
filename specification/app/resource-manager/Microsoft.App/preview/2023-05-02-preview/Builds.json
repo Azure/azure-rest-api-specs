@@ -42,23 +42,16 @@
         "description": "List BuildResource resources by BuilderResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
           }
         ],
         "responses": {
@@ -94,33 +87,19 @@
         "description": "Get a BuildResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
           },
           {
-            "name": "buildName",
-            "in": "path",
-            "required": true,
-            "description": "The name of a build.",
-            "minLength": 2,
-            "maxLength": 64,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/BuildNameParameter"
           }
         ],
         "responses": {
@@ -151,33 +130,19 @@
         "description": "Create a BuildResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
           },
           {
-            "name": "buildName",
-            "in": "path",
-            "required": true,
-            "description": "The name of a build.",
-            "minLength": 2,
-            "maxLength": 64,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/BuildNameParameter"
           },
           {
             "name": "buildEnvelope",
@@ -235,33 +200,19 @@
         "description": "Delete a BuildResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "builderName",
-            "in": "path",
-            "required": true,
-            "description": "The name of the builder.",
-            "minLength": 2,
-            "maxLength": 32,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
           },
           {
-            "name": "buildName",
-            "in": "path",
-            "required": true,
-            "description": "The name of a build.",
-            "minLength": 2,
-            "maxLength": 64,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "$ref": "#/parameters/BuildNameParameter"
           }
         ],
         "responses": {
@@ -380,7 +331,7 @@
       "description": "Information pertaining to an individual build.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -410,7 +361,7 @@
       "description": "Status of the build once it has been provisioned.",
       "enum": [
         "NotStarted",
-        "InProgress",
+        "Creating",
         "Succeeded",
         "Canceled",
         "Failed"
@@ -427,7 +378,7 @@
           "type": "string",
           "description": "Login server of the container registry that the final image should be uploaded to."
         },
-        "identity": {
+        "identityResourceId": {
           "type": "string",
           "description": "Full user-assigned identity Resource ID for the managed identity that should be used to connect to the container registry."
         },
@@ -439,7 +390,7 @@
       "description": "Container registry that the final image will be uploaded to.",
       "required": [
         "server",
-        "identity"
+        "identityResourceId"
       ]
     },
     "EnvironmentVariable": {
@@ -523,5 +474,16 @@
       "readOnly": true
     }
   },
-  "parameters": {}
+  "parameters": {
+    "BuildNameParameter": {
+      "name": "buildName",
+      "in": "path",
+      "required": true,
+      "description": "The name of a build.",
+      "minLength": 2,
+      "maxLength": 64,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
+    }
+  }
 }
