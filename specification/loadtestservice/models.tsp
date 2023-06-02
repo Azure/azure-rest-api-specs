@@ -497,6 +497,7 @@ model ResourceMetric {
 }
 
 @doc("Load test run model")
+@resource("test-runs")
 model TestRun {
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
@@ -539,9 +540,22 @@ SECRET_VALUE.
   @visibility("read")
   virtualUsers?: int32;
 
+  // FIXME: is testRunId optional or required in the response? Resource key and path params cannot be optional
+  @key
+  @path
   @doc("Unique test run name as identifier")
   @visibility("read")
-  testRunId?: string;
+  testRunId: string;
+
+  @doc("""
+Existing test run identifier that should be rerun, if this is provided, the
+test will run with the JMX file, configuration and app components from the
+existing test run. You can override the configuration values for new test run
+in the request body.
+""")
+  @query
+  @visibility("create", "update")
+  oldTestRunId?: string;
 
   @doc("Display name of a testRun.")
   displayName?: string;
@@ -823,31 +837,30 @@ model DimensionValue {
   value?: string;
 }
 
-// FIXME
-// @resource("values")
-// model DimensionValueList {
-//   @key
-//   value: {
-//     items: string[]
-//   }
-// }
-// @doc("Metrics dimension values.")
-// model DimensionValuePage is Azure.Core.Page<DimensionValueList>;
-
-// @resource("metric-dimensions/{name}/values")
-model MetricDimensionsRequest {
-  @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
-  @path("testRunId")
-  testRunId: string;
-
+@resource("/test-runs/{testRunId}/metric-dimensions/{name}/values")
+model DimensionValueList {
   @key
-  @doc("")
-  @path
-  name: string;
+  value: {
+    items: DimensionValue[]
+  };
 
+  @doc("""
+  Unique name for the load test run, must contain only lower-case alphabetic,
+  numeric, underscore or hyphen characters.
+  """)
+  @path("testRunId")
+  @visibility("query")
+  testRunId: string;
+  
+  @doc("")
+  @path("name")
+  @visibility("query")
+  name: string;
+}
+@doc("Metrics dimension values.")
+model DimensionValuePage is Azure.Core.Page<DimensionValueList>;
+
+model MetricDimensions {
   @doc("The interval (i.e. timegrain) of the query.")
   @query
   interval?: Interval;
