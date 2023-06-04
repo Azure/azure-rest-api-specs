@@ -63,13 +63,5 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
   - Products/preview/2023-01-01-preview/products.json
- ```
-
-### Tag: package-2023-01-01-preview
-
-These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-01-01-preview'
-input-file:
   - Search/preview/2023-01-01-preview/search.json
  ```
