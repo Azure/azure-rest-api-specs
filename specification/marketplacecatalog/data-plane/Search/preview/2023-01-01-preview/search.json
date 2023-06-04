@@ -14,6 +14,418 @@
     "application/json"
   ],
   "paths": {
+    "/facets": {
+      "get": {
+        "tags": [
+          "Public-Search"
+        ],
+        "summary": "Get a list of offers count per filter",
+        "operationId": "Facets_Get",
+        "x-ms-examples": {
+          "Facets_Get": {
+            "$ref": "./examples/Facets_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "searchQuery",
+            "in": "query",
+            "description": "The search text, if no value provided, this filter is ignored. Such as searchQuery=red hat"
+          },
+          {
+            "type": "string",
+            "name": "publisherDisplayName",
+            "in": "query",
+            "description": "The search publisher name. Such as publisherDisplayName=red hat. If no value provided, this filter is ignored."
+          },
+          {
+            "type": "string",
+            "name": "azureBenefit",
+            "in": "query",
+            "description": "Define the search for only azure benefit eligible offers, if no value provided, this filter is ignored. Default: null. \n- `Eligible`: Eligible.\n- `NotEligible`: Not Eligible.",
+            "x-schema": {
+              "$ref": "#/definitions/AzureBenefit"
+            },
+            "enum": [
+              "Eligible",
+              "NotEligible"
+            ],
+            "x-ms-enum": {
+              "name": "AzureBenefit",
+              "modelAsString": true
+            }
+          },
+          {
+            "type": "array",
+            "name": "publisherTypes",
+            "in": "query",
+            "description": "Products that contains any of the given publisher types, If no value provided, this filter is ignored. Possible values: Microsoft, ThirdParty. Default: Microsoft. \n- `Microsoft`: Microsoft.\n- `ThirdParty`: Third Party.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Microsoft",
+                "ThirdParty"
+              ],
+              "x-ms-enum": {
+                "name": "PublisherType",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "array",
+            "name": "badges",
+            "in": "query",
+            "description": "Products that contains any of the given badges. If no value provided, this filter is ignored. The following product badges are available: \n- `PreferredSolution`: Preferred Solution.\n- `PowerBICertified`: power BI Certified.\n- `AdditionalPurchaseRequirement`: Additional Purchase Requirement.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "PreferredSolution",
+                "PowerBICertified",
+                "AdditionalPurchaseRequirement"
+              ],
+              "x-ms-enum": {
+                "name": "Badge",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "string",
+            "name": "industryCloud",
+            "in": "query",
+            "description": "Define the search for IndustryCloud offers. If no value provided, this filter is ignored. Default: NotApplicable. \n- `NotApplicable`: Not Applicable.\n- `True`: True.\n- `False`: False.",
+            "x-schema": {
+              "$ref": "#/definitions/IndustryCloud"
+            },
+            "enum": [
+              "NotApplicable",
+              "True",
+              "False"
+            ],
+            "x-ms-enum": {
+              "name": "IndustryCloud",
+              "modelAsString": true
+            }
+          },
+          {
+            "type": "string",
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'"
+          },
+          {
+            "type": "array",
+            "name": "productTypes",
+            "in": "query",
+            "description": "Products that contains any of the given product types, Such as 'VirtualMachine'. If no value provided, this filter is ignored.\n- `AADApps`: Azure Active Directory Apps.\n- `AzureApplication`: Azure Application.\n- `AzureServices`: Azure Services.\n- `ConsultingServices`: Consulting Services.\n- `Container`: Container.\n- `ContainerApps`: Container Apps.\n- `CoreVirtualMachine`: Core Virtual Machine.\n- `CosellOnly`: Cosell Only.\n- `DevService`: Dev Service.\n- `DynamicsBC`: Dynamics BC.\n- `DynamicsCE`: Dynamics CE.\n- `DynamicsOps`: Dynamics Ops.\n- `IotEdgeModules`: Iot Edge Modules.\n- `ManagedApplication`: Managed Application.\n- `ManagedServices`: Managed Services.\n- `None`: None.\n- `Office365`: Office365.\n- `PowerBI`: PowerBI.\n- `PowerBIVisuals`: PowerBI Visuals.\n- `SaaS`: SaaS.\n- `SolutionTemplate`: Solution Template.\n- `VirtualMachine`: Virtual Machine.\n- `VisualStudioExtension`: Visual Studio Extension.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "None",
+                "DevService",
+                "ManagedApplication",
+                "VirtualMachine",
+                "AzureApplication",
+                "Container",
+                "SaaS",
+                "SolutionTemplate",
+                "IotEdgeModules",
+                "ManagedServices",
+                "ContainerApps",
+                "VisualStudioExtension",
+                "DynamicsOps",
+                "DynamicsCE",
+                "DynamicsBC",
+                "PowerBI",
+                "ConsultingServices",
+                "CosellOnly",
+                "CoreVirtualMachine",
+                "PowerBIVisuals",
+                "Office365",
+                "AADApps",
+                "AzureServices",
+                "AppService",
+                "LogAnalytics"
+              ],
+              "x-ms-enum": {
+                "name": "ProductType",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "array",
+            "name": "pricingTypes",
+            "in": "query",
+            "description": "Products that contains any of the given pricing types. If no value provided, this filter is ignored. \n- `Byol`: The product has at least one plan that is bring your own license.\n- `Free`: The product has at least one plan that is free of charge.\n- `FreeTrial`: The product has at least one plan that is free trial.\n- `Payg`: The product has at least one plan that is Pay as you go, usage based billing model.\n- `RI`: The product has at least one plan that is Reserved Instance billing model.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Free",
+                "FreeTrial",
+                "Byol",
+                "Payg",
+                "Ri"
+              ],
+              "x-ms-enum": {
+                "name": "PricingType",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "array",
+            "name": "industryIds",
+            "in": "query",
+            "description": "Products that contains any of the given Product industries, If no value provided, this filter is ignored. Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#industries. Such as 'retailers'",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "array",
+            "name": "operatingSystems",
+            "in": "query",
+            "description": "Products that contains any of the given operating systems, if none provided then filter is ignored, this is relevant for Virtual Machine product type only. Such as operatingSystems=windows,linux",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "array",
+            "name": "hideKeys",
+            "in": "query",
+            "description": "Products that contains any of the given hideKeys for preview. Such as '22c6b3ae-1111-1111-1111-e7cbdc8569dd'. If no value provided, this filter is ignored.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "array",
+            "name": "categoryIds",
+            "in": "query",
+            "description": "Products that contains any of the given product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'. If no value provided, this filter is ignored.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "string",
+            "name": "market",
+            "in": "query",
+            "required": true,
+            "description": "Product sold market, Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies or 'All' for all markets. Such as 'US'"
+          },
+          {
+            "type": "array",
+            "name": "supportedProducts",
+            "in": "query",
+            "description": "Products that contains any of the given supported products. Such as 'CRM'. If no value provided, this filter is ignored.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "array",
+            "name": "applicableProducts",
+            "in": "query",
+            "description": "Products that contains any of the given M365 products applicable. Such as 'Office365'. If no value provided, this filter is ignored.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "array",
+            "name": "publisherIds",
+            "in": "query",
+            "description": "Products that contains any of the given publisher ids. Such as 'Microsoft'. If no value provided, this filter is ignored.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "type": "array",
+            "name": "ratingBuckets",
+            "in": "query",
+            "description": "Products that contains any of the given rating buckets. Such as 'Above1'. If no value provided, this filter is ignored. \n- `AboveOne`: Above One.\n- `AboveTwo`: Above Two.\n- `AboveThree`: Above Three.\n- `AboveFour`: Above Four",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "AboveOne",
+                "AboveTwo",
+                "AboveThree",
+                "AboveFour"
+              ],
+              "x-ms-enum": {
+                "name": "RatingBucket",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "array",
+            "name": "vmArchitectureTypes",
+            "in": "query",
+            "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "X64Gen1",
+                "X64Gen2",
+                "Arm64"
+              ],
+              "x-ms-enum": {
+                "name": "VmArchitectureType",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "array",
+            "name": "vmSecurityTypes",
+            "in": "query",
+            "description": "Products that contains any of the given vm security types. Such as 'Trusted'. If no value provided, this filter is ignored. \n- `None`: None.\n- `Trusted`: Trusted.\n- `Confidential`: Confidential",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "None",
+                "Trusted",
+                "Confidential"
+              ],
+              "x-ms-enum": {
+                "name": "VmSecurityType",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "string",
+            "name": "publishingStage",
+            "in": "query",
+            "description": "Audience. Default: Preview.\n- `Preview`: Preview.\n- `Public`: Public",
+            "x-schema": {
+              "$ref": "#/definitions/PublishingStage"
+            },
+            "enum": [
+              "Preview",
+              "Public"
+            ],
+            "x-ms-enum": {
+              "name": "PublishingStage",
+              "modelAsString": true
+            }
+          },
+          {
+            "type": "array",
+            "name": "facets",
+            "in": "query",
+            "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `ApplicableProducts`: Applicable Products.\n- `CategoryIds`: Category Ids.\n- `SupportedProducts`: Supported Products. \n- `PublisherId`: Publisher Id.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string",
+              "enum": [
+                "All",
+                "ApplicableProducts",
+                "LastModifiedDateTime",
+                "IndustryIds",
+                "CategoryIds",
+                "Market",
+                "LinkedAddInTypes",
+                "SupportedProducts",
+                "HideKeys",
+                "PublisherId",
+                "DisplayName",
+                "AzureBenefit",
+                "Badges",
+                "SmallIconUri",
+                "IndustryCloud",
+                "PublisherType",
+                "PublishingState",
+                "Language",
+                "UniqueProductId",
+                "ProductType",
+                "Plans",
+                "OperatingSystems",
+                "PricingTypes",
+                "PublisherDisplayName",
+                "Summary",
+                "LongSummary",
+                "VmImageGenerations",
+                "VmSecurityTypes",
+                "VmArchitectureTypes",
+                "Description",
+                "RatingBuckets",
+                "RatingAverage",
+                "RatingCount"
+              ],
+              "x-ms-enum": {
+                "name": "SearchFieldName",
+                "modelAsString": true
+              }
+            }
+          },
+          {
+            "type": "string",
+            "name": "x-ms-app",
+            "x-originalName": "callingApp",
+            "in": "header",
+            "required": true,
+            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'"
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "x-originalName": "apiVersion",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "x-api-key",
+            "in": "header",
+            "description": "Api key"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of offers count per filter",
+            "schema": {
+              "$ref": "#/definitions/FacetsResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        }
+      }
+    },
     "/search": {
       "get": {
         "tags": [
@@ -483,418 +895,6 @@
             "description": "Returns a list of Azure Marketplace catalog offers and total count and facets",
             "schema": {
               "$ref": "#/definitions/SearchResponse"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/facets": {
-      "get": {
-        "tags": [
-          "Public-Search"
-        ],
-        "summary": "Get a list of offers count per filter",
-        "operationId": "Facets_Get",
-        "x-ms-examples": {
-          "Facets_Get": {
-            "$ref": "./examples/Facets_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "type": "string",
-            "name": "searchQuery",
-            "in": "query",
-            "description": "The search text, if no value provided, this filter is ignored. Such as searchQuery=red hat"
-          },
-          {
-            "type": "string",
-            "name": "publisherDisplayName",
-            "in": "query",
-            "description": "The search publisher name. Such as publisherDisplayName=red hat. If no value provided, this filter is ignored."
-          },
-          {
-            "type": "string",
-            "name": "azureBenefit",
-            "in": "query",
-            "description": "Define the search for only azure benefit eligible offers, if no value provided, this filter is ignored. Default: null. \n- `Eligible`: Eligible.\n- `NotEligible`: Not Eligible.",
-            "x-schema": {
-              "$ref": "#/definitions/AzureBenefit"
-            },
-            "enum": [
-              "Eligible",
-              "NotEligible"
-            ],
-            "x-ms-enum": {
-              "name": "AzureBenefit",
-              "modelAsString": true
-            }
-          },
-          {
-            "type": "array",
-            "name": "publisherTypes",
-            "in": "query",
-            "description": "Products that contains any of the given publisher types, If no value provided, this filter is ignored. Possible values: Microsoft, ThirdParty. Default: Microsoft. \n- `Microsoft`: Microsoft.\n- `ThirdParty`: Third Party.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "Microsoft",
-                "ThirdParty"
-              ],
-              "x-ms-enum": {
-                "name": "PublisherType",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "array",
-            "name": "badges",
-            "in": "query",
-            "description": "Products that contains any of the given badges. If no value provided, this filter is ignored. The following product badges are available: \n- `PreferredSolution`: Preferred Solution.\n- `PowerBICertified`: power BI Certified.\n- `AdditionalPurchaseRequirement`: Additional Purchase Requirement.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "PreferredSolution",
-                "PowerBICertified",
-                "AdditionalPurchaseRequirement"
-              ],
-              "x-ms-enum": {
-                "name": "Badge",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "string",
-            "name": "industryCloud",
-            "in": "query",
-            "description": "Define the search for IndustryCloud offers. If no value provided, this filter is ignored. Default: NotApplicable. \n- `NotApplicable`: Not Applicable.\n- `True`: True.\n- `False`: False.",
-            "x-schema": {
-              "$ref": "#/definitions/IndustryCloud"
-            },
-            "enum": [
-              "NotApplicable",
-              "True",
-              "False"
-            ],
-            "x-ms-enum": {
-              "name": "IndustryCloud",
-              "modelAsString": true
-            }
-          },
-          {
-            "type": "string",
-            "name": "language",
-            "in": "query",
-            "required": true,
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'"
-          },
-          {
-            "type": "array",
-            "name": "productTypes",
-            "in": "query",
-            "description": "Products that contains any of the given product types, Such as 'VirtualMachine'. If no value provided, this filter is ignored.\n- `AADApps`: Azure Active Directory Apps.\n- `AzureApplication`: Azure Application.\n- `AzureServices`: Azure Services.\n- `ConsultingServices`: Consulting Services.\n- `Container`: Container.\n- `ContainerApps`: Container Apps.\n- `CoreVirtualMachine`: Core Virtual Machine.\n- `CosellOnly`: Cosell Only.\n- `DevService`: Dev Service.\n- `DynamicsBC`: Dynamics BC.\n- `DynamicsCE`: Dynamics CE.\n- `DynamicsOps`: Dynamics Ops.\n- `IotEdgeModules`: Iot Edge Modules.\n- `ManagedApplication`: Managed Application.\n- `ManagedServices`: Managed Services.\n- `None`: None.\n- `Office365`: Office365.\n- `PowerBI`: PowerBI.\n- `PowerBIVisuals`: PowerBI Visuals.\n- `SaaS`: SaaS.\n- `SolutionTemplate`: Solution Template.\n- `VirtualMachine`: Virtual Machine.\n- `VisualStudioExtension`: Visual Studio Extension.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "None",
-                "DevService",
-                "ManagedApplication",
-                "VirtualMachine",
-                "AzureApplication",
-                "Container",
-                "SaaS",
-                "SolutionTemplate",
-                "IotEdgeModules",
-                "ManagedServices",
-                "ContainerApps",
-                "VisualStudioExtension",
-                "DynamicsOps",
-                "DynamicsCE",
-                "DynamicsBC",
-                "PowerBI",
-                "ConsultingServices",
-                "CosellOnly",
-                "CoreVirtualMachine",
-                "PowerBIVisuals",
-                "Office365",
-                "AADApps",
-                "AzureServices",
-                "AppService",
-                "LogAnalytics"
-              ],
-              "x-ms-enum": {
-                "name": "ProductType",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "array",
-            "name": "pricingTypes",
-            "in": "query",
-            "description": "Products that contains any of the given pricing types. If no value provided, this filter is ignored. \n- `Byol`: The product has at least one plan that is bring your own license.\n- `Free`: The product has at least one plan that is free of charge.\n- `FreeTrial`: The product has at least one plan that is free trial.\n- `Payg`: The product has at least one plan that is Pay as you go, usage based billing model.\n- `RI`: The product has at least one plan that is Reserved Instance billing model.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "Free",
-                "FreeTrial",
-                "Byol",
-                "Payg",
-                "Ri"
-              ],
-              "x-ms-enum": {
-                "name": "PricingType",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "array",
-            "name": "industryIds",
-            "in": "query",
-            "description": "Products that contains any of the given Product industries, If no value provided, this filter is ignored. Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#industries. Such as 'retailers'",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "operatingSystems",
-            "in": "query",
-            "description": "Products that contains any of the given operating systems, if none provided then filter is ignored, this is relevant for Virtual Machine product type only. Such as operatingSystems=windows,linux",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "hideKeys",
-            "in": "query",
-            "description": "Products that contains any of the given hideKeys for preview. Such as '22c6b3ae-1111-1111-1111-e7cbdc8569dd'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "categoryIds",
-            "in": "query",
-            "description": "Products that contains any of the given product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "string",
-            "name": "market",
-            "in": "query",
-            "required": true,
-            "description": "Product sold market, Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies or 'All' for all markets. Such as 'US'"
-          },
-          {
-            "type": "array",
-            "name": "supportedProducts",
-            "in": "query",
-            "description": "Products that contains any of the given supported products. Such as 'CRM'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "applicableProducts",
-            "in": "query",
-            "description": "Products that contains any of the given M365 products applicable. Such as 'Office365'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "publisherIds",
-            "in": "query",
-            "description": "Products that contains any of the given publisher ids. Such as 'Microsoft'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "ratingBuckets",
-            "in": "query",
-            "description": "Products that contains any of the given rating buckets. Such as 'Above1'. If no value provided, this filter is ignored. \n- `AboveOne`: Above One.\n- `AboveTwo`: Above Two.\n- `AboveThree`: Above Three.\n- `AboveFour`: Above Four",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "AboveOne",
-                "AboveTwo",
-                "AboveThree",
-                "AboveFour"
-              ],
-              "x-ms-enum": {
-                "name": "RatingBucket",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "array",
-            "name": "vmArchitectureTypes",
-            "in": "query",
-            "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "X64Gen1",
-                "X64Gen2",
-                "Arm64"
-              ],
-              "x-ms-enum": {
-                "name": "VmArchitectureType",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "array",
-            "name": "vmSecurityTypes",
-            "in": "query",
-            "description": "Products that contains any of the given vm security types. Such as 'Trusted'. If no value provided, this filter is ignored. \n- `None`: None.\n- `Trusted`: Trusted.\n- `Confidential`: Confidential",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "None",
-                "Trusted",
-                "Confidential"
-              ],
-              "x-ms-enum": {
-                "name": "VmSecurityType",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "string",
-            "name": "publishingStage",
-            "in": "query",
-            "description": "Audience. Default: Preview.\n- `Preview`: Preview.\n- `Public`: Public",
-            "x-schema": {
-              "$ref": "#/definitions/PublishingStage"
-            },
-            "enum": [
-              "Preview",
-              "Public"
-            ],
-            "x-ms-enum": {
-              "name": "PublishingStage",
-              "modelAsString": true
-            }
-          },
-          {
-            "type": "array",
-            "name": "facets",
-            "in": "query",
-            "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `ApplicableProducts`: Applicable Products.\n- `CategoryIds`: Category Ids.\n- `SupportedProducts`: Supported Products. \n- `PublisherId`: Publisher Id.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string",
-              "enum": [
-                "All",
-                "ApplicableProducts",
-                "LastModifiedDateTime",
-                "IndustryIds",
-                "CategoryIds",
-                "Market",
-                "LinkedAddInTypes",
-                "SupportedProducts",
-                "HideKeys",
-                "PublisherId",
-                "DisplayName",
-                "AzureBenefit",
-                "Badges",
-                "SmallIconUri",
-                "IndustryCloud",
-                "PublisherType",
-                "PublishingState",
-                "Language",
-                "UniqueProductId",
-                "ProductType",
-                "Plans",
-                "OperatingSystems",
-                "PricingTypes",
-                "PublisherDisplayName",
-                "Summary",
-                "LongSummary",
-                "VmImageGenerations",
-                "VmSecurityTypes",
-                "VmArchitectureTypes",
-                "Description",
-                "RatingBuckets",
-                "RatingAverage",
-                "RatingCount"
-              ],
-              "x-ms-enum": {
-                "name": "SearchFieldName",
-                "modelAsString": true
-              }
-            }
-          },
-          {
-            "type": "string",
-            "name": "x-ms-app",
-            "x-originalName": "callingApp",
-            "in": "header",
-            "required": true,
-            "description": "The Application named property has the name of the client application that makes the request, used for tracing. E.g. 'appsource'"
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "x-originalName": "apiVersion",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
-          },
-          {
-            "type": "string",
-            "name": "x-api-key",
-            "in": "header",
-            "description": "Api key"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of offers count per filter",
-            "schema": {
-              "$ref": "#/definitions/FacetsResponse"
             }
           },
           "default": {
