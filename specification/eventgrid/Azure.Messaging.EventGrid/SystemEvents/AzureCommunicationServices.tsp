@@ -44,7 +44,7 @@ model AcsUserDisconnectedEventData {
 
 alias AcsChatMessageBaseEventData = {
   @doc("The body of the chat message")
-  messageBody: string;
+  messageBody?: string;
 
   @doc("The chat message metadata")
   metadata?: Record<string>;
