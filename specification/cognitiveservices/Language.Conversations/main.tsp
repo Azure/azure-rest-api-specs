@@ -16,7 +16,6 @@ namespace Contoso.WidgetManager;
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   `2022-11-01-preview`,
-  
 }
 
 @doc("A widget.")
