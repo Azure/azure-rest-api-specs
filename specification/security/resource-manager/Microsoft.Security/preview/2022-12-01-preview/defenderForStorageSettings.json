@@ -126,7 +126,7 @@
     "definitions": {
       "DefenderForStorageSetting": {
         "type": "object",
-        "allOf": [ // Salam - What is this? Do we need to add it somewhere else?
+        "allOf": [
           {
             "$ref": "../../../common/v1/types.json#/definitions/Resource"
           }
@@ -147,7 +147,7 @@
             "description": "Indicates whether Defender for Storage is enabled on this resource."
           },
           "malwareScanning": {
-            "x-ms-client-flatten": true, // Salam - What is this?
+            "x-ms-client-flatten": true,
             "$ref": "#/definitions/MalwareScanningProperties"
           },
           "sensitiveDataDiscovery": {
@@ -157,9 +157,9 @@
           "overrideSubscriptionLevelSettings": {
             "type": "boolean",
             "description": "Indicates whether the settings defined for this resource should override the settings defined on the subscription."
-          },
-          "description": "A Defender for Storage resource properties."
-        }
+          }
+        },
+        "description": "A Defender for Storage resource properties."
       },
       "MalwareScanningProperties": {
         "type": "object",
@@ -175,29 +175,29 @@
             "description": "Optional. A status describing the success/failure of Malware Scanning's enablement/disablement operation."
           }
         },
-        "description": "Properties of Malware Scanning." // Salam
+        "description": "Properties of Malware Scanning."
       },
       "OnUploadProperties": {
         "type": "object",
         "properties": {
           "isEnabled": {
             "type": "boolean",
-            "description": "Indicates whether On Upload malware scanning should be enabled." // Salam
+            "description": "Indicates whether On Upload malware scanning should be enabled."
           },
           "capGBPerMonth": {
-            "type": "integer", // Salam
+            "type": "integer",
             "format": "int32",
-            "description": "Defines the max GB to be scanned per Month. Set to -1 if no capping is needed." // Salam
+            "description": "Defines the max GB to be scanned per Month. Set to -1 if no capping is needed."
           }
         },
-        "description": "Properties of On Upload malware scanning." // Salam
+        "description": "Properties of On Upload malware scanning."
       },
       "SensitiveDataDiscoveryProperties": {
         "type": "object",
         "properties": {
             "isEnabled": {
               "type": "boolean",
-              "description": "Indicates whether Sensitive Data Discovery should be enabled." // Salam
+              "description": "Indicates whether Sensitive Data Discovery should be enabled."
             },
             "operationStatus": {
               "type": "object",
@@ -206,7 +206,7 @@
               "description": "Optional. A status describing the success/failure of Sensitive Data Discovery's enablement/disablement operation."
             }
           },
-          "description": "Properties of Sensitive Data Discovery." // Salam
+          "description": "Properties of Sensitive Data Discovery."
       },
       "OperationStatus": {
         "type": "object",
@@ -214,25 +214,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "The operation status code.",
-            "enum": [ // Salam - There are more values. Like "UnknownError"...
-              "Succeeded",
-              "Failed"
-            ],
-            "x-ms-enum": { // Salam - Should this be an enum? If so, need to include all values.
-              "name": "code",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Succeeded",
-                  "description": "Extension was created/updated successfully."
-                },
-                {
-                  "value": "Failed",
-                  "description": "Extension was not created/updated successfully. See operation status message for more details."
-                }
-              ]
-            }
+            "description": "The operation status code."
           },
           "message": {
             "type": "string",
