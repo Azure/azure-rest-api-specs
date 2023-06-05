@@ -4802,9 +4802,9 @@
           }
         },
         "dedicatedvip": {
-          "description": "A reference to the origin group. The dedicated vip is created as a separate resource. The dedicated vip will be linked to an endpoint for L4 profiles",
-          "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "description": "Whether the endpoint uses a dedicated IP address. This should be used for L4 scenarios where the AzureFrontDoor endpoint requires a dedicated static IP address.",
+          "type": "string",
+          "readonly": true
         }
       }
     },
@@ -5328,6 +5328,55 @@
       "x-ms-azure-resource": true
     },
     "AFDOriginGroupUpdatePropertiesParameters": {
+      "type": "object",
+      "properties": {
+        "originGroupPropertiesType": {
+          "type": "string",
+          "enum": [
+            "L4OriginGroupProperties",
+            "L7OriginGroupProperties"
+          ],
+          "default": "L7OriginGroupProperties",
+          "x-ms-enum": {
+            "name": "OriginGroupPropertiesType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "originGroupType"
+    },
+    "L7OriginGroupProperties": {
+      "x-ms-discriminator-value": "L7OriginGroupProperties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/OriginGroupBaseProperties"
+        }
+      ]
+    },
+    "L4OriginGroupProperties": {
+      "x-ms-discriminator-value": "L4OriginGroupProperties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/OriginGroupBaseProperties"
+        },
+        {
+          "properties": {
+            "originProtocolSettings": {
+              "description": "Origin protocol settings that determine how the origin is accessed.",
+              "type": "object",
+              "$ref": "#/definitions/OriginProtocolSettingsParameters"
+            }
+          }
+        }
+      ]
+    },
+    "OriginGroupBaseProperties": {
       "description": "The JSON object that contains the properties of the origin group.",
       "properties": {
         "profileName": {
@@ -5344,12 +5393,6 @@
           "type": "object",
           "$ref": "./cdn.json#/definitions/HealthProbeParameters"
         },
-        "originProtocolSettings": {
-          "description": "Origin protocol settings that determine how the origin is accessed.",
-          "type": "object",
-          "$ref": "#/definitions/OriginProtocolSettingsParameters"
-        },
-
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
           "type": "integer",
@@ -5396,9 +5439,6 @@
       "description": "Origin protocol settings that determine how the origin is accessed.",
       "type": "object",
       "properties": {
-        "proxyType":{
-          "$ref": "#/definitions/ProxyType"
-        },
         "sessionAffinityType": {
           "description": "Session affinity to use for origins under the origin groups. Valid options are 'SourceIP' or 'None'",
               "enum": [
@@ -5469,20 +5509,20 @@
       }
     },
     "Route": {
-      "description": "Based on the ProxyType the route can have either L4 or L7 properties.",
+      "description": "Based on the RouteType the route can have either L4 or L7 properties.",
       "type": "object",
-      "discriminator": "proxyType",
+      "discriminator": "routeType",
       "properties": {
-        "proxyType": {
+        "routeType": {
           "description": "the protocol type of the route.",
-          "$ref": "#/definitions/ProxyType"
+          "$ref": "#/definitions/RouteType"
         }
       }
     },
     "L7Route": {
       "description": "Friendly Routes name mapping to the any Routes or secret related information.",
       "type": "object",
-      "x-ms-discriminator-value": "Layer7",
+      "x-ms-discriminator-value": "L7Route",
       "allOf": [
         {
           "$ref": "#/definitions/Route"
@@ -5494,15 +5534,15 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RouteProperties"
+          "$ref": "#/definitions/L7RouteProperties"
         }
       }
     },
-    "RouteProperties": {
+    "L7RouteProperties": {
       "description": "The JSON object that contains the properties of the Routes to create.",
       "allOf": [
         {
-          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
+          "$ref": "#/definitions/L7RouteUpdatePropertiesParameters"
         },
         {
           "$ref": "#/definitions/AFDStateProperties"
@@ -5518,11 +5558,11 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
+          "$ref": "#/definitions/L7RouteUpdatePropertiesParameters"
         }
       }
     },
-    "RouteUpdatePropertiesParameters": {
+    "L7RouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
         "endpointName": {
@@ -5769,7 +5809,7 @@
     "L4Route": {
       "description": "Friendly Routes name mapping to L4 Routes",
       "type": "object",
-      "x-ms-discriminator-value": "Layer4",
+      "x-ms-discriminator-value": "L4Route",
       "allOf": [
         {
           "$ref": "#/definitions/Route"
@@ -5815,10 +5855,10 @@
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
-       "L4RouteBaseSettings": {
+       "ProtocolSettings": {
           "description": "L4 Route base settings",
           "type": "object",
-          "$ref": "#/definitions/L4RouteBaseSettings"
+          "$ref": "#/definitions/ProtocolSettings"
         },
         "enabledState": {
           "description": "Whether to enable the route. Permitted values are 'Enabled' or 'Disabled'",
@@ -5834,7 +5874,7 @@
         }
       }
     },
-    "L4RouteBaseSettings": {
+    "ProtocolSettings": {
       "description": "Base class for all L4 route settings.",
       "type": "object",
       "properties": {
@@ -5873,18 +5913,18 @@
         }
       }
     },
-    "ProxyType": {
-      "description": "ProxyType type for this route for example Layer7 or Layer4 by default Layer7 will be considered. This will help in configuring the route correctly for the given ProxyType type.",
+    "RouteType": {
+      "description": "RouteType for this route for example Layer7 or Layer4 by default Layer7 will be considered. This will help in configuring the route correctly for the given  route type.",
       "type": "string",
       "enum": [
-        "Layer7",
-        "Layer4"
+        "L7Route",
+        "L4Route"
       ],
       "x-ms-enum": {
-        "name": "ProxyType",
+        "name": "RouteType",
         "modelAsString": true
       },
-      "default": "Layer7"
+      "default": "L7Route"
     },
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",
