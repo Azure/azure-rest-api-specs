@@ -25,10 +25,26 @@ for definition_name, definition_body in fileContent["definitions"].items():
             old_name = name
     except:
         name = old_name
+
+
     with open(f'swaggers\\{name}.json', 'a') as f:
         if file_names.count(name) == 0:
+            file_names.append(name)
             f.write("{\n")
+            f.write('"swagger": "2.0",\n')
+            f.write('"info": {\n')
+            f.write('"version": "2018-01-01",\n')
+            f.write(f'"title": "Schema of {name} events published to Azure Event Grid",\n')
+            f.write(f'"description": "Describes the schema of the {name} events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."\n')
+            f.write("},\n")
+            f.write('"paths": {},\n')
+            f.write('"definitions": {\n')
         f.write('"'+event+'"' + " : ")
         json.dump(definition_body,f)
         f.write(",\n")
-        file_names.append(name)
+        
+
+    
+for file_name in file_names:
+    with open(f'swaggers\\{file_name}.json', 'a') as f:
+        f.write("}")
