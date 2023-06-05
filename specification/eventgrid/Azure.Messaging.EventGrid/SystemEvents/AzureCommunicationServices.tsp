@@ -3,6 +3,39 @@ import "./AzureCommunicationServicesCore.tsp";
 @doc("Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid.AzureCommunicationServices;
 
+@doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event")
+model AcsIncomingCallEventData {
+  @doc("The communication identifier of the target user.")
+  to: CommunicationIdentifierModel;
+
+  @doc("The communication identifier of the user who initiated the call.")
+  from: CommunicationIdentifierModel;
+
+  @doc("The Id of the server call")
+  serverCallId: string;
+
+  @doc("Display name of caller")
+  callerDisplayName: string;
+
+  @doc("Custom Context of Incoming Call")
+  customContext: AcsIncomingCallCustomContext;
+
+  @doc("Signed incoming call context.")
+  incomingCallContext: string;
+
+  @doc("CorrelationId (CallId).")
+  correlationId: string;
+}
+
+@doc("Custom Context of Incoming Call")
+model AcsIncomingCallCustomContext {
+  @doc("Sip Headers for incoming call")
+  sipHeaders: Record<string>;
+
+  @doc("Voip Headers for incoming call")
+  viopHeaders: Record<string>;
+}
+
 @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.")
 model AcsUserDisconnectedEventData {
   @doc("The communication identifier of the user who was disconnected")
@@ -11,7 +44,7 @@ model AcsUserDisconnectedEventData {
 
 alias AcsChatMessageBaseEventData = {
   @doc("The body of the chat message")
-  messageBody?: string;
+  messageBody: string;
 
   @doc("The chat message metadata")
   metadata?: Record<string>;
@@ -64,7 +97,7 @@ alias AcsChatThreadBaseEventData = {
   createdByCommunicationIdentifier?: CommunicationIdentifierModel;
 
   @doc("The thread properties")
-  properties?: Record<string>;
+  properties?: Record<unknown>;
 
   @doc("The list of properties of participants who are part of the thread")
   participants?: AcsChatThreadParticipantProperties[];
@@ -110,7 +143,7 @@ alias AcsChatThredPropertiesBaseEventData = {
   editTime?: utcDateTime;
 
   @doc("The updated thread properties")
-  properties?: Record<string>;
+  properties?: Record<unknown>;
 };
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.")
@@ -207,8 +240,6 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   receivedTimestamp?: utcDateTime;
 }
 
-// @knownValues(recordingContentTypeKV)
-// model recordingContentType is string;
 enum recordingContentType {
   AudioVideo,
   Audio,
@@ -249,6 +280,80 @@ model AcsRecordingFileStatusUpdatedEventData {
   @doc("The reason for ending recording session")
   sessionEndReason?: string;
 }
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.")
+model AcsEmailDeliveryReportReceivedEventData {
+  @doc("The Sender Email Address")
+  sender: string;
+
+  @doc("The recipient Email Address")
+  recipient: string;
+
+  @doc("The Id of the email been sent")
+  messageId: string;
+
+  @doc("The status of the email. Any value other than Delivered is considered failed.")
+  status: AcsEmailDeliveryReportStatus;
+
+  @doc("Detailed information about the status if any")
+  deliveryStatusDetails: AcsEmailDeliveryReportStatusDetails;
+
+  @doc("The time at which the email delivery report received timestamp")
+  @friendlyName("deliveryAttemptTimestamp")
+  deliveryAttemptTimeStamp: utcDateTime;
+}
+
+enum AcsEmailDeliveryReportStatus {
+  @doc("Hard bounce detected while sending the email")
+  Bounced,
+  @doc("The email was delivered")
+  Delivered,
+  @doc("The email failed to be delivered")
+  Failed,
+  @doc("The message was identified as spam and was rejected or blocked (not quarantined).")
+  FilteredSpam,
+  @doc("The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION).")
+  Quarantined,
+  @doc("The email was suppressed")
+  Suppressed,
+}
+
+@doc("Detailed information about the status if any")
+model AcsEmailDeliveryReportStatusDetails {
+  @doc("Detailed status message")
+  statusMessage: string;
+}
+
+@doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.")
+model AcsEmailEngagementTrackingReportReceivedEventData {
+  @doc("The Sender Email Address")
+  sender: string;
+
+  @doc("The Id of the email been sent")
+  messageId: string;
+
+  @doc("The time at which the user interacted with the email")
+  @friendlyName("userActionTimestamp")
+  userActionTimeStamp: utcDateTime;
+
+  @doc("The context of the type of engagement user had with email")
+  engagementContext: string;
+
+  @doc("The user agent interacting with the email")
+  userAgent: string;
+
+  @doc("The type of engagement user have with email")
+  engagementType: AcsUserEngagement;
+
+}
+
+enum AcsUserEngagement {
+  "view",
+  "click",
+}
+
+// Base Properties
+
 
 @doc("Schema of common properties of all chat thread events")
 model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
