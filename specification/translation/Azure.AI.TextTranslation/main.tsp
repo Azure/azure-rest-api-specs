@@ -44,6 +44,7 @@ Dictionary example Returns grammatical structure and context examples for the so
 @versioned(APIVersion)
 namespace TextTranslation;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Version enums should not require documentation"
 @doc("Text Translation supported versions")
 enum APIVersion {
   v3_0: "3.0",
