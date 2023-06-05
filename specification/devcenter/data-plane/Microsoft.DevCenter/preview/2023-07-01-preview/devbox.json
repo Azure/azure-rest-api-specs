@@ -139,6 +139,58 @@
         }
       }
     },
+    "/projects/{projectName}/schedules": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          }
+        ],
+        "description": "Lists available schedules for all resources within a project.",
+        "operationId": "DevBoxes_ListSchedulesByProject",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_ListSchedulesByProject": {
+            "$ref": "./examples/Schedules_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Schedule"
+      }
+    },
     "/projects/{projectName}/pools/{poolName}/schedules": {
       "get": {
         "tags": [
@@ -747,6 +799,61 @@
         }
       }
     },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:troubleshoot": {
+      "post": {
+        "tags": [
+          "Dev Boxes"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          }
+        ],
+        "description": "Troubleshoot a Dev Box",
+        "operationId": "DevBoxes_TroubleshootDevBox",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "The request was accepted.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/OperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_TroubleshootDevBox": {
+            "$ref": "./examples/DevBoxes_Troubleshoot.json"
+          }
+        }
+      }
+    },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
       "get": {
         "tags": [
@@ -1084,6 +1191,10 @@
       "type": "object",
       "description": "A pool of Dev Boxes.",
       "properties": {
+        "id": {
+          "description": "The ID of the pool",
+          "type": "string"
+        },
         "name": {
           "type": "string",
           "description": "Pool name"
@@ -1126,6 +1237,7 @@
         }
       },
       "required": [
+        "id",
         "name",
         "location",
         "healthStatus"
@@ -1263,8 +1375,16 @@
       "type": "object",
       "description": "A Schedule to execute action.",
       "properties": {
+        "id": {
+          "description": "The ID of the schedule",
+          "type": "string"
+        },
         "name": {
           "description": "Display name for the Schedule",
+          "type": "string"
+        },
+        "sourceId": {
+          "description": "The id of the resource that this schedule belongs to",
           "type": "string"
         },
         "type": {
@@ -1285,7 +1405,9 @@
         }
       },
       "required": [
+        "id",
         "name",
+        "sourceId",
         "type",
         "frequency",
         "time",
@@ -1350,6 +1472,11 @@
       "type": "object",
       "description": "A Dev Box",
       "properties": {
+        "id": {
+          "description": "The ID of the dev box",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Display name for the Dev Box",
           "type": "string",
@@ -1702,6 +1829,11 @@
       "type": "object",
       "description": "An action which will take place on a Dev Box.",
       "properties": {
+        "id": {
+          "description": "Unique identifier for the dev box action within a dev center",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "The name of the action.",
           "type": "string"
