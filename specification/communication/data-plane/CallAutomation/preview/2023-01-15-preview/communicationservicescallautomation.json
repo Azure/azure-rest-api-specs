@@ -1676,16 +1676,13 @@
     },
     "PlayRequest": {
       "required": [
-        "playSources"
+        "playSourceInfo"
       ],
       "type": "object",
       "properties": {
-        "playSources": {
-          "description": "The source of the audio to be played.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PlaySource"
-          }
+        "playSourceInfo": {
+          "$ref": "#/definitions/PlaySource",
+          "description": "The source of the audio to be played."
         },
         "playTo": {
           "description": "The list of call participants play provided audio to.\r\nPlays to everyone in the call when not provided.",
