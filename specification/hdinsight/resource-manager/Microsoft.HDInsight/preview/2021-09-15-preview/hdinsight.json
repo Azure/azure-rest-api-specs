@@ -1674,6 +1674,43 @@
         }
       }
     },
+    "FlinkCatalogOptions": {
+      "type": "object",
+      "description": "Flink cluster catalog options.",
+      "properties": {
+        "hive": {
+          "type": "array",
+          "description": "hive catalog options.",
+          "items": {
+            "$ref": "#/definitions/FlinkHiveCatalogOption"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FlinkHiveCatalogOption": {
+      "type": "object",
+      "description": "Hive Catalog Option for Flink cluster.",
+      "required": [
+        "metastoreDbConnectionURL",
+        "metastoreDbConnectionUserName",
+        "metastoreDbConnectionPasswordSecret"
+      ],
+      "properties": {
+        "metastoreDbConnectionPasswordSecret": {
+          "description": "The secret whose value is the password for database connection.",
+          "type": "string"
+        },
+        "metastoreDbConnectionURL": {
+          "description": "Connection string for hive metastore database.",
+          "type": "string"
+        },
+        "metastoreDbConnectionUserName": {
+          "description": "User name for database connection.",
+          "type": "string"
+        }
+      }
+    },
     "TrinoCoordinator": {
       "type": "object",
       "description": "Trino Coordinator.",
@@ -1686,15 +1723,6 @@
           "type": "boolean",
           "description": "The flag that if enable coordinator HA, uses multiple coordinator replicas with auto failover, one per each head node. Default: true.",
           "default": true
-        },
-        "replicas": {
-          "type": "integer",
-          "description": "The coordinator replicas number.",
-          "format": "int32",
-          "minimum": 1
-        },
-        "resources": {
-          "$ref": "#/definitions/TrinoReservedResource"
         }
       }
     },
@@ -1705,15 +1733,6 @@
         "debug": {
           "$ref": "#/definitions/TrinoDebugConfig",
           "x-ms-client-flatten": true
-        },
-        "replicas": {
-          "type": "integer",
-          "description": "The worker replicas number.",
-          "format": "int32",
-          "minimum": 1
-        },
-        "resources": {
-          "$ref": "#/definitions/TrinoReservedResource"
         }
       }
     },
@@ -1736,26 +1755,6 @@
           "type": "boolean",
           "description": "The flag that if suspend debug or not.",
           "default": false
-        }
-      }
-    },
-    "TrinoReservedResource": {
-      "type": "object",
-      "description": "CPU and memory resources to reserve.",
-      "properties": {
-        "limits": {
-          "type": "object",
-          "description": "The limits of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "requests": {
-          "type": "object",
-          "description": "The requests of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1907,6 +1906,9 @@
         "taskManager": {
           "description": "Task Manager container/ process CPU and memory requirements",
           "$ref": "#/definitions/ComputeResourceDefinition"
+        },
+        "catalogOptions": {
+          "$ref": "#/definitions/FlinkCatalogOptions"
         }
       }
     },
