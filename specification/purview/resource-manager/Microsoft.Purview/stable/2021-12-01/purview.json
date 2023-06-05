@@ -1470,6 +1470,20 @@
           "type": "string",
           "readOnly": true
         },
+        "managedEventHubState": {
+          "description": " Gets or sets the state of managed eventhub. If enabled managed eventhub will be created, if disabled the managed eventhub will be removed.",
+          "default": "NotSpecified",
+          "enum": [
+            "NotSpecified",
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "managedEventHubState",
+            "modelAsString": true
+          }
+        },
         "managedResourceGroupName": {
           "description": "Gets or sets the managed resource group name",
           "type": "string",
@@ -2047,7 +2061,7 @@
             "modelAsString": true
           }
         },
-        "partitionId": {
+        "eventHubPartitionId": {
           "description": "Optional partition Id for notification event hub. If not set, all partitions will be leveraged.",
           "type": "string"
         }
