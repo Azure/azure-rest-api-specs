@@ -5,29 +5,23 @@ namespace EventGrid.HealthCareApis {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event.")
   model HealthcareFhirResourceCreatedEventData {
     ...HealthcareFhirResourceBaseEventData;
-
-    @doc("Type of HL7 FHIR resource.")
-    resourceType?: HealthcareFhirResourceType;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceUpdated event.")
   model HealthcareFhirResourceUpdatedEventData {
     ...HealthcareFhirResourceBaseEventData;
-
-    @doc("Type of HL7 FHIR resource.")
-    resourceType?: HealthcareFhirResourceType;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceDeleted event.")
   model HealthcareFhirResourceDeletedEventData {
     ...HealthcareFhirResourceBaseEventData;
-
-    @doc("Type of HL7 FHIR resource.")
-    resourceType?: HealthcareFhirResourceType;
   }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.")
   model HealthcareDicomImageCreatedEventData {
+    @doc("Data partition name")
+    partitionName: string;
+
     @doc("Unique identifier for the Study")
     imageStudyInstanceUid?: string;
 
@@ -46,6 +40,9 @@ namespace EventGrid.HealthCareApis {
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.")
   model HealthcareDicomImageDeletedEventData {
+    @doc("Data partition name")
+    partitionName: string;
+
     @doc("Unique identifier for the Study")
     imageStudyInstanceUid?: string;
 
@@ -59,6 +56,27 @@ namespace EventGrid.HealthCareApis {
     serviceHostName?: string;
 
     @doc("Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service.")
+    sequenceNumber?: int64;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event.")
+  model HealthcareDicomImageUpdatedEventData {
+    @doc("Data partition name")
+    partitionName: string;
+    
+    @doc("Unique identifier for the Study")
+    imageStudyInstanceUid?: string;
+
+    @doc("Unique identifier for the Series")
+    imageSeriesInstanceUid?: string;
+
+    @doc("Unique identifier for the DICOM Image")
+    imageSopInstanceUid?: string;
+
+    @doc("Host name of the DICOM account for this image.")
+    serviceHostName?: string;
+
+    @doc("Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service.")
     sequenceNumber?: int64;
   }
 
@@ -557,5 +575,8 @@ namespace EventGrid.HealthCareApis {
 
     @doc("VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).")
     resourceVersionId?: int64;
+
+    @doc("Type of HL7 FHIR resource.")
+    resourceType?: HealthcareFhirResourceType;
   };
 }
