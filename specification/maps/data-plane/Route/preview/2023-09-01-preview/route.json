@@ -25,11 +25,11 @@
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
     },
-    "SharedKey": {
+    "AzureKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
+      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be  securely stored.",
       "name": "subscription-key",
-      "in": "query"
+      "in": "header"
     },
     "SasToken": {
       "type": "apiKey",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "SharedKey": []
+      "AzureKey": []
     },
     {
       "SasToken": []
@@ -132,7 +132,7 @@
     },
     "/route/directions:batch": {
       "post": {
-        "description": "**Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Directions Batch API sends batches of queries to Directions API using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2023-09-01-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#directionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Directions Batch API sends batches of queries to Directions API using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2023-08-01-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#directionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostDirectionsBatch",
         "consumes": [
           "application/json"
@@ -607,7 +607,7 @@
           "$ref": "#/definitions/FeatureProperties"
         },
         {
-          "$ref": "#/definitions/ManeuverPointProperties"
+          "$ref": "#/definitions/NavigationPointProperties"
         }
       ]
     },
@@ -620,62 +620,68 @@
           "$ref": "#/definitions/FeatureProperties"
         },
         {
-          "description": "ManeuverPoint Properties",
-          "type": "object",
-          "properties": {
-            "legPointIndex": {
-              "$ref": "#/definitions/LegPointIndex"
-            },
-            "compassDirection": {
-              "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
-              "type": "string",
-              "readOnly": true
-            },
-            "steps": {
-              "description": "steps between two consecutive maneuver points",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Step"
-              }
-            },
-            "instruction": {
-              "$ref": "#/definitions/Instruction"
-            },
-            "sideOfStreet": {
-              "$ref": "#/definitions/SideOfStreetEnum"
-            },
-            "signs": {
-              "description": "Signage text for the route. There may be more than one sign value",
-              "type": "array",
-              "readOnly": true,
-              "items": {
-                "type": "string"
-              }
-            },
-            "towardsRoadName": {
-              "description": "The name of the street that the route goes towards in the first ManeuverPoint.",
-              "type": "string",
-              "readOnly": true
-            },
-            "exitIdentifier": {
-              "description": "The name or number of the exit associated with this route step.",
-              "type": "string",
-              "readOnly": true
-            },
-            "distanceInMeters": {
-              "description": "The physical distance in meters covered by this route step.",
-              "type": "number",
-              "readOnly": true
-            },
-            "durationInSeconds": {
-              "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
-              "format": "int64",
-              "type": "integer",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/NavigationPointProperties"
         }
       ]
+    },
+    "NavigationPointProperties": {
+      "description": "Waypoint and ManeuverPoint properties",
+      "type": "object",
+      "properties": {
+        "legPointIndex": {
+          "$ref": "#/definitions/LegPointIndex"
+        },
+        "compassDirection": {
+          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
+          "type": "string",
+          "readOnly": true
+        },
+        "steps": {
+          "description": "steps between two consecutive maneuver points",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        },
+        "instruction": {
+          "$ref": "#/definitions/Instruction"
+        },
+        "sideOfStreet": {
+          "$ref": "#/definitions/SideOfStreetEnum"
+        },
+        "signs": {
+          "description": "Signage text for the route. There may be more than one sign value",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "towardsRoadName": {
+          "description": "The name of the street that the route goes towards in the first ManeuverPoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "exitIdentifier": {
+          "description": "The name or number of the exit associated with this route step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "distanceInMeters": {
+          "description": "The physical distance in meters covered by this route step.",
+          "type": "number",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "travelMode": {
+          "$ref": "#/definitions/RouteTravelMode"
+        }
+      }
     },
     "ViaWaypointProperties": {
       "x-ms-discriminator-value": "ViaWaypoint",
@@ -1727,6 +1733,39 @@
           "description": "id of the request which would show in corresponding batchItem",
           "type": "string"
         }
+      }
+    },
+    "RouteTravelMode": {
+      "description": "The mode of travel for the route path",
+      "type": "string",
+      "default": "driving",
+      "enum": [
+        "driving",
+        "truck",
+        "walking",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "RouteTravelMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "driving",
+            "description": "driving"
+          },
+          {
+            "value": "truck",
+            "description": "truck"
+          },
+          {
+            "value": "walking",
+            "description": "walking"
+          },
+          {
+            "value": "other",
+            "description": "Other"
+          }
+        ]
       }
     },
     "DirectionsBatchRequestItem": {
