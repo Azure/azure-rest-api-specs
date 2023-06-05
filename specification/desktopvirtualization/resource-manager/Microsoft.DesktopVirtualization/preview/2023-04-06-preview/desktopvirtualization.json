@@ -2509,7 +2509,7 @@
           "SessionHostManagement"
         ],
         "operationId": "ValidateSessionHostUpdate_Post",
-        "description": "Initiates a hostpool update or schedule an update for the future. When validateOnly is true this will only run validations and return warnings and errors.",
+        "description": "Validates a session host update operation for validation errors. When Session Host Configuration and Session Host Management values are not provided the ones saved in the Host Pool will be used.",
         "x-ms-examples": {
           "HostPools_Update_Post": {
             "$ref": "./examples/SessionHostManagements_ValidateSessionHostUpdate_Post.json"
@@ -2578,7 +2578,7 @@
           "SessionHostManagement"
         ],
         "operationId": "InitiateSessionHostUpdate_Post",
-        "description": "Initiates a hostpool update or schedule an update for the future. When validateOnly is true this will only run validations and return warnings and errors.",
+        "description": "Initiates a hostpool update or schedule an update for the future.",
         "x-ms-examples": {
           "HostPools_Update_Post": {
             "$ref": "./examples/SessionHostManagements_UpdateSessionHosts_Post.json"
@@ -3212,7 +3212,7 @@
           "200": {
             "description": "Successfully retrieved activeSessionHostConfiguration.",
             "schema": {
-              "$ref": "#/definitions/SessionHostConfiguration"
+              "$ref": "#/definitions/ActiveSessionHostConfiguration"
             }
           },
           "default": {
@@ -3254,7 +3254,7 @@
           "200": {
             "description": "Successfully retrieved activeSessionHostConfigurations in HostPool.",
             "schema": {
-              "$ref": "#/definitions/SessionHostConfigurationList"
+              "$ref": "#/definitions/ActiveSessionHostConfigurationList"
             }
           },
           "default": {
@@ -5409,11 +5409,11 @@
       "description": "Session host Managements of HostPool.",
       "type": "object",
       "required": [
-        "timeZone",
+        "scheduledDateTimeZone",
         "update"
       ],
       "properties": {
-        "timeZone": {
+        "scheduledDateTimeZone": {
           "type": "string",
           "description": "Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true."
         },
@@ -5442,7 +5442,7 @@
       "description": "Session host Managements of HostPool.",
       "type": "object",
       "properties": {
-        "timeZone": {
+        "scheduledDateTimeZone": {
           "type": "string",
           "description": "Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true."
         },
@@ -5817,7 +5817,7 @@
           "format": "date-time",
           "description": "The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately"
         },
-        "timeZone": {
+        "scheduledDateTimeZone": {
           "type": "string",
           "description": "The timeZone as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0."
         },
@@ -5892,6 +5892,136 @@
           "type": "string",
           "readOnly": true,
           "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ActiveSessionHostConfigurationList": {
+      "type": "object",
+      "title": "ActiveSessionHostConfigurationList",
+      "description": "List of ActiveSessionHostConfiguration definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ActiveSessionHostConfiguration definitions.",
+          "items": {
+            "$ref": "#/definitions/ActiveSessionHostConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ActiveSessionHostConfiguration": {
+      "type": "object",
+      "description": "Represents a ActiveSessionHostConfiguration definition. This has all of the sessionHostConfiguration properties except provisioningState",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for SessionHostConfiguration",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ActiveSessionHostConfigurationProperties"
+        }
+      }
+    },
+    "ActiveSessionHostConfigurationProperties": {
+      "description": "Session host configurations of HostPool.",
+      "type": "object",
+      "required": [
+        "vmNamePrefix",
+        "networkInfo",
+        "vmSizeId",
+        "diskInfo",
+        "imageInfo",
+        "domainInfo",
+        "vmAdminCredentials"
+      ],
+      "properties": {
+        "version": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the last update.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name to describe this version of the SessionHostConfiguration."
+        },
+        "vmTags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Hashtable that lists key/value pair tags to apply to the VMs"
+        },
+        "vmLocation": {
+          "type": "string",
+          "description": "The Location for the session host to be created in. It will default to the location of the hostpool if not provided."
+        },
+        "vmResourceGroup": {
+          "type": "string",
+          "description": "The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided."
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "The prefix that should be associated with session host names"
+        },
+        "availabilityZones": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Value for availability zones to be used by the session host. Should be from [1,2,3]."
+        },
+        "networkInfo": {
+          "$ref": "#/definitions/NetworkInfoProperties",
+          "description": "Network information."
+        },
+        "vmSizeId": {
+          "type": "string",
+          "description": "The id of the size of a virtual machine connected to a hostpool."
+        },
+        "diskInfo": {
+          "$ref": "#/definitions/DiskInfoProperties",
+          "description": "Disk information."
+        },
+        "customConfigurationScriptUrl": {
+          "type": "string",
+          "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
+        },
+        "imageInfo": {
+          "$ref": "#/definitions/ImageInfoProperties",
+          "description": "Image configurations of HostPool."
+        },
+        "domainInfo": {
+          "$ref": "#/definitions/DomainInfoProperties",
+          "description": "Domain configurations of session hosts."
+        },
+        "securityInfo": {
+          "$ref": "#/definitions/SecurityInfoProperties",
+          "description": "Security information."
+        },
+        "vmAdminCredentials": {
+          "$ref": "#/definitions/KeyVaultCredentialsProperties",
+          "description": "Local Admin credentials for session hosts."
+        },
+        "bootDiagnosticsInfo": {
+          "$ref": "#/definitions/BootDiagnosticsInfoProperties",
+          "description": "Boot Diagnostics information."
         }
       }
     },
@@ -6136,8 +6266,7 @@
           "enum": [
             "Standard_LRS",
             "Premium_LRS",
-            "StandardSSD_LRS",
-            "UltraSSD_LRS"
+            "StandardSSD_LRS"
           ],
           "x-ms-enum": {
             "name": "VirtualMachineDiskType",
@@ -6154,10 +6283,6 @@
               {
                 "value": "StandardSSD_LRS",
                 "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
-              },
-              {
-                "value": "UltraSSD_LRS",
-                "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
               }
             ]
           },
@@ -6174,8 +6299,7 @@
           "enum": [
             "Standard_LRS",
             "Premium_LRS",
-            "StandardSSD_LRS",
-            "UltraSSD_LRS"
+            "StandardSSD_LRS"
           ],
           "x-ms-enum": {
             "name": "VirtualMachineDiskType",
@@ -6192,10 +6316,6 @@
               {
                 "value": "StandardSSD_LRS",
                 "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
-              },
-              {
-                "value": "UltraSSD_LRS",
-                "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
               }
             ]
           },
