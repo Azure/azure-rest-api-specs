@@ -16,32 +16,27 @@ file_names = []
 for definition_name, definition_body in fileContent["definitions"].items():
     try:
         if "Azure.Core" in definition_name:
-            name = 'Azure.Core'
-            event = definition_name.split('.')[2]
-            old_name = name
+            pass
         else:
             name = definition_name.split('.')[0]
             event = definition_name.split('.')[1]
             old_name = name
+
+            with open(f'swaggers\\{name}.json', 'a') as f:
+                if file_names.count(name) == 0:
+                    file_names.append(name)
+                    f.write('{\n"swagger": "2.0",\n"info": {\n"version": "2018-01-01",\n')
+                    f.write(f'"title": "Schema of {name} events published to Azure Event Grid",\n')
+                    f.write(f'"description": "Describes the schema of the {name} events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."\n')
+                    f.write("},\n")
+                    f.write('"paths": {},\n"definitions": {\n')
+                f.write('"'+event+'"' + " : ")
+                json.dump(definition_body,f)
+                f.write(",\n")
     except:
-        name = old_name
+        pass
 
 
-    with open(f'swaggers\\{name}.json', 'a') as f:
-        if file_names.count(name) == 0:
-            file_names.append(name)
-            f.write("{\n")
-            f.write('"swagger": "2.0",\n')
-            f.write('"info": {\n')
-            f.write('"version": "2018-01-01",\n')
-            f.write(f'"title": "Schema of {name} events published to Azure Event Grid",\n')
-            f.write(f'"description": "Describes the schema of the {name} events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."\n')
-            f.write("},\n")
-            f.write('"paths": {},\n')
-            f.write('"definitions": {\n')
-        f.write('"'+event+'"' + " : ")
-        json.dump(definition_body,f)
-        f.write(",\n")
         
 
     
