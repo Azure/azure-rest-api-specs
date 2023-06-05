@@ -1,15 +1,17 @@
-
-
 # Go into the TypespecEventGrid.json file and find the definitions section
 # Separate the defintions into individual files based on the starting name of the defintion 
 # i.e ApiManagement..ApiManagementApiCreatedEventData goes into ApiManagement.json
 
 # get to the directory where the TypespecEventGrid.json file is located
-import os
-PATH = os.environ['PATH']
-
 import json
-with open("..\\data-plane\\Microsoft.EventGrid\\stable\\2018-01-01\\TypespecEventGrid.json") as user_file:
+import pathlib
+
+# Clear out the swaggers folder
+path_to_clear = pathlib.Path("./swaggers")
+for file_to_rem in path_to_clear.glob("*.json"):
+    file_to_rem.unlink()    
+
+with open("../data-plane/Microsoft.EventGrid/stable/2018-01-01/TypespecEventGrid.json") as user_file:
     fileContent = json.load(user_file)
 
 file_names = []
