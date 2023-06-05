@@ -1,58 +1,57 @@
 {
-    "parameters": {
-      "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-      "resourceGroupName": "rg",
-      "appName": "testApp0",
-      "api-version": "2023-08-01-preview"
-    },
-    "responses": {
-      "200": {
-        "headers": {},
-        "body": {
-          "value": [
-            {
-              "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/apps/testApp0/revisions/testApp0-pjxhsye",
-              "name": "testApp0-pjxhsye",
-              "type": "Microsoft.AppPlatform/apps/revisions",
-              "properties": {
-                "createdTime": "2021-05-24T21:24:22+00:00",
-                "lastActiveTime": "2021-05-24T21:24:22+00:00",
-                "fqdn": "testApp0-pjxhsye.politehill-ab123456.eastus.azurecontainerapps.io",
-                "template": {
-                  "containers": [
-                    {
-                      "image": "repo/testApp0:v2",
-                      "name": "testApp0",
-                      "resources": {
-                        "cpu": 0.2,
-                        "memory": "100Mi"
-                      }
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "appName": "testApp0",
+    "api-version": "2023-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/apps/testApp0/revisions/testApp0-pjxhsye",
+            "name": "testApp0-pjxhsye",
+            "type": "Microsoft.AppPlatform/apps/revisions",
+            "properties": {
+              "createdTime": "2021-05-24T21:24:22+00:00",
+              "lastActiveTime": "2021-05-24T21:24:22+00:00",
+              "fqdn": "testApp0-pjxhsye.politehill-ab123456.eastus.azurecontainerapps.io",
+              "template": {
+                "containers": [
+                  {
+                    "image": "repo/testApp0:v2",
+                    "name": "testApp0",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
                     }
-                  ],
-                  "scale": {
-                    "minReplicas": 1,
-                    "maxReplicas": 5,
-                    "rules": [
-                      {
-                        "name": "httpscalingrule",
-                        "http": {
-                          "metadata": {
-                            "concurrentRequests": "50"
-                          }
+                  }
+                ],
+                "scale": {
+                  "minReplicas": 1,
+                  "maxReplicas": 5,
+                  "rules": [
+                    {
+                      "name": "httpscalingrule",
+                      "http": {
+                        "metadata": {
+                          "concurrentRequests": "50"
                         }
                       }
-                    ]
-                  }
-                },
-                "trafficWeight": 80,
-                "active": true,
-                "replicas": 1
-              }
+                    }
+                  ]
+                }
+              },
+              "trafficWeight": 80,
+              "active": true,
+              "replicas": 1
             }
-          ],
-          "nextLink": null
-        }
+          }
+        ],
+        "nextLink": null
       }
     }
   }
-  
+}
