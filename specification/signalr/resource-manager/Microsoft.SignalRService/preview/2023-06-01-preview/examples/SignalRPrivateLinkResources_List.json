@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-03-01-preview",
+    "api-version": "2023-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "mySignalRService"
@@ -25,6 +25,22 @@
                     "description": "Azure App Service can be used as an upstream",
                     "groupId": "sites",
                     "type": "Microsoft.Web/sites"
+                  }
+                },
+                {
+                  "name": "vault",
+                  "properties": {
+                    "description": "Azure Key Vault can be used as credentials store",
+                    "groupId": "vault",
+                    "type": "Microsoft.KeyVault/vaults"
+                  }
+                },
+                {
+                  "name": "table",
+                  "properties": {
+                    "description": "Azure Storage Table can be used as message store",
+                    "groupId": "table",
+                    "type": "Microsoft.Storage/storageAccounts"
                   }
                 }
               ]

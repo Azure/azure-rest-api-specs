@@ -3,7 +3,7 @@
   "info": {
     "title": "WebPubSubManagementClient",
     "description": "REST API for Azure WebPubSub Service",
-    "version": "2023-03-01-preview"
+    "version": "2023-06-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -1820,6 +1820,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}/skus": {
+      "get": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "List all available skus of the replica resource.",
+        "operationId": "WebPubSub_ListReplicaSkus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes all available skus of the replica resource.",
+            "schema": {
+              "$ref": "#/definitions/SkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ListReplicaSkus": {
+            "$ref": "./examples/WebPubSub_ListReplicaSkus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/restart": {
       "post": {
         "tags": [
@@ -2620,7 +2668,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\" or \"Microsoft.SignalRService/webPubSub\"",
+          "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/WebPubSub\", \"Microsoft.SignalRService/SignalR/replicas\" or \"Microsoft.SignalRService/WebPubSub/replicas\"",
           "type": "string"
         },
         "name": {
@@ -3063,6 +3111,18 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ScaleType",
+        "modelAsString": true
+      }
+    },
+    "ServiceKind": {
+      "description": "The kind of the service",
+      "enum": [
+        "WebPubSub",
+        "SocketIO"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServiceKind",
         "modelAsString": true
       }
     },
@@ -3609,6 +3669,13 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WebPubSubProperties"
+        },
+        "kind": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "$ref": "#/definitions/ServiceKind"
         },
         "identity": {
           "$ref": "#/definitions/ManagedIdentity"

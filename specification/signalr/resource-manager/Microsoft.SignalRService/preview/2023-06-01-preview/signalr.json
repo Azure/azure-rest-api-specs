@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2023-03-01-preview"
+    "version": "2023-06-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -1597,6 +1597,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/skus": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all available skus of the replica resource.",
+        "operationId": "SignalR_ListReplicaSkus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes all available skus of the replica resource.",
+            "schema": {
+              "$ref": "#/definitions/SkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalR_ListReplicaSkus": {
+            "$ref": "./examples/SignalR_ListReplicaSkus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/restart": {
       "post": {
         "tags": [
@@ -2279,7 +2327,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\" or \"Microsoft.SignalRService/webPubSub\"",
+          "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/WebPubSub\", \"Microsoft.SignalRService/SignalR/replicas\" or \"Microsoft.SignalRService/WebPubSub/replicas\"",
           "type": "string"
         },
         "name": {
@@ -2754,7 +2802,7 @@
       }
     },
     "ServiceKind": {
-      "description": "The kind of the service, it can be SignalR or RawWebSockets",
+      "description": "The kind of the service",
       "enum": [
         "SignalR",
         "RawWebSockets"
