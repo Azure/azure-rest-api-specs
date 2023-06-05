@@ -1404,14 +1404,65 @@
         }
       }
     },
+    "CommunicationIdentifierModelKind": {
+      "description": "Type of CommunicationIdentifierModel.",
+      "enum": [
+        "unknown",
+        "communicationUser",
+        "phoneNumber",
+        "microsoftTeamsUser"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentifierModelKind",
+        "modelAsString": true
+      }
+    },
     "CommunicationIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationIdentifierModel"
+      "type": "object",
+      "properties": {
+        "rawId": {
+          "description": "Full ID of the identifier.",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CommunicationIdentifierModelKind"
+        },
+        "communicationUser": {
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "The communication user."
+        },
+        "phoneNumber": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The phone number."
+        },
+        "microsoftTeamsUser": {
+          "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel",
+          "description": "The Microsoft Teams user."
+        }
+      }
     },
     "PhoneNumberIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/PhoneNumberIdentifierModel"
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
     },
     "CommunicationUserIdentifierModel": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationUserIdentifierModel"
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
     },
     "MediaStreamingTransportType": {
       "description": "The type of transport to be used for media streaming, eg. Websocket",
@@ -1490,7 +1541,39 @@
       }
     },
     "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+      "description": "The Communication Services error response",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommunicationError"
+        }
+      }
+    },
+    "CommunicationError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/CommunicationError"
+        }
+      }
     },
     "CallConnectionStateModel": {
       "description": "The state of the call connection.",
