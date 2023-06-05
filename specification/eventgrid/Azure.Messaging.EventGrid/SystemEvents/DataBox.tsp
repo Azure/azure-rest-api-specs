@@ -22,7 +22,7 @@ namespace EventGrid.DataBox {
     stageName?: DataBoxStageName;
 
     @doc("The time at which the stage happened.")
-    stageTime?: string;
+    stageTime?: utcDateTime;
   };
 
   enum DataBoxStageName {
