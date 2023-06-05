@@ -310,6 +310,157 @@
         }
       }
     },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations": {
+      "get": {
+        "tags": [
+          "Operations",
+          "Environments"
+        ],
+        "description": "Lists the operations for an environment.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          }
+        ],
+        "operationId": "EnvironmentOperations_ListByEnvironment",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentOperations_ListByEnvironment": {
+            "$ref": "./examples/EnvironmentOperations_ListByEnvironment.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationName}": {
+      "get": {
+        "tags": [
+          "Operations",
+          "Environments"
+        ],
+        "description": "Gets an environment operation.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentOperationNameParameter"
+          }
+        ],
+        "operationId": "EnvironmentOperations_GetByEnvironment",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentOperations_GetByEnvironment": {
+            "$ref": "./examples/EnvironmentOperations_GetByEnvironment.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationName}/logs": {
+      "get": {
+        "tags": [
+          "Operations",
+          "Environments"
+        ],
+        "description": "Gets an environment operations logs.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentOperationNameParameter"
+          }
+        ],
+        "operationId": "EnvironmentOperations_GetLogs",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnvironmentOperations_GetLogs": {
+            "$ref": "./examples/EnvironmentOperations_GetLogs.json"
+          }
+        }
+      }
+    },
     "/projects/{projectName}/catalogs": {
       "get": {
         "tags": [
@@ -619,6 +770,11 @@
         }
       ],
       "properties": {
+        "id": {
+          "description": "The ID of the environment",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "type": "string",
           "description": "Environment name.",
@@ -719,12 +875,17 @@
       "description": "A catalog.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The ID of the catalog",
+          "type": "string"
+        },
         "name": {
           "description": "Name of the catalog.",
           "type": "string"
         }
       },
       "required": [
+        "id",
         "name"
       ]
     },
@@ -862,6 +1023,10 @@
       "description": "Properties of an environment type.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The ID of the environment type",
+          "type": "string"
+        },
         "name": {
           "description": "Name of the environment type",
           "type": "string"
@@ -876,6 +1041,7 @@
         }
       },
       "required": [
+        "id",
         "name",
         "deploymentTargetId",
         "status"
@@ -944,6 +1110,79 @@
           }
         ]
       }
+    },
+    "EnvironmentOperationListResult": {
+      "type": "object",
+      "description": "The operations list result.",
+      "properties": {
+        "value": {
+          "description": "The current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnvironmentOperation": {
+      "type": "object",
+      "description": "An operation on an environment.",
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the environment operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of operation that was taken.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters object for the operation.",
+          "readOnly": true
+        },
+        "createdByObjectId": {
+          "description": "The object ID of the actor which initiated the operation'.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The time the operation started.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The time the operation finished.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "error": {
+          "description": "Provisioning or action error details. Populated only for error states.",
+          "readOnly": true,
+          "$ref": "devcenter.json#/definitions/CloudErrorBody"
+        }
+      }
     }
   },
   "parameters": {
@@ -978,6 +1217,17 @@
       "minLength": 3,
       "maxLength": 63,
       "description": "The name of the environment definition",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentOperationNameParameter": {
+      "name": "operationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the operation.",
       "x-ms-parameter-location": "method"
     }
   }
