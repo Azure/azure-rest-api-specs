@@ -28,6 +28,8 @@ These are the global settings for the Managed Network Fabric.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2023-02-01-preview
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 
