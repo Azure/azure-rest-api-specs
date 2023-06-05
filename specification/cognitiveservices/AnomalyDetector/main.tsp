@@ -49,6 +49,8 @@ namespace AnomalyDetector;
 @doc("The secret key for your Azure Cognitive Services subscription.")
 model AnomalyDetectorApiKeyAuth is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
+@doc("The versions of this service")
 enum APIVersion {
+  @doc("Version 1.1")
   v1_1: "v1.1",
 }
