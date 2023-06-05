@@ -839,7 +839,6 @@ model DimensionValue {
 
 @resource("/test-runs/{testRunId}/metric-dimensions/{name}/values")
 model DimensionValueList {
-  @key
   value: {
     items: DimensionValue[]
   };
@@ -851,7 +850,8 @@ model DimensionValueList {
   @path("testRunId")
   @visibility("query")
   testRunId: string;
-  
+
+  @key
   @doc("")
   @path("name")
   @visibility("query")

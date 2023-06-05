@@ -297,6 +297,7 @@ numeric, underscore or hyphen characters.
 
   @summary("Create and start a new test run with the given name.")
   @doc("Create and start a new test run with the given name.")
+  @pollingOperation(LoadTestRunOperations.GetTestRun)
   CreateOrUpdateTestRun is LongRunningResourceCreateOrUpdate<TestRun>;
 
   @summary("Delete a test run by its name.")
