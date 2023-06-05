@@ -8,7 +8,7 @@ using Azure.Core;
 
 namespace AnomalyDetector.Univariate;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy spec"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ImputeMode {
   Auto: "auto",
   Previous: "previous",
@@ -18,7 +18,7 @@ enum ImputeMode {
   NotFill: "notFill",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy spec"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum AnomalyDetectorErrorCodes {
   "InvalidCustomInterval",
   "BadArgument",
@@ -33,7 +33,7 @@ enum AnomalyDetectorErrorCodes {
   "InvalidImputeFixedValue",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy spec"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
