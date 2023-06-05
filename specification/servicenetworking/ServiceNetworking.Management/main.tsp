@@ -71,6 +71,7 @@ model AssociationProperties {
 
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy Spec"
 enum AssociationType {
   "subnets",
 }
@@ -108,6 +109,7 @@ model TrafficControllerProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Legacy Spec"
 @lroStatus
 enum ProvisioningState{
   Provisioning,

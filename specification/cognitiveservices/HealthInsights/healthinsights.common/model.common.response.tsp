@@ -88,6 +88,7 @@ model TrialMatcherInferenceEvidence {
   ...InferenceEvidence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API"
 @doc("The status of the processing job.")
 enum JobStatus {
   NotStarted: "notStarted",
