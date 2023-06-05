@@ -374,6 +374,7 @@ enum ClinicalTrialRecruitmentStatus {
   Recruiting: "recruiting",
   EnrollingByInvitation: "enrollingByInvitation",
 }
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible purposes of a clinical trial.")
 enum ClinicalTrialPurpose {
