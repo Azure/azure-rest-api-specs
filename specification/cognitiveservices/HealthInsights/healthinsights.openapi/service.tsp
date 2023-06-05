@@ -20,7 +20,7 @@ using TypeSpec.Versioning;
 
 namespace AzureHealthInsights;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "SHOULD fix in next version"
 enum ApiVersion {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_03_01_preview: "2023-03-01-preview"
