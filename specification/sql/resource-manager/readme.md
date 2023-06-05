@@ -1036,7 +1036,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FirewallRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/InstancePools.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/JobAgents.json
+- ./Microsoft.Sql/preview/2023-05-01-preview/JobAgents.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobCredentials.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobExecutions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/Jobs.json
