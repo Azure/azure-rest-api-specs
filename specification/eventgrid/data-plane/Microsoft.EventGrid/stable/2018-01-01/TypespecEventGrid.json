@@ -378,15 +378,15 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key used to identify the key-value that was ."
+          "description": "The key used to identify the key-value that was deleted."
         },
         "label": {
           "type": "string",
-          "description": "The label, if any, used to identify the key-value that was ."
+          "description": "The label, if any, used to identify the key-value that was deleted."
         },
         "etag": {
           "type": "string",
-          "description": "The etag representing the key-value that was ."
+          "description": "The etag representing the key-value that was deleted.."
         },
         "syncToken": {
           "type": "string",
@@ -400,15 +400,15 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key used to identify the key-value that was ."
+          "description": "The key used to identify the key-value that was modified."
         },
         "label": {
           "type": "string",
-          "description": "The label, if any, used to identify the key-value that was ."
+          "description": "The label, if any, used to identify the key-value that was modified."
         },
         "etag": {
           "type": "string",
-          "description": "The etag representing the key-value that was ."
+          "description": "The etag representing the new state of the key-value."
         },
         "syncToken": {
           "type": "string",
@@ -838,10 +838,8 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
           "description": "The thread properties"
         },
         "participants": {
@@ -870,10 +868,8 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
           "description": "The thread properties"
         },
         "participants": {
@@ -983,10 +979,8 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
           "description": "The updated thread properties"
         }
       },
@@ -1011,10 +1005,8 @@
         },
         "properties": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
           "description": "The updated thread properties"
         }
       },
@@ -1043,6 +1035,213 @@
         {
           "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
         }
+      ]
+    },
+    "AzureCommunicationServices.AcsEmailDeliveryReportReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "The Sender Email Address"
+        },
+        "recipient": {
+          "type": "string",
+          "description": "The recipient Email Address"
+        },
+        "messageId": {
+          "type": "string",
+          "description": "The Id of the email been sent"
+        },
+        "status": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatus",
+          "description": "The status of the email. Any value other than Delivered is considered failed."
+        },
+        "deliveryStatusDetails": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails",
+          "description": "Detailed information about the status if any"
+        },
+        "deliveryAttemptTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the email delivery report received timestamp"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
+      "required": [
+        "sender",
+        "recipient",
+        "messageId",
+        "status",
+        "deliveryStatusDetails",
+        "deliveryAttemptTimeStamp"
+      ]
+    },
+    "AzureCommunicationServices.AcsEmailDeliveryReportStatus": {
+      "type": "string",
+      "enum": [
+        "Bounced",
+        "Delivered",
+        "Failed",
+        "FilteredSpam",
+        "Quarantined",
+        "Suppressed"
+      ],
+      "x-ms-enum": {
+        "name": "AcsEmailDeliveryReportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bounced",
+            "value": "Bounced",
+            "description": "Hard bounce detected while sending the email"
+          },
+          {
+            "name": "Delivered",
+            "value": "Delivered",
+            "description": "The email was delivered"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The email failed to be delivered"
+          },
+          {
+            "name": "FilteredSpam",
+            "value": "FilteredSpam",
+            "description": "The message was identified as spam and was rejected or blocked (not quarantined)."
+          },
+          {
+            "name": "Quarantined",
+            "value": "Quarantined",
+            "description": "The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION)."
+          },
+          {
+            "name": "Suppressed",
+            "value": "Suppressed",
+            "description": "The email was suppressed"
+          }
+        ]
+      }
+    },
+    "AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails": {
+      "type": "object",
+      "properties": {
+        "statusMessage": {
+          "type": "string",
+          "description": "Detailed status message"
+        }
+      },
+      "description": "Detailed information about the status if any",
+      "required": [
+        "statusMessage"
+      ]
+    },
+    "AzureCommunicationServices.AcsEmailEngagementTrackingReportReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "The Sender Email Address"
+        },
+        "messageId": {
+          "type": "string",
+          "description": "The Id of the email been sent"
+        },
+        "userActionTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user interacted with the email"
+        },
+        "engagementContext": {
+          "type": "string",
+          "description": "The context of the type of engagement user had with email"
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The user agent interacting with the email"
+        },
+        "engagementType": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsUserEngagement",
+          "description": "The type of engagement user have with email"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
+      "required": [
+        "sender",
+        "messageId",
+        "userActionTimeStamp",
+        "engagementContext",
+        "userAgent",
+        "engagementType"
+      ]
+    },
+    "AzureCommunicationServices.AcsIncomingCallCustomContext": {
+      "type": "object",
+      "properties": {
+        "sipHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Sip Headers for incoming call"
+        },
+        "viopHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Voip Headers for incoming call"
+        }
+      },
+      "description": "Custom Context of Incoming Call",
+      "required": [
+        "sipHeaders",
+        "viopHeaders"
+      ]
+    },
+    "AzureCommunicationServices.AcsIncomingCallEventData": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the target user."
+        },
+        "from": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who initiated the call."
+        },
+        "serverCallId": {
+          "type": "string",
+          "description": "The Id of the server call"
+        },
+        "callerDisplayName": {
+          "type": "string",
+          "description": "Display name of caller"
+        },
+        "customContext": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsIncomingCallCustomContext",
+          "description": "Custom Context of Incoming Call"
+        },
+        "incomingCallContext": {
+          "type": "string",
+          "description": "Signed incoming call context."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "CorrelationId (CallId)."
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
+      "required": [
+        "to",
+        "from",
+        "serverCallId",
+        "callerDisplayName",
+        "customContext",
+        "incomingCallContext",
+        "correlationId"
       ]
     },
     "AzureCommunicationServices.AcsRecordingChunkInfoProperties": {
@@ -1228,6 +1427,17 @@
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event."
+    },
+    "AzureCommunicationServices.AcsUserEngagement": {
+      "type": "string",
+      "enum": [
+        "view",
+        "click"
+      ],
+      "x-ms-enum": {
+        "name": "AcsUserEngagement",
+        "modelAsString": true
+      }
     },
     "AzureCommunicationServices.recordingChannelType": {
       "type": "string",
@@ -1608,6 +1818,39 @@
         }
       ]
     },
+    "ContainerService.ContainerServiceClusterSupportEndedEventData": {
+      "type": "object",
+      "properties": {},
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerService.ContainerServiceClusterSupportEventData"
+        }
+      ]
+    },
+    "ContainerService.ContainerServiceClusterSupportEndingEventData": {
+      "type": "object",
+      "properties": {},
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerService.ContainerServiceClusterSupportEventData"
+        }
+      ]
+    },
+    "ContainerService.ContainerServiceClusterSupportEventData": {
+      "type": "object",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version of the ManagedCluster resource"
+        }
+      },
+      "description": "Schema of common properties of cluster support events",
+      "required": [
+        "kubernetesVersion"
+      ]
+    },
     "ContainerService.ContainerServiceNewKubernetesVersionAvailableEventData": {
       "type": "object",
       "properties": {
@@ -1630,10 +1873,136 @@
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event"
     },
+    "ContainerService.ContainerServiceNodePoolRollingEventData": {
+      "type": "object",
+      "properties": {
+        "nodePoolName": {
+          "type": "string",
+          "description": "The name of the node pool in the ManagedCluster resource"
+        }
+      },
+      "description": "Schema of common properties of node pool rolling events",
+      "required": [
+        "nodePoolName"
+      ]
+    },
+    "ContainerService.ContainerServiceNodePoolRollingFailedEventData": {
+      "type": "object",
+      "properties": {},
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerService.ContainerServiceNodePoolRollingEventData"
+        }
+      ]
+    },
+    "ContainerService.ContainerServiceNodePoolRollingStartedEventData": {
+      "type": "object",
+      "properties": {},
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerService.ContainerServiceNodePoolRollingEventData"
+        }
+      ]
+    },
+    "ContainerService.ContainerServiceNodePoolRollingSucceededEventData": {
+      "type": "object",
+      "properties": {},
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerService.ContainerServiceNodePoolRollingEventData"
+        }
+      ]
+    },
     "CustomEventEvent": {
       "type": "object",
       "properties": {},
       "description": "Properties of an event published to an Event Grid topic using a custom schema"
+    },
+    "DataBox.DataBoxCopyCompletedEventData": {
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."
+        },
+        "stageName": {
+          "$ref": "#/definitions/DataBox.DataBoxStageName",
+          "description": "Name of the current Stage"
+        },
+        "stageTime": {
+          "type": "string",
+          "description": "The time at which the stage happened."
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event."
+    },
+    "DataBox.DataBoxCopyStartedEventData": {
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."
+        },
+        "stageName": {
+          "$ref": "#/definitions/DataBox.DataBoxStageName",
+          "description": "Name of the current Stage"
+        },
+        "stageTime": {
+          "type": "string",
+          "description": "The time at which the stage happened."
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event."
+    },
+    "DataBox.DataBoxOrderCompletedEventData": {
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."
+        },
+        "stageName": {
+          "$ref": "#/definitions/DataBox.DataBoxStageName",
+          "description": "Name of the current Stage"
+        },
+        "stageTime": {
+          "type": "string",
+          "description": "The time at which the stage happened."
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event."
+    },
+    "DataBox.DataBoxStageName": {
+      "type": "string",
+      "enum": [
+        "CopyStarted",
+        "CopyCompleted",
+        "OrderCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "DataBoxStageName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CopyStarted",
+            "value": "CopyStarted",
+            "description": "Copy has started"
+          },
+          {
+            "name": "CopyCompleted",
+            "value": "CopyCompleted",
+            "description": "Copy has completed"
+          },
+          {
+            "name": "OrderCompleted",
+            "value": "OrderCompleted",
+            "description": "Order has been completed"
+          }
+        ]
+      }
     },
     "EventGridEvent": {
       "type": "object",

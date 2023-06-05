@@ -3,6 +3,7 @@ import "./AppConfiguration.tsp";
 import "./AzureCommunicationServices.tsp";
 import "./ContainerRegistry.tsp";
 import "./ContainerService.tsp";
+import "./DataBox.tsp";
 import "./EventHub.tsp";
 import "./Maps.tsp";
 import "./IotHub.tsp";

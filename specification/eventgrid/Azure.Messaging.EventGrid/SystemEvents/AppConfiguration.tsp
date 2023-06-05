@@ -19,7 +19,6 @@ namespace EventGrid.AppConfiguration {
     @doc("The sync token representing the server state after the event.")
     syncToken?: string;
   };
-  }
 
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.")
   model AppConfigurationKeyValueDeletedEventData {
@@ -38,4 +37,4 @@ namespace EventGrid.AppConfiguration {
     @doc("The sync token representing the server state after the event.")
     syncToken?: string;
   };
-
+}
