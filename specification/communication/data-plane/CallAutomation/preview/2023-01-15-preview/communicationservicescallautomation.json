@@ -1464,6 +1464,35 @@
         }
       }
     },
+    "CommunicationCloudEnvironmentModel": {
+      "enum": [
+        "public",
+        "dod",
+        "gcch"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationCloudEnvironmentModel",
+        "modelAsString": true
+      }
+    },
+    "MicrosoftTeamsUserIdentifierModel": {
+      "required": [
+        "userId"
+      ],
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "isAnonymous": {
+          "type": "boolean"
+        },
+        "cloud": {
+          "$ref": "#/definitions/CommunicationCloudEnvironmentModel"
+        }
+      }
+    },
     "MediaStreamingTransportType": {
       "description": "The type of transport to be used for media streaming, eg. Websocket",
       "enum": [
