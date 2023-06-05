@@ -830,7 +830,7 @@
           "200": {
             "description": "Returns the get participants response.",
             "schema": {
-              "$ref": "#/definitions/GetParticipantsResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -2214,23 +2214,6 @@
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
-          "type": "string"
-        }
-      }
-    },
-    "GetParticipantsResponse": {
-      "description": "The response payload for getting participants of the call.",
-      "type": "object",
-      "properties": {
-        "values": {
-          "description": "List of the current participants in the call.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CallParticipant"
-          }
-        },
-        "nextLink": {
-          "description": "Continue of the list of participants",
           "type": "string"
         }
       }
