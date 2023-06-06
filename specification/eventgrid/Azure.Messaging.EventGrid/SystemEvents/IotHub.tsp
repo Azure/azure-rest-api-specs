@@ -35,9 +35,14 @@ model DeviceTwinInfo {
   lastActivityTime?: string;
   //TODO: something here needs to change
 
-
   @doc("Properties JSON element.")
-  properties?: PropertiesJson;
+  properties?: {
+    @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+    desired?: DeviceTwinProperties;
+  
+    @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+    reported?: DeviceTwinProperties;
+  };
 
   @doc("Whether the device twin is enabled or disabled.")
   status?: string;
@@ -104,14 +109,10 @@ model DeviceConnectionStateEventInfo {
 }
 
 @doc("Event data for Microsoft.Devices.DeviceCreated event.")
-model IotHubDeviceCreatedEventData {
-  ...DeviceLifeCycleEventProperties;
-}
+model IotHubDeviceCreatedEventData extends DeviceLifeCycleEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceDeleted event.")
-model IotHubDeviceDeletedEventData {
-  ...DeviceLifeCycleEventProperties;
-}
+model IotHubDeviceDeletedEventData extends DeviceLifeCycleEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceConnected event.")
 model IotHubDeviceConnectedEventData
@@ -126,20 +127,20 @@ model IotHubDeviceTelemetryEventData {
   ...DeviceTelemetryEventProperties;
 }
 
-@doc("Properties JSON element.")
-model PropertiesJson {
-  @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
-  desired?: IoTHub.DeviceTwinProperties;
+// @doc("Properties JSON element.")
+// alias JsonProperties = {
+//   @doc("A portion of the properties that can be written only by the application back-end, and read by the device.")
+//   desired?: DeviceTwinProperties;
 
-  @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
-  reported?: IoTHub.DeviceTwinProperties;
-}
+//   @doc("A portion of the properties that can be written only by the device, and read by the application back-end.")
+//   reported?: DeviceTwinProperties;
+// };
 
-@doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
-model ThumbPrintValue {
+// @doc("The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.")
+alias ThumbPrintValue = {
   @doc("Primary thumbprint for the x509 certificate.")
   primaryThumbprint?: string;
 
   @doc("Secondary thumbprint for the x509 certificate.")
   secondaryThumbprint?: string;
-}
+};
