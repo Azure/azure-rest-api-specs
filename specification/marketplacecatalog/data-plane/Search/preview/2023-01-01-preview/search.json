@@ -864,14 +864,16 @@
             "name": "skip",
             "in": "query",
             "description": "Number of items to skip. Minimum: 0",
-            "format": "int32"
+            "format": "int32",
+            "default": 0
           },
           {
             "type": "integer",
             "name": "top",
             "in": "query",
             "description": "Number of items to return. Minimum: 0, Maximum: 50000, Default: 20.",
-            "format": "int32"
+            "format": "int32",
+            "default": 20
           }
         ],
         "responses": {
@@ -1217,7 +1219,8 @@
             "name": "top",
             "in": "query",
             "description": "Number of items per SuggestionType to return. Minimum: 1, Maximum: 40, Default: 20.",
-            "format": "int32"
+            "format": "int32",
+            "default": 20
           },
           {
             "type": "array",
