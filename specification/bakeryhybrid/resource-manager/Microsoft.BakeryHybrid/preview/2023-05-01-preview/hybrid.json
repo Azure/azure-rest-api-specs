@@ -1,0 +1,1164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridManagementClient",
+    "description": "Hybrid provider",
+    "version": "2023-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BakeryHybrid/pies": {
+      "get": {
+        "description": "Returns list of pies.",
+        "operationId": "Pie_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pie details.",
+            "schema": {
+              "$ref": "#/definitions/PieResourceList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Pie_ListBySubscription": {
+            "$ref": "./examples/Pie_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BakeryHybrid/pies": {
+      "get": {
+        "description": "Returns list of pies.",
+        "operationId": "Pie_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pie details.",
+            "schema": {
+              "$ref": "#/definitions/PieResourceList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Pie_List": {
+            "$ref": "./examples/Pie_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BakeryHybrid/pies/{pieName}": {
+      "get": {
+        "description": "Returns pie resource for a given name.",
+        "operationId": "Pie_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pie details.",
+            "schema": {
+              "$ref": "#/definitions/PieResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pie_Get": {
+            "$ref": "./examples/Pie_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes pie resource for a given name.",
+        "operationId": "Pie_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the pie details."
+          },
+          "204": {
+            "description": "Deletes the pie details."
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pie_Delete": {
+            "$ref": "./examples/Pie_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update pie resource.",
+        "operationId": "Pie_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          },
+          {
+            "name": "PieResource",
+            "description": "Pie details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PieResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/PieResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pie_CreateAndUpdate": {
+            "$ref": "./examples/Pie_CreateAndUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update pie details.",
+        "operationId": "Pies_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          },
+          {
+            "name": "PieResource",
+            "description": "Pie patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PiePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/PieResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pies_Update": {
+            "$ref": "./examples/Pies_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BakeryHybrid/pies/{pieName}/nestedResourceType/{nestedResourceName}": {
+      "get": {
+        "description": "Returns nested resources for a given pie name",
+        "operationId": "NestedResourceType_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_Get": {
+            "$ref": "./examples/NestedResourceType_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update nested resource type.",
+        "operationId": "NestedResourceType_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceNameParameter"
+          },
+          {
+            "name": "NestedResourceType",
+            "description": "Nested Resource Type details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_CreateAndUpdate": {
+            "$ref": "./examples/NestedResourceType_CreateAndUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update nested resource type details.",
+        "operationId": "NestedResourceType_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceNameParameter"
+          },
+          {
+            "name": "NestedResourcePatchResource",
+            "description": "Nested resource patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_Update": {
+            "$ref": "./examples/NestedResourceType_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BakeryHybrid/pies/{pieName}/nestedResourceType": {
+      "get": {
+        "description": "Returns nested resources for a given pie name",
+        "operationId": "NestedResourceType_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PieNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/NestedResourceList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_List": {
+            "$ref": "./examples/NestedResourceType_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BakeryHybrid/extensionResourceType": {
+      "get": {
+        "description": "Returns extension resource for a given pie name",
+        "operationId": "ExtensionResourceType_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResourceList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExtensionResourceType_ListBySubscription": {
+            "$ref": "./examples/ExtensionResourceType_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BakeryHybrid/extensionResourceType": {
+      "get": {
+        "description": "Returns extension resource for a given pie name",
+        "operationId": "ExtensionResourceType_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResourceList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResourceType_Get": {
+            "$ref": "./examples/ExtensionResourceType_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BakeryHybrid/extensionResourceType/{extensionResourceName}": {
+      "get": {
+        "description": "Returns extension resources",
+        "operationId": "ExtensionResource_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Extension Resources.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResource_Get": {
+            "$ref": "./examples/ExtensionResource_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update extension resource.",
+        "operationId": "ExtensionResource_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionResourceNameParameter"
+          },
+          {
+            "name": "ExtensionResourceType",
+            "description": "ExtensionResource details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResource_CreateAndUpdate": {
+            "$ref": "./examples/ExtensionResource_CreateAndUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update extension resource details.",
+        "operationId": "ExtensionResource_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionResourceNameParameter"
+          },
+          {
+            "name": "ExtensionResourcePatchResource",
+            "description": "Extension Resource patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource",
+              "description": "The extension resource schema."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResource_Update": {
+            "$ref": "./examples/ExtensionResource_Update.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BakeryHybrid/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns list of operations.",
+            "schema": {
+              "$ref": "#/definitions/operationsList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "type": "object",
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "readOnly": false
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PieResource": {
+      "type": "object",
+      "description": "Pie details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "size",
+            "filling",
+            "topping"
+          ],
+          "properties": {
+            "size": {
+              "type": "string",
+              "description": "Pie size.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "filling": {
+              "type": "string",
+              "description": "Pie filling.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "topping": {
+              "type": "string",
+              "description": "Pie topping.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "PiePatchResource": {
+      "type": "object",
+      "description": "Pie patch properties",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "string",
+              "description": "Pie size.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "filling": {
+              "type": "string",
+              "description": "Pie filling.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "topping": {
+              "type": "string",
+              "description": "Pie topping.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            }
+          }
+        }
+      }
+    },
+    "PieResourceList": {
+      "description": "The list of pies.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of pies list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PieResource"
+          }
+        }
+      }
+    },
+    "NestedResource": {
+      "type": "object",
+      "description": "Nested Resource details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "Nested Resource full name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "middleName": {
+              "type": "string",
+              "description": "Nested Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Nested Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc...",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "identificationNumber": {
+              "type": "string",
+              "readOnly": true,
+              "description": "unique id assigned at the time of user creation"
+            },
+            "likesTea": {
+              "type": "string",
+              "description": "Gets or sets the deployment mode.",
+              "enum": [
+                "Yes"
+              ],
+              "x-ms-enum": {
+                "name": "likesTea",
+                "modelAsString": true
+              }
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "required": [
+            "firstName",
+            "lastName",
+            "group",
+            "likesTea"
+          ],
+          "type": "object"
+        }
+      }
+    },
+    "NestedResourceList": {
+      "description": "The list of nested resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of nested resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NestedResource"
+          }
+        }
+      }
+    },
+    "ExtensionResource": {
+      "type": "object",
+      "description": "The extension resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "Extension Resource full name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "middleName": {
+              "type": "string",
+              "description": "Extension Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Extension Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc...",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "identificationNumber": {
+              "type": "string",
+              "readOnly": true,
+              "description": "unique id assigned at the time of user creation"
+            },
+            "likesTea": {
+              "type": "string",
+              "description": "Gets or sets the deployment mode.",
+              "enum": [
+                "Yes"
+              ],
+              "x-ms-enum": {
+                "name": "likesTea",
+                "modelAsString": true
+              }
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "required": [
+            "firstName",
+            "lastName",
+            "group",
+            "likesTea"
+          ],
+          "type": "object"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "description": "The extended location.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      }
+    },
+    "ExtensionResourceList": {
+      "description": "The list of extension resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of extension resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionResource"
+          }
+        }
+      }
+    },
+    "operation": {
+      "description": "Operation provided by provider",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the operation applies to the data plane."
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name"
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation"
+            }
+          }
+        }
+      }
+    },
+    "operationsList": {
+      "description": "Lists the operations available.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResourceProviderDefaultErrorResponse": {
+      "type": "object",
+      "description": "Default error response for resource provider",
+      "title": "ResourceProviderDefaultErrorResponse",
+      "properties": {
+        "error": {
+          "description": "Response body of Error",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID.",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "PieNameParameter": {
+      "name": "pieName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name pie resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "NestedResourceNameParameter": {
+      "name": "nestedResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of nested resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtensionResourceNameParameter": {
+      "name": "extensionResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of extension resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
