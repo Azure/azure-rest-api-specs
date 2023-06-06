@@ -1,10 +1,6 @@
 parameters:
   python-sdk-folder:
     default: "{cwd}/azure-sdk-for-python/"
-  java-sdk-folder:
-    default: "{cwd}/azure-sdk-for-java/"
-  js-sdk-folder:
-    default: "{cwd}/azure-sdk-for-js/"
   csharp-sdk-folder:
     default: "{cwd}/azure-sdk-for-csharp/"
   service-directory-name:
@@ -25,14 +21,4 @@ options:
     clear-output-folder: true
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
-  "@azure-tools/typespec-typescript":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/azure-ai-language-conversations-rest"
-    generateMetadata: true
-    generateTest: true
-    azureSdkForJs: true
-    packageDetails:
-      name: "@azure-rest/azure-ai-language-conversations-rest"
-      description: "Azure.AI.Language.Conversations Service"
-  "@azure-tools/typespec-java":
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-language-conversations"
-    namespace: com.azure.ai.language.conversations
+
