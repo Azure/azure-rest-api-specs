@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-05
+tag: package-preview-2023-08
 ```
 
 ### Suppression
@@ -58,6 +58,7 @@ input-file:
   - Microsoft.AppPlatform/preview/2023-08-01-preview/Revisions.json
   - Microsoft.AppPlatform/preview/2023-08-01-preview/SpringEnvironments.json
   - Microsoft.AppPlatform/preview/2023-08-01-preview/SpringEnvironmentsMiddlewares.json
+  - Microsoft.AppPlatform/preview/2023-05-01-preview/appplatform.json
 ```
 
 
