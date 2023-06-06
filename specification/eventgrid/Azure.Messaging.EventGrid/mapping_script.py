@@ -5,6 +5,7 @@
 # get to the directory where the TypespecEventGrid.json file is located
 import json
 import pathlib
+import os
 
 # Clear out the swaggers folder
 path_to_clear = pathlib.Path("./swaggers")
@@ -34,7 +35,7 @@ for definition_name, definition_body in fileContent["definitions"].items():
                     f.write('"paths": {},\n"definitions": {\n')
                 f.write('"'+event+'"' + " : ")
                 json.dump(definition_body,f)
-                f.write(",\n")
+                f.write(",")
     except:
         pass
 
@@ -43,5 +44,11 @@ for definition_name, definition_body in fileContent["definitions"].items():
 
     
 for file_name in file_names:
+    with open(f'swaggers\\{file_name}.json', 'rb+') as f:
+        f.seek(0,2)                 # end of file
+        size=f.tell()               # the size...
+        print(size)
+        f.truncate(size-1)
     with open(f'swaggers\\{file_name}.json', 'a') as f:
+        f.write("}\n")
         f.write("}")

@@ -1,51 +1,1001 @@
 {
-"swagger": "2.0",
-"info": {
-"version": "2018-01-01",
-"title": "Schema of AzureCommunicationServices events published to Azure Event Grid",
-"description": "Describes the schema of the AzureCommunicationServices events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
-},
-"paths": {},
-"definitions": {
-"AcsChatEventBaseProperties" : {"type": "object", "properties": {"recipientCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the target user"}, "transactionId": {"type": "string", "description": "The transaction id will be used as co-relation vector"}, "threadId": {"type": "string", "description": "The chat thread id"}}, "description": "Schema of common properties of all chat events"},
-"AcsChatEventInThreadBaseProperties" : {"type": "object", "properties": {"transactionId": {"type": "string", "description": "The transaction id will be used as co-relation vector"}, "threadId": {"type": "string", "description": "The chat thread id"}}, "description": "Schema of common properties of all thread-level chat events"},
-"AcsChatMessageDeletedEventData" : {"type": "object", "properties": {"deleteTime": {"type": "string", "format": "date-time", "description": "The time at which the message was deleted"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"}]},
-"AcsChatMessageDeletedInThreadEventData" : {"type": "object", "properties": {"deleteTime": {"type": "string", "format": "date-time", "description": "The time at which the message was deleted"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"}]},
-"AcsChatMessageEditedEventData" : {"type": "object", "properties": {"messageBody": {"type": "string", "description": "The body of the chat message"}, "metadata": {"type": "object", "additionalProperties": {"type": "string"}, "x-typespec-name": "Record<string>", "description": "The chat message metadata"}, "editTime": {"type": "string", "format": "date-time", "description": "The time at which the message was edited"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"}]},
-"AcsChatMessageEditedInThreadEventData" : {"type": "object", "properties": {"messageBody": {"type": "string", "description": "The body of the chat message"}, "metadata": {"type": "object", "additionalProperties": {"type": "string"}, "x-typespec-name": "Record<string>", "description": "The chat message metadata"}, "editTime": {"type": "string", "format": "date-time", "description": "The time at which the message was edited"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"}]},
-"AcsChatMessageEventBaseProperties" : {"type": "object", "properties": {"messageId": {"type": "string", "description": "The chat message id"}, "senderCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the sender"}, "senderDisplayName": {"type": "string", "description": "The display name of the sender"}, "composeTime": {"type": "string", "format": "date-time", "description": "The original compose time of the message"}, "type": {"type": "string", "description": "The type of the message"}, "version": {"type": "integer", "format": "int64", "description": "The version of the message"}}, "description": "Schema of common properties of all chat message events", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"}]},
-"AcsChatMessageEventInThreadBaseProperties" : {"type": "object", "properties": {"messageId": {"type": "string", "description": "The chat message id"}, "senderCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the sender"}, "senderDisplayName": {"type": "string", "description": "The display name of the sender"}, "composeTime": {"type": "string", "format": "date-time", "description": "The original compose time of the message"}, "type": {"type": "string", "description": "The type of the message"}, "version": {"type": "integer", "format": "int64", "description": "The version of the message"}}, "description": "Schema of common properties of all thread-level chat message events", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"}]},
-"AcsChatMessageReceivedEventData" : {"type": "object", "properties": {"messageBody": {"type": "string", "description": "The body of the chat message"}, "metadata": {"type": "object", "additionalProperties": {"type": "string"}, "x-typespec-name": "Record<string>", "description": "The chat message metadata"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"}]},
-"AcsChatMessageReceivedInThreadEventData" : {"type": "object", "properties": {"messageBody": {"type": "string", "description": "The body of the chat message"}, "metadata": {"type": "object", "additionalProperties": {"type": "string"}, "x-typespec-name": "Record<string>", "description": "The chat message metadata"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"}]},
-"AcsChatParticipantAddedToThreadEventData" : {"type": "object", "properties": {"time": {"type": "string", "format": "date-time", "description": "The time at which the user was added to the thread"}, "addedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who added the user"}, "participantAdded": {"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties", "description": "The details of the user who was added"}, "version": {"type": "integer", "format": "int64", "description": "The version of the thread"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"}]},
-"AcsChatParticipantAddedToThreadWithUserEventData" : {"type": "object", "properties": {"time": {"type": "string", "format": "date-time", "description": "The time at which the user was added to the thread"}, "addedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who added the user"}, "participantAdded": {"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties", "description": "The details of the user who was added"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"}]},
-"AcsChatParticipantRemovedFromThreadEventData" : {"type": "object", "properties": {"time": {"type": "string", "format": "date-time", "description": "The time at which the user was removed to the thread"}, "removedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who removed the user"}, "participantRemoved": {"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties", "description": "The details of the user who was removed"}, "version": {"type": "integer", "format": "int64", "description": "The version of the thread"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"}]},
-"AcsChatParticipantRemovedFromThreadWithUserEventData" : {"type": "object", "properties": {"time": {"type": "string", "format": "date-time", "description": "The time at which the user was removed to the thread"}, "removedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who removed the user"}, "participantRemoved": {"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties", "description": "The details of the user who was removed"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"}]},
-"AcsChatThreadCreatedEventData" : {"type": "object", "properties": {"createdByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who created the thread"}, "properties": {"type": "object", "additionalProperties": true, "x-typespec-name": "Record<unknown>", "description": "The thread properties"}, "participants": {"type": "array", "items": {"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"}, "x-ms-identifiers": [], "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]", "description": "The list of properties of participants who are part of the thread"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"}]},
-"AcsChatThreadCreatedWithUserEventData" : {"type": "object", "properties": {"createdByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who created the thread"}, "properties": {"type": "object", "additionalProperties": true, "x-typespec-name": "Record<unknown>", "description": "The thread properties"}, "participants": {"type": "array", "items": {"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"}, "x-ms-identifiers": [], "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]", "description": "The list of properties of participants who are part of the thread"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"}]},
-"AcsChatThreadDeletedEventData" : {"type": "object", "properties": {"deletedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who deleted the thread"}, "deleteTime": {"type": "string", "format": "date-time", "description": "The deletion time of the thread"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"}]},
-"AcsChatThreadEventBaseProperties" : {"type": "object", "properties": {"createTime": {"type": "string", "format": "date-time", "description": "The original creation time of the thread"}, "version": {"type": "integer", "format": "int64", "description": "The version of the thread"}}, "description": "Schema of common properties of all chat thread events", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"}]},
-"AcsChatThreadEventInThreadBaseProperties" : {"type": "object", "properties": {"createTime": {"type": "string", "format": "date-time", "description": "The original creation time of the thread"}, "version": {"type": "integer", "format": "int64", "description": "The version of the thread"}}, "description": "Schema of common properties of all chat thread events", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"}]},
-"AcsChatThreadParticipantProperties" : {"type": "object", "properties": {"displayName": {"type": "string", "description": "The name of the user"}, "participantCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user"}}, "description": "Schema of the chat thread participant"},
-"AcsChatThreadPropertiesUpdatedEventData" : {"type": "object", "properties": {"editedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who updated the thread properties"}, "editTime": {"type": "string", "format": "date-time", "description": "The time at which the properties of the thread were updated"}, "properties": {"type": "object", "additionalProperties": true, "x-typespec-name": "Record<unknown>", "description": "The updated thread properties"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"}]},
-"AcsChatThreadPropertiesUpdatedPerUserEventData" : {"type": "object", "properties": {"editedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who updated the thread properties"}, "editTime": {"type": "string", "format": "date-time", "description": "The time at which the properties of the thread were updated"}, "properties": {"type": "object", "additionalProperties": true, "x-typespec-name": "Record<unknown>", "description": "The updated thread properties"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"}]},
-"AcsChatThreadWithUserDeletedEventData" : {"type": "object", "properties": {"deletedByCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who deleted the thread"}, "deleteTime": {"type": "string", "format": "date-time", "description": "The deletion time of the thread"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"}]},
-"AcsEmailDeliveryReportReceivedEventData" : {"type": "object", "properties": {"sender": {"type": "string", "description": "The Sender Email Address"}, "recipient": {"type": "string", "description": "The recipient Email Address"}, "messageId": {"type": "string", "description": "The Id of the email been sent"}, "status": {"$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatus", "description": "The status of the email. Any value other than Delivered is considered failed."}, "deliveryStatusDetails": {"$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails", "description": "Detailed information about the status if any"}, "deliveryAttemptTimeStamp": {"type": "string", "format": "date-time", "description": "The time at which the email delivery report received timestamp"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.", "required": ["sender", "recipient", "messageId", "status", "deliveryStatusDetails", "deliveryAttemptTimeStamp"]},
-"AcsEmailDeliveryReportStatus" : {"type": "string", "enum": ["Bounced", "Delivered", "Failed", "FilteredSpam", "Quarantined", "Suppressed"], "x-ms-enum": {"name": "AcsEmailDeliveryReportStatus", "modelAsString": true, "values": [{"name": "Bounced", "value": "Bounced", "description": "Hard bounce detected while sending the email"}, {"name": "Delivered", "value": "Delivered", "description": "The email was delivered"}, {"name": "Failed", "value": "Failed", "description": "The email failed to be delivered"}, {"name": "FilteredSpam", "value": "FilteredSpam", "description": "The message was identified as spam and was rejected or blocked (not quarantined)."}, {"name": "Quarantined", "value": "Quarantined", "description": "The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION)."}, {"name": "Suppressed", "value": "Suppressed", "description": "The email was suppressed"}]}},
-"AcsEmailDeliveryReportStatusDetails" : {"type": "object", "properties": {"statusMessage": {"type": "string", "description": "Detailed status message"}}, "description": "Detailed information about the status if any", "required": ["statusMessage"]},
-"AcsEmailEngagementTrackingReportReceivedEventData" : {"type": "object", "properties": {"sender": {"type": "string", "description": "The Sender Email Address"}, "messageId": {"type": "string", "description": "The Id of the email been sent"}, "userActionTimeStamp": {"type": "string", "format": "date-time", "description": "The time at which the user interacted with the email"}, "engagementContext": {"type": "string", "description": "The context of the type of engagement user had with email"}, "userAgent": {"type": "string", "description": "The user agent interacting with the email"}, "engagementType": {"$ref": "#/definitions/AzureCommunicationServices.AcsUserEngagement", "description": "The type of engagement user have with email"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.", "required": ["sender", "messageId", "userActionTimeStamp", "engagementContext", "userAgent", "engagementType"]},
-"AcsIncomingCallCustomContext" : {"type": "object", "properties": {"sipHeaders": {"type": "object", "additionalProperties": {"type": "string"}, "x-typespec-name": "Record<string>", "description": "Sip Headers for incoming call"}, "viopHeaders": {"type": "object", "additionalProperties": {"type": "string"}, "x-typespec-name": "Record<string>", "description": "Voip Headers for incoming call"}}, "description": "Custom Context of Incoming Call", "required": ["sipHeaders", "viopHeaders"]},
-"AcsIncomingCallEventData" : {"type": "object", "properties": {"to": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the target user."}, "from": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who initiated the call."}, "serverCallId": {"type": "string", "description": "The Id of the server call"}, "callerDisplayName": {"type": "string", "description": "Display name of caller"}, "customContext": {"$ref": "#/definitions/AzureCommunicationServices.AcsIncomingCallCustomContext", "description": "Custom Context of Incoming Call"}, "incomingCallContext": {"type": "string", "description": "Signed incoming call context."}, "correlationId": {"type": "string", "description": "CorrelationId (CallId)."}}, "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event", "required": ["to", "from", "serverCallId", "callerDisplayName", "customContext", "incomingCallContext", "correlationId"]},
-"AcsRecordingChunkInfoProperties" : {"type": "object", "properties": {"documentId": {"type": "string", "description": "The documentId of the recording chunk"}, "index": {"type": "integer", "format": "int64", "description": "The index of the recording chunk"}, "endReason": {"type": "string", "description": "The reason for ending the recording chunk"}, "metadataLocation": {"type": "string", "description": "The location of the metadata for this chunk"}, "contentLocation": {"type": "string", "description": "The location of the content for this chunk"}, "deleteLocation": {"type": "string", "description": "The location to delete all chunk storage"}}, "description": "Schema for all properties of  Recording Chunk Information."},
-"AcsRecordingFileStatusUpdatedEventData" : {"type": "object", "properties": {"recordingStorageInfo": {"$ref": "#/definitions/AzureCommunicationServices.AcsRecordingStorageInfoProperties", "description": "The details of recording storage information"}, "recordingStartTime": {"type": "string", "format": "date-time", "description": "The time at which the recording started"}, "recordingDurationMs": {"type": "integer", "format": "int64", "description": "The recording duration in milliseconds"}, "recordingContentType": {"$ref": "#/definitions/AzureCommunicationServices.recordingContentType", "description": "The recording content type- AudioVideo, or Audio"}, "recordingChannelType": {"$ref": "#/definitions/AzureCommunicationServices.recordingChannelType", "description": "The recording  channel type - Mixed, Unmixed"}, "recordingFormatType": {"$ref": "#/definitions/AzureCommunicationServices.recordingFormatType", "description": "The recording format type - Mp4, Mp3, Wav"}, "sessionEndReason": {"type": "string", "description": "The reason for ending recording session"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event."},
-"AcsRecordingStorageInfoProperties" : {"type": "object", "properties": {"recordingChunks": {"type": "array", "items": {"$ref": "#/definitions/AzureCommunicationServices.AcsRecordingChunkInfoProperties"}, "x-ms-identifiers": [], "x-typespec-name": "AzureCommunicationServices.AcsRecordingChunkInfoProperties[]", "description": "List of details of recording chunks information"}}, "description": "Schema for all properties of Recording Storage Information."},
-"AcsSmsDeliveryAttemptProperties" : {"type": "object", "properties": {"timestamp": {"type": "string", "format": "date-time", "description": "TimeStamp when delivery was attempted"}, "segmentsSucceeded": {"description": "Number of segments that were successfully delivered"}, "segmentsFailed": {"description": "Number of segments whose delivery failed"}}, "description": "Schema for details of a delivery attempt"},
-"AcsSmsDeliveryReportReceivedEventData" : {"type": "object", "properties": {"deliveryStatus": {"type": "string", "description": "Status of Delivery"}, "deliveryStatusDetails": {"type": "string", "description": "Details about Delivery Status"}, "deliveryAttempts": {"type": "array", "items": {"$ref": "#/definitions/AzureCommunicationServices.AcsSmsDeliveryAttemptProperties"}, "x-ms-identifiers": [], "x-typespec-name": "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties[]", "description": "List of details of delivery attempts made"}, "receivedTimestamp": {"type": "string", "format": "date-time", "description": "The time at which the SMS delivery report was received"}, "tag": {"type": "string", "description": "Customer Content"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"}]},
-"AcsSmsEventBaseProperties" : {"type": "object", "properties": {"messageId": {"type": "string", "description": "The identity of the SMS message"}, "from": {"type": "string", "description": "The identity of SMS message sender"}, "to": {"type": "string", "description": "The identity of SMS message receiver"}}, "description": "Schema of common properties of all SMS events"},
-"AcsSmsReceivedEventData" : {"type": "object", "properties": {"message": {"type": "string", "description": "The SMS content"}, "receivedTimestamp": {"type": "string", "format": "date-time", "description": "The time at which the SMS was received"}}, "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.", "allOf": [{"$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"}]},
-"AcsUserDisconnectedEventData" : {"type": "object", "properties": {"userCommunicationIdentifier": {"$ref": "#/definitions/CommunicationIdentifierModel", "description": "The communication identifier of the user who was disconnected"}}, "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event."},
-"AcsUserEngagement" : {"type": "string", "enum": ["view", "click"], "x-ms-enum": {"name": "AcsUserEngagement", "modelAsString": true}},
-"recordingChannelType" : {"type": "string", "enum": ["Mixed", "Unmixed"], "x-ms-enum": {"name": "recordingChannelType", "modelAsString": true}},
-"recordingContentType" : {"type": "string", "enum": ["AudioVideo", "Audio"], "x-ms-enum": {"name": "recordingContentType", "modelAsString": true}},
-"recordingFormatType" : {"type": "string", "enum": ["Wav", "Mp3", "Mp4"], "x-ms-enum": {"name": "recordingFormatType", "modelAsString": true}},
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of AzureCommunicationServices events published to Azure Event Grid",
+    "description": "Describes the schema of the AzureCommunicationServices events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "AcsChatEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "recipientCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the target user"
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "The transaction id will be used as co-relation vector"
+        },
+        "threadId": {
+          "type": "string",
+          "description": "The chat thread id"
+        }
+      },
+      "description": "Schema of common properties of all chat events"
+    },
+    "AcsChatEventInThreadBaseProperties": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string",
+          "description": "The transaction id will be used as co-relation vector"
+        },
+        "threadId": {
+          "type": "string",
+          "description": "The chat thread id"
+        }
+      },
+      "description": "Schema of common properties of all thread-level chat events"
+    },
+    "AcsChatMessageDeletedEventData": {
+      "type": "object",
+      "properties": {
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was deleted"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageDeletedInThreadEventData": {
+      "type": "object",
+      "properties": {
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was deleted"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEditedEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "The chat message metadata"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was edited"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEditedInThreadEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "The chat message metadata"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the message was edited"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The chat message id"
+        },
+        "senderCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        },
+        "composeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original compose time of the message"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the message"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the message"
+        }
+      },
+      "description": "Schema of common properties of all chat message events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageEventInThreadBaseProperties": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The chat message id"
+        },
+        "senderCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        },
+        "composeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original compose time of the message"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the message"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the message"
+        }
+      },
+      "description": "Schema of common properties of all thread-level chat message events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "The chat message metadata"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatMessageReceivedInThreadEventData": {
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "The chat message metadata"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantAddedToThreadEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was added to the thread"
+        },
+        "addedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who added the user"
+        },
+        "participantAdded": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was added"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantAddedToThreadWithUserEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was added to the thread"
+        },
+        "addedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who added the user"
+        },
+        "participantAdded": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was added"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantRemovedFromThreadEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was removed to the thread"
+        },
+        "removedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who removed the user"
+        },
+        "participantRemoved": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was removed"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatParticipantRemovedFromThreadWithUserEventData": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user was removed to the thread"
+        },
+        "removedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who removed the user"
+        },
+        "participantRemoved": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "description": "The details of the user who was removed"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadCreatedEventData": {
+      "type": "object",
+      "properties": {
+        "createdByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who created the thread"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
+          "description": "The thread properties"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]",
+          "description": "The list of properties of participants who are part of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadCreatedWithUserEventData": {
+      "type": "object",
+      "properties": {
+        "createdByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who created the thread"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
+          "description": "The thread properties"
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]",
+          "description": "The list of properties of participants who are part of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadDeletedEventData": {
+      "type": "object",
+      "properties": {
+        "deletedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who deleted the thread"
+        },
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion time of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original creation time of the thread"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of common properties of all chat thread events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadEventInThreadBaseProperties": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original creation time of the thread"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The version of the thread"
+        }
+      },
+      "description": "Schema of common properties of all chat thread events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadParticipantProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name of the user"
+        },
+        "participantCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user"
+        }
+      },
+      "description": "Schema of the chat thread participant"
+    },
+    "AcsChatThreadPropertiesUpdatedEventData": {
+      "type": "object",
+      "properties": {
+        "editedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who updated the thread properties"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the properties of the thread were updated"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
+          "description": "The updated thread properties"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadPropertiesUpdatedPerUserEventData": {
+      "type": "object",
+      "properties": {
+        "editedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who updated the thread properties"
+        },
+        "editTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the properties of the thread were updated"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true,
+          "x-typespec-name": "Record<unknown>",
+          "description": "The updated thread properties"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatThreadWithUserDeletedEventData": {
+      "type": "object",
+      "properties": {
+        "deletedByCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who deleted the thread"
+        },
+        "deleteTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deletion time of the thread"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsEmailDeliveryReportReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "The Sender Email Address"
+        },
+        "recipient": {
+          "type": "string",
+          "description": "The recipient Email Address"
+        },
+        "messageId": {
+          "type": "string",
+          "description": "The Id of the email been sent"
+        },
+        "status": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatus",
+          "description": "The status of the email. Any value other than Delivered is considered failed."
+        },
+        "deliveryStatusDetails": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails",
+          "description": "Detailed information about the status if any"
+        },
+        "deliveryAttemptTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the email delivery report received timestamp"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
+      "required": [
+        "sender",
+        "recipient",
+        "messageId",
+        "status",
+        "deliveryStatusDetails",
+        "deliveryAttemptTimeStamp"
+      ]
+    },
+    "AcsEmailDeliveryReportStatus": {
+      "type": "string",
+      "enum": [
+        "Bounced",
+        "Delivered",
+        "Failed",
+        "FilteredSpam",
+        "Quarantined",
+        "Suppressed"
+      ],
+      "x-ms-enum": {
+        "name": "AcsEmailDeliveryReportStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bounced",
+            "value": "Bounced",
+            "description": "Hard bounce detected while sending the email"
+          },
+          {
+            "name": "Delivered",
+            "value": "Delivered",
+            "description": "The email was delivered"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The email failed to be delivered"
+          },
+          {
+            "name": "FilteredSpam",
+            "value": "FilteredSpam",
+            "description": "The message was identified as spam and was rejected or blocked (not quarantined)."
+          },
+          {
+            "name": "Quarantined",
+            "value": "Quarantined",
+            "description": "The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION)."
+          },
+          {
+            "name": "Suppressed",
+            "value": "Suppressed",
+            "description": "The email was suppressed"
+          }
+        ]
+      }
+    },
+    "AcsEmailDeliveryReportStatusDetails": {
+      "type": "object",
+      "properties": {
+        "statusMessage": {
+          "type": "string",
+          "description": "Detailed status message"
+        }
+      },
+      "description": "Detailed information about the status if any",
+      "required": [
+        "statusMessage"
+      ]
+    },
+    "AcsEmailEngagementTrackingReportReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "sender": {
+          "type": "string",
+          "description": "The Sender Email Address"
+        },
+        "messageId": {
+          "type": "string",
+          "description": "The Id of the email been sent"
+        },
+        "userActionTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the user interacted with the email"
+        },
+        "engagementContext": {
+          "type": "string",
+          "description": "The context of the type of engagement user had with email"
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The user agent interacting with the email"
+        },
+        "engagementType": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsUserEngagement",
+          "description": "The type of engagement user have with email"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
+      "required": [
+        "sender",
+        "messageId",
+        "userActionTimeStamp",
+        "engagementContext",
+        "userAgent",
+        "engagementType"
+      ]
+    },
+    "AcsIncomingCallCustomContext": {
+      "type": "object",
+      "properties": {
+        "sipHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Sip Headers for incoming call"
+        },
+        "viopHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-typespec-name": "Record<string>",
+          "description": "Voip Headers for incoming call"
+        }
+      },
+      "description": "Custom Context of Incoming Call",
+      "required": [
+        "sipHeaders",
+        "viopHeaders"
+      ]
+    },
+    "AcsIncomingCallEventData": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the target user."
+        },
+        "from": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who initiated the call."
+        },
+        "serverCallId": {
+          "type": "string",
+          "description": "The Id of the server call"
+        },
+        "callerDisplayName": {
+          "type": "string",
+          "description": "Display name of caller"
+        },
+        "customContext": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsIncomingCallCustomContext",
+          "description": "Custom Context of Incoming Call"
+        },
+        "incomingCallContext": {
+          "type": "string",
+          "description": "Signed incoming call context."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "CorrelationId (CallId)."
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
+      "required": [
+        "to",
+        "from",
+        "serverCallId",
+        "callerDisplayName",
+        "customContext",
+        "incomingCallContext",
+        "correlationId"
+      ]
+    },
+    "AcsRecordingChunkInfoProperties": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "description": "The documentId of the recording chunk"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The index of the recording chunk"
+        },
+        "endReason": {
+          "type": "string",
+          "description": "The reason for ending the recording chunk"
+        },
+        "metadataLocation": {
+          "type": "string",
+          "description": "The location of the metadata for this chunk"
+        },
+        "contentLocation": {
+          "type": "string",
+          "description": "The location of the content for this chunk"
+        },
+        "deleteLocation": {
+          "type": "string",
+          "description": "The location to delete all chunk storage"
+        }
+      },
+      "description": "Schema for all properties of  Recording Chunk Information."
+    },
+    "AcsRecordingFileStatusUpdatedEventData": {
+      "type": "object",
+      "properties": {
+        "recordingStorageInfo": {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingStorageInfoProperties",
+          "description": "The details of recording storage information"
+        },
+        "recordingStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the recording started"
+        },
+        "recordingDurationMs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The recording duration in milliseconds"
+        },
+        "recordingContentType": {
+          "$ref": "#/definitions/AzureCommunicationServices.recordingContentType",
+          "description": "The recording content type- AudioVideo, or Audio"
+        },
+        "recordingChannelType": {
+          "$ref": "#/definitions/AzureCommunicationServices.recordingChannelType",
+          "description": "The recording  channel type - Mixed, Unmixed"
+        },
+        "recordingFormatType": {
+          "$ref": "#/definitions/AzureCommunicationServices.recordingFormatType",
+          "description": "The recording format type - Mp4, Mp3, Wav"
+        },
+        "sessionEndReason": {
+          "type": "string",
+          "description": "The reason for ending recording session"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event."
+    },
+    "AcsRecordingStorageInfoProperties": {
+      "type": "object",
+      "properties": {
+        "recordingChunks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingChunkInfoProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "AzureCommunicationServices.AcsRecordingChunkInfoProperties[]",
+          "description": "List of details of recording chunks information"
+        }
+      },
+      "description": "Schema for all properties of Recording Storage Information."
+    },
+    "AcsSmsDeliveryAttemptProperties": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "TimeStamp when delivery was attempted"
+        },
+        "segmentsSucceeded": {
+          "description": "Number of segments that were successfully delivered"
+        },
+        "segmentsFailed": {
+          "description": "Number of segments whose delivery failed"
+        }
+      },
+      "description": "Schema for details of a delivery attempt"
+    },
+    "AcsSmsDeliveryReportReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "deliveryStatus": {
+          "type": "string",
+          "description": "Status of Delivery"
+        },
+        "deliveryStatusDetails": {
+          "type": "string",
+          "description": "Details about Delivery Status"
+        },
+        "deliveryAttempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureCommunicationServices.AcsSmsDeliveryAttemptProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties[]",
+          "description": "List of details of delivery attempts made"
+        },
+        "receivedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the SMS delivery report was received"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Customer Content"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"
+        }
+      ]
+    },
+    "AcsSmsEventBaseProperties": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The identity of the SMS message"
+        },
+        "from": {
+          "type": "string",
+          "description": "The identity of SMS message sender"
+        },
+        "to": {
+          "type": "string",
+          "description": "The identity of SMS message receiver"
+        }
+      },
+      "description": "Schema of common properties of all SMS events"
+    },
+    "AcsSmsReceivedEventData": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The SMS content"
+        },
+        "receivedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the SMS was received"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"
+        }
+      ]
+    },
+    "AcsUserDisconnectedEventData": {
+      "type": "object",
+      "properties": {
+        "userCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the user who was disconnected"
+        }
+      },
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event."
+    },
+    "AcsUserEngagement": {
+      "type": "string",
+      "enum": [
+        "view",
+        "click"
+      ],
+      "x-ms-enum": {
+        "name": "AcsUserEngagement",
+        "modelAsString": true
+      }
+    },
+    "recordingChannelType": {
+      "type": "string",
+      "enum": [
+        "Mixed",
+        "Unmixed"
+      ],
+      "x-ms-enum": {
+        "name": "recordingChannelType",
+        "modelAsString": true
+      }
+    },
+    "recordingContentType": {
+      "type": "string",
+      "enum": [
+        "AudioVideo",
+        "Audio"
+      ],
+      "x-ms-enum": {
+        "name": "recordingContentType",
+        "modelAsString": true
+      }
+    },
+    "recordingFormatType": {
+      "type": "string",
+      "enum": [
+        "Wav",
+        "Mp3",
+        "Mp4"
+      ],
+      "x-ms-enum": {
+        "name": "recordingFormatType",
+        "modelAsString": true
+      }
+    }
+  }
 }
