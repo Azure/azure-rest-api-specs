@@ -29,6 +29,7 @@ cd specification/contosowidgetmanager
 npm install
 
 # Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
+# Note: this has to be run from `main` branch. If you are working on a different branch, temporarily switch to `main` to run it.
 npx tsc 
 
 # As of 6/2/2023, the prettier version should be 2.1.2 (this is coming from openapi-alps repo)
@@ -62,7 +63,7 @@ If you see failure like the following upon running `npx prettier --check` or `np
 [error] - azure-rest-api-specs-pr\node_modules\prettier\bin-prettier.js
 ```
 
-then ensure you ran `npx tsc` from `main` branch and did not run `npx tsc` from any other branch, like `RPSaaSDev`.
+then ensure you ran `npx tsc` from `main` branch and did not run `npx tsc` from any other branch, like `RPSaaSDev`. This means you might need to temporarily switch to `main` just to run this command.
 
 ## Model Validation
 
