@@ -1025,7 +1025,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/DeletedServers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ElasticPoolOperations.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/EncryptionProtectors.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/FailoverGroups.json
+- ./Microsoft.Sql/preview/2023-02-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FirewallRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/InstancePools.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobAgents.json
