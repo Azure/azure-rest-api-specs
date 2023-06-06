@@ -1006,6 +1006,13 @@ directive:
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
     reason: The tags API does not support system data
+  - suppress: ResourceNameRestriction
+    from: changes.json
+    reason: change resources cannot be created or named by end users
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: 'Duplicate Operations API causes generation issues'
 ```
 
 ---
