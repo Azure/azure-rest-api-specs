@@ -472,7 +472,7 @@ directive:
 suppressions:
   - code: pathforresourceaction
     reason: Existing API used in production by customers and cannot be modified at this point. 
-    from: Microsoft.Consumption/stable/2023-03-01/consumption_pricesheet.json
+    from: consumption_pricesheet.json
     where: /providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/download
 ```
 
