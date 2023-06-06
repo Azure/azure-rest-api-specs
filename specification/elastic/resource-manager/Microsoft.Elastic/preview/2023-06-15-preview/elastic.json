@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2023-05-01-preview"
+    "version": "2023-06-15-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1470,6 +1470,46 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/elasticOrganizationToAzureSubscriptionMapping": {
+      "get": {
+        "tags": [
+          "UserOrganization"
+        ],
+        "summary": "Get Elastic Organization To Azure Subscription Mapping details for the logged-in user.",
+        "description": "Get Elastic Organization To Azure Subscription Mapping details for the logged-in user.",
+        "operationId": "Organizations_GetElasticOrganizationToAzureSubscriptionMapping",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticOrganizationToAzureSubscriptionMappingResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_GetElasticOrganizationToAzureSubscriptionMapping": {
+            "$ref": "./examples/Organizations_GetElasticOrganizationToAzureSubscriptionMapping.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2462,6 +2502,37 @@
           "description": "The User Api Key Generated based on GenerateApiKey flag. This is applicable for non-Portal clients only.",
           "type": "string",
           "x-ms-secret": true
+        }
+      }
+    },
+    "ElasticOrganizationToAzureSubscriptionMappingResponse": {
+      "description": "The Azure Subscription ID to which the Organization of the logged in user belongs and gets billed into.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticOrganizationToAzureSubscriptionMappingResponseProperties"
+        }
+      }
+    },
+    "ElasticOrganizationToAzureSubscriptionMappingResponseProperties": {
+      "type": "object",
+      "properties": {
+        "billedAzureSubscriptionId": {
+          "description": "The Azure Subscription ID to which the Organization belongs and gets billed into. This is empty for a new user OR a user without an Elastic Organization.",
+          "type": "string"
+        },
+        "marketplaceSaasInfo": {
+          "description": "Marketplace SaaS Info of the resource.",
+          "$ref": "#/definitions/MarketplaceSaaSInfo",
+          "readOnly": true
+        },
+        "elasticOrganizationId": {
+          "description": "The Elastic Organization Id.",
+          "type": "string"
+        },
+        "elasticOrganizationName": {
+          "description": "The Elastic Organization Name.",
+          "type": "string"
         }
       }
     }
