@@ -799,10 +799,18 @@
           "format": "int32",
           "description": "The priority of this correlation."
         },
-        "suppressNotificationForChildAlerts": {
-          "type": "boolean",
-          "default": true,
-          "description": "Indicates whether child alerts notifications should be suppressed."
+        "notificationsForCorrelatedAlerts": {
+          "type": "string",
+          "default": "SuppressAll",
+          "description": "Indicates how to handle child alerts notifications.",
+          "enum": [
+            "NotifyAlways",
+            "SuppressAll"
+          ],
+          "x-ms-enum": {
+            "name": "NotificationsForCorrelatedAlerts",
+            "modelAsString": true
+          }
         }
       }
     },
