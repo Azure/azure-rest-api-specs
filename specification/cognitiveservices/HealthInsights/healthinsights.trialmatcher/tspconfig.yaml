@@ -1,16 +1,16 @@
 emit: [
-  "@azure-tools/typespec-csharp",
+  # "@azure-tools/typespec-csharp",
   # "@azure-tools/cadl-python",
   # "@azure-tools/typespec-java",
-  # "@azure-tools/cadl-typescript",
+  # "@azure-tools/typespec-ts",
 ]
 
 options:
-  "@azure-tools/typespec-csharp":
-    namespace : "Azure.Health.Insights.ClinicalMatching"
-    clear-output-folder : true
-    new-project : false
-    model-namespace : false
+  # "@azure-tools/typespec-csharp":
+  #   namespace : "Azure.Health.Insights.ClinicalMatching"
+  #   clear-output-folder : true
+  #   new-project : false
+  #   model-namespace : false
   # "@azure-tools/typespec-java":
   #     namespace: "Com.Azure.Health.Insights.ClinicalMatching"
   #     clear-output-folder: true
@@ -19,7 +19,11 @@ options:
   # "@azure-tools/cadl-python":
   #     package-mode: "dataplane"
   #     package-name: "azure-healthinsights-clinicalmatching"
-  # "@azure-tools/cadl-typescript": 
-  #     packageDetails:
-  #        name: "@azure-rest/health-insights-clinicalmatching"
-  #        description: "Azure Health Insights ClinicalMatching"
+    "@azure-tools/typespec-ts": 
+      title: Health Insights Clinical Matching
+      generateMetadata: true
+      generateTest: true
+      packageDetails:
+         name: "@azure-rest/health-insights-clinicalmatching"
+         description: "Azure Health Insights ClinicalMatching"
+         version: "1.0.0-beta.1"
