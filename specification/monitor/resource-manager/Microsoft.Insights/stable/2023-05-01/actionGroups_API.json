@@ -520,23 +520,23 @@
           "type": "string",
           "description": "The mechanism type"
         },
-        "Name": {
+        "name": {
           "type": "string",
           "description": "The name of the action"
         },
-        "Status": {
+        "status": {
           "type": "string",
           "description": "The status of the action"
         },
-        "SubState": {
+        "subState": {
           "type": "string",
           "description": "The substatus of the action"
         },
-        "SendTime": {
+        "sendTime": {
           "type": "string",
           "description": "The send time"
         },
-        "Detail": {
+        "detail": {
           "type": "string",
           "description": "The detail of the friendly error message"
         }
@@ -1216,6 +1216,9 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^\S[ .A-Za-z][ .A-Za-z0-9]*[^.\s]$",
+      "minLength": 1,
+      "maxLength": 260,
       "description": "The name of the action group.",
       "x-ms-parameter-location": "method"
     }
