@@ -5,35 +5,55 @@
     "endpoint": "{endpoint}",
     "api-version": "2023-03-01-preview",
     "body": {
-      "configuration": {
-        "checkForCancerCase": true,
-        "includeEvidence": false
-      },
       "patients": [
         {
-          "id": "patient1",
+          "id": "Patient ID Example 1",
+          "info": {
+            "sex": "female",
+            "birthDate": "1975-09-27"
+          },
           "data": [
             {
-              "kind": "note",
-              "clinicalType": "pathology",
-              "id": "document1",
+              "type": "note",
+              "clinicalType": "historyAndPhysical",
+              "id": "1",
               "language": "en",
-              "createdDateTime": "2022-01-01T00:00:00",
+              "createdDateTime": "2021-10-26T16:54:44.739Z",
               "content": {
                 "sourceType": "inline",
-                "value": "Laterality:  Left \n   Tumor type present:  Invasive duct carcinoma; duct carcinoma in situ \n   Tumor site:  Upper inner quadrant \n   Invasive carcinoma \n   Histologic type:  Ductal \n   Size of invasive component:  0.9 cm \n   Histologic Grade - Nottingham combined histologic score:  1 out of 3 \n   In situ carcinoma (DCIS) \n   Histologic type of DCIS:  Cribriform and solid \n   Necrosis in DCIS:  Yes \n   DCIS component of invasive carcinoma:  Extensive \n"
+                "value": "Sample note 1"
+              }
+            },
+            {
+              "type": "note",
+              "clinicalType": "imaging",
+              "id": "2",
+              "language": "en",
+              "createdDateTime": "2020-11-26T16:39:44.739Z",
+              "content": {
+                "sourceType": "inline",
+                "value": "Sample note 2"
               }
             }
           ]
         }
-      ]
+      ],
+      "configuration": {
+        "verbose": true,
+        "includeEvidence": true,
+        "inferenceTypes": [
+          "histology",
+          "clinicalStageT"
+        ],
+        "checkForCancerCase": false
+      }
     }
   },
   "responses": {
     "202": {
       "headers": {
         "Operation-Location": "{endpoint}/healthinsights/oncophenotype/jobs/{jobId}?api-version=2023-03-01-preview",
-        "Retry-After": "5"
+        "Retry-After": "1"
       }
     }
   }
