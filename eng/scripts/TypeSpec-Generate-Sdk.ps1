@@ -4,7 +4,7 @@ param (
   [ValidateNotNullOrEmpty()]
   [string] $SdkRepoRootDirectory,
   [Parameter(Position = 1)]
-  [string] $TypeSpecProjectDirectory, # A directory of `tspconfig.yaml` or a remoteUrl of `tspconfig.yaml`
+  [string] $TypeSpecProjectDirectory = ".", # A directory of `tspconfig.yaml` or a remoteUrl of `tspconfig.yaml`
   [Parameter(Position = 2)]
   [string] $CommitHash,
   [Parameter(Position = 3)]
