@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for WebPubSub.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for WebPubSub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,18 @@ To build the SDK for WebPubSub, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the WebPubSub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-03-01-preview
+tag: package-preview-2023-06
 ```
 
 ### Suppression
@@ -71,6 +71,15 @@ directive:
     reason: It can introduce a breaking change when updating parameter order, since Web PubSub service has already shipped public versions.
 ```
 
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.SignalRService/preview/2023-06-01-preview/webpubsub.json
+```
 ### Tag: package-2021-10-01
 
 These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
@@ -111,7 +120,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-08-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08-01-preview'
+``` yaml $(tag) == 'package-2022-08-01-preview'
 input-file:
 - Microsoft.SignalRService/preview/2022-08-01-preview/webpubsub.json
 ```
@@ -120,7 +129,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02-01'
+``` yaml $(tag) == 'package-2023-02-01'
 input-file:
 - Microsoft.SignalRService/stable/2023-02-01/webpubsub.json
 ```
@@ -129,7 +138,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03-01-preview'
+``` yaml $(tag) == 'package-2023-03-01-preview'
 input-file:
 - Microsoft.SignalRService/preview/2023-03-01-preview/webpubsub.json
 ```
@@ -137,7 +146,6 @@ input-file:
 ---
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -185,6 +193,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/webpubsub/Microsoft.Azure.Management.WebPubSub/src/Generated
   clear-output-folder: true
 ```
-
-
-
