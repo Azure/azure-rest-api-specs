@@ -5,17 +5,11 @@
     "version": "2023-06-01-preview",
     "description": "Microsoft Azure Quota Resource Provider"
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": [ "user_impersonation" ]
     }
   ],
   "securityDefinitions": {
@@ -32,9 +26,7 @@
   "paths": {
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}": {
       "put": {
-        "tags": [
-          "SharedQuotaEntity"
-        ],
+        "tags": [ "SharedQuotaEntity" ],
         "summary": "Creates a new sharedQuotaEntity for the name passed.",
         "description": "Creates a new sharedQuotaEntity for the name passed. A sharedQuotaEntityRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
         "operationId": "SharedQuotaEntities_CreateOrUpdate",
@@ -52,7 +44,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "SharedQuotaEntityRequest",
@@ -100,9 +92,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "SharedQuotaEntity"
-        ],
+        "tags": [ "SharedQuotaEntity" ],
         "summary": "Updates a new sharedQuotaEntity for the name passed.",
         "description": "Updates the sharedQuotaEntity for the name passed. A sharedQuotaEntityRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked. \n Any change in the filters will be applicable to the future quota assignments, existing quota assigned to subscriptions from the sharedQuotaEntity remains unchanged.",
         "operationId": "SharedQuotaEntities_Update",
@@ -120,7 +110,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "SharedQuotaEntityPatchRequest",
@@ -168,9 +158,7 @@
         }
       },
       "get": {
-        "tags": [
-          "SharedQuotaEntity"
-        ],
+        "tags": [ "SharedQuotaEntity" ],
         "summary": "Gets sharedQuotaEntity for the name passed.",
         "description": "Gets the sharedQuotaEntity for the name passed. It will display the SharedQuotaEntity properties only.The details on groupQuota can be access from the groupQuota APIs.",
         "operationId": "SharedQuotaEntities_Get",
@@ -187,7 +175,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -200,15 +188,13 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "SharedQuotaEntity"
-        ],
+        "tags": [ "SharedQuotaEntity" ],
         "summary": "Deletes sharedQuotaEntity for the name passed.",
         "description": "Deletes the sharedQuotaEntity for the name passed. All the remaining shareQuota in the sharedQuotaEntity will be lost.",
         "operationId": "SharedQuotaEntities_Delete",
@@ -225,7 +211,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -238,7 +224,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -246,9 +232,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities": {
       "get": {
-        "tags": [
-          "SharedQuotaEntity"
-        ],
+        "tags": [ "SharedQuotaEntity" ],
         "summary": "Lists sharedQuotaEntities for the scope passed.",
         "description": "Lists sharedQuotaEntities for the scope passed. It will display the SharedQuotaEntity properties only.The details on groupQuota can be access from the groupQuota APIs.",
         "operationId": "SharedQuotaEntities_List",
@@ -262,7 +246,7 @@
             "$ref": "#/parameters/MgIdInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -275,153 +259,16 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/subscriptionsToSharedQuotaEntity": {
-      "put": {
-        "tags": [
-          "SharedQuotaEntities-Subscriptions"
-        ],
-        "summary": "Adds subscription(s) to the sharedQuotaEntity.",
-        "description": "Adds list of subscriptions to sharedQuotaEntity. Should it overwrite the existing subscriptionList, as per put? Patch is to add, delete is for removing the subscripting from list.",
-        "operationId": "SharedQuotaEntitiesSubscriptionsAdd_CreateOrUpdate",
-        "x-ms-examples": {
-          "GroupQuotaLimits_Put_Subscriptions": {
-            "$ref": "./examples/PutSharedQuotaEntitySubscriptions.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/MgIdInParameters"
-          },
-          {
-            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "SubscriptionListForSharedQuotaEntity",
-            "in": "body",
-            "description": "TThe List of  subscriptions to add  to SharedQuotaEntity.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionIdList"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK, Create or Update",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionIdList"
-            }
-          },
-          "201": {
-            "description": "Request Accepted, Create or Update",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int64"
-              },
-              "Location": {
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers.  New guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#131-resource-based-long-running-operations-relo",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/OperationsStatus"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "SharedQuotaEntities-Subscriptions"
-        ],
-        "summary": "Updates a the sharedQuotaEntity with the subscriptions to add to the subscriptions list.",
-        "description": "Updates a the sharedQuotaEntity with the subscriptions to add to the subscriptions list.",
-        "operationId": "SharedQuotaEntitiesSubscriptions_Update",
-        "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/PatchSharedQuotaEntitySubscriptionsAdd.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/MgIdInParameters"
-          },
-          {
-            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "SharedQuotaEntityPatchRequest",
-            "in": "body",
-            "description": "The List of  subscriptions to add  to SharedQuotaEntity.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionIdList"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionIdList"
-            }
-          },
-          "202": {
-            "description": "Request Accepted",
-            "headers": {
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int64"
-              },
-              "Location": {
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/OperationsStatus"
-            }
-          },
-          "default": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
+
       "get": {
-        "tags": [
-          "SharedQuotaEntities-Subscriptions"
-        ],
+        "tags": [ "SharedQuotaEntities-Subscription" ],
         "summary": "Gets sharedQuotaEntity Subscription List for the SharedQuotaEntity name passed.",
         "description": "Gets sharedQuotaEntity Subscription List for the SharedQuotaEntity name passed.",
         "operationId": "SharedQuotaEntitiesSubscriptions_GetList",
@@ -438,7 +285,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -451,19 +298,92 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/subscriptionsToSharedQuotaEntity/{subscriptionId}": {
-      "delete": {
-        "tags": [
-          "SharedQuotaEntities-Subscriptions"
+      "put": {
+        "tags": [ "SharedQuotaEntities-Subscription" ],
+        "summary": "Adds subscription to the sharedQuotaEntity.",
+        "description": "Adds a subscriptions to sharedQuotaEntity.",
+        "operationId": "SharedQuotaEntitiesSubscriptionsAdd_CreateOrUpdate",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Subscriptions": {
+            "$ref": "./examples/PutSharedQuotaEntitySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdInParameters"
+          }
         ],
+        "responses": {
+          "200": {
+            "description": "OK, Create or Update"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [ "SharedQuotaEntities-Subscription" ],
+        "summary": "Updates the sharedQuotaEntity with the subscription to add to the subscriptions list.",
+        "description": "Updates the sharedQuotaEntity with the subscription to add to the subscriptions list.",
+        "operationId": "SharedQuotaEntitiesSubscriptions_Update",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Request_ForCompute": {
+            "$ref": "./examples/PatchSharedQuotaEntitySubscriptionAdd.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdInParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionIdList"
+            }
+          },
+          "default": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "SharedQuotaEntities-Subscription" ],
         "summary": "Removes the subscription from sharedQuotaEntity.",
-        "description": "Removes the subscription from sharedQuotaEntity. It will return the remaining subscriptions in the sharedQuotaEntity.",
+        "description": "Removes the subscription from sharedQuotaEntity.",
         "operationId": "SharedQuotaEntitiesSubscriptions_Delete",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
@@ -478,7 +398,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdInParameters"
@@ -494,7 +414,46 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [ "SharedQuotaEntities-Subscription" ],
+        "summary": "Checks if the subscription is in sharedQuotaEntity SubscriptionIdList.",
+        "description": "Checks if the subscription is in sharedQuotaEntity SubscriptionIdList.",
+        "operationId": "SharedQuotaEntitiesSubscription_Get",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Subscription": {
+            "$ref": "./examples/DeleteSharedQuotaEntitySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdInParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -502,9 +461,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/groupQuotaLimits/{resourceName}": {
       "put": {
-        "tags": [
-          "GroupQuotaLimits"
-        ],
+        "tags": [ "GroupQuotaLimits" ],
         "summary": "Creates a new Group Quota request for a specific resources.",
         "description": "Creates a new Group Quota request for a specific resources. A groupQuotaRequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
         "operationId": "GroupQuotaLimits_CreateOrUpdate",
@@ -528,7 +485,7 @@
             "$ref": "#/parameters/ResourceInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "groupQuotaRequest",
@@ -576,9 +533,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "GroupQuotaLimits"
-        ],
+        "tags": [ "GroupQuotaLimits" ],
         "summary": "Creates/Updates a new Group Quota request for a specific resources.",
         "description": "Creates/Updates a new Group Quota request for a specific resources. A groupQuotaRequestId will be returned by the Service. The status will be updated periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed,then the URI will change to Get URI and full details can be checked.",
         "operationId": "GroupQuotaLimits_Update",
@@ -602,7 +557,7 @@
             "$ref": "#/parameters/ResourceInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "groupQuotaRequest",
@@ -650,9 +605,7 @@
         }
       },
       "get": {
-        "tags": [
-          "GroupQuotaLimits"
-        ],
+        "tags": [ "GroupQuotaLimits" ],
         "summary": "Gets the resource groupQuotaLimits for the MGId.",
         "description": "Gets the resource groupQuotaLimits for the MGId. It will include the limits, availableLimits, assignedToSubscriptions: Quotas assigned to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_Get",
@@ -675,7 +628,7 @@
             "$ref": "#/parameters/ResourceInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -688,7 +641,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -696,9 +649,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/groupQuotaLimits": {
       "get": {
-        "tags": [
-          "GroupQuotaLimits"
-        ],
+        "tags": [ "GroupQuotaLimits" ],
         "summary": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope.",
         "description": "Gets the List of resources groupQuotaLimits for the MGId, based on the scope. The scope can be - providers/Microsoft.Compute/locations/<eastus>. The list elements will be same as the Get API - It will include the limits, availableLimits, assignedToSubscriptions: Quotas assigned to subscriptions from the groupQuota.",
         "operationId": "GroupQuotaLimits_List",
@@ -721,7 +672,7 @@
             "$ref": "#/parameters/ResourceInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -734,7 +685,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -742,9 +693,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/groupQuotaRequests": {
       "get": {
-        "tags": [
-          "GroupQuota-Requests"
-        ],
+        "tags": [ "GroupQuota-Requests" ],
         "summary": "List the status of all GroupQuota requests.",
         "description": "List API to check the status of a GroupQuota requests by requestId. The groupQuotaRequest history is maintained for 1 year.",
         "operationId": "GroupQuota-Requests_List",
@@ -764,7 +713,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -777,7 +726,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -785,9 +734,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/groupQuotaRequests/{requestId}": {
       "get": {
-        "tags": [
-          "GroupQuota-Requests"
-        ],
+        "tags": [ "GroupQuota-Requests" ],
         "summary": "Get the status of a single GroupQuota request by requestId.",
         "description": "Get API to check the status of a GroupQuota request by requestId.  Use the polling API - OperationsStatus URI specified in Azure-AsyncOperation header field, with retry-after duration in seconds to check the intermediate status. This API provides the finals status with the request details and status.",
         "operationId": "GroupQuota-Requests_Get",
@@ -810,7 +757,7 @@
             "$ref": "#/parameters/RequestIdInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -823,7 +770,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -831,9 +778,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/quotaAllocations": {
       "get": {
-        "tags": [
-          "SubscriptionQuota-Allocation"
-        ],
+        "tags": [ "SubscriptionQuota-Allocation" ],
         "summary": "Gets all the quota assigned to a subscription for the specific Resource Provider, Location.",
         "description": "Gets all the quota assigned to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
         "operationId": "ShareQuotaMGSubscription_List",
@@ -856,7 +801,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -869,7 +814,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -877,9 +822,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/quotaAllocations/{resourceName}": {
       "put": {
-        "tags": [
-          "SubscriptionQuota-Allocation"
-        ],
+        "tags": [ "SubscriptionQuota-Allocation" ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
         "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, which means the maximum unused quota assigned back to MG groupQuota will be the groupQuota assigned to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_CreateOrUpdate",
@@ -907,7 +850,7 @@
             "$ref": "#/parameters/ResourceInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "allocateQuotaRequest",
@@ -921,7 +864,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Create or Update",
+            "description": "OK. , Create or Update",
             "schema": {
               "$ref": "#/definitions/SubscriptionQuotaAllocationRequest"
             }
@@ -956,9 +899,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "SubscriptionQuota-Allocation"
-        ],
+        "tags": [ "SubscriptionQuota-Allocation" ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern with 202 response and status polling API.",
         "description": "Request to assign quota from group quota to a specific Subscription. The subscriptions and reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, using this API. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription(s).",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_Update",
@@ -985,7 +926,7 @@
             "$ref": "#/parameters/ResourceInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "allocateQuotaRequest",
@@ -1034,9 +975,7 @@
         }
       },
       "get": {
-        "tags": [
-          "SubscriptionQuota-Allocation"
-        ],
+        "tags": [ "SubscriptionQuota-Allocation" ],
         "summary": "Gets Quota assigned to a subscription for the specific Resource Provider, Location, ResourceName.",
         "description": "Gets Quota assigned to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_Get",
@@ -1062,7 +1001,7 @@
             "$ref": "#/parameters/ResourceInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -1075,7 +1014,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1083,9 +1022,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/quotaAllocationRequests/{allocationId}": {
       "get": {
-        "tags": [
-          "Subscription-Quota-Allocation-Requests"
-        ],
+        "tags": [ "Subscription-Quota-Allocation-Requests" ],
         "operationId": "GroupQuotaSubscriptionQuotaAllocationRequests_Get",
         "summary": "Get the status of the quota allocation request for the subscriptionId.",
         "description": "Get the quota allocation request status for the subscriptionId by allocationId.",
@@ -1111,7 +1048,7 @@
             "$ref": "#/parameters/AllocationIdInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -1124,7 +1061,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1132,9 +1069,7 @@
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/sharedQuotaEntities/{sharedQuotaEntityName}/quotaAllocationRequests": {
       "get": {
-        "tags": [
-          "Subscription-Quota-Allocation-Requests"
-        ],
+        "tags": [ "Subscription-Quota-Allocation-Requests" ],
         "operationId": "SubscriptionGroupQuotaAllocationRequest_List",
         "summary": "Lists all the quota allocation requests.to subscriptions",
         "description": "Lists all the allocation requests.",
@@ -1157,7 +1092,7 @@
             "$ref": "#/parameters/SharedQuotaEntityNameInParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -1170,7 +1105,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorContent"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1283,7 +1218,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ErrorContent",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
           "readOnly": true
         }
       }
@@ -1315,25 +1250,19 @@
           "description": "The resource ID.",
           "type": "string",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "type": {
           "description": "The type.",
           "type": "string",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "name": {
           "description": "The resource name.",
           "type": "string",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "properties": {
           "description": "Group Quota properties for the specified resource.",
@@ -1417,25 +1346,19 @@
           "description": "The operation status identifier. It should match what is used to GET the operation resource.",
           "type": "string",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "name": {
           "description": "It must match the last segment of the id field, and will typically be a GUID / system generated value.",
           "type": "string",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "type": {
           "description": "The type.",
           "type": "string",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "properties": {
           "type": "object",
@@ -1636,11 +1559,7 @@
     "AttributeType": {
       "type": "string",
       "description": "Name of the entity for filter, such as offerType.",
-      "enum": [
-        "billingId",
-        "serviceTreeId",
-        "subscriptionType"
-      ],
+      "enum": [ "billingId", "serviceTreeId", "subscriptionType" ],
       "x-ms-enum": {
         "name": "SharedQuotaAttributeType",
         "modelAsString": true
@@ -1657,9 +1576,7 @@
           "type": "string",
           "description": "The value for the attribute."
         },
-        "x-ms-identifiers": [
-          "attribute"
-        ]
+        "x-ms-identifiers": [ "attribute" ]
       }
     },
     "AttributeList": {
@@ -1718,25 +1635,19 @@
           "description": "Entity resource Id.",
           "type": "string",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "type": {
           "type": "string",
           "description": "Type of the entity - Microsoft.Quota/SharedQuotaEntity.",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "name": {
           "type": "string",
           "description": "The entity name. The entity name is provided in the request, so it is not needed in the request body. The response will include it.",
           "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "x-ms-mutability": [ "read" ]
         },
         "properties": {
           "title": "Properties",
@@ -1756,10 +1667,7 @@
     "EnvironmentType": {
       "type": "string",
       "description": "Environment name.",
-      "enum": [
-        "Non Production",
-        "Production"
-      ],
+      "enum": [ "Non Production", "Production" ],
       "x-ms-enum": {
         "name": "EnvironmentType",
         "modelAsString": true
@@ -1771,10 +1679,15 @@
     },
     "GroupingIdType": {
       "type": "string",
-      "description": "GroupingId type. More types of groupIds can be supported in future. MGID is already in the URI, so it's not needed and cause errors, if the MGId in Uri is different properties.'",
-      "enum": [
-        "ServiceTreeId"
-      ],
+      "GroupingIdType": {
+        "type": "string",
+        "description": "GroupingId type. More types of groupIds can be supported in future. MGID is already in the URI, so it's not needed and cause errors, if the MGId in Uri is different properties.'",
+        "enum": [ "ServiceTreeId" ],
+        "x-ms-enum": {
+          "name": "GroupingIdType",
+          "modelAsString": true
+        }
+      },
       "x-ms-enum": {
         "name": "GroupingIdType",
         "modelAsString": true
@@ -1798,7 +1711,7 @@
       "type": "object",
       "properties": {
         "billingAccountId": {
-          "description": "BillingAccountId. The customer can make mistake and select a billing account ID not belonging to MG. Let us think from the end user perspective. Make it simpler and less error prone, where the customer is struggling to provide the right configuration.",
+          "description": "BillingAccountId. The customer can make mistake and select a billing account ID not belonging to MG. Let's think from the end user perspective. Make it simpler and less error prone, where the customer is struggling to provide the right configuration.",
           "$ref": "#/definitions/BillingAccountId"
         },
         "groupId": {
@@ -1808,9 +1721,7 @@
           "$ref": "#/definitions/Environment"
         }
       },
-      "required": [
-        "billingAccountId"
-      ]
+      "required": [ "billingAccountId" ]
     },
     "Filter": {
       "type": "object",
@@ -1819,11 +1730,7 @@
         "filterEntity": {
           "type": "string",
           "description": "Name of the entity for filter, such as offerType.",
-          "enum": [
-            "billingId",
-            "groupId",
-            "environment"
-          ],
+          "enum": [ "billingId", "groupId", "environment" ],
           "x-ms-enum": {
             "name": "SubscriptionFilterType",
             "modelAsString": true
@@ -1832,10 +1739,7 @@
         "operator": {
           "type": "string",
           "description": "Operator to use for comparison., such as eq (==), neq (!=), etc.",
-          "enum": [
-            "eq",
-            "neq"
-          ],
+          "enum": [ "eq", "neq" ],
           "x-ms-enum": {
             "name": "SubscriptionFilterOperatorType",
             "modelAsString": true
@@ -1846,11 +1750,7 @@
           "description": "Values for the filterEntity for comparison."
         }
       },
-      "required": [
-        "filterEntity",
-        "operator",
-        "filterValues"
-      ]
+      "required": [ "filterEntity", "operator", "filterValues" ]
     },
     "Filters": {
       "type": "object",
@@ -1941,7 +1841,7 @@
       "description": "The SharedQuotaEntity name. The name should be unique for the provided context tenantId/MgId.",
       "x-ms-parameter-location": "method"
     },
-    "ApiVersionParameter": {
+    "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
