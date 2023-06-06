@@ -20,7 +20,7 @@
         "tags": [
           "Archives"
         ],
-        "description": "Lists all archives for the specified container registry and repository type.",
+        "description": "Lists all archives for the specified container registry and package type.",
         "operationId": "Archives_List",
         "parameters": [
           {
@@ -4170,6 +4170,12 @@
           "description": "The published version of the archive.",
           "type": "string"
         },
+        "repositoryEndpointPrefix": {
+          "type": "string"
+        },
+        "repositoryEndpoint": {
+          "type": "string"
+        },
         "provisioningState": {
           "description": "The provisioning state of the archive at the time the operation was called.",
           "enum": [
@@ -4199,10 +4205,6 @@
         },
         "url": {
           "description": "The external repository url.",
-          "type": "string"
-        },
-        "distributionName": {
-          "description": "Upstream Debian/RPM distribution Name.",
           "type": "string"
         }
       }
@@ -7935,7 +7937,7 @@
     "PackageTypeParameter": {
       "name": "packageType",
       "in": "path",
-      "description": "The type of the package repository.",
+      "description": "The type of the package resource.",
       "required": true,
       "type": "string",
       "maxLength": 50,
