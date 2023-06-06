@@ -27,18 +27,17 @@ These are the global settings for the deviceupdate.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-07
+tag: package-2023-07-01
 ```
 
 
-### Tag: package-2023-07
+### Tag: package-2023-07-01
 
-These settings apply only when `--tag=package-2023-07` is specified on the command line.
+These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+```yaml $(tag) == 'package-2023-07-01'
 input-file:
   - Microsoft.DeviceUpdate/stable/2023-07-01/deviceupdate.json
-  - Microsoft.DeviceUpdate/stable/2023-07-01/privatelinks.json
 ```
 ### Tag: package-2022-12-01-preview
 
