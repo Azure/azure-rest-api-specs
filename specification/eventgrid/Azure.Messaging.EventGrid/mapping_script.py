@@ -12,7 +12,7 @@ path_to_clear = pathlib.Path("./swaggers")
 for file_to_rem in path_to_clear.glob("*.json"):
     file_to_rem.unlink()    
 
-with open("../data-plane/Microsoft.EventGrid/stable/2018-01-01/TypespecEventGrid.json") as user_file:
+with open("C:/Users/llawrence/Repositories/azure-rest-api-specs/specification/eventgrid/data-plane/Microsoft.EventGrid/stable/2018-01-01/TypespecEventGrid.json") as user_file:
     fileContent = json.load(user_file)
 
 file_names = []
@@ -34,6 +34,14 @@ for definition_name, definition_body in fileContent["definitions"].items():
                     f.write("},\n")
                     f.write('"paths": {},\n"definitions": {\n')
                 f.write('"'+event+'"' + " : ")
+
+                # Fix the $ref
+                try:
+                    if definition_body["allOf"]:
+                        definition_body["allOf"][0]["$ref"] = "#/definitions/"+definition_body["allOf"][0]["$ref"].split('.')[1]
+                except:
+                    pass
+
                 json.dump(definition_body,f)
                 f.write(",")
     except:
@@ -47,7 +55,6 @@ for file_name in file_names:
     with open(f'swaggers\\{file_name}.json', 'rb+') as f:
         f.seek(0,2)                 # end of file
         size=f.tell()               # the size...
-        print(size)
         f.truncate(size-1)
     with open(f'swaggers\\{file_name}.json', 'a') as f:
         f.write("}\n")
