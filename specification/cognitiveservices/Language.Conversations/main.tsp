@@ -1,4 +1,5 @@
 import "@typespec/rest";
+import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
@@ -6,62 +7,69 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.Core.Traits;
 
+// @useAuth(
+//   ApiKeyAuth<ApiKeyLocation.header, "api-key">, 
+// )
+
+@doc("The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.")
 @service({
-  title: "Contoso Widget Manager",
+  title: "Microsoft Cognitive Language Service - Analyze Conversations",
+  version: "2022-05-01",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace Contoso.WidgetManager;
 
-enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  `2022-11-01-preview`,
+// @server(
+//   "{endpoint}/widget",
+//   "Contoso Widget APIs",
+//   {
+//     @doc("""
+// Supported Widget Services endpoints (protocol and hostname, for example:
+// https://westus.api.widget.contoso.com).
+// """)
+//     endpoint: string,
+//   }
+// )
+namespace AnalyzeConversation;
+
+@doc("Enumeration of supported Conversation tasks.")
+model AnalyzeConversationTaskKind {
+  @doc("the type")
+  type: string;
 }
 
-@doc("A widget.")
-@resource("widgets")
-model Widget {
-  @key("widgetName")
-  @doc("The widget name.")
-  @visibility("read")
-  name: string;
-
-  @doc("The ID of the manufacturer.")
-  manufacturerId: string;
-
-  @doc("The faked shared model.")
-  sharedModel?: FakedSharedModel;
+@doc("Enumeration of supported conversational task results.")
+model AnalyzeConversationTaskResultsKind {
+  @doc("the type")
+  type: string;
 }
 
-@doc("Faked shared model")
-model FakedSharedModel {
-  @doc("The tag.")
-  tag: string;
-
-  @doc("The created date.")
-  createdDate: utcDateTime;
+@doc("The base class of a conversation input task.")
+@discriminator("kind") 
+model AnalyzeConversationTask {
+  @doc("discriminator type")
+  kind: string;
 }
 
-interface Widgets {
-  @doc("Fetch a Widget by name.")
-  getWidget is ResourceRead<Widget>;
+@doc("The base class of a conversation input task result.")
+@discriminator("kind") 
+model AnalyzeConversationTaskResult {
+  @doc("discriminator type")
+  kind: string;
+}
 
-  @doc("Gets status of a Widget operation.")
-  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
 
-  @doc("Creates or updates a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
+// alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-  @doc("Delete a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  deleteWidget is LongRunningResourceDelete<Widget>;
+// interface AnalyzeConversations{
+//   @doc("Analyzes the input conversation utterance.")
+//   @key(apiKey: valueof string)
+//   AnalyzeConversation is Operations.ResourceCreateWithServiceProvidedName<AnalyzeConversationTaskKind>;
+// }
 
-  @doc("List Widget resources")
-  listWidgets is ResourceList<
-    Widget,
-    {
-      parameters: StandardListQueryParameters;
-    }
-  >;
+@route("/:analyze-conversations")
+interface ConversationAnalysis {
+  @doc("Analyzes the input conversation utterance.") 
+  @post 
+  op analyzeConversation(...AnalyzeConversationTask): AnalyzeConversationTask;
 }

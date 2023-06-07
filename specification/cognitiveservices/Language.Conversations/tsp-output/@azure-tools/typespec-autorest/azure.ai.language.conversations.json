@@ -1,8 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contoso Widget Manager",
-    "version": "0000-00-00",
+    "title": "Microsoft Cognitive Language Service - Analyze Conversations",
+    "version": "2022-05-01",
+    "description": "The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -20,70 +21,24 @@
   ],
   "tags": [],
   "paths": {
-    "/widgets/{widgetName}/operations/{operationId}": {
-      "get": {
-        "operationId": "Widgets_GetWidgetOperationStatus",
-        "description": "Gets status of a Widget operation.",
+    "/:analyze-conversations": {
+      "post": {
+        "operationId": "ConversationAnalysis_AnalyzeConversation",
+        "description": "Analyzes the input conversation utterance.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "widgetName",
-            "in": "path",
-            "required": true,
-            "description": "The widget name.",
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "description": "The unique ID of the operation.",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationTask"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/Widget",
-                  "description": "The result of the operation."
-                }
-              },
-              "description": "Provides status details for long running operations.",
-              "required": [
-                "id",
-                "status"
-              ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<Widget, Widget, Azure.Core.Foundations.Error>"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/AnalyzeConversationTask"
             }
           }
         }
@@ -91,148 +46,60 @@
     }
   },
   "definitions": {
-    "Azure.Core.Foundations.Error": {
+    "AnalyzeConversationTask": {
       "type": "object",
       "properties": {
-        "code": {
+        "kind": {
           "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
+          "description": "discriminator type"
         }
       },
-      "description": "The error object.",
+      "description": "The base class of a conversation input task.",
+      "discriminator": "kind",
       "required": [
-        "code",
-        "message",
-        "details"
+        "kind"
       ]
     },
-    "Azure.Core.Foundations.ErrorResponse": {
+    "AnalyzeConversationTaskKind": {
       "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
+        "type": {
+          "type": "string",
+          "description": "the type"
         }
       },
-      "description": "A response containing error details.",
+      "description": "Enumeration of supported Conversation tasks.",
       "required": [
-        "error"
+        "type"
       ]
     },
-    "Azure.Core.Foundations.InnerError": {
+    "AnalyzeConversationTaskResult": {
       "type": "object",
       "properties": {
-        "code": {
+        "kind": {
           "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
+          "description": "discriminator type"
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "The base class of a conversation input task result.",
+      "discriminator": "kind",
       "required": [
-        "code"
+        "kind"
       ]
     },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "enum": [
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true
-      }
-    },
-    "FakedSharedModel": {
+    "AnalyzeConversationTaskResultsKind": {
       "type": "object",
       "properties": {
-        "tag": {
+        "type": {
           "type": "string",
-          "description": "The tag."
-        },
-        "createdDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The created date."
+          "description": "the type"
         }
       },
-      "description": "Faked shared model",
+      "description": "Enumeration of supported conversational task results.",
       "required": [
-        "tag",
-        "createdDate"
-      ]
-    },
-    "Versions": {
-      "type": "string",
-      "enum": [
-        "2022-11-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true
-      }
-    },
-    "Widget": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The widget name.",
-          "readOnly": true
-        },
-        "manufacturerId": {
-          "type": "string",
-          "description": "The ID of the manufacturer."
-        },
-        "sharedModel": {
-          "$ref": "#/definitions/FakedSharedModel",
-          "description": "The faked shared model."
-        }
-      },
-      "description": "A widget.",
-      "required": [
-        "name",
-        "manufacturerId"
+        "type"
       ]
     }
   },
-  "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
-      "minLength": 1,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
