@@ -39,7 +39,9 @@ namespace Azure.Messaging.EventGrid {
   using Azure.Core;
   using Azure.Core.Foundations;
 
+  @doc("Currently supported versions of the service.")
   enum ServiceApiVersions {
+    @doc("The 2023-06-01-preview API version of the service.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_06_01_preview: "2023-06-01-preview"
   }
