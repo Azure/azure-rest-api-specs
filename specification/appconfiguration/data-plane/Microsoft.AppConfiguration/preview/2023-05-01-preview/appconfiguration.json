@@ -952,7 +952,8 @@
         "summary": "Updates the state of a key-value snapshot.",
         "operationId": "UpdateSnapshot",
         "consumes": [
-          "application/json"
+          "application/json",
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/vnd.microsoft.appconfig.snapshot+json",
@@ -1652,7 +1653,6 @@
             "archived",
             "failed"
           ],
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "SnapshotStatus",
             "modelAsString": true
@@ -1675,7 +1675,6 @@
             "key",
             "key_label"
           ],
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "CompositionType",
             "modelAsString": true
@@ -1757,7 +1756,6 @@
             "archived",
             "failed"
           ],
-          "x-nullable": false,
           "x-ms-enum": {
             "name": "SnapshotStatus",
             "modelAsString": true
@@ -2046,7 +2044,7 @@
       "collectionFormat": "csv"
     },
     "Status": {
-      "name": "Status",
+      "name": "status",
       "in": "query",
       "description": "Used to filter returned snapshots by their status property.",
       "type": "array",
@@ -2075,5 +2073,32 @@
         "$ref": "#/parameters/Endpoint"
       }
     ]
-  }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    },
+    "connection_string": {
+      "type": "apiKey",
+      "description": "Connection string secret used to connect to an App Config resource.",
+      "name": "Connection String",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    },
+    {
+      "connection_string": []
+    }
+  ]
 }
