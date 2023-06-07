@@ -374,8 +374,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/DebugSendResponse"
             }
@@ -1594,8 +1594,8 @@
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
-          "201": {
-            "description": "Created",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
@@ -1641,6 +1641,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -1648,6 +1651,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error code with reason.",
@@ -2342,27 +2348,6 @@
         }
       }
     },
-    "LinkedNotification": {
-      "description": "Content of ARM Linked notification.",
-      "type": "object",
-      "properties": {
-        "action": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/LinkedNotificationProperties"
-        }
-      }
-    },
-    "LinkedNotificationProperties": {
-      "description": "ARM linked notification properties.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      }
-    },
     "LogSpecification": {
       "description": "A single log category specification.",
       "type": "object",
@@ -2527,9 +2512,6 @@
         "properties": {
           "$ref": "#/definitions/NamespaceProperties"
         },
-        "id": {
-          "type": "string"
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -2596,8 +2578,13 @@
         "replicationRegion": {
           "$ref": "#/definitions/ReplicationRegion"
         },
-        "zoneRedundancy": {
-          "$ref": "#/definitions/ZoneRedundancyPreference"
+        "zoneRedundant": {
+          "description": "Controls whether the namespace is zone redundant.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkAcls"
@@ -2727,9 +2714,6 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku"
-        },
-        "id": {
-          "type": "string"
         },
         "tags": {
           "type": "object",
@@ -3003,9 +2987,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "description": "Provisioning state.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState"
         },
         "privateEndpoint": {
           "$ref": "#/definitions/RemotePrivateEndpointConnection"
@@ -3021,6 +3003,24 @@
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/RemotePrivateLinkServiceConnectionState"
         }
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "description": "State of Private Endpoint Connection.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "UpdatingByProxy",
+        "Deleting",
+        "DeletingByProxy",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
       }
     },
     "PrivateEndpointConnectionResource": {
@@ -3539,23 +3539,6 @@
           "x-ms-secret": true
         }
       }
-    },
-    "ZoneRedundancyPreference": {
-      "description": "Namespace SKU name.",
-      "default": "Disabled",
-      "enum": [
-        "Disabled",
-        "Enabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ZoneRedundancyPreference",
-        "modelAsString": true
-      },
-      "x-ms-mutability": [
-        "create",
-        "read"
-      ]
     }
   },
   "parameters": {
