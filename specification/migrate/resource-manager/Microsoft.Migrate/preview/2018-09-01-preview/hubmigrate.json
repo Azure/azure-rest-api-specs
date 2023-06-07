@@ -95,19 +95,10 @@
       "name": "pageSize",
       "description": "The number of items to be returned in a single page. This value is honored only if it is less than the 100.",
       "type": "integer",
+      "format": "int32",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
-    },
-    "api-version": {
-      "name": "api-version",
-      "description": "Standard request header. Used by service to identify API version used by client.",
-      "type": "string",
-      "in": "query",
-      "required": true,
-      "enum": [
-        "2018-09-01-preview"
-      ]
     },
     "acceptLanguage": {
       "description": "Standard request header. Used by service to respond to client in appropriate language.",
@@ -166,7 +157,7 @@
           "DatabaseInstancesController"
         ],
         "summary": "Gets a list of database instances in the migrate project.",
-        "operationId": "DatabaseInstancesController_EnumerateDatabaseInstances",
+        "operationId": "DatabaseInstancesController_ListDatabaseInstances",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -178,7 +169,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/continuationToken"
@@ -195,6 +186,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseInstanceCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -227,7 +224,7 @@
             "$ref": "#/parameters/databaseInstanceName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -238,6 +235,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -255,7 +258,7 @@
           "DatabasesController"
         ],
         "summary": "Gets a list of databases in the migrate project.",
-        "operationId": "DatabasesController_EnumerateDatabases",
+        "operationId": "DatabasesController_ListDatabases",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -267,7 +270,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/continuationToken"
@@ -284,6 +287,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/DatabaseCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -316,7 +325,7 @@
             "$ref": "#/parameters/databaseName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -344,7 +353,7 @@
           "EventsController"
         ],
         "summary": "Gets a list of events in the migrate project.",
-        "operationId": "EventsController_EnumerateEvents",
+        "operationId": "EventsController_ListEvents",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -356,7 +365,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/continuationToken"
@@ -370,6 +379,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/EventCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -402,7 +417,7 @@
             "$ref": "#/parameters/eventName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -410,6 +425,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrateEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -441,7 +462,7 @@
             "$ref": "#/parameters/eventName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -454,7 +475,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -472,7 +493,7 @@
           "MachinesController"
         ],
         "summary": "Gets a list of machines in the migrate project.",
-        "operationId": "MachinesController_EnumerateMachines",
+        "operationId": "MachinesController_ListMachines",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -484,7 +505,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/continuationToken"
@@ -498,6 +519,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MachineCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -530,7 +557,7 @@
             "$ref": "#/parameters/machineName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -538,6 +565,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -567,7 +600,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -575,6 +608,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -611,7 +650,7 @@
             }
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -622,6 +661,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -659,7 +704,7 @@
             }
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -670,6 +715,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -698,7 +749,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -714,7 +765,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -744,7 +795,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "input",
@@ -764,6 +815,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RegistrationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -802,7 +859,7 @@
             }
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -810,6 +867,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RefreshSummaryResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -842,7 +905,7 @@
             "$ref": "#/parameters/solutionName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -850,6 +913,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -880,7 +949,7 @@
             "$ref": "#/parameters/solutionName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "solutionInput",
@@ -897,6 +966,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -928,7 +1003,7 @@
             "$ref": "#/parameters/solutionName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "solutionInput",
@@ -945,6 +1020,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Solution"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -976,7 +1057,7 @@
             "$ref": "#/parameters/solutionName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/acceptLanguage"
@@ -992,7 +1073,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1010,7 +1091,7 @@
           "SolutionsController"
         ],
         "summary": "Gets the list of solutions in the migrate project.",
-        "operationId": "SolutionsController_EnumerateSolutions",
+        "operationId": "SolutionsController_ListSolutions",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1022,7 +1103,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1030,6 +1111,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SolutionsCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1062,7 +1149,7 @@
             "$ref": "#/parameters/solutionName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1070,6 +1157,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SolutionConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1102,7 +1195,7 @@
             "$ref": "#/parameters/solutionName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1110,6 +1203,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Object"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1133,7 +1232,7 @@
             "$ref": "#/parameters/subscriptionId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1146,7 +1245,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1164,7 +1263,7 @@
           "VirtualDesktopUserController"
         ],
         "summary": "Gets a list of virtual desktop users in the migrate project.",
-        "operationId": "VirtualDesktopUserController_EnumerateVirtualDesktopUsers",
+        "operationId": "VirtualDesktopUserController_ListVirtualDesktopUsers",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1176,7 +1275,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/continuationToken"
@@ -1190,6 +1289,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualDesktopUserCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1222,7 +1327,7 @@
             "$ref": "#/parameters/virtualDesktopUserName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1230,6 +1335,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualDesktopUser"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1247,7 +1358,7 @@
           "WebServersController"
         ],
         "summary": "Gets a list of WebServers in the migrate project.",
-        "operationId": "WebServersController_EnumerateWebServers",
+        "operationId": "WebServersController_ListWebServers",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1259,7 +1370,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/continuationToken"
@@ -1273,6 +1384,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/WebServerCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1305,7 +1422,7 @@
             "$ref": "#/parameters/webServerId"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1313,6 +1430,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/WebServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1342,7 +1465,7 @@
             "$ref": "#/parameters/migrateProjectName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/continuationToken"
@@ -1356,6 +1479,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/WebSiteCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1388,7 +1517,7 @@
             "$ref": "#/parameters/webSiteName"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1396,6 +1525,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/WebSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1417,6 +1552,12 @@
             "description": "OK. Returns list of operations.",
             "schema": {
               "$ref": "#/definitions/OperationResultList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
