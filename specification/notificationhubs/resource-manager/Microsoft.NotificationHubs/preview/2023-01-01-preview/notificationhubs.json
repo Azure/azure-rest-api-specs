@@ -1626,7 +1626,6 @@
           "PrivateLink"
         ],
         "summary": "Deletes the Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
-        "description": "This is an asynchronous API, which sets the Azure-AsyncOperation header. \r\nCaller can use URI from that header to check status of the operation.",
         "operationId": "PrivateEndpointConnections_Delete",
         "produces": [
           "application/json"
@@ -2424,28 +2423,6 @@
           "description": "Optional property. If set to true, then zero will be returned for time duration where no metric is emitted / published.",
           "type": "boolean",
           "readOnly": true
-        }
-      }
-    },
-    "MoveResourcesRequest": {
-      "description": "A request for Move Namespace requests.",
-      "required": [
-        "resources",
-        "targetResourceGroup"
-      ],
-      "type": "object",
-      "properties": {
-        "targetResourceGroup": {
-          "description": "Target resource group URI. All resources will be moved to this group.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "resources": {
-          "description": "List of resource URIs to move.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
