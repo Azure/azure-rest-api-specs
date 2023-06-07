@@ -134,6 +134,7 @@ enum ManagedClusterUpgradeType{
     NodeImageOnly
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The state of the UpdateRun, UpdateStage, UpdateGroup, or MemberUpdate.")
 enum UpdateState {
     NotStarted,
