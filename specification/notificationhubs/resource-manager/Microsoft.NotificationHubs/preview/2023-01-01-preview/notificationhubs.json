@@ -1553,7 +1553,6 @@
           "PrivateLink"
         ],
         "summary": "Approves or rejects Private Endpoint Connection.\r\nThis is a public API that can be called directly by Notification Hubs users.",
-        "description": "This is an asynchronous API, which sets the Azure-AsyncOperation header. \r\nCaller can use URI from that header to check status of the operation.",
         "operationId": "PrivateEndpointConnections_Update",
         "consumes": [
           "application/json"
@@ -1598,6 +1597,11 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1611,6 +1615,10 @@
           "PrivateEndpointConnections_Update": {
             "$ref": "./examples/Namespaces/PrivateEndpointConnectionUpdate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "delete": {
