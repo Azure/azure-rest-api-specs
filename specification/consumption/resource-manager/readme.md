@@ -473,7 +473,7 @@ suppressions:
   - code: pathforresourceaction
     reason: Existing API used in production by customers and cannot be modified at this point. 
     from: consumption_pricesheet.json
-    where: /providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/pricesheets/download
+    where: - $.paths["/pricesheets/download"].post
 ```
 
 ## AzureResourceSchema
