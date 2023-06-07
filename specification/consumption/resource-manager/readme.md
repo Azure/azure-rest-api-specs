@@ -469,11 +469,11 @@ directive:
     from: consumption.json
     reason: Usage of Guid in the consumption RP APIs is signed off from the ARM team.
 
-suppressions:
-  - code: pathforresourceaction
-    reason: Existing API used in production by customers and cannot be modified at this point. 
-    from: consumption_pricesheet.json
+directive:
+  - suppress: pathforresourceaction
     where: $.paths["/pricesheets/download"].post
+    from: consumption_pricesheet.json
+    reason: Existing API used in production by customers and cannot be modified at this point.
 ```
 
 ## AzureResourceSchema
