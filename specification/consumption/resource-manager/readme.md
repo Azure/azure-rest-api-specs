@@ -468,8 +468,6 @@ directive:
   - suppress: GuidUsage
     from: consumption.json
     reason: Usage of Guid in the consumption RP APIs is signed off from the ARM team.
-
-directive:
   - suppress: pathforresourceaction
     where: $.paths["/pricesheets/download"].post
     from: consumption_pricesheet.json
