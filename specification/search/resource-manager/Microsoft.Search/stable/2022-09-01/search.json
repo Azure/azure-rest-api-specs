@@ -2285,21 +2285,72 @@
         },
         "type": {
           "type": "string",
-          "description": "The identity type.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an identity created by the system and a set of user assigned identities. The type 'None' will remove all identities from the service.",
           "enum": [
             "None",
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
           ],
           "x-ms-enum": {
             "name": "IdentityType",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "name": "None",
+                "description": "Indicates that any identity associated with the search service needs to be removed."
+              },
+              {
+                "value": "SystemAssigned",
+                "name": "SystemAssigned",
+                "description": "Indicates that system-assigned identity for the search service will be enabled."
+              },
+              {
+                "value": "UserAssigned",
+                "name": "UserAssigned",
+                "description": "Indicates that one or more user assigned identities will be assigned to the search service."
+              },
+              {
+                "value": "SystemAssigned, UserAssigned",
+                "name": "SystemAssigned, UserAssigned",
+                "description": "Indicates that system-assigned identity for the search service will be enabled along with the assignment of one or more user assigned identities."
+              }
+            ]
           }
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedManagedIdentities",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "required": [
         "type"
       ],
-      "description": "Identity for the resource."
+      "description": "Details about the search service identity. A null value indicates that the search service has no identity assigned."
+    },
+    "UserAssignedManagedIdentities": {
+      "type": "object",
+      "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
+      }
+    },
+    "UserAssignedManagedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of user assigned identity."
+        }
+      },
+      "type": "object",
+      "description": "The details of the user assigned managed identity assigned to the search service."
     }
   },
   "parameters": {
