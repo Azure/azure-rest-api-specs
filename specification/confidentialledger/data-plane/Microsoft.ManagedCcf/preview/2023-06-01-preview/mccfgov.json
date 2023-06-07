@@ -34,7 +34,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -48,8 +48,8 @@
                     "$ref": "#/definitions/Proposals.Proposal"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "Proposals.Proposal[]",
-                  "description": "The Proposal items on this page"
+                  "description": "The Proposal items on this page",
+                  "x-typespec-name": "Proposals.Proposal[]"
                 },
                 "nextLink": {
                   "type": "string",
@@ -100,7 +100,7 @@
             "name": "proposalId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "description": "Unique ID assigned to this proposal at its submission, by the service.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -113,7 +113,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -157,7 +157,7 @@
             "name": "proposalId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "description": "Unique ID assigned to this proposal at its submission, by the service.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -167,7 +167,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -208,7 +208,7 @@
             "name": "proposalId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "description": "Unique ID assigned to this proposal at its submission, by the service.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -218,7 +218,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -259,7 +259,7 @@
             "name": "proposalId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "description": "Unique ID assigned to this proposal at its submission, by the service.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -267,7 +267,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "ID of CCF member who signed and submitted this ballot.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -280,7 +280,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -324,7 +324,7 @@
             "name": "proposalId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of proposed actions and merkle root of store at proposal creation. Unlike other IDs, this is generated on the service and will not be known in advance.",
+            "description": "Unique ID assigned to this proposal at its submission, by the service.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -332,7 +332,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "ID of CCF member who signed and submitted this ballot.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -342,7 +342,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -392,7 +392,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -436,7 +436,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "Identifier for member this stateDigest applies to.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -449,7 +449,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -493,7 +493,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "Identifier for member this stateDigest applies to.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -506,7 +506,7 @@
             "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction where this request produced a write on the service. This uniquely identifies the submitted request, and can be used to confirm that the request becomes committed.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -547,7 +547,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "Identifier for member this stateDigest applies to.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -557,7 +557,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -598,7 +598,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "ID of CCF member who this recovery share belongs to.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -642,7 +642,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "Identifier for member this recovery state applies to.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           },
@@ -655,7 +655,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -701,7 +701,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -748,7 +748,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -791,7 +791,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -834,7 +834,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -877,7 +877,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -920,7 +920,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -934,8 +934,8 @@
                     "$ref": "#/definitions/ServiceState.Member"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "ServiceState.Member[]",
-                  "description": "The Member items on this page"
+                  "description": "The Member items on this page",
+                  "x-typespec-name": "ServiceState.Member[]"
                 },
                 "nextLink": {
                   "type": "string",
@@ -986,7 +986,7 @@
             "name": "memberId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a member certificate's fingerprint.",
+            "description": "ID of CCF member who this object refers to.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -996,7 +996,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -1039,7 +1039,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -1053,8 +1053,8 @@
                     "$ref": "#/definitions/ServiceState.Node"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "ServiceState.Node[]",
-                  "description": "The Node items on this page"
+                  "description": "The Node items on this page",
+                  "x-typespec-name": "ServiceState.Node[]"
                 },
                 "nextLink": {
                   "type": "string",
@@ -1105,7 +1105,7 @@
             "name": "nodeId",
             "in": "path",
             "required": true,
-            "description": "Hex encoding of SHA-256 of a node's public key.",
+            "description": "ID of CCF node who this object refers to.",
             "type": "string",
             "pattern": "^[a-f0-9]{64}$"
           }
@@ -1115,7 +1115,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-ms-ccf-transaction-id": {
-                "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+                "description": "Identifier for transaction this response was read from. The service state may be altered by other write requests. Reads at the same transactionId describe a consistent single point in the service history.",
                 "type": "string",
                 "pattern": "^[0-9]+\\.[0-9]+$"
               }
@@ -1156,7 +1156,7 @@
             "name": "transactionId",
             "in": "path",
             "required": true,
-            "description": "Uniquely identifies an atomic transaction within a CCF service. Composed of a term number and sequence number. Sequence numbers increase monotonically, apart from during elections where the service may reuse an existing sequence number. Each election will result in a new, higher term number being used for the conflicting and future sequence numbers.",
+            "description": "Identifier of the requested transaction.",
             "type": "string",
             "pattern": "^[0-9]+\\.[0-9]+$"
           }
@@ -1261,8 +1261,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1272,8 +1272,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -1301,10 +1300,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "Proposals.Action": {
       "type": "object",
@@ -1408,8 +1404,8 @@
             "$ref": "#/definitions/Proposals.Action"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Proposals.Action[]",
-          "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically."
+          "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically.",
+          "x-typespec-name": "Proposals.Action[]"
         }
       },
       "description": "The actions contained in a proposal, describing the proposal's changes.",
@@ -1598,8 +1594,8 @@
             "type": "string",
             "format": "byte"
           },
-          "x-typespec-name": "bytes[]",
-          "description": "Code measurements of acceptable enclaves."
+          "description": "Code measurements of acceptable enclaves.",
+          "x-typespec-name": "bytes[]"
         }
       },
       "description": "Describes what a joining node must present, in order to join the service.",
@@ -1615,8 +1611,8 @@
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.JsOperations"
           },
-          "x-typespec-name": "Record<ServiceState.JsOperations>",
-          "description": "The collection of endpoints exposed by the application. Keyed by path."
+          "description": "The collection of endpoints exposed by the application. Keyed by path.",
+          "x-typespec-name": "Record<ServiceState.JsOperations>"
         }
       },
       "description": "Describes the currently installed JavaScript application.",
@@ -1644,8 +1640,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "The authentication policies which restrict access to this endpoint"
+          "description": "The authentication policies which restrict access to this endpoint",
+          "x-typespec-name": "string[]"
         },
         "mode": {
           "$ref": "#/definitions/ServiceState.JsExecMode",
@@ -1654,8 +1650,8 @@
         "openApi": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API."
+          "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API.",
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "Describes an endpoint implemented by a Javascript handler.",
@@ -1713,16 +1709,16 @@
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.JwtIssuer"
           },
-          "x-typespec-name": "Record<ServiceState.JwtIssuer>",
-          "description": "Collection of JWT issuers. Keyed by issuer ID."
+          "description": "Collection of JWT issuers. Keyed by issuer ID.",
+          "x-typespec-name": "Record<ServiceState.JwtIssuer>"
         },
         "caCertBundles": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.caCertBundle"
           },
-          "x-typespec-name": "Record<ServiceState.caCertBundle>",
-          "description": "Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names."
+          "description": "Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names.",
+          "x-typespec-name": "Record<ServiceState.caCertBundle>"
         }
       },
       "description": "Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.",
@@ -1743,8 +1739,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Collection of claims which must be present in SGX attestation to permit updates from this issuer."
+          "description": "Collection of claims which must be present in SGX attestation to permit updates from this issuer.",
+          "x-typespec-name": "Record<string>"
         },
         "autoRefresh": {
           "type": "boolean",
@@ -1763,6 +1759,7 @@
     },
     "ServiceState.JwtIssuerKeyFilter": {
       "type": "string",
+      "description": "Possible restrictions on what keys will be accepted from a JWT issuer.",
       "enum": [
         "All",
         "Sgx"
@@ -1883,8 +1880,8 @@
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.NetworkInterface"
           },
-          "x-typespec-name": "Record<ServiceState.NetworkInterface>",
-          "description": "A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator."
+          "description": "A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator.",
+          "x-typespec-name": "Record<ServiceState.NetworkInterface>"
         }
       },
       "description": "Information on individual nodes within a service.",
@@ -2065,8 +2062,8 @@
             "type": "string",
             "format": "byte"
           },
-          "x-typespec-name": "bytes[]",
-          "description": "Code measurements of acceptable enclaves."
+          "description": "Code measurements of acceptable enclaves.",
+          "x-typespec-name": "bytes[]"
         },
         "hostData": {
           "type": "object",
@@ -2074,8 +2071,8 @@
             "type": "string",
             "format": "byte"
           },
-          "x-typespec-name": "Record<bytes>",
-          "description": "Collection of acceptable host data values."
+          "description": "Collection of acceptable host data values.",
+          "x-typespec-name": "Record<bytes>"
         },
         "uvmEndorsements": {
           "type": "object",
@@ -2083,8 +2080,8 @@
             "type": "string",
             "format": "byte"
           },
-          "x-typespec-name": "Record<bytes>",
-          "description": "Collection of acceptable UVM endorsements."
+          "description": "Collection of acceptable UVM endorsements.",
+          "x-typespec-name": "Record<bytes>"
         }
       },
       "description": "Join policy fields specific to nodes running on AMD SEV-SNP hardware.",
@@ -2210,12 +2207,20 @@
     },
     "Versions": {
       "type": "string",
+      "description": "Known versions for this service.",
       "enum": [
         "2023-06-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2023-06-01-preview",
+            "value": "2023-06-01-preview",
+            "description": "2023-06-01-preview"
+          }
+        ]
       }
     },
     "memberId": {
@@ -2257,8 +2262,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "CoseSignature.body": {

@@ -236,6 +236,7 @@ model JoinPolicies {
 }
 
 /// JWK/JWT types
+@doc("Possible restrictions on what keys will be accepted from a JWT issuer.")
 enum JwtIssuerKeyFilter {
   @doc("Accepts any JWT issuer.")
   All,

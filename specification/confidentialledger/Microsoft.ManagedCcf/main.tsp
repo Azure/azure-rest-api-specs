@@ -14,7 +14,9 @@ import "./transactions.tsp";
 @TypeSpec.Versioning.versioned(Microsoft.ManagedCcf.Versions)
 namespace Microsoft.ManagedCcf;
 
+@doc("Known versions for this service.")
 enum Versions {
+  @doc("2023-06-01-preview")
   @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2023-06-01-preview`,
 }
