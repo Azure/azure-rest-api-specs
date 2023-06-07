@@ -163,10 +163,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databaseInstances": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabaseInstancesController"
+          "DatabaseInstancesController"
         ],
         "summary": "Gets a list of database instances in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabaseInstancesController_EnumerateDatabaseInstances",
+        "operationId": "DatabaseInstancesController_EnumerateDatabaseInstances",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -209,10 +209,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databaseInstances/{databaseInstanceName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabaseInstancesController"
+          "DatabaseInstancesController"
         ],
         "summary": "Gets a database instance in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabaseInstancesController_GetDatabaseInstance",
+        "operationId": "DatabaseInstancesController_GetDatabaseInstance",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -252,10 +252,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databases": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabasesController"
+          "DatabasesController"
         ],
         "summary": "Gets a list of databases in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabasesController_EnumerateDatabases",
+        "operationId": "DatabasesController_EnumerateDatabases",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -298,10 +298,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databases/{databaseName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabasesController"
+          "DatabasesController"
         ],
         "summary": "Gets a database in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.DatabasesController_GetDatabase",
+        "operationId": "DatabasesController_GetDatabase",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -341,10 +341,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/migrateEvents": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.EventsController"
+          "EventsController"
         ],
         "summary": "Gets a list of events in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.EventsController_EnumerateEvents",
+        "operationId": "EventsController_EnumerateEvents",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -384,10 +384,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/migrateEvents/{eventName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.EventsController"
+          "EventsController"
         ],
         "summary": "Gets an event in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.EventsController_GetEvent",
+        "operationId": "EventsController_GetEvent",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -422,11 +422,11 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.EventsController"
+          "EventsController"
         ],
         "summary": "Delete the migrate event",
         "description": "Delete the migrate event. Deleting non-existent migrate event is a no-operation.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.EventsController_DeleteEvent",
+        "operationId": "EventsController_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -446,7 +446,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -460,10 +469,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/machines": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MachinesController"
+          "MachinesController"
         ],
         "summary": "Gets a list of machines in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MachinesController_EnumerateMachines",
+        "operationId": "MachinesController_EnumerateMachines",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -503,10 +512,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/machines/{machineName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MachinesController"
+          "MachinesController"
         ],
         "summary": "Gets a machine in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MachinesController_GetMachine",
+        "operationId": "MachinesController_GetMachine",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -543,10 +552,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Method to get a migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController_GetMigrateProject",
+        "operationId": "MigrateProjectsController_GetMigrateProject",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -578,10 +587,10 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Method to create or update a migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController_PutMigrateProject",
+        "operationId": "MigrateProjectsController_PutMigrateProject",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -625,11 +634,11 @@
       },
       "patch": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Update migrate project.",
         "description": "Update a migrate project with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController_PatchMigrateProject",
+        "operationId": "MigrateProjectsController_PatchMigrateProject",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -673,11 +682,11 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Delete the migrate project",
         "description": "Delete the migrate project. Deleting non-existent project is a no-operation.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController_DeleteMigrateProject",
+        "operationId": "MigrateProjectsController_DeleteMigrateProject",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -697,7 +706,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -711,10 +729,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/registerTool": {
       "post": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Registers a tool with the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController_RegisterTool",
+        "operationId": "MigrateProjectsController_RegisterTool",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -760,10 +778,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/refreshSummary": {
       "post": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Refresh the summary of the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.MigrateProjectsController_RefreshMigrateProjectSummary",
+        "operationId": "MigrateProjectsController_RefreshMigrateProjectSummary",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -806,10 +824,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions/{solutionName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController"
+          "SolutionsController"
         ],
         "summary": "Gets a solution in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController_GetSolution",
+        "operationId": "SolutionsController_GetSolution",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -844,10 +862,10 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController"
+          "SolutionsController"
         ],
         "summary": "Creates a solution in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController_PutSolution",
+        "operationId": "SolutionsController_PutSolution",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -891,11 +909,11 @@
       },
       "patch": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController"
+          "SolutionsController"
         ],
         "summary": "Update solution.",
         "description": "Update a solution with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController_PatchSolution",
+        "operationId": "SolutionsController_PatchSolution",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -939,11 +957,11 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController"
+          "SolutionsController"
         ],
         "summary": "Delete the solution",
         "description": "Delete the solution. Deleting non-existent project is a no-operation.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController_DeleteSolution",
+        "operationId": "SolutionsController_DeleteSolution",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -966,7 +984,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -980,10 +1007,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController"
+          "SolutionsController"
         ],
         "summary": "Gets the list of solutions in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController_EnumerateSolutions",
+        "operationId": "SolutionsController_EnumerateSolutions",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1017,10 +1044,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions/{solutionName}/getConfig": {
       "post": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController"
+          "SolutionsController"
         ],
         "summary": "Gets the config for the solution in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController_GetConfig",
+        "operationId": "SolutionsController_GetConfig",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1057,10 +1084,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions/{solutionName}/cleanupData": {
       "post": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController"
+          "SolutionsController"
         ],
         "summary": "Cleanup the solution data in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SolutionsController_CleanupSolutionData",
+        "operationId": "SolutionsController_CleanupSolutionData",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1097,10 +1124,10 @@
     "/subscriptions/{subscriptionId}": {
       "delete": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SubscriptionController"
+          "SubscriptionController"
         ],
         "summary": "Method to handle delete subscription notification.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.SubscriptionController_DeleteSubscriptionNotification",
+        "operationId": "SubscriptionController_DeleteSubscriptionNotification",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1111,9 +1138,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Object"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1128,10 +1161,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/VirtualDesktopUsers": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.VirtualDesktopUserController"
+          "VirtualDesktopUserController"
         ],
         "summary": "Gets a list of virtual desktop users in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.VirtualDesktopUserController_EnumerateVirtualDesktopUsers",
+        "operationId": "VirtualDesktopUserController_EnumerateVirtualDesktopUsers",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1171,10 +1204,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/VirtualDesktopUsers/{virtualDesktopUserName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.VirtualDesktopUserController"
+          "VirtualDesktopUserController"
         ],
         "summary": "Gets a virtual desktop user in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.VirtualDesktopUserController_GetVirtualDesktopUser",
+        "operationId": "VirtualDesktopUserController_GetVirtualDesktopUser",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1211,10 +1244,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebServers": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebServersController"
+          "WebServersController"
         ],
         "summary": "Gets a list of WebServers in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebServersController_EnumerateWebServers",
+        "operationId": "WebServersController_EnumerateWebServers",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1254,10 +1287,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebServers/{webServerId}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebServersController"
+          "WebServersController"
         ],
         "summary": "Gets a webserver in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebServersController_GetWebServer",
+        "operationId": "WebServersController_GetWebServer",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1294,10 +1327,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebSites": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController"
+          "WebSitesController"
         ],
         "summary": "Gets a list of websites in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController_EnumerateWebSites",
+        "operationId": "WebSitesController_EnumerateWebSites",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1337,10 +1370,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebSites/{webSiteName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController"
+          "WebSitesController"
         ],
         "summary": "Gets a website in the migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController_GetWebSite",
+        "operationId": "WebSitesController_GetWebSite",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2926,13 +2959,16 @@
           "readOnly": true
         },
         "tags": {
-          "description": "Gets or sets the tags.",
           "type": "object",
-          "properties": {
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Gets or sets the tags."
         }
       }
     },

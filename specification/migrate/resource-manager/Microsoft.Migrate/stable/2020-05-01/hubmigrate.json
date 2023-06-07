@@ -63,9 +63,9 @@
         "summary": "Get a specific project.",
         "description": "Get information related to a specific migrate project. Returns a json object of type 'migrateProject' as specified in the models section.",
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController_GetMigrateProject",
+        "operationId": "MigrateProjectsController_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -107,11 +107,11 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Create a new project with specified settings.",
         "description": "Create a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController_PutMigrateProject",
+        "operationId": "MigrateProjectsController_PutMigrateProject",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -162,11 +162,11 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Delete the project",
         "description": "Delete the migrate project. It deletes summary of the project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController_DeleteMigrateProject",
+        "operationId": "MigrateProjectsController_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -208,11 +208,11 @@
       },
       "patch": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController"
+          "MigrateProjectsController"
         ],
         "summary": "Update project.",
         "description": "Update a project with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.MigrateProjectsController_PatchMigrateProject",
+        "operationId": "MigrateProjectsController_PatchMigrateProject",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -265,11 +265,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController"
+          "PrivateEndpointConnectionController"
         ],
         "summary": "Get the private endpoint connections.",
         "description": "Get all the private endpoint connections under a migrate project.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController_GetPrivateEndpointConnections",
+        "operationId": "PrivateEndpointConnectionController_ListPrivateEndpointConnections",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -313,11 +313,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnections/{peConnectionName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController"
+          "PrivateEndpointConnectionController"
         ],
         "summary": "Get the private endpoint.",
         "description": "Get the private endpoint with the specified name.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController_GetPrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -366,11 +366,11 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController"
+          "PrivateEndpointConnectionController"
         ],
         "summary": "Create or update private endpoint.",
         "description": "Create a private endpoint with specified name. If a private endpoint already exists, update it.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController_PutPrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -428,11 +428,11 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController"
+          "PrivateEndpointConnectionController"
         ],
         "summary": "Delete the endpoint",
         "description": "Delete the private endpoint. Deleting non-existent private endpoint is a no-operation.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnectionController_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -483,11 +483,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/privateEndpointConnectionProxies/{pecProxyName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController"
+          "PrivateEndpointConnectionProxyController"
         ],
         "summary": "Get the list of private link proxy resources.",
         "description": "Get the list of private link proxy resources.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -536,11 +536,11 @@
       },
       "put": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController"
+          "PrivateEndpointConnectionProxyController"
         ],
         "summary": "Create or update private endpoint proxy.",
         "description": "Create a private endpoint proxy with specified name. If a private endpoint already exists, update it.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -598,11 +598,11 @@
       },
       "delete": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController"
+          "PrivateEndpointConnectionProxyController"
         ],
         "summary": "Delete the private endpoint proxy",
         "description": "Delete the private endpoint proxy. Deleting non-existent private endpoint proxy is a no-operation.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -653,11 +653,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/privateEndpointConnectionProxies/{pecProxyName}/Validate": {
       "post": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController"
+          "PrivateEndpointConnectionProxyController"
         ],
         "summary": "Validates private endpoint connection proxy.",
         "description": "Validates private endpoint connection proxy",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -717,11 +717,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateLinkResourceController"
+          "PrivateLinkResourceController"
         ],
         "summary": "Get the private link resource.",
         "description": "Get the private link resource with the specified name.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateLinkResourceController_GetPrivateLinkResource",
+        "operationId": "PrivateLinkResourceController_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -772,11 +772,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateLinkResources": {
       "get": {
         "tags": [
-          "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateLinkResourceController"
+          "PrivateLinkResourceController"
         ],
         "summary": "Get the list of private link resources.",
         "description": "Get the list of private link resources.",
-        "operationId": "Microsoft.Azure.AMH.WebRole.V2020_05_01.PrivateLinkResourceController_GetPrivateLinkResources",
+        "operationId": "PrivateLinkResourceController_ListPrivateLinkResources",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1352,19 +1352,21 @@
         "eTag": {
           "type": "string"
         },
-        "remotePrivateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointDetails",
-          "readOnly": true
-        },
-        "status": {
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Running"
-          ],
-          "type": "string",
-          "readOnly": true
+        "properties": {
+          "remotePrivateEndpoint": {
+            "$ref": "#/definitions/PrivateEndpointDetails",
+            "readOnly": true
+          },
+          "status": {
+            "enum": [
+              "Succeeded",
+              "Failed",
+              "Cancelled",
+              "Running"
+            ],
+            "type": "string",
+            "readOnly": true
+          }
         }
       }
     },
