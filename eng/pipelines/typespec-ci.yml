@@ -7,6 +7,7 @@ pr:
   branches:
     include:
     - main
+    - typespec-next
   paths:
     include:
     - package.json
@@ -23,7 +24,10 @@ jobs:
   steps:
   - script: npm ci
     displayName: npm ci
-  
+
+  - script: npm ls -a
+    displayName: npm ls -a
+
   - template: templates/steps/typespec-ci.yml
     parameters:
       Folder: specification/contosowidgetmanager/Contoso.WidgetManager
@@ -48,6 +52,16 @@ jobs:
     parameters:
       Folder: specification/cognitiveservices/OpenAI.Inference
       DisplayName: OpenAI.Inference
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/containerservice/Fleet.Management
+      DisplayName: Fleet.Management
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/servicenetworking/ServiceNetworking.Management
+      DisplayName: Microsoft.ServiceNetworking
 
   - template: templates/steps/typespec-ci.yml
     parameters:

@@ -292,7 +292,7 @@
         "operationId": "Clusters_Update",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Update multiple configuration settings of the cluster": {
@@ -1872,12 +1872,12 @@
         },
         "storageQuotaInMb": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The storage of a server in MB."
         },
         "vCores": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The vCores count of a server."
         },
         "enableHa": {
@@ -2045,12 +2045,12 @@
         },
         "coordinatorStorageQuotaInMb": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The storage of the coordinator in MB."
         },
         "coordinatorVCores": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The vCores count of the coordinator (max: 96)."
         },
         "coordinatorEnablePublicIpAccess": {
@@ -2063,17 +2063,17 @@
         },
         "nodeCount": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The storage in MB on each worker node."
         },
         "nodeVCores": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The compute in vCores on each worker node (max: 104)."
         },
         "nodeEnablePublicIpAccess": {
@@ -2180,12 +2180,12 @@
         },
         "coordinatorStorageQuotaInMb": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The storage of a server in MB. Required for creation. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "coordinatorVCores": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The vCores count of a server (max: 96). Required for creation. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "coordinatorEnablePublicIpAccess": {
@@ -2198,17 +2198,17 @@
         },
         "nodeCount": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1. Required for creation."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The storage in MB on each worker node. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "nodeVCores": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The compute in vCores on each worker node (max: 104). See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
         },
         "nodeEnablePublicIpAccess": {
