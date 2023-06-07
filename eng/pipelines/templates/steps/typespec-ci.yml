@@ -12,7 +12,7 @@ steps:
     exit_code=0
 
     pushd ${{parameters.Folder}}
-    npx tsp compile . || exit_code=1
+    npx tsp compile . --warn-as-error || exit_code=1
     # Format parent folder to include shared files (disabled until formatting diffs are fixed)
     # npx tsp format ../**/*.tsp
     popd
