@@ -575,6 +575,15 @@
           },
           {
             "in": "query",
+            "name": "messageTtlSeconds",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300,
+            "minimum": 0
+          },
+          {
+            "in": "query",
             "name": "api-version",
             "description": "The version of the REST APIs.",
             "required": true,
