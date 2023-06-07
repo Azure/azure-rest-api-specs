@@ -2563,13 +2563,8 @@
         "replicationRegion": {
           "$ref": "#/definitions/ReplicationRegion"
         },
-        "zoneRedundant": {
-          "description": "Controls whether the namespace is zone redundant.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+        "zoneRedundancy": {
+          "$ref": "#/definitions/ZoneRedundancyPreference"
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkAcls"
@@ -3524,6 +3519,23 @@
           "x-ms-secret": true
         }
       }
+    },
+    "ZoneRedundancyPreference": {
+      "description": "Namespace SKU name.",
+      "default": "Disabled",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ZoneRedundancyPreference",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
     }
   },
   "parameters": {
