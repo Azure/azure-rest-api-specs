@@ -11,13 +11,18 @@ typescript:
   generate-metadata: true
   payload-flattening-threshold: 2
   override-client-name: StorageManagementClient
+
+directive:
+  # Constraint doesn't validate in JS since Unicode letters aren't part of \w
+    from: storage.json
+    where: $.parameters.ResourceGroupName
+    transform: delete $.pattern
 ```
 
 ``` yaml $(typescript) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-storage"
   output-folder: "$(typescript-sdks-folder)/sdk/storage/arm-storage"
-  clear-output-folder: true
 ```
 
 ### Profile: profile-hybrid-2019-03-01
@@ -28,7 +33,6 @@ These settings apply only when `--profile-content=profile-hybrid-2019-03-01` is 
 typescript:
   package-name: "@azure/arm-storage-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/storage/arm-storage-profile-2019-03-01-hybrid"
-  clear-output-folder: true
   batch:
     - tag: profile-hybrid-2019-03-01
 ```
@@ -41,7 +45,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-storage-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/storage/arm-storage-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   azure-arm: true
   generate-metadata: true
   batch:

@@ -396,6 +396,25 @@
       ],
       "description": "Device resource."
     },
+    "AzureStackEdgeFormat": {
+      "description": "The reference to the Azure stack edge device.",
+      "required": [
+        "azureStackEdge"
+      ],
+      "x-ms-discriminator-value": "AzureStackEdge",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevicePropertiesFormat"
+        }
+      ],
+      "properties": {
+        "azureStackEdge": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to the Azure stack edge device."
+        }
+      }
+    },
     "DevicePropertiesFormat": {
       "description": "Device properties.",
       "required": [
@@ -434,11 +453,6 @@
             "name": "DeviceType",
             "modelAsString": true
           }
-        },
-        "azureStackEdge": {
-          "x-ms-discriminator-value": "AzureStackEdge",
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "The reference to the Azure stack edge device. Once set, it cannot be updated."
         },
         "networkFunctions": {
           "readOnly": true,

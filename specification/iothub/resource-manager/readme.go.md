@@ -2,17 +2,27 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: devices
   clear-output-folder: true
 ```
 
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/iothub/armiothub
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
+```
+
 ### Go multi-api
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2021-07-02
+  - tag: package-2021-03
   - tag: package-preview-2021-03
   - tag: package-2020-03
   - tag: package-preview-2019-07
@@ -23,6 +33,24 @@ batch:
   - tag: package-2017-07
   - tag: package-2017-01
   - tag: package-2016-02
+```
+
+### Tag: package-2021-07-02 and go
+
+These settings apply only when `--tag=package-2021-07-02 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-07-02' && $(go)
+output-folder: $(go-sdk-folder)/services/iothub/mgmt/2021-07-02/$(namespace)
+```
+
+### Tag: package-2021-03 and go
+
+These settings apply only when `--tag=package-2021-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2021-03' && $(go)
+output-folder: $(go-sdk-folder)/services/iothub/mgmt/2021-03-31/$(namespace)
 ```
 
 ### Tag: package-preview-2021-03 and go

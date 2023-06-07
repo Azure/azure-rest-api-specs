@@ -495,6 +495,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListRecommendations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         }
       }
     },
@@ -936,7 +941,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DigestConfig"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1104,19 +1112,6 @@
           "description": "The recommendation-type GUID.",
           "type": "string"
         },
-        "risk": {
-          "description": "The potential risk of not implementing the recommendation.",
-          "enum": [
-            "Error",
-            "Warning",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "risk",
-            "modelAsString": true
-          }
-        },
         "shortDescription": {
           "$ref": "#/definitions/ShortDescription",
           "description": "A summary of the recommendation."
@@ -1164,7 +1159,8 @@
             "additionalProperties": {
               "type": "object"
             }
-          }
+          },
+          "x-ms-identifiers": []
         },
         "remediation": {
           "description": "The automated way to apply recommendation.",
@@ -1208,11 +1204,11 @@
       "type": "object",
       "properties": {
         "problem": {
-          "description": "The issue or opportunity identified by the recommendation.",
+          "description": "The issue or opportunity identified by the recommendation and proposed solution.",
           "type": "string"
         },
         "solution": {
-          "description": "The remediation action suggested by the recommendation.",
+          "description": "The issue or opportunity identified by the recommendation and proposed solution.",
           "type": "string"
         }
       }
@@ -1259,7 +1255,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationEntity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

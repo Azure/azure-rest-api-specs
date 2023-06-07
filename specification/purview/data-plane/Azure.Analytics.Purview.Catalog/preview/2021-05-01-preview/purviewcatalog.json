@@ -14,7 +14,7 @@
       }
     ]
   },
-  "basePath": "/api",
+  "basePath": "/catalog/api",
   "schemes": [
     "https"
   ],
@@ -75,6 +75,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -93,15 +99,16 @@
         },
         "parameters": [
           {
-            "name": "guids",
+            "name": "guid",
             "in": "query",
-            "description": "An array of GUIDs of entities to create.",
+            "description": "An array of GUIDs of entities to list.",
             "required": true,
             "type": "array",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
           },
           {
             "$ref": "#/parameters/minExtInfo"
@@ -118,6 +125,12 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -150,6 +163,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -166,7 +185,7 @@
         },
         "parameters": [
           {
-            "name": "guids",
+            "name": "guid",
             "in": "query",
             "description": "An array of GUIDs of entities to delete.",
             "required": true,
@@ -174,7 +193,8 @@
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
           }
         ],
         "responses": {
@@ -182,6 +202,12 @@
             "description": "Deleted with EntityMutationResponse.",
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -213,6 +239,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -245,6 +277,12 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -287,6 +325,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -311,6 +355,12 @@
             "description": "Deleted with EntityMutationResponse.",
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -342,6 +392,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasClassification"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -367,6 +423,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -393,6 +455,12 @@
             "description": "An array of classifications for the given entity GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasClassifications"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -429,6 +497,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -464,6 +538,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -503,6 +583,12 @@
             "description": "AtlasEntityWithExtInfo.",
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -545,6 +631,12 @@
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -576,6 +668,12 @@
             "description": "Deleted with EntityMutationResponse.",
             "schema": {
               "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -611,6 +709,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -655,6 +759,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -697,6 +807,12 @@
         "responses": {
           "204": {
             "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -733,6 +849,12 @@
               "items": {
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -774,6 +896,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -801,6 +929,12 @@
               "$ref": "#/definitions/AtlasEntityHeader"
             },
             "description": "AtlasEntityHeader"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -826,6 +960,9 @@
           },
           {
             "$ref": "#/parameters/sort"
+          },
+          {
+            "$ref": "#/parameters/ignoreTermsAndCategories"
           }
         ],
         "responses": {
@@ -836,6 +973,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasGlossary"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -867,6 +1010,12 @@
             "description": "OK. If glossary creation was successful.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -909,6 +1058,12 @@
                 "$ref": "#/definitions/AtlasGlossaryCategory"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -942,6 +1097,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -968,6 +1129,12 @@
             "description": "OK. If glossary category exists for given GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1003,6 +1170,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1025,6 +1198,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary category deletion is successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1064,6 +1243,12 @@
             "description": "OK. If glossary category partial update was successful.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1108,6 +1293,12 @@
                 }
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1148,6 +1339,12 @@
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1187,6 +1384,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1216,6 +1419,12 @@
             "description": "OK. If glossary term exists for given GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1251,6 +1460,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1273,6 +1488,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term delete was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1315,6 +1536,12 @@
             "description": "OK. If glossary partial update was successful.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1360,6 +1587,12 @@
                 "$ref": "#/definitions/AtlasGlossaryTerm"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1400,6 +1633,12 @@
                 "$ref": "#/definitions/AtlasRelatedObjectId"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1435,6 +1674,12 @@
         "responses": {
           "204": {
             "description": "OK. If the term assignment was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1470,6 +1715,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term dissociation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1505,6 +1756,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary term dissociation was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1548,6 +1805,12 @@
                 }
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1574,6 +1837,12 @@
             "description": "OK. If glossary with given guid exists.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1609,6 +1878,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1631,6 +1906,12 @@
         "responses": {
           "204": {
             "description": "OK. If glossary delete was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1670,6 +1951,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryCategory"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1711,6 +1998,12 @@
                 "$ref": "#/definitions/AtlasRelatedCategoryHeader"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1740,6 +2033,12 @@
             "description": "OK. If glossary exists for given GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryExtInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1784,6 +2083,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1827,6 +2132,12 @@
                 "$ref": "#/definitions/AtlasGlossaryTerm"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1866,6 +2177,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -1909,6 +2226,12 @@
             "description": "Accepted. A job to import glossary terms via csv has been accepted.",
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1957,6 +2280,12 @@
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -1990,6 +2319,12 @@
             "description": "OK. Return the status of import csv operation.",
             "schema": {
               "$ref": "#/definitions/ImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2035,6 +2370,12 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2077,6 +2418,12 @@
               "items": {
                 "$ref": "#/definitions/AtlasGlossaryTerm"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2131,6 +2478,9 @@
           },
           "Discovery_Query_Taxonomy": {
             "$ref": "./examples/Discovery_Query_Taxonomy.json"
+          },
+          "Discovery_Query_Collection": {
+            "$ref": "./examples/Discovery_Query_Collection.json"
           }
         },
         "parameters": [
@@ -2152,6 +2502,12 @@
             "description": "OK. On successful lookup of the advanced search.",
             "schema": {
               "$ref": "#/definitions/SearchResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2188,6 +2544,12 @@
             "description": "OK. On successful lookup of the suggestions.",
             "schema": {
               "$ref": "#/definitions/SuggestResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2228,6 +2590,12 @@
             "schema": {
               "$ref": "#/definitions/BrowseResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2263,6 +2631,12 @@
             "description": "OK. On successful lookup of the auto complete options.",
             "schema": {
               "$ref": "#/definitions/AutoCompleteResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2306,6 +2680,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasLineageInfo"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2348,6 +2728,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasLineageInfo"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2381,6 +2767,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2412,6 +2804,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2442,6 +2840,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationshipWithExtInfo"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2464,6 +2868,12 @@
         "responses": {
           "204": {
             "description": "OK. The relationship is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2490,6 +2900,12 @@
             "description": "OK. On successful lookup of the the classification definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasClassificationDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2518,6 +2934,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasClassificationDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2544,6 +2966,12 @@
             "description": "OK. On successful lookup of the the entity definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasEntityDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2572,6 +3000,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasEntityDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2598,6 +3032,12 @@
             "description": "OK. On successful lookup of the the enum definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasEnumDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2626,6 +3066,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasEnumDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2652,6 +3098,12 @@
             "description": "OK. On successful lookup of the the relationship definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasRelationshipDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2680,6 +3132,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasRelationshipDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2706,6 +3164,12 @@
             "description": "OK. On successful lookup of the the struct definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasStructDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2734,6 +3198,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasStructDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2760,6 +3230,12 @@
             "description": "OK. On successful lookup of the the type definition by its GUID.",
             "schema": {
               "$ref": "#/definitions/AtlasTypeDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2788,6 +3264,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasTypeDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2810,6 +3292,12 @@
         "responses": {
           "204": {
             "description": "On successful deletion of the requested type definitions"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2846,6 +3334,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2876,6 +3370,12 @@
             "description": "OK. On successful update of requested type definitions.",
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2908,6 +3408,12 @@
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2936,6 +3442,12 @@
         "responses": {
           "204": {
             "description": "OK. On successful deletion of the requested type definitions."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2970,6 +3482,12 @@
                 "$ref": "#/definitions/AtlasTypeDefHeader"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -3000,6 +3518,12 @@
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -3029,6 +3553,147 @@
             "description": "OK. On successful lookup of the the term template definition by its name.",
             "schema": {
               "$ref": "#/definitions/TermTemplateDef"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Creates or updates an entity to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "Collection_CreateOrUpdate",
+        "x-ms-examples": {
+          "Collection_CreateOrUpdate": {
+            "$ref": "./examples/Collection_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entity",
+            "description": "Atlas entity with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntityWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/bulk": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Creates or updates entities in bulk to a collection.\nExisting entity is matched using its unique guid if supplied or by its unique attributes eg: qualifiedName.\nMap and array of collections are not well supported. E.g., array<array<int>>, array<map<string, int>>.",
+        "operationId": "Collection_CreateOrUpdateBulk",
+        "x-ms-examples": {
+          "Collection_CreateOrUpdateBulk": {
+            "$ref": "./examples/Collection_CreateOrUpdateBulk.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "entities",
+            "description": "Atlas entities with extended information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/collections/{collection}/entity/moveHere": {
+      "post": {
+        "tags": [
+          "Collection"
+        ],
+        "description": "Move existing entities to the target collection.",
+        "operationId": "Collection_MoveEntitiesToCollection",
+        "x-ms-examples": {
+          "Collection_MoveEntitiesToCollection": {
+            "$ref": "./examples/Collection_MoveEntitiesToCollection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          },
+          {
+            "in": "body",
+            "name": "moveEntitiesRequest",
+            "description": "Entity guids to be moved to target collection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveEntitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created with EntityMutationResponse.",
+            "schema": {
+              "$ref": "#/definitions/EntityMutationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -4664,6 +5329,18 @@
       "title": "ClassificationAssociateRequest",
       "description": "The request for classification association."
     },
+    "MoveEntitiesRequest": {
+      "type": "object",
+      "properties": {
+        "entityGuids": {
+          "type": "array",
+          "description": "An array of entity guids to be moved to target collection.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "DateFormat": {
       "type": "object",
       "title": "DateFormat",
@@ -5275,7 +5952,7 @@
         }
       },
       "title": "Context",
-      "description": "A facet list that consists of index fields assetType ,classification, classificationCategory, contactId, fileExtension, label, and label. When the facet is specified in the request, the value of the facet is returned as an element of @search.facets."
+      "description": "A facet list that consists of index fields assetType ,classification, contactId, and label. When the facet is specified in the request, the value of the facet is returned as an element of @search.facets."
     },
     "SearchFacetItemValue": {
       "type": "object",
@@ -5523,7 +6200,7 @@
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The offset. The default value is 0."
+          "description": "The offset. The default value is 0. The maximum value is 100000."
         },
         "limit": {
           "type": "integer",
@@ -5572,12 +6249,12 @@
         "limit": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of browse items we hope to return."
+          "description": "The number of browse items we hope to return. The maximum value is 10000."
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The offset. The default value is 0."
+          "description": "The offset. The default value is 0. The maximum value is 100000."
         }
       },
       "title": "BrowseRequest",
@@ -5678,12 +6355,29 @@
       "type": "string",
       "title": "lastModifiedTS",
       "description": "ETag for concurrency control."
+    },
+    "ErrorResponse": {
+      "description": "An error response from the service",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "The request ID."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message."
+        }
+      }
     }
   },
   "parameters": {
     "Endpoint": {
       "name": "Endpoint",
-      "description": "The catalog endpoint of your Purview account. Example: https://{accountName}.catalog.purview.azure.com",
+      "description": "The catalog endpoint of your Purview account. Example: https://{accountName}.purview.azure.com",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",
@@ -6089,6 +6783,15 @@
       "default": false,
       "x-ms-parameter-location": "method"
     },
+    "ignoreTermsAndCategories": {
+      "name": "ignoreTermsAndCategories",
+      "description": "Whether ignore terms and categories",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
     "purviewAPIVersion": {
       "name": "api-version",
       "description": "Version of Purview APIs",
@@ -6123,6 +6826,14 @@
         "name": "type",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "collection": {
+      "name": "collection",
+      "description": "the collection unique name",
+      "in": "path",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

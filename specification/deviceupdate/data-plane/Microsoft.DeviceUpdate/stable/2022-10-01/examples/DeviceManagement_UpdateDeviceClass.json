@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "deviceClassId": "deviceClassId",
+    "api-version": "2022-10-01",
+    "deviceClassPatch": {
+      "friendlyName": "GA Webcams"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "deviceClassId": "deviceClassId",
+        "friendlyName": "GA Webcams",
+        "deviceClassProperties": {
+          "contractModel": {
+            "id": "dtmi:azure:iot:deviceUpdateContractModel;2",
+            "name": "Device Update Model V2"
+          },
+          "compatProperties": {
+            "manufacturer": "manufacturer1",
+            "model": "model1"
+          }
+        },
+        "bestCompatibleUpdate": {
+          "updateId": {
+            "provider": "provider",
+            "name": "name",
+            "version": "1.0.0.0"
+          },
+          "friendlyName": "July 2022 Update"
+        }
+      }
+    }
+  }
+}

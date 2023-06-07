@@ -28,6 +28,7 @@
   ],
   "definitions": {
     "ApiToken": {
+      "description": "The API access token definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
@@ -53,6 +54,7 @@
       }
     },
     "ApiTokenCollection": {
+      "description": "The paged results of API tokens.",
       "type": "object",
       "properties": {
         "value": {
@@ -85,6 +87,7 @@
       "discriminator": "type"
     },
     "Collection": {
+      "description": "The paged results of entities.",
       "type": "object",
       "properties": {
         "value": {
@@ -104,6 +107,7 @@
       ]
     },
     "Device": {
+      "description": "The device definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -139,6 +143,7 @@
       }
     },
     "DeviceCollection": {
+      "description": "The paged results of devices.",
       "type": "object",
       "properties": {
         "value": {
@@ -158,6 +163,7 @@
       ]
     },
     "DeviceCommand": {
+      "description": "The device command definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -192,6 +198,7 @@
       }
     },
     "DeviceCommandCollection": {
+      "description": "The paged results of device command executions.",
       "type": "object",
       "properties": {
         "value": {
@@ -211,6 +218,7 @@
       ]
     },
     "DeviceCredentials": {
+      "description": "The device credentials definition.",
       "type": "object",
       "properties": {
         "idScope": {
@@ -240,6 +248,7 @@
       "additionalProperties": true
     },
     "DeviceTelemetry": {
+      "description": "The device telemetry definition.",
       "type": "object",
       "properties": {
         "value": {
@@ -253,6 +262,7 @@
       }
     },
     "DeviceTemplate": {
+      "description": "The device template definition.",
       "type": "object",
       "properties": {
         "@id": {
@@ -290,6 +300,7 @@
       ]
     },
     "DeviceTemplateCollection": {
+      "description": "The paged results of device templates.",
       "type": "object",
       "properties": {
         "value": {
@@ -309,6 +320,7 @@
       ]
     },
     "EmailUser": {
+      "description": "The email user definition.",
       "x-ms-discriminator-value": "email",
       "allOf": [
         {
@@ -328,6 +340,7 @@
       ]
     },
     "Permission": {
+      "description": "The permission definition.",
       "type": "object",
       "properties": {
         "roles": {
@@ -344,6 +357,7 @@
       ]
     },
     "Role": {
+      "description": "The role definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -358,6 +372,7 @@
       }
     },
     "RoleAssignment": {
+      "description": "The role assignment definition.",
       "type": "object",
       "properties": {
         "role": {
@@ -370,6 +385,7 @@
       ]
     },
     "RoleCollection": {
+      "description": "The paged results of roles.",
       "type": "object",
       "properties": {
         "value": {
@@ -389,6 +405,7 @@
       ]
     },
     "ServicePrincipalUser": {
+      "description": "The service principal user definition.",
       "x-ms-discriminator-value": "servicePrincipal",
       "allOf": [
         {
@@ -412,6 +429,7 @@
       ]
     },
     "SymmetricKey": {
+      "description": "The symmetric key definition.",
       "type": "object",
       "properties": {
         "primaryKey": {
@@ -429,6 +447,7 @@
       ]
     },
     "SymmetricKeyAttestation": {
+      "description": "The symmetric key attestation definition.",
       "x-ms-discriminator-value": "symmetricKey",
       "allOf": [
         {
@@ -447,6 +466,7 @@
       ]
     },
     "Tpm": {
+      "description": "The trusted platform module definition.",
       "type": "object",
       "properties": {
         "endorsementKey": {
@@ -459,6 +479,7 @@
       ]
     },
     "TpmAttestation": {
+      "description": "The attestation of TPM.",
       "x-ms-discriminator-value": "tpm",
       "allOf": [
         {
@@ -477,6 +498,7 @@
       ]
     },
     "User": {
+      "description": "The user definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Permission"
@@ -500,6 +522,7 @@
       "discriminator": "type"
     },
     "UserCollection": {
+      "description": "The paged results of users.",
       "type": "object",
       "properties": {
         "value": {
@@ -519,6 +542,7 @@
       ]
     },
     "X509": {
+      "description": "The X509 definition.",
       "type": "object",
       "properties": {
         "clientCertificates": {
@@ -528,6 +552,7 @@
       }
     },
     "X509Attestation": {
+      "description": "The X509 attestation definition.",
       "x-ms-discriminator-value": "x509",
       "allOf": [
         {
@@ -546,6 +571,7 @@
       ]
     },
     "X509Certificate": {
+      "description": "The X509 certificate definition.",
       "type": "object",
       "properties": {
         "certificate": {
@@ -560,6 +586,7 @@
       }
     },
     "X509CertificateInfo": {
+      "description": "The X509 certificate info.",
       "type": "object",
       "properties": {
         "sha1Thumbprint": {
@@ -572,6 +599,7 @@
       ]
     },
     "X509Certificates": {
+      "description": "The X509 certificates definition.",
       "type": "object",
       "properties": {
         "primary": {
@@ -956,7 +984,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1090,7 +1118,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1392,7 +1420,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1784,7 +1812,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -1935,7 +1963,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -2074,7 +2102,7 @@
         },
         "consumes": [
           "application/json",
-          "application/json-patch+json"
+          "application/merge-patch+json"
         ],
         "parameters": [
           {
@@ -2436,6 +2464,13 @@
       "required": true
     }
   },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",

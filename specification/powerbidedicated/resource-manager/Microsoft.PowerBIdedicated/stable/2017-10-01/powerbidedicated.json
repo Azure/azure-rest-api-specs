@@ -655,6 +655,25 @@
               "description": "Operation type: create, update, delete, etc.",
               "type": "string",
               "readOnly": true
+            },
+            "description": {
+              "type": "string",
+              "description": "Localized description of the operation."
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "Executor of the operation.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties to expose performance metrics to shoebox.",
+          "properties": {
+            "serviceSpecification": {
+              "$ref": "#/definitions/ServiceSpecification",
+              "description": "Service specification for exposing performance metrics to shoebox."
             }
           }
         }
@@ -830,6 +849,11 @@
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity of the SKU."
         }
       },
       "required": [
@@ -847,6 +871,16 @@
         "mode": {
           "description": "The capacity mode.",
           "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID for the capacity. Used for creating Pro Plus capacity.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Capacity name",
           "readOnly": true
         }
       }
@@ -895,6 +929,10 @@
       "description": "An object that represents SKU details for existing resources",
       "type": "object",
       "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type"
+        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
@@ -953,6 +991,98 @@
         "message": {
           "type": "string",
           "description": "The detailed message of the request unavailability."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "Service specification for exposing performance metrics to shoebox.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Metric specifications for exposing performance metrics to shoebox.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Log specifications for exposing diagnostic logs to shoebox.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Metric specification for exposing performance metrics to shoebox.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Metric name",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localizable metric name"
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localizable description of metric"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit for the metric",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type for the metric",
+          "readOnly": true
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern used to filter the metric",
+          "readOnly": true
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "For describing multi dimensional metrics",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Dimension of the metric",
+                "readOnly": true
+              },
+              "displayName": {
+                "type": "string",
+                "description": "Localizable dimension of the metric"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Log specification for exposing diagnostic logs to shoebox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localizable name of the log"
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Blob duration for the log",
+          "readOnly": true
         }
       }
     }

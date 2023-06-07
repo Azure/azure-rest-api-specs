@@ -1,0 +1,1431 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridComputeManagementClient",
+    "description": "The Hybrid Compute Management Client.",
+    "version": "2022-03-10"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}": {
+      "put": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_CreateOrUpdate",
+        "description": "The operation to create or update a hybrid machine resource identity in Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            },
+            "description": "Parameters supplied to the Create hybrid machine operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Machine": {
+            "$ref": "./examples/Machines_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_Update",
+        "description": "The operation to update a hybrid machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineUpdate"
+            },
+            "description": "Parameters supplied to the Update hybrid machine operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Machine": {
+            "$ref": "./examples/Machines_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_Delete",
+        "description": "The operation to remove a hybrid machine identity in Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Machine": {
+            "$ref": "./examples/Machines_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_Get",
+        "description": "Retrieves information about the model view or the instance view of a hybrid machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Machine": {
+            "$ref": "./examples/Machines_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines": {
+      "get": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_ListByResourceGroup",
+        "description": "Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Machines by resource group": {
+            "$ref": "./examples/Machines_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/machines": {
+      "get": {
+        "tags": [
+          "machines"
+        ],
+        "operationId": "Machines_ListBySubscription",
+        "description": "Lists all the hybrid machines in the specified subscription. Use the nextLink property in the response to get the next page of hybrid machines.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Machines by resource group": {
+            "$ref": "./examples/Machines_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}": {
+      "put": {
+        "tags": [
+          "MachineExtensions"
+        ],
+        "operationId": "MachineExtensions_CreateOrUpdate",
+        "description": "The operation to create or update the extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine where the extension should be created or updated."
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine extension."
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            },
+            "description": "Parameters supplied to the Create Machine Extension operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Machine Extension": {
+            "$ref": "./examples/PUTExtension.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "MachineExtensions"
+        ],
+        "operationId": "MachineExtensions_Update",
+        "description": "The operation to create or update the extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine where the extension should be created or updated."
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine extension."
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionUpdate"
+            },
+            "description": "Parameters supplied to the Create Machine Extension operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Machine Extension": {
+            "$ref": "./examples/UpdateExtension.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "MachineExtensions"
+        ],
+        "operationId": "MachineExtensions_Delete",
+        "description": "The operation to delete the extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine where the extension should be deleted."
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine extension."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a Machine Extension": {
+            "$ref": "./examples/DELETEExtension.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MachineExtensions"
+        ],
+        "operationId": "MachineExtensions_Get",
+        "description": "The operation to get the extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine containing the extension."
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine extension."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Machine Extension": {
+            "$ref": "./examples/GETExtension.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/extensions": {
+      "get": {
+        "tags": [
+          "MachineExtensions"
+        ],
+        "operationId": "MachineExtensions_List",
+        "description": "The operation to get all extensions of a non-Azure machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the machine containing the extension."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GET all Machine Extensions": {
+            "$ref": "./examples/LISTExtension.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/upgradeExtensions": {
+      "post": {
+        "tags": [
+          "MachineExtensions Upgrade"
+        ],
+        "operationId": "UpgradeExtensions",
+        "description": "The operation to Upgrade Machine Extensions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "name": "extensionUpgradeParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionUpgrade"
+            },
+            "description": "Parameters supplied to the Upgrade Extensions operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upgrade Machine Extensions": {
+            "$ref": "./examples/Extensions_Upgrade.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.HybridCompute/operations": {
+      "get": {
+        "tags": [
+          "operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of hybrid compute operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Hybrid Compute Provider Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationValue"
+          },
+          "description": "The list of compute operations",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "The List Compute Operation operation response."
+    },
+    "OperationValue": {
+      "type": "object",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The origin of the compute operation."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the compute operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationValueDisplay",
+          "description": "Display properties"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "This property indicates if the operation is an action or a data action"
+        }
+      },
+      "description": "Describes the properties of a Compute Operation value."
+    },
+    "OperationValueDisplay": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the compute operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the resource the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource provider for the operation."
+        }
+      },
+      "description": "Describes the properties of a Hybrid Compute Operation Value Display."
+    },
+    "PatchSettings": {
+      "type": "object",
+      "properties": {
+        "assessmentMode": {
+          "type": "string",
+          "description": "Specifies the assessment mode.",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "AssessmentModeTypes",
+            "modelAsString": true
+          }
+        },
+        "patchMode": {
+          "type": "string",
+          "description": "Specifies the patch mode.",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform",
+            "AutomaticByOS",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "PatchModeTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies the patch settings."
+    },
+    "AgentConfiguration": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "proxyUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the URL of the proxy to be used."
+        },
+        "incomingConnectionsPorts": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Specifies the list of ports that the agent will be able to listen on.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensionsAllowList": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ConfigurationExtension"
+          },
+          "description": "Array of extensions that are allowed to be installed or updated.",
+          "x-ms-identifiers": []
+        },
+        "extensionsBlockList": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ConfigurationExtension"
+          },
+          "description": "Array of extensions that are blocked (cannot be installed or updated)",
+          "x-ms-identifiers": []
+        },
+        "proxyBypass": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of service names which should not use the specified proxy server.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensionsEnabled": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies whether the extension service is enabled or disabled."
+        },
+        "guestConfigurationEnabled": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specified whether the guest configuration service is enabled or disabled."
+        }
+      },
+      "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM."
+    },
+    "ConfigurationExtension": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Publisher of the extension."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of the extension."
+        }
+      },
+      "description": "Describes properties that can identify extensions."
+    },
+    "ServiceStatuses": {
+      "type": "object",
+      "properties": {
+        "extensionService": {
+          "$ref": "#/definitions/ServiceStatus",
+          "description": "The state of the extension service on the Arc-enabled machine."
+        },
+        "guestConfigurationService": {
+          "$ref": "#/definitions/ServiceStatus",
+          "description": "The state of the guest configuration service on the Arc-enabled machine."
+        }
+      },
+      "description": "Reports the state and behavior of dependent services."
+    },
+    "ServiceStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The current status of the service."
+        },
+        "startupType": {
+          "type": "string",
+          "description": "The behavior of the service when the Arc-enabled machine starts up."
+        }
+      },
+      "description": "Describes the status and behavior of a service."
+    },
+    "CloudMetadata": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the cloud provider (Azure/AWS/GCP...)."
+        }
+      },
+      "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
+    },
+    "OSProfile": {
+      "type": "object",
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies the host OS name of the hybrid machine."
+        },
+        "windowsConfiguration": {
+          "type": "object",
+          "properties": {
+            "patchSettings": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/PatchSettings"
+            }
+          },
+          "description": "Specifies the windows configuration for update management."
+        },
+        "linuxConfiguration": {
+          "type": "object",
+          "properties": {
+            "patchSettings": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/PatchSettings"
+            }
+          },
+          "description": "Specifies the linux configuration for update management."
+        }
+      },
+      "description": "Specifies the operating system settings for the hybrid machine."
+    },
+    "DetectedProperties": {
+      "readOnly": true,
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Detected properties from the machine."
+    },
+    "MachineProperties": {
+      "type": "object",
+      "properties": {
+        "locationData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentConfiguration",
+          "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM."
+        },
+        "serviceStatuses": {
+          "$ref": "#/definitions/ServiceStatuses",
+          "description": "Statuses of dependent services that are reported back to ARM."
+        },
+        "cloudMetadata": {
+          "$ref": "#/definitions/CloudMetadata",
+          "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Specifies the operating system settings for the hybrid machine."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the hybrid machine agent.",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusTypes",
+            "modelAsString": true
+          }
+        },
+        "lastStatusChange": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the last status change."
+        },
+        "errorDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+          },
+          "description": "Details about the error state.",
+          "x-ms-identifiers": []
+        },
+        "agentVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hybrid machine agent full version."
+        },
+        "vmId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Specifies the hybrid machine unique ID."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the hybrid machine display name."
+        },
+        "machineFqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the hybrid machine FQDN."
+        },
+        "clientPublicKey": {
+          "type": "string",
+          "description": "Public Key that the client provides to be used during initial resource onboarding"
+        },
+        "osName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Operating System running on the hybrid machine."
+        },
+        "osVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The version of Operating System running on the hybrid machine."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The type of Operating System (windows/linux)."
+        },
+        "vmUuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the Arc Machine's unique SMBIOS ID"
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtensionInstanceView"
+          },
+          "description": "Machine Extensions information",
+          "x-ms-identifiers": []
+        },
+        "osSku": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the Operating System product SKU."
+        },
+        "domainName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the Windows domain name."
+        },
+        "adFqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the AD fully qualified display name."
+        },
+        "dnsFqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the DNS fully qualified display name."
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "description": "The resource id of the private link scope this machine is assigned to, if any."
+        },
+        "parentClusterResourceId": {
+          "type": "string",
+          "description": "The resource id of the parent cluster (Azure HCI) this machine is assigned to, if any."
+        },
+        "mssqlDiscovered": {
+          "type": "string",
+          "description": "Specifies whether any MS SQL instance is discovered on the machine."
+        },
+        "detectedProperties": {
+          "$ref": "#/definitions/DetectedProperties",
+          "description": "Detected properties from the machine."
+        }
+      },
+      "description": "Describes the properties of a hybrid machine."
+    },
+    "MachineUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "locationData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile"
+        },
+        "cloudMetadata": {
+          "$ref": "#/definitions/CloudMetadata",
+          "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...)."
+        },
+        "parentClusterResourceId": {
+          "type": "string",
+          "description": "The resource id of the parent cluster (Azure HCI) this machine is assigned to, if any."
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "description": "The resource id of the private link scope this machine is assigned to, if any."
+        }
+      },
+      "description": "Describes the ARM updatable properties of a hybrid machine."
+    },
+    "Machine": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineProperties",
+          "description": "Hybrid Compute Machine properties"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a hybrid machine."
+    },
+    "MachineUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/MachineUpdateProperties",
+          "description": "Hybrid Compute Machine properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Describes a hybrid machine Update."
+    },
+    "MachineListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          },
+          "description": "The list of hybrid machines."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Machines. Call ListNext() with this URI to fetch the next page of hybrid machines."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List hybrid machine operation response."
+    },
+    "ResourceUpdate": {
+      "type": "object",
+      "description": "The Update Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "MachineExtension": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineExtensionProperties",
+          "description": "Describes Machine Extension Properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a Machine Extension."
+    },
+    "MachineExtensionUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineExtensionUpdateProperties",
+          "description": "Describes Machine Extension Update Properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Describes a Machine Extension Update."
+    },
+    "MachineExtensionProperties": {
+      "type": "object",
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/MachineExtensionInstanceView",
+          "description": "The machine extension instance view."
+        }
+      },
+      "description": "Describes the properties of a Machine Extension."
+    },
+    "MachineExtensionUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        }
+      },
+      "description": "Describes the properties of a Machine Extension."
+    },
+    "MachineExtensionInstanceView": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The machine extension name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "The status code."
+            },
+            "level": {
+              "type": "string",
+              "description": "The level code.",
+              "enum": [
+                "Info",
+                "Warning",
+                "Error"
+              ],
+              "x-ms-enum": {
+                "name": "StatusLevelTypes",
+                "modelAsString": true
+              }
+            },
+            "displayStatus": {
+              "type": "string",
+              "description": "The short localizable label for the status."
+            },
+            "message": {
+              "type": "string",
+              "description": "The detailed status message, including for alerts and error messages."
+            },
+            "time": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The time of the status."
+            }
+          },
+          "description": "Instance view status."
+        }
+      },
+      "description": "Describes the Machine Extension Instance View."
+    },
+    "MachineExtensionsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtension"
+          },
+          "description": "The list of extensions"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of machine extensions. Call ListNext() with this to fetch the next page of extensions."
+        }
+      },
+      "description": "Describes the Machine Extensions List Result."
+    },
+    "TargetVersion": {
+      "type": "string",
+      "description": "Extension Upgrade Target Version."
+    },
+    "ExtensionTargetProperties": {
+      "type": "object",
+      "properties": {
+        "targetVersion": {
+          "type": "object",
+          "$ref": "#/definitions/TargetVersion",
+          "description": "Properties for the specified Extension to Upgrade."
+        }
+      },
+      "description": "Describes the Machine Extension Target Version Properties"
+    },
+    "ExtensionTarget": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "$ref": "#/definitions/ExtensionTargetProperties"
+      },
+      "description": "Describes the Machine Extension Target Properties"
+    },
+    "MachineExtensionUpgrade": {
+      "type": "object",
+      "properties": {
+        "extensionTargets": {
+          "$ref": "#/definitions/ExtensionTarget",
+          "description": "Describes the Extension Target Properties."
+        }
+      },
+      "description": "Describes the Machine Extension Upgrade Properties"
+    }
+  },
+  "parameters": {}
+}

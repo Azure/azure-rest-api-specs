@@ -2044,7 +2044,17 @@
         },
         "failoverMode": {
           "type": "string",
-          "description": "Failover mode."
+          "description": "Failover mode.",
+          "enum": [
+            "PlannedFailover",
+            "ForcedFailover",
+            "PlannedSwitchover",
+            "ForcedSwitchover"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverMode",
+            "modelAsString": true
+          }
         }
       },
       "description": "Represents server restart parameters."

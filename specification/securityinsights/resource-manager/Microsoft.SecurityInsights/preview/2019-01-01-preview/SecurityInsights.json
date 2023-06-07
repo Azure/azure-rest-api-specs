@@ -1134,7 +1134,13 @@
             "$ref": "#/parameters/ODataOrderBy"
           },
           {
-            "$ref": "#/parameters/ODataTop"
+            "in": "query",
+            "name": "$top",
+            "description": "Returns only the first n results. Optional.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 1000,
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/ODataSkipToken"
@@ -7902,40 +7908,8 @@
         },
         "severity": {
           "description": "The severity of the incident",
-          "enum": [
-            "Critical",
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "CaseSeverity",
-            "values": [
-              {
-                "description": "Critical severity",
-                "value": "Critical"
-              },
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
-          }
+          "$ref": "#/definitions/IncidentSeverity"
         },
         "title": {
           "description": "The title of the incident",

@@ -125,6 +125,34 @@
         "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
         "b": 0.5,
         "k1": 1.3
+      },
+      "semantic": {
+        "configurations": [
+          {
+            "name": "semanticHotels",
+            "prioritizedFields": {
+              "titleField": {
+                "fieldName": "hotelName"
+              },
+              "prioritizedContentFields": [
+                {
+                  "fieldName": "description"
+                },
+                {
+                  "fieldName": "description_fr"
+                }
+              ],
+              "prioritizedKeywordsFields": [
+                {
+                  "fieldName": "tags"
+                },
+                {
+                  "fieldName": "category"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   },
@@ -366,6 +394,34 @@
           "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
           "b": 0.5,
           "k1": 1.3
+        },
+        "semantic": {
+          "configurations": [
+            {
+              "name": "semanticHotels",
+              "prioritizedFields": {
+                "titleField": {
+                  "fieldName": "hotelName"
+                },
+                "prioritizedContentFields": [
+                  {
+                    "fieldName": "description"
+                  },
+                  {
+                    "fieldName": "description_fr"
+                  }
+                ],
+                "prioritizedKeywordsFields": [
+                  {
+                    "fieldName": "tags"
+                  },
+                  {
+                    "fieldName": "category"
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     }

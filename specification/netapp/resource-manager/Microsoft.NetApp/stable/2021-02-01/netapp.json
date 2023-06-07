@@ -63,6 +63,11 @@
           "default": {
             "description": "Error response describing why the operation failed."
           }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "examples/OperationList.json"
+          }
         }
       }
     },
@@ -3037,7 +3042,7 @@
         },
         "username": {
           "type": "string",
-          "description": "Username of Active Directory domain administrator"
+          "description": "A domain user account with permission to create machine accounts"
         },
         "password": {
           "type": "string",
@@ -5117,7 +5122,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the mount target",
+      "description": "The name of the snapshot",
       "x-ms-parameter-location": "method"
     },
     "SnapshotPolicyName": {
@@ -5125,7 +5130,7 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "description": "The name of the snapshot policy target",
+      "description": "The name of the snapshot policy",
       "x-ms-parameter-location": "method"
     },
     "BackupName": {

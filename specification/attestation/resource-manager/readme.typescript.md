@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-attestation"
   output-folder: "$(typescript-sdks-folder)/sdk/attestation/arm-attestation"
-  clear-output-folder: true
   generate-metadata: true
 ```

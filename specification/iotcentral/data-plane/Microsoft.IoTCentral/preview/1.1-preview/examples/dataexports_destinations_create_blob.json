@@ -1,0 +1,34 @@
+{
+  "title": "Create data export Blob Storage destination",
+  "description": "Create a Blob Storage destination with an Id.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "destinationId": "destination1",
+    "api-version": "1.1-preview",
+    "body": {
+      "displayName": "Blob Storage",
+      "type": "blobstorage@v1",
+      "authorization": {
+        "type": "connectionString",
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=[key];EndpointSuffix=core.windows.net",
+        "containerName": "test"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "destination1",
+        "displayName": "Blob Storage",
+        "type": "blobstorage@v1",
+        "authorization": {
+          "type": "connectionString",
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=[accountName];AccountKey=*****;EndpointSuffix=core.windows.net",
+          "containerName": "test"
+        },
+        "status": "waiting"
+      }
+    }
+  }
+}

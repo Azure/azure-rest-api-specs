@@ -88,7 +88,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+            "$ref": "../2020-10-01-preview/common-types.json#/parameters/ResourceProviderNamespaceParameter"
           },
           {
             "name": "parentResourcePath",
@@ -404,6 +404,7 @@
           "description": "Returns role definition with the specific type."
         }
       },
+      "type": "object",
       "description": "Role Definitions filter"
     },
     "RoleDefinitionProperties": {
@@ -426,6 +427,7 @@
           "items": {
             "$ref": "#/definitions/Permission"
           },
+          "x-ms-identifiers": [],
           "description": "Role definition permissions."
         },
         "assignableScopes": {
@@ -436,6 +438,7 @@
           "description": "Role definition assignable scopes."
         }
       },
+      "type": "object",
       "description": "Role definition properties."
     },
     "RoleDefinition": {
@@ -461,6 +464,7 @@
           "description": "Role definition properties."
         }
       },
+      "type": "object",
       "description": "Role definition."
     },
     "RoleDefinitionListResult": {
@@ -477,6 +481,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Role definition list operation result."
     },
     "PermissionGetResult": {
@@ -486,6 +491,7 @@
           "items": {
             "$ref": "#/definitions/Permission"
           },
+          "x-ms-identifiers": [],
           "description": "An array of permissions."
         },
         "nextLink": {
@@ -493,6 +499,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
+      "type": "object",
       "description": "Permissions information."
     },
     "Permission": {
@@ -526,18 +533,11 @@
           "description": "Denied Data actions."
         }
       },
+      "type": "object",
       "description": "Role definition permissions."
     }
   },
   "parameters": {
-    "ResourceProviderNamespaceParameter": {
-      "name": "resourceProviderNamespace",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The namespace of the resource provider.",
-      "x-ms-parameter-location": "method"
-    },
     "FilterParameter": {
       "name": "$filter",
       "in": "query",

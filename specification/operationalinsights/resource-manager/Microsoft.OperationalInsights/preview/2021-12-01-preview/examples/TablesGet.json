@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "resourceGroupName": "oiautorest6685",
+    "workspaceName": "oiautorest6685",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "tableName": "table1_SRCH"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "systemData": {
+          "createdBy": "00000000-0000-0000-0000-00000000000",
+          "createdAt": "2020-02-03T04:05:06Z"
+        },
+        "properties": {
+          "resultStatistics": {
+            "progress": 75.0,
+            "ingestedRecords": 5
+          },
+          "schema": {
+            "name": "table1_SRCH",
+            "tableSubType": "DataCollectionRuleBased",
+            "tableType": "SearchResults",
+            "displayName": null,
+            "description": null,
+            "columns": [],
+            "standardColumns": [
+              {
+                "isHidden": false,
+                "name": "TenantId",
+                "type": "guid",
+                "dataTypeHint": null,
+                "displayName": null,
+                "description": null,
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "SourceSystem",
+                "type": "string",
+                "dataTypeHint": null,
+                "displayName": null,
+                "description": null,
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "MG",
+                "type": "guid",
+                "dataTypeHint": null,
+                "displayName": null,
+                "description": null,
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "ManagementGroupName",
+                "type": "string",
+                "dataTypeHint": null,
+                "displayName": null,
+                "description": null,
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "TimeGenerated",
+                "type": "dateTime",
+                "dataTypeHint": null,
+                "displayName": null,
+                "description": null,
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "Computer",
+                "type": "string",
+                "dataTypeHint": null,
+                "displayName": null,
+                "description": null,
+                "isDefaultDisplay": false
+              },
+              {
+                "isHidden": false,
+                "name": "RawData",
+                "type": "string",
+                "dataTypeHint": null,
+                "displayName": null,
+                "description": null,
+                "isDefaultDisplay": false
+              }
+            ],
+            "categories": null,
+            "labels": null,
+            "source": null,
+            "solutions": [
+              "LogManagement"
+            ],
+            "searchResults": {
+              "query": "Heartbeat | where SourceSystem != '' | project SourceSystem",
+              "description": "This table was created using a Search Job with the following query: 'Heartbeat | where SourceSystem != '' | project SourceSystem'.",
+              "limit": 1000,
+              "startSearchTime": "2020-02-03T04:05:06Z",
+              "endSearchTime": "2020-02-02T04:05:06Z",
+              "sourceTable": "Heartbeat"
+            }
+          },
+          "provisioningState": "InProgress",
+          "retentionInDays": 50,
+          "totalRetentionInDays": 50,
+          "archiveRetentionInDays": 0,
+          "plan": "Analytics"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/oiautorest6685/providers/Microsoft.OperationalInsights/workspaces/oiautorest6685/tables/table1_SRCH",
+        "name": "table1_SRCH"
+      }
+    }
+  }
+}

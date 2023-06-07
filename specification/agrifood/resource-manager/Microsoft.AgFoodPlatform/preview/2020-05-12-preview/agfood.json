@@ -276,6 +276,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "description": "Get operationResults for a FarmBeats resource.",
+        "operationId": "OperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "locations",
+            "description": "Location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationResultsId",
+            "description": "operation Results Id.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions": {
       "get": {
         "tags": [
@@ -1029,6 +1083,9 @@
           "items": {
             "$ref": "#/definitions/DetailedInformation"
           },
+          "x-ms-identifiers": [
+            "apiName"
+          ],
           "readOnly": true
         }
       }
@@ -1070,6 +1127,33 @@
         }
       }
     },
+    "ArmAsyncOperation": {
+      "description": "Arm async operation class.\r\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ArmAsyncOperationError"
+        }
+      }
+    },
+    "ArmAsyncOperationError": {
+      "description": "Arm async operation error class.\r\nRef: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        }
+      }
+    },
     "FarmBeatsProperties": {
       "description": "FarmBeats ARM Resource properties.",
       "type": "object",
@@ -1104,6 +1188,13 @@
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
@@ -1118,6 +1209,9 @@
       "description": "FarmBeats update request.",
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
+        },
         "location": {
           "description": "Geo-location where the resource lives.",
           "type": "string"

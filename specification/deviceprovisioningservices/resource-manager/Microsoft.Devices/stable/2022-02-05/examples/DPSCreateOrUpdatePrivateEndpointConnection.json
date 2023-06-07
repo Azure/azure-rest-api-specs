@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "resourceName": "myFirstProvisioningService",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2022-02-05",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0",
+    "privateEndpointConnectionName": "myPrivateEndpointConnection",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approved by johndoe@contoso.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/PrivateEndpointConnections/myPrivateEndpointConnection",
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Devices/ProvisioningServices/PrivateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/a9eba280-4734-4d49-878f-b5549d1d0453/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by johndoe@contoso.com",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/PrivateEndpointConnections/myPrivateEndpointConnection",
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Devices/ProvisioningServices/PrivateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/a9eba280-4734-4d49-878f-b5549d1d0453/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by johndoe@contoso.com",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}

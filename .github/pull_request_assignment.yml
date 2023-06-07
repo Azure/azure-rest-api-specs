@@ -5,19 +5,34 @@
       - "specification/cognitiveservices/data-plane/TranslatorText/**"
     reviewers:
       - kristapratico
-      - maririos
+      
+- rule:
+    # OpenAI data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/AzureOpenAI/**"
+    reviewers:
+      - lmazuel
+
+- rule:
+    # Cognitive Services - Language pillar data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/Language/**"
+    reviewers:
+      - kristapratico
+      - heaths
+      
+- rule:
+    # Key Vault data-plane PR
+    paths:
+      - "specification/keyvault/data-plane/**"
+    reviewers:
+      - heaths
 
 - rule:
     paths:
       - "specification/confidentialledger/data-plane/**"
     reviewers:
       - christothes 
-      
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - akning-ms
 
 - rule:
     # eventgrid data-plane PR
@@ -25,6 +40,13 @@
       - "specification/eventgrid/data-plane/**"
     reviewers:
       - lmazuel
+      
+- rule:
+    # storage data-plane PR
+    paths:
+      - "specification/storage/data-plane/**"
+    reviewers:
+      - tg-msft
 
 - rule:
     # synapse data-plane PR
@@ -44,6 +66,7 @@
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
+      - "dev/**/data-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
@@ -51,143 +74,172 @@
 
 - rule:
     paths:
+      - "specification/**/*Management/**/*.cadl"
+      - "specification/**/*Management.Shared/**/*.cadl"
+      - "specification/**/resource-manager/**/*.cadl"
+      - "specification/**/*Management/**/*.tsp"
+      - "specification/**/*Management.Shared/**/*.tsp"
+      - "specification/**/resource-manager/**/*.tsp"
+    reviewers:
+      - JackTn
+      - keryul
+      - zedy-wj
+      - v-jiaodi
+      - Wzb123456789
+      - kazrael2119
+      - v-xuto
+
+- rule:
+    paths:
+        - "specification/**/*.cadl"
+        - "specification/**/*.tsp"
+    reviewers:
+        - anuchandy
+        - jhendrixMSFT
+        - tjprescott
+        
+
+- rule:
+    paths:
       - "specification/network/**"
     reviewers:
-      - lirenhe
+      - JackTn
+      - keryul
+    branches:
+      - release-network-Microsoft.Network-official
 
 
 - rule:
-    paths: "specification/@(resources|powerplatform|appplatform|deviceupdate)/**"
+    paths: "specification/common-types/**"
     reviewers:
-      - raych1
-      
-- rule:
-    paths: "specification/@(security|edgeorder|synapse)/**"
-    reviewers:
-      - ruowan
-      
+      - v-xuto
+      - weshaggard
+
+
 - rule:
     paths: "specification/sql/**"
     reviewers:
-      - zhenglaizhang
-      
+      - v-xuto
+    branches:
+      - dev-sql-
+
 - rule:
-    paths: "specification/signalr/**"
+    paths: "specification/@(financialdataservices|standbypool)/**"
     reviewers:
-      - leni-msft
-      
-- rule:
-    paths: "specification/eventhub/**"
-    reviewers:
-      - ruowan
+      - JackTn
+      - keryul
+    branches:
+      - RPSaaSDev
+
 - rule:
     paths: "specification/compute/**"
     reviewers:
-      - ArcturusZhang
-      - yungezz
+      - JackTn
+      - keryul
 
 - rule:
     paths:
       - "specification/machinelearningservices/**"
     reviewers:
-      - ArcturusZhang
-
-- rule:
-    paths:
-      - "specification/authorization/**"
-    reviewers:
-      - ruowan
-
-- rule:
-    paths:
-      - "specification/datafactory/**"
-    reviewers:
-      - leni-msft
+      - zedy-wj
+      - v-jiaodi
 
 - rule:
     paths:
       - "specification/monitor/**"
     reviewers:
-      - weidongxu-microsoft
+      - zedy-wj
+      - v-jiaodi
 
 - rule:
     paths:
-      - "specification/storage/**"
+      - "specification/@(azurestackhci|security)/**"
     reviewers:
-      - jianyexi
-
-
-- rule:	
-    paths: "specification/mediaservices/**"	
-    reviewers:	
-      - allenjzhang
-      
-- rule:
-    paths:
-      - "specification/containerregistry/**"
-    reviewers:
-      - fengzhou-msft
+      - Wzb123456789
+      - kazrael2119
 
 - rule:
     paths:
-      - "specification/mixedreality/**"
-      - "specification/hdinsight/**"
+      - "specification/@(web|app)/**"
     reviewers:
-      - leni-msft
+      - Wzb123456789
+      - kazrael2119
 
 - rule:
-    paths:
-      - "specification/web/**"
+    paths: "specification/@(synapse|azurearcdata)/**"
     reviewers:
-      - weidongxu-microsoft
-      
+      - zedy-wj
+      - v-jiaodi
+
 - rule:
-    paths:
-      - "specification/servicelinker/**"
+    paths: "specification/@(workloads|apimanagement)/**"
     reviewers:
-      - raych1
-      
+      - zedy-wj
+      - v-jiaodi
+
 - rule:
-    paths:
-      - "specification/keyvault/**"
+    paths: "specification/@(securityinsights|impact)/**"
     reviewers:
-      - zhenglaizhang
+      - JackTn
+      - keryul
+
+- rule:
+    paths: "specification/@(appcomplianceautomation|hybridnetwork)/**"
+    reviewers:
+      - zedy-wj
+      - v-jiaodi
+
+- rule:
+    paths: "specification/@(cost-management|hybridconnectivity)/**"
+    reviewers:
+      - JackTn
+      - keryul
+
+- rule:
+    paths: "specification/@(billing|resources)/**"
+    reviewers:
+      - Wzb123456789
+      - kazrael2119
+
+- rule:
+    paths: "specification/@(testbase|appplatform)/**"
+    reviewers:
+      - JackTn
+      - keryul
+
+- rule:
+    paths: "specification/@(containerservice|paloaltonetworks)/**"
+    reviewers:
+      - zedy-wj
+      - v-jiaodi
 
 - rule:
     paths:
       - "documentation/**"
     reviewers:
       - josefree
-      - akning-ms
+      - weshaggard
 
 
 - rule:
     paths:
-      - "**/package.json"	
       - ".github/**"	
       - "**/azure-pipelines.yml"	
       - ".azure-pipelines/**"	
       - ".azure-pipelines-preproduction/**"	
     reviewers:
-      - akning-ms
-      - raych1
-      - zhenglaizhang
+      - weshaggard
+      - konrad-jamrozik
 
 - rule:
     # manager-plane PR
     paths:
       - "**"
     reviewers:
-      - lirenhe
-      - weidongxu-microsoft
-      - ArcturusZhang
-      - raych1
-      - akning-ms
-      - leni-msft
-      - ruowan
-      - jianyexi
-      - zhenglaizhang
-      - chunyu3
-      - changlong-liu
-      - msyyc
-      - qwordy
+      - JackTn
+      - keryul
+      - zedy-wj
+      - v-jiaodi
+      - Wzb123456789
+      - kazrael2119
+      - v-xuto

@@ -544,6 +544,13 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the Azure Health Bot."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -633,6 +640,7 @@
               "items": {
                 "$ref": "#/definitions/Error"
               },
+              "x-ms-identifiers": [],
               "description": "The error details."
             },
             "additionalInfo": {
@@ -641,6 +649,7 @@
               "items": {
                 "$ref": "#/definitions/ErrorAdditionalInfo"
               },
+              "x-ms-identifiers": [],
               "description": "The error additional info."
             }
           }
@@ -674,7 +683,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",

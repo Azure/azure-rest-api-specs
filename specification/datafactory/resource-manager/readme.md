@@ -44,6 +44,7 @@ input-file:
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ChangeDataCapture.json
 ```
 
 ### Tag: package-2017-09-preview
@@ -66,7 +67,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -74,6 +75,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 
