@@ -843,7 +843,7 @@
         "additionalPortMappings": {
           "description": "Settings to expose additional ports on container app",
           "type": "array",
-          "items":{
+          "items": {
             "$ref": "#/definitions/IngressPortMapping"
           },
           "x-ms-identifiers": [
@@ -1054,15 +1054,15 @@
         }
       }
     },
-    "IngressPortMapping":{
+    "IngressPortMapping": {
       "description": "Port mappings of container app ingress",
       "type": "object",
       "required": [
         "external",
         "targetPort"
       ],
-      "properties":{
-        "external":{
+      "properties": {
+        "external": {
           "description": "Specifies whether the app port is accessible outside of the managed environment",
           "type": "boolean"
         },
@@ -1075,7 +1075,7 @@
           "format": "int32",
           "description": "Specifies the exposed port for the target port. If not specified, it defaults to target port",
           "type": "integer"
-        }        
+        }
       }
     },
     "CustomHostnameAnalysisResult": {
