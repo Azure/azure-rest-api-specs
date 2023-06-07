@@ -3611,6 +3611,11 @@
         "useRollingUpgradePolicy": {
           "type": "boolean",
           "description": "Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Default value is false. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS."
+        },
+        "osRollingUpgradeDeferral": {
+          "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_InvokeUpgrade_MaximumSet_Gen.json",
+          "type": "boolean",
+          "description": "Indicates whether Auto OS Upgrade should undergo deferral. Default value is false. Deferred OS upgrades will send advanced notifications on a per-VM basis that an OS upgrade from rolling upgrades is incoming, via IMDS. The upgrade then defers until the upgrade is invoked via an InvokeUpgrade call."
         }
       },
       "description": "The configuration parameters used for performing automatic OS upgrade."
