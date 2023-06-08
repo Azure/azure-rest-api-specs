@@ -138,11 +138,11 @@ namespace EventGrid.ContainerRegistry {
   }
 
   alias ContainerRegistryBaseEventTarget<
-    TmediaType extends string,
-    Tsize extends string,
-    Tdigest extends string,
-    Trepository extends string,
-    Ttag extends string
+    TmediaType extends valueof string,
+    Tsize extends valueof string,
+    Tdigest extends valueof string,
+    Trepository extends valueof string,
+    Ttag extends valueof string
   > = {
     @doc(TmediaType)
     mediaType?: string;
