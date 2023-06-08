@@ -9,6 +9,7 @@ using Azure.Core.Foundations;
 
 namespace AnomalyDetector.Multivariate;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Field that indicates how missing values will be filled.")
 enum MultivariateFillNaMethod {
   "Previous",
@@ -18,6 +19,7 @@ enum MultivariateFillNaMethod {
   "Fixed",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",

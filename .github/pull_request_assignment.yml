@@ -1,5 +1,23 @@
 ---
 - rule:
+    # resource management plane PR's
+    paths:
+      - "specification/**/*Management/**"
+      - "specification/**/*Management.Shared/**"
+      - "specification/**/resource-manager/**"
+      - "specification/common-types/resource-management/**"
+    reviewers:
+      - JackTn
+      - keryul
+      - zedy-wj
+      - v-jiaodi
+      - Wzb123456789
+      - kazrael2119
+      - v-xuto
+      - rkmanda
+      - armapireview
+
+- rule:
     # translator data-plane PR
     paths:
       - "specification/cognitiveservices/data-plane/TranslatorText/**"
@@ -74,23 +92,6 @@
 
 - rule:
     paths:
-      - "specification/**/*Management/**/*.cadl"
-      - "specification/**/*Management.Shared/**/*.cadl"
-      - "specification/**/resource-manager/**/*.cadl"
-      - "specification/**/*Management/**/*.tsp"
-      - "specification/**/*Management.Shared/**/*.tsp"
-      - "specification/**/resource-manager/**/*.tsp"
-    reviewers:
-      - JackTn
-      - keryul
-      - zedy-wj
-      - v-jiaodi
-      - Wzb123456789
-      - kazrael2119
-      - v-xuto
-
-- rule:
-    paths:
         - "specification/**/*.cadl"
         - "specification/**/*.tsp"
     reviewers:
@@ -98,7 +99,6 @@
         - jhendrixMSFT
         - tjprescott
         
-
 - rule:
     paths:
       - "specification/network/**"
@@ -107,14 +107,6 @@
       - keryul
     branches:
       - release-network-Microsoft.Network-official
-
-
-- rule:
-    paths: "specification/common-types/**"
-    reviewers:
-      - v-xuto
-      - weshaggard
-
 
 - rule:
     paths: "specification/sql/**"
@@ -220,7 +212,6 @@
       - josefree
       - weshaggard
 
-
 - rule:
     paths:
       - ".github/**"	
@@ -232,14 +223,8 @@
       - konrad-jamrozik
 
 - rule:
-    # manager-plane PR
+    # temporary catchall
     paths:
       - "**"
     reviewers:
-      - JackTn
-      - keryul
-      - zedy-wj
-      - v-jiaodi
-      - Wzb123456789
-      - kazrael2119
-      - v-xuto
+      - weshaggard

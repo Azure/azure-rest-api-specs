@@ -8,6 +8,7 @@ using Azure.Core;
 
 namespace AnomalyDetector.Univariate;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ImputeMode {
   Auto: "auto",
   Previous: "previous",
@@ -17,6 +18,7 @@ enum ImputeMode {
   NotFill: "notFill",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum AnomalyDetectorErrorCodes {
   "InvalidCustomInterval",
   "BadArgument",

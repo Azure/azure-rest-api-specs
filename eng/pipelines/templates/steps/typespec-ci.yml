@@ -12,9 +12,13 @@ steps:
     exit_code=0
 
     pushd ${{parameters.Folder}}
-    npx tsp compile . || exit_code=1
+
+    # Pass "--no" to ensure npx does not install anything (TypeSpec compiler should already be installed)
+    npx --no tsp compile . --warn-as-error || exit_code=1
+
     # Format parent folder to include shared files (disabled until formatting diffs are fixed)
     # npx tsp format ../**/*.tsp
+
     popd
 
     # If any files are added, changed, or deleted, print diff and return error
