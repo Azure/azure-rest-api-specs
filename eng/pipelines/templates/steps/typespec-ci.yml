@@ -13,6 +13,11 @@ steps:
 
     pushd ${{parameters.Folder}}
 
+    if test -f package.json; then
+      echo "TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the root package.json"
+      exit_code=1
+    fi
+
     # Pass "--no" to ensure npx does not install anything (TypeSpec compiler should already be installed)
     npx --no tsp compile . --warn-as-error || exit_code=1
 
