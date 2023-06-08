@@ -835,7 +835,8 @@
           "application/json"
         ],
         "produces": [
-          "application/json"
+          "application/json",
+          "application/octet-stream"
         ],
         "parameters": [
           {
@@ -902,6 +903,16 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "default": {
             "description": "Error response",
