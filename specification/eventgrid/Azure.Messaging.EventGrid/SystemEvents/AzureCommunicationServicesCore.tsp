@@ -37,8 +37,12 @@ model CommunicationUserIdentifierModel {
   id: string;
 }
 
+@doc("Communication cloud environment model.")
 enum CommunicationCloudEnvironmentModel {
+  @doc("Public")
   public,
+  @doc("Dod")
   dod,
+  @doc("Gcch")
   gcch,
 }

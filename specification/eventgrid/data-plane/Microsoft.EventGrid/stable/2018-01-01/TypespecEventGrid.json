@@ -438,8 +438,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -449,8 +449,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -478,10 +477,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "AzureCommunicationServices.AcsChatEventBaseProperties": {
       "type": "object",
@@ -559,8 +555,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         },
         "editTime": {
           "type": "string",
@@ -587,8 +583,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         },
         "editTime": {
           "type": "string",
@@ -689,8 +685,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
@@ -712,8 +708,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
@@ -839,8 +835,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The thread properties"
+          "description": "The thread properties",
+          "x-typespec-name": "Record<unknown>"
         },
         "participants": {
           "type": "array",
@@ -848,8 +844,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]",
-          "description": "The list of properties of participants who are part of the thread"
+          "description": "The list of properties of participants who are part of the thread",
+          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
@@ -869,8 +865,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The thread properties"
+          "description": "The thread properties",
+          "x-typespec-name": "Record<unknown>"
         },
         "participants": {
           "type": "array",
@@ -878,8 +874,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]",
-          "description": "The list of properties of participants who are part of the thread"
+          "description": "The list of properties of participants who are part of the thread",
+          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
@@ -980,8 +976,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The updated thread properties"
+          "description": "The updated thread properties",
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
@@ -1006,8 +1002,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The updated thread properties"
+          "description": "The updated thread properties",
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
@@ -1078,6 +1074,7 @@
     },
     "AzureCommunicationServices.AcsEmailDeliveryReportStatus": {
       "type": "string",
+      "description": "The status of the email. Any value other than Delivered is considered failed.",
       "enum": [
         "Bounced",
         "Delivered",
@@ -1183,16 +1180,16 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Sip Headers for incoming call"
+          "description": "Sip Headers for incoming call",
+          "x-typespec-name": "Record<string>"
         },
         "viopHeaders": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Voip Headers for incoming call"
+          "description": "Voip Headers for incoming call",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Custom Context of Incoming Call",
@@ -1320,8 +1317,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingChunkInfoProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsRecordingChunkInfoProperties[]",
-          "description": "List of details of recording chunks information"
+          "description": "List of details of recording chunks information",
+          "x-typespec-name": "AzureCommunicationServices.AcsRecordingChunkInfoProperties[]"
         }
       },
       "description": "Schema for all properties of Recording Storage Information."
@@ -1360,8 +1357,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsSmsDeliveryAttemptProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties[]",
-          "description": "List of details of delivery attempts made"
+          "description": "List of details of delivery attempts made",
+          "x-typespec-name": "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties[]"
         },
         "receivedTimestamp": {
           "type": "string",
@@ -1430,39 +1427,79 @@
     },
     "AzureCommunicationServices.AcsUserEngagement": {
       "type": "string",
+      "description": "The type of engagement user have with email.",
       "enum": [
         "view",
         "click"
       ],
       "x-ms-enum": {
         "name": "AcsUserEngagement",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "view",
+            "value": "view",
+            "description": "View"
+          },
+          {
+            "name": "click",
+            "value": "click",
+            "description": "Click"
+          }
+        ]
       }
     },
     "AzureCommunicationServices.recordingChannelType": {
       "type": "string",
+      "description": "Recording channel type",
       "enum": [
         "Mixed",
         "Unmixed"
       ],
       "x-ms-enum": {
         "name": "recordingChannelType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mixed",
+            "value": "Mixed",
+            "description": "Mixed channel type"
+          },
+          {
+            "name": "Unmixed",
+            "value": "Unmixed",
+            "description": "Unmixed channel type"
+          }
+        ]
       }
     },
     "AzureCommunicationServices.recordingContentType": {
       "type": "string",
+      "description": "Recording content type",
       "enum": [
         "AudioVideo",
         "Audio"
       ],
       "x-ms-enum": {
         "name": "recordingContentType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AudioVideo",
+            "value": "AudioVideo",
+            "description": "AudioVideo content type"
+          },
+          {
+            "name": "Audio",
+            "value": "Audio",
+            "description": "Audio content type"
+          }
+        ]
       }
     },
     "AzureCommunicationServices.recordingFormatType": {
       "type": "string",
+      "description": "Recording format type",
       "enum": [
         "Wav",
         "Mp3",
@@ -1470,7 +1507,24 @@
       ],
       "x-ms-enum": {
         "name": "recordingFormatType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Wav",
+            "value": "Wav",
+            "description": "WAV format"
+          },
+          {
+            "name": "Mp3",
+            "value": "Mp3",
+            "description": "MP3 format"
+          },
+          {
+            "name": "Mp4",
+            "value": "Mp4",
+            "description": "MP4 format"
+          }
+        ]
       }
     },
     "CloudEventEvent": {
@@ -1528,6 +1582,7 @@
     },
     "CommunicationCloudEnvironmentModel": {
       "type": "string",
+      "description": "Communication cloud environment model.",
       "enum": [
         "public",
         "dod",
@@ -1535,7 +1590,24 @@
       ],
       "x-ms-enum": {
         "name": "CommunicationCloudEnvironmentModel",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "public",
+            "value": "public",
+            "description": "Public"
+          },
+          {
+            "name": "dod",
+            "value": "dod",
+            "description": "Dod"
+          },
+          {
+            "name": "gcch",
+            "value": "gcch",
+            "description": "Gcch"
+          }
+        ]
       }
     },
     "CommunicationIdentifierModel": {
@@ -1980,6 +2052,7 @@
     },
     "DataBox.DataBoxStageName": {
       "type": "string",
+      "description": "Name of the DataBox Stage",
       "enum": [
         "CopyStarted",
         "CopyCompleted",
@@ -3307,24 +3380,24 @@
         "body": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The content of the message from the device."
+          "description": "The content of the message from the device.",
+          "x-typespec-name": "Record<unknown>"
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional."
+          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
+          "x-typespec-name": "Record<string>"
         },
         "systemProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "System properties help identify contents and source of the messages."
+          "description": "System properties help identify contents and source of the messages.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry)."
@@ -3470,24 +3543,24 @@
         "body": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The content of the message from the device."
+          "description": "The content of the message from the device.",
+          "x-typespec-name": "Record<unknown>"
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional."
+          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
+          "x-typespec-name": "Record<string>"
         },
         "systemProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "System properties help identify contents and source of the messages."
+          "description": "System properties help identify contents and source of the messages.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Event data for Microsoft.Devices.DeviceTelemetry event."
@@ -3913,16 +3986,16 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The tags of the deployed service."
+          "description": "The tags of the deployed service.",
+          "x-typespec-name": "Record<string>"
         },
         "serviceProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the deployed service."
+          "description": "The properties of the deployed service.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event."
@@ -3943,16 +4016,16 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The tags of the model that was registered."
+          "description": "The tags of the model that was registered.",
+          "x-typespec-name": "Record<string>"
         },
         "modelProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the model that was registered."
+          "description": "The properties of the model that was registered.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event."
@@ -3981,16 +4054,16 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The tags of the completed Run."
+          "description": "The tags of the completed Run.",
+          "x-typespec-name": "Record<string>"
         },
         "runProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the completed Run."
+          "description": "The properties of the completed Run.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event."
@@ -4019,16 +4092,16 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The tags of the Machine Learning Run."
+          "description": "The tags of the Machine Learning Run.",
+          "x-typespec-name": "Record<string>"
         },
         "runProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the Machine Learning Run."
+          "description": "The properties of the Machine Learning Run.",
+          "x-typespec-name": "Record<string>"
         },
         "runStatus": {
           "type": "string",
@@ -4055,8 +4128,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request."
+          "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.",
+          "x-typespec-name": "string[]"
         },
         "geometries": {
           "type": "array",
@@ -4064,16 +4137,16 @@
             "$ref": "#/definitions/Maps.MapsGeofenceGeometry"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Maps.MapsGeofenceGeometry[]",
-          "description": "Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence."
+          "description": "Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.",
+          "x-typespec-name": "Maps.MapsGeofenceGeometry[]"
         },
         "invalidPeriodGeofenceGeometryId": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request."
+          "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.",
+          "x-typespec-name": "string[]"
         },
         "isEventPublished": {
           "type": "boolean",
@@ -4148,8 +4221,8 @@
             "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "MediaServices.MediaJobOutput[]",
-          "description": "Gets the Job outputs."
+          "description": "Gets the Job outputs.",
+          "x-typespec-name": "MediaServices.MediaJobOutput[]"
         }
       },
       "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobCanceled event.",
@@ -4207,14 +4280,15 @@
             "$ref": "#/definitions/MediaServices.MediaJobErrorDetail"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "MediaServices.MediaJobErrorDetail[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "MediaServices.MediaJobErrorDetail[]"
         }
       },
       "description": "Details of JobOutput errors."
     },
     "MediaServices.MediaJobErrorCategory": {
       "type": "string",
+      "description": "Error categories for Media Job Errors.",
       "enum": [
         "Service",
         "Download",
@@ -4262,6 +4336,7 @@
     },
     "MediaServices.MediaJobErrorCode": {
       "type": "string",
+      "description": "Media Job Error Codes.",
       "enum": [
         "ServiceError",
         "ServiceTransientError",
@@ -4358,8 +4433,8 @@
             "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "MediaServices.MediaJobOutput[]",
-          "description": "Gets the Job outputs."
+          "description": "Gets the Job outputs.",
+          "x-typespec-name": "MediaServices.MediaJobOutput[]"
         }
       },
       "description": "Job error state event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobErrored event.",
@@ -4386,8 +4461,8 @@
             "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "MediaServices.MediaJobOutput[]",
-          "description": "Gets the Job outputs."
+          "description": "Gets the Job outputs.",
+          "x-typespec-name": "MediaServices.MediaJobOutput[]"
         }
       },
       "description": "Job finished event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.JobFinished event.",
@@ -4569,8 +4644,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Gets the Job correlation data."
+          "description": "Gets the Job correlation data.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Job Output Progress Event Data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
@@ -4614,8 +4689,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Gets the Job correlation data."
+          "description": "Gets the Job correlation data.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event."
@@ -4641,6 +4716,7 @@
     },
     "MediaServices.MediaJobRetry": {
       "type": "string",
+      "description": "Media Job Retry Options.",
       "enum": [
         "DoNotRetry",
         "MayRetry"
@@ -4683,6 +4759,7 @@
     },
     "MediaServices.MediaJobState": {
       "type": "string",
+      "description": "State of a Media Job.",
       "enum": [
         "Canceled",
         "Canceling",
@@ -4750,8 +4827,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Gets the Job correlation data."
+          "description": "Gets the Job correlation data.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobStateChange event."
@@ -5343,8 +5420,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5397,8 +5474,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5451,8 +5528,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5481,8 +5558,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The evidence for the authorization."
+          "description": "The evidence for the authorization.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "The details of the authorization for the resource."
@@ -5527,8 +5604,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5581,8 +5658,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5635,8 +5712,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5711,8 +5788,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5765,8 +5842,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5819,8 +5896,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The properties of the claims."
+          "description": "The properties of the claims.",
+          "x-typespec-name": "Record<string>"
         },
         "correlationId": {
           "type": "string",
@@ -5835,6 +5912,7 @@
     },
     "ServiceApiVersions": {
       "type": "string",
+      "description": "The API version of the EventGrid service.",
       "enum": [
         "2018-01-01"
       ],
@@ -5844,7 +5922,8 @@
         "values": [
           {
             "name": "v2018_01_01",
-            "value": "2018-01-01"
+            "value": "2018-01-01",
+            "description": "2018-01-01"
           }
         ]
       }
@@ -6047,8 +6126,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         },
         "contentLength": {
           "type": "integer",
@@ -6107,8 +6186,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         },
         "contentLength": {
           "type": "integer",
@@ -6162,8 +6241,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         },
         "contentType": {
           "type": "string",
@@ -6247,8 +6326,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobRenamed event."
@@ -6281,8 +6360,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         },
         "contentLength": {
           "type": "integer",
@@ -6340,8 +6419,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event."
@@ -6382,8 +6461,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryDeleted event."
@@ -6424,8 +6503,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers."
+          "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryRenamed event."
@@ -6511,6 +6590,7 @@
     },
     "Web.AppAction": {
       "type": "string",
+      "description": "App Action Type",
       "enum": [
         "Restarted",
         "Stopped",
@@ -6568,6 +6648,7 @@
     },
     "Web.AppServicePlanAction": {
       "type": "string",
+      "description": "Type of action on the app service plan.",
       "enum": [
         "Updated"
       ],
@@ -6603,6 +6684,7 @@
     },
     "Web.AsyncStatus": {
       "type": "string",
+      "description": "Asynchronous operation status of the operation on the app service plan.",
       "enum": [
         "Started",
         "Completed",
@@ -6632,6 +6714,7 @@
     },
     "Web.StampKind": {
       "type": "string",
+      "description": "Kind of environment where app service plan is.",
       "enum": [
         "Public",
         "AseV1",
@@ -7136,8 +7219,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }

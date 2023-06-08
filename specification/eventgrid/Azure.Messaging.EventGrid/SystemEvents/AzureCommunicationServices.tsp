@@ -240,19 +240,29 @@ model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   receivedTimestamp?: utcDateTime;
 }
 
+@doc("Recording content type")
 enum recordingContentType {
+  @doc("AudioVideo content type")
   AudioVideo,
+  @doc("Audio content type")
   Audio,
 }
 
+@doc("Recording channel type")
 enum recordingChannelType {
+  @doc("Mixed channel type")
   Mixed,
+  @doc("Unmixed channel type")
   Unmixed,
 }
 
+@doc("Recording format type")
 enum recordingFormatType {
+  @doc("WAV format")
   Wav,
+  @doc("MP3 format")
   Mp3,
+  @doc("MP4 format")
   Mp4,
 }
 
@@ -303,6 +313,7 @@ model AcsEmailDeliveryReportReceivedEventData {
   deliveryAttemptTimeStamp: utcDateTime;
 }
 
+@doc("The status of the email. Any value other than Delivered is considered failed.")
 enum AcsEmailDeliveryReportStatus {
   @doc("Hard bounce detected while sending the email")
   Bounced,
@@ -347,8 +358,11 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
 
 }
 
+@doc("The type of engagement user have with email.")
 enum AcsUserEngagement {
+  @doc("View")
   "view",
+  @doc("Click")
   "click",
 }
 
