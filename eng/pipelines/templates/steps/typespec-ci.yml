@@ -14,7 +14,11 @@ steps:
     pushd ${{parameters.Folder}}
 
     # Pass "--no" to ensure npx does not install anything (TypeSpec compiler should already be installed)
-    npx --no tsp compile . --warn-as-error || exit_code=1
+    if test -f client.tsp; then
+      npx --no tsp compile client.tsp --warn-as-error || exit_code=1
+    else
+      npx --no tsp compile . --warn-as-error || exit_code=1
+    fi
 
     # Format parent folder to include shared files (disabled until formatting diffs are fixed)
     # npx tsp format ../**/*.tsp
