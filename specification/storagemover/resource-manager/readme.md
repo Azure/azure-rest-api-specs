@@ -30,20 +30,20 @@ openapi-subtype: providerHub
 tag: package-preview-2023-07
 ```
 
-
 ### Tag: package-preview-2023-07
 
 These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07'
+``` yaml $(tag) == 'package-preview-2023-07'
 input-file:
   - Microsoft.StorageMover/preview/2023-07-01-preview/storagemover.json
 ```
-### Tag: package-2023-03-01
 
-These settings apply only when `--tag=package-2023-03-01` is specified on the command line.
+### Tag: package-2023-03
 
-``` yaml $(tag) == 'package-2023-03-01'
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.StorageMover/stable/2023-03-01/storagemover.json
 ```
@@ -68,7 +68,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
