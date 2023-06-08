@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@versioned(APIVersion)
+@versioned(AnomalyDetector.APIVersions)
 @service({title: "Anomaly Detector"})
 @useAuth(AnomalyDetectorApiKeyAuth)
 @server(
@@ -23,7 +23,7 @@ https://westus2.api.cognitive.microsoft.com).
     
     @doc("Api Version")
     @path
-    ApiVersion: APIVersion,
+    ApiVersion: AnomalyDetector.APIVersions,
   }
 )
 @doc("""
@@ -50,6 +50,7 @@ namespace AnomalyDetector;
 model AnomalyDetectorApiKeyAuth is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
-enum APIVersion {
+enum APIVersions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_1: "v1.1",
 }
