@@ -32,14 +32,21 @@ If you are developing within your own ADO repo first and then submitting into `a
 ```
    npm install
 ```
+- You should then be able to run TypeSpec compiler within the repo folders.
+```
+   tsp --version 
+```
 
-- You should also install TypeSpec VisualStudio or VSCode extensions:
+- We recommend you install TypeSpec VisualStudio or VSCode extensions to get syntex highlighting, tool tips in IDE:
 ```
   tsp code install
+``` 
+OR
+```
   tsp vs install
 ```
 
-### First-time setup
+### TypeSpec project setup
 
 Please first review recommended folder structure detailed in [this document](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md).
 
@@ -55,10 +62,35 @@ Please first review recommended folder structure detailed in [this document](htt
 ```
 5. Next step is to replace the sample TypeSpec with your own TypeSpec code. When the project is ready, you can submit a PR on the changes in service folder.
 
-### Continue developing REST API with TypeSpec
-
-
-### Submitting PRs
-
 
 ### Generate SDKs (First-time & subsequent update)
+
+The section discribe the process for data-plane SDKs. Management-plane SDKs still follow the `autorest` process.
+
+#### With your local cloned language SDK repos
+This assumes you have cloned language SDKs into your local folder. The script you will be calling is located in the `rest-api-specs` repository's `./eng/script/TypeSpec-Generate-Sdk.ps1` file. This script will generate the necessary SDK folder and project structure if it does not already exist, and then regenerate the SDK source code.
+
+Scenarios:
+- You just want to test generate SDK project and code based on the local TypeSpec changes in your `rest-api-specs` repo. Please note this cannot be used to submit a SDK PR as it does not contain a valid commit id.
+```
+   cd specifications/contoso/contoso.widgetmanager
+   ..\..\..\eng\script\TypeSpec-Generate-Sdk.ps1 -SdkRepoRootDirectory C:\Github\fork\azure-sdk-for-java\
+```
+
+- You are generate/refresh SDK code for submitting a PR. The following command will update tsp-location.yaml with commit id and repo info so the build can be generated and verified by the CI and release pipeline.
+```
+   cd specifications/contoso/contoso.widgetmanager
+   ..\..\..\eng\script\TypeSpec-Generate-Sdk.ps1 -SdkRepoRootDirectory C:\Github\fork\azure-sdk-for-java\ [commit id] Azure/azure-rest-api-specs
+```
+ 
+#### With Docker container
+
+We provide a docker container that contains all language toolsets, which can be used to generate code, run mock test. This docker image can be used for local development, and running in pipeline. We also included additional helper scripts to help easily generate/update SDK code for all languages at once.
+
+The following command starts the docker container in interactive mode.
+```
+
+```
+
+
+
