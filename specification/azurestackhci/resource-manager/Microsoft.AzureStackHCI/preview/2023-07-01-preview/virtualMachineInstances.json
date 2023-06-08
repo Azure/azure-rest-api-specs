@@ -837,18 +837,6 @@
               },
               "description": "LinuxConfiguration - linux specific configuration values for the virtual machine instance"
             },
-            "osType": {
-              "type": "string",
-              "description": "OsType - string specifying whether the OS is Linux or Windows",
-              "enum": [
-                "Linux",
-                "Windows"
-              ],
-              "x-ms-enum": {
-                "name": "OsTypeEnum",
-                "modelAsString": true
-              }
-            },
             "windowsConfiguration": {
               "type": "object",
               "properties": {
@@ -930,6 +918,18 @@
                 "id": {
                   "type": "string",
                   "description": "Resource ID of the OS disk"
+                },
+                "osType": {
+                  "type": "string",
+                  "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**",
+                  "enum": [
+                    "Linux",
+                    "Windows"
+                  ],
+                  "x-ms-enum": {
+                    "name": "OperatingSystemTypes",
+                    "modelAsString": false
+                  }
                 }
               },
               "description": "VHD to attach as OS disk"
