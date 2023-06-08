@@ -17,5 +17,6 @@ namespace ClientForAzureHealthInsights;
     service: AzureHealthInsights
 })
   interface ClinicalMatchingClient {
-  MatchTrials is AzureHealthInsights.TrialMatcher.createJob;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
+    matchTrials is AzureHealthInsights.TrialMatcher.createJob;
 }
