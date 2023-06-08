@@ -193,9 +193,7 @@ namespace EventGrid {
       @header("content-type")
       contentType: "application/cloudevents+json; charset=utf-8";
       
-      @doc("Single Cloud Event being published.")
-      @body 
-      event: CloudEvent;
+      ...CloudEvent;
     },
     {@body _: PublishResult}
     >;
@@ -250,9 +248,7 @@ namespace EventGrid {
       @header("content-type")
       contentType: "application/json; charset=utf-8";   
 
-      @doc("AcknowledgeOptions.")
-      @body
-      lockTokens: AcknowledgeOptions;
+      ...AcknowledgeOptions;
     },
     AcknowledgeResult
   >;
@@ -269,9 +265,7 @@ namespace EventGrid {
       @header("content-type")
       contentType: "application/json; charset=utf-8";
 
-      @doc("ReleaseOptions")
-      @body    
-      lockTokens : ReleaseOptions;
+      ...ReleaseOptions;
   }, ReleaseResult>;
 
   // Reject Operation:
@@ -286,8 +280,6 @@ namespace EventGrid {
     @header("content-type")
     contentType: "application/json; charset=utf-8";
 
-    @doc("RejectOptions")
-    @body
-    lockTokens : RejectOptions;
+    ...RejectOptions;
   }, RejectResult>;
 }
