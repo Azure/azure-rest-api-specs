@@ -16,6 +16,9 @@ steps:
     # Pass "--no" to ensure npx does not install anything (TypeSpec compiler should already be installed)
     npx --no tsp compile . --warn-as-error || exit_code=1
 
+    # Verify no errors with @typespec/openapi3, but don't emit (output not stored in repo)
+    npx --no tsp compile . --warn-as-error --emit @typespec/openapi3 --no-emit || exit_code=1
+
     # Format parent folder to include shared files (disabled until formatting diffs are fixed)
     # npx tsp format ../**/*.tsp
 
