@@ -95,6 +95,7 @@ namespace EventGrid.Web {
     sku?: sku;
   }
 
+  @doc("App Action Type")
   enum AppAction {
     @doc("Web app was restarted.")
     Restarted,
@@ -115,6 +116,7 @@ namespace EventGrid.Web {
     Failed,
   }
 
+  @doc("Kind of environment where app service plan is.")
   enum StampKind {
     @doc("App Service Plan is running on a public stamp.")
     Public,
@@ -126,6 +128,7 @@ namespace EventGrid.Web {
     AseV2,
   }
 
+  @doc("Type of action on the app service plan.")
   enum AppServicePlanAction {
     @doc("App Service plan is being updated.")
     Updated,
@@ -143,6 +146,7 @@ namespace EventGrid.Web {
     status?: AsyncStatus;
   }
 
+  @doc("Asynchronous operation status of the operation on the app service plan.")
   enum AsyncStatus {
     @doc("Async operation has started.")
     Started,

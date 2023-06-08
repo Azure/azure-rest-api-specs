@@ -1,5 +1,6 @@
 @doc("Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
 namespace EventGrid.MediaServices {
+  @doc("State of a Media Job.")
   enum MediaJobState {
     @doc("The job was canceled. This is a final state for the job.")
     Canceled,
@@ -35,6 +36,7 @@ namespace EventGrid.MediaServices {
     correlationData?: Record<string>;
   }
 
+  @doc("Media Job Error Codes.")
   enum MediaJobErrorCode {
     @doc("Fatal service error, please contact support.")
     ServiceError,
@@ -67,6 +69,7 @@ namespace EventGrid.MediaServices {
     IdentityUnsupported,
   }
 
+  @doc("Error categories for Media Job Errors.")
   enum MediaJobErrorCategory {
     @doc("The error is service related.")
     Service,
@@ -87,6 +90,7 @@ namespace EventGrid.MediaServices {
     Account,
   }
 
+  @doc("Media Job Retry Options.")
   enum MediaJobRetry {
     @doc("Issue needs to be investigated and then the job resubmitted with corrections or retried once the underlying issue has been corrected.")
     DoNotRetry,

@@ -34,7 +34,9 @@ namespace EventGrid {
   using Azure.Core;
   using Azure.Core.Foundations;
 
+  @doc("The API version of the EventGrid service.")
   enum ServiceApiVersions {
+    @doc("2018-01-01")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2018_01_01: "2018-01-01",
   }
