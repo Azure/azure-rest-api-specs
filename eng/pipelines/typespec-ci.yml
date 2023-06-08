@@ -27,6 +27,7 @@ jobs:
 
   - script: npm ls -a
     displayName: npm ls -a
+    condition: succeededOrFailed()
 
   - template: templates/steps/typespec-ci.yml
     parameters:
