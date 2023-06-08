@@ -1150,12 +1150,6 @@
             "name": "modifiedBy",
             "description": "Modified by user/tenant id.",
             "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "eTag",
-            "description": "The ETag value to implement optimistic concurrency.",
-            "type": "string"
           }
         ],
         "responses": {
@@ -6215,12 +6209,6 @@
             "in": "formData",
             "name": "modifiedBy",
             "description": "Modified by user/tenant id.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "eTag",
-            "description": "The ETag value to implement optimistic concurrency.",
             "type": "string"
           }
         ],
@@ -12734,7 +12722,7 @@
           {
             "in": "query",
             "name": "provider",
-            "description": "Provider name of scene data. Supported value: SentinelHub.",
+            "description": "Provider name of scene data.",
             "required": true,
             "type": "string"
           },
@@ -13144,9 +13132,91 @@
           }
         },
         "x-ms-examples": {
-          "SearchFeaturesQuery": null,
           "Scenes_SearchFeatures": {
             "$ref": "./examples/Scenes_SearchFeatures.json"
+          }
+        }
+      }
+    },
+    "/scenes/stac-collections/{collectionId}/features/{featureId}": {
+      "get": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Get a feature(SpatioTemporal Asset Catalog (STAC) Item) for given collection and feature id.",
+        "operationId": "Scenes_GetStacFeature",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collectionId",
+            "description": "Collection Id to be fetched.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Sentinel_2_L2A",
+              "Sentinel_2_L1C"
+            ],
+            "x-ms-enum": {
+              "name": "collectionId",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "path",
+            "name": "featureId",
+            "description": "Feature Id to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "providerClientId",
+            "description": "Provider client id for authenticating to provider to pull satellite data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "providerClientSecret",
+            "description": "Provider client secret for authenticating to provider to pull satellite data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StacFeature"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_GetStacFeature": {
+            "$ref": "./examples/Scenes_GetStacFeature.json"
           }
         }
       }
@@ -17336,6 +17406,17 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/WeatherDataProviderResponse"
+            },
+            "headers": {
+              "x-ms-cache-hit": {
+                "description": "Indicate whether the request was cache hit or cache miss.",
+                "type": "boolean"
+              },
+              "x-ms-response-latency-in-milliseconds": {
+                "description": "Time taken in milliseconds for processing the request at server side.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "default": {
@@ -18029,27 +18110,6 @@
         }
       }
     },
-    "ApiKeyAuthCredentials": {
-      "description": "Api Key Auth Credentials class for API Key based Auth.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AuthCredentials"
-        },
-        {
-          "required": [
-            "apiKey"
-          ],
-          "type": "object",
-          "properties": {
-            "apiKey": {
-              "$ref": "#/definitions/KeyVaultProperties"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "ApiKeyAuthCredentials"
-    },
     "ApplicationData": {
       "description": "Schema of application data resource.",
       "type": "object",
@@ -18336,31 +18396,6 @@
           "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string"
         }
-      }
-    },
-    "AuthCredentials": {
-      "description": "AuthCredentials abstract base class for Auth Purpose. .",
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AuthCredentialsKind"
-        }
-      },
-      "discriminator": "kind"
-    },
-    "AuthCredentialsKind": {
-      "description": "CredentialTypeEnum.",
-      "enum": [
-        "OAuthClientCredentials",
-        "ApiKeyAuthCredentials"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "AuthCredentialsKind",
-        "modelAsString": true
       }
     },
     "BiomassModelJob": {
@@ -20616,32 +20651,6 @@
         }
       }
     },
-    "KeyVaultProperties": {
-      "description": "Properties of the key vault.",
-      "required": [
-        "keyName",
-        "keyVaultUri",
-        "keyVersion"
-      ],
-      "type": "object",
-      "properties": {
-        "keyVaultUri": {
-          "description": "Uri of the key vault.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "keyName": {
-          "description": "Name of Key Vault key.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "keyVersion": {
-          "description": "Version of Key Vault key.",
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
     "LabDetails": {
       "description": "Model for representing LabDetails object.",
       "type": "object",
@@ -21045,33 +21054,6 @@
           "type": "string"
         }
       }
-    },
-    "OAuthClientCredentials": {
-      "description": "OAuthClientCredentials for clientId clientSecret auth.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AuthCredentials"
-        },
-        {
-          "required": [
-            "clientId",
-            "clientSecret"
-          ],
-          "type": "object",
-          "properties": {
-            "clientId": {
-              "description": "ClientId associated with the provider.",
-              "minLength": 1,
-              "type": "string"
-            },
-            "clientSecret": {
-              "$ref": "#/definitions/KeyVaultProperties"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "OAuthClientCredentials"
     },
     "OAuthConnectRequest": {
       "description": "Get OAuth config query parameters.",
@@ -22219,9 +22201,6 @@
       ],
       "type": "object",
       "properties": {
-        "credential": {
-          "$ref": "#/definitions/OAuthClientCredentials"
-        },
         "partyId": {
           "description": "Party Id.",
           "minLength": 1,
@@ -22250,6 +22229,14 @@
         },
         "data": {
           "$ref": "#/definitions/SatelliteData"
+        },
+        "providerClientId": {
+          "description": "Provider client id for authenticating to provider to pull satellite data.",
+          "type": "string"
+        },
+        "providerClientSecret": {
+          "description": "Provider client secret for authenticating to provider to pull satellite data.",
+          "type": "string"
         },
         "id": {
           "description": "Unique job id.",
@@ -22325,7 +22312,12 @@
         },
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
         }
       }
     },
@@ -22539,13 +22531,12 @@
       "description": "Search stac Features parameters.",
       "required": [
         "endDateTime",
-        "startDateTime"
+        "startDateTime",
+        "providerClientId",
+        "providerClientSecret"
       ],
       "type": "object",
       "properties": {
-        "credential": {
-          "$ref": "#/definitions/OAuthClientCredentials"
-        },
         "startDateTime": {
           "format": "date-time",
           "description": "Start datetime of the time interval in which to search for Features.",
@@ -22573,6 +22564,16 @@
           "items": {
             "type": "string"
           }
+        },
+        "providerClientId": {
+          "description": "Provider client id for authenticating to provider to pull satellite data.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "providerClientSecret": {
+          "description": "Provider client secret for authenticating to provider to pull satellite data.",
+          "minLength": 1,
+          "type": "string"
         }
       }
     },
@@ -24148,141 +24149,6 @@
         }
       }
     },
-    "WeatherData": {
-      "description": "Schema of weather data.",
-      "required": [
-        "boundaryId",
-        "dateTime",
-        "extensionId",
-        "extensionVersion",
-        "granularity",
-        "location",
-        "partyId",
-        "weatherDataType"
-      ],
-      "type": "object",
-      "properties": {
-        "partyId": {
-          "description": "Party ID.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "boundaryId": {
-          "description": "Boundary ID.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "extensionId": {
-          "description": "ID of the weather extension.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/Location"
-        },
-        "dateTime": {
-          "format": "date-time",
-          "description": "Date-time of the weather data, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string"
-        },
-        "unitSystemCode": {
-          "description": "Unit System like US/SI etc.",
-          "type": "string"
-        },
-        "extensionVersion": {
-          "description": "Version of the weather data extension.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "weatherDataType": {
-          "description": "Type of weather data (forecast/historical).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "granularity": {
-          "description": "Granularity of weather data (daily/hourly).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "cloudCover": {
-          "$ref": "#/definitions/Measure"
-        },
-        "dewPoint": {
-          "$ref": "#/definitions/Measure"
-        },
-        "growingDegreeDay": {
-          "$ref": "#/definitions/Measure"
-        },
-        "precipitation": {
-          "$ref": "#/definitions/Measure"
-        },
-        "pressure": {
-          "$ref": "#/definitions/Measure"
-        },
-        "relativeHumidity": {
-          "$ref": "#/definitions/Measure"
-        },
-        "soilMoisture": {
-          "$ref": "#/definitions/Measure"
-        },
-        "soilTemperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "temperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "visibility": {
-          "$ref": "#/definitions/Measure"
-        },
-        "wetBulbTemperature": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windChill": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windDirection": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windGust": {
-          "$ref": "#/definitions/Measure"
-        },
-        "windSpeed": {
-          "$ref": "#/definitions/Measure"
-        },
-        "id": {
-          "description": "Weather data ID.",
-          "type": "string"
-        },
-        "eTag": {
-          "description": "The ETag value to implement optimistic concurrency.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true,
-          "example": "2020-12-31T11:10:21Z"
-        },
-        "modifiedDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "readOnly": true,
-          "example": "2020-12-31T11:10:21Z"
-        },
-        "properties": {
-          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 250 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
-          "type": "object",
-          "additionalProperties": {},
-          "example": {
-            "key1": "value1",
-            "key2": 123.45
-          }
-        }
-      }
-    },
     "WeatherDataDeleteJob": {
       "description": "Schema of weather data delete job.",
       "required": [
@@ -24458,16 +24324,14 @@
           "description": "This number is the key to the weather icon lookup. The data field shows the icon number that is matched to represent the observed weather conditions.",
           "type": "array",
           "items": {
-            "format": "int32",
-            "type": "integer"
+            "type": "string"
           }
         },
         "iconCodeExtend": {
           "description": "Code representing full set sensible weather.",
           "type": "array",
           "items": {
-            "format": "int32",
-            "type": "integer"
+            "type": "string"
           }
         },
         "hasPrecipitation": {
@@ -24509,8 +24373,7 @@
           "description": "Hourly maximum UV index.",
           "type": "array",
           "items": {
-            "format": "double",
-            "type": "number"
+            "type": "string"
           }
         },
         "validTimeLocal": {
@@ -24694,6 +24557,141 @@
         }
       }
     },
+    "WeatherData": {
+      "description": "Schema of weather data.",
+      "required": [
+        "boundaryId",
+        "dateTime",
+        "extensionId",
+        "extensionVersion",
+        "granularity",
+        "location",
+        "partyId",
+        "weatherDataType"
+      ],
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party ID.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "boundaryId": {
+          "description": "Boundary ID.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "extensionId": {
+          "description": "ID of the weather extension.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "dateTime": {
+          "format": "date-time",
+          "description": "Date-time of the weather data, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "unitSystemCode": {
+          "description": "Unit System like US/SI etc.",
+          "type": "string"
+        },
+        "extensionVersion": {
+          "description": "Version of the weather data extension.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "weatherDataType": {
+          "description": "Type of weather data (forecast/historical).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "granularity": {
+          "description": "Granularity of weather data (daily/hourly).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "cloudCover": {
+          "$ref": "#/definitions/Measure"
+        },
+        "dewPoint": {
+          "$ref": "#/definitions/Measure"
+        },
+        "growingDegreeDay": {
+          "$ref": "#/definitions/Measure"
+        },
+        "precipitation": {
+          "$ref": "#/definitions/Measure"
+        },
+        "pressure": {
+          "$ref": "#/definitions/Measure"
+        },
+        "relativeHumidity": {
+          "$ref": "#/definitions/Measure"
+        },
+        "soilMoisture": {
+          "$ref": "#/definitions/Measure"
+        },
+        "soilTemperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "temperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "visibility": {
+          "$ref": "#/definitions/Measure"
+        },
+        "wetBulbTemperature": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windChill": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windDirection": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windGust": {
+          "$ref": "#/definitions/Measure"
+        },
+        "windSpeed": {
+          "$ref": "#/definitions/Measure"
+        },
+        "id": {
+          "description": "Weather data ID.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-12-31T11:10:21Z"
+        },
+        "properties": {
+          "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 250 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": {},
+          "example": {
+            "key1": "value1",
+            "key2": 123.45
+          }
+        }
+      }
+    },
     "WeatherDataListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "required": [
@@ -24723,19 +24721,29 @@
       "required": [
         "extensionApiName",
         "extensionId",
+        "providerApiKey",
         "units"
       ],
       "type": "object",
       "properties": {
-        "credential": {
-          "$ref": "#/definitions/ApiKeyAuthCredentials"
-        },
         "locations": {
           "description": "List of locations for which weather data need to be fetched from the provider.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WeatherLocation"
           }
+        },
+        "providerAppId": {
+          "description": "App id of the weather data provider.",
+          "maxLength": 200,
+          "minLength": 2,
+          "type": "string"
+        },
+        "providerApiKey": {
+          "description": "Api key of the weather data provider.",
+          "maxLength": 200,
+          "minLength": 2,
+          "type": "string"
         },
         "extensionId": {
           "description": "Id of the extension to be used for the providerInput. eg. DTN.ClearAg.",
@@ -24760,7 +24768,7 @@
         },
         "endTimeHours": {
           "format": "int32",
-          "description": "End of time range. (Only applicable for DTN.ClearAg extension.)",
+          "description": "End of time range. Supported ranges are from 0 to 240. (Only applicable for DTN.ClearAg extension.)",
           "maximum": 240,
           "minimum": 0,
           "type": "integer"
@@ -24862,7 +24870,7 @@
           "format": "date-time",
           "description": "Date-time when resource was last requested, sample format: yyyy-MM-ddTHH:mm:ssZ.",
           "type": "string",
-          "example": "2020-12-31T11:10:21Z"
+          "example": "2020-12-31T11:10:21Z."
         },
         "data": {
           "$ref": "#/definitions/WeatherDataForPassthrough"
