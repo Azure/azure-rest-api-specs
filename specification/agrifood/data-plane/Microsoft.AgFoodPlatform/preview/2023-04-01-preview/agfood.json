@@ -18030,7 +18030,7 @@
       }
     },
     "ApiKeyAuthCredentials": {
-      "description": "ApiKeyAuthCredentials.",
+      "description": "Api Key Auth Credentials class for API Key based Auth.",
       "type": "object",
       "allOf": [
         {
@@ -18339,56 +18339,29 @@
       }
     },
     "AuthCredentials": {
-      "description": "ConnectorCredentials.",
+      "description": "AuthCredentials abstract base class for Auth Purpose. .",
       "required": [
         "kind"
       ],
       "type": "object",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/AuthCredentialsEnum"
+          "$ref": "#/definitions/AuthCredentialsKind"
         }
       },
       "discriminator": "kind"
     },
-    "AuthCredentialsEnum": {
+    "AuthCredentialsKind": {
       "description": "CredentialTypeEnum.",
       "enum": [
-        "BasicAuthCredentials",
+        "OAuthClientCredentials",
         "ApiKeyAuthCredentials"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "AuthCredentialsEnum",
+        "name": "AuthCredentialsKind",
         "modelAsString": true
       }
-    },
-    "BasicAuthCredentials": {
-      "description": "BasicAuthCredentials.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AuthCredentials"
-        },
-        {
-          "required": [
-            "password",
-            "username"
-          ],
-          "type": "object",
-          "properties": {
-            "username": {
-              "description": "UserName.",
-              "minLength": 1,
-              "type": "string"
-            },
-            "password": {
-              "$ref": "#/definitions/KeyVaultProperties"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "BasicAuthCredentials"
     },
     "BiomassModelJob": {
       "description": "Schema of biomass model job.",
@@ -20644,7 +20617,7 @@
       }
     },
     "KeyVaultProperties": {
-      "description": "KeyVaultProperties.",
+      "description": "Properties of the key vault.",
       "required": [
         "keyName",
         "keyVaultUri",
@@ -20653,17 +20626,17 @@
       "type": "object",
       "properties": {
         "keyVaultUri": {
-          "description": "KeyVaultUri.",
+          "description": "Uri of the key vault.",
           "minLength": 1,
           "type": "string"
         },
         "keyName": {
-          "description": "KeyName.",
+          "description": "Name of Key Vault key.",
           "minLength": 1,
           "type": "string"
         },
         "keyVersion": {
-          "description": "KeyVersion.",
+          "description": "Version of Key Vault key.",
           "minLength": 1,
           "type": "string"
         }
@@ -21072,6 +21045,33 @@
           "type": "string"
         }
       }
+    },
+    "OAuthClientCredentials": {
+      "description": "OAuthClientCredentials for clientId clientSecret auth.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthCredentials"
+        },
+        {
+          "required": [
+            "clientId",
+            "clientSecret"
+          ],
+          "type": "object",
+          "properties": {
+            "clientId": {
+              "description": "ClientId associated with the provider.",
+              "minLength": 1,
+              "type": "string"
+            },
+            "clientSecret": {
+              "$ref": "#/definitions/KeyVaultProperties"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "OAuthClientCredentials"
     },
     "OAuthConnectRequest": {
       "description": "Get OAuth config query parameters.",
@@ -22220,7 +22220,7 @@
       "type": "object",
       "properties": {
         "credential": {
-          "$ref": "#/definitions/BasicAuthCredentials"
+          "$ref": "#/definitions/OAuthClientCredentials"
         },
         "partyId": {
           "description": "Party Id.",
@@ -22544,7 +22544,7 @@
       "type": "object",
       "properties": {
         "credential": {
-          "$ref": "#/definitions/BasicAuthCredentials"
+          "$ref": "#/definitions/OAuthClientCredentials"
         },
         "startDateTime": {
           "format": "date-time",
