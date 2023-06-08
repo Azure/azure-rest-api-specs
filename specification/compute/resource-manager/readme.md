@@ -255,20 +255,20 @@ These settings apply only when `--tag=package-2023-01-02` is specified on the co
 ``` yaml $(tag) == 'package-2023-01-02'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-11-01/runCommand.json 
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2023-03-01/runCommand.json 
   - Microsoft.Compute/DiskRP/stable/2023-01-02/diskRPCommon.json
   - Microsoft.Compute/DiskRP/stable/2023-01-02/disk.json
   - Microsoft.Compute/DiskRP/stable/2023-01-02/diskAccess.json
