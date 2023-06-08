@@ -5,6 +5,14 @@
     "title": "Azure Maps Wayfinding Service",
     "description": "Azure Maps Wayfinding REST APIs"
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -222,8 +230,10 @@
     },
     "AvoidFeatures": {
       "name": "avoidFeatures",
-      "description": "To avoid certain types of connectors in the resulting path. Multiple values can be specified.",
+      "in": "query",
+      "description": "To avoid certain types of connectors in the resulting path. Can be specified multiple times in one request, for example, '&avoidFeatures=elevators&avoidFeatures=escalators'.",
       "type": "array",
+      "collectionFormat": "multi",
       "items": {
         "type": "string",
         "enum": [
@@ -232,15 +242,20 @@
         ],
         "x-ms-enum": {
           "name": "avoidFeatures",
+          "modelAsString": true,
           "values": [
-            "stairs",
-            "elevators"
-          ],
-          "modelAsString": true
-        }
-      },
-      "in": "query",
-      "x-ms-parameter-location": "client"
+            {
+              "value": "stairs",
+              "description": "Avoids the use of stairs in route calculation."
+            },
+            {
+              "value": "elevators",
+              "description": "Avoids the use of elevators in route calculation."
+            }
+          ]
+        },
+        "x-ms-parameter-location": "client"
+      }
     },
     "MinWidth": {
       "name": "minWidth",
