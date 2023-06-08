@@ -8,6 +8,7 @@ using Azure.Core;
 
 namespace AnomalyDetector.Multivariate;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Field that indicates how missing values will be filled.")
 enum FillNAMethod {
   "Previous",
@@ -17,6 +18,7 @@ enum FillNAMethod {
   "Fixed",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
@@ -32,11 +34,13 @@ enum DataSchema {
   "MultiTable",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum AlignMode {
   "Inner",
   "Outer",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ModelStatus {
   @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",

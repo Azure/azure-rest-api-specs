@@ -16,6 +16,7 @@ using Azure.Core;
 
 namespace Azure.Contoso.WidgetManager;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_11_01_Preview: "2022-11-01-preview",
