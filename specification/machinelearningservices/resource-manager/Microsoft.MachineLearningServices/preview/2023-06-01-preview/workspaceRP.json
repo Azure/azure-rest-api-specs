@@ -1751,18 +1751,9 @@
         }
       }
     },
-    "Credentials": {
-      "description": "Base credential object",
-      "type": "object"
-    },
     "CustomKeys": {
       "type": "object",
       "description": "Custom Keys credential object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "keys": {
           "type": "object",
@@ -2142,10 +2133,6 @@
         }
       },
       "x-ms-discriminator-value": "FQDN"
-    },
-    "IValue": {
-      "description": "Value object used for meta data.",
-      "type": "object"
     },
     "IdentityForCmk": {
       "type": "object",
@@ -2987,11 +2974,6 @@
     },
     "WorkspaceConnectionAccessKey": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "accessKeyId": {
           "type": "string"
@@ -3003,11 +2985,6 @@
     },
     "WorkspaceConnectionApiKey": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "description": "Api key object for workspace connection credential.",
       "properties": {
         "key": {
@@ -3017,11 +2994,6 @@
     },
     "WorkspaceConnectionManagedIdentity": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "clientId": {
           "type": "string"
@@ -3033,11 +3005,6 @@
     },
     "WorkspaceConnectionPersonalAccessToken": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "pat": {
           "type": "string"
@@ -3063,10 +3030,7 @@
           "type": "string"
         },
         "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/IValue"
-          }
+          "type": "object"
         },
         "target": {
           "type": "string"
@@ -3106,11 +3070,6 @@
     },
     "WorkspaceConnectionServicePrincipal": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "clientId": {
           "type": "string"
@@ -3125,11 +3084,6 @@
     },
     "WorkspaceConnectionSharedAccessSignature": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "sas": {
           "type": "string"
@@ -3148,11 +3102,6 @@
     },
     "WorkspaceConnectionUsernamePassword": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Credentials"
-        }
-      ],
       "properties": {
         "password": {
           "type": "string"
