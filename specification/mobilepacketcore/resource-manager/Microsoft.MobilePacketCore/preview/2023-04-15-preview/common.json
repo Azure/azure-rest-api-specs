@@ -1155,6 +1155,18 @@
       },
       "description": "PDU Type"
     },
+    "IpVersion": {
+      "type": "string",
+      "enum": [
+        "V4",
+        "V6"
+      ],
+      "x-ms-enum": {
+        "name": "IpVersion",
+        "modelAsString": true
+      },
+      "description": "IP Version"
+    },
     "NetworkContextName": {
       "type": "string",
       "description": "Definition of a network context name",
@@ -1455,7 +1467,7 @@
         },
         "tag": {
           "type": "string",
-          "description": "Optional tag to be used to identify the cluster pool from which this pool is allocated.  If specified, only pools provisioned with the same tag value can be used to populate this IP Pool when a UPF is deployed.  If not specified any untagged pool can be used.  Applicable to pools of type UE"
+          "description": "Optional tag to be used to identify the cluster pool from which this pool is allocated.  If specified, only pools provisioned with the same tag value can be used to populate this IP Pool when the network function is deployed.  If not specified any untagged pool can be used"
         },
         "dataNetworkList": {
           "type": "array",
