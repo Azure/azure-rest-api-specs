@@ -13,45 +13,47 @@
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "Endpoint",
+        "in": "path",
+        "required": true,
+        "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
+        "type": "string"
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "tags": [],
-  "paths": {
-    "/:analyze-conversations": {
-      "post": {
-        "operationId": "ConversationAnalysis_AnalyzeConversation",
-        "description": "Analyzes the input conversation utterance.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationTask"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationTask"
-            }
-          }
-        }
-      }
+  "security": [
+    {
+      "ApiKey": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKey": {
+      "type": "apiKey",
+      "description": "A subscription key for a Language service resource",
+      "in": "header",
+      "name": "Ocp-Apim-Subscription-Key"
     }
   },
+  "tags": [],
+  "paths": {},
   "definitions": {
     "AnalyzeConversationTask": {
       "type": "object",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "discriminator type"
+          "$ref": "#/definitions/AnalyzeConversationTaskKind",
+          "description": "discriminator kind"
         }
       },
       "description": "The base class of a conversation input task.",
@@ -61,24 +63,22 @@
       ]
     },
     "AnalyzeConversationTaskKind": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "the type"
-        }
-      },
+      "type": "string",
       "description": "Enumeration of supported Conversation tasks.",
-      "required": [
-        "type"
-      ]
+      "enum": [
+        "Conversation"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationTaskKind",
+        "modelAsString": true
+      }
     },
     "AnalyzeConversationTaskResult": {
       "type": "object",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "discriminator type"
+          "$ref": "#/definitions/AnalyzeConversationTaskResultsKind",
+          "description": "discriminator kind"
         }
       },
       "description": "The base class of a conversation input task result.",
@@ -88,16 +88,49 @@
       ]
     },
     "AnalyzeConversationTaskResultsKind": {
+      "type": "string",
+      "description": "Enumeration of supported conversational task results.",
+      "enum": [
+        "ConversationResult"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationTaskResultsKind",
+        "modelAsString": true
+      }
+    },
+    "ApiKey": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "description": "the type"
+          "enum": [
+            "apiKey"
+          ],
+          "description": "API key authentication"
+        },
+        "in": {
+          "type": "string",
+          "enum": [
+            "header"
+          ],
+          "description": "location of the API key"
+        },
+        "name": {
+          "type": "string",
+          "enum": [
+            "Ocp-Apim-Subscription-Key"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "name of the API key"
         }
       },
-      "description": "Enumeration of supported conversational task results.",
+      "description": "A subscription key for a Language service resource",
       "required": [
-        "type"
+        "type",
+        "in",
+        "name"
       ]
     }
   },
