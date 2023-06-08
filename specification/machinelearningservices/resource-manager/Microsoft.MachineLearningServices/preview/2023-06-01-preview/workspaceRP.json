@@ -2109,7 +2109,6 @@
       "type": "object",
       "description": "Property bag for FQDN endpoints result",
       "properties": {
-
         "properties": {
           "$ref": "#/definitions/FQDNEndpoints"
         }
@@ -2715,6 +2714,7 @@
       }
     },
     "ProvisioningState": {
+      "description": "The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.",
       "enum": [
         "Unknown",
         "Updating",
@@ -2731,6 +2731,7 @@
       }
     },
     "PublicNetworkAccessType": {
+      "description": "The public network access flag.",
       "enum": [
         "Enabled",
         "Disabled"
@@ -2772,6 +2773,7 @@
       }
     },
     "RuleAction": {
+      "description": "The action enum for networking rule.",
       "enum": [
         "Allow",
         "Deny"
@@ -2783,6 +2785,7 @@
       }
     },
     "RuleCategory": {
+      "description": "Category of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Required",
         "Recommended",
@@ -2795,6 +2798,7 @@
       }
     },
     "RuleStatus": {
+      "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
         "Active"
@@ -2806,6 +2810,7 @@
       }
     },
     "RuleType": {
+      "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "FQDN",
         "PrivateEndpoint",
@@ -2855,6 +2860,7 @@
     },
     "ServiceTagDestination": {
       "type": "object",
+      "description": "Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "properties": {
         "action": {
           "$ref": "#/definitions/RuleAction"
@@ -2880,6 +2886,7 @@
     },
     "ServiceTagOutboundRule": {
       "type": "object",
+      "description": "Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "allOf": [
         {
           "$ref": "#/definitions/OutboundRule"
@@ -2907,6 +2914,7 @@
     },
     "SharedPrivateLinkResourceProperty": {
       "type": "object",
+      "description": "Properties of a shared private link resource.",
       "properties": {
         "groupId": {
           "description": "group id of the private link",
@@ -2944,6 +2952,7 @@
         "properties"
       ],
       "type": "object",
+      "description": "An object that represents a machine learning workspace.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
@@ -2999,6 +3008,7 @@
           "$ref": "#/definitions/Credentials"
         }
       ],
+      "description": "Api key object for workspace connection credential.",
       "properties": {
         "key": {
           "type": "string"
@@ -3128,6 +3138,7 @@
     },
     "WorkspaceConnectionUpdateParameter": {
       "type": "object",
+      "description": "The properties that the machine learning workspace connection will be updated with.",
       "properties": {
         "properties": {
           "description": "The properties that the machine learning workspace connection will be updated with.",
@@ -3153,6 +3164,7 @@
     },
     "WorkspaceHubConfig": {
       "type": "object",
+      "description": "WorkspaceHub's configuration object.",
       "properties": {
         "additionalWorkspaceStorageAccounts": {
           "type": "array",
@@ -3184,6 +3196,7 @@
     },
     "WorkspacePrivateEndpointResource": {
       "type": "object",
+      "description": "The Private Endpoint resource.",
       "properties": {
         "id": {
           "description": "e.g. /subscriptions/{networkSubscriptionId}/resourceGroups/{rgName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}",
