@@ -171,52 +171,9 @@
           }
         }
       },
-      "delete": {
-        "x-ms-examples": {
-          "Delete a source control.": {
-            "$ref": "./examples/sourcecontrols/DeleteSourceControl.json"
-          }
-        },
-        "tags": [
-          "SourceControls"
-        ],
-        "description": "Delete a source control.",
-        "operationId": "SourceControls_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/SourceControlIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
       "put": {
         "x-ms-examples": {
-          "Creates a source control.": {
+          "Creates or updates a source control.": {
             "$ref": "./examples/sourcecontrols/CreateSourceControl.json"
           }
         },
@@ -247,7 +204,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/SourceControl"
             }
@@ -256,6 +213,54 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/SourceControl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/sourcecontrols/{sourceControlId}/delete": {
+      "post": {
+        "x-ms-examples": {
+          "Delete a source control.": {
+            "$ref": "./examples/sourcecontrols/DeleteSourceControl.json"
+          }
+        },
+        "tags": [
+          "SourceControls"
+        ],
+        "description": "Delete a source control.",
+        "operationId": "SourceControls_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SourceControlIdParameter"
+          },
+          {
+            "$ref": "#/parameters/RepositoryAccess"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Source control deleted.",
+            "schema": {
+              "$ref": "#/definitions/Warning"
             }
           },
           "default": {
@@ -356,7 +361,8 @@
       "properties": {
         "id": {
           "description": "The id (a Guid) of the source control",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "version": {
           "$ref": "#/definitions/Version",
@@ -387,6 +393,18 @@
           "description": "Repository metadata.",
           "$ref": "#/definitions/Repository"
         },
+        "servicePrincipal": {
+          "description": "Service principal metadata.",
+          "$ref": "#/definitions/ServicePrincipal"
+        },
+        "repositoryAccess": {
+          "description": "Repository access credentials. This is write-only object and it never returns back to a user.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "$ref": "#/definitions/RepositoryAccess"
+        },
         "repositoryResourceInfo": {
           "description": "Information regarding the resources created in user's repository.",
           "$ref": "#/definitions/RepositoryResourceInfo"
@@ -394,6 +412,10 @@
         "lastDeploymentInfo": {
           "description": "Information regarding the latest deployment for the source control.",
           "$ref": "#/definitions/DeploymentInfo"
+        },
+        "pullRequest": {
+          "description": "Information regarding the pull request of the source control.",
+          "$ref": "#/definitions/PullRequest"
         }
       },
       "required": [
@@ -404,8 +426,48 @@
       ],
       "type": "object"
     },
+    "RepositoryAccess": {
+      "type": "object",
+      "description": "Credentials to access repository.",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "description": "The kind of repository access credentials",
+          "$ref": "#/definitions/RepositoryAccessKind"
+        },
+        "code": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "OAuth Code. Required when `kind` is `OAuth`"
+        },
+        "state": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "OAuth State. Required when `kind` is `OAuth`"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "OAuth ClientId. Required when `kind` is `OAuth`"
+        },
+        "token": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Personal Access Token. Required when `kind` is `PAT`"
+        },
+        "installationId": {
+          "type": "string",
+          "description": "Application installation ID. Required when `kind` is `App`. Supported by `GitHub` only."
+        }
+      }
+    },
     "Repository": {
       "type": "object",
+      "required": [
+        "url",
+        "branch"
+      ],
       "description": "metadata of a repository.",
       "properties": {
         "url": {
@@ -422,15 +484,30 @@
         },
         "deploymentLogsUrl": {
           "description": "Url to access repository action logs.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServicePrincipal": {
+      "readOnly": true,
+      "type": "object",
+      "description": "Service principal metadata.",
+      "properties": {
+        "id": {
+          "description": "Id of service principal.",
+          "type": "string",
+          "readOnly": true
         },
-        "pathMapping": {
-          "description": "Dictionary of source control content type and path mapping.",
-          "items": {
-            "$ref": "#/definitions/ContentPathMap"
-          },
-          "type": "array",
-          "x-ms-identifiers": []
+        "tenantId": {
+          "description": "Tenant id of service principal.",
+          "type": "string",
+          "readOnly": true
+        },
+        "appId": {
+          "description": "App id of service principal.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -461,15 +538,19 @@
       "properties": {
         "webhookId": {
           "description": "Unique identifier for the webhook.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "webhookUrl": {
           "description": "URL that gets invoked by the webhook.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "webhookSecretUpdateTime": {
+          "format": "date-time",
           "description": "Time when the webhook secret was updated.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "rotateWebhookSecret": {
           "description": "A flag to instruct the backend service to rotate webhook secret.",
@@ -478,6 +559,7 @@
       }
     },
     "GitHubResourceInfo": {
+      "readOnly": true,
       "description": "Resources created in GitHub repository.",
       "type": "object",
       "properties": {
@@ -488,6 +570,7 @@
       }
     },
     "AzureDevOpsResourceInfo": {
+      "readOnly": true,
       "description": "Resources created in Azure DevOps repository.",
       "type": "object",
       "properties": {
@@ -502,6 +585,7 @@
       }
     },
     "DeploymentInfo": {
+      "readOnly": true,
       "description": "Information regarding a deployment.",
       "type": "object",
       "properties": {
@@ -550,25 +634,14 @@
         }
       }
     },
-    "ContentPathMap": {
-      "description": "The mapping of content type to a repo path.",
-      "properties": {
-        "contentType": {
-          "$ref": "#/definitions/ContentType",
-          "description": "Content type.",
-          "type": "string"
-        },
-        "path": {
-          "description": "The path to the content.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "ContentType": {
       "description": "The content type of a source control path.",
       "enum": [
         "AnalyticRule",
+        "AutomationRule",
+        "HuntingQuery",
+        "Parser",
+        "Playbook",
         "Workbook"
       ],
       "type": "string",
@@ -580,6 +653,18 @@
             "value": "AnalyticRule"
           },
           {
+            "value": "AutomationRule"
+          },
+          {
+            "value": "HuntingQuery"
+          },
+          {
+            "value": "Parser"
+          },
+          {
+            "value": "Playbook"
+          },
+          {
             "value": "Workbook"
           }
         ]
@@ -589,7 +674,7 @@
       "description": "The type of repository.",
       "enum": [
         "Github",
-        "DevOps"
+        "AzureDevOps"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -600,12 +685,37 @@
             "value": "Github"
           },
           {
-            "value": "DevOps"
+            "value": "AzureDevOps"
+          }
+        ]
+      }
+    },
+    "RepositoryAccessKind": {
+      "description": "The kind of repository access credentials",
+      "enum": [
+        "OAuth",
+        "PAT",
+        "App"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "RepositoryAccessKind",
+        "values": [
+          {
+            "value": "OAuth"
+          },
+          {
+            "value": "PAT"
+          },
+          {
+            "value": "App"
           }
         ]
       }
     },
     "Version": {
+      "readOnly": true,
       "description": "The version of the source control.",
       "enum": [
         "V1",
@@ -700,6 +810,115 @@
           }
         ]
       }
+    },
+    "PullRequest": {
+      "readOnly": true,
+      "description": "Information regarding pull request for protected branches.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "URL of pull request",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/PullRequestState",
+          "description": "State of the pull request",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "PullRequestState": {
+      "description": "Status of the pull request.",
+      "enum": [
+        "Open",
+        "Closed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "state",
+        "values": [
+          {
+            "value": "Open"
+          },
+          {
+            "value": "Closed"
+          }
+        ]
+      }
+    },
+    "Warning": {
+      "description": "Warning response structure.",
+      "x-ms-external": true,
+      "properties": {
+        "warning": {
+          "$ref": "#/definitions/WarningBody",
+          "description": "Warning data."
+        }
+      },
+      "type": "object"
+    },
+    "WarningBody": {
+      "readOnly": true,
+      "x-ms-external": true,
+      "description": "Warning details.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the warning. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true,
+          "type": "object",
+          "$ref": "#/definitions/WarningCode"
+        },
+        "message": {
+          "description": "A message describing the warning, intended to be suitable for display in a user interface.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WarningBody"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "type": "object"
+    },
+    "WarningCode": {
+      "readOnly": true,
+      "description": "The type of repository.",
+      "enum": [
+        "SourceControlWarning_DeleteServicePrincipal",
+        "SourceControlWarning_DeletePipelineFromAzureDevOps",
+        "SourceControlWarning_DeleteWorkflowAndSecretFromGitHub",
+        "SourceControlWarning_DeleteRoleAssignment",
+        "SourceControl_DeletedWithWarnings"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "WarningCode",
+        "values": [
+          {
+            "value": "SourceControlWarning_DeleteServicePrincipal"
+          },
+          {
+            "value": "SourceControlWarning_DeletePipelineFromAzureDevOps"
+          },
+          {
+            "value": "SourceControlWarning_DeleteWorkflowAndSecretFromGitHub"
+          },
+          {
+            "value": "SourceControlWarning_DeleteRoleAssignment"
+          },
+          {
+            "value": "SourceControl_DeletedWithWarnings"
+          }
+        ]
+      }
     }
   },
   "parameters": {
@@ -728,6 +947,23 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/SourceControl"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RepositoryAccess": {
+      "description": "The repository access credentials.",
+      "in": "body",
+      "name": "repositoryAccess",
+      "required": true,
+      "schema": {
+        "required": [
+          "repositoryAccess"
+        ],
+        "properties": {
+          "repositoryAccess": {
+            "$ref": "#/definitions/RepositoryAccess"
+          }
+        }
       },
       "x-ms-parameter-location": "method"
     }
