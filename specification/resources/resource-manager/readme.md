@@ -1103,8 +1103,7 @@ directive:
     reason: change resources cannot be created or named by end users
   - from: changes.json
     suppress: OperationsAPIImplementation
-    where: $.paths
-    reason: 'Duplicate Operations API causes generation issues'
+    reason: Duplicate Operations API causes generation issues
   - from: resources.json
     suppress: R4009
     where:
