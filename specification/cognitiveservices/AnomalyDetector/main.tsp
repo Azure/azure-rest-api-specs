@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "./univariate/routes.tsp";
 import "./multivariate/routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
