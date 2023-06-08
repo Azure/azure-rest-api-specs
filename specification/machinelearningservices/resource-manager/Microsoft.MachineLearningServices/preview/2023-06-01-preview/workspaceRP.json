@@ -80,6 +80,9 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/PaginationParameter"
+          },
+          {
             "$ref": "#/parameters/WorkspaceKindParameter"
           }
         ],
@@ -126,6 +129,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameter"
           },
           {
             "$ref": "#/parameters/WorkspaceKindParameter"
@@ -2144,6 +2150,19 @@
         }
       }
     },
+    "IsolationMode": {
+      "description": "Isolation mode for the managed network of a machine learning workspace.",
+      "enum": [
+        "Disabled",
+        "AllowInternetOutbound",
+        "AllowOnlyApprovedOutbound"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IsolationMode",
+        "modelAsString": true
+      }
+    },
     "KeyVaultProperties": {
       "required": [
         "keyIdentifier",
@@ -2276,6 +2295,29 @@
         },
         "status": {
           "$ref": "#/definitions/ManagedNetworkStatus"
+        }
+      }
+    },
+    "ManagedNetworkSettings": {
+      "description": "Managed Network settings for a machine learning workspace.",
+      "type": "object",
+      "properties": {
+        "isolationMode": {
+          "$ref": "#/definitions/IsolationMode"
+        },
+        "networkId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "outboundRules": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/OutboundRule"
+          },
+          "x-nullable": true
+        },
+        "status": {
+          "$ref": "#/definitions/ManagedNetworkProvisionStatus"
         }
       }
     },
@@ -2563,8 +2605,23 @@
           "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         },
         "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus"
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState"
         }
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
       }
     },
     "PrivateEndpointDestination": {
@@ -3242,7 +3299,9 @@
             "type": "string"
           }
         },
-        "managedNetwork": {},
+        "managedNetwork": {
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        },
         "mlFlowTrackingUri": {
           "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
           "type": "string",
@@ -3406,7 +3465,9 @@
           "description": "The compute name for image build",
           "type": "string"
         },
-        "managedNetwork": {},
+        "managedNetwork": {
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        },
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
@@ -3472,6 +3533,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "PaginationParameter": {
+      "in": "query",
+      "name": "$skip",
+      "type": "string",
+      "description": "Continuation token for pagination.",
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
     "WorkspaceForceToPurgeParameter": {
       "in": "query",
