@@ -6,15 +6,18 @@ parameters:
 
 steps:
 - script: |
-    # Log commands before running
-    set -x
+    RED='\033[0;31m'
+    NC='\033[0m' # No Color
 
     exit_code=0
+
+    # Log commands before running
+    set -x
 
     pushd ${{parameters.Folder}}
 
     if test -f package.json; then
-      echo "TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the root package.json"
+      echo -e "\n${RED}ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the root package.json${NC}\n"
       exit_code=1
     fi
 
