@@ -4800,6 +4800,11 @@
             "name": "EnabledState",
             "modelAsString": true
           }
+        },
+        "dedicatedvip": {
+          "description": "Whether the endpoint uses a dedicated IP address. This should be used for L4 scenarios where the AzureFrontDoor endpoint requires a dedicated static IP address.",
+          "type": "string",
+          "readonly": true
         }
       }
     },
@@ -5323,6 +5328,55 @@
       "x-ms-azure-resource": true
     },
     "AFDOriginGroupUpdatePropertiesParameters": {
+      "type": "object",
+      "properties": {
+        "originGroupPropertiesType": {
+          "type": "string",
+          "enum": [
+            "L4OriginGroupProperties",
+            "L7OriginGroupProperties"
+          ],
+          "default": "L7OriginGroupProperties",
+          "x-ms-enum": {
+            "name": "OriginGroupPropertiesType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "originGroupPropertiesType"
+    },
+    "L7OriginGroupProperties": {
+      "x-ms-discriminator-value": "L7OriginGroupProperties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/OriginGroupBaseProperties"
+        }
+      ]
+    },
+    "L4OriginGroupProperties": {
+      "x-ms-discriminator-value": "L4OriginGroupProperties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/OriginGroupBaseProperties"
+        },
+        {
+          "properties": {
+            "originProtocolSettings": {
+              "description": "Origin protocol settings that determine how the origin is accessed.",
+              "type": "object",
+              "$ref": "#/definitions/OriginProtocolSettingsParameters"
+            }
+          }
+        }
+      ]
+    },
+    "OriginGroupBaseProperties": {
       "description": "The JSON object that contains the properties of the origin group.",
       "properties": {
         "profileName": {
@@ -5378,6 +5432,45 @@
           "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "OriginProtocolSettingsParameters": {
+      "description": "Origin protocol settings that determine how the origin is accessed.",
+      "type": "object",
+      "properties": {
+        "sessionAffinityType": {
+          "description": "Session affinity to use for origins under the origin groups. Valid options are 'SourceIP' or 'None'",
+              "enum": [
+                "SourceIP",
+                "None"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "sessionAffinityType",
+                "modelAsString": true
+              }
+        },
+        "originPort": {
+          "description": "The ports used for the TCP/UDP connection to the customer's backend. Must be between 1 and 65535. The ports can be a comma separated list or a valid range like 5050-5090",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          }
+        },
+        "clientIPPreservationState": {
+          "description": "Preserves the client side IP allowing the back-end to see the IP address of the client. This can then be used by applications for applying any rules. Valid options are 'Enabled' or 'Disabled'",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "clientIPPreservationState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5455,6 +5548,33 @@
       }
     },
     "RouteUpdatePropertiesParameters": {
+      "description": "Based on the RouteType the route can have either L4 or L7 properties.",
+      "type": "object",
+      "discriminator": "routeType",
+      "properties": {
+        "routeType": {
+          "description": "the protocol type of the route.",
+          "$ref": "#/definitions/RouteType"
+        }
+      }
+    },
+    "L7RouteProperties": {
+      "description": "Friendly Routes name mapping to the any Routes or secret related information.",
+      "type": "object",
+      "x-ms-discriminator-value": "L7Route",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/L7RouteUpdatePropertiesParameters"
+        }
+      }
+    },
+    "L7RouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
         "endpointName": {
@@ -5697,6 +5817,109 @@
           "default": "Continue"
         }
       }
+    },
+    "L4RouteProperties": {
+      "description": "Friendly Routes name mapping to L4 Routes",
+      "type": "object",
+      "x-ms-discriminator-value": "L4Route",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/L4RouteUpdatePropertiesParameters"
+        }
+      }
+    },
+    "L4RouteUpdatePropertiesParameters": {
+      "description": "L4 Route.",
+      "type": "object",
+      "properties": {
+        "customDomains": {
+          "description": "Domains referenced by this endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivatedResourceReference"
+          }
+        },
+        "originGroup": {
+          "description": "A reference to the origin group.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+       "protocolSettings": {
+          "description": "L4 Route base settings",
+          "type": "object",
+          "$ref": "#/definitions/ProtocolSettings"
+        },
+        "enabledState": {
+          "description": "Whether to enable the route. Permitted values are 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "enabledState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProtocolSettings": {
+      "description": "Base class for all L4 route settings.",
+      "type": "object",
+      "properties": {
+        "listenerProtocol": {
+          "description": "Listerner/Frontend protocol for TCP/UDP routes, to accept connection from client.",
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "name": "listenerProtocol",
+            "modelAsString": true
+          }
+        },
+        "originProtocol": {
+          "description": "Origin/Backend protocol used to establish connection with customer's origin.",
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "name": "originProtocol",
+            "modelAsString": true
+          }
+        },
+       "ports": {
+          "description": "The ports used for the TCP/UDP connection. Must be between 1 and 65535. The ports can be a comma separated list or a valid range like 5050-5090",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          }
+        }
+      }
+    },
+    "RouteType": {
+      "description": "RouteType for this route for example Layer7 or Layer4 by default Layer7 will be considered. This will help in configuring the route correctly for the given  route type.",
+      "type": "string",
+      "enum": [
+        "L7Route",
+        "L4Route"
+      ],
+      "x-ms-enum": {
+        "name": "RouteType",
+        "modelAsString": true
+      },
+      "default": "L7Route"
     },
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",
