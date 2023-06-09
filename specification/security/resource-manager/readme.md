@@ -392,7 +392,9 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
+- Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
+
 
 # Needed when there is more than one input file
 override-info:
@@ -888,6 +890,14 @@ input-file:
 override-info:
   title: SecurityCenter
 ```
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Security/stable/2023-05-01/serverVulnerabilityAssessmentsSettings.json
 
 ---
 
