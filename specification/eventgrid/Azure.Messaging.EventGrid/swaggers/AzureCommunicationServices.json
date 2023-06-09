@@ -83,8 +83,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         },
         "editTime": {
           "type": "string",
@@ -111,8 +111,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         },
         "editTime": {
           "type": "string",
@@ -213,8 +213,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
@@ -236,8 +236,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "The chat message metadata"
+          "description": "The chat message metadata",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
@@ -363,8 +363,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The thread properties"
+          "description": "The thread properties",
+          "x-typespec-name": "Record<unknown>"
         },
         "participants": {
           "type": "array",
@@ -372,8 +372,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]",
-          "description": "The list of properties of participants who are part of the thread"
+          "description": "The list of properties of participants who are part of the thread",
+          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
@@ -393,8 +393,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The thread properties"
+          "description": "The thread properties",
+          "x-typespec-name": "Record<unknown>"
         },
         "participants": {
           "type": "array",
@@ -402,8 +402,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]",
-          "description": "The list of properties of participants who are part of the thread"
+          "description": "The list of properties of participants who are part of the thread",
+          "x-typespec-name": "AzureCommunicationServices.AcsChatThreadParticipantProperties[]"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
@@ -504,8 +504,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The updated thread properties"
+          "description": "The updated thread properties",
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
@@ -530,8 +530,8 @@
         "properties": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The updated thread properties"
+          "description": "The updated thread properties",
+          "x-typespec-name": "Record<unknown>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
@@ -590,18 +590,11 @@
           "description": "The time at which the email delivery report received timestamp"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
-      "required": [
-        "sender",
-        "recipient",
-        "messageId",
-        "status",
-        "deliveryStatusDetails",
-        "deliveryAttemptTimeStamp"
-      ]
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event."
     },
     "AcsEmailDeliveryReportStatus": {
       "type": "string",
+      "description": "The status of the email. Any value other than Delivered is considered failed.",
       "enum": [
         "Bounced",
         "Delivered",
@@ -655,10 +648,7 @@
           "description": "Detailed status message"
         }
       },
-      "description": "Detailed information about the status if any",
-      "required": [
-        "statusMessage"
-      ]
+      "description": "Detailed information about the status if any"
     },
     "AcsEmailEngagementTrackingReportReceivedEventData": {
       "type": "object",
@@ -669,7 +659,7 @@
         },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email been sent"
+          "description": "The Id of the email that has been sent"
         },
         "userActionTimeStamp": {
           "type": "string",
@@ -689,15 +679,7 @@
           "description": "The type of engagement user have with email"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
-      "required": [
-        "sender",
-        "messageId",
-        "userActionTimeStamp",
-        "engagementContext",
-        "userAgent",
-        "engagementType"
-      ]
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event."
     },
     "AcsIncomingCallCustomContext": {
       "type": "object",
@@ -707,23 +689,19 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Sip Headers for incoming call"
+          "description": "Sip Headers for incoming call",
+          "x-typespec-name": "Record<string>"
         },
         "viopHeaders": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Voip Headers for incoming call"
+          "description": "Voip Headers for incoming call",
+          "x-typespec-name": "Record<string>"
         }
       },
-      "description": "Custom Context of Incoming Call",
-      "required": [
-        "sipHeaders",
-        "viopHeaders"
-      ]
+      "description": "Custom Context of Incoming Call"
     },
     "AcsIncomingCallEventData": {
       "type": "object",
@@ -742,7 +720,7 @@
         },
         "callerDisplayName": {
           "type": "string",
-          "description": "Display name of caller"
+          "description": "Display name of caller."
         },
         "customContext": {
           "$ref": "#/definitions/AzureCommunicationServices.AcsIncomingCallCustomContext",
@@ -757,16 +735,7 @@
           "description": "CorrelationId (CallId)."
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
-      "required": [
-        "to",
-        "from",
-        "serverCallId",
-        "callerDisplayName",
-        "customContext",
-        "incomingCallContext",
-        "correlationId"
-      ]
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event"
     },
     "AcsRecordingChunkInfoProperties": {
       "type": "object",
@@ -844,8 +813,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingChunkInfoProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsRecordingChunkInfoProperties[]",
-          "description": "List of details of recording chunks information"
+          "description": "List of details of recording chunks information",
+          "x-typespec-name": "AzureCommunicationServices.AcsRecordingChunkInfoProperties[]"
         }
       },
       "description": "Schema for all properties of Recording Storage Information."
@@ -884,8 +853,8 @@
             "$ref": "#/definitions/AzureCommunicationServices.AcsSmsDeliveryAttemptProperties"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties[]",
-          "description": "List of details of delivery attempts made"
+          "description": "List of details of delivery attempts made",
+          "x-typespec-name": "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties[]"
         },
         "receivedTimestamp": {
           "type": "string",
@@ -954,39 +923,79 @@
     },
     "AcsUserEngagement": {
       "type": "string",
+      "description": "The type of engagement user have with email.",
       "enum": [
         "view",
         "click"
       ],
       "x-ms-enum": {
         "name": "AcsUserEngagement",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "view",
+            "value": "view",
+            "description": "View"
+          },
+          {
+            "name": "click",
+            "value": "click",
+            "description": "Click"
+          }
+        ]
       }
     },
     "recordingChannelType": {
       "type": "string",
+      "description": "Recording channel type",
       "enum": [
         "Mixed",
         "Unmixed"
       ],
       "x-ms-enum": {
         "name": "recordingChannelType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mixed",
+            "value": "Mixed",
+            "description": "Mixed channel type"
+          },
+          {
+            "name": "Unmixed",
+            "value": "Unmixed",
+            "description": "Unmixed channel type"
+          }
+        ]
       }
     },
     "recordingContentType": {
       "type": "string",
+      "description": "Recording content type",
       "enum": [
         "AudioVideo",
         "Audio"
       ],
       "x-ms-enum": {
         "name": "recordingContentType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AudioVideo",
+            "value": "AudioVideo",
+            "description": "AudioVideo content type"
+          },
+          {
+            "name": "Audio",
+            "value": "Audio",
+            "description": "Audio content type"
+          }
+        ]
       }
     },
     "recordingFormatType": {
       "type": "string",
+      "description": "Recording format type",
       "enum": [
         "Wav",
         "Mp3",
@@ -994,7 +1003,24 @@
       ],
       "x-ms-enum": {
         "name": "recordingFormatType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Wav",
+            "value": "Wav",
+            "description": "WAV format"
+          },
+          {
+            "name": "Mp3",
+            "value": "Mp3",
+            "description": "MP3 format"
+          },
+          {
+            "name": "Mp4",
+            "value": "Mp4",
+            "description": "MP4 format"
+          }
+        ]
       }
     }
   }
