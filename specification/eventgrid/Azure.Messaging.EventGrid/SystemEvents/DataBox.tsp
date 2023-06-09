@@ -25,7 +25,7 @@ namespace EventGrid.DataBox {
     stageTime?: utcDateTime;
   };
 
-  @doc("Name of the DataBox Stage")
+  @doc("Schema of DataBox Stage Name enumeration.")
   enum DataBoxStageName {
     @doc("Copy has started")
     CopyStarted,
