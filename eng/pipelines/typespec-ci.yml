@@ -27,6 +27,7 @@ jobs:
 
   - script: npm ls -a
     displayName: npm ls -a
+    condition: succeededOrFailed()
 
   - template: templates/steps/typespec-ci.yml
     parameters:
@@ -47,6 +48,16 @@ jobs:
     parameters:
       Folder: specification/cognitiveservices/HealthInsights/healthinsights.openapi
       DisplayName: healthinsights.openapi
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/cognitiveservices/HealthInsights/healthinsights.oncophenotype
+      DisplayName: healthinsights.oncophenotype
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/cognitiveservices/HealthInsights/healthinsights.trialmatcher
+      DisplayName: healthinsights.trialmatcher
 
   - template: templates/steps/typespec-ci.yml
     parameters:
