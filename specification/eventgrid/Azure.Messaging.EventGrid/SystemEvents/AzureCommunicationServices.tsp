@@ -6,34 +6,34 @@ namespace EventGrid.AzureCommunicationServices;
 @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event")
 model AcsIncomingCallEventData {
   @doc("The communication identifier of the target user.")
-  to: CommunicationIdentifierModel;
+  to?: CommunicationIdentifierModel;
 
   @doc("The communication identifier of the user who initiated the call.")
-  from: CommunicationIdentifierModel;
+  from?: CommunicationIdentifierModel;
 
   @doc("The Id of the server call")
-  serverCallId: string;
+  serverCallId?: string;
 
-  @doc("Display name of caller")
-  callerDisplayName: string;
+  @doc("Display name of caller.")
+  callerDisplayName?: string;
 
   @doc("Custom Context of Incoming Call")
-  customContext: AcsIncomingCallCustomContext;
+  customContext?: AcsIncomingCallCustomContext;
 
   @doc("Signed incoming call context.")
-  incomingCallContext: string;
+  incomingCallContext?: string;
 
   @doc("CorrelationId (CallId).")
-  correlationId: string;
+  correlationId?: string;
 }
 
 @doc("Custom Context of Incoming Call")
 model AcsIncomingCallCustomContext {
   @doc("Sip Headers for incoming call")
-  sipHeaders: Record<string>;
+  sipHeaders?: Record<string>;
 
   @doc("Voip Headers for incoming call")
-  viopHeaders: Record<string>;
+  viopHeaders?: Record<string>;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.")
@@ -294,23 +294,23 @@ model AcsRecordingFileStatusUpdatedEventData {
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.")
 model AcsEmailDeliveryReportReceivedEventData {
   @doc("The Sender Email Address")
-  sender: string;
+  sender?: string;
 
   @doc("The recipient Email Address")
-  recipient: string;
+  recipient?: string;
 
   @doc("The Id of the email been sent")
-  messageId: string;
+  messageId?: string;
 
   @doc("The status of the email. Any value other than Delivered is considered failed.")
-  status: AcsEmailDeliveryReportStatus;
+  status?: AcsEmailDeliveryReportStatus;
 
   @doc("Detailed information about the status if any")
-  deliveryStatusDetails: AcsEmailDeliveryReportStatusDetails;
+  deliveryStatusDetails?: AcsEmailDeliveryReportStatusDetails;
 
   @doc("The time at which the email delivery report received timestamp")
   @friendlyName("deliveryAttemptTimestamp")
-  deliveryAttemptTimeStamp: utcDateTime;
+  deliveryAttemptTimeStamp?: utcDateTime;
 }
 
 @doc("The status of the email. Any value other than Delivered is considered failed.")
@@ -332,29 +332,29 @@ enum AcsEmailDeliveryReportStatus {
 @doc("Detailed information about the status if any")
 model AcsEmailDeliveryReportStatusDetails {
   @doc("Detailed status message")
-  statusMessage: string;
+  statusMessage?: string;
 }
 
 @doc("Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.")
 model AcsEmailEngagementTrackingReportReceivedEventData {
   @doc("The Sender Email Address")
-  sender: string;
+  sender?: string;
 
-  @doc("The Id of the email been sent")
-  messageId: string;
+  @doc("The Id of the email that has been sent")
+  messageId?: string;
 
   @doc("The time at which the user interacted with the email")
   @friendlyName("userActionTimestamp")
-  userActionTimeStamp: utcDateTime;
+  userActionTimeStamp?: utcDateTime;
 
   @doc("The context of the type of engagement user had with email")
-  engagementContext: string;
+  engagementContext?: string;
 
   @doc("The user agent interacting with the email")
-  userAgent: string;
+  userAgent?: string;
 
   @doc("The type of engagement user have with email")
-  engagementType: AcsUserEngagement;
+  engagementType?: AcsUserEngagement;
 
 }
 

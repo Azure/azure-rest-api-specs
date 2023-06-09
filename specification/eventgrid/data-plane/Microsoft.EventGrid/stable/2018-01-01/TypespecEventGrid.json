@@ -1062,15 +1062,7 @@
           "description": "The time at which the email delivery report received timestamp"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
-      "required": [
-        "sender",
-        "recipient",
-        "messageId",
-        "status",
-        "deliveryStatusDetails",
-        "deliveryAttemptTimeStamp"
-      ]
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event."
     },
     "AzureCommunicationServices.AcsEmailDeliveryReportStatus": {
       "type": "string",
@@ -1128,10 +1120,7 @@
           "description": "Detailed status message"
         }
       },
-      "description": "Detailed information about the status if any",
-      "required": [
-        "statusMessage"
-      ]
+      "description": "Detailed information about the status if any"
     },
     "AzureCommunicationServices.AcsEmailEngagementTrackingReportReceivedEventData": {
       "type": "object",
@@ -1142,7 +1131,7 @@
         },
         "messageId": {
           "type": "string",
-          "description": "The Id of the email been sent"
+          "description": "The Id of the email that has been sent"
         },
         "userActionTimeStamp": {
           "type": "string",
@@ -1162,15 +1151,7 @@
           "description": "The type of engagement user have with email"
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
-      "required": [
-        "sender",
-        "messageId",
-        "userActionTimeStamp",
-        "engagementContext",
-        "userAgent",
-        "engagementType"
-      ]
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event."
     },
     "AzureCommunicationServices.AcsIncomingCallCustomContext": {
       "type": "object",
@@ -1192,11 +1173,7 @@
           "x-typespec-name": "Record<string>"
         }
       },
-      "description": "Custom Context of Incoming Call",
-      "required": [
-        "sipHeaders",
-        "viopHeaders"
-      ]
+      "description": "Custom Context of Incoming Call"
     },
     "AzureCommunicationServices.AcsIncomingCallEventData": {
       "type": "object",
@@ -1215,7 +1192,7 @@
         },
         "callerDisplayName": {
           "type": "string",
-          "description": "Display name of caller"
+          "description": "Display name of caller."
         },
         "customContext": {
           "$ref": "#/definitions/AzureCommunicationServices.AcsIncomingCallCustomContext",
@@ -1230,16 +1207,7 @@
           "description": "CorrelationId (CallId)."
         }
       },
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
-      "required": [
-        "to",
-        "from",
-        "serverCallId",
-        "callerDisplayName",
-        "customContext",
-        "incomingCallContext",
-        "correlationId"
-      ]
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event"
     },
     "AzureCommunicationServices.AcsRecordingChunkInfoProperties": {
       "type": "object",
