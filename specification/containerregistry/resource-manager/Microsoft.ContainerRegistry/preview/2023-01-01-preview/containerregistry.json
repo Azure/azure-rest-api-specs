@@ -4131,30 +4131,25 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ArchiveProperties",
           "description": "The properties of the archive.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArchiveProperties"
+            },
+            {
+              "$ref": "#/definitions/DebianArchiveProperties"
+            }
+          ],
           "x-ms-client-flatten": true
         }
       }
     },
-    "InnerErrorDescription": {
-      "description": "inner error.",
-      "required": [
-        "code",
-        "message"
-      ],
+    "ErrorResponse": {
+      "description": "An error response from the Azure Container Registry service.",
       "properties": {
-        "code": {
-          "description": "error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "target of the particular error.",
-          "type": "string"
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Azure container registry build API error body."
         }
       }
     },
@@ -4163,8 +4158,16 @@
       "type": "object",
       "properties": {
         "packageSource": {
-          "$ref": "#/definitions/ArchivePackageSourceProperties",
-          "description": "The package source of the archive."
+          "description": "The package source of the archive.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArchivePackageSourceProperties"
+            },
+            {
+              "$ref": "#/definitions/DebianArchivePackageSourceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         },
         "publishedVersion": {
           "description": "The published version of the archive.",
@@ -5100,44 +5103,33 @@
       },
       "readOnly": true
     },
-    "ErrorResponseBody": {
-      "description": "An error response from the Azure Container Registry service.",
-      "required": [
-        "code",
-        "message"
+    "DebianArchiveProperties": {
+      "description": "The properties of the Debian package Archive.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArchiveProperties"
+        }
       ],
       "properties": {
-        "code": {
-          "description": "error code.",
+        "distributionName": {
+          "description": "Debian distribution Name.",
           "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "target of the particular error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "an array of additional nested error response info objects, as described by this contract.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InnerErrorDescription"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
         }
       }
     },
-    "ErrorResponse": {
-      "description": "An error response from the Azure Container Registry service.",
+    "DebianArchivePackageSourceProperties": {
+      "description": "The properties of the archive package source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ArchivePackageSourceProperties"
+        }
+      ],
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody",
-          "description": "Azure container registry build API error body."
+        "distributionName": {
+          "description": "Upstream Debian distribution Name.",
+          "type": "string"
         }
       }
     },
@@ -7808,6 +7800,59 @@
           }
         }
       }
+    },
+    "ErrorResponseBody": {
+      "description": "An error response from the Azure Container Registry service.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "an array of additional nested error response info objects, as described by this contract.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InnerErrorDescription"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        }
+      }
+    },
+    "InnerErrorDescription": {
+      "description": "inner error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -7951,7 +7996,7 @@
       "description": "The name of the archive resource.",
       "required": true,
       "type": "string",
-      "maxLength": 50,
+      "maxLength": 200,
       "minLength": 5,
       "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
@@ -7962,7 +8007,7 @@
       "description": "The name of the archive version resource.",
       "required": true,
       "type": "string",
-      "maxLength": 50,
+      "maxLength": 200,
       "minLength": 5,
       "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
