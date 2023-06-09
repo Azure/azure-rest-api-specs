@@ -63,24 +63,24 @@
         "body": {
           "type": "object",
           "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The content of the message from the device."
+          "description": "The content of the message from the device.",
+          "x-typespec-name": "Record<unknown>"
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional."
+          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
+          "x-typespec-name": "Record<string>"
         },
         "systemProperties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "System properties help identify contents and source of the messages."
+          "description": "System properties help identify contents and source of the messages.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry)."
@@ -222,31 +222,13 @@
     },
     "IotHubDeviceTelemetryEventData": {
       "type": "object",
-      "properties": {
-        "body": {
-          "type": "object",
-          "additionalProperties": true,
-          "x-typespec-name": "Record<unknown>",
-          "description": "The content of the message from the device."
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional."
-        },
-        "systemProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-typespec-name": "Record<string>",
-          "description": "System properties help identify contents and source of the messages."
+      "properties": {},
+      "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceTelemetryEventProperties"
         }
-      },
-      "description": "Event data for Microsoft.Devices.DeviceTelemetry event."
+      ]
     }
   }
 }

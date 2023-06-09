@@ -123,9 +123,7 @@ model IotHubDeviceDisconnectedEventData
   extends DeviceConnectionStateEventProperties {}
 
 @doc("Event data for Microsoft.Devices.DeviceTelemetry event.")
-model IotHubDeviceTelemetryEventData {
-  ...DeviceTelemetryEventProperties;
-}
+model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 
 // @doc("Properties JSON element.")
 // alias JsonProperties = {
