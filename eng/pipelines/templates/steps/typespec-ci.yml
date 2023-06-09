@@ -7,9 +7,7 @@ parameters:
 steps:
 - script: |
     RED='\033[0;31m'
-
     exit_code=0
-
     expected_npm_prefix=$(pwd)
 
     # Log commands before running
@@ -21,7 +19,7 @@ steps:
 
     if [ "$expected_npm_prefix" != "$actual_npm_prefix" ]; then
       echo -e "\n${RED}ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the root package.json"
-      echo -e "${RED}Expected npm prefix: $expected_npm_prefix\nActual npm prefix: $actual_npm_prefix\n"
+      echo -e "${RED}Expected npm prefix: $expected_npm_prefix\n${RED}Actual npm prefix: $actual_npm_prefix\n"
       exit_code=1
     fi
 
