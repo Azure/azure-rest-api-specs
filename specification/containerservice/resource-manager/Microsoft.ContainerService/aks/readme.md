@@ -37,15 +37,15 @@ openapi-type: arm
 tag: package-2023-05
 ```
 
-
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - stable/2023-05-01/managedClusters.json
 ```
+
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
