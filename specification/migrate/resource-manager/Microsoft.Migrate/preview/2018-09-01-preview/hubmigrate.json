@@ -20,21 +20,6 @@
     "application/json"
   ],
   "parameters": {
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "description": "Azure Subscription Id in which migrate project was created.",
-      "type": "string",
-      "in": "path",
-      "required": true
-    },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "description": "Name of the Azure Resource Group that migrate project is part of.",
-      "type": "string",
-      "in": "path",
-      "x-ms-parameter-location": "method",
-      "required": true
-    },
     "migrateProjectName": {
       "name": "migrateProjectName",
       "description": "Name of the Azure Migrate project.",
@@ -160,10 +145,10 @@
         "operationId": "DatabaseInstancesController_ListDatabaseInstances",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -196,6 +181,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "x-ms-examples": {
           "DatabaseInstances_List": {
             "$ref": "./examples/DatabaseInstances_List.json"
@@ -212,10 +200,10 @@
         "operationId": "DatabaseInstancesController_GetDatabaseInstance",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -261,10 +249,10 @@
         "operationId": "DatabasesController_ListDatabases",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -313,10 +301,10 @@
         "operationId": "DatabasesController_GetDatabase",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -337,6 +325,12 @@
             "schema": {
               "$ref": "#/definitions/Database"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -356,10 +350,10 @@
         "operationId": "EventsController_ListEvents",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -405,10 +399,10 @@
         "operationId": "EventsController_GetEvent",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -450,10 +444,10 @@
         "operationId": "EventsController_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -496,10 +490,10 @@
         "operationId": "MachinesController_ListMachines",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -545,10 +539,10 @@
         "operationId": "MachinesController_GetMachine",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -591,10 +585,10 @@
         "operationId": "MigrateProjectsController_GetMigrateProject",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -632,10 +626,10 @@
         "operationId": "MigrateProjectsController_PutMigrateProject",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -686,10 +680,10 @@
         "operationId": "MigrateProjectsController_PatchMigrateProject",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -740,10 +734,10 @@
         "operationId": "MigrateProjectsController_DeleteMigrateProject",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -786,10 +780,10 @@
         "operationId": "MigrateProjectsController_RegisterTool",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -841,10 +835,10 @@
         "operationId": "MigrateProjectsController_RefreshMigrateProjectSummary",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -893,10 +887,10 @@
         "operationId": "SolutionsController_GetSolution",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -937,10 +931,10 @@
         "operationId": "SolutionsController_PutSolution",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -988,13 +982,13 @@
         ],
         "summary": "Update solution.",
         "description": "Update a solution with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "SolutionsController_PatchSolution",
+        "operationId": "SolutionsController_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1045,10 +1039,10 @@
         "operationId": "SolutionsController_DeleteSolution",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1094,10 +1088,10 @@
         "operationId": "SolutionsController_ListSolutions",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1137,10 +1131,10 @@
         "operationId": "SolutionsController_GetConfig",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1183,10 +1177,10 @@
         "operationId": "SolutionsController_CleanupSolutionData",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1229,7 +1223,7 @@
         "operationId": "SubscriptionController_DeleteSubscriptionNotification",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1257,7 +1251,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/VirtualDesktopUsers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/virtualDesktopUsers": {
       "get": {
         "tags": [
           "VirtualDesktopUserController"
@@ -1266,10 +1260,10 @@
         "operationId": "VirtualDesktopUserController_ListVirtualDesktopUsers",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1306,7 +1300,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/VirtualDesktopUsers/{virtualDesktopUserName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/virtualDesktopUsers/{virtualDesktopUserName}": {
       "get": {
         "tags": [
           "VirtualDesktopUserController"
@@ -1315,10 +1309,10 @@
         "operationId": "VirtualDesktopUserController_GetVirtualDesktopUser",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1352,7 +1346,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/webServers": {
       "get": {
         "tags": [
           "WebServersController"
@@ -1361,10 +1355,10 @@
         "operationId": "WebServersController_ListWebServers",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1401,7 +1395,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebServers/{webServerId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/webServers/{webServerId}": {
       "get": {
         "tags": [
           "WebServersController"
@@ -1410,10 +1404,10 @@
         "operationId": "WebServersController_GetWebServer",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1447,19 +1441,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebSites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/webSites": {
       "get": {
         "tags": [
           "WebSitesController"
         ],
         "summary": "Gets a list of websites in the migrate project.",
-        "operationId": "WebSitesController_EnumerateWebSites",
+        "operationId": "WebSitesController_ListWebSites",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1496,7 +1490,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebSites/{webSiteName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/webSites/{webSiteName}": {
       "get": {
         "tags": [
           "WebSitesController"
@@ -1505,10 +1499,10 @@
         "operationId": "WebSitesController_GetWebSite",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -1544,14 +1538,22 @@
     },
     "/providers/Microsoft.Migrate/operations": {
       "get": {
+        "tags": [
+          "Operations"
+        ],
         "summary": "Get list of operations supported in the API.",
         "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
         "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK. Returns list of operations.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OperationResultList"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1563,12 +1565,7 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        }
+        }        
       }
     }
   },

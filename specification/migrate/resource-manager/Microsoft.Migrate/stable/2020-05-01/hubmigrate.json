@@ -36,7 +36,8 @@
       "in": "path",
       "x-ms-parameter-location": "method",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     }
   },
   "securityDefinitions": {
@@ -451,7 +452,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/privateEndpointConnectionProxies/{pecProxyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/privateEndPointConnectionProxies/{pecProxyName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
@@ -474,7 +475,8 @@
             "description": "Private link proxy name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -507,7 +509,7 @@
         ],
         "summary": "Create or update private endpoint proxy.",
         "description": "Create a private endpoint proxy with specified name. If a private endpoint already exists, update it.",
-        "operationId": "PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -523,7 +525,8 @@
             "description": "Private endpoint proxy name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -581,7 +584,8 @@
             "description": "Private endpoint proxy name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -609,7 +613,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/privateEndpointConnectionProxies/{pecProxyName}/Validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/privateEndPointConnectionProxies/{pecProxyName}/Validate": {
       "post": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
@@ -632,7 +636,8 @@
             "description": "Private link proxy name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -858,18 +863,26 @@
     },
     "/providers/Microsoft.Migrate/operations": {
       "get": {
+        "tags": [
+          "Operations"
+        ],
         "summary": "Get list of operations supported in the API.",
         "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
         "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK. Returns list of operations.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AvailableOperations"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
@@ -877,11 +890,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
         }
       }
     }
