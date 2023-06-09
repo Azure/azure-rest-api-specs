@@ -20,7 +20,7 @@ namespace EventGrid.HealthCareApis {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.")
   model HealthcareDicomImageCreatedEventData {
     @doc("Data partition name")
-    partitionName: string;
+    partitionName?: string;
 
     @doc("Unique identifier for the Study")
     imageStudyInstanceUid?: string;
@@ -41,7 +41,7 @@ namespace EventGrid.HealthCareApis {
   @doc("Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.")
   model HealthcareDicomImageDeletedEventData {
     @doc("Data partition name")
-    partitionName: string;
+    partitionName?: string;
 
     @doc("Unique identifier for the Study")
     imageStudyInstanceUid?: string;
@@ -73,7 +73,7 @@ namespace EventGrid.HealthCareApis {
     @doc("Unique identifier for the DICOM Image")
     imageSopInstanceUid?: string;
 
-    @doc("Host name of the DICOM account for this image.")
+    @doc("Domain name of the DICOM account for this image.")
     serviceHostName?: string;
 
     @doc("Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service.")
