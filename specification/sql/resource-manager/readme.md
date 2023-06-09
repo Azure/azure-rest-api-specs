@@ -31,15 +31,6 @@ tag: package-preview-2023-05
 
 The following packages may be composed from multiple api-versions.
 
-### Tag: package-preview-2023-05
-
-These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-05'
-input-file:
-  - Microsoft.Sql/preview/2023-05-01-preview/JobAgents.json
-```
-
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
@@ -1036,7 +1027,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FirewallRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/InstancePools.json
-- ./Microsoft.Sql/preview/2023-05-01-preview/JobAgents.json
+- ./Microsoft.Sql/preview/2023-02-01-preview/JobAgents.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobCredentials.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobExecutions.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/Jobs.json
