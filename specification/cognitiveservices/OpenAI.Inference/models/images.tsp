@@ -13,19 +13,19 @@ enum ImageSize {
     `1024x1024`,
 }
 
-@doc("Defines the request to create an operation to generate images.")
+@doc("Represents the request data used to generate images.")
 model ImageRequest {
-    @doc("A text description of the desired image(s).")
+    @doc("A description of the desired images.")
     prompt: string;
 
-    @doc("The number of images to generate.")
-    n: int32;
+    @doc("The number of images to generate (defaults to 1).")
+    n?: int32;
 
-    @doc("The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.")
-    size: ImageSize;
+    @doc("The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).")
+    size?: ImageSize;
 
     @doc("A unique identifier representing your end-user, which can help to monitor and detect abuse.")
-    user: string;
+    user?: string;
 }
 
 @doc("The image url if successful, and an error otherwise.")
@@ -34,7 +34,7 @@ model ImageResult {
     url: string;
 
     @doc("The error if the operation failed.")
-    error: Foundations.Error;
+    error?: Foundations.Error;
 }
 
 @doc("The result of the operation if the operation succeeded.")
