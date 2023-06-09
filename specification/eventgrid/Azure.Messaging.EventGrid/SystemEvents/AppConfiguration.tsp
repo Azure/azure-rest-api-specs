@@ -31,7 +31,7 @@ namespace EventGrid.AppConfiguration {
     label?: string;
 
     @doc(
-      "The etag representing the key-value that was deleted..")
+      "The etag representing the key-value that was deleted.")
     etag?: string;
 
     @doc("The sync token representing the server state after the event.")
