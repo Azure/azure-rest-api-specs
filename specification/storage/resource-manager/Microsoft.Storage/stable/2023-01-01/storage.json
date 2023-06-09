@@ -3095,6 +3095,11 @@
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
         },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "x-ms-client-name": "DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
+        },
         "allowBlobPublicAccess": {
           "type": "boolean",
           "x-ms-client-name": "AllowBlobPublicAccess",
@@ -3307,6 +3312,16 @@
           "x-ms-client-flatten": false,
           "$ref": "#/definitions/StorageAccountInternetEndpoints",
           "description": "Gets the internet routing storage endpoints"
+        },
+        "ipv4Endpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountIpv4Endpoints",
+          "description": "Gets the ipv4 storage endpoints."
+        },
+        "ipv6Endpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountIpv6Endpoints",
+          "description": "Gets the ipv6 storage endpoints."
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object."
@@ -3371,6 +3386,96 @@
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, file, web or dfs object via a internet routing endpoint."
     },
+    "StorageAccountIpv4Endpoints": {
+      "properties": {
+        "blob": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the blob endpoint."
+        },
+        "queue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the queue endpoint."
+        },
+        "table": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the table endpoint."
+        },
+        "file": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the file endpoint."
+        },
+        "web": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the web endpoint."
+        },
+        "dfs": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the dfs endpoint."
+        },
+        "microsoftEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountMicrosoftEndpoints",
+          "description": "Gets the microsoft routing storage endpoints."
+        },
+        "internetEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountInternetEndpoints",
+          "description": "Gets the internet routing storage endpoints"
+        }
+      },
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via an IPv4 endpoint."
+    },
+    "StorageAccountIpv6Endpoints": {
+      "properties": {
+        "blob": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the blob endpoint."
+        },
+        "queue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the queue endpoint."
+        },
+        "table": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the table endpoint."
+        },
+        "file": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the file endpoint."
+        },
+        "web": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the web endpoint."
+        },
+        "dfs": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the dfs endpoint."
+        },
+        "microsoftEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountMicrosoftEndpoints",
+          "description": "Gets the microsoft routing storage endpoints."
+        },
+        "internetEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountInternetEndpoints",
+          "description": "Gets the internet routing storage endpoints"
+        }
+      },
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via an IPv6 endpoint."
+    },
     "GeoReplicationStats": {
       "properties": {
         "status": {
@@ -3425,6 +3530,23 @@
         }
       },
       "description": "Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing"
+    },
+    "DualStackEndpointPreference": {
+      "properties": {
+        "defaultDualStackEndpoints": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether dual-stack storage endpoints are to be published."
+        },
+        "publishIpv4Endpoint": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether IPv4 storage endpoints are to be published."
+        },
+        "publishIpv6Endpoint": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether IPv6 storage endpoints are to be published."
+        }
+      },
+      "description": "Dual-stack endpoint preference defines the type of network, either dualstack/ipv4/ipv6 endpoints are going to be published."
     },
     "ImmutableStorageAccount": {
       "type": "object",
@@ -3749,6 +3871,11 @@
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
         },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "x-ms-client-name": "DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
+        },
         "blobRestoreStatus": {
           "$ref": "#/definitions/BlobRestoreStatus",
           "x-ms-client-name": "BlobRestoreStatus",
@@ -4064,6 +4191,11 @@
           "$ref": "#/definitions/RoutingPreference",
           "x-ms-client-name": "RoutingPreference",
           "description": "Maintains information about the network routing choice opted by the user for data transfer"
+        },
+        "dualStackEndpointPreference": {
+          "$ref": "#/definitions/DualStackEndpointPreference",
+          "x-ms-client-name": "DualStackEndpointPreference",
+          "description": "Maintains information about the Internet protocol opted by the user."
         },
         "allowBlobPublicAccess": {
           "type": "boolean",
