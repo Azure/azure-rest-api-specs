@@ -35,7 +35,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     },
     "databaseName": {
       "name": "databaseName",
@@ -61,7 +62,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     },
     "eventName": {
       "name": "eventName",
@@ -102,7 +104,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     },
     "webServerId": {
       "name": "webServerId",
@@ -118,7 +121,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     }
   },
   "securityDefinitions": {
@@ -954,7 +958,7 @@
           "SolutionsController"
         ],
         "summary": "Creates a solution in the migrate project.",
-        "operationId": "SolutionsController_PutSolution",
+        "operationId": "SolutionsController_Create",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1425,11 +1429,6 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Solutions_CleanupData": {
-            "$ref": "./examples/MigrateProjects_EnumerateWebServers.json"
-          }
         }
       }
     },
@@ -1473,7 +1472,7 @@
         },
         "deprecated": false,
         "x-ms-examples": {
-          "Solutions_CleanupData": {
+          "WebServersController_GetWebServer": {
             "$ref": "./examples/MigrateProjects_GetWebServer.json"
           }
         }
@@ -1525,7 +1524,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Solutions_CleanupData": {
+          "WebSitesController_ListWebSites": {
             "$ref": "./examples/MigrateProjects_EnumerateWebSites.json"
           }
         }
@@ -2116,6 +2115,10 @@
             "Untyped",
             "Path"
           ],
+          "x-ms-enum": {
+            "name": "typeKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         }
@@ -2256,6 +2259,10 @@
             "EntityContainer",
             "Function"
           ],
+          "x-ms-enum": {
+            "name": "schemaElementKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -2316,6 +2323,10 @@
             "EntityContainer",
             "Function"
           ],
+          "x-ms-enum": {
+            "name": "schemaElementKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -2389,6 +2400,10 @@
             "EnumMember",
             "AnnotationPath"
           ],
+          "x-ms-enum": {
+            "name": "expressionKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         }
@@ -2420,6 +2435,10 @@
             "Filter",
             "Compute"
           ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         }
@@ -2469,6 +2488,10 @@
             "In",
             "CollectionConstant"
           ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         }
@@ -2529,6 +2552,10 @@
             "EntityContainer",
             "Function"
           ],
+          "x-ms-enum": {
+            "name": "schemaElementKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -2578,6 +2605,10 @@
             "EnumMember",
             "AnnotationPath"
           ],
+          "x-ms-enum": {
+            "name": "expressionKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         }
@@ -2594,6 +2625,10 @@
             "FunctionImport",
             "Singleton"
           ],
+          "x-ms-enum": {
+            "name": "containerElementKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -2619,6 +2654,10 @@
             "None",
             "Cascade"
           ],
+          "x-ms-enum": {
+            "name": "onDelete",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -2636,6 +2675,10 @@
             "Structural",
             "Navigation"
           ],
+          "x-ms-enum": {
+            "name": "propertyKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -2707,6 +2750,10 @@
             "Untyped",
             "Path"
           ],
+          "x-ms-enum": {
+            "name": "typeKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         }
@@ -2734,6 +2781,10 @@
             "Structural",
             "Navigation"
           ],
+          "x-ms-enum": {
+            "name": "propertyKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -2764,6 +2815,10 @@
             "Structural",
             "Navigation"
           ],
+          "x-ms-enum": {
+            "name": "propertyKind",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -3169,6 +3224,10 @@
               "DataMigrationAssistant",
               "DatabaseMigrationService"
             ],
+            "x-ms-enum": {
+              "name": "registeredTools",
+              "modelAsString": true
+            },
             "type": "string"
           }
         },
@@ -3233,6 +3292,10 @@
             "Completed",
             "Failed"
           ],
+          "x-ms-enum": {
+            "name": "refreshSummaryState",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "lastSummaryRefreshedTime": {
@@ -3270,6 +3333,10 @@
             "DataMigrationAssistant",
             "DatabaseMigrationService"
           ],
+          "x-ms-enum": {
+            "name": "tool",
+            "modelAsString": true
+          },
           "type": "string"
         }
       }
@@ -3304,6 +3371,10 @@
             "Servers",
             "Databases"
           ],
+          "x-ms-enum": {
+            "name": "goal",
+            "modelAsString": true
+          },
           "type": "string"
         }
       }
@@ -3358,6 +3429,10 @@
             "DataMigrationAssistant",
             "DatabaseMigrationService"
           ],
+          "x-ms-enum": {
+            "name": "tool",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "purpose": {
@@ -3367,6 +3442,10 @@
             "Assessment",
             "Migration"
           ],
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "goal": {
@@ -3375,6 +3454,10 @@
             "Servers",
             "Databases"
           ],
+          "x-ms-enum": {
+            "name": "goal",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "status": {
@@ -3383,6 +3466,10 @@
             "Inactive",
             "Active"
           ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "cleanupState": {
@@ -3394,6 +3481,10 @@
             "Completed",
             "Failed"
           ],
+          "x-ms-enum": {
+            "name": "cleanupState",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "summary": {
