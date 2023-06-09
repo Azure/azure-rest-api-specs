@@ -187,7 +187,7 @@ csharp:
 
 ## Python
 
-See configuration in [readme.pyhton.md](./readme.python.md)
+See configuration in [readme.Python.md](./readme.python.md)
 
 ## Go
 
