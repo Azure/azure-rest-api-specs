@@ -101,27 +101,34 @@ namespace EventGrid.MediaServices {
 
   @doc("Details of JobOutput errors.")
   model MediaJobError {
+    @visibility("read")
     @doc("Error code describing the error.")
     code?: MediaJobErrorCode;
 
+    @visibility("read")
     @doc("A human-readable language-dependent representation of the error.")
     message?: string;
 
+    @visibility("read")
     @doc("Helps with categorization of errors.")
     category?: MediaJobErrorCategory;
 
+    @visibility("read")
     @doc("Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal.")
     retry?: MediaJobRetry;
 
+    @visibility("read")
     @doc("An array of details about specific errors that led to this reported error.")
     details?: MediaJobErrorDetail[];
   }
 
   @doc("Details of JobOutput errors.")
   model MediaJobErrorDetail {
+    @visibility("read")
     @doc("Code describing the error detail.")
     code?: string;
 
+    @visibility("read")
     @doc("A human-readable representation of the error.")
     message?: string;
   }
@@ -149,7 +156,8 @@ namespace EventGrid.MediaServices {
 
   @doc("The event data for a Job output asset.")
   @discriminator("#Microsoft.Media.JobOutputAsset")
-  model MediaJobOutputAsset {
+  model MediaJobOutputAsset{
+    ...MediaJobOutput;
     @doc("Gets the Job output asset name.")
     assetName?: string;
   }
@@ -265,188 +273,243 @@ namespace EventGrid.MediaServices {
 
   @doc("Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event.")
   model MediaLiveEventIncomingStreamReceivedEventData {
+    @visibility("read")
     @doc("Gets the ingest URL provided by the live event.")
     ingestUrl?: string;
 
+    @visibility("read")
     @doc("Gets the type of the track (Audio / Video).")
     trackType?: string;
 
+    @visibility("read")
     @doc("Gets the track name.")
     trackName?: string;
 
+    @visibility("read")
     @doc("Gets the bitrate of the track.")
     bitrate?: int64;
 
+    @visibility("read")
     @doc("Gets the remote IP.")
     encoderIp?: string;
 
+    @visibility("read")
     @doc("Gets the remote port.")
     encoderPort?: string;
 
+    @visibility("read")
     @doc("Gets the first timestamp of the data chunk received.")
     timestamp?: string;
 
+    @visibility("read")
     @doc("Gets the duration of the first data chunk.")
     duration?: string;
 
+    @visibility("read")
     @doc("Gets the timescale in which timestamp is represented.")
     timescale?: string;
   }
 
   @doc("Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event.")
   model MediaLiveEventIncomingStreamsOutOfSyncEventData {
+    @visibility("read")
     @doc("Gets the minimum last timestamp received.")
     minLastTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the type of stream with minimum last timestamp.")
     typeOfStreamWithMinLastTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the maximum timestamp among all the tracks (audio or video).")
     maxLastTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the type of stream with maximum last timestamp.")
     typeOfStreamWithMaxLastTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the timescale in which \"MinLastTimestamp\" is represented.")
     timescaleOfMinLastTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the timescale in which \"MaxLastTimestamp\" is represented.")
     timescaleOfMaxLastTimestamp?: string;
   }
 
   @doc("Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event.")
   model MediaLiveEventIncomingVideoStreamsOutOfSyncEventData {
+    @visibility("read")
     @doc("Gets the first timestamp received for one of the quality levels.")
     firstTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the duration of the data chunk with first timestamp.")
     firstDuration?: string;
 
+    @visibility("read")
     @doc("Gets the timestamp received for some other quality levels.")
     secondTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the duration of the data chunk with second timestamp.")
     secondDuration?: string;
 
+    @visibility("read")
     @doc("Gets the timescale in which both the timestamps and durations are represented.")
     timescale?: string;
   }
 
   @doc("Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event.")
   model MediaLiveEventIncomingDataChunkDroppedEventData {
+    @visibility("read")
     @doc("Gets the timestamp of the data chunk dropped.")
     timestamp?: string;
 
+    @visibility("read")
     @doc("Gets the type of the track (Audio / Video).")
     trackType?: string;
 
+    @visibility("read")
     @doc("Gets the bitrate of the track.")
     bitrate?: int64;
 
+    @visibility
     @doc("Gets the timescale of the Timestamp.")
     timescale?: string;
 
+    @visibility("read")
     @doc("Gets the result code for fragment drop operation.")
     resultCode?: string;
 
+    @visibility("read")
     @doc("Gets the name of the track for which fragment is dropped.")
     trackName?: string;
   }
 
   @doc("Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event.")
   model MediaLiveEventIngestHeartbeatEventData {
+    @visibility("read")
     @doc("Gets the type of the track (Audio / Video).")
     trackType?: string;
 
+    @visibility("read")
     @doc("Gets the track name.")
     trackName?: string;
 
+    @visibility("read")
     @doc("Gets the Live Transcription language.")
     transcriptionLanguage?: string;
 
+    @visibility("read")
     @doc("Gets the Live Transcription state.")
     transcriptionState?: string;
 
+    @visibility("read")
     @doc("Gets the bitrate of the track.")
     bitrate?: int64;
 
+    @visibility("read")
     @doc("Gets the incoming bitrate.")
     incomingBitrate?: int64;
 
+    @visibility("read")
     @doc("Gets the track ingest drift value.")
     ingestDriftValue?: string;
 
+    @visibility("read")
     @doc("Gets the arrival UTC time of the last fragment.")
     lastFragmentArrivalTime?: string;
 
+    @visibility("read")
     @doc("Gets the last timestamp.")
     lastTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the timescale of the last timestamp.")
     timescale?: string;
 
+    @visibility("read")
     @doc("Gets the fragment Overlap count.")
     overlapCount?: int64;
 
+    @visibility("read")
     @doc("Gets the fragment Discontinuity count.")
     discontinuityCount?: int64;
 
+    @visibility("read")
     @doc("Gets Non increasing count.")
     nonincreasingCount?: int64;
 
+    @visibility("read")
     @doc("Gets a value indicating whether unexpected bitrate is present or not.")
     unexpectedBitrate?: boolean;
 
+    @visibility("read")
     @doc("Gets the state of the live event.")
     state?: string;
 
+    @visibility("read")
     @doc("Gets a value indicating whether preview is healthy or not.")
     healthy?: boolean;
   }
 
   @doc("Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event.")
   model MediaLiveEventTrackDiscontinuityDetectedEventData {
+    @visibility("read")
     @doc("Gets the type of the track (Audio / Video).")
     trackType?: string;
 
+    @visibility("read")
     @doc("Gets the track name.")
     trackName?: string;
 
+    @visibility("read")
     @doc("Gets the bitrate.")
     bitrate?: int64;
 
+    @visibility("read")
     @doc("Gets the timestamp of the previous fragment.")
     previousTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the timestamp of the current fragment.")
     newTimestamp?: string;
 
+    @visibility("read")
     @doc("Gets the timescale in which both timestamps and discontinuity gap are represented.")
     timescale?: string;
 
+    @visibility("read")
     @doc("Gets the discontinuity gap between PreviousTimestamp and NewTimestamp.")
     discontinuityGap?: string;
   }
 
   @doc("Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event.")
   model MediaLiveEventChannelArchiveHeartbeatEventData {
+    @visibility("read")
     @doc("Gets the channel latency in ms.")
     channelLatencyMs: string;
 
+    @visibility("read")
     @doc("Gets the latency result code.")
     latencyResultCode: string;
   }
 
   alias MediaLiveEventConnectionBaseData = {
+    @visibility("read")
     @doc("Gets the ingest URL provided by the live event.")
     ingestUrl?: string;
 
+    @visibility("read")
     @doc("Gets the stream Id.")
     streamId?: string;
 
+    @visibility("read")
     @doc("Gets the remote IP.")
     encoderIp?: string;
 
+    @visibility("read")
     @doc("Gets the remote port.")
     encoderPort?: string;
   };

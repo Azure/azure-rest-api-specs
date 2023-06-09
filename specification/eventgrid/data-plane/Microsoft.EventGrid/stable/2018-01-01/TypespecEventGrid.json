@@ -4198,19 +4198,23 @@
       "properties": {
         "code": {
           "$ref": "#/definitions/MediaServices.MediaJobErrorCode",
-          "description": "Error code describing the error."
+          "description": "Error code describing the error.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "A human-readable language-dependent representation of the error."
+          "description": "A human-readable language-dependent representation of the error.",
+          "readOnly": true
         },
         "category": {
           "$ref": "#/definitions/MediaServices.MediaJobErrorCategory",
-          "description": "Helps with categorization of errors."
+          "description": "Helps with categorization of errors.",
+          "readOnly": true
         },
         "retry": {
           "$ref": "#/definitions/MediaServices.MediaJobRetry",
-          "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal."
+          "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
@@ -4219,7 +4223,8 @@
           },
           "x-ms-identifiers": [],
           "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "MediaServices.MediaJobErrorDetail[]"
+          "x-typespec-name": "MediaServices.MediaJobErrorDetail[]",
+          "readOnly": true
         }
       },
       "description": "Details of JobOutput errors."
@@ -4349,11 +4354,13 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Code describing the error detail."
+          "description": "Code describing the error detail.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "A human-readable representation of the error."
+          "description": "A human-readable representation of the error.",
+          "readOnly": true
         }
       },
       "description": "Details of JobOutput errors."
@@ -4455,6 +4462,28 @@
           "type": "string",
           "description": "Discriminator property for MediaJobOutputAsset."
         },
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types.",
+          "x-ms-client-name": "OdataType"
+        },
+        "error": {
+          "$ref": "#/definitions/MediaServices.MediaJobError",
+          "description": "Gets the Job output error."
+        },
+        "label": {
+          "type": "string",
+          "description": "Gets the Job output label."
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the Job output progress."
+        },
+        "state": {
+          "$ref": "#/definitions/MediaServices.MediaJobState",
+          "description": "Gets the Job output state."
+        },
         "assetName": {
           "type": "string",
           "description": "Gets the Job output asset name."
@@ -4463,7 +4492,9 @@
       "description": "The event data for a Job output asset.",
       "discriminator": "#Microsoft.Media.JobOutputAsset",
       "required": [
-        "#Microsoft.Media.JobOutputAsset"
+        "#Microsoft.Media.JobOutputAsset",
+        "progress",
+        "state"
       ]
     },
     "MediaServices.MediaJobOutputCanceledEventData": {
@@ -4776,11 +4807,13 @@
       "properties": {
         "channelLatencyMs": {
           "type": "string",
-          "description": "Gets the channel latency in ms."
+          "description": "Gets the channel latency in ms.",
+          "readOnly": true
         },
         "latencyResultCode": {
           "type": "string",
-          "description": "Gets the latency result code."
+          "description": "Gets the latency result code.",
+          "readOnly": true
         }
       },
       "description": "Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event.",
@@ -4794,19 +4827,23 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
         },
         "streamId": {
           "type": "string",
-          "description": "Gets the stream Id."
+          "description": "Gets the stream Id.",
+          "readOnly": true
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP."
+          "description": "Gets the remote IP.",
+          "readOnly": true
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port."
+          "description": "Gets the remote port.",
+          "readOnly": true
         },
         "resultCode": {
           "type": "string",
@@ -4820,19 +4857,23 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
         },
         "streamId": {
           "type": "string",
-          "description": "Gets the stream Id."
+          "description": "Gets the stream Id.",
+          "readOnly": true
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP."
+          "description": "Gets the remote IP.",
+          "readOnly": true
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port."
+          "description": "Gets the remote port.",
+          "readOnly": true
         }
       },
       "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event."
@@ -4842,19 +4883,23 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
         },
         "streamId": {
           "type": "string",
-          "description": "Gets the stream Id."
+          "description": "Gets the stream Id.",
+          "readOnly": true
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP."
+          "description": "Gets the remote IP.",
+          "readOnly": true
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port."
+          "description": "Gets the remote port.",
+          "readOnly": true
         },
         "resultCode": {
           "type": "string",
@@ -4868,16 +4913,19 @@
       "properties": {
         "timestamp": {
           "type": "string",
-          "description": "Gets the timestamp of the data chunk dropped."
+          "description": "Gets the timestamp of the data chunk dropped.",
+          "readOnly": true
         },
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate of the track."
+          "description": "Gets the bitrate of the track.",
+          "readOnly": true
         },
         "timescale": {
           "type": "string",
@@ -4885,11 +4933,13 @@
         },
         "resultCode": {
           "type": "string",
-          "description": "Gets the result code for fragment drop operation."
+          "description": "Gets the result code for fragment drop operation.",
+          "readOnly": true
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the name of the track for which fragment is dropped."
+          "description": "Gets the name of the track for which fragment is dropped.",
+          "readOnly": true
         }
       },
       "description": "Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event."
@@ -4899,40 +4949,49 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event."
+          "description": "Gets the ingest URL provided by the live event.",
+          "readOnly": true
         },
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the track name."
+          "description": "Gets the track name.",
+          "readOnly": true
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate of the track."
+          "description": "Gets the bitrate of the track.",
+          "readOnly": true
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP."
+          "description": "Gets the remote IP.",
+          "readOnly": true
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port."
+          "description": "Gets the remote port.",
+          "readOnly": true
         },
         "timestamp": {
           "type": "string",
-          "description": "Gets the first timestamp of the data chunk received."
+          "description": "Gets the first timestamp of the data chunk received.",
+          "readOnly": true
         },
         "duration": {
           "type": "string",
-          "description": "Gets the duration of the first data chunk."
+          "description": "Gets the duration of the first data chunk.",
+          "readOnly": true
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale in which timestamp is represented."
+          "description": "Gets the timescale in which timestamp is represented.",
+          "readOnly": true
         }
       },
       "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event."
@@ -4942,27 +5001,33 @@
       "properties": {
         "minLastTimestamp": {
           "type": "string",
-          "description": "Gets the minimum last timestamp received."
+          "description": "Gets the minimum last timestamp received.",
+          "readOnly": true
         },
         "typeOfStreamWithMinLastTimestamp": {
           "type": "string",
-          "description": "Gets the type of stream with minimum last timestamp."
+          "description": "Gets the type of stream with minimum last timestamp.",
+          "readOnly": true
         },
         "maxLastTimestamp": {
           "type": "string",
-          "description": "Gets the maximum timestamp among all the tracks (audio or video)."
+          "description": "Gets the maximum timestamp among all the tracks (audio or video).",
+          "readOnly": true
         },
         "typeOfStreamWithMaxLastTimestamp": {
           "type": "string",
-          "description": "Gets the type of stream with maximum last timestamp."
+          "description": "Gets the type of stream with maximum last timestamp.",
+          "readOnly": true
         },
         "timescaleOfMinLastTimestamp": {
           "type": "string",
-          "description": "Gets the timescale in which \"MinLastTimestamp\" is represented."
+          "description": "Gets the timescale in which \"MinLastTimestamp\" is represented.",
+          "readOnly": true
         },
         "timescaleOfMaxLastTimestamp": {
           "type": "string",
-          "description": "Gets the timescale in which \"MaxLastTimestamp\" is represented."
+          "description": "Gets the timescale in which \"MaxLastTimestamp\" is represented.",
+          "readOnly": true
         }
       },
       "description": "Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event."
@@ -4972,23 +5037,28 @@
       "properties": {
         "firstTimestamp": {
           "type": "string",
-          "description": "Gets the first timestamp received for one of the quality levels."
+          "description": "Gets the first timestamp received for one of the quality levels.",
+          "readOnly": true
         },
         "firstDuration": {
           "type": "string",
-          "description": "Gets the duration of the data chunk with first timestamp."
+          "description": "Gets the duration of the data chunk with first timestamp.",
+          "readOnly": true
         },
         "secondTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp received for some other quality levels."
+          "description": "Gets the timestamp received for some other quality levels.",
+          "readOnly": true
         },
         "secondDuration": {
           "type": "string",
-          "description": "Gets the duration of the data chunk with second timestamp."
+          "description": "Gets the duration of the data chunk with second timestamp.",
+          "readOnly": true
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale in which both the timestamps and durations are represented."
+          "description": "Gets the timescale in which both the timestamps and durations are represented.",
+          "readOnly": true
         }
       },
       "description": "Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event."
@@ -4998,72 +5068,88 @@
       "properties": {
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the track name."
+          "description": "Gets the track name.",
+          "readOnly": true
         },
         "transcriptionLanguage": {
           "type": "string",
-          "description": "Gets the Live Transcription language."
+          "description": "Gets the Live Transcription language.",
+          "readOnly": true
         },
         "transcriptionState": {
           "type": "string",
-          "description": "Gets the Live Transcription state."
+          "description": "Gets the Live Transcription state.",
+          "readOnly": true
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate of the track."
+          "description": "Gets the bitrate of the track.",
+          "readOnly": true
         },
         "incomingBitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the incoming bitrate."
+          "description": "Gets the incoming bitrate.",
+          "readOnly": true
         },
         "ingestDriftValue": {
           "type": "string",
-          "description": "Gets the track ingest drift value."
+          "description": "Gets the track ingest drift value.",
+          "readOnly": true
         },
         "lastFragmentArrivalTime": {
           "type": "string",
-          "description": "Gets the arrival UTC time of the last fragment."
+          "description": "Gets the arrival UTC time of the last fragment.",
+          "readOnly": true
         },
         "lastTimestamp": {
           "type": "string",
-          "description": "Gets the last timestamp."
+          "description": "Gets the last timestamp.",
+          "readOnly": true
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale of the last timestamp."
+          "description": "Gets the timescale of the last timestamp.",
+          "readOnly": true
         },
         "overlapCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the fragment Overlap count."
+          "description": "Gets the fragment Overlap count.",
+          "readOnly": true
         },
         "discontinuityCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the fragment Discontinuity count."
+          "description": "Gets the fragment Discontinuity count.",
+          "readOnly": true
         },
         "nonincreasingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets Non increasing count."
+          "description": "Gets Non increasing count.",
+          "readOnly": true
         },
         "unexpectedBitrate": {
           "type": "boolean",
-          "description": "Gets a value indicating whether unexpected bitrate is present or not."
+          "description": "Gets a value indicating whether unexpected bitrate is present or not.",
+          "readOnly": true
         },
         "state": {
           "type": "string",
-          "description": "Gets the state of the live event."
+          "description": "Gets the state of the live event.",
+          "readOnly": true
         },
         "healthy": {
           "type": "boolean",
-          "description": "Gets a value indicating whether preview is healthy or not."
+          "description": "Gets a value indicating whether preview is healthy or not.",
+          "readOnly": true
         }
       },
       "description": "Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event."
@@ -5073,32 +5159,39 @@
       "properties": {
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video)."
+          "description": "Gets the type of the track (Audio / Video).",
+          "readOnly": true
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the track name."
+          "description": "Gets the track name.",
+          "readOnly": true
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate."
+          "description": "Gets the bitrate.",
+          "readOnly": true
         },
         "previousTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp of the previous fragment."
+          "description": "Gets the timestamp of the previous fragment.",
+          "readOnly": true
         },
         "newTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp of the current fragment."
+          "description": "Gets the timestamp of the current fragment.",
+          "readOnly": true
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale in which both timestamps and discontinuity gap are represented."
+          "description": "Gets the timescale in which both timestamps and discontinuity gap are represented.",
+          "readOnly": true
         },
         "discontinuityGap": {
           "type": "string",
-          "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp."
+          "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp.",
+          "readOnly": true
         }
       },
       "description": "Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event."
