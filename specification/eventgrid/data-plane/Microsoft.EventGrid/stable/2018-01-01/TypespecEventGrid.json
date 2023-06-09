@@ -3501,31 +3501,13 @@
     },
     "IoTHub.IotHubDeviceTelemetryEventData": {
       "type": "object",
-      "properties": {
-        "body": {
-          "type": "object",
-          "additionalProperties": true,
-          "description": "The content of the message from the device.",
-          "x-typespec-name": "Record<unknown>"
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
-          "x-typespec-name": "Record<string>"
-        },
-        "systemProperties": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "System properties help identify contents and source of the messages.",
-          "x-typespec-name": "Record<string>"
+      "properties": {},
+      "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IoTHub.DeviceTelemetryEventProperties"
         }
-      },
-      "description": "Event data for Microsoft.Devices.DeviceTelemetry event."
+      ]
     },
     "KeyVault.KeyVaultCertificateExpiredEventData": {
       "type": "object",
