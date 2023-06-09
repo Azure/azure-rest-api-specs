@@ -9230,55 +9230,55 @@
     "AuditLogQueryRequest": {
       "type": "object",
       "properties": {
-        "Category": {
+        "category": {
           "$ref": "#/definitions/AuditCategory"
         },
-        "Guid": {
+        "guid": {
           "type": "string",
           "description": "GUID of the targe asset, glossary term or classification definition."
         },
-        "TypeName": {
+        "typeName": {
           "type": "string",
           "description": "Only applied to asset; specifies the asset type name."
         },
-        "QualifiedName": {
+        "qualifiedName": {
           "type": "string",
           "description": "Only applied to asset; specifies the asset qualified name."
         },
-        "OperationType": {
+        "operationType": {
           "$ref": "#/definitions/AuditOperationType"
         },
-        "UserId": {
+        "userId": {
           "type": "string",
           "description": "User principal name or service principle object ID."
         },
-        "Keywords": {
+        "keywords": {
           "type": "string",
           "description": "Any keywords contained in audit log old value or new value part."
         },
-        "StartTime": {
+        "startTime": {
           "type": "string",
           "description": "Start time of audit log; ISO-8601 representation. Default value is 1970-01-01T00:00:00Z."
         },
-        "EndTime": {
+        "endTime": {
           "type": "string",
           "description": "End time of audit log; ISO-8601 representation. Default value is UTC now."
         },
-        "SortBy": {
+        "sortBy": {
           "type": "string",
           "description": "Property to sort by. The value should be one of the audit log schema field. Must be used with \"SortOrder\". CreationTime is suggested."
         },
-        "SortOrder": {
+        "sortOrder": {
           "$ref": "#/definitions/AuditSortOrder"
         },
-        "PageSize": {
+        "pageSize": {
           "type": "integer",
           "format": "int32",
           "description": "The number of items we hope to return in one page. The maximum value is 1000."
         },
-        "WaterMark": {
+        "continuationToken": {
           "type": "string",
-          "description": "The continuous token to retrieve the next page."
+          "description": "The continuation token to retrieve the next page."
         }
       },
       "title": "AuditLogQueryRequest",
@@ -9340,25 +9340,25 @@
     "AuditLogQueryResponse": {
       "type": "object",
       "properties": {
-        "WaterMark": {
+        "continuationToken": {
           "type": "string",
-          "description": "The continuous token to retrieve the next page. When \"LastPage\" is false. Client uses this token in the query payload to retrieve the next page."
+          "description": "The continuation token to retrieve the next page. When \"lastPage\" is false. Client uses this token in the query payload to retrieve the next page."
         },
-        "LastPage": {
+        "lastPage": {
           "type": "boolean",
           "description": "Indicates whether it's the last page."
         },
-        "TotalResultCount": {
+        "totalResultCount": {
           "type": "integer",
           "format": "int32",
           "description": "The number of total items that qualified for the search criteria."
         },
-        "RecordCount": {
+        "recordCount": {
           "type": "integer",
           "format": "int32",
           "description": "The number of items in current page."
         },
-        "ResultData": {
+        "resultData": {
           "type": "array",
           "description": "An array of audit logs.",
           "items": {
@@ -9372,84 +9372,84 @@
     "AuditLog": {
       "type": "object",
       "properties": {
-        "Workload": {
+        "workload": {
           "type": "string",
           "description": "Log metadata. Indicates workload type of audit log."
         },
-        "RecordType": {
+        "recordType": {
           "type": "integer",
           "format": "int32",
           "description": "Log metadata. Indicates record type of audit log."
         },
-        "Id": {
+        "id": {
           "type": "string",
           "description": "Log ID."
         },
-        "CreationTime": {
+        "creationTime": {
           "type": "string",
           "description": "Timestamp when the audit log was created."
         },
-        "Operation": {
+        "operation": {
           "$ref": "#/definitions/AuditOperationType"
         },
-        "OrganizationId": {
+        "organizationId": {
           "type": "string",
           "description": "Customer tenant ID."
         },
-        "UserType": {
+        "userType": {
           "type": "integer",
           "format": "int32",
           "description": "Type of user that performed the operation."
         },
-        "UserKey": {
+        "userKey": {
           "type": "string",
           "description": "User identity."
         },
-        "UserId": {
+        "userId": {
           "type": "string",
           "description": "User principal name."
         },
-        "ClientIP": {
+        "clientIP": {
           "type": "string",
           "description": "Client IP address."
         },
-        "AccountId": {
+        "accountId": {
           "type": "string",
           "description": "Purview account ID."
         },
-        "CatalogId": {
+        "catalogId": {
           "type": "string",
           "description": "Purview catalog ID."
         },
-        "ChangeRequestId": {
+        "changeRequestId": {
           "type": "string",
           "description": "Correlation ID."
         },
-        "ObjectId": {
+        "objectId": {
           "type": "string",
           "description": "GUID of the targe asset, glossary term or classification definition."
         },
-        "ObjectName": {
+        "objectName": {
           "type": "string",
           "description": "Object name."
         },
-        "ObjectFullyQualifiedName": {
+        "objectFullyQualifiedName": {
           "type": "string",
           "description": "Object fully qualified name."
         },
-        "ObjectType": {
+        "objectType": {
           "type": "string",
           "description": "Object type name."
         },
-        "ObjectCollectionId": {
+        "objectCollectionId": {
           "type": "string",
           "description": "Object collection ID."
         },
-        "OldValue": {
+        "oldValue": {
           "type": "string",
           "description": "Old data value."
         },
-        "NewValue": {
+        "newValue": {
           "type": "string",
           "description": "New data value."
         }
