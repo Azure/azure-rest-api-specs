@@ -166,7 +166,7 @@ These settings apply only when `--tag=package-hubmigrate-2020-05` is specified o
 
 ``` yaml $(tag) == 'package-hubmigrate-2020-05'
 input-file:
-- Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
+- Microsoft.Migrate/MigrateProjects/preview/2020-05-01/hubmigrate.json
 ```
 
 ### Tag: package-hubmigrate-2018-09-preview
@@ -175,7 +175,7 @@ These settings apply only when `--tag=package-hubmigrate-2018-09-preview` is spe
 
 ``` yaml $(tag) == 'package-hubmigrate-2018-09-preview'
 input-file:
-- Microsoft.Migrate/preview/2018-09-01-preview/hubmigrate.json
+- Microsoft.Migrate/MigrateProjects/preview/2018-09-01-preview/hubmigrate.json
 ```
 
 ### Tag: package-migrate-2020-07
