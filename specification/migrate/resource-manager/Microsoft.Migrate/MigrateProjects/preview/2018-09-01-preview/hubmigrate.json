@@ -1561,6 +1561,95 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Migrate/migrateProjects": {
+      "get": {
+        "summary": "Get all migrate projects.",
+        "description": "Get all the migrate projects in the subscription.",
+        "operationId": "Projects_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProjectResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/migrateProjectsInSubscription_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects": {
+      "get": {
+        "summary": "Get all migrate projects.",
+        "description": "Get all the migrate projects in the resource group.",
+        "operationId": "Projects_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ProjectResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/migrateProjects_List.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Migrate/operations": {
       "get": {
         "tags": [
@@ -4243,6 +4332,22 @@
           "type": "string",
           "description": "Description of the operation.",
           "readOnly": true
+        }
+      }
+    },
+    "ProjectResultList": {
+      "type": "object",
+      "description": "List of projects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of projects.",
+          "items": {
+            "$ref": "#/definitions/MigrateProject"
+          }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     }

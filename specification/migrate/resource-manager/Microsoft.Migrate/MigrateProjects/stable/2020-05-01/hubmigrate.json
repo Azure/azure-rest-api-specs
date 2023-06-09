@@ -15,21 +15,6 @@
     "application/json"
   ],
   "parameters": {
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "description": "Azure Subscription Id in which project was created.",
-      "type": "string",
-      "in": "path",
-      "required": true
-    },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "description": "Name of the Azure Resource Group that project is part of.",
-      "type": "string",
-      "in": "path",
-      "x-ms-parameter-location": "method",
-      "required": true
-    },
     "migrateProjectName": {
       "name": "migrateProjectName",
       "description": "Migrate project name.",
@@ -69,10 +54,10 @@
         "operationId": "MigrateProjectsController_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -106,15 +91,15 @@
         "tags": [
           "MigrateProjectsController"
         ],
-        "summary": "Create a new project with specified settings.",
-        "description": "Create a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
+        "summary": "Create or update a new project with specified settings.",
+        "description": "Create or update a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
         "operationId": "MigrateProjectsController_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -175,10 +160,10 @@
         "operationId": "MigrateProjectsController_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -217,10 +202,10 @@
         "operationId": "MigrateProjectsController_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -270,10 +255,10 @@
         "operationId": "PrivateEndpointConnectionController_ListPrivateEndpointConnections",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -317,10 +302,10 @@
         "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -362,14 +347,14 @@
           "PrivateEndpointConnectionController"
         ],
         "summary": "Create or update private endpoint.",
-        "description": "Create a private endpoint with specified name. If a private endpoint already exists, update it.",
+        "description": "Create or update a private endpoint with specified name. If a private endpoint already exists, update it.",
         "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -437,10 +422,10 @@
         "operationId": "PrivateEndpointConnectionController_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -488,10 +473,10 @@
         "operationId": "PrivateEndpointConnectionProxyController_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -529,14 +514,14 @@
           "PrivateEndpointConnectionProxyController"
         ],
         "summary": "Create or update private endpoint proxy.",
-        "description": "Create a private endpoint proxy with specified name. If a private endpoint already exists, update it.",
+        "description": "Create or update a private endpoint proxy with specified name. If a private endpoint already exists, update it.",
         "operationId": "PrivateEndpointConnectionProxyController_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -600,10 +585,10 @@
         "operationId": "PrivateEndpointConnectionProxyController_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -652,10 +637,10 @@
         "operationId": "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -713,10 +698,10 @@
         "operationId": "PrivateLinkResourceController_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -764,10 +749,10 @@
         "operationId": "PrivateLinkResourceController_ListPrivateLinkResources",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
@@ -808,7 +793,7 @@
         "operationId": "Projects_ListBySubscription",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -851,10 +836,10 @@
         "operationId": "Projects_List",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
