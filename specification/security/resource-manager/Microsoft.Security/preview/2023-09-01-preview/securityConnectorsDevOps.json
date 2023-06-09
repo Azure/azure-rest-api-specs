@@ -1,0 +1,3293 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Security",
+    "description": "REST APIs for Defender for DevOps",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of Azure DevOps organizations.",
+        "operationId": "List_AzureDevOpsOrg",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrgListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_AzureDevOpsOrg": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListAzureDevOpsOrg.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a monitored Azure DevOps organization resource.",
+        "operationId": "Get_AzureDevOpsOrg",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_AzureDevOpsOrg": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetAzureDevOpsOrg.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates monitored Azure DevOps organization details.",
+        "operationId": "CreateOrUpdate_AzureDevOpsOrg",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "azureDevOpsOrg",
+            "description": "Azure DevOps organization resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_AzureDevOpsOrg": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateAzureDevOpsOrg.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates monitored Azure DevOps organization details.",
+        "operationId": "Update_AzureDevOpsOrg",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "azureDevOpsOrg",
+            "description": "Azure DevOps organization resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrg"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_AzureDevOpsOrg": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateAzureDevOpsOrg.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a monitored Azure DevOps organization.",
+        "operationId": "Delete_AzureDevOpsOrg",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_AzureDevOpsOrg": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteAzureDevOpsOrg.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of Azure DevOps projects.",
+        "operationId": "List_AzureDevOpsProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProjectListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_AzureDevOpsProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListAzureDevOpsProject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a monitored Azure DevOps project resource.",
+        "operationId": "Get_AzureDevOpsProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_AzureDevOpsProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetAzureDevOpsProject.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates a monitored Azure DevOps project resource.",
+        "operationId": "CreateOrUpdate_AzureDevOpsProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "azureDevOpsProject",
+            "description": "Azure DevOps project resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_AzureDevOpsProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateAzureDevOpsProject.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates a monitored Azure DevOps project resource.",
+        "operationId": "Update_AzureDevOpsProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "azureDevOpsProject",
+            "description": "Azure DevOps project resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_AzureDevOpsProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateAzureDevOpsProject.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a monitored Azure DevOps project resource.",
+        "operationId": "Delete_AzureDevOpsProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_AzureDevOpsProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteAzureDevOpsProject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of Azure DevOps repositories.",
+        "operationId": "List_AzureDevOpsRepo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepoListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_AzureDevOpsRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListAzureDevOpsRepo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos/{repoName}": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a monitored Azure DevOps repository resource.",
+        "operationId": "Get_AzureDevOpsRepo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_AzureDevOpsRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetAzureDevOpsRepo.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates a monitored Azure DevOps repository resource.",
+        "operationId": "CreateOrUpdate_AzureDevOpsRepo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "azureDevOpsRepo",
+            "description": "Azure DevOps repository resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_AzureDevOpsRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateAzureDevOpsRepo.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates a monitored Azure DevOps repository resource.",
+        "operationId": "Update_AzureDevOpsRepo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "azureDevOpsRepo",
+            "description": "Azure DevOps repository resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_AzureDevOpsRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateAzureDevOpsRepo.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a monitored Azure DevOps repository resource.",
+        "operationId": "Delete_AzureDevOpsRepo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_AzureDevOpsRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteAzureDevOpsRepo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "List DevOps Configurations.",
+        "operationId": "DevOpsConfigurations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfigurationListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevOpsConfigurations_List": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Gets a DevOps Configuration.",
+        "operationId": "DevOpsConfigurations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevOpsConfigurations_Get": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates a DevOps Configuration.",
+        "operationId": "DevOpsConfigurations_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "devOpsConfiguration",
+            "description": "DevOps configuration resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfiguration"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DevOpsConfigurations_CreateAndAuthorizeOnly": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsCreateAndAuthorizeOnly.json"
+          },
+          "DevOpsConfigurations_CreateAzureDevOps": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsCreateAzureDevOps.json"
+          },
+          "DevOpsConfigurations_CreateGitHub": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsCreateGitHub.json"
+          },
+          "DevOpsConfigurations_CreateGitLab": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsCreateGitLab.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates a DevOps Configuration.",
+        "operationId": "DevOpsConfigurations_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "devOpsConfiguration",
+            "description": "DevOps configuration resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DevOpsConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DevOpsConfigurations_Update": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a DevOps Connector.",
+        "operationId": "DevOpsConfigurations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DevOpsConfigurations_Delete": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DevOpsConfigurationsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of GitHub owners.",
+        "operationId": "List_GitHubOwner",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwnerListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_GitHubOwner": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListGitHubOwner.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a monitored GitHub owner.",
+        "operationId": "Get_GitHubOwner",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_GitHubOwner": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetGitHubOwner.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates a monitored GitHub owner.",
+        "operationId": "CreateOrUpdate_GitHubOwner",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitHubOwner",
+            "description": "Github owner resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_GitHubOwner": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateGitHubOwner.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates a monitored GitHub owner.",
+        "operationId": "Update_GitHubOwner",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitHubOwner",
+            "description": "Github owner resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwner"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_GitHubOwner": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateGitHubOwner.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a monitored GitHub owner.",
+        "operationId": "Delete_GitHubOwner",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_GitHubOwner": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteGitHubOwner.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of GitHub repositories.",
+        "operationId": "List_GitHubRepo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepoListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_GitHubRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListGitHubRepo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a monitored GitHub repository.",
+        "operationId": "Get_GitHubRepo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_GitHubRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetGitHubRepo.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates a monitored GitHub repository.",
+        "operationId": "CreateOrUpdate_GitHubRepo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitHubRepo",
+            "description": "GitHub repository resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_GitHubRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateGitHubRepo.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates a monitored GitHub repository.",
+        "operationId": "Update_GitHubRepo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitHubRepo",
+            "description": "GitHub repository resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_GitHubRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateGitHubRepo.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a monitored GitHub repository.",
+        "operationId": "Delete_GitHubRepo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OwnerName"
+          },
+          {
+            "$ref": "#/parameters/RepoName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_GitHubRepo": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteGitHubRepo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of GitLab groups.",
+        "operationId": "List_GitLabGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroupListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_GitLabGroup": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListGitLabGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a monitored GitLab Group resource for a given fully-qualified name.",
+        "operationId": "Get_GitLabGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_GitLabGroup": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetGitLabGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates monitored GitLab Group details.",
+        "operationId": "CreateOrUpdate_GitLabGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitLabGroup",
+            "description": "GitLab Group resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitLabGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_GitLabGroup": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateGitLabGroup.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates monitored GitLab Group details.",
+        "operationId": "Update_GitLabGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitLabGroup",
+            "description": "GitLab Group resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitLabGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_GitLabGroup": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateGitLabGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a monitored GitLab Group.",
+        "operationId": "Delete_GitLabGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_GitLabGroup": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteGitLabGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listSubgroups": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Gets all nested subgroups of given GitLab Group.",
+        "operationId": "List_GitLabSubgroups",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroupListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_GitLabSubgroups": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListGitLabSubgroups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Gets a list of GitLab projects that are directly owned by given group.",
+        "operationId": "List_GitLabProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "#/parameters/InventoryScope"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabProjectListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List_GitLabProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/ListGitLabProject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects/{projectName}": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a monitored GitLab Project resource for a given fully-qualified group name and project name.",
+        "operationId": "Get_GitLabProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_GitLabProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetGitLabProject.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Creates or updates monitored GitLab Project details.",
+        "operationId": "CreateOrUpdate_GitLabProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitLabProject",
+            "description": "GitLab project resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitLabProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabProject"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GitLabProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_GitLabProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/CreateOrUpdateGitLabProject.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Updates monitored GitLab Project details.",
+        "operationId": "Update_GitLabProject",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "gitLabProject",
+            "description": "GitLab project resource payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GitLabProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GitLabProject"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GitLabProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update_GitLabProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/UpdateGitLabProject.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Deletes a monitored GitLab Project.",
+        "operationId": "Delete_GitLabProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete_GitLabProject": {
+            "$ref": "./examples/SecurityConnectorsDevOps/DeleteGitLabProject.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionableRemediation": {
+      "description": "Configuration payload for PR Annotations.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ActionableRemediationState"
+        },
+        "categoryConfigurations": {
+          "description": "Gets or sets list of categories and severity levels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CategoryConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "branchConfiguration": {
+          "$ref": "#/definitions/TargetBranchConfiguration"
+        },
+        "inheritFromParentState": {
+          "$ref": "#/definitions/InheritFromParentState"
+        }
+      }
+    },
+    "ActionableRemediationState": {
+      "description": "ActionableRemediation Setting.\r\nNone - the setting was never set.\r\nEnabled - ActionableRemediation is enabled.\r\nDisabled - ActionableRemediation is disabled.",
+      "enum": [
+        "None",
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ActionableRemediationState",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "AnnotateDefaultBranchState": {
+      "description": "Configuration of PR Annotations on default branch.\r\n\r\nEnabled - PR Annotations are enabled on the resource's default branch.\r\nDisabled - PR Annotations are disabled on the resource's default branch.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AnnotateDefaultBranchState",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "Authorization": {
+      "description": "Authorization payload.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets one-time OAuth code to exchange for refresh and access tokens.\r\n\r\nOnly used during PUT operations. The secret is cleared during GET.",
+          "type": "string",
+          "example": "00000000000000000000.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "AutoDiscovery": {
+      "description": "AutoDiscovery states.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AutoDiscovery",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "AzureDevOpsOrg": {
+      "description": "Azure DevOps Org Proxy Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDevOpsOrgProperties"
+        }
+      }
+    },
+    "AzureDevOpsOrgListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureDevOpsOrg"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDevOpsOrgProperties": {
+      "description": "AzureDevOps Org properties.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "actionableRemediation": {
+          "$ref": "#/definitions/ActionableRemediation"
+        },
+        "globalOnboardingState": {
+          "$ref": "#/definitions/GlobalOnboardingState"
+        }
+      }
+    },
+    "AzureDevOpsOrganizationConfiguration": {
+      "description": "AzureDevOps Org Inventory Configuration.",
+      "type": "object",
+      "properties": {
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "projectConfigs": {
+          "description": "AzureDevOps Project Inventory Configuration.\r\nDictionary of AzureDevOps project name to desired project configuration.\r\nIf AutoDiscovery is Enabled, this field should be empty or null.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureDevOpsProjectConfiguration"
+          }
+        }
+      }
+    },
+    "AzureDevOpsProject": {
+      "description": "Azure DevOps Project Proxy Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDevOpsProjectProperties"
+        }
+      }
+    },
+    "AzureDevOpsProjectConfiguration": {
+      "description": "AzureDevOps Project Inventory Configuration.",
+      "type": "object",
+      "properties": {
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "repositoryConfigs": {
+          "description": "AzureDevOps Repository Inventory Configuration.\r\nDictionary of AzureDevOps repository name to desired repository configuration.\r\nIf AutoDiscovery is Enabled, this field should be null or empty.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseResourceConfiguration"
+          }
+        }
+      }
+    },
+    "AzureDevOpsProjectListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureDevOpsProject"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDevOpsProjectProperties": {
+      "description": "AzureDevOps Project properties.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "orgName": {
+          "description": "Gets or sets AzureDevOps org Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "projectId": {
+          "description": "Gets or sets AzureDevOps Project Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "actionableRemediation": {
+          "$ref": "#/definitions/ActionableRemediation"
+        }
+      }
+    },
+    "AzureDevOpsRepo": {
+      "description": "Azure DevOps Repo Proxy Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureDevOpsRepoProperties"
+        }
+      }
+    },
+    "AzureDevOpsRepoListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureDevOpsRepo"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDevOpsRepoProperties": {
+      "description": "AzureDevOps Repo properties.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "orgName": {
+          "description": "Gets or sets AzureDevOps org Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "projectName": {
+          "description": "Gets or sets AzureDevOps project Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "repoId": {
+          "description": "Gets or sets Azure DevOps repo id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "repoUrl": {
+          "description": "Gets or sets AzureDevOps repo url.",
+          "type": "string",
+          "readOnly": true
+        },
+        "visibility": {
+          "description": "Gets or sets AzureDevOps repo visibility, whether it is public or private etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionableRemediation": {
+          "$ref": "#/definitions/ActionableRemediation"
+        }
+      }
+    },
+    "BaseResourceConfiguration": {
+      "description": "Base Resource Inventory configuration changes.",
+      "type": "object",
+      "properties": {
+        "desiredOnboardingState": {
+          "$ref": "#/definitions/DesiredOnboardingState"
+        }
+      }
+    },
+    "CategoryConfiguration": {
+      "description": "Severity level per category configuration for PR Annotations.",
+      "type": "object",
+      "properties": {
+        "minimumSeverityLevel": {
+          "description": "Gets or sets minimum severity level for a given category.",
+          "type": "string"
+        },
+        "category": {
+          "$ref": "#/definitions/RuleCategory"
+        }
+      }
+    },
+    "DesiredOnboardingState": {
+      "description": "Onboarding states.",
+      "enum": [
+        "Disable",
+        "Enable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DesiredOnboardingState",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "DevOpsConfiguration": {
+      "description": "DevOps Configuration resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DevOpsConfigurationProperties"
+        }
+      }
+    },
+    "DevOpsConfigurationListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevOpsConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "DevOpsConfigurationProperties": {
+      "description": "DevOps Configuration metadata.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "authorization": {
+          "$ref": "#/definitions/Authorization"
+        },
+        "azureDevOpsOrganizationConfigs": {
+          "description": "AzureDevOps Org Inventory Configuration.\r\nDictionary of AzureDevOps org name to desired org configuration.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AzureDevOpsOrganizationConfiguration"
+          }
+        },
+        "gitLabGroupConfigs": {
+          "description": "GitLab Group Inventory Configuration.\r\nDictionary of GitLab fully-qualified group name to desired group configuration.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GitLabGroupConfiguration"
+          }
+        },
+        "gitHubOwnerConfigs": {
+          "description": "GitHub Owner Inventory Configuration.\r\nDictionary of GitHub owner name to desired owner configuration.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GitHubOwnerConfiguration"
+          }
+        }
+      }
+    },
+    "GitHubOwner": {
+      "description": "GitHub repo owner Proxy Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GitHubOwnerProperties"
+        }
+      }
+    },
+    "GitHubOwnerConfiguration": {
+      "description": "GitHub Owner Inventory Configuration.",
+      "type": "object",
+      "properties": {
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "repositoryConfigs": {
+          "description": "GitHub Repository Inventory Configuration.\r\nDictionary of GitHub repository name to desired repository configuration.\r\nIf AutoDiscovery is Enabled, this field should be null or empty.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseResourceConfiguration"
+          }
+        }
+      }
+    },
+    "GitHubOwnerListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitHubOwner"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "GitHubOwnerProperties": {
+      "description": "GitHub Repo Owner properties.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "ownerUrl": {
+          "description": "Gets or sets gitHub owner url.",
+          "type": "string",
+          "readOnly": true
+        },
+        "globalOnboardingState": {
+          "$ref": "#/definitions/GlobalOnboardingState"
+        }
+      }
+    },
+    "GitHubRepo": {
+      "description": "GitHub repo Proxy Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GitHubRepoProperties"
+        }
+      }
+    },
+    "GitHubRepoListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitHubRepo"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "GitHubRepoProperties": {
+      "description": "GitHub Repo properties.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "accountId": {
+          "format": "int64",
+          "description": "Gets or sets gitHub repo account id.",
+          "type": "integer"
+        },
+        "repoUrl": {
+          "description": "Gets or sets gitHub repo url.",
+          "type": "string"
+        },
+        "ownerName": {
+          "description": "Gets or sets GitHub Owner Name.",
+          "type": "string"
+        }
+      }
+    },
+    "GitLabGroup": {
+      "description": "GitLab Group Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GitLabGroupProperties"
+        }
+      }
+    },
+    "GitLabGroupConfiguration": {
+      "description": "GitLab Group Inventory Configuration.",
+      "type": "object",
+      "properties": {
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "projectConfigs": {
+          "description": "GitLab Project Inventory Configuration.\r\nDictionary of GitLab fully-qualified project name to desired project configuration.\r\nIf AutoDiscovery is Enabled, this field should be null or empty.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseResourceConfiguration"
+          }
+        }
+      }
+    },
+    "GitLabGroupListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitLabGroup"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "GitLabGroupProperties": {
+      "description": "GitLab Group metadata.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "fullQualifiedName": {
+          "description": "Gets or sets the full qualified name of the Group object.\r\n\r\nThis contains the entire namespace hierarchy where namespaces are separated by the '$' character.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "url": {
+          "description": "Gets or sets the Url of the GitLab Group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "globalOnboardingState": {
+          "$ref": "#/definitions/GlobalOnboardingState"
+        }
+      }
+    },
+    "GitLabProject": {
+      "description": "GitLab Project Resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GitLabProjectProperties"
+        }
+      }
+    },
+    "GitLabProjectListResponse": {
+      "description": "List of RP resources which supports pagination.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitLabProject"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets or sets next link to scroll over the results.",
+          "type": "string"
+        }
+      }
+    },
+    "GitLabProjectProperties": {
+      "description": "GitLab Project metadata.",
+      "type": "object",
+      "properties": {
+        "provisioningStatusMessage": {
+          "description": "Gets or sets resource status message.",
+          "type": "string",
+          "example": "Resource onboarded successful.",
+          "readOnly": true
+        },
+        "provisioningStatusUpdateTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets time when resource was last checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "fullQualifiedName": {
+          "description": "Gets or sets the full qualified name of the project object.\r\n\r\nThis contains the entire namespace hierarchy where namespaces are separated by the '$' character.",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "description": "Gets or sets the Url of the GitLab Project.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GlobalOnboardingState": {
+      "description": "Details about resource onboarding status across all connectors.\r\n\r\nAlreadyOnboardedByOtherConnector - this resource has already been onboarded to another connector.\r\nAlreadyOnboardedByCurrentConnector - this resource has already been onboarded by the specified connector.\r\nNotOnboarded - this resource has not been onboarded to any connector.\r\nNotApplicable - this resource is not a top-level resource or its onboarding state is not applicable to the current endpoint.",
+      "enum": [
+        "NotApplicable",
+        "AlreadyOnboardedByOtherConnector",
+        "AlreadyOnboardedByCurrentConnector",
+        "NotOnboarded"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "GlobalOnboardingState",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "InheritFromParentState": {
+      "description": "Update Settings.\r\n\r\nEnabled - Resource should inherit configurations from parent.\r\nDisabled - Resource should not inherit configurations from parent.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InheritFromParentState",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "ProvisioningState": {
+      "description": "ProvisioningState of resource.\r\n\r\nPending - Provisioning pending.\r\nFailed - Provisioning failed.\r\nSucceeded - Successful provisioning.\r\nCanceled - Provisioning canceled.\r\nPendingDeletion - Deletion pending.\r\nDeletionSuccess - Deletion successful.\r\nDeletionFailure - Deletion failure.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending",
+        "PendingDeletion",
+        "DeletionSuccess",
+        "DeletionFailure"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "RuleCategory": {
+      "description": "Rule categories.\r\nCode - code scanning results.\r\nArtifact scanning results.\r\nDependencies scanning results.\r\nIaC results.\r\nSecrets scanning results.\r\nContainer scanning results.",
+      "enum": [
+        "Code",
+        "Artifacts",
+        "Dependencies",
+        "Secrets",
+        "IaC",
+        "Containers"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RuleCategory",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "TargetBranchConfiguration": {
+      "description": "Repository branch configuration for PR Annotations.",
+      "type": "object",
+      "properties": {
+        "branchNames": {
+          "description": "Gets or sets branches that should have annotations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "annotateDefaultBranch": {
+          "$ref": "#/definitions/AnnotateDefaultBranchState"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SecurityConnectorName": {
+      "in": "path",
+      "name": "securityConnectorName",
+      "description": "Name of the Security Connector.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "InventoryScope": {
+      "in": "query",
+      "name": "inventoryScope",
+      "description": "Query parameter to decide returned inventory scope.\r\n            \"Onboarded\" (default) - returns all inventory already onboarded to the connector.\r\n            \"Available\" - returns all inventory accessible by the user token consumed by the connector.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OrgName": {
+      "in": "path",
+      "name": "orgName",
+      "description": "Name of the Azure DevOps organization.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ProjectName": {
+      "in": "path",
+      "name": "projectName",
+      "description": "Name of the Azure DevOps project.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RepoName": {
+      "in": "path",
+      "name": "repoName",
+      "description": "Name of the Azure DevOps repository.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OwnerName": {
+      "in": "path",
+      "name": "ownerName",
+      "description": "Name of the GitHub owner.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupFQName": {
+      "in": "path",
+      "name": "groupFQName",
+      "description": "Fully-qualified name of the GitLab Group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
