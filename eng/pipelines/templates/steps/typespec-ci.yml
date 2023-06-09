@@ -7,7 +7,9 @@ parameters:
 steps:
 - script: |
     npm install -g ts-node
-    npm ci eng/tools/TypeSpecValidation
+    pushd eng/tools/TypeSpecValidation
+    npm ci
+    popd
     ts-node eng/tools/TypeSpecValidation/src/TypeSpecValidation.ts ${{parameters.Folder}}
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
