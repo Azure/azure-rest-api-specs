@@ -6,12 +6,22 @@ parameters:
 
 steps:
 - script: |
+    RED='\033[0;31m'
+    exit_code=0
+    expected_npm_prefix=$(pwd)
+
     # Log commands before running
     set -x
 
-    exit_code=0
-
     pushd ${{parameters.Folder}}
+
+    actual_npm_prefix=$(npm prefix)
+
+    if [ "$expected_npm_prefix" != "$actual_npm_prefix" ]; then
+      echo -e "\n${RED}ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root."
+      echo -e "${RED}Expected npm prefix: $expected_npm_prefix\n${RED}Actual npm prefix: $actual_npm_prefix\n"
+      exit_code=1
+    fi
 
     # Pass "--no" to ensure npx does not install anything (TypeSpec compiler should already be installed)
     
