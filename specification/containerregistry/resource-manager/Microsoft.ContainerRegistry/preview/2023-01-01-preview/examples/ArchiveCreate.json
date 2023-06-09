@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "packageType": "rpm"
+    "archiveName": "myArchiveName",
+    "archiveCreateParameters ": {
+      {
+        "properties": {
+            "packageSource": "string",
+            "publishedVersion": "string",
+            "repositoryEndpointPrefix": "string",
+            "repositoryEndpoint": "string"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ContainerRegistry/registries/archives",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/archives/myArchiveName",
+        "name": "myArchiveName",
+        "properties": {
+          "packageSource": "string",
+          "publishedVersion": "string",
+          "repositoryEndpointPrefix": "string",
+          "repositoryEndpoint": "string",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+    
+}
