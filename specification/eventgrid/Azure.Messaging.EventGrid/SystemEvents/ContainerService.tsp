@@ -34,11 +34,11 @@ model ContainerServiceNodePoolRollingFailedEventData extends ContainerServiceNod
 @doc("Schema of common properties of cluster support events")
 model ContainerServiceClusterSupportEventData {
   @doc("The Kubernetes version of the ManagedCluster resource")
-  kubernetesVersion: string;
+  kubernetesVersion?: string;
 }
 
 @doc("Schema of common properties of node pool rolling events")
 model ContainerServiceNodePoolRollingEventData {
   @doc("The name of the node pool in the ManagedCluster resource")
-  nodePoolName: string;
+  nodePoolName?: string;
 }
