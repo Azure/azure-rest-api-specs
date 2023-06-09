@@ -669,13 +669,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "ARM create or update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MigrateProject"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "ARM create or update operation completed successfully.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
@@ -987,13 +987,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "ARM create or update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Solution"
             }
           },
           "201": {
-            "description": "ARM create operation completed successfully.",
+            "description": "ARM create or update operation completed successfully.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
@@ -1256,43 +1256,6 @@
         "x-ms-examples": {
           "Solutions_CleanupData": {
             "$ref": "./examples/Solutions_CleanupData.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}": {
-      "delete": {
-        "tags": [
-          "SubscriptionController"
-        ],
-        "summary": "Method to handle delete subscription notification.",
-        "operationId": "SubscriptionController_DeleteSubscriptionNotification",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-examples": {
-          "SubscriptionId_delete": {
-            "$ref": "./examples/SubscriptionId_delete.json"
           }
         }
       }
@@ -1684,10 +1647,6 @@
     }
   },
   "definitions": {
-    "Object": {
-      "type": "object",
-      "properties": {}
-    },
     "DatabaseInstanceCollection": {
       "description": "Collection of database instances.",
       "type": "object",
