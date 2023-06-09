@@ -11,14 +11,21 @@ steps:
 
     exit_code=0
 
+    expected_npm_prefix=$(pwd)
+
     # Log commands before running
     set -x
 
     pushd ${{parameters.Folder}}
 
-    if test -f package.json; then
-      echo -e "\n${RED}ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the root package.json${NC}\n"
-      exit_code=1
+    actual_npm_prefix=$(npm prefix)
+
+    if [ "$expected_npm_prefix" != "$actual_npm_prefix" ]; then
+      echo -e "${RED}\n"
+      echo -e "ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the root package.json"
+      echo -e "Expected npm prefix: $expected_npm_prefix"
+      echo -e "Actual npm prefix: $actual_npm_prefix"
+      echo -e "${NC}\n"
     fi
 
     # Pass "--no" to ensure npx does not install anything (TypeSpec compiler should already be installed)
