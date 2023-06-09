@@ -1,2 +1,3 @@
-## Adding dummy readme for temperory folder structure.
-### PLEASE move the required versions to this folders and remove this README
+# Adding dummy readme. PLEASE move the required versions to these folders and remove this README
+
+> see https://aka.ms/autorest
