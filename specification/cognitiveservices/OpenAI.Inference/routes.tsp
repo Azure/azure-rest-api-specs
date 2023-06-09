@@ -6,6 +6,7 @@ import "@typespec/http";
 import "./models/completions.create.tsp";
 import "./models/chat.completions.tsp";
 import "./models/embeddings.create.tsp";
+import "./models/images.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -28,7 +29,7 @@ Gets completions for the provided input prompts.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-@TypeSpec.Rest.actionSeparator("/")
+@actionSeparator("/")
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
     Deployment,
@@ -41,10 +42,24 @@ Gets chat completions for the provided chat messages.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-@TypeSpec.Rest.actionSeparator("/")
+@actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
-op getChatCompletions is Azure.Core.ResourceAction<
+op getChatCompletions is ResourceAction<
     Deployment,
     ChatCompletionsOptions,
     ChatCompletions
 >;
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "because"
+@doc("Returns the status of the images operation")
+@route("/operations/images/{operationId}")
+op generateImage is RpcOperation<{@doc(".") @path operationId: string}, ImageOperationResponse>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@route("/images/generations:submit")
+@pollingOperation(generateImage, {operationId: ResponseProperty<"id">})
+op startGenerateImage is OaiLongRunningRpcOperation<
+    ImageRequest,
+    ImageOperationResponse,
+    ImageOperationStatus>;
+
