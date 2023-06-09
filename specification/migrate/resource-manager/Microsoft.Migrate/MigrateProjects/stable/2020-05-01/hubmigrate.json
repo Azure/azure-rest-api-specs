@@ -108,7 +108,7 @@
         ],
         "summary": "Create a new project with specified settings.",
         "description": "Create a new project by sending a json object of type 'migrateproject' as given in Models section as part of the Request Body. The project name is unique.\n\nThis operation is Idempotent.\n",
-        "operationId": "MigrateProjectsController_PutMigrateProject",
+        "operationId": "MigrateProjectsController_Create",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -952,7 +952,8 @@
         },
         "location": {
           "type": "string",
-          "description": "Azure location in which project is created."
+          "description": "Azure location in which project is created.",
+          "x-ms-mutability": [ "create", "read" ]
         },
         "id": {
           "type": "string",
@@ -1117,7 +1118,8 @@
             "Accepted",
             "InProgress",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Canceled"
           ],
           "type": "string",
           "description": "Provisioning state.",

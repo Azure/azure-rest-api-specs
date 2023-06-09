@@ -26,7 +26,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     },
     "machineName": {
       "name": "machineName",
@@ -42,7 +43,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     },
     "databaseInstanceName": {
       "name": "databaseInstanceName",
@@ -50,7 +52,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     },
     "solutionName": {
       "name": "solutionName",
@@ -66,7 +69,8 @@
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
-      "required": true
+      "required": true,
+      "pattern": "^[a-zA-Z0-9-]{3,24}$"
     },
     "continuationToken": {
       "name": "continuationToken",
@@ -285,6 +289,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Databases_List": {
             "$ref": "./examples/Databases_List.json"
@@ -383,6 +390,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "MigrateEvents_List": {
             "$ref": "./examples/MigrateEvents_List.json"
@@ -523,6 +533,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Machines_List": {
             "$ref": "./examples/Machines_List.json"
@@ -690,7 +703,7 @@
         ],
         "summary": "Update migrate project.",
         "description": "Update a migrate project with specified name. Supports partial updates, for example only tags can be provided.",
-        "operationId": "MigrateProjectsController_PatchMigrateProject",
+        "operationId": "MigrateProjectsController_Update",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -845,7 +858,7 @@
           "MigrateProjectsController"
         ],
         "summary": "Refresh the summary of the migrate project.",
-        "operationId": "MigrateProjectsController_RefreshMigrateProjectSummary",
+        "operationId": "MigrateProjectsController_RefreshSummary",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1141,6 +1154,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Solutions_List": {
             "$ref": "./examples/Solutions_List.json"
@@ -1200,7 +1216,7 @@
           "SolutionsController"
         ],
         "summary": "Cleanup the solution data in the migrate project.",
-        "operationId": "SolutionsController_CleanupSolutionData",
+        "operationId": "SolutionsController_CleanupData",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1319,6 +1335,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Solutions_CleanupData": {
             "$ref": "./examples/MigrateProjects_EnumerateVirtualDesktopUsers.json"
@@ -1414,6 +1433,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Solutions_CleanupData": {
             "$ref": "./examples/MigrateProjects_EnumerateWebServers.json"
@@ -1509,6 +1531,9 @@
           }
         },
         "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Solutions_CleanupData": {
             "$ref": "./examples/MigrateProjects_EnumerateWebSites.json"
@@ -3101,7 +3126,8 @@
         },
         "location": {
           "description": "Gets or sets the Azure location in which migrate project is created.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [ "create", "read" ]
         },
         "properties": {
           "$ref": "#/definitions/MigrateProjectProperties",
@@ -3194,7 +3220,8 @@
             "Deleting",
             "Failed",
             "Moving",
-            "Succeeded"
+            "Succeeded",
+            "Canceled"
           ],
           "description": "Provisioning state of the migrate project.",
           "x-ms-enum": {
