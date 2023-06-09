@@ -67,6 +67,9 @@ model ImageOperationResponse {
 
     @doc("The status of the operation")
     status: State;
+
+    @doc("The error if the operation failed.")
+    error?: Foundations.Error;
 }
 
 @lroStatus
