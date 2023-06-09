@@ -118,15 +118,16 @@ input-file:
   - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - Microsoft.Authorization/preview/2022-05-01-preview/common-types.json
   - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
-  - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
   - Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
-  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
   - Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
-  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 ### Tag: package-2021-12-01-preview-only
 
