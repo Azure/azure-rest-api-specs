@@ -147,20 +147,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the operation has completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Archive"
-            }
-          },
-          "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Archive"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -174,10 +163,6 @@
           "ArchiveCreate": {
             "$ref": "./examples/ArchiveCreate.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -280,17 +265,6 @@
               "$ref": "#/definitions/Archive"
             }
           },
-          "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Archive"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
             "schema": {
@@ -302,10 +276,6 @@
           "ArchiveUpdate": {
             "$ref": "./examples/ArchiveUpdate.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -441,13 +411,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the operation has completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ArchiveVersion"
             }
           },
           "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
+            "description": "ARM create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ArchiveVersion"
             },
