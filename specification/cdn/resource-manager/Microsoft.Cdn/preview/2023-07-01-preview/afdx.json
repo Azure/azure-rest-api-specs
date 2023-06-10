@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01",
+    "version": "2023-07-01-preview",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure Front Door resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -2738,6 +2738,9 @@
         "x-ms-examples": {
           "Rules_Create": {
             "$ref": "./examples/Rules_Create.json"
+          },
+          "Rules_Create_AfdUrlSigningAction": {
+            "$ref": "./examples/Rules_Create_AfdUrlSigningAction.json"
           }
         },
         "parameters": [
@@ -3400,7 +3403,10 @@
         "operationId": "Secrets_Create",
         "x-ms-examples": {
           "Secrets_Create": {
-            "$ref": "./examples/Secrets_Create.json"
+            "$ref": "./examples/Secrets_CreateCustomerCertificateType.json"
+          },
+          "Secrets_CreateUrlSigningKeyType": {
+            "$ref": "./examples/Secrets_CreateUrlSigningKeyType.json"
           }
         },
         "parameters": [
@@ -3535,6 +3541,215 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups": {
+      "get": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Lists existing AzureFrontDoor KeyGroups.",
+        "operationId": "KeyGroups_ListByProfile",
+        "x-ms-examples": {
+          "KeyGroups_ListByProfile": {
+            "$ref": "./examples/KeyGroups_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}": {
+      "get": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Gets an existing KeyGroup within a profile.",
+        "operationId": "KeyGroups_Get",
+        "x-ms-examples": {
+          "KeyGroups_Get": {
+            "$ref": "./examples/KeyGroups_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/keyGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Creates or updates a new KeyGroup within the specified profile.",
+        "operationId": "KeyGroups_CreateUpdate",
+        "x-ms-examples": {
+          "KeyGroups_Create": {
+            "$ref": "./examples/KeyGroups_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/keyGroupNameParameter"
+          },
+          {
+            "name": "keyGroup",
+            "in": "body",
+            "description": "The KeyGroup properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Creation or update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new key group has been created.",
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/KeyGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "KeyGroups"
+        ],
+        "description": "Deletes an existing KeyGroup within profile.",
+        "operationId": "KeyGroups_Delete",
+        "x-ms-examples": {
+          "KeyGroups_Delete": {
+            "$ref": "./examples/KeyGroups_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/keyGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the key group was not found."
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics": {
@@ -4299,7 +4514,7 @@
       ],
       "properties": {
         "secretSource": {
-          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{certificateName}",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
         "secretVersion": {
@@ -4351,7 +4566,7 @@
           "$ref": "#/definitions/SecretType"
         },
         "secretSource": {
-          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
         "secretVersion": {
@@ -4381,6 +4596,65 @@
         "message": {
           "description": "Detailed error message",
           "type": "string"
+        }
+      }
+    },
+    "KeyGroup": {
+      "description": "Contains a list of references of UrlSigningKey type secret objects.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/KeyGroupProperties"
+        }
+      }
+    },
+    "KeyGroupProperties": {
+      "description": "The JSON object that contains the properties of the key group to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ]
+    },
+    "KeyGroupUpdatePropertiesParameters": {
+      "description": "The JSON object containing properties of key group to create or update.",
+      "type": "object",
+      "properties": {
+        "keyReferences": {
+          "description": "Names of UrlSigningKey type secret objects",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "KeyGroupListResult": {
+      "description": "Result of the request to list keyGroups. It contains a list of KeyGroup objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/KeyGroup"
+          },
+          "description": "List of AzureFrontDoor KeyGroup within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of KeyGroup objects if there are any."
         }
       }
     },
@@ -4929,7 +5203,7 @@
           "type": "string"
         },
         "secretSource": {
-          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{secretName}",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
@@ -4975,7 +5249,7 @@
       ],
       "properties": {
         "secretSource": {
-          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{certificateName}",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
@@ -5028,7 +5302,7 @@
       ],
       "properties": {
         "secretSource": {
-          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/secrets/{certificateName}",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference",
           "readOnly": true
@@ -5698,6 +5972,97 @@
         }
       }
     },
+    "AfdUrlSigningAction": {
+      "description": "Defines the url signing action for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "AfdUrlSigning",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/AfdUrlSigningActionParameters"
+        }
+      }
+    },
+    "AfdUrlSigningActionParameters": {
+      "description": "Defines the parameters for the Url Signing action.",
+      "type": "object",
+      "required": [
+        "typeName",
+        "keyGroupReference"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleAfdUrlSigningActionParameters"
+          ],
+          "x-ms-enum": {
+            "name": "typeName",
+            "modelAsString": true
+          }
+        },
+        "keyGroupReference": {
+          "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "algorithm": {
+          "description": "Algorithm to use for URL signing",
+          "type": "string",
+          "enum": [
+            "SHA256"
+          ],
+          "x-ms-enum": {
+            "name": "algorithm",
+            "modelAsString": true
+          }
+        },
+        "parameterNameOverride": {
+          "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UrlSigningParamIdentifier"
+          },
+          "x-ms-identifiers": [
+            "paramName"
+          ]
+        }
+      }
+    },
+    "UrlSigningParamIdentifier": {
+      "description": "Defines how to identify a parameter for a specific purpose e.g. expires",
+      "type": "object",
+      "required": [
+        "paramIndicator",
+        "paramName"
+      ],
+      "properties": {
+        "paramIndicator": {
+          "description": "Indicates the purpose of the parameter",
+          "type": "string",
+          "enum": [
+            "Expires",
+            "KeyId",
+            "Signature"
+          ],
+          "x-ms-enum": {
+            "name": "paramIndicator",
+            "modelAsString": true
+          }
+        },
+        "paramName": {
+          "description": "Parameter name",
+          "type": "string"
+        }
+      }
+    },
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",
       "type": "object",
@@ -5811,7 +6176,7 @@
       "properties": {
         "error": {
           "description": "The error object.",
-          "$ref": "./cdn.json#/definitions/ErrorDetail"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
         }
       }
     },
@@ -6305,6 +6670,17 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method",
       "description": "Name of the Azure Front Door Standard or Azure Front Door Premium which is unique within the resource group."
+    },
+    "keyGroupNameParameter": {
+      "name": "keyGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the KeyGroup under the profile."
     }
   }
 }
