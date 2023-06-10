@@ -152,6 +152,17 @@
               "$ref": "#/definitions/Archive"
             }
           },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
             "schema": {
@@ -163,6 +174,10 @@
           "ArchiveCreate": {
             "$ref": "./examples/ArchiveCreate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
