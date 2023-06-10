@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01",
+    "version": "2023-07-01-preview",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -4747,7 +4747,8 @@
             "UrlRewrite",
             "UrlSigning",
             "OriginGroupOverride",
-            "RouteConfigurationOverride"
+            "RouteConfigurationOverride",
+            "AfdUrlSigning"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -7006,68 +7007,9 @@
       "type": "object",
       "properties": {
         "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
         }
       }
-    },
-    "ErrorDetail": {
-      "description": "The error detail.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error target."
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ],
-          "description": "The error details."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "x-ms-identifiers": [],
-          "description": "The error additional info."
-        }
-      }
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
     }
   },
   "parameters": {
