@@ -4204,7 +4204,14 @@
       "properties": {
         "type": {
           "description": "The type of package source for a archive.",
-          "type": "string"
+          "enum": [
+            "remote"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PackageSourceType",
+            "modelAsString": true
+          }
         },
         "url": {
           "description": "The external repository url.",
