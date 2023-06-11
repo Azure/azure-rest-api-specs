@@ -195,19 +195,9 @@
           },
           {
             "type": "array",
-            "name": "industryIds",
-            "in": "query",
-            "description": "Products that contains any of the given Product industries, If no value provided, this filter is ignored. Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#industries. Such as 'retailers'",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
             "name": "operatingSystems",
             "in": "query",
-            "description": "Products that contains any of the given operating systems, if none provided then filter is ignored, this is relevant for Virtual Machine product type only. Such as operatingSystems=windows,linux",
+            "description": "Products that contains any of the given operating systems, Such as operatingSystems=windows,linux. If no value provided, this filter is ignored. This filter is relevant for Virtual Machine product type only.\n- `windows.windowsserver2019`: Windows Server 2019.\n- `windows.windowsserver2019`: Windows Server 2019.\n- `windows.windowsserver2016`: Windows Server 2016.\n- `windows.windowsserver2012r2`: Windows Server 2012 R2.\n- `windows.windowsserver2012`: Windows Server 2012.\n- `windows.windowsserver2008r2`: Windows Server 2008 R2.\n- `windows.others`: Others (windows).\n- `windows.windowsserver2022`: Windows Server 2022.\n- `linux.centos`: Cent OS.\n- `linux.debian`: Debian.\n- `linux.redhat`: Red Hat.\n- `linux.suse`: SUSE.\n- `linux.ubuntu`: Ubuntu.\n- `linux.others`: Others (Linux).",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -217,17 +207,7 @@
             "type": "array",
             "name": "hideKeys",
             "in": "query",
-            "description": "Products that contains any of the given hideKeys for preview. Such as '22c6b3ae-1111-1111-1111-e7cbdc8569dd'. If no value provided, this filter is ignored.\n this filter is applied only when PublishingStage filter is set to Preview.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "categoryIds",
-            "in": "query",
-            "description": "Products that contains any of the given product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'. If no value provided, this filter is ignored.",
+            "description": "Products that contains any of the given hideKeys for preview. Such as '22c6b3ae-1111-1111-1111-e7cbdc8569dd'. If no value provided, this filter is ignored. This filter is applied only when PublishingStage filter is set to Preview.",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -245,16 +225,6 @@
             "name": "supportedProducts",
             "in": "query",
             "description": "Products that contains any of the given supported products. Such as 'CRM'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "applicableProducts",
-            "in": "query",
-            "description": "Products that contains any of the given M365 products applicable. Such as 'Office365'. If no value provided, this filter is ignored.",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -294,7 +264,7 @@
             "type": "array",
             "name": "vmArchitectureTypes",
             "in": "query",
-            "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
+            "description": "Array of Virtual Machine image architecture types to search by, If no value provided, this filter is ignored. see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
@@ -350,44 +320,21 @@
             "type": "array",
             "name": "facets",
             "in": "query",
-            "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `ApplicableProducts`: Applicable Products.\n- `CategoryIds`: Category Ids.\n- `SupportedProducts`: Supported Products. \n- `PublisherId`: Publisher Id.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
+            "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `SupportedProducts`: Supported Products. \n- `PublisherType`: Publisher Type.\n- `AzureBenefit`: Azure Benefit.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
               "enum": [
-                "All",
-                "ApplicableProducts",
-                "LastModifiedDateTime",
-                "IndustryIds",
-                "CategoryIds",
-                "Market",
-                "LinkedAddInTypes",
                 "SupportedProducts",
-                "HideKeys",
-                "PublisherId",
-                "DisplayName",
-                "AzureBenefit",
-                "Badges",
-                "SmallIconUri",
-                "IndustryCloud",
                 "PublisherType",
-                "PublishingState",
-                "Language",
-                "UniqueProductId",
+                "AzureBenefit",
                 "ProductType",
-                "Plans",
                 "OperatingSystems",
                 "PricingTypes",
-                "PublisherDisplayName",
-                "Summary",
-                "LongSummary",
                 "VmImageGenerations",
                 "VmSecurityTypes",
                 "VmArchitectureTypes",
-                "Description",
-                "RatingBuckets",
-                "RatingAverage",
-                "RatingCount"
+                "RatingBuckets"
               ],
               "x-ms-enum": {
                 "name": "SearchFieldName",
@@ -541,20 +488,15 @@
             "name": "select",
             "in": "query",
             "required": true,
-            "description": "Array of fields to return. Such as 'pricingTypes'. \n- `All`: All fields.\n- `ApplicableProducts`: Applicable Products.\n- `CategoryIds`: Category Ids.\n- `Market`: Market.\n- `SupportedProducts`: Supported Products.\n- `HideKeys`: Hide Keys.\n- `PublisherId`: Publisher Id.\n- `CspStates`: Csp States.\n- `DisplayName`: Display Name.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `SmallIconUri`: Small Icon Uri.\n- `MediumIconUri`: Medium Icon Uri.\n- `LargeIconUri`: Large Icon Uri.\n- `WideIconUri`: Wide Icon Uri.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `PublishingState`: Publishing State.\n- `Language`: Language.\n- `UniqueProductId`: Unique Product Id.\n- `ProductType`: Product Type.\n- `Plans`: Plans.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `PublisherDisplayName`: Publisher Display Name.\n- `Summary`: Summary.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `Description`: Description.\n- `RatingBuckets`: Rating Buckets.\n- `RatingAverage`: Rating Average.",
+            "description": "Array of fields to return. Such as select=pricingTypes. \n- `All`: All fields.\n- `Market`: Market.\n- `Language`: Language.\n- `SupportedProducts`: Supported Products.\n- `PublisherId`: Publisher Id.\n- `DisplayName`: Display Name.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `SmallIconUri`: Small Icon Uri.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `PublishingState`: Publishing State.\n- `UniqueProductId`: Unique Product Id.\n- `ProductType`: Product Type.\n- `Plans`: Plans.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `PublisherDisplayName`: Publisher Display Name.\n- `Summary`: Summary.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `Description`: Description.\n- `RatingBuckets`: Rating Buckets.\n- `RatingAverage`: Rating Average.\n- `LastModifiedDateTime`: Last Modified time.\n- `RatingCount`: Rating Count.\n- `LinkedAddInTypes`: Linked Add In Types.\n- `LongSummary`: Long Summary.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
               "enum": [
                 "All",
-                "ApplicableProducts",
-                "LastModifiedDateTime",
-                "IndustryIds",
-                "CategoryIds",
                 "Market",
-                "LinkedAddInTypes",
+                "Language",
                 "SupportedProducts",
-                "HideKeys",
                 "PublisherId",
                 "DisplayName",
                 "AzureBenefit",
@@ -563,7 +505,6 @@
                 "IndustryCloud",
                 "PublisherType",
                 "PublishingState",
-                "Language",
                 "UniqueProductId",
                 "ProductType",
                 "Plans",
@@ -571,14 +512,16 @@
                 "PricingTypes",
                 "PublisherDisplayName",
                 "Summary",
-                "LongSummary",
                 "VmImageGenerations",
                 "VmSecurityTypes",
                 "VmArchitectureTypes",
                 "Description",
                 "RatingBuckets",
                 "RatingAverage",
-                "RatingCount"
+                "LastModifiedDateTime",
+                "RatingCount",
+                "LinkedAddInTypes",
+                "LongSummary"
               ],
               "x-ms-enum": {
                 "name": "SearchFieldName",
@@ -590,7 +533,7 @@
             "type": "array",
             "name": "orderBy",
             "in": "query",
-            "description": "Array of sort by fields to order by, if none provided then ordered by search score. For example, orderby=RatingCount  desc. \n- `RatingCount`: ratingCount (asc/desc).\n- `LastModifiedDateTime`: lastModifiedDateTime (asc/desc).\n- `RatingAverage`: RatingAverage (asc/desc).",
+            "description": "Array of sort by fields to order by and ordering type (asc\\desc), If no value provided, ordered by search score. Default ordering type: asc. For example, orderby=RatingCount desc. \n- `RatingCount`: ratingCount (asc/desc).\n- `LastModifiedDateTime`: lastModifiedDateTime (asc/desc).\n- `RatingAverage`: RatingAverage (asc/desc).",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -659,19 +602,9 @@
           },
           {
             "type": "array",
-            "name": "industryIds",
-            "in": "query",
-            "description": "Products that contains any of the given Product industries, If no value provided, this filter is ignored. Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#industries. Such as 'retailers'",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
             "name": "operatingSystems",
             "in": "query",
-            "description": "Products that contains any of the given operating systems, if none provided then filter is ignored, this is relevant for Virtual Machine product type only. Such as operatingSystems=windows,linux",
+            "description": "Products that contains any of the given operating systems, Such as operatingSystems=windows,linux. If no value provided, this filter is ignored. This filter is relevant for Virtual Machine product type only.\n- `windows.windowsserver2019`: Windows Server 2019.\n- `windows.windowsserver2019`: Windows Server 2019.\n- `windows.windowsserver2016`: Windows Server 2016.\n- `windows.windowsserver2012r2`: Windows Server 2012 R2.\n- `windows.windowsserver2012`: Windows Server 2012.\n- `windows.windowsserver2008r2`: Windows Server 2008 R2.\n- `windows.others`: Others (windows).\n- `windows.windowsserver2022`: Windows Server 2022.\n- `linux.centos`: Cent OS.\n- `linux.debian`: Debian.\n- `linux.redhat`: Red Hat.\n- `linux.suse`: SUSE.\n- `linux.ubuntu`: Ubuntu.\n- `linux.others`: Others (Linux).",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -681,17 +614,7 @@
             "type": "array",
             "name": "hideKeys",
             "in": "query",
-            "description": "Products that contains any of the given hideKeys for preview. Such as '22c6b3ae-1111-1111-1111-e7cbdc8569dd'. If no value provided, this filter is ignored.\n this filter is applied only when PublishingStage filter is set to Preview.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "categoryIds",
-            "in": "query",
-            "description": "Products that contains any of the given product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'. If no value provided, this filter is ignored.",
+            "description": "Products that contains any of the given hideKeys for preview. Such as '22c6b3ae-1111-1111-1111-e7cbdc8569dd'. If no value provided, this filter is ignored. This filter is applied only when PublishingStage filter is set to Preview.",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -709,16 +632,6 @@
             "name": "supportedProducts",
             "in": "query",
             "description": "Products that contains any of the given supported products. Such as 'CRM'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "applicableProducts",
-            "in": "query",
-            "description": "Products that contains any of the given M365 products applicable. Such as 'Office365'. If no value provided, this filter is ignored.",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -758,7 +671,7 @@
             "type": "array",
             "name": "vmArchitectureTypes",
             "in": "query",
-            "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
+            "description": "Array of Virtual Machine image architecture types to search by, If no value provided, this filter is ignored. see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
@@ -814,44 +727,21 @@
             "type": "array",
             "name": "facets",
             "in": "query",
-            "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `ApplicableProducts`: Applicable Products.\n- `CategoryIds`: Category Ids.\n- `SupportedProducts`: Supported Products. \n- `PublisherId`: Publisher Id.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `IndustryCloud`: Industry Cloud.\n- `PublisherType`: Publisher Type.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
+            "description": "Array facets to facet by, if none provided then no facets will return. Such as facets=PricingTypes,operatingSystems. \n- `SupportedProducts`: Supported Products. \n- `PublisherType`: Publisher Type.\n- `AzureBenefit`: Azure Benefit.\n- `ProductType`: Product Type.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `VmImageGenerations`: Vm Image Generations.\n- `VmSecurityTypes`: Vm Security Types.\n- `VmArchitectureTypes`: Vm Architecture Types.\n- `RatingBuckets`: Rating Buckets.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
               "enum": [
-                "All",
-                "ApplicableProducts",
-                "LastModifiedDateTime",
-                "IndustryIds",
-                "CategoryIds",
-                "Market",
-                "LinkedAddInTypes",
                 "SupportedProducts",
-                "HideKeys",
-                "PublisherId",
-                "DisplayName",
-                "AzureBenefit",
-                "Badges",
-                "SmallIconUri",
-                "IndustryCloud",
                 "PublisherType",
-                "PublishingState",
-                "Language",
-                "UniqueProductId",
+                "AzureBenefit",
                 "ProductType",
-                "Plans",
                 "OperatingSystems",
                 "PricingTypes",
-                "PublisherDisplayName",
-                "Summary",
-                "LongSummary",
                 "VmImageGenerations",
                 "VmSecurityTypes",
                 "VmArchitectureTypes",
-                "Description",
-                "RatingBuckets",
-                "RatingAverage",
-                "RatingCount"
+                "RatingBuckets"
               ],
               "x-ms-enum": {
                 "name": "SearchFieldName",
@@ -863,7 +753,7 @@
             "type": "integer",
             "name": "skip",
             "in": "query",
-            "description": "Number of items to skip. Minimum: 0",
+            "description": "Number of items to skip. Minimum: 0, Maximum: 100000, Default : 0.",
             "format": "int32",
             "default": 0
           },
@@ -871,7 +761,7 @@
             "type": "integer",
             "name": "top",
             "in": "query",
-            "description": "Number of items to return. Minimum: 0, Maximum: 50000, Default: 20.",
+            "description": "Number of items to return. Minimum: 0, Maximum: 1000, Default: 20.",
             "format": "int32",
             "default": 20
           }
@@ -903,7 +793,7 @@
         "tags": [
           "Public-Suggestions"
         ],
-        "summary": "Public Suggestions API provides an unauthenticated endpoint for consuming list of Marketplace public products suggestions per requested properties. In addition, it enables filtering on selected product properties, search, and getting product details. Each API request must include an API key allocated to you (see X-API-Key description). Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
+        "summary": "Public Suggestions API provides an unauthenticated endpoint for consuming list of Marketplace public products suggestions per requested properties. In addition, it enables filtering on selected product properties, and getting product details. Each API request must include an API key allocated to you (see X-API-Key description). Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
         "operationId": "Suggestions_GetProducts",
         "x-ms-examples": {
           "SuggestionsProducts_Get": {
@@ -930,7 +820,7 @@
             "name": "searchQuery",
             "in": "query",
             "required": true,
-            "description": "The search text. Such as searchQuery=red hat. If no value provided, this filter is ignored."
+            "description": "The search text, if no value provided, this filter is ignored. Such as searchQuery=red hat"
           },
           {
             "type": "string",
@@ -1080,29 +970,9 @@
           },
           {
             "type": "array",
-            "name": "industryIds",
-            "in": "query",
-            "description": "Products that contains any of the given Product industries, If no value provided, this filter is ignored. Possible values - https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#industries. Such as 'retailers'",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
             "name": "operatingSystems",
             "in": "query",
-            "description": "Products that contains any of the given operating systems, if none provided then filter is ignored, this is relevant for Virtual Machine product type only. Such as operatingSystems=windows,linux",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "categoryIds",
-            "in": "query",
-            "description": "Products that contains any of the given product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'. If no value provided, this filter is ignored.'",
+            "description": "Products that contains any of the given operating systems, Such as operatingSystems=windows,linux. If no value provided, this filter is ignored. This filter is relevant for Virtual Machine product type only.\n- `windows.windowsserver2019`: Windows Server 2019.\n- `windows.windowsserver2019`: Windows Server 2019.\n- `windows.windowsserver2016`: Windows Server 2016.\n- `windows.windowsserver2012r2`: Windows Server 2012 R2.\n- `windows.windowsserver2012`: Windows Server 2012.\n- `windows.windowsserver2008r2`: Windows Server 2008 R2.\n- `windows.others`: Others (windows).\n- `windows.windowsserver2022`: Windows Server 2022.\n- `linux.centos`: Cent OS.\n- `linux.debian`: Debian.\n- `linux.redhat`: Red Hat.\n- `linux.suse`: SUSE.\n- `linux.ubuntu`: Ubuntu.\n- `linux.others`: Others (Linux).",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -1113,16 +983,6 @@
             "name": "supportedProducts",
             "in": "query",
             "description": "Products that contains any of the given supported products. Such as 'CRM'. If no value provided, this filter is ignored.",
-            "collectionFormat": "csv",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "type": "array",
-            "name": "applicableProducts",
-            "in": "query",
-            "description": "Products that contains any of the given M365 products applicable. Such as 'Office365'. If no value provided, this filter is ignored.",
             "collectionFormat": "csv",
             "items": {
               "type": "string"
@@ -1162,7 +1022,7 @@
             "type": "array",
             "name": "vmArchitectureTypes",
             "in": "query",
-            "description": "Array of Virtual Machine image architecture types to search by, see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
+            "description": "Array of Virtual Machine image architecture types to search by, If no value provided, this filter is ignored. see https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2: \n - `X64Gen1`: X64 Generation 1.\n - `X64Gen2`: X64 Generation 2.\n - `Arm64`: Arm64 image architecture.",
             "collectionFormat": "csv",
             "items": {
               "type": "string",
@@ -1273,8 +1133,8 @@
       "description": "The facets response",
       "properties": {
         "value": {
-          "description": "The facet items results",
           "type": "object",
+          "description": "The facet items results",
           "additionalProperties": {
             "$ref": "#/definitions/FacetsItem"
           }
@@ -1307,7 +1167,7 @@
     },
     "ErrorResponse": {
       "type": "object",
-      "description": "The search error response object",
+      "description": "The search error response object. \n\n * 400 - In case request malformed.\n\n * 401 - In case of a missing or invalid api key header\n\n * 500 - In case internal error.",
       "properties": {
         "error": {
           "description": "The search error response details",
@@ -1497,10 +1357,7 @@
       "description": "The search field name",
       "enum": [
         "All",
-        "ApplicableProducts",
         "LastModifiedDateTime",
-        "IndustryIds",
-        "CategoryIds",
         "Market",
         "LinkedAddInTypes",
         "SupportedProducts",
@@ -1536,8 +1393,8 @@
       }
     },
     "SearchResponse": {
-      "description": "Search response object",
       "type": "object",
+      "description": "Search response object",
       "required": [
         "results"
       ],
@@ -1582,20 +1439,6 @@
           "type": "string",
           "description": "Product display name"
         },
-        "categoryIds": {
-          "type": "array",
-          "description": "Array of product categories, https://docs.microsoft.com/en-us/azure/marketplace/marketplace-categories-industries#categories. Such as 'Productivity'",
-          "items": {
-            "type": "string"
-          }
-        },
-        "industryIds": {
-          "type": "array",
-          "description": "List of industry IDs the item belongs to",
-          "items": {
-            "type": "string"
-          }
-        },
         "publisherId": {
           "type": "string",
           "description": "Publisher id"
@@ -1636,7 +1479,7 @@
           "description": "Unique product identifier"
         },
         "productType": {
-          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions",
+          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant\n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central\n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -1730,13 +1573,6 @@
         "supportedProducts": {
           "type": "array",
           "description": "Maps to the list of compatible products that the publisher provides",
-          "items": {
-            "type": "string"
-          }
-        },
-        "applicableProducts": {
-          "type": "array",
-          "description": "Product categories the offer belongs to",
           "items": {
             "type": "string"
           }
@@ -1871,7 +1707,7 @@
           "description": "The SKU id"
         },
         "planType": {
-          "description": "Managed Application or Solution template plan type (applicable only to Azure Applications product). Possible values: \n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
+          "description": "Managed Application or Solution template plan type (applicable only to Azure Applications product). Possible values :\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -1968,22 +1804,22 @@
       ],
       "properties": {
         "value": {
-          "description": "The suggestion items results",
           "type": "array",
+          "description": "The suggestion items results",
           "items": {
             "$ref": "#/definitions/SuggestionsItem"
           }
         },
         "totalCount": {
-          "description": "The suggestion count",
           "type": "integer",
+          "description": "The suggestion count",
           "format": "int64"
         }
       }
     },
     "SuggestionsItem": {
-      "description": "The suggestion item",
       "type": "object",
+      "description": "The suggestion item",
       "required": [
         "displayText"
       ],
@@ -1997,16 +1833,16 @@
           ]
         },
         "displayText": {
-          "description": "The suggestion display text",
-          "type": "string"
+          "type": "string",
+          "description": "The suggestion display text"
         },
         "id": {
-          "description": "The suggestion item id",
-          "type": "string"
+          "type": "string",
+          "description": "The suggestion item id"
         },
         "iconUrl": {
-          "description": "The suggestion icon url",
-          "type": "string"
+          "type": "string",
+          "description": "The suggestion icon url"
         },
         "productType": {
           "description": "The suggestion supported product types",
@@ -2017,8 +1853,8 @@
           ]
         },
         "linkedAddInsTypes": {
-          "description": "The suggestion linked add-in types",
           "type": "object",
+          "description": "The suggestion linked add-in types",
           "additionalProperties": {
             "type": "string"
           }
