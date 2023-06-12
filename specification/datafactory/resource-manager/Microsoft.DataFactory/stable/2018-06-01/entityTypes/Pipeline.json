@@ -2271,16 +2271,9 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         }
       }
     },
@@ -2299,21 +2292,26 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
+      }
+    },
+    "SalesforceSourceReadBehavior": {
+      "description": "The Salesforce read behavior for the operation",
+      "type": "string",
+      "enum": [
+        "Query",
+        "QueryAll"
+      ],
+      "x-ms-enum": {
+        "name": "SalesforceSourceReadBehavior",
+        "modelAsString": true
       }
     },
     "SapCloudForCustomerSource": {
