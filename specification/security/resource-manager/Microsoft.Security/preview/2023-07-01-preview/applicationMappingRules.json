@@ -1,0 +1,356 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Microsoft Defender for Cloud",
+		"description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+		"version": "2023-07-01-preview"
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/applicationMappingRules": {
+      "get": {
+        "x-ms-examples": {
+          "Retrieve an application": {
+            "$ref": "./examples/ApplicationMappingRules/GetApplicationMappingRulesSingle_example.json"
+          }
+        },
+        "tags": [
+          "ApplicationMappingRules"
+        ],
+        "description": "Get a list of all relevant application mapping rules over a scope.",
+        "operationId": "ApplicationMappingRules_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationMappingRuleList"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/applicationMappingRules/{ruleId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an application mapping rule over subscription scope": {
+            "$ref": "./examples/ApplicationMappingRules/GetApplicationMappingRule_example.json"
+          },
+          "Get an application mapping rule over security connector scope": {
+            "$ref": "./examples/ApplicationMappingRules/GetSecurityConnectorApplicationMappingRule_example.json"
+          },
+          "Get an application mapping rule over management group scope": {
+            "$ref": "./examples/ApplicationMappingRules/GetManagementGroupApplicationMappingRule_example.json"
+          }
+        },
+        "tags": [
+          "ApplicationMappingRules"
+        ],
+        "description": "Retrieves details of a specific application mapping rule for the requested scope by ruleId.",
+        "operationId": "ApplicationMappingRules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationMappingRule"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update an application": {
+            "$ref": "./examples/ApplicationMappingRules/PutApplication_example.json"
+          }
+        },
+        "tags": [
+          "ApplicationMappingRules"
+        ],
+        "description": "Creates or updates a single application mapping rule over a given scope.",
+        "operationId": "ApplicationMappingRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          },
+          {
+            "$ref": "#/parameters/applicationMappingRuleInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationMappingRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ApplicationMappingRule"
+            }
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security connector": {
+            "$ref": "./examples/ApplicationMappingRules/DeleteApplication_example.json"
+          }
+        },
+        "tags": [
+          "ApplicationMappingRules"
+        ],
+        "operationId": "ApplicationMappingRules_Delete",
+        "description": "Delete a single application mapping rule over a given scope.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was deleted successfully"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response that describes why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationMappingRuleList": {
+      "type": "object",
+      "description": "Page of a application mapping rules list",
+      "properties": {
+        "value": {
+          "description": "Collection of application mapping rules in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationMappingRule"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page"
+        }
+      }
+    },
+    "ApplicationMappingRule": {
+      "type": "object",
+      "description": "The application mapping rule resource",
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "description": "Properties of an application mapping rule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationMappingRuleProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationMappingRuleProperties": {
+      "type": "object",
+      "description": "Describes properties of the application",
+      "properties": {
+        "TenantId": {
+          "type": "string",
+          "description": "The tenant Id associated with the appplication mapping rule (GUID)"
+        },
+        "EnvironmentId": {
+          "type": "string",
+          "description": "The application mapping rule EnvironmentId"
+        },
+        "DisplayName": {
+          "type": "string",
+          "description": "The application mapping rule display name"
+        },
+        "Description": {
+          "type": "string",
+          "description": "The application mapping rule description"
+        },
+        "MappingTagKeys": {
+          "type": "array",
+          "description": "The mapping tag key list",
+          "items": {
+            "description": "The mapping tag key",
+            "type": "string"
+          }
+        },
+        "IncludedMappingTagValues": {
+          "type": "array",
+          "description": "The Included mapping tag values,For an empty array - all the values should create applications",
+          "items": {
+            "description": "The Included mapping tag value",
+            "type": "string"
+          }
+        },
+        "ExcludedScopes": {
+          "type": "array",
+          "description": "Excluded Scopes, filter out the descendants of the scope",
+          "items": {
+            "description": "The excluded scope",
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "IncludeMemberScopes": {
+          "type": "boolean",
+          "description": "Defines whether the rule is management scope rule (master connector as a single scope or management scope)"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/applicationMappingRuleMetaData"
+        }
+      }
+    },
+    "applicationMappingRuleMetaData": {
+      "type": "object",
+      "description": "The applications mappig rule metadata",
+      "properties": {
+        "CreatedBy": {
+          "type": "string",
+          "description": "The applications mappig rule created by object id (GUID)"
+        },
+        "CreatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The applications mappig rule creation date"
+        },
+        "UpdatedBy": {
+          "type": "string",
+          "description": "The applications mappig rule last updated by object id (GUID)"
+        },
+        "UpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The applications mappig rule last update date"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "RuleId": {
+      "name": "ruleId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The rule Key - Unique key for the rule for ABC (GUID)",
+      "x-ms-parameter-location": "method"
+    },
+    "applicationMappingRuleInBody": {
+      "name": "application",
+      "in": "body",
+      "required": true,
+      "description": "The application mapping rules resource",
+      "schema": {
+        "$ref": "#/definitions/ApplicationMappingRule"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the application mapping rules rules. Valid scopes are: management group (format: 'providers/Microsoft.Management/managementGroups/{resourceName}'), subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Security/securityConnectors/{resourceName})'",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -85,6 +85,23 @@ tag: package-preview-2023-07
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.Security/preview/2023-07-01-preview/applications.json
+```
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.Security/preview/2023-07-01-preview/applicationMappingRules.json
+```
 
 ### Tag: package-preview-2023-07
 
@@ -394,7 +411,6 @@ input-file:
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
-- Microsoft.Security/preview/2022-07-01-preview/applications.json
 - Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -403,6 +419,8 @@ input-file:
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
+- Microsoft.Security/preview/2023-07-01-preview/applications.json
+- Microsoft.Security/preview/2023-07-01-preview/applicationMappingRules.json
 
 
 # Needed when there is more than one input file
