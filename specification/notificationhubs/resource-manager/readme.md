@@ -59,6 +59,13 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 ```yaml $(tag) == 'package-preview-2023-01'
 input-file:
   - Microsoft.NotificationHubs/preview/2023-01-01-preview/notificationhubs.json
+
+suppressions:
+ - code: RepeatedPathInfo
+   reason: We cannot remove the subscriptionId parameter without introducing a breaking change.
+   from: notificationhubs.json
+   where:
+   - $.definitions.NamespaceProperties.subscriptionId
 ```
 ### Tag: package-2017-04
 
