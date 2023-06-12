@@ -21,17 +21,17 @@ interface OncoPhenotype {
     "./examples/SuccessfulOncoPhenotypeResponse.json",
     "SuccessfulOncoPhenotypeGetAnalyzeStatus"
   )
-  GetJob is Azure.Core.ResourceRead<OncoPhenotypeResult>;
+  getJob is Azure.Core.ResourceRead<OncoPhenotypeResult>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
   @summary("Create Onco Phenotype job")
   @tag("OncoPhenotype")
   @doc("Creates an Onco Phenotype job with the given request body.")
-  @pollingOperation(OncoPhenotype.GetJob)
+  @pollingOperation(OncoPhenotype.getJob)
   @route("/oncophenotype/jobs")
   @example(
     "./examples/SuccessfulOncoPhenotypeRequest.json",
     "SuccessfulOncoPhenotypeAnalyzeRequest"
   )
-  CreateJob is LongRunningRpcOperation<OncoPhenotypeData, OncoPhenotypeResult>;
+  createJob is LongRunningRpcOperation<OncoPhenotypeData, OncoPhenotypeResult>;
 }

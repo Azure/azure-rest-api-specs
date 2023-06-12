@@ -54,8 +54,9 @@ batch:
   - tag: package-2017-03-01-preview-only
   - tag: package-2016-09-01-only
   - tag: package-2016-03-01-only
-  - tag: package-2015-07-01-only
-  - tag: package-2015-04-01-only
+  - tag: package-2015-07-01-python-only
+  - tag: package-2015-04-01-python-only
+  - tag: package-2014-04-01-only
   - multiapiscript: true
 ```
 
@@ -381,22 +382,32 @@ namespace: $(python-base-namespace).v2016_03_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2016_03_01
 ```
 
-### Tag: package-2015-07-01-only and python
+### Tag: package-2015-07-01-python-only and python
 
-These settings apply only when `--tag=package-2015-07-01-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2015-07-01-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2015-07-01-only'
+``` yaml $(tag) == 'package-2015-07-01-python-only'
 namespace: $(python-base-namespace).v2015_07_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2015_07_01
 ```
 
-### Tag: package-2015-04-01-only and python
+### Tag: package-2015-04-01-python-only and python
 
-These settings apply only when `--tag=package-2015-04-01-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2015-04-01-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2015-04-01-only'
+``` yaml $(tag) == 'package-2015-04-01-python-only'
 namespace: $(python-base-namespace).v2015_04_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2015_04_01
+```
+
+### Tag: package-2014-04-01-only and python
+
+These settings apply only when `--tag=package-2014-04-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2014-04-01-only'
+namespace: $(python-base-namespace).v2014_04_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2014_04_01
 ```
