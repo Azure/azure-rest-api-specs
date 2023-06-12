@@ -78,6 +78,31 @@
           "description": "Activity description.",
           "type": "string"
         },
+        "state": {
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityState",
+            "modelAsString": true
+          }
+        },
+        "onInactiveMarkAs": {
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityOnInactiveMarkAs",
+            "modelAsString": true
+          }
+        },
         "dependsOn": {
           "type": "array",
           "description": "Activity depends on condition.",
@@ -7489,9 +7514,34 @@
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the session, which will be used for overriding 'driverCores' and 'driverMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide.",
-          "type": "integer",
-          "format": "int32"
+          "type": "object",
+          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide. Type: integer (or Expression with resultType integer)."
+        },
+        "configurationType": {
+          "enum": [
+            "Default",
+            "Customized",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationParametrizationReference"
+        },
+        "sparkConfig": {
+          "description": "Spark configuration property.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [
