@@ -159,6 +159,12 @@
               "$ref": "#/definitions/NotificationHubResource"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubResource"
+            }
+          },
           "default": {
             "description": "Error code with reason.",
             "schema": {
@@ -170,6 +176,10 @@
           "NotificationHubs_CreateOrUpdate": {
             "$ref": "./examples/NotificationHubs/CreateOrUpdate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
