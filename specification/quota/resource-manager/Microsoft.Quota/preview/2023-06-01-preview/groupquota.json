@@ -441,6 +441,47 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "GroupQuotas-Subscriptions"
+        ],
+        "summary": "Checks if the subscription is in GroupQuotas SubscriptionIdList.",
+        "description": "Checks if the subscription is in GroupQuotas SubscriptionIdList.",
+        "operationId": "SGroupQuotaSubscription_Get",
+        "x-ms-examples": {
+          "GroupQuotaLimits_Put_Subscription": {
+            "$ref": "./examples/DeleteGroupQuotaSubscriptions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/MgIdInParameters"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaNameInParameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdInParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}": {
