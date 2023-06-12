@@ -4,9 +4,9 @@
     "title": "Azure-ContainerStorageRP",
     "version": "2023-03-01-preview",
     "description": "Azure Container Storage Resource Provider API.",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -134,6 +134,90 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes": {
+      "get": {
+        "tags": [
+          "Volumes"
+        ],
+        "operationId": "Volumes_ListBySubscription",
+        "description": "List Volume resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "required": true,
+            "description": "Pool Object",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VolumeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumeSnapshots": {
+      "get": {
+        "tags": [
+          "VolumeSnapshots"
+        ],
+        "operationId": "VolumeSnapshots_ListBySubscription",
+        "description": "List VolumeSnapshot resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "required": true,
+            "description": "Pool Object",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VolumeSnapshotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools": {
       "get": {
         "tags": [
@@ -201,8 +285,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -249,8 +333,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -293,10 +377,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Pools_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Pools_CreateOrUpdate_MaximumSet_Gen.json"
@@ -304,7 +384,11 @@
           "Pools_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/Pools_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -327,8 +411,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -359,10 +443,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Pools_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Pools_Delete_MaximumSet_Gen.json"
@@ -370,7 +450,11 @@
           "Pools_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Pools_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -393,8 +477,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -434,10 +518,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Pools_Update_MaximumSet_Gen": {
             "$ref": "./examples/Pools_Update_MaximumSet_Gen.json"
@@ -445,7 +525,11 @@
           "Pools_Update_MinimumSet_Gen": {
             "$ref": "./examples/Pools_Update_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes": {
@@ -470,8 +554,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -523,16 +607,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -579,16 +663,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -631,10 +715,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Volumes_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_CreateOrUpdate_MaximumSet_Gen.json"
@@ -642,7 +722,11 @@
           "Volumes_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -665,16 +749,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -705,10 +789,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Volumes_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_Delete_MaximumSet_Gen.json"
@@ -716,7 +796,11 @@
           "Volumes_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -739,16 +823,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -788,10 +872,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Volumes_Update_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_Update_MaximumSet_Gen.json"
@@ -799,7 +879,11 @@
           "Volumes_Update_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Update_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumeSnapshots": {
@@ -824,8 +908,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -877,16 +961,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -933,16 +1017,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -985,10 +1069,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VolumeSnapshots_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_CreateOrUpdate_MaximumSet_Gen.json"
@@ -996,7 +1076,11 @@
           "VolumeSnapshots_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1019,16 +1103,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -1059,10 +1143,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VolumeSnapshots_Delete_MaximumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Delete_MaximumSet_Gen.json"
@@ -1070,7 +1150,11 @@
           "VolumeSnapshots_Delete_MinimumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -1093,16 +1177,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -1142,10 +1226,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VolumeSnapshots_Update_MaximumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Update_MaximumSet_Gen.json"
@@ -1153,7 +1233,11 @@
           "VolumeSnapshots_Update_MinimumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Update_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1213,8 +1297,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "List of KV pairs to set in StorageClass to configure CSI driver."
+          "description": "List of KV pairs to set in StorageClass to configure CSI driver.",
+          "x-typespec-name": "Record<string>"
         },
         "maxVolumeCapacityGiB": {
           "type": "integer",
@@ -1227,8 +1311,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Disk Pool Properties"
@@ -1347,16 +1431,16 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks."
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
+          "x-typespec-name": "string[]"
         },
         "disks": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "x-typespec-name": "string[]"
         },
         "diskFormat": {
           "type": "boolean",
@@ -1378,16 +1462,16 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks."
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
+          "x-typespec-name": "string[]"
         },
         "disks": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "x-typespec-name": "string[]"
         },
         "diskFormat": {
           "type": "boolean",
@@ -1414,8 +1498,8 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           },
-          "x-cadl-name": "VirtualNetworkRule[]",
-          "description": "Virtual network rules"
+          "description": "Virtual network rules",
+          "x-typespec-name": "VirtualNetworkRule[]"
         }
       },
       "description": "Network Rule Set definition",
@@ -1475,14 +1559,14 @@
           "items": {
             "$ref": "#/definitions/Pool"
           },
-          "x-cadl-name": "Pool[]",
-          "description": "The Pool items on this page"
+          "description": "The Pool items on this page",
+          "x-typespec-name": "Pool[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Pool list operation.",
@@ -1507,8 +1591,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of availability zones that resources can be created in."
+          "description": "List of availability zones that resources can be created in.",
+          "x-typespec-name": "string[]"
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1520,8 +1604,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many."
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
+          "x-typespec-name": "string[]"
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolProperties",
@@ -1584,8 +1668,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         },
         "properties": {
           "$ref": "#/definitions/PoolUpdateProperties",
@@ -1606,8 +1690,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of availability zones that resources can be created in."
+          "description": "List of availability zones that resources can be created in.",
+          "x-typespec-name": "string[]"
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1619,8 +1703,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many."
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
+          "x-typespec-name": "string[]"
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolPropertiesUpdate",
@@ -1763,14 +1847,14 @@
           "items": {
             "$ref": "#/definitions/Volume"
           },
-          "x-cadl-name": "Volume[]",
-          "description": "The Volume items on this page"
+          "description": "The Volume items on this page",
+          "x-typespec-name": "Volume[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Volume list operation.",
@@ -1802,8 +1886,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "String KV pairs indicating labels"
+          "description": "String KV pairs indicating labels",
+          "x-typespec-name": "Record<string>"
         },
         "capacityGiB": {
           "type": "integer",
@@ -1823,8 +1907,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Volume Properties",
@@ -1864,14 +1948,14 @@
           "items": {
             "$ref": "#/definitions/VolumeSnapshot"
           },
-          "x-cadl-name": "VolumeSnapshot[]",
-          "description": "The VolumeSnapshot items on this page"
+          "description": "The VolumeSnapshot items on this page",
+          "x-typespec-name": "VolumeSnapshot[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a VolumeSnapshot list operation.",
@@ -1904,8 +1988,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Volume Snapshot Properties",
@@ -1946,8 +2030,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The updatable properties of the VolumeSnapshot."
@@ -1970,8 +2054,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "String KV pairs indicating labels"
+          "description": "String KV pairs indicating labels",
+          "x-typespec-name": "Record<string>"
         },
         "capacityGiB": {
           "type": "integer",
@@ -1991,8 +2075,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The updatable properties of the Volume."

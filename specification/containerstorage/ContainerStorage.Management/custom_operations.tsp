@@ -1,13 +1,10 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi3";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-resource-manager";
 
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-resource-manager";
-
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using OpenAPI;
 using Autorest;
 using Azure.ResourceManager;
@@ -15,9 +12,9 @@ using Azure.ResourceManager.Foundations;
 
 /**
  * Custom types modified from the Azure Resource Manager Cadl library to add
- * asynchronous update to operations, and location header on asynchronous create/update 
+ * asynchronous update to operations, and location header on asynchronous create/update
  * to be in line with the ARM async API guidelines.
- * 
+ *
  * Reference: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md
  * Cadl ARM Library: https://github.com/Azure/cadl-azure/tree/main/packages/cadl-azure-resource-manager/lib
  */
@@ -30,9 +27,12 @@ interface ResourceOperationsCustom<
   TProperties extends object,
   TBaseParameters = BaseParameters<TResource>
 >
-  extends ResourceInstanceOperationsCustom<TResource, TProperties, TBaseParameters>,
+  extends ResourceInstanceOperationsCustom<
+      TResource,
+      TProperties,
+      TBaseParameters
+    >,
     ResourceCollectionOperations<TResource, TBaseParameters> {}
-
 
 // Add custom create and update async operations (modified)
 interface ResourceInstanceOperationsCustom<
@@ -44,8 +44,7 @@ interface ResourceInstanceOperationsCustom<
   extends Azure.ResourceManager.ResourceRead<TResource, TBaseParameters>,
     ResourceCreateAsyncCustom<TResource, TBaseParameters>,
     ResourceDeleteAsyncCustom<TResource, TBaseParameters>,
-    ResourceUpdateAsyncCustom<TResource, TProperties, TBaseParameters>  {}
-
+    ResourceUpdateAsyncCustom<TResource, TProperties, TBaseParameters> {}
 
 // Create custom create and update async operations (modified)
 @doc("Asynchronous resource create")
@@ -53,7 +52,10 @@ interface ResourceCreateAsyncCustom<
   TResource extends ArmResource,
   TBaseParameters = BaseParameters<TResource>
 > {
-  createOrUpdate is ArmResourceCreateOrUpdateAsyncLocation<TResource, TBaseParameters>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsyncLocation<
+    TResource,
+    TBaseParameters
+  >;
 }
 
 @doc("Asynchronous resource update")
@@ -88,14 +90,17 @@ alias ArmResourcePatchAsync<
   TResource extends ArmResource,
   TProperties extends object,
   TBaseParameters = BaseParameters<TResource>
-> = ArmCustomPatchAsyncLocation<TResource, ResourceUpdateModel<TResource, TProperties>, TBaseParameters>;
+> = ArmCustomPatchAsyncLocation<
+  TResource,
+  ResourceUpdateModel<TResource, TProperties>,
+  TBaseParameters
+>;
 
 alias ArmResourceDeleteAsync<
   TResource extends ArmResource,
   TProperties extends object,
   TBaseParameters = BaseParameters<TResource>
 > = ArmCustomDeleteAsyncLocation<TResource, TBaseParameters>;
-
 
 // Add async response with locations to response type (modified)
 @autoRoute
@@ -104,7 +109,7 @@ alias ArmResourceDeleteAsync<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    `final-state-via`: "azure-async-operation",
   }
 )
 @armResourceCreateOrUpdate(TResource)
@@ -126,7 +131,7 @@ op ArmResourceCreateOrUpdateAsyncLocation<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "azure-async-operation",
+    `final-state-via`: "azure-async-operation",
   }
 )
 @armResourceUpdate(TResource)
@@ -149,7 +154,7 @@ op ArmCustomPatchAsyncLocation<
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "location",
+    `final-state-via`: "location",
   }
 )
 @armResourceDelete(TResource)
@@ -157,11 +162,11 @@ op ArmCustomPatchAsyncLocation<
 op ArmCustomDeleteAsyncLocation<
   TResource extends ArmResource,
   TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>
-): ArmDeletedResponse | ArmAcceptedResponseLocation<"Resource deletion accepted."> | ArmDeletedNoContentResponse | ErrorResponse;
-
-
+>(...ResourceInstanceParameters<TResource, TBaseParameters>):
+  | ArmDeletedResponse
+  | ArmAcceptedResponseLocation<"Resource deletion accepted.">
+  | ArmDeletedNoContentResponse
+  | ErrorResponse;
 
 // Add location header to response type (modified)
 @doc("ARM create operation completed successfully.")
@@ -179,7 +184,6 @@ model ArmAcceptedResponseLocation<TMessage extends string = "Resource operation 
   ...LocationHeader;
 }
 
-
 // Create location header
 @doc("The location uri of the operation.")
 model LocationHeader {
@@ -194,4 +198,3 @@ model RetryAfterHeaderCustom {
   @header("Retry-After")
   retryAfter: int32;
 }
-

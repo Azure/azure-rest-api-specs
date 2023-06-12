@@ -1,14 +1,13 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi3";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-resource-manager";
 
-import "./custom_operations.cadl";
+import "./custom_operations.tsp";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.ContainerStorage.Custom;
@@ -47,28 +46,28 @@ model PoolProperties {
 
   @doc("Type of the Pool: ephemeral, disk, managed, or elasticsan.")
   poolType: PoolType;
-  
+
   @doc("List of availability zones that resources can be created in.")
   zones: string[];
 
   @doc("Initial capacity of the pool in GiB.")
   poolCapacityGiB: int64;
-
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
 
+
   @doc("List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.")
   assignments: string[];
-
   // Don't include in preview
   // @doc("Type of encryption. Allowed values: EncryptionAtRestWithPlatformKey.")
   // encryption: EncryptionType;
 
+
   @doc("Ephemeral Pool Properties")
   ephemeralPoolProperties?: EphemeralPoolProperties;
-
   // @doc("Managed Pool Properties")
   // managedPoolProperties?: ManagedPoolProperties;
+
 
   @doc("Disk Pool Properties")
   diskPoolProperties?: DiskPoolProperties;
@@ -110,15 +109,15 @@ model ElasticSanPoolProperties {
 
 @doc("Disk Pool Properties")
 model DiskPoolProperties {
-  // Don't include in preview 
+  // Don't include in preview
   // @doc("Name of the CSI provisioner, e.g. disk.csi.azure.com")
   // csiProvisioner?: string;
 
   @doc("List of KV pairs to set in StorageClass to configure CSI driver.")
   csiParams?: Record<string>;
-  
   // @doc("Initial capacity of disks. Application volumes must fit within single disks.")
   // diskCapacityRequest: int64;
+
 
   @doc("Maximum capacity of the volumes in GiB the user intends to create. Default 512.")
   maxVolumeCapacityGiB?: int64 = 512;
@@ -129,99 +128,98 @@ model DiskPoolProperties {
 
 @doc("Sku definition")
 model Sku {
-    @doc("Sku name")
-    name: SkuName;
+  @doc("Sku name")
+  name: SkuName;
 
-    @doc("Sku Account Tier")
-    tier: AccountTier;
+  @doc("Sku Account Tier")
+  tier: AccountTier;
 }
 
 enum SkuName {
   Invalid,
   Premium_LRS,
-  Premium_ZRS
+  Premium_ZRS,
 }
 
 enum AccountTier {
   Invalid,
   Standard,
   Premium,
-  Ultra
+  Ultra,
 }
 
 @doc("Network Rule Set definition")
 model NetworkRuleSet {
-    @doc("Default action")
-    defaultAction: Action;
+  @doc("Default action")
+  defaultAction: Action;
 
-    @doc("Virtual network rules")
-    virtualNetworkRules: VirtualNetworkRule[];
+  @doc("Virtual network rules")
+  virtualNetworkRules: VirtualNetworkRule[];
 }
 
 @doc("Virtual Network Rule definition")
 model VirtualNetworkRule {
-    @doc("Action of rule")
-    action?: Action = Action.Allow;
+  @doc("Action of rule")
+  action?: Action = Action.Allow;
 
-    @doc("Id of rule")
-    id: string;
+  @doc("Id of rule")
+  id: string;
 }
 
 enum Action {
-    Deny,
-    Allow
+  Deny,
+  Allow,
 }
 
 enum ProtocolType {
-    None,
-    iSCSI
+  None,
+  iSCSI,
 }
 
 enum EncryptionType {
-    EncryptionAtRestWithPlatformKey
+  EncryptionAtRestWithPlatformKey,
 }
 
 enum PoolType {
   Ephemeral: 1,
   Disk: 2,
   Managed: 3,
-  ElasticSan: 4 
+  ElasticSan: 4,
 }
 
 enum VolumeBindingMode {
   Immediate,
-  WaitFirstForCustomer
+  WaitFirstForCustomer,
 }
 
 @doc("Disk Properties Model")
 model DiskProperties {
-    @doc("Reference to Managed Disk")
-    resourceId: string;
+  @doc("Reference to Managed Disk")
+  resourceId: string;
 
-    @doc("Manufacturer Disk ID")
-    wwn: string;
+  @doc("Manufacturer Disk ID")
+  wwn: string;
 
-    @doc("Capacity of disk in GiB")
-    capacityGiB: int64;
+  @doc("Capacity of disk in GiB")
+  capacityGiB: int64;
 
-    @doc("Type of disk")
-    diskType: DiskType;
+  @doc("Type of disk")
+  diskType: DiskType;
 
-    @doc("SKU or Manufacturer type/name")
-    displayName: string;
+  @doc("SKU or Manufacturer type/name")
+  displayName: string;
 
-    @doc("Name of the node disk is attached on")
-    nodeName: string;
+  @doc("Name of the node disk is attached on")
+  nodeName: string;
 
-    @doc("Used to import SSD to discover WWN")
-    devicePath: string;
+  @doc("Used to import SSD to discover WWN")
+  devicePath: string;
 }
 
 enum DiskType {
   Local,
-  Managed
+  Managed,
 }
-
 
 @doc("Provisioning state of the resource.")
 @Azure.Core.lroStatus
@@ -243,22 +241,21 @@ enum ProvisioningState {
 model Volume is ProxyResource<VolumeProperties> {
   @doc("Volume Resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-
   @key("volumeName")
   @path
   @segment("volumes")
   name: string;
 }
-  
+
 @doc("Volume Properties")
 model VolumeProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
   // Will not have features enabled by these flags for preview
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
+
 
   @doc("String KV pairs indicating labels")
   labels: Record<string>;
@@ -268,7 +265,6 @@ model VolumeProperties {
 
   @doc("Indicates how the volume should be attached")
   volumeMode: VolumeMode;
-
   // Set default to RWO in RP and pass it through
   // @doc("Indicates how the volume can be accessed")
   // accessMode: AccessMode;
@@ -276,6 +272,7 @@ model VolumeProperties {
   // Don't support replication for preview
   // @doc("Number of replicas")
   // replicas: int64;
+
 
   @doc("Reclaim Policy, Delete or Retain")
   reclaimPolicy: ReclaimPolicy;
@@ -290,19 +287,19 @@ model VolumeProperties {
 
 enum VolumeMode {
   Filesystem,
-  Raw
+  Raw,
 }
 
 enum AccessMode {
   ReadWriteOnce,
   ReadOnlyMany,
   ReadWriteMany,
-  ReadWriteOncePod
+  ReadWriteOncePod,
 }
 
 enum ReclaimPolicy {
   Delete,
-  Retain
+  Retain,
 }
 
 @doc("Placement Properties Model")
@@ -319,7 +316,7 @@ model PlacementProperties {
 
 enum WhenUnsatisfiable {
   DoNotSchedule,
-  ScheduleAnyway
+  ScheduleAnyway,
 }
 
 // END VOLUME
@@ -330,22 +327,21 @@ enum WhenUnsatisfiable {
 model VolumeSnapshot is ProxyResource<VolumeSnapshotProperties> {
   @doc("Volume Snapshot Resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-
   @key("volumeSnapshotName")
   @path
   @segment("volumeSnapshots")
   name: string;
 }
-  
+
 @doc("Volume Snapshot Properties")
 model VolumeSnapshotProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
   // Don't include in preview
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
+
 
   @doc("Reference to the source volume")
   source: string;
@@ -361,7 +357,7 @@ model VolumeSnapshotProperties {
 }
 
 // END VOLUME SNAPSHOT
-  
+
 @armResourceOperations
 interface Pools extends ResourceOperationsCustom<Pool, PoolProperties> {}
 
@@ -369,4 +365,5 @@ interface Pools extends ResourceOperationsCustom<Pool, PoolProperties> {}
 interface Volumes extends ResourceOperationsCustom<Volume, VolumeProperties> {}
 
 @armResourceOperations
-interface VolumeSnapshots extends ResourceOperationsCustom<VolumeSnapshot, VolumeSnapshotProperties> {}
+interface VolumeSnapshots
+  extends ResourceOperationsCustom<VolumeSnapshot, VolumeSnapshotProperties> {}
