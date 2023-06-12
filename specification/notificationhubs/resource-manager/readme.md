@@ -63,7 +63,6 @@ input-file:
 suppressions:
  - code: RepeatedPathInfo
    reason: We cannot remove the subscriptionId parameter without introducing a breaking change.
-   from: notificationhubs.json
    where:
    - $.definitions.NamespaceProperties.subscriptionId
 ```
