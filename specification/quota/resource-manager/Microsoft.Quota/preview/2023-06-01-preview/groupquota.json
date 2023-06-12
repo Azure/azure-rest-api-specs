@@ -1590,26 +1590,6 @@
         }
       }
     },
-    "GroupQuotasEntityBase": {
-      "type": "object",
-      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "additionalAttributes": {
-          "description": "Additional attributes to allow subscription, which can be added to the subscriptionIds.",
-          "$ref": "#/definitions/AdditionalAttributes"
-        },
-        "subscriptionIds": {
-          "description": "List of subscriptions included in the ShareQuotaEntity. It can be null at the time of creation or a list of subscriptions can be passed.",
-          "$ref": "#/definitions/SubscriptionIdList"
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the operation.",
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        }
-      }
-    },
     "AttributeType": {
       "type": "string",
       "description": "Name of the entity for filter, such as offerType.",
@@ -1716,10 +1696,18 @@
             "read"
           ]
         },
-        "properties": {
-          "title": "Properties",
-          "type": "object",
-          "$ref": "#/definitions/GroupQuotasEntityBase"
+        "additionalAttributes": {
+          "description": "Additional attributes to allow subscription, which can be added to the subscriptionIds.",
+          "$ref": "#/definitions/AdditionalAttributes"
+        },
+        "subscriptionIds": {
+          "description": "List of subscriptions included in the ShareQuotaEntity. It can be null at the time of creation or a list of subscriptions can be passed.",
+          "$ref": "#/definitions/SubscriptionIdList"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the operation.",
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
         }
       }
     },
