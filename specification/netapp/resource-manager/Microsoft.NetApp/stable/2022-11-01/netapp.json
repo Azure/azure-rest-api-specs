@@ -4799,47 +4799,10 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "The identity user for the resource."
-        }
-      }
-    },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "allOf": [
-        {
+          "description": "The identity used for the resource.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
-      ],
-      "properties": {
-        "userAssignedIdentities": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here."
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Identity for the resource."
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
-        }
-      ],
-      "properties": {
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of the assigned identity."
-        }
-      },
-      "description": "UserAssignedIdentity for the resource."
+      }
     },
     "netAppAccountPatch": {
       "description": "NetApp account patch resource",
