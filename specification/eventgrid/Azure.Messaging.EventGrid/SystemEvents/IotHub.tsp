@@ -20,7 +20,7 @@ model DeviceTwinInfo {
   authenticationType?: string;
 
   @doc("Count of cloud to device messages sent to this device.")
-  cloudToDeviceMessageCount?: integer;
+  cloudToDeviceMessageCount?: int64;
 
   @doc("Whether the device is connected or disconnected.")
   connectionState?: string;
@@ -51,7 +51,7 @@ model DeviceTwinInfo {
   statusUpdateTime?: string;
 
   @doc("An integer that is incremented by one each time the device twin is updated.")
-  version?: integer;
+  version?: int64;
   //TODO: also here
 
 
