@@ -330,6 +330,49 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/{roleId}?disambiguation_dummy": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_GetById",
+        "description": "Gets a role definition by ID.",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get role definition by ID": {
+            "$ref": "./examples/GetRoleDefinitionById.json"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "RoleDefinitionFilter": {
       "properties": {
@@ -363,7 +406,7 @@
         "permissions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Permission"
+            "$ref": "./common-types.json#/definitions/Permission"
           },
           "x-ms-identifiers": [],
           "description": "Role definition permissions."
@@ -450,7 +493,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Permission"
+            "$ref": "./common-types.json#/definitions/Permission"
           },
           "x-ms-identifiers": [],
           "description": "An array of permissions."
@@ -462,50 +505,6 @@
       },
       "type": "object",
       "description": "Permissions information."
-    },
-    "Permission": {
-      "properties": {
-        "actions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed actions."
-        },
-        "notActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Denied actions."
-        },
-        "dataActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed Data actions."
-        },
-        "notDataActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Denied Data actions."
-        },
-        "condition": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The conditions on the role definition. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'"
-        },
-        "conditionVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Version of the condition. Currently the only accepted value is '2.0'"
-        }
-      },
-      "type": "object",
-      "description": "Role definition permissions."
     }
   },
   "parameters": {
