@@ -310,13 +310,13 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actionResults": {
       "get": {
         "tags": [
-          "Operations",
+          "ActionResults",
           "Environments"
         ],
-        "description": "Lists the operations for an environment.",
+        "description": "Lists the action results for an environment.",
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
@@ -334,12 +334,12 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
-        "operationId": "EnvironmentOperations_ListByEnvironment",
+        "operationId": "EnvironmentActionResults_ListByEnvironment",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EnvironmentOperationListResult"
+              "$ref": "#/definitions/ActionResultListResult"
             }
           },
           "default": {
@@ -356,8 +356,8 @@
           }
         },
         "x-ms-examples": {
-          "EnvironmentOperations_ListByEnvironment": {
-            "$ref": "./examples/EnvironmentOperations_ListByEnvironment.json"
+          "EnvironmentActionResults_ListByEnvironment": {
+            "$ref": "./examples/EnvironmentActionResults_ListByEnvironment.json"
           }
         },
         "x-ms-pageable": {
@@ -365,13 +365,13 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationName}": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actionResults/{actionResultName}": {
       "get": {
         "tags": [
-          "Operations",
+          "ActionResults",
           "Environments"
         ],
-        "description": "Gets an environment operation.",
+        "description": "Gets an environment action result.",
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
@@ -386,15 +386,15 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/EnvironmentOperationNameParameter"
+            "$ref": "#/parameters/ActionResultNameParameter"
           }
         ],
-        "operationId": "EnvironmentOperations_GetByEnvironment",
+        "operationId": "EnvironmentActionResults_GetByEnvironment",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EnvironmentOperation"
+              "$ref": "#/definitions/ActionResult"
             }
           },
           "default": {
@@ -411,19 +411,19 @@
           }
         },
         "x-ms-examples": {
-          "EnvironmentOperations_GetByEnvironment": {
-            "$ref": "./examples/EnvironmentOperations_GetByEnvironment.json"
+          "EnvironmentActionResults_GetByEnvironment": {
+            "$ref": "./examples/EnvironmentActionResults_GetByEnvironment.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationName}/logs": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actionResults/{actionResultName}/logs": {
       "get": {
         "tags": [
-          "Operations",
+          "ActionResults",
           "Environments"
         ],
-        "description": "Gets an environment operations logs.",
+        "description": "Gets the logs for an action on an environment.",
         "produces": [
           "text/plain"
         ],
@@ -441,10 +441,10 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/EnvironmentOperationNameParameter"
+            "$ref": "#/parameters/ActionResultNameParameter"
           }
         ],
-        "operationId": "EnvironmentOperations_GetLogs",
+        "operationId": "EnvironmentActionResults_GetLogs",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -455,8 +455,8 @@
           }
         },
         "x-ms-examples": {
-          "EnvironmentOperations_GetLogs": {
-            "$ref": "./examples/EnvironmentOperations_GetLogs.json"
+          "EnvironmentActionResults_GetLogs": {
+            "$ref": "./examples/EnvironmentActionResults_GetLogs.json"
           }
         }
       }
@@ -1111,15 +1111,15 @@
         ]
       }
     },
-    "EnvironmentOperationListResult": {
+    "ActionResultListResult": {
       "type": "object",
-      "description": "The operations list result.",
+      "description": "The action results list result.",
       "properties": {
         "value": {
           "description": "The current page of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EnvironmentOperation"
+            "$ref": "#/definitions/ActionResult"
           }
         },
         "nextLink": {
@@ -1131,48 +1131,48 @@
         "value"
       ]
     },
-    "EnvironmentOperation": {
+    "ActionResult": {
       "type": "object",
-      "description": "An operation on an environment.",
+      "description": "The result of an action on an environment.",
       "properties": {
         "id": {
-          "description": "Unique identifier for the environment operation.",
+          "description": "Unique identifier for the environment action.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "The name of the operation.",
+          "description": "The name of the action.",
           "type": "string",
           "readOnly": true
         },
-        "type": {
-          "description": "The type of operation that was taken.",
+        "kind": {
+          "description": "The kind of action that was taken.",
           "type": "string",
           "readOnly": true
         },
         "status": {
-          "description": "The operation status.",
+          "description": "The action status.",
           "type": "string",
           "readOnly": true
         },
         "parameters": {
           "type": "object",
-          "description": "Parameters object for the operation.",
+          "description": "Parameters object for the action.",
           "readOnly": true
         },
         "createdByObjectId": {
-          "description": "The object ID of the actor which initiated the operation'.",
+          "description": "The object ID of the actor which initiated the action'.",
           "type": "string",
           "readOnly": true
         },
         "startTime": {
-          "description": "The time the operation started.",
+          "description": "The time the action started.",
           "type": "string",
           "readOnly": true,
           "format": "date-time"
         },
         "endTime": {
-          "description": "The time the operation finished.",
+          "description": "The time the action finished.",
           "type": "string",
           "readOnly": true,
           "format": "date-time"
@@ -1219,15 +1219,15 @@
       "description": "The name of the environment definition",
       "x-ms-parameter-location": "method"
     },
-    "EnvironmentOperationNameParameter": {
-      "name": "operationName",
+    "ActionResultNameParameter": {
+      "name": "actionResultName",
       "in": "path",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
-      "description": "The name of the operation.",
+      "description": "The name of the action to check the result for.",
       "x-ms-parameter-location": "method"
     }
   }

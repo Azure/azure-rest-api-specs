@@ -799,7 +799,7 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:troubleshoot": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:repair": {
       "post": {
         "tags": [
           "Dev Boxes"
@@ -818,8 +818,8 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           }
         ],
-        "description": "Troubleshoot a Dev Box",
-        "operationId": "DevBoxes_TroubleshootDevBox",
+        "description": "Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.",
+        "operationId": "DevBoxes_RepairDevBox",
         "x-ms-long-running-operation": true,
         "responses": {
           "202": {
@@ -848,8 +848,57 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_TroubleshootDevBox": {
-            "$ref": "./examples/DevBoxes_Troubleshoot.json"
+          "DevBoxes_RepairDevBox": {
+            "$ref": "./examples/DevBoxes_Repair.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:repairResult": {
+      "get": {
+        "tags": [
+          "Dev Boxes"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          }
+        ],
+        "description": "Retrieves the result of the last repair operation on a Dev Box.",
+        "operationId": "DevBoxes_GetDevBoxRepairResult",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "The request completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RepairResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_GetDevBoxRepairResult": {
+            "$ref": "./examples/DevBoxes_GetRepairResult.json"
           }
         }
       }
@@ -1468,6 +1517,38 @@
         "value"
       ]
     },
+    "RepairResult": {
+      "type": "object",
+      "description": "The result of a repair operation on a Dev Box.",
+      "properties": {
+        "status": {
+          "description": "The status of the repair operation.",
+          "type": "string"
+        },
+        "resultCode": {
+          "description": "The result code of the repair operation.",
+          "type": "string"
+        },
+        "resultMessage": {
+          "description": "The result message of the repair operation.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The time the repair operation started.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The time the repair operation ended.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "description": "The error that occurred during the repair operation.",
+          "$ref": "devcenter.json#/definitions/CloudErrorBody"
+        }
+      }
+    },
     "DevBox": {
       "type": "object",
       "description": "A Dev Box",
@@ -1567,11 +1648,6 @@
         "localAdministrator": {
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
           "$ref": "#/definitions/LocalAdminStatus"
-        },
-        "lastOperationId": {
-          "description": "The ID of the most recent operation performed on the Dev Box.",
-          "readOnly": true,
-          "type": "string"
         }
       },
       "required": [
