@@ -176,10 +176,6 @@
           "NotificationHubs_CreateOrUpdate": {
             "$ref": "./examples/NotificationHubs/CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -443,6 +439,12 @@
         "responses": {
           "200": {
             "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
@@ -1191,6 +1193,12 @@
         "responses": {
           "200": {
             "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SharedAccessAuthorizationRuleResource"
             }
