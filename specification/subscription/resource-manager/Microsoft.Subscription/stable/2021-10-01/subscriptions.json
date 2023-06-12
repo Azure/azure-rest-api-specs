@@ -127,6 +127,7 @@
             "$ref": "./examples/getSubscriptionOperation.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "responses": {
           "200": {
             "description": "Successful completion of the asynchronous operation",
@@ -143,8 +144,15 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -619,6 +627,7 @@
     },
     "SubscriptionCreationResult": {
       "description": "The created subscription object.",
+      "type": "object",
       "properties": {
         "subscriptionLink": {
           "description": "The link to the new subscription. Use this link to check the status of subscription creation operation.",
