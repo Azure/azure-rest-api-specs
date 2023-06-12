@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "orderId": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
+    "subscriptionId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "provider": "Microsoft.CosmosDb",
+    "location": "global",
+    "resourceName": "databaseAccounts",
+    "allocateQuotaRequest": {
+      "limits": 5,
+      "providerSpecificProperties": [],
+      "additionalFlags": "None"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": "30",
+        "Azure-AsyncOperation": "https://capacityorder-ppe.trafficmanaget.net/allocations/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3"
+      },
+      "body": {
+        "id": "allocations/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
+        "name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
+        "status": "Accepted"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "target": "capacityOrder",
+          "message": "Required parameter needByDate missing."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "target": "capacityOrder",
+          "message": "Capacity order not found."
+        }
+      }
+    }
+  }
+}

@@ -108,7 +108,7 @@
         "operationId": "GroupQuotas_Update",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/Patch GroupQuotas.json"
+            "$ref": "./examples/PatchGroupQuotas.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -176,7 +176,7 @@
         "operationId": " GroupQuotas_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/GetGroupQuotas,json"
+            "$ref": "./examples/GetGroupQuotas.json"
           }
         },
         "parameters": [
@@ -214,7 +214,7 @@
         "operationId": "GroupQuotas_Delete",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/DeleteGroupQuotas,json"
+            "$ref": "./examples/DeleteGroupQuotas.json"
           }
         },
         "parameters": [
@@ -286,8 +286,8 @@
         "tags": [
           "GroupQuotas-Subscriptions"
         ],
-        "summary": "Gets GroupQuotas Subscription List for the GroupQuotas name passed.",
-        "description": "Gets GroupQuotas Subscription List for the GroupQuotas name passed.",
+        "summary": "Gets GroupQuota Subscription List for the GroupQuotas name passed.",
+        "description": "Gets GroupQuota Subscription List for the GroupQuota name passed.",
         "operationId": "GroupQuotaSubscriptions_GetList",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
@@ -410,7 +410,7 @@
         "operationId": "GroupQuotaSubscriptions_Delete",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/DeleteGroupQuotasSubscriptions.json"
+            "$ref": "./examples/DeleteGroupQuotaSubscriptions.json"
           }
         },
         "parameters": [
@@ -451,7 +451,7 @@
         "operationId": "SGroupQuotaSubscription_Get",
         "x-ms-examples": {
           "GroupQuotaLimits_Put_Subscription": {
-            "$ref": "./examples/DeleteGroupQuotasSubscription.json"
+            "$ref": "./examples/DeleteGroupQuotaSubscriptions.json"
           }
         },
         "parameters": [
@@ -702,9 +702,6 @@
             "$ref": "#/parameters/GroupQuotaNameInParameters"
           },
           {
-            "$ref": "#/parameters/ResourceInParameters"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -822,8 +819,8 @@
         "description": "Gets all the quota assigned to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota assigned to the subscription. Only the Group quota assigned to the subscription can be assigned back to the MG Group Quota.",
         "operationId": "ShareQuotaMGSubscription_List",
         "x-ms-examples": {
-          "GroupQuota_Put_Request_ForCompute": {
-            "$ref": "./examples/PutQuotaAllocation-Compute.json"
+          "GroupQuota_Get_Request_ForCompute": {
+            "$ref": "./examples/GetQuotaAllocation-Compute.json"
           }
         },
         "parameters": [
@@ -1421,17 +1418,14 @@
             "read"
           ]
         },
-        "properties": {
-          "type": "object",
-          "provisioningState ": {
-            "$ref": "#/definitions/RequestState",
-            "readOnly": true
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
-          }
+        "provisioningState ": {
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
         }
       }
     },
@@ -1522,7 +1516,6 @@
       "type": "object",
       "description": "Subscription quota list.",
       "properties": {
-        "type": "object",
         "value": {
           "type": "array",
           "description": "Subscription quota list.",
@@ -1640,11 +1633,11 @@
         "value": {
           "type": "string",
           "description": "The value for the attribute."
-        },
-        "x-ms-identifiers": [
-          "attribute"
-        ]
-      }
+        } 
+      },
+      "x-ms-identifiers": [
+        "attribute"
+      ]
     },
     "AttributeList": {
       "type": "array",
@@ -1674,21 +1667,22 @@
           "type": "string",
           "readOnly": true
         },
-        "properties": {
-          "type": "object",
-          "provisioningState": {
-            "type": "string",
-            "description": "Provisioning state",
-            "$ref": "#/definitions/RequestState",
-            "readOnly": true
-          },
-          "subscriptionIds": {
-            "type": "array",
-            "description": "List of subscriptionIds.",
-            "items": {
-              "type": "string",
-              "description": "SubscriptionId."
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RequestState"
             }
+          ],
+          "readOnly": true
+        },
+        "subscriptionIds": {
+          "type": "array",
+          "description": "List of subscriptionIds.",
+          "items": {
+            "type": "string",
+            "description": "SubscriptionId."
           }
         }
       }
@@ -1755,17 +1749,10 @@
     },
     "GroupingIdType": {
       "type": "string",
-      "GroupingIdType": {
-        "type": "string",
-        "description": "GroupingId type. More types of groupIds can be supported in future. MGID is already in the URI, so it's not needed and cause errors, if the MGId in Uri is different properties.'",
-        "enum": [
-          "ServiceTreeId"
-        ],
-        "x-ms-enum": {
-          "name": "GroupingIdType",
-          "modelAsString": true
-        }
-      },
+      "description": "GroupingId type. More types of groupIds can be supported in future. MGID is already in the URI, so it's not needed and cause errors, if the MGId in Uri is different properties.'",
+      "enum": [
+        "ServiceTreeId"
+      ],
       "x-ms-enum": {
         "name": "GroupingIdType",
         "modelAsString": true
