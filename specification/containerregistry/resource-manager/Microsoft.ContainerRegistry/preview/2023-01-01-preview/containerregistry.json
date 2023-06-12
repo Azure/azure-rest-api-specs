@@ -4116,15 +4116,8 @@
       ],
       "properties": {
         "properties": {
+          "$ref": "#/definitions/ArchiveProperties",
           "description": "The properties of the archive.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ArchiveProperties"
-            },
-            {
-              "$ref": "#/definitions/DebianArchiveProperties"
-            }
-          ],
           "x-ms-client-flatten": true
         }
       }
@@ -4143,16 +4136,8 @@
       "type": "object",
       "properties": {
         "packageSource": {
-          "description": "The package source of the archive.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ArchivePackageSourceProperties"
-            },
-            {
-              "$ref": "#/definitions/DebianArchivePackageSourceProperties"
-            }
-          ],
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ArchivePackageSourceProperties",
+          "description": "The package source of the archive."
         },
         "publishedVersion": {
           "description": "The published version of the archive.",
