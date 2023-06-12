@@ -41,8 +41,8 @@
                     "$ref": "#/definitions/Widget"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "Widget[]",
-                  "description": "The Widget items on this page"
+                  "description": "The Widget items on this page",
+                  "x-typespec-name": "Widget[]"
                 },
                 "nextLink": {
                   "type": "string",
@@ -152,7 +152,7 @@
             "description": "The request has succeeded.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               }
@@ -165,7 +165,7 @@
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               }
@@ -216,7 +216,7 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               }
@@ -362,8 +362,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -373,8 +373,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -402,13 +401,11 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "Azure.Core.Foundations.OperationState": {
       "type": "string",
+      "description": "Enum describing allowed operation states.",
       "enum": [
         "InProgress",
         "Succeeded",
@@ -417,7 +414,29 @@
       ],
       "x-ms-enum": {
         "name": "OperationState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
       }
     },
     "FakedSharedModel": {
@@ -515,8 +534,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }

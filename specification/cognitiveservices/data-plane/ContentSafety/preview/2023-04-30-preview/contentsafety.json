@@ -114,8 +114,8 @@
                     "$ref": "#/definitions/TextBlocklist"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "TextBlocklist[]",
-                  "description": "The TextBlocklist items on this page"
+                  "description": "The TextBlocklist items on this page",
+                  "x-typespec-name": "TextBlocklist[]"
                 },
                 "nextLink": {
                   "type": "string",
@@ -168,9 +168,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -212,9 +212,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "resource",
@@ -274,9 +274,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -317,16 +317,17 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/AddBlockItemsOptions"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -370,16 +371,17 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/RemoveBlockItemsOptions"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -420,9 +422,9 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
@@ -446,8 +448,8 @@
                     "$ref": "#/definitions/TextBlockItem"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "TextBlockItem[]",
-                  "description": "The TextBlockItem items on this page"
+                  "description": "The TextBlockItem items on this page",
+                  "x-typespec-name": "TextBlockItem[]"
                 },
                 "nextLink": {
                   "type": "string",
@@ -500,17 +502,17 @@
             "in": "path",
             "required": true,
             "description": "Text blocklist name.",
+            "type": "string",
             "pattern": "^[0-9A-Za-z._~-]+$",
-            "maxLength": 64,
-            "type": "string"
+            "maxLength": 64
           },
           {
             "name": "blockItemId",
             "in": "path",
             "required": true,
             "description": "Block Item Id. It will be uuid.",
-            "maxLength": 64,
-            "type": "string"
+            "type": "string",
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -597,8 +599,8 @@
             "$ref": "#/definitions/TextBlockItemInfo"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "TextBlockItemInfo[]",
-          "description": "Array of blockItemInfo to add."
+          "description": "Array of blockItemInfo to add.",
+          "x-typespec-name": "TextBlockItemInfo[]"
         }
       },
       "description": "The request of adding blockItems to text blocklist.",
@@ -615,8 +617,8 @@
             "$ref": "#/definitions/TextBlockItem"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "TextBlockItem[]",
-          "description": "Array of blockItems added."
+          "description": "Array of blockItems added.",
+          "x-typespec-name": "TextBlockItem[]"
         }
       },
       "description": "The response of adding blockItems to text blocklist."
@@ -633,8 +635,8 @@
           "items": {
             "$ref": "#/definitions/ImageCategory"
           },
-          "x-typespec-name": "ImageCategory[]",
-          "description": "The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned."
+          "description": "The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned.",
+          "x-typespec-name": "ImageCategory[]"
         }
       },
       "description": "The analysis request of the image.",
@@ -677,16 +679,16 @@
           "items": {
             "$ref": "#/definitions/TextCategory"
           },
-          "x-typespec-name": "TextCategory[]",
-          "description": "The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned."
+          "description": "The categories will be analyzed. If not assigned, a default set of the categories' analysis results will be returned.",
+          "x-typespec-name": "TextCategory[]"
         },
         "blocklistNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "The names of blocklists."
+          "description": "The names of blocklists.",
+          "x-typespec-name": "string[]"
         },
         "breakByBlocklists": {
           "type": "boolean",
@@ -707,8 +709,8 @@
             "$ref": "#/definitions/TextBlocklistMatchResult"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "TextBlocklistMatchResult[]",
-          "description": "The details of blocklist match."
+          "description": "The details of blocklist match.",
+          "x-typespec-name": "TextBlocklistMatchResult[]"
         },
         "hateResult": {
           "$ref": "#/definitions/TextAnalyzeSeverityResult",
@@ -750,8 +752,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -761,8 +763,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -790,10 +791,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "ImageAnalyzeSeverityResult": {
       "type": "object",
@@ -852,8 +850,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Array of blockItemIds to remove."
+          "description": "Array of blockItemIds to remove.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The request of removing blockItems from text blocklist.",
@@ -1039,8 +1037,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.MaxPageSizeQueryParameter": {
