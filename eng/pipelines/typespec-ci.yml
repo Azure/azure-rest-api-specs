@@ -1,20 +1,3 @@
-trigger:
-  branches:
-    include:
-    - main
-
-pr:
-  branches:
-    include:
-    - main
-    - typespec-next
-  paths:
-    include:
-    - package.json
-    - package-lock.json
-    - eng/pipelines/typespec-ci.yml
-    - eng/pipelines/templates/steps/typespec-ci.yml
-
 jobs:
 - job: TypeSpecCI
   pool:
@@ -24,11 +7,7 @@ jobs:
   steps:
   - script: npm ci
     displayName: npm ci
-
-  - script: npm ls -a
-    displayName: npm ls -a
-    condition: succeededOrFailed()
-
+  
   - template: templates/steps/typespec-ci.yml
     parameters:
       Folder: specification/contosowidgetmanager/Contoso.WidgetManager
@@ -51,28 +30,13 @@ jobs:
 
   - template: templates/steps/typespec-ci.yml
     parameters:
-      Folder: specification/cognitiveservices/HealthInsights/healthinsights.oncophenotype
-      DisplayName: healthinsights.oncophenotype
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/HealthInsights/healthinsights.trialmatcher
-      DisplayName: healthinsights.trialmatcher
+      Folder: specification/cognitiveservices/OpenAI.Authoring
+      DisplayName: OpenAI.Authoring
 
   - template: templates/steps/typespec-ci.yml
     parameters:
       Folder: specification/cognitiveservices/OpenAI.Inference
       DisplayName: OpenAI.Inference
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/containerservice/Fleet.Management
-      DisplayName: Fleet.Management
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/servicenetworking/ServiceNetworking.Management
-      DisplayName: Microsoft.ServiceNetworking
 
   - template: templates/steps/typespec-ci.yml
     parameters:

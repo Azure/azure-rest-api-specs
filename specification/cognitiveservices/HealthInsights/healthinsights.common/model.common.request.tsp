@@ -46,7 +46,6 @@ model PatientInfo {
   clinicalInfo?: ClinicalCodedElement[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The patient's sex.")
 enum PatientInfoSex {
   Female: "female",
@@ -54,7 +53,6 @@ enum PatientInfoSex {
   Unspecified: "unspecified",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).")
 enum DocumentType {
   Note: "note",
@@ -63,7 +61,6 @@ enum DocumentType {
   GenomicSequencing: "genomicSequencing",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the clinical document.")
 enum ClinicalDocumentType {
   Consultation: "consultation",
@@ -76,7 +73,6 @@ enum ClinicalDocumentType {
   Pathology: "pathology",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("""
 The type of the content's source. 
 In case the source type is 'inline', the content is given as a string (for instance, text). 

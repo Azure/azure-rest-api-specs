@@ -20,7 +20,6 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2023-03-preview
   - tag: package-2022-09-preview
   - tag: package-2022-07-preview
   - tag: package-2022-06-preview

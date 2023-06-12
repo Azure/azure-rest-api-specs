@@ -1208,8 +1208,7 @@
           "type": "object",
           "properties": {
             "vmSize": {
-              "type": "string",
-              "default": "Default"
+              "type": "string"
             },
             "processors": {
               "type": "integer",
@@ -1384,15 +1383,13 @@
           "type": "object",
           "properties": {
             "enableTPM": {
-              "type": "boolean",
-              "default": false
+              "type": "boolean"
             },
             "uefiSettings": {
               "type": "object",
               "properties": {
                 "secureBootEnabled": {
                   "type": "boolean",
-                  "default": false,
                   "description": "Specifies whether secure boot should be enabled on the virtual machine."
                 }
               }
@@ -1423,11 +1420,7 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "Name - Name of the image",
-                  "x-ms-mutability": [
-                    "create",
-                    "read"
-                  ]
+                  "description": "Name - Name of the image"
                 }
               },
               "description": "Which Image to use for the virtual machine"

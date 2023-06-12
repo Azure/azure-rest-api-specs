@@ -395,7 +395,7 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
+## Pyhton
 
 See configuration in [readme.python.md](./readme.python.md)
 

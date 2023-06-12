@@ -62,10 +62,4 @@ cli:
             operationGroup: 'zones'
             operation: 'createOrUpdate'
         hidden: true
-      - select: 'parameter'
-        where:
-            operationGroup: 'dnssecConfigs'
-            parameter: 'parameters'
-        set:
-            name: 'dnssec_configs'
 ```

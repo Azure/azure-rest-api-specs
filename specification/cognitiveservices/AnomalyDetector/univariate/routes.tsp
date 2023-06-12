@@ -25,7 +25,7 @@ with the same model. With this method, points before and after a certain point
 are used to determine whether it's an anomaly. The entire detection can give the
 user an overall status of the time series.
 """)
-op detectUnivariateEntireSeries is UnivariateServiceAction<
+op DetectUnivariateEntireSeries is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
@@ -42,7 +42,7 @@ op detectUnivariateEntireSeries is UnivariateServiceAction<
 This operation generates a model by using the points that you sent in to the API
 and based on all data to determine whether the last point is anomalous.
 """)
-op detectUnivariateLastPoint is UnivariateServiceAction<
+op DetectUnivariateLastPoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
@@ -56,7 +56,7 @@ op detectUnivariateLastPoint is UnivariateServiceAction<
 @route("timeseries/changepoint/detect")
 @summary("Detect change point for the entire series")
 @doc("Evaluate the change point score of every series point.")
-op detectUnivariateChangePoint is UnivariateServiceAction<
+op DetectUnivariateChangePoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")

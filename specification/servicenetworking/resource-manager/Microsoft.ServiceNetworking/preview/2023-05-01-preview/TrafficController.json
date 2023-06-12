@@ -60,6 +60,11 @@
         ],
         "operationId": "Operations_List",
         "description": "List the operations for the provider",
+        "x-ms-examples": {
+          "Get Operations List": {
+            "$ref": "../../cadl/examples/OperationsList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -81,11 +86,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get Operations List": {
-            "$ref": "./examples/OperationsList.json"
-          }
         }
       }
     },
@@ -96,6 +96,11 @@
         ],
         "operationId": "TrafficControllerInterface_ListBySubscription",
         "description": "List TrafficController resources by subscription ID",
+        "x-ms-examples": {
+          "Get Traffic Controllers List": {
+            "$ref": "../../cadl/examples/TrafficControllersGetList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -120,11 +125,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get Traffic Controllers List": {
-            "$ref": "./examples/TrafficControllersGetList.json"
-          }
         }
       }
     },
@@ -135,6 +135,11 @@
         ],
         "operationId": "TrafficControllerInterface_ListByResourceGroup",
         "description": "List TrafficController resources by resource group",
+        "x-ms-examples": {
+          "Get Traffic Controllers": {
+            "$ref": "../../cadl/examples/TrafficControllersGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -162,11 +167,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get Traffic Controllers": {
-            "$ref": "./examples/TrafficControllersGet.json"
-          }
         }
       }
     },
@@ -177,6 +177,11 @@
         ],
         "operationId": "TrafficControllerInterface_Get",
         "description": "Get a TrafficController",
+        "x-ms-examples": {
+          "Get Traffic Controller": {
+            "$ref": "../../cadl/examples/TrafficControllerGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -193,7 +198,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -209,11 +214,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Traffic Controller": {
-            "$ref": "./examples/TrafficControllerGet.json"
-          }
         }
       },
       "put": {
@@ -222,6 +222,11 @@
         ],
         "operationId": "TrafficControllerInterface_CreateOrUpdate",
         "description": "Create a TrafficController",
+        "x-ms-examples": {
+          "Put Traffic Controller": {
+            "$ref": "../../cadl/examples/TrafficControllerPut.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -238,7 +243,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "resource",
@@ -277,11 +282,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Put Traffic Controller": {
-            "$ref": "./examples/TrafficControllerPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -293,6 +293,11 @@
         ],
         "operationId": "TrafficControllerInterface_Update",
         "description": "Update a TrafficController",
+        "x-ms-examples": {
+          "Patch Traffic Controller": {
+            "$ref": "../../cadl/examples/TrafficControllerPatch.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -309,7 +314,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "properties",
@@ -334,11 +339,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Patch Traffic Controller": {
-            "$ref": "./examples/TrafficControllerPatch.json"
-          }
         }
       },
       "delete": {
@@ -347,6 +347,11 @@
         ],
         "operationId": "TrafficControllerInterface_Delete",
         "description": "Delete a TrafficController",
+        "x-ms-examples": {
+          "Delete Traffic Controller": {
+            "$ref": "../../cadl/examples/TrafficControllerDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -363,7 +368,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -373,14 +378,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              },
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
               }
             }
           },
@@ -392,11 +397,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Traffic Controller": {
-            "$ref": "./examples/TrafficControllerDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -412,6 +412,11 @@
         ],
         "operationId": "AssociationsInterface_ListByTrafficController",
         "description": "List Association resources by TrafficController",
+        "x-ms-examples": {
+          "Get Associations": {
+            "$ref": "../../cadl/examples/AssociationsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -428,7 +433,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -447,11 +452,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get Associations": {
-            "$ref": "./examples/AssociationsGet.json"
-          }
         }
       }
     },
@@ -462,6 +462,11 @@
         ],
         "operationId": "AssociationsInterface_Get",
         "description": "Get a Association",
+        "x-ms-examples": {
+          "Get Association": {
+            "$ref": "../../cadl/examples/AssociationGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -478,7 +483,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
@@ -486,7 +491,7 @@
             "required": true,
             "description": "Name of Association",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -502,11 +507,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Association": {
-            "$ref": "./examples/AssociationGet.json"
-          }
         }
       },
       "put": {
@@ -515,6 +515,11 @@
         ],
         "operationId": "AssociationsInterface_CreateOrUpdate",
         "description": "Create a Association",
+        "x-ms-examples": {
+          "Put Association": {
+            "$ref": "../../cadl/examples/AssociationPut.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -531,7 +536,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
@@ -539,7 +544,7 @@
             "required": true,
             "description": "Name of Association",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "resource",
@@ -578,11 +583,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Put Association": {
-            "$ref": "./examples/AssociationPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -594,6 +594,11 @@
         ],
         "operationId": "AssociationsInterface_Update",
         "description": "Update a Association",
+        "x-ms-examples": {
+          "Update Association": {
+            "$ref": "../../cadl/examples/AssociationPatch.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -610,7 +615,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
@@ -618,7 +623,7 @@
             "required": true,
             "description": "Name of Association",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "properties",
@@ -643,11 +648,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Update Association": {
-            "$ref": "./examples/AssociationPatch.json"
-          }
         }
       },
       "delete": {
@@ -656,6 +656,11 @@
         ],
         "operationId": "AssociationsInterface_Delete",
         "description": "Delete a Association",
+        "x-ms-examples": {
+          "Delete Association": {
+            "$ref": "../../cadl/examples/AssociationDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -672,7 +677,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "associationName",
@@ -680,7 +685,7 @@
             "required": true,
             "description": "Name of Association",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -711,11 +716,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Delete Association": {
-            "$ref": "./examples/AssociationDelete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -729,6 +729,11 @@
         ],
         "operationId": "FrontendsInterface_ListByTrafficController",
         "description": "List Frontend resources by TrafficController",
+        "x-ms-examples": {
+          "Get Frontends": {
+            "$ref": "../../cadl/examples/FrontendsGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -745,7 +750,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -764,11 +769,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get Frontends": {
-            "$ref": "./examples/FrontendsGet.json"
-          }
         }
       }
     },
@@ -779,6 +779,11 @@
         ],
         "operationId": "FrontendsInterface_Get",
         "description": "Get a Frontend",
+        "x-ms-examples": {
+          "Get Frontend": {
+            "$ref": "../../cadl/examples/FrontendGet.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -795,7 +800,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
@@ -803,7 +808,7 @@
             "required": true,
             "description": "Frontends",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -819,11 +824,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Frontend": {
-            "$ref": "./examples/FrontendGet.json"
-          }
         }
       },
       "put": {
@@ -832,6 +832,11 @@
         ],
         "operationId": "FrontendsInterface_CreateOrUpdate",
         "description": "Create a Frontend",
+        "x-ms-examples": {
+          "Put Frontend": {
+            "$ref": "../../cadl/examples/FrontendPut.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -848,7 +853,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
@@ -856,7 +861,7 @@
             "required": true,
             "description": "Frontends",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "resource",
@@ -895,11 +900,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Put Frontend": {
-            "$ref": "./examples/FrontendPut.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -911,6 +911,11 @@
         ],
         "operationId": "FrontendsInterface_Update",
         "description": "Update a Frontend",
+        "x-ms-examples": {
+          "Update Frontend": {
+            "$ref": "../../cadl/examples/FrontendPatch.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -927,7 +932,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
@@ -935,7 +940,7 @@
             "required": true,
             "description": "Frontends",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "properties",
@@ -960,11 +965,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Update Frontend": {
-            "$ref": "./examples/FrontendPatch.json"
-          }
         }
       },
       "delete": {
@@ -973,6 +973,11 @@
         ],
         "operationId": "FrontendsInterface_Delete",
         "description": "Delete a Frontend",
+        "x-ms-examples": {
+          "Delete Frontend": {
+            "$ref": "../../cadl/examples/FrontendDelete.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -989,7 +994,7 @@
             "required": true,
             "description": "traffic controller name for path",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           },
           {
             "name": "frontendName",
@@ -997,7 +1002,7 @@
             "required": true,
             "description": "Frontends",
             "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+            "pattern": "[A-Za-z0-9]+[A-Za-z0-9-_.]{0,62}[A-Za-z0-9_]+"
           }
         ],
         "responses": {
@@ -1026,11 +1031,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Frontend": {
-            "$ref": "./examples/FrontendDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1069,8 +1069,8 @@
           "items": {
             "$ref": "#/definitions/Association"
           },
-          "description": "The Association items on this page",
-          "x-typespec-name": "Association[]"
+          "x-typespec-name": "Association[]",
+          "description": "The Association items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -1147,8 +1147,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
         },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties",
@@ -1199,8 +1199,8 @@
           "items": {
             "$ref": "#/definitions/Frontend"
           },
-          "description": "The Frontend items on this page",
-          "x-typespec-name": "Frontend[]"
+          "x-typespec-name": "Frontend[]",
+          "description": "The Frontend items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -1238,8 +1238,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
         }
       },
       "description": "The type used for update operations of the Frontend."
@@ -1301,8 +1301,8 @@
           "items": {
             "$ref": "#/definitions/TrafficController"
           },
-          "description": "The TrafficController items on this page",
-          "x-typespec-name": "TrafficController[]"
+          "x-typespec-name": "TrafficController[]",
+          "description": "The TrafficController items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -1324,8 +1324,8 @@
           "items": {
             "type": "string"
           },
-          "description": "Configuration Endpoints.",
           "x-typespec-name": "string[]",
+          "description": "Configuration Endpoints.",
           "readOnly": true
         },
         "frontends": {
@@ -1333,8 +1333,8 @@
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "description": "Frontends References List",
           "x-typespec-name": "ResourceId[]",
+          "description": "Frontends References List",
           "readOnly": true
         },
         "associations": {
@@ -1342,8 +1342,8 @@
           "items": {
             "$ref": "#/definitions/ResourceId"
           },
-          "description": "Associations References List",
           "x-typespec-name": "ResourceId[]",
+          "description": "Associations References List",
           "readOnly": true
         },
         "provisioningState": {
@@ -1362,8 +1362,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          "x-typespec-name": "Record<string>",
+          "description": "Resource tags."
         }
       },
       "description": "The type used for update operations of the TrafficController."

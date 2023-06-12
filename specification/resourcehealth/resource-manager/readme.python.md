@@ -4,7 +4,6 @@ These settings apply only when `--track2` is specified on the command line.
 
 ``` yaml $(python)
 azure-arm: true
-title: ResourceHealthMgmtClient
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resourcehealth
 no-namespace-folders: true

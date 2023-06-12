@@ -19,7 +19,6 @@ input-file:
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
 - Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
-- Microsoft.DataFactory/stable/2018-06-01/entityTypes/ChangeDataCapture.json
 
 directive:
     - from: swagger-document

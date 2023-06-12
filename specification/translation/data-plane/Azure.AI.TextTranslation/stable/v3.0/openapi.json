@@ -112,9 +112,6 @@
         },
         "x-ms-examples": {
           "Find Sentence Boundaries": {
-            "$ref": "./examples/FindSentenceBoundaries_MaximumSet_Gen.json"
-          },
-          "Find Sentence Boundaries with minimum properties": {
             "$ref": "./examples/FindSentenceBoundaries_MinimumSet_Gen.json"
           }
         }
@@ -204,9 +201,6 @@
         },
         "x-ms-examples": {
           "Lookup Dictionary Examples": {
-            "$ref": "./examples/LookupDictionaryExamples_MaximumSet_Gen.json"
-          },
-          "Lookup Dictionary Examples with minimum properties": {
             "$ref": "./examples/LookupDictionaryExamples_MinimumSet_Gen.json"
           }
         }
@@ -296,9 +290,6 @@
         },
         "x-ms-examples": {
           "Lookup Dictionary Entries": {
-            "$ref": "./examples/LookupDictionaryEntries_MaximumSet_Gen.json"
-          },
-          "Lookup Dictionary Entries with minimum properties": {
             "$ref": "./examples/LookupDictionaryEntries_MinimumSet_Gen.json"
           }
         }
@@ -368,9 +359,6 @@
         },
         "x-ms-examples": {
           "Gets the set of languages currently supported by other operations of the Translator.": {
-            "$ref": "./examples/GetLanguages_MaximumSet_Gen.json"
-          },
-          "Gets the set of languages currently supported by other operations of the Translator with minimum properties.": {
             "$ref": "./examples/GetLanguages_MinimumSet_Gen.json"
           }
         }
@@ -491,9 +479,6 @@
         },
         "x-ms-examples": {
           "Translate Text": {
-            "$ref": "./examples/Translate_MaximumSet_Gen.json"
-          },
-          "Translate Text with minimum properties": {
             "$ref": "./examples/Translate_MinimumSet_Gen.json"
           }
         }
@@ -578,9 +563,6 @@
         },
         "x-ms-examples": {
           "Transliterate Text": {
-            "$ref": "./examples/Transliterate_MaximumSet_Gen.json"
-          },
-          "Transliterate Text with minimum properties": {
             "$ref": "./examples/Transliterate_MinimumSet_Gen.json"
           }
         }
@@ -648,8 +630,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "description": "An integer array representing the lengths of the sentences in the input text.\nThe length of the array is the number of sentences, and the values are the length of each sentence.",
-          "x-typespec-name": "int32[]"
+          "x-typespec-name": "int32[]",
+          "description": "An integer array representing the lengths of the sentences in the input text.\nThe length of the array is the number of sentences, and the values are the length of each sentence."
         }
       },
       "description": "Item containing break sentence result.",
@@ -666,8 +648,8 @@
             "$ref": "#/definitions/BreakSentenceItem"
           },
           "x-ms-identifiers": [],
-          "description": "Array of the break sentence elements.",
-          "x-typespec-name": "BreakSentenceItem[]"
+          "x-typespec-name": "BreakSentenceItem[]",
+          "description": "Array of the break sentence elements."
         }
       },
       "description": "Response for the Break SEntence API.",
@@ -777,8 +759,8 @@
             "$ref": "#/definitions/DictionaryExample"
           },
           "x-ms-identifiers": [],
-          "description": "A list of examples for the (source term, target term) pair.",
-          "x-typespec-name": "DictionaryExample[]"
+          "x-typespec-name": "DictionaryExample[]",
+          "description": "A list of examples for the (source term, target term) pair."
         }
       },
       "description": "Dictionary Example element",
@@ -833,8 +815,8 @@
             "$ref": "#/definitions/DictionaryExampleItem"
           },
           "x-ms-identifiers": [],
-          "description": "Array of the dictionary examples elements.",
-          "x-typespec-name": "DictionaryExampleItem[]"
+          "x-typespec-name": "DictionaryExampleItem[]",
+          "description": "Array of the dictionary examples elements."
         }
       },
       "description": "Response for the dictionary examples API.",
@@ -859,8 +841,8 @@
             "$ref": "#/definitions/DictionaryTranslation"
           },
           "x-ms-identifiers": [],
-          "description": "A list of translations for the source term.",
-          "x-typespec-name": "DictionaryTranslation[]"
+          "x-typespec-name": "DictionaryTranslation[]",
+          "description": "A list of translations for the source term."
         }
       },
       "description": "Dictionary Lookup Element",
@@ -897,8 +879,8 @@
             "$ref": "#/definitions/DictionaryLookupItem"
           },
           "x-ms-identifiers": [],
-          "description": "Array of the dictionary lookup elements.",
-          "x-typespec-name": "DictionaryLookupItem[]"
+          "x-typespec-name": "DictionaryLookupItem[]",
+          "description": "Array of the dictionary lookup elements."
         }
       },
       "description": "Response for the dictionary lookup API.",
@@ -936,8 +918,8 @@
             "$ref": "#/definitions/BackTranslation"
           },
           "x-ms-identifiers": [],
-          "description": "A list of \"back translations\" of the target. For example, source words that the target can translate to.\nThe list is guaranteed to contain the source word that was requested (e.g., if the source word being\nlooked up is \"fly\", then it is guaranteed that \"fly\" will be in the backTranslations list).\nHowever, it is not guaranteed to be in the first position, and often will not be.",
-          "x-typespec-name": "BackTranslation[]"
+          "x-typespec-name": "BackTranslation[]",
+          "description": "A list of \"back translations\" of the target. For example, source words that the target can translate to.\nThe list is guaranteed to contain the source word that was requested (e.g., if the source word being\nlooked up is \"fly\", then it is guaranteed that \"fly\" will be in the backTranslations list).\nHowever, it is not guaranteed to be in the first position, and often will not be."
         }
       },
       "description": "Translation source term.",
@@ -990,24 +972,24 @@
           "additionalProperties": {
             "$ref": "#/definitions/TranslationLanguage"
           },
-          "description": "Languages that support translate API.",
-          "x-typespec-name": "Record<TranslationLanguage>"
+          "x-typespec-name": "Record<TranslationLanguage>",
+          "description": "Languages that support translate API."
         },
         "transliteration": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/TransliterationLanguage"
           },
-          "description": "Languages that support transliteration API.",
-          "x-typespec-name": "Record<TransliterationLanguage>"
+          "x-typespec-name": "Record<TransliterationLanguage>",
+          "description": "Languages that support transliteration API."
         },
         "dictionary": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/SourceDictionaryLanguage"
           },
-          "description": "Languages that support dictionary API.",
-          "x-typespec-name": "Record<SourceDictionaryLanguage>"
+          "x-typespec-name": "Record<SourceDictionaryLanguage>",
+          "description": "Languages that support dictionary API."
         }
       },
       "description": "Response for the languages API."
@@ -1128,8 +1110,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "description": "An integer array representing the lengths of the sentences in the input text. \nThe length of the array is the number of sentences, and the values are the length of each sentence.",
-          "x-typespec-name": "int32[]"
+          "x-typespec-name": "int32[]",
+          "description": "An integer array representing the lengths of the sentences in the input text. \nThe length of the array is the number of sentences, and the values are the length of each sentence."
         },
         "transSentLen": {
           "type": "array",
@@ -1137,8 +1119,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "description": "An integer array representing the lengths of the sentences in the translated text. \nThe length of the array is the number of sentences, and the values are the length of each sentence.",
-          "x-typespec-name": "int32[]"
+          "x-typespec-name": "int32[]",
+          "description": "An integer array representing the lengths of the sentences in the translated text. \nThe length of the array is the number of sentences, and the values are the length of each sentence."
         }
       },
       "description": "An object returning sentence boundaries in the input and output texts.",
@@ -1168,8 +1150,8 @@
             "$ref": "#/definitions/TargetDictionaryLanguage"
           },
           "x-ms-identifiers": [],
-          "description": "List of languages with alterative translations and examples for the query expressed in the source language.",
-          "x-typespec-name": "TargetDictionaryLanguage[]"
+          "x-typespec-name": "TargetDictionaryLanguage[]",
+          "description": "List of languages with alterative translations and examples for the query expressed in the source language."
         }
       },
       "description": "Properties ot the source dictionary language",
@@ -1289,8 +1271,8 @@
             "$ref": "#/definitions/Translation"
           },
           "x-ms-identifiers": [],
-          "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter.",
-          "x-typespec-name": "Translation[]"
+          "x-typespec-name": "Translation[]",
+          "description": "An array of translation results. The size of the array matches the number of target \nlanguages specified through the to query parameter."
         },
         "sourceText": {
           "$ref": "#/definitions/SourceText",
@@ -1364,8 +1346,8 @@
             "$ref": "#/definitions/TranslatedTextItem"
           },
           "x-ms-identifiers": [],
-          "description": "Array of the translated text elements.",
-          "x-typespec-name": "TranslatedTextItem[]"
+          "x-typespec-name": "TranslatedTextItem[]",
+          "description": "Array of the translated text elements."
         }
       },
       "description": "Response for the translation API.",
@@ -1382,8 +1364,8 @@
             "$ref": "#/definitions/CommonScriptModel"
           },
           "x-ms-identifiers": [],
-          "description": "List of scripts available to convert text to.",
-          "x-typespec-name": "CommonScriptModel[]"
+          "x-typespec-name": "CommonScriptModel[]",
+          "description": "List of scripts available to convert text to."
         }
       },
       "description": "Script definition with list of script into which given script can be translitered.",
@@ -1405,8 +1387,8 @@
             "$ref": "#/definitions/TransliteratedText"
           },
           "x-ms-identifiers": [],
-          "description": "Array of transliterated texts",
-          "x-typespec-name": "TransliteratedText[]"
+          "x-typespec-name": "TransliteratedText[]",
+          "description": "Array of transliterated texts"
         }
       },
       "description": "Response for the transliteration API.",
@@ -1449,8 +1431,8 @@
             "$ref": "#/definitions/TransliterableScript"
           },
           "x-ms-identifiers": [],
-          "description": "List of scripts to convert from.",
-          "x-typespec-name": "TransliterableScript[]"
+          "x-typespec-name": "TransliterableScript[]",
+          "description": "List of scripts to convert from."
         }
       },
       "description": "The value of the transliteration property is a dictionary of (key, value) pairs. \nEach key is a BCP 47 language tag. A key identifies a language for which text can be converted from one script \nto another script.",
@@ -1561,7 +1543,6 @@
       "name": "profanityAction",
       "in": "query",
       "required": false,
-      "description": "Specifies how profanities should be treated in translations.\nPossible values are: NoAction (default), Marked or Deleted.",
       "default": "NoAction",
       "type": "string",
       "enum": [
@@ -1593,7 +1574,6 @@
       "name": "profanityMarker",
       "in": "query",
       "required": false,
-      "description": "Specifies how profanities should be marked in translations.\nPossible values are: Asterisk (default) or Tag. ",
       "default": "Asterisk",
       "type": "string",
       "enum": [
@@ -1628,7 +1608,6 @@
       "name": "textType",
       "in": "query",
       "required": false,
-      "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, \ncomplete element. Possible values are: plain (default) or html.",
       "default": "Plain",
       "type": "string",
       "enum": [

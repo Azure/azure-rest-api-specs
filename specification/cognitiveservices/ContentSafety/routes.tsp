@@ -45,7 +45,6 @@ interface BlockOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
-
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
   @doc("Returns text blocklist details.")

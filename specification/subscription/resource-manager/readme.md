@@ -149,9 +149,9 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## Python
+## Pyhton
 
-See configuration in [readme.Python.md](./readme.python.md)
+See configuration in [readme.pyhton.md](./readme.python.md)
 
 ## Go
 

@@ -30,27 +30,18 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-05
+tag: package-2022-12
 ```
 
 
-### Tag: package-2023-05
-
-These settings apply only when `--tag=package-2023-05` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-05'
-input-file:
-  - Microsoft.CognitiveServices/stable/2023-05-01/cognitiveservices.json
-```
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-12'
+```yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.CognitiveServices/stable/2022-12-01/cognitiveservices.json
 ```
-
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
@@ -106,7 +97,6 @@ input-file:
 ```
 
 ## Suppression
-
 ``` yaml
 directive:
   - suppress: TrackedResourcePatchOperation

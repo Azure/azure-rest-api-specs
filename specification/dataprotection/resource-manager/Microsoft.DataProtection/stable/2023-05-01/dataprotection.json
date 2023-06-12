@@ -4063,11 +4063,6 @@
           "readOnly": true,
           "type": "string"
         },
-        "rehydrationPriority": {
-          "description": "Priority to be used for rehydration",
-          "readOnly": true,
-          "type": "string"
-        },
         "restoreType": {
           "description": "It indicates the sub type of operation i.e. in case of Restore it can be ALR/OLR",
           "readOnly": true,
@@ -4309,10 +4304,6 @@
         "sourceResourceId": {
           "description": "Fully qualified Azure Resource Manager ID of the datasource which is being recovered.",
           "type": "string"
-        },
-        "identityDetails": {
-          "$ref": "#/definitions/IdentityDetails",
-          "description": "Contains information of the Identity Details for the BI.\r\nIf it is null, default will be considered as System Assigned."
         }
       },
       "required": [
@@ -4322,19 +4313,6 @@
       ],
       "title": "AzureBackupRestoreRequest",
       "type": "object"
-    },
-    "IdentityDetails": {
-      "type": "object",
-      "properties": {
-        "useSystemAssignedIdentity": {
-          "description": "Specifies if the BI is protected by System Identity.",
-          "type": "boolean"
-        },
-        "userAssignedIdentityArmUrl": {
-          "description": "ARM URL for User Assigned Identity.",
-          "type": "string"
-        }
-      }
     },
     "AzureBackupRestoreWithRehydrationRequest": {
       "allOf": [
@@ -4658,10 +4636,6 @@
             "modelAsString": true
           }
         },
-        "identityDetails": {
-          "$ref": "#/definitions/IdentityDetails",
-          "description": "Contains information of the Identity Details for the BI.\r\nIf it is null, default will be considered as System Assigned."
-        },
         "objectType": {
           "type": "string"
         }
@@ -4831,22 +4805,6 @@
         "featureSettings": {
           "$ref": "#/definitions/FeatureSettings",
           "description": "Feature Settings"
-        },
-        "secureScore": {
-          "description": "Secure Score of Backup Vault",
-          "enum": [
-            "None",
-            "Minimum",
-            "Adequate",
-            "Maximum",
-            "NotSupported"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SecureScoreLevel",
-            "modelAsString": true
-          }
         }
       },
       "required": [
@@ -4966,21 +4924,6 @@
       ],
       "title": "BasePolicyRule",
       "type": "object"
-    },
-    "BaseResourceProperties": {
-      "description": "Properties which are specific to datasource/datasourceSets",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "Type of the specific object - used for deserializing",
-          "type": "string",
-          "readOnly": false
-        }
-      },
-      "discriminator": "objectType"
     },
     "CheckNameAvailabilityRequest": {
       "description": "CheckNameAvailability Request",
@@ -5169,23 +5112,6 @@
       "title": "CopyOption",
       "type": "object"
     },
-    "CrossRegionRestoreSettings": {
-      "type": "object",
-      "properties": {
-        "state": {
-          "description": "CrossRegionRestore state",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CrossRegionRestoreState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "CrossSubscriptionRestoreSettings": {
       "description": "CrossSubscriptionRestore Settings",
       "type": "object",
@@ -5255,10 +5181,6 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
-        },
-        "resourceProperties": {
-          "$ref": "#/definitions/BaseResourceProperties",
-          "description": "Properties specific to data source"
         }
       },
       "required": [
@@ -5297,10 +5219,6 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
-        },
-        "resourceProperties": {
-          "$ref": "#/definitions/BaseResourceProperties",
-          "description": "Properties specific to data source set"
         }
       },
       "required": [
@@ -5511,35 +5429,12 @@
           "type": "string"
         },
         "type": {
-          "description": "The identityType which can be either SystemAssigned, UserAssigned, 'SystemAssigned,UserAssigned' or None",
+          "description": "The identityType which can be either SystemAssigned or None",
           "type": "string"
-        },
-        "userAssignedIdentities": {
-          "description": "Gets or sets the user assigned identities.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentityDetails"
-          }
         }
       },
       "title": "DppIdentityDetails",
       "type": "object"
-    },
-    "UserAssignedIdentityDetails": {
-      "description": "User Assigned Identity Details",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The Client Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "principalId": {
-          "description": "The Object Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "DppBaseResourceList": {
       "description": "Base for all lists of V2 resources.",
@@ -5853,9 +5748,6 @@
       "properties": {
         "crossSubscriptionRestoreSettings": {
           "$ref": "#/definitions/CrossSubscriptionRestoreSettings"
-        },
-        "crossRegionRestoreSettings": {
-          "$ref": "#/definitions/CrossRegionRestoreSettings"
         }
       }
     },

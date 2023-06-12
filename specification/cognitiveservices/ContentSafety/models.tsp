@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 
 namespace ContentSafety;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Text analyze category")
 enum TextCategory {
   Hate,
@@ -15,7 +14,6 @@ enum TextCategory {
   Violence,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Image analyze category")
 enum ImageCategory {
   Hate,

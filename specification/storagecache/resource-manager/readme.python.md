@@ -16,8 +16,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagecache/azure/mgmt/storagecache
 ```
-
-``` yaml $(python)
-modelerfour:
-  lenient-model-deduplication: true
-```
