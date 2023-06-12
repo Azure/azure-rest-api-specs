@@ -377,3 +377,14 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+
+### Suppress rules that due to service design
+
+``` yaml
+suppressions:
+  - code: LroLocationHeader
+    from: workspaceRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].delete
+    reason: legacy design
+```
