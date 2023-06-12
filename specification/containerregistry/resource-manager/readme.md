@@ -36,6 +36,11 @@ These settings apply only when `--tag=package-2023-01-preview-only` is specified
 ```yaml $(tag) == 'package-2023-01-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-01-01-preview/containerregistry.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - LroErrorContent
 ```
 
 ### Tag: package-2023-01-preview
@@ -413,5 +418,4 @@ See configuration in [readme.java.md](./readme.java.md)
 suppressions:
   - code: LroErrorContent
     reason: The Error object is shared between all controllers. Changing the Error object will require refactoring all the controllers.
-    from: Microsoft.ContainerRegistry/preview/2023-01-01-preview/containerregistry.json
 ```
