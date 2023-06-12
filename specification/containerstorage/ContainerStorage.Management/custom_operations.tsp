@@ -24,7 +24,7 @@ namespace Microsoft.ContainerStorage.Custom;
 // Custom operations (modified)
 interface ResourceOperationsCustom<
   TResource extends ArmResource,
-  TProperties extends object,
+  TProperties extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>
 >
   extends ResourceInstanceOperationsCustom<
@@ -37,7 +37,7 @@ interface ResourceOperationsCustom<
 // Add custom create and update async operations (modified)
 interface ResourceInstanceOperationsCustom<
   TResource extends ArmResource,
-  TProperties extends object,
+  TProperties extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>,
   TPatchModel = ResourceUpdateModel<TResource, TProperties>
 >
@@ -61,7 +61,7 @@ interface ResourceCreateAsyncCustom<
 @doc("Asynchronous resource update")
 interface ResourceUpdateAsyncCustom<
   TResource extends ArmResource,
-  TProperties extends object,
+  TProperties extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>
 > {
   update is ArmCustomPatchAsyncLocation<
@@ -82,13 +82,13 @@ interface ResourceDeleteAsyncCustom<
 // Aliases for potential external reference (modified)
 alias ArmResourceCreateAsync<
   TResource extends ArmResource,
-  TProperties extends object,
+  TProperties extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>
 > = ArmResourceCreateOrUpdateAsyncLocation<TResource, TBaseParameters>;
 
 alias ArmResourcePatchAsync<
   TResource extends ArmResource,
-  TProperties extends object,
+  TProperties extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>
 > = ArmCustomPatchAsyncLocation<
   TResource,
@@ -98,7 +98,7 @@ alias ArmResourcePatchAsync<
 
 alias ArmResourceDeleteAsync<
   TResource extends ArmResource,
-  TProperties extends object,
+  TProperties extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>
 > = ArmCustomDeleteAsyncLocation<TResource, TBaseParameters>;
 
@@ -138,7 +138,7 @@ op ArmResourceCreateOrUpdateAsyncLocation<
 @patch
 op ArmCustomPatchAsyncLocation<
   TResource extends ArmResource,
-  TPatchModel extends object = TagsUpdateModel<TResource>,
+  TPatchModel extends TypeSpec.Reflection.Model = TagsUpdateModel<TResource>,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
@@ -178,7 +178,7 @@ model ArmCreatedResponseLocation<T> {
 }
 
 @doc(TMessage)
-model ArmAcceptedResponseLocation<TMessage extends string = "Resource operation accepted."> {
+model ArmAcceptedResponseLocation<TMessage extends valueof string = "Resource operation accepted."> {
   ...AcceptedResponse;
   ...RetryAfterHeaderCustom;
   ...LocationHeader;
