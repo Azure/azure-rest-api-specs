@@ -56,7 +56,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -112,7 +112,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -168,7 +168,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -215,7 +215,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -488,7 +488,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the machine where the extension should be created or updated."
@@ -555,7 +555,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the machine where the extension should be created or updated."
@@ -637,7 +637,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the machine where the extension should be deleted."
@@ -710,7 +710,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the machine containing the extension."
@@ -766,7 +766,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the machine containing the extension."
@@ -831,7 +831,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -1065,7 +1065,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -1120,7 +1120,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -1130,7 +1130,7 @@
             "name": "metadataName",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "description": "Name of the HybridIdentityMetadata."
           },
           {
@@ -1181,7 +1181,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "minLength": 1,
             "maxLength": 54,
             "description": "The name of the hybrid machine."
@@ -1315,7 +1315,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "description": "The name of the run command."
           },
           {
@@ -1397,7 +1397,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "description": "The name of the run command."
           },
           {
@@ -1473,7 +1473,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "description": "The name of the run command."
           },
           {
@@ -1543,7 +1543,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
+            "pattern": "[a-zA-Z0-9-_\\.]+",
             "description": "The name of the run command."
           },
           {
@@ -3200,48 +3200,52 @@
     "MachineRunCommandInstanceView": {
       "type": "object",
       "properties": {
-        "name": {
+        "executionState": {
           "type": "string",
-          "description": "The run command name."
+          "description": "Script execution status.",
+          "enum": [
+            "Unknown",
+            "Pending",
+            "Running",
+            "Failed",
+            "Succeeded",
+            "TimedOut",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionState",
+            "modelAsString": true
+          }
         },
-        "status": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The status code."
-            },
-            "level": {
-              "type": "string",
-              "description": "The level code.",
-              "enum": [
-                "Info",
-                "Warning",
-                "Error"
-              ],
-              "x-ms-enum": {
-                "name": "StatusLevelTypes",
-                "modelAsString": true
-              }
-            },
-            "displayStatus": {
-              "type": "string",
-              "description": "The short localizable label for the status."
-            },
-            "message": {
-              "type": "string",
-              "description": "The detailed status message, including for alerts and error messages."
-            },
-            "time": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The time of the status."
-            }
-          },
-          "description": "Instance view status."
+        "executionMessage": {
+          "type": "string",
+          "description": "Communicate script configuration errors or execution messages."
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exit code returned from script execution."
+        },
+        "output": {
+          "type": "string",
+          "description": "Script output stream."
+        },
+        "error": {
+          "type": "string",
+          "description": "Script error stream."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Script start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Script end time."
         }
       },
-      "description": "Describes the Machine Extension Instance View."
+      "description": "The instance view of a machine run command."
     },
     "MachineRunCommandsListResult": {
       "type": "object",
@@ -3308,7 +3312,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "[a-zA-Z0-9-_\\.]",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the hybrid machine.",
       "x-ms-parameter-location": "method"
     }
