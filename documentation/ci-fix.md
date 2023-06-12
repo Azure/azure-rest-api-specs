@@ -31,10 +31,17 @@ npm install
 # Compile TypeScript. Compilation will fail, this is expected. But it will compile 'scripts/prettier-swagger-plugin', which is what we need.
 npx tsc 
 
-# Run 'prettier --list-different' to understand what is the problem.
+# As of 5/25/2023, the prettier version should be 2.1.2
+npx prettier --version
+
+# Run 'prettier --check' to verify the problems can be reproduced locally
+npx prettier --check **/*.json
+
+# Run 'prettier --list-different' to understand which files have problems.
+# Note: there is no way to view the exact problems without actually changing the affected files. See https://github.com/prettier/prettier/issues/6069.
 npx prettier --list-different **/*.json
 
-# Run 'prettier --write' to fix the problem.
+# Run 'prettier --write' to fix the problems.
 npx prettier --write **/*.json
 ```
 
@@ -93,22 +100,7 @@ The [LintDiff validation tool](https://github.com/Azure/azure-openapi-validator)
 Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.  
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
-### Run linter locally:
-
-#### Prerequisites:
-npm install -g autorest
-
-#### Given a swagger spec, run linter:
-```
-autorest --v3 --spectral --validation --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
-```
-#### Given a readme file, run linter:
-```
-autorest --v3 --spectral --validation --azure-validator --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
-```
-
-Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/main/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/linter).
+To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
 
 ## Avocado
 

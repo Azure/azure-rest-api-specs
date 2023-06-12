@@ -13,6 +13,7 @@ namespace TextTranslation;
 model TranslateParameters {
   ...CommonParameters;
 
+  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing Spec"
   @query({format: "multi"})
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
@@ -137,6 +138,7 @@ model TranslationResult {
   meteredUsage: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum TextTypeKnownValues {
   Plain: "Plain",
   Html: "Html",
@@ -146,6 +148,7 @@ enum TextTypeKnownValues {
 @knownValues(TextTypeKnownValues)
 scalar TextType extends string;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ProfanityActionKnownValues {
   NoAction: "NoAction",
   Marked: "Marked",
@@ -156,6 +159,7 @@ enum ProfanityActionKnownValues {
 @knownValues(ProfanityActionKnownValues)
 scalar ProfanityAction extends string;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ProfanityMarkerKnownValues {
   Asterisk: "Asterisk",
   Tag: "Tag",
