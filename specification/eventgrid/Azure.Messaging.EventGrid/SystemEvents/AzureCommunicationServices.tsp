@@ -474,10 +474,10 @@ model AcsSmsDeliveryAttemptProperties {
   timestamp?: utcDateTime;
 
   @doc("Number of segments that were successfully delivered")
-  segmentsSucceeded?: integer;
+  segmentsSucceeded?: int64;
 
   @doc("Number of segments whose delivery failed")
-  segmentsFailed?: integer;
+  segmentsFailed?: int64;
 }
 
 @doc("Schema for all properties of Recording Storage Information.")
