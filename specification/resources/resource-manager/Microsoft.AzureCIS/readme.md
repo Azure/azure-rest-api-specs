@@ -15,6 +15,7 @@ input-file:
   - preview/2021-08-10-privatepreview/dstsServiceClientIdentity.json
   - preview/2021-08-10-privatepreview/dsmsRootFolder.json
   - preview/2021-08-10-privatepreview/dsmsAllowlist.json
+  - preview/2021-08-10-privatepreview/dstsApplication.json
 ```
 
 ```yaml $(tag) == '2021-02-01'
