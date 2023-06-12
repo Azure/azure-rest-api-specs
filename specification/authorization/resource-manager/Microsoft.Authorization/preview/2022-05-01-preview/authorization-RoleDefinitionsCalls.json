@@ -330,49 +330,6 @@
       }
     }
   },
-  "x-ms-paths": {
-    "/{roleId}?disambiguation_dummy": {
-      "get": {
-        "tags": [
-          "RoleDefinitions"
-        ],
-        "operationId": "RoleDefinitions_GetById",
-        "description": "Gets a role definition by ID.",
-        "parameters": [
-          {
-            "name": "roleId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns information about the role definition.",
-            "schema": {
-              "$ref": "#/definitions/RoleDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get role definition by ID": {
-            "$ref": "./examples/GetRoleDefinitionById.json"
-          }
-        }
-      }
-    }
-  },
   "definitions": {
     "RoleDefinitionFilter": {
       "properties": {
