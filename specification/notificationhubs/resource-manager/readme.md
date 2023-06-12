@@ -63,8 +63,6 @@ input-file:
 suppressions:
  - code: RepeatedPathInfo
    reason: We cannot remove the subscriptionId parameter without introducing a breaking change.
-   where:
-   - $.definitions.NamespaceProperties.subscriptionId
 ```
 ### Tag: package-2017-04
 
