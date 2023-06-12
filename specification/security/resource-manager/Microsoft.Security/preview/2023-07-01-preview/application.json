@@ -247,36 +247,36 @@
       "type": "object",
       "description": "Describes properties of the application",
       "properties": {
-        "TenantId": {
+        "tenantId": {
           "type": "string",
           "description": "The tenant Id associated with the appplication (GUID)"
         },
-        "EnvironmentId": {
+        "environmentId": {
           "type": "string",
           "description": "The application environment Id"
         },
-        "DisplayName": {
+        "displayName": {
           "type": "string",
           "description": "The application display name, automatically generated from the TagKey-TagValue"
         },
-        "ApplicationMappingRuleId": {
+        "applicationMappingRuleId": {
           "type": "string",
           "description": "The application mapping rule Key, the key of the rule were created the application (GUID)"
         },
-        "KqlQuery": {
+        "kqlQuery": {
           "type": "string",
           "description": "The application mapping KQL query"
         },
-        "ApplicationOwner": {
+        "applicationOwner": {
           "type": "string",
           "description": "application owner (GUID)"
         },
-        "BusinessCriticality": {
-          "$ref": "#/definitions/businessCriticality"
+        "businessCriticality": {
+          "$ref": "#/definitions/BusinessCriticality"
         }
       }
     },
-    "businessCriticality": {
+    "BusinessCriticality": {
       "type": "string",
       "description": "The business criticality of the application",
       "enum": [

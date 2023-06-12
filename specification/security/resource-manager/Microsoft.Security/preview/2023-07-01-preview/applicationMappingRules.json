@@ -248,23 +248,23 @@
       "type": "object",
       "description": "Describes properties of the application",
       "properties": {
-        "TenantId": {
+        "tenantId": {
           "type": "string",
           "description": "The tenant Id associated with the appplication mapping rule (GUID)"
         },
-        "EnvironmentId": {
+        "environmentId": {
           "type": "string",
           "description": "The application mapping rule EnvironmentId"
         },
-        "DisplayName": {
+        "displayName": {
           "type": "string",
           "description": "The application mapping rule display name"
         },
-        "Description": {
+        "description": {
           "type": "string",
           "description": "The application mapping rule description"
         },
-        "MappingTagKeys": {
+        "mappingTagKeys": {
           "type": "array",
           "description": "The mapping tag key list",
           "items": {
@@ -272,7 +272,7 @@
             "type": "string"
           }
         },
-        "IncludedMappingTagValues": {
+        "includedMappingTagValues": {
           "type": "array",
           "description": "The Included mapping tag values,For an empty array - all the values should create applications",
           "items": {
@@ -280,7 +280,7 @@
             "type": "string"
           }
         },
-        "ExcludedScopes": {
+        "excludedScopes": {
           "type": "array",
           "description": "Excluded Scopes, filter out the descendants of the scope",
           "items": {
@@ -289,16 +289,16 @@
           },
           "x-ms-identifiers": []
         },
-        "IncludeMemberScopes": {
+        "includeMemberScopes": {
           "type": "boolean",
           "description": "Defines whether the rule is management scope rule (master connector as a single scope or management scope)"
         },
-        "Metadata": {
-          "$ref": "#/definitions/applicationMappingRuleMetaData"
+        "metadata": {
+          "$ref": "#/definitions/ApplicationMappingRuleMetaData"
         }
       }
     },
-    "applicationMappingRuleMetaData": {
+    "ApplicationMappingRuleMetaData": {
       "type": "object",
       "description": "The applications mappig rule metadata",
       "properties": {
