@@ -27,8 +27,9 @@
     label: NewApiVersionRequired
     booleanFilterExpression: "!(Approved-OkToMerge)"
     onLabeledComments: >-
-      Hi @${PRAuthor}! The automation detected this pull request introduces breaking changes 
-      to an existing API version that can be avoided by creating a new API version instead.
+      Hi @${PRAuthor}! The automation detected this pull request introduces changes
+      to an existing API version that violate Azure's versioning policy. To comply with the
+      policy, these changes must be made in a new API version.
       As a result, the automation added the `NewApiVersionRequired` label.
       <br/><br/> 
       You cannot proceed with merging this PR until you complete one of the following action items:
