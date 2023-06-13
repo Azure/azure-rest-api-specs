@@ -35,7 +35,7 @@ and followed the instructions by checking all the boxes:
 ### Breaking change review
 
 If you have any breaking changes as defined in the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy/), 
-follow the process outlined in the [High-level Breaking Change Process doc](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/overview_breakingchanges#high-level-breaking-change-process).
+follow the process outlined in the [High-level Breaking Change Process doc](https://aka.ms/breakingchangesprocess#high-level-breaking-change-process).
       
 ## Getting help
 
