@@ -1442,14 +1442,17 @@
           ]
         },
         "properties": {
-          "provisioningState": {
-            "$ref": "#/definitions/RequestState",
-            "readOnly": true
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
+            },
+            "limit": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
+            }
           }
         }
       }
