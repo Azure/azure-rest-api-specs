@@ -97,61 +97,6 @@
         }
       }
     },
-    "DatastoreCreatedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.DatastoreCreated event.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreEventProperties"
-        }
-      ],
-      "properties": {}
-    },
-    "DatastoreDeletedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.DatastoreDeleted event.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreEventProperties"
-        }
-      ],
-      "properties": {}
-    },
-    "DatastoreUpdatingEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.DatastoreUpdating event.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreEventProperties"
-        }
-      ],
-      "properties": {}
-    },
-    "DatastoreUpdatedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.DatastoreUpdated event.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreEventProperties"
-        }
-      ],
-      "properties": {}
-    },
-    "DatastoreFailedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.DatastoreFailed event.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DatastoreEventProperties"
-        }
-      ],
-      "properties": {
-        "failure": {
-          "description": "Failure reason of an event.",
-          "type": "string"
-        }
-      }
-    },
     "ScriptExecutionStartedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionStarted event.",
       "type": "object",
@@ -240,20 +185,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "DatastoreEventProperties": {
-      "description": "Schema of the Data property of an EventGridEvent for Microsoft.AVS/datastores events.",
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "Id of the operation that caused this event.",
-          "type": "string"
-        },
-        "datastoreType": {
-          "description": "Type of the datastore.",
-          "type": "string"
         }
       }
     },
