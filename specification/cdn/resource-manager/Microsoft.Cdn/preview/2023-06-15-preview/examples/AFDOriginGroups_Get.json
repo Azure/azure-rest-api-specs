@@ -14,22 +14,6 @@
         "name": "origingroup1",
         "properties": {
           "originGroupPropertiesType": "L4OriginGroupProperties",
-          "loadBalancingSettings": {
-            "sampleSize": 3,
-            "successfulSamplesRequired": 3,
-            "additionalLatencyInMilliseconds": 1000
-          },
-          "healthProbeSettings": {
-            "probeProtocol": "TCP",
-            "probePort": 8080,
-            "probeIntervalInSeconds": 10
-          },
-          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
-          "originProtocolSettings": {
-            "sessionAffinityType": "SourceIP",
-            "originPort": ["8080", "8081-1090", "8092"],
-            "clientIPPreservationState": "Enabled"
-          },
           "provisioningState": "Succeeded",
           "deploymentStatus": "NotStarted"
         }
