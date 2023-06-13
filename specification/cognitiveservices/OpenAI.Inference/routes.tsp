@@ -18,7 +18,7 @@ namespace Azure.OpenAI;
 
 @doc("Return the embeddings for a given prompt.")
 @added(ServiceApiVersions.v2022_12_01)
-@TypeSpec.Rest.actionSeparator("/")
+@actionSeparator("/")
 @action("embeddings") //@convenientAPI(true)
 op getEmbeddings is Azure.Core.ResourceAction<
     Deployment,
