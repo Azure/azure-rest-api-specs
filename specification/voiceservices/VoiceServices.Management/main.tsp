@@ -1,5 +1,5 @@
 // First, import the common Microsoft.VoiceServices definition
-import "./voiceservices.cadl";
+import "./voiceservices.tsp";
 
 // Then import the resource API definitions
-import "./communicationsgateway.cadl";
+import "./communicationsgateway.tsp";

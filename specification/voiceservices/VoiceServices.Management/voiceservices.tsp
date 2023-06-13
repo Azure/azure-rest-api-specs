@@ -1,13 +1,13 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "@cadl-lang/versioning";
+import "@typespec/rest";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.VoiceServices")
@@ -15,6 +15,7 @@ using Azure.ResourceManager;
   title: "Microsoft.VoiceServices",
 })
 @versioned(Versions)
+<<<<<<< Updated upstream:specification/voiceservices/resource-manager/Microsoft.VoiceServices/cadl/voiceservices.cadl
 @versionedDependency(
   [
     [
@@ -35,11 +36,16 @@ using Azure.ResourceManager;
     ]
   ]
 )
+=======
+>>>>>>> Stashed changes:specification/voiceservices/VoiceServices.Management/voiceservices.tsp
 namespace Microsoft.VoiceServices;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2022_12_01_preview: "2022-12-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_01_31: "2023-01-31",
   v2023_03_01_preview: "2023-03-01-preview",
   v2023_04_03: "2023-04-03"
@@ -51,7 +57,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning state of the resource.")
 enum ProvisioningState {
-    ...ResourceProvisioningState
+  ...ResourceProvisioningState,
 }
 
 @doc("General resource properties.")
@@ -109,8 +115,8 @@ model CheckNameAvailabilityRequest {
 
 @doc("Possible reasons for a name not being available.")
 enum CheckNameAvailabilityReason {
-  "Invalid",
-  "AlreadyExists",
+  Invalid,
+  AlreadyExists,
 }
 
 @doc("The check availability result.")

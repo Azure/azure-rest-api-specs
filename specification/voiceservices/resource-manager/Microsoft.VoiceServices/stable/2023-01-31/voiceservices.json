@@ -3,9 +3,9 @@
   "info": {
     "title": "Microsoft.VoiceServices",
     "version": "2023-01-31",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -368,6 +368,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -387,7 +391,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -673,6 +677,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -692,7 +700,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -852,14 +860,14 @@
           "items": {
             "$ref": "#/definitions/CommunicationsGateway"
           },
-          "x-cadl-name": "CommunicationsGateway[]",
+          "x-typespec-name": "CommunicationsGateway[]",
           "description": "The CommunicationsGateway items on this page"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a CommunicationsGateway list operation.",
@@ -888,7 +896,7 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "x-cadl-name": "ServiceRegionProperties[]",
+          "x-typespec-name": "ServiceRegionProperties[]",
           "description": "The regions in which to deploy the resources needed for Teams Calling",
           "x-ms-mutability": [
             "read",
@@ -909,7 +917,7 @@
           "items": {
             "$ref": "#/definitions/TeamsCodecs"
           },
-          "x-cadl-name": "TeamsCodecs[]",
+          "x-typespec-name": "TeamsCodecs[]",
           "description": "Voice codecs to support",
           "x-ms-mutability": [
             "read",
@@ -931,7 +939,7 @@
           "items": {
             "$ref": "#/definitions/CommunicationsPlatform"
           },
-          "x-cadl-name": "CommunicationsPlatform[]",
+          "x-typespec-name": "CommunicationsPlatform[]",
           "description": "What platforms to support",
           "minItems": 1,
           "x-ms-mutability": [
@@ -987,7 +995,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
+          "x-typespec-name": "string[]",
           "description": "A list of dial strings used for emergency calling.",
           "default": [
             "911",
@@ -1017,7 +1025,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
+          "x-typespec-name": "Record<string>",
           "description": "Resource tags."
         }
       },
@@ -1053,6 +1061,79 @@
         ]
       }
     },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ContactProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A Contact resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ContactProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "contactName": {
+          "type": "string",
+          "description": "Full name of contact",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Telephone number of contact",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of contact",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "description": "Job title of contact",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "description": "Details of the Contact resource.",
+      "required": [
+        "contactName",
+        "phoneNumber",
+        "email",
+        "role"
+      ]
+    },
     "E911Type": {
       "type": "string",
       "description": "The method for terminating emergency calls to the PSTN.",
@@ -1085,7 +1166,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
+          "x-typespec-name": "string[]",
           "description": "IP address to use to contact the operator network from this region",
           "x-ms-mutability": [
             "read",
@@ -1098,7 +1179,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
+          "x-typespec-name": "string[]",
           "description": "IP address to use to contact the ESRP from this region",
           "x-ms-mutability": [
             "read",
@@ -1111,7 +1192,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
+          "x-typespec-name": "string[]",
           "description": "The allowed source IP address or CIDR ranges for signaling",
           "default": [],
           "x-ms-mutability": [
@@ -1125,7 +1206,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
+          "x-typespec-name": "string[]",
           "description": "The allowed source IP address or CIDR ranges for media",
           "default": [],
           "x-ms-mutability": [
@@ -1152,6 +1233,17 @@
         "name": "ProvisioningState",
         "modelAsString": true
       }
+    },
+    "ResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        }
+      },
+      "description": "General resource properties."
     },
     "ServiceRegionProperties": {
       "type": "object",
@@ -1248,14 +1340,14 @@
           "items": {
             "$ref": "#/definitions/TestLine"
           },
-          "x-cadl-name": "TestLine[]",
+          "x-typespec-name": "TestLine[]",
           "description": "The TestLine items on this page"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a TestLine list operation.",
@@ -1316,11 +1408,32 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
+          "x-typespec-name": "Record<string>",
           "description": "Resource tags."
         }
       },
       "description": "The type used for update operations of the TestLine."
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "2022-12-01-preview",
+        "2023-01-31"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_12_01_preview",
+            "value": "2022-12-01-preview"
+          },
+          {
+            "name": "v2023_01_31",
+            "value": "2023-01-31"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
