@@ -78,6 +78,31 @@
           "description": "Activity description.",
           "type": "string"
         },
+        "state": {
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityState",
+            "modelAsString": true
+          }
+        },
+        "onInactiveMarkAs": {
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityOnInactiveMarkAs",
+            "modelAsString": true
+          }
+        },
         "dependsOn": {
           "type": "array",
           "description": "Activity depends on condition.",
@@ -1900,16 +1925,8 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       }
     },
@@ -1927,21 +1944,25 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
+      }
+    },
+    "SalesforceSourceReadBehavior": {
+      "description": "The Salesforce read behavior for the operation",
+      "type": "string",
+      "enum": [
+        "Query",
+        "QueryAll"
+      ],
+      "x-ms-enum": {
+        "name": "SalesforceSourceReadBehavior",
+        "modelAsString": true
       }
     },
     "SapCloudForCustomerSource": {
