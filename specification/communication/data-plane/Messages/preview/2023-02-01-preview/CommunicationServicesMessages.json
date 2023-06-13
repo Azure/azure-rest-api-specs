@@ -47,7 +47,7 @@
         }
       }
     },
-    "/messages/stream/{id}": {
+    "/messages/streams/{id}": {
       "get": {
         "tags": [
           "Stream"
@@ -77,12 +77,6 @@
               "type": "string"
             }
           },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
           "default": {
             "description": "Communication Error Response",
             "schema": {
@@ -93,7 +87,7 @@
         }
       }
     },
-    "/messages/channel/{channelId}/templates": {
+    "/messages/channels/{channelId}/templates": {
       "get": {
         "tags": [
           "Template"
@@ -112,6 +106,17 @@
             "format": "uuid"
           },
           {
+            "in": "query",
+            "name": "maxPageSize",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -120,59 +125,6 @@
             "description": "OK - Returns the list of waTemplatesInternal.",
             "schema": {
               "$ref": "#/definitions/ListTemplatesResponse"
-            }
-          },
-          "default": {
-            "description": "Communication Error Response",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/messages/channel/{channelId}/template/{templateId}": {
-      "get": {
-        "tags": [
-          "Template"
-        ],
-        "summary": "Get the template given its templateId",
-        "operationId": "TemplateV2_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "channelId",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "path",
-            "name": "templateId",
-            "description": "The template's ID",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns the requested template.",
-            "schema": {
-              "$ref": "#/definitions/WhatsAppTemplateResponse"
-            }
-          },
-          "404": {
-            "description": "NotFound - The template could not be found",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "default": {
@@ -223,17 +175,15 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "The collection of elements",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TemplateResponse"
           }
         },
-        "maxItems": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "@nextLink": {
-          "type": "string"
+        "nextLink": {
+          "type": "string",
+	  "example": "/messages/channels/#CHANNEL_ID#/templates?maxPageSize=4&api-version=2023-02-01-preview&after=#AFTER#"
         }
       }
     },
@@ -278,13 +228,77 @@
           "description": "Array of parameters for the content of the template.",
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "example": [
-            "Friday",
-            "2424"
-          ]
+            "$ref": "#/definitions/MessageTemplateParameter"
+          }
         }
+      }
+    },
+    "MessageTemplateParameter": {
+      "description": "The class describes a parameter of a template.",
+      "required": [
+        "type",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "component": {
+          "description": "The component name of the parameter.",
+          "type": "string",
+          "example": "Header;Footer;Body"
+        },
+        "value": {
+          "description": "The text value of the parameter.",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/MessageTemplateParameterType"
+        },
+        "subType": {
+          "description": "The [Optional] sub type of the parameter.",
+          "type": "string",
+          "example": "QuickReply;Url"
+        },
+        "location": {
+          "$ref": "#/definitions/MessageTemplateParameterLocation"
+        }
+      }
+    },
+    "MessageTemplateParameterLocation": {
+      "description": "The location's additional information.\r\nMessageTemplateParameter.Value is the name of the location.",
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "The address of the location.",
+          "type": "string",
+          "example": "1 Microsoft Way, Redmond, WA 98052, USA"
+        },
+        "latitude": {
+          "format": "float",
+          "description": "The latitude of the location.",
+          "type": "number",
+          "example": 47.639423
+        },
+        "longitude": {
+          "format": "float",
+          "description": "The longitude of the location.",
+          "type": "number",
+          "example": -122.12831
+        }
+      }
+    },
+    "MessageTemplateParameterType": {
+      "enum": [
+        "text",
+        "image",
+        "document",
+        "video",
+        "location",
+        "button"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MessageTemplateParameterType",
+        "modelAsString": true
       }
     },
     "SendMessageResult": {
@@ -347,16 +361,6 @@
     "TemplateResponse": {
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "description": "Get the Template's Id",
-          "type": "string"
-        },
-        "channelId": {
-          "format": "uuid",
-          "description": "Get the template's channel",
-          "type": "string"
-        },
         "name": {
           "description": "Get the template's Name",
           "type": "string"
@@ -370,52 +374,33 @@
         },
         "status": {
           "$ref": "#/definitions/TemplateStatus"
+        },
+        "whatsApp": {
+          "$ref": "#/definitions/TemplateResponseWhatsApp"
+        }
+      }
+    },
+    "TemplateResponseWhatsApp": {
+      "description": "The WhatsApp-specific template response contract",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "WhatsApp platform's template content\r\nThis is the payload returned from WhatsApp API."
         }
       }
     },
     "TemplateStatus": {
       "description": "The aggregated template status.",
       "enum": [
-        "active",
-        "inactive"
+        "approved",
+        "rejected",
+        "pending",
+        "paused"
       ],
       "type": "string",
       "x-ms-enum": {
         "name": "TemplateStatus",
         "modelAsString": true
-      }
-    },
-    "WhatsAppTemplateResponse": {
-      "description": "The WhatsApp-specific template response contract",
-      "type": "object",
-      "properties": {
-        "content": {
-          "description": "WhatsApp platform's template content\r\nThis is the payload returned from WhatsApp API."
-        },
-        "id": {
-          "format": "uuid",
-          "description": "Get the Template's Id",
-          "type": "string"
-        },
-        "channelId": {
-          "format": "uuid",
-          "description": "Get the template's channel",
-          "type": "string"
-        },
-        "name": {
-          "description": "Get the template's Name",
-          "type": "string"
-        },
-        "language": {
-          "description": "Get the template's language",
-          "type": "string"
-        },
-        "channelType": {
-          "$ref": "#/definitions/ChannelType"
-        },
-        "status": {
-          "$ref": "#/definitions/TemplateStatus"
-        }
       }
     }
   },
