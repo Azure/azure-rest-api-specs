@@ -415,3 +415,11 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+### Suppress rules that might be fixed
+
+``` yaml
+suppressions:
+  - code: LroErrorContent
+    reason: The Error object is shared between all controllers. Changing the Error object will require refactoring all the controllers. This is planned for 2023-07-01-preview
+```
