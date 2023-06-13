@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
+import {exec} from "child_process";
+import fs from "fs";
+import path from "path";
 import {simpleGit} from 'simple-git';
-import { exec } from "child_process";
 
 async function runCmd(cmd:string, cwd:string) {
     console.log(`run command:${cmd}`)
@@ -30,10 +32,25 @@ async function main() {
     const args = process.argv.slice(2);
     const folder = args[0];
     console.log("Running TypeSpecValidation on folder:", folder);
-    const output = await runCmd(
-        `npx --no tsp compile . --warn-as-error`,
-        folder
-    );
+    if (fs.existsSync(path.join(folder, "main.tsp"))) {
+        const output = await runCmd(
+            `npx --no tsp compile . --warn-as-error`,
+            folder
+        );
+    }
+    if (fs.existsSync(path.join(folder, "client.tsp"))) {
+        const output = await runCmd(
+            `npx --no tsp compile client.tsp --no-emit --warn-as-error`,
+            folder
+        );
+    }
+
+    let expected_npm_prefix = process.env.PWD
+    const actual_npm_prefix = await runCmd(`npm prefix`, folder)
+    if (expected_npm_prefix !== actual_npm_prefix) {
+        console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.")
+        throw new Error ("Expected npm prefix: $expected_npm_prefix\nActual npm prefix: $actual_npm_prefix\n")
+    }
 
     const git = simpleGit();
     let gitStatusIsClean = await (await git.status(['--porcelain'])).isClean()
