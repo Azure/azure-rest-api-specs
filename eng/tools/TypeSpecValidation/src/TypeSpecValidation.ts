@@ -3,12 +3,12 @@
 import {simpleGit} from 'simple-git';
 import { exec } from "child_process";
 
-async function runCmd(cmd:string) {
+async function runCmd(cmd:string, cwd:string) {
     console.log(`run command:${cmd}`)
     const { err, stdout, stderr } = await new Promise((res) =>
         exec(
         cmd,
-        { encoding: "utf8", maxBuffer: 1024 * 1024 * 64 },
+        { encoding: "utf8", maxBuffer: 1024 * 1024 * 64, cwd: cwd},
         (err: unknown, stdout: unknown, stderr: unknown) =>
             res({ err: err, stdout: stdout, stderr: stderr })
         )
@@ -31,7 +31,8 @@ async function main() {
     const folder = args[0];
     console.log("Running TypeSpecValidation on folder:", folder);
     const output = await runCmd(
-        `npx tsp compile ${folder}`
+        `npx --no tsp compile . --warn-as-error`,
+        folder
     );
 
     const git = simpleGit();

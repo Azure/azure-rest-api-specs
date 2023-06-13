@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { simpleGit } from 'simple-git';
 import { exec } from "child_process";
-function runCmd(cmd) {
+function runCmd(cmd, cwd) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(`run command:${cmd}`);
-        const { err, stdout, stderr } = yield new Promise((res) => exec(cmd, { encoding: "utf8", maxBuffer: 1024 * 1024 * 64 }, (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
+        const { err, stdout, stderr } = yield new Promise((res) => exec(cmd, { encoding: "utf8", maxBuffer: 1024 * 1024 * 64, cwd: cwd }, (err, stdout, stderr) => res({ err: err, stdout: stdout, stderr: stderr })));
         let resultString = stderr + stdout;
         console.log("Stdout output:");
         console.log(stdout);
@@ -32,7 +32,7 @@ function main() {
         const args = process.argv.slice(2);
         const folder = args[0];
         console.log("Running TypeSpecValidation on folder:", folder);
-        const output = yield runCmd(`npx tsp compile ${folder}`);
+        const output = yield runCmd(`npx --no tsp compile . --warn-as-error`, folder);
         const git = simpleGit();
         let gitStatusIsClean = yield (yield git.status(['--porcelain'])).isClean();
         if (!gitStatusIsClean) {
