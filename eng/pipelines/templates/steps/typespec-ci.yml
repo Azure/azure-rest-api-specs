@@ -5,11 +5,6 @@ parameters:
   type: string
 
 steps:
-- script: |
-    npm install -g ts-node
-    pushd eng/tools/TypeSpecValidation
-    npm ci
-    popd
-    ts-node eng/tools/TypeSpecValidation/src/TypeSpecValidation.ts ${{parameters.Folder}}
+- script: npx tsv ${{parameters.Folder}}
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
