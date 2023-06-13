@@ -9,7 +9,7 @@ using TypeSpec.Http;
 
 namespace AzureLoadTesting;
 
-interface LoadTestAdministrationOperations {
+interface LoadTestAdministration {
   @summary("Create a new test or update an existing test.")
   @doc("Create a new test or update an existing test.")
   @route("/tests/{testId}")
@@ -28,7 +28,7 @@ numeric, underscore or hyphen characters.
       @body
       body: Test;
     },
-    Test
+    ResourceCreatedOrOkResponse<Test>
   >;
 
   @summary("Delete a test by its name.")
@@ -125,6 +125,7 @@ should be provided in the request body as application/octet-stream.
   @put
   UploadTestFile is Azure.Core.Foundations.Operation<
     {
+      @header contentType: "application/octet-stream",
       @doc("""
 Unique name for the load test, must contain only lower-case alphabetic,
 numeric, underscore or hyphen characters.
@@ -144,7 +145,7 @@ numeric, underscore or hyphen characters.
       @body
       body: bytes;
     },
-    FileInfo
+    ResourceCreatedResponse<FileInfo>
   >;
 
   @summary("Get test file by the file name.")
@@ -221,7 +222,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestAppComponents;
     },
-    TestAppComponents
+    ResourceCreatedOrOkResponse<TestAppComponents>
   >;
 
   @summary("Get associated app component (collection of azure resources) for the given test.")
@@ -258,7 +259,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestServerMetricConfig;
     },
-    TestServerMetricConfig
+    ResourceCreatedOrOkResponse<TestServerMetricConfig>
   >;
 
   @summary("List server metrics configuration for the given test.")
@@ -278,7 +279,7 @@ numeric, underscore or hyphen characters.
   >;
 }
 
-interface LoadTestRunOperations {
+interface LoadTestRun {
   @summary("Get test run details by name.")
   @doc("Get test run details by name.")
   @route("/test-runs/{testRunId}")
@@ -499,7 +500,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestRunAppComponents;
     },
-    TestRunAppComponents
+    ResourceCreatedOrOkResponse<TestRunAppComponents>
   >;
 
   @summary("""
@@ -542,7 +543,7 @@ numeric, underscore or hyphen characters.
       @body
       body: TestRunServerMetricConfig;
     },
-    TestRunServerMetricConfig
+    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>
   >;
 
   @summary("List server metrics configuration for the given test run.")
