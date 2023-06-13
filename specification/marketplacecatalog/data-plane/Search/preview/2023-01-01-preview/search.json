@@ -1724,12 +1724,25 @@
       "enum": [
         "OptIn",
         "OptOut",
-        "Terminated",
         "SelectiveOptIn"
       ],
       "x-ms-enum": {
         "name": "CspState",
-        "modelAsString": true
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "OptIn",
+            "description": "plan configured CSP program opt-in for any partner in the CSP Program"
+          },
+          {
+            "value": "OptOut",
+            "description": "plan configured CSP program opt-out"
+          },
+          {
+            "value": "SelectiveOptIn",
+            "description": "plan configured CSP program opt-in for specific partners in the CSP program ISV selects"
+          }
+        ]
       }
     },
     "PlanMetadata": {
