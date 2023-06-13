@@ -502,7 +502,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}": {
       "put": {
         "tags": [
           "GroupQuotaLimits"
@@ -696,7 +696,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits": {
       "get": {
         "tags": [
           "GroupQuotaLimits"
@@ -739,7 +739,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
       "get": {
         "tags": [
           "GroupQuotaLimits-Requests"
@@ -782,7 +782,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
       "get": {
         "tags": [
           "GroupQuotaLimits-Requests"
@@ -828,7 +828,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
       "get": {
         "tags": [
           "SubscriptionQuota-Allocation"
@@ -874,7 +874,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}": {
       "put": {
         "tags": [
           "SubscriptionQuota-Allocation"
@@ -1080,7 +1080,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests/{allocationId}": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests/{allocationId}": {
       "get": {
         "tags": [
           "Subscription-Quota-Allocation-Requests"
@@ -1129,7 +1129,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{scope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests": {
+    "/providers/Microsoft.Management/managementGroups/{mgId}/subscriptions/{subscriptionId}/{resourceProviderScope}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests": {
       "get": {
         "tags": [
           "Subscription-Quota-Allocation-Requests"
@@ -1868,7 +1868,7 @@
       "minLength": 1
     },
     "ScopeInParameters": {
-      "name": "scope",
+      "name": "resourceProviderScope",
       "in": "path",
       "required": true,
       "type": "string",
