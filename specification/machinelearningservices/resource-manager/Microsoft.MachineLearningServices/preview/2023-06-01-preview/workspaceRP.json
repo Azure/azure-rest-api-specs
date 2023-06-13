@@ -1055,6 +1055,7 @@
           "ManagedNetwork"
         ],
         "operationId": "ManagedNetworkSettingsRule_Delete",
+        "summary": "Deletes an outbound rule from the managed network of a machine learning workspace.",
         "produces": [
           "application/json"
         ],
@@ -1077,10 +1078,19 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error",
