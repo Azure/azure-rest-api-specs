@@ -1,13 +1,13 @@
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -30,13 +30,13 @@ enum ProvisioningState {
 @doc("Regional data boundary values.")
 enum RegionalDataBoundary {
   None,
-  EU
+  EU,
 }
 
 @doc("Allow crash dumps values.")
 enum AllowCrashDumpCollection {
   Enabled,
-  Disabled
+  Disabled,
 }
 
 @doc("Certificate status values.")
@@ -44,14 +44,14 @@ enum CertificateStatus {
   Active,
   Inactive,
   Expired,
-  Revoked
+  Revoked,
 }
 
 @doc("Provides the custom '$filter' query parameter for list operations")
 model CustomFilterQueryParameter {
-    @query("$filter")
-    @doc("Filter the result list using the given expression")
-    filter?: string;
+  @query("$filter")
+  @doc("Filter the result list using the given expression")
+  filter?: string;
 }
 
 @doc("Provides the custom '$top' query parameter for list operations.")
@@ -75,12 +75,12 @@ model CustomMaxPageSizeQueryParameter {
   maxpagesize?: int32;
 }
 
-@doc("Provides the most common query parameters for list operations.")
-model StandardListQueryParametersWithCorrectNames {
+// @doc("Provides the most common query parameters for list operations.")
+alias StandardListQueryParametersWithCorrectNames = {
   ...CustomTopQueryParameter;
   ...CustomSkipQueryParameter;
   ...CustomMaxPageSizeQueryParameter;
-}
+};
 
 @doc("Response to the action call for count devices in a catalog.")
 model CountDeviceResponse extends CountElementsResponse {}
@@ -91,56 +91,67 @@ model CountElementsResponse {
   value: int32;
 }
 
-@doc("Parameters for paginated APIs")
-model ListQueryParameters {
+alias ListQueryParameters = {
   ...CustomFilterQueryParameter;
   ...StandardListQueryParametersWithCorrectNames;
-}
+};
 
 // Templates
 interface ProxyResourceOperationsReadList<
-    TResource extends ArmResource,
-    TListParameters extends object = {}>
+  TResource extends ArmResource,
+  TListParameters extends object = {}
+>
   extends Azure.ResourceManager.ResourceRead<TResource>,
-    ResourceListByParent<TResource, TListParameters & BaseParameters<TResource>> {}
+    ResourceListByParent<
+      TResource,
+      TListParameters & BaseParameters<TResource>
+    > {}
 
 interface ProxyResourceOperationsReadListCreateDelete<
-    TResource extends ArmResource,
-    TListParameters extends object = {}>
+  TResource extends ArmResource,
+  TListParameters extends object = {}
+>
   extends Azure.ResourceManager.ResourceRead<TResource>,
-    ResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>,
+    ResourceListByParent<
+      TResource,
+      TListParameters & BaseParameters<TResource>
+    >,
     ResourceCreate<TResource>,
-    Azure.ResourceManager.ResourceDelete<TResource>{}
+    Azure.ResourceManager.ResourceDelete<TResource> {}
 
-// Custom update operations 
+// Custom update operations
 @armResourceOperations
-interface CustomUpdateOperations{
-    @autoRoute
-    @doc("Update a {name}", TResource)
-    @extension("x-ms-long-running-operation", true)
-    @extension(
-      "x-ms-long-running-operation-options",
-      {
-        "final-state-via": "location",
-      }
-    )
-    @armResourceUpdate(TResource)
-    @patch
-    op ArmCustomPatchAsyncWithLocation<
-      TResource extends ArmResource,
-      TPatchModel extends object = TagsUpdateModel<TResource>,
-      TBaseParameters = BaseParameters<TResource>
-    >(
-      ...ResourceInstanceParameters<TResource, TBaseParameters>,
+interface CustomUpdateOperations {
+  @autoRoute
+  @doc("Update a {name}", TResource)
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  @armResourceUpdate(TResource)
+  @patch
+  ArmCustomPatchAsyncWithLocation<
+    TResource extends ArmResource,
+    TPatchModel extends object = TagsUpdateModel<TResource>,
+    TBaseParameters = BaseParameters<TResource>
+  >(
+    ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
-      @doc("The resource properties to be updated.")
-      @body
-      properties: TPatchModel
-    ): ArmResponse<TResource> | ArmAcceptedResponse<"Resource update request accepted."> | ErrorResponse;
+    @doc("The resource properties to be updated.")
+    @body
+    properties: TPatchModel
+  ): ArmResponse<TResource> | ArmAcceptedResponse<"Resource update request accepted."> | ErrorResponse;
 }
 
 alias CustomArmResourcePatchAsync<
   TResource extends ArmResource,
   TProperties extends object,
   TBaseParameters = BaseParameters<TResource>
-> = CustomUpdateOperations.ArmCustomPatchAsyncWithLocation<TResource, ResourceUpdateModel<TResource, TProperties>, TBaseParameters>;
+> = CustomUpdateOperations.ArmCustomPatchAsyncWithLocation<
+  TResource,
+  ResourceUpdateModel<TResource, TProperties>,
+  TBaseParameters
+>;
