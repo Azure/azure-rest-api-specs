@@ -1595,64 +1595,6 @@
         }
       }
     },
-    "GroupQuotasEntityBase": {
-      "type": "object",
-      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "additionalAttributes": {
-          "description": "Additional attributes to allow subscription, which can be added to the subscriptionIds.",
-          "$ref": "#/definitions/AdditionalAttributes"
-        },
-        "subscriptionIds": {
-          "description": "List of subscriptions included in the ShareQuotaEntity. It can be null at the time of creation or a list of subscriptions can be passed.",
-          "$ref": "#/definitions/SubscriptionIdList"
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the operation.",
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        }
-      }
-    },
-    "AttributeType": {
-      "type": "string",
-      "description": "Name of the entity for filter, such as offerType.",
-      "enum": [
-        "billingId",
-        "serviceTreeId",
-        "subscriptionType"
-      ],
-      "x-ms-enum": {
-        "name": "GroupQuotaAttributeType",
-        "modelAsString": true
-      }
-    },
-    "Attribute": {
-      "type": "object",
-      "properties": {
-        "attribute": {
-          "$ref": "#/definitions/AttributeType",
-          "description": "The attribute type."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value for the attribute."
-        }
-      },
-      "x-ms-identifiers": [
-        "attribute"
-      ]
-    },
-    "AttributeList": {
-      "type": "array",
-      "description": "Attributes List for the GroupQuotas,",
-      "items": {
-        "$ref": "#/definitions/Attribute",
-        "description": "The attribute type and corresponding value."
-      },
-      "x-ms-identifiers": []
-    },
     "SubscriptionIdList": {
       "x-ms-azure-resource": true,
       "type": "object",
@@ -1689,6 +1631,34 @@
             "type": "string",
             "description": "SubscriptionId."
           }
+        }
+      }
+    },
+    "GroupQuotasEntityBase": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "displayName": {
+          "description": "Display name of the GroupQuota entity.",
+          "type": "string"
+        },
+        "additionalAttributes": {
+          "description": "Additional attributes to allow subscription, which can be added to the subscriptionIds.",
+          "$ref": "#/definitions/AdditionalAttributes"
+        },
+        "subscriptionIds": {
+          "description": "List of subscriptions included in the ShareQuotaEntity. It can be null at the time of creation or a list of subscriptions can be passed.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "SubscriptionId."
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the operation.",
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
         }
       }
     },
@@ -1754,9 +1724,10 @@
     },
     "GroupingIdType": {
       "type": "string",
-      "description": "GroupingId type. More types of groupIds can be supported in future. MGID is already in the URI, so it's not needed and cause errors, if the MGId in Uri is different properties.'",
+      "description": "GroupingId type. It is a required property. More types of groupIds can be supported in future. MGID is already in the URI, so it's not needed.'",
       "enum": [
-        "ServiceTreeId"
+        "ServiceTreeId",
+        "BillingId"
       ],
       "x-ms-enum": {
         "name": "GroupingIdType",
@@ -1780,10 +1751,6 @@
       "description": "Additional attribute to allow subscriptions to be part of the GroupQuota.",
       "type": "object",
       "properties": {
-        "billingAccountId": {
-          "description": "BillingAccountId. The customer can make mistake and select a billing account ID not belonging to MG. Let's think from the end user perspective. Make it simpler and less error prone, where the customer is struggling to provide the right configuration.",
-          "$ref": "#/definitions/BillingAccountId"
-        },
         "groupId": {
           "$ref": "#/definitions/GroupingId"
         },
@@ -1792,7 +1759,7 @@
         }
       },
       "required": [
-        "billingAccountId"
+        "groupId"
       ]
     },
     "GroupQuotasList": {
