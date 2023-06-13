@@ -1,60 +1,65 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-autorest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-azure-resource-manager";
-import "@azure-tools/cadl-providerhub";
+import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-providerhub";
 
-using Cadl.Versioning;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 
 @armProviderNamespace
-@service({title:"Qumulo.Storage"})
-@versionedDependency([[Versions.v2022_06_27_preview,Azure.ResourceManager.Versions.v1_0_Preview_1], [Versions.v2022_10_12_preview,Azure.ResourceManager.Versions.v1_0_Preview_1]])
+@service({
+  title: "Qumulo.Storage",
+})
 @versioned(Versions)
 namespace Qumulo.Storage;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 @doc("Storage Sku")
 enum StorageSku {
-
   @doc("Standard Storage Sku")
-  "Standard",
-  
+  Standard,
+
   @doc("Performance Storage Sku")
-  "Performance"
+  Performance,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2022_06_27_preview: "2022-06-27-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2022_10_12_preview: "2022-10-12-preview",
 }
 
 @doc("Qumulo File System resource")
 model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
-
   @key("fileSystemName")
   @segment("fileSystems")
-
   @doc("Name of the storage resource")
+  @path
   name: string;
-
-  ...ManagedServiceIdentity
+  ...ManagedServiceIdentity;
 }
 
 @armResourceOperations
-interface FileSystems extends ResourceOperations<FileSystemResource,FileSystemResourceProperties> {
-}
+interface FileSystems
+  extends TrackedResourceOperations<
+      FileSystemResource,
+      FileSystemResourceProperties
+    > {}
 
 @doc("Properties specific to the Qumulo File System resource")
 model FileSystemResourceProperties {
-
   @doc("Azure Subscription Id")
   subscriptionId: string;
 
   @doc("Marketplace details")
-  marketplaceDetails? : MarketplaceDetails;
+  marketplaceDetails?: MarketplaceDetails;
 
   @doc("Provisioning State of the resource")
   provisioningState: ProvisioningState;
@@ -70,6 +75,9 @@ model FileSystemResourceProperties {
 
   @doc("Qumulo admin dashboard Url")
   clusterLoginUrl: string;
+
+  @added(Versions.v2022_10_12_preview)
+  newProp: string;
 
   @doc("List of eNIC IPs")
   privateIPs: string[];
@@ -93,7 +101,7 @@ model FileSystemResourceProperties {
 }
 
 @doc("MarketplaceDetails of Qumulo FileSystem resource")
-model MarketplaceDetails{
+model MarketplaceDetails {
   @doc("Marketplace Subscription Id")
   marketplaceSubscriptionId: string;
 
@@ -111,14 +119,13 @@ model MarketplaceDetails{
 }
 
 @doc("User Details of Qumulo FileSystem resource")
-model UserDetails{
-
+model UserDetails {
   @doc("First name")
   firstName?: string;
 
   @doc("Last name")
   lastName?: string;
-  
+
   @doc("User Email")
   email: string;
 
@@ -136,8 +143,7 @@ model UserDetails{
 }
 
 @doc("Company details of Qumulo FileSystem resource")
-model CompanyDetails{
-
+model CompanyDetails {
   @doc("Company name")
   companyName: string;
 
@@ -158,22 +164,22 @@ model CompanyDetails{
 }
 
 @doc("Marketplace subscription status of the storage resource")
-enum MarketplaceSubscriptionStatus{
-  "PendingFulfillmentStart",
-  "Subscribed",
-  "Suspended",
-  "Unsubscribed",
+enum MarketplaceSubscriptionStatus {
+  PendingFulfillmentStart,
+  Subscribed,
+  Suspended,
+  Unsubscribed,
 }
 
 @doc("Provisioning State of the storage resource")
 enum ProvisioningState {
-  "Accepted",
-  "Creating",
-  "Updating",
-  "Deleting",
-  "Succeeded",
-  "Failed",
-  "Canceled",
-  "Deleted",
-  "NotSpecified"
+  Accepted,
+  Creating,
+  Updating,
+  Deleting,
+  Succeeded,
+  Failed,
+  Canceled,
+  Deleted,
+  NotSpecified,
 }
