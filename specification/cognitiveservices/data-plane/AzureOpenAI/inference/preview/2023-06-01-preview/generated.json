@@ -102,6 +102,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/chat_completions.json"
+          }
         }
       }
     },
@@ -250,12 +255,17 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Starts the generation of a batch of images from a text caption": {
+            "$ref": "./examples/start_generate_image.json"
+          }
         }
       }
     },
     "/operations/images/{operationId}": {
       "get": {
-        "operationId": "GenerateImage",
+        "operationId": "GetImageOperationStatus",
         "description": "Returns the status of the images operation",
         "parameters": [
           {
@@ -287,6 +297,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the status of the images operation": {
+            "$ref": "./examples/get_image_operation_status.json"
           }
         }
       }
