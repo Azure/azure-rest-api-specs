@@ -1034,7 +1034,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/JobCollection"
+              "$ref": "#/definitions/RouterJobCollection"
             }
           },
           "default": {
@@ -1081,7 +1081,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/JobPositionDetails"
+              "$ref": "#/definitions/RouterJobPositionDetails"
             }
           },
           "default": {
@@ -1300,7 +1300,7 @@
             "description": "Model of queue properties to be patched. See also: https://datatracker.ietf.org/doc/html/rfc7386",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobQueue"
+              "$ref": "#/definitions/RouterQueue"
             }
           }
         ],
@@ -1308,13 +1308,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/JobQueue"
+              "$ref": "#/definitions/RouterQueue"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/JobQueue"
+              "$ref": "#/definitions/RouterQueue"
             }
           },
           "default": {
@@ -1358,7 +1358,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/JobQueue"
+              "$ref": "#/definitions/RouterQueue"
             }
           },
           "default": {
@@ -2127,9 +2127,9 @@
           "description": "The human readable name of the policy.",
           "type": "string"
         },
-        "offerTtlSeconds": {
+        "offerExpiresAfterSeconds": {
           "format": "double",
-          "description": "The expiry time of any offers created under this policy will be governed by the offer time to live.",
+          "description": "The number of seconds after which any offers created under this policy will be expired.",
           "type": "number"
         },
         "mode": {
@@ -2246,7 +2246,7 @@
       "type": "object",
       "properties": {
         "trigger": {
-          "$ref": "#/definitions/JobExceptionTrigger"
+          "$ref": "#/definitions/ExceptionTrigger"
         },
         "actions": {
           "description": "A dictionary collection of actions to perform once the exception is triggered. Key is the Id of each exception action.",
@@ -2256,6 +2256,20 @@
           }
         }
       }
+    },
+    "ExceptionTrigger": {
+      "description": "The trigger for this exception rule",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The type discriminator describing a sub-type of ExceptionTrigger",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
     },
     "ExpressionRule": {
       "description": "A rule providing inline expression rules.",
@@ -2339,188 +2353,6 @@
           "description": "(Optional) Client id, when AppKey is provided\r\nIn context of Azure function, this is usually the name of the key",
           "maxLength": 500,
           "minLength": 0,
-          "type": "string"
-        }
-      }
-    },
-    "JobAssignment": {
-      "description": "Assignment details of a job to a worker",
-      "required": [
-        "assignTime",
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The Id of the job assignment.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "workerId": {
-          "description": "The Id of the Worker assigned to the job.",
-          "type": "string"
-        },
-        "assignTime": {
-          "format": "date-time",
-          "description": "The assignment time of the job.",
-          "type": "string"
-        },
-        "completeTime": {
-          "format": "date-time",
-          "description": "The time the job was marked as completed after being assigned.",
-          "type": "string"
-        },
-        "closeTime": {
-          "format": "date-time",
-          "description": "The time the job was marked as closed after being completed.",
-          "type": "string"
-        }
-      }
-    },
-    "JobCollection": {
-      "description": "A paged collection of jobs.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RouterJobItem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "JobExceptionTrigger": {
-      "description": "The trigger for this exception rule",
-      "required": [
-        "kind"
-      ],
-      "type": "object",
-      "properties": {
-        "kind": {
-          "description": "The type discriminator describing a sub-type of ExceptionTrigger",
-          "type": "string"
-        }
-      },
-      "discriminator": "kind"
-    },
-    "JobOffer": {
-      "description": "An offer of a job to a worker",
-      "required": [
-        "capacityCost",
-        "id",
-        "jobId"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The Id of the offer.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "jobId": {
-          "description": "The Id of the job.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "capacityCost": {
-          "format": "int32",
-          "description": "The capacity cost consumed by the job offer.",
-          "type": "integer"
-        },
-        "offerTimeUtc": {
-          "format": "date-time",
-          "description": "The time the offer was created.",
-          "type": "string"
-        },
-        "expiryTimeUtc": {
-          "format": "date-time",
-          "description": "The time that the offer will expire.",
-          "type": "string"
-        }
-      }
-    },
-    "JobPositionDetails": {
-      "description": "Dto for JobPositionDetails.",
-      "required": [
-        "estimatedWaitTimeMinutes",
-        "jobId",
-        "position",
-        "queueId",
-        "queueLength"
-      ],
-      "type": "object",
-      "properties": {
-        "jobId": {
-          "description": "Id of the job these details are about.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "position": {
-          "format": "int32",
-          "description": "Position of the job in question within that queue.",
-          "type": "integer"
-        },
-        "queueId": {
-          "description": "Id of the queue this job is enqueued in.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "queueLength": {
-          "format": "int32",
-          "description": "Length of the queue: total number of enqueued jobs.",
-          "type": "integer"
-        },
-        "estimatedWaitTimeMinutes": {
-          "format": "double",
-          "description": "Estimated wait time of the job rounded up to the nearest minute",
-          "type": "number"
-        }
-      }
-    },
-    "JobQueue": {
-      "description": "A queue that can contain jobs to be routed.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The Id of this queue",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of this queue.",
-          "type": "string"
-        },
-        "distributionPolicyId": {
-          "description": "The ID of the distribution policy that will determine how a job is distributed to workers.",
-          "type": "string"
-        },
-        "labels": {
-          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "exceptionPolicyId": {
-          "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
-          "type": "string"
-        }
-      }
-    },
-    "JobQueueItem": {
-      "description": "Paged instance of JobQueue",
-      "type": "object",
-      "properties": {
-        "jobQueue": {
-          "$ref": "#/definitions/JobQueue"
-        },
-        "etag": {
-          "description": "(Optional) The Concurrency Token.",
           "type": "string"
         }
       }
@@ -2696,7 +2528,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobQueueItem"
+            "$ref": "#/definitions/RouterQueueItem"
           }
         },
         "nextLink": {
@@ -2713,7 +2545,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/JobExceptionTrigger"
+          "$ref": "#/definitions/ExceptionTrigger"
         }
       ],
       "properties": {
@@ -2856,7 +2688,7 @@
         "labelsToUpsert": {
           "description": "(optional) Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       },
       "x-ms-discriminator-value": "reclassify"
@@ -2966,20 +2798,20 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/JobAssignment"
+            "$ref": "#/definitions/RouterJobAssignment"
           },
           "readOnly": true
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
@@ -2999,12 +2831,180 @@
         }
       }
     },
+    "RouterJobAssignment": {
+      "description": "Assignment details of a job to a worker",
+      "required": [
+        "assignTime",
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Id of the job assignment.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "workerId": {
+          "description": "The Id of the Worker assigned to the job.",
+          "type": "string"
+        },
+        "assignTime": {
+          "format": "date-time",
+          "description": "The assignment time of the job.",
+          "type": "string"
+        },
+        "completeTime": {
+          "format": "date-time",
+          "description": "The time the job was marked as completed after being assigned.",
+          "type": "string"
+        },
+        "closeTime": {
+          "format": "date-time",
+          "description": "The time the job was marked as closed after being completed.",
+          "type": "string"
+        }
+      }
+    },
+    "RouterJobCollection": {
+      "description": "A paged collection of jobs.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouterJobItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "RouterJobItem": {
       "description": "Paged instance of RouterJob",
       "type": "object",
       "properties": {
         "routerJob": {
           "$ref": "#/definitions/RouterJob"
+        },
+        "etag": {
+          "description": "(Optional) The Concurrency Token.",
+          "type": "string"
+        }
+      }
+    },
+    "RouterJobOffer": {
+      "description": "An offer of a job to a worker",
+      "required": [
+        "capacityCost",
+        "id",
+        "jobId"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Id of the offer.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "jobId": {
+          "description": "The Id of the job.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "capacityCost": {
+          "format": "int32",
+          "description": "The capacity cost consumed by the job offer.",
+          "type": "integer"
+        },
+        "offerTimeUtc": {
+          "format": "date-time",
+          "description": "The time the offer was created.",
+          "type": "string"
+        },
+        "expiryTimeUtc": {
+          "format": "date-time",
+          "description": "The time that the offer will expire.",
+          "type": "string"
+        }
+      }
+    },
+    "RouterJobPositionDetails": {
+      "description": "Dto for JobPositionDetails.",
+      "required": [
+        "estimatedWaitTimeMinutes",
+        "jobId",
+        "position",
+        "queueId",
+        "queueLength"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Id of the job these details are about.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "position": {
+          "format": "int32",
+          "description": "Position of the job in question within that queue.",
+          "type": "integer"
+        },
+        "queueId": {
+          "description": "Id of the queue this job is enqueued in.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "queueLength": {
+          "format": "int32",
+          "description": "Length of the queue: total number of enqueued jobs.",
+          "type": "integer"
+        },
+        "estimatedWaitTimeMinutes": {
+          "format": "double",
+          "description": "Estimated wait time of the job rounded up to the nearest minute",
+          "type": "number"
+        }
+      }
+    },
+    "RouterQueue": {
+      "description": "A queue that can contain jobs to be routed.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Id of this queue",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of this queue.",
+          "type": "string"
+        },
+        "distributionPolicyId": {
+          "description": "The ID of the distribution policy that will determine how a job is distributed to workers.",
+          "type": "string"
+        },
+        "labels": {
+          "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "exceptionPolicyId": {
+          "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
+          "type": "string"
+        }
+      }
+    },
+    "RouterQueueItem": {
+      "description": "Paged instance of JobQueue",
+      "type": "object",
+      "properties": {
+        "jobQueue": {
+          "$ref": "#/definitions/RouterQueue"
         },
         "etag": {
           "description": "(Optional) The Concurrency Token.",
@@ -3063,12 +3063,12 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
@@ -3081,7 +3081,7 @@
           "description": "A list of active offers issued to this worker.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobOffer"
+            "$ref": "#/definitions/RouterJobOffer"
           },
           "readOnly": true
         },
@@ -3300,7 +3300,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/JobExceptionTrigger"
+          "$ref": "#/definitions/ExceptionTrigger"
         }
       ],
       "properties": {
