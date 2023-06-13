@@ -8,6 +8,7 @@
     "routeName": "route1",
     "routeUpdateProperties": {
       "properties": {
+        "routeType": "L4Route",
         "customDomains": [
           {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
@@ -16,32 +17,11 @@
         "originGroup": {
           "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
         },
-        "originPath": null,
-        "ruleSets": [
-          {
-            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
-          }
-        ],
-        "supportedProtocols": [
-          "Https",
-          "Http"
-        ],
-        "patternsToMatch": [
-          "/*"
-        ],
-        "cacheConfiguration": {
-          "compressionSettings": {
-            "contentTypesToCompress": [
-              "text/html",
-              "application/octet-stream"
-            ],
-            "isCompressionEnabled": true
-          },
-          "queryStringCachingBehavior": "IgnoreQueryString"
+        "protocolSettings": {
+          "listenerProtocol": "TCP",
+          "originProtocol": "TCP",
+          "ports": ["8080", "8081-8089", "8090"]
         },
-        "forwardingProtocol": "MatchRequest",
-        "linkToDefaultDomain": "Enabled",
-        "httpsRedirect": "Enabled",
         "enabledState": "Enabled"
       }
     }
@@ -53,6 +33,7 @@
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
         "type": "Microsoft.Cdn/profiles/afdendpoints/routes",
         "properties": {
+          "routeType": "L4Route",
           "customDomains": [
             {
               "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
@@ -61,33 +42,11 @@
           "originGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
           },
-          "originPath": null,
-          "ruleSets": [
-            {
-              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
-            }
-          ],
-          "supportedProtocols": [
-            "Https",
-            "Http"
-          ],
-          "patternsToMatch": [
-            "/*"
-          ],
-          "cacheConfiguration": {
-            "compressionSettings": {
-              "contentTypesToCompress": [
-                "text/html",
-                "application/octet-stream"
-              ],
-              "isCompressionEnabled": true
-            },
-            "queryStringCachingBehavior": "IgnoreQueryString",
-            "queryParameters": null
+          "protocolSettings": {
+            "listenerProtocol": "TCP",
+            "originProtocol": "TCP",
+            "ports": ["8080", "8081-8089", "8090"]
           },
-          "forwardingProtocol": "MatchRequest",
-          "linkToDefaultDomain": "Enabled",
-          "httpsRedirect": "Enabled",
           "enabledState": "Enabled",
           "provisioningState": "Succeeded",
           "deploymentStatus": "NotStarted"
@@ -103,6 +62,7 @@
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
         "type": "Microsoft.Cdn/profiles/afdendpoints/routes",
         "properties": {
+          "routeType": "L4Route",
           "customDomains": [
             {
               "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
@@ -111,33 +71,11 @@
           "originGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
           },
-          "originPath": null,
-          "ruleSets": [
-            {
-              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
-            }
-          ],
-          "supportedProtocols": [
-            "Https",
-            "Http"
-          ],
-          "patternsToMatch": [
-            "/*"
-          ],
-          "cacheConfiguration": {
-            "compressionSettings": {
-              "contentTypesToCompress": [
-                "text/html",
-                "application/octet-stream"
-              ],
-              "isCompressionEnabled": true
-            },
-            "queryStringCachingBehavior": "IgnoreQueryString",
-            "queryParameters": null
+          "protocolSettings": {
+            "listenerProtocol": "TCP",
+            "originProtocol": "TCP",
+            "ports": ["8080", "8081-8089", "8090"]
           },
-          "forwardingProtocol": "MatchRequest",
-          "linkToDefaultDomain": "Enabled",
-          "httpsRedirect": "Enabled",
           "enabledState": "Enabled",
           "provisioningState": "Updating",
           "deploymentStatus": "NotStarted"
