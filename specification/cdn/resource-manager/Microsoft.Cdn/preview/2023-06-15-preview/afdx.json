@@ -5329,6 +5329,10 @@
     },
     "AFDOriginGroupUpdatePropertiesParameters": {
       "type": "object",
+      "discriminator": "originGroupPropertiesType",
+      "required": [
+        "originGroupPropertiesType"
+      ],
       "properties": {
         "originGroupPropertiesType": {
           "type": "string",
@@ -5342,8 +5346,7 @@
             "modelAsString": true
           }
         }
-      },
-      "discriminator": "originGroupPropertiesType"
+      }
     },
     "L7OriginGroupProperties": {
       "x-ms-discriminator-value": "L7OriginGroupProperties",
@@ -5532,9 +5535,6 @@
         {
           "$ref": "#/definitions/AFDStateProperties"
         }
-      ],
-      "required": [
-        "originGroup"
       ]
     },
     "RouteUpdateParameters": {
@@ -5551,10 +5551,21 @@
       "description": "Based on the RouteType the route can have either L4 or L7 properties.",
       "type": "object",
       "discriminator": "routeType",
+      "required": [
+        "routeType"
+      ],
       "properties": {
         "routeType": {
-          "description": "the protocol type of the route.",
-          "$ref": "#/definitions/RouteType"
+          "type": "string",
+          "enum": [
+            "L7Route",
+            "L4Route"
+          ],
+          "default": "L7Route",
+          "x-ms-enum": {
+            "name": "RouteType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5572,7 +5583,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/L7RouteUpdatePropertiesParameters"
         }
-      }
+      },
+      "required": [
+        "originGroup"
+      ]
     },
     "L7RouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
@@ -5832,7 +5846,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/L4RouteUpdatePropertiesParameters"
         }
-      }
+      },
+      "required": [
+        "originGroup"
+      ]
     },
     "L4RouteUpdatePropertiesParameters": {
       "description": "L4 Route.",
@@ -5907,19 +5924,6 @@
           }
         }
       }
-    },
-    "RouteType": {
-      "description": "RouteType for this route for example Layer7 or Layer4 by default Layer7 will be considered. This will help in configuring the route correctly for the given  route type.",
-      "type": "string",
-      "enum": [
-        "L7Route",
-        "L4Route"
-      ],
-      "x-ms-enum": {
-        "name": "RouteType",
-        "modelAsString": true
-      },
-      "default": "L7Route"
     },
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",
