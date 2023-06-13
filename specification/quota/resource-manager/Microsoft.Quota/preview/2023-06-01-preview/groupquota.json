@@ -1441,14 +1441,16 @@
             "read"
           ]
         },
-        "provisioningState": {
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
+        "properties": {
+          "provisioningState": {
+            "$ref": "#/definitions/RequestState",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The new quota limit for the subscription. The incremental quota will be assigned from pre-approved groupQuota."
+          }
         }
       }
     },
@@ -1506,10 +1508,6 @@
           "type": "string",
           "readOnly": true
         },
-        "provisioningState": {
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        },
         "properties": {
           "description": "Group Quota properties for the specified resource.",
           "$ref": "#/definitions/SubscriptionQuotaDetails"
@@ -1529,6 +1527,10 @@
           "type": "integer",
           "format": "int64",
           "description": "The non shareable quota for the subscription."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/RequestState",
+          "readOnly": true
         },
         "quotaSource": {
           "$ref": "#/definitions/SubscriptionGroupQuotaAssignmentList"
@@ -1632,22 +1634,24 @@
           "type": "string",
           "readOnly": true
         },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state",
-          "allOf": [
-            {
-              "$ref": "#/definitions/RequestState"
-            }
-          ],
-          "readOnly": true
-        },
-        "subscriptionIds": {
-          "type": "array",
-          "description": "List of subscriptionIds.",
-          "items": {
+        "properties": {
+          "provisioningState": {
             "type": "string",
-            "description": "SubscriptionId."
+            "description": "Provisioning state",
+            "allOf": [
+              {
+                "$ref": "#/definitions/RequestState"
+              }
+            ],
+            "readOnly": true
+          },
+          "subscriptionIds": {
+            "type": "array",
+            "description": "List of subscriptionIds.",
+            "items": {
+              "type": "string",
+              "description": "SubscriptionId."
+            }
           }
         }
       }
