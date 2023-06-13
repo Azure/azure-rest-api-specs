@@ -309,7 +309,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionIdList"
+              "$ref": "#/definitions/GroupQuotaSubscriptionIdList"
             }
           },
           "default": {
@@ -350,7 +350,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK, Create or Update"
+            "description": "OK, Create or Update",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+            }
           },
           "201": {
             "description": "Request Accepted, Create or Update",
@@ -411,7 +414,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionIdList"
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
             }
           },
           "default": {
@@ -491,7 +494,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK."
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+            }
           },
           "default": {
             "description": "Error",
@@ -882,7 +888,6 @@
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
         "description": "Request to assign a specific resource quota from group quota to a specific Subscription. The subscriptions can also reduce the quota assigned to subscription to give back the group back to MG. The quota assignment back to MG groupQuota is limited by the GroupQuota assigned to subscription, which means the maximum unused quota assigned back to MG groupQuota will be the groupQuota assigned to the subscriptions. So, this API can used to assign Quota to subscriptions and assign back unused quota, which was previously assigned from MG groupQuota to subscription.",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_CreateOrUpdate",
-        "x-ms-azure-resource": true,
         "x-ms-examples": {
           "ShareQuotaOrder_Subscription_Allocation_Put_ForCompute": {
             "$ref": "./examples/PutQuotaAllocation-Compute.json"
@@ -1618,7 +1623,7 @@
         }
       }
     },
-    "SubscriptionIdList": {
+    "GroupQuotaSubscriptionIdList": {
       "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
@@ -1637,6 +1642,19 @@
           "type": "string",
           "readOnly": true
         },
+        "value": {
+          "type": "array", 
+          "description": "The full list of subscription ids that have been requested to be added to a Group Quot and their provisioning status.",
+          "items": { 
+              "$ref": "#/definitions/GroupQuotaSubscriptionId" 
+          } 
+        }
+      }
+    },
+    "GroupQuotaSubscriptionId": {
+      "type": "object",
+      "description": "A subscription id that has been requested to be added to a Group Quota. Includes status of that add request.",
+      "properties": {
         "properties": {
           "provisioningState": {
             "type": "string",
@@ -1648,13 +1666,9 @@
             ],
             "readOnly": true
           },
-          "subscriptionIds": {
-            "type": "array",
-            "description": "List of subscriptionIds.",
-            "items": {
-              "type": "string",
-              "description": "SubscriptionId."
-            }
+          "subscriptionId": {
+            "type": "string",
+            "description": "SubscriptionId."
           }
         }
       }
