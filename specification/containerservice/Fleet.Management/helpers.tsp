@@ -38,7 +38,7 @@ alias ArmAcceptedResponseWithLocationHeader = ArmAcceptedResponse & LocationHead
 @post
 op ArmResourceNoRequestBodyActionSync<
   TResource extends Azure.ResourceManager.Foundations.ArmResource,
-  TResponse extends object,
+  TResponse extends TypeSpec.Reflection.Model,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>
@@ -58,7 +58,7 @@ op ArmResourceNoRequestBodyActionSync<
 @post
 op ArmResourceNoRequestBodyActionAsync<
   TResource extends Azure.ResourceManager.Foundations.ArmResource,
-  TResponse extends object,
+  TResponse extends TypeSpec.Reflection.Model,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>
@@ -71,7 +71,7 @@ op ArmResourceNoRequestBodyActionAsync<
 @patch
 op FleetCustomPatchSync<
   TResource extends ArmResource,
-  TPatchModel extends object = TagsUpdateModel<TResource>,
+  TPatchModel extends TypeSpec.Reflection.Model = TagsUpdateModel<TResource>,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,

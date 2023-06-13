@@ -17,5 +17,6 @@ namespace ClientForAzureHealthInsights;
     service: AzureHealthInsights
 })
   interface CancerProfilingClient {
-  InferCancerProfile is AzureHealthInsights.OncoPhenotype.createJob;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
+  inferCancerProfile is AzureHealthInsights.OncoPhenotype.createJob;
 }
