@@ -1647,6 +1647,10 @@
     }
   },
   "definitions": {
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
     "DatabaseInstanceCollection": {
       "description": "Collection of database instances.",
       "type": "object",
@@ -1994,6 +1998,7 @@
     },
     "ODataQueryOptions`1": {
       "type": "object",
+      "description": "OData Query options.",
       "properties": {
         "filter": {
           "$ref": "#/definitions/FilterQueryOption",
@@ -2003,6 +2008,7 @@
     },
     "ODataQueryContext": {
       "type": "object",
+      "description": "Query options context",
       "properties": {
         "defaultQuerySettings": {
           "$ref": "#/definitions/DefaultQuerySettings",
@@ -2036,6 +2042,7 @@
     },
     "ODataRawQueryOptions": {
       "type": "object",
+      "description": "Query options for raw queries.",
       "properties": {
         "filter": {
           "type": "string",
@@ -2045,6 +2052,7 @@
     },
     "FilterQueryOption": {
       "type": "object",
+      "description": "Filter query option providing validator and filterClause",
       "properties": {
         "context": {
           "$ref": "#/definitions/ODataQueryContext",
@@ -2065,10 +2073,12 @@
     },
     "ODataQueryValidator": {
       "type": "object",
+      "description": "OData query validator.",
       "properties": {}
     },
     "DefaultQuerySettings": {
       "type": "object",
+      "description": "Provides default query settings.",
       "properties": {
         "enableExpand": {
           "type": "boolean"
@@ -2093,6 +2103,7 @@
     },
     "IEdmModel": {
       "type": "object",
+      "description": "Defines EDM model properties.",
       "properties": {
         "schemaElements": {
           "type": "array",
@@ -2139,6 +2150,7 @@
     },
     "IEdmType": {
       "type": "object",
+      "description": "Defines EDM type.",
       "properties": {
         "typeKind": {
           "enum": [
@@ -2164,6 +2176,7 @@
     },
     "IEdmNavigationSource": {
       "type": "object",
+      "description": "Defines EDM navigation using path, type and name.",
       "properties": {
         "navigationPropertyBindings": {
           "type": "array",
@@ -2191,6 +2204,7 @@
     },
     "ODataPath": {
       "type": "object",
+      "description": "Defines OData path.",
       "properties": {
         "edmType": {
           "$ref": "#/definitions/IEdmType",
@@ -2228,14 +2242,17 @@
     },
     "IServiceProvider": {
       "type": "object",
+      "description": "Service provider value.",
       "properties": {}
     },
     "SelectExpandQueryValidator": {
       "type": "object",
+      "description": "Query validator.",
       "properties": {}
     },
     "SelectExpandClause": {
       "type": "object",
+      "description": "Selecte expand clause.",
       "properties": {
         "selectedItems": {
           "type": "array",
@@ -2253,6 +2270,7 @@
     },
     "ApplyClause": {
       "type": "object",
+      "description": "Apply transformations clause.",
       "properties": {
         "transformations": {
           "type": "array",
@@ -2266,10 +2284,12 @@
     },
     "FilterQueryValidator": {
       "type": "object",
+      "description": "Filter query validator.",
       "properties": {}
     },
     "FilterClause": {
       "type": "object",
+      "description": "Filter clause expression.",
       "properties": {
         "expression": {
           "$ref": "#/definitions/SingleValueNode",
@@ -2287,6 +2307,7 @@
     },
     "IEdmSchemaElement": {
       "type": "object",
+      "description": "EDM Schema element.",
       "properties": {
         "schemaElementKind": {
           "enum": [
@@ -2316,6 +2337,7 @@
     },
     "IEdmVocabularyAnnotation": {
       "type": "object",
+      "description": "EDM vocabulary annotations.",
       "properties": {
         "qualifier": {
           "type": "string",
@@ -2337,10 +2359,12 @@
     },
     "IEdmDirectValueAnnotationsManager": {
       "type": "object",
+      "description": "EDM vocabulary annotations manager.",
       "properties": {}
     },
     "IEdmEntityContainer": {
       "type": "object",
+      "description": "EDM entity elements.",
       "properties": {
         "elements": {
           "type": "array",
@@ -2380,6 +2404,7 @@
     },
     "IEdmNavigationPropertyBinding": {
       "type": "object",
+      "description": "EDM navigation properties.",
       "properties": {
         "navigationProperty": {
           "$ref": "#/definitions/IEdmNavigationProperty",
@@ -2397,6 +2422,7 @@
     },
     "IEdmPathExpression": {
       "type": "object",
+      "description": "EDM path expression definition.",
       "properties": {
         "pathSegments": {
           "type": "array",
@@ -2449,6 +2475,7 @@
     },
     "ODataPathSegment": {
       "type": "object",
+      "description": "OData path segment.",
       "properties": {
         "edmType": {
           "$ref": "#/definitions/IEdmType",
@@ -2461,10 +2488,12 @@
     },
     "SelectItem": {
       "type": "object",
+      "description": "Select item.",
       "properties": {}
     },
     "TransformationNode": {
       "type": "object",
+      "description": "Transformation node type.",
       "properties": {
         "kind": {
           "enum": [
@@ -2484,6 +2513,7 @@
     },
     "SingleValueNode": {
       "type": "object",
+      "description": "Single value node type.",
       "properties": {
         "typeReference": {
           "$ref": "#/definitions/IEdmTypeReference",
@@ -2537,6 +2567,7 @@
     },
     "RangeVariable": {
       "type": "object",
+      "description": "Defines variable of kind range.",
       "properties": {
         "name": {
           "type": "string",
@@ -2555,6 +2586,7 @@
     },
     "IEdmTypeReference": {
       "type": "object",
+      "description": "EDM type reference.",
       "properties": {
         "isNullable": {
           "type": "boolean",
@@ -2568,6 +2600,7 @@
     },
     "IEdmTerm": {
       "type": "object",
+      "description": "EDM term.",
       "properties": {
         "type": {
           "$ref": "#/definitions/IEdmTypeReference",
@@ -2609,10 +2642,12 @@
     },
     "IEdmVocabularyAnnotatable": {
       "type": "object",
+      "description": "EDM vocabulary annotatable type.",
       "properties": {}
     },
     "IEdmExpression": {
       "type": "object",
+      "description": "EDM expression.",
       "properties": {
         "expressionKind": {
           "enum": [
@@ -2654,6 +2689,7 @@
     },
     "IEdmEntityContainerElement": {
       "type": "object",
+      "description": "EDM entity container.",
       "properties": {
         "containerElementKind": {
           "enum": [
@@ -2682,6 +2718,7 @@
     },
     "IEdmNavigationProperty": {
       "type": "object",
+      "description": "Defines EDM navigation property.",
       "properties": {
         "partner": {
           "$ref": "#/definitions/IEdmNavigationProperty",
@@ -2736,6 +2773,7 @@
     },
     "IEdmReferentialConstraint": {
       "type": "object",
+      "description": "EDM constraint.",
       "properties": {
         "propertyPairs": {
           "type": "array",
@@ -2752,6 +2790,7 @@
     },
     "IEdmStructuredType": {
       "type": "object",
+      "description": "EDM structured type.",
       "properties": {
         "isAbstract": {
           "type": "boolean",
@@ -2799,6 +2838,7 @@
     },
     "EdmReferentialConstraintPropertyPair": {
       "type": "object",
+      "description": "EDM property constraint pair.",
       "properties": {
         "dependentProperty": {
           "$ref": "#/definitions/IEdmStructuralProperty",
@@ -2812,6 +2852,7 @@
     },
     "IEdmProperty": {
       "type": "object",
+      "description": "EDM property.",
       "properties": {
         "propertyKind": {
           "enum": [
@@ -2842,6 +2883,7 @@
     },
     "IEdmStructuralProperty": {
       "type": "object",
+      "description": "EDM structural property.",
       "properties": {
         "defaultValueString": {
           "type": "string",
@@ -3599,6 +3641,7 @@
     },
     "VirtualDesktopUserCollection": {
       "type": "object",
+      "description": "Collection of virtual desktop users.",
       "properties": {
         "value": {
           "type": "array",
@@ -3613,6 +3656,7 @@
     },
     "VirtualDesktopUser": {
       "type": "object",
+      "description": "Class representing virtual desktop user.",
       "properties": {
         "id": {
           "type": "string"
@@ -3631,6 +3675,7 @@
     },
     "VirtualDesktopUserProperties": {
       "type": "object",
+      "description": "Properties of class representing virtual desktop user.",
       "properties": {
         "assessmentData": {
           "type": "array",
@@ -3646,6 +3691,7 @@
     },
     "VirtualDesktopUserAssessmentDetails": {
       "type": "object",
+      "description": "Details of assessment data of virtual desktop user.",
       "properties": {
         "lastUpdatedTime": {
           "format": "date-time",
@@ -3746,6 +3792,7 @@
     },
     "WebServerCollection": {
       "type": "object",
+      "description": "Collection of web servers.",
       "properties": {
         "value": {
           "type": "array",
@@ -3760,6 +3807,7 @@
     },
     "WebServer": {
       "type": "object",
+      "description": "Class representing a web server.",
       "properties": {
         "id": {
           "type": "string"
@@ -3778,6 +3826,7 @@
     },
     "WebServerProperties": {
       "type": "object",
+      "description": "Properties of class representing web server.",
       "properties": {
         "discoveryData": {
           "type": "array",
@@ -3799,6 +3848,7 @@
     },
     "WebServerDiscoveryDetails": {
       "type": "object",
+      "description": "Details of discovery data of web server.",
       "properties": {
         "osName": {
           "type": "string"
@@ -3852,6 +3902,7 @@
     },
     "WebServerSummary": {
       "type": "object",
+      "description": "Summary of information representing web server.",
       "properties": {
         "discoveredCount": {
           "format": "int32",
@@ -3877,6 +3928,7 @@
     },
     "WebSiteCollection": {
       "type": "object",
+      "description": "Collection of web sites.",
       "properties": {
         "value": {
           "type": "array",
@@ -3891,6 +3943,7 @@
     },
     "WebSite": {
       "type": "object",
+      "description": "Class representing a web site.",
       "properties": {
         "id": {
           "type": "string"
@@ -3909,6 +3962,7 @@
     },
     "WebSiteProperties": {
       "type": "object",
+      "description": "Properties of class representing web site.",
       "properties": {
         "discoveryData": {
           "type": "array",
@@ -3936,6 +3990,7 @@
     },
     "WebSiteDiscoveryDetails": {
       "type": "object",
+      "description": "Details of discovery data of web site.",
       "properties": {
         "lastUpdatedTime": {
           "format": "date-time",
@@ -3970,6 +4025,7 @@
     },
     "WebSiteAssessmentDetails": {
       "type": "object",
+      "description": "Details of assessment data of web site.",
       "properties": {
         "assessmentId": {
           "type": "string"
@@ -4041,6 +4097,7 @@
     },
     "WebSiteMigrationDetails": {
       "type": "object",
+      "description": "Details of migration data of web site.",
       "properties": {
         "migrationPhase": {
           "type": "string"
@@ -4230,69 +4287,6 @@
         }
       },
       "x-ms-discriminator-value": "Databases"
-    },
-    "OperationResultList": {
-      "type": "object",
-      "description": "List of API operations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations.",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "Operation": {
-      "type": "object",
-      "description": "A REST API operation supported by the provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation.",
-          "readOnly": true
-        },
-        "display": {
-          "description": "Displayable properties of the operation.",
-          "$ref": "#/definitions/OperationDisplay"
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationDisplay": {
-      "type": "object",
-      "description": "Displayable properties of the operation.",
-      "readOnly": true,
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Provider of the operation.",
-          "readOnly": true
-        },
-        "resource": {
-          "type": "string",
-          "description": "Resource operated on by the operation.",
-          "readOnly": true
-        },
-        "operation": {
-          "type": "string",
-          "description": "Operation Type.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the operation.",
-          "readOnly": true
-        }
-      }
     },
     "ProjectResultList": {
       "type": "object",
