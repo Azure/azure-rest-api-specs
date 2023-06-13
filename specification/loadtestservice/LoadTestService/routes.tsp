@@ -9,7 +9,7 @@ using TypeSpec.Http;
 
 namespace AzureLoadTesting;
 
-interface LoadTestAdministrationOperations {
+interface LoadTestAdministration {
   @summary("Create a new test or update an existing test.")
   @doc("Create a new test or update an existing test.")
   @route("/tests/{testId}")
@@ -279,7 +279,7 @@ numeric, underscore or hyphen characters.
   >;
 }
 
-interface LoadTestRunOperations {
+interface LoadTestRun {
   @summary("Get test run details by name.")
   @doc("Get test run details by name.")
   @route("/test-runs/{testRunId}")
