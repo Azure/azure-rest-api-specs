@@ -1648,6 +1648,7 @@
   },
   "definitions": {
     "Object": {
+      "description": "Defines generic onject.",
       "type": "object",
       "properties": {}
     },
@@ -1726,6 +1727,10 @@
         "lastUpdatedTime": {
           "format": "date-time",
           "description": "Gets or sets the time of the last modification of the database instance details.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Gets the relative URL to get to this DatabaseInstanceDiscoveryDetails resource.",
           "type": "string"
         },
         "instanceId": {
@@ -1857,6 +1862,10 @@
       "properties": {
         "assessmentId": {
           "description": "Gets or sets the database assessment scope/Id.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Gets the relative URL to get to this DatabaseAssessmentDetails resource.",
           "type": "string"
         },
         "migrationBlockersCount": {
@@ -2999,6 +3008,10 @@
       "description": "Discovery properties that can be published by various ISVs.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the relative URL to get to this DiscoveryDetails resource.",
+          "type": "string"
+        },
         "osType": {
           "description": "Gets or sets the OS type.",
           "type": "string"
@@ -3075,6 +3088,10 @@
       "description": "Assessment properties that can be shared by various publishers.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the relative URL to get to this AssessmentDetails resource.",
+          "type": "string"
+        },
         "assessmentId": {
           "description": "Gets or sets the id of the assessment done on the machine.",
           "type": "string"
@@ -3158,6 +3175,10 @@
       "description": "Migration properties that can be shared by various publishers.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Gets the relative URL to get to this MigrationDetails resource.",
+          "type": "string"
+        },
         "migrationPhase": {
           "description": "Gets or sets the phase of migration of the machine.",
           "type": "string"
@@ -3333,6 +3354,10 @@
             "Completed",
             "Failed"
           ],
+          "x-ms-enum": {
+            "name": "refreshSummaryState",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -3700,6 +3725,10 @@
         "userId": {
           "type": "string"
         },
+        "id": {
+          "description": "Gets the relative URL to get to this VirtualDesktopUserAssessmentDetails resource.",
+          "type": "string"
+        },
         "enqueueTime": {
           "type": "string"
         },
@@ -3850,6 +3879,10 @@
       "type": "object",
       "description": "Details of discovery data of web server.",
       "properties": {
+        "id": {
+          "description": "Gets the relative URL to get to this WebServerDiscoveryDetails resource.",
+          "type": "string"
+        },
         "osName": {
           "type": "string"
         },
@@ -3996,6 +4029,10 @@
           "format": "date-time",
           "type": "string"
         },
+        "id": {
+          "description": "Gets the relative URL to get to this WebSiteDiscoveryDetails resource.",
+          "type": "string"
+        },
         "webServerId": {
           "type": "string"
         },
@@ -4028,6 +4065,10 @@
       "description": "Details of assessment data of web site.",
       "properties": {
         "assessmentId": {
+          "type": "string"
+        },
+        "id": {
+          "description": "Gets the relative URL to get to this WebSiteAssessmentDetails resource.",
           "type": "string"
         },
         "isReadyForMigration": {
@@ -4099,6 +4140,10 @@
       "type": "object",
       "description": "Details of migration data of web site.",
       "properties": {
+        "id": {
+          "description": "Gets the relative URL to get to this WebSiteMigrationDetails resource.",
+          "type": "string"
+        },
         "migrationPhase": {
           "type": "string"
         },
