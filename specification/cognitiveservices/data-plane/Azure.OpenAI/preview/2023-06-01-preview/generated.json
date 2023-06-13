@@ -79,7 +79,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/ChatCompletionsOptions"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -124,7 +125,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/CompletionsOptions"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -145,6 +147,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a completion for the provided prompt, parameters and chosen model.": {
+            "$ref": "./examples/completions.json"
           }
         }
       }
@@ -169,7 +176,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -191,6 +199,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Return the embeddings for a given prompt.": {
+            "$ref": "./examples/embeddings.json"
+          }
         }
       }
     },
@@ -207,7 +220,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/ImageRequest"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -215,7 +229,7 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               }
@@ -300,8 +314,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -311,8 +325,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -340,10 +353,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "ChatChoice": {
       "type": "object",
@@ -391,8 +401,8 @@
             "$ref": "#/definitions/ChatChoice"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ChatChoice[]",
-          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated."
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "x-typespec-name": "ChatChoice[]"
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -416,8 +426,8 @@
             "$ref": "#/definitions/ChatMessage"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ChatMessage[]",
-          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles."
+          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+          "x-typespec-name": "ChatMessage[]"
         },
         "max_tokens": {
           "type": "integer",
@@ -442,8 +452,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "x-typespec-name": "Record<int32>",
           "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
+          "x-typespec-name": "Record<int32>",
           "x-ms-client-name": "logitBias"
         },
         "user": {
@@ -460,8 +470,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "A collection of textual sequences that will end completions generation."
+          "description": "A collection of textual sequences that will end completions generation.",
+          "x-typespec-name": "string[]"
         },
         "presence_penalty": {
           "type": "number",
@@ -591,8 +601,8 @@
             "$ref": "#/definitions/Choice"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Choice[]",
-          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated."
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "x-typespec-name": "Choice[]"
         },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
@@ -615,8 +625,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "The textual forms of tokens evaluated in this probability model."
+          "description": "The textual forms of tokens evaluated in this probability model.",
+          "x-typespec-name": "string[]"
         },
         "token_logprobs": {
           "type": "array",
@@ -626,8 +636,8 @@
             "x-nullable": true,
             "x-typespec-name": "float32 | null"
           },
-          "x-typespec-name": "float32 | null[]",
           "description": "A collection of log probability values for the tokens in this completions data.",
+          "x-typespec-name": "float32 | null[]",
           "x-ms-client-name": "tokenLogprobs"
         },
         "top_logprobs": {
@@ -637,8 +647,8 @@
             "x-typespec-name": "Record<float32 | null>"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Record<float32 | null>[]",
           "description": "A mapping of tokens to maximum log probability values in this completions data.",
+          "x-typespec-name": "Record<float32 | null>[]",
           "x-ms-client-name": "topLogprobs"
         },
         "text_offset": {
@@ -647,8 +657,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "x-typespec-name": "int32[]",
           "description": "The text offsets associated with tokens in this completions data.",
+          "x-typespec-name": "int32[]",
           "x-ms-client-name": "textOffset"
         }
       },
@@ -668,8 +678,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "The prompts to generate completions from."
+          "description": "The prompts to generate completions from.",
+          "x-typespec-name": "string[]"
         },
         "max_tokens": {
           "type": "integer",
@@ -694,8 +704,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "x-typespec-name": "Record<int32>",
           "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
+          "x-typespec-name": "Record<int32>",
           "x-ms-client-name": "logitBias"
         },
         "user": {
@@ -721,8 +731,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "A collection of textual sequences that will end completions generation."
+          "description": "A collection of textual sequences that will end completions generation.",
+          "x-typespec-name": "string[]"
         },
         "presence_penalty": {
           "type": "number",
@@ -808,8 +818,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input."
+          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
+          "x-typespec-name": "float32[]"
         },
         "index": {
           "type": "integer",
@@ -832,8 +842,8 @@
             "$ref": "#/definitions/EmbeddingItem"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "EmbeddingItem[]",
-          "description": "Embedding values for the prompts submitted in the request."
+          "description": "Embedding values for the prompts submitted in the request.",
+          "x-typespec-name": "EmbeddingItem[]"
         },
         "usage": {
           "$ref": "#/definitions/EmbeddingsUsage",
@@ -862,8 +872,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present."
+          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
@@ -982,7 +992,7 @@
       "properties": {
         "created": {
           "type": "integer",
-          "format": "uint64",
+          "format": "int64",
           "description": "A timestamp when this job or item was created (in unix epochs)."
         },
         "data": {
@@ -991,8 +1001,8 @@
             "$ref": "#/definitions/ImageResult"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ImageResult[]",
-          "description": "The images generated by the operator."
+          "description": "The images generated by the operator.",
+          "x-typespec-name": "ImageResult[]"
         }
       },
       "description": "The result of the operation if the operation succeeded.",
@@ -1130,8 +1140,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
