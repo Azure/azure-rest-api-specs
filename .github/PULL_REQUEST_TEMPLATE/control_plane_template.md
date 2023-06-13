@@ -42,7 +42,7 @@ Otherwise your PR may be subject to ARM review requirements. Complete the follow
 ### Breaking Change Review Checklist
 If you have any breaking changes as defined in the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy/), request approval from the Breaking Change Review Board.
 
-**Action**: to initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Additional details on the process and office hours are on the [Breaking Change Wiki](http://aka.ms/aprwiki).
+**Action**: to initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Additional details on the process and office hours are on the [Breaking Change Wiki](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/overview_breakingchanges).
 
 NOTE: To update API(s) in public preview for over 1 year (refer to [Retirement of Previews](http://aka.ms/aprwiki))
 

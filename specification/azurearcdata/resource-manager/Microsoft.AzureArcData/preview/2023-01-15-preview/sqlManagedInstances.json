@@ -185,11 +185,15 @@
           "type": "integer",
           "format": "int32",
           "description": "This option specifies the number of SQL Managed Instance replicas that will be deployed in your Kubernetes cluster for high availability purposes. If sku.tier is BusinessCritical, allowed values are '2' or '3' with default of '3'. If sku.tier is GeneralPurpose, replicas must be '1'."
+        },
+        "security": {
+          "$ref": "#/definitions/K8sSecurity"
+        },
+        "settings": {
+          "$ref": "#/definitions/K8sSettings"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "K8sScheduling": {
       "type": "object",
@@ -199,9 +203,7 @@
           "$ref": "#/definitions/K8sSchedulingOptions"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "K8sSchedulingOptions": {
       "type": "object",
@@ -211,9 +213,7 @@
           "$ref": "#/definitions/K8sResourceRequirements"
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      }
+      "additionalProperties": {}
     },
     "K8sResourceRequirements": {
       "type": "object",
@@ -234,8 +234,108 @@
           "description": "Limits for a kubernetes resource type (e.g 'cpu', 'memory'). The 'cpu' request must be less than or equal to 'cpu' limit. Default 'cpu' is 2, minimum is 1. Default 'memory' is '4Gi', minimum is '2Gi. If sku.tier is GeneralPurpose, maximum 'cpu' is 24 and maximum 'memory' is '128Gi'."
         }
       },
+      "additionalProperties": {}
+    },
+    "K8sSecurity": {
+      "type": "object",
+      "description": "The kubernetes security information.",
+      "properties": {
+        "adminLoginSecret": {
+          "type": "string",
+          "description": "Admin login secret key"
+        },
+        "serviceCertificateSecret": {
+          "type": "string",
+          "description": "Service certificate secret used"
+        },
+        "activeDirectory": {
+          "$ref": "#/definitions/K8sActiveDirectory"
+        },
+        "transparentDataEncryption": {
+          "$ref": "#/definitions/k8stransparentDataEncryption"
+        }
+      },
       "additionalProperties": {
         "type": "object"
+      }
+    },
+    "K8sActiveDirectory": {
+      "type": "object",
+      "description": "The kubernetes active directory information.",
+      "properties": {
+        "connector": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the connector"
+            },
+            "namespace": {
+              "type": "string",
+              "description": "Name space of the connector"
+            }
+          }
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Account name for AAD"
+        },
+        "keytabSecret": {
+          "type": "string",
+          "description": "Keytab secret used to authenticate with Active Directory."
+        },
+        "encryptionTypes": {
+          "type": "array",
+          "description": "An array of encryption types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "k8stransparentDataEncryption": {
+      "type": "object",
+      "description": "Transparent data encryption information.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Transparent data encryption mode. Can be Service Managed, Customer managed or disabled"
+        },
+        "protectorSecret": {
+          "type": "string",
+          "description": "Protector secret for customer managed Transparent data encryption mode"
+        }
+      }
+    },
+    "K8sSettings": {
+      "type": "object",
+      "description": "The kubernetes settings information.",
+      "properties": {
+        "network": {
+          "$ref": "#/definitions/K8sNetworkSettings"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "K8sNetworkSettings": {
+      "type": "object",
+      "description": "The kubernetes network settings information.",
+      "properties": {
+        "forceencryption": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If 1, then SQL Server forces all connections to be encrypted. By default, this option is 0"
+        },
+        "tlsciphers": {
+          "type": "string",
+          "description": "Specifies which ciphers are allowed by SQL Server for TLS"
+        },
+        "tlsprotocols": {
+          "type": "string",
+          "description": "A comma-separated list of which TLS protocols are allowed by SQL Server"
+        }
       }
     },
     "KeytabInformation": {
