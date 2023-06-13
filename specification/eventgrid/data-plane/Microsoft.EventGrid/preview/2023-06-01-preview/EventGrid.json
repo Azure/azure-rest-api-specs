@@ -99,7 +99,12 @@
         },
         "consumes": [
           "application/cloudevents-batch+json; charset=utf-8"
-        ]
+        ],
+        "x-ms-examples": {
+          "Publish Cloud Event": {
+            "$ref": "./examples/publish.json"
+          }
+        }
       }
     },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive": {
@@ -163,6 +168,11 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Receive Cloud Event": {
+            "$ref": "./examples/receive.json"
+          }
         }
       }
     },
@@ -220,7 +230,12 @@
         },
         "consumes": [
           "application/json; charset=utf-8"
-        ]
+        ],
+        "x-ms-examples": {
+          "Acknowledge Cloud Event": {
+            "$ref": "./examples/ack.json"
+          }
+        }
       }
     },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
@@ -277,7 +292,12 @@
         },
         "consumes": [
           "application/json; charset=utf-8"
-        ]
+        ],
+        "x-ms-examples": {
+          "Release Cloud Event": {
+            "$ref": "./examples/release.json"
+          }
+        }
       }
     },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject": {
@@ -334,7 +354,12 @@
         },
         "consumes": [
           "application/json; charset=utf-8"
-        ]
+        ],
+        "x-ms-examples": {
+          "Reject Cloud Event": {
+            "$ref": "./examples/reject.json"
+          }
+        }
       }
     }
   },

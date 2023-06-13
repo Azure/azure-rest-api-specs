@@ -1,0 +1,51 @@
+{
+    "operationId": "PublishCloudEvents",
+    "title": "Publish Cloud Event",
+    "parameters": {
+        "endpoint": "myNamespaceName.westus-1.eventgrid.azure.net",
+        "topicName": "myTopic",
+        "content-type": "application/cloudevents-batch+json",
+        "authorization": "SharedAccessKey 123",
+        "api-version": "2023-06-01-preview",
+        "body": [
+            {
+                "id": "b3ccc7e3-c1cb-49bf-b7c8-0d4e60980616",
+                "source": "/microsoft/autorest/examples/eventgrid/cloud-events/publish",
+                "specversion": "1.0",
+                "data": {
+                    "Property1": "Value1",
+                    "Property2": "Value2"
+                },
+                "type": "Microsoft.Contoso.TestEvent",
+                "time": "2023-05-04T23:06:09.147165Z"
+            }
+        ]
+    },
+    "responses": {
+        "200": {},
+        "400": {
+            "error": {
+                "code": "BadRequest",
+                "message": "Unknown api version",
+                "timestamp_utc": "2023-03-11T06:37:39.385878+00:00",
+                "tracking_id": "7607D780-2141-4624-82F8-5EED64AC05C5"
+            }
+        },
+        "401": {
+            "error": {
+                "code": "Unauthenticated",
+                "message": "Provided Shared Access Key is not authorized",
+                "timestamp_utc": "2023-04-22T06:37:39.385878+00:00",
+                "tracking_id": "D63729F8-5798-4481-A392-7C2C6F3E5B4F"
+            }
+        },
+        "413": {
+            "error": {
+                "code": "MessageTooLarge",
+                "message": "Message size cannot exceed 1Mb bytes",
+                "timestamp_utc": "2023-06-05T06:12:19.105271+00:00",
+                "tracking_id": "87EC8E1E-CA0A-491F-8834-99F17CA72D18"
+            }
+        }
+    }
+}
