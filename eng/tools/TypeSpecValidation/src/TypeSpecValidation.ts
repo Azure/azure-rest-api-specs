@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import {simpleGit} from 'simple-git';
 import { exec } from "child_process";
 
