@@ -1,16 +1,18 @@
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./custom_operations.tsp";
+//import "./custom_operations.tsp";
 
+using OpenApi;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Microsoft.ContainerStorage.Custom;
+// using Microsoft.ContainerStorage.Custom;
 
 @armProviderNamespace
 @service({
@@ -359,11 +361,38 @@ model VolumeSnapshotProperties {
 // END VOLUME SNAPSHOT
 
 @armResourceOperations
-interface Pools extends ResourceOperationsCustom<Pool, PoolProperties> {}
+interface Pools {
+  get is ArmResourceRead<Pool>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
+  delete is ArmResourceDeleteAsync<Pool>;
+  update is ArmResourcePatchAsync<Pool, PoolProperties>;
+  listByResourceGroup is ArmResourceListByParent<Pool>;
+  listBySubscription is ArmListBySubscription<Pool>;
+}
 
 @armResourceOperations
-interface Volumes extends ResourceOperationsCustom<Volume, VolumeProperties> {}
+interface Volumes {
+  get is ArmResourceRead<Volume>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Volume>;
+  delete is ArmResourceDeleteAsync<Volume>;
+  update is ArmResourcePatchAsync<Volume, VolumeProperties>;
+  listByResourceGroup is ArmResourceListByParent<Volume>;
+  listBySubscription is ArmListBySubscription<Volume>;
+}
 
 @armResourceOperations
-interface VolumeSnapshots
-  extends ResourceOperationsCustom<VolumeSnapshot, VolumeSnapshotProperties> {}
+interface VolumeSnapshots {
+  get is ArmResourceRead<VolumeSnapshot>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<VolumeSnapshot>;
+  delete is ArmResourceDeleteAsync<VolumeSnapshot>;
+
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  update is ArmResourcePatchAsync<VolumeSnapshot, VolumeSnapshotProperties>;
+  listByResourceGroup is ArmResourceListByParent<VolumeSnapshot>;
+  listBySubscription is ArmListBySubscription<VolumeSnapshot>;
+}
