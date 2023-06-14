@@ -76,25 +76,25 @@ model ImageOperationResponse {
 @doc("The state of a job or item.")
 enum State {
   @doc("The operation was created and is queued to be processed in the future.")
-  "notRunning",
+  notRunning,
 
   @doc("The operation has started to be processed.")
-  "running",
+  running,
 
   @lroSucceeded
   @doc("The operation has successfully be processed and is ready for consumption.")
-  "succeeded",
+  succeeded,
 
   @lroCanceled
   @doc("The operation has been canceled and is incomplete.")
-  "canceled",
+  canceled,
 
   @lroFailed
   @doc("The operation has completed processing with a failure and cannot be further consumed.")
-  "failed",
+  failed,
 
   @doc("The entity has been deleted but may still be referenced by other entities predating the deletion.")
-  "deleted",
+  deleted,
 }
 
 @doc("Provides status details for long running operations.")
@@ -120,11 +120,18 @@ op OaiLongRunningRpcOperation<
   Traits extends TypeSpec.Reflection.Model = {},
   TErrorResponse = Azure.Core.Foundations.ErrorResponse
 > is Foundations.Operation<
-  TParams & Azure.Core.Traits.Private.TraitProperties<Traits, Azure.Core.Traits.TraitLocation.Parameters>,
+  TParams &
+    Azure.Core.Traits.Private.TraitProperties<
+      Traits,
+      Azure.Core.Traits.TraitLocation.Parameters
+    >,
   Azure.Core.Foundations.AcceptedResponse &
     ImageOperationResponse &
     Foundations.LongRunningStatusLocation<TStatusResult> &
-    Azure.Core.Traits.Private.TraitProperties<Traits, Azure.Core.Traits.TraitLocation.Response>,
+    Azure.Core.Traits.Private.TraitProperties<
+      Traits,
+      Azure.Core.Traits.TraitLocation.Response
+    >,
   Traits,
   TErrorResponse
 >;
