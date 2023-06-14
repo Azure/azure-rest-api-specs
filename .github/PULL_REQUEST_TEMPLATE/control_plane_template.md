@@ -4,7 +4,6 @@
 
 What's the purpose of this PR? Check all that apply. This is **mandatory**!
 
-  - [ ] New service onboarding.
   - [ ] New API version. (Such PR should have been generated with [OpenAPI Hub](https://aka.ms/openapihub), per [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).)
   - [ ] Update existing version for new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix swagger quality issues in S360.
