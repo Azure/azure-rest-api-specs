@@ -1973,7 +1973,10 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeNode"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "nodeId"
+          ]
         },
         "otherErrors": {
           "description": "The errors that occurred on this integration runtime.",
@@ -1981,7 +1984,8 @@
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "lastOperation": {
           "description": "The last operation result that occurred on this integration runtime.",
@@ -2061,7 +2065,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedIntegrationRuntimeError"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
@@ -2165,7 +2170,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-          }
+          },
+          "x-ms-identifiers": [
+            "nodeName"
+          ]
         },
         "scheduledUpdateDate": {
           "description": "The date at which the integration runtime will be scheduled to update, in ISO8601 format.",
@@ -2215,7 +2223,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedIntegrationRuntime"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "pushedVersion": {
           "description": "The version that the integration runtime is going to update to.",
@@ -2495,7 +2506,10 @@
           "description": "Integration runtime node monitoring data.",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeNodeMonitoringData"
-          }
+          },
+          "x-ms-identifiers": [
+            "nodeName"
+          ]
         }
       }
     },
@@ -2960,7 +2974,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesCategoryEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "category"
+          ]
         }
       }
     },
@@ -2977,7 +2994,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpoint"
-          }
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
         }
       }
     },
@@ -2994,7 +3014,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IntegrationRuntimeOutboundNetworkDependenciesEndpointDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
         }
       }
     },

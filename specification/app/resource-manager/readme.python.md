@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-app
-namespace: azure.mgmt.app
+package-name: azure-mgmt-appcontainers
+namespace: azure.mgmt.appcontainers
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/app/azure-mgmt-app/azure/mgmt/app
+output-folder: $(python-sdks-folder)/appcontainers/azure-mgmt-appcontainers/azure/mgmt/appcontainers
 ```

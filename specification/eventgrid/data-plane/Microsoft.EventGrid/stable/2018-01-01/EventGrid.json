@@ -29,14 +29,15 @@
   "produces": [
     "application/json"
   ],
-  "paths": {
-    "/api/events": {
+  "paths": {},
+  "x-ms-paths": {
+    "?overload=EventGridEvent": {
       "post": {
         "tags": [
           "Events"
         ],
         "description": "Publishes a batch of events to an Azure Event Grid topic.",
-        "operationId": "PublishEvents",
+        "operationId": "PublishEventGridEvents",
         "parameters": [
           {
             "name": "events",
@@ -68,10 +69,8 @@
           }
         }
       }
-    }
-  },
-  "x-ms-paths": {
-    "/api/events?overload=cloudEvent": {
+    },
+    "?overload=cloudEvent": {
       "post": {
         "consumes": [
           "application/cloudevents-batch+json; charset=utf-8"
@@ -116,7 +115,7 @@
         }
       }
     },
-    "/api/events?overload=customEvent": {
+    "?overload=customEvent": {
       "post": {
         "tags": [
           "Events"

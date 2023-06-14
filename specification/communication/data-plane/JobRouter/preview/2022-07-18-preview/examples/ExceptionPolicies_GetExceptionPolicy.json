@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2022-07-18-preview",
+    "id": "MainExceptionPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "MainExceptionPolicy",
+        "name": "Main",
+        "exceptionRules": {
+          "MaxWaitTimeExceeded": {
+            "trigger": {
+              "kind": "wait-time",
+              "thresholdSeconds": 20
+            },
+            "actions": {
+              "MoveJobToEscalatedQueue": {
+                "kind": "reclassify",
+                "classificationPolicyId": "Main",
+                "labelsToUpsert": {
+                  "escalated": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

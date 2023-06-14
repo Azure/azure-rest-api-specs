@@ -16,6 +16,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storage
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2022-09
+  - tag: package-2022-05
   - tag: package-2021-09
   - tag: package-2021-06
   - tag: package-2021-04
@@ -28,6 +30,32 @@ batch:
   - tag: package-2018-02
   - tag: package-2017-10
   - tag: package-2016-01
+```
+
+### Tag: package-2022-09 and java
+
+These settings apply only when `--tag=package-2022-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storage.v2022_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storage/mgmt-v2022_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2022-05 and java
+
+These settings apply only when `--tag=package-2022-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.storage.v2022_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storage/mgmt-v2022_05_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-09 and java

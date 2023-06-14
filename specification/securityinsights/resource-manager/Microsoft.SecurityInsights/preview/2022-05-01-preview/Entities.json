@@ -635,8 +635,7 @@
         },
         "createdBy": {
           "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
-          "description": "Describes a user that created the bookmark",
-          "type": "object"
+          "description": "Describes a user that created the bookmark"
         },
         "labels": {
           "description": "List of labels relevant to this bookmark",
@@ -651,6 +650,80 @@
       ],
       "type": "object",
       "x-ms-discriminator-value": "Bookmark"
+    },
+    "AnomalyTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents anomaly timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The anomaly azure resource id."
+        },
+        "productName": {
+          "type": "string",
+          "description": "The anomaly product name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The anomaly description."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The anomaly name."
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The anomaly end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The anomaly start time."
+        },
+        "timeGenerated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The anomaly generated time."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "The name of the anomaly vendor."
+        },
+        "intent": {
+          "type": "string",
+          "description": "The intent of the anomaly."
+        },
+        "techniques": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "technique of the anomaly"
+          },
+          "description": "The techniques of the anomaly."
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Reason of the anomaly"
+          },
+          "description": "The reasons that cause the anomaly."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "displayName",
+        "endTimeUtc",
+        "startTimeUtc",
+        "timeGenerated"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Anomaly"
     },
     "EntityGetInsightsParameters": {
       "description": "The parameters required to execute insights operation on the given entity.",
@@ -697,7 +770,8 @@
           "items": {
             "$ref": "#/definitions/EntityInsightItem"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -755,14 +829,16 @@
               "items": {
                 "$ref": "./common/EntityTypes.json#/definitions/Entity"
               },
-              "type": "array"
+              "type": "array",
+              "x-ms-identifiers": []
             },
             "edges": {
               "description": "Array of edges that connects the entity to the list of entities.",
               "items": {
                 "$ref": "#/definitions/EntityEdges"
               },
-              "type": "array"
+              "type": "array",
+              "x-ms-identifiers": []
             }
           },
           "type": "object"
@@ -804,7 +880,8 @@
           "items": {
             "$ref": "#/definitions/InsightsTableResult",
             "description": "Query results for table insights query."
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -855,7 +932,8 @@
           "items": {
             "$ref": "#/definitions/EntityTimelineItem"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "type": "object"
@@ -865,7 +943,8 @@
       "enum": [
         "Activity",
         "Bookmark",
-        "SecurityAlert"
+        "SecurityAlert",
+        "Anomaly"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -883,6 +962,10 @@
           {
             "description": "security alerts",
             "value": "SecurityAlert"
+          },
+          {
+            "description": "anomaly",
+            "value": "Anomaly"
           }
         ]
       }
@@ -939,7 +1022,6 @@
         },
         "kind": {
           "$ref": "./common/EntityTypes.json#/definitions/EntityQueryKind",
-          "type": "string",
           "description": "The kind of the entity query"
         }
       },
@@ -962,7 +1044,8 @@
               }
             },
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "inputEntityType": {
           "description": "The type of the entity",
@@ -1003,7 +1086,8 @@
               }
             },
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "rows": {
           "type": "array",
@@ -1088,11 +1172,13 @@
                   }
                 },
                 "type": "object"
-              }
+              },
+              "x-ms-identifiers": []
             },
             "queriesDefinitions": {
               "type": "array",
               "description": "List of insight queries definitions.",
+              "x-ms-identifiers": [],
               "items": {
                 "properties": {
                   "filter": {
@@ -1110,6 +1196,7 @@
                   "linkColumnsDefinitions": {
                     "type": "array",
                     "description": "Insight column header.",
+                    "x-ms-identifiers": [],
                     "items": {
                       "properties": {
                         "projectedName": {
@@ -1186,9 +1273,10 @@
         "errors": {
           "description": "information about the failed queries",
           "items": {
-            "$ref": "#/definitions/GetInsightsError"
+            "$ref": "#/definitions/GetInsightsErrorKind"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1196,7 +1284,7 @@
       ],
       "type": "object"
     },
-    "GetInsightsError": {
+    "GetInsightsErrorKind": {
       "description": "GetInsights Query Errors.",
       "properties": {
         "kind": {
@@ -1204,7 +1292,16 @@
           "type": "string",
           "enum": [
             "Insight"
-          ]
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GetInsightsError",
+            "values": [
+              {
+                "value": "Insight"
+              }
+            ]
+          }
         },
         "queryId": {
           "description": "the query id",
@@ -1329,14 +1426,16 @@
           "items": {
             "$ref": "#/definitions/TimelineAggregation"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         },
         "errors": {
           "description": "information about the failure queries",
           "items": {
             "$ref": "#/definitions/TimelineError"
           },
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "required": [

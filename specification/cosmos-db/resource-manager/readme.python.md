@@ -10,7 +10,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.cosmosdb
 package-name: azure-mgmt-cosmosdb
 package-version: 0.7.0
-clear-output-folder: false
+clear-output-folder: true
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -18,4 +18,15 @@ modelerfour:
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-cosmosdb/azure/mgmt/cosmosdb
+```
+``` yaml $(python)
+directive:
+- from: managedCassandra.json
+  where: $.definitions
+  transform: >
+    $.CassandraClusterPublicStatus.properties.dataCenters.items.properties.nodes.items['x-ms-client-name'] = 'CassandraClusterDataCenterNodeItem';
+- from: cosmos-db.json
+  where: $.definitions
+  transform: >
+    $.ManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties['x-ms-client-name'] = 'ManagedServiceIdentityUserAssignedIdentity';
 ```

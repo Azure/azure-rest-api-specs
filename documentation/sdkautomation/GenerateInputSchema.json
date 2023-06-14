@@ -42,18 +42,21 @@
         "type": "string"
       }
     },
+    "relatedTypeSpecProjectFolder": {
+      // Related typespec project folder that pending generation.
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "installInstructionInput": {
       // See #InstallInstructionScriptInput
       "$ref": "InstallInstructionScriptInput#"
+    },
+    "autorestConfig": {
+      // Autorest configuration in spec PR comment
+      "type": "string"
     }
   },
-  "required": [
-    "specFolder",
-    "headSha",
-    "headRef",
-    "repoHttpsUrl",
-    "trigger",
-    "changedFiles",
-    "relatedReadmeMdFiles"
-  ]
+  "required": ["specFolder", "headSha", "headRef", "repoHttpsUrl", "trigger", "changedFiles", "relatedReadmeMdFiles"]
 }

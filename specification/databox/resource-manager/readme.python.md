@@ -20,8 +20,14 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python)
+multiapi: true
+default-api-version: "2022-12-01"
 batch:
+  - tag: package-2022-12
+  - tag: package-2022-10
+  - tag: package-2022-09
+  - tag: package-2022-02
   - tag: package-2021-12
   - tag: package-2021-08-preview
   - tag: package-2021-05
@@ -36,6 +42,46 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/
 perform-load: false
+```
+
+### Tag: package-2022-12 and python
+
+These settings apply only when `--tag=package-2022-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-12' && $(python)
+namespace: azure.mgmt.databox.v2022_12_01
+output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2022_12_01
+```
+
+### Tag: package-2022-10 and python
+
+These settings apply only when `--tag=package-2022-10 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-10' && $(python)
+namespace: azure.mgmt.databox.v2022_10_01
+output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2022_10_01
+```
+
+### Tag: package-2022-09 and python
+
+These settings apply only when `--tag=package-2022-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(python)
+namespace: azure.mgmt.databox.v2022_09_01
+output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2022_09_01
+```
+
+### Tag: package-2022-02 and python
+
+These settings apply only when `--tag=package-2022-02 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-02' && $(python)
+namespace: azure.mgmt.databox.v2022_02_01
+output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2022_02_01
 ```
 
 ### Tag: package-2021-12 and python

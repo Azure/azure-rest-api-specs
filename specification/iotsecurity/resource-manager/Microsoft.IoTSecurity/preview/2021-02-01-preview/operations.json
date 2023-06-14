@@ -86,6 +86,9 @@
           "items": {
             "$ref": "#/definitions/ErrorModel"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "readOnly": true
         },
         "message": {
@@ -122,7 +125,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -195,7 +199,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaLogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "metricSpecifications": {
           "description": "metric specifications for the operation",
@@ -203,7 +210,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetaMetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -221,7 +231,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DimensionProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "displayDescription": {
           "description": "description of the metric",
