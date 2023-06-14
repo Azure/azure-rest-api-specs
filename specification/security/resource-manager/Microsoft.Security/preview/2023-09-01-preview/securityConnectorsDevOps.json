@@ -2544,8 +2544,8 @@
         "actionableRemediation": {
           "$ref": "#/definitions/ActionableRemediation"
         },
-        "globalOnboardingState": {
-          "$ref": "#/definitions/GlobalOnboardingState"
+        "onboardingState": {
+          "$ref": "#/definitions/OnboardingState"
         }
       }
     },
@@ -2647,6 +2647,9 @@
         },
         "actionableRemediation": {
           "$ref": "#/definitions/ActionableRemediation"
+        },
+        "onboardingState": {
+          "$ref": "#/definitions/OnboardingState"
         }
       }
     },
@@ -2728,6 +2731,9 @@
         },
         "actionableRemediation": {
           "$ref": "#/definitions/ActionableRemediation"
+        },
+        "onboardingState": {
+          "$ref": "#/definitions/OnboardingState"
         }
       }
     },
@@ -2756,8 +2762,8 @@
     "DesiredOnboardingState": {
       "description": "Onboarding states.",
       "enum": [
-        "Disable",
-        "Enable"
+        "Disabled",
+        "Enabled"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2915,8 +2921,16 @@
           "type": "string",
           "readOnly": true
         },
-        "globalOnboardingState": {
-          "$ref": "#/definitions/GlobalOnboardingState"
+        "gitHubInternalId": {
+          "description": "Gets or sets internal GitHub id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "autoDiscovery": {
+          "$ref": "#/definitions/AutoDiscovery"
+        },
+        "onboardingState": {
+          "$ref": "#/definitions/OnboardingState"
         }
       }
     },
@@ -3058,6 +3072,11 @@
           "type": "string",
           "readOnly": true
         },
+        "fullQualifiedFriendlyName": {
+          "description": "Gets or sets the human readable full qualified name of the Group object.\r\n\r\nThis contains the entire namespace hierarchy as seen on GitLab UI where namespaces are separated by the '/' character.",
+          "type": "string",
+          "readOnly": true
+        },
         "autoDiscovery": {
           "$ref": "#/definitions/AutoDiscovery"
         },
@@ -3066,8 +3085,8 @@
           "type": "string",
           "readOnly": true
         },
-        "globalOnboardingState": {
-          "$ref": "#/definitions/GlobalOnboardingState"
+        "onboardingState": {
+          "$ref": "#/definitions/OnboardingState"
         }
       }
     },
@@ -3127,26 +3146,19 @@
           "type": "string",
           "readOnly": true
         },
+        "fullQualifiedFriendlyName": {
+          "description": "Gets or sets the human readable full qualified name of the Project object.\r\n\r\nThis contains the entire namespace hierarchy as seen on GitLab UI where namespaces are separated by the '/' character.",
+          "type": "string",
+          "readOnly": true
+        },
         "url": {
           "description": "Gets or sets the Url of the GitLab Project.",
           "type": "string",
           "readOnly": true
+        },
+        "onboardingState": {
+          "$ref": "#/definitions/OnboardingState"
         }
-      }
-    },
-    "GlobalOnboardingState": {
-      "description": "Details about resource onboarding status across all connectors.\r\n\r\nAlreadyOnboardedByOtherConnector - this resource has already been onboarded to another connector.\r\nAlreadyOnboardedByCurrentConnector - this resource has already been onboarded by the specified connector.\r\nNotOnboarded - this resource has not been onboarded to any connector.\r\nNotApplicable - this resource is not a top-level resource or its onboarding state is not applicable to the current endpoint.",
-      "enum": [
-        "NotApplicable",
-        "AlreadyOnboardedByOtherConnector",
-        "AlreadyOnboardedByCurrentConnector",
-        "NotOnboarded"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "GlobalOnboardingState",
-        "modelAsString": true,
-        "modelAsExtensible": true
       }
     },
     "InheritFromParentState": {
@@ -3158,6 +3170,21 @@
       "type": "string",
       "x-ms-enum": {
         "name": "InheritFromParentState",
+        "modelAsString": true,
+        "modelAsExtensible": true
+      }
+    },
+    "OnboardingState": {
+      "description": "Details about resource onboarding status across all connectors.\r\n\r\nOnboardedByOtherConnector - this resource has already been onboarded to another connector. This is only applicable to top-level resources.\r\nOnboarded - this resource has already been onboarded by the specified connector.\r\nNotOnboarded - this resource has not been onboarded to any connector.\r\nNotApplicable - the onboarding state is not applicable to the current endpoint.",
+      "enum": [
+        "NotApplicable",
+        "OnboardedByOtherConnector",
+        "Onboarded",
+        "NotOnboarded"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OnboardingState",
         "modelAsString": true,
         "modelAsExtensible": true
       }
