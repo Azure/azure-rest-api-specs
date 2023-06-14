@@ -13,18 +13,18 @@ namespace Customizations;
     service: AzureLoadTesting,
 })
 interface AdministrationOperations {
-    CreateOrUpdateTest is LoadTestAdministrationOperations.CreateOrUpdateTest;
-    CreateOrUpdateAppComponents is LoadTestAdministrationOperations.CreateOrUpdateAppComponents;
-    CreateOrUpdateServerMetricsConfig is LoadTestAdministrationOperations.CreateOrUpdateServerMetricsConfig;
-    GetAppComponents is LoadTestAdministrationOperations.GetAppComponents;
-    GetServerMetricsConfig is LoadTestAdministrationOperations.GetServerMetricsConfig;
-    GetTest is LoadTestAdministrationOperations.GetTest;
-    GetTestFile is LoadTestAdministrationOperations.GetTestFile;
-    ListTestFiles is LoadTestAdministrationOperations.ListTestFiles;
-    ListTests is LoadTestAdministrationOperations.ListTests;
-    UploadTestFile is LoadTestAdministrationOperations.UploadTestFile;
-    DeleteTestFile is LoadTestAdministrationOperations.DeleteTestFile;
-    DeleteTest is LoadTestAdministrationOperations.DeleteTest;
+    CreateOrUpdateTest is LoadTestAdministration.CreateOrUpdateTest;
+    CreateOrUpdateAppComponents is LoadTestAdministration.CreateOrUpdateAppComponents;
+    CreateOrUpdateServerMetricsConfig is LoadTestAdministration.CreateOrUpdateServerMetricsConfig;
+    GetAppComponents is LoadTestAdministration.GetAppComponents;
+    GetServerMetricsConfig is LoadTestAdministration.GetServerMetricsConfig;
+    GetTest is LoadTestAdministration.GetTest;
+    GetTestFile is LoadTestAdministration.GetTestFile;
+    ListTestFiles is LoadTestAdministration.ListTestFiles;
+    ListTests is LoadTestAdministration.ListTests;
+    UploadTestFile is LoadTestAdministration.UploadTestFile;
+    DeleteTestFile is LoadTestAdministration.DeleteTestFile;
+    DeleteTest is LoadTestAdministration.DeleteTest;
 };
 
 @client({
@@ -32,17 +32,18 @@ interface AdministrationOperations {
     service: AzureLoadTesting,
 })
 interface TestRunOperations {
-    TestRun is LoadTestRunOperations.CreateOrUpdateTestRun;
-    CreateOrUpdateAppComponents is LoadTestRunOperations.CreateOrUpdateAppComponents;
-    CreateOrUpdateServerMetricsConfig is LoadTestRunOperations.CreateOrUpdateServerMetricsConfig;
-    DeleteTestRun is LoadTestRunOperations.DeleteTestRun;
-    GetAppComponents is LoadTestRunOperations.GetAppComponents;
-    GetServerMetricsConfig is LoadTestRunOperations.GetServerMetricsConfig;
-    GetTestRun is LoadTestRunOperations.GetTestRun;
-    GetTestRunFile is LoadTestRunOperations.GetTestRunFile;
-    ListMetricDefinitions is LoadTestRunOperations.ListMetricDefinitions;
-    ListMetricNamespaces is LoadTestRunOperations.ListMetricNamespaces;
-    ListMetrics is LoadTestRunOperations.ListMetrics;
-    ListTestRuns is LoadTestRunOperations.ListTestRuns;
-    StopTestRun is LoadTestRunOperations.StopTestRun;
+    TestRun is LoadTestRun.CreateOrUpdateTestRun;
+    CreateOrUpdateAppComponents is LoadTestRun.CreateOrUpdateAppComponents;
+    CreateOrUpdateServerMetricsConfig is LoadTestRun.CreateOrUpdateServerMetricsConfig;
+    DeleteTestRun is LoadTestRun.DeleteTestRun;
+    GetAppComponents is LoadTestRun.GetAppComponents;
+    GetServerMetricsConfig is LoadTestRun.GetServerMetricsConfig;
+    GetTestRun is LoadTestRun.GetTestRun;
+    GetTestRunFile is LoadTestRun.GetTestRunFile;
+    ListMetricDimensionValues is LoadTestRun.ListMetricDimensionValues;
+    ListMetricDefinitions is LoadTestRun.ListMetricDefinitions;
+    ListMetricNamespaces is LoadTestRun.ListMetricNamespaces;
+    ListMetrics is LoadTestRun.ListMetrics;
+    ListTestRuns is LoadTestRun.ListTestRuns;
+    StopTestRun is LoadTestRun.StopTestRun;
 };
