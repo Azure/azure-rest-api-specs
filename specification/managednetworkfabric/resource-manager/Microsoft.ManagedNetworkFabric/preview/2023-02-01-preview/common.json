@@ -1,0 +1,257 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Canceled",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "OperationalState": {
+      "type": "string",
+      "description": "Operational state for the resource.",
+      "enum": [
+        "Configuring",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "operationalState"
+      }
+    },
+    "AnnotationResource": {
+      "type": "object",
+      "description": "Switch configuration entries require a description to discern between configuration groups.",
+      "properties": {
+        "annotation": {
+          "type": "string",
+          "description": "Switch configuration description."
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "ReachabilityState": {
+      "type": "string",
+      "description": "Generic network reachability state.",
+      "enum": [
+        "Reachable",
+        "Unreachable"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "reachabilityState"
+      }
+    },
+    "EnabledDisabledState": {
+      "type": "string",
+      "description": "EnabledDisabledState state for the resource.",
+      "readOnly": true,
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "enabledDisabledState"
+      }
+    },
+    "FailedSucceededState": {
+      "type": "string",
+      "description": "FailedSucceeded state for the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "FailedSucceededState"
+      }
+    },
+    "UpdateAdministrativeState": {
+      "type": "object",
+      "description": "Update administrative state on list of resources.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Administrative state.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "AdministrativeState",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnableDisableOnResources"
+        }
+      ]
+    },
+    "EnableDisableOnResources": {
+      "type": "object",
+      "description": "Update administrative state on list of resources.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "Network Fabrics or Network Rack resource Id.",
+          "items": {
+            "description": "Network Fabrics or Network Rack resource Id.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ARPProperties": {
+      "type": "object",
+      "description": "Show ARP table entry properties",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Ipv4 or Ipv6 address"
+        },
+        "age": {
+          "type": "string",
+          "description": "Duration in seconds."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "Hardware address."
+        },
+        "interface": {
+          "type": "string",
+          "description": "Layer 2 interface name."
+        },
+        "state": {
+          "type": "string",
+          "description": "ARP status"
+        }
+      },
+      "required": [
+        "address",
+        "age",
+        "macAddress",
+        "interface"
+      ]
+    },
+    "GetARPResponse": {
+      "type": "object",
+      "description": "Show ARP entries response per network device",
+      "additionalProperties": {
+        "$ref": "#/definitions/ARPProperties"
+      }
+    },
+    "BooleanEnumProperty": {
+      "type": "string",
+      "description": "Boolean Enum. Example- True/False",
+      "enum": [
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BooleanEnumProperty"
+      }
+    },
+    "PeeringOption": {
+      "type": "string",
+      "description": "Peering option list.",
+      "enum": [
+        "OptionA",
+        "OptionB"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PeeringOption"
+      }
+    },
+    "NetworkDeviceRoleTypes": {
+      "type": "string",
+      "description": "Available roles for the network device.",
+      "enum": [
+        "CE",
+        "ToR",
+        "NPB",
+        "TS",
+        "Management"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "NetworkDeviceRoleTypes"
+      }
+    },
+    "CommunityActionTypes": {
+      "type": "string",
+      "description": "community action types. Example: Permit | Deny.",
+      "enum": [
+        "Permit",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "communityActionTypes"
+      }
+    }
+  },
+  "parameters": {}
+}
