@@ -28,14 +28,25 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-preview-2022-11
+tag: package-2023-05
 ```
 
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Cdn/stable/2023-05-01/afdx.json
+  - Microsoft.Cdn/stable/2023-05-01/cdn.json
+  - Microsoft.Cdn/stable/2023-05-01/cdnwebapplicationfirewall.json
+```
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-11'
+``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
   - Microsoft.Cdn/preview/2022-11-01-preview/afdx.json
   - Microsoft.Cdn/preview/2022-11-01-preview/cdn.json
@@ -46,12 +57,13 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.Cdn/preview/2022-05-01-preview/afdx.json
   - Microsoft.Cdn/preview/2022-05-01-preview/cdn.json
   - Microsoft.Cdn/preview/2022-05-01-preview/cdnwebapplicationfirewall.json
 ```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.

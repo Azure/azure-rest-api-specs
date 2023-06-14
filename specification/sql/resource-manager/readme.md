@@ -955,7 +955,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/DistributedAvailabilityGroups.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerTrustCertificates.json
-- ./Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/SensitivityLabels.json
@@ -998,6 +997,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/FailoverGroups.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/IPv6FirewallRules.json
 
 
 # Needed when there is more than one input file
