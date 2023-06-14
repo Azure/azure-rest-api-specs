@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "assetId": "aG9zdCQkY29udG9zby5jb20",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalElements": 2,
+        "nextLink": "https://<api-endpoint>/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/workspaces/ThisisaWorkspace/assets/host$$contoso.net/observations?skip=1&maxpagesize=2&api-version=2023-05-01-preview",
+        "value": [
+          {
+            "name": "ObservationName1",
+            "severity": "high",
+            "type": "cve",
+            "cvssScoreV2": 9.9,
+            "cvssScoreV3": 9.9,
+            "webComponent": {
+              "type": "Server",
+              "service": "",
+              "name": "Apache",
+              "version": "2.4.46"
+            }
+          },
+          {
+            "name": "ObservationName1",
+            "severity": "high",
+            "type": "insight",
+            "observationId": "1234",
+            "description": "This is a description of the impact of this observation."
+          }
+        ]
+      }
+    }
+  }
+}
