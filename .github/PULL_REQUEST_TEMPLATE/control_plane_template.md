@@ -16,6 +16,7 @@ What's the purpose of this PR? Check all that apply. This is **mandatory**!
 To merge this PR, you **must** go through the following checklist and confirm you understood 
 and followed the instructions by checking all the boxes:
 
+- [ ] I have reviewed the general guidance on the spec PR review process: https://aka.ms/specprreview.
 - [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data-plane related specifications.
 - [ ] I commit to follow the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy).
 - [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
@@ -36,7 +37,6 @@ follow the process outlined in the [High-level Breaking Change Process doc](http
       
 ## Getting help
 
-- For general guidance on the spec PR review process, see https://aka.ms/specprreview
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.
 - For help adding new API version using OpenAPI Hub, see [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
