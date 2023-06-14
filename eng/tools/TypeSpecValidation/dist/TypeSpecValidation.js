@@ -42,7 +42,8 @@ function main() {
         }
         let expected_npm_prefix = process.env.PWD;
         const actual_npm_prefix = yield runCmd(`npm prefix`, folder);
-        if (expected_npm_prefix !== actual_npm_prefix) {
+        console.log(actual_npm_prefix);
+        if (expected_npm_prefix === actual_npm_prefix) {
             console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.");
             throw new Error("Expected npm prefix: $expected_npm_prefix\nActual npm prefix: $actual_npm_prefix\n");
         }
