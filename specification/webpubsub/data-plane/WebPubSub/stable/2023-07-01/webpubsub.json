@@ -78,8 +78,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "Success"
           },
           "default": {
             "description": "Error response",
@@ -268,7 +268,7 @@
           "webpubsub"
         ],
         "summary": "Send content inside request body to a group of connections and wait for acknowledgement.",
-        "operationId": "WebPubSub_GroupInvoke",
+        "operationId": "WebPubSub_Invoke",
         "consumes": [
           "application/octet-stream",
           "text/plain",
@@ -286,25 +286,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "query",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
-            "type": "string",
-            "maxLength": 1024,
-            "minLength": 1,
-            "pattern": "^(?!\\s+$).+$"
-          },
-          {
-            "in": "query",
-            "name": "excluded",
-            "description": "Excluded connection Ids",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
           },
           {
             "in": "query",
@@ -328,15 +309,6 @@
             "name": "filter",
             "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
             "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "messageTtlSeconds",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
-            "type": "integer",
-            "format": "int32",
-            "maximum": 300,
-            "minimum": 0
           }
         ],
         "responses": {
@@ -362,8 +334,8 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSub_GroupInvoke": {
-            "$ref": "./examples/WebPubSub_GroupInvoke.json"
+          "WebPubSub_Invoke": {
+            "$ref": "./examples/WebPubSub_Invoke.json"
           }
         }
       }
@@ -410,8 +382,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "200": {
+            "description": "Success"
           },
           "default": {
             "description": "Error response",
