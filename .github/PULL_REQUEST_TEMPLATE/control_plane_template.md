@@ -4,11 +4,11 @@
 
 What's the purpose of this PR? Check all that apply. This is **mandatory**!
 
-  - [ ] new service onboarding
-  - [ ] new API version
-  - [ ] update existing version for new feature
-  - [ ] update existing version to fix swagger quality issue in s360
-  - [ ] other, please clarify:
+  - [ ] New service onboarding.
+  - [ ] New API version. ([OpenAPI Hub](https://aka.ms/openapihub) can be used to generate such PR.)
+  - [ ] update existing version for new feature. (This is applicable only when you are revising a private preview API version.)
+  - [ ] Update existing version to fix swagger quality issue in S360.
+  - [ ] Other, please clarify:
     - _edit this with your clarification_
 
 ## Due diligence checklist
@@ -18,11 +18,7 @@ and followed the instructions by checking all the boxes:
 
 - [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data-plane related specifications.
 - [ ] I commit to follow the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy).
-- [ ] If I am adding a new service, API, or API version, I have ensured to copy the existing version into a new
-  directory structure for first commit and then I pushed new changes, including version updates, in separate commits.  
-  - I understand I can use [OpenAPI Hub](https://aka.ms/openapihub) to initialize the PR for adding a new version.  
-  - I understand that this doesn't apply if this PR was previously a PR in the [private repository](https://github.com/Azure/azure-rest-api-specs-pr).
-- [ ] I have reviewed following [guidelines](https://aka.ms/rpguidelines), including
+- [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can request review from an ARM API Review board.
@@ -30,7 +26,8 @@ and followed the instructions by checking all the boxes:
 ### ARM API changes review
 
 - If you want for the ARM team to review this PR, you must add the `ARMReview` label. 
-- The automation may automatically add the `ARMReview` label, if appropriate.
+- The automation may automatically add the `ARMReview` label, if appropriate.  
+  If this happens, proceed according to guidance given in GitHub comments also added by the automation.
 
 ### Breaking change review
 
