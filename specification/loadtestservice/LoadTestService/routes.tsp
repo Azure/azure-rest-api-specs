@@ -298,8 +298,22 @@ numeric, underscore or hyphen characters.
 
   @summary("Create and start a new test run with the given name.")
   @doc("Create and start a new test run with the given name.")
-  @pollingOperation(LoadTestRunOperations.GetTestRun)
-  CreateOrUpdateTestRun is LongRunningResourceCreateOrUpdate<TestRun>;
+  @pollingOperation(LoadTestRun.GetTestRun)
+  CreateOrUpdateTestRun is LongRunningResourceCreateOrUpdate<
+  TestRun,
+  QueryParametersTrait<
+      {
+        @doc("""
+      Existing test run identifier that should be rerun, if this is provided, the
+      test will run with the JMX file, configuration and app components from the
+      existing test run. You can override the configuration values for new test run
+      in the request body.
+      """)
+        @query
+        oldTestRunId?: string;
+      }
+    >
+  >;
 
   @summary("Delete a test run by its name.")
   @doc("Delete a test run by its name.")
@@ -476,11 +490,11 @@ The timespan of the query. It is a string with the following format
     Metrics
   >;
 
-  // @summary("List the dimension values for the given metric dimension name.")
-  // @doc("List the dimension values for the given metric dimension name.")
-  // ListMetricDimensionValues is Azure.Core.ResourceList<
-  //   DimensionValueList, QueryParametersTrait<MetricDimensions>
-  // >;
+  @summary("List the dimension values for the given metric dimension name.")
+  @doc("List the dimension values for the given metric dimension name.")
+  ListMetricDimensionValues is Azure.Core.ResourceList<
+    DimensionValueList, QueryParametersTrait<MetricDimensions>
+  >;
 
   @summary("Associate an app component (collection of azure resources) to a test run")
   @doc("Associate an app component (collection of azure resources) to a test run")
