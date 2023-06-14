@@ -269,7 +269,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotasList"
+              "$ref": "#/definitions/GroupQuotaList"
             }
           },
           "default": {
@@ -693,7 +693,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/GroupQuotaList"
+              "$ref": "#/definitions/GroupQuotaLimitList"
             }
           },
           "default": {
@@ -1359,13 +1359,13 @@
         }
       }
     },
-    "GroupQuotaList": {
+    "GroupQuotaLimitList": {
       "type": "object",
-      "description": "List of Group Quotas at MG level.",
+      "description": "List of Group Quota Limit details.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Group Quotas at MG level.",
+          "description": "List of Group Quota Limit details.",
           "items": {
             "$ref": "#/definitions/GroupQuotaLimit"
           }
@@ -1573,7 +1573,7 @@
           "type": "array",
           "description": "Subscription groupQuotaRequests list.",
           "items": {
-            "$ref": "#/definitions/SubscriptionQuotaLimit"
+            "$ref": "#/definitions/SubmittedResourceRequestStatus"
           }
         },
         "nextLink": {
@@ -1711,13 +1711,13 @@
         "groupId"
       ]
     },
-    "GroupQuotasList": {
+    "GroupQuotaList": {
       "type": "object",
-      "description": "Share Quota Entity list.",
+      "description": "List of Group Quotas at MG level.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Share Quota Entity list.",
+          "description": "List of Group Quotas at MG level.",
           "items": {
             "$ref": "#/definitions/GroupQuotasEntity"
           }
