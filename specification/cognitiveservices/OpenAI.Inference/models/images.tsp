@@ -36,7 +36,7 @@ model ImageRequest {
 @doc("The image url if successful, and an error otherwise.")
 model ImageResult {
   @doc("The URL that provides temporary access to download the generated image.")
-  url: string;
+  url: url;
 
   @doc("The error if the operation failed.")
   error?: Foundations.Error;
@@ -60,10 +60,10 @@ model ImageOperationResponse {
   created: int64;
 
   @doc("A timestamp when this operation and its associated images expire and will be deleted (in unix epochs).")
-  expires: int64;
+  expires?: int64;
 
   @doc("The result of the operation if the operation succeeded.")
-  result: ImageResponse;
+  result?: ImageResponse;
 
   @doc("The status of the operation")
   status: State;
