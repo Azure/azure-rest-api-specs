@@ -499,6 +499,18 @@ model ResourceMetric {
 @doc("Load test run model")
 @resource("test-runs")
 model TestRun {
+  // FIXME: is testRunId optional or required in the response? Resource key and path params cannot be optional
+  @key
+  @path
+  @doc("Unique test run name as identifier")
+  @visibility("read")
+  testRunId: string;
+}
+
+@doc("Load test run model")
+model TestRunInfo {
+  ...TestRun,
+
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
 
@@ -539,23 +551,6 @@ SECRET_VALUE.
   @doc("Number of virtual users, for which test has been run.")
   @visibility("read")
   virtualUsers?: int32;
-
-  // FIXME: is testRunId optional or required in the response? Resource key and path params cannot be optional
-  @key
-  @path
-  @doc("Unique test run name as identifier")
-  @visibility("read")
-  testRunId: string;
-
-  @doc("""
-Existing test run identifier that should be rerun, if this is provided, the
-test will run with the JMX file, configuration and app components from the
-existing test run. You can override the configuration values for new test run
-in the request body.
-""")
-  @query
-  @visibility("create", "update")
-  oldTestRunId?: string;
 
   @doc("Display name of a testRun.")
   displayName?: string;
@@ -837,28 +832,24 @@ model DimensionValue {
   value?: string;
 }
 
-@resource("/test-runs/{testRunId}/metric-dimensions/{name}/values")
+@resource("values")
+@parentResource(Dimension)
 model DimensionValueList {
+  @key
   value: {
     items: DimensionValue[]
   };
+}
 
-  @doc("""
-  Unique name for the load test run, must contain only lower-case alphabetic,
-  numeric, underscore or hyphen characters.
-  """)
-  @path("testRunId")
-  @visibility("query")
-  testRunId: string;
-
+@resource("metric-dimensions")
+@parentResource(TestRun)
+model Dimension {
   @key
-  @doc("")
+  @doc("Dimension name")
   @path("name")
   @visibility("query")
   name: string;
 }
-@doc("Metrics dimension values.")
-model DimensionValuePage is Azure.Core.Page<DimensionValueList>;
 
 model MetricDimensions {
   @doc("The interval (i.e. timegrain) of the query.")
@@ -871,7 +862,7 @@ model MetricDimensions {
 
   @doc("Metric namespace to query metric definitions for.")
   @query
-  metricNamespace?: string;
+  metricNamespace: string;
 
   @doc("""
   The timespan of the query. It is a string with the following format
