@@ -22,35 +22,22 @@
       ]
     }
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
   "paths": {
     "/providers/Microsoft.MachineLearningServices/operations": {
       "get": {
         "tags": [
           "Operation"
         ],
-        "description": "Lists all of the available Azure Machine Learning Services REST API operations.",
+        "summary": "Lists all of the available Azure Machine Learning Workspaces REST API operations",
         "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
-        "x-ms-examples": {
-          "OperationsList": {
-            "$ref": "./examples/Workspace/operationsList.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
@@ -59,10 +46,15 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/Workspace/operationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -70,222 +62,22 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
           "Workspaces"
         ],
-        "description": "Gets the properties of the specified machine learning workspace.",
-        "operationId": "Workspaces_Get",
-        "x-ms-examples": {
-          "Get Workspace": {
-            "$ref": "./examples/Workspace/get.json"
-          }
-        },
+        "summary": "Lists all the available machine learning workspaces under the specified subscription.",
+        "operationId": "Workspaces_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Creates or updates a workspace with the specified parameters.",
-        "operationId": "Workspaces_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create Workspace": {
-            "$ref": "./examples/Workspace/create.json"
-          }
-        },
-        "parameters": [
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for creating or updating a machine learning workspace.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Deletes a machine learning workspace.",
-        "operationId": "Workspaces_Delete",
-        "x-ms-examples": {
-          "Delete Workspace": {
-            "$ref": "./examples/Workspace/delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceForceToPurgeParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "202": {
-            "description": "The request was accepted; the request was well-formed and received properly."
-          },
-          "204": {
-            "description": "The machine learning workspace does not exist in the subscription."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Updates a machine learning workspace with the specified parameters.",
-        "operationId": "Workspaces_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update Workspace": {
-            "$ref": "./examples/Workspace/update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The parameters for updating a machine learning workspace.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/WorkspaceUpdateParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces": {
-      "get": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Lists all the available machine learning workspaces under the specified resource group.",
-        "operationId": "Workspaces_ListByResourceGroup",
-        "x-ms-examples": {
-          "Get Workspaces by Resource Group": {
-            "$ref": "./examples/Workspace/listByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/PaginationParameter"
@@ -302,10 +94,15 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspaces by subscription": {
+            "$ref": "./examples/Workspace/listBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -313,13 +110,157 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces": {
+      "get": {
         "tags": [
           "Workspaces"
         ],
-        "summary": "Diagnose workspace setup issue.",
-        "operationId": "Workspaces_Diagnose",
+        "summary": "Lists all the available machine learning workspaces under the specified resource group.",
+        "operationId": "Workspaces_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceKindParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspaces by Resource Group": {
+            "$ref": "./examples/Workspace/listByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}": {
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Deletes a machine learning workspace.",
+        "operationId": "Workspaces_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceForceToPurgeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace": {
+            "$ref": "./examples/Workspace/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Gets the properties of the specified machine learning workspace.",
+        "operationId": "Workspaces_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspace": {
+            "$ref": "./examples/Workspace/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Updates a machine learning workspace with the specified parameters.",
+        "operationId": "Workspaces_Update",
         "consumes": [
           "application/json"
         ],
@@ -341,16 +282,82 @@
           },
           {
             "in": "body",
-            "name": "parameters",
-            "description": "The parameter of diagnosing workspace health",
+            "name": "body",
+            "description": "The parameters for updating a machine learning workspace.",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/DiagnoseWorkspaceParameters"
+              "$ref": "#/definitions/WorkspaceUpdateParameters"
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
           "202": {
-            "description": "Success",
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Workspace": {
+            "$ref": "./examples/Workspace/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Creates or updates a workspace with the specified parameters.",
+        "operationId": "Workspaces_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The parameters for creating or updating a machine learning workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "202": {
+            "description": "Accepted",
             "headers": {
               "Location": {
                 "description": "URI to poll for asynchronous operation result.",
@@ -365,12 +372,6 @@
               }
             }
           },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DiagnoseResponseResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -379,682 +380,13 @@
           }
         },
         "x-ms-examples": {
-          "Diagnose Workspace": {
-            "$ref": "./examples/Workspace/diagnose.json"
+          "Create Workspace": {
+            "$ref": "./examples/Workspace/create.json"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys": {
-      "post": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
-        "operationId": "Workspaces_ListKeys",
-        "x-ms-examples": {
-          "List Workspace Keys": {
-            "$ref": "./examples/Workspace/listKeys.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ListWorkspaceKeysResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys": {
-      "post": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
-        "operationId": "Workspaces_ResyncKeys",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Resync Workspace Keys": {
-            "$ref": "./examples/Workspace/resyncKeys.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "202": {
-            "description": "The request was accepted; the request was well-formed and received properly."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
-      "get": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Lists all the available machine learning workspaces under the specified subscription.",
-        "operationId": "Workspaces_ListBySubscription",
-        "x-ms-examples": {
-          "Get Workspaces by subscription": {
-            "$ref": "./examples/Workspace/listBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PaginationParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceKindParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken": {
-      "post": {
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "return notebook access token and refresh token",
-        "operationId": "Workspaces_ListNotebookAccessToken",
-        "x-ms-examples": {
-          "List Workspace Keys": {
-            "$ref": "./examples/Workspace/listNotebookAccessToken.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/NotebookAccessTokenResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_List",
-        "description": "List all the private endpoint connections associated with the workspace.",
-        "x-ms-examples": {
-          "StorageAccountListPrivateEndpointConnections": {
-            "$ref": "./examples/PrivateEndpointConnection/list.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Successfully retrieved private endpoint connections.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "tags": [
-          "WorkspacePrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the workspace.",
-        "x-ms-examples": {
-          "WorkspaceGetPrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnection/get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Get the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "WorkspacePrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-        "description": "Update the state of specified private endpoint connection associated with the workspace.",
-        "x-ms-examples": {
-          "WorkspacePutPrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnection/createOrUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "description": "The private endpoint connection properties."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Update the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "WorkspacePrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the workspace.",
-        "x-ms-examples": {
-          "WorkspaceDeletePrivateEndpointConnection": {
-            "$ref": "./examples/PrivateEndpointConnection/delete.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateEndpointConnectionName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Delete the private endpoint connection successfully."
-          },
-          "204": {
-            "description": "No Content -- The private endpoint connection does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "WorkspacePrivateLinkResources"
-        ],
-        "operationId": "PrivateLinkResources_List",
-        "description": "Gets the private link resources that need to be created for a workspace.",
-        "x-ms-examples": {
-          "WorkspaceListPrivateLinkResources": {
-            "$ref": "./examples/PrivateLinkResource/list.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved private link resources.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
-      "post": {
-        "tags": [
-          "ProxyOperations"
-        ],
-        "operationId": "Workspaces_PrepareNotebook",
-        "description": "Prepare a notebook.",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Prepare Notebook": {
-            "$ref": "./examples/Notebook/prepare.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/NotebookResourceInfo"
-            }
-          },
-          "202": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys": {
-      "post": {
-        "tags": [
-          "ProxyOperations"
-        ],
-        "operationId": "Workspaces_ListStorageAccountKeys",
-        "description": "List storage account keys of a workspace.",
-        "x-ms-examples": {
-          "List Workspace Keys": {
-            "$ref": "./examples/Workspace/listStorageAccountKeys.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ListStorageAccountKeysResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
-      "post": {
-        "tags": [
-          "ProxyOperations"
-        ],
-        "operationId": "Workspaces_ListNotebookKeys",
-        "description": "List keys of a notebook.",
-        "x-ms-examples": {
-          "List Workspace Keys": {
-            "$ref": "./examples/Notebook/listKeys.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ListNotebookKeysResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}": {
-      "put": {
-        "tags": [
-          "V2WorkspaceConnectionResource"
-        ],
-        "operationId": "WorkspaceConnections_Create",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConnectionName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The object for creating or updating a new workspace connection",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateWorkspaceConnection": {
-            "$ref": "./examples/WorkspaceConnection/create.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "V2WorkspaceConnectionResource"
-        ],
-        "operationId": "WorkspaceConnections_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConnectionName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetWorkspaceConnection": {
-            "$ref": "./examples/WorkspaceConnection/get.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "V2WorkspaceConnectionResource"
-        ],
-        "operationId": "WorkspaceConnections_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ConnectionName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success"
-          },
-          "204": {
-            "description": "Success"
-          }
-        },
-        "x-ms-examples": {
-          "DeleteWorkspaceConnection": {
-            "$ref": "./examples/WorkspaceConnection/delete.json"
-          }
         }
       }
     },
@@ -1063,7 +395,11 @@
         "tags": [
           "V2WorkspaceConnectionResource"
         ],
+        "summary": "Lists all the available machine learning workspaces connections under the specified workspace.",
         "operationId": "WorkspaceConnections_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1072,7 +408,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
             "$ref": "#/parameters/TargetParameter"
@@ -1108,13 +444,345 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}": {
+      "delete": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Delete machine learning workspaces connections by name.",
+        "operationId": "WorkspaceConnections_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/delete.json"
+          }
+        }
+      },
       "get": {
         "tags": [
-          "ManagedNetwork"
+          "V2WorkspaceConnectionResource"
         ],
-        "description": "Lists the managed network outbound rules for a machine learning workspace.",
-        "operationId": "ManagedNetworkSettingsRule_List",
+        "summary": "Lists machine learning workspaces connections by name.",
+        "operationId": "WorkspaceConnections_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "operationId": "WorkspaceConnections_Update",
+        "summary": "Update machine learning workspaces connections under the specified workspace.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parameters for workspace connection update.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/update.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Create or update machine learning workspaces connections under the specified workspace.",
+        "operationId": "WorkspaceConnections_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The object for creating or updating a new workspace connection",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/create.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/listsecrets": {
+      "post": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "operationId": "WorkspaceConnections_ListSecrets",
+        "summary": "List all the secrets of a machine learning workspaces connections.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/listSecrets.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "summary": "Diagnose workspace setup issue.",
+        "operationId": "Workspaces_Diagnose",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The parameter of diagnosing workspace health",
+            "schema": {
+              "$ref": "#/definitions/DiagnoseWorkspaceParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/DiagnoseResponseResult"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Diagnose Workspace": {
+            "$ref": "./examples/Workspace/diagnose.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "summary": "Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.",
+        "operationId": "Workspaces_ListKeys",
         "produces": [
           "application/json"
         ],
@@ -1136,7 +804,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleListResult"
+              "$ref": "#/definitions/ListWorkspaceKeysResult"
             }
           },
           "default": {
@@ -1146,202 +814,24 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "List ManagedNetworkSettingsRule": {
-            "$ref": "./examples/ManagedNetwork/listRule.json"
+          "List Workspace Keys": {
+            "$ref": "./examples/Workspace/listKeys.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}": {
-      "delete": {
-        "tags": [
-          "ManagedNetwork"
-        ],
-        "description": "Deletes an outbound rule from the managed network of a machine learning workspace.",
-        "operationId": "ManagedNetworkSettingsRule_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "The machine learning workspace does not exist in the subscription."
-          },
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete ManagedNetworkSettingsRule": {
-            "$ref": "./examples/ManagedNetwork/deleteRule.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      },
-      "get": {
-        "tags": [
-          "ManagedNetwork"
-        ],
-        "description": "Gets an outbound rule from the managed network of a machine learning workspace.",
-        "operationId": "ManagedNetworkSettingsRule_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResource"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get ManagedNetworkSettingsRule": {
-            "$ref": "./examples/ManagedNetwork/getRule.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ManagedNetwork"
-        ],
-        "description": "Creates or updates an outbound rule in the managed network of a machine learning workspace.",
-        "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "description": "Outbound Rule to be created or updated in the managed network of a machine learning workspace.",
-            "in": "body",
-            "name": "parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResource"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              }
-            }
-          },
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResource"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate ManagedNetworkSettingsRule": {
-            "$ref": "./examples/ManagedNetwork/createOrUpdateRule.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken": {
       "post": {
         "tags": [
-          "ManagedNetwork"
+          "ProxyOperations"
         ],
-        "description": "Provisions the managed network of a machine learning workspace.",
-        "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Provision ManagedNetwork": {
-            "$ref": "./examples/ManagedNetwork/provision.json"
-          }
-        },
+        "summary": "Get Azure Machine Learning Workspace notebook access token",
+        "operationId": "Workspaces_ListNotebookAccessToken",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -1352,28 +842,14 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "description": "Managed Network Provisioning Options for a machine learning workspace.",
-            "in": "body",
-            "name": "parameters",
-            "schema": {
-              "$ref": "#/definitions/ManagedNetworkProvisionOptions"
-            }
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              }
+              "$ref": "#/definitions/NotebookAccessTokenResult"
             }
           },
           "default": {
@@ -1381,6 +857,101 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/Workspace/listNotebookAccessToken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "summary": "Lists keys of Azure Machine Learning Workspaces notebook.",
+        "operationId": "Workspaces_ListNotebookKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListNotebookKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/Notebook/listKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "summary": "Lists keys of Azure Machine Learning Workspace's storage account.",
+        "operationId": "Workspaces_ListStorageAccountKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListStorageAccountKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/Workspace/listStorageAccountKeys.json"
           }
         }
       }
@@ -1429,118 +1000,723 @@
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "WorkspaceNameParameter": {
-      "name": "workspaceName",
-      "description": "Name of Azure Machine Learning workspace.",
-      "in": "path",
-      "type": "string",
-      "required": true,
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$",
-      "x-ms-parameter-location": "method"
     },
-    "PaginationParameter": {
-      "in": "query",
-      "name": "$skip",
-      "type": "string",
-      "description": "Continuation token for pagination.",
-      "required": false,
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules": {
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Lists the managed network outbound rules for a machine learning workspace.",
+        "operationId": "ManagedNetworkSettingsRule_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/listRule.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     },
-    "PrivateEndpointConnectionName": {
-      "name": "privateEndpointConnectionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the private endpoint connection associated with the workspace",
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}": {
+      "delete": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "operationId": "ManagedNetworkSettingsRule_Delete",
+        "summary": "Deletes an outbound rule from the managed network of a machine learning workspace.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/deleteRule.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "operationId": "ManagedNetworkSettingsRule_Get",
+        "summary": "Gets an outbound rule from the managed network of a machine learning workspace.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/getRule.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
+        "summary": "Creates or updates an outbound rule in the managed network of a machine learning workspace.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Outbound Rule to be created or updated in the managed network of a machine learning workspace.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/createOrUpdateRule.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     },
-    "ConnectionName": {
-      "name": "connectionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Friendly name of the workspace connection",
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "summary": "Prepare Azure Machine Learning Workspace's notebook resource",
+        "operationId": "Workspaces_PrepareNotebook",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NotebookResourceInfo"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Prepare Notebook": {
+            "$ref": "./examples/Notebook/prepare.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     },
-    "RuleName": {
-      "name": "ruleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the workspace managed network outbound rule",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$",
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "summary": "Called by end-users to get all PE connections.",
+        "operationId": "PrivateEndpointConnections_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountListPrivateEndpointConnections": {
+            "$ref": "./examples/PrivateEndpointConnection/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     },
-    "TargetParameter": {
-      "in": "query",
-      "name": "target",
-      "type": "string",
-      "description": "Target of the workspace connection.",
-      "required": false,
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "delete": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "summary": "Called by end-users to delete a PE connection.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePutPrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnection/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "summary": "Called by end-users to get a PE connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspaceGetPrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnection/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WorkspacePrivateEndpointConnections"
+        ],
+        "summary": "Called by end-users to approve or reject a PE connection.\r\nThis method must validate and forward the call to NRP.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "PrivateEndpointConnection object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePutPrivateEndpointConnection": {
+            "$ref": "./examples/PrivateEndpointConnection/createOrUpdate.json"
+          }
+        }
+      }
     },
-    "CategoryParameter": {
-      "in": "query",
-      "name": "category",
-      "type": "string",
-      "description": "Category of the workspace connection.",
-      "required": false,
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "WorkspacePrivateLinkResources"
+        ],
+        "summary": "Called by Client (Portal, CLI, etc) to get available \"private link resources\" for the workspace.\r\nEach \"private link resource\" is a connection endpoint (IP address) to the resource.\r\nPre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.\r\nOther RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.\r\nDefined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupIds\".",
+        "operationId": "PrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspaceListPrivateLinkResources": {
+            "$ref": "./examples/PrivateLinkResource/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     },
-    "WorkspaceKindParameter": {
-      "in": "query",
-      "name": "kind",
-      "type": "string",
-      "description": "Kind of workspace.",
-      "required": false,
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork": {
+      "post": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
+        "summary": "Provisions the managed network of a machine learning workspace.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Managed Network Provisioning Options for a machine learning workspace.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Provision ManagedNetwork": {
+            "$ref": "./examples/ManagedNetwork/provision.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     },
-    "WorkspaceForceToPurgeParameter": {
-      "in": "query",
-      "name": "forceToPurge",
-      "type": "boolean",
-      "description": "Flag to indicate delete is a purge request.",
-      "required": false,
-      "x-ms-parameter-location": "method"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "summary": "Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry",
+        "operationId": "Workspaces_ResyncKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resync Workspace Keys": {
+            "$ref": "./examples/Workspace/resyncKeys.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
+    "AccessKeyAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/WorkspaceConnectionAccessKey"
+        }
+      },
+      "x-ms-discriminator-value": "AccessKey"
+    },
     "AmlOperation": {
-      "description": "Azure Machine Learning REST API operation",
+      "description": "Azure Machine Learning team account REST API operation",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
         "display": {
-          "description": "Display name of operation",
-          "type": "object",
-          "properties": {
-            "provider": {
-              "description": "The resource provider name: Microsoft.MachineLearningExperimentation",
-              "type": "string"
-            },
-            "resource": {
-              "description": "The resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "The operation that users can perform.",
-              "type": "string"
-            },
-            "description": {
-              "description": "The description for the operation.",
-              "type": "string"
-            }
-          }
+          "description": "Gets or sets display name of operation",
+          "$ref": "#/definitions/OperationDisplay"
         },
         "isDataAction": {
           "description": "Indicates whether the operation applies to data-plane",
           "type": "boolean"
+        },
+        "name": {
+          "description": "Gets or sets operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "origin": {
+          "description": "The intended executor of the operation: user/system",
+          "type": "string"
         }
       }
     },
@@ -1549,485 +1725,168 @@
       "description": "An array of operations supported by the resource provider.",
       "properties": {
         "value": {
+          "description": "Gets or sets list of AML team account operations supported by the\r\nAML team account resource provider.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AmlOperation"
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "description": "List of AML operations supported by the AML resource provider."
+          ]
         }
       }
     },
-    "Workspace": {
+    "ApiKeyAuthWorkspaceConnectionProperties": {
+      "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\r\nAzureOpenAI:\r\n    Category:= AzureOpenAI\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {ApiKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= {ApiBase}\r\n            \r\nCognitiveService:\r\n    Category:= CognitiveService\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {SubscriptionKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= ServiceRegion={serviceRegion}\r\n            \r\nCognitiveSearch:\r\n    Category:= CognitiveSearch\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {Key} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= {Endpoint}\r\n            \r\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
       "type": "object",
-      "description": "An object that represents a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
         }
       ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkspaceProperties",
-          "description": "The properties of the machine learning workspace.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the resource."
-        },
-        "location": {
-          "description": "Specifies the location of the resource.",
+        "credentials": {
+          "$ref": "#/definitions/WorkspaceConnectionApiKey"
+        }
+      },
+      "x-ms-discriminator-value": "ApiKey"
+    },
+    "ComputeRuntimeDto": {
+      "type": "object",
+      "properties": {
+        "sparkRuntimeVersion": {
           "type": "string"
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
+        }
+      }
+    },
+    "ConnectionAuthType": {
+      "description": "Authentication type of the connection target",
+      "enum": [
+        "PAT",
+        "ManagedIdentity",
+        "UsernamePassword",
+        "None",
+        "SAS",
+        "ServicePrincipal",
+        "AccessKey",
+        "ApiKey",
+        "CustomKeys"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConnectionAuthType",
+        "modelAsString": true
+      }
+    },
+    "ConnectionCategory": {
+      "description": "Category of the connection",
+      "enum": [
+        "PythonFeed",
+        "ContainerRegistry",
+        "Git",
+        "S3",
+        "Snowflake",
+        "AzureSqlDb",
+        "AzureSynapseAnalytics",
+        "AzureMySqlDb",
+        "AzurePostgresDb",
+        "ADLSGen2",
+        "Redis",
+        "ApiKey",
+        "AzureOpenAI",
+        "CognitiveSearch",
+        "CognitiveService",
+        "CustomKeys"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConnectionCategory",
+        "modelAsString": true
+      }
+    },
+    "CosmosDbSettings": {
+      "type": "object",
+      "properties": {
+        "collectionsThroughput": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CustomKeys": {
+      "type": "object",
+      "description": "Custom Keys credential object",
+      "properties": {
+        "keys": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The sku of the workspace."
-        },
-        "kind": {
-          "type": "string"
         }
       }
     },
-    "WorkspaceProperties": {
+    "CustomKeysWorkspaceConnectionProperties": {
+      "description": "Category:= CustomKeys\r\nAuthType:= CustomKeys (as type discriminator)\r\nCredentials:= {CustomKeys} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.CustomKeys\r\nTarget:= {any value}\r\nUse Metadata property bag for ApiVersion and other metadata fields",
       "type": "object",
-      "description": "The properties of a machine learning workspace.",
-      "properties": {
-        "workspaceId": {
-          "description": "The immutable id associated with this workspace.",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "The description of this workspace.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "The friendly name for this workspace. This name in mutable",
-          "type": "string"
-        },
-        "keyVault": {
-          "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
-          "type": "string"
-        },
-        "applicationInsights": {
-          "description": "ARM id of the application insights associated with this workspace.",
-          "type": "string"
-        },
-        "containerRegistry": {
-          "description": "ARM id of the container registry associated with this workspace.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "storageAccount": {
-          "description": "ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created",
-          "type": "string"
-        },
-        "discoveryUrl": {
-          "description": "Url for the discovery service to identify regional endpoints for machine learning experimentation services",
-          "type": "string"
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "Updating",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "SoftDeleted"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning."
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionProperty",
-          "description": "The encryption settings of Azure ML workspace."
-        },
-        "hbiWorkspace": {
-          "type": "boolean",
-          "description": "The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service",
-          "default": false
-        },
-        "serviceProvisionedResourceGroup": {
-          "type": "string",
-          "description": "The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace",
-          "readOnly": true
-        },
-        "privateLinkCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Count of private connections in the workspace",
-          "readOnly": true
-        },
-        "imageBuildCompute": {
-          "description": "The compute name for image build",
-          "type": "string"
-        },
-        "allowPublicAccessWhenBehindVnet": {
-          "type": "boolean",
-          "description": "The flag to indicate whether to allow public access when behind VNet.",
-          "default": false
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "Whether requests from Public Network are allowed.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "PublicNetworkAccess"
-          }
-        },
-        "privateEndpointConnections": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The list of private endpoint connections in the workspace."
-        },
-        "sharedPrivateLinkResources": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SharedPrivateLinkResource"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The list of shared private link resources in this workspace."
-        },
-        "notebookInfo": {
-          "readOnly": true,
-          "$ref": "#/definitions/NotebookResourceInfo",
-          "description": "The notebook info of Azure ML workspace."
-        },
-        "serviceManagedResourcesSettings": {
-          "$ref": "#/definitions/ServiceManagedResourcesSettings",
-          "description": "The service managed resource settings."
-        },
-        "primaryUserAssignedIdentity": {
-          "description": "The user assigned identity resource id that represents the workspace identity.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenant id associated with this workspace.",
-          "type": "string",
-          "readOnly": true
-        },
-        "storageHnsEnabled": {
-          "description": "If the storage associated with the workspace has hierarchical namespace(HNS) enabled.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "mlFlowTrackingUri": {
-          "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
-          "type": "string",
-          "readOnly": true
-        },
-        "v1LegacyMode": {
-          "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
-          "default": false,
-          "type": "boolean"
-        },
-        "softDeletedAt": {
-          "description": "The timestamp when the workspace was soft deleted",
-          "type": "string",
-          "readOnly": true
-        },
-        "scheduledPurgeDate": {
-          "description": "The timestamp when the soft deleted workspace is going to be purged",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemDatastoresAuthMode": {
-          "description": "The auth mode used for accessing the system datastores of the workspace",
-          "type": "string"
-        },
-        "featureStoreSettings": {
-          "description": "Settings for feature store type workspace.",
-          "$ref": "#/definitions/FeatureStoreSettings"
-        },
-        "softDeleteRetentionInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention time in days after workspace get soft deleted."
-        },
-        "enableDataIsolation": {
-          "description": "A flag to determine if workspace has data isolation enabled. The flag can only be set at the creation phase, it can't be updated.",
-          "default": false,
-          "type": "boolean"
-        },
-        "storageAccounts": {
-          "description": ": A list of storage accounts used by Hub.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "keyVaults": {
-          "description": "A list of key vaults used by Hub.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "containerRegistries": {
-          "description": "A list of container registries used by Hub.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "existingWorkspaces": {
-          "description": "A list of existing workspaces used by Hub to perform convert.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "hubResourceId": {
-          "description": "Resource Id of Hub used for lean workspace.",
-          "type": "string"
-        },
-        "associatedWorkspaces": {
-          "description": "A list of lean workspaces associated with Hub.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettings"
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
         }
-      }
-    },
-    "WorkspaceUpdateParameters": {
-      "type": "object",
-      "description": "The parameters for updating a machine learning workspace.",
+      ],
       "properties": {
-        "tags": {
-          "description": "The resource tags for the machine learning workspace.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The sku of the workspace."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
-          "description": "The properties that the machine learning workspace will be updated with.",
-          "x-ms-client-flatten": true
+        "credentials": {
+          "$ref": "#/definitions/CustomKeys"
         }
-      }
-    },
-    "WorkspacePropertiesUpdateParameters": {
-      "type": "object",
-      "description": "The parameters for updating the properties of a machine learning workspace.",
-      "properties": {
-        "description": {
-          "description": "The description of this workspace.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "The friendly name for this workspace.",
-          "type": "string"
-        },
-        "imageBuildCompute": {
-          "description": "The compute name for image build",
-          "type": "string"
-        },
-        "serviceManagedResourcesSettings": {
-          "$ref": "#/definitions/ServiceManagedResourcesSettings",
-          "description": "The service managed resource settings."
-        },
-        "primaryUserAssignedIdentity": {
-          "description": "The user assigned identity resource id that represents the workspace identity.",
-          "type": "string"
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "Whether requests from Public Network are allowed.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "PublicNetworkAccess"
-          }
-        },
-        "applicationInsights": {
-          "description": "ARM id of the application insights associated with this workspace.",
-          "type": "string"
-        },
-        "containerRegistry": {
-          "description": "ARM id of the container registry associated with this workspace.",
-          "type": "string"
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionUpdateProperties",
-          "description": "The encryption settings of the workspace."
-        },
-        "featureStoreSettings": {
-          "description": "Settings for feature store type workspace.",
-          "$ref": "#/definitions/FeatureStoreSettings"
-        },
-        "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettings"
-        }
-      }
-    },
-    "WorkspaceListResult": {
-      "type": "object",
-      "description": "The result of a request to list machine learning workspaces.",
-      "properties": {
-        "value": {
-          "description": "The list of machine learning workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Workspace"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next list of machine learning workspaces.",
-          "type": "string"
-        }
-      }
+      },
+      "x-ms-discriminator-value": "CustomKeys"
     },
     "DiagnoseRequestProperties": {
       "type": "object",
       "properties": {
-        "udr": {
-          "description": "Setting for diagnosing user defined routing",
+        "applicationInsights": {
+          "description": "Setting for diagnosing dependent application insights",
           "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "nsg": {
-          "description": "Setting for diagnosing network security group",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "resourceLock": {
-          "description": "Setting for diagnosing resource lock",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "dnsResolution": {
-          "description": "Setting for diagnosing dns resolution",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "storageAccount": {
-          "description": "Setting for diagnosing dependent storage account",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "keyVault": {
-          "description": "Setting for diagnosing dependent key vault",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": {}
         },
         "containerRegistry": {
           "description": "Setting for diagnosing dependent container registry",
           "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": {}
         },
-        "applicationInsights": {
-          "description": "Setting for diagnosing dependent application insights",
+        "dnsResolution": {
+          "description": "Setting for diagnosing dns resolution",
           "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "additionalProperties": {}
+        },
+        "keyVault": {
+          "description": "Setting for diagnosing dependent key vault",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "nsg": {
+          "description": "Setting for diagnosing network security group",
+          "type": "object",
+          "additionalProperties": {}
         },
         "others": {
           "description": "Setting for diagnosing unclassified category of problems",
           "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "DiagnoseWorkspaceParameters": {
-      "type": "object",
-      "description": "Parameters to diagnose a workspace",
-      "properties": {
-        "value": {
-          "description": "Value of Parameters",
-          "$ref": "#/definitions/DiagnoseRequestProperties"
-        }
-      }
-    },
-    "DiagnoseResult": {
-      "type": "object",
-      "description": "Result of Diagnose",
-      "properties": {
-        "code": {
-          "description": "Code for workspace setup error",
-          "type": "string",
-          "readOnly": true
+          "additionalProperties": {}
         },
-        "level": {
-          "description": "Level of workspace setup error",
-          "enum": [
-            "Warning",
-            "Error",
-            "Information"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "DiagnoseResultLevel",
-            "modelAsString": true
-          }
+        "resourceLock": {
+          "description": "Setting for diagnosing resource lock",
+          "type": "object",
+          "additionalProperties": {}
         },
-        "message": {
-          "description": "Message of workspace setup error",
-          "type": "string",
-          "readOnly": true
+        "storageAccount": {
+          "description": "Setting for diagnosing dependent storage account",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "udr": {
+          "description": "Setting for diagnosing user defined routing",
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
@@ -2122,475 +1981,267 @@
         }
       }
     },
-    "ListWorkspaceKeysResult": {
+    "DiagnoseResult": {
       "type": "object",
+      "description": "Result of Diagnose",
       "properties": {
-        "userStorageKey": {
-          "readOnly": true,
+        "code": {
+          "description": "Code for workspace setup error",
           "type": "string",
-          "x-ms-secret": true
-        },
-        "userStorageResourceId": {
           "readOnly": true,
-          "type": "string"
+          "x-ms-mutability": [
+            "read"
+          ]
         },
-        "appInsightsInstrumentationKey": {
+        "level": {
+          "description": "Level of workspace setup error",
+          "$ref": "#/definitions/DiagnoseResultLevel",
           "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "message": {
+          "description": "Message of workspace setup error",
           "type": "string",
-          "x-ms-secret": true
-        },
-        "containerRegistryCredentials": {
           "readOnly": true,
-          "$ref": "#/definitions/RegistryListCredentialsResult"
-        },
-        "notebookAccessKeys": {
-          "readOnly": true,
-          "$ref": "#/definitions/ListNotebookKeysResult"
-        }
-      }
-    },
-    "NotebookAccessTokenResult": {
-      "type": "object",
-      "properties": {
-        "notebookResourceId": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "hostName": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "publicDns": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "accessToken": {
-          "readOnly": true,
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "tokenType": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "expiresIn": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32"
-        },
-        "refreshToken": {
-          "readOnly": true,
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "scope": {
-          "readOnly": true,
-          "type": "string"
-        }
-      }
-    },
-    "RegistryListCredentialsResult": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "username": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "passwords": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Password"
-          },
-          "x-ms-identifiers": [
-            "name"
+          "x-ms-mutability": [
+            "read"
           ]
         }
       }
     },
-    "Password": {
+    "DiagnoseResultLevel": {
+      "enum": [
+        "Warning",
+        "Error",
+        "Information"
+      ],
+      "type": "string",
+      "description": "Level of workspace setup error",
+      "x-ms-enum": {
+        "name": "DiagnoseResultLevel",
+        "modelAsString": true
+      }
+    },
+    "DiagnoseWorkspaceParameters": {
+      "description": "Parameters to diagnose a workspace",
       "type": "object",
       "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string"
-        },
         "value": {
-          "readOnly": true,
-          "type": "string"
+          "$ref": "#/definitions/DiagnoseRequestProperties"
         }
       }
     },
-    "PrivateEndpointConnectionListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private endpoint connections",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        }
-      },
-      "description": "List of private endpoint connection associated with the specified workspace"
-    },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "x-ms-client-flatten": true,
-          "description": "Resource properties."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the resource."
-        },
-        "location": {
-          "description": "Specifies the location of the resource.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The sku of the workspace."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "The Private Endpoint Connection resource."
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The resource of private end point."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "A collection of information about the state of the connection between service consumer and provider."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource."
-        }
-      },
+    "EncryptionKeyVaultUpdateProperties": {
       "required": [
-        "privateLinkServiceConnectionState"
+        "keyIdentifier"
       ],
-      "description": "Properties of the PrivateEndpointConnectProperties."
-    },
-    "PrivateEndpoint": {
       "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM identifier for Private Endpoint"
-        }
-      },
-      "description": "The Private Endpoint resource."
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
-        }
-      },
-      "description": "A collection of information about the state of the connection between service consumer and provider."
-    },
-    "PrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected",
-        "Disconnected",
-        "Timeout"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
-      }
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        }
-      },
-      "description": "A list of private link resources"
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the resource."
-        },
-        "location": {
-          "description": "Specifies the location of the resource.",
+        "keyIdentifier": {
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The sku of the workspace."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "A private link resource"
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "The private link resource required member names.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The private link resource Private link DNS zone name."
-        }
-      },
-      "description": "Properties of a private link resource."
-    },
-    "SharedPrivateLinkResource": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Unique name of the private link.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/SharedPrivateLinkResourceProperty",
-          "x-ms-client-flatten": true,
-          "description": "Resource properties."
         }
       }
-    },
-    "SharedPrivateLinkResourceProperty": {
-      "type": "object",
-      "properties": {
-        "privateLinkResourceId": {
-          "description": "The resource id that private link links to.",
-          "type": "string"
-        },
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string"
-        },
-        "requestMessage": {
-          "description": "Request message.",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        }
-      },
-      "description": "Properties of a shared private link resource."
     },
     "EncryptionProperty": {
+      "required": [
+        "keyVaultProperties",
+        "status"
+      ],
+      "type": "object",
       "properties": {
-        "status": {
-          "description": "Indicates whether or not the encryption is enabled for the workspace.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EncryptionStatus",
-            "modelAsString": true
-          }
+        "cosmosDbResourceId": {
+          "description": "The byok cosmosdb account that customer brings to store customer's data\r\nwith encryption",
+          "type": "string"
         },
         "identity": {
-          "$ref": "#/definitions/IdentityForCmk",
-          "description": "The identity that will be used to access the key vault for encryption at rest."
+          "description": "Identity to be used with the keyVault",
+          "$ref": "#/definitions/IdentityForCmk"
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/EncryptionKeyVaultProperties",
-          "description": "Customer Key vault properties."
+          "description": "KeyVault details to do the encryption",
+          "$ref": "#/definitions/KeyVaultProperties"
+        },
+        "searchAccountResourceId": {
+          "description": "The byok search account that customer brings to store customer's data\r\nwith encryption",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/EncryptionStatus"
+        },
+        "storageAccountResourceId": {
+          "description": "The byok storage account that customer brings to store customer's data\r\nwith encryption",
+          "type": "string"
         }
-      },
+      }
+    },
+    "EncryptionStatus": {
+      "description": "Indicates whether or not the encryption is enabled for the workspace.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EncryptionStatus",
+        "modelAsString": true
+      }
+    },
+    "EncryptionUpdateProperties": {
       "required": [
-        "status",
         "keyVaultProperties"
       ],
-      "type": "object"
-    },
-    "EncryptionKeyVaultProperties": {
+      "type": "object",
       "properties": {
-        "keyVaultArmId": {
-          "description": "The ArmId of the keyVault where the customer owned encryption key is present.",
+        "keyVaultProperties": {
+          "$ref": "#/definitions/EncryptionKeyVaultUpdateProperties"
+        }
+      }
+    },
+    "ExternalFQDNResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpointsPropertyBag"
+          },
+          "x-ms-identifiers": [
+            "/properties/category"
+          ]
+        }
+      }
+    },
+    "FQDNEndpoint": {
+      "type": "object",
+      "properties": {
+        "domainName": {
           "type": "string"
         },
-        "keyIdentifier": {
-          "description": "Key vault uri to access the encryption key.",
+        "endpointDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpointDetail"
+          },
+          "x-ms-identifiers": [
+            "port"
+          ]
+        }
+      }
+    },
+    "FQDNEndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "FQDNEndpoints": {
+      "type": "object",
+      "properties": {
+        "category": {
           "type": "string"
         },
-        "identityClientId": {
-          "description": "For future use - The client id of the identity which will be used to access key vault.",
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FQDNEndpoint"
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
+        }
+      }
+    },
+    "FQDNEndpointsPropertyBag": {
+      "type": "object",
+      "description": "Property bag for FQDN endpoints result",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FQDNEndpoints"
+        }
+      }
+    },
+    "FeatureStoreSettings": {
+      "type": "object",
+      "properties": {
+        "computeRuntime": {
+          "$ref": "#/definitions/ComputeRuntimeDto"
+        },
+        "offlineStoreConnectionName": {
+          "type": "string"
+        },
+        "onlineStoreConnectionName": {
+          "type": "string"
+        }
+      }
+    },
+    "FqdnOutboundRule": {
+      "type": "object",
+      "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutboundRule"
+        }
+      ],
+      "properties": {
+        "destination": {
           "type": "string"
         }
       },
+      "x-ms-discriminator-value": "FQDN"
+    },
+    "IdentityForCmk": {
+      "type": "object",
+      "description": "Identity object used for encryption.",
+      "properties": {
+        "userAssignedIdentity": {
+          "description": "UserAssignedIdentity to be used to fetch the encryption key from keyVault",
+          "type": "string"
+        }
+      }
+    },
+    "IsolationMode": {
+      "description": "Isolation mode for the managed network of a machine learning workspace.",
+      "enum": [
+        "Disabled",
+        "AllowInternetOutbound",
+        "AllowOnlyApprovedOutbound"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IsolationMode",
+        "modelAsString": true
+      }
+    },
+    "KeyVaultProperties": {
       "required": [
         "keyIdentifier",
         "keyVaultArmId"
       ],
-      "type": "object"
-    },
-    "IdentityForCmk": {
-      "description": "Identity that will be used to access key vault for encryption at rest",
       "type": "object",
+      "description": "Customer Key vault properties.",
       "properties": {
-        "userAssignedIdentity": {
-          "description": "The ArmId of the user assigned identity that will be used to access the customer managed key vault",
+        "identityClientId": {
+          "description": "Currently, we support only SystemAssigned MSI.\r\nWe need this when we support UserAssignedIdentities",
           "type": "string"
-        }
-      }
-    },
-    "EncryptionUpdateProperties": {
-      "properties": {
-        "keyVaultProperties": {
-          "$ref": "#/definitions/EncryptionKeyVaultUpdateProperties",
-          "description": "Customer Key vault properties."
-        }
-      },
-      "required": [
-        "keyVaultProperties"
-      ],
-      "type": "object"
-    },
-    "EncryptionKeyVaultUpdateProperties": {
-      "properties": {
+        },
         "keyIdentifier": {
-          "description": "Key Vault uri to access the encryption key.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "keyIdentifier"
-      ],
-      "type": "object"
-    },
-    "ServiceManagedResourcesSettings": {
-      "type": "object",
-      "properties": {
-        "cosmosDb": {
-          "$ref": "#/definitions/CosmosDbSettings",
-          "description": "The settings for the service managed cosmosdb account."
-        }
-      }
-    },
-    "CosmosDbSettings": {
-      "type": "object",
-      "properties": {
-        "collectionsThroughput": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The throughput of the collections in cosmosdb database"
-        }
-      }
-    },
-    "NotebookResourceInfo": {
-      "type": "object",
-      "properties": {
-        "fqdn": {
+          "description": "KeyVault key identifier to encrypt the data",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
-        "resourceId": {
-          "type": "string",
-          "description": "the data plane resourceId that used to initialize notebook component"
-        },
-        "notebookPreparationError": {
-          "$ref": "#/definitions/NotebookPreparationError",
-          "description": "The error that occurs when preparing notebook.",
-          "x-nullable": true
-        }
-      }
-    },
-    "NotebookPreparationError": {
-      "type": "object",
-      "properties": {
-        "errorMessage": {
+        "keyVaultArmId": {
+          "description": "KeyVault Arm Id that contains the data encryption key",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string"
-        },
-        "statusCode": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -2598,13 +2249,21 @@
       "type": "object",
       "properties": {
         "primaryAccessKey": {
-          "readOnly": true,
+          "description": "The primary access key of the Notebook",
           "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-ms-secret": true
         },
         "secondaryAccessKey": {
-          "readOnly": true,
+          "description": "The secondary access key of the Notebook",
           "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
           "x-ms-secret": true
         }
       }
@@ -2613,243 +2272,52 @@
       "type": "object",
       "properties": {
         "userStorageKey": {
+          "description": "The access key of the storage",
+          "type": "string",
           "readOnly": true,
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "ConnectionAuthType": {
-      "enum": [
-        "PAT",
-        "ManagedIdentity",
-        "UsernamePassword",
-        "None",
-        "SAS",
-        "ServicePrincipal",
-        "AccessKey"
-      ],
-      "type": "string",
-      "description": "Authentication type of the connection target",
-      "x-ms-enum": {
-        "name": "ConnectionAuthType",
-        "modelAsString": true
-      }
-    },
-    "ConnectionCategory": {
-      "enum": [
-        "PythonFeed",
-        "ContainerRegistry",
-        "Git",
-        "FeatureStore",
-        "S3",
-        "Snowflake",
-        "AzureSqlDb",
-        "AzureSynapseAnalytics",
-        "AzureMySqlDb",
-        "AzurePostgresDb",
-        "AzureDataLakeGen2",
-        "Redis"
-      ],
-      "type": "string",
-      "description": "Category of the connection",
-      "x-ms-enum": {
-        "name": "ConnectionCategory",
-        "modelAsString": true
-      }
-    },
-    "WorkspaceConnectionUsernamePassword": {
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "WorkspaceConnectionPersonalAccessToken": {
-      "type": "object",
-      "properties": {
-        "pat": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "PATAuthTypeWorkspaceConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionPersonalAccessToken"
-        }
-      },
-      "additionalProperties": false,
-      "x-ms-discriminator-value": "PAT"
-    },
-    "WorkspaceConnectionSharedAccessSignature": {
-      "type": "object",
-      "properties": {
-        "sas": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "SASAuthTypeWorkspaceConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionSharedAccessSignature"
-        }
-      },
-      "additionalProperties": false,
-      "x-ms-discriminator-value": "SAS"
-    },
-    "UsernamePasswordAuthTypeWorkspaceConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionUsernamePassword"
-        }
-      },
-      "additionalProperties": false,
-      "x-ms-discriminator-value": "UsernamePassword"
-    },
-    "WorkspaceConnectionAccessKey": {
-      "type": "object",
-      "properties": {
-        "accessKeyId": {
-          "type": "string"
-        },
-        "secretAccessKey": {
-          "type": "string",
-          "x-ms-secret": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AccessKeyAuthTypeWorkspaceConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionAccessKey"
-        }
-      },
-      "additionalProperties": false,
-      "x-ms-discriminator-value": "AccessKey"
-    },
-    "WorkspaceConnectionServicePrincipal": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string"
-        },
-        "clientSecret": {
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "tenantId": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ServicePrincipalAuthTypeWorkspaceConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionServicePrincipal"
-        }
-      },
-      "additionalProperties": false,
-      "x-ms-discriminator-value": "ServicePrincipal"
-    },
-    "WorkspaceConnectionPropertiesV2": {
-      "required": [
-        "authType"
-      ],
-      "type": "object",
-      "properties": {
-        "authType": {
-          "$ref": "#/definitions/ConnectionAuthType"
-        },
-        "expiryTime": {
-          "type": "string"
-        },
-        "category": {
-          "$ref": "#/definitions/ConnectionCategory"
-        },
-        "target": {
-          "type": "string"
-        },
-        "value": {
-          "description": "Value details of the workspace connection.",
-          "type": "string"
-        },
-        "valueFormat": {
-          "description": "format for the workspace connection value",
-          "type": "string",
-          "enum": [
-            "JSON"
+          "x-ms-mutability": [
+            "read"
           ],
-          "x-ms-enum": {
-            "name": "ValueFormat",
-            "modelAsString": true
-          }
+          "x-ms-secret": true
         }
-      },
-      "additionalProperties": false,
-      "discriminator": "authType"
+      }
     },
-    "NoneAuthTypeWorkspaceConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
-        }
-      ],
-      "additionalProperties": false,
-      "x-ms-discriminator-value": "None"
-    },
-    "WorkspaceConnectionManagedIdentity": {
+    "ListWorkspaceKeysResult": {
       "type": "object",
       "properties": {
-        "resourceId": {
-          "type": "string"
+        "appInsightsInstrumentationKey": {
+          "description": "The access key of the workspace app insights",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-secret": true
         },
-        "clientId": {
-          "type": "string"
+        "containerRegistryCredentials": {
+          "$ref": "#/definitions/RegistryListCredentialsResult"
+        },
+        "notebookAccessKeys": {
+          "$ref": "#/definitions/ListNotebookKeysResult"
+        },
+        "userStorageArmId": {
+          "description": "The arm Id key of the workspace storage",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "userStorageKey": {
+          "description": "The access key of the workspace storage",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-secret": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "ManagedIdentityAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
@@ -2863,7 +2331,6 @@
           "$ref": "#/definitions/WorkspaceConnectionManagedIdentity"
         }
       },
-      "additionalProperties": false,
       "x-ms-discriminator-value": "ManagedIdentity"
     },
     "ManagedNetworkProvisionOptions": {
@@ -2879,11 +2346,11 @@
       "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
-        "status": {
-          "$ref": "#/definitions/ManagedNetworkStatus"
-        },
         "sparkReady": {
           "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/definitions/ManagedNetworkStatus"
         }
       }
     },
@@ -2922,18 +2389,150 @@
         "modelAsString": true
       }
     },
-    "IsolationMode": {
-      "description": "Isolation mode for the managed network of a machine learning workspace.",
-      "enum": [
-        "Disabled",
-        "AllowInternetOutbound",
-        "AllowOnlyApprovedOutbound"
+    "NoneAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "IsolationMode",
-        "modelAsString": true
+      "x-ms-discriminator-value": "None"
+    },
+    "NotebookAccessTokenResult": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-secret": true
+        },
+        "expiresIn": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "hostName": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "notebookResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "publicDns": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "refreshToken": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-secret": true
+        },
+        "scope": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "tokenType": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
       }
+    },
+    "NotebookPreparationError": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "NotebookResourceInfo": {
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "type": "string"
+        },
+        "isPrivateLinkEnabled": {
+          "type": "boolean"
+        },
+        "notebookPreparationError": {
+          "description": "The error that occurs when preparing notebook.",
+          "$ref": "#/definitions/NotebookPreparationError"
+        },
+        "resourceId": {
+          "description": "the data plane resourceId that used to initialize notebook component",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Display name of operation",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Gets or sets the description for the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Gets or sets the operation that users can perform.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Gets or sets the resource provider name:\r\nMicrosoft.MachineLearningExperimentation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Gets or sets the resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    },
+    "OutboundRule": {
+      "description": "Outbound Rule for the managed network of a machine learning workspace.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/RuleCategory"
+        },
+        "status": {
+          "$ref": "#/definitions/RuleStatus"
+        },
+        "type": {
+          "$ref": "#/definitions/RuleType"
+        }
+      },
+      "discriminator": "type"
     },
     "OutboundRuleBasicResource": {
       "description": "Outbound Rule Basic Resource for the managed network of a machine learning workspace.",
@@ -2950,44 +2549,340 @@
         "properties": {
           "$ref": "#/definitions/OutboundRule"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "OutboundRuleListResult": {
       "description": "List of outbound rules for the managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        },
         "value": {
           "description": "The list of machine learning workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OutboundRuleBasicResource"
           }
+        }
+      }
+    },
+    "PATAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/WorkspaceConnectionPersonalAccessToken"
+        }
+      },
+      "x-ms-discriminator-value": "PAT"
+    },
+    "Password": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-secret": true
         },
-        "nextLink": {
-          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+        "value": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The Private Endpoint Connection resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "location": {
+          "description": "Same as workspace location.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Private endpoint connection properties.",
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "description": "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "List of private endpoint connection associated with the specified workspace",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Private endpoint connection properties.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/WorkspacePrivateEndpointResource"
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "The connection state.",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointDestination": {
+      "type": "object",
+      "description": "Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
+      "properties": {
+        "serviceResourceId": {
+          "type": "string"
+        },
+        "sparkEnabled": {
+          "type": "boolean"
+        },
+        "sparkStatus": {
+          "$ref": "#/definitions/RuleStatus"
+        },
+        "subresourceTarget": {
           "type": "string"
         }
       }
     },
-    "OutboundRule": {
-      "description": "Outbound Rule for the managed network of a machine learning workspace.",
-      "required": [
-        "type"
-      ],
+    "PrivateEndpointOutboundRule": {
+      "description": "Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutboundRule"
+        }
+      ],
       "properties": {
-        "type": {
-          "$ref": "#/definitions/RuleType"
-        },
-        "status": {
-          "$ref": "#/definitions/RuleStatus"
-        },
-        "category": {
-          "$ref": "#/definitions/RuleCategory"
+        "destination": {
+          "$ref": "#/definitions/PrivateEndpointDestination"
         }
       },
-      "discriminator": "type"
+      "x-ms-discriminator-value": "PrivateEndpoint"
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "description": "Connection status of the service consumer with the service provider\r\nPossible state transitions\r\nPending -> Approved (Service provider approves the connection request)\r\nPending -> Rejected (Service provider rejects the connection request)\r\nPending -> Disconnected (Service provider deletes the connection)\r\nApproved -> Rejected (Service provider rejects the approved connection)\r\nApproved -> Disconnected (Service provider deletes the connection)\r\nRejected -> Pending (Service consumer re-initiates the connection request that was rejected)\r\nRejected -> Disconnected (Service provider deletes the connection)",
+      "enum": [
+        "Approved",
+        "Pending",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "location": {
+          "description": "Same as workspace location.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "description": "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "A list of private link resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string"
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource Private link DNS zone name.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "A collection of information about the state of the connection between service consumer and provider.",
+      "properties": {
+        "actionsRequired": {
+          "description": "Some RP chose \"None\". Other RPs use this for region expansion.",
+          "type": "string"
+        },
+        "description": {
+          "description": "User-defined message that, per NRP doc, may be used for approval-related message.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.",
+      "enum": [
+        "Unknown",
+        "Updating",
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PublicNetworkAccessType": {
+      "description": "The public network access flag.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true
+      }
+    },
+    "RegistryListCredentialsResult": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The location of the workspace ACR",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "passwords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Password"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "username": {
+          "description": "The username of the workspace ACR",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "RuleAction": {
+      "description": "The action enum for networking rule.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RuleAction",
+        "modelAsString": true
+      }
     },
     "RuleCategory": {
       "description": "Category of a managed network Outbound Rule of a machine learning workspace.",
@@ -3003,7 +2898,7 @@
       }
     },
     "RuleStatus": {
-      "description": "Status of a managed network Outbound Rule of a machine learning workspace.",
+      "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
         "Active"
@@ -3027,57 +2922,71 @@
         "modelAsString": true
       }
     },
-    "FqdnOutboundRule": {
-      "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
+    "SASAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRule"
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
         }
       ],
       "properties": {
-        "destination": {
-          "type": "string"
+        "credentials": {
+          "$ref": "#/definitions/WorkspaceConnectionSharedAccessSignature"
         }
       },
-      "x-ms-discriminator-value": "FQDN"
+      "x-ms-discriminator-value": "SAS"
     },
-    "PrivateEndpointOutboundRule": {
-      "description": "Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
+    "ServiceManagedResourcesSettings": {
+      "type": "object",
+      "properties": {
+        "cosmosDb": {
+          "$ref": "#/definitions/CosmosDbSettings"
+        }
+      }
+    },
+    "ServicePrincipalAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRule"
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
         }
       ],
       "properties": {
-        "destination": {
-          "$ref": "#/definitions/PrivateEndpointDestination"
+        "credentials": {
+          "$ref": "#/definitions/WorkspaceConnectionServicePrincipal"
         }
       },
-      "x-ms-discriminator-value": "PrivateEndpoint"
+      "x-ms-discriminator-value": "ServicePrincipal"
     },
-    "PrivateEndpointDestination": {
-      "description": "Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
+    "ServiceTagDestination": {
       "type": "object",
+      "description": "Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "properties": {
-        "serviceResourceId": {
+        "action": {
+          "$ref": "#/definitions/RuleAction"
+        },
+        "addressPrefixes": {
+          "description": "Optional, if provided, the ServiceTag property will be ignored.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "portRanges": {
           "type": "string"
         },
-        "subresourceTarget": {
+        "protocol": {
           "type": "string"
         },
-        "sparkEnabled": {
-          "type": "boolean"
-        },
-        "sparkStatus": {
-          "$ref": "#/definitions/RuleStatus"
+        "serviceTag": {
+          "type": "string"
         }
       }
     },
     "ServiceTagOutboundRule": {
-      "description": "Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
+      "description": "Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "allOf": [
         {
           "$ref": "#/definitions/OutboundRule"
@@ -3090,20 +2999,157 @@
       },
       "x-ms-discriminator-value": "ServiceTag"
     },
-    "ServiceTagDestination": {
-      "description": "Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace.",
+    "SharedPrivateLinkResource": {
       "type": "object",
       "properties": {
-        "serviceTag": {
+        "name": {
+          "description": "Unique name of the private link",
           "type": "string"
         },
-        "protocol": {
+        "properties": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperty",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProperty": {
+      "type": "object",
+      "description": "Properties of a shared private link resource.",
+      "properties": {
+        "groupId": {
+          "description": "group id of the private link",
           "type": "string"
         },
-        "portRanges": {
+        "privateLinkResourceId": {
+          "description": "the resource id that private link links to",
+          "type": "string"
+        },
+        "requestMessage": {
+          "description": "Request message",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus"
+        }
+      }
+    },
+    "UsernamePasswordAuthTypeWorkspaceConnectionProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
+        }
+      ],
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/WorkspaceConnectionUsernamePassword"
+        }
+      },
+      "x-ms-discriminator-value": "UsernamePassword"
+    },
+    "Workspace": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "description": "An object that represents a machine learning workspace.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "$ref": "#/definitions/WorkspaceProperties",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "description": "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WorkspaceConnectionAccessKey": {
+      "type": "object",
+      "properties": {
+        "accessKeyId": {
+          "type": "string"
+        },
+        "secretAccessKey": {
           "type": "string"
         }
       }
+    },
+    "WorkspaceConnectionApiKey": {
+      "type": "object",
+      "description": "Api key object for workspace connection credential.",
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceConnectionManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceConnectionPersonalAccessToken": {
+      "type": "object",
+      "properties": {
+        "pat": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceConnectionPropertiesV2": {
+      "required": [
+        "authType"
+      ],
+      "type": "object",
+      "properties": {
+        "authType": {
+          "description": "Authentication type of the connection target",
+          "$ref": "#/definitions/ConnectionAuthType"
+        },
+        "category": {
+          "description": "Category of the connection",
+          "$ref": "#/definitions/ConnectionCategory"
+        },
+        "expiryTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "target": {
+          "type": "string"
+        }
+      },
+      "discriminator": "authType"
     },
     "WorkspaceConnectionPropertiesV2BasicResource": {
       "required": [
@@ -3119,110 +3165,496 @@
         "properties": {
           "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult": {
       "type": "object",
       "properties": {
+        "nextLink": {
+          "type": "string"
+        },
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
           }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "FQDNEndpointDetail": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
-    "FQDNEndpoint": {
+    "WorkspaceConnectionServicePrincipal": {
       "type": "object",
       "properties": {
-        "domainName": {
+        "clientId": {
           "type": "string"
         },
-        "endpointDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FQDNEndpointDetail"
-          },
-          "x-ms-identifiers": [
-            "port"
-          ]
+        "clientSecret": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
         }
       }
     },
-    "FQDNEndpointsProperties": {
+    "WorkspaceConnectionSharedAccessSignature": {
       "type": "object",
       "properties": {
-        "category": {
+        "sas": {
           "type": "string"
-        },
-        "endpoints": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FQDNEndpoint"
-          },
-          "x-ms-identifiers": [
-            "domainName"
-          ]
         }
       }
     },
-    "FQDNEndpoints": {
+    "WorkspaceConnectionUpdateParameter": {
       "type": "object",
+      "description": "The properties that the machine learning workspace connection will be updated with.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/FQDNEndpointsProperties"
+          "description": "The properties that the machine learning workspace connection will be updated with.",
+          "$ref": "#/definitions/WorkspaceConnectionPropertiesV2"
         }
       }
     },
-    "ExternalFQDNResponse": {
+    "WorkspaceConnectionUsernamePassword": {
       "type": "object",
       "properties": {
-        "value": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceHubConfig": {
+      "type": "object",
+      "description": "WorkspaceHub's configuration object.",
+      "properties": {
+        "additionalWorkspaceStorageAccounts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FQDNEndpoints"
-          },
-          "x-ms-identifiers": [
-            "/properties/category"
+            "type": "string"
+          }
+        },
+        "defaultWorkspaceResourceGroup": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceListResult": {
+      "description": "The result of a request to list machine learning workspaces.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of machine learning workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "WorkspacePrivateEndpointResource": {
+      "type": "object",
+      "description": "The Private Endpoint resource.",
+      "properties": {
+        "id": {
+          "description": "e.g. /subscriptions/{networkSubscriptionId}/resourceGroups/{rgName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "subnetArmId": {
+          "description": "The subnetId that the private endpoint is connected to.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
           ]
         }
       }
     },
-    "FeatureStoreSettings": {
+    "WorkspaceProperties": {
+      "description": "The properties of a machine learning workspace.",
       "type": "object",
       "properties": {
-        "computeRuntime": {
-          "$ref": "#/definitions/ComputeRuntimeDto"
+        "allowPublicAccessWhenBehindVnet": {
+          "description": "The flag to indicate whether to allow public access when behind VNet.",
+          "type": "boolean"
         },
-        "offlineStoreConnectionName": {
+        "applicationInsights": {
+          "description": "ARM id of the application insights associated with this workspace.",
           "type": "string"
         },
-        "onlineStoreConnectionName": {
+        "associatedWorkspaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerRegistries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerRegistry": {
+          "description": "ARM id of the container registry associated with this workspace.",
           "type": "string"
+        },
+        "description": {
+          "description": "The description of this workspace.",
+          "type": "string"
+        },
+        "discoveryUrl": {
+          "description": "Url for the discovery service to identify regional endpoints for machine learning experimentation services",
+          "type": "string"
+        },
+        "enableDataIsolation": {
+          "type": "boolean"
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperty"
+        },
+        "existingWorkspaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featureStoreSettings": {
+          "description": "Settings for feature store type workspace.",
+          "$ref": "#/definitions/FeatureStoreSettings"
+        },
+        "friendlyName": {
+          "description": "The friendly name for this workspace. This name in mutable",
+          "type": "string"
+        },
+        "hbiWorkspace": {
+          "description": "The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service",
+          "type": "boolean"
+        },
+        "hubResourceId": {
+          "type": "string"
+        },
+        "imageBuildCompute": {
+          "description": "The compute name for image build",
+          "type": "string"
+        },
+        "keyVault": {
+          "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
+          "type": "string"
+        },
+        "keyVaults": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "managedNetwork": {
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        },
+        "mlFlowTrackingUri": {
+          "description": "The URI associated with this workspace that machine learning flow must point at to set up tracking.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "notebookInfo": {
+          "description": "The notebook info of Azure ML workspace.",
+          "$ref": "#/definitions/NotebookResourceInfo",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "The list of private endpoint connections in the workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "privateLinkCount": {
+          "format": "int32",
+          "description": "Count of private connections in the workspace",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "description": "The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "publicNetworkAccess": {
+          "description": "Whether requests from Public Network are allowed.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "serviceManagedResourcesSettings": {
+          "description": "The service managed resource settings.",
+          "$ref": "#/definitions/ServiceManagedResourcesSettings"
+        },
+        "serviceProvisionedResourceGroup": {
+          "description": "The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "sharedPrivateLinkResources": {
+          "description": "The list of shared private link resources in this workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "softDeleteRetentionInDays": {
+          "format": "int32",
+          "description": "Retention time in days after workspace get soft deleted.",
+          "type": "integer"
+        },
+        "storageAccount": {
+          "description": "ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created",
+          "type": "string"
+        },
+        "storageAccounts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageHnsEnabled": {
+          "description": "If the storage associated with the workspace has hierarchical namespace(HNS) enabled.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "systemDatastoresAuthMode": {
+          "description": "The auth mode used for accessing the system datastores of the workspace.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id associated with this workspace.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "v1LegacyMode": {
+          "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
+          "type": "boolean"
+        },
+        "workspaceHubConfig": {
+          "$ref": "#/definitions/WorkspaceHubConfig"
+        },
+        "workspaceId": {
+          "description": "The immutable id associated with this workspace.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },
-    "ComputeRuntimeDto": {
+    "WorkspacePropertiesUpdateParameters": {
+      "description": "The parameters for updating a machine learning workspace.",
       "type": "object",
       "properties": {
-        "sparkRuntimeVersion": {
+        "applicationInsights": {
+          "description": "ARM id of the application insights associated with this workspace.",
           "type": "string"
+        },
+        "containerRegistry": {
+          "description": "ARM id of the container registry associated with this workspace.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this workspace.",
+          "type": "string"
+        },
+        "enableDataIsolation": {
+          "type": "boolean"
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionUpdateProperties"
+        },
+        "featureStoreSettings": {
+          "description": "Settings for feature store type workspace.",
+          "$ref": "#/definitions/FeatureStoreSettings"
+        },
+        "friendlyName": {
+          "description": "The friendly name for this workspace. This name in mutable",
+          "type": "string"
+        },
+        "imageBuildCompute": {
+          "description": "The compute name for image build",
+          "type": "string"
+        },
+        "managedNetwork": {
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
+          "type": "string"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether requests from Public Network are allowed.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "serviceManagedResourcesSettings": {
+          "description": "The service managed resource settings.",
+          "$ref": "#/definitions/ServiceManagedResourcesSettings"
+        },
+        "softDeleteRetentionInDays": {
+          "format": "int32",
+          "description": "Retention time in days after workspace get soft deleted.",
+          "type": "integer"
+        },
+        "v1LegacyMode": {
+          "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
+          "type": "boolean"
         }
+      }
+    },
+    "WorkspaceUpdateParameters": {
+      "description": "The parameters for updating a machine learning workspace.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "The properties that the machine learning workspace will be updated with.",
+          "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
+          "x-ms-client-flatten": true
+        },
+        "sku": {
+          "description": "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "tags": {
+          "description": "The resource tags for the machine learning workspace.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WorkspaceKindParameter": {
+      "in": "query",
+      "name": "kind",
+      "description": "Kind of workspace.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "in": "path",
+      "name": "workspaceName",
+      "description": "Name of Azure Machine Learning workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "PaginationParameter": {
+      "in": "query",
+      "name": "$skip",
+      "type": "string",
+      "description": "Continuation token for pagination.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceForceToPurgeParameter": {
+      "in": "query",
+      "name": "forceToPurge",
+      "description": "Flag to indicate delete is a purge request.",
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "TargetParameter": {
+      "in": "query",
+      "name": "target",
+      "description": "Target of the workspace connection.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CategoryParameter": {
+      "in": "query",
+      "name": "category",
+      "description": "Category of the workspace connection.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ConnectionName": {
+      "in": "path",
+      "name": "connectionName",
+      "description": "Friendly name of the workspace connection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "RuleName": {
+      "in": "path",
+      "name": "ruleName",
+      "description": "Name of the workspace managed network outbound rule",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "PrivateEndpointConnectionName": {
+      "in": "path",
+      "name": "privateEndpointConnectionName",
+      "description": "NRP Private Endpoint Connection Name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
   }
