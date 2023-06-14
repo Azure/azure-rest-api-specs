@@ -1697,30 +1697,50 @@
             ]
           }
         },
-        "legacyPortalEnabled": {
-          "description": "Enable legacy portal for this API Management service.",
+        "legacyPortalStatus": {
+          "description": "Status of legacy portal in the API Management service.",
           "enum": [
-            "true",
-            "false"
+            "Enabled",
+            "Disabled"
           ],
           "default": "true",
           "type": "string",
           "x-ms-enum": {
-            "name": "LegacyPortalEnabled",
-            "modelAsString": true
+            "name": "LegacyPortalStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Legacy Portal is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Legacy Portal is disabled for the service."
+              }
+            ]
           }
         },
-        "developerPortalEnabled": {
-          "description": "Enable developer portal for this API Management service.",
+        "developerPortalStatus": {
+          "description": "Status of developer portal in this API Management service.",
           "enum": [
-            "true",
-            "false"
+            "Enabled",
+            "Disabled"
           ],
           "type": "string",
           "default": "true",
           "x-ms-enum": {
-            "name": "DeveloperPortalEnabled",
-            "modelAsString": true
+            "name": "developerPortalStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "Developer Portal is enabled for the service."
+              },
+              {
+                "value": "Disabled",
+                "description": "Developer Portal is disabled for the service."
+              }
+            ]
           }
         }
       },
