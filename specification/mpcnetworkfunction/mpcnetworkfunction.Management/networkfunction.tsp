@@ -54,52 +54,83 @@ model NetworkFunctionResourceProperties {
 }
 
 @armResourceOperations(NetworkFunctionResource)
-interface NetworkFunctions
-  extends TrackedResourceOperations<NetworkFunctionResource, NetworkFunctionResourceProperties> {
-    delete is ArmResourceDeleteSync<NetworkFunctionResource>;
-    createOrUpdate is ArmResourceCreateOrUpdateSync<NetworkFunctionResource>
+interface NetworkFunctions {
+    get is ArmResourceRead<NetworkFunctionResource>;
+    createOrUpdate is ArmResourceCreateOrUpdateSync<NetworkFunctionResource>; 
+    updateTags is ArmTagsPatchSync<NetworkFunctionResource>;               
+    delete is ArmResourceDeleteSync<NetworkFunctionResource>;         
+    listByResourceGroup is ArmResourceListByParent<NetworkFunctionResource>;
+    listBySubscription is ArmListBySubscription<NetworkFunctionResource>;
 }
 
 @doc("Type of Workload")
 enum WorkloadType {
+  @doc("Access and Mobility Function")
   AMF,
+  @doc("Session Management Function")
   SMF,
+  @doc("User Plane Function")
   UPF,
+  @doc("Network Repository Function")
   NRF,
+  @doc("Network Slice Selection Function")
   NSSF,
+  @doc("Mobility Management Entity")
   MME,
+  @doc("Serving Gateway Control Plane")
   SGWControlPlane,
+  @doc("Packet Data Network Gateway Control Plane")
   PGWControlPlane,
+  @doc("Serving Gateway User Plane")
   SGWUserPlane,
+  @doc("Packet Data Network Gateway User Plane")
   PGWUserPlane,
+  @doc("Gateway GPRS support node")
   GGSN,
+  @doc("Serving GPRS support node")
   SGSN,
+  @doc("Evolved Packet Data Gateway")
   ePDG,
+  @doc("N3 Interworking Function")
   N3IWF,
+  @doc("Platform As A Service")
   PaaS,
+  @doc("Element Management System")
   EMS,
+  @doc("Operations and Policy Manager")
   OperationsPolicyManager
 }
 
 @doc("Network Function Administrative State enumerations")
 enum NetworkFunctionAdministrativeState {
+  @doc("Resource has been commissioned")
   Commissioned,
+  @doc("Resource has been decommissioned")
   Decommissioned
 }
 
 @doc("Network Function Operational Status enumerations")
 enum NetworkFunctionOperationalStatus {
+  @doc("Resource is inactive")
   Inactive,
+  @doc("Resource has been deployed, awaiting provisioning")
   InstantiatedNotProvisioned,
+  @doc("Resource has been deployed and provisioned, awaiting testing")
   InstantiatedProvisioned,
+  @doc("Resource is fully deployed and operational")
   Active
 }
 
+@doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+  @doc("Resource is getting provisioned")
   Provisioning,
+  @doc("Resource is updating")
   Updating,
+  @doc("Resource is getting deleted")
   Deleting,
+  @doc("Resource has been accepted")
   Accepted,
 }

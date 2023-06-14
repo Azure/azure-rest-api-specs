@@ -1,12 +1,17 @@
 {
-  "operationId": "NetworkFunctions_Update",
-  "title": "NetworkFunctions_Update",
+  "operationId": "NetworkFunctions_UpdateTags",
+  "title": "NetworkFunctions_UpdateTags",
   "parameters": {
     "api-version": "2023-05-15-preview",
     "subscriptionId": "sub1",
     "resourceGroupName": "rg1",
     "networkFunctionName": "nf1",
-    "properties": {}
+    "properties": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -14,7 +19,7 @@
         "id": "/subscriptions/sub1/resourceGroups/rg1/providers/Microsoft.MobilePacketCore/networkFunctions/nf1",
         "name": "nf1",
         "type": "Microsoft.MobilePacketCore/networkFunctions",
-        "location": "global",
+        "location": "eastus",
         "properties": {
           "sku": "ProductionKvm2",
           "workloadTypes": [

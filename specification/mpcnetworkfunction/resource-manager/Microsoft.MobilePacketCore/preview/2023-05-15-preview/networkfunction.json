@@ -266,7 +266,7 @@
         "tags": [
           "NetworkFunctions"
         ],
-        "operationId": "NetworkFunctions_Update",
+        "operationId": "NetworkFunctions_UpdateTags",
         "description": "Update a NetworkFunctionResource",
         "parameters": [
           {
@@ -291,7 +291,7 @@
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/NetworkFunctionResourceUpdate"
+              "$ref": "#/definitions/NetworkFunctionResourceTagsUpdate"
             }
           }
         ],
@@ -310,8 +310,8 @@
           }
         },
         "x-ms-examples": {
-          "NetworkFunctions_Update": {
-            "$ref": "./examples/NetworkFunctions_Update.json"
+          "NetworkFunctions_UpdateTags": {
+            "$ref": "./examples/NetworkFunctions_UpdateTags.json"
           }
         }
       },
@@ -371,7 +371,19 @@
       ],
       "x-ms-enum": {
         "name": "NetworkFunctionAdministrativeState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Commissioned",
+            "value": "Commissioned",
+            "description": "Resource has been commissioned"
+          },
+          {
+            "name": "Decommissioned",
+            "value": "Decommissioned",
+            "description": "Resource has been decommissioned"
+          }
+        ]
       }
     },
     "NetworkFunctionOperationalStatus": {
@@ -385,7 +397,29 @@
       ],
       "x-ms-enum": {
         "name": "NetworkFunctionOperationalStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Resource is inactive"
+          },
+          {
+            "name": "InstantiatedNotProvisioned",
+            "value": "InstantiatedNotProvisioned",
+            "description": "Resource has been deployed, awaiting provisioning"
+          },
+          {
+            "name": "InstantiatedProvisioned",
+            "value": "InstantiatedProvisioned",
+            "description": "Resource has been deployed and provisioned, awaiting testing"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Resource is fully deployed and operational"
+          }
+        ]
       }
     },
     "NetworkFunctionResource": {
@@ -423,7 +457,7 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a NetworkFunctionResource list operation.",
@@ -490,7 +524,7 @@
         "networkFunctionAdministrativeState"
       ]
     },
-    "NetworkFunctionResourceUpdate": {
+    "NetworkFunctionResourceTagsUpdate": {
       "type": "object",
       "properties": {
         "tags": {
@@ -500,34 +534,13 @@
           },
           "x-typespec-name": "Record<string>",
           "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/NetworkFunctionResourceUpdateProperties",
-          "x-ms-client-flatten": true
         }
       },
-      "description": "The type used for update operations of the NetworkFunctionResource."
-    },
-    "NetworkFunctionResourceUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "networkFunctionAdministrativeState": {
-          "$ref": "#/definitions/NetworkFunctionAdministrativeState",
-          "description": "Administrative state of the network function"
-        },
-        "userDescription": {
-          "type": "string",
-          "description": "User provided description"
-        },
-        "deploymentNotes": {
-          "type": "string",
-          "description": "User provided deployment notes.  This is used to optionally provide details about the NF deployment"
-        }
-      },
-      "description": "The updatable properties of the NetworkFunctionResource."
+      "description": "The type used for updating tags in NetworkFunctionResource resources."
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Provisioning state of the resource",
       "enum": [
         "Succeeded",
         "Failed",
@@ -539,11 +552,46 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is getting provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is getting deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted"
+          }
+        ]
       }
     },
     "Versions": {
       "type": "string",
+      "description": "API Versions",
       "enum": [
         "2023-05-15-preview"
       ],
@@ -553,7 +601,8 @@
         "values": [
           {
             "name": "v2023_05_15_preview",
-            "value": "2023-05-15-preview"
+            "value": "2023-05-15-preview",
+            "description": "May 15, 2023 Preview API Version"
           }
         ]
       }
@@ -582,7 +631,94 @@
       ],
       "x-ms-enum": {
         "name": "WorkloadType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMF",
+            "value": "AMF",
+            "description": "Access and Mobility Function"
+          },
+          {
+            "name": "SMF",
+            "value": "SMF",
+            "description": "Session Management Function"
+          },
+          {
+            "name": "UPF",
+            "value": "UPF",
+            "description": "User Plane Function"
+          },
+          {
+            "name": "NRF",
+            "value": "NRF",
+            "description": "Network Repository Function"
+          },
+          {
+            "name": "NSSF",
+            "value": "NSSF",
+            "description": "Network Slice Selection Function"
+          },
+          {
+            "name": "MME",
+            "value": "MME",
+            "description": "Mobility Management Entity"
+          },
+          {
+            "name": "SGWControlPlane",
+            "value": "SGWControlPlane",
+            "description": "Serving Gateway Control Plane"
+          },
+          {
+            "name": "PGWControlPlane",
+            "value": "PGWControlPlane",
+            "description": "Packet Data Network Gateway Control Plane"
+          },
+          {
+            "name": "SGWUserPlane",
+            "value": "SGWUserPlane",
+            "description": "Serving Gateway User Plane"
+          },
+          {
+            "name": "PGWUserPlane",
+            "value": "PGWUserPlane",
+            "description": "Packet Data Network Gateway User Plane"
+          },
+          {
+            "name": "GGSN",
+            "value": "GGSN",
+            "description": "Gateway GPRS support node"
+          },
+          {
+            "name": "SGSN",
+            "value": "SGSN",
+            "description": "Serving GPRS support node"
+          },
+          {
+            "name": "ePDG",
+            "value": "ePDG",
+            "description": "Evolved Packet Data Gateway"
+          },
+          {
+            "name": "N3IWF",
+            "value": "N3IWF",
+            "description": "N3 Interworking Function"
+          },
+          {
+            "name": "PaaS",
+            "value": "PaaS",
+            "description": "Platform As A Service"
+          },
+          {
+            "name": "EMS",
+            "value": "EMS",
+            "description": "Element Management System"
+          },
+          {
+            "name": "OperationsPolicyManager",
+            "value": "OperationsPolicyManager",
+            "description": "Operations and Policy Manager"
+          }
+        ]
       }
     }
   },
