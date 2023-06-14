@@ -281,46 +281,6 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions": {
-      "get": {
-        "tags": [
-          "GroupQuotas-Subscriptions"
-        ],
-        "summary": "Gets GroupQuota Subscription List for the GroupQuotas name passed.",
-        "description": "Gets GroupQuota Subscription List for the GroupQuota name passed.",
-        "operationId": "GroupQuotaSubscriptions_GetList",
-        "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/GetGroupQuotaSubscriptions.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/MgIdInParameters"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaNameInParameters"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/GroupQuotaSubscriptionIdList"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Management/managementGroups/{mgId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}": {
       "put": {
         "tags": [
@@ -352,7 +312,7 @@
           "200": {
             "description": "OK, Create or Update",
             "schema": {
-              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+              "$ref": "#/definitions/GroupQuotasEntity"
             }
           },
           "201": {
@@ -414,7 +374,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+              "$ref": "#/definitions/GroupQuotasEntity"
             }
           },
           "default": {
@@ -496,7 +456,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/GroupQuotaSubscriptionId"
+              "$ref": "#/definitions/GroupQuotasEntity"
             }
           },
           "default": {
@@ -1620,56 +1580,6 @@
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "GroupQuotaSubscriptionIdList": {
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "type": "array",
-          "description": "The full list of subscription ids that have been requested to be added to a Group Quot and their provisioning status.",
-          "items": {
-            "$ref": "#/definitions/GroupQuotaSubscriptionId"
-          }
-        }
-      }
-    },
-    "GroupQuotaSubscriptionId": {
-      "type": "object",
-      "description": "A subscription id that has been requested to be added to a Group Quota. Includes status of that add request.",
-      "properties": {
-        "properties": {
-          "provisioningState": {
-            "type": "string",
-            "description": "Provisioning state",
-            "allOf": [
-              {
-                "$ref": "#/definitions/RequestState"
-              }
-            ],
-            "readOnly": true
-          },
-          "subscriptionId": {
-            "type": "string",
-            "description": "SubscriptionId."
-          }
         }
       }
     },
