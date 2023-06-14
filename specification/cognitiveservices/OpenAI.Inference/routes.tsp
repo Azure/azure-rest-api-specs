@@ -21,9 +21,9 @@ namespace Azure.OpenAI;
 @actionSeparator("/")
 @action("embeddings") //@convenientAPI(true)
 op getEmbeddings is Azure.Core.ResourceAction<
-    Deployment,
-    EmbeddingsOptions,
-    Embeddings
+  Deployment,
+  EmbeddingsOptions,
+  Embeddings
 >;
 
 @doc("""
@@ -35,9 +35,9 @@ provided prompt data.
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
-    Deployment,
-    CompletionsOptions,
-    Completions
+  Deployment,
+  CompletionsOptions,
+  Completions
 >;
 
 @doc("""
@@ -49,9 +49,9 @@ provided prompt data.
 @actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
 op getChatCompletions is ResourceAction<
-    Deployment,
-    ChatCompletionsOptions,
-    ChatCompletions
+  Deployment,
+  ChatCompletionsOptions,
+  ChatCompletions
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "because"
@@ -66,7 +66,8 @@ op getImageOperationStatus is RpcOperation<{@doc(".") @path operationId: string}
 @route("/images/generations:submit")
 @pollingOperation(getImageOperationStatus, {operationId: ResponseProperty<"id">})
 op startGenerateImage is OaiLongRunningRpcOperation<
-    ImageRequest,
-    ImageOperationResponse,
-    ImageOperationStatus>;
+  ImageRequest,
+  ImageOperationResponse,
+  ImageOperationStatus
+>;
 

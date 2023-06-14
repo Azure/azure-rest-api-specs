@@ -10,10 +10,9 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
-    title: "Contoso Widget Manager",
-  })
+  title: "Contoso Widget Manager",
+})
 @versioned(Contoso.WidgetManager.Versions)
-
 namespace Azure.Contoso.WidgetManager;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
