@@ -44,10 +44,7 @@
         "summary": "Add filtered connections to multiple groups.",
         "operationId": "WebPubSub_AddConnectionsToGroups",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -72,6 +69,7 @@
             "in": "body",
             "name": "message",
             "description": "Target groups and connection filter.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AddToGroupsRequest"
             }
@@ -270,10 +268,7 @@
         "summary": "Remove filtered connections from multiple groups.",
         "operationId": "WebPubSub_RemoveConnectionsFromGroups",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -298,6 +293,7 @@
             "in": "body",
             "name": "message",
             "description": "Target groups and connection filter.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RemoveFromGroupsRequest"
             }
@@ -1722,16 +1718,18 @@
   },
   "definitions": {
     "AddToGroupsRequest": {
-      "description": "The request object containing targets groups and connection filter",
+      "description": "The request object containing targets groups and a connection filter",
       "type": "object",
       "properties": {
         "groups": {
+          "description": "A list of groups which target connections will be added into",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "connectionFilter": {
+          "description": "An OData filter which target connnections satisfy",
           "type": "string"
         }
       }
@@ -1787,16 +1785,18 @@
       }
     },
     "RemoveFromGroupsRequest": {
-      "description": "The request object containing targets groups and connection filter",
+      "description": "The request object containing targets groups and a connection filter",
       "type": "object",
       "properties": {
         "groups": {
+          "description": "A list of groups which target connections will be removed from",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "connectionFilter": {
+          "description": "An OData filter which target connnections satisfy",
           "type": "string"
         }
       }
