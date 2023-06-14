@@ -87,8 +87,7 @@
             "required": true,
             "type": "string",
             "maxLength": 63,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+            "minLength": 1
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -143,8 +142,7 @@
             "required": true,
             "type": "string",
             "maxLength": 63,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+            "minLength": 1
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -211,8 +209,7 @@
             "required": true,
             "type": "string",
             "maxLength": 63,
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+            "minLength": 1
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -224,6 +221,9 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "default": {
             "description": "Error",
@@ -1867,7 +1867,7 @@
   },
   "definitions": {
     "ApiKeyAuthCredentials": {
-      "description": "ApiKeyAuthCredentials represents ApiKey credentials authentication.",
+      "description": "ApiKeyAuthCredentials class for ApiKey based Auth.",
       "type": "object",
       "allOf": [
         {
@@ -1928,7 +1928,7 @@
       }
     },
     "AuthCredentials": {
-      "description": "ConnectorCredentials.",
+      "description": "AuthCredentials abstract base class for Auth Purpose.",
       "required": [
         "kind"
       ],
@@ -1941,7 +1941,7 @@
       "discriminator": "kind"
     },
     "AuthCredentialsKind": {
-      "description": "CredentialTypeEnum.",
+      "description": "Enum for different types of AuthCredentials supported.",
       "enum": [
         "OAuthClientCredentials",
         "ApiKeyAuthCredentials"
@@ -1954,6 +1954,9 @@
     },
     "DataConnector": {
       "description": "DataConnector Model.",
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1988,10 +1991,6 @@
           "items": {
             "$ref": "#/definitions/DataConnector"
           }
-        },
-        "$skipToken": {
-          "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-          "type": "string"
         },
         "nextLink": {
           "description": "Continuation link (absolute URI) to the next page of results in the list.",
@@ -2673,7 +2672,7 @@
       }
     },
     "KeyVaultProperties": {
-      "description": "KeyVault Properties Model.",
+      "description": "Properties of the key vault.",
       "required": [
         "keyName",
         "keyVaultUri",
@@ -2682,17 +2681,17 @@
       "type": "object",
       "properties": {
         "keyVaultUri": {
-          "description": "KeyVault Uri field.",
+          "description": "Uri of the key vault.",
           "minLength": 1,
           "type": "string"
         },
         "keyName": {
-          "description": "KeyVault key name.",
+          "description": "Name of Key Vault key.",
           "minLength": 1,
           "type": "string"
         },
         "keyVersion": {
-          "description": "KeyVault key Version.",
+          "description": "Version of Key Vault key.",
           "minLength": 1,
           "type": "string"
         }
@@ -2710,7 +2709,7 @@
       }
     },
     "OAuthClientCredentials": {
-      "description": "OAuthClientCredentials.",
+      "description": "OAuthClientCredentials for clientId clientSecret auth.",
       "type": "object",
       "allOf": [
         {
@@ -2724,7 +2723,7 @@
           "type": "object",
           "properties": {
             "clientId": {
-              "description": "UserName.",
+              "description": "ClientId associated with the provider.",
               "minLength": 1,
               "type": "string"
             },
