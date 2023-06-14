@@ -48,8 +48,12 @@ function main() {
         if (fs.existsSync(path.join(folder, "client.tsp"))) {
             const output = yield runCmd(`npx --no tsp compile client.tsp --no-emit --warn-as-error`, folder);
         }
+        // TODO: enable this after tsp format hotfix is merged
         // Format parent folder to include shared files
-        const output = yield runCmd(`npx tsp format ../**/*.tsp`, folder);
+        // const output = await runCmd(
+        //     `npx tsp format ../**/*.tsp`,
+        //     folder
+        // );
         // Verify generated swagger file is in sync with one on disk
         const git = simpleGit();
         let gitStatusIsClean = yield (yield git.status(['--porcelain'])).isClean();
