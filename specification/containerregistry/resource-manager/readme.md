@@ -30,14 +30,25 @@ tag: package-preview-2023-06
 ```
 
 
-### Tag: package-preview-2023-06
+### Tag: package-2023-06-preview-only
 
-These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+These settings apply only when `--tag=package-2023-06-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-06'
+``` yaml $(tag) == 'package-2023-06-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2023-06-01-preview/containerregistry.json
 ```
+
+### Tag: package-2023-06-preview
+
+These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-preview'
+input-file:
+  - Microsoft.ContainerRegistry/preview/2023-06-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
 ### Tag: package-2023-01-preview-only
 
 These settings apply only when `--tag=package-2023-01-preview-only` is specified on the command line.
