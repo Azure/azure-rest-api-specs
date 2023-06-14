@@ -5,9 +5,9 @@
 What's the purpose of this PR? Check all that apply. This is **mandatory**!
 
   - [ ] New service onboarding.
-  - [ ] New API version. ([OpenAPI Hub](https://aka.ms/openapihub) can be used to generate such PR.)
-  - [ ] update existing version for new feature. (This is applicable only when you are revising a private preview API version.)
-  - [ ] Update existing version to fix swagger quality issue in S360.
+  - [ ] New API version. (Such PR should have been generated with [OpenAPI Hub](https://aka.ms/openapihub), per [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).)
+  - [ ] Update existing version for new feature. (This is applicable only when you are revising a private preview API version.)
+  - [ ] Update existing version to fix swagger quality issues in S360.
   - [ ] Other, please clarify:
     - _edit this with your clarification_
 
@@ -39,5 +39,4 @@ follow the process outlined in the [High-level Breaking Change Process doc](http
 
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.
-- For help adding new API version using OpenAPI Hub, see [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
 - For additional help, see https://aka.ms/azsdk/support/spectools.
