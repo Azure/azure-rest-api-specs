@@ -46,6 +46,8 @@ function main() {
             console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.");
             throw new Error("Expected npm prefix: " + expected_npm_prefix + "\nActual npm prefix: " + actual_npm_prefix);
         }
+        // Format parent folder to include shared files
+        const output = yield runCmd(`npx tsp format ../**/*.tsp`, folder);
         const git = simpleGit();
         let gitStatusIsClean = yield (yield git.status(['--porcelain'])).isClean();
         if (!gitStatusIsClean) {

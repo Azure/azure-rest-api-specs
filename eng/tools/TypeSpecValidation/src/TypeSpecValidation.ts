@@ -52,6 +52,12 @@ async function main() {
         throw new Error ("Expected npm prefix: " + expected_npm_prefix +"\nActual npm prefix: " + actual_npm_prefix)
     }
 
+    // Format parent folder to include shared files
+    const output = await runCmd(
+        `npx tsp format ../**/*.tsp`,
+        folder
+    );
+
     const git = simpleGit();
     let gitStatusIsClean = await (await git.status(['--porcelain'])).isClean()
     if (!gitStatusIsClean) {
