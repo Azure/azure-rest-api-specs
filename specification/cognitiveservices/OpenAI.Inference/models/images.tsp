@@ -8,14 +8,14 @@ namespace Azure.OpenAI;
 
 @doc("The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.")
 enum ImageSize {
-  @doc("Small image size (256x256).")
-  Small: "256x256",
+  @doc("Image size of 256x256.")
+  Size256x256: "256x256",
 
-  @doc("Medium image size (512x512).")
-  Medium: "512x512",
+  @doc("Image size of 512x512.")
+  Size512x512: "512x512",
 
-  @doc("Large image size (1024x1024).")
-  Large: "1024x1024",
+  @doc("Image size of 1024x1024.")
+  Size1024x1024: "1024x1024",
 }
 
 @doc("Represents the request data used to generate images.")
