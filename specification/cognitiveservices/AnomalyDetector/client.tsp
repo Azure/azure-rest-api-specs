@@ -3,7 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@convenientAPI(AnomalyDetector.Univariate.detectUnivariateEntireSeries, false)
+@@convenientAPI(AnomalyDetector.Univariate.detectUnivariateEntireSeries, false);
 @@projectedName(AnomalyDetector.Multivariate.MultivariateModelDetails.dataSource, "java", "dataSourceUrl");  // Prefer a different name for java only
 @@projectedName(AnomalyDetector.Multivariate.MultivariateModelDetails.dataSource, "csharp", "dataSourceUri"); // Prefer a different name for C# only
 @@projectedName(AnomalyDetector.Multivariate.MultivariateModelDetails.endTime, "csharp", "endsOn"); // Prefer a different name for C# only

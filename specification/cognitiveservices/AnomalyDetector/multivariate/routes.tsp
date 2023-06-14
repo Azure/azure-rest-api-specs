@@ -34,7 +34,8 @@ resultId value that the BatchDetectAnomaly API returns.
 op getMultivariateBatchDetectionResult(
   @format("uuid")
   @doc("ID of a batch detection result.")
-  @path resultId: string,
+  @path
+  resultId: string
 ): MultivariateDetectionResult | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
@@ -61,7 +62,8 @@ op trainMultivariateModel is MultivariateServiceAction<
   },
   // TResponse
   {
-    @statusCode statusCode: 201,
+    @statusCode statusCode: 201;
+
     @doc("Location and ID of the model.")
     @header location: string,
     @body result: MultivariateModel
@@ -79,9 +81,8 @@ op trainMultivariateModel is MultivariateServiceAction<
 @doc("List models of a resource.")
 op listMultivariateModels(
   ...SkipQueryParameter,
-  ...TopQueryParameter,
+  ...TopQueryParameter
 ): ModelList | ResponseError;
-
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
@@ -94,13 +95,12 @@ op listMultivariateModels(
 op deleteMultivariateModel(
   @doc("Model identifier.")
   @path
-  modelId: string,
+  modelId: string
 ): {
   @doc("Delete model successfully.")
   @statusCode
-  statusCode: 204
-  } | ResponseError;
-
+  statusCode: 204;
+} | ResponseError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
@@ -149,7 +149,6 @@ op detectMultivariateBatchAnomaly(
   @body result: MultivariateDetectionResult,
 } | ResponseError;
 
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
 // This operation does not fit any standard operation pattern.
 // The closest match is probably ResourceAction, but that can't be used because
@@ -166,6 +165,7 @@ op detectMultivariateLastAnomaly(
   @doc("Model identifier.")
   @path
   modelId: string,
+
   @doc("Request of the last detection.")
   @body options: MultivariateLastDetectionSettings,
 ): MultivariateLastDetectionResult | ResponseError;

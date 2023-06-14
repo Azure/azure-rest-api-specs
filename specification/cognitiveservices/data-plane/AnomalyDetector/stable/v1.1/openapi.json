@@ -28,6 +28,7 @@
         "name": "ApiVersion",
         "in": "path",
         "required": true,
+        "description": "Api Version",
         "type": "string",
         "enum": [
           "v1.1"
@@ -77,8 +78,8 @@
             "in": "path",
             "required": true,
             "description": "ID of a batch detection result.",
-            "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -537,8 +538,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -548,8 +549,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -581,10 +581,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "Multivariate.AlignPolicy": {
       "type": "object",
@@ -642,8 +639,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]",
-          "description": "Error message for the current time stamp."
+          "description": "Error message for the current time stamp.",
+          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]"
         }
       },
       "description": "Anomaly status and information.",
@@ -659,8 +656,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Correlated variables that have correlation changes under an anomaly."
+          "description": "Correlated variables that have correlation changes under an anomaly.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Correlation changes among the anomalous variables."
@@ -692,8 +689,8 @@
             "$ref": "#/definitions/Multivariate.AnomalyInterpretation"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.AnomalyInterpretation[]",
-          "description": "Interpretation of this anomalous time stamp."
+          "description": "Interpretation of this anomalous time stamp.",
+          "x-typespec-name": "Multivariate.AnomalyInterpretation[]"
         }
       },
       "description": "Detailed information of the data point.",
@@ -712,8 +709,8 @@
             "$ref": "#/definitions/Multivariate.MultivariateModelItem"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.MultivariateModel[]",
-          "description": "List of models."
+          "description": "List of models.",
+          "x-typespec-name": "Multivariate.MultivariateModel[]"
         },
         "currentCount": {
           "type": "integer",
@@ -761,8 +758,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]",
-          "description": "Error message when detection fails."
+          "description": "Error message when detection fails.",
+          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]"
         },
         "variableStates": {
           "type": "array",
@@ -770,8 +767,8 @@
             "$ref": "#/definitions/Multivariate.MultivariateVariableState"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.MultivariateVariableState[]",
-          "description": "Variable status."
+          "description": "Variable status.",
+          "x-typespec-name": "Multivariate.MultivariateVariableState[]"
         },
         "setupInfo": {
           "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionSettings",
@@ -889,8 +886,8 @@
             "$ref": "#/definitions/Multivariate.AnomalyState"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.AnomalyState[]",
-          "description": "Detection result for each time stamp."
+          "description": "Detection result for each time stamp.",
+          "x-typespec-name": "Multivariate.AnomalyState[]"
         }
       },
       "description": "Detection results for the resultId value.",
@@ -913,8 +910,8 @@
             "$ref": "#/definitions/Multivariate.MultivariateVariableState"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.MultivariateVariableState[]",
-          "description": "Variable status."
+          "description": "Variable status.",
+          "x-typespec-name": "Multivariate.MultivariateVariableState[]"
         }
       },
       "description": "Diagnostics information to help inspect the states of a model or variable."
@@ -943,8 +940,8 @@
             "$ref": "#/definitions/Multivariate.MultivariateVariableState"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.MultivariateVariableState[]",
-          "description": "Variable status."
+          "description": "Variable status.",
+          "x-typespec-name": "Multivariate.MultivariateVariableState[]"
         },
         "results": {
           "type": "array",
@@ -952,8 +949,8 @@
             "$ref": "#/definitions/Multivariate.AnomalyState"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.AnomalyState[]",
-          "description": "Anomaly status and information."
+          "description": "Anomaly status and information.",
+          "x-typespec-name": "Multivariate.AnomalyState[]"
         }
       },
       "description": "Results of the last detection."
@@ -967,8 +964,8 @@
             "$ref": "#/definitions/Multivariate.MultivariateVariableValue"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Multivariate.MultivariateVariableValue[]",
-          "description": "Contains the inference data, including the name, time stamps (ISO 8601), and\nvalues of variables."
+          "description": "Contains the inference data, including the name, time stamps (ISO 8601), and\nvalues of variables.",
+          "x-typespec-name": "Multivariate.MultivariateVariableValue[]"
         },
         "topContributorCount": {
           "type": "integer",
@@ -1059,8 +1056,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]",
           "description": "Error messages after failure to create a model.",
+          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]",
           "readOnly": true
         },
         "diagnosticsInfo": {
@@ -1167,8 +1164,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]",
           "description": "Error messages after failure to create a model.",
+          "x-typespec-name": "Azure.Core.Foundations.ErrorResponse[]",
           "readOnly": true
         },
         "diagnosticsInfo": {
@@ -1223,8 +1220,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "x-typespec-name": "int32[]",
-          "description": "Number of passes of the entire training dataset that the\nalgorithm has completed."
+          "description": "Number of passes of the entire training dataset that the\nalgorithm has completed.",
+          "x-typespec-name": "int32[]"
         },
         "trainLosses": {
           "type": "array",
@@ -1232,8 +1229,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "List of metrics used to assess how the model fits the training data for each\nepoch."
+          "description": "List of metrics used to assess how the model fits the training data for each\nepoch.",
+          "x-typespec-name": "float32[]"
         },
         "validationLosses": {
           "type": "array",
@@ -1241,16 +1238,16 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "List of metrics used to assess how the model fits the validation set for each\nepoch."
+          "description": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
+          "x-typespec-name": "float32[]"
         },
         "latenciesInSeconds": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Multivariate.float32Duration"
           },
-          "x-typespec-name": "Multivariate.float32Duration[]",
-          "description": "Latency for each epoch."
+          "description": "Latency for each epoch.",
+          "x-typespec-name": "Multivariate.float32Duration[]"
         }
       },
       "description": "Model state."
@@ -1338,8 +1335,8 @@
             "type": "string",
             "format": "date-time"
           },
-          "x-typespec-name": "utcDateTime[]",
-          "description": "Time stamps of the last detection request."
+          "description": "Time stamps of the last detection request.",
+          "x-typespec-name": "utcDateTime[]"
         },
         "values": {
           "type": "array",
@@ -1347,8 +1344,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "Values of variables."
+          "description": "Values of variables.",
+          "x-typespec-name": "float32[]"
         }
       },
       "description": "Variable values.",
@@ -1379,8 +1376,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1390,13 +1387,12 @@
       "description": "Error response.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Multivariate.float32Duration": {
       "type": "number",
-      "format": "seconds"
+      "format": "float"
     },
     "Univariate.AnomalyDetectorError": {
       "type": "object",
@@ -1486,8 +1482,8 @@
             "$ref": "#/definitions/Univariate.UnivariateTimeSeriesPoint"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Univariate.UnivariateTimeSeriesPoint[]",
-          "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the change point detection result."
+          "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the change point detection result.",
+          "x-typespec-name": "Univariate.UnivariateTimeSeriesPoint[]"
         },
         "granularity": {
           "$ref": "#/definitions/Univariate.UnivariateTimeGranularity",
@@ -1534,8 +1530,8 @@
           "items": {
             "type": "boolean"
           },
-          "x-typespec-name": "boolean[]",
-          "description": "Change point properties for each input point. True means\nan anomaly (either negative or positive) has been detected. The index of the\narray is consistent with the input series."
+          "description": "Change point properties for each input point. True means\nan anomaly (either negative or positive) has been detected. The index of the\narray is consistent with the input series.",
+          "x-typespec-name": "boolean[]"
         },
         "confidenceScores": {
           "type": "array",
@@ -1543,8 +1539,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "Change point confidence of each point."
+          "description": "Change point confidence of each point.",
+          "x-typespec-name": "float32[]"
         }
       },
       "description": "Response of change point detection."
@@ -1558,8 +1554,8 @@
             "$ref": "#/definitions/Univariate.UnivariateTimeSeriesPoint"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Univariate.UnivariateTimeSeriesPoint[]",
-          "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there's a duplicated time stamp, the API won't work. In such\na case, an error message is returned."
+          "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there's a duplicated time stamp, the API won't work. In such\na case, an error message is returned.",
+          "x-typespec-name": "Univariate.UnivariateTimeSeriesPoint[]"
         },
         "granularity": {
           "$ref": "#/definitions/Univariate.UnivariateTimeGranularity",
@@ -1614,8 +1610,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "Expected value for each input point. The index of the\narray is consistent with the input series."
+          "description": "Expected value for each input point. The index of the\narray is consistent with the input series.",
+          "x-typespec-name": "float32[]"
         },
         "upperMargins": {
           "type": "array",
@@ -1623,8 +1619,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "Upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which is equal to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in the response can be filtered by\nupperBoundary and lowerBoundary. Adjusting the marginScale value can help filter less\nsignificant anomalies on the client side. The index of the array is\nconsistent with the input series."
+          "description": "Upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which is equal to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in the response can be filtered by\nupperBoundary and lowerBoundary. Adjusting the marginScale value can help filter less\nsignificant anomalies on the client side. The index of the array is\nconsistent with the input series.",
+          "x-typespec-name": "float32[]"
         },
         "lowerMargins": {
           "type": "array",
@@ -1632,32 +1628,32 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "Lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which is equal to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones on the client side. The index of the array is consistent with the input\nseries."
+          "description": "Lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which is equal to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones on the client side. The index of the array is consistent with the input\nseries.",
+          "x-typespec-name": "float32[]"
         },
         "isAnomaly": {
           "type": "array",
           "items": {
             "type": "boolean"
           },
-          "x-typespec-name": "boolean[]",
-          "description": "Anomaly properties for each input point. True means an\nanomaly (either negative or positive) has been detected. The index of the array\nis consistent with the input series."
+          "description": "Anomaly properties for each input point. True means an\nanomaly (either negative or positive) has been detected. The index of the array\nis consistent with the input series.",
+          "x-typespec-name": "boolean[]"
         },
         "isNegativeAnomaly": {
           "type": "array",
           "items": {
             "type": "boolean"
           },
-          "x-typespec-name": "boolean[]",
-          "description": "Anomaly status in a negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series."
+          "description": "Anomaly status in a negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
+          "x-typespec-name": "boolean[]"
         },
         "isPositiveAnomaly": {
           "type": "array",
           "items": {
             "type": "boolean"
           },
-          "x-typespec-name": "boolean[]",
-          "description": "Anomaly status in a positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series."
+          "description": "Anomaly status in a positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
+          "x-typespec-name": "boolean[]"
         },
         "severity": {
           "type": "array",
@@ -1665,8 +1661,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
-          "description": "Severity score for each input point. The larger the value is, the more\nsevere the anomaly is. For normal points, the severity is always 0."
+          "description": "Severity score for each input point. The larger the value is, the more\nsevere the anomaly is. For normal points, the severity is always 0.",
+          "x-typespec-name": "float32[]"
         }
       },
       "description": "Response of the entire anomaly detection.",

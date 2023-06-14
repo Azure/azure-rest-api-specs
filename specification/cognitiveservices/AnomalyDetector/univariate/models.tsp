@@ -20,17 +20,17 @@ enum ImputeMode {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum AnomalyDetectorErrorCodes {
-  "InvalidCustomInterval",
-  "BadArgument",
-  "InvalidGranularity",
-  "InvalidPeriod",
-  "InvalidModelArgument",
-  "InvalidSeries",
-  "InvalidJsonFormat",
-  "RequiredGranularity",
-  "RequiredSeries",
-  "InvalidImputeMode",
-  "InvalidImputeFixedValue",
+  InvalidCustomInterval,
+  BadArgument,
+  InvalidGranularity,
+  InvalidPeriod,
+  InvalidModelArgument,
+  InvalidSeries,
+  InvalidJsonFormat,
+  RequiredGranularity,
+  RequiredSeries,
+  InvalidImputeMode,
+  InvalidImputeFixedValue,
 }
 
 enum UnivariateTimeGranularity {
@@ -175,7 +175,7 @@ severe the anomaly is. For normal points, the severity is always 0.
 model AnomalyDetectorError {
   @header("x-ms-error-code")
   @doc("Error code.")
-  msErrorCode: string,
+  msErrorCode: string;
 
   @doc("Error code.")
   code: AnomalyDetectorErrorCodes;

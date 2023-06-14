@@ -43,10 +43,13 @@ enum MultivariateAlignMode {
 enum MultivariateModelStatus {
   @doc("The model has been created. Training has been scheduled but not yet started.")
   Created: "CREATED",
+
   @doc("The model is being trained.")
   Running: "RUNNING",
+
   @doc("The model has been trained and is ready to be used for anomaly detection.")
   Ready: "READY",
+
   @doc("The model training failed.")
   Failed: "FAILED",
 }
@@ -74,6 +77,7 @@ model MultivariateBatchDetectionResultSummary {
 
   @doc("Error message when detection fails.")
   errors?: ErrorResponse[];
+
   @doc("Variable status.")
   variableStates?: MultivariateVariableState[];
 
@@ -142,6 +146,7 @@ be in ISO 8601 format.
 model AnomalyState {
   @doc("Time stamp for this anomaly.")
   timestamp: utcDateTime;
+
   @doc("Detailed value of this anomalous time stamp.")
   value?: DataPointDetails;
 
@@ -168,6 +173,7 @@ Raw anomaly score of severity, to help indicate the degree of abnormality.
   @minValue(0.0)
   @maxValue(2.0)
   score: float32;
+
   @doc("Interpretation of this anomalous time stamp.")
   interpretation?: AnomalyInterpretation[];
 }
@@ -182,6 +188,7 @@ This score shows the percentage that contributes to the anomalous time stamp. It
 number between 0 and 1.
 """)
   contributionScore?: float32;
+
   @doc("Correlation changes among the anomalous variables.")
   correlationChanges?: CorrelationChanges;
 }
@@ -371,7 +378,6 @@ model MultivariateVariableValue {
   @doc("Values of variables.")
   values: float32[];
 }
-
 
 @doc("Results of the last detection.")
 model MultivariateLastDetectionResult {
