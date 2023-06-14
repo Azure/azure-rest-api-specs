@@ -1,27 +1,27 @@
 {
   "parameters": {
     "api-version": "2023-01-01-preview",
-    "CloudServiceResourceName": "myResourceName",
+    "CloudServiceResourceName": "targetResourceName",
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "parameters": {
-      "tags": {
-        "additionalProp1": "string"
-      },
-      "properties": {
-        "autoRenew": "On",
-        "renewalTerm": {
-          "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
-          "quantity": 9
+      "sourceResources": [
+        {
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/sourceResourceName1",
+          "quantity": 10
+        },
+        {
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/sourceResourceName2",
+          "quantity": 5
         }
-      }
+      ]
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/myResourceName",
-        "name": "myResourceName",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/targetResourceName",
+        "name": "targetResourceName",
         "location": "westus",
         "type": "Microsoft.SaaSHub/CloudServices",
         "tags": {
@@ -31,23 +31,17 @@
           "autoRenew": "On",
           "productType": "Microsoft 365 E5",
           "provisioningState": "Succeeded",
-          "quantity": 20,
+          "quantity": 25,
           "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
           "skuDescription": "Microsoft 365 E5",
           "systemOverrides": {
             "cancellationAllowedEndDate": "2022-05-06T07:54:48-07:00"
           },
-          "renewalTerm": {
-            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
-            "quantity": 9,
-            "billingFrequency": "P1Y",
-            "termUnit": "P3Y"
-          },
           "term": {
             "billingFrequency": "P1M",
             "termUnit": "P1Y",
             "startDate": "2022-04-28T17:00:00-07:00",
-            "endDate": "2023-04-27T17:00:00-07:00"
+            "endDate": "2023-05-27T17:00:00-07:00"
           },
           "status": "Active"
         }
