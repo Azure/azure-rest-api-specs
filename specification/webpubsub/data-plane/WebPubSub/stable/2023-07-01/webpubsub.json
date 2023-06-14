@@ -36,7 +36,7 @@
         }
       }
     },
-    "/api/hubs/{hub}/:addToGroup": {
+    "/api/hubs/{hub}/:addToGroups": {
       "post": {
         "tags": [
           "webpubsub"
@@ -73,7 +73,7 @@
             "name": "message",
             "description": "Target groups and connection filter.",
             "schema": {
-              "$ref": "#/definitions/MultiGroupJoinRequest"
+              "$ref": "#/definitions/AddToGroupsRequest"
             }
           }
         ],
@@ -262,7 +262,113 @@
         }
       }
     },
-    "/api/hubs/{hub}/:removeFromGroup": {
+    "/api/hubs/{hub}/:invoke": {
+      "post": {
+        "tags": [
+          "webpubsub"
+        ],
+        "summary": "Send content inside request body to a group of connections and wait for acknowledgement.",
+        "operationId": "WebPubSub_GroupInvoke",
+        "consumes": [
+          "application/octet-stream",
+          "text/plain",
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "query",
+            "name": "group",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "in": "query",
+            "name": "excluded",
+            "description": "Excluded connection Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The version of the REST APIs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "message",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "messageTtlSeconds",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300,
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "x-ms-error-response": true,
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_GroupInvoke": {
+            "$ref": "./examples/WebPubSub_GroupInvoke.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/:removeFromGroups": {
       "post": {
         "tags": [
           "webpubsub"
@@ -299,7 +405,7 @@
             "name": "message",
             "description": "Target groups and connection filter.",
             "schema": {
-              "$ref": "#/definitions/MultiGroupLeaveRequest"
+              "$ref": "#/definitions/RemoveFromGroupsRequest"
             }
           }
         ],
@@ -818,113 +924,6 @@
         "x-ms-examples": {
           "WebPubSub_CloseGroupConnections": {
             "$ref": "./examples/WebPubSub_CloseGroupConnections.json"
-          }
-        }
-      }
-    },
-    "/api/hubs/{hub}/groups/{group}/:invoke": {
-      "post": {
-        "tags": [
-          "webpubsub"
-        ],
-        "summary": "Send content inside request body to a group of connections and wait for acknowledgement.",
-        "operationId": "WebPubSub_GroupInvoke",
-        "consumes": [
-          "application/octet-stream",
-          "text/plain",
-          "application/json"
-        ],
-        "produces": [
-          "application/json",
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
-            "required": true,
-            "type": "string",
-            "maxLength": 1024,
-            "minLength": 1,
-            "pattern": "^(?!\\s+$).+$"
-          },
-          {
-            "in": "query",
-            "name": "excluded",
-            "description": "Excluded connection Ids",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "in": "query",
-            "name": "messageTtlSeconds",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
-            "type": "integer",
-            "format": "int32",
-            "maximum": 300,
-            "minimum": 0
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The version of the REST APIs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "message",
-            "description": "The payload body.",
-            "required": true,
-            "schema": {
-              "format": "binary",
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "Following OData filter syntax to filter out the subscribers receiving the messages.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "format": "binary",
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "Error response",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetail"
-            },
-            "x-ms-error-response": true,
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WebPubSub_GroupInvoke": {
-            "$ref": "./examples/WebPubSub_GroupInvoke.json"
           }
         }
       }
@@ -1828,6 +1827,21 @@
     }
   },
   "definitions": {
+    "AddToGroupsRequest": {
+      "description": "The request object containing targets groups and connection filter",
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "connectionFilter": {
+          "type": "string"
+        }
+      }
+    },
     "ClientTokenResponse": {
       "description": "The response object containing the token for the client",
       "type": "object",
@@ -1878,22 +1892,7 @@
         }
       }
     },
-    "MultiGroupJoinRequest": {
-      "description": "The request object containing targets groups and connection filter",
-      "type": "object",
-      "properties": {
-        "groups": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "connectionFilter": {
-          "type": "string"
-        }
-      }
-    },
-    "MultiGroupLeaveRequest": {
+    "RemoveFromGroupsRequest": {
       "description": "The request object containing targets groups and connection filter",
       "type": "object",
       "properties": {
