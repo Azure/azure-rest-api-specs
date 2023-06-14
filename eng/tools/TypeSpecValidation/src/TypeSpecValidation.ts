@@ -32,6 +32,16 @@ async function main() {
     const args = process.argv.slice(2);
     const folder = args[0];
     console.log("Running TypeSpecValidation on folder:", folder);
+
+    // Verify all specs are using root level pacakge.json
+    let expected_npm_prefix = process.env.PWD.trim()
+    const actual_npm_prefix = (await runCmd(`npm prefix`, folder)).trim()
+    if (expected_npm_prefix !== actual_npm_prefix) {
+        console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.")
+        throw new Error ("Expected npm prefix: " + expected_npm_prefix +"\nActual npm prefix: " + actual_npm_prefix)
+    }
+
+    // Spec compilation check
     if (fs.existsSync(path.join(folder, "main.tsp"))) {
         const output = await runCmd(
             `npx --no tsp compile . --warn-as-error`,
@@ -45,19 +55,13 @@ async function main() {
         );
     }
 
-    let expected_npm_prefix = process.env.PWD.trim()
-    const actual_npm_prefix = (await runCmd(`npm prefix`, folder)).trim()
-    if (expected_npm_prefix !== actual_npm_prefix) {
-        console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.")
-        throw new Error ("Expected npm prefix: " + expected_npm_prefix +"\nActual npm prefix: " + actual_npm_prefix)
-    }
-
     // Format parent folder to include shared files
     const output = await runCmd(
         `npx tsp format ../**/*.tsp`,
         folder
     );
 
+    // Verify generated swagger file is in sync with one on disk
     const git = simpleGit();
     let gitStatusIsClean = await (await git.status(['--porcelain'])).isClean()
     if (!gitStatusIsClean) {
