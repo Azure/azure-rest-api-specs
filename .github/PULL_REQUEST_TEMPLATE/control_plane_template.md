@@ -36,7 +36,7 @@ follow the process outlined in the [High-level Breaking Change Process doc](http
       
 ## Getting help
 
-- For general guidance on the spec PR review process, see https://aka.ms/specprreview and [FAQ](https://aka.ms/faqinprreview).
+- For general guidance on the spec PR review process, see https://aka.ms/specprreview
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.
 - For help adding new API version using OpenAPI Hub, see [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).
