@@ -456,9 +456,12 @@
     "BlobStorageTokenStore": {
       "description": "The configuration settings of the storage of the tokens if blob storage is used.",
       "type": "object",
+      "required": [
+        "sasUrlSettingName"
+      ],
       "properties": {
         "sasUrlSettingName": {
-          "description": "The name of the app setting containing the SAS URL of the blob storage containing the tokens.",
+          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens.",
           "type": "string"
         }
       }
