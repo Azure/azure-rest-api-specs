@@ -2087,9 +2087,7 @@
     "DistributionMode": {
       "description": "Abstract base class for defining a distribution mode",
       "required": [
-        "kind",
-        "maxConcurrentOffers",
-        "minConcurrentOffers"
+        "kind"
       ],
       "type": "object",
       "properties": {
@@ -3168,7 +3166,7 @@
       "properties": {
         "batchSize": {
           "format": "int32",
-          "description": "(Optional) Set batch size when AllowScoringBatchOfWorkers is set to true",
+          "description": "(Optional) Set batch size when AllowScoringBatchOfWorkers is set to true. Defaults to 20 if not configured.",
           "type": "integer"
         },
         "scoringParameters": {
