@@ -33,5 +33,5 @@ interface TrialMatcher {
     "./examples/SuccessfulTrialMatcherRequest.json",
     "SuccessfulTrialMatcherAnalyzeRequest"
   )
-  createJob is LongRunningRpcOperation<TrialMatcherData, TrialMatcherResult>;
+  createJob is TLongRunningRpcOperation<TrialMatcherData, TrialMatcherResult>;
 }
