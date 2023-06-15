@@ -118,6 +118,16 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-01'
 input-file:
+- Microsoft.EventGrid/stable/2018-01-01/TypespecEventGrid.json
+```
+
+### Tag: package-2023-06-01-preview
+
+These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-01-preview'
+input-file:
+- Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
 - Microsoft.Storage/stable/2018-01-01/Storage.json
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
@@ -139,17 +149,6 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
-
-```
-
-### Tag: package-2023-06-01-preview
-
-These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-06-01-preview'
-input-file:
-- Microsoft.EventGrid/stable/2018-01-01/TypespecEventGrid.json
-- Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
 ```
 
 ### Suppression
