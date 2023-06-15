@@ -67,7 +67,7 @@
           },
           {
             "in": "body",
-            "name": "message",
+            "name": "groupsToAdd",
             "description": "Target groups and connection filter.",
             "required": true,
             "schema": {
@@ -291,7 +291,7 @@
           },
           {
             "in": "body",
-            "name": "message",
+            "name": "groupsToRemove",
             "description": "Target groups and connection filter.",
             "required": true,
             "schema": {
@@ -384,7 +384,7 @@
           {
             "in": "query",
             "name": "messageTtlSeconds",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "type": "integer",
             "format": "int32",
             "maximum": 300,
@@ -589,7 +589,7 @@
           {
             "in": "query",
             "name": "messageTtlSeconds",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "type": "integer",
             "format": "int32",
             "maximum": 300,
@@ -888,7 +888,7 @@
           {
             "in": "query",
             "name": "messageTtlSeconds",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "type": "integer",
             "format": "int32",
             "maximum": 300,
@@ -1485,7 +1485,7 @@
           {
             "in": "query",
             "name": "messageTtlSeconds",
-            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited.",
             "type": "integer",
             "format": "int32",
             "maximum": 300,
@@ -1728,7 +1728,7 @@
             "type": "string"
           }
         },
-        "connectionFilter": {
+        "filter": {
           "description": "An OData filter which target connnections satisfy",
           "type": "string"
         }
@@ -1795,7 +1795,7 @@
             "type": "string"
           }
         },
-        "connectionFilter": {
+        "filter": {
           "description": "An OData filter which target connnections satisfy",
           "type": "string"
         }
