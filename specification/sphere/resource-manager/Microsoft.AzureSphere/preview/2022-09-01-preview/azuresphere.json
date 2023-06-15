@@ -3040,7 +3040,19 @@
       ],
       "x-ms-enum": {
         "name": "AllowCrashDumpCollection",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Crash dump collection enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Crash dump collection disabled"
+          }
+        ]
       }
     },
     "CapabilityType": {
@@ -3052,7 +3064,19 @@
       ],
       "x-ms-enum": {
         "name": "CapabilityType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApplicationDevelopment",
+            "value": "ApplicationDevelopment",
+            "description": "Application development capability"
+          },
+          {
+            "name": "FieldServicing",
+            "value": "FieldServicing",
+            "description": "Field servicing capability"
+          }
+        ]
       }
     },
     "Catalog": {
@@ -3231,7 +3255,29 @@
       ],
       "x-ms-enum": {
         "name": "CertificateStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Certificate is active"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Certificate is inactive"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Certificate has expired"
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "Certificate has been revoked"
+          }
+        ]
       }
     },
     "ClaimDevicesRequest": {
@@ -3794,7 +3840,129 @@
       ],
       "x-ms-enum": {
         "name": "ImageType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidImageType",
+            "value": "InvalidImageType",
+            "description": "Invalid image."
+          },
+          {
+            "name": "OneBl",
+            "value": "OneBl",
+            "description": "One Bl image type"
+          },
+          {
+            "name": "PlutonRuntime",
+            "value": "PlutonRuntime",
+            "description": "Pluton image type"
+          },
+          {
+            "name": "WifiFirmware",
+            "value": "WifiFirmware",
+            "description": "Wifi firmware image type"
+          },
+          {
+            "name": "SecurityMonitor",
+            "value": "SecurityMonitor",
+            "description": "Security monitor image type"
+          },
+          {
+            "name": "NormalWorldLoader",
+            "value": "NormalWorldLoader",
+            "description": "Normal world loader image type"
+          },
+          {
+            "name": "NormalWorldDtb",
+            "value": "NormalWorldDtb",
+            "description": "Normal world dtb image type"
+          },
+          {
+            "name": "NormalWorldKernel",
+            "value": "NormalWorldKernel",
+            "description": "Normal world kernel image type"
+          },
+          {
+            "name": "RootFs",
+            "value": "RootFs",
+            "description": "Root FS image type"
+          },
+          {
+            "name": "Services",
+            "value": "Services",
+            "description": "Services image type"
+          },
+          {
+            "name": "Applications",
+            "value": "Applications",
+            "description": "Applications image type"
+          },
+          {
+            "name": "FwConfig",
+            "value": "FwConfig",
+            "description": "FW config image type"
+          },
+          {
+            "name": "BootManifest",
+            "value": "BootManifest",
+            "description": "Boot manifest image type"
+          },
+          {
+            "name": "Nwfs",
+            "value": "Nwfs",
+            "description": "Nwfs image type"
+          },
+          {
+            "name": "TrustedKeystore",
+            "value": "TrustedKeystore",
+            "description": "Trusted key store image type"
+          },
+          {
+            "name": "Policy",
+            "value": "Policy",
+            "description": "Policy image type"
+          },
+          {
+            "name": "CustomerBoardConfig",
+            "value": "CustomerBoardConfig",
+            "description": "Customer board config image type"
+          },
+          {
+            "name": "UpdateCertStore",
+            "value": "UpdateCertStore",
+            "description": "Update certstore image type"
+          },
+          {
+            "name": "BaseSystemUpdateManifest",
+            "value": "BaseSystemUpdateManifest",
+            "description": "Base system update manifest image type"
+          },
+          {
+            "name": "FirmwareUpdateManifest",
+            "value": "FirmwareUpdateManifest",
+            "description": "Firmware update manifest image type"
+          },
+          {
+            "name": "CustomerUpdateManifest",
+            "value": "CustomerUpdateManifest",
+            "description": "Customer update manifest image type"
+          },
+          {
+            "name": "RecoveryManifest",
+            "value": "RecoveryManifest",
+            "description": "Recovery manifest image type"
+          },
+          {
+            "name": "ManifestSet",
+            "value": "ManifestSet",
+            "description": "manifest set image type"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other image type"
+          }
+        ]
       }
     },
     "ImageUploadRequestBody": {
@@ -3829,7 +3997,19 @@
       ],
       "x-ms-enum": {
         "name": "OSFeedType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Retail",
+            "value": "Retail",
+            "description": "Retail OS feed type."
+          },
+          {
+            "name": "RetailEval",
+            "value": "RetailEval",
+            "description": "Retail evaluation OS feed type."
+          }
+        ]
       }
     },
     "PagedDeviceInsight": {
@@ -3962,6 +4142,7 @@
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Provisioning state of the resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -3992,19 +4173,23 @@
           },
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The resource is being updated"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The resource is being deleted"
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
           }
         ]
       }
@@ -4018,7 +4203,19 @@
       ],
       "x-ms-enum": {
         "name": "RegionalDataBoundary",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No data boundary"
+          },
+          {
+            "name": "EU",
+            "value": "EU",
+            "description": "EU data boundary"
+          }
+        ]
       }
     },
     "SignedCapabilityImageResponse": {
@@ -4041,7 +4238,19 @@
       ],
       "x-ms-enum": {
         "name": "UpdatePolicy",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UpdateAll",
+            "value": "UpdateAll",
+            "description": "Update all policy."
+          },
+          {
+            "name": "No3rdPartyAppUpdates",
+            "value": "No3rdPartyAppUpdates",
+            "description": "No update for 3rd party app policy."
+          }
+        ]
       }
     }
   },

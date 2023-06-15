@@ -27,7 +27,7 @@ model Product is ProxyResource<ProductProperties> {
 
 interface ProxyResourceOperationsProducts<
   TResource extends ArmResource,
-  TListParameters extends object = {}
+  TListParameters extends {} = {}
 >
   extends ResourceListByParent<
       TResource,

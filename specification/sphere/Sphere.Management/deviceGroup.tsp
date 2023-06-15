@@ -28,7 +28,7 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
 
 interface ProxyResourceOperationsDeviceGroups<
   TResource extends ArmResource,
-  TListParameters extends object = {}
+  TListParameters extends {} = {}
 > {
   @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
   list is ArmResourceListByParent<
@@ -107,13 +107,17 @@ model DeviceGroupProperties {
 
 @doc("OS feed type values.")
 enum OSFeedType {
+  /** Retail OS feed type. */
   Retail,
+  /** Retail evaluation OS feed type. */
   RetailEval,
 }
 
 @doc("Update policy values.")
 enum UpdatePolicy {
+  /** Update all policy. */
   UpdateAll,
+  /** No update for 3rd party app policy. */
   No3rdPartyAppUpdates,
 }
 

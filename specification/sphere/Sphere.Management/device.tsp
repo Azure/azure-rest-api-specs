@@ -29,7 +29,7 @@ model Device is ProxyResource<DeviceProperties> {
 
 interface ProxyResourceOperationsDevice<
   TResource extends ArmResource,
-  TListParameters extends object = {}
+  TListParameters extends {} = {}
 > {
   @doc("Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.")
   get is ArmResourceRead<Device>;
@@ -114,7 +114,10 @@ model SignedCapabilityImageResponse {
 
 @doc("Capability image type")
 enum CapabilityType {
+  /** Application development capability */
   ApplicationDevelopment,
+  
+  /** Field servicing capability */
   FieldServicing,
 }
 

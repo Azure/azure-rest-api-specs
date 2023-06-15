@@ -18,32 +18,45 @@ namespace Microsoft.AzureSphere;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 // Common models
+/** Provisioning state of the resource. */
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
+  /** The resource is being provisioned */
   Provisioning,
+  /** The resource is being updated */
   Updating,
+  /** The resource is being deleted */
   Deleting,
+  /** The resource create request has been accepted */
   Accepted,
 }
 
 @doc("Regional data boundary values.")
 enum RegionalDataBoundary {
+  /** No data boundary */
   None,
+  /** EU data boundary */
   EU,
 }
 
 @doc("Allow crash dumps values.")
 enum AllowCrashDumpCollection {
+  /** Crash dump collection enabled */
   Enabled,
+  /** Crash dump collection disabled */
   Disabled,
 }
 
 @doc("Certificate status values.")
 enum CertificateStatus {
+  /** Certificate is active */
   Active,
+  /** Certificate is inactive */
   Inactive,
+  /** Certificate has expired */
   Expired,
+  /** Certificate has been revoked */
   Revoked,
 }
 
@@ -99,7 +112,7 @@ alias ListQueryParameters = {
 // Templates
 interface ProxyResourceOperationsReadList<
   TResource extends ArmResource,
-  TListParameters extends object = {}
+  TListParameters extends {} = {}
 >
   extends Azure.ResourceManager.ResourceRead<TResource>,
     ResourceListByParent<
@@ -109,7 +122,7 @@ interface ProxyResourceOperationsReadList<
 
 interface ProxyResourceOperationsReadListCreateDelete<
   TResource extends ArmResource,
-  TListParameters extends object = {}
+  TListParameters extends {} = {}
 >
   extends Azure.ResourceManager.ResourceRead<TResource>,
     ResourceListByParent<
@@ -135,7 +148,7 @@ interface CustomUpdateOperations {
   @patch
   ArmCustomPatchAsyncWithLocation<
     TResource extends ArmResource,
-    TPatchModel extends object = TagsUpdateModel<TResource>,
+    TPatchModel extends TagsUpdateModel<TResource>,
     TBaseParameters = BaseParameters<TResource>
   >(
     ...ResourceInstanceParameters<TResource, TBaseParameters>,
@@ -148,7 +161,7 @@ interface CustomUpdateOperations {
 
 alias CustomArmResourcePatchAsync<
   TResource extends ArmResource,
-  TProperties extends object,
+  TProperties extends {},
   TBaseParameters = BaseParameters<TResource>
 > = CustomUpdateOperations.ArmCustomPatchAsyncWithLocation<
   TResource,

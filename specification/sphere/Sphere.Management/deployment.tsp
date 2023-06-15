@@ -26,7 +26,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
 
 interface ProxyResourceOperationsDeployments<
   TResource extends ArmResource,
-  TListParameters extends object = {}
+  TListParameters extends {} = {}
 > {
   @doc("Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   get is ArmResourceRead<Deployment>;
