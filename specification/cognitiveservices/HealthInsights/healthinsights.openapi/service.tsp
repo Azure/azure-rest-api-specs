@@ -1,4 +1,8 @@
-// imports to rest,http and versioning should be done outside of this file (csharp emitter issue)
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -21,6 +25,6 @@ namespace AzureHealthInsights;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2023_03_01_preview: "2023-03-01-preview",
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_03_01_preview: "2023-03-01-preview"
 }
