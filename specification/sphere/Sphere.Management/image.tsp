@@ -112,7 +112,7 @@ enum ImageType {
   Policy,
   /** Customer board config image type */
   CustomerBoardConfig,
-  /** Update certstore image type */
+  /** Update certificate store image type */
   UpdateCertStore,
   /** Base system update manifest image type */
   BaseSystemUpdateManifest,
