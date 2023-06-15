@@ -255,7 +255,7 @@ namespace EventGrid {
       @header("content-type")
       contentType: "application/json";
 
-      @doc("AcknowledgeOptions.")
+      @doc("Acknowledge Options model containing an array of lock token strings for the corresponding received Cloud Events to be acknowledged.")
       @body
       lockTokens: AcknowledgeOptions;
     },
@@ -274,7 +274,7 @@ namespace EventGrid {
       @header("content-type")
       contentType: "application/json";
 
-      @doc("ReleaseOptions")
+      @doc("Release Options model containing an array of lock token strings for the corresponding received Cloud Events to be released.")
       @body
       lockTokens: ReleaseOptions;
     },
@@ -293,7 +293,7 @@ namespace EventGrid {
       @header("content-type")
       contentType: "application/json";
 
-      @doc("RejectOptions")
+      @doc("Reject Options model containing an array of lock token strings for the corresponding received Cloud Events to be rejected.")
       @body
       lockTokens: RejectOptions;
     },
