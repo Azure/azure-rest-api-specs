@@ -425,7 +425,6 @@ interface Volumes {
   delete is ArmResourceDeleteAsync<Volume>;
   update is ArmResourcePatchAsync<Volume, VolumeProperties>;
   listByResourceGroup is ArmResourceListByParent<Volume>;
-  listBySubscription is ArmListBySubscription<Volume>;
 }
 
 @armResourceOperations
@@ -442,5 +441,4 @@ interface VolumeSnapshots {
   )
   update is ArmResourcePatchAsync<VolumeSnapshot, VolumeSnapshotProperties>;
   listByResourceGroup is ArmResourceListByParent<VolumeSnapshot>;
-  listBySubscription is ArmListBySubscription<VolumeSnapshot>;
 }
