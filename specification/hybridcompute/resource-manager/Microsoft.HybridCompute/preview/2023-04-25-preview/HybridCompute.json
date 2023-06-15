@@ -2416,40 +2416,8 @@
           "description": "Specifies the version of the script handler."
         },
         "status": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The status code."
-            },
-            "level": {
-              "type": "string",
-              "description": "The level code.",
-              "enum": [
-                "Info",
-                "Warning",
-                "Error"
-              ],
-              "x-ms-enum": {
-                "name": "StatusLevelTypes",
-                "modelAsString": true
-              }
-            },
-            "displayStatus": {
-              "type": "string",
-              "description": "The short localizable label for the status."
-            },
-            "message": {
-              "type": "string",
-              "description": "The detailed status message, including for alerts and error messages."
-            },
-            "time": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The time of the status."
-            }
-          },
-          "description": "Instance view status."
+          "$ref": "#/definitions/ExtensionsResourceStatus",
+          "type": "object"
         }
       },
       "description": "Describes the Machine Extension Instance View."
@@ -3247,7 +3215,7 @@
         "statuses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExtensionsResourceInstanceView"
+            "$ref": "#/definitions/ExtensionsResourceStatus"
           },
           "x-ms-identifiers": [],
           "description": "The  status information."
@@ -3313,7 +3281,7 @@
       },
       "description": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
     },
-    "ExtensionsResourceInstanceView": {
+    "ExtensionsResourceStatus": {
       "properties": {
         "code": {
           "type": "string",
@@ -3323,7 +3291,7 @@
           "type": "string",
           "description": "The level code.",
           "enum": [
-            "Information",
+            "Info",
             "Warning",
             "Error"
           ],
