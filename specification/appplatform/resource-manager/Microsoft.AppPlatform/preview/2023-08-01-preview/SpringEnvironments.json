@@ -329,6 +329,368 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/default": {
+      "get": {
+        "tags": [
+          "ConfigServers"
+        ],
+        "summary": "Get the config server and its properties.",
+        "description": "Operation to get the config server and its properties.",
+        "operationId": "ConfigServers_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Config Servers": {
+            "$ref": "./examples/v2/SpringMiddlewares/ConfigServers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfigServers"
+        ],
+        "summary": "Create or update the config server middleware.",
+        "description": "Operation to create or update the config server.",
+        "operationId": "ConfigServers_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigServerEnvelopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServer"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Config Servers": {
+            "$ref": "./examples/v2/SpringMiddlewares/ConfigServers_UpdatePut.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ConfigServers"
+        ],
+        "summary": "Update the config server middleware.",
+        "description": "Operation to update the config server.",
+        "operationId": "ConfigServers_UpdatePatch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigServerEnvelopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServer"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": ".#/definitions/ConfigServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Config Servers": {
+            "$ref": "./examples/v2/SpringMiddlewares/ConfigServers_UpdatePatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/validate": {
+      "post": {
+        "tags": [
+          "ConfigServers"
+        ],
+        "summary": "Validate the config server middleware settings.",
+        "description": "Check if the config server settings are valid.",
+        "operationId": "ConfigServers_Validate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigServerSettingsParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the validation result of Config Server.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the ConfigServerSetting is validating.",
+            "schema": {
+              "$ref": "#/definitions/ConfigServerSettingsValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Validate Config Servers": {
+            "$ref": "./examples/v2/SpringMiddlewares/ConfigServers_Validate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/eurekaServers/default": {
+      "get": {
+        "tags": [
+          "EurekaServers"
+        ],
+        "summary": "Get the eureka server middleware settings.",
+        "description": "Get the eureka server settings.",
+        "operationId": "EurekaServers_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding eureka server settings.",
+            "schema": {
+              "$ref": "#/definitions/EurekaServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Eureka Servers": {
+            "$ref": "./examples/v2/SpringMiddlewares/EurekaServers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EurekaServers"
+        ],
+        "summary": "Create or update the eureka server settings.",
+        "description": "The operation to create or update the eureka server settings.",
+        "operationId": "EurekaServers_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EurekaServerEnvelopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated eureka server settings.",
+            "schema": {
+              "$ref": "#/definitions/EurekaServer"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the exiting eureka server settings are now updating and contain a Azure-AsyncOperation\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/EurekaServer"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update Eureka Servers": {
+            "$ref": "./examples/v2/SpringMiddlewares/EurekaServers_UpdatePut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EurekaServers"
+        ],
+        "summary": "Update the eureka server settings.",
+        "description": "The operation to update the eureka server settings.",
+        "operationId": "EurekaServers_UpdatePatch",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EurekaServerEnvelopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated eureka server settings.",
+            "schema": {
+              "$ref": "#/definitions/EurekaServer"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting eureka server settings are now updating and contain a Location\r\nheader to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/EurekaServer"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update Eureka Servers": {
+            "$ref": "./examples/v2/SpringMiddlewares/EurekaServers_UpdatePatch.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -412,6 +774,290 @@
           }
         }
       }
+    },
+    "ConfigServer": {
+      "description": "Config Server resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Config server git properties payload",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "State of the config server.",
+              "enum": [
+                "NotAvailable",
+                "Deleted",
+                "Failed",
+                "Succeeded",
+                "Updating"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ConfigServerState",
+                "modelAsString": true
+              }
+            },
+            "enabledState": {
+              "type": "string",
+              "description": "Enabled state of the config server. This is only used in Consumption tier.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "ConfigServerEnabledState",
+                "values": [
+                  {
+                    "description": "Enable the config server.",
+                    "value": "Enabled"
+                  },
+                  {
+                    "description": "Disable the config server.",
+                    "value": "Disabled"
+                  }
+                ]
+              }
+            },
+            "configServer": {
+              "$ref": "#/definitions/ConfigServerSettings",
+              "description": "Settings of config server."
+            }
+          }
+        }
+      }
+    },
+    "EurekaServer": {
+      "description": "Eureka server resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Eureka server properties payload",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "State of the eureka server.",
+              "enum": [
+                "Failed",
+                "Succeeded",
+                "Updating",
+                "Canceled"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "EurekaServerState",
+                "modelAsString": true
+              }
+            },
+            "dashboardUri": {
+              "type": "string",
+              "description": "The uri to visit the eureka server dashboard"
+            },
+            "enabledState": {
+              "type": "string",
+              "description": "Enabled state of the eureka server. This is only used in Consumption tier.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true,
+                "name": "EurekaServerEnabledState",
+                "values": [
+                  {
+                    "description": "Enable the eureka server.",
+                    "value": "Enabled"
+                  },
+                  {
+                    "description": "Disable the eureka server.",
+                    "value": "Disabled"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "ConfigServerSettings": {
+      "description": "The settings of config server.",
+      "type": "object",
+      "properties": {
+        "gitProperty": {
+          "$ref": "#/definitions/ConfigServerGitProperty",
+          "description": "Property of git environment."
+        }
+      }
+    },
+    "ConfigServerGitProperty": {
+      "description": "Property of git.",
+      "required": [
+        "uri"
+      ],
+      "type": "object",
+      "properties": {
+        "repositories": {
+          "description": "Repositories of git.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitPatternRepository"
+          }
+        },
+        "uri": {
+          "description": "URI of the repository",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label of the repository",
+          "type": "string"
+        },
+        "searchPaths": {
+          "description": "Searching path of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "description": "Username of git repository basic auth.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password of git repository basic auth.",
+          "type": "string"
+        },
+        "hostKey": {
+          "description": "Public sshKey of git repository.",
+          "type": "string"
+        },
+        "hostKeyAlgorithm": {
+          "description": "SshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "Private sshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "strictHostKeyChecking": {
+          "description": "Strict host key checking or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "GitPatternRepository": {
+      "description": "Git repository property payload for config server",
+      "required": [
+        "name",
+        "uri"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the repository",
+          "type": "string"
+        },
+        "pattern": {
+          "description": "Collection of pattern of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uri": {
+          "description": "URI of the repository",
+          "type": "string"
+        },
+        "label": {
+          "description": "Label of the repository",
+          "type": "string"
+        },
+        "searchPaths": {
+          "description": "Searching path of the repository",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "description": "Username of git repository basic auth.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password of git repository basic auth.",
+          "type": "string"
+        },
+        "hostKey": {
+          "description": "Public sshKey of git repository.",
+          "type": "string"
+        },
+        "hostKeyAlgorithm": {
+          "description": "SshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "Private sshKey algorithm of git repository.",
+          "type": "string"
+        },
+        "strictHostKeyChecking": {
+          "description": "Strict host key checking or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ConfigServerSettingsValidateResult": {
+      "description": "Validation result for config server settings",
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "description": "Indicate if the config server settings are valid",
+          "type": "boolean"
+        },
+        "details": {
+          "description": "The detail validation results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigServerSettingsErrorRecord"
+          }
+        }
+      }
+    },
+    "ConfigServerSettingsErrorRecord": {
+      "description": "Error record of the config server settings",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the config server settings error record",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The uri of the config server settings error record",
+          "type": "string"
+        },
+        "messages": {
+          "description": "The detail error messages of the record",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -438,6 +1084,40 @@
       "required": true,
       "schema": {
         "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+      }
+    },
+    "SpringEnvironmentNameParameter": {
+      "name": "springEnvironmentName",
+      "in": "path",
+      "description": "Name of the Spring Environment.",
+      "required": true,
+      "type": "string"
+    },
+    "ConfigServerEnvelopeParameter": {
+      "name": "configServerResource",
+      "in": "body",
+      "description": "Parameters for the update operation",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ConfigServer"
+      }
+    },
+    "ConfigServerSettingsParameter": {
+      "name": "configServerSettings",
+      "in": "body",
+      "description": "Config server settings to be validated",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ConfigServerSettings"
+      }
+    },
+    "EurekaServerEnvelopeParameter": {
+      "name": "eurekaServerResource",
+      "in": "body",
+      "description": "Parameters for the update operation",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EurekaServer"
       }
     }
   },

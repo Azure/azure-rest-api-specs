@@ -56,7 +56,6 @@ input-file:
   - Microsoft.AppPlatform/preview/2023-08-01-preview/CommonDefinitions.json
   - Microsoft.AppPlatform/preview/2023-08-01-preview/Revisions.json
   - Microsoft.AppPlatform/preview/2023-08-01-preview/SpringEnvironments.json
-  - Microsoft.AppPlatform/preview/2023-08-01-preview/SpringMiddlewares.json
   - Microsoft.AppPlatform/preview/2023-05-01-preview/appplatform.json
 ```
 
