@@ -1239,7 +1239,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1248,6 +1248,7 @@
   "definitions": {
     "AccessMode": {
       "type": "string",
+      "description": "Access mode",
       "enum": [
         "ReadWriteOnce",
         "ReadOnlyMany",
@@ -1256,11 +1257,34 @@
       ],
       "x-ms-enum": {
         "name": "AccessMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadWriteOnce",
+            "value": "ReadWriteOnce",
+            "description": "Read Write Once"
+          },
+          {
+            "name": "ReadOnlyMany",
+            "value": "ReadOnlyMany",
+            "description": "Read Only Many"
+          },
+          {
+            "name": "ReadWriteMany",
+            "value": "ReadWriteMany",
+            "description": "Read Write Many"
+          },
+          {
+            "name": "ReadWriteOncePod",
+            "value": "ReadWriteOncePod",
+            "description": "Shared Read Write Once Pod"
+          }
+        ]
       }
     },
     "AccountTier": {
       "type": "string",
+      "description": "Account Tier",
       "enum": [
         "Invalid",
         "Standard",
@@ -1269,18 +1293,53 @@
       ],
       "x-ms-enum": {
         "name": "AccountTier",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid Account Tier"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Tier"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Tier"
+          },
+          {
+            "name": "Ultra",
+            "value": "Ultra",
+            "description": "Ultra Tier"
+          }
+        ]
       }
     },
     "Action": {
       "type": "string",
+      "description": "Action Enum",
       "enum": [
         "Deny",
         "Allow"
       ],
       "x-ms-enum": {
         "name": "Action",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny Action"
+          },
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow Action"
+          }
+        ]
       }
     },
     "DiskPoolProperties": {
@@ -1357,13 +1416,26 @@
     },
     "DiskType": {
       "type": "string",
+      "description": "Disk Type",
       "enum": [
         "Local",
         "Managed"
       ],
       "x-ms-enum": {
         "name": "DiskType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "Local Disk Type"
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed Disk Type"
+          }
+        ]
       }
     },
     "ElasticSanPoolProperties": {
@@ -1409,12 +1481,20 @@
     },
     "EncryptionType": {
       "type": "string",
+      "description": "Encryption Type",
       "enum": [
         "EncryptionAtRestWithPlatformKey"
       ],
       "x-ms-enum": {
         "name": "EncryptionType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EncryptionAtRestWithPlatformKey",
+            "value": "EncryptionAtRestWithPlatformKey",
+            "description": "Encryption at rest with platform key"
+          }
+        ]
       }
     },
     "EphemeralPoolProperties": {
@@ -1625,6 +1705,7 @@
     },
     "PoolType": {
       "type": "number",
+      "description": "Pool Type",
       "enum": [
         1,
         2,
@@ -1637,19 +1718,23 @@
         "values": [
           {
             "name": "Ephemeral",
-            "value": 1
+            "value": 1,
+            "description": "Ephemeral Pool"
           },
           {
             "name": "Disk",
-            "value": 2
+            "value": 2,
+            "description": "Disk Pool"
           },
           {
             "name": "Managed",
-            "value": 3
+            "value": 3,
+            "description": "Managed Pool"
           },
           {
             "name": "ElasticSan",
-            "value": 4
+            "value": 4,
+            "description": "ElasticSan Pool"
           }
         ]
       }
@@ -1717,13 +1802,26 @@
     },
     "ProtocolType": {
       "type": "string",
+      "description": "Protocol Type",
       "enum": [
         "None",
         "iSCSI"
       ],
       "x-ms-enum": {
         "name": "ProtocolType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "iSCSI",
+            "value": "iSCSI",
+            "description": "iSCSI protocol"
+          }
+        ]
       }
     },
     "ProvisioningState": {
@@ -1740,18 +1838,68 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
       }
     },
     "ReclaimPolicy": {
       "type": "string",
+      "description": "Reclaim Policy",
       "enum": [
         "Delete",
         "Retain"
       ],
       "x-ms-enum": {
         "name": "ReclaimPolicy",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete"
+          },
+          {
+            "name": "Retain",
+            "value": "Retain",
+            "description": "Retain"
+          }
+        ]
       }
     },
     "Sku": {
@@ -1774,6 +1922,7 @@
     },
     "SkuName": {
       "type": "string",
+      "description": "Sku Name enum type",
       "enum": [
         "Invalid",
         "Premium_LRS",
@@ -1781,7 +1930,24 @@
       ],
       "x-ms-enum": {
         "name": "SkuName",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid Sku"
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium_LRS Sku"
+          },
+          {
+            "name": "Premium_ZRS",
+            "value": "Premium_ZRS",
+            "description": "Premium_ZRS Sku"
+          }
+        ]
       }
     },
     "VirtualNetworkRule": {
@@ -1824,13 +1990,26 @@
     },
     "VolumeBindingMode": {
       "type": "string",
+      "description": "Volume binding mode",
       "enum": [
         "Immediate",
         "WaitFirstForCustomer"
       ],
       "x-ms-enum": {
         "name": "VolumeBindingMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Immediate",
+            "value": "Immediate",
+            "description": "Immediate binding"
+          },
+          {
+            "name": "WaitFirstForCustomer",
+            "value": "WaitFirstForCustomer",
+            "description": "Wait for customer to bind"
+          }
+        ]
       }
     },
     "VolumeListResult": {
@@ -1858,13 +2037,26 @@
     },
     "VolumeMode": {
       "type": "string",
+      "description": "Storage volume mode",
       "enum": [
         "Filesystem",
         "Raw"
       ],
       "x-ms-enum": {
         "name": "VolumeMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Filesystem",
+            "value": "Filesystem",
+            "description": "FileSystem volume mode"
+          },
+          {
+            "name": "Raw",
+            "value": "Raw",
+            "description": "Raw volume mode"
+          }
+        ]
       }
     },
     "VolumeProperties": {
@@ -2077,13 +2269,26 @@
     },
     "WhenUnsatisfiable": {
       "type": "string",
+      "description": "When request unsatisfiable",
       "enum": [
         "DoNotSchedule",
         "ScheduleAnyway"
       ],
       "x-ms-enum": {
         "name": "WhenUnsatisfiable",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DoNotSchedule",
+            "value": "DoNotSchedule",
+            "description": "Do not schedule"
+          },
+          {
+            "name": "ScheduleAnyway",
+            "value": "ScheduleAnyway",
+            "description": "Schedule anyway"
+          }
+        ]
       }
     }
   },

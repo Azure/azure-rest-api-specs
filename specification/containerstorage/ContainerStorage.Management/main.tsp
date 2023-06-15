@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 //import "./custom_operations.tsp";
 
-using OpenApi;
+using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -137,16 +137,25 @@ model Sku {
   tier: AccountTier;
 }
 
+/** Sku Name enum type */
 enum SkuName {
+  /** Invalid Sku */
   Invalid,
+  /** Premium_LRS Sku */
   Premium_LRS,
+  /** Premium_ZRS Sku */
   Premium_ZRS,
 }
 
+/** Account Tier */
 enum AccountTier {
+  /** Invalid Account Tier */
   Invalid,
+  /** Standard Tier */
   Standard,
+  /** Premium Tier */
   Premium,
+  /** Ultra Tier */
   Ultra,
 }
 
@@ -168,29 +177,45 @@ model VirtualNetworkRule {
   id: string;
 }
 
+/** Action Enum */
 enum Action {
+  /** Deny Action */
   Deny,
+  /** Allow Action */
   Allow,
 }
 
+/** Protocol Type */
 enum ProtocolType {
+  /** None */
   None,
+  /** iSCSI protocol */
   iSCSI,
 }
 
+/** Encryption Type */
 enum EncryptionType {
+  /** Encryption at rest with platform key */
   EncryptionAtRestWithPlatformKey,
 }
 
+/** Pool Type */
 enum PoolType {
+  /** Ephemeral Pool */
   Ephemeral: 1,
+  /** Disk Pool */
   Disk: 2,
+  /** Managed Pool */
   Managed: 3,
+  /** ElasticSan Pool */
   ElasticSan: 4,
 }
 
+/** Volume binding mode */
 enum VolumeBindingMode {
+  /** Immediate binding */
   Immediate,
+  /**  Wait for customer to bind */
   WaitFirstForCustomer,
 }
 
@@ -218,20 +243,29 @@ model DiskProperties {
   devicePath: string;
 }
 
+/** Disk Type */
 enum DiskType {
+  /** Local Disk Type */
   Local,
+  /** Managed Disk Type */
   Managed,
 }
 
 @doc("Provisioning state of the resource.")
 @Azure.Core.lroStatus
 enum ProvisioningState {
-  Succeeded,
-  Failed,
-  Canceled,
+  ...ResourceProvisioningState,
+
+  @doc("The resource is being provisioned")
   Provisioning,
+
+  @doc("The resource is updating")
   Updating,
+
+  @doc("The resource is being deleted")
   Deleting,
+
+  @doc("The resource create request has been accepted")
   Accepted,
 }
 
@@ -287,20 +321,31 @@ model VolumeProperties {
   // placementProperties: PlacementProperties;
 }
 
+/** Storage volume mode  */
 enum VolumeMode {
+  /** FileSystem volume mode */
   Filesystem,
+  /** Raw volume mode */
   Raw,
 }
 
+/** Access mode */
 enum AccessMode {
+  /** Read Write Once */
   ReadWriteOnce,
+  /** Read Only Many */
   ReadOnlyMany,
+  /** Read Write Many */
   ReadWriteMany,
+  /** Shared Read Write Once Pod */
   ReadWriteOncePod,
 }
 
+/** Reclaim Policy */
 enum ReclaimPolicy {
+  /** Delete */
   Delete,
+  /** Retain */
   Retain,
 }
 
@@ -316,8 +361,11 @@ model PlacementProperties {
   whenUnsatisfiable: WhenUnsatisfiable;
 }
 
+/** When request unsatisfiable */
 enum WhenUnsatisfiable {
+  /** Do not schedule */
   DoNotSchedule,
+  /** Schedule anyway */
   ScheduleAnyway,
 }
 
