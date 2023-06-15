@@ -292,7 +292,7 @@ namespace Azure.Messaging.EventGrid {
       @doc("content type")
       @header("content-type")
       contentType: "application/json";
-      
+
       @doc("RejectOptions")
       @body
       lockTokens: RejectOptions;
