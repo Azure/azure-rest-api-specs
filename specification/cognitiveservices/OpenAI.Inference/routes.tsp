@@ -76,7 +76,7 @@ op getImageOperationStatus is RpcOperation<
   }
 )
 op startGenerateImage is OaiLongRunningRpcOperation<
-  ImageRequest,
+  ImageGenerationOptions,
   ImageOperationResponse,
   ImageOperationStatus
 >;

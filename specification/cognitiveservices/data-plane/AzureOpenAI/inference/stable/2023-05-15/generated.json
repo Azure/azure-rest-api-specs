@@ -824,6 +824,32 @@
         "total_tokens"
       ]
     },
+    "ImageGenerationOptions": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "A description of the desired images."
+        },
+        "n": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of images to generate (defaults to 1)."
+        },
+        "size": {
+          "$ref": "#/definitions/ImageSize",
+          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024)."
+        },
+        "user": {
+          "type": "string",
+          "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
+        }
+      },
+      "description": "Represents the request data used to generate images.",
+      "required": [
+        "prompt"
+      ]
+    },
     "ImageLocation": {
       "type": "object",
       "properties": {
@@ -896,32 +922,6 @@
       "required": [
         "id",
         "status"
-      ]
-    },
-    "ImageRequest": {
-      "type": "object",
-      "properties": {
-        "prompt": {
-          "type": "string",
-          "description": "A description of the desired images."
-        },
-        "n": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of images to generate (defaults to 1)."
-        },
-        "size": {
-          "$ref": "#/definitions/ImageSize",
-          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024)."
-        },
-        "user": {
-          "type": "string",
-          "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
-        }
-      },
-      "description": "Represents the request data used to generate images.",
-      "required": [
-        "prompt"
       ]
     },
     "ImageResponse": {

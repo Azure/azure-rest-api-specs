@@ -19,7 +19,7 @@ enum ImageSize {
 }
 
 @doc("Represents the request data used to generate images.")
-model ImageRequest {
+model ImageGenerationOptions {
   @doc("A description of the desired images.")
   prompt: string;
 
