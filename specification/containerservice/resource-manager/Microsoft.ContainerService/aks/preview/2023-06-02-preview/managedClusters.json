@@ -601,7 +601,7 @@
           "Create Managed Cluster with Node Public IP Prefix": {
             "$ref": "./examples/ManagedClustersCreate_NodePublicIPPrefix.json"
           },
-          "Create Managed Cluster with Azure KeyVault Secrets Provider Addon": {
+          "Create Managed Cluster with Azure Key Vault Secrets Provider Addon": {
             "$ref": "./examples/ManagedClustersCreate_AzureKeyvaultSecretsProvider.json"
           },
           "Create Managed Cluster with FIPS enabled OS": {
@@ -7710,6 +7710,9 @@
       "properties": {
         "components": {
           "$ref": "#/definitions/IstioComponents"
+        },
+        "certificateAuthority": {
+          "$ref": "#/definitions/IstioCertificateAuthority"
         }
       }
     },
@@ -7726,6 +7729,14 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "egressGateways": {
+      "type": "array",
+      "description": "Istio egress gateways.",
+      "items": {
+        "$ref": "#/definitions/IstioEgressGateway"
+      },
+      "x-ms-identifiers": []
     },
     "IstioIngressGateway": {
       "type": "object",
@@ -7760,6 +7771,69 @@
       },
       "required": [
         "mode",
+        "enabled"
+      ]
+    },
+    "IstioCertificateAuthority": {
+      "type": "object",
+      "description": "Istio Service Mesh Certificate Authority (CA) configuration. For now, we only support plugin certificates as described here https://aka.ms/asm-plugin-ca",
+      "properties": {
+        "plugin": {
+          "$ref": "#/definitions/IstioPluginCertificateAuthority"
+        }
+      }
+    },
+    "IstioPluginCertificateAuthority": {
+      "type": "object",
+      "description": "Plugin certificates information for Service Mesh.",
+      "properties": {
+        "keyVaultId": {
+        "type": "string",
+        "format": "arm-id",
+        "x-ms-arm-id-details": {
+          "allowedResources": [
+            {
+              "type": "Microsoft.KeyVault/vaults"
+            }
+          ]
+        },
+        "description": "The resource ID of the Key Vault."
+        },
+        "certObjectName": {
+          "type": "string",
+          "description": "Intermediate certificate object name in Azure Key Vault."
+        },
+        "keyObjectName": {
+          "type": "string",
+          "description": "Intermediate certificate private key object name in Azure Key Vault."
+        },
+        "rootCertObjectName": {
+          "type": "string",
+          "description": "Root certificate object name in Azure Key Vault."
+        },
+        "certChainObjectName": {
+          "type": "string",
+          "description": "Certificate chain object name in Azure Key Vault."
+        }
+      }
+    },
+    "IstioEgressGateway": {
+      "type": "object",
+      "description": "Istio egress gateway configuration.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable the egress gateway."
+        },
+        "nodeSelector": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "NodeSelector for scheduling the egress gateway."
+        }
+      },
+      "required": [
         "enabled"
       ]
     },
