@@ -4,15 +4,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
-//import "./custom_operations.tsp";
-
 using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-// using Microsoft.ContainerStorage.Custom;
 
 @armProviderNamespace
 @service({
