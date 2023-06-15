@@ -46,10 +46,8 @@ input-file:
   - stable/2023-07-01/features.json
   - stable/2023-07-01/featurestate.json
   - stable/2023-07-01/mapconfiguration.json
-  - stable/2023-07-01/routeset.json
   - stable/2023-07-01/style.json
   - stable/2023-07-01/tileset.json
-  - stable/2023-07-01/wayfind.json
 ```
 ### Tag: package-preview-2023-03
 
