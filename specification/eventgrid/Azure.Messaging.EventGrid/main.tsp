@@ -253,7 +253,7 @@ namespace Azure.Messaging.EventGrid {
     {
       @doc("content type")
       @header("content-type")
-      contentType: "application/json; charset=utf-8";
+      contentType: "application/json";
 
       @doc("AcknowledgeOptions.")
       @body
@@ -272,7 +272,7 @@ namespace Azure.Messaging.EventGrid {
     {
       @doc("content type")
       @header("content-type")
-      contentType: "application/json; charset=utf-8";
+      contentType: "application/json";
 
       @doc("ReleaseOptions")
       @body
@@ -291,8 +291,8 @@ namespace Azure.Messaging.EventGrid {
     {
       @doc("content type")
       @header("content-type")
-      contentType: "application/json; charset=utf-8";
-
+      contentType: "application/json";
+      
       @doc("RejectOptions")
       @body
       lockTokens: RejectOptions;
