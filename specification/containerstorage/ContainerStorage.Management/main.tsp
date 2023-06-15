@@ -184,7 +184,7 @@ enum Action {
 
 /** Protocol Type */
 enum ProtocolType {
-  /** None */
+  /** No Protocol */
   None,
   /** iSCSI protocol */
   iSCSI,
@@ -340,9 +340,9 @@ enum AccessMode {
 
 /** Reclaim Policy */
 enum ReclaimPolicy {
-  /** Delete */
+  /** Delete resource */
   Delete,
-  /** Retain */
+  /** Retain resource */
   Retain,
 }
 
