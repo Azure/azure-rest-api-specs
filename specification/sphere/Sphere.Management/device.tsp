@@ -116,7 +116,6 @@ model SignedCapabilityImageResponse {
 enum CapabilityType {
   /** Application development capability */
   ApplicationDevelopment,
-  
   /** Field servicing capability */
   FieldServicing,
 }
