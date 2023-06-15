@@ -189,10 +189,10 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           }
         ],
         "responses": {
@@ -252,10 +252,10 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           },
           {
             "name": "resource",
@@ -333,10 +333,10 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           },
           {
             "name": "properties",
@@ -397,10 +397,10 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           }
         ],
         "responses": {
@@ -464,10 +464,10 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           }
         ],
         "responses": {
@@ -513,10 +513,10 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           }
         ],
         "responses": {
@@ -565,20 +565,20 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           },
           {
             "name": "fleetMemberName",
             "in": "path",
             "required": true,
             "description": "The name of the Fleet member resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 50,
-            "type": "string"
+            "maxLength": 50
           }
         ],
         "responses": {
@@ -638,20 +638,20 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           },
           {
             "name": "fleetMemberName",
             "in": "path",
             "required": true,
             "description": "The name of the Fleet member resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 50,
-            "type": "string"
+            "maxLength": 50
           },
           {
             "name": "resource",
@@ -729,20 +729,20 @@
             "in": "path",
             "required": true,
             "description": "The name of the Fleet resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 63,
-            "type": "string"
+            "maxLength": 63
           },
           {
             "name": "fleetMemberName",
             "in": "path",
             "required": true,
             "description": "The name of the Fleet member resource.",
+            "type": "string",
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
             "minLength": 1,
-            "maxLength": 50,
-            "type": "string"
+            "maxLength": 50
           }
         ],
         "responses": {
@@ -851,8 +851,8 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "x-typespec-name": "FleetCredentialResult[]",
           "description": "Array of base64-encoded Kubernetes configuration files.",
+          "x-typespec-name": "FleetCredentialResult[]",
           "readOnly": true
         }
       },
@@ -893,8 +893,8 @@
           "items": {
             "$ref": "#/definitions/Fleet"
           },
-          "x-typespec-name": "Fleet[]",
-          "description": "The Fleet items on this page"
+          "description": "The Fleet items on this page",
+          "x-typespec-name": "Fleet[]"
         },
         "nextLink": {
           "type": "string",
@@ -941,8 +941,8 @@
           "items": {
             "$ref": "#/definitions/FleetMember"
           },
-          "x-typespec-name": "FleetMember[]",
-          "description": "The FleetMember items on this page"
+          "description": "The FleetMember items on this page",
+          "x-typespec-name": "FleetMember[]"
         },
         "nextLink": {
           "type": "string",
@@ -991,7 +991,36 @@
       ],
       "x-ms-enum": {
         "name": "FleetMemberProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Joining",
+            "value": "Joining"
+          },
+          {
+            "name": "Leaving",
+            "value": "Leaving"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          }
+        ]
       }
     },
     "FleetPatch": {
@@ -1002,8 +1031,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-typespec-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "Properties of a Fleet that can be patched."
@@ -1036,7 +1065,36 @@
       ],
       "x-ms-enum": {
         "name": "FleetProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          }
+        ]
       }
     }
   },
