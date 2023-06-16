@@ -718,8 +718,17 @@
     },
     "Deployment": {
       "type": "object",
-      "properties": {},
-      "description": "A specific deployment"
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "deployment id of the deployed model",
+          "readOnly": true
+        }
+      },
+      "description": "A specific deployment",
+      "required": [
+        "deploymentId"
+      ]
     },
     "EmbeddingItem": {
       "type": "object",
@@ -825,11 +834,13 @@
         "n": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of images to generate (defaults to 1)."
+          "description": "The number of images to generate (defaults to 1).",
+          "default": 1
         },
         "size": {
           "$ref": "#/definitions/ImageSize",
-          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024)."
+          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
+          "default": "1024x1024"
         },
         "user": {
           "type": "string",
@@ -854,10 +865,7 @@
           "description": "The error if the operation failed."
         }
       },
-      "description": "The image url if successful, and an error otherwise.",
-      "required": [
-        "url"
-      ]
+      "description": "The image url if successful, and an error otherwise."
     },
     "ImageOperationResponse": {
       "type": "object",

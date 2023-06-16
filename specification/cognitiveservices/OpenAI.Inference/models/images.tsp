@@ -24,10 +24,10 @@ model ImageGenerationOptions {
   prompt: string;
 
   @doc("The number of images to generate (defaults to 1).")
-  n?: int32;
+  n?: int32 = 1;
 
   @doc("The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).")
-  size?: ImageSize;
+  size?: ImageSize = ImageSize.Size1024x1024;
 
   @doc("A unique identifier representing your end-user, which can help to monitor and detect abuse.")
   user?: string;
@@ -36,7 +36,7 @@ model ImageGenerationOptions {
 @doc("The image url if successful, and an error otherwise.")
 model ImageLocation {
   @doc("The URL that provides temporary access to download the generated image.")
-  url: url;
+  url?: url;
 
   @doc("The error if the operation failed.")
   error?: Foundations.Error;
