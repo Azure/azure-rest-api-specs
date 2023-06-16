@@ -141,8 +141,10 @@
           },
           "202": {
             "description": "Accepted. The response indicates the exiting Config Server is now updating and contains a Location\r\nheader to query the operation result.",
-            "schema": {
-              "$ref": ".#/definitions/ConfigServer"
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -350,9 +352,6 @@
           },
           "202": {
             "description": "Accepted. The response indicates the exiting eureka server settings are now updating and contain a Location\r\nheader to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/EurekaServer"
-            },
             "headers": {
               "Location": {
                 "type": "string"
