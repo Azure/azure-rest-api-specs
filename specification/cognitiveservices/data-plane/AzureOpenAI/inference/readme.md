@@ -42,6 +42,15 @@ These settings apply only when `--tag=release_2022_12_01_autogen` is specified o
 input-file: stable/2022-12-01/generated.json
 ```
 
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive:
+  - suppress: RequiredReadOnlyProperties
+    reason: Parameter is read only
+```
+
 ## AzureOpenAI 2023-03-15-preview
 These settings apply only when `--tag=release_2023_03_15_preview` is specified on the command line.
 
@@ -61,6 +70,15 @@ These settings apply only when `--tag=release_2023_05_15_autogen` is specified o
 
 ``` yaml $(tag) == 'release_2023_05_15_autogen'
 input-file: stable/2023-05-15/generated.json
+```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive:
+  - suppress: RequiredReadOnlyProperties
+    reason: Parameter is read only
 ```
 
 ## AzureOpenAI 2023-06-01-preview
@@ -84,5 +102,7 @@ AutoRest-Linter Suppressions
 directive:
   - suppress: LroExtension
     reason: https://github.com/Azure/typespec-azure/issues/3194
+  - suppress: RequiredReadOnlyProperties
+    reason: Parameter is read only
 ```
 
