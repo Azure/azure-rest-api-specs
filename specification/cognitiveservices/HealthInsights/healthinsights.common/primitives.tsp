@@ -10,7 +10,7 @@ op TLongRunningRpcOperation<
   TResponse
 > is Azure.Core.Foundations.Operation<
   TParams & RepeatabilityRequestHeaders,
-  (Foundations.AcceptedResponse<Foundations.LongRunningStatusLocation &
+  (Foundations.AcceptedResponse<Foundations.LongRunningStatusLocation<TResponse> &
     Foundations.RetryAfterHeader> &
     RepeatabilityResponseHeaders),
   RepeatabilityRequestHeaders & RepeatabilityResponseHeaders,

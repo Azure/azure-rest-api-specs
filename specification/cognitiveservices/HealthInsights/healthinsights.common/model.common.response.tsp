@@ -1,5 +1,6 @@
 import "./model.common.shared.tsp";
 
+using Azure.Core;
 using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
@@ -24,6 +25,7 @@ alias Response = {
   @visibility("read")
   lastUpdateDateTime: utcDateTime;
 
+  @lroStatus
   @doc("The status of the processing job.")
   @visibility("read")
   status: JobStatus;
@@ -96,6 +98,7 @@ enum JobStatus {
   Succeeded: "succeeded",
   Failed: "failed",
   PartiallyCompleted: "partiallyCompleted",
+  Canceled: "canceled",
 }
 
 @doc("The version of the model used for inference, expressed as the model date.")
