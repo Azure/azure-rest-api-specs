@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "0806e1cd-cfda-4ff8-b99c-2b0af42cffd3",
+    "resourceGroupName": "myRg",
+    "securityConnectorName": "mySecurityConnectorName",
+    "inventoryScope": "Available",
+    "api-version": "2023-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "autoDiscovery": "Enabled",
+              "actionableRemediation": {
+                "state": "Enabled"
+              },
+              "onboardingState": "Onboarded",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/myAzDevOpsOrg",
+            "name": "myAzDevOpsOrg",
+            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs"
+          },
+          {
+            "properties": {
+              "autoDiscovery": "Enabled",
+              "actionableRemediation": {
+                "state": "Enabled"
+              },
+              "onboardingState": "OnboardedByOtherConnector",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/anotherOrg",
+            "name": "anotherOrg",
+            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs"
+          },
+          {
+            "properties": {
+              "autoDiscovery": "Disabled",
+              "actionableRemediation": {
+                "state": "None"
+              },
+              "onboardingState": "NotOnboarded"
+            },
+            "id": "/subscriptions/0806e1cd-cfda-4ff8-b99c-2b0af42cffd3/resourceGroups/myRg/providers/Microsoft.Security/securityConnectors/mySecurityConnectorName/devops/default/azureDevOpsOrgs/notOnboardedOrg",
+            "name": "notOnboardedOrg",
+            "type": "Microsoft.Security/securityConnectors/devops/azureDevOpsOrgs"
+          }
+        ]
+      }
+    }
+  }
+}
