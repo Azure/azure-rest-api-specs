@@ -16,6 +16,7 @@ pr:
     - eng/pipelines/templates/steps/typespec-ci.yml
     - specification/contosowidgetmanager
     - specification/cognitiveservices
+    - specification/confidentialledger
     - specification/containerservice
     - specification/servicenetworking
     - specification/translation
@@ -68,6 +69,11 @@ jobs:
     parameters:
       Folder: specification/cognitiveservices/OpenAI.Inference
       DisplayName: OpenAI.Inference
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/confidentialledger/Microsoft.ManagedCcf
+      DisplayName: ManagedCcf
 
   - template: templates/steps/typespec-ci.yml
     parameters:
