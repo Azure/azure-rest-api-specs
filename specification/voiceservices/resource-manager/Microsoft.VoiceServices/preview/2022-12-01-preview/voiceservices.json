@@ -3,9 +3,9 @@
   "info": {
     "title": "Microsoft.VoiceServices",
     "version": "2022-12-01-preview",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -39,6 +39,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "TestLines"
     },
     {
@@ -46,9 +49,6 @@
     },
     {
       "name": "CommunicationsGateways"
-    },
-    {
-      "name": "Operations"
     }
   ],
   "paths": {
@@ -84,6 +84,49 @@
         "x-ms-examples": {
           "OperationsList": {
             "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations/{location}/providers/Microsoft.VoiceServices/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "CommunicationsGateways"
+        ],
+        "operationId": "CommunicationsGateways_CheckLocal",
+        "description": "Implements global CheckNameAvailability operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The CheckAvailability request",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -187,7 +230,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -227,7 +275,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -293,7 +346,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -307,6 +365,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -326,7 +388,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -347,7 +409,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -398,7 +465,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -443,10 +515,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/Contact.contactName"
+            "name": "contactName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this contact",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -486,10 +568,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/Contact.contactName"
+            "name": "contactName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this contact",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -555,10 +647,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/Contact.contactName"
+            "name": "contactName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this contact",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -572,6 +674,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -591,7 +697,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -612,10 +718,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/Contact.contactName"
+            "name": "contactName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this contact",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -666,7 +782,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -711,10 +832,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/TestLine.testLineName"
+            "name": "testLineName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this test line",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -754,10 +885,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/TestLine.testLineName"
+            "name": "testLineName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this test line",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -823,10 +964,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/TestLine.testLineName"
+            "name": "testLineName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this test line",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -840,6 +991,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -859,7 +1014,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -880,10 +1035,20 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationsGateway.communicationsGatewayName"
+            "name": "communicationsGatewayName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this deployment",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "$ref": "#/parameters/TestLine.testLineName"
+            "name": "testLineName",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for this test line",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -923,17 +1088,57 @@
       "properties": {},
       "description": "Details of API bridge functionality."
     },
+    "AutoGeneratedDomainNameLabelScope": {
+      "type": "string",
+      "description": "Available auto-generated domain name scopes.",
+      "enum": [
+        "TenantReuse",
+        "SubscriptionReuse",
+        "ResourceGroupReuse",
+        "NoReuse"
+      ],
+      "x-ms-enum": {
+        "name": "AutoGeneratedDomainNameLabelScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TenantReuse",
+            "value": "TenantReuse",
+            "description": "Re-use tenant"
+          },
+          {
+            "name": "SubscriptionReuse",
+            "value": "SubscriptionReuse",
+            "description": "Re-use subscription"
+          },
+          {
+            "name": "ResourceGroupReuse",
+            "value": "ResourceGroupReuse",
+            "description": "Re-use resource group"
+          },
+          {
+            "name": "NoReuse",
+            "value": "NoReuse",
+            "description": "No re-use"
+          }
+        ]
+      }
+    },
     "CommunicationsGateway": {
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CommunicationsGatewayProperties",
           "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "x-ms-client-flatten": true
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "description": "A CommunicationsGateway resource",
@@ -951,13 +1156,14 @@
           "items": {
             "$ref": "#/definitions/CommunicationsGateway"
           },
-          "x-cadl-name": "CommunicationsGateway[]",
-          "description": "The CommunicationsGateway items on this page"
+          "description": "The CommunicationsGateway items on this page",
+          "x-typespec-name": "CommunicationsGateway[]"
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation<CommunicationsGateway>"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a CommunicationsGateway list operation.",
@@ -986,8 +1192,8 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "x-cadl-name": "ServiceRegionProperties[]",
           "description": "The regions in which to deploy the resources needed for Teams Calling",
+          "x-typespec-name": "ServiceRegionProperties[]",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1007,8 +1213,8 @@
           "items": {
             "$ref": "#/definitions/TeamsCodecs"
           },
-          "x-cadl-name": "TeamsCodecs[]",
           "description": "Voice codecs to support",
+          "x-typespec-name": "TeamsCodecs[]",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1029,8 +1235,9 @@
           "items": {
             "$ref": "#/definitions/CommunicationsPlatform"
           },
-          "x-cadl-name": "CommunicationsPlatform[]",
           "description": "What platforms to support",
+          "x-typespec-name": "CommunicationsPlatform[]",
+          "minItems": 1,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1059,13 +1266,17 @@
     "CommunicationsGatewayUpdate": {
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "The type used for update operations of the CommunicationsGateway."
@@ -1079,7 +1290,19 @@
       ],
       "x-ms-enum": {
         "name": "CommunicationsPlatform",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OperatorConnect",
+            "value": "OperatorConnect",
+            "description": "Operator Connect"
+          },
+          {
+            "name": "TeamsPhoneMobile",
+            "value": "TeamsPhoneMobile",
+            "description": "Teams Phone Mobile"
+          }
+        ]
       }
     },
     "Connectivity": {
@@ -1106,11 +1329,11 @@
         "properties": {
           "$ref": "#/definitions/ContactProperties",
           "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "x-ms-client-flatten": true
+          ]
         }
       },
       "description": "A Contact resource",
@@ -1128,13 +1351,14 @@
           "items": {
             "$ref": "#/definitions/Contact"
           },
-          "x-cadl-name": "Contact[]",
-          "description": "The Contact items on this page"
+          "description": "The Contact items on this page",
+          "x-typespec-name": "Contact[]"
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation<Contact>"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Contact list operation.",
@@ -1203,8 +1427,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "The type used for update operations of the Contact."
@@ -1241,8 +1465,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
           "description": "IP address to use to contact the operator network from this region",
+          "x-typespec-name": "string[]",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1254,8 +1478,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
           "description": "IP address to use to contact the ESRP from this region",
+          "x-typespec-name": "string[]",
           "x-ms-mutability": [
             "read",
             "update",
@@ -1278,8 +1502,36 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
       }
+    },
+    "ResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        }
+      },
+      "description": "General resource properties."
     },
     "ServiceRegionProperties": {
       "type": "object",
@@ -1317,7 +1569,7 @@
       ],
       "x-ms-enum": {
         "name": "Status",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "ChangePending",
@@ -1345,7 +1597,39 @@
       ],
       "x-ms-enum": {
         "name": "TeamsCodecs",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PCMA",
+            "value": "PCMA",
+            "description": "PCMA Codec"
+          },
+          {
+            "name": "PCMU",
+            "value": "PCMU",
+            "description": "PCMU Codec"
+          },
+          {
+            "name": "G722",
+            "value": "G722",
+            "description": "G722 Codec"
+          },
+          {
+            "name": "G722_2",
+            "value": "G722_2",
+            "description": "G722.2 Codec"
+          },
+          {
+            "name": "SILK_8",
+            "value": "SILK_8",
+            "description": "SILK 8K Codec"
+          },
+          {
+            "name": "SILK_16",
+            "value": "SILK_16",
+            "description": "SILK 16K Codec"
+          }
+        ]
       }
     },
     "TestLine": {
@@ -1354,11 +1638,11 @@
         "properties": {
           "$ref": "#/definitions/TestLineProperties",
           "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "x-ms-client-flatten": true
+          ]
         }
       },
       "description": "A TestLine resource",
@@ -1376,13 +1660,14 @@
           "items": {
             "$ref": "#/definitions/TestLine"
           },
-          "x-cadl-name": "TestLine[]",
-          "description": "The TestLine items on this page"
+          "description": "The TestLine items on this page",
+          "x-typespec-name": "TestLine[]"
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation<TestLine>"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a TestLine list operation.",
@@ -1432,7 +1717,19 @@
       ],
       "x-ms-enum": {
         "name": "TestLinePurpose",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The test line is used for manual testing."
+          },
+          {
+            "name": "Automated",
+            "value": "Automated",
+            "description": "The test line is used for automated testing."
+          }
+        ]
       }
     },
     "TestLineUpdate": {
@@ -1443,39 +1740,52 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "The type used for update operations of the TestLine."
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "2022-12-01-preview",
+        "2023-01-31",
+        "2023-03-01-preview",
+        "2023-04-03"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_12_01_preview",
+            "value": "2022-12-01-preview"
+          },
+          {
+            "name": "v2023_01_31",
+            "value": "2023-01-31"
+          },
+          {
+            "name": "v2023_03_01_preview",
+            "value": "2023-03-01-preview"
+          },
+          {
+            "name": "v2023_04_03",
+            "value": "2023-04-03"
+          }
+        ]
+      }
     }
   },
   "parameters": {
-    "CommunicationsGateway.communicationsGatewayName": {
-      "name": "communicationsGatewayName",
+    "Azure.ResourceManager.LocationParameter": {
+      "name": "location",
       "in": "path",
       "required": true,
-      "description": "Unique identifier for this deployment",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "description": "The location name.",
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Contact.contactName": {
-      "name": "contactName",
-      "in": "path",
-      "required": true,
-      "description": "Unique identifier for this contact",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "TestLine.testLineName": {
-      "name": "testLineName",
-      "in": "path",
-      "required": true,
-      "description": "Unique identifier for this test line",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }

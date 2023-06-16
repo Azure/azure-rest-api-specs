@@ -1,13 +1,13 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "@cadl-lang/versioning";
+import "@typespec/rest";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.VoiceServices")
@@ -15,34 +15,21 @@ using Azure.ResourceManager;
   title: "Microsoft.VoiceServices",
 })
 @versioned(Versions)
-@versionedDependency(
-  [
-    [
-      Versions.v2022_12_01_preview,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ],
-    [
-      Versions.v2023_01_31,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ],
-    [
-      Versions.v2023_03_01_preview,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ],
-    [
-      Versions.v2023_04_03,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ]
-  ]
-)
 namespace Microsoft.VoiceServices;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2022_12_01_preview: "2022-12-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_01_31: "2023-01-31",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2023_03_01_preview: "2023-03-01-preview",
-  v2023_04_03: "2023-04-03"
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_04_03: "2023-04-03",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -51,7 +38,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning state of the resource.")
 enum ProvisioningState {
-    ...ResourceProvisioningState
+  ...ResourceProvisioningState,
 }
 
 @doc("General resource properties.")
@@ -66,7 +53,7 @@ model ResourceProperties {
 // See https://github.com/Azure/azure-rest-api-specs-pr/pull/8707#discussion_r971363996 for context
 @doc("The type used for update operations of the {name}.", TResource)
 @friendlyName("{name}Update", TResource)
-model ResourceUpdateModelNoProperties<TResource extends object>
+model ResourceUpdateModelNoProperties<TResource extends TypeSpec.Reflection.Model>
   is OptionalProperties<UpdateableProperties<OmitProperties<
     TResource,
     "Name" | "name"
@@ -90,37 +77,39 @@ interface ResourceUpdateNoProperties<TResource extends Foundations.ArmResource> 
   ): ArmResponse<TResource> | ErrorResponse;
 }
 
-// These models should be provided by the common CADL infra, but currently they are not. See GitHub PR:
-// https://github.com/Azure/cadl-azure/pull/2311
-// For now, these definitions are reimplementations of the common types from:
-// https://github.com/Azure/azure-rest-api-specs-pr/blob/66dc2c9a0243bc217a938583a53da052498ac39f/specification/common-types/resource-management/v3/types.json
+// // These models should be provided by the common CADL infra, but currently they are not. See GitHub PR:
+// // https://github.com/Azure/cadl-azure/pull/2311
+// // For now, these definitions are reimplementations of the common types from:
+// // https://github.com/Azure/azure-rest-api-specs-pr/blob/66dc2c9a0243bc217a938583a53da052498ac39f/specification/common-types/resource-management/v3/types.json
 
-// Ideally all of these would be marked as @added(Versions.v2022_12_02_preview) but they can't be because of
-// https://github.com/microsoft/cadl/issues/1332
+// // Ideally all of these would be marked as @added(Versions.v2022_12_02_preview) but they can't be because of
+// // https://github.com/microsoft/cadl/issues/1332
 
-@doc("The check availability request body.")
-model CheckNameAvailabilityRequest {
-  @doc("The name of the resource for which availability needs to be checked.")
-  name?: string;
+// @doc("The check availability request body.")
+// model CheckNameAvailabilityRequest {
+//   @doc("The name of the resource for which availability needs to be checked.")
+//   name?: string;
 
-  @doc("The resource type.")
-  type?: string;
-}
+//   @doc("The resource type.")
+//   type?: string;
+// }
 
-@doc("Possible reasons for a name not being available.")
-enum CheckNameAvailabilityReason {
-  "Invalid",
-  "AlreadyExists",
-}
+// @doc("Possible reasons for a name not being available.")
+// enum CheckNameAvailabilityReason {
+//   /** Invalid name */
+//   Invalid,
+//   /** Name already exists */
+//   AlreadyExists,
+// }
 
-@doc("The check availability result.")
-model CheckNameAvailabilityResponse {
-  @doc("Indicates if the resource name is available.")
-  nameAvailable?: boolean;
+// @doc("The check availability result.")
+// model CheckNameAvailabilityResponse {
+//   @doc("Indicates if the resource name is available.")
+//   nameAvailable?: boolean;
 
-  @doc("The reason why the given name is not available.")
-  reason?: CheckNameAvailabilityReason;
+//   @doc("The reason why the given name is not available.")
+//   reason?: CheckNameAvailabilityReason;
 
-  @doc("Detailed reason why the given name is not available.")
-  message?: string;
-}
+//   @doc("Detailed reason why the given name is not available.")
+//   message?: string;
+// }

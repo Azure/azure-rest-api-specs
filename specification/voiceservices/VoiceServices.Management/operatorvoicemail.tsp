@@ -1,21 +1,22 @@
 // Definitions for the OperatorVoicemailInstance resource
 
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.VoiceServices;
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @doc("A OperatorVoicemailInstance resource")
-model OperatorVoicemailInstance is TrackedResource<OperatorVoicemailInstanceProperties> {
+model OperatorVoicemailInstance
+  is TrackedResource<OperatorVoicemailInstanceProperties> {
   @pattern("^[a-zA-Z][a-zA-Z0-9-]{2,23}$")
   @key("operatorVoicemailInstanceName")
   @segment("operatorVoicemailInstances")
@@ -23,7 +24,6 @@ model OperatorVoicemailInstance is TrackedResource<OperatorVoicemailInstanceProp
   @visibility("Read")
   @path
   name: string;
-
   ...ResourceSku;
 }
 
