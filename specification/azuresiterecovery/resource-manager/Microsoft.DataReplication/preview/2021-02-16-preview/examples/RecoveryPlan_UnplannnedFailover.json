@@ -1,0 +1,30 @@
+{
+  "title": "Performs the unplanned failover on the recovery plan.",
+  "operationId": "RecoveryPlan_UnplannnedFailover",
+  "parameters": {
+    "subscriptionId": "04A6EE54-A345-4577-98EB-D65DE78716B0",
+    "resourceGroupName": "rgswagger",
+    "vaultName": "dgiywsgglpgjqxkg",
+    "recoveryPlanName": "kztrivgjabsdaasfyizezfpslcy",
+    "api-version": "2021-02-16-preview",
+    "body": {
+      "properties": {
+        "failoverDirection": "PrimaryToRecovery",
+        "performShutdown": true,
+        "customProperties": [
+          {
+            "instanceType": "RecoveryPlanUnplannedFailoverModelCustomProperties"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    },
+    "204": {}
+  }
+}
