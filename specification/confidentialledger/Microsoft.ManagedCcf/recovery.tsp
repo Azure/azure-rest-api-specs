@@ -47,8 +47,7 @@ model Member {
   memberId: memberId;
 }
 
-interface EncryptedShares
-{
+interface EncryptedShares {
   @doc("Retrieve a member's recovery share, encrypted with that member's share-encryption key.")
   get is Azure.Core.StandardResourceOperations.ResourceRead<EncryptedRecoveryShare>;
 }
