@@ -3468,6 +3468,10 @@
         "networkProfile": {
           "$ref": "#/definitions/AgentPoolNetworkProfile",
           "description": "Network-related settings of an agent pool."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/AgentPoolSecurityProfile",
+          "description": "The security settings of an agent pool."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -6355,6 +6359,38 @@
           "description": "The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled."
         }
       }
+    },
+    "AgentPoolSecurityProfile": {
+      "type": "object",
+      "properties": {
+        "sshAccess": {
+          "$ref": "#/definitions/AgentPoolSSHAccess",
+          "description": "SSH access method of an agent pool."
+        }
+      },
+      "description": "The security settings of an agent pool."
+    },
+    "AgentPoolSSHAccess": {
+      "type": "string",
+      "enum": [
+        "LocalUser",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AgentPoolSSHAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "LocalUser",
+            "description": "Can SSH onto the node as a local user using private key."
+          },
+          {
+            "value": "Disabled",
+            "description": "SSH service will be turned off on the node."
+          }
+        ]
+      },
+      "description": "SSH access method of an agent pool."
     },
     "SysctlConfig": {
       "description": "Sysctl settings for Linux agent nodes.",
