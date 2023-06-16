@@ -14,6 +14,7 @@ using Autorest;
 namespace AzureHealthInsights;
 
 interface OncoPhenotype {
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
   @summary("Get Onco Phenotype job details")
   @tag("OncoPhenotype")
   @doc("Gets the status and details of the Onco Phenotype job.")
@@ -32,6 +33,8 @@ interface OncoPhenotype {
     }, OncoPhenotypeResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
   @summary("Create Onco Phenotype job")
   @tag("OncoPhenotype")
   @doc("Creates an Onco Phenotype job with the given request body.")
@@ -39,10 +42,6 @@ interface OncoPhenotype {
   @example(
     "./examples/SuccessfulOncoPhenotypeRequest.json",
     "SuccessfulOncoPhenotypeAnalyzeRequest"
-  )
-  @pollingOperation(
-    OncoPhenotype.getJob,
-    {@doc("job id") jobId: ResponseProperty<"operationLocation">}
   )
   createJob is TLongRunningRpcOperation<OncoPhenotypeData, OncoPhenotypeResult>;
 }

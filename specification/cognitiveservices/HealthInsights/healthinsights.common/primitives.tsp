@@ -1,5 +1,8 @@
+import "@azure-tools/typespec-azure-core";
+
 using Azure.Core;
 using TypeSpec.Http;
+
 namespace AzureHealthInsights;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template"
