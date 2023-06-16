@@ -17,6 +17,7 @@ pr:
     - specification/contosowidgetmanager
     - specification/cognitiveservices
     - specification/containerservice
+    - specification/eventgrid
     - specification/servicenetworking
     - specification/translation
 
@@ -51,11 +52,6 @@ jobs:
 
   - template: templates/steps/typespec-ci.yml
     parameters:
-      Folder: specification/eventgrid/Azure.Messaging.EventGrid
-      DisplayName: Messaging.EventGrid
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
       Folder: specification/cognitiveservices/HealthInsights/healthinsights.openapi
       DisplayName: healthinsights.openapi
 
@@ -78,6 +74,11 @@ jobs:
     parameters:
       Folder: specification/containerservice/Fleet.Management
       DisplayName: Fleet.Management
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/eventgrid/Azure.Messaging.EventGrid
+      DisplayName: Messaging.EventGrid
 
   - template: templates/steps/typespec-ci.yml
     parameters:
