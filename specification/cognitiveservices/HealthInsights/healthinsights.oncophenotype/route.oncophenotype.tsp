@@ -42,7 +42,7 @@ interface OncoPhenotype {
   )
   @pollingOperation(
     OncoPhenotype.getJob,
-    {@doc("job id") jobId: ResponseProperty<"jobId">}
+    {@doc("job id") jobId: ResponseProperty<"operationLocation">}
   )
   createJob is TLongRunningRpcOperation<OncoPhenotypeData, OncoPhenotypeResult>;
 }
