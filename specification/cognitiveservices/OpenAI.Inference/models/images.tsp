@@ -1,15 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
-import "@typespec/versioning";
 
 using Azure.Core;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
 @doc("The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.")
-@added(ServiceApiVersions.v2023_06_01_Preview)
 enum ImageSize {
   @doc("Image size of 256x256.")
   Size256x256: "256x256",
@@ -22,7 +19,6 @@ enum ImageSize {
 }
 
 @doc("Represents the request data used to generate images.")
-@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerationOptions {
   @doc("A description of the desired images.")
   prompt: string;
@@ -38,7 +34,6 @@ model ImageGenerationOptions {
 }
 
 @doc("The image url if successful, and an error otherwise.")
-@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageLocation {
   @doc("The URL that provides temporary access to download the generated image.")
   url: url;
@@ -48,7 +43,6 @@ model ImageLocation {
 }
 
 @doc("The result of the operation if the operation succeeded.")
-@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageResponse {
   @doc("A timestamp when this job or item was created (in unix epochs).")
   created: int64;
@@ -58,7 +52,6 @@ model ImageResponse {
 }
 
 @doc("The result of the operation if the operation succeeded.")
-@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageOperationResponse {
   @doc("The ID of the operation.")
   id: string;
@@ -81,7 +74,6 @@ model ImageOperationResponse {
 
 @lroStatus
 @doc("The state of a job or item.")
-@added(ServiceApiVersions.v2023_06_01_Preview)
 enum State {
   @doc("The operation was created and is queued to be processed in the future.")
   notRunning,
@@ -103,6 +95,17 @@ enum State {
 
   @doc("The entity has been deleted but may still be referenced by other entities predating the deletion.")
   deleted,
+}
+
+@doc("Provides status details for long running operations.")
+model ImageOperationStatus {
+  @key("operationId")
+  @visibility("read", "query")
+  @doc("The unique ID of the operation.")
+  id: string;
+
+  @doc("The status of the operation")
+  status: State;
 }
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
