@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "body": {
+      "from": "+18003145821",
+      "smsRecipients": [ "+11234567890", "+11234567891", "+112345678910" ],
+      "message": "Hey, Let's go for Dinner",
+      "SendSmsOptions": {
+        "enableDeliveryReport": true
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {},
+      "body": {
+        "details": [
+          {
+            "to": "+11234567890",
+            "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
+            "httpStatusCode": "202",
+            "successful": true
+          },
+          {
+            "to": "+11234567891",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
+            "httpStatusCode": "202",
+            "successful": true
+          },
+          {
+            "to": "+112345678910",
+            "httpStatusCode": "400",
+            "errorMessage": "Invalid To phone number format.",
+            "successful": false
+          }
+        ]
+      }
+    }
+  }
+}
