@@ -52,7 +52,7 @@ op getChatCompletions is ResourceAction<
   ChatCompletions
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "because"
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Allowed because this is a non-standard status polling operation."
 @doc("Returns the status of the images operation")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @route("/operations/images/{operationId}")
