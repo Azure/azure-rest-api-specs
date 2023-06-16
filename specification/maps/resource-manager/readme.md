@@ -285,6 +285,7 @@ directive:
     from: maps-management.json
     reason: standard property being applied to all azure resources.
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    from: maps-management.json
     where:
       - '$.paths["/subscriptions/{}/resourceGroups/{}/moveResources"].post'
       - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources"].post'
