@@ -76,3 +76,13 @@ These settings apply only when `--tag=release_2023_06_01_preview_autogen` is spe
 ``` yaml $(tag) == 'release_2023_06_01_preview_autogen'
 input-file: preview/2023-06-01-preview/generated.json
 ```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive:
+  - suppress: LroExtension
+    reason: https://github.com/Azure/typespec-azure/issues/3194
+```
+

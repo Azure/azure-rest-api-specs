@@ -51,7 +51,7 @@ enum ServiceApiVersions {
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
 model Deployment {
-  @visibility("read")
+  @visibility("query")
   @doc("deployment id of the deployed model")
   @key
   deploymentId: string;

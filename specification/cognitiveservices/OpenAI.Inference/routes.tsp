@@ -17,7 +17,6 @@ using Azure.Core;
 namespace Azure.OpenAI;
 
 @doc("Return the embeddings for a given prompt.")
-@added(ServiceApiVersions.v2022_12_01)
 @actionSeparator("/")
 @action("embeddings") //@convenientAPI(true)
 op getEmbeddings is Azure.Core.ResourceAction<
@@ -31,7 +30,6 @@ Gets completions for the provided input prompts.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-@added(ServiceApiVersions.v2022_12_01)
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
