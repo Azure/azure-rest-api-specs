@@ -18,9 +18,9 @@ namespace Azure.OpenAI;
 @TypeSpec.Rest.actionSeparator("/")
 @action("embeddings") //@convenientAPI(true)
 op getEmbeddings is Azure.Core.ResourceAction<
-    Deployment,
-    EmbeddingsOptions,
-    Embeddings
+  Deployment,
+  EmbeddingsOptions,
+  Embeddings
 >;
 
 @doc("""
@@ -31,9 +31,9 @@ provided prompt data.
 @TypeSpec.Rest.actionSeparator("/")
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
-    Deployment,
-    CompletionsOptions,
-    Completions
+  Deployment,
+  CompletionsOptions,
+  Completions
 >;
 
 @doc("""
@@ -44,7 +44,7 @@ provided prompt data.
 @TypeSpec.Rest.actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)
 op getChatCompletions is Azure.Core.ResourceAction<
-    Deployment,
-    ChatCompletionsOptions,
-    ChatCompletions
+  Deployment,
+  ChatCompletionsOptions,
+  ChatCompletions
 >;
