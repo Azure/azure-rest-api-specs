@@ -284,4 +284,9 @@ directive:
       - $.definitions.Dimension.properties.toBeExportedToShoebox
     from: maps-management.json
     reason: standard property being applied to all azure resources.
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    where:
+      - '$.paths["/subscriptions/{}/resourceGroups/{}/moveResources"].post'
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources"].post'
+    reason: ARM provides the specification for resource move operation. Hence, the operation has been removed from versions after 2018-05-01.
 ```
