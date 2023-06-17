@@ -40,6 +40,57 @@ directive:
 
 ``` 
 
+### Tag: package-2023-07-01
+
+These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-01'
+input-file:
+  - Microsoft.Maps/Alias/stable/2023-07-01/alias.json
+  - Microsoft.Maps/Dataset/stable/2023-07-01/dataset.json
+  - Microsoft.Maps/DwgConversion/stable/2023-07-01/dwgconversion.json
+  - Microsoft.Maps/Features/stable/2023-07-01/features.json
+  - Microsoft.Maps/FeatureState/stable/2023-07-01/featurestate.json
+  - Microsoft.Maps/MapConfiguration/stable/2023-07-01/mapconfiguration.json
+  - Microsoft.Maps/Style/stable/2023-07-01/style.json
+  - Microsoft.Maps/Tileset/stable/2023-07-01/tileset.json
+```
+
+### Tag: package-preview-2023-03-01
+
+These settings apply only when `--tag=package-preview-2023-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03-01'
+input-file:
+  - Microsoft.Maps/Alias/preview/2023-03-01-preview/alias.json
+  - Microsoft.Maps/Dataset/preview/2023-03-01-preview/dataset.json
+  - Microsoft.Maps/DwgConversion/preview/2023-03-01-preview/dwgconversion.json
+  - Microsoft.Maps/Features/preview/2023-03-01-preview/features.json
+  - Microsoft.Maps/FeatureState/preview/2023-03-01-preview/featurestate.json
+  - Microsoft.Maps/MapConfiguration/preview/2023-03-01-preview/mapconfiguration.json
+  - Microsoft.Maps/Style/preview/2023-03-01-preview/style.json
+  - Microsoft.Maps/Tileset/preview/2023-03-01-preview/tileset.json
+  - Microsoft.Maps/Routeset/preview/2023-03-01-preview/routeset.json
+  - Microsoft.Maps/Wayfinding/preview/2023-03-01-preview/wayfinding.json
+```
+
+### Tag: package-preview-2022-09-01
+
+These settings apply only when `--tag=package-preview-2022-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09-01'
+input-file:
+  - Microsoft.Maps/Alias/preview/2.0/alias.json
+  - Microsoft.Maps/Dataset/preview/2022-09-01-preview/dataset.json
+  - Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
+  - Microsoft.Maps/Features/preview/2.0/features.json
+  - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
+  - Microsoft.Maps/MapConfiguration/preview/2022-09-01-preview/mapconfiguration.json
+  - Microsoft.Maps/Style/preview/2022-09-01-preview/style.json
+  - Microsoft.Maps/Tileset/preview/2022-09-01-preview/tileset.json
+  - Microsoft.Maps/Routeset/preview/2022-09-01-preview/routeset.json
+  - Microsoft.Maps/Wayfinding/preview/2022-09-01-preview/wayfinding.json
+```
 
 ### Tag: package-preview-2.0
 
