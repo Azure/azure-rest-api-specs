@@ -34,6 +34,117 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListAllBuiltins",
+        "summary": "Lists all built-in policy definition versions.",
+        "description": "This operation lists all the built-in policy definition versions for all built-in policy definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListAllAtManagementGroup",
+        "summary": "Lists all policy definition versions at management group scope.",
+        "description": "This operation lists all the policy definition versions for all policy definitions at the management group scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "operationId": "PolicyDefinitionVersions_ListAll",
+        "summary": "Lists all policy definition versions within a subscription.",
+        "description": "This operation lists all the policy definition versions for all policy definitions within a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy definition versions.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions/{version}": {
       "put": {
         "tags": [
@@ -396,7 +507,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of policy definitions.",
+            "description": "OK - Returns an array of policy definition versions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionVersionListResult"
             }
@@ -431,7 +542,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of built-in policy definitions.",
+            "description": "OK - Returns an array of built-in policy definition versions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionVersionListResult"
             }
@@ -469,7 +580,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of policy definitions.",
+            "description": "OK - Returns an array of policy definition versions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionVersionListResult"
             }
