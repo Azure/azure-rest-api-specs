@@ -1,38 +1,38 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "Microsoft Defender for Cloud",
-		"description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-		"version": "2023-07-01-preview"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
-			]
-		}
-	],
-	"securityDefinitions": {
-		"azure_auth": {
-			"type": "oauth2",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"flow": "implicit",
-			"description": "Azure Active Directory OAuth2 Flow",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
-			}
-		}
-	},
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2023-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/{scope}/providers/Microsoft.Security/applicationMappingRule/{ruleId}/applications/{applicationId}": {
       "get": {
