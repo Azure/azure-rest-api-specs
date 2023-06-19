@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2023-06-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-06-15-preview'
 input-file:
-  - preview/package-2023-06-15-preview/communicationservicescallautomation.json
+  - preview/2023-06-15-preview/communicationservicescallautomation.json
 title:
   Azure Communication Services
 ```
