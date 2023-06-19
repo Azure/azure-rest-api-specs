@@ -52,9 +52,9 @@ input-file:
 
 ### Tag: package-2022-08-preview
 
-These settings apply only when `--tag=package-2022-08-31-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-08-31-preview'
+``` yaml $(tag) == 'package-2022-08-preview'
 input-file:
 - Microsoft.HardwareSecurityModules/preview/2022-08-31-preview/cloudhsm.json
 - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
