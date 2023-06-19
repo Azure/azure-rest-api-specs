@@ -1,13 +1,13 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -27,28 +27,36 @@ model DeviceGroup is ProxyResource<DeviceGroupProperties> {
 }
 
 interface ProxyResourceOperationsDeviceGroups<
-    TResource extends ArmResource,
-    TListParameters extends object = {}>{
-        @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-        list is ArmResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>;
-        @doc("Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-        get is ArmResourceRead<DeviceGroup>;
-        @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-        createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
-        @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-        delete is ArmResourceDeleteAsync<DeviceGroup>;
-        @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-        update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
-    }
+  TResource extends ArmResource,
+  TListParameters extends {} = {}
+> {
+  @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+  list is ArmResourceListByParent<
+    TResource,
+    TListParameters & BaseParameters<TResource>
+  >;
+  @doc("Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  get is ArmResourceRead<DeviceGroup>;
+  @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+  @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  delete is ArmResourceDeleteAsync<DeviceGroup>;
+  @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
+}
 
 @armResourceOperations
-interface DeviceGroups extends ProxyResourceOperationsDeviceGroups<DeviceGroup, ListQueryParameters> {
+interface DeviceGroups
+  extends ProxyResourceOperationsDeviceGroups<
+      DeviceGroup,
+      ListQueryParameters
+    > {
   @autoRoute
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   @armResourceAction(DeviceGroup)
   @post
-  op countDevices(
-    ...ResourceInstanceParameters<DeviceGroup>,
+  countDevices(
+    ...ResourceInstanceParameters<DeviceGroup>
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 
   @autoRoute
@@ -56,16 +64,18 @@ interface DeviceGroups extends ProxyResourceOperationsDeviceGroups<DeviceGroup, 
   @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
   @extension("x-ms-long-running-operation", true)
   @extension(
-      "x-ms-long-running-operation-options",
-      {
-        "final-state-via": "location",
-      }
-    )
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
   @post
-  op claimDevices(
-    ...ResourceInstanceParameters<DeviceGroup>, 
+  claimDevices(
+    ...ResourceInstanceParameters<DeviceGroup>,
+
     @doc("Bulk claim devices request body.")
-    @body claimDevicesRequest: ClaimDevicesRequest
+    @body
+    claimDevicesRequest: ClaimDevicesRequest
   ): ArmAcceptedResponse | ErrorResponse;
 }
 
@@ -82,7 +92,7 @@ model DeviceGroupProperties {
 
   @doc("Flag to define if the user allows for crash dump collection.")
   allowCrashDumpsCollection?: AllowCrashDumpCollection;
-  
+
   @doc("Regional data boundary for the device group.")
   regionalDataBoundary?: RegionalDataBoundary;
 
@@ -97,14 +107,18 @@ model DeviceGroupProperties {
 
 @doc("OS feed type values.")
 enum OSFeedType {
+  /** Retail OS feed type. */
   Retail,
-  RetailEval
+  /** Retail evaluation OS feed type. */
+  RetailEval,
 }
 
 @doc("Update policy values.")
 enum UpdatePolicy {
+  /** Update all policy. */
   UpdateAll,
-  No3rdPartyAppUpdates
+  /** No update for 3rd party app policy. */
+  No3rdPartyAppUpdates,
 }
 
 // Device group models
@@ -112,5 +126,5 @@ enum UpdatePolicy {
 @doc("Request to the action call to bulk claim devices.")
 model ClaimDevicesRequest {
   @doc("Device identifiers of the devices to be claimed.")
-  deviceIdentifiers: string[]
+  deviceIdentifiers: string[];
 }
