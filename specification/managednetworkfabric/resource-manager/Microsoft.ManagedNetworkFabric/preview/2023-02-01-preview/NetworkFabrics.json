@@ -836,17 +836,15 @@
         },
         "ipv4Prefix": {
           "type": "string",
-          "description": "IPv4Prefix for Management Network. Default value : 10.1.0.0/19.",
+          "description": "IPv4Prefix for Management Network. Example: 10.1.0.0/19.",
           "x-ms-mutability": [
             "create",
             "read"
-          ],
-          "default": "10.1.0.0/19"
+          ]
         },
         "ipv6Prefix": {
           "type": "string",
-          "description": "IPv6Prefix for Management Network. Default value 3FFE:FFFF:0:CD40::/59.",
-          "default": "3FFE:FFFF:0:CD40::/59",
+          "description": "IPv6Prefix for Management Network. Example: 3FFE:FFFF:0:CD40::/59.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -931,7 +929,7 @@
                 }
               },
               "required": [
-                "optionBProperties"
+                "peeringOption"
               ]
             },
             "workloadVpnConfiguration": {
@@ -960,7 +958,7 @@
                 }
               },
               "required": [
-                "optionBProperties"
+                "peeringOption"
               ]
             }
           }
@@ -1098,6 +1096,19 @@
       "type": "object",
       "description": "Configuration used to setup CE-PE connectivity.",
       "properties": {
+        "nniType": {
+          "type": "string",
+          "description": "Type of NNI used. Example: CE | NPB",
+          "default": "CE",
+          "enum": [
+            "CE",
+            "NPB"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "nniType"
+          }
+        },
         "administrativeState": {
           "description": "Gets the administrativeState of the resource. Example -Enabled/Disabled",
           "$ref": "./common.json#/definitions/EnabledDisabledState"
@@ -1169,7 +1180,7 @@
           "format": "int32",
           "minimum": 501,
           "maximum": 4095,
-          "description": "Vlan Id.Example : 501"
+          "description": "Vlan identifier. Example : 501"
         },
         "peerASN": {
           "type": "integer",
@@ -1205,7 +1216,7 @@
     },
     "OptionBProperties": {
       "type": "object",
-      "description": "Option B configuration to be used for management vpn.",
+      "description": "Option B configuration.",
       "properties": {
         "importRouteTargets": {
           "type": "array",
@@ -1307,23 +1318,19 @@
       "properties": {
         "primaryIpv4Prefix": {
           "type": "string",
-          "description": "IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.31.0.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "172.31.0.0/31"
+          "description": "IPv4 Address Prefix of CE-PE interconnect links. Example: 172.31.0.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "primaryIpv6Prefix": {
           "type": "string",
-          "description": "IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a0/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "3FFE:FFFF:0:CD30::a0/126"
+          "description": "IPv6 Address Prefix of CE-PE interconnect links. Example: 3FFE:FFFF:0:CD30::a0/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "secondaryIpv4Prefix": {
           "type": "string",
-          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.31.0.20/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "172.31.0.20/31"
+          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Example: 172.31.0.20/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         },
         "secondaryIpv6Prefix": {
           "type": "string",
-          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a4/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces.",
-          "default": "3FFE:FFFF:0:CD30::a4/126"
+          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Example: 3FFE:FFFF:0:CD30::a4/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
         }
       }
     }
