@@ -528,7 +528,6 @@ run.
 """)
   @route("/test-runs/{testRunId}/app-components")
   @get
-  @projectedName("json", "TestRun_ListAppComponents")
   GetAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
