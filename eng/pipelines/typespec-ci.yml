@@ -16,9 +16,12 @@ pr:
     - eng/pipelines/templates/steps/typespec-ci.yml
     - specification/contosowidgetmanager
     - specification/cognitiveservices
+    - specification/confidentialledger
     - specification/containerservice
+    - specification/containerstorage
     - specification/eventgrid
     - specification/servicenetworking
+    - specification/sphere
     - specification/translation
 
 jobs:
@@ -72,8 +75,18 @@ jobs:
 
   - template: templates/steps/typespec-ci.yml
     parameters:
+      Folder: specification/confidentialledger/Microsoft.ManagedCcf
+      DisplayName: ManagedCcf
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
       Folder: specification/containerservice/Fleet.Management
       DisplayName: Fleet.Management
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/containerstorage/ContainerStorage.Management
+      DisplayName: ContainerStorage.Management
 
   - template: templates/steps/typespec-ci.yml
     parameters:
@@ -84,6 +97,11 @@ jobs:
     parameters:
       Folder: specification/servicenetworking/ServiceNetworking.Management
       DisplayName: Microsoft.ServiceNetworking
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/sphere/Sphere.Management
+      DisplayName: Sphere.Management
 
   - template: templates/steps/typespec-ci.yml
     parameters:
