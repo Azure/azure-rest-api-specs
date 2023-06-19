@@ -1,12 +1,12 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -25,24 +25,26 @@ model Certificate is ProxyResource<CertificateProperties> {
 }
 
 @armResourceOperations
-interface Certificates extends ProxyResourceOperationsReadList<Certificate, ListQueryParameters> {
-
+interface Certificates
+  extends ProxyResourceOperationsReadList<Certificate, ListQueryParameters> {
   @autoRoute
   @doc("Retrieves cert chain.")
   @armResourceAction(Certificate)
   @post
-  op retrieveCertChain(
-    ...ResourceInstanceParameters<Certificate>,
+  retrieveCertChain(
+    ...ResourceInstanceParameters<Certificate>
   ): ArmResponse<CertificateChainResponse> | ErrorResponse;
 
   @autoRoute
   @armResourceAction(Certificate)
   @post
   @doc("Gets the proof of possession nonce.")
-  op retrieveProofOfPossessionNonce(
-    ...ResourceInstanceParameters<Certificate>, 
+  retrieveProofOfPossessionNonce(
+    ...ResourceInstanceParameters<Certificate>,
+
     @doc("Proof of possession nonce request body ")
-    @body proofOfPossessionNonceRequest: ProofOfPossessionNonceRequest
+    @body
+    proofOfPossessionNonceRequest: ProofOfPossessionNonceRequest
   ): ArmResponse<ProofOfPossessionNonceResponse> | ErrorResponse;
 }
 
@@ -66,11 +68,11 @@ model CertificateProperties {
 
   @visibility("read")
   @doc("The certificate expiry date.")
-  expiryUtc?: zonedDateTime;
+  expiryUtc?: utcDateTime;
 
   @visibility("read")
   @doc("The certificate not before date.")
-  notBeforeUtc?: zonedDateTime;
+  notBeforeUtc?: utcDateTime;
 
   @visibility("read")
   @doc("The status of the last operation.")

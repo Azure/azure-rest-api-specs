@@ -1,13 +1,13 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -28,21 +28,25 @@ model Device is ProxyResource<DeviceProperties> {
 }
 
 interface ProxyResourceOperationsDevice<
-    TResource extends ArmResource,
-    TListParameters extends object = {}>{
-        @doc("Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.")
-        get is ArmResourceRead<Device>;
-        @doc("Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.")
-        createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
-        @doc("List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-        list is ArmResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>;
-        delete is ArmResourceDeleteAsync<Device>;
-        @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
-        update is CustomArmResourcePatchAsync<Device, DevicePatchProperties>;
-    }
+  TResource extends ArmResource,
+  TListParameters extends {} = {}
+> {
+  @doc("Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.")
+  get is ArmResourceRead<Device>;
+  @doc("Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
+  @doc("List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  list is ArmResourceListByParent<
+    TResource,
+    TListParameters & BaseParameters<TResource>
+  >;
+  delete is ArmResourceDeleteAsync<Device>;
+  @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
+  update is CustomArmResourcePatchAsync<Device, DevicePatchProperties>;
+}
 
 @armResourceOperations
-interface Devices extends ProxyResourceOperationsDevice<Device>{
+interface Devices extends ProxyResourceOperationsDevice<Device> {
   @autoRoute
   @armResourceAction(Device)
   @post
@@ -51,19 +55,20 @@ interface Devices extends ProxyResourceOperationsDevice<Device>{
   @extension(
     "x-ms-long-running-operation-options",
     {
-      "final-state-via": "location",
+      `final-state-via`: "location",
     }
   )
-  op generateCapabilityImage(
-    ...ResourceInstanceParameters<Device>, 
+  generateCapabilityImage(
+    ...ResourceInstanceParameters<Device>,
+
     @doc("Generate capability image request body.")
-    @body generateDeviceCapabilityRequest: GenerateCapabilityImageRequest
+    @body
+    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest
   ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
 }
 
 @doc("The properties of device")
 model DeviceProperties {
-
   @doc("Device ID")
   @visibility("create", "read")
   deviceId?: string;
@@ -82,11 +87,11 @@ model DeviceProperties {
 
   @doc("Time when update requested and new OS version available")
   @visibility("read")
-  lastOsUpdateUtc?: zonedDateTime;
+  lastOsUpdateUtc?: utcDateTime;
 
   @doc("Time when update was last requested")
   @visibility("read")
-  lastUpdateRequestUtc?: zonedDateTime;
+  lastUpdateRequestUtc?: utcDateTime;
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -109,8 +114,10 @@ model SignedCapabilityImageResponse {
 
 @doc("Capability image type")
 enum CapabilityType {
+  /** Application development capability */
   ApplicationDevelopment,
-  FieldServicing
+  /** Field servicing capability */
+  FieldServicing,
 }
 
 @doc("The properties of device patch")

@@ -1,13 +1,12 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -26,22 +25,25 @@ model Image is ProxyResource<ImageProperties> {
 }
 
 @armResourceOperations
-interface Images extends ProxyResourceOperationsReadListCreateDelete<Image, ListQueryParameters> {}
+interface Images
+  extends ProxyResourceOperationsReadListCreateDelete<
+      Image,
+      ListQueryParameters
+    > {}
 
 @doc("The properties of image")
 model ImageProperties {
-
   @doc("Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.")
   @visibility("create", "read")
-  image?: string,
+  image?: string;
 
   @doc("Image ID")
   @visibility("create", "read")
-  imageId?: string,
+  imageId?: string;
 
   @doc("Image name")
   @visibility("read")
-  imageName?: string,
+  imageName?: string;
 
   @doc("Regional data boundary for an image")
   @visibility("create", "read")
@@ -71,33 +73,57 @@ model ImageProperties {
 @doc("Image upload request body.")
 model ImageUploadRequestBody {
   @doc(".")
-  images: string
+  images: string;
 }
 
 @doc("Image type values.")
 enum ImageType {
+  /** Invalid image. */
   InvalidImageType,
+  /** One Bl image type */
   OneBl,
+  /** Pluton image type */
   PlutonRuntime,
+  /** Wifi firmware image type */
   WifiFirmware,
+  /** Security monitor image type */
   SecurityMonitor,
+  /** Normal world loader image type */
   NormalWorldLoader,
+  /** Normal world dtb image type */
   NormalWorldDtb,
+  /** Normal world kernel image type */
   NormalWorldKernel,
+  /** Root FS image type */
   RootFs,
+  /** Services image type */
   Services,
+  /** Applications image type */
   Applications,
+  /** FW config image type */
   FwConfig,
+  /** Boot manifest image type */
   BootManifest,
+  /** Nwfs image type */
   Nwfs,
+  /** Trusted key store image type */
   TrustedKeystore,
+  /** Policy image type */
   Policy,
+  /** Customer board config image type */
   CustomerBoardConfig,
+  /** Update certificate store image type */
   UpdateCertStore,
+  /** Base system update manifest image type */
   BaseSystemUpdateManifest,
+  /** Firmware update manifest image type */
   FirmwareUpdateManifest,
+  /** Customer update manifest image type */
   CustomerUpdateManifest,
+  /** Recovery manifest image type */
   RecoveryManifest,
+  /** manifest set image type */
   ManifestSet,
-  Other
+  /** Other image type */
+  Other,
 }
