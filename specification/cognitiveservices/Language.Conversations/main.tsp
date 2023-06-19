@@ -124,16 +124,14 @@ model NoneLinkedTargetIntentResult extends TargetIntentResult {
 
 @doc("This is a set of request parameters for LUIS Generally Available projects.")
 model LuisParameters extends Record<unknown> {
-  //@doc("This is a set of request parameters for LUIS Generally Available projects.")
-  //targetProjectKind: targetProjectKind.Luis;
   ...AnalysisParameters;
 
   @doc("The utterance to predict.")
   @maxLength(500)
-  query: string;
+  query?: string;
 
   @doc("This customizes how the service calls LUIS Generally Available projects.")
-  callingOptions: LuisCallingOptions;
+  callingOptions?: LuisCallingOptions;
 }
 
 @doc("This customizes how the service calls LUIS Generally Available projects.")
@@ -417,6 +415,8 @@ model CurrencyResolution extends BaseResolution {
 model BooleanResolution extends BaseResolution {
   @doc("A resolution for boolean expressions")
   resolutionKind: resolutionKind.BooleanResolution;
+
+  @doc("A resolution for boolean expressions")
   value: boolean;
 }
 
@@ -469,7 +469,11 @@ model OrdinalResolution extends BaseResolution {
 model TemporalSpanResolution extends BaseResolution {
   @doc("represents the resolution of a date and/or time span.")
   resolutionKind: resolutionKind.TemporalSpanResolution;
+
+  @doc("represents the resolution of a date and/or time span.")
   begin: TimeExpression;
+
+  @doc("represents the resolution of a date and/or time span.")
   end: TimeExpression;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")

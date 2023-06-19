@@ -382,7 +382,8 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "A resolution for boolean expressions"
         }
       },
       "description": "A resolution for boolean expressions",
@@ -1025,7 +1026,7 @@
           "type": "string",
           "description": "Source of QnA result."
         },
-        "metadeta": {
+        "metadata": {
           "$ref": "#/definitions/object",
           "description": "Metadata associated with the answer, useful to categorize or filter question answers."
         },
@@ -1045,7 +1046,7 @@
         "confidenceScore",
         "id",
         "source",
-        "metadeta",
+        "metadata",
         "dialog",
         "answerSpan"
       ]
@@ -1257,9 +1258,7 @@
       },
       "description": "This is a set of request parameters for LUIS Generally Available projects.",
       "required": [
-        "targetProjectKind",
-        "query",
-        "callingOptions"
+        "targetProjectKind"
       ],
       "allOf": [
         {
@@ -1810,10 +1809,12 @@
       "type": "object",
       "properties": {
         "begin": {
-          "$ref": "#/definitions/TimeExpression"
+          "$ref": "#/definitions/TimeExpression",
+          "description": "represents the resolution of a date and/or time span."
         },
         "end": {
-          "$ref": "#/definitions/TimeExpression"
+          "$ref": "#/definitions/TimeExpression",
+          "description": "represents the resolution of a date and/or time span."
         },
         "duration": {
           "type": "string",

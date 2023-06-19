@@ -99,7 +99,7 @@ model KnowledgeBaseAnswer {
     source: string;
 
     @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
-    metadeta: object;
+    metadata: object;
 
     @doc("Dialog associated with Answer.")
     dialog: KnowledgeBaseAnswerDialog;
@@ -199,7 +199,10 @@ model KnowledgeBaseAnswerContext {
 
 @doc("filters over knowledge base.")
 model QueryFilters {
+    @doc("filters over knowledge base.")
     metadataFilter: MetadataFilter;
+
+    @doc("filters over knowledge base.")
     sourceFilter: SourceFilter;
 
     @doc("Logical operation used to join metadata filter with source filter.")
@@ -208,6 +211,7 @@ model QueryFilters {
 
 @doc("Find QnAs that are associated with the given list of metadata.")
 model MetadataFilter {
+    @doc("List of metadata.")
     metadata: Array<MetadataRecord>;
 
     @doc("Operation used to join metadata filters.")
@@ -225,6 +229,7 @@ model MetadataRecord {
 
 @doc("Find QnAs that are associated with any of the given list of sources in knowledge base.")
 model SourceFilter {
+    @doc("List of sources in knowledge base.")
     type: Array<string>;
 }
 
