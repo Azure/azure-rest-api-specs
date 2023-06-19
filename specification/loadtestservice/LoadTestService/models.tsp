@@ -498,7 +498,7 @@ model ResourceMetric {
 
 @doc("Load test run model")
 @resource("test-runs")
-model TestRun {
+model TestRuns {
   // FIXME: is testRunId optional or required in the response? Resource key and path params cannot be optional
   @key
   @path
@@ -508,8 +508,8 @@ model TestRun {
 }
 
 @doc("Load test run model")
-model TestRunInfo {
-  ...TestRun,
+model TestRun {
+  ...TestRuns,
 
   @doc("Pass fail criteria for a test.")
   passFailCriteria?: PassFailCriteria;
@@ -836,13 +836,11 @@ model DimensionValue {
 @parentResource(Dimension)
 model DimensionValueList {
   @key
-  value: {
-    items: DimensionValue[]
-  };
+  value: string[];
 }
 
 @resource("metric-dimensions")
-@parentResource(TestRun)
+@parentResource(TestRuns)
 model Dimension {
   @key
   @doc("Dimension name")
