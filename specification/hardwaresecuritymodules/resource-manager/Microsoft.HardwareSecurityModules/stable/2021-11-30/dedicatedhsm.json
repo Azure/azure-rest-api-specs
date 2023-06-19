@@ -706,7 +706,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/DedicatedHsmResource"
         }
       ],
       "required": [
@@ -749,7 +749,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Resource"
+            "$ref": "#/definitions/DedicatedHsmResource"
           },
           "description": "The list of dedicated HSM resources."
         },
@@ -791,7 +791,8 @@
       },
       "description": "The key vault server error."
     },
-    "Resource": {
+    "DedicatedHsmResource": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
