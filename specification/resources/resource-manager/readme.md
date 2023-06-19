@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 
 ``` yaml
 openapi-type: arm
-tag: package-changes-2022-05
+tag: package-subscriptions-2022-12
 ```
 
 ``` yaml $(package-privatelinks)
@@ -50,7 +50,7 @@ tag: package-resources-2022-09
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2021-01
+tag: package-subscriptions-2022-12
 ```
 
 ``` yaml $(package-links)
@@ -81,6 +81,56 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+
+### Tag: package-2022-12
+
+These settings apply only when `--tag=package-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12'
+input-file:
+  - Microsoft.Resources/stable/2022-12-01/subscriptions.json
+```
+
+### Tag: package-policy-2022-08-preview-only
+
+These settings apply only when `--tag=package-policy-2022-08-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2022-08-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2022-07-preview-only
+
+These settings apply only when `--tag=package-policy-2022-07-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2022-07-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2022-06-only
+
+These settings apply only when `--tag=package-policy-2022-06-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2022-06-only'
+input-file:
+- Microsoft.Authorization/stable/2022-06-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2022-06
 
 These settings apply only when `--tag=package-policy-2022-06` is specified on the command line.
@@ -107,6 +157,15 @@ These settings apply only when `--tag=package-changes-2023-03-01-preview` is spe
 ``` yaml $(tag) == 'package-changes-2023-03-01-preview'
 input-file:
 - Microsoft.Resources/preview/2023-03-01-preview/changes.json
+```
+
+### Tag: package-changes-2023-07-01-preview
+
+These settings apply only when `--tag=package-changes-2023-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2023-07-01-preview'
+input-file:
+- Microsoft.Resources/preview/2023-07-01-preview/changes.json
 ```
 
 ### Tag: package-snapshots-2022-11
@@ -149,6 +208,21 @@ input-file:
 - Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 - Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
 - Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2021-06-only
+
+These settings apply only when `--tag=package-policy-2021-06-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2021-06-only'
+input-file:
+- Microsoft.Authorization/stable/2021-06-01/policyAssignments.json
+- Microsoft.Authorization/stable/2021-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2021-06-01/policySetDefinitions.json
 
 # Needed when there is more than one input file
 override-info:
@@ -198,6 +272,23 @@ input-file:
 override-info:
   title: PolicyClient
 ```
+
+### Tag: package-policy-2020-09-only
+
+These settings apply only when `--tag=package-policy-2020-09-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2020-09-only'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+- Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-locks-2017-04
 
 These settings apply only when `--tag=package-locks-2017-04` is specified on the command line.
@@ -207,7 +298,6 @@ input-file:
 - Microsoft.Authorization/stable/2017-04-01/locks.json
 ```
 
-
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
@@ -215,6 +305,15 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 ``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
+```
+
+### Tag: package-subscriptions-2022-12
+
+These settings apply only when `--tag=package-subscriptions-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2022-12'
+input-file:
+- Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
 
 
@@ -226,7 +325,6 @@ These settings apply only when `--tag=package-subscriptions-2021-01` is specifie
 input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
-
 
 ### Tag: package-deploymentscripts-2020-10
 
@@ -296,6 +394,19 @@ input-file:
 - Microsoft.Authorization/stable/2020-03-01/policyAssignments.json
 - Microsoft.Authorization/stable/2020-03-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2020-03-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2020-07-preview-only
+
+These settings apply only when `--tag=package-policy-2020-07-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2020-07-preview-only'
+input-file:
 - Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 
 # Needed when there is more than one input file
@@ -398,6 +509,20 @@ override-info:
 These settings apply only when `--tag=package-pure-policy-2017-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-pure-policy-2017-06'
+input-file:
+- Microsoft.Authorization/preview/2017-06-01-preview/policyAssignments.json
+- Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2017-06-preview-only
+
+These settings apply only when `--tag=package-policy-2017-06-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2017-06-preview-only'
 input-file:
 - Microsoft.Authorization/preview/2017-06-01-preview/policyAssignments.json
 - Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json
@@ -973,6 +1098,12 @@ directive:
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
+  - suppress: ResourceNameRestriction
+    from: changes.json
+    reason: change resources cannot be created or named by end users
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    reason: Duplicate Operations API causes generation issues
   - from: resources.json
     suppress: R4009
     where:
@@ -1002,6 +1133,7 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -1050,4 +1182,3 @@ input-file:
 override-info:
   title: PolicyClient
 ```
-
