@@ -13,7 +13,7 @@ The current stable release of Question Answering is 2021-10-01.
 The current stable release of Conversational Language Understanding and Language is 2022-05-01.
 
 ```yaml
-tag: release_2022_10_01_preview
+tag: release_2023-04-01
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -23,6 +23,24 @@ directive:
   - suppress: R3016
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
+```
+### Release 2023-04-01
+
+These settings apply only when `--tag=release_2023_04_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_04_01'
+input-file:
+  - stable/2023-04-01/analyzetext.json
+  - stable/2023-04-01/analyzetext-authoring.json
+  - stable/2023-04-01/analyzeconversations.json
+  - stable/2023-04-01/analyzeconversations-authoring.json
+  - stable/2023-04-01/questionanswering.json
+  - stable/2023-04-01/questionanswering-authoring.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+
 ```
 
 ### Release 2022-10-01-preview
