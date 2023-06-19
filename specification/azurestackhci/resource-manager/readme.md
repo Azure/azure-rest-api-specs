@@ -55,6 +55,7 @@ directive:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
+      - nodeConfiguration.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
@@ -75,6 +76,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/nodeConfiguration.json
 ```
 ### Tag: package-2023-03
 
