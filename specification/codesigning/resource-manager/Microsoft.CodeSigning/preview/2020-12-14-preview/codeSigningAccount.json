@@ -1,0 +1,1047 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CodeSigningManagementClient",
+    "description": "Code Signing Resource Provider Account and Certificate Profile management API.",
+    "version": "2020-12-14-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}": {
+      "put": {
+        "operationId": "CodeSigningAccount_Create",
+        "description": "Create a Code Signing Account",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create Code Signing Account": {
+            "$ref": "./examples/createCodeSigningAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "codeSigningAccount",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            },
+            "description": "Parameters to create the code signing account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ]
+      },
+      "patch": {
+        "operationId": "CodeSigningAccount_Update",
+        "description": "Update a code signing account",
+        "x-ms-examples": {
+          "Update Code Signing Account": {
+            "$ref": "./examples/updateCodeSigningAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "codeSigningAccountPatch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccountPatch"
+            },
+            "description": "Parameters supplied to update code signing account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ]
+      },
+      "get": {
+        "operationId": "CodeSigningAccount_Get",
+        "description": "Get a Code Signing Account",
+        "x-ms-examples": {
+          "Get Code Signing Account": {
+            "$ref": "./examples/getCodeSigningAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ]
+      },
+      "delete": {
+        "operationId": "CodeSigningAccount_Delete",
+        "description": "Delete Code Signing Account",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Code Signing Account": {
+            "$ref": "./examples/deleteCodeSigningAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Resource deletion is in progress"
+          },
+          "204": {
+            "description": "The resource was not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles": {
+      "get": {
+        "operationId": "CertificateProfile_ListByCodeSigningAccount",
+        "description": "List certificate profiles within a code signing account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "List Certificate Profiles": {
+            "$ref": "./examples/listCertificateProfiles.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Gets all code signing accounts in the specified resource group",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfiles"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts/{accountName}/certificateProfiles/{profileName}": {
+      "put": {
+        "operationId": "CertificateProfile_Create",
+        "description": "Create a certificate profile",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create Certificate Profile": {
+            "$ref": "./examples/createCertificateProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "certificateProfile",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            },
+            "description": "Parameters to create the certificate profile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create a certificate profile",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CertificateProfiles"
+        ]
+      },
+      "patch": {
+        "operationId": "CertificateProfile_Update",
+        "description": "Update a certificate profile",
+        "x-ms-examples": {
+          "Update Certificate Profile": {
+            "$ref": "./examples/updateCertificateProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "certificateProfilePatch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateProfilePatch"
+            },
+            "description": "Parameters supplied to update certificate profile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CertificateProfiles"
+        ]
+      },
+      "get": {
+        "operationId": "CertificateProfile_Get",
+        "description": "Get details of a certificate profile",
+        "x-ms-examples": {
+          "Get Certificate Profile": {
+            "$ref": "./examples/getCertificateProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CertificateProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CertificateProfiles"
+        ]
+      },
+      "delete": {
+        "operationId": "CertificateProfile_Delete",
+        "description": "Delete a Certificate Profile",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete Certificate Profile": {
+            "$ref": "./examples/deleteCertificateProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Resource deletion is in progress"
+          },
+          "204": {
+            "description": "The resource was not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CertificateProfiles"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/codeSigningAccounts": {
+      "get": {
+        "operationId": "CodeSigningAccount_ListBySubscription",
+        "description": "Lists Code Signing Accounts within a subscription",
+        "x-ms-examples": {
+          "List Code Signing Accounts by Subscription": {
+            "$ref": "./examples/listCodeSigningAccountsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all code signing accounts in the specified subscription",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccounts"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CodeSigning/codeSigningAccounts": {
+      "get": {
+        "operationId": "CodeSigningAccount_ListByResourceGroup",
+        "description": "List Code Signing Accounts within a resource group",
+        "x-ms-examples": {
+          "List Code Signing Accounts by Resource Group": {
+            "$ref": "./examples/listCodeSigningAccountsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all code signing accounts in the specified resource group",
+            "schema": {
+              "$ref": "#/definitions/CodeSigningAccounts"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CodeSigning/checkNameAvailability": {
+      "post": {
+        "operationId": "CodeSigningAccount_CheckNameAvailability",
+        "description": "Checks that the code signing account name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            },
+            "description": "The name of the code signing account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a code signing account name": {
+            "$ref": "./examples/checkAccountNameAvailability.json"
+          }
+        },
+        "tags": [
+          "CodeSigningAccounts"
+        ]
+      }
+    },
+    "/providers/Microsoft.CodeSigning/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all of the available API operations for code signing resource.",
+        "x-ms-examples": {
+          "List Code Signing Account operations": {
+            "$ref": "./examples/listCodeSigningAccountOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "tags": [
+          "Operations"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CodeSigningAccounts": {
+      "description": "The paginated list of code signing accounts",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of code signing accounts",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CodeSigningAccount"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of code signing account",
+          "type": "string"
+        }
+      }
+    },
+    "CodeSigningAccount": {
+      "description": "Code signing account resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CodeSigningAccountProperties",
+          "description": "Code signing account properties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CodeSigningAccountProperties": {
+      "description": "Properties of the code signing account",
+      "type": "object",
+      "properties": {
+        "accountUri": {
+          "description": "The URI of the code signing account for performing operations on certificate profiles. This property is readonly",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "CodeSigningAccountPatch": {
+      "description": "Parameters for creating or updating a code signing account",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CodeSigningAccountPatchProperties",
+          "description": "Properties of the code signing account"
+        }
+      }
+    },
+    "CodeSigningAccountPatchProperties": {
+      "description": "Properties of the code signing account",
+      "type": "object",
+      "properties": {
+        "accountUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Account Uri of the code signing account"
+        }
+      }
+    },
+    "CertificateProfiles": {
+      "description": "The paginated list of certificate profiles",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of certificate profiles",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateProfile"
+          }
+        },
+        "nextLink": {
+          "description": "The link to fetch the next page of certificate profile",
+          "type": "string"
+        }
+      }
+    },
+    "CertificateProfile": {
+      "description": "Certificate profile resource",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CertificateProfileProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CertificateProfileProperties": {
+      "description": "Properties of the certificate profile",
+      "type": "object",
+      "required": [
+        "profileType",
+        "rotationPolicy",
+        "commonName",
+        "organization"
+      ],
+      "properties": {
+        "profileType": {
+          "$ref": "#/definitions/ProfileType"
+        },
+        "rotationPolicy": {
+          "$ref": "#/definitions/RotationPolicy"
+        },
+        "commonName": {
+          "type": "string",
+          "description": "Used as CN in the subject name of the certificate"
+        },
+        "organization": {
+          "type": "string",
+          "description": "Used as O in the subject name of the certificate"
+        },
+        "streetAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true
+        },
+        "city": {
+          "type": "string",
+          "readOnly": true
+        },
+        "certificates": {
+          "readOnly": true,
+          "type": "array",
+          "x-ms-client-flatten": true,
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "Certificate": {
+      "description": "Properties of the certificate",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "Id of the certificate",
+          "type": "string"
+        },
+        "subjectName": {
+          "description": "Subject name of the certificate",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "Thumbprint of the certificate",
+          "type": "string"
+        },
+        "createdDate": {
+          "description": "Certificate created date",
+          "type": "string"
+        },
+        "expiryDate": {
+          "description": "Certificate expiry date",
+          "type": "string"
+        }
+      }
+    },
+    "CertificateProfilePatch": {
+      "type": "object",
+      "description": "Certificate Profile Patch Properties",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CertificateProfilePatchProperties",
+          "description": "Properties of the certificate profile"
+        }
+      }
+    },
+    "CertificateProfilePatchProperties": {
+      "description": "Properties of the certificate profile",
+      "type": "object",
+      "properties": {
+        "streetAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "country": {
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true
+        },
+        "city": {
+          "type": "string",
+          "readOnly": true
+        },
+        "certificates": {
+          "readOnly": true,
+          "type": "array",
+          "x-ms-client-flatten": true,
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the code signing account",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ProfileType": {
+      "description": "Profile type of the certificate",
+      "type": "string",
+      "enum": [
+        "PublicTrust",
+        "PrivateTrust"
+      ],
+      "x-ms-enum": {
+        "name": "ProfileType",
+        "modelAsString": true
+      }
+    },
+    "RotationPolicy": {
+      "description": "Rotation policy of the certificate",
+      "type": "string",
+      "enum": [
+        "30 Days"
+      ],
+      "x-ms-enum": {
+        "name": "RotationPolicy",
+        "modelAsString": true
+      }
+    },
+    "CheckNameAvailability": {
+      "description": "The parameters used to check the availability of the code signing account name.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Code signing account name."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "The CheckNameAvailability operation response.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason that a code signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+          "enum": [
+            "AccountNameInvalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An error message explaining the Reason value in more detail."
+        }
+      }
+    },
+    "OperationList": {
+      "description": "The paginated list of code signing API operations.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "The list of code signing API operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch the next page of code signing API operations."
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "The code signing API operation",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {Microsoft.CodeSigning}/{resource}/{operation}"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display payload",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider of the operation",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Code signing resource on which the operation is performed",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized friendly name for the operation read, write, etc",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AccountNameParameter": {
+      "name": "accountName",
+      "description": "Code Signing account name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ProfileNameParameter": {
+      "name": "profileName",
+      "description": "Certificate profile name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^(?=.{5,100}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
