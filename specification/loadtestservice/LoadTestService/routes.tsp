@@ -565,7 +565,6 @@ numeric, underscore or hyphen characters.
   @doc("List server metrics configuration for the given test run.")
   @route("/test-runs/{testRunId}/server-metrics-config")
   @get
-  @projectedName("json", "TestRun_ListServerMetricsConfig")
   GetServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
