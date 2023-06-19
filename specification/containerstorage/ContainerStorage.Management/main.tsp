@@ -1,17 +1,15 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi3";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-resource-manager";
 
-import "./custom_operations.cadl";
-
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using OpenAPI;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Microsoft.ContainerStorage.Custom;
 
 @armProviderNamespace
 @service({
@@ -47,28 +45,28 @@ model PoolProperties {
 
   @doc("Type of the Pool: ephemeral, disk, managed, or elasticsan.")
   poolType: PoolType;
-  
+
   @doc("List of availability zones that resources can be created in.")
   zones: string[];
 
   @doc("Initial capacity of the pool in GiB.")
   poolCapacityGiB: int64;
-
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
 
+
   @doc("List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.")
   assignments: string[];
-
   // Don't include in preview
   // @doc("Type of encryption. Allowed values: EncryptionAtRestWithPlatformKey.")
   // encryption: EncryptionType;
 
+
   @doc("Ephemeral Pool Properties")
   ephemeralPoolProperties?: EphemeralPoolProperties;
-
   // @doc("Managed Pool Properties")
   // managedPoolProperties?: ManagedPoolProperties;
+
 
   @doc("Disk Pool Properties")
   diskPoolProperties?: DiskPoolProperties;
@@ -110,15 +108,15 @@ model ElasticSanPoolProperties {
 
 @doc("Disk Pool Properties")
 model DiskPoolProperties {
-  // Don't include in preview 
+  // Don't include in preview
   // @doc("Name of the CSI provisioner, e.g. disk.csi.azure.com")
   // csiProvisioner?: string;
 
   @doc("List of KV pairs to set in StorageClass to configure CSI driver.")
   csiParams?: Record<string>;
-  
   // @doc("Initial capacity of disks. Application volumes must fit within single disks.")
   // diskCapacityRequest: int64;
+
 
   @doc("Maximum capacity of the volumes in GiB the user intends to create. Default 512.")
   maxVolumeCapacityGiB?: int64 = 512;
@@ -129,109 +127,142 @@ model DiskPoolProperties {
 
 @doc("Sku definition")
 model Sku {
-    @doc("Sku name")
-    name: SkuName;
+  @doc("Sku name")
+  name: SkuName;
 
-    @doc("Sku Account Tier")
-    tier: AccountTier;
+  @doc("Sku Account Tier")
+  tier: AccountTier;
 }
 
+/** Sku Name enum type */
 enum SkuName {
+  /** Invalid Sku */
   Invalid,
+  /** Premium_LRS Sku */
   Premium_LRS,
-  Premium_ZRS
+  /** Premium_ZRS Sku */
+  Premium_ZRS,
 }
 
+/** Account Tier */
 enum AccountTier {
+  /** Invalid Account Tier */
   Invalid,
+  /** Standard Tier */
   Standard,
+  /** Premium Tier */
   Premium,
-  Ultra
+  /** Ultra Tier */
+  Ultra,
 }
 
 @doc("Network Rule Set definition")
 model NetworkRuleSet {
-    @doc("Default action")
-    defaultAction: Action;
+  @doc("Default action")
+  defaultAction: Action;
 
-    @doc("Virtual network rules")
-    virtualNetworkRules: VirtualNetworkRule[];
+  @doc("Virtual network rules")
+  virtualNetworkRules: VirtualNetworkRule[];
 }
 
 @doc("Virtual Network Rule definition")
 model VirtualNetworkRule {
-    @doc("Action of rule")
-    action?: Action = Action.Allow;
+  @doc("Action of rule")
+  action?: Action = Action.Allow;
 
-    @doc("Id of rule")
-    id: string;
+  @doc("Id of rule")
+  id: string;
 }
 
+/** Action Enum */
 enum Action {
-    Deny,
-    Allow
+  /** Deny Action */
+  Deny,
+  /** Allow Action */
+  Allow,
 }
 
+/** Protocol Type */
 enum ProtocolType {
-    None,
-    iSCSI
+  /** No Protocol */
+  None,
+  /** iSCSI protocol */
+  iSCSI,
 }
 
+/** Encryption Type */
 enum EncryptionType {
-    EncryptionAtRestWithPlatformKey
+  /** Encryption at rest with platform key */
+  EncryptionAtRestWithPlatformKey,
 }
 
+/** Pool Type */
 enum PoolType {
+  /** Ephemeral Pool */
   Ephemeral: 1,
+  /** Disk Pool */
   Disk: 2,
+  /** Managed Pool */
   Managed: 3,
-  ElasticSan: 4 
+  /** ElasticSan Pool */
+  ElasticSan: 4,
 }
 
+/** Volume binding mode */
 enum VolumeBindingMode {
+  /** Immediate binding */
   Immediate,
-  WaitFirstForCustomer
+  /**  Wait for customer to bind */
+  WaitFirstForCustomer,
 }
 
 @doc("Disk Properties Model")
 model DiskProperties {
-    @doc("Reference to Managed Disk")
-    resourceId: string;
+  @doc("Reference to Managed Disk")
+  resourceId: string;
 
-    @doc("Manufacturer Disk ID")
-    wwn: string;
+  @doc("Manufacturer Disk ID")
+  wwn: string;
 
-    @doc("Capacity of disk in GiB")
-    capacityGiB: int64;
+  @doc("Capacity of disk in GiB")
+  capacityGiB: int64;
 
-    @doc("Type of disk")
-    diskType: DiskType;
+  @doc("Type of disk")
+  diskType: DiskType;
 
-    @doc("SKU or Manufacturer type/name")
-    displayName: string;
+  @doc("SKU or Manufacturer type/name")
+  displayName: string;
 
-    @doc("Name of the node disk is attached on")
-    nodeName: string;
+  @doc("Name of the node disk is attached on")
+  nodeName: string;
 
-    @doc("Used to import SSD to discover WWN")
-    devicePath: string;
+  @doc("Used to import SSD to discover WWN")
+  devicePath: string;
 }
 
+/** Disk Type */
 enum DiskType {
+  /** Local Disk Type */
   Local,
-  Managed
+  /** Managed Disk Type */
+  Managed,
 }
-
 
 @doc("Provisioning state of the resource.")
 @Azure.Core.lroStatus
 enum ProvisioningState {
-  Succeeded,
-  Failed,
-  Canceled,
+  ...ResourceProvisioningState,
+
+  @doc("The resource is being provisioned")
   Provisioning,
+
+  @doc("The resource is updating")
   Updating,
+
+  @doc("The resource is being deleted")
   Deleting,
+
+  @doc("The resource create request has been accepted")
   Accepted,
 }
 
@@ -243,22 +274,21 @@ enum ProvisioningState {
 model Volume is ProxyResource<VolumeProperties> {
   @doc("Volume Resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-
   @key("volumeName")
   @path
   @segment("volumes")
   name: string;
 }
-  
+
 @doc("Volume Properties")
 model VolumeProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
   // Will not have features enabled by these flags for preview
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
+
 
   @doc("String KV pairs indicating labels")
   labels: Record<string>;
@@ -268,7 +298,6 @@ model VolumeProperties {
 
   @doc("Indicates how the volume should be attached")
   volumeMode: VolumeMode;
-
   // Set default to RWO in RP and pass it through
   // @doc("Indicates how the volume can be accessed")
   // accessMode: AccessMode;
@@ -276,6 +305,7 @@ model VolumeProperties {
   // Don't support replication for preview
   // @doc("Number of replicas")
   // replicas: int64;
+
 
   @doc("Reclaim Policy, Delete or Retain")
   reclaimPolicy: ReclaimPolicy;
@@ -288,21 +318,32 @@ model VolumeProperties {
   // placementProperties: PlacementProperties;
 }
 
+/** Storage volume mode  */
 enum VolumeMode {
+  /** FileSystem volume mode */
   Filesystem,
-  Raw
+  /** Raw volume mode */
+  Raw,
 }
 
+/** Access mode */
 enum AccessMode {
+  /** Read Write Once */
   ReadWriteOnce,
+  /** Read Only Many */
   ReadOnlyMany,
+  /** Read Write Many */
   ReadWriteMany,
-  ReadWriteOncePod
+  /** Shared Read Write Once Pod */
+  ReadWriteOncePod,
 }
 
+/** Reclaim Policy */
 enum ReclaimPolicy {
+  /** Delete resource */
   Delete,
-  Retain
+  /** Retain resource */
+  Retain,
 }
 
 @doc("Placement Properties Model")
@@ -317,9 +358,12 @@ model PlacementProperties {
   whenUnsatisfiable: WhenUnsatisfiable;
 }
 
+/** When request unsatisfiable */
 enum WhenUnsatisfiable {
+  /** Do not schedule */
   DoNotSchedule,
-  ScheduleAnyway
+  /** Schedule anyway */
+  ScheduleAnyway,
 }
 
 // END VOLUME
@@ -330,22 +374,21 @@ enum WhenUnsatisfiable {
 model VolumeSnapshot is ProxyResource<VolumeSnapshotProperties> {
   @doc("Volume Snapshot Resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-
   @key("volumeSnapshotName")
   @path
   @segment("volumeSnapshots")
   name: string;
 }
-  
+
 @doc("Volume Snapshot Properties")
 model VolumeSnapshotProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
   // Don't include in preview
   // @doc("List of boolean feature-flags, e.g. pool/volume auto-expansion, reclaim policy.")
   // features?: Record<boolean>;
+
 
   @doc("Reference to the source volume")
   source: string;
@@ -361,12 +404,38 @@ model VolumeSnapshotProperties {
 }
 
 // END VOLUME SNAPSHOT
-  
-@armResourceOperations
-interface Pools extends ResourceOperationsCustom<Pool, PoolProperties> {}
 
 @armResourceOperations
-interface Volumes extends ResourceOperationsCustom<Volume, VolumeProperties> {}
+interface Pools {
+  get is ArmResourceRead<Pool>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
+  delete is ArmResourceDeleteAsync<Pool>;
+  update is ArmResourcePatchAsync<Pool, PoolProperties>;
+  listByResourceGroup is ArmResourceListByParent<Pool>;
+  listBySubscription is ArmListBySubscription<Pool>;
+}
 
 @armResourceOperations
-interface VolumeSnapshots extends ResourceOperationsCustom<VolumeSnapshot, VolumeSnapshotProperties> {}
+interface Volumes {
+  get is ArmResourceRead<Volume>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Volume>;
+  delete is ArmResourceDeleteAsync<Volume>;
+  update is ArmResourcePatchAsync<Volume, VolumeProperties>;
+  listByResourceGroup is ArmResourceListByParent<Volume>;
+}
+
+@armResourceOperations
+interface VolumeSnapshots {
+  get is ArmResourceRead<VolumeSnapshot>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<VolumeSnapshot>;
+  delete is ArmResourceDeleteAsync<VolumeSnapshot>;
+
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  update is ArmResourcePatchAsync<VolumeSnapshot, VolumeSnapshotProperties>;
+  listByResourceGroup is ArmResourceListByParent<VolumeSnapshot>;
+}

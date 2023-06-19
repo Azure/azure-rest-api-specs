@@ -18,6 +18,7 @@ pr:
     - specification/cognitiveservices
     - specification/confidentialledger
     - specification/containerservice
+    - specification/containerstorage
     - specification/servicenetworking
     - specification/sphere
     - specification/translation
@@ -80,6 +81,11 @@ jobs:
     parameters:
       Folder: specification/containerservice/Fleet.Management
       DisplayName: Fleet.Management
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/containerstorage/ContainerStorage.Management
+      DisplayName: ContainerStorage.Management
 
   - template: templates/steps/typespec-ci.yml
     parameters:
