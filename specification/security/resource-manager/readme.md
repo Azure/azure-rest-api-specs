@@ -901,6 +901,8 @@ input-file:
 
 ```
 
+---
+
 # Code Generation
 
 ## Swagger to SDK
