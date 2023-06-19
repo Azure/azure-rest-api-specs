@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Datadog",
-    "version": "2022-06-01"
+    "version": "2022-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -411,7 +411,7 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2022-06-01 api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2022-08-01 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -1242,10 +1242,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogApiKey"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1329,10 +1326,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogHost"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
@@ -1458,10 +1452,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -1593,6 +1584,10 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "cspm": {
+          "description": "The configuration which describes the state of cloud security posture management",
+          "type": "boolean"
         }
       }
     },
@@ -1759,6 +1754,10 @@
       "properties": {
         "monitoringStatus": {
           "$ref": "#/definitions/MonitoringStatus"
+        },
+        "cspm": {
+          "description": "The new cspm value of the monitor resource.",
+          "type": "boolean"
         }
       }
     },
@@ -1839,10 +1838,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -1855,10 +1851,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilteringTag"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -1874,6 +1867,10 @@
         },
         "metricRules": {
           "$ref": "#/definitions/MetricRules"
+        },
+        "automuting": {
+          "description": "Configuration to enable/disable auto-muting flag",
+          "type": "boolean"
         }
       }
     },
