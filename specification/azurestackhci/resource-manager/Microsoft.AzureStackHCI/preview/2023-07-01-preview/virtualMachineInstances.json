@@ -132,6 +132,10 @@
             "$ref": "./examples/DeleteVirtualMachineInstance.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -150,6 +154,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No content"
           }
@@ -162,6 +169,10 @@
           "UpdateVirtualMachine": {
             "$ref": "./examples/UpdateVirtualMachineInstance.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -192,17 +203,8 @@
               "$ref": "#/definitions/VirtualMachineInstance"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineInstance"
-            }
-          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineInstance"
-            }
+            "description": "Accepted"
           }
         }
       }
@@ -832,6 +834,12 @@
                 },
                 "provisionVMAgent": {
                   "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
+                },
+                "provisionAzureConnectedMachineAgent": {
+                  "type": "boolean",
+                  "default": false,
                   "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
                 }
               },
@@ -854,6 +862,12 @@
                 },
                 "provisionVMAgent": {
                   "type": "boolean",
+                  "default": true,
+                  "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
+                },
+                "provisionAzureConnectedMachineAgent": {
+                  "type": "boolean",
+                  "default": false,
                   "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process."
                 }
               },
@@ -957,6 +971,11 @@
             "name": "ProvisioningStateEnum",
             "modelAsString": true
           }
+        },
+        "instanceView": {
+          "$ref": "#/definitions/VirtualMachineInstanceView",
+          "readOnly": true,
+          "description": "The virtual machine instance view."
         },
         "status": {
           "$ref": "#/definitions/VirtualMachineInstanceStatus"
@@ -1078,6 +1097,67 @@
       ],
       "description": "The virtual machine instance resource definition."
     },
+    "VirtualMachineInstanceView": {
+      "properties": {
+        "vmAgent": {
+          "$ref": "#/definitions/VirtualMachineAgentInstanceView",
+          "description": "The VM Agent running on the virtual machine."
+        }
+      },
+      "description": "The instance view of a virtual machine."
+    },
+    "VirtualMachineAgentInstanceView": {
+      "properties": {
+        "vmAgentVersion": {
+          "type": "string",
+          "description": "The VM Agent full version."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of the VM agent running on the virtual machine."
+    },
+    "InstanceViewStatus": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code."
+        },
+        "level": {
+          "type": "string",
+          "description": "The level code.",
+          "enum": [
+            "Info",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusLevelTypes",
+            "modelAsString": false
+          }
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "The short localizable label for the status."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed status message, including for alerts and error messages."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the status."
+        }
+      },
+      "description": "Instance view status."
+    },
     "HardwareProfileUpdate": {
       "type": "object",
       "properties": {
@@ -1163,6 +1243,40 @@
         }
       }
     },
+    "OsProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "description": "ComputerName - name of the computer"
+        },
+        "linuxConfiguration": {
+          "properties": {
+            "provisionVMAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
+            },
+            "provisionAzureConnectedMachineAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine creation process."
+            }
+          }
+        },
+        "windowsConfiguration": {
+          "properties": {
+            "provisionVMAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether the VM agent should be installed during the virtual machine creation process."
+            },
+            "provisionAzureConnectedMachineAgent": {
+              "type": "boolean",
+              "description": "Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine creation process."
+            }
+          }
+        }
+      },
+      "description": "OsProfile - describes the update configuration of the operating system"
+    },
     "VirtualMachineInstanceUpdateProperties": {
       "description": "Defines the resource properties for the update.",
       "type": "object",
@@ -1175,6 +1289,9 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfileUpdate"
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OsProfileUpdate"
         }
       }
     },

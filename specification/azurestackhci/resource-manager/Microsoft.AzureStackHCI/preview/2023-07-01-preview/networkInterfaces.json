@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteNetworkInterface.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -162,6 +166,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No content"
           }
@@ -174,6 +181,10 @@
           "UpdateNetworkInterface": {
             "$ref": "./examples/UpdateNetworkInterface.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -210,17 +221,8 @@
               "$ref": "#/definitions/NetworkInterfaces"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
-            }
-          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/NetworkInterfaces"
-            }
+            "description": "Accepted"
           }
         }
       }

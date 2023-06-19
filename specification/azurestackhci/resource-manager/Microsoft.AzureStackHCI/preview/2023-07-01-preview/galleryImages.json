@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteGalleryImage.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -161,6 +165,9 @@
           },
           "200": {
             "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -210,17 +217,8 @@
               "$ref": "#/definitions/GalleryImages"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GalleryImages"
-            }
-          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/GalleryImages"
-            }
+            "description": "Accepted"
           }
         }
       }
@@ -269,7 +267,7 @@
         "operationId": "GalleryImages_ListAll",
         "description": "Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.",
         "x-ms-examples": {
-          "ListGalleryImageByResourceGroup": {
+          "ListGalleryImageBySubscription": {
             "$ref": "./examples/ListGalleryImageBySubscription.json"
           }
         },
@@ -306,9 +304,9 @@
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
-        "containerName": {
+        "containerId": {
           "type": "string",
-          "description": "Container Name for storage container"
+          "description": "Storage ContainerID of the storage container to be used for gallery image"
         },
         "imagePath": {
           "type": "string",

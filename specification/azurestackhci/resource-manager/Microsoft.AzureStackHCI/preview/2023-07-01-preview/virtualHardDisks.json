@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteVirtualHardDisk.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -162,6 +166,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No content"
           }
@@ -174,6 +181,10 @@
           "UpdateVirtualHardDisk": {
             "$ref": "./examples/UpdateVirtualHardDisk.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -210,17 +221,8 @@
               "$ref": "#/definitions/VirtualHardDisks"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
-            }
-          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/VirtualHardDisks"
-            }
+            "description": "Accepted"
           }
         }
       }
@@ -269,7 +271,7 @@
         "operationId": "VirtualHardDisks_ListAll",
         "description": "Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.",
         "x-ms-examples": {
-          "ListVirtualHardDiskByResourceGroup": {
+          "ListVirtualHardDiskBySubscription": {
             "$ref": "./examples/ListVirtualHardDiskBySubscription.json"
           }
         },

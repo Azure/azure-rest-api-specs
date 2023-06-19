@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteStorageContainer.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -162,6 +166,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No content"
           }
@@ -174,6 +181,10 @@
           "UpdateStorageContainer": {
             "$ref": "./examples/UpdateStorageContainer.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -210,17 +221,8 @@
               "$ref": "#/definitions/StorageContainers"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/StorageContainers"
-            }
-          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/StorageContainers"
-            }
+            "description": "Accepted"
           }
         }
       }
@@ -269,7 +271,7 @@
         "operationId": "StorageContainers_ListAll",
         "description": "Lists all of the storage containers in the specified subscription. Use the nextLink property in the response to get the next page of storage containers.",
         "x-ms-examples": {
-          "ListStorageContainerByResourceGroup": {
+          "ListStorageContainerBySubscription": {
             "$ref": "./examples/ListStorageContainerBySubscription.json"
           }
         },

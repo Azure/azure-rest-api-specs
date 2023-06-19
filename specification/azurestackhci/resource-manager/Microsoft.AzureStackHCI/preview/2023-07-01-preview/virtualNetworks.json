@@ -137,6 +137,10 @@
             "$ref": "./examples/DeleteVirtualNetwork.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -161,6 +165,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No content"
           }
@@ -173,6 +180,10 @@
           "UpdateVirtualNetwork": {
             "$ref": "./examples/UpdateVirtualNetwork.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -209,17 +220,8 @@
               "$ref": "#/definitions/VirtualNetworks"
             }
           },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworks"
-            }
-          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworks"
-            }
+            "description": "Accepted"
           }
         }
       }
@@ -444,14 +446,6 @@
                     },
                     "description": "RouteTable for the subnet"
                   },
-                  "ipPools": {
-                    "type": "array",
-                    "description": "network associated pool of IP Addresses",
-                    "items": {
-                      "$ref": "#/definitions/IPPool"
-                    },
-                    "x-ms-identifiers": []
-                  },
                   "vlan": {
                     "type": "integer",
                     "format": "int32",
@@ -528,49 +522,6 @@
         }
       },
       "description": "The observed state of virtual networks"
-    },
-    "IPPoolInfo": {
-      "type": "object",
-      "properties": {
-        "used": {
-          "type": "string",
-          "readOnly": true,
-          "description": "no. of ip addresses allocated from the ip pool"
-        },
-        "available": {
-          "type": "string",
-          "readOnly": true,
-          "description": "no. of ip addresses available in the ip pool"
-        }
-      }
-    },
-    "IPPool": {
-      "type": "object",
-      "properties": {
-        "ipPoolType": {
-          "type": "string",
-          "enum": [
-            "vm",
-            "vippool"
-          ],
-          "x-ms-enum": {
-            "name": "IPPoolTypeEnum",
-            "modelAsString": false
-          },
-          "description": "ip pool type"
-        },
-        "start": {
-          "type": "string",
-          "description": "start of the ip address pool"
-        },
-        "end": {
-          "type": "string",
-          "description": "end of the ip address pool"
-        },
-        "info": {
-          "$ref": "#/definitions/IPPoolInfo"
-        }
-      }
     },
     "VirtualNetworks": {
       "type": "object",

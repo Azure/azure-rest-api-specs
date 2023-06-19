@@ -138,6 +138,10 @@
             "$ref": "./examples/DeleteMarketplaceGalleryImage.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -162,6 +166,9 @@
           "200": {
             "description": "Deleted the marketplace gallery image resource."
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "No content"
           }
@@ -174,6 +181,10 @@
           "UpdateMarketplaceGalleryImage": {
             "$ref": "./examples/UpdateMarketplaceGalleryImage.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -210,17 +221,8 @@
               "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           },
-          "201": {
-            "description": "Updates the marketplace gallery image resource.",
-            "schema": {
-              "$ref": "#/definitions/MarketplaceGalleryImages"
-            }
-          },
           "202": {
-            "description": "Updates the marketplace gallery image resource.",
-            "schema": {
-              "$ref": "#/definitions/MarketplaceGalleryImages"
-            }
+            "description": "Updates the marketplace gallery image resource."
           }
         }
       }
@@ -269,7 +271,7 @@
         "operationId": "MarketplaceGalleryImages_ListAll",
         "description": "Lists all of the marketplace gallery images in the specified subscription. Use the nextLink property in the response to get the next page of marketplace gallery images.",
         "x-ms-examples": {
-          "ListMarketplaceGalleryImageByResourceGroup": {
+          "ListMarketplaceGalleryImageBySubscription": {
             "$ref": "./examples/ListMarketplaceGalleryImageBySubscription.json"
           }
         },
@@ -306,9 +308,9 @@
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
-        "containerName": {
+        "containerId": {
           "type": "string",
-          "description": "Container Name for storage container"
+          "description": "Storage ContainerID of the storage container to be used for marketplace gallery image"
         },
         "osType": {
           "type": "string",
