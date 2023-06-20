@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ArtifactsClient",
-    "description": "SyMS API Service Client.",
+    "title": "SyMS API Client",
+    "description": "Synapse Metadata Service Client API.",
     "version": "2021-04-01"
   },
   "x-ms-parameterized-host": {
@@ -27,7 +27,7 @@
     "/databases/ExecuteChange": {
       "post": {
         "summary": "Batch execution of DDL Payload.",
-        "operationId": "ExecuteChange",
+        "operationId": "SyMS_ExecuteChange",
         "description": "Batch execution of DDL Payload",
         "x-ms-examples": {
           "Batch execution of DDL Payload": {
@@ -70,7 +70,7 @@
     "/databases/ExecuteChangeWithValidation": {
       "post": {
         "summary": "Batch execution of DDL Payload.",
-        "operationId": "ExecuteChangeWithValidation",
+        "operationId": "SyMS_ExecuteChangeWithValidation",
         "x-ms-long-running-operation": true,
         "description": "Batch execution of DDL Payload",
         "x-ms-examples": {
@@ -118,7 +118,7 @@
     "/databases": {
       "get": {
         "summary": "Get all databases in a workspace.",
-        "operationId": "ListDatabases",
+        "operationId": "SyMS_ListDatabases",
         "description": "Get all databases in a workspace",
         "x-ms-examples": {
           "Get all databases in a workspace": {
@@ -167,7 +167,7 @@
     "/databases/{databaseName}/{artifactType}s": {
       "get": {
         "summary": "List all Artifacts of a type in a database.",
-        "operationId": "ListArtifacts",
+        "operationId": "SyMS_ListArtifacts",
         "description": "List all Artifacts of a type in a database",
         "x-ms-examples": {
           "List all Artifacts of a type in a database": {
@@ -243,7 +243,7 @@
     "/databases/{databaseName}/schemas/{schemaName}/{artifactType}s": {
       "get": {
         "summary": "List all artifacts in schema by type.",
-        "operationId": "ListArtifactsInSchemaByType",
+        "operationId": "SyMS_ListArtifactsInSchemaByType",
         "description": "List all Artifacts in schema by type",
         "x-ms-examples": {
           "List all artifacts in schema by type": {
@@ -326,7 +326,7 @@
     "/databases/{databaseName}/tables/{tableName}/partitionInfos": {
       "get": {
         "summary": "List all partition information for a table.",
-        "operationId": "ListPartitionInfosForTable",
+        "operationId": "SyMS_ListPartitionInfosForTable",
         "description": "List all partition information for a table",
         "x-ms-examples": {
           "List all partition information for a table": {
@@ -389,7 +389,7 @@
     "/databases/{databaseName}/views/{viewName}/partitionInfos": {
       "get": {
         "summary": "List all partition information for a view.",
-        "operationId": "ListPartitionInfosForView",
+        "operationId": "SyMS_ListPartitionInfosForView",
         "description": "List all partition information for a view",
         "x-ms-examples": {
           "List all partition information for a view": {
@@ -452,7 +452,7 @@
     "/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/partitionInfos": {
       "get": {
         "summary": "List all partition information for table in schema.",
-        "operationId": "ListPartitionInfosForSchemaAndTable",
+        "operationId": "SyMS_ListPartitionInfosForSchemaAndTable",
         "description": "List all partition information for a table in schema",
         "x-ms-examples": {
           "List all partition information for a table in schema": {
@@ -522,7 +522,7 @@
     "/databases/{databaseName}/schemas/{schemaName}/views/{viewName}/partitionInfos": {
       "get": {
         "summary": "List all partition information for a view in schema.",
-        "operationId": "ListPartitionInfosForSchemaAndView",
+        "operationId": "SyMS_ListPartitionInfosForSchemaAndView",
         "description": "List all partition information for a view in schema",
         "x-ms-examples": {
           "List all partition information for a view in schema": {
@@ -592,7 +592,7 @@
     "/databases/{databaseName}": {
       "get": {
         "summary": "Get details about a database.",
-        "operationId": "GetDatabase",
+        "operationId": "SyMS_GetDatabase",
         "description": "Get details about a database",
         "x-ms-examples": {
           "Get details about a database": {
@@ -631,7 +631,7 @@
       },
       "put": {
         "summary": "Put a database.",
-        "operationId": "PutDatabase",
+        "operationId": "SyMS_PutDatabase",
         "description": "Put a database",
         "x-ms-examples": {
           "Put a database": {
@@ -679,7 +679,7 @@
       },
       "delete": {
         "summary": "Delete a database.",
-        "operationId": "DeleteDatabase",
+        "operationId": "SyMS_DeleteDatabase",
         "description": "Delete a database",
         "x-ms-examples": {
           "Delete a database": {
@@ -717,7 +717,7 @@
     "/databases/{databaseName}/{artifactType}s/{artifactName}": {
       "get": {
         "summary": "Get an artifact from database.",
-        "operationId": "GetArtifactFromDB",
+        "operationId": "SyMS_GetArtifactFromDB",
         "description": "Get an artifact from database",
         "x-ms-examples": {
           "Get an artifact from database": {
@@ -783,7 +783,7 @@
       },
       "put": {
         "summary": "Put an artifact in a Database.",
-        "operationId": "PutArtifactInDB",
+        "operationId": "SyMS_PutArtifactInDB",
         "description": "Put an artifact in a Database",
         "x-ms-examples": {
           "Put a database": {
@@ -873,7 +873,7 @@
       },
       "delete": {
         "summary": "Delete an artifact in a Database.",
-        "operationId": "DeleteArtifactForDB",
+        "operationId": "SyMS_DeleteArtifactForDB",
         "description": "Delete an artifact in a Database",
         "x-ms-examples": {
           "Delete an artifact in a Database": {
@@ -938,7 +938,7 @@
     "/databases/{databaseName}/schemas/{schemaName}/{artifactType}s/{artifactName}": {
       "get": {
         "summary": "Get an artifact from schema.",
-        "operationId": "GetArtifactFromSchema",
+        "operationId": "SyMS_GetArtifactFromSchema",
         "description": "Get an artifact from schema",
         "x-ms-examples": {
           "Get an artifact from schema": {
@@ -1011,7 +1011,7 @@
       },
       "put": {
         "summary": "Create or Update an artifact in a schema.",
-        "operationId": "PutArtifactInSchema",
+        "operationId": "SyMS_PutArtifactInSchema",
         "description": "Create or Update an artifact in a schema",
         "x-ms-examples": {
           "Put a database": {
@@ -1093,7 +1093,7 @@
       },
       "delete": {
         "summary": "Delete an artifact from Schema.",
-        "operationId": "DeleteArtifactFromSchema",
+        "operationId": "SyMS_DeleteArtifactFromSchema",
         "description": "Delete an artifact from Schema",
         "x-ms-examples": {
           "Delete an artifact in a Database": {
@@ -1165,7 +1165,7 @@
     "/databases/operations/{operationId}": {
       "get": {
         "summary": "Get the status of validation by operation Id.",
-        "operationId": "GetSyMSOperationStatus",
+        "operationId": "SyMS_GetSyMSOperationStatus",
         "description": "Get the status of validation by operation Id",
         "x-ms-examples": {
           "Get the status of validation by operation Id,": {
