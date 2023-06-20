@@ -1248,6 +1248,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticsans/{elasticSanName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByElasticSan",
+        "description": "Gets the private link resources that need to be created for a elastic San.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully retrieved private endpoint connections",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error from the ElasticSan Resource Provider",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByElasticSan_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResources_ListByElasticSan_MaximumSet_Gen.json"
+          },
+          "PrivateLinkResources_ListByElasticSan_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResources_ListByElasticSan_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -2205,7 +2250,10 @@
             "$ref": "#/definitions/PrivateEndpoint"
           }
         }
-      }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
     },
     "PrivateEndpoint": {
       "type": "object",
@@ -2224,7 +2272,7 @@
       "properties": {
         "status": {
           "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
-          "$ref": "#/definitions/PrivateEndpointConnectionStatus"
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus"
         },
         "description": {
           "type": "string",
@@ -2236,7 +2284,7 @@
         }
       }
     },
-    "PrivateEndpointConnectionStatus": {
+    "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
       "description": "The private endpoint connection status.",
       "enum": [
@@ -2246,9 +2294,61 @@
         "Rejected"
       ],
       "x-ms-enum": {
-        "name": "PrivateEndpointConnectionStatus",
+        "name": "PrivateEndpointServiceConnectionStatus",
         "modelAsString": true
       }
+    },
+    "PrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The private link resource Private link DNS zone name."
+        }
+      },
+      "description": "Properties of a private link resource."
     }
   }
 }
