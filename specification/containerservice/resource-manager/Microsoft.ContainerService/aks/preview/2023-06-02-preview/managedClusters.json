@@ -3133,6 +3133,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List mesh revision profiles in a location": {
             "$ref": "./examples/ManagedClustersList_MeshRevisionProfiles.json"
@@ -3217,6 +3220,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Lists version compatibility and upgrade profile for all service meshes in a cluster": {
@@ -8027,6 +8033,11 @@
             "$ref": "#/definitions/MeshRevisionProfile"
           },
           "description": "Array of service mesh add-on revision profiles for all supported mesh modes."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of mesh revision profile.",
+          "readOnly": true
         }
       }
     },
@@ -8068,6 +8079,11 @@
             "$ref": "#/definitions/MeshUpgradeProfile"
           },
           "description": "Array of supported service mesh add-on upgrade profiles."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of mesh upgrade profile.",
+          "readOnly": true
         }
       }
     },
@@ -8113,7 +8129,8 @@
           "description": "List of items this revision of service mesh is compatible with, and their associated versions.",
           "items": {
             "$ref": "#/definitions/CompatibleVersions"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
