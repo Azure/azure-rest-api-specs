@@ -159,6 +159,15 @@ input-file:
 - Microsoft.Resources/preview/2023-03-01-preview/changes.json
 ```
 
+### Tag: package-changes-2023-07-01-preview
+
+These settings apply only when `--tag=package-changes-2023-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2023-07-01-preview'
+input-file:
+- Microsoft.Resources/preview/2023-07-01-preview/changes.json
+```
+
 ### Tag: package-snapshots-2022-11
 
 These settings apply only when `--tag=package-snapshots-2022-11` is specified on the command line.
@@ -1089,6 +1098,12 @@ directive:
   - suppress: RequiredReadOnlySystemData
     from: changes.json
     reason: System Metadata from a change resource perspective is irrelevant
+  - suppress: ResourceNameRestriction
+    from: changes.json
+    reason: change resources cannot be created or named by end users
+  - from: changes.json
+    suppress: OperationsAPIImplementation
+    reason: Duplicate Operations API causes generation issues
   - from: resources.json
     suppress: R4009
     where:
