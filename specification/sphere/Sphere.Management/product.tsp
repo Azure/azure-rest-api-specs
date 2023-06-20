@@ -50,7 +50,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
   @armResourceAction(Product)
   @post
   generateDefaultDeviceGroups(
-    ...ResourceInstanceParameters<Product>
+    ...ResourceInstanceParameters<Product>,
   ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
 
   @autoRoute
@@ -58,7 +58,7 @@ interface Products extends ProxyResourceOperationsProducts<Product> {
   @armResourceAction(Product)
   @post
   countDevices(
-    ...ResourceInstanceParameters<Product>
+    ...ResourceInstanceParameters<Product>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 }
 

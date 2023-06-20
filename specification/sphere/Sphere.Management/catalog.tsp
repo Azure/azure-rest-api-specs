@@ -74,7 +74,7 @@ interface Catalogs
   @armResourceAction(Catalog)
   @post
   countDevices(
-    ...ResourceInstanceParameters<Catalog>
+    ...ResourceInstanceParameters<Catalog>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 
   @autoRoute
@@ -83,7 +83,7 @@ interface Catalogs
   @post
   listDeviceInsights(
     ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters
+    ...ListQueryParameters,
   ): ArmResponse<Page<DeviceInsight>> | ErrorResponse;
 
   @autoRoute
@@ -92,7 +92,7 @@ interface Catalogs
   @post
   listDevices(
     ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters
+    ...ListQueryParameters,
   ): ArmResponse<ResourceListResult<Device>> | ErrorResponse;
 
   @autoRoute
@@ -101,7 +101,7 @@ interface Catalogs
   @post
   listDeployments(
     ...ResourceInstanceParameters<Catalog>,
-    ...ListQueryParameters
+    ...ListQueryParameters,
   ): ArmResponse<ResourceListResult<Deployment>> | ErrorResponse;
 
   @autoRoute
@@ -114,6 +114,6 @@ interface Catalogs
 
     @doc("List device groups for catalog.")
     @body
-    listDeviceGroupsRequest: ListDeviceGroupsRequest
+    listDeviceGroupsRequest: ListDeviceGroupsRequest,
   ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
 }
