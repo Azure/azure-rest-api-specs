@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-03
+tag: package-preview-2023-07
 ```
 
 ## Suppression
@@ -55,15 +55,34 @@ directive:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
+      - nodeConfiguration.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 ```
 
 
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2023-07-01-preview/nodeConfiguration.json
+```
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+``` yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.AzureStackHCI/stable/2023-03-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2023-03-01/clusters.json
@@ -76,6 +95,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2023-03-01/updateSummaries.json
   - Microsoft.AzureStackHCI/stable/2023-03-01/updates.json
 ```
+
 ### Tag: package-2023-02
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.

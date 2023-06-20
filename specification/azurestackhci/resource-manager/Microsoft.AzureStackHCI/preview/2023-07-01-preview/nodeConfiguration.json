@@ -1,0 +1,314 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-07-01-preview",
+    "title": "AzureStackHCI",
+    "description": "Azure Stack HCI management service"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/nodeConfigurations/{nodeConfigurationName}": {
+      "get": {
+        "tags": [
+          "NodeConfiguration"
+        ],
+        "operationId": "Get_NodeConfiguration",
+        "x-ms-examples": {
+          "Get The Node Configuration": {
+            "$ref": "./examples/GetNodeConfiguration.json"
+          }
+        },
+        "description": "Validate the Node Configuration Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeConfigurationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NodeConfiguration"
+        ],
+        "operationId": "Create_NodeConfiguration",
+        "x-ms-examples": {
+          "Put the Node Configuration": {
+            "$ref": "./examples/CreateNodeConfiguration.json"
+          }
+        },
+        "description": "Validate the Node Configuration Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeConfigurationName"
+          },
+          {
+            "name": "nodeConfiguration",
+            "in": "body",
+            "description": "Details of the Node Configuration Resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NodeConfiguration"
+        ],
+        "operationId": "Update_NodeConfiguration",
+        "x-ms-examples": {
+          "Put the Node Configuration": {
+            "$ref": "./examples/UpdateNodeConfiguration.json"
+          }
+        },
+        "description": "Validate the Node Configuration Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeConfigurationName"
+          },
+          {
+            "name": "nodeConfiguration",
+            "in": "body",
+            "description": "Details of the Node Configuration Resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NodeConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/nodeConfigurations/{nodeConfigurationName}/validate": {
+      "post": {
+        "tags": [
+          "NodeConfiguration"
+        ],
+        "operationId": "NodeConfigurations_Validate",
+        "x-ms-examples": {
+          "Validate the Node Configurations for all the given nodes": {
+            "$ref": "./examples/ValidateNodeConfigurations.json"
+          }
+        },
+        "description": "Validate the Node Configuration Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/NodeConfigurationResources"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validation Successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the resource to be connected.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "NodeConfigurationResources": {
+      "name": "nodeConfigurationResources",
+      "in": "body",
+      "description": "The list of node Configuration Resources.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/NodeConfigurationResources"
+      }
+    },
+    "NodeConfigurationName": {
+      "name": "nodeConfigurationName",
+      "in": "path",
+      "description": "The name of the node configuration resource",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "NodeConfigurationIds": {
+      "description": "The list of node Configuration Ids.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "type": "string",
+        "readOnly": true
+      }
+    },
+    "NodeConfigurationResources": {
+      "description": "List of Node Configuration Details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of NodeConfiguration Resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeConfiguration"
+          }
+        }
+      }
+    },
+    "NodeConfiguration": {
+      "description": "NodeConfiguration details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "NodeConfiguration properties.",
+          "$ref": "#/definitions/NodeConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NodeConfigurationProperties": {
+      "description": "NodeConfiguration properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "NotSpecified",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Deleted",
+            "PartiallySucceeded",
+            "InProgress",
+            "DisableInProgress",
+            "Connected",
+            "PartiallyConnected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "nodeConfiguration": {
+          "description": "The base 64 encoded string for the node configuration with all the ips and nics",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
