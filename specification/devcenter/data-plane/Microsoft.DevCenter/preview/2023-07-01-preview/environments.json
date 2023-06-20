@@ -316,7 +316,7 @@
           "EnvironmentOperations",
           "Environments"
         ],
-        "description": "Lists operations on the environment which have occurred within the past 30 days",
+        "description": "Lists operations on the environment which have occurred within the past 90 days",
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
@@ -1141,6 +1141,7 @@
     "EnvironmentOperation": {
       "type": "object",
       "description": "Information about an operation on an environment.",
+      "discriminator": "kind",
       "properties": {
         "uri": {
           "description": "The unique URI for the environment operation.",
@@ -1158,10 +1159,6 @@
           "description": "The operation status.",
           "type": "string"
         },
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the operation."
-        },
         "createdByObjectId": {
           "description": "The object ID of the actor which initiated the operation.",
           "type": "string"
@@ -1175,6 +1172,10 @@
           "description": "The time the operation finished.",
           "type": "string",
           "format": "date-time"
+        },
+        "environmentParameters": {
+          "type": "object",
+          "description": "Parameters object for the environment at the time of the operation."
         },
         "error": {
           "description": "Provisioning or operation error details. Populated only for error states.",
@@ -1191,7 +1192,8 @@
     "EnvironmentOperationKind": {
       "type": "string",
       "enum": [
-        "Deployment"
+        "Deploy",
+        "Delete"
       ],
       "description": "The type of environment operation.",
       "x-ms-enum": {
@@ -1199,11 +1201,35 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Deployment",
+            "value": "Deploy",
             "description": "The operation represents a deployment."
+          },
+          {
+            "value": "Delete",
+            "description": "The operation represents a delete."
           }
         ]
       }
+    },
+    "EnvironmentDeployOperation": {
+      "type": "object",
+      "description": "Information about a deploy operation on an environment.",
+      "x-ms-discriminator-value": "Deploy",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentOperation"
+        }
+      ]
+    },
+    "EnvironmentDeleteOperation": {
+      "type": "object",
+      "description": "Information about a delete operation on an environment.",
+      "x-ms-discriminator-value": "Delete",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentOperation"
+        }
+      ]
     }
   },
   "parameters": {
