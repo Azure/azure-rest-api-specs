@@ -310,19 +310,22 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actionResults": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations": {
       "get": {
         "tags": [
-          "ActionResults",
+          "EnvironmentOperations",
           "Environments"
         ],
-        "description": "Lists the action results for an environment.",
+        "description": "Lists operations on the environment which have occurred within the past 30 days",
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/FilterParameter"
           },
           {
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
@@ -334,12 +337,12 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
-        "operationId": "EnvironmentActionResults_ListByEnvironment",
+        "operationId": "EnvironmentOperations_ListByEnvironment",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ActionResultListResult"
+              "$ref": "#/definitions/EnvironmentOperationListResult"
             }
           },
           "default": {
@@ -356,8 +359,8 @@
           }
         },
         "x-ms-examples": {
-          "EnvironmentActionResults_ListByEnvironment": {
-            "$ref": "./examples/EnvironmentActionResults_ListByEnvironment.json"
+          "EnvironmentOperations_ListByEnvironment": {
+            "$ref": "./examples/EnvironmentOperations_ListByEnvironment.json"
           }
         },
         "x-ms-pageable": {
@@ -365,10 +368,10 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actionResults/{actionResultName}": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}": {
       "get": {
         "tags": [
-          "ActionResults",
+          "EnvironmentOperations",
           "Environments"
         ],
         "description": "Gets an environment action result.",
@@ -386,15 +389,15 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/ActionResultNameParameter"
+            "$ref": "#/parameters/EnvironmentOperationIdParameter"
           }
         ],
-        "operationId": "EnvironmentActionResults_GetByEnvironment",
+        "operationId": "EnvironmentOperations_GetByEnvironment",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ActionResult"
+              "$ref": "#/definitions/EnvironmentOperation"
             }
           },
           "default": {
@@ -411,19 +414,19 @@
           }
         },
         "x-ms-examples": {
-          "EnvironmentActionResults_GetByEnvironment": {
-            "$ref": "./examples/EnvironmentActionResults_GetByEnvironment.json"
+          "EnvironmentOperations_GetByEnvironment": {
+            "$ref": "./examples/EnvironmentOperations_GetByEnvironment.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actionResults/{actionResultName}/logs": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}/logs": {
       "get": {
         "tags": [
-          "ActionResults",
+          "EnvironmentOperations",
           "Environments"
         ],
-        "description": "Gets the logs for an action on an environment.",
+        "description": "Gets the logs for an operation on an environment.",
         "produces": [
           "text/plain"
         ],
@@ -441,22 +444,21 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/ActionResultNameParameter"
+            "$ref": "#/parameters/EnvironmentOperationIdParameter"
           }
         ],
-        "operationId": "EnvironmentActionResults_GetLogs",
+        "operationId": "EnvironmentOperations_GetLogs",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           }
         },
         "x-ms-examples": {
-          "EnvironmentActionResults_GetLogs": {
-            "$ref": "./examples/EnvironmentActionResults_GetLogs.json"
+          "EnvironmentOperations_GetLogs": {
+            "$ref": "./examples/EnvironmentOperations_GetLogs.json"
           }
         }
       }
@@ -770,8 +772,8 @@
         }
       ],
       "properties": {
-        "id": {
-          "description": "The ID of the environment",
+        "uri": {
+          "description": "The unique URI of the environment",
           "type": "string",
           "readOnly": true
         },
@@ -875,8 +877,8 @@
       "description": "A catalog.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The ID of the catalog",
+        "uri": {
+          "description": "The unique URI of the catalog",
           "type": "string"
         },
         "name": {
@@ -885,7 +887,7 @@
         }
       },
       "required": [
-        "id",
+        "uri",
         "name"
       ]
     },
@@ -913,6 +915,10 @@
       "description": "An environment definition.",
       "type": "object",
       "properties": {
+        "uri": {
+          "description": "The unique URI of the environment definition",
+          "type": "string"
+        },
         "id": {
           "description": "The ID of the environment definition.",
           "type": "string"
@@ -947,6 +953,7 @@
       },
       "required": [
         "name",
+        "uri",
         "catalogName",
         "id"
       ]
@@ -1023,8 +1030,8 @@
       "description": "Properties of an environment type.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The ID of the environment type",
+        "uri": {
+          "description": "The unique URI of the environment type",
           "type": "string"
         },
         "name": {
@@ -1032,7 +1039,7 @@
           "type": "string"
         },
         "deploymentTargetId": {
-          "description": "Id of a subscription or management group that the environment type will be mapped to. The environment's resources will be deployed into this subscription or management group.",
+          "description": "The ID of a subscription or management group that the environment type will be mapped to. The environment's resources will be deployed into this subscription or management group.",
           "type": "string"
         },
         "status": {
@@ -1041,7 +1048,7 @@
         }
       },
       "required": [
-        "id",
+        "uri",
         "name",
         "deploymentTargetId",
         "status"
@@ -1111,7 +1118,7 @@
         ]
       }
     },
-    "ActionResultListResult": {
+    "EnvironmentOperationListResult": {
       "type": "object",
       "description": "The action results list result.",
       "properties": {
@@ -1119,7 +1126,7 @@
           "description": "The current page of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActionResult"
+            "$ref": "#/definitions/EnvironmentOperation"
           }
         },
         "nextLink": {
@@ -1131,57 +1138,71 @@
         "value"
       ]
     },
-    "ActionResult": {
+    "EnvironmentOperation": {
       "type": "object",
-      "description": "The result of an action on an environment.",
+      "description": "Information about an operation on an environment.",
       "properties": {
-        "id": {
-          "description": "Unique identifier for the environment action.",
-          "type": "string",
-          "readOnly": true
+        "uri": {
+          "description": "The unique URI for the environment operation.",
+          "type": "string"
         },
-        "name": {
-          "description": "The name of the action.",
-          "type": "string",
-          "readOnly": true
+        "operationId": {
+          "description": "Unique identifier for the environment operation.",
+          "type": "string"
         },
         "kind": {
-          "description": "The kind of action that was taken.",
-          "type": "string",
-          "readOnly": true
+          "description": "The kind of operation that occurred.",
+          "$ref": "#/definitions/EnvironmentOperationKind"
         },
         "status": {
-          "description": "The action status.",
-          "type": "string",
-          "readOnly": true
+          "description": "The operation status.",
+          "type": "string"
         },
         "parameters": {
           "type": "object",
-          "description": "Parameters object for the action.",
-          "readOnly": true
+          "description": "Parameters object for the operation."
         },
         "createdByObjectId": {
-          "description": "The object ID of the actor which initiated the action'.",
-          "type": "string",
-          "readOnly": true
+          "description": "The object ID of the actor which initiated the operation.",
+          "type": "string"
         },
         "startTime": {
-          "description": "The time the action started.",
+          "description": "The time the operation started.",
           "type": "string",
-          "readOnly": true,
           "format": "date-time"
         },
         "endTime": {
-          "description": "The time the action finished.",
+          "description": "The time the operation finished.",
           "type": "string",
-          "readOnly": true,
           "format": "date-time"
         },
         "error": {
-          "description": "Provisioning or action error details. Populated only for error states.",
-          "readOnly": true,
+          "description": "Provisioning or operation error details. Populated only for error states.",
           "$ref": "devcenter.json#/definitions/CloudErrorBody"
         }
+      },
+      "required": [
+        "uri",
+        "operationId",
+        "kind",
+        "status"
+      ]
+    },
+    "EnvironmentOperationKind": {
+      "type": "string",
+      "enum": [
+        "Deployment"
+      ],
+      "description": "The type of environment operation.",
+      "x-ms-enum": {
+        "name": "EnvironmentOperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Deployment",
+            "description": "The operation represents a deployment."
+          }
+        ]
       }
     }
   },
@@ -1219,15 +1240,15 @@
       "description": "The name of the environment definition",
       "x-ms-parameter-location": "method"
     },
-    "ActionResultNameParameter": {
-      "name": "actionResultName",
+    "EnvironmentOperationIdParameter": {
+      "name": "operationId",
       "in": "path",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
-      "description": "The name of the action to check the result for.",
+      "description": "The id of the operation on an environment.",
       "x-ms-parameter-location": "method"
     }
   }

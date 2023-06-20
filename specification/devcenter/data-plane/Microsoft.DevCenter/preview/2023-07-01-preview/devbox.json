@@ -854,55 +854,6 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:repairResult": {
-      "get": {
-        "tags": [
-          "Dev Boxes"
-        ],
-        "parameters": [
-          {
-            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/UserIdParameter"
-          },
-          {
-            "$ref": "#/parameters/DevBoxNameParameter"
-          }
-        ],
-        "description": "Retrieves the result of the last repair operation on a Dev Box.",
-        "operationId": "DevBoxes_GetDevBoxRepairResult",
-        "x-ms-long-running-operation": true,
-        "responses": {
-          "200": {
-            "description": "The request completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RepairResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "devcenter.json#/definitions/CloudError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DevBoxes_GetDevBoxRepairResult": {
-            "$ref": "./examples/DevBoxes_GetRepairResult.json"
-          }
-        }
-      }
-    },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
       "get": {
         "tags": [
@@ -1213,6 +1164,115 @@
         },
         "x-ms-odata": "#/definitions/DevBoxActionDelayResult"
       }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/operations": {
+      "get": {
+        "tags": [
+          "DevBoxOperations"
+        ],
+        "description": "Lists operations on the Dev Box which have occurred within the past 30 days.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          }
+        ],
+        "operationId": "DevBoxOperations_List",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxOperations_List": {
+            "$ref": "./examples/DevBoxOperations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DevBoxOperation"
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "DevBoxOperations"
+        ],
+        "description": "Gets an operation on a Dev Box.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxOperationIdParameter"
+          }
+        ],
+        "operationId": "DevBoxOperations_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevBoxOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxOperations_Get": {
+            "$ref": "./examples/DevBoxOperations_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1240,8 +1300,8 @@
       "type": "object",
       "description": "A pool of Dev Boxes.",
       "properties": {
-        "id": {
-          "description": "The ID of the pool",
+        "uri": {
+          "description": "The unique URI of the pool",
           "type": "string"
         },
         "name": {
@@ -1286,7 +1346,7 @@
         }
       },
       "required": [
-        "id",
+        "uri",
         "name",
         "location",
         "healthStatus"
@@ -1424,8 +1484,8 @@
       "type": "object",
       "description": "A Schedule to execute action.",
       "properties": {
-        "id": {
-          "description": "The ID of the schedule",
+        "uri": {
+          "description": "The unique URI of the schedule",
           "type": "string"
         },
         "name": {
@@ -1454,7 +1514,7 @@
         }
       },
       "required": [
-        "id",
+        "uri",
         "name",
         "sourceId",
         "type",
@@ -1553,8 +1613,8 @@
       "type": "object",
       "description": "A Dev Box",
       "properties": {
-        "id": {
-          "description": "The ID of the dev box",
+        "uri": {
+          "description": "The unique URI of the dev box",
           "type": "string",
           "readOnly": true
         },
@@ -1840,10 +1900,9 @@
       "type": "object",
       "description": "The action delay result",
       "properties": {
-        "id": {
-          "description": "Unique identifier for the dev box action within a dev center",
+        "uri": {
           "type": "string",
-          "readOnly": true
+          "description": "The unique URI of the action."
         },
         "name": {
           "type": "string",
@@ -1866,6 +1925,7 @@
       },
       "required": [
         "name",
+        "uri",
         "result"
       ]
     },
@@ -1915,10 +1975,9 @@
       "type": "object",
       "description": "An action which will take place on a Dev Box.",
       "properties": {
-        "id": {
-          "description": "Unique identifier for the dev box action within a dev center",
-          "type": "string",
-          "readOnly": true
+        "uri": {
+          "description": "The unique URI for the Dev Box action.",
+          "type": "string"
         },
         "name": {
           "description": "The name of the action.",
@@ -1944,6 +2003,7 @@
       },
       "required": [
         "name",
+        "uri",
         "actionType",
         "sourceId"
       ]
@@ -1978,6 +2038,196 @@
       "required": [
         "scheduledTime"
       ]
+    },
+    "DevBoxOperationListResult": {
+      "type": "object",
+      "description": "The result of listing operations on a Dev Box.",
+      "properties": {
+        "value": {
+          "description": "The current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevBoxOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DevBoxOperation": {
+      "type": "object",
+      "description": "Information about an operation on a Dev Box.",
+      "discriminator": "kind",
+      "properties": {
+        "uri": {
+          "description": "The unique URI for the Dev Box operation.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "Unique identifier for the Dev Box operation.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The kind of operation that occurred.",
+          "$ref": "#/definitions/DevBoxOperationKind"
+        },
+        "status": {
+          "description": "The operation status.",
+          "type": "string"
+        },
+        "createdByObjectId": {
+          "description": "The object ID of the actor which initiated the operation.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The time the operation started.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The time the operation finished.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "description": "Provisioning or operation error details. Populated only for error states.",
+          "$ref": "devcenter.json#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "uri",
+        "operationId",
+        "kind",
+        "status"
+      ]
+    },
+    "DevBoxStartOperation": {
+      "type": "object",
+      "description": "Information about a start operation on a Dev Box.",
+      "x-ms-discriminator-value": "Start",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ]
+    },
+    "DevBoxStopOperation": {
+      "type": "object",
+      "description": "Information about a stop operation on a Dev Box.",
+      "x-ms-discriminator-value": "Stop",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ]
+    },
+    "DevBoxRestartOperation": {
+      "type": "object",
+      "description": "Information about a restart operation on a Dev Box.",
+      "x-ms-discriminator-value": "Restart",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ]
+    },
+    "DevBoxRepairOperation": {
+      "type": "object",
+      "description": "Information about a repair operation on a Dev Box.",
+      "x-ms-discriminator-value": "Repair",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevBoxOperation"
+        }
+      ],
+      "properties": {
+        "result": {
+          "description": "The result of the repair operation.",
+          "$ref": "#/definitions/DevBoxRepairOperationResult"
+        }
+      }
+    },
+    "DevBoxRepairOperationResult": {
+      "description": "Information about the result of a repair operation on a Dev Box.",
+      "type": "object",
+      "properties": {
+        "repairOutcome": {
+          "description": "The outcome of the repair operation.",
+          "$ref": "#/definitions/DevBoxRepairOutcome"
+        },
+        "code": {
+          "description": "The result code associated with the repair operation.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The result message associated with the repair operation.",
+          "type": "string"
+        }
+      }
+    },
+    "DevBoxRepairOutcome": {
+      "type": "string",
+      "enum": [
+        "FixApplied",
+        "IssuesDetected",
+        "NoIssuesDetected"
+      ],
+      "description": "The action taken during a repair operation.",
+      "x-ms-enum": {
+        "name": "DevBoxRepairOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "FixApplied",
+            "description": "A fix for an issue was automatically applied to the Dev Box."
+          },
+          {
+            "value": "IssuesDetected",
+            "description": "One or more issues was detected on the Dev Box, but they could not be fixed automatically."
+          },
+          {
+            "value": "NoIssuesDetected",
+            "description": "The service did not identify any issues on the Dev Box."
+          }
+        ]
+      }
+    },
+    "DevBoxOperationKind": {
+      "type": "string",
+      "enum": [
+        "Start",
+        "Stop",
+        "Restart",
+        "Repair"
+      ],
+      "description": "The type of Dev Box operation.",
+      "x-ms-enum": {
+        "name": "DevBoxOperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Start",
+            "description": "The operation represents a Dev Box start."
+          },
+          {
+            "value": "Stop",
+            "description": "The operation represents a Dev Box stop."
+          },
+          {
+            "value": "Restart",
+            "description": "The operation represents a Dev Box restart."
+          },
+          {
+            "value": "Repair",
+            "description": "The operation represents a Dev Box repair."
+          }
+        ]
+      }
     }
   },
   "parameters": {
@@ -2037,6 +2287,17 @@
       "type": "string",
       "format": "date-time",
       "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "DevBoxOperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The id of the operation on a Dev Box.",
       "x-ms-parameter-location": "method"
     }
   }
