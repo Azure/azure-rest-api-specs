@@ -1157,7 +1157,7 @@
         },
         "status": {
           "description": "The operation status.",
-          "type": "string"
+          "$ref": "#/definitions/EnvironmentOperationStatus"
         },
         "createdByObjectId": {
           "description": "The object ID of the actor which initiated the operation.",
@@ -1207,6 +1207,38 @@
           {
             "value": "Delete",
             "description": "The operation represents a delete."
+          }
+        ]
+      }
+    },
+    "EnvironmentOperationStatus": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Running"
+      ],
+      "description": "The status of an environment operation.",
+      "x-ms-enum": {
+        "name": "EnvironmentOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "value": "Running",
+            "description": "The operation is running."
           }
         ]
       }

@@ -2056,7 +2056,7 @@
         },
         "status": {
           "description": "The operation status.",
-          "type": "string"
+          "$ref": "#/definitions/DevBoxOperationStatus"
         },
         "createdByObjectId": {
           "description": "The object ID of the actor which initiated the operation.",
@@ -2203,6 +2203,38 @@
           {
             "value": "Repair",
             "description": "The operation represents a Dev Box repair."
+          }
+        ]
+      }
+    },
+    "DevBoxOperationStatus": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Running"
+      ],
+      "description": "The status of a Dev Box operation.",
+      "x-ms-enum": {
+        "name": "DevBoxOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "The operation succeeded."
+          },
+          {
+            "value": "Failed",
+            "description": "The operation failed."
+          },
+          {
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "value": "Running",
+            "description": "The operation is running."
           }
         ]
       }
