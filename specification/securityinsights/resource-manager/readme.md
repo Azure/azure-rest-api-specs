@@ -68,6 +68,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-07-01-preview/WorkspaceManagerGroups.json
   - Microsoft.SecurityInsights/preview/2023-07-01-preview/WorkspaceManagerMembers.json
   - Microsoft.SecurityInsights/preview/2023-07-01-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-07-01-preview/dataConnectorDefinitions.json
   - Microsoft.SecurityInsights/preview/2023-07-01-preview/operations.json
 ```
 ### Tag: package-preview-2023-06
