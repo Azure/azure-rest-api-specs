@@ -557,6 +557,99 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/getBillingInfo": {
+      "get": {
+        "tags": [
+          "ConnectedResources"
+        ],
+        "summary": "Get marketplace and organization info mapped to the given monitor.",
+        "operationId": "BillingInfo_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BillingInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingInfo_Get": {
+            "$ref": "./examples/BillingInfo_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listConnectedPartnerResources": {
+      "get": {
+        "tags": [
+          "ConnectedResources"
+        ],
+        "summary": "List of all active deployments that are associated with the marketplace subscription linked to the given monitor.",
+        "operationId": "ConnectedPartnerResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConnectedPartnerResourcesListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConnectedPartnerResources_List": {
+            "$ref": "./examples/ConnectedPartnerResources_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules": {
       "get": {
         "tags": [
@@ -2174,6 +2267,20 @@
         }
       }
     },
+      "BillingInfoResponse": {
+        "description": "Marketplace Susbscription and Organization details to which resource gets billed into.",
+        "type": "object",
+        "properties": {
+          "marketplaceSaasInfo": {
+            "description": "Marketplace Subscription details",
+            "$ref": "#/definitions/MarketplaceSaaSInfo"
+          },
+          "partnerBillingEntity": {
+            "description": "Partner Billing Entity details: Organization Info",
+            "$ref": "#/definitions/PartnerBillingEntity"
+          }
+        }
+      },
     "MarketplaceSaaSInfo": {
       "description": "Marketplace SAAS Info of the resource.",
       "type": "object",
@@ -2198,6 +2305,72 @@
         },
         "marketplaceStatus": {
           "description": "Marketplace Subscription Details: SaaS Subscription Status",
+          "type": "string"
+        },
+        "billedAzureSubscriptionId": {
+          "description": "The Azure Subscription ID to which the Marketplace Subscription belongs and gets billed into.",
+          "type": "string"
+        }
+      }
+    },
+    "PartnerBillingEntity": {
+      "description": "Partner Billing details associated with the resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Elastic Organization Id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Elastic Organization Name.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedPartnerResourceProperties": {
+      "description": "Connected Partner Resource Properties",
+      "type": "object",
+      "properties": {
+        "partnerDeploymentName": {
+          "description": "Elastic deployment name",
+          "type": "string"
+        },
+        "partnerDeploymentUri": {
+          "description": "Deployment URL of the elasticsearch in Elastic cloud deployment.",
+          "type": "string"
+        },
+        "liftrResourceId": {
+          "description": "The azure resource Id of the deployment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the deployment.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedPartnerResourcesListFormat": {
+      "description": "Connected Partner Resources List Format",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectedPartnerResourceProperties"
+        }
+      }
+    },
+    "ConnectedPartnerResourcesListResponse": {
+      "description": " List of all active elastic deployments.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Results of a list operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedPartnerResourcesListFormat"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results, if any.",
           "type": "string"
         }
       }
