@@ -3099,6 +3099,176 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/meshRevisionProfiles": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListMeshRevisionProfiles",
+        "summary": "Lists mesh revision profiles for all meshes in the specified location.",
+        "description": "Contains extra metadata on the revision, including supported revisions, cluster compatibility and available upgrades",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MeshRevisionProfileList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List mesh revisions": {
+            "$ref": "./examples/ManagedClustersList_MeshRevisionProfiles.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/meshRevisionProfiles/{mode}": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetMeshRevisionProfile",
+        "summary": "Gets mesh revision profiles for a specified mesh in the specified location.",
+        "description": "Contains extra metadata on the revision, including supported revisions, cluster compatibility and available upgrades",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/MeshModeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MeshRevisionProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a mesh revision": {
+            "$ref": "./examples/ManagedClustersGet_MeshRevisionProfile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/meshUpgradeProfiles": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListMeshUpgradeProfiles",
+        "summary": "Lists available upgrades for all service meshes in a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MeshUpgradeProfileList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get version compatibility and upgrade profile for service mesh": {
+            "$ref": "./examples/ManagedClustersList_MeshUpgradeProfiles.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/meshUpgradeProfiles/{mode}": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetMeshUpgradeProfile",
+        "summary": "Gets available upgrades for a service mesh in a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MeshModeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MeshUpgradeProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get version compatibility and upgrade profile for service mesh": {
+            "$ref": "./examples/ManagedClustersGet_MeshUpgradeProfile.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7713,6 +7883,15 @@
         },
         "certificateAuthority": {
           "$ref": "#/definitions/IstioCertificateAuthority"
+        },
+        "revisions": {
+          "type": "array",
+          "description": "The list of revisions of the Istio control plane. When an upgrade is not in progress, this holds one value. When canary upgrade is in progress, this can only hold two consecutive values. For more information, see: https://learn.microsoft.com/en-us/azure/aks/istio-upgrade",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 2
         }
       }
     },
@@ -7836,6 +8015,121 @@
       "required": [
         "enabled"
       ]
+    },
+    "MeshRevisionProfileList": {
+      "type": "object",
+      "description": "Holds values property, which is array of MeshRevisionsProfiles",
+      "properties": {
+        "values": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/MeshRevisionProfile"
+          },
+          "description": "Array of supported Istio-based mesh add-on revisions."
+        }
+      }
+    },
+    "MeshRevisionProfile": {
+      "type": "object",
+      "description": "Mesh revision profile for a mesh.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MeshRevisionProfileProperties"
+        }
+      }
+    },
+    "MeshRevisionProfileProperties": {
+      "type": "object",
+      "description": "Mesh revision properties for a mesh.",
+      "properties": {
+        "meshRevisions": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/MeshRevision"
+          }
+        }
+      }
+    },
+    "MeshUpgradeProfileList": {
+      "type": "object",
+      "description": "Holds values property, which is array of MeshUpgradeProfiles",
+      "properties": {
+        "values": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/MeshUpgradeProfile"
+          },
+          "description": "Array of supported Istio-based mesh add-on revisions."
+        }
+      }
+    },
+    "MeshUpgradeProfile": {
+      "type": "object",
+      "description": "Upgrade profile for given mesh.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MeshUpgradeProfileProperties"
+        }
+      }
+    },
+    "MeshUpgradeProfileProperties": {
+      "type": "object",
+      "description": "Mesh upgrade properties for a major.minor release.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MeshRevision"
+        }
+      ]
+    },
+    "MeshRevision": {
+      "type": "object",
+      "description": "Holds information on upgrades and compatibility for given major.minor mesh release.",
+      "properties": {
+        "revision": {
+          "type": "string"
+        },
+        "upgrades": {
+          "type": "array",
+          "description": "list of mesh revisions available for upgrade for a specific revision",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compatibleWith": {
+          "type": "array",
+          "description": "List of items this revision of service mesh is compatible with, and their associated properties.",
+          "items": {
+            "$ref": "#/definitions/CompatibleVersions"
+          }
+        }
+      }
+    },
+    "CompatibleVersions": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "versions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "KubernetesSupportPlan": {
       "type": "string",
