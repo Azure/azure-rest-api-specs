@@ -1,11 +1,11 @@
-parameters:
-  service-directory-name:
-    default: "loadtesting"
+parameters:  
+  "service-dir":
+    default: "sdk/contosowidgetmanager"
 emit:
   # - "@azure-tools/typespec-autorest"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   - "@azure-tools/typespec-python"
-  - "@azure-tools/typespec-ts"
+  # - "@azure-tools/typespec-ts"
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   # "@azure-tools/typespec-java": true
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
@@ -19,9 +19,10 @@ options:
   #   azure-resource-provider-folder: "data-plane"
   #   examples-directory: ./examples
   "@azure-tools/typespec-python":
-    package-name: "azure-developer-loadtesting"
+    package-dir: "azure-developer-loadtesting"
+    package-name: "{package-dir}"
     # emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
-    package-mode: dataplane
+    package-mode: "dataplane"
   "@azure-tools/typespec-ts":
     package-dir: "load-testing-rest"
     title: Azure Load Testing
