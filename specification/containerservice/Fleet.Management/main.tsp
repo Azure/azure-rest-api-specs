@@ -26,5 +26,5 @@ enum Versions {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2023_03_15_preview: "2023-03-15-preview"
+  v2023_03_15_preview: "2023-03-15-preview",
 }
