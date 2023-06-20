@@ -56,6 +56,16 @@ These settings apply only when `--tag=package-2022-09-13-preview` is specified o
 input-file:
   - Microsoft.SCOM/preview/2022-09-13-preview/scom.json
 ```
+
+### Tag: package-2023-06-30
+
+These settings apply only when `--tag=package-2023-06-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-30'
+input-file:
+  - Microsoft.SCOM/stable/2023-06-30/scom.json
+```
+
 ---
 
 # Code Generation
