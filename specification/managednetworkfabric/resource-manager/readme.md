@@ -28,6 +28,8 @@ These are the global settings for the Managed Network Fabric.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2023-02-01-preview
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 
@@ -38,8 +40,9 @@ These settings apply only when `--tag=package-2023-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-02-01-preview'
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/AccessControlLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpCommunityLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpPrefixLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpExtendedCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpPrefixes.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/L2IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/L3IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/NetworkDeviceSkus.json
@@ -66,7 +69,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_managednetworkfabric']
 ```
@@ -79,9 +84,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## TypeScript
 
