@@ -1496,6 +1496,10 @@
           "description": "The id of the resource that this schedule belongs to",
           "type": "string"
         },
+        "sourceType": {
+          "description": "The type of the resource that this schedule belongs to",
+          "$ref": "#/definitions/ScheduleSourceType"
+        },
         "type": {
           "description": "Supported type this scheduled task represents.",
           "$ref": "#/definitions/ScheduledType"
@@ -1517,6 +1521,7 @@
         "uri",
         "name",
         "sourceId",
+        "sourceType",
         "type",
         "frequency",
         "time",
@@ -1991,6 +1996,10 @@
           "description": "The id of the resource which triggered this action",
           "type": "string"
         },
+        "sourceType": {
+          "description": "The type of the resource which triggered this action",
+          "$ref": "#/definitions/DevBoxActionSourceType"
+        },
         "suspendedUntil": {
           "description": "The earliest time that the action could occur (UTC).",
           "type": "string",
@@ -2005,7 +2014,8 @@
         "name",
         "uri",
         "actionType",
-        "sourceId"
+        "sourceId",
+        "sourceType"
       ]
     },
     "DevBoxActionType": {
@@ -2225,6 +2235,45 @@
           {
             "value": "Repair",
             "description": "The operation represents a Dev Box repair."
+          }
+        ]
+      }
+    },
+    "ScheduleSourceType": {
+      "type": "string",
+      "enum": [
+        "Pool"
+      ],
+      "description": "The type of the resource that this schedule belongs to.",
+      "x-ms-enum": {
+        "name": "ScheduleSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Pool",
+            "description": "The schedule source is a Dev Box pool."
+          }
+        ]
+      }
+    },
+    "DevBoxActionSourceType": {
+      "type": "string",
+      "enum": [
+        "Pool",
+        "Schedule"
+      ],
+      "description": "The type of the resource which triggered the action.",
+      "x-ms-enum": {
+        "name": "DevBoxActionSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Pool",
+            "description": "The action was triggered by a Dev Box pool."
+          },
+          {
+            "value": "Schedule",
+            "description": "The action was triggered by a Dev Box schedule."
           }
         ]
       }
