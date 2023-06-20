@@ -2073,9 +2073,6 @@
         "safetyProfile": {
           "$ref": "#/definitions/GalleryApplicationVersionSafetyProfile"
         },
-        "securityProfile": {
-          "$ref": "#/definitions/ImageVersionSecurityProfile"
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "#/definitions/GalleryProvisioningState"
@@ -2089,15 +2086,6 @@
         "publishingProfile"
       ],
       "description": "Describes the properties of a gallery image version."
-    },
-    "ImageVersionSecurityProfile": {
-      "type": "object",
-      "description": "The security profile of a gallery image version",
-      "properties": {
-        "uefiSettings": {
-          "$ref": "#/definitions/UefiSettings"
-        }
-      }
     },
     "GalleryApplicationVersionPublishingProfile": {
       "properties": {
@@ -2438,6 +2426,9 @@
         },
         "safetyProfile": {
           "$ref": "#/definitions/GalleryImageVersionSafetyProfile"
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/ImageVersionSecurityProfile"
         },
         "replicationStatus": {
           "readOnly": true,
@@ -2906,6 +2897,15 @@
         }
       },
       "description": "A policy violation reported against a gallery artifact."
+    },
+    "ImageVersionSecurityProfile": {
+      "type": "object",
+      "description": "The security profile of a gallery image version",
+      "properties": {
+        "uefiSettings": {
+          "$ref": "#/definitions/UefiSettings"
+        }
+      }
     },
     "ReplicationStatus": {
       "properties": {
