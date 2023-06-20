@@ -1369,7 +1369,7 @@
         "partial"
       ],
       "x-ms-enum": {
-        "name": "QueryResultDocumentSemanticFieldState",
+        "name": "SemanticFieldState",
         "modelAsString": true,
         "values": [
           {
@@ -1848,12 +1848,14 @@
           "description": "The vector representation of a search query."
         },
         "k": {
+          "x-ms-client-name": "kNearestNeighborsCount",
           "type": "integer",
           "format": "int32",
           "description": "Number of nearest neighbors to return as top hits."
         },
         "fields": {
           "type": "string",
+          "format": "csv",
           "description": "Vector Fields of type Collection(Edm.Single) to be included in the vector searched."
         }
       },

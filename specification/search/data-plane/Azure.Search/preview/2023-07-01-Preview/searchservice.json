@@ -7403,6 +7403,7 @@
           "x-nullable": true
         },
         "dimensions": {
+          "x-ms-client-name": "vectorSearchDimensions",
           "type": "integer",
           "format": "int32",
           "x-nullable": true,
@@ -9015,6 +9016,7 @@
         },
         "authResourceId": {
           "type": "string",
+          "format": "arm-id",
           "x-nullable": true,
           "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
         },
