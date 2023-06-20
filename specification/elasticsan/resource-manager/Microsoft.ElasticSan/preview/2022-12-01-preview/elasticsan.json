@@ -1176,9 +1176,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Get the private endpoint connection properties successfully",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+            "description": "OK -- Get the private endpoint connection properties successfully"
+          },
+          "202": {
+            "description": "Delete request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "204": {
@@ -1190,6 +1195,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "PrivateEndpoinConnections_Delete_MaximumSet_Gen": {
@@ -1541,10 +1550,7 @@
         },
         "privateEndpointConnections": {
           "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionList"
-          },
+          "$ref": "#/definitions/PrivateEndpointConnectionList",
           "description": "The list of Private Endpoint Connections."
         }
       }
@@ -1846,10 +1852,7 @@
         },
         "privateEndpointConnections": {
           "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionList"
-          },
+          "$ref": "#/definitions/PrivateEndpointConnectionList",
           "description": "The list of Private Endpoint Connections."
         }
       }
@@ -2299,6 +2302,7 @@
       }
     },
     "PrivateLinkResourceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2306,11 +2310,17 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "A list of private link resources"
     },
     "PrivateLinkResource": {
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
@@ -2326,6 +2336,7 @@
       "description": "A private link resource"
     },
     "PrivateLinkResourceProperties": {
+      "type": "object",
       "properties": {
         "groupId": {
           "description": "The private link resource group id.",
