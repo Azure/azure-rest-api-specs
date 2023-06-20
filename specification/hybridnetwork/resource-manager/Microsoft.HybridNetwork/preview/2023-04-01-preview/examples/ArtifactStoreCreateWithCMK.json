@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "artifactStoreName": "TestArtifactStore",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "storeType": "AzureContainerRegistry",
+        "replicationStrategy": "GeoReplication",
+        "managedResourceGroupConfiguration": {
+          "name": "testRg",
+          "location": "eastus"
+        },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}": {}
+          }
+        },
+        "encryption": {
+          "useCustomerManagedKey": true,
+          "keyVaultProperties": {
+            "keyVaultUri": "https://testvault.vault.azure.net/",
+            "keyName": "key1"
+          },
+          "userAssignedManagedIdentity": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestArtifactStore",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "location": "eastus",
+        "properties": {
+          "storeType": "AzureContainerRegistry",
+          "replicationStrategy": "GeoReplication",
+          "storageResourceId": "TestResourceId",
+          "managedResourceGroupConfiguration": {
+            "name": "testRg",
+            "location": "eastus"
+          },
+          "identity": {
+            "userAssignedIdentities": {
+              "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}": {
+                "principalId": "8d823284-1060-42a5-9ec4-ed3d831e24d7",
+                "clientId": "fbaa6278-1ecc-415c-819f-6e2058d3acb5"
+              }
+            }
+          },
+          "encryption": {
+            "useCustomerManagedKey": true,
+            "keyVaultProperties": {
+              "keyVaultUri": "https://testvault.vault.azure.net/",
+              "keyName": "key1",
+              "versionedKeyIdentifier": "https://testvault.vault.core.windows.net/keys/key1/863425f1358359c",
+              "lastKeyRotationTimestamp": "2019-12-13T20:36:23.7023290Z"
+            },
+            "userAssignedManagedIdentity": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestArtifactStore",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "location": "eastus",
+        "properties": {
+          "storeType": "AzureContainerRegistry",
+          "replicationStrategy": "GeoReplication",
+          "storageResourceId": "TestResourceId",
+          "managedResourceGroupConfiguration": {
+            "name": "testRg",
+            "location": "eastus"
+          },
+          "identity": {
+            "userAssignedIdentities": {
+              "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}": {
+                "principalId": "8d823284-1060-42a5-9ec4-ed3d831e24d7",
+                "clientId": "fbaa6278-1ecc-415c-819f-6e2058d3acb5"
+              }
+            }
+          },
+          "encryption": {
+            "useCustomerManagedKey": true,
+            "keyVaultProperties": {
+              "keyVaultUri": "https://testvault.vault.azure.net/",
+              "keyName": "key1",
+              "versionedKeyIdentifier": "https://testvault.vault.core.windows.net/keys/key1/863425f1358359c",
+              "lastKeyRotationTimestamp": "2019-12-13T20:36:23.7023290Z"
+            },
+            "userAssignedManagedIdentity": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
+          }
+        }
+      }
+    }
+  }
+}

@@ -459,8 +459,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a artifact store of publisher resource": {
+          "Create or update an artifact store of publisher resource": {
             "$ref": "./examples/ArtifactStoreCreate.json"
+          },
+          "Create or update an artifact store of publisher resource, with customer-managed key": {
+            "$ref": "./examples/ArtifactStoreCreateWithCMK.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1099,6 +1102,19 @@
             "read"
           ],
           "description": "The created storage resource id"
+        },
+        "identity": {
+          "description": "Managed identities associated with this artifact store.  Only user-assigned identities are allowed.",
+          "type": "object",
+          "properties": {
+            "userAssignedIdentities": {
+              "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentities"
+            }
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption settings to be used for server-side encryption for the artifact store."
         }
       }
     },
@@ -1263,6 +1279,61 @@
       "x-ms-enum": {
         "name": "ArtifactType",
         "modelAsString": true
+      }
+    },
+    "KeyVaultProperties": {
+      "description": "Properties of key vault holding the customer-managed key used for encryption.",
+      "type": "object",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The uri of the key vault."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key in the key vault."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key to use.  Omit to use the latest version."
+        },
+        "versionedKeyIdentifier": {
+          "description": "The fully qualified key identifier that includes the version of the key that is actually used for encryption.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastKeyRotationTimestamp": {
+          "format": "date-time",
+          "description": "Timestamp of the last successful key rotation.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "keyVaultUri",
+        "keyName"
+      ]
+    },
+    "Encryption": {
+      "description": "The encryption settings on the artifact store.",
+      "properties": {
+        "useCustomerManagedKey": {
+          "description": "When true, a customer-managed key is used for encryption.",
+          "type": "boolean",
+          "default": false
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "description": "A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. This is supported only for ArtifactStores of type AzureStorageAccount."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Key vault properties. Required if and only if useCustomerManagedKey is true."
+        },
+        "userAssignedManagedIdentity": {
+          "type": "string",
+          "description": "The identity to be used to access the key vault."
+        }
       }
     }
   }
