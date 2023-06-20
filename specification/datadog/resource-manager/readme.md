@@ -26,7 +26,25 @@ These are the global settings for the Datadog API.
 title: Microsoft Datadog Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-06
+tag: package-2023-01-01
+```
+
+### Tag: package-2023-01-01
+
+These settings apply only when `--tag=package-2023-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-01'
+input-file:
+- Microsoft.Datadog/stable/2023-01-01/swagger.json
+```
+
+### Tag: package-2022-08-01
+
+These settings apply only when `--tag=package-2022-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08-01'
+input-file:
+- Microsoft.Datadog/stable/2022-08-01/swagger.json
 ```
 
 ### Tag: package-2022-06
