@@ -3107,7 +3107,7 @@
         ],
         "operationId": "ManagedClusters_ListMeshRevisionProfiles",
         "summary": "Lists mesh revision profiles for all meshes in the specified location.",
-        "description": "Contains extra metadata on the revision, including supported revisions, cluster compatibility and available upgrades",
+        "description": "Contains extra metadata on each revision, including supported revisions, cluster compatibility and available upgrades",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3134,7 +3134,7 @@
           }
         },
         "x-ms-examples": {
-          "List mesh revisions": {
+          "List mesh revision profiles in a location": {
             "$ref": "./examples/ManagedClustersList_MeshRevisionProfiles.json"
           }
         }
@@ -3146,7 +3146,7 @@
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_GetMeshRevisionProfile",
-        "summary": "Gets mesh revision profiles for a specified mesh in the specified location.",
+        "summary": "Gets a mesh revision profile for a specified mesh in the specified location.",
         "description": "Contains extra metadata on the revision, including supported revisions, cluster compatibility and available upgrades",
         "parameters": [
           {
@@ -3177,7 +3177,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a mesh revision": {
+          "Get a mesh revision profile for a mesh mode": {
             "$ref": "./examples/ManagedClustersGet_MeshRevisionProfile.json"
           }
         }
@@ -3189,7 +3189,7 @@
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_ListMeshUpgradeProfiles",
-        "summary": "Lists available upgrades for all service meshes in a cluster.",
+        "summary": "Lists available upgrades for all service meshes in a specific cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3219,7 +3219,7 @@
           }
         },
         "x-ms-examples": {
-          "Get version compatibility and upgrade profile for service mesh": {
+          "Lists version compatibility and upgrade profile for all service meshes in a cluster": {
             "$ref": "./examples/ManagedClustersList_MeshUpgradeProfiles.json"
           }
         }
@@ -3264,7 +3264,7 @@
           }
         },
         "x-ms-examples": {
-          "Get version compatibility and upgrade profile for service mesh": {
+          "Gets version compatibility and upgrade profile for a service mesh in a cluster": {
             "$ref": "./examples/ManagedClustersGet_MeshUpgradeProfile.json"
           }
         }
@@ -8026,7 +8026,7 @@
           "items": {
             "$ref": "#/definitions/MeshRevisionProfile"
           },
-          "description": "Array of supported Istio-based mesh add-on revisions."
+          "description": "Array of service mesh add-on revision profiles for all supported mesh modes."
         }
       }
     },
@@ -8046,7 +8046,7 @@
     },
     "MeshRevisionProfileProperties": {
       "type": "object",
-      "description": "Mesh revision properties for a mesh.",
+      "description": "Mesh revision profile properties for a mesh.",
       "properties": {
         "meshRevisions": {
           "type": "array",
@@ -8067,7 +8067,7 @@
           "items": {
             "$ref": "#/definitions/MeshUpgradeProfile"
           },
-          "description": "Array of supported Istio-based mesh add-on revisions."
+          "description": "Array of supported service mesh add-on upgrade profiles."
         }
       }
     },
@@ -8087,7 +8087,7 @@
     },
     "MeshUpgradeProfileProperties": {
       "type": "object",
-      "description": "Mesh upgrade properties for a major.minor release.",
+      "description": "Mesh upgrade profile properties for a major.minor release.",
       "allOf": [
         {
           "$ref": "#/definitions/MeshRevision"
@@ -8103,14 +8103,14 @@
         },
         "upgrades": {
           "type": "array",
-          "description": "list of mesh revisions available for upgrade for a specific revision",
+          "description": "List of revisions available for upgrade of a specific mesh revision",
           "items": {
             "type": "string"
           }
         },
         "compatibleWith": {
           "type": "array",
-          "description": "List of items this revision of service mesh is compatible with, and their associated properties.",
+          "description": "List of items this revision of service mesh is compatible with, and their associated versions.",
           "items": {
             "$ref": "#/definitions/CompatibleVersions"
           }
