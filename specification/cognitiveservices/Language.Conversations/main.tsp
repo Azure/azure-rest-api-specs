@@ -24,6 +24,7 @@ using Azure.Core.Traits;
     Endpoint: string,
   }
 )
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Azure.AI.Language.Conversations;
 
 @doc("A subscription key for a Language service resource")

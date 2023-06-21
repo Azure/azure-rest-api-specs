@@ -17,28 +17,11 @@ using Azure.Core.Traits;
 namespace Azure.AI.Language.Conversations;
 
 @doc("Error Response")
-model ErrorResponse {
-    @doc("The error object.")
-    error: Error;
+model ErrorResponse is Azure.Core.Foundations.ErrorResponse{
 }
 
 @doc("The error object.")
-model Error extends Record<unknown> {
-    @doc("One of a server-defined set of error codes.")
-    code: ErrorCode;
-
-    @doc("A human-readable representation of the error.")
-    message: string;
-
-    @doc("The target of the error.")
-    target?: string;
-
-    @doc("An array of details about specific errors that led to this reported error.")
-    details?: Array<Error>;
-
-    @doc("An object containing more specific information than the current object about the error.")
-    innererror?: InnerErrorModel;
-}
+model Error is Azure.Core.Foundations.Error{}
 
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
 model InnerErrorModel extends Record<unknown> {
@@ -58,8 +41,8 @@ model InnerErrorModel extends Record<unknown> {
     innererror?: InnerErrorModel;
 }
 
-@doc("Language of the text records. This is BCP-47 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.")
-model Language {}
+
+alias Language= string;
 
 @doc("Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.")
 enum StringIndexType {
@@ -76,7 +59,7 @@ enum StringIndexType {
 @doc("Represents List of Question Answers.")
 model AnswersResult {
     @doc("Represents Answer Result list.")
-    answers: Array<KnowledgeBaseAnswer>;
+    answers?: Array<KnowledgeBaseAnswer>;
 }
 
 @doc("Represents knowledge base answer.")
