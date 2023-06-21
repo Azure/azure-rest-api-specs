@@ -88,14 +88,6 @@
       "description": "The ID to query the status for the style create request.",
       "required": true,
       "x-ms-parameter-location": "method"
-    },
-    "StyleAlias": {
-      "name": "alias",
-      "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a reserved prefix. Alias can be provided optionally during creating a style, and can be used as same as styleId after style creation. ",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -127,12 +119,9 @@
             "$ref": "#/parameters/DescriptionStyle"
           },
           {
-            "$ref": "#/parameters/StyleAlias"
-          },
-          {
             "name": "CreateContent",
             "in": "body",
-            "description": "The style content to be uploaded. If JSON data format is provided, then the request body should follow [Layers specification](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers) in MapLibre Style specification. If ZIP data format is provided, you should also provide the sprite sheet and associated index files which contains icons used in the style configuration json file.",
+            "description": "The style content to be uploaded. If JSON data format is provided, then the request body should follow [Layers specification](https://maplibre.org/maplibre-gl-js-docs/style-spec/layers) in MapLibre Style specification. If ZIP data format is provided, you should also provide the sprite sheets and associated index files which contains icons used in the style configuration json file. The zip file should contain five files, including two sprite sheet PNG files, two JSON sprite index files with matching filenames to their corresponding PNG files, and one JSON style file. Ensure that the filenames are appropriately descriptive to convey their purpose and maintain consistency between the associated files. \n\n Note: The embedded JSON size limit is 1 MB and zip file size limit is 23 MB.\n\n\n Learn more about how to use [MapLibre sprite](https://maplibre.org/maplibre-style-spec/sprite) here.",
             "required": true,
             "schema": {
               "type": "object"
@@ -324,11 +313,6 @@
         },
         "description": {
           "description": "The description the caller provided when creating the style. Maximum length 1024 characters.",
-          "type": "string",
-          "readOnly": true
-        },
-        "alias": {
-          "description": "The alias of the style. Maximum length 1024 characters. Alias cannot start with `microsoft-maps` which is a reserved prefix.",
           "type": "string",
           "readOnly": true
         },

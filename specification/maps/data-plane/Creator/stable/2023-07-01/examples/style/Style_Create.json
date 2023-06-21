@@ -2,27 +2,98 @@
   "parameters": {
     "geography": "us",
     "api-version": "2023-07-01",
-    "alias": "test-alias",
     "CreateContent": {
       "layers": [
         {
-          "id": "background",
-          "type": "background",
-          "source-layer": "bg-source",
-          "minzoom": 18,
-          "maxzoom": 20,
+          "id": "indoor_level",
+          "type": "fill",
           "layout": {
-            "visibility": "none",
-            "symbol-placement": "point",
-            "symbol-avoid-edges": true,
-            "text-field": "{name}",
-            "text-keep-upright": true,
-            "text-font": [
-              "SegoeUi-SemiBold"
+            "visibility": "visible"
+          },
+          "minzoom": 15.0,
+          "paint": {
+            "fill-antialias": true,
+            "fill-color": [
+              "string",
+              [
+                "feature-state",
+                "color"
+              ],
+              "rgba(255, 255, 255, 1)"
             ],
+            "fill-opacity": 1
+          },
+          "source-layer": "level"
+        },
+        {
+          "id": "indoor_Unit_Office",
+          "type": "fill",
+          "filter": [
+            "all",
+            [
+              "any",
+              [
+                "==",
+                "unitType",
+                "Office"
+              ]
+            ]
+          ],
+          "layout": {
+            "visibility": "visible"
+          },
+          "minzoom": 16.0,
+          "paint": {
+            "fill-antialias": true,
+            "fill-color": [
+              "string",
+              [
+                "feature-state",
+                "color"
+              ],
+              "rgba(204, 222, 239, 1)"
+            ],
+            "fill-opacity": 1,
+            "fill-outline-color": "rgba(120, 120, 120, 1)"
+          },
+          "source-layer": "Unit"
+        },
+        {
+          "id": "indoor_Unit_Office_label",
+          "type": "symbol",
+          "filter": [
+            "all",
+            [
+              "any",
+              [
+                "==",
+                "unitType",
+                "Office"
+              ]
+            ]
+          ],
+          "layout": {
+            "visibility": "visible",
+            "icon-image": "focus-room",
+            "symbol-avoid-edges": true,
+            "symbol-placement": "point",
+            "text-anchor": "top",
+            "text-field": "{name}",
+            "text-font": [
+              "SegoeFrutigerHelveticaMYingHei-Medium"
+            ],
+            "text-keep-upright": true,
             "text-letter-spacing": 0.1,
+            "text-offset": [
+              0,
+              1.05
+            ],
             "text-size": {
               "stops": [
+                [
+                  18,
+                  5
+                ],
                 [
                   18.5,
                   6.5
@@ -40,15 +111,25 @@
                   11
                 ]
               ]
-            },
-            "text-anchor": "center"
+            }
           },
+          "minzoom": 17.5,
           "paint": {
-            "text-color": "rgb(0, 0, 0)",
-            "text-halo-color": "rgb(255, 255, 255)",
+            "text-color": "rgba(255, 0, 0, 1)",
+            "text-halo-blur": 0.5,
+            "text-halo-color": "rgba(255, 255, 255, 1)",
             "text-halo-width": 1,
-            "text-halo-blur": 0.5
-          }
+            "text-opacity": [
+              "step",
+              [
+                "zoom"
+              ],
+              0,
+              18,
+              1
+            ]
+          },
+          "source-layer": "Unit"
         }
       ]
     }
