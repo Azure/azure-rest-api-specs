@@ -16,12 +16,7 @@ using Azure.Core.Traits;
 })
 namespace Azure.AI.Language.Conversations;
 
-@doc("Error Response")
-model ErrorResponse is Azure.Core.Foundations.ErrorResponse{
-}
-
-@doc("The error object.")
-model Error is Azure.Core.Foundations.Error{}
+alias ErrorResponse = Azure.Core.Foundations.ErrorResponse;
 
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
 model InnerErrorModel extends Record<unknown> {
@@ -41,8 +36,7 @@ model InnerErrorModel extends Record<unknown> {
     innererror?: InnerErrorModel;
 }
 
-
-alias Language= string;
+alias Language = string;
 
 @doc("Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.")
 enum StringIndexType {
@@ -65,40 +59,40 @@ model AnswersResult {
 @doc("Represents knowledge base answer.")
 model KnowledgeBaseAnswer {
     @doc("List of questions associated with the answer.")
-    questions: Array<string>;
+    questions?: Array<string>;
 
     @doc("Answer text.")
-    answer: string;
+    answer?: string;
 
     @doc("Answer confidence score, value ranges from 0 to 1.")
     @minValue(0)
     @maxValue(1)
-    confidenceScore: float;
+    confidenceScore?: float;
 
     @doc("ID of the QnA result.")
-    id: int32;
+    id?: int32;
 
     @doc("Source of QnA result.")
-    source: string;
+    source?: string;
 
     @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
-    metadata: object;
+    metadata?: object;
 
     @doc("Dialog associated with Answer.")
-    dialog: KnowledgeBaseAnswerDialog;
+    dialog?: KnowledgeBaseAnswerDialog;
 
     @doc("Answer span object of QnA with respect to user's question.")
-    answerSpan: AnswerSpan;
+    answerSpan?: AnswerSpan;
 }
 
 @doc("Dialog associated with Answer.")
 model KnowledgeBaseAnswerDialog {
     @doc("To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as search result for queries without context; otherwise, if false, ignores context and includes this QnA in search result.")
-    isContextOnly: boolean;
+    isContextOnly?: boolean;
 
     @doc("List of prompts associated with the answer.")
     @maxItems(20)
-    prompts: Array<KnowledgeBaseAnswerPrompt>;
+    prompts?: Array<KnowledgeBaseAnswerPrompt>;
 }
 
 @doc("Prompt for an answer.")
@@ -117,18 +111,18 @@ model KnowledgeBaseAnswerPrompt {
 @doc("Answer span object of QnA.")
 model AnswerSpan {
     @doc("Predicted text of answer span.")
-    text: string;
+    text?: string;
 
     @doc("Predicted score of answer span, value ranges from 0 to 1.")
     @minValue(0)
     @maxValue(1)
-    confidenceScore: float64;
+    confidenceScore?: float64;
 
     @doc("The answer span offset from the start of answer.")
-    offset: int32;
+    offset?: int32;
 
     @doc("The length of the answer span.")
-    length: int32;
+    length?: int32;
 }
 
 @doc("Parameters to query a knowledge base.")
@@ -183,22 +177,22 @@ model KnowledgeBaseAnswerContext {
 @doc("filters over knowledge base.")
 model QueryFilters {
     @doc("filters over knowledge base.")
-    metadataFilter: MetadataFilter;
+    metadataFilter?: MetadataFilter;
 
     @doc("filters over knowledge base.")
-    sourceFilter: SourceFilter;
+    sourceFilter?: SourceFilter;
 
     @doc("Logical operation used to join metadata filter with source filter.")
-    logicalOperation: LogicalOperationKind = LogicalOperationKind.AND;
+    logicalOperation?: LogicalOperationKind = LogicalOperationKind.AND;
 }
 
 @doc("Find QnAs that are associated with the given list of metadata.")
 model MetadataFilter {
     @doc("List of metadata.")
-    metadata: Array<MetadataRecord>;
+    metadata?: Array<MetadataRecord>;
 
     @doc("Operation used to join metadata filters.")
-    logicalOperation: LogicalOperationKind = LogicalOperationKind.AND;
+    logicalOperation?: LogicalOperationKind = LogicalOperationKind.AND;
 }
 
 @doc("Object to provide the key value pair for each metadata.")
@@ -213,7 +207,7 @@ model MetadataRecord {
 @doc("Find QnAs that are associated with any of the given list of sources in knowledge base.")
 model SourceFilter {
     @doc("List of sources in knowledge base.")
-    type: Array<string>;
+    type?: Array<string>;
 }
 
 @doc("Set to 'OR' or 'AND' for using corresponding logical operation.")
@@ -236,7 +230,7 @@ model ShortAnswerOptions {
     @maxValue(10)
     @minValue(1)
     @projectedName("client", "top")
-    topAnswersWithSpan: int32;
+    topAnswersWithSpan?: int32;
 }
 
 @doc("Human-readable error code.")
