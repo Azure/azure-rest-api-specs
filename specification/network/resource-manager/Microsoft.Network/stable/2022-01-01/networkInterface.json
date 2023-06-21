@@ -944,21 +944,24 @@
           "items": {
             "$ref": "./applicationGateway.json#/definitions/ApplicationGatewayBackendAddressPool"
           },
-          "description": "The reference to ApplicationGatewayBackendAddressPool resource."
+          "description": "The reference to ApplicationGatewayBackendAddressPool resource.",
+          "x-ms-identifiers": ["id"]
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
             "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
           },
-          "description": "The reference to LoadBalancerBackendAddressPool resource."
+          "description": "The reference to LoadBalancerBackendAddressPool resource.",
+          "x-ms-identifiers": ["id"]
         },
         "loadBalancerInboundNatRules": {
           "type": "array",
           "items": {
             "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
           },
-          "description": "A list of references of LoadBalancerInboundNatRules."
+          "description": "A list of references of LoadBalancerInboundNatRules.",
+          "x-ms-identifiers": ["id"]
         },
         "privateIPAddress": {
           "type": "string",
@@ -1331,7 +1334,7 @@
           "description": "A collection of effective security rules."
         },
         "tagMap": {
-          "type": "string",
+          "type": "object",
           "additionalProperties": {
             "type": "array",
             "items": {
