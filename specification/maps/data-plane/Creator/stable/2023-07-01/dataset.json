@@ -68,34 +68,11 @@
     },
     "ConversionIdQuery": {
       "name": "conversionId",
-      "description": "ID to create the dataset. The `conversionId` must be obtained from a successful call to the Conversion Service [Convert API](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion/convert). Only one conversionId can be provided per API call. **conversionId and udid are mutually exclusive parameters.**",
+      "description": "ID to create the dataset. The `conversionId` must be obtained from a successful call to the Conversion Service [Convert API](https://docs.microsoft.com/en-us/rest/api/maps/2023-07-01/conversion/convert). Only one conversionId can be provided per API call.",
       "type": "string",
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
-    },
-    "Udid": {
-      "name": "udid",
-      "description": "ID to create the dataset. The `udid` can be obtained from uploading data using [Azure Maps Data Service](https://docs.microsoft.com/en-us/rest/api/maps/data-v2). Only one udid can be provided per API call. **outputOntology parameter must be provided with the udid. conversionId and udid are mutually exclusive parameters.**",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method"
-    },
-    "OutputOntologyDataset": {
-      "name": "outputOntology",
-      "description": "The ontology for the uploaded zip package containing GeoJSON files. **outputOntology is required if udid is provided, however, is mutually exclusive with conversionId. Currently, only the value *facility-2.0* is supported.**",
-      "type": "string",
-      "in": "query",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "facility-2.0"
-      ],
-      "x-ms-enum": {
-        "name": "outputOntology",
-        "modelAsString": true
-      }
     },
     "DatasetDescription": {
       "name": "description",
@@ -131,7 +108,7 @@
   "paths": {
     "/datasets": {
       "post": {
-        "description": "This API allows the caller to create a dataset from data that was uploaded to the [Azure Maps Data Service](https://docs.microsoft.com/en-us/rest/api/maps/data-v2) and converted using the [Azure Maps Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/v2/conversion). You can also create a dataset directly using data uploaded to the [Azure Maps Data Service](https://docs.microsoft.com/en-us/rest/api/maps/data-v2), provided that the uploaded data is a zip of GeoJSON files conforming to the [facility ontology](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) format.\n\nFor more information on how to create a dataset from a zip of GeoJSON files, please visit this [article](https://aka.ms/howtofacilitygeojson)\n\n### Submit Create Request\n\nTo create your dataset, issue a `POST` request with the required parameters. The Create API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
+        "description": "This API allows the caller to create a dataset from data that was uploaded to the [Azure Maps Data Service](https://docs.microsoft.com/en-us/rest/api/maps/data-v2) and converted using the [Azure Maps Conversion Service](https://docs.microsoft.com/en-us/rest/api/maps/2023-07-01/conversion).\n\n### Submit Create Request\n\nTo create your dataset, issue a `POST` request with the required parameters. The Create API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Dataset_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -141,13 +118,7 @@
           "Create dataset from a converted CAD file provided by conversionId": {
             "$ref": "./examples/dataset/Dataset_Create_ConversionId.json"
           },
-          "Create dataset from a zip of GeoJSON files provided by udid": {
-            "$ref": "./examples/dataset/Dataset_Create_Udid.json"
-          },
-          "Create dataset with Udid and append to it a dataset created with udid": {
-            "$ref": "./examples/dataset/Dataset_Append_Udid.json"
-          },
-          "Create dataset with Udid and append to it a dataset created with conversionId": {
+          "Create dataset with conversionId and append to it another dataset created with conversionId": {
             "$ref": "./examples/dataset/Dataset_Append_ConversionId.json"
           }
         },
@@ -160,12 +131,6 @@
           },
           {
             "$ref": "#/parameters/ConversionIdQuery"
-          },
-          {
-            "$ref": "#/parameters/Udid"
-          },
-          {
-            "$ref": "#/parameters/OutputOntologyDataset"
           },
           {
             "$ref": "#/parameters/AppendDatasetId"
@@ -184,7 +149,7 @@
         }
       },
       "get": {
-        "description": "This API allows the caller to fetch a list of all previously successfully created datasets.\n\n### Submit List Request\n\nTo list all your datasets, issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, `datasetSources`, and `ontology` of 2 dataset resources:\n\n\n```json\n{\n  \"datasets\": [\n    {\n      \"timestamp\": \"2020-01-01T22:50:48.123Z\",\n      \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n      \"description\": \"Some description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"udids\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],\n      },\n      \"ontology\": \"facility-2.0\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    },\n    {\n      \"timestamp\": \"2020-01-01T22:57:53.123Z\",\n      \"datasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n      \"description\": \"Create from upload '0c1288fa-2058-4a1b-b68d-13a5f5af7d7c'.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n        ],\n        \"udids\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ]\n        \"appendDatasetId\": \"46d1edb6-d29e-4786-9589-dbd4efd7a977\"\n      },\n      \"ontology\": \"facility-2.0\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    }\n  ]\n}\n```",
+        "description": "This API allows the caller to fetch a list of all previously successfully created datasets.\n\n### Submit List Request\n\nTo list all your datasets, issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, `datasetSources`, and `ontology` of 2 dataset resources:\n\n\n```json\n{\n  \"datasets\": [\n    {\n      \"timestamp\": \"2020-01-01T22:50:48.123Z\",\n      \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n      \"description\": \"Some description or comment for the dataset.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n        ],\n      },\n      \"ontology\": \"facility-2.0\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    },\n    {\n      \"timestamp\": \"2020-01-01T22:57:53.123Z\",\n      \"datasetId\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n      \"description\": \"Create from upload '0c1288fa-2058-4a1b-b68d-13a5f5af7d7c'.\",\n      \"datasetSources\": {\n        \"conversionIds\": [\n          \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n        ],\n        \"appendDatasetId\": \"46d1edb6-d29e-4786-9589-dbd4efd7a977\"\n      },\n      \"ontology\": \"custom\",\n      \"featureCounts\": {\n        \"directoryInfo\": 2,\n        \"category\": 10,\n        \"facility\": 1,\n        \"level\": 3,\n        \"unit\": 183,\n        \"zone\": 3,\n        \"verticalPenetration\": 6,\n        \"opening\": 48,\n        \"areaElement\": 108\n      }\n    }\n  ]\n}\n```",
         "operationId": "Dataset_List",
         "x-ms-examples": {
           "List all the previously created datasets": {
@@ -218,7 +183,7 @@
     },
     "/datasets/{datasetId}": {
       "get": {
-        "description": "This API allows the caller to fetch a previously successfully created dataset.\n\n### Submit Get Details Request\n\nTo get the details for a previously created dataset, you will issue a `GET` request with the `datasetId` in the path.\n\n### Get Details Response\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, `datasetSources`, and `ontology` of a dataset resource:\n\n```json\n{\n   \"timestamp\": \"2020-01-01T22:50:48.123Z\",\n   \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n   \"description\": \"Some description or comment for the dataset.\",\n   \"datasetSources\": {\n     \"conversionIds\": [\n       \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n     ],\n     \"udids\": [\n       \"15d21452-c9bb-27b6-5e79-743ca5c3205d\"\n     ]\n     \"appendDatasetId\": \"46d1edb6-d29e-4786-9589-dbd4efd7a977\"\n   },\n   \"ontology\": \"facility-2.0\",\n   \"featureCounts\": {\n     \"directoryInfo\": 2,\n     \"category\": 10,\n     \"facility\": 1,\n     \"level\": 3,\n     \"unit\": 183,\n     \"zone\": 3,\n     \"verticalPenetration\": 6,\n     \"opening\": 48,\n     \"areaElement\": 108\n   }\n }\n```",
+        "description": "This API allows the caller to fetch a previously successfully created dataset.\n\n### Submit Get Details Request\n\nTo get the details for a previously created dataset, you will issue a `GET` request with the `datasetId` in the path.\n\n### Get Details Response\n\nHere's a sample response returning the `timestamp`, `datasetId`, `description`, `datasetSources`, and `ontology` of a dataset resource:\n\n```json\n{\n   \"timestamp\": \"2020-01-01T22:50:48.123Z\",\n   \"datasetId\": \"f6495f62-94f8-0ec2-c252-45626f82fcb2\",\n   \"description\": \"Some description or comment for the dataset.\",\n   \"datasetSources\": {\n     \"conversionIds\": [\n       \"0c1288fa-2058-4a1b-b68d-13a5f5af7d7c\"\n     ],\n     \"appendDatasetId\": \"46d1edb6-d29e-4786-9589-dbd4efd7a977\"\n   },\n   \"ontology\": \"facility-2.0\",\n   \"featureCounts\": {\n     \"directoryInfo\": 2,\n     \"category\": 10,\n     \"facility\": 1,\n     \"level\": 3,\n     \"unit\": 183,\n     \"zone\": 3,\n     \"verticalPenetration\": 6,\n     \"opening\": 48,\n     \"areaElement\": 108\n   }\n }\n```",
         "operationId": "Dataset_Get",
         "x-ms-examples": {
           "Get details for a previously created dataset": {
@@ -379,14 +344,6 @@
       "properties": {
         "conversionIds": {
           "description": "The `conversionIds` used to create the dataset.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
-        },
-        "udids": {
-          "description": "The `udids` used to create the dataset.",
           "type": "array",
           "readOnly": true,
           "items": {
