@@ -24,18 +24,64 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the mobilenetwork.
 
-```yaml
+``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-11-01
+tag: package-2023-06
 ```
 
+
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.MobileNetwork/stable/2023-06-01/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/common.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/dataNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/mobileNetwork.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/operation.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/packetCapture.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/service.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/sim.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/simGroup.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/simPolicy.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/site.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/slice.json
+  - Microsoft.MobileNetwork/stable/2023-06-01/ts29571.json
+```
+### Tag: package-2022-12-01-privatepreview
+
+These settings apply only when `--tag=package-2022-12-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-12-01-privatepreview'
+input-file:
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/common.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/operation.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/service.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/sim.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/simGroup.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/site.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/slice.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/ts29571.json
+  - Microsoft.MobileNetwork/preview/2022-12-01-privatepreview/radioAccessNetwork.json
+```
 
 ### Tag: package-2022-11-01
 
 These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11-01'
+``` yaml $(tag) == 'package-2022-11-01'
 input-file:
   - Microsoft.MobileNetwork/stable/2022-11-01/attachedDataNetwork.json
   - Microsoft.MobileNetwork/stable/2022-11-01/common.json
@@ -52,11 +98,12 @@ input-file:
   - Microsoft.MobileNetwork/stable/2022-11-01/slice.json
   - Microsoft.MobileNetwork/stable/2022-11-01/ts29571.json
 ```
+
 ### Tag: package-2022-04-01-preview
 
 These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04-01-preview'
+``` yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
   - Microsoft.MobileNetwork/preview/2022-04-01-preview/attachedDataNetwork.json
   - Microsoft.MobileNetwork/preview/2022-04-01-preview/common.json
@@ -75,7 +122,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03-01-preview'
+``` yaml $(tag) == 'package-2022-03-01-preview'
 input-file:
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/attachedDataNetwork.json
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/common.json
@@ -90,6 +137,25 @@ input-file:
   - Microsoft.MobileNetwork/preview/2022-03-01-preview/ts29571.json
 ```
 
+### Tag: package-2021-04-01-preview
+
+These settings apply only when `--tag=package-2021-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-01-preview'
+input-file:
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/common.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/dataNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/mobileNetwork.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/operation.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreControlPlane.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/service.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/simPolicy.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/slice.json
+  - Microsoft.MobileNetwork/preview/2021-04-01-preview/ts29571.json
+```
+
 ---
 
 # Code Generation
@@ -99,7 +165,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
