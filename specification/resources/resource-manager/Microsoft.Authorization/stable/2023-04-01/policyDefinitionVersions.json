@@ -79,10 +79,10 @@
         "description": "This operation lists all the policy definition versions for all policy definitions at the management group scope.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"
@@ -369,10 +369,10 @@
             "description": "The policy definition properties."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -413,10 +413,10 @@
             "description": "The version to delete."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -457,10 +457,10 @@
             "description": "The version to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -485,7 +485,7 @@
           "PolicyDefinitionVersions"
         ],
         "operationId": "PolicyDefinitionVersions_List",
-        "summary": "Retrieves policy definition versions for a given policy definintion in a subscription",
+        "summary": "Retrieves policy definition versions for a given policy definition in a subscription",
         "description": "This operation retrieves a list of all the policy definition versions for the given policy definition.",
         "parameters": [
           {
@@ -569,10 +569,10 @@
         "description": "This operation retrieves a list of all the policy definition versions for the given policy definition in the given management group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TopParameter"
@@ -776,7 +776,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription."
+      "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "method"
     },
     "ManagementGroupIdParameter": {
       "name": "managementGroupId",
@@ -791,7 +792,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for the operation."
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "method"
     },
     "PolicyDefinitionsFilterParameter": {
       "name": "$filter",

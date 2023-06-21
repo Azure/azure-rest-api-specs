@@ -545,6 +545,9 @@
         },
         "versions": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "description": "A list of available versions for this policy definition."
         }
       },
@@ -670,7 +673,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription."
+      "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "method"
     },
     "ManagementGroupIdParameter": {
       "name": "managementGroupId",
@@ -685,7 +689,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for the operation."
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "method"
     },
     "PolicyDefinitionsFilterParameter": {
       "name": "$filter",

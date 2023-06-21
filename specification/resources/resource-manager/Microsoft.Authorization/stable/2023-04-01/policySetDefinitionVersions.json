@@ -689,10 +689,6 @@
         "version": {
           "type": "string",
           "description": "The policy set definition version in #.#.# format."
-        },
-        "versions": {
-          "type": "array",
-          "description": "A list of available versions for this policy set definition."
         }
       },
       "required": [
@@ -809,7 +805,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription."
+      "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "method"
     },
     "ManagementGroupIdParameter": {
       "name": "managementGroupId",
@@ -824,7 +821,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for the operation."
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "method"
     },
     "PolicySetDefinitionsFilterParameter": {
       "name": "$filter",
