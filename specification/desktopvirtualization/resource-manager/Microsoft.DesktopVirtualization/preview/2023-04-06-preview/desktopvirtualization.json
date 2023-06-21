@@ -5468,7 +5468,8 @@
         "maxVmsRemoved": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of virtual machines to be removed during hostpool update."
+          "description": "The maximum number of virtual machines to be removed during hostpool update.",
+          "minimum": 1
         },
         "logOffDelayMinutes": {
           "type": "integer",
@@ -5492,7 +5493,8 @@
         "maxVmsRemoved": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of virtual machines to be removed during hostpool update."
+          "description": "The maximum number of virtual machines to be removed during hostpool update.",
+          "minimum": 1
         },
         "logOffDelayMinutes": {
           "type": "integer",
@@ -5824,7 +5826,7 @@
         "update": {
           "type": "object",
           "description": "settings for management information for the hostpool update operation. If none is provided the update will use the settings saved in the sessionHostManagement object.",
-          "$ref": "#/definitions/HostPoolUpdateConfigurationProperties"
+          "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties"
         }
       }
     },
