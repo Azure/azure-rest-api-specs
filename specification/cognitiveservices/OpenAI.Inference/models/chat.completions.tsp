@@ -157,6 +157,7 @@ model ChatChoice {
   index: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "https://github.com/Azure/typespec-azure/issues/3180"
   @doc("The reason that this chat completions choice completed its generated.")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
