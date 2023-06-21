@@ -1480,7 +1480,7 @@
             "name": "requestBody",
             "description": "Solution resource request body.",
             "schema": {
-              "$ref": "#/definitions/SolutionInstallationRequest"
+              "$ref": "#/definitions/Solution"
             }
           }
         ],
@@ -2296,27 +2296,10 @@
         "marketplaceOfferDetails": {
           "$ref": "#/definitions/MarketplaceOfferDetails"
         },
-        "inputParametersValidationScopes": {
-          "description": "Gets or sets scope of the Data Manager For Agriculture related parameters that need to\r\nbe validated in solutionInference trigger request.\r\nExample. [{ \"resourceIdName\" :\"boundaryId\", \"resourceType\" :\r\n\"Boundary\" }].",
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "#/definitions/ResourceParameter"
-          },
-          "readOnly": true
-        },
-        "openAPISpecsDictionary": {
+        "openApiSpecsDictionary": {
           "description": "Gets api-version Swagger Document Dictionary to capture all api-versions of swagger exposed by partner to Data Manager For Agriculture.",
           "type": "object",
           "additionalProperties": {},
-          "readOnly": true
-        },
-        "evaluatedOutputsDictionary": {
-          "description": "Gets example name: insight sample response Dictionary to capture all variations of computed results ingested by partner.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/SolutionEvaluatedOutput"
-          },
           "readOnly": true
         },
         "accessFBApplicationId": {
@@ -2326,7 +2309,6 @@
           "readOnly": true
         },
         "saaSApplicationId": {
-          "format": "uuid",
           "description": "Application id of the SaaS multi tenant application.",
           "type": "string",
           "readOnly": true
@@ -2552,131 +2534,6 @@
         }
       }
     },
-    "Insight": {
-      "type": "object",
-      "properties": {
-        "farmerId": {
-          "type": "string"
-        },
-        "modelId": {
-          "type": "string"
-        },
-        "resourceType": {
-          "type": "string"
-        },
-        "resourceId": {
-          "type": "string"
-        },
-        "modelVersion": {
-          "type": "string"
-        },
-        "insightStartDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "insightEndDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "measures": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Measure"
-          }
-        },
-        "id": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "modifiedDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "eTag": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "createdBy": {
-          "type": "string"
-        },
-        "modifiedBy": {
-          "type": "string"
-        },
-        "properties": {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "InsightAttachment": {
-      "type": "object",
-      "properties": {
-        "insightId": {
-          "type": "string"
-        },
-        "modelId": {
-          "type": "string"
-        },
-        "resourceType": {
-          "type": "string"
-        },
-        "resourceId": {
-          "type": "string"
-        },
-        "fileLink": {
-          "type": "string"
-        },
-        "originalFileName": {
-          "type": "string"
-        },
-        "farmerId": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "modifiedDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "source": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "createdBy": {
-          "type": "string"
-        },
-        "modifiedBy": {
-          "type": "string"
-        },
-        "eTag": {
-          "type": "string"
-        }
-      }
-    },
     "KeyVaultProperties": {
       "description": "Properties of the key vault.",
       "required": [
@@ -2741,18 +2598,7 @@
       ],
       "x-ms-discriminator-value": "OAuthClientCredentials"
     },
-    "Measure": {
-      "type": "object",
-      "properties": {
-        "unit": {
-          "type": "string"
-        },
-        "value": {
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
+
     "PublicNetworkAccess": {
       "description": "Property to allow or block public traffic for an Azure Data Manager For Agriculture resource.",
       "enum": [
@@ -2763,17 +2609,6 @@
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
         "modelAsString": true
-      }
-    },
-    "ResourceParameter": {
-      "type": "object",
-      "properties": {
-        "resourceIdName": {
-          "type": "string"
-        },
-        "resourceType": {
-          "type": "string"
-        }
       }
     },
     "SensorIntegration": {
@@ -2829,26 +2664,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "SolutionEvaluatedOutput": {
-      "type": "object",
-      "properties": {
-        "insightResponse": {
-          "$ref": "#/definitions/Insight"
-        },
-        "insightAttachmentResponse": {
-          "$ref": "#/definitions/InsightAttachment"
-        }
-      }
-    },
-    "SolutionInstallationRequest": {
-      "description": "Solution Installation Request Body.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SolutionProperties"
-        }
-      }
-    },
+
     "SolutionListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
       "required": [
@@ -2885,11 +2701,6 @@
       ],
       "type": "object",
       "properties": {
-        "solutionId": {
-          "description": "Solution Id.",
-          "type": "string",
-          "readOnly": true
-        },
         "partnerId": {
           "description": "Partner Id of the Solution.",
           "type": "string",
