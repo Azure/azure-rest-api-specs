@@ -37,14 +37,14 @@
     "/{scope}/providers/Microsoft.Security/applicationMappingRules": {
       "get": {
         "x-ms-examples": {
-          "Retrieve an application mapping rules by subscription": {
-            "$ref": "./examples/ApplicationMappingRules/ListBySubscriptionApplicationMappingRules_example.json"
+          "Get a list of  application mapping rules": {
+            "$ref": "./examples/ApplicationMappingRules/ListApplicationMappingRulesBySubscription_example.json"
           },
-          "Retrieve an application mapping rules by management group": {
-            "$ref": "./examples/ApplicationMappingRules/ListByManagementGroupApplicationMappingRules_example.json"
+          "Get a list of  application mapping rules by management group": {
+            "$ref": "./examples/ApplicationMappingRules/ListApplicationMappingRulesByManagementGroup_example.json"
           },
-          "Retrieve an application mapping rules by security connector": {
-            "$ref": "./examples/ApplicationMappingRules/ListBySecurityConnectorApplicationMappingRules_example.json"
+          "Get a list of  application mapping rules by security connector": {
+            "$ref": "./examples/ApplicationMappingRules/ListApplicationMappingRulesBySecurityConnector_example.json"
           }
         },
         "tags": [
@@ -54,7 +54,7 @@
         "operationId": "ApplicationMappingRules_List",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -99,7 +99,7 @@
         "operationId": "ApplicationMappingRules_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -118,7 +118,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -142,7 +142,7 @@
         "operationId": "ApplicationMappingRules_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -170,7 +170,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -194,7 +194,7 @@
         "description": "Delete a single application mapping rule over a given scope.",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -213,7 +213,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -244,12 +244,6 @@
       "type": "object",
       "description": "The application mapping rule resource",
       "properties": {
-        "systemData": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
         "properties": {
           "description": "Properties of an application mapping rule",
           "x-ms-client-flatten": true,
@@ -269,10 +263,6 @@
         "tenantId": {
           "type": "string",
           "description": "The tenant Id associated with the application mapping rule (GUID)"
-        },
-        "environmentId": {
-          "type": "string",
-          "description": "The application mapping rule EnvironmentId"
         },
         "displayName": {
           "type": "string",

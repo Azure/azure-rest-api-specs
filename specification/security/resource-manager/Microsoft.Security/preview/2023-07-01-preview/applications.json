@@ -48,7 +48,7 @@
         "operationId": "Application_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -88,7 +88,7 @@
         "operationId": "Application_Update",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -113,7 +113,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -122,7 +122,7 @@
     "/{scope}/providers/Microsoft.Security/applications": {
       "get": {
         "x-ms-examples": {
-          "Retrieve an application": {
+          "Get a list of applications": {
             "$ref": "./examples/Applications/ListApplicationsByEnvironment_example.json"
           }
         },
@@ -133,7 +133,7 @@
         "operationId": "Application_List",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -149,7 +149,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -161,7 +161,7 @@
     "/{scope}/providers/Microsoft.Security/applicationMappingRule/{ruleId}/applications": {
       "get": {
         "x-ms-examples": {
-          "Retrieve an application": {
+          "Get list of  applications": {
             "$ref": "./examples/Applications/ListApplicationsByRuleId_example.json"
           }
         },
@@ -172,7 +172,7 @@
         "operationId": "Application_ListByRuleId",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/RuleId"
@@ -191,7 +191,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -225,12 +225,6 @@
       "type": "object",
       "description": "The application business criticality resource",
       "properties": {
-        "systemData": {
-          "readOnly": true,
-          "type": "object",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
         "properties": {
           "description": "Properties of an application business criticality",
           "x-ms-client-flatten": true,
@@ -250,14 +244,6 @@
         "tenantId": {
           "type": "string",
           "description": "The tenant Id associated with the application (GUID)"
-        },
-        "environmentId": {
-          "type": "string",
-          "description": "The application environment Id"
-        },
-        "applicationMappingRuleId": {
-          "type": "string",
-          "description": "The application mapping rule Key, the key of the rule were created the application (GUID)"
         },
         "kqlQuery": {
           "type": "string",
