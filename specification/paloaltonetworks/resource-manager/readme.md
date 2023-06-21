@@ -27,7 +27,16 @@ These are the global settings for the PaloAltoNetworks.Cloudngfw.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-08-29-preview
+tag: package-2022-08-29
+```
+
+### Tag: package-2022-08-29
+
+These settings apply only when `--tag=package-2022-08-29` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-08-29'
+input-file:
+  - PaloAltoNetworks.Cloudngfw/stable/2022-08-29/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2022-08-29-preview
@@ -52,7 +61,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go-track2
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
