@@ -13,7 +13,13 @@ using TypeSpec.Http;
 namespace TextTranslation;
 
 @doc("Defines Text Translation custom Operation")
-op CustomOperation<TBody, TParams, TResponse, Traits = {}, TError = ErrorResponse>(
+op CustomOperation<
+  TBody,
+  TParams,
+  TResponse,
+  Traits = {},
+  TError = ErrorResponse
+>(
   ...TParams,
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing spec"
