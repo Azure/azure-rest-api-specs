@@ -24,16 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the marketplacecatalog.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-2021-10-01
+tag: package-preview-2023-05
 ```
 
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Products/preview/2023-05-01-preview/products.json
+```
 ### Tag: package-2021-10-01
 
 These settings apply only when `--tag=package-2021-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10-01'
+``` yaml $(tag) == 'package-2021-10-01'
 input-file:
   - Microsoft.Marketplace/stable/2021-10-01/marketplacecatalog.json
 ```
@@ -42,25 +51,25 @@ input-file:
 
 These settings apply only when `--tag=package-2022-08-17-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08-17-preview'
+``` yaml $(tag) == 'package-2022-08-17-preview'
 input-file:
   - Search/preview/2022-08-17-preview/search.json
-```  
+```
 
 ### Tag: package-2022-09-25-preview
 
 These settings apply only when `--tag=package-2022-09-25-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09-25-preview'
+``` yaml $(tag) == 'package-2022-09-25-preview'
 input-file:
   - Search/preview/2022-09-25-preview/search.json
- ```
+```
 
- ### Tag: package-2023-01-01-preview
+### Tag: package-2023-01-01-preview
 
 These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-01-01-preview'
+``` yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
   - Products/preview/2023-01-01-preview/products.json
- ```
+```
