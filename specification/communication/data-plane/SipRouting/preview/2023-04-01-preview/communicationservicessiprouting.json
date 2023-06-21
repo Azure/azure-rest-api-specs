@@ -452,7 +452,7 @@
       }
     },
     "DomainPatch": {
-      "description": "Represents Domain that will be validated and used.\r\nMap key is domain.",
+      "description": "Represents Domain that will be used.\r\nMap key is domain.",
       "type": "object",
       "properties": {
         "enabled": {
@@ -466,7 +466,7 @@
       "type": "object",
       "properties": {
         "domains": {
-          "description": "Domains that will be validated and used.\r\nMap key is domain.",
+          "description": "Domains that will be used.\r\nMap key is domain.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/DomainPatch"
@@ -511,21 +511,8 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Sip configuration expand. Optional.",
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "trunks/health"
-      ],
-      "x-ms-enum": {
-        "name": "ExpandEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "trunks/health",
-            "description": "Health state of a SIP trunk for routing calls."
-          }
-        ]
-      }
+      "description": "Sip configuration expand. Supported option \"trunks/health\" expands health state of a SIP trunk for routing calls. Optional.",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "in": "query",
