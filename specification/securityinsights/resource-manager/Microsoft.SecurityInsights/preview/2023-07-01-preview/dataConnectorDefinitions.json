@@ -105,12 +105,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "in": "path",
-            "name": "dataConnectorDefinitionName",
-            "description": "The data connector definition name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9-]*$"
+            "$ref": "#/parameters/dataConnectorDefinitionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -159,11 +154,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "in": "path",
-            "name": "dataConnectorDefinitionName",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9-]*$"
+            "$ref": "#/parameters/dataConnectorDefinitionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -171,6 +162,7 @@
           {
             "in": "body",
             "name": "connectorDefinitionInput",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectorDefinitionBaseArmObjectWrapperWithConverter"
             }
@@ -222,11 +214,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
-            "in": "path",
-            "name": "dataConnectorDefinitionName",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9-]*$"
+            "$ref": "#/parameters/dataConnectorDefinitionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -250,6 +238,14 @@
     }
   },
   "definitions": {
+    "dataConnectorDefinitionName": {
+      "in": "path",
+      "name": "dataConnectorDefinitionName",
+      "description": "The data connector definition name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9-]*$"
+    },
     "ConnectorDefinitionsAvailability": {
       "description": "The exposure status of the connector to the customers.",
       "type": "object",
