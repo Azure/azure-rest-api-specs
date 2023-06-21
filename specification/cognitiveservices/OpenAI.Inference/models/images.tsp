@@ -126,7 +126,7 @@ op OaiLongRunningRpcOperation<
       Azure.Core.Traits.TraitLocation.Parameters
     >,
   Azure.Core.Foundations.AcceptedResponse &
-    ImageOperationResponse &
+    TResponse &
     Foundations.LongRunningStatusLocation<TStatusResult> &
     Azure.Core.Traits.Private.TraitProperties<
       Traits,
