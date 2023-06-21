@@ -5,6 +5,8 @@ import "./completions.common.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
+namespace Azure.OpenAI;
+
 @doc("""
 The configuration information for a completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"

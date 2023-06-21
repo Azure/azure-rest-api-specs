@@ -4,6 +4,8 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
+namespace Azure.OpenAI;
+
 @doc("""
 The configuration information for an embeddings request.
 Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
