@@ -2354,6 +2354,33 @@
         }
       }
     },
+    "JobMatchingMode": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "modeType": {
+          "enum": [
+            "queueAndMatchMode",
+            "scheduleAndSuspendMode",
+            "suspendMode"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobMatchModeType",
+            "modelAsString": true
+          }
+        },
+        "queueAndMatchMode": {
+          "$ref": "#/definitions/QueueAndMatchMode"
+        },
+        "scheduleAndSuspendMode": {
+          "$ref": "#/definitions/ScheduleAndSuspendMode"
+        },
+        "suspendMode": {
+          "$ref": "#/definitions/SuspendMode"
+        }
+      }
+    },
     "LongestIdleMode": {
       "description": "Jobs are directed to the worker who has been idle longest.",
       "type": "object",
@@ -2510,6 +2537,10 @@
         }
       },
       "x-ms-discriminator-value": "pass-through"
+    },
+    "QueueAndMatchMode": {
+      "description": "",
+      "type": "object"
     },
     "QueueLengthExceptionTrigger": {
       "description": "Trigger for an exception action on exceeding queue length",
@@ -2725,14 +2756,14 @@
             "type": "string"
           }
         },
-        "unavailableForMatching": {
-          "description": "A flag indicating this job is ready for being matched with workers.\r\nWhen set to true, job matching will not be started. If set to false, job matching will start automatically",
-          "type": "boolean"
-        },
-        "scheduledTimeUtc": {
+        "scheduledAt": {
           "format": "date-time",
           "description": "If set, job will be scheduled to be enqueued at a given time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
+        },
+        "matchingMode": {
+          "$ref": "#/definitions/JobMatchingMode"
         }
       }
     },
@@ -3274,6 +3305,15 @@
       },
       "x-ms-discriminator-value": "rule-engine"
     },
+    "ScheduleAndSuspendMode": {
+      "type": "object",
+      "properties": {
+        "scheduleAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "ScoringRuleOptions": {
       "description": "Encapsulates all options that can be passed as parameters for scoring rule with BestWorkerMode",
       "type": "object",
@@ -3373,6 +3413,9 @@
         }
       },
       "x-ms-discriminator-value": "static"
+    },
+    "SuspendMode": {
+      "type": "object"
     },
     "UnassignJobRequest": {
       "description": "Request payload for unassigning a job.",
