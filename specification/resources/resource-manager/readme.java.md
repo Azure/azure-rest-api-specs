@@ -54,6 +54,7 @@ batch:
   - tag: package-features-2021-07
   - tag: package-locks-2016-09
   - tag: package-managedapplications-2019-07
+  - tag: package-policy-2023-04
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
   - tag: package-policy-2019-09
@@ -131,6 +132,23 @@ java:
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "ManagedApplications"}'
+```
+### Tag: package-policy-2023-04 and java
+
+These settings apply only when `--tag=package-policy-2023-04 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2023-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.policy.v2023_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policy/mgmt-v2023_04_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "Policy"}'
+directive:
+  from: policyAssignments.json
+  where: $.definitions.PolicyAssignmentProperties.properties.scope
+  transform: $['x-ms-client-name'] = 'scopeProperty'
 ```
 
 ### Tag: package-policy-2021-06 and java
