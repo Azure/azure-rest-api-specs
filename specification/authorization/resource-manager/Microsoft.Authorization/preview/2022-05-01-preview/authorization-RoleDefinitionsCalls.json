@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AuthorizationManagementClient",
-    "version": "2022-04-01",
+    "version": "2022-05-01-preview",
     "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations allow you to manage role definitions. A role definition describes the set of actions that can be performed on resources."
   },
   "host": "management.azure.com",
@@ -154,12 +154,7 @@
         "description": "Deletes a role definition.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
             "name": "roleDefinitionId",
@@ -200,15 +195,10 @@
           "RoleDefinitions"
         ],
         "operationId": "RoleDefinitions_Get",
-        "description": "Get role definition by name (GUID).",
+        "description": "Get role definition by ID (GUID).",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
             "name": "roleDefinitionId",
@@ -236,8 +226,8 @@
           }
         },
         "x-ms-examples": {
-          "Get role definition by name": {
-            "$ref": "./examples/GetRoleDefinitionByName.json"
+          "Get role definition by id": {
+            "$ref": "./examples/GetRoleDefinitionById.json"
           }
         }
       },
@@ -249,12 +239,7 @@
         "description": "Creates or updates a role definition.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
             "name": "roleDefinitionId",
@@ -278,7 +263,7 @@
         ],
         "responses": {
           "201": {
-            "description": "OK - Returns information about the role definition.",
+            "description": "OK - Returns information about the created or updated role definition.",
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
@@ -306,12 +291,7 @@
         "description": "Get all role definitions that are applicable at scope and above.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
             "name": "$filter",
@@ -386,8 +366,8 @@
           }
         },
         "x-ms-examples": {
-          "Get role definition by ID": {
-            "$ref": "./examples/GetRoleDefinitionById.json"
+          "Get role definition by role ID": {
+            "$ref": "./examples/GetRoleDefinitionByRoleId.json"
           }
         }
       }
@@ -426,7 +406,7 @@
         "permissions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Permission"
+            "$ref": "./common-types.json#/definitions/Permission"
           },
           "x-ms-identifiers": [],
           "description": "Role definition permissions."
@@ -465,6 +445,7 @@
       "description": "Role definition properties."
     },
     "RoleDefinition": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -512,7 +493,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Permission"
+            "$ref": "./common-types.json#/definitions/Permission"
           },
           "x-ms-identifiers": [],
           "description": "An array of permissions."
@@ -524,40 +505,6 @@
       },
       "type": "object",
       "description": "Permissions information."
-    },
-    "Permission": {
-      "properties": {
-        "actions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed actions."
-        },
-        "notActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Denied actions."
-        },
-        "dataActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed Data actions."
-        },
-        "notDataActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Denied Data actions."
-        }
-      },
-      "type": "object",
-      "description": "Role definition permissions."
     }
   },
   "parameters": {
