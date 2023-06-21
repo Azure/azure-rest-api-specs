@@ -19,7 +19,7 @@ directive:
       from: 'SharedAccessSignatureAuthorizationRule[AccessRightsDescription]'
       to: SharedAccessSignatureAuthorizationRule
   - from: iotdps.json
-    where: $.definitions.Resource.resourcegroup
+    where: $.definitions.Resource.properties.resourcegroup
     transform: >
       $["readOnly"] = true
 ```
