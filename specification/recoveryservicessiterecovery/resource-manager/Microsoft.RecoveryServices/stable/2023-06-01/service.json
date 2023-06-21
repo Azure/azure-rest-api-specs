@@ -9398,6 +9398,19 @@
         "recoveryCapacityReservationGroupId": {
           "description": "The recovery capacity reservation group Id.",
           "type": "string"
+        },
+        "churnOptionSelected" : {
+          "description": "A value indicating the churn option selected by user.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Normal",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "ChurnOptionSelected",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
