@@ -1216,20 +1216,16 @@
     },
     "MultiUserAuthorization": {
       "description": "MUA Settings of vault",
-      "type": "object",
-      "properties": {
-        "multiUserAuthorization": {
-          "enum": [
+      "enum": [
             "Invalid",
             "Enabled",
             "Disabled"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "MultiUserAuthorization",
-            "modelAsString": true
-          }
-        }
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "MultiUserAuthorization",
+        "modelAsString": true
       }
     },
     "MonitoringSettings": {
