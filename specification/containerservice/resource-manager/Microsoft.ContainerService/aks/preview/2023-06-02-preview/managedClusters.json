@@ -6522,6 +6522,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The size in MB of a swap file that will be created on each node."
+        },
+        "ulimitConfig": {
+          "$ref": "#/definitions/UlimitConfig",
+          "description": "Ulimit settings for Linux agent nodes."
         }
       }
     },
@@ -6635,6 +6639,8 @@
         "netIpv4TcpkeepaliveIntvl": {
           "type": "integer",
           "format": "int32",
+          "minimum": 10,
+          "maximum": 90,
           "description": "Sysctl setting net.ipv4.tcp_keepalive_intvl."
         },
         "netIpv4TcpTwReuse": {
@@ -6663,11 +6669,15 @@
         "netNetfilterNfConntrackMax": {
           "type": "integer",
           "format": "int32",
+          "minimum": 131072,
+          "maximum": 2097152,
           "description": "Sysctl setting net.netfilter.nf_conntrack_max."
         },
         "netNetfilterNfConntrackBuckets": {
           "type": "integer",
           "format": "int32",
+          "minimum": 65536,
+          "maximum": 524288,
           "description": "Sysctl setting net.netfilter.nf_conntrack_buckets."
         },
         "fsInotifyMaxUserWatches": {
@@ -6709,6 +6719,20 @@
           "type": "integer",
           "format": "int32",
           "description": "Sysctl setting vm.vfs_cache_pressure."
+        }
+      }
+    },
+    "UlimitConfig": {
+      "description": "Ulimit settings for Linux agent nodes",
+      "type": "object",
+      "properties": {
+        "maxLockedMemory": {
+          "type": "string",
+          "description": "Maximum locked-in-memory address space (KB)"
+        },
+        "noFile": {
+          "type": "string",
+          "description": "Maximum number of open files"
         }
       }
     },
