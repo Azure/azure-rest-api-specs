@@ -5794,12 +5794,10 @@
       "type": "object",
       "properties": {
         "sessionHostConfiguration": {
-          "type": "object",
           "description": "Object containing the definition for the SessionHostConfiguration to be validated.  If none is provided the update will use the SessionHostConfiguration settings associated with the HostPool.",
           "$ref": "#/definitions/SessionHostConfiguration"
         },
         "sessionHostManagement": {
-          "type": "object",
           "description": "Object containing the definition for the SessionHostManagement to be validated. If none is provided the update will use the settings saved in the sessionHostManagement object.",
           "$ref": "#/definitions/SessionHostManagement"
         },
@@ -5824,7 +5822,6 @@
           "description": "The timeZone as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0."
         },
         "update": {
-          "type": "object",
           "description": "settings for management information for the hostpool update operation. If none is provided the update will use the settings saved in the sessionHostManagement object.",
           "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties"
         }
@@ -8062,8 +8059,7 @@
         },
         "additionalFailureDetails": {
           "$ref": "#/definitions/SessionHostHealthCheckFailureDetails",
-          "description": "Additional detailed information on the failure.",
-          "readOnly": true
+          "description": "Additional detailed information on the failure."
         }
       }
     },
