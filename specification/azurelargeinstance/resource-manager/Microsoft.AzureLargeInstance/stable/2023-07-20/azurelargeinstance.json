@@ -35,8 +35,8 @@
           "AzureLargeInstance"
         ],
         "operationId": "AzureLargeInstanceInstances_ListBySubscription",
-        "summary": "Gets a list of Azure BareMetal instances in the specified subscription.",
-        "description": "Gets a list of Azure Large instances in the specified subscription. The operations returns various properties of each Azure BareMetal instance.",
+        "summary": "Gets a list of Azure Large instances in the specified subscription.",
+        "description": "Gets a list of Azure Large instances in the specified subscription. The operations returns various properties of each Azure Large instance.",
         "x-ms-examples": {
           "List all Azure Large instances in a subscription": {
             "$ref": "./examples/AzureLargeInstanceInstances_ListBySubscription.json"
@@ -72,8 +72,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance": {
       "get": {
         "operationId": "AzureLargeInstanceInstances_ListByResourceGroup",
-        "summary": "Gets a list of Azure BareMetal instances in the specified subscription and resource group.",
-        "description": "Gets a list of Azure Large instances in the specified subscription and resource group. The operations returns various properties of each Azure BareMetal instance.",
+        "summary": "Gets a list of Azure Large instances in the specified subscription and resource group.",
+        "description": "Gets a list of Azure Large instances in the specified subscription and resource group. The operations returns various properties of each Azure Large instance.",
         "x-ms-examples": {
           "List all Azure Large instances in a resource group": {
             "$ref": "./examples/AzureLargeInstanceInstances_ListByResourceGroup.json"
@@ -461,7 +461,7 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "Specifies information about the operating system disk used by baremetal instance."
+          "description": "Specifies information about the operating system disk used by Azure Large instance."
         }
       },
       "description": "Specifies the storage settings for the Azure Large instance disks."
@@ -587,69 +587,7 @@
           "description": "The localized friendly description for the operation as shown to the user."
         }
       },
-      "description": "Detailed Azure BareMetal Instance operation information"
-    },
-    "StorageProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Canceled",
-            "Migrating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "description": "State of provisioning of the AzureLargeInstanceStorageInstance"
-        },
-        "offeringType": {
-          "type": "string",
-          "description": "the offering type for which the resource is getting provisioned"
-        },
-        "storageType": {
-          "type": "string",
-          "description": "the storage protocol for which the resource is getting provisioned"
-        },
-        "generation": {
-          "type": "string",
-          "description": "the kind of storage instance"
-        },
-        "hardwareType": {
-          "type": "string",
-          "description": "the hardware type of the storage instance"
-        },
-        "workloadType": {
-          "type": "string",
-          "description": "the workload for which the resource is getting provisioned"
-        },
-        "storageBillingProperties": {
-          "$ref": "#/definitions/StorageBillingProperties",
-          "description": "the billing related information for the resource"
-        }
-      },
-      "description": "described the storage properties of the azure baremetalstorage instance"
-    },
-    "StorageBillingProperties": {
-      "type": "object",
-      "properties": {
-        "billingMode": {
-          "type": "string",
-          "description": "the billing mode for the storage instance"
-        },
-        "azureBareMetalStorageInstanceSize": {
-          "type": "string",
-          "description": "the SKU type that is provisioned"
-        }
-      },
-      "description": "Describes the billing related details of the AzureLargeInstanceStorageInstance."
+      "description": "Detailed Azure Large Instance operation information"
     },
     "Tags": {
       "type": "object",
@@ -659,10 +597,10 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Tags field of the AzureLargeInstance/AzureBareMetaStorage instance."
+          "description": "Tags field of the AzureLargeInstance instance."
         }
       },
-      "description": "Tags field of the AzureLargeInstance/AzureBareMetaStorage instance."
+      "description": "Tags field of the AzureLargeInstance instance."
     }
   },
   "parameters": {
@@ -671,16 +609,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the Azure BareMetal on Azure instance.",
-      "x-ms-parameter-location": "method"
-    },
-    "AzureLargeInstanceStorageInstanceNameParameter": {
-      "name": "azureBareMetalStorageInstanceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": ".*",
-      "description": "Name of the AzureLargeInstanceStorage on Azure instance.",
+      "description": "Name of the AzureLargeInstance.",
       "x-ms-parameter-location": "method"
     },
     "TagsParameter": {
