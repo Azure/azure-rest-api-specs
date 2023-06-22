@@ -5,6 +5,8 @@ import "./completions.common.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
+namespace Azure.OpenAI;
+
 @doc("A description of the intended purpose of a message within a chat completions interaction.")
 enum ChatRole {
   @doc("The role that instructs or sets the behavior of the assistant.")
@@ -157,6 +159,7 @@ model ChatChoice {
   index: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "https://github.com/Azure/typespec-azure/issues/3180"
   @doc("The reason that this chat completions choice completed its generated.")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
