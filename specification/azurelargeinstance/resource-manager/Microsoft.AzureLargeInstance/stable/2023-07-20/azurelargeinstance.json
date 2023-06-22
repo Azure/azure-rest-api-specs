@@ -31,9 +31,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance": {
       "get": {
-        "tags": [
-          "AzureLargeInstance"
-        ],
+        "tags": ["AzureLargeInstance"],
         "operationId": "AzureLargeInstanceInstances_ListBySubscription",
         "summary": "Gets a list of Azure Large instances in the specified subscription.",
         "description": "Gets a list of Azure Large instances in the specified subscription. The operations returns various properties of each Azure Large instance.",
@@ -111,9 +109,7 @@
     },
     "/providers/Microsoft.AzureLargeInstance/operations": {
       "get": {
-        "tags": [
-          "AzureLargeInstance"
-        ],
+        "tags": ["AzureLargeInstance"],
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List all management operations supported by the AzureLargeInstance RP": {
@@ -121,12 +117,8 @@
           }
         },
         "description": "Gets a list of AzureLargeInstance management operations.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -153,9 +145,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance/{azureLargeInstanceName}": {
       "get": {
-        "tags": [
-          "AzureLargeInstance"
-        ],
+        "tags": ["AzureLargeInstance"],
         "operationId": "AzureLargeInstance_Get",
         "summary": "Gets an Azure Large instance.",
         "description": "Gets an Azure Large instance for the specified subscription, resource group, and instance name.",
@@ -194,9 +184,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "AzureLargeInstance"
-        ],
+        "tags": ["AzureLargeInstance"],
         "operationId": "AzureLargeInstanceInstances_Update",
         "summary": "Patches the Tags field of a Azure Large instance.",
         "description": "Patches the Tags field of a Azure Large instance for the specified subscription, resource group, and instance name.",
@@ -359,10 +347,7 @@
         "hardwareType": {
           "readOnly": true,
           "type": "string",
-          "enum": [
-            "Cisco_UCS",
-            "HPE"
-          ],
+          "enum": ["Cisco_UCS", "HPE"],
           "x-ms-enum": {
             "name": "AzureLargeInstanceHardwareTypeNamesEnum",
             "modelAsString": true
@@ -458,9 +443,7 @@
           "items": {
             "$ref": "#/definitions/Disk"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": ["name"],
           "description": "Specifies information about the operating system disk used by Azure Large instance."
         }
       },
@@ -496,9 +479,7 @@
           "items": {
             "$ref": "#/definitions/IpAddress"
           },
-          "x-ms-identifiers": [
-            "ipAddress"
-          ],
+          "x-ms-identifiers": ["ipAddress"],
           "description": "Specifies the network interfaces for the Azure Large instance."
         },
         "circuitId": {
@@ -526,9 +507,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
+          "x-ms-identifiers": ["name"],
           "description": "List of AzureLargeInstance operations"
         }
       },
