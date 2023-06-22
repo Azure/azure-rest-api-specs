@@ -7,4 +7,4 @@ using Azure.ClientGenerator.Core;
 @@internal(Azure.OpenAI.startGenerateImage);
 
 // Some models from client-internal LROs are still desired for custom public surface
-@@include(Azure.OpenAI.ImageGenerationOptions)
+@@include(Azure.OpenAI.ImageGenerationOptions);
