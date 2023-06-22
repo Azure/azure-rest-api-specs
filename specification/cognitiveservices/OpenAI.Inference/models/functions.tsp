@@ -11,7 +11,7 @@ model FunctionName {
   name: string;
 }
 
-@doc("Preset values to contro how the mode; responds to function calls.")
+@doc("Preset values to control how the mode; responds to function calls.")
 @added(ServiceApiVersions.v2023_07_01_Preview)
 enum FunctionCallPreset {
   @doc("Means the model can pick between an end-user or calling a function.")
