@@ -78,7 +78,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2023-07
 ```
 
 ### Composite packages
@@ -86,14 +86,23 @@ tag: package-composite-v3
 The following packages may be composed from multiple api-versions.
 
 
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.Security/preview/2023-07-01-preview/healthReports.json
+```
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-05'
+``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 ```
+
 ### Tag: package-preview-2023-03-only
 
 These settings apply only when `--tag=package-preview-2023-03-only` is specified on the command line.
@@ -145,6 +154,7 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
   - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
+
 ### Tag: package-preview-2022-12
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
@@ -153,7 +163,6 @@ These settings apply only when `--tag=package-preview-2022-12` is specified on t
 input-file:
   - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 ```
-
 
 ### Tag: package-preview-2022-11
 
@@ -905,7 +914,7 @@ override-info:
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.Security/stable/2023-05-01/serverVulnerabilityAssessmentsSettings.json
 
