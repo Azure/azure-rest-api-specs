@@ -122,7 +122,7 @@
     "/{scope}/providers/Microsoft.Security/applications": {
       "get": {
         "x-ms-examples": {
-          "Get a list of applications": {
+          "Get a list of applications by environment": {
             "$ref": "./examples/Applications/ListApplicationsByEnvironment_example.json"
           }
         },
@@ -161,7 +161,7 @@
     "/{scope}/providers/Microsoft.Security/applicationMappingRule/{ruleId}/applications": {
       "get": {
         "x-ms-examples": {
-          "Get list of  applications": {
+          "Get list of  applications by rule Id": {
             "$ref": "./examples/Applications/ListApplicationsByRuleId_example.json"
           }
         },
@@ -175,10 +175,10 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/RuleId"
+            "$ref": "#/parameters/Scope"
           },
           {
-            "$ref": "#/parameters/Scope"
+            "$ref": "#/parameters/RuleId"
           }
         ],
         "responses": {
