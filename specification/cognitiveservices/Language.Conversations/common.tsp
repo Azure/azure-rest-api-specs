@@ -16,6 +16,7 @@ using Azure.Core.Traits;
 })
 namespace Azure.AI.Language.Conversations;
 
+@doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
 
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
