@@ -40,7 +40,7 @@ input-file:
 suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
     from: swagger.yaml
-    reason: API path is not needed anymore.
+    reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
 ### Tag: package-2021-09-01
