@@ -3,7 +3,7 @@
   "info": {
     "version": "2023-07-20",
     "title": "azurelargeinstance",
-    "description": "Description of the new service",
+    "description": "The AzureLargeInstance Management client",
     "x-ms-code-generation-settings": {
       "name": "azurelargeinstanceClient"
     }
@@ -29,33 +29,213 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
+        "tags": [
+          "AzureLargeInstance"
+        ],
+        "operationId": "AzureLargeInstanceInstances_ListBySubscription",
+        "summary": "Gets a list of Azure BareMetal instances in the specified subscription.",
+        "description": "Gets a list of Azure Large instances in the specified subscription. The operations returns various properties of each Azure BareMetal instance.",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+          "List all Azure Large instances in a subscription": {
+            "$ref": "./examples/AzureLargeInstanceInstances_ListBySubscription.json"
+          }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/AzureLargeInstanceListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance": {
+      "get": {
+        "operationId": "AzureLargeInstanceInstances_ListByResourceGroup",
+        "summary": "Gets a list of Azure BareMetal instances in the specified subscription and resource group.",
+        "description": "Gets a list of Azure Large instances in the specified subscription and resource group. The operations returns various properties of each Azure BareMetal instance.",
+        "x-ms-examples": {
+          "List all Azure Large instances in a resource group": {
+            "$ref": "./examples/AzureLargeInstanceInstances_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.AzureLargeInstance/operations": {
+      "get": {
+        "tags": [
+          "AzureLargeInstance"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List all management operations supported by the AzureLargeInstance RP": {
+            "$ref": "./examples/AzureLargeInstanceOperations_List.json"
+          }
+        },
+        "description": "Gets a list of AzureLargeInstance management operations.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance/{azureLargeInstanceName}": {
+      "get": {
+        "tags": [
+          "AzureLargeInstance"
+        ],
+        "operationId": "AzureLargeInstance_Get",
+        "summary": "Gets an Azure Large instance.",
+        "description": "Gets an Azure Large instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Get an Azure Large instance": {
+            "$ref": "./examples/AzureLargeInstance_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstanceInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AzureLargeInstance"
+        ],
+        "operationId": "AzureLargeInstanceInstances_Update",
+        "summary": "Patches the Tags field of a Azure Large instance.",
+        "description": "Patches the Tags field of a Azure Large instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Update Tags field of an Azure Large instance": {
+            "$ref": "./examples/AzureLargeInstanceInstances_PatchTags.json"
+          },
+          "Delete Tags field of an Azure Large instance": {
+            "$ref": "./examples/AzureLargeInstanceInstances_PatchTags_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureLargeInstanceInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -63,6 +243,317 @@
     }
   },
   "definitions": {
+    "AzureLargeInstanceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureLargeInstance"
+          },
+          "description": "The list of Azure Large instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of Azure Large instances."
+        }
+      },
+      "description": "The response from the List Azure Large instances operation."
+    },
+    "AzureLargeInstance": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureLargeInstanceProperties",
+          "description": "Azure Large instance properties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Azure Large instance info on Azure (ARM properties and AzureLargeInstance properties)"
+    },
+    "AzureLargeInstanceProperties": {
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the Azure Large instance."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the Azure Large instance disks."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Specifies the operating system settings for the Azure Large instance."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Specifies the network settings for the Azure Large instance."
+        },
+        "azureLargeInstanceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the Azure Large instance unique ID."
+        },
+        "powerState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "starting",
+            "started",
+            "stopping",
+            "stopped",
+            "restarting",
+            "unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AzureLargeInstanceInstancePowerStateEnum",
+            "modelAsString": true
+          },
+          "description": "Resource power state"
+        },
+        "proximityPlacementGroup": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource proximity placement group"
+        },
+        "hwRevision": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Hardware revision of an Azure Large instance"
+        },
+        "partnerNodeId": {
+          "type": "string",
+          "description": "ARM ID of another AzureLargeInstanceInstance that will share a network with this AzureLargeInstanceInstance"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "AzureLargeInstanceProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the AzureLargeInstanceInstance"
+        }
+      },
+      "description": "Describes the properties of an Azure Large instance."
+    },
+    "HardwareProfile": {
+      "properties": {
+        "hardwareType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Cisco_UCS",
+            "HPE"
+          ],
+          "x-ms-enum": {
+            "name": "AzureLargeInstanceHardwareTypeNamesEnum",
+            "modelAsString": true
+          },
+          "description": "Name of the hardware type (vendor and/or their product name)"
+        },
+        "azureLargeInstanceSize": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "S72m",
+            "S144m",
+            "S72",
+            "S144",
+            "S192",
+            "S192m",
+            "S192xm",
+            "S96",
+            "S112",
+            "S224",
+            "S224m",
+            "S224om",
+            "S224oo",
+            "S224oom",
+            "S224ooo",
+            "S384",
+            "S384m",
+            "S384xm",
+            "S384xxm",
+            "S448",
+            "S448m",
+            "S448om",
+            "S448oo",
+            "S448oom",
+            "S448ooo",
+            "S576m",
+            "S576xm",
+            "S672",
+            "S672m",
+            "S672om",
+            "S672oo",
+            "S672oom",
+            "S672ooo",
+            "S768",
+            "S768m",
+            "S768xm",
+            "S896",
+            "S896m",
+            "S896om",
+            "S896oo",
+            "S896oom",
+            "S896ooo",
+            "S960m"
+          ],
+          "x-ms-enum": {
+            "name": "azureLargeInstanceSizeNamesEnum",
+            "modelAsString": true
+          },
+          "description": "Specifies the Azure Large instance SKU."
+        }
+      },
+      "description": "Specifies the hardware settings for the Azure Large instance."
+    },
+    "Disk": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The disk name."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the size of an empty data disk in gigabytes."
+        },
+        "lun": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
+        }
+      },
+      "description": "Specifies the disk information fo the Azure Large instance"
+    },
+    "StorageProfile": {
+      "properties": {
+        "nfsIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "IP Address to connect to storage."
+        },
+        "osDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies information about the operating system disk used by baremetal instance."
+        }
+      },
+      "description": "Specifies the storage settings for the Azure Large instance disks."
+    },
+    "OSProfile": {
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "description": "Specifies the host OS name of the Azure Large instance."
+        },
+        "osType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "This property allows you to specify the type of the OS."
+        },
+        "version": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies version of operating system."
+        },
+        "sshPublicKey": {
+          "type": "string",
+          "description": "Specifies the SSH public key used to access the operating system."
+        }
+      },
+      "description": "Specifies the operating system settings for the Azure Large instance."
+    },
+    "NetworkProfile": {
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpAddress"
+          },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ],
+          "description": "Specifies the network interfaces for the Azure Large instance."
+        },
+        "circuitId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the circuit id for connecting to express route."
+        }
+      },
+      "description": "Specifies the network settings for the Azure Large instance disks."
+    },
+    "IpAddress": {
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "Specifies the IP address of the network interface."
+        }
+      },
+      "description": "Specifies the IP address of the network interface."
+    },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of AzureLargeInstance operations"
+        }
+      },
+      "description": "List of AzureLargeInstance operations"
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Displayed AzureLargeInstance operation information"
+        },
+        "isDataAction": {
+          "readOnly": true,
+          "description": "indicates whether an operation is a data action or not.",
+          "type": "boolean"
+        }
+      },
+      "description": "AzureLargeInstance operation information"
+    },
     "Result": {
       "description": "Sample result definition",
       "properties": {
@@ -72,61 +563,135 @@
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "Display": {
+      "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name."
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly form of the resource type related to this action/operation."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly name for the operation as shown to the user."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly description for the operation as shown to the user."
         }
-      }
+      },
+      "description": "Detailed Azure BareMetal Instance operation information"
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "StorageProperties": {
+      "type": "object",
       "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+        "provisioningState": {
           "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
           },
-          "readOnly": true
+          "description": "State of provisioning of the AzureLargeInstanceStorageInstance"
+        },
+        "offeringType": {
+          "type": "string",
+          "description": "the offering type for which the resource is getting provisioned"
+        },
+        "storageType": {
+          "type": "string",
+          "description": "the storage protocol for which the resource is getting provisioned"
+        },
+        "generation": {
+          "type": "string",
+          "description": "the kind of storage instance"
+        },
+        "hardwareType": {
+          "type": "string",
+          "description": "the hardware type of the storage instance"
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "the workload for which the resource is getting provisioned"
+        },
+        "storageBillingProperties": {
+          "$ref": "#/definitions/StorageBillingProperties",
+          "description": "the billing related information for the resource"
         }
-      }
+      },
+      "description": "described the storage properties of the azure baremetalstorage instance"
+    },
+    "StorageBillingProperties": {
+      "type": "object",
+      "properties": {
+        "billingMode": {
+          "type": "string",
+          "description": "the billing mode for the storage instance"
+        },
+        "azureBareMetalStorageInstanceSize": {
+          "type": "string",
+          "description": "the SKU type that is provisioned"
+        }
+      },
+      "description": "Describes the billing related details of the AzureLargeInstanceStorageInstance."
+    },
+    "Tags": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags field of the AzureLargeInstance/AzureBareMetaStorage instance."
+        }
+      },
+      "description": "Tags field of the AzureLargeInstance/AzureBareMetaStorage instance."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
+    "AzureLargeInstanceNameParameter": {
+      "name": "azureLargeInstanceName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
+      "description": "Name of the Azure BareMetal on Azure instance.",
       "x-ms-parameter-location": "method"
     },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
+    "AzureLargeInstanceStorageInstanceNameParameter": {
+      "name": "azureBareMetalStorageInstanceName",
+      "in": "path",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "pattern": ".*",
+      "description": "Name of the AzureLargeInstanceStorage on Azure instance.",
+      "x-ms-parameter-location": "method"
+    },
+    "TagsParameter": {
+      "name": "tagsParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Tags"
+      },
+      "description": "Request body that only contains the new Tags field",
+      "x-ms-parameter-location": "method"
     }
   }
 }
