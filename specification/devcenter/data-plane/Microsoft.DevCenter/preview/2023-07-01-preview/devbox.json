@@ -1492,8 +1492,8 @@
           "description": "Display name for the Schedule",
           "type": "string"
         },
-        "sourceId": {
-          "description": "The id of the resource that this schedule belongs to",
+        "sourceUri": {
+          "description": "The URI of the resource that this schedule belongs to",
           "type": "string"
         },
         "sourceType": {
@@ -1520,7 +1520,7 @@
       "required": [
         "uri",
         "name",
-        "sourceId",
+        "sourceUri",
         "sourceType",
         "type",
         "frequency",
@@ -1964,6 +1964,10 @@
           "description": "The id of the resource which triggered this action",
           "type": "string"
         },
+        "sourceUri": {
+          "description": "The URI of the resource which triggered this action",
+          "type": "string"
+        },
         "sourceType": {
           "description": "The type of the resource which triggered this action",
           "$ref": "#/definitions/DevBoxActionSourceType"
@@ -1983,6 +1987,7 @@
         "uri",
         "actionType",
         "sourceId",
+        "sourceUri",
         "sourceType"
       ]
     },
