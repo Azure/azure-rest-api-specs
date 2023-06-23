@@ -56,6 +56,7 @@ input-file:
 - Microsoft.Billing/stable/2023-04-01/product.json
 - Microsoft.Billing/stable/2023-04-01/reservation.json
 - Microsoft.Billing/stable/2023-04-01/transaction.json
+- Microsoft.Billing/stable/2023-04-01/enrollmentAccount.json
 - Microsoft.Billing/stable/2023-04-01/transfers.json
 - Microsoft.Billing/stable/2023-04-01/types.json
 ```
