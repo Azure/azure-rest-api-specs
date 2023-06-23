@@ -20,19 +20,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-### Basic Information
-
-These are the global settings for the community training.
-
-```yaml
-openapi-type: data-plane
-
-tag: package-2023-06-23-preview
-
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-```
 
 ### Tag: package-2023-06-23-preview
 
@@ -57,3 +44,16 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-net-track2
 ```
+
+
+## Go
+
+See configuration in [readme.go.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
