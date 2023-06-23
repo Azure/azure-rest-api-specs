@@ -14,6 +14,14 @@ pr:
     - package-lock.json
     - eng/pipelines/typespec-ci.yml
     - eng/pipelines/templates/steps/typespec-ci.yml
+    - specification/contosowidgetmanager
+    - specification/cognitiveservices
+    - specification/confidentialledger
+    - specification/containerservice
+    - specification/containerstorage
+    - specification/servicenetworking
+    - specification/sphere
+    - specification/translation
 
 jobs:
 - job: TypeSpecCI
@@ -27,6 +35,7 @@ jobs:
 
   - script: npm ls -a
     displayName: npm ls -a
+    condition: succeededOrFailed()
 
   - template: templates/steps/typespec-ci.yml
     parameters:
@@ -50,8 +59,23 @@ jobs:
 
   - template: templates/steps/typespec-ci.yml
     parameters:
+      Folder: specification/cognitiveservices/HealthInsights/healthinsights.oncophenotype
+      DisplayName: healthinsights.oncophenotype
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/cognitiveservices/HealthInsights/healthinsights.trialmatcher
+      DisplayName: healthinsights.trialmatcher
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
       Folder: specification/cognitiveservices/OpenAI.Inference
       DisplayName: OpenAI.Inference
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/confidentialledger/Microsoft.ManagedCcf
+      DisplayName: ManagedCcf
 
   - template: templates/steps/typespec-ci.yml
     parameters:
@@ -60,8 +84,18 @@ jobs:
 
   - template: templates/steps/typespec-ci.yml
     parameters:
+      Folder: specification/containerstorage/ContainerStorage.Management
+      DisplayName: ContainerStorage.Management
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
       Folder: specification/servicenetworking/ServiceNetworking.Management
       DisplayName: Microsoft.ServiceNetworking
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/sphere/Sphere.Management
+      DisplayName: Sphere.Management
 
   - template: templates/steps/typespec-ci.yml
     parameters:

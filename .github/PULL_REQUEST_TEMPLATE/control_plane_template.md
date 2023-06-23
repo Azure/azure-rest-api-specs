@@ -1,49 +1,41 @@
-## ARM API Information (Control Plane)
+# ARM (Control Plane) API Specification Update Pull Request 
 
-### Changelog
-Add a changelog entry for this PR by answering the following questions:
-  1. What's the purpose of the update?
-      - [ ] new service onboarding
-      - [ ] new API version
-      - [ ] update existing version for new feature
-      - [ ] update existing version to fix swagger quality issue in s360
-      - [ ] Other, please clarify
-  2. When are you targeting to deploy the new service/feature to public regions? Please provide the date or, if the date is not yet available, the month.
-  3. When do you expect to publish the swagger? Please provide date or, the the date is not yet available, the month.
-  4. By default, Azure SDKs of all languages (.NET/Python/Java/JavaScript for both management-plane SDK and data-plane SDK, Go for management-plane SDK only ) MUST be refreshed with/after swagger of new version is published. If you prefer NOT to refresh any specific SDK language upon swagger updates in the current PR, please leave details with justification here.
+## Purpose of this PR
 
-### Contribution checklist (MS Employees Only):
-- [ ] I commit to follow the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy) of "no breaking changes"
-- [ ] I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow.
-- [ ] [Validation tools](https://aka.ms/swaggertools) were run on swagger spec(s) and errors have all been fixed in this PR. [How to fix?](https://aka.ms/ci-fix)
+What's the purpose of this PR? Check all that apply. This is **mandatory**!
 
-If any further question about AME onboarding or validation tools, please view the [FAQ](https://aka.ms/faqinprreview).
+  - [ ] New API version. (Such PR should have been generated with [OpenAPI Hub](https://aka.ms/openapihub), per [this wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version).)
+  - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
+  - [ ] Update existing version to fix swagger quality issues in S360.
+  - [ ] Other, please clarify:
+    - _edit this with your clarification_
 
-### ARM API Review Checklist
+## Due diligence checklist
 
-> **Applicability**: :warning:
->
-> If your changes encompass only the following scenarios, you should SKIP this section, as these scenarios do not require ARM review.
-> - Change to data plane APIs
-> - Adding new properties
-> - All removals
+To merge this PR, you **must** go through the following checklist and confirm you understood 
+and followed the instructions by checking all the boxes:
 
-Otherwise your PR may be subject to ARM review requirements. Complete the following:
-- [ ] Check this box if any of the following apply to the PR so that the label "ARMReview" and "WaitForARMFeedback" will be added by bot to kick off ARM API Review.  Missing to check this box in the following scenario may result in delays to the ARM manifest review and deployment.
-  - Adding a new service
-  - Adding new API(s)
-  - Adding a new API version
-    -[ ] To review changes efficiently, ensure you copy the existing version into the new directory structure for first commit and then push new changes, including version updates, in separate commits. You can use OpenAPIHub to initialize the PR for adding a new version. For more details refer to the [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/208/OpenAPI-Hub-Adding-new-API-version). Note that this doesn't apply if you are trying to merge a PR that was previously in the private repository.
+- [ ] I have reviewed the general guidance on the spec PR review process: https://aka.ms/specprreview.
+- [ ] I confirm this PR is modifying Azure Resource Manager (ARM) related specifications, and not data-plane related specifications.
+- [ ] I commit to follow the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy).
+- [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
+  [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and
+  [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
+  I understand this is required before I can request review from an ARM API Review board.
 
-- [ ] Ensure you've reviewed following [guidelines](https://aka.ms/rpguidelines) including [ARM resource provider contract](https://github.com/Azure/azure-resource-manager-rpc) and [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md). Estimated time (4 hours). This is required before you can request review from ARM API Review board.
+### ARM API changes review
 
-- [ ] If you are blocked on ARM review and want to get the PR merged with urgency, please get the ARM oncall for reviews (*RP Manifest Approvers* team under <ins>Azure Resource Manager service</ins>) from IcM and reach out to them.
+- If you want for the ARM team to review this PR, you must add the `ARMReview` label. 
+- The automation may automatically add the `ARMReview` label, if appropriate.  
+  If this happens, proceed according to guidance given in GitHub comments also added by the automation.
 
-### Breaking Change Review Checklist
-If you have any breaking changes as defined in the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy/), request approval from the Breaking Change Review Board.
+### Breaking change review
 
-**Action**: to initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Additional details on the process and office hours are on the [Breaking Change Wiki](https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/overview_breakingchanges).
+If you have any breaking changes as defined in the [Breaking Change Policy](https://aka.ms/AzBreakingChangesPolicy/), 
+follow the process outlined in the [High-level Breaking Change Process doc](https://aka.ms/breakingchangesprocess#high-level-breaking-change-process).
+      
+## Getting help
 
-NOTE: To update API(s) in public preview for over 1 year (refer to [Retirement of Previews](http://aka.ms/aprwiki))
-
-Please follow the link to find more details on [PR review process](https://aka.ms/SwaggerPRReview).
+- For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
+  and https://aka.ms/ci-fix.
+- For additional help, see https://aka.ms/azsdk/support/spectools.
