@@ -78,7 +78,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/OncoPhenotypeData"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -92,7 +93,7 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               },
@@ -151,8 +152,8 @@
             "in": "path",
             "required": true,
             "description": "A processing job identifier.",
-            "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -208,7 +209,8 @@
             "in": "body",
             "schema": {
               "$ref": "#/definitions/TrialMatcherData"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -222,7 +224,7 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
+                "description": "The location for monitoring the operation state.",
                 "type": "string",
                 "format": "uri"
               },
@@ -281,8 +283,8 @@
             "in": "path",
             "required": true,
             "description": "A processing job identifier.",
-            "format": "uuid",
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -406,8 +408,8 @@
             "type": "number",
             "format": "float"
           },
-          "x-typespec-name": "float32[]",
           "description": "Coordinates of the area circle's center, represented according to the `GeoJSON` standard.\nThis is an array of 2 decimal numbers, longitude and latitude (precisely in this order).",
+          "x-typespec-name": "float32[]",
           "minItems": 2,
           "maxItems": 2
         }
@@ -458,8 +460,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -469,8 +471,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -498,10 +499,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "ClinicalCodedElement": {
       "type": "object",
@@ -688,8 +686,8 @@
           "items": {
             "$ref": "#/definitions/ClinicalTrialPhase"
           },
-          "x-typespec-name": "ClinicalTrialPhase[]",
-          "description": "Phases which are relevant for the clinical trial.\nEach clinical trial can be in a certain phase or in multiple phases."
+          "description": "Phases which are relevant for the clinical trial.\nEach clinical trial can be in a certain phase or in multiple phases.",
+          "x-typespec-name": "ClinicalTrialPhase[]"
         },
         "studyType": {
           "$ref": "#/definitions/ClinicalTrialStudyType",
@@ -704,8 +702,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
           "description": "Medical conditions and their synonyms which are relevant for the clinical trial, given as strings.",
+          "x-typespec-name": "string[]",
           "minItems": 1
         },
         "sponsors": {
@@ -713,8 +711,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Sponsors/collaborators involved with the trial."
+          "description": "Sponsors/collaborators involved with the trial.",
+          "x-typespec-name": "string[]"
         },
         "contacts": {
           "type": "array",
@@ -722,8 +720,8 @@
             "$ref": "#/definitions/ContactDetails"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ContactDetails[]",
-          "description": "Contact details of the trial administrators, for patients that want to participate in the trial."
+          "description": "Contact details of the trial administrators, for patients that want to participate in the trial.",
+          "x-typespec-name": "ContactDetails[]"
         },
         "facilities": {
           "type": "array",
@@ -731,8 +729,8 @@
             "$ref": "#/definitions/ClinicalTrialResearchFacility"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ClinicalTrialResearchFacility[]",
-          "description": "Research facilities where the clinical trial is conducted."
+          "description": "Research facilities where the clinical trial is conducted.",
+          "x-typespec-name": "ClinicalTrialResearchFacility[]"
         }
       },
       "description": "Trial data which is of interest to the potential participant.",
@@ -884,72 +882,72 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Trials with any of the given medical conditions will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the medical conditions."
+          "description": "Trials with any of the given medical conditions will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the medical conditions.",
+          "x-typespec-name": "string[]"
         },
         "studyTypes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClinicalTrialStudyType"
           },
-          "x-typespec-name": "ClinicalTrialStudyType[]",
-          "description": "Trials with any of the given study types will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the study types."
+          "description": "Trials with any of the given study types will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the study types.",
+          "x-typespec-name": "ClinicalTrialStudyType[]"
         },
         "recruitmentStatuses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClinicalTrialRecruitmentStatus"
           },
-          "x-typespec-name": "ClinicalTrialRecruitmentStatus[]",
-          "description": "Trials with any of the given recruitment statuses will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the recruitment statuses."
+          "description": "Trials with any of the given recruitment statuses will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the recruitment statuses.",
+          "x-typespec-name": "ClinicalTrialRecruitmentStatus[]"
         },
         "sponsors": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Trials with any of the given sponsors will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sponsors."
+          "description": "Trials with any of the given sponsors will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sponsors.",
+          "x-typespec-name": "string[]"
         },
         "phases": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClinicalTrialPhase"
           },
-          "x-typespec-name": "ClinicalTrialPhase[]",
-          "description": "Trials with any of the given phases will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the phases."
+          "description": "Trials with any of the given phases will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the phases.",
+          "x-typespec-name": "ClinicalTrialPhase[]"
         },
         "purposes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClinicalTrialPurpose"
           },
-          "x-typespec-name": "ClinicalTrialPurpose[]",
-          "description": "Trials with any of the given purposes will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the purposes."
+          "description": "Trials with any of the given purposes will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the purposes.",
+          "x-typespec-name": "ClinicalTrialPurpose[]"
         },
         "ids": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Trials with any of the given identifiers will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial identifiers."
+          "description": "Trials with any of the given identifiers will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial identifiers.",
+          "x-typespec-name": "string[]"
         },
         "sources": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClinicalTrialSource"
           },
-          "x-typespec-name": "ClinicalTrialSource[]",
-          "description": "Trials with any of the given sources will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sources."
+          "description": "Trials with any of the given sources will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sources.",
+          "x-typespec-name": "ClinicalTrialSource[]"
         },
         "facilityNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Trials with any of the given facility names will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility names."
+          "description": "Trials with any of the given facility names will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility names.",
+          "x-typespec-name": "string[]"
         },
         "facilityLocations": {
           "type": "array",
@@ -957,8 +955,8 @@
             "$ref": "#/definitions/GeographicLocation"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "GeographicLocation[]",
-          "description": "Trials with any of the given facility locations will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility locations."
+          "description": "Trials with any of the given facility locations will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility locations.",
+          "x-typespec-name": "GeographicLocation[]"
         },
         "facilityAreas": {
           "type": "array",
@@ -966,8 +964,8 @@
             "$ref": "#/definitions/GeographicArea"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "GeographicArea[]",
-          "description": "Trials with any of the given facility area boundaries will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility area boundaries."
+          "description": "Trials with any of the given facility area boundaries will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility area boundaries.",
+          "x-typespec-name": "GeographicArea[]"
         }
       },
       "description": "A filter defining a subset of clinical trials from a given clinical trial registry (e.g. clinicaltrials.gov)."
@@ -1060,8 +1058,8 @@
           "items": {
             "$ref": "#/definitions/ClinicalTrialDetails"
           },
-          "x-typespec-name": "ClinicalTrialDetails[]",
           "description": "A list of clinical trials.",
+          "x-typespec-name": "ClinicalTrialDetails[]",
           "minItems": 1
         },
         "registryFilters": {
@@ -1070,8 +1068,8 @@
             "$ref": "#/definitions/ClinicalTrialRegistryFilter"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ClinicalTrialRegistryFilter[]",
           "description": "A list of filters, each one creating a selection of trials from a given\nclinical trial registry.",
+          "x-typespec-name": "ClinicalTrialRegistryFilter[]",
           "minItems": 1
         }
       },
@@ -1398,8 +1396,8 @@
           "items": {
             "$ref": "#/definitions/PatientRecord"
           },
-          "x-typespec-name": "PatientRecord[]",
-          "description": "The list of patients, including their clinical information and data."
+          "description": "The list of patients, including their clinical information and data.",
+          "x-typespec-name": "PatientRecord[]"
         },
         "configuration": {
           "$ref": "#/definitions/OncoPhenotypeModelConfiguration",
@@ -1439,8 +1437,8 @@
             "$ref": "#/definitions/InferenceEvidence"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "InferenceEvidence[]",
-          "description": "The evidence corresponding to the inference value."
+          "description": "The evidence corresponding to the inference value.",
+          "x-typespec-name": "InferenceEvidence[]"
         },
         "caseId": {
           "type": "string",
@@ -1523,8 +1521,8 @@
           "items": {
             "$ref": "#/definitions/OncoPhenotypeInferenceType"
           },
-          "x-typespec-name": "OncoPhenotypeInferenceType[]",
-          "description": "A list of inference types to be inferred for the current request.\nThis could be used if only part of the Onco Phenotype inferences are required.\nIf this list is omitted or empty, the model will return all the inference types."
+          "description": "A list of inference types to be inferred for the current request.\nThis could be used if only part of the Onco Phenotype inferences are required.\nIf this list is omitted or empty, the model will return all the inference types.",
+          "x-typespec-name": "OncoPhenotypeInferenceType[]"
         },
         "checkForCancerCase": {
           "type": "boolean",
@@ -1547,8 +1545,8 @@
             "$ref": "#/definitions/OncoPhenotypeInference"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "OncoPhenotypeInference[]",
-          "description": "The model's inferences for the given patient."
+          "description": "The model's inferences for the given patient.",
+          "x-typespec-name": "OncoPhenotypeInference[]"
         }
       },
       "description": "The results of the model's work for a single patient.",
@@ -1595,8 +1593,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
           "description": "An array of errors, if any errors occurred during the processing job.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
           "readOnly": true
         },
         "results": {
@@ -1622,8 +1620,8 @@
           "items": {
             "$ref": "#/definitions/OncoPhenotypePatientResult"
           },
-          "x-typespec-name": "OncoPhenotypePatientResult[]",
-          "description": "Results for the patients given in the request."
+          "description": "Results for the patients given in the request.",
+          "x-typespec-name": "OncoPhenotypePatientResult[]"
         },
         "modelVersion": {
           "$ref": "#/definitions/ModelVersion",
@@ -1691,8 +1689,8 @@
             "$ref": "#/definitions/ClinicalCodedElement"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ClinicalCodedElement[]",
-          "description": "Known clinical information for the patient, structured."
+          "description": "Known clinical information for the patient, structured.",
+          "x-typespec-name": "ClinicalCodedElement[]"
         }
       },
       "description": "Patient structured information, including demographics and known structured clinical information."
@@ -1741,8 +1739,8 @@
           "items": {
             "$ref": "#/definitions/PatientDocument"
           },
-          "x-typespec-name": "PatientDocument[]",
-          "description": "Patient unstructured clinical data, given as documents."
+          "description": "Patient unstructured clinical data, given as documents.",
+          "x-typespec-name": "PatientDocument[]"
         }
       },
       "description": "A patient record, including their clinical information and data.",
@@ -1758,8 +1756,8 @@
           "items": {
             "$ref": "#/definitions/PatientRecord"
           },
-          "x-typespec-name": "PatientRecord[]",
-          "description": "The list of patients, including their clinical information and data."
+          "description": "The list of patients, including their clinical information and data.",
+          "x-typespec-name": "PatientRecord[]"
         },
         "configuration": {
           "$ref": "#/definitions/TrialMatcherModelConfiguration",
@@ -1799,8 +1797,8 @@
             "$ref": "#/definitions/TrialMatcherInferenceEvidence"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "TrialMatcherInferenceEvidence[]",
-          "description": "The evidence corresponding to the inference value."
+          "description": "The evidence corresponding to the inference value.",
+          "x-typespec-name": "TrialMatcherInferenceEvidence[]"
         },
         "id": {
           "type": "string",
@@ -1899,8 +1897,8 @@
           "items": {
             "$ref": "#/definitions/TrialMatcherInference"
           },
-          "x-typespec-name": "TrialMatcherInference[]",
-          "description": "The model's inferences for the given patient."
+          "description": "The model's inferences for the given patient.",
+          "x-typespec-name": "TrialMatcherInference[]"
         },
         "neededClinicalInfo": {
           "$ref": "#/definitions/NeededClinicalInfo",
@@ -1951,8 +1949,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
           "description": "An array of errors, if any errors occurred during the processing job.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
           "readOnly": true
         },
         "results": {
@@ -1978,8 +1976,8 @@
           "items": {
             "$ref": "#/definitions/TrialMatcherPatientResult"
           },
-          "x-typespec-name": "TrialMatcherPatientResult[]",
-          "description": "Results for the patients given in the request."
+          "description": "Results for the patients given in the request.",
+          "x-typespec-name": "TrialMatcherPatientResult[]"
         },
         "modelVersion": {
           "$ref": "#/definitions/ModelVersion",
@@ -2005,8 +2003,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
