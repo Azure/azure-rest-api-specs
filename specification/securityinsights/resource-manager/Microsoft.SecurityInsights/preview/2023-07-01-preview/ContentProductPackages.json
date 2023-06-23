@@ -76,7 +76,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/packageList"
+              "$ref": "#/definitions/productPackageList"
             }
           },
           "default": {
@@ -124,7 +124,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/packageModel"
+              "$ref": "#/definitions/productPackageModel"
             }
           },
           "default": {
@@ -138,7 +138,7 @@
     }
   },
   "definitions": {
-    "packageList": {
+    "productPackageList": {
       "description": "List available packages.",
       "properties": {
         "nextLink": {
@@ -149,7 +149,7 @@
         "value": {
           "description": "Array of packages.",
           "items": {
-            "$ref": "#/definitions/packageModel"
+            "$ref": "#/definitions/productPackageModel"
           },
           "type": "array"
         }
@@ -159,7 +159,7 @@
       ],
       "type": "object"
     },
-    "packageModel": {
+    "productPackageModel": {
       "allOf": [
         {
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
@@ -169,112 +169,24 @@
       "properties": {
         "properties": {
           "description": "package properties",
-          "$ref": "#/definitions/packageProperties",
+          "$ref": "#/definitions/productPackageProperties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object"
     },
-    "packageProperties": {
+    "productPackageProperties": {
       "description": "Describes package properties",
-      "properties": {
-        "contentId": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+      "allOf": [
+        {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/packageBaseProperties",
           "description": "The content id of the package"
         },
-        "contentKind": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
+        {
+          "$ref": "#/definitions/productPackageAdditionalProperties",
           "description": "The package kind"
-        },
-        "installedVersion": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
-          "description": "The version of the installed package, null or absent means not installed."
-        },
-        "contentSchemaVersion": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
-          "description": "The version of the content schema."
-        },
-        "resourceId": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
-          "description": "The metadata resource id."
-        },
-        "isNew": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
-          "description": "Flag indicates if this is a newly published package."
-        },
-        "isPreview": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
-          "description": "Flag indicates if this package is in preview."
-        },
-        "isFeatured": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
-          "description": "Flag indicates if this package is among the featured list."
-        },
-        "version": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
-          "description": "the latest version number of the package"
-        },
-        "displayName": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
-          "description": "The display name of the package"
-        },
-        "description": {
-          "description": "The description of the package",
-          "type": "string"
-        },
-        "publisherDisplayName": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
-          "description": "The publisher display name of the package"
-        },
-        "source": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSource",
-          "description": "The source of the package"
-        },
-        "author": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataAuthor",
-          "description": "The author of the package"
-        },
-        "support": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSupport",
-          "description": "The support tier of the package"
-        },
-        "dependencies": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDependencies",
-          "description": "The support tier of the package"
-        },
-        "providers": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataProviders",
-          "description": "Providers for the package item"
-        },
-        "firstPublishDate": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataFirstPublishDate",
-          "description": "first publish date package item"
-        },
-        "lastPublishDate": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataLastPublishDate",
-          "description": "last publish date for the package item"
-        },
-        "categories": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataCategories",
-          "description": "The categories of the package"
-        },
-        "threatAnalysisTactics": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTactics",
-          "description": "the tactics the resource covers"
-        },
-        "threatAnalysisTechniques": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTechniques",
-          "description": "the techniques the resource covers, these have to be aligned with the tactics being used"
-        },
-        "icon": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataIcon",
-          "description": "the icon identifier. this id can later be fetched from the content metadata"
-        },
-        "packagedContent": {
-          "type": "object",
-          "description": "the json to deploy"
         }
-      },
+      ],
       "required": [
         "contentId",
         "contentKind",
@@ -282,6 +194,28 @@
         "displayName"
       ],
       "type": "object"
+    },
+    "productPackageAdditionalProperties": {
+      "description": "product package additional properties",
+      "properties": {
+        "installedVersion": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "description": "The version of the installed package, null or absent means not installed."
+        },
+        "resourceId": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "description": "The metadata resource id."
+        },
+        "packagedContent": {
+          "$ref": "#/definitions/packagedContent",
+          "description": "the json to deploy"
+        }
+      },
+      "type": "object"
+    },
+    "packagedContent": {
+      "type": "object",
+      "description": "the json to deploy"
     }
   },
   "parameters": {
