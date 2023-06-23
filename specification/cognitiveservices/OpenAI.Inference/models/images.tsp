@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
+import "./operations.common.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;
@@ -51,7 +52,11 @@ model ImageResponse {
   data: ImageLocation[];
 }
 
-@doc("The result of the operation if the operation succeeded.")
+// Note: pending resolution of  cross-language code emission behavior for long-running operations, image generation
+//        reuses its final operation response model as its status polling model.
+
+// @lroStatus
+@doc("A polling status update or final response payload for an image operation.")
 model ImageOperationResponse {
   @doc("The ID of the operation.")
   id: string;
@@ -66,72 +71,8 @@ model ImageOperationResponse {
   result?: ImageResponse;
 
   @doc("The status of the operation")
-  status: State;
+  status: AzureOpenAIOperationState;
 
   @doc("The error if the operation failed.")
   error?: Foundations.Error;
 }
-
-@lroStatus
-@doc("The state of a job or item.")
-enum State {
-  @doc("The operation was created and is queued to be processed in the future.")
-  notRunning,
-
-  @doc("The operation has started to be processed.")
-  running,
-
-  @lroSucceeded
-  @doc("The operation has successfully be processed and is ready for consumption.")
-  succeeded,
-
-  @lroCanceled
-  @doc("The operation has been canceled and is incomplete.")
-  canceled,
-
-  @lroFailed
-  @doc("The operation has completed processing with a failure and cannot be further consumed.")
-  failed,
-
-  @doc("The entity has been deleted but may still be referenced by other entities predating the deletion.")
-  deleted,
-}
-
-@doc("Provides status details for long running operations.")
-model ImageOperationStatus {
-  @key("operationId")
-  @visibility("read", "query")
-  @doc("The unique ID of the operation.")
-  id: string;
-
-  @doc("The status of the operation")
-  status: State;
-}
-
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
-@Foundations.Private.needsRoute
-@post
-@doc("Long running operation template to match Azure OpenAI .")
-op OaiLongRunningRpcOperation<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model,
-  TStatusResult extends TypeSpec.Reflection.Model,
-  TStatusError = Foundations.Error,
-  Traits extends TypeSpec.Reflection.Model = {},
-  TErrorResponse = Azure.Core.Foundations.ErrorResponse
-> is Foundations.Operation<
-  TParams &
-    Azure.Core.Traits.Private.TraitProperties<
-      Traits,
-      Azure.Core.Traits.TraitLocation.Parameters
-    >,
-  Azure.Core.Foundations.AcceptedResponse &
-    TResponse &
-    Foundations.LongRunningStatusLocation<TStatusResult> &
-    Azure.Core.Traits.Private.TraitProperties<
-      Traits,
-      Azure.Core.Traits.TraitLocation.Response
-    >,
-  Traits,
-  TErrorResponse
->;
