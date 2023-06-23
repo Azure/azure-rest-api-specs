@@ -6942,6 +6942,10 @@
           "description": "Set Variable activity properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SetVariableActivityTypeProperties"
+        },
+        "policy": {
+          "$ref": "#/definitions/SecureInputOutputPolicy",
+          "description": "Activity policy."
         }
       },
       "required": [
@@ -6963,6 +6967,20 @@
         "setSystemVariable": {
           "description": "If set to true, it sets the pipeline run return value.",
           "type": "boolean"
+        }
+      }
+    },
+    "SecureInputOutputPolicy": {
+      "description": "Execution policy for an activity that supports secure input and output.",
+      "type": "object",
+      "properties": {
+        "secureInput": {
+          "type": "boolean",
+          "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring."
+        },
+        "secureOutput": {
+          "type": "boolean",
+          "description": "When set to true, Output from activity is considered as secure and will not be logged to monitoring."
         }
       }
     },

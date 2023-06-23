@@ -4,9 +4,9 @@
     "title": "AzureSphereProviderClient",
     "version": "2022-09-01-preview",
     "description": "Azure Sphere resource management API.",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -204,8 +204,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -249,8 +249,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "resource",
@@ -320,8 +320,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "properties",
@@ -374,8 +374,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -389,6 +389,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -408,7 +412,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -447,8 +451,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -497,8 +501,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "serialNumber",
@@ -551,8 +555,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "serialNumber",
@@ -605,8 +609,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "serialNumber",
@@ -668,8 +672,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -727,8 +731,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -777,8 +781,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "imageName",
@@ -829,8 +833,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "imageName",
@@ -907,8 +911,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "imageName",
@@ -929,6 +933,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -948,7 +956,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -975,8 +983,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "$ref": "#/parameters/CustomFilterQueryParameter"
@@ -1037,8 +1045,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "$ref": "#/parameters/CustomFilterQueryParameter"
@@ -1108,8 +1116,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "$ref": "#/parameters/CustomFilterQueryParameter"
@@ -1170,8 +1178,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "$ref": "#/parameters/CustomFilterQueryParameter"
@@ -1232,8 +1240,8 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -1282,16 +1290,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -1335,16 +1343,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "resource",
@@ -1414,16 +1422,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -1437,6 +1445,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -1456,7 +1468,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -1481,16 +1493,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "properties",
@@ -1516,6 +1528,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -1532,7 +1548,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1559,16 +1575,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -1626,16 +1642,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -1684,24 +1700,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -1745,24 +1761,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "resource",
@@ -1832,24 +1848,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -1863,6 +1879,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -1882,7 +1902,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -1907,24 +1927,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "properties",
@@ -1950,6 +1970,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -1966,7 +1990,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1993,24 +2017,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "claimDevicesRequest",
@@ -2073,24 +2097,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -2148,24 +2172,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -2214,24 +2238,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deploymentName",
@@ -2282,24 +2306,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deploymentName",
@@ -2376,24 +2400,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deploymentName",
@@ -2414,6 +2438,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -2433,7 +2461,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2460,24 +2488,24 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -2526,32 +2554,32 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceName",
             "in": "path",
             "required": true,
             "description": "Device name",
-            "pattern": "^[a-zA-Z0-9-]{128}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
           }
         ],
         "responses": {
@@ -2595,32 +2623,32 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceName",
             "in": "path",
             "required": true,
             "description": "Device name",
-            "pattern": "^[a-zA-Z0-9-]{128}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
           },
           {
             "name": "resource",
@@ -2690,32 +2718,32 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceName",
             "in": "path",
             "required": true,
             "description": "Device name",
-            "pattern": "^[a-zA-Z0-9-]{128}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
           }
         ],
         "responses": {
@@ -2729,6 +2757,10 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -2748,7 +2780,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -2773,32 +2805,32 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceName",
             "in": "path",
             "required": true,
             "description": "Device name",
-            "pattern": "^[a-zA-Z0-9-]{128}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
           },
           {
             "name": "properties",
@@ -2867,32 +2899,32 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
             "description": "Name of device group.",
-            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
             "name": "deviceName",
             "in": "path",
             "required": true,
             "description": "Device name",
-            "pattern": "^[a-zA-Z0-9-]{128}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{128}$"
           },
           {
             "name": "generateDeviceCapabilityRequest",
@@ -2961,16 +2993,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
             "description": "Name of product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$"
           }
         ],
         "responses": {
@@ -3008,7 +3040,19 @@
       ],
       "x-ms-enum": {
         "name": "AllowCrashDumpCollection",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Crash dump collection enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Crash dump collection disabled"
+          }
+        ]
       }
     },
     "CapabilityType": {
@@ -3020,7 +3064,19 @@
       ],
       "x-ms-enum": {
         "name": "CapabilityType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApplicationDevelopment",
+            "value": "ApplicationDevelopment",
+            "description": "Application development capability"
+          },
+          {
+            "name": "FieldServicing",
+            "value": "FieldServicing",
+            "description": "Field servicing capability"
+          }
+        ]
       }
     },
     "Catalog": {
@@ -3051,14 +3107,14 @@
           "items": {
             "$ref": "#/definitions/Catalog"
           },
-          "x-cadl-name": "Catalog[]",
-          "description": "The Catalog items on this page"
+          "description": "The Catalog items on this page",
+          "x-typespec-name": "Catalog[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Catalog list operation.",
@@ -3085,8 +3141,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         }
       },
       "description": "The type used for update operations of the Catalog."
@@ -3130,14 +3186,14 @@
           "items": {
             "$ref": "#/definitions/Certificate"
           },
-          "x-cadl-name": "Certificate[]",
-          "description": "The Certificate items on this page"
+          "description": "The Certificate items on this page",
+          "x-typespec-name": "Certificate[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Certificate list operation.",
@@ -3199,7 +3255,29 @@
       ],
       "x-ms-enum": {
         "name": "CertificateStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Certificate is active"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Certificate is inactive"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Certificate has expired"
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "Certificate has been revoked"
+          }
+        ]
       }
     },
     "ClaimDevicesRequest": {
@@ -3210,8 +3288,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Device identifiers of the devices to be claimed."
+          "description": "Device identifiers of the devices to be claimed.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Request to the action call to bulk claim devices.",
@@ -3243,26 +3321,6 @@
         "value"
       ]
     },
-    "CustomFilterQueryParameter": {
-      "type": "object",
-      "properties": {},
-      "description": "Provides the custom '$filter' query parameter for list operations"
-    },
-    "CustomMaxPageSizeQueryParameter": {
-      "type": "object",
-      "properties": {},
-      "description": "Provides the custom '$maxpagesize' query parameter for list operations."
-    },
-    "CustomSkipQueryParameter": {
-      "type": "object",
-      "properties": {},
-      "description": "Provides the custom '$skip' query parameter for list operations."
-    },
-    "CustomTopQueryParameter": {
-      "type": "object",
-      "properties": {},
-      "description": "Provides the custom '$top' query parameter for list operations."
-    },
     "Deployment": {
       "type": "object",
       "properties": {
@@ -3291,14 +3349,14 @@
           "items": {
             "$ref": "#/definitions/Deployment"
           },
-          "x-cadl-name": "Deployment[]",
-          "description": "The Deployment items on this page"
+          "description": "The Deployment items on this page",
+          "x-typespec-name": "Deployment[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Deployment list operation.",
@@ -3322,8 +3380,8 @@
           "items": {
             "$ref": "#/definitions/Image"
           },
-          "x-cadl-name": "Image[]",
           "description": "Images deployed",
+          "x-typespec-name": "Image[]",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3391,14 +3449,14 @@
           "items": {
             "$ref": "#/definitions/DeviceGroup"
           },
-          "x-cadl-name": "DeviceGroup[]",
-          "description": "The DeviceGroup items on this page"
+          "description": "The DeviceGroup items on this page",
+          "x-typespec-name": "DeviceGroup[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a DeviceGroup list operation.",
@@ -3537,14 +3595,14 @@
           "items": {
             "$ref": "#/definitions/Device"
           },
-          "x-cadl-name": "Device[]",
-          "description": "The Device items on this page"
+          "description": "The Device items on this page",
+          "x-typespec-name": "Device[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Device list operation.",
@@ -3639,8 +3697,8 @@
           "items": {
             "$ref": "#/definitions/CapabilityType"
           },
-          "x-cadl-name": "CapabilityType[]",
-          "description": "List of capabilities to create"
+          "description": "List of capabilities to create",
+          "x-typespec-name": "CapabilityType[]"
         }
       },
       "description": "Request of the action to create a signed device capability image",
@@ -3676,14 +3734,14 @@
           "items": {
             "$ref": "#/definitions/Image"
           },
-          "x-cadl-name": "Image[]",
-          "description": "The Image items on this page"
+          "description": "The Image items on this page",
+          "x-typespec-name": "Image[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Image list operation.",
@@ -3782,7 +3840,129 @@
       ],
       "x-ms-enum": {
         "name": "ImageType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InvalidImageType",
+            "value": "InvalidImageType",
+            "description": "Invalid image."
+          },
+          {
+            "name": "OneBl",
+            "value": "OneBl",
+            "description": "One Bl image type"
+          },
+          {
+            "name": "PlutonRuntime",
+            "value": "PlutonRuntime",
+            "description": "Pluton image type"
+          },
+          {
+            "name": "WifiFirmware",
+            "value": "WifiFirmware",
+            "description": "Wifi firmware image type"
+          },
+          {
+            "name": "SecurityMonitor",
+            "value": "SecurityMonitor",
+            "description": "Security monitor image type"
+          },
+          {
+            "name": "NormalWorldLoader",
+            "value": "NormalWorldLoader",
+            "description": "Normal world loader image type"
+          },
+          {
+            "name": "NormalWorldDtb",
+            "value": "NormalWorldDtb",
+            "description": "Normal world dtb image type"
+          },
+          {
+            "name": "NormalWorldKernel",
+            "value": "NormalWorldKernel",
+            "description": "Normal world kernel image type"
+          },
+          {
+            "name": "RootFs",
+            "value": "RootFs",
+            "description": "Root FS image type"
+          },
+          {
+            "name": "Services",
+            "value": "Services",
+            "description": "Services image type"
+          },
+          {
+            "name": "Applications",
+            "value": "Applications",
+            "description": "Applications image type"
+          },
+          {
+            "name": "FwConfig",
+            "value": "FwConfig",
+            "description": "FW config image type"
+          },
+          {
+            "name": "BootManifest",
+            "value": "BootManifest",
+            "description": "Boot manifest image type"
+          },
+          {
+            "name": "Nwfs",
+            "value": "Nwfs",
+            "description": "Nwfs image type"
+          },
+          {
+            "name": "TrustedKeystore",
+            "value": "TrustedKeystore",
+            "description": "Trusted key store image type"
+          },
+          {
+            "name": "Policy",
+            "value": "Policy",
+            "description": "Policy image type"
+          },
+          {
+            "name": "CustomerBoardConfig",
+            "value": "CustomerBoardConfig",
+            "description": "Customer board config image type"
+          },
+          {
+            "name": "UpdateCertStore",
+            "value": "UpdateCertStore",
+            "description": "Update certificate store image type"
+          },
+          {
+            "name": "BaseSystemUpdateManifest",
+            "value": "BaseSystemUpdateManifest",
+            "description": "Base system update manifest image type"
+          },
+          {
+            "name": "FirmwareUpdateManifest",
+            "value": "FirmwareUpdateManifest",
+            "description": "Firmware update manifest image type"
+          },
+          {
+            "name": "CustomerUpdateManifest",
+            "value": "CustomerUpdateManifest",
+            "description": "Customer update manifest image type"
+          },
+          {
+            "name": "RecoveryManifest",
+            "value": "RecoveryManifest",
+            "description": "Recovery manifest image type"
+          },
+          {
+            "name": "ManifestSet",
+            "value": "ManifestSet",
+            "description": "manifest set image type"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other image type"
+          }
+        ]
       }
     },
     "ImageUploadRequestBody": {
@@ -3808,11 +3988,6 @@
       },
       "description": "Request of the action to list device groups for a catalog."
     },
-    "ListQueryParameters": {
-      "type": "object",
-      "properties": {},
-      "description": "Parameters for paginated APIs"
-    },
     "OSFeedType": {
       "type": "string",
       "description": "OS feed type values.",
@@ -3822,7 +3997,19 @@
       ],
       "x-ms-enum": {
         "name": "OSFeedType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Retail",
+            "value": "Retail",
+            "description": "Retail OS feed type."
+          },
+          {
+            "name": "RetailEval",
+            "value": "RetailEval",
+            "description": "Retail evaluation OS feed type."
+          }
+        ]
       }
     },
     "PagedDeviceInsight": {
@@ -3834,14 +4021,14 @@
             "$ref": "#/definitions/DeviceInsight"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "DeviceInsight[]",
-          "description": "The DeviceInsight items on this page"
+          "description": "The DeviceInsight items on this page",
+          "x-typespec-name": "DeviceInsight[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "Paged collection of DeviceInsight items",
@@ -3877,14 +4064,14 @@
           "items": {
             "$ref": "#/definitions/Product"
           },
-          "x-cadl-name": "Product[]",
-          "description": "The Product items on this page"
+          "description": "The Product items on this page",
+          "x-typespec-name": "Product[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Product list operation.",
@@ -3955,6 +4142,7 @@
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Provisioning state of the resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -3966,7 +4154,44 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
       }
     },
     "RegionalDataBoundary": {
@@ -3978,7 +4203,19 @@
       ],
       "x-ms-enum": {
         "name": "RegionalDataBoundary",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No data boundary"
+          },
+          {
+            "name": "EU",
+            "value": "EU",
+            "description": "EU data boundary"
+          }
+        ]
       }
     },
     "SignedCapabilityImageResponse": {
@@ -3992,11 +4229,6 @@
       },
       "description": "Signed device capability image response"
     },
-    "StandardListQueryParametersWithCorrectNames": {
-      "type": "object",
-      "properties": {},
-      "description": "Provides the most common query parameters for list operations."
-    },
     "UpdatePolicy": {
       "type": "string",
       "description": "Update policy values.",
@@ -4006,7 +4238,19 @@
       ],
       "x-ms-enum": {
         "name": "UpdatePolicy",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UpdateAll",
+            "value": "UpdateAll",
+            "description": "Update all policy."
+          },
+          {
+            "name": "No3rdPartyAppUpdates",
+            "value": "No3rdPartyAppUpdates",
+            "description": "No update for 3rd party app policy."
+          }
+        ]
       }
     }
   },
