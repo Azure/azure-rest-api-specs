@@ -4,9 +4,9 @@
     "title": "Azure-ContainerStorageRP",
     "version": "2023-03-01-preview",
     "description": "Azure Container Storage Resource Provider API.",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -201,8 +201,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -249,8 +249,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -276,10 +276,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
-                "type": "string"
               }
             },
             "schema": {
@@ -293,10 +289,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Pools_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Pools_CreateOrUpdate_MaximumSet_Gen.json"
@@ -304,7 +296,11 @@
           "Pools_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/Pools_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -327,8 +323,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -344,7 +340,7 @@
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -359,10 +355,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Pools_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Pools_Delete_MaximumSet_Gen.json"
@@ -370,7 +362,11 @@
           "Pools_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Pools_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -393,8 +389,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -422,7 +418,7 @@
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -434,10 +430,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Pools_Update_MaximumSet_Gen": {
             "$ref": "./examples/Pools_Update_MaximumSet_Gen.json"
@@ -445,7 +437,11 @@
           "Pools_Update_MinimumSet_Gen": {
             "$ref": "./examples/Pools_Update_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumes": {
@@ -470,8 +466,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -523,16 +519,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -579,16 +575,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -614,10 +610,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
-                "type": "string"
               }
             },
             "schema": {
@@ -631,10 +623,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Volumes_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_CreateOrUpdate_MaximumSet_Gen.json"
@@ -642,7 +630,11 @@
           "Volumes_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -665,16 +657,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -690,7 +682,7 @@
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -705,10 +697,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Volumes_Delete_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_Delete_MaximumSet_Gen.json"
@@ -716,7 +704,11 @@
           "Volumes_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -739,16 +731,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeName",
             "in": "path",
             "required": true,
             "description": "Volume Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -776,7 +768,7 @@
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -788,10 +780,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Volumes_Update_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_Update_MaximumSet_Gen.json"
@@ -799,7 +787,11 @@
           "Volumes_Update_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Update_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerStorage/pools/{poolName}/volumeSnapshots": {
@@ -824,8 +816,8 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -877,16 +869,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -933,16 +925,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "resource",
@@ -968,10 +960,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
-                "type": "string"
               }
             },
             "schema": {
@@ -985,10 +973,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VolumeSnapshots_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_CreateOrUpdate_MaximumSet_Gen.json"
@@ -996,7 +980,11 @@
           "VolumeSnapshots_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_CreateOrUpdate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1019,16 +1007,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -1044,7 +1032,7 @@
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -1059,10 +1047,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VolumeSnapshots_Delete_MaximumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Delete_MaximumSet_Gen.json"
@@ -1070,7 +1054,11 @@
           "VolumeSnapshots_Delete_MinimumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -1093,16 +1081,16 @@
             "in": "path",
             "required": true,
             "description": "Pool Object",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "volumeSnapshotName",
             "in": "path",
             "required": true,
             "description": "Volume Snapshot Resource",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "properties",
@@ -1130,7 +1118,7 @@
                 "format": "int32"
               },
               "Location": {
-                "description": "The Location header has the uri for monitoring the operation state.",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
@@ -1142,10 +1130,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "VolumeSnapshots_Update_MaximumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Update_MaximumSet_Gen.json"
@@ -1153,13 +1137,18 @@
           "VolumeSnapshots_Update_MinimumSet_Gen": {
             "$ref": "./examples/VolumeSnapshots_Update_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "AccessMode": {
       "type": "string",
+      "description": "Access mode",
       "enum": [
         "ReadWriteOnce",
         "ReadOnlyMany",
@@ -1168,11 +1157,34 @@
       ],
       "x-ms-enum": {
         "name": "AccessMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadWriteOnce",
+            "value": "ReadWriteOnce",
+            "description": "Read Write Once"
+          },
+          {
+            "name": "ReadOnlyMany",
+            "value": "ReadOnlyMany",
+            "description": "Read Only Many"
+          },
+          {
+            "name": "ReadWriteMany",
+            "value": "ReadWriteMany",
+            "description": "Read Write Many"
+          },
+          {
+            "name": "ReadWriteOncePod",
+            "value": "ReadWriteOncePod",
+            "description": "Shared Read Write Once Pod"
+          }
+        ]
       }
     },
     "AccountTier": {
       "type": "string",
+      "description": "Account Tier",
       "enum": [
         "Invalid",
         "Standard",
@@ -1181,29 +1193,54 @@
       ],
       "x-ms-enum": {
         "name": "AccountTier",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid Account Tier"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Tier"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Tier"
+          },
+          {
+            "name": "Ultra",
+            "value": "Ultra",
+            "description": "Ultra Tier"
+          }
+        ]
       }
     },
     "Action": {
       "type": "string",
+      "description": "Action Enum",
       "enum": [
         "Deny",
         "Allow"
       ],
       "x-ms-enum": {
         "name": "Action",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny Action"
+          },
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow Action"
+          }
+        ]
       }
-    },
-    "Custom.LocationHeader": {
-      "type": "object",
-      "properties": {},
-      "description": "The location uri of the operation."
-    },
-    "Custom.RetryAfterHeaderCustom": {
-      "type": "object",
-      "properties": {},
-      "description": "The retry-after envelope."
     },
     "DiskPoolProperties": {
       "type": "object",
@@ -1213,8 +1250,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "List of KV pairs to set in StorageClass to configure CSI driver."
+          "description": "List of KV pairs to set in StorageClass to configure CSI driver.",
+          "x-typespec-name": "Record<string>"
         },
         "maxVolumeCapacityGiB": {
           "type": "integer",
@@ -1227,8 +1264,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Disk Pool Properties"
@@ -1279,13 +1316,26 @@
     },
     "DiskType": {
       "type": "string",
+      "description": "Disk Type",
       "enum": [
         "Local",
         "Managed"
       ],
       "x-ms-enum": {
         "name": "DiskType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "Local Disk Type"
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed Disk Type"
+          }
+        ]
       }
     },
     "ElasticSanPoolProperties": {
@@ -1331,12 +1381,20 @@
     },
     "EncryptionType": {
       "type": "string",
+      "description": "Encryption Type",
       "enum": [
         "EncryptionAtRestWithPlatformKey"
       ],
       "x-ms-enum": {
         "name": "EncryptionType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EncryptionAtRestWithPlatformKey",
+            "value": "EncryptionAtRestWithPlatformKey",
+            "description": "Encryption at rest with platform key"
+          }
+        ]
       }
     },
     "EphemeralPoolProperties": {
@@ -1347,16 +1405,16 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks."
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
+          "x-typespec-name": "string[]"
         },
         "disks": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "x-typespec-name": "string[]"
         },
         "diskFormat": {
           "type": "boolean",
@@ -1378,16 +1436,16 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks."
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
+          "x-typespec-name": "string[]"
         },
         "disks": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
+          "x-typespec-name": "string[]"
         },
         "diskFormat": {
           "type": "boolean",
@@ -1414,8 +1472,8 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           },
-          "x-cadl-name": "VirtualNetworkRule[]",
-          "description": "Virtual network rules"
+          "description": "Virtual network rules",
+          "x-typespec-name": "VirtualNetworkRule[]"
         }
       },
       "description": "Network Rule Set definition",
@@ -1475,14 +1533,14 @@
           "items": {
             "$ref": "#/definitions/Pool"
           },
-          "x-cadl-name": "Pool[]",
-          "description": "The Pool items on this page"
+          "description": "The Pool items on this page",
+          "x-typespec-name": "Pool[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Pool list operation.",
@@ -1507,8 +1565,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of availability zones that resources can be created in."
+          "description": "List of availability zones that resources can be created in.",
+          "x-typespec-name": "string[]"
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1520,8 +1578,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many."
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
+          "x-typespec-name": "string[]"
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolProperties",
@@ -1547,6 +1605,7 @@
     },
     "PoolType": {
       "type": "number",
+      "description": "Pool Type",
       "enum": [
         1,
         2,
@@ -1559,19 +1618,23 @@
         "values": [
           {
             "name": "Ephemeral",
-            "value": 1
+            "value": 1,
+            "description": "Ephemeral Pool"
           },
           {
             "name": "Disk",
-            "value": 2
+            "value": 2,
+            "description": "Disk Pool"
           },
           {
             "name": "Managed",
-            "value": 3
+            "value": 3,
+            "description": "Managed Pool"
           },
           {
             "name": "ElasticSan",
-            "value": 4
+            "value": 4,
+            "description": "ElasticSan Pool"
           }
         ]
       }
@@ -1584,8 +1647,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
+          "description": "Resource tags.",
+          "x-typespec-name": "Record<string>"
         },
         "properties": {
           "$ref": "#/definitions/PoolUpdateProperties",
@@ -1606,8 +1669,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of availability zones that resources can be created in."
+          "description": "List of availability zones that resources can be created in.",
+          "x-typespec-name": "string[]"
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1619,8 +1682,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many."
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
+          "x-typespec-name": "string[]"
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolPropertiesUpdate",
@@ -1639,13 +1702,26 @@
     },
     "ProtocolType": {
       "type": "string",
+      "description": "Protocol Type",
       "enum": [
         "None",
         "iSCSI"
       ],
       "x-ms-enum": {
         "name": "ProtocolType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No Protocol"
+          },
+          {
+            "name": "iSCSI",
+            "value": "iSCSI",
+            "description": "iSCSI protocol"
+          }
+        ]
       }
     },
     "ProvisioningState": {
@@ -1662,18 +1738,68 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
       }
     },
     "ReclaimPolicy": {
       "type": "string",
+      "description": "Reclaim Policy",
       "enum": [
         "Delete",
         "Retain"
       ],
       "x-ms-enum": {
         "name": "ReclaimPolicy",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete resource"
+          },
+          {
+            "name": "Retain",
+            "value": "Retain",
+            "description": "Retain resource"
+          }
+        ]
       }
     },
     "Sku": {
@@ -1696,6 +1822,7 @@
     },
     "SkuName": {
       "type": "string",
+      "description": "Sku Name enum type",
       "enum": [
         "Invalid",
         "Premium_LRS",
@@ -1703,7 +1830,24 @@
       ],
       "x-ms-enum": {
         "name": "SkuName",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid Sku"
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium_LRS Sku"
+          },
+          {
+            "name": "Premium_ZRS",
+            "value": "Premium_ZRS",
+            "description": "Premium_ZRS Sku"
+          }
+        ]
       }
     },
     "VirtualNetworkRule": {
@@ -1746,13 +1890,26 @@
     },
     "VolumeBindingMode": {
       "type": "string",
+      "description": "Volume binding mode",
       "enum": [
         "Immediate",
         "WaitFirstForCustomer"
       ],
       "x-ms-enum": {
         "name": "VolumeBindingMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Immediate",
+            "value": "Immediate",
+            "description": "Immediate binding"
+          },
+          {
+            "name": "WaitFirstForCustomer",
+            "value": "WaitFirstForCustomer",
+            "description": "Wait for customer to bind"
+          }
+        ]
       }
     },
     "VolumeListResult": {
@@ -1763,14 +1920,14 @@
           "items": {
             "$ref": "#/definitions/Volume"
           },
-          "x-cadl-name": "Volume[]",
-          "description": "The Volume items on this page"
+          "description": "The Volume items on this page",
+          "x-typespec-name": "Volume[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a Volume list operation.",
@@ -1780,13 +1937,26 @@
     },
     "VolumeMode": {
       "type": "string",
+      "description": "Storage volume mode",
       "enum": [
         "Filesystem",
         "Raw"
       ],
       "x-ms-enum": {
         "name": "VolumeMode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Filesystem",
+            "value": "Filesystem",
+            "description": "FileSystem volume mode"
+          },
+          {
+            "name": "Raw",
+            "value": "Raw",
+            "description": "Raw volume mode"
+          }
+        ]
       }
     },
     "VolumeProperties": {
@@ -1802,8 +1972,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "String KV pairs indicating labels"
+          "description": "String KV pairs indicating labels",
+          "x-typespec-name": "Record<string>"
         },
         "capacityGiB": {
           "type": "integer",
@@ -1823,8 +1993,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Volume Properties",
@@ -1864,14 +2034,14 @@
           "items": {
             "$ref": "#/definitions/VolumeSnapshot"
           },
-          "x-cadl-name": "VolumeSnapshot[]",
-          "description": "The VolumeSnapshot items on this page"
+          "description": "The VolumeSnapshot items on this page",
+          "x-typespec-name": "VolumeSnapshot[]"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
+          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
         }
       },
       "description": "The response of a VolumeSnapshot list operation.",
@@ -1904,8 +2074,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Volume Snapshot Properties",
@@ -1946,8 +2116,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The updatable properties of the VolumeSnapshot."
@@ -1970,8 +2140,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "x-cadl-name": "Record<string>",
-          "description": "String KV pairs indicating labels"
+          "description": "String KV pairs indicating labels",
+          "x-typespec-name": "Record<string>"
         },
         "capacityGiB": {
           "type": "integer",
@@ -1991,21 +2161,34 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "List of string mount options"
+          "description": "List of string mount options",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The updatable properties of the Volume."
     },
     "WhenUnsatisfiable": {
       "type": "string",
+      "description": "When request unsatisfiable",
       "enum": [
         "DoNotSchedule",
         "ScheduleAnyway"
       ],
       "x-ms-enum": {
         "name": "WhenUnsatisfiable",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DoNotSchedule",
+            "value": "DoNotSchedule",
+            "description": "Do not schedule"
+          },
+          {
+            "name": "ScheduleAnyway",
+            "value": "ScheduleAnyway",
+            "description": "Schedule anyway"
+          }
+        ]
       }
     }
   },
