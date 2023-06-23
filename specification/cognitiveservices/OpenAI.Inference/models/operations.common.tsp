@@ -26,13 +26,6 @@ enum AzureOpenAIOperationState {
   @lroFailed
   @doc("The operation has completed processing with a failure and cannot be further consumed.")
   failed,
-
-  @doc("""
-  The entity has been deleted but may still be referenced by other entities that originated before the deletion.
-  Note that this state is not used by some Azure OpenAI long-running operations and may not represent
-  a terminal state for those operations.
-  """)
-  deleted,
 }
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"

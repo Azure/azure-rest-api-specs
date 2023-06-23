@@ -370,6 +370,48 @@
       },
       "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
+    "AzureOpenAIOperationState": {
+      "type": "string",
+      "description": "The state of a job or item.",
+      "enum": [
+        "notRunning",
+        "running",
+        "succeeded",
+        "canceled",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "AzureOpenAIOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notRunning",
+            "value": "notRunning",
+            "description": "The operation was created and is queued to be processed in the future."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation has started to be processed."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The operation has successfully be processed and is ready for consumption."
+          },
+          {
+            "name": "canceled",
+            "value": "canceled",
+            "description": "The operation has been canceled and is incomplete."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The operation has completed processing with a failure and cannot be further consumed."
+          }
+        ]
+      }
+    },
     "ChatChoice": {
       "type": "object",
       "properties": {
@@ -1013,7 +1055,7 @@
           "description": "The result of the operation if the operation succeeded."
         },
         "status": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/AzureOpenAIOperationState",
           "description": "The status of the operation"
         },
         "error": {
@@ -1021,31 +1063,10 @@
           "description": "The error if the operation failed."
         }
       },
-      "description": "The result of the operation if the operation succeeded.",
+      "description": "A polling status update or final response payload for an image operation.",
       "required": [
         "id",
         "created",
-        "status"
-      ]
-    },
-    "ImageOperationStatus": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation.",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the operation"
-        }
-      },
-      "description": "Provides status details for long running operations.",
-      "required": [
-        "id",
         "status"
       ]
     },
@@ -1125,54 +1146,6 @@
           {
             "name": "v2023_06_01_Preview",
             "value": "2023-06-01-preview"
-          }
-        ]
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "The state of a job or item.",
-      "enum": [
-        "notRunning",
-        "running",
-        "succeeded",
-        "canceled",
-        "failed",
-        "deleted"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notRunning",
-            "value": "notRunning",
-            "description": "The operation was created and is queued to be processed in the future."
-          },
-          {
-            "name": "running",
-            "value": "running",
-            "description": "The operation has started to be processed."
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded",
-            "description": "The operation has successfully be processed and is ready for consumption."
-          },
-          {
-            "name": "canceled",
-            "value": "canceled",
-            "description": "The operation has been canceled and is incomplete."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The operation has completed processing with a failure and cannot be further consumed."
-          },
-          {
-            "name": "deleted",
-            "value": "deleted",
-            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion."
           }
         ]
       }

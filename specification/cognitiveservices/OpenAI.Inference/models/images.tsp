@@ -1,13 +1,16 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./operations.common.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
 @doc("The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.")
+@added(ServiceApiVersions.v2023_06_01_Preview)
 enum ImageSize {
   @doc("Image size of 256x256.")
   Size256x256: "256x256",
@@ -20,6 +23,7 @@ enum ImageSize {
 }
 
 @doc("Represents the request data used to generate images.")
+@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerationOptions {
   @doc("A description of the desired images.")
   prompt: string;
@@ -35,6 +39,7 @@ model ImageGenerationOptions {
 }
 
 @doc("The image url if successful, and an error otherwise.")
+@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageLocation {
   @doc("The URL that provides temporary access to download the generated image.")
   url?: url;
@@ -44,6 +49,7 @@ model ImageLocation {
 }
 
 @doc("The result of the operation if the operation succeeded.")
+@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageResponse {
   @doc("A timestamp when this job or item was created (in unix epochs).")
   created: int64;
@@ -57,6 +63,7 @@ model ImageResponse {
 
 // @lroStatus
 @doc("A polling status update or final response payload for an image operation.")
+@added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageOperationResponse {
   @doc("The ID of the operation.")
   id: string;
