@@ -1914,11 +1914,13 @@
       "properties": {
         "atlasKafkaPrimaryEndpoint": {
           "description": "Gets or sets the primary connection string.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "atlasKafkaSecondaryEndpoint": {
           "description": "Gets or sets the secondary connection string.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -2034,663 +2036,652 @@
                 "type": "Microsoft.EventHub/namespaces/eventHubs"
               }
             ]
-          },
-          "eventHubType": {
-            "description": "The event hub type.",
-            "enum": [
-              "Notification",
-              "Hook"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "eventHubType",
-              "modelAsString": true
-            }
-          },
-          "eventStreamingState": {
-            "description": "The state of the event streaming service",
-            "default": "Enabled",
-            "enum": [
-              "Disabled",
-              "Enabled"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "eventStreamingState",
-              "modelAsString": true
-            }
-          },
-          "eventStreamingType": {
-            "description": "The event streaming service type",
-            "default": "None",
-            "enum": [
-              "None",
-              "Managed",
-              "Azure"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "eventStreamingType",
-              "modelAsString": true
-            }
-          },
-          "eventHubPartitionId": {
-            "description": "Optional partition Id for notification event hub. If not set, all partitions will be leveraged.",
-            "type": "string"
-          }
-        }
-      },
-      "Credentials": {
-        "description": "Credentials to access the event streaming service attached to the purview account.",
-        "type": "object",
-        "properties": {
-          "identityId": {
-            "description": "Identity identifier for UserAssign type.",
-            "type": "string"
-          },
-          "type": {
-            "description": "Identity Type.",
-            "enum": [
-              "None",
-              "SystemAssigned",
-              "UserAssigned"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "CredentialsType",
-              "modelAsString": true
-            }
-          }
-        }
-      },
-      "KafkaConfigurationList": {
-        "description": "Paged list of kafka configuration resources",
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "nextLink": {
-            "description": "The Url of next result page.",
-            "type": "string"
-          },
-          "value": {
-            "description": "Collection of items of type results.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/KafkaConfiguration"
-            }
-          }
-        }
-      },
-      "OperationList": {
-        "description": "Paged list of operation resources",
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "count": {
-            "format": "int64",
-            "description": "Total item count.",
-            "type": "integer"
-          },
-          "nextLink": {
-            "description": "The Url of next result page.",
-            "type": "string"
-          },
-          "value": {
-            "description": "Collection of items of type results.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Operation"
-            },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          }
-        }
-      },
-      "Operation": {
-        "description": "Operation resource",
-        "type": "object",
-        "properties": {
-          "display": {
-            "$ref": "#/definitions/OperationDisplay",
-            "description": "Properties on the operation"
-          },
-          "isDataAction": {
-            "description": "Whether operation is a data action",
-            "type": "boolean"
-          },
-          "name": {
-            "description": "Operation name for display purposes",
-            "type": "string"
-          },
-          "origin": {
-            "description": "origin of the operation",
-            "type": "string"
-          },
-          "properties": {
-            "$ref": "#/definitions/OperationProperties",
-            "description": "properties for the operation meta info",
-            "x-ms-client-flatten": true
-          }
-        }
-      },
-      "OperationDisplay": {
-        "description": "The response model for get operation properties",
-        "type": "object",
-        "properties": {
-          "description": {
-            "description": "Description of the operation for display purposes",
-            "type": "string"
-          },
-          "operation": {
-            "description": "Name of the operation for display purposes",
-            "type": "string"
-          },
-          "provider": {
-            "description": "Name of the provider for display purposes",
-            "type": "string"
-          },
-          "resource": {
-            "description": "Name of the resource type for display purposes",
-            "type": "string"
-          }
-        }
-      },
-      "OperationProperties": {
-        "description": "properties on meta info",
-        "type": "object",
-        "properties": {
-          "serviceSpecification": {
-            "$ref": "#/definitions/OperationMetaServiceSpecification",
-            "description": "meta service specification"
-          }
-        }
-      },
-      "OperationMetaServiceSpecification": {
-        "description": "The operation meta service specification",
-        "type": "object",
-        "properties": {
-          "logSpecifications": {
-            "description": "log specifications for the operation",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/OperationMetaLogSpecification"
-            },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          },
-          "metricSpecifications": {
-            "description": "metric specifications for the operation",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/OperationMetaMetricSpecification"
-            },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          }
-        }
-      },
-      "OperationMetaMetricSpecification": {
-        "description": "metric specifications for the operation",
-        "type": "object",
-        "properties": {
-          "aggregationType": {
-            "description": "aggregation type of metric",
-            "type": "string"
-          },
-          "dimensions": {
-            "description": "properties for dimension",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/DimensionProperties"
-            },
-            "x-ms-identifiers": [
-              "name"
-            ]
-          },
-          "displayDescription": {
-            "description": "description of the metric",
-            "type": "string"
-          },
-          "displayName": {
-            "description": "localized name of the metric",
-            "type": "string"
-          },
-          "enableRegionalMdmAccount": {
-            "description": "enable regional mdm account",
-            "type": "string"
-          },
-          "internalMetricName": {
-            "description": "internal metric name",
-            "type": "string"
-          },
-          "name": {
-            "description": "name of the metric",
-            "type": "string"
-          },
-          "resourceIdDimensionNameOverride": {
-            "description": "dimension name use to replace resource id if specified",
-            "type": "string"
-          },
-          "sourceMdmNamespace": {
-            "description": "Metric namespace.\r\nOnly set the namespace if different from the default value, \r\nleaving it empty makes it use the value from the ARM manifest.",
-            "type": "string"
-          },
-          "supportedAggregationTypes": {
-            "description": "supported aggregation types",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "supportedTimeGrainTypes": {
-            "description": "supported time grain types",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "unit": {
-            "description": "units for the metric",
-            "type": "string"
-          }
-        }
-      },
-      "OperationMetaLogSpecification": {
-        "description": "log specifications for operation api",
-        "type": "object",
-        "properties": {
-          "blobDuration": {
-            "description": "blob duration of the log",
-            "type": "string"
-          },
-          "displayName": {
-            "description": "localized name of the log category",
-            "type": "string"
-          },
-          "name": {
-            "description": "name of the log category",
-            "type": "string"
-          }
-        }
-      },
-      "DimensionProperties": {
-        "description": "properties for dimension",
-        "type": "object",
-        "properties": {
-          "displayName": {
-            "description": "localized display name of the dimension to customer",
-            "type": "string"
-          },
-          "name": {
-            "description": "dimension name",
-            "type": "string"
-          },
-          "toBeExportedForCustomer": {
-            "description": "flag indicating whether this dimension should be included to the customer in Azure Monitor logs (aka Shoebox)",
-            "type": "boolean"
-          }
-        }
-      },
-      "PrivateEndpointConnectionList": {
-        "description": "Paged list of private endpoint connections",
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "count": {
-            "format": "int64",
-            "description": "Total item count.",
-            "type": "integer"
-          },
-          "nextLink": {
-            "description": "The Url of next result page.",
-            "type": "string"
-          },
-          "value": {
-            "description": "Collection of items of type results.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          }
-        }
-      },
-      "PrivateLinkResourceList": {
-        "description": "Paged list of private link resources",
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "count": {
-            "format": "int64",
-            "description": "Total item count.",
-            "type": "integer"
-          },
-          "nextLink": {
-            "description": "The Url of next result page.",
-            "type": "string"
-          },
-          "value": {
-            "description": "Collection of items of type results.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          }
-        }
-      },
-      "PrivateLinkResource": {
-        "description": "A privately linkable resource.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "The private link resource identifier.",
-            "type": "string",
-            "readOnly": true
-          },
-          "name": {
-            "description": "The private link resource name.",
-            "type": "string",
-            "readOnly": true
-          },
-          "properties": {
-            "$ref": "#/definitions/PrivateLinkResourceProperties",
-            "description": "The private link resource properties.",
-            "readOnly": true
-          },
-          "type": {
-            "description": "The private link resource type.",
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
-      "PrivateLinkResourceProperties": {
-        "description": "A privately linkable resource properties.",
-        "type": "object",
-        "properties": {
-          "groupId": {
-            "description": "The private link resource group identifier.",
-            "type": "string",
-            "readOnly": true
-          },
-          "requiredMembers": {
-            "description": "This translates to how many Private IPs should be created for each privately linkable resource.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          },
-          "requiredZoneNames": {
-            "description": "The required zone names for private link resource.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          }
-        }
-      },
-      "CheckNameAvailabilityRequest": {
-        "description": "The request payload for CheckNameAvailability API",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Resource name to verify for availability",
-            "type": "string"
-          },
-          "type": {
-            "description": "Fully qualified resource type which includes provider namespace",
-            "type": "string"
-          }
-        }
-      },
-      "CheckNameAvailabilityResult": {
-        "description": "The response payload for CheckNameAvailability API",
-        "type": "object",
-        "properties": {
-          "message": {
-            "description": "Error message",
-            "type": "string"
-          },
-          "nameAvailable": {
-            "description": "Indicates if name is valid and available.",
-            "type": "boolean"
-          },
-          "reason": {
-            "description": "The reason the name is not available.",
-            "enum": [
-              "Invalid",
-              "AlreadyExists"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "reason",
-              "modelAsString": true
-            }
-          }
-        }
-      },
-      "UsageList": {
-        "description": "Response for usage get request",
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "Collection of usage values.",
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Usage"
-            },
-            "nextLink": {
-              "description": "The Url of next result page.",
-              "type": "string"
-            }
-          }
-        }
-      },
-      "Usage": {
-        "description": "Response for usage information",
-        "type": "object",
-        "properties": {
-          "currentValue": {
-            "format": "int32",
-            "description": "Current usage quota value",
-            "type": "integer",
-            "readOnly": true
-          },
-          "id": {
-            "description": "Fully qualified ARM resource Id",
-            "type": "string",
-            "readOnly": true
-          },
-          "limit": {
-            "format": "int32",
-            "description": "Usage quota limit",
-            "type": "integer",
-            "readOnly": true
-          },
-          "name": {
-            "description": "Quota name",
-            "allOf": [
-              {
-                "$ref": "#/definitions/QuotaName"
-              }
-            ],
-            "readOnly": true
-          },
-          "unit": {
-            "description": "Quota usage unit.",
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
-      "QuotaName": {
-        "description": "Quota name",
-        "type": "object",
-        "properties": {
-          "localizedValue": {
-            "description": "Gets or sets the localized name value.",
-            "type": "string"
-          },
-          "value": {
-            "description": "Gets or sets the name value.",
-            "type": "string"
-          }
-        }
-      },
-      "TrackedResource": {
-        "description": "Azure ARM Tracked Resource",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Gets or sets the identifier.",
-            "type": "string",
-            "readOnly": true
-          },
-          "identity": {
-            "$ref": "#/definitions/Identity",
-            "description": "Identity Info on the tracked resource"
-          },
-          "location": {
-            "description": "Gets or sets the location.",
-            "type": "string"
-          },
-          "name": {
-            "description": "Gets or sets the name.",
-            "type": "string",
-            "readOnly": true
-          },
-          "systemData": {
-            "description": "Metadata pertaining to creation and last modification of the resource.",
-            "allOf": [
-              {
-                "$ref": "#/definitions/SystemData"
-              }
-            ],
-            "readOnly": true
-          },
-          "tags": {
-            "description": "Tags on the azure resource.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "type": {
-            "description": "Gets or sets the type.",
-            "type": "string",
-            "readOnly": true
           }
         },
-        "x-ms-azure-resource": true
-      },
-      "ProxyResource": {
-        "description": "Proxy Azure Resource",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Gets or sets the identifier.",
-            "type": "string",
-            "readOnly": true
-          },
-          "name": {
-            "description": "Gets or sets the name.",
-            "type": "string",
-            "readOnly": true
-          },
-          "systemData": {
-            "description": "Metadata pertaining to creation and last modification of the resource.",
-            "allOf": [
-              {
-                "$ref": "#/definitions/SystemData"
-              }
-            ],
-            "readOnly": true
-          },
-          "type": {
-            "description": "Gets or sets the type.",
-            "type": "string",
-            "readOnly": true
+        "eventHubType": {
+          "description": "The event hub type.",
+          "enum": [
+            "Notification",
+            "Hook"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "eventHubType",
+            "modelAsString": true
           }
         },
-        "x-ms-azure-resource": true
-      }
-    },
-    "parameters": {
-      "subscriptionId": {
-        "name": "subscriptionId",
-        "in": "path",
-        "description": "The subscription identifier",
-        "required": true,
-        "type": "string"
-      },
-      "api-version": {
-        "name": "api-version",
-        "in": "query",
-        "description": "The api version to use.",
-        "required": true,
-        "type": "string"
-      },
-      "accountName": {
-        "name": "accountName",
-        "in": "path",
-        "description": "The name of the account.",
-        "required": true,
-        "type": "string",
-        "maxLength": 63,
-        "minLength": 3,
-        "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
-        "x-ms-parameter-location": "method"
-      },
-      "resourceGroupName": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "description": "The resource group name.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      }
-    },
-    "securityDefinitions": {
-      "azure_auth": {
-        "flow": "implicit",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
+        "eventStreamingState": {
+          "description": "The state of the event streaming service",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "eventStreamingState",
+            "modelAsString": true
+          }
         },
-        "type": "oauth2",
-        "description": "Azure Active Directory OAuth2 Flow."
+        "eventStreamingType": {
+          "description": "The event streaming service type",
+          "default": "None",
+          "enum": [
+            "None",
+            "Managed",
+            "Azure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "eventStreamingType",
+            "modelAsString": true
+          }
+        },
+        "eventHubPartitionId": {
+          "description": "Optional partition Id for notification event hub. If not set, all partitions will be leveraged.",
+          "type": "string"
+        }
       }
     },
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
+    "Credentials": {
+      "description": "Credentials to access the event streaming service attached to the purview account.",
+      "type": "object",
+      "properties": {
+        "identityId": {
+          "description": "Identity identifier for UserAssign type.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Identity Type.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialsType",
+            "modelAsString": true
+          }
+        }
       }
-    ],
-    "tags": []
-  }
+    },
+    "KafkaConfigurationList": {
+      "description": "Paged list of kafka configuration resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KafkaConfiguration"
+          }
+        }
+      }
+    },
+    "OperationList": {
+      "description": "Paged list of operation resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation resource",
+      "type": "object",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Properties on the operation"
+        },
+        "isDataAction": {
+          "description": "Whether operation is a data action",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "Operation name for display purposes",
+          "type": "string"
+        },
+        "origin": {
+          "description": "origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "properties for the operation meta info",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The response model for get operation properties",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the operation for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "properties on meta info",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "meta service specification"
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "description": "The operation meta service specification",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "log specifications for the operation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "metricSpecifications": {
+          "description": "metric specifications for the operation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "description": "metric specifications for the operation",
+      "type": "object",
+      "properties": {
+        "aggregationType": {
+          "description": "aggregation type of metric",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "properties for dimension",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "displayDescription": {
+          "description": "description of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "localized name of the metric",
+          "type": "string"
+        },
+        "enableRegionalMdmAccount": {
+          "description": "enable regional mdm account",
+          "type": "string"
+        },
+        "internalMetricName": {
+          "description": "internal metric name",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the metric",
+          "type": "string"
+        },
+        "resourceIdDimensionNameOverride": {
+          "description": "dimension name use to replace resource id if specified",
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "description": "Metric namespace.\r\nOnly set the namespace if different from the default value, \r\nleaving it empty makes it use the value from the ARM manifest.",
+          "type": "string"
+        },
+        "supportedAggregationTypes": {
+          "description": "supported aggregation types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "supported time grain types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unit": {
+          "description": "units for the metric",
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetaLogSpecification": {
+      "description": "log specifications for operation api",
+      "type": "object",
+      "properties": {
+        "blobDuration": {
+          "description": "blob duration of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "localized name of the log category",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the log category",
+          "type": "string"
+        }
+      }
+    },
+    "DimensionProperties": {
+      "description": "properties for dimension",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "localized display name of the dimension to customer",
+          "type": "string"
+        },
+        "name": {
+          "description": "dimension name",
+          "type": "string"
+        },
+        "toBeExportedForCustomer": {
+          "description": "flag indicating whether this dimension should be included to the customer in Azure Monitor logs (aka Shoebox)",
+          "type": "boolean"
+        }
+      }
+    },
+    "PrivateEndpointConnectionList": {
+      "description": "Paged list of private endpoint connections",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "PrivateLinkResourceList": {
+      "description": "Paged list of private link resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A privately linkable resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The private link resource identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The private link resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The private link resource properties.",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The private link resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "A privately linkable resource properties.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "This translates to how many Private IPs should be created for each privately linkable resource.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The required zone names for private link resource.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "description": "The request payload for CheckNameAvailability API",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Resource name to verify for availability",
+          "type": "string"
+        },
+        "type": {
+          "description": "Fully qualified resource type which includes provider namespace",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "The response payload for CheckNameAvailability API",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        },
+        "nameAvailable": {
+          "description": "Indicates if name is valid and available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason the name is not available.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "UsageList": {
+      "description": "Response for usage get request",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of usage values.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          }
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "Usage": {
+      "description": "Response for usage information",
+      "type": "object",
+      "properties": {
+        "currentValue": {
+          "format": "int32",
+          "description": "Current usage quota value",
+          "type": "integer",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Fully qualified ARM resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "limit": {
+          "format": "int32",
+          "description": "Usage quota limit",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Quota name",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QuotaName"
+            }
+          ],
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Quota usage unit.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaName": {
+      "description": "Quota name",
+      "type": "object",
+      "properties": {
+        "localizedValue": {
+          "description": "Gets or sets the localized name value.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the name value.",
+          "type": "string"
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "Azure ARM Tracked Resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity Info on the tracked resource"
+        },
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Gets or sets the type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "Proxy Azure Resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the account.",
+      "required": true,
+      "type": "string",
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": []
+}
