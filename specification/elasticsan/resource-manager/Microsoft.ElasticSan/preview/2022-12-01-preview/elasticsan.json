@@ -1444,7 +1444,7 @@
     },
     "ElasticSanCreateParameter": {
       "type": "object",
-      "description": "Response for ElasticSan request.",
+      "description": "Input Parameter for ElasticSan request.",
       "required": [
         "properties"
       ],
@@ -1552,6 +1552,18 @@
           "readOnly": true,
           "$ref": "#/definitions/PrivateEndpointConnectionList",
           "description": "The list of Private Endpoint Connections."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Allow or disallow public network access to ElasticSan. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1594,6 +1606,18 @@
             "read",
             "create"
           ]
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          },
+          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
         }
       }
     },
@@ -2236,7 +2260,8 @@
       "properties": {
         "provisioningState": {
           "description": "Provisioning State of Private Endpoint connection resource",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "privateEndpoint": {
           "description": "Private Endpoint resource",
@@ -2250,7 +2275,7 @@
           "description": " List of resources private endpoint is mapped",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpoint"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         }
       },
