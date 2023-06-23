@@ -30,13 +30,8 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
-  - script: |
-      set -x
-      git checkout main
-      git pull
-      git checkout typespec-next
-      git merge main
-    displayName: merge main
+  - script: git merge origin/main
+    displayName: git merge origin/main
   
   # Remove lockfile to update all packages to latest "next" version
   - script: rm package-lock.json
