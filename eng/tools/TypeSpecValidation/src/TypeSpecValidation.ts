@@ -32,7 +32,7 @@ export async function main() {
     console.log("Running TypeSpecValidation on folder:", folder);
 
     // Verify all specs are using root level pacakge.json
-    let expected_npm_prefix = process.env.PWD.trim()
+    let expected_npm_prefix = process.cwd().trim()
     const actual_npm_prefix = (await runCmd(`npm prefix`, folder)).trim()
     if (expected_npm_prefix !== actual_npm_prefix) {
         console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.")
@@ -41,13 +41,13 @@ export async function main() {
 
     // Spec compilation check
     if (fs.existsSync(path.join(folder, "main.tsp"))) {
-        const output = await runCmd(
+        await runCmd(
             `npx --no tsp compile . --warn-as-error`,
             folder
         );
     }
     if (fs.existsSync(path.join(folder, "client.tsp"))) {
-        const output = await runCmd(
+        await runCmd(
             `npx --no tsp compile client.tsp --no-emit --warn-as-error`,
             folder
         );
