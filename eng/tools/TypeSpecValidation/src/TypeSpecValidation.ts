@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import {exec} from "child_process";
 import fs from "fs";
 import path from "path";
@@ -28,7 +26,7 @@ async function runCmd(cmd:string, cwd:string) {
     return resultString as string;
 }
     
-async function main() {
+export async function main() {
     const args = process.argv.slice(2);
     const folder = args[0];
     console.log("Running TypeSpecValidation on folder:", folder);
@@ -75,5 +73,3 @@ async function main() {
         throw new Error("Generated swagger file does not match swagger file on disk")
     }
 }
-
-main();
