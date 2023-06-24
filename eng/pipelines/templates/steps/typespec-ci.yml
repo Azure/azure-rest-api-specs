@@ -5,6 +5,6 @@ parameters:
   type: string
 
 steps:
-- script: npx tsv ${{parameters.Folder}}
+- script: npx --no tsv ${{parameters.Folder}}
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
