@@ -15,7 +15,7 @@ namespace Azure.ResourceManager;
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via":"azure-async-operation",
+    "final-state-via":"location",
   }
 )
 @armResourceAction(TResource)
@@ -28,7 +28,7 @@ op ArmResourceActionAsyncNoRequestBody<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
-):   ArmAcceptedResponse ;
+):   ArmAcceptedResponseWithLocationHeader | ErrorResponse;
 
 
 @autoRoute
@@ -47,7 +47,7 @@ op ArmResourceActionNoContentNoBodyAsync<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
-): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponse ;
+): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponseWithLocationHeader ;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
@@ -65,7 +65,7 @@ op ArmResourceActionNoBodyAsync<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
-):  ArmAcceptedResponse ;
+):  ArmAcceptedResponseWithLocationHeader ;
 
 
 @doc("The response of a {name} list operation.", TResource)
@@ -149,7 +149,7 @@ op ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
   @doc("The content of the action request")
   @body
   updateMachineDepMapStatus: TRequest
-):  ArmAcceptedResponse ;
+):  ArmAcceptedResponseWithLocationHeader ;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
@@ -171,7 +171,7 @@ op ArmResourceActionNoContentAsyncCustomUpdateRunAsAccount<
   @doc("The content of the action request")
   @body
   updateMachineRunAsAccount: TRequest
-):  ArmAcceptedResponse ;
+):  ArmAcceptedResponseWithLocationHeader ;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
@@ -193,8 +193,11 @@ op ArmResourceActionNoContentAsyncCustomUpdateMachineTags<
   @doc("The content of the action request")
   @body
   updateMachineTags: TRequest
-):  ArmAcceptedResponse ;
+):  ArmAcceptedResponseWithLocationHeader ;
 
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "inlining the response with a header does not present a risk"
+alias ArmAcceptedResponseWithLocationHeader = ArmAcceptedResponse &
+  LocationHeader;
 
 @autoRoute
 @doc("Create a {name}", TResource)
@@ -216,8 +219,17 @@ op ArmResourceCreateOrUpdateAsyncCustom<
   @doc("Resource create parameters.")
   @body
   body: TResource
-):  ArmAcceptedResponse<"Accepted.">  | ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
+):  ArmAcceptedResponseWithLocationHeader  | ArmUpdateResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
+/**
+ * The ARM synchronous OK response
+ * @template T The contents of the response body
+ */
+@doc("ARM update operation completed successfully.")
+model ArmUpdateResponse<T> {
+  ...OkResponse;
+  ...Body<T>;
+}
 @autoRoute
 @doc("Create a {name}", TResource)
 @armResourceCreateOrUpdate(TResource)
@@ -231,7 +243,7 @@ op ArmResourceCreateOrUpdateSyncCustom<
   @doc("Resource create parameters.")
   @body
   body: TResource
-): ArmResponse<TResource> | ArmCreatedResponse<TResource> ;
+): ArmUpdateResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 /**
  * A resource CreateOrUpdate (PUT)
@@ -251,7 +263,7 @@ op ArmResourceCreateOrUpdateSync201<
   @doc("Resource create parameters.")
   @body
   body: TResource
-): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
+): ArmUpdateResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 @autoRoute
 @armResourceAction(TResource)
@@ -262,7 +274,7 @@ op ArmResourceActionSyncNoRequestBody<
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResponse> ;
+): ArmResponse<TResponse> | ErrorResponse;
 
 /**
  * This is the interface that implements the standard ARM operation that returns

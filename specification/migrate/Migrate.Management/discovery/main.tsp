@@ -161,8 +161,12 @@ interface Sites {
   @added(Versions.v2018_05_01_preview)
   @get  
   getErrorSummary(
-    ...ResourceInstanceParameters<VmwareSite>
-  ): SiteErrorSummary;
+    ...ResourceInstanceParameters<VmwareSite>,
+
+    @doc("Appliance Name")
+    @query
+    applianceName: string
+  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
 
   @doc("Method to get site error summary.")
   @armResourceRead(InnerError)
@@ -172,7 +176,7 @@ interface Sites {
   
   getUsage(
     ...ResourceInstanceParameters<VmwareSite>
-  ): ArmResponse<VmwareSiteUsage>;
+  ): ArmResponse<VmwareSiteUsage> | ErrorResponse;
 
   @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
   @armResourceAction(InnerError)
@@ -215,7 +219,7 @@ interface VmwareOperationsStatus {
   @get
   @added(Versions.v2018_05_01_preview)
   
-  vmwareOperationStatus(
+  getVmwareOperationStatus(
     ...ResourceInstanceParameters<VmwareSite>,
 
     @doc("Operation status  Arm Name.")
@@ -223,7 +227,7 @@ interface VmwareOperationsStatus {
     @segment("operationsStatus")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
-  ): ArmResponse<OperationStatus>;
+  ): ArmResponse<OperationStatus> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -369,7 +373,7 @@ interface VmwareSites {
   
   listHealthSummary(
     ...ResourceInstanceParameters<VmwareSite>
-  ): ArmResponse<SiteHealthSummaryCollection>;
+  ): ArmResponse<SiteHealthSummaryCollection> |ErrorResponse;
 }
 
 //#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -448,7 +452,7 @@ interface MachinesController {
   
   getMachineSoftwareInventory(
     ...ResourceInstanceParameters<MachineResource>
-  ): ArmResponse<VmwareMachineSoftwareInventory>;
+  ): ArmResponse<VmwareMachineSoftwareInventory> | ErrorResponse;
 }
 @armResourceOperations
 interface VmwareMachinesController {
@@ -460,7 +464,7 @@ interface VmwareMachinesController {
   
   getApplications(
     ...ResourceInstanceParameters<MachineResource>
-  ): ArmResponse<MachineResource>;
+  ): ArmResponse<MachineResource> | ErrorResponse ;
 }
 @doc("A vcenter resource belonging to a site resource.")
 @parentResource(VmwareSite)
@@ -654,7 +658,7 @@ interface HypervSitesController {
   @post  
   listHealthSummary(
     ...ResourceInstanceParameters<HypervSite>
-  ): ArmResponse<SiteHealthSummaryCollection>;
+  ): ArmResponse<SiteHealthSummaryCollection> |ErrorResponse;
 
   @doc("Method to get site error summary.")
   @armResourceRead(InnerError)
@@ -667,7 +671,7 @@ interface HypervSitesController {
     @doc("Appliance Name")
     @query
     applianceName: string
-  ): ArmResponse<SiteErrorSummary>;
+  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
 
   @doc("Method to get site error summary.")
   @armResourceRead(InnerError)
@@ -676,7 +680,7 @@ interface HypervSitesController {
   @get  
   getUsage(
     ...ResourceInstanceParameters<HypervSite>
-  ): ArmResponse<SiteUsageResponse>;
+  ): ArmResponse<SiteUsageResponse> | ErrorResponse;
 
   @doc("Method to refresh a site.")
   @added(Versions.v2018_05_01_preview)  
@@ -721,7 +725,7 @@ interface HypervSites {
     @segment("operationsStatus")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
-  ): ArmResponse<OperationStatus>;
+  ): ArmResponse<OperationStatus> | ErrorResponse;
 }
 
 @doc("A job resource belonging to a site resource.")
@@ -868,7 +872,7 @@ interface HypervMachinesController {
   @get
   getApplications(
     ...ResourceInstanceParameters<HypervMachine>
-  ): ArmResponse<HypervMachine>;
+  ): ArmResponse<HypervMachine> | ErrorResponse;
 
   @doc("Method to get a machines software inventory like applications and roles.")
   @armResourceRead(InnerError)
@@ -878,7 +882,7 @@ interface HypervMachinesController {
   
   getMachineSoftwareInventory(
     ...ResourceInstanceParameters<HypervMachine>
-  ): ArmResponse<HypervVmSoftwareInventory>;
+  ): ArmResponse<HypervVmSoftwareInventory> | ErrorResponse;
 
   @added(Versions.v2018_05_01_preview)
   @doc("Method to update custom properties for HYPERV machines\r\n            in a site.")
@@ -929,6 +933,31 @@ model ServerSiteResource is TrackedResource<SitesProperties> {
 @armResourceOperations
 @added(Versions.v2019_05_01_preview)
 interface ServersController {
+
+  @doc("Method to get machine with application and roles present in it.")
+  @segment("applications")
+  @armResourceRead(InnerError)
+  @added(Versions.v2020_08_01_preview)  
+  @get
+  getApplications(
+    ...ResourceInstanceParameters<ServerMachineResource>
+  ): ArmResponse<ServerMachineResource> | ErrorResponse ;
+
+  
+  
+  getMachine is ArmResourceRead<ServerMachineResource>;
+  createMachine is ArmResourceCreateOrUpdateAsyncCustom<ServerMachineResource>;
+  deleteMachine is ArmResourceDeleteSync<ServerMachineResource>;
+  @doc("Get all machines in a site.")
+  
+  listByParent is ArmResourceListByParent<ServerMachineResource>;
+
+}
+
+@armResourceOperations
+interface ServerSitesController {
+
+  
   get is ArmResourceRead<ServerSiteResource>;
   create is ArmResourceCreateOrUpdateAsyncCustom<ServerSiteResource>;
   update is ArmResourcePatchSync<ServerSiteResource, SitesProperties>;
@@ -953,7 +982,7 @@ interface ServersController {
   @get
   @added(Versions.v2019_05_01_preview)
   
-  serverSiteOperationsStatus(
+  getServerSiteOperationsStatus(
     ...ResourceInstanceParameters<ServerSiteResource>,
 
     @doc("Operation status  Arm Name.")
@@ -961,7 +990,7 @@ interface ServersController {
     @segment("operationsStatus")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
-  ): ArmResponse<OperationStatus>;
+  ): ArmResponse<OperationStatus> | ErrorResponse;
 
   @get
   @doc("Get a serve site usage.")
@@ -970,7 +999,7 @@ interface ServersController {
   
   getUsage(
     ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<ServerSiteUsageResponse>;
+  ): ArmResponse<ServerSiteUsageResponse> | ErrorResponse;
 
   @get
   @doc("Get the error summary for a server site.")
@@ -978,8 +1007,12 @@ interface ServersController {
   @armResourceRead(InnerError)
   
   getErrorSummary(
-    ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<SiteErrorSummary>;
+    ...ResourceInstanceParameters<ServerSiteResource>,
+
+    @doc("Appliance Name")
+    @query
+    applianceName: string
+  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
 
   // @doc("Method to get a machines software inventory like applications and roles.")
   // @armResourceRead(InnerError)
@@ -998,30 +1031,7 @@ interface ServersController {
     ServerSiteResource,
     UpdateMachineDepMapStatus
   >;
-
-  @doc("Method to get machine with application and roles present in it.")
-  @segment("applications")
-  @armResourceRead(InnerError)
-  @added(Versions.v2020_08_01_preview)
   
-  @get
-  getApplications(
-    ...ResourceInstanceParameters<ServerMachineResource>
-  ): ArmResponse<ServerMachineResource>;
-
-  
-  
-  getMachine is ArmResourceRead<ServerMachineResource>;
-  createMachine is ArmResourceCreateOrUpdateAsyncCustom<ServerMachineResource>;
-  deleteMachine is ArmResourceDeleteSync<ServerMachineResource>;
-  @doc("Get all machines in a site.")
-  
-  listByParent is ArmResourceListByParent<ServerMachineResource>;
-
-}
-
-@armResourceOperations
-interface ServerSitesController {
   @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
   @added(Versions.v2020_08_01_preview)
   
@@ -1050,7 +1060,7 @@ interface ServerSitesController {
   
   listHealthSummary(
     ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<SiteHealthSummaryCollection>;
+  ): ArmResponse<SiteHealthSummaryCollection> |ErrorResponse;
 }
 @armResourceOperations
 interface ServerDependencyMapController {
@@ -1195,7 +1205,7 @@ interface ImportJobsController {
   
   listDeletejobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<Azure.Core.PageUpdated<ImportDeleteImportMachinesJobDeleteImportMachinesJobCollection>>;
+  ): ArmResponse<Azure.Core.PageUpdated<ImportDeleteImportMachinesJobDeleteImportMachinesJobCollection>> | ErrorResponse;
 
   @doc("Gets the delete imported machines job with the given job name.")
   @armResourceRead(InnerError)
@@ -1210,7 +1220,7 @@ interface ImportJobsController {
     @segment("deleteJobs")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
-  ): ArmResponse<V20200201DeleteImportMachinesJob>;
+  ): ArmResponse<V20200201DeleteImportMachinesJob>| ErrorResponse;
 
   @doc("Method to get all export import machines job for the given site.")
   @armResourceRead(InnerError)
@@ -1220,7 +1230,7 @@ interface ImportJobsController {
   
   listExportjobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<Azure.Core.PageUpdated<V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection>>;
+  ): ArmResponse<Azure.Core.PageUpdated<V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection>> | ErrorResponse;
 
   @doc("Gets the export imported machines job with the given job name.")
   @armResourceRead(InnerError)
@@ -1235,7 +1245,7 @@ interface ImportJobsController {
     @segment("exportJobs")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
-  ): ArmResponse<V20200201ExportImportedMachinesJob>;
+  ): ArmResponse<V20200201ExportImportedMachinesJob> | ErrorResponse;
 
   @doc("Method to get all import machines job for the given site.")
   @armResourceRead(InnerError)
@@ -1245,7 +1255,7 @@ interface ImportJobsController {
   
   listImportjobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<Azure.Core.PageUpdated<V20200201ImportMachinesJobImportMachinesJobCollection>>;
+  ): ArmResponse<Azure.Core.PageUpdated<V20200201ImportMachinesJobImportMachinesJobCollection>> | ErrorResponse;
 
   @doc("Gets the import job with the given job name.")
   @armResourceRead(InnerError)
@@ -1260,7 +1270,7 @@ interface ImportJobsController {
     @segment("importJob")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
-  ): ArmResponse<V20200201ImportMachinesJob>;
+  ): ArmResponse<V20200201ImportMachinesJob> | ErrorResponse;
 
   @doc("Patch the delete imported machines job object.")
   @armResourceUpdate(InnerError)
@@ -1426,7 +1436,7 @@ interface MasterSitesController {
     @doc("Appliance name.")
     @query
     applianceName: string
-  ): ArmResponse<SiteErrorSummary>;
+  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -1448,7 +1458,7 @@ interface MasterSitesOperationsStatusController {
   @get
   @added(Versions.v2020_07_07)
   
-  vmwareOperationStatus(
+  getVmwareOperationStatus(
     ...ResourceInstanceParameters<MasterSite>,
 
     @doc("Operation status  Arm Name.")
@@ -1456,7 +1466,7 @@ interface MasterSitesOperationsStatusController {
     @segment("operationsStatus")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
-  ): ArmResponse<OperationStatus>;
+  ): ArmResponse<OperationStatus> | ErrorResponse;
 }
 
 @doc("REST model used to encapsulate Private Link properties for tracked resources.")
@@ -1646,7 +1656,7 @@ interface SqlSitesController {
     @doc("Appliance name.")
     @query
     applianceName: string
-  ): ArmResponse<SiteErrorSummary>;
+  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
 
   @doc("Method to get site usage/summary.")
   @added(Versions.v2020_11_11_preview)
@@ -1737,7 +1747,7 @@ interface WebAppSitesController {
     @doc("Appliance name.")
     @query
     applianceName: string
-  ): ArmResponse<SiteErrorSummary>;
+  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
 
   @doc("Method to get site usage/summary.")
   @added(Versions.v2020_11_11_preview)
@@ -2385,7 +2395,7 @@ interface SqlOperationsStatusController {
   @get
   @added(Versions.v2020_11_11_preview)
   
-  sqlOperationStatus(
+  getSqlOperationStatus(
     ...ResourceInstanceParameters<SqlSite>,
 
     @doc("Operation status  Arm Name.")
@@ -2393,5 +2403,5 @@ interface SqlOperationsStatusController {
     @segment("operationsStatus")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
-  ): ArmResponse<OperationStatus>;
+  ): ArmResponse<OperationStatus> | ErrorResponse;
 }

@@ -221,13 +221,26 @@
             "description": "Site name",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
+          },
+          {
+            "name": "applianceName",
+            "in": "query",
+            "required": true,
+            "description": "Appliance Name",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SiteErrorSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -411,9 +424,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/serverSites": {
       "get": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_ListBySubscription",
+        "operationId": "ServerSitesController_ListBySubscription",
         "description": "List ServerSiteResource resources by subscription ID",
         "parameters": [
           {
@@ -441,11 +454,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ServersController_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_ListBySubscription_MaximumSet_Gen.json"
+          "ServerSitesController_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ListBySubscription_MaximumSet_Gen.json"
           },
-          "ServersController_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_ListBySubscription_MinimumSet_Gen.json"
+          "ServerSitesController_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -624,7 +637,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervSite"
             }
@@ -640,6 +653,12 @@
             },
             "schema": {
               "$ref": "#/definitions/HypervSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -996,7 +1015,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervCluster"
             }
@@ -1015,12 +1034,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -1139,6 +1162,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SiteErrorSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1278,9 +1307,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1618,7 +1644,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervHost"
             }
@@ -1637,12 +1663,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -1865,6 +1895,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SiteHealthSummaryCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2124,6 +2160,12 @@
             "schema": {
               "$ref": "#/definitions/HypervMachine"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2175,6 +2217,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HypervVmSoftwareInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2228,6 +2276,12 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2268,18 +2322,28 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -2512,6 +2576,12 @@
             "schema": {
               "$ref": "#/definitions/HypervSiteUsage"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2700,6 +2770,12 @@
             "schema": {
               "$ref": "#/definitions/SiteUsageResponse"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -2842,7 +2918,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ImportSiteResource"
             }
@@ -2858,6 +2934,12 @@
             },
             "schema": {
               "$ref": "#/definitions/ImportSiteResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3069,6 +3151,12 @@
             "schema": {
               "$ref": "#/definitions/PagedImportDeleteImportMachinesJobDeleteImportMachinesJobCollection"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -3123,6 +3211,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/V20200201DeleteImportMachinesJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3227,6 +3321,12 @@
             "schema": {
               "$ref": "#/definitions/PagedV20200201ExportImportedMachinesJobExportImportedMachinesJobCollection"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -3282,6 +3382,12 @@
             "schema": {
               "$ref": "#/definitions/V20200201ExportImportedMachinesJob"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -3334,6 +3440,12 @@
             "schema": {
               "$ref": "#/definitions/V20200201ImportMachinesJob"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -3377,6 +3489,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PagedV20200201ImportMachinesJobImportMachinesJobCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3891,7 +4009,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MasterSite"
             }
@@ -3910,12 +4028,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -4161,6 +4283,12 @@
             "schema": {
               "$ref": "#/definitions/SiteErrorSummary"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -4178,7 +4306,7 @@
         "tags": [
           "MasterSitesOperationsStatusController"
         ],
-        "operationId": "MasterSitesOperationsStatusController_VmwareOperationStatus",
+        "operationId": "MasterSitesOperationsStatusController_GetVmwareOperationStatus",
         "description": "A operation status resource belonging to a master site resource.",
         "parameters": [
           {
@@ -4213,14 +4341,20 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "MasterSitesOperationsStatusController_VmwareOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/MasterSitesOperationsStatusController_VmwareOperationStatus_MaximumSet_Gen.json"
+          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MaximumSet_Gen.json"
           },
-          "MasterSitesOperationsStatusController_VmwareOperationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/MasterSitesOperationsStatusController_VmwareOperationStatus_MinimumSet_Gen.json"
+          "MasterSitesOperationsStatusController_GetVmwareOperationStatus_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSitesOperationsStatusController_GetVmwareOperationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -4435,7 +4569,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -4809,7 +4943,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlSite"
             }
@@ -5105,7 +5239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SqlDiscoverySiteDataSourceResource"
             }
@@ -5124,12 +5258,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -5268,18 +5406,28 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -5339,6 +5487,12 @@
             "schema": {
               "$ref": "#/definitions/SiteErrorSummary"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -5356,7 +5510,7 @@
         "tags": [
           "SqlOperationsStatusController"
         ],
-        "operationId": "SqlOperationsStatusController_SqlOperationStatus",
+        "operationId": "SqlOperationsStatusController_GetSqlOperationStatus",
         "description": "Method to get operation status.",
         "parameters": [
           {
@@ -5399,14 +5553,20 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "SqlOperationsStatusController_SqlOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/SqlOperationsStatusController_SqlOperationStatus_MaximumSet_Gen.json"
+          "SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MaximumSet_Gen.json"
           },
-          "SqlOperationsStatusController_SqlOperationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/SqlOperationsStatusController_SqlOperationStatus_MinimumSet_Gen.json"
+          "SqlOperationsStatusController_GetSqlOperationStatus_MinimumSet_Gen": {
+            "$ref": "./examples/SqlOperationsStatusController_GetSqlOperationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -6335,6 +6495,12 @@
             "schema": {
               "$ref": "#/definitions/SqlSiteUsage"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -6575,7 +6741,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WebAppSite"
             }
@@ -6953,7 +7119,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoverySiteDataSource"
             }
@@ -6972,12 +7138,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -7045,18 +7215,28 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -7271,6 +7451,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SiteErrorSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -7923,6 +8109,12 @@
             "schema": {
               "$ref": "#/definitions/WebAppSiteUsage"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -8378,9 +8570,6 @@
               }
             }
           },
-          "204": {
-            "description": "Action completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -8585,9 +8774,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites": {
       "get": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_ListByResourceGroup",
+        "operationId": "ServerSitesController_ListByResourceGroup",
         "description": "List ServerSiteResource resources by resource group",
         "parameters": [
           {
@@ -8618,11 +8807,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ServersController_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_ListByResourceGroup_MaximumSet_Gen.json"
+          "ServerSitesController_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "ServersController_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_ListByResourceGroup_MinimumSet_Gen.json"
+          "ServerSitesController_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -8630,9 +8819,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}": {
       "get": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_Get",
+        "operationId": "ServerSitesController_Get",
         "description": "Get a ServerSiteResource",
         "parameters": [
           {
@@ -8668,19 +8857,19 @@
           }
         },
         "x-ms-examples": {
-          "ServersController_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_Get_MaximumSet_Gen.json"
+          "ServerSitesController_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Get_MaximumSet_Gen.json"
           },
-          "ServersController_Get_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_Get_MinimumSet_Gen.json"
+          "ServerSitesController_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Get_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_Create",
+        "operationId": "ServerSitesController_Create",
         "description": "Create a ServerSiteResource",
         "parameters": [
           {
@@ -8712,7 +8901,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerSiteResource"
             }
@@ -8731,12 +8920,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -8752,19 +8945,19 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ServersController_Create_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_Create_MaximumSet_Gen.json"
+          "ServerSitesController_Create_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Create_MaximumSet_Gen.json"
           },
-          "ServersController_Create_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_Create_MinimumSet_Gen.json"
+          "ServerSitesController_Create_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Create_MinimumSet_Gen.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_Update",
+        "operationId": "ServerSitesController_Update",
         "description": "Update a ServerSiteResource",
         "parameters": [
           {
@@ -8809,19 +9002,19 @@
           }
         },
         "x-ms-examples": {
-          "ServersController_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_Update_MaximumSet_Gen.json"
+          "ServerSitesController_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Update_MaximumSet_Gen.json"
           },
-          "ServersController_Update_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_Update_MinimumSet_Gen.json"
+          "ServerSitesController_Update_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Update_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_Delete",
+        "operationId": "ServerSitesController_Delete",
         "description": "Delete a ServerSiteResource",
         "parameters": [
           {
@@ -8857,11 +9050,11 @@
           }
         },
         "x-ms-examples": {
-          "ServersController_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_Delete_MaximumSet_Gen.json"
+          "ServerSitesController_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Delete_MaximumSet_Gen.json"
           },
-          "ServersController_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_Delete_MinimumSet_Gen.json"
+          "ServerSitesController_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -8946,9 +9139,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/errorSummary": {
       "get": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_GetErrorSummary",
+        "operationId": "ServerSitesController_GetErrorSummary",
         "description": "Get the error summary for a server site.",
         "parameters": [
           {
@@ -8967,6 +9160,13 @@
             "description": "Site name",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
+          },
+          {
+            "name": "applianceName",
+            "in": "query",
+            "required": true,
+            "description": "Appliance Name",
+            "type": "string"
           }
         ],
         "responses": {
@@ -8975,14 +9175,20 @@
             "schema": {
               "$ref": "#/definitions/SiteErrorSummary"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "ServersController_GetErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_GetErrorSummary_MaximumSet_Gen.json"
+          "ServerSitesController_GetErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_GetErrorSummary_MaximumSet_Gen.json"
           },
-          "ServersController_GetErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_GetErrorSummary_MinimumSet_Gen.json"
+          "ServerSitesController_GetErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_GetErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -9015,12 +9221,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -9168,9 +9378,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -9490,6 +9697,12 @@
             "schema": {
               "$ref": "#/definitions/SiteHealthSummaryCollection"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -9656,7 +9869,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerMachineResource"
             }
@@ -9675,12 +9888,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -9801,6 +10018,12 @@
             "schema": {
               "$ref": "#/definitions/ServerMachineResource"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -9816,9 +10039,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_ServerSiteOperationsStatus",
+        "operationId": "ServerSitesController_GetServerSiteOperationsStatus",
         "description": "A operation status resource belonging to a site resource.",
         "parameters": [
           {
@@ -9853,14 +10076,20 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "ServersController_ServerSiteOperationsStatus_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_ServerSiteOperationsStatus_MaximumSet_Gen.json"
+          "ServerSitesController_GetServerSiteOperationsStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_GetServerSiteOperationsStatus_MaximumSet_Gen.json"
           },
-          "ServersController_ServerSiteOperationsStatus_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_ServerSiteOperationsStatus_MinimumSet_Gen.json"
+          "ServerSitesController_GetServerSiteOperationsStatus_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_GetServerSiteOperationsStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -9868,9 +10097,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
       "post": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_RefreshSite",
+        "operationId": "ServerSitesController_RefreshSite",
         "description": "Operation to refresh a site",
         "parameters": [
           {
@@ -9893,26 +10122,36 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ServersController_RefreshSite_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_RefreshSite_MaximumSet_Gen.json"
+          "ServerSitesController_RefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_RefreshSite_MaximumSet_Gen.json"
           },
-          "ServersController_RefreshSite_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_RefreshSite_MinimumSet_Gen.json"
+          "ServerSitesController_RefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_RefreshSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -10137,6 +10376,12 @@
             "schema": {
               "$ref": "#/definitions/ServerSiteUsage"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -10152,9 +10397,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/updateDependencyMapStatus": {
       "post": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_UpdateDependencyMapStatus",
+        "operationId": "ServerSitesController_UpdateDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\r\n            in a site.",
         "parameters": [
           {
@@ -10217,11 +10462,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ServersController_UpdateDependencyMapStatus_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_UpdateDependencyMapStatus_MaximumSet_Gen.json"
+          "ServerSitesController_UpdateDependencyMapStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_UpdateDependencyMapStatus_MaximumSet_Gen.json"
           },
-          "ServersController_UpdateDependencyMapStatus_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_UpdateDependencyMapStatus_MinimumSet_Gen.json"
+          "ServerSitesController_UpdateDependencyMapStatus_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_UpdateDependencyMapStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -10229,9 +10474,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/updateProperties": {
       "post": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_UpdateProperties",
+        "operationId": "ServerSitesController_UpdateProperties",
         "description": "Operation to update custom properties for servers",
         "parameters": [
           {
@@ -10284,11 +10529,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ServersController_UpdateProperties_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_UpdateProperties_MaximumSet_Gen.json"
+          "ServerSitesController_UpdateProperties_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_UpdateProperties_MaximumSet_Gen.json"
           },
-          "ServersController_UpdateProperties_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_UpdateProperties_MinimumSet_Gen.json"
+          "ServerSitesController_UpdateProperties_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_UpdateProperties_MinimumSet_Gen.json"
           }
         }
       }
@@ -10296,9 +10541,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/usage": {
       "get": {
         "tags": [
-          "ServersController"
+          "ServerSitesController"
         ],
-        "operationId": "ServersController_GetUsage",
+        "operationId": "ServerSitesController_GetUsage",
         "description": "Get a serve site usage.",
         "parameters": [
           {
@@ -10325,14 +10570,20 @@
             "schema": {
               "$ref": "#/definitions/ServerSiteUsageResponse"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "ServersController_GetUsage_MaximumSet_Gen": {
-            "$ref": "./examples/ServersController_GetUsage_MaximumSet_Gen.json"
+          "ServerSitesController_GetUsage_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_GetUsage_MaximumSet_Gen.json"
           },
-          "ServersController_GetUsage_MinimumSet_Gen": {
-            "$ref": "./examples/ServersController_GetUsage_MinimumSet_Gen.json"
+          "ServerSitesController_GetUsage_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_GetUsage_MinimumSet_Gen.json"
           }
         }
       }
@@ -10516,7 +10767,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/VmwareSite"
             }
@@ -10532,6 +10783,12 @@
             },
             "schema": {
               "$ref": "#/definitions/VmwareSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -10707,12 +10964,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           }
@@ -10857,9 +11118,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -11349,6 +11607,12 @@
             "schema": {
               "$ref": "#/definitions/SiteHealthSummaryCollection"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -11607,6 +11871,12 @@
             "schema": {
               "$ref": "#/definitions/MachineResource"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -11659,6 +11929,12 @@
             "schema": {
               "$ref": "#/definitions/VmwareMachineSoftwareInventory"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -11707,18 +11983,28 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -11767,18 +12053,28 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -11796,7 +12092,7 @@
         "tags": [
           "VmwareOperationsStatus"
         ],
-        "operationId": "VmwareOperationsStatus_VmwareOperationStatus",
+        "operationId": "VmwareOperationsStatus_GetVmwareOperationStatus",
         "description": "A operation status resource belonging to a site resource.",
         "parameters": [
           {
@@ -11831,14 +12127,20 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "VmwareOperationsStatus_VmwareOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareOperationsStatus_VmwareOperationStatus_MaximumSet_Gen.json"
+          "VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MaximumSet_Gen.json"
           },
-          "VmwareOperationsStatus_VmwareOperationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareOperationsStatus_VmwareOperationStatus_MinimumSet_Gen.json"
+          "VmwareOperationsStatus_GetVmwareOperationStatus_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareOperationsStatus_GetVmwareOperationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -11871,18 +12173,28 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -12115,6 +12427,12 @@
             "schema": {
               "$ref": "#/definitions/VmwareSiteUsage"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -12164,12 +12482,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           }
@@ -12286,6 +12608,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/VmwareSiteUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -12460,7 +12788,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "ARM update operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Vcenter"
             }
@@ -12479,12 +12807,16 @@
             }
           },
           "202": {
-            "description": "Accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
