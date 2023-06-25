@@ -6207,6 +6207,9 @@
       "properties": {
         "keda": {
           "$ref": "#/definitions/ManagedClusterWorkloadAutoScalerProfileKeda"
+        },
+        "verticalPodAutoscaler": {
+          "$ref": "#/definitions/ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler"
         }
       }
     },
@@ -6217,6 +6220,20 @@
         "enabled": {
           "type": "boolean",
           "description": "Whether to enable KEDA."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler": {
+      "type": "object",
+      "description": "VPA (Vertical Pod Autoscaler) settings for the workload auto-scaler profile.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable VPA. Default value is false.",
+          "default": false
         }
       },
       "required": [
