@@ -28,16 +28,20 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2022-09-preview
+tag: package-2023-04
+csharp-sdks-folder: ./Generated/CSharp
+python-sdks-folder: ./Generated/Python
+go-sdk-folder: ./Generated/Golang
+
 license-header: MICROSOFT_MIT
 ```
 
 ``` yaml $(package-passivestamp)
-tag: package-passivestamp-2021-11-15
+tag: package-passivestamp-2023-01-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-2022-09-preview
+tag: package-2023-04
 ```
 
 ### Validations
@@ -52,14 +56,67 @@ message-format: json
 ```
 
 
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-04-01/bms.json
+```
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-02-01/bms.json
+```
+### Tag: package-passivestamp-2023-01-15
+
+These settings apply only when `--tag=package-passivestamp-2023-01-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-passivestamp-2023-01-15'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-01-15/bms.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-01-01/bms.json
+```
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-10-01/bms.json
+```
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.RecoveryServices/preview/2022-09-30-preview/bms.json
+```
+
 ### Tag: package-2022-09-preview
 
 These settings apply only when `--tag=package-2022-09-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09-preview'
+``` yaml $(tag) == 'package-2022-09-preview'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-09-01-preview/bms.json
 ```
+
 ### Tag: package-2022-06-01-preview
 
 These settings apply only when `--tag=package-2022-06-01-preview` is specified on the command line.
@@ -67,6 +124,15 @@ These settings apply only when `--tag=package-2022-06-01-preview` is specified o
 ``` yaml $(tag) == 'package-2022-06-01-preview'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-06-01-preview/bms.json
+```
+
+### Tag: package-2022-04
+
+These settings apply only when `--tag=package-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04'
+input-file:
+  - Microsoft.RecoveryServices/stable/2022-04-01/bms.json
 ```
 
 ### Tag: package-2022-03
@@ -324,7 +390,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

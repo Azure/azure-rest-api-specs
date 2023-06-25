@@ -26,7 +26,16 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-06
+tag: package-2023-06-preview
+```
+
+### Tag: package-2023-06-preview
+
+These settings apply only when `--tag=package-2023-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-preview'
+input-file:
+- Microsoft.EventGrid/preview/2023-06-01-preview/EventGrid.json
 ```
 
 ### Tag: package-2022-06
@@ -218,7 +227,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
