@@ -33,7 +33,11 @@
           },
           "transparentHugePageEnabled": "always",
           "transparentHugePageDefrag": "madvise",
-          "swapFileSizeMB": 1500
+          "swapFileSizeMB": 1500,
+          "ulimits": {
+            "maxLockedMemory": "infinity",
+            "noFile": "1000"
+          }
         }
       }
     }
@@ -74,7 +78,11 @@
             },
             "transparentHugePageEnabled": "always",
             "transparentHugePageDefrag": "madvise",
-            "swapFileSizeMB": 1500
+            "swapFileSizeMB": 1500,
+            "ulimits": {
+              "noFile": "1000",
+              "maxLockedMemory": "infinity"
+            }
           }
         }
       }
