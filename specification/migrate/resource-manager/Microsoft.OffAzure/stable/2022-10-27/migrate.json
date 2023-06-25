@@ -194,63 +194,6 @@
     }
   ],
   "paths": {
-    "/errorSummary/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}": {
-      "get": {
-        "tags": [
-          "Sites"
-        ],
-        "operationId": "Sites_GetErrorSummary",
-        "description": "Method to get site error summary.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "type": "string"
-          },
-          {
-            "name": "applianceName",
-            "in": "query",
-            "required": true,
-            "description": "Appliance Name",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SiteErrorSummary"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Sites_GetErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/Sites_GetErrorSummary_MaximumSet_Gen.json"
-          },
-          "Sites_GetErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/Sites_GetErrorSummary_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.OffAzure/operations": {
       "get": {
         "tags": [
@@ -2705,12 +2648,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -10517,12 +10464,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -10945,6 +10896,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/errorSummary": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_GetErrorSummary",
+        "description": "Method to get site error summary.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "applianceName",
+            "in": "query",
+            "required": true,
+            "description": "Appliance Name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteErrorSummary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sites_GetErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_GetErrorSummary_MaximumSet_Gen.json"
+          },
+          "Sites_GetErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_GetErrorSummary_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/exportApplications": {
       "post": {
         "tags": [
@@ -11184,12 +11192,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -12568,12 +12580,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "type": "integer",
                 "format": "int32"
+              },
+              "location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
