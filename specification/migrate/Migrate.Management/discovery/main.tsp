@@ -116,6 +116,7 @@ interface HypervClusterController {
   @doc("Method to put a Hyper-V cluster.")  
   createCluster is ArmResourceCreateOrUpdateAsyncCustom<HypervCluster>;
 
+  //added in Swagger
   @added(Versions.v2022_10_27)  
   delete is ArmResourceDeleteSync<HypervCluster>;
   
@@ -140,8 +141,51 @@ interface Sites {
   get is ArmResourceRead<VmwareSite>;
 
   @added(Versions.v2018_05_01_preview)
-  
   delete is ArmResourceDeleteSync<VmwareSite>;
+  
+  @added(Versions.v2018_05_01_preview)  
+  create is ArmResourceCreateOrUpdateSyncCustom<VmwareSite>;
+
+  // @armResourceUpdate(InnerError)
+  // @patch
+  // @added(Versions.v2018_05_01_preview)
+  // 
+  // @doc("Update a VmwareSite")
+  // updateVmwareSite(
+  //   ...ResourceInstanceParameters<VmwareSite>,
+
+  @added(Versions.v2018_05_01_preview)
+  
+  @doc("Update a VmwareSite")
+  update is ArmResourcePatchSync<
+  VmwareSite,
+  SiteProperties
+  >;
+
+  //   @doc(" body with updated properties.")
+  //   @body
+  //   body: VmwareSite
+  // ): ArmResponse<VmwareSite>;
+
+  @added(Versions.v2022_10_27)
+  @summary("Get all vmware sites.")
+  @doc("Get all the vmware sites in the subscription.")
+  
+  listBySubscription is ArmListBySubscription<VmwareSite>;
+
+  @added(Versions.v2020_01_01)
+  @summary("Get all vmware sites.")
+  @doc("Get all the vmware sites in the resource group.")
+  listByParent is ArmResourceListByParent<VmwareSite>;
+
+  @doc("Method to get site health summary.")
+  @armResourceAction(InnerError)
+  @added(Versions.v2018_05_01_preview)
+  @post
+  
+  listHealthSummary(
+    ...ResourceInstanceParameters<VmwareSite>
+  ): ArmResponse<SiteHealthSummaryCollection> |ErrorResponse;
 
   @doc("Method to refresh a site.")
   @added(Versions.v2018_05_01_preview)
@@ -196,7 +240,7 @@ interface Sites {
     @doc("filter query")
     @query
     filter?: string
-  ): ArmAcceptedResponse;
+  ): ArmAcceptedResponse | ErrorResponse;
 
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_01_01)
@@ -326,54 +370,6 @@ interface DependencyMapController {
     VmwareSite,
     DependencyMapServiceMapextensionsExportDependenciesRequest
   >;
-}
-
-@armResourceOperations
-interface VmwareSites {
-  @added(Versions.v2018_05_01_preview)
-  
-  create is ArmResourceCreateOrUpdateSyncCustom<VmwareSite>;
-
-  // @armResourceUpdate(InnerError)
-  // @patch
-  // @added(Versions.v2018_05_01_preview)
-  // 
-  // @doc("Update a VmwareSite")
-  // updateVmwareSite(
-  //   ...ResourceInstanceParameters<VmwareSite>,
-
-  @added(Versions.v2018_05_01_preview)
-  
-  @doc("Update a VmwareSite")
-  update is ArmResourcePatchSync<
-  VmwareSite,
-  SiteProperties
-  >;
-
-  //   @doc(" body with updated properties.")
-  //   @body
-  //   body: VmwareSite
-  // ): ArmResponse<VmwareSite>;
-
-  @added(Versions.v2022_10_27)
-  @summary("Get all vmware sites.")
-  @doc("Get all the vmware sites in the subscription.")
-  
-  listBySubscription is ArmListBySubscription<VmwareSite>;
-
-  @added(Versions.v2020_01_01)
-  @summary("Get all vmware sites.")
-  @doc("Get all the vmware sites in the resource group.")
-  listByParent is ArmResourceListByParent<VmwareSite>;
-
-  @doc("Method to get site health summary.")
-  @armResourceAction(InnerError)
-  @added(Versions.v2018_05_01_preview)
-  @post
-  
-  listHealthSummary(
-    ...ResourceInstanceParameters<VmwareSite>
-  ): ArmResponse<SiteHealthSummaryCollection> |ErrorResponse;
 }
 
 //#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -556,7 +552,7 @@ model VmwareJobResource is ProxyResource<JobProperties> {
 
 @armResourceOperations
 @added(Versions.v2018_05_01_preview)
-interface JobsController {
+interface HypervJobsController {
   
   get is ArmResourceRead<VmwareJobResource>;
   
@@ -793,6 +789,7 @@ interface HypervHostController {
   
   create is ArmResourceCreateOrUpdateAsyncCustom<HypervHost>;
 
+  // added in swagger
   @added(Versions.v2022_10_27)
   delete is ArmResourceDeleteSync<HypervHost>;
 
@@ -826,12 +823,14 @@ model HypervMachine is ProxyResource<HypervMachineProperties> {
 
 @armResourceOperations
 interface HypervMachinesController {
+  // not in swashbuckle generated swagger
   @added(Versions.v2018_05_01_preview)
   
   get is ArmResourceRead<HypervMachine>;
 
   @added(Versions.v2022_10_27)
   
+  // update machine properties is there not this 
   update is ArmResourcePatchSync<
   HypervMachine,
   HypervMachineProperties
@@ -869,6 +868,7 @@ interface HypervMachinesController {
   @armResourceRead(InnerError)
   @added(Versions.v2020_08_01_preview)
   
+  //Not there
   @get
   getApplications(
     ...ResourceInstanceParameters<HypervMachine>
@@ -880,6 +880,7 @@ interface HypervMachinesController {
   @added(Versions.v2022_10_27)
   @segment("softwareInventory/default")
   
+  //Not there 
   getMachineSoftwareInventory(
     ...ResourceInstanceParameters<HypervMachine>
   ): ArmResponse<HypervVmSoftwareInventory> | ErrorResponse;
@@ -1289,7 +1290,7 @@ interface ImportJobsController {
     @doc("Job body with updated properties.")
     @body
     body: V20200201DeleteImportMachinesJob
-  ): ArmResponse<V20200201DeleteImportMachinesJob>;
+  ): ArmResponse<V20200201DeleteImportMachinesJob> | ErrorResponse;
 }
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("An machine resource belonging to a site resource.")

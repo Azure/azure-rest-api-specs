@@ -61,9 +61,6 @@
       "name": "DependencyMapController"
     },
     {
-      "name": "VmwareSites"
-    },
-    {
       "name": "MachinesController"
     },
     {
@@ -79,7 +76,7 @@
       "name": "VmwareHostController"
     },
     {
-      "name": "JobsController"
+      "name": "HypervJobsController"
     },
     {
       "name": "HypervDependencyMapController"
@@ -466,9 +463,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/vmwareSites": {
       "get": {
         "tags": [
-          "VmwareSites"
+          "Sites"
         ],
-        "operationId": "VmwareSites_ListBySubscription",
+        "operationId": "Sites_ListBySubscription",
         "summary": "Get all vmware sites.",
         "description": "Get all the vmware sites in the subscription.",
         "parameters": [
@@ -497,11 +494,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VmwareSites_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ListBySubscription_MaximumSet_Gen.json"
+          "Sites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_ListBySubscription_MaximumSet_Gen.json"
           },
-          "VmwareSites_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ListBySubscription_MinimumSet_Gen.json"
+          "Sites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_ListBySubscription_MinimumSet_Gen.json"
           }
         }
       }
@@ -3276,6 +3273,12 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/V20200201DeleteImportMachinesJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -9236,6 +9239,12 @@
           },
           "204": {
             "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10591,9 +10600,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites": {
       "get": {
         "tags": [
-          "VmwareSites"
+          "Sites"
         ],
-        "operationId": "VmwareSites_ListByResourceGroup",
+        "operationId": "Sites_ListByResourceGroup",
         "summary": "Get all vmware sites.",
         "description": "Get all the vmware sites in the resource group.",
         "parameters": [
@@ -10625,11 +10634,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VmwareSites_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ListByResourceGroup_MaximumSet_Gen.json"
+          "Sites_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_ListByResourceGroup_MaximumSet_Gen.json"
           },
-          "VmwareSites_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ListByResourceGroup_MinimumSet_Gen.json"
+          "Sites_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_ListByResourceGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -10733,9 +10742,9 @@
       },
       "put": {
         "tags": [
-          "VmwareSites"
+          "Sites"
         ],
-        "operationId": "VmwareSites_Create",
+        "operationId": "Sites_Create",
         "description": "Create a VmwareSite",
         "parameters": [
           {
@@ -10793,19 +10802,19 @@
           }
         },
         "x-ms-examples": {
-          "VmwareSites_Create_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_Create_MaximumSet_Gen.json"
+          "Sites_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_Create_MaximumSet_Gen.json"
           },
-          "VmwareSites_Create_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_Create_MinimumSet_Gen.json"
+          "Sites_Create_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_Create_MinimumSet_Gen.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "VmwareSites"
+          "Sites"
         ],
-        "operationId": "VmwareSites_Update",
+        "operationId": "Sites_Update",
         "description": "Update a VmwareSite",
         "parameters": [
           {
@@ -10850,11 +10859,11 @@
           }
         },
         "x-ms-examples": {
-          "VmwareSites_Update_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_Update_MaximumSet_Gen.json"
+          "Sites_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_Update_MaximumSet_Gen.json"
           },
-          "VmwareSites_Update_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_Update_MinimumSet_Gen.json"
+          "Sites_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_Update_MinimumSet_Gen.json"
           }
         }
       }
@@ -11183,6 +11192,12 @@
                 "format": "int32"
               }
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -11467,9 +11482,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/jobs": {
       "get": {
         "tags": [
-          "JobsController"
+          "HypervJobsController"
         ],
-        "operationId": "JobsController_ListByVmwareSite",
+        "operationId": "HypervJobsController_ListByVmwareSite",
         "description": "List VmwareJobResource resources by VmwareSite",
         "parameters": [
           {
@@ -11508,11 +11523,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "JobsController_ListByVmwareSite_MaximumSet_Gen": {
-            "$ref": "./examples/JobsController_ListByVmwareSite_MaximumSet_Gen.json"
+          "HypervJobsController_ListByVmwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/HypervJobsController_ListByVmwareSite_MaximumSet_Gen.json"
           },
-          "JobsController_ListByVmwareSite_MinimumSet_Gen": {
-            "$ref": "./examples/JobsController_ListByVmwareSite_MinimumSet_Gen.json"
+          "HypervJobsController_ListByVmwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/HypervJobsController_ListByVmwareSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -11520,9 +11535,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/jobs/{jobName}": {
       "get": {
         "tags": [
-          "JobsController"
+          "HypervJobsController"
         ],
-        "operationId": "JobsController_Get",
+        "operationId": "HypervJobsController_Get",
         "description": "Get a VmwareJobResource",
         "parameters": [
           {
@@ -11566,11 +11581,11 @@
           }
         },
         "x-ms-examples": {
-          "JobsController_Get_MaximumSet_Gen": {
-            "$ref": "./examples/JobsController_Get_MaximumSet_Gen.json"
+          "HypervJobsController_Get_MaximumSet_Gen": {
+            "$ref": "./examples/HypervJobsController_Get_MaximumSet_Gen.json"
           },
-          "JobsController_Get_MinimumSet_Gen": {
-            "$ref": "./examples/JobsController_Get_MinimumSet_Gen.json"
+          "HypervJobsController_Get_MinimumSet_Gen": {
+            "$ref": "./examples/HypervJobsController_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -11578,9 +11593,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/listHealthSummary": {
       "post": {
         "tags": [
-          "VmwareSites"
+          "Sites"
         ],
-        "operationId": "VmwareSites_ListHealthSummary",
+        "operationId": "Sites_ListHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -11616,11 +11631,11 @@
           }
         },
         "x-ms-examples": {
-          "VmwareSites_ListHealthSummary_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ListHealthSummary_MaximumSet_Gen.json"
+          "Sites_ListHealthSummary_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_ListHealthSummary_MaximumSet_Gen.json"
           },
-          "VmwareSites_ListHealthSummary_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ListHealthSummary_MinimumSet_Gen.json"
+          "Sites_ListHealthSummary_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_ListHealthSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -12493,6 +12508,12 @@
                 "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },

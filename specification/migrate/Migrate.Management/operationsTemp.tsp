@@ -47,7 +47,7 @@ op ArmResourceActionNoContentNoBodyAsync<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
-): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponseWithLocationHeader ;
+): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponseWithLocationHeader | ErrorResponse;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
@@ -149,7 +149,7 @@ op ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
   @doc("The content of the action request")
   @body
   updateMachineDepMapStatus: TRequest
-):  ArmAcceptedResponseWithLocationHeader ;
+):  ArmAcceptedResponseWithLocationHeader | ErrorResponse;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
