@@ -77,7 +77,9 @@
 				"x-ms-pageable": {
 					"nextLinkName": "nextLink"
 				}
-			},
+			}
+		},
+		"/{scope}/providers/Microsoft.Security/integrations/metadata": {
 			"get": {
 				"x-ms-examples": {
 					"Try to get Service Now metatdata by subscription scope": {
@@ -129,7 +131,7 @@
 			"get": {
 				"x-ms-examples": {
 					"Get an integration over subscription scope": {
-						"$ref": "./examples/Integrations/Integration_example.json"
+						"$ref": "./examples/Integrations/GetIntegration_example.json"
 					},
 					"Get an integration over security connector scope": {
 						"$ref": "./examples/Integrations/GetSecurityConnectorIntegration_example.json"
@@ -159,52 +161,6 @@
 						"description": "OK",
 						"schema": {
 							"$ref": "#/definitions/Integration"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed",
-						"schema": {
-							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-						}
-					}
-				}
-			},
-			"get": {
-				"x-ms-examples": {
-					"Get integration user names over subscription scope": {
-						"$ref": "./examples/Integrations/IntegrationUserNames_example.json"
-					},
-					"Get integration user names over security connector scope": {
-						"$ref": "./examples/Integrations/GetSecurityConnectorIntegrationUserNames_example.json"
-					},
-					"Get integration user names over management group scope": {
-						"$ref": "./examples/Integrations/GetManagementGroupIntegrationUserNames_example.json"
-					}
-				},
-				"tags": [
-					"Integrations"
-				],
-				"description": "Get user integration names for the requested scope by integrationId",
-				"operationId": "IntegrationUserNames_List",
-				"parameters": [
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-					},
-					{
-						"$ref": "#/parameters/Scope"
-					},
-					{
-						"$ref": "#/parameters/IntegrationId"
-					},
-					{
-						"$ref": "#/parameters/NamePrefixBody"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/IntegrationUserNames"
 						}
 					},
 					"default": {
@@ -318,6 +274,54 @@
 				"x-ms-long-running-operation": true,
 				"x-ms-long-running-operation-options": {
 					"final-state-via": "location"
+				}
+			}
+		},
+		"/{scope}/providers/Microsoft.Security/integrations/{integrationId}/users": {
+			"get": {
+				"x-ms-examples": {
+					"Get integration user names over subscription scope": {
+						"$ref": "./examples/Integrations/IntegrationUserNames_example.json"
+					},
+					"Get integration user names over security connector scope": {
+						"$ref": "./examples/Integrations/GetSecurityConnectorIntegrationUserNames_example.json"
+					},
+					"Get integration user names over management group scope": {
+						"$ref": "./examples/Integrations/GetManagementGroupIntegrationUserNames_example.json"
+					}
+				},
+				"tags": [
+					"Integrations"
+				],
+				"description": "Get user integration names for the requested scope by integrationId",
+				"operationId": "IntegrationUserNames_List",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "#/parameters/Scope"
+					},
+					{
+						"$ref": "#/parameters/IntegrationId"
+					},
+					{
+						"$ref": "#/parameters/NamePrefixBody"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IntegrationUserNames"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
 				}
 			}
 		}
