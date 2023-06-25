@@ -1168,6 +1168,20 @@
         }
       }
     },
+    "ClusterPrometheusProfile": {
+      "type": "object",
+      "description": "Cluster Prometheus profile.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Prometheus for cluster or not.",
+          "default": false
+        }
+      }
+    },
     "IdentityProfile": {
       "type": "object",
       "description": "Identity Profile with details of an MSI.",
@@ -1436,6 +1450,9 @@
         },
         "logAnalyticsProfile": {
           "$ref": "#/definitions/ClusterLogAnalyticsProfile"
+        },
+        "prometheusProfile": {
+          "$ref": "#/definitions/ClusterPrometheusProfile"
         },
         "sshProfile": {
           "$ref": "#/definitions/SshProfile"
