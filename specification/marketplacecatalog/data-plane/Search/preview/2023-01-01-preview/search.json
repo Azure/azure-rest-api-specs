@@ -1993,7 +1993,11 @@
       "properties": {
         "suggestionType": {
           "description": "The suggestion type",
-          "$ref": "#/definitions/SuggestionType"
+          "allOf": [
+            {
+              "$ref": "#/definitions/SuggestionType"
+            }
+          ]
         },
         "displayText": {
           "type": "string",
