@@ -22,6 +22,10 @@ directive:
     where: $.definitions.Resource.properties.resourcegroup
     transform: >
       $["readOnly"] = true
+  - from: iotdps.json
+    where: $.definitions.Resource.properties.subscriptionid
+    transform: >
+      $["readOnly"] = true
 ```
 
 ## Tag: package-2021-10 and java
