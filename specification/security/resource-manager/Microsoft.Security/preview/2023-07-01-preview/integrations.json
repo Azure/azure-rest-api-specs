@@ -1,0 +1,651 @@
+{
+"swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+	"paths": {
+		"/{scope}/providers/Microsoft.Security/integrations": {
+			"get": {
+				"x-ms-examples": {
+					"List integrations by subscription scope": {
+						"$ref": "./examples/integrations/ListBySubscriptionIntegrations_example.json"
+					},
+					"List integrations by security connector scope": {
+						"$ref": "./examples/integrations/ListBySecurityConnectorIntegrations_example.json"
+					},
+					"List integrations by management group scope": {
+						"$ref": "./examples/integrations/ListByManagementGroupIntegrations_example.json"
+					}
+				},
+				"tags": [
+					"Integrations"
+				],
+				"description": "Get a list of all relevant integrations over a scope",
+				"operationId": "Integrations_List",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "#/parameters/Scope"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IntegrationsList"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			},
+			"get": {
+				"x-ms-examples": {
+					"Try to get Service Now metatdata by subscription scope": {
+						"$ref": "./examples/integrations/TryGetServiceNowMetatdataBySubscription_example.json"
+					},
+					"Try to get Service Now metatdata by security connector scope": {
+						"$ref": "./examples/integrations/TryGetServiceNowMetatdataBySecurityConnector_example.json"
+					},
+					"Try to get Service Now metatdata by management group scope": {
+						"$ref": "./examples/integrations/TryGetServiceNowMetatdataByManagementGroup_example.json"
+					}
+				},
+				"tags": [
+					"TryGetServiceNowMetatdata"
+				],
+				"description": "Try to get Service Now metatdata over a scope",
+				"operationId": "ServiceNowMetatdata_Get",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "#/parameters/Scope"
+					},
+					{
+						"$ref": "#/parameters/ServiceNowAuthonticationDetailsBody"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ServiceNowMetadataResponse"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		},
+		"/{scope}/providers/Microsoft.Security/integrations/{integrationId}": {
+			"get": {
+				"x-ms-examples": {
+					"Get an integration over subscription scope": {
+						"$ref": "./examples/Integrations/Integration_example.json"
+					},
+					"Get an integration over security connector scope": {
+						"$ref": "./examples/Integrations/GetSecurityConnectorIntegration_example.json"
+					},
+					"Get an integration over management group scope": {
+						"$ref": "./examples/Integrations/GetManagementGroupIntegration_example.json"
+					}
+				},
+				"tags": [
+					"Integrations"
+				],
+				"description": "Get a specific integration for the requested scope by integrationId",
+				"operationId": "Integrations_Get",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "#/parameters/Scope"
+					},
+					{
+						"$ref": "#/parameters/IntegrationId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Integration"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				}
+			},
+			"get": {
+				"x-ms-examples": {
+					"Get integration user names over subscription scope": {
+						"$ref": "./examples/Integrations/IntegrationUserNames_example.json"
+					},
+					"Get integration user names over security connector scope": {
+						"$ref": "./examples/Integrations/GetSecurityConnectorIntegrationUserNames_example.json"
+					},
+					"Get integration user names over management group scope": {
+						"$ref": "./examples/Integrations/GetManagementGroupIntegrationUserNames_example.json"
+					}
+				},
+				"tags": [
+					"Integrations"
+				],
+				"description": "Get user integration names for the requested scope by integrationId",
+				"operationId": "IntegrationUserNames_List",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "#/parameters/Scope"
+					},
+					{
+						"$ref": "#/parameters/IntegrationId"
+					},
+					{
+						"$ref": "#/parameters/NamePrefixBody"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/IntegrationUserNames"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				}
+			},
+			"put": {
+				"x-ms-examples": {
+					"Create or update integration over subscription scope": {
+						"$ref": "./examples/Integrations/PutIntegration_example.json"
+					},
+					"Create or update integration over security connector scope": {
+						"$ref": "./examples/Integrations/PutSecurityConnectorIntegration_example.json"
+					},
+					"Create or update integration over management group scope": {
+						"$ref": "./examples/Integrations/PutManagementGroupIntegration_example.json"
+					}
+				},
+				"tags": [
+					"Integrations"
+				],
+				"description": "Creates or updates an integration over a given scope",
+				"operationId": "Integrations_CreateOrUpdate",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "#/parameters/Scope"
+					},
+					{
+						"$ref": "#/parameters/IntegrationId"
+					},
+					{
+						"$ref": "#/parameters/IntegrationBody"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Integration"
+						}
+					},
+					"200": {
+						"description": "OK - Updated",
+						"schema": {
+							"$ref": "#/definitions/Integration"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				}
+			},
+			"delete": {
+				"x-ms-examples": {
+					"Delete an integration over subscription scope": {
+						"$ref": "./examples/Integrations/DeleteIntegration_example.json"
+					},
+					"Delete an integration over security connector scope": {
+						"$ref": "./examples/Integrations/DeleteSecurityConnectorIntegration_example.json"
+					},
+					"Delete an integration over management group scope": {
+						"$ref": "./examples/Integrations/DeleteManagementGroupIntegration_example.json"
+					}
+				},
+				"tags": [
+					"Integrations"
+				],
+				"description": "Delete an integration over a given scope",
+				"operationId": "Integrations_Delete",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "#/parameters/Scope"
+					},
+					{
+						"$ref": "#/parameters/IntegrationId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK - Integration was deleted"
+					},
+					"202": {
+						"description": "Accepted - The operation still in progress",
+						"headers": {
+							"location": {
+								"type": "string",
+								"description": "Location URL for the deletion status"
+							}
+						}
+					},
+					"204": {
+						"description": "No Content - Integration does not exist"
+					},
+					"default": {
+						"description": "Error response describing why the operation failed"
+					}
+				},
+				"x-ms-long-running-operation": true,
+				"x-ms-long-running-operation-options": {
+					"final-state-via": "location"
+				}
+			}
+		}
+	},
+	"definitions": {
+		"IntegrationsList": {
+			"type": "object",
+			"description": "Page of a integrations list",
+			"properties": {
+				"value": {
+					"description": "Collection of integrations in this page",
+					"readOnly": true,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Integration"
+					}
+				},
+				"nextLink": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The URI to fetch the next page"
+				}
+			}
+		},
+		"Integration": {
+			"type": "object",
+			"description": "Integration over a given scope",
+			"properties": {
+				"properties": {
+					"description": "Properties of an integration",
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/IntegrationProperties"
+				}
+			},
+			"allOf": [
+				{
+					"$ref": "../../../common/v1/types.json#/definitions/Resource"
+				}
+			]
+		},
+		"IntegrationProperties": {
+			"type": "object",
+			"description": "Describes properties of an integration",
+			"properties": {
+				"tenantId": {
+					"description": "The tenantId (GUID)",
+					"readOnly": true,
+					"type": "string"
+				},
+				"displayName": {
+					"description": "Display name of the integration",
+					"type": "string"
+				},
+				"isDisabled": {
+					"description": "Defines whether the integration is active/inactive",
+					"type": "boolean"
+				},
+				"integrationType": {
+					"type": "string",
+					"description": "The integration platform type, defines the source of the integration e.g. ServiceNow",
+					"enum": [
+						"ServiceNow"
+					],
+					"x-ms-enum": {
+						"name": "IntegrationType",
+						"modelAsString": true,
+						"values": [
+							{
+								"value": "ServiceNow",
+								"description": "The source of the integration type definition is ServiceNow"
+							}
+						]
+					}
+				},
+				"integrationRootDetails": {
+					"$ref": "#/definitions/IntegrationRootDetails"
+				},
+				"excludedScopes": {
+					"type": "array",
+					"description": "Excluded scopes, filter out the descendants of the scope (on management scopes)",
+					"items": {
+						"description": "The excluded scope",
+						"type": "string"
+					},
+					"x-ms-identifiers": []
+				},
+				"includeMemberScopes": {
+					"type": "boolean",
+					"description": "Defines whether the integration is management scope integration (master connector as a single scope or management scope)"
+				},
+				"metadata": {
+					"$ref": "#/definitions/IntegrationMetadata"
+				},
+				"integrationAdditionalData": {
+					"$ref": "#/definitions/IntegrationAdditionalData"
+				}
+			},
+			"required": [
+				"displayName",
+				"integrationType",
+				"sourceResourceType"
+			]
+		},
+		"IntegrationRootDetails": {
+			"type": "object",
+			"description": "The integration root details",
+			"properties": {
+				"ResourceId": {
+					"description": "The integration root resource Id",
+					"type": "string",
+					"readOnly": true
+				},
+				"Distance": {
+					"description": "The number of nodes between integration and the root integration resource",
+					"type": "number",
+					"format": "date-time",
+					"readOnly": true
+				}
+			}
+		},
+		"IntegrationMetadata": {
+			"type": "object",
+			"description": "The integration metadata",
+			"properties": {
+				"createdBy": {
+					"description": "Integration Created by object id (GUID)",
+					"type": "string",
+					"readOnly": true
+				},
+				"createdOn": {
+					"description": "Integration creation date",
+					"type": "string",
+					"format": "date-time",
+					"readOnly": true
+				},
+				"updatedBy": {
+					"description": "Integration last updated by object id (GUID)",
+					"type": "string",
+					"readOnly": true
+				},
+				"updatedOn": {
+					"description": "Integration last update date",
+					"type": "string",
+					"format": "date-time",
+					"readOnly": true
+				}
+			}
+		},
+		"IntegrationAdditionalData": {
+			"type": "object",
+			"description": "The integration additional data (abstract)",
+			"discriminator": "integrationPlatform",
+			"x-abstract": true
+		},
+		"ServiceNowAdditionalData": {
+			"description": "Service Now specific additional data",
+			"allOf": [
+				{
+					"$ref": "#/definitions/IntegrationAdditionalData"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"instanceUrl": {
+							"description": "Integration creation date",
+							"type": "string",
+							"format": "date-time",
+							"readOnly": true
+						},
+						"clientId": {
+							"description": "Integration creation date",
+							"type": "string",
+							"format": "date-time",
+							"readOnly": true
+						},
+						"clientSecret": {
+							"description": "Integration creation date",
+							"type": "string",
+							"format": "date-time",
+							"readOnly": true
+						},
+						"refreshToken": {
+							"description": "Integration creation date",
+							"type": "string",
+							"format": "date-time",
+							"readOnly": true
+						},
+						"tableMetadata": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ServiceNowTableMetadata"
+							}
+						}
+					}
+				}
+			],
+			"discriminator": {
+				"propertyName": "integrationPlatform",
+				"mapping": {
+					"ServiceNowAdditionalData": "#/definitions/ServiceNowAdditionalData"
+				}
+			}
+		},
+		"ServiceNowAuthonticationDetails": {
+			"description": "Service Now authentication details",
+			"type": "object",
+			"properties": {
+				"userName": {
+					"type": "string",
+					"description": "The integration user name"
+				},
+				"password": {
+					"type": "string",
+					"description": "The integration user password"
+				},
+				"clientId": {
+					"type": "string",
+					"description": "The integration client id"
+				},
+				"clientSecret": {
+					"type": "string",
+					"description": "The integration client secret"
+				},
+				"instanceUrl": {
+					"type": "string",
+					"description": "The integration instance url"
+				}
+			}
+		},
+		"ServiceNowMetadataResponse": {
+			"description": "Describes the Service Now authentication response and if successfull, contains tables metadata reponse",
+			"type": "object",
+			"properties": {
+				"authonticationSecceeded": {
+					"type": "boolean",
+					"description": "Defines whether the Service Now authentication succeeded or not"
+				},
+				"errorType": {
+					"type": "string",
+					"description": "Describes the authentication error type - empty string if authentication succeeded"
+				},
+				"errorDescription": {
+					"type": "string",
+					"description": "Describes the authentication error - empty string if authentication succeeded"
+				},
+				"serviceNowTablesMetadata": {
+					"type": "array",
+					"description": "Describes a collection of tables cloumns, each item contains column table name an column details",
+					"items": {
+						"$ref": "#/definitions/ServiceNowTableMetadata"
+					}
+				}
+			}
+		},
+		"ServiceNowTableMetadata": {
+			"description": "Service Now table name and column metadata",
+			"type": "object",
+			"properties": {
+				"table": {
+					"type": "string",
+					"description": "The Service Now table name"
+				},
+				"displayName": {
+					"type": "string",
+					"description": "The Service Now column name"
+				},
+				"serviceNowKey": {
+					"type": "string",
+					"description": "The Service Now cloumn key"
+				},
+				"isMandatory": {
+					"type": "boolean",
+					"description": "Defines whether the cloumn is mandatory or not"
+				}
+			}
+		},
+		"IntegrationUserNames": {
+			"type": "array",
+			"description": "User names from integration platform ",
+			"items": {
+				"type": "string"
+			}
+		}
+	},
+	"parameters": {
+		"IntegrationId": {
+			"name": "integrationId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The integration key - unique key for the standard integration (GUID)",
+			"x-ms-parameter-location": "method"
+		},
+		"IntegrationBody": {
+			"name": "integration",
+			"in": "body",
+			"required": true,
+			"schema": {
+				"$ref": "#/definitions/Integration"
+			},
+			"description": "Integration over a given scope",
+			"x-ms-parameter-location": "method"
+		},
+		"ServiceNowAuthonticationDetailsBody": {
+			"name": "serviceNowAuthonticationDetails",
+			"in": "body",
+			"required": true,
+			"schema": {
+				"$ref": "#/definitions/ServiceNowAuthonticationDetails"
+			},
+			"description": "Service Now authontication details over a given scope",
+			"x-ms-parameter-location": "method"
+		},
+		"Scope": {
+			"name": "scope",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The scope of the Integration. Valid scopes are: management group (format: 'providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
+			"x-ms-parameter-location": "method"
+		},
+		"NamePrefixBody": {
+			"name": "namePrefix",
+			"in": "body",
+			"required": true,
+			"type": "string",
+			"description": "Prefix of user names to get",
+			"x-ms-parameter-location": "method"
+		}
+	}
+}
