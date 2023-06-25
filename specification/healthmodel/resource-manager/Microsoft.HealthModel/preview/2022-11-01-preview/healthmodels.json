@@ -1086,15 +1086,22 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the query"
+          "description": "Name of the query",
+          "minLength": 1,
+          "maxLength": 100
         },
         "queryText": {
           "type": "string",
-          "description": "Query text"
+          "description": "Query text",
+          "minLength": 1,
+          "maxLength": 5000
         },
         "valueColumnName": {
           "type": "string",
-          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to 'value' if not specified."
+          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to 'value' if not specified.",
+          "minLength": 1,
+          "maxLength": 100,
+          "default": "value"
         },
         "dataType": {
           "$ref": "#/definitions/ResultDataType",
@@ -1110,7 +1117,6 @@
       "required": [
         "name",
         "queryText",
-        "valueColumnName",
         "dataType"
       ],
       "allOf": [
@@ -1150,7 +1156,9 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the node"
+          "description": "Name of the node",
+          "minLength": 1,
+          "maxLength": 100
         },
         "childNodeIds": {
           "type": "array",
@@ -1193,7 +1201,9 @@
         },
         "credentialId": {
           "type": "string",
-          "description": "Credential to use for queries of this node. Not required on Aggregation Nodes."
+          "description": "Credential to use for queries of this node. Not required on Aggregation Nodes.",
+          "minLength": 1,
+          "maxLength": 100
         },
         "visual": {
           "$ref": "#/definitions/NodeVisual",
@@ -1438,11 +1448,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the query"
+          "description": "Name of the query",
+          "minLength": 1,
+          "maxLength": 100
         },
         "queryText": {
           "type": "string",
-          "description": "Query text"
+          "description": "Query text",
+          "minLength": 1,
+          "maxLength": 5000
         }
       },
       "description": "Query for a Prometheus data source",
@@ -1497,11 +1511,15 @@
         },
         "degradedThreshold": {
           "type": "string",
-          "description": "Degraded threshold"
+          "description": "Degraded threshold",
+          "minLength": 1,
+          "maxLength": 100
         },
         "unhealthyThreshold": {
           "type": "string",
-          "description": "Unhealthy threshold"
+          "description": "Unhealthy threshold",
+          "minLength": 1,
+          "maxLength": 100
         },
         "degradedOperator": {
           "$ref": "#/definitions/QueryOperator",
@@ -1513,11 +1531,15 @@
         },
         "timeGrain": {
           "type": "string",
-          "description": "Time range of the query"
+          "description": "Time range of the query",
+          "minLength": 1,
+          "maxLength": 100
         },
         "dataUnit": {
           "type": "string",
-          "description": "Unit of the query result"
+          "description": "Unit of the query result",
+          "minLength": 1,
+          "maxLength": 100
         },
         "enabledState": {
           "$ref": "#/definitions/QueryEnabledState",
@@ -1533,7 +1555,6 @@
         "unhealthyThreshold",
         "degradedOperator",
         "unhealthyOperator",
-        "timeGrain",
         "enabledState"
       ]
     },
@@ -1722,11 +1743,15 @@
       "properties": {
         "metricName": {
           "type": "string",
-          "description": "Name of the metric to query"
+          "description": "Name of the metric to query",
+          "minLength": 1,
+          "maxLength": 100
         },
         "metricNamespace": {
           "type": "string",
-          "description": "Metric namespace"
+          "description": "Metric namespace",
+          "minLength": 1,
+          "maxLength": 100
         },
         "aggregationType": {
           "$ref": "#/definitions/MetricAggregationType",
@@ -1734,11 +1759,15 @@
         },
         "dimension": {
           "type": "string",
-          "description": "Optional: Dimension to split by"
+          "description": "Optional: Dimension to split by",
+          "minLength": 1,
+          "maxLength": 100
         },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set."
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "minLength": 1,
+          "maxLength": 100
         }
       },
       "description": "Metrics query for an Azure Resource data source",

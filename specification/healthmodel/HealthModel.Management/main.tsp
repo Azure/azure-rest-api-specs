@@ -89,6 +89,8 @@ model Node {
     nodeId: string;
 
     @doc("Name of the node")
+    @minLength(1)
+    @maxLength(100)
     name: string;
 
     @doc("List of children Node IDs")
@@ -113,6 +115,8 @@ model Node {
     healthTargetPercentage?: float32;
 
     @doc("Credential to use for queries of this node. Not required on Aggregation Nodes.")
+    @minLength(1)
+    @maxLength(100)
     credentialId?: string;
 
     @doc("Visual of the node")
@@ -233,9 +237,13 @@ model Query {
     queryId: string;
 
     @doc("Degraded threshold")
+    @minLength(1)
+    @maxLength(100)
     degradedThreshold: string;
 
     @doc("Unhealthy threshold")
+    @minLength(1)
+    @maxLength(100)
     unhealthyThreshold: string;
 
     @doc("Degraded operator")
@@ -245,9 +253,13 @@ model Query {
     unhealthyOperator: QueryOperator;
 
     @doc("Time range of the query")
-    timeGrain: string;
+    @minLength(1)
+    @maxLength(100)
+    timeGrain?: string;
 
     @doc("Unit of the query result")
+    @minLength(1)
+    @maxLength(100)
     dataUnit?: string;
 
     @doc("Query enabled state")
@@ -260,13 +272,19 @@ model LogQuery extends Query {
     queryType: "LogQuery";
 
     @doc("Name of the query")
+    @minLength(1)
+    @maxLength(100)
     name: string;
 
     @doc("Query text")
+    @minLength(1)
+    @maxLength(5000)
     queryText: string;
 
     @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to 'value' if not specified.")
-    valueColumnName: string;
+    @minLength(1)
+    @maxLength(100)
+    valueColumnName?: string = "value";
 
     @doc("Data type of the result")
     dataType: ResultDataType;
@@ -282,18 +300,26 @@ model ResourceMetricsQuery extends Query {
     queryType: "ResourceMetricsQuery";
 
     @doc("Name of the metric to query")
+    @minLength(1)
+    @maxLength(100)
     metricName: string;
 
     @doc("Metric namespace")
+    @minLength(1)
+    @maxLength(100)
     metricNamespace: string;
 
     @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to 'value' if not specified.")
     aggregationType: MetricAggregationType;
 
     @doc("Optional: Dimension to split by")
+    @minLength(1)
+    @maxLength(100)
     dimension?: string;
 
     @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
+    @minLength(1)
+    @maxLength(100)
     dimensionFilter?: string;
 }
 
@@ -303,9 +329,13 @@ model PrometheusMetricsQuery extends Query {
     queryType: "PrometheusMetricsQuery";
 
     @doc("Name of the query")
+    @minLength(1)
+    @maxLength(100)
     name: string;
 
     @doc("Query text")
+    @minLength(1)
+    @maxLength(5000)
     queryText: string;
 }
 
