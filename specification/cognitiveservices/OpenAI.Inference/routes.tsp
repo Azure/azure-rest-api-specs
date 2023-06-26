@@ -59,11 +59,11 @@ op getChatCompletions is ResourceAction<
 @doc("Returns the status of the images operation")
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @route("/operations/images/{operationId}")
-op getImageOperationStatus is RpcOperation<
+op getAzureBatchImageGenerationOperationStatus is RpcOperation<
   {
     @doc(".") @path operationId: string;
   },
-  ImageOperationResponse
+  BatchImageGenerationOperationResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -71,13 +71,13 @@ op getImageOperationStatus is RpcOperation<
 @added(ServiceApiVersions.v2023_06_01_Preview)
 @route("/images/generations:submit")
 @pollingOperation(
-  getImageOperationStatus,
+  getAzureBatchImageGenerationOperationStatus,
   {
     operationId: ResponseProperty<"id">,
   }
 )
-op startGenerateImage is OaiLongRunningRpcOperation<
+op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
   ImageGenerationOptions,
-  ImageOperationResponse,
-  ImageOperationResponse
+  BatchImageGenerationOperationResponse,
+  BatchImageGenerationOperationResponse
 >;
