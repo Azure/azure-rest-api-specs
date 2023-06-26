@@ -43,6 +43,23 @@
       ]
     }
   ],
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "MigrateProjectsController"
+    },
+    {
+      "name": "PrivateEndpointConnectionController"
+    },
+    {
+      "name": "PrivateEndpointConnectionProxyController"
+    },
+    {
+      "name": "PrivateLinkResourceController"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}": {
       "get": {
@@ -1185,6 +1202,10 @@
             "Enabled",
             "Disabled"
           ],
+          "x-ms-enum": {
+            "name": "publicNetworkAccess",
+            "modelAsString": true
+          },
           "type": "string"
         },
         "privateEndpointConnections": {
@@ -1247,6 +1268,10 @@
           ],
           "type": "string",
           "description": "Provisioning state.",
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "privateEndpoint": {
@@ -1378,6 +1403,10 @@
             "Failed"
           ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "refreshSummaryState",
+            "modelAsString": true
+          },
           "description": "Refresh summary state."
         },
         "lastSummaryRefreshedTime": {
@@ -1454,21 +1483,23 @@
         "eTag": {
           "type": "string"
         },
-        "properties": {
-          "remotePrivateEndpoint": {
-            "$ref": "#/definitions/PrivateEndpointDetails",
-            "readOnly": true
+        "remotePrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointDetails",
+          "readOnly": true
+        },
+        "status": {
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Running"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
           },
-          "status": {
-            "enum": [
-              "Succeeded",
-              "Failed",
-              "Cancelled",
-              "Running"
-            ],
-            "type": "string",
-            "readOnly": true
-          }
+          "type": "string",
+          "readOnly": true
         }
       }
     },

@@ -12,7 +12,6 @@ This is the AutoRest configuration file for Azure Migrate.
 batch:
   - tag: package-migrate-2018-02
   - tag: package-migrate-2020-01
-  - tag: package-migrate-2020-05
   - tag: package-migrate-2020-07
   - tag: package-hubmigrate-2020-05
   - tag: package-migrateengine-2022-05
