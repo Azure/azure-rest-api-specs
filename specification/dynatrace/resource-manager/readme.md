@@ -39,7 +39,7 @@ input-file:
   - Dynatrace.Observability/stable/2023-04-27/dynatrace.json
 suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: swagger.yaml
+    from: Dynatrace.Observability/stable/2021-09-01/dynatrace.json
     reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
