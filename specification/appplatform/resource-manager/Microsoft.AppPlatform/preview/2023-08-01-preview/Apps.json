@@ -270,6 +270,7 @@
           {
             "name": "appEnvelopeForPatch",
             "in": "body",
+            "required": true,
             "description": "Properties used to create an app",
             "schema": {
               "$ref": "#/definitions/App"
@@ -535,7 +536,24 @@
       "properties": {
         "properties": {
           "type": "object",
-          "properties": {}
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Azure Spring Apps App.",
+              "enum": [
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "AppProvisioningState",
+                "modelAsString": true
+              }
+            }
+          }
         }
       }
     },

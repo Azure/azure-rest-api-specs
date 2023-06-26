@@ -148,7 +148,8 @@
           "Activate the revision of an App": {
             "$ref": "./examples/v2/Revisions/Revisions_Activate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/deactivate": {
@@ -190,7 +191,8 @@
           "Deactivate the revision of an App": {
             "$ref": "./examples/v2/Revisions/Revisions_Deactivate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/replicas/{replicaName}": {
@@ -325,7 +327,8 @@
           "Restart the revision of an App": {
             "$ref": "./examples/v2/Revisions/Revisions_Restart.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -374,6 +377,22 @@
             "relativePath": {
               "description": "Relative path of the storage which stores the source",
               "type": "string"
+            },
+            "provisioningState": {
+              "description": "Current provisioning State of the revision",
+              "enum": [
+                "Provisioning",
+                "Provisioned",
+                "Failed",
+                "Deprovisioning",
+                "Deprovisioned"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "RevisionProvisioningState",
+                "modelAsString": true
+              }
             }
           }
         }
