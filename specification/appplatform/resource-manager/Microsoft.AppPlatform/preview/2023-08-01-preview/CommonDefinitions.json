@@ -19,39 +19,11 @@
     "CloudError": {
       "type": "object",
       "description": "An error response from the service.",
-      "properties": {
-        "error": {
-          "description": "An error response from the service.",
-          "$ref": "#/definitions/CloudErrorBody"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
         }
-      },
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "code": {
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A message describing the error, intended to be suitable for display in a user interface.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error. For example, the name of the property in error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "A list of additional details about the error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          }
-        }
-      },
-      "x-ms-external": true
+      ]
     }
   },
   "securityDefinitions": {
