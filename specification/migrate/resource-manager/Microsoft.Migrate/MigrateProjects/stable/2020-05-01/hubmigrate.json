@@ -511,7 +511,49 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndPointConnectionProxies/{pecProxyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnectionProxies": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionProxyController"
+        ],
+        "summary": "Get the private endpoint connection proxies.",
+        "description": "Get all the private endpoint connections proxies under a migrate project.",
+        "operationId": "PrivateEndpointConnectionProxyController_ListPrivateEndpointConnectionProxies",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxyCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnectionProxies/{pecProxyName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
@@ -599,7 +641,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxyRequestBody"
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
             }
           }
         ],
@@ -697,7 +739,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndPointConnectionProxies/{pecProxyName}/Validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnectionProxies/{pecProxyName}/validate": {
       "post": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
@@ -1373,14 +1415,35 @@
         }
       }
     },
+    "PrivateEndpointConnectionProxyCollection": {
+      "description": "Collection of PrivateLink proxy resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of PrivateLink proxy resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PrivateEndpointConnectionProxy": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "type": "string",
