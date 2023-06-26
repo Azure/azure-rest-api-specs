@@ -49,7 +49,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,7 +98,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -134,13 +134,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Revision was activated"
+          "202": {
+            "description": "Accepted. Azure Spring Apps revision is being activated"
           },
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -176,13 +176,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Revision was deactivated"
+          "202": {
+            "description": "Accepted. Azure Spring Apps revision is being deactivated"
           },
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -230,7 +230,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -275,7 +275,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -292,7 +292,7 @@
           "Revisions"
         ],
         "summary": "Restarts a revision for an App",
-        "operationId": "Revisions_RestartRevision",
+        "operationId": "Revisions_Restart",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -311,13 +311,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Container App revision was restarted"
+          "202": {
+            "description": "Accepted. Azure Spring Apps revision is being restarted"
           },
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -443,14 +443,16 @@
       "in": "path",
       "description": "Name of the Revision.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
     },
     "ReplicaNameParameter": {
       "name": "replicaName",
       "in": "path",
       "description": "Name of the Revision Replica.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
     }
   },
   "securityDefinitions": {

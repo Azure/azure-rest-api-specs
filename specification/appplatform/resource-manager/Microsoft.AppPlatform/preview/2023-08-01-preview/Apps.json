@@ -40,7 +40,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -82,7 +82,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -127,7 +127,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -155,7 +155,13 @@
             "$ref": "#/parameters/AppNameParameter"
           },
           {
-            "$ref": "#/parameters/AppEnvelopeParameter"
+            "name": "appEnvelope",
+            "in": "body",
+            "description": "Properties used to create an app",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -163,7 +169,7 @@
         ],
         "responses": {
           "200": {
-            "description": "No change performed on the App.",
+            "description": "No update performed on the App.",
             "schema": {
               "$ref": "#/definitions/App"
             }
@@ -177,7 +183,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -230,7 +236,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -262,7 +268,12 @@
             "$ref": "#/parameters/AppNameParameter"
           },
           {
-            "$ref": "#/parameters/AppEnvelopeParameter"
+            "name": "appEnvelopeForPatch",
+            "in": "body",
+            "description": "Properties used to create an app",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -286,7 +297,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -329,7 +340,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -379,7 +390,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -433,7 +444,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -479,7 +490,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
