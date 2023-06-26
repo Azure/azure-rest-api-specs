@@ -10,13 +10,13 @@
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableAzureDevOpsOrgs": {
+      "post": {
         "tags": [
           "default"
         ],
-        "summary": "Returns a list of Azure DevOps organizations.",
-        "operationId": "AzureDevOpsOrgs_List",
+        "summary": "Returns a list of all Azure DevOps organizations accessible by the user token consumed by the connector.",
+        "operationId": "AzureDevOpsOrgs_ListAvailable",
         "produces": [
           "application/json"
         ],
@@ -31,7 +31,52 @@
             "$ref": "#/parameters/SecurityConnectorName"
           },
           {
-            "$ref": "#/parameters/InventoryScope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides list of Azure DevOps organization details",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsOrgListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AzureDevOpsOrgs_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsOrgsListAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of Azure DevOps organizations onboarded to the connector.",
+        "operationId": "AzureDevOpsOrgs_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -57,12 +102,6 @@
         "x-ms-examples": {
           "AzureDevOpsOrgs_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsOrgsList.json"
-          },
-          "AzureDevOpsOrgs_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsOrgsListOnboarded.json"
-          },
-          "AzureDevOpsOrgs_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsOrgsListAvailable.json"
           }
         }
       }
@@ -301,13 +340,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/listAvailableProjects": {
+      "post": {
         "tags": [
           "default"
         ],
-        "summary": "Returns a list of Azure DevOps projects.",
-        "operationId": "AzureDevOpsProjects_List",
+        "summary": "Returns a list of all Azure DevOps projects accessible by the user token consumed by the connector.",
+        "operationId": "AzureDevOpsProjects_ListAvailable",
         "produces": [
           "application/json"
         ],
@@ -325,7 +364,55 @@
             "$ref": "#/parameters/OrgName"
           },
           {
-            "$ref": "#/parameters/InventoryScope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides a list of Azure DevOps project details",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsProjectListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AzureDevOpsProjects_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsProjectsListAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of Azure DevOps projects onboarded to the connector.",
+        "operationId": "AzureDevOpsProjects_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -351,12 +438,6 @@
         "x-ms-examples": {
           "AzureDevOpsProjects_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsProjectsList.json"
-          },
-          "AzureDevOpsProjects_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsProjectsListOnboarded.json"
-          },
-          "AzureDevOpsProjects_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsProjectsListAvailable.json"
           }
         }
       }
@@ -607,13 +688,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/listAvailableRepos": {
+      "post": {
         "tags": [
           "default"
         ],
-        "summary": "Returns a list of Azure DevOps repositories.",
-        "operationId": "AzureDevOpsRepos_List",
+        "summary": "Returns a list of all Azure DevOps repositories accessible by the user token consumed by the connector.",
+        "operationId": "AzureDevOpsRepos_ListAvailable",
         "produces": [
           "application/json"
         ],
@@ -634,7 +715,58 @@
             "$ref": "#/parameters/ProjectName"
           },
           {
-            "$ref": "#/parameters/InventoryScope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides a list of Azure DevOps repository details",
+            "schema": {
+              "$ref": "#/definitions/AzureDevOpsRepoListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AzureDevOpsRepos_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsReposListAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/azureDevOpsOrgs/{orgName}/projects/{projectName}/repos": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of Azure DevOps repositories onboarded to the connector.",
+        "operationId": "AzureDevOpsRepos_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/OrgName"
+          },
+          {
+            "$ref": "#/parameters/ProjectName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -660,12 +792,6 @@
         "x-ms-examples": {
           "AzureDevOpsRepos_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsReposList.json"
-          },
-          "AzureDevOpsRepos_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsReposListOnboarded.json"
-          },
-          "AzureDevOpsRepos_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsReposListAvailable.json"
           }
         }
       }
@@ -1207,13 +1333,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitHubOwners": {
+      "post": {
         "tags": [
           "default"
         ],
-        "summary": "Returns a list of GitHub owners.",
-        "operationId": "GitHubOwners_List",
+        "summary": "Returns a list of all GitHub owners accessible by the user token consumed by the connector.",
+        "operationId": "GitHubOwners_ListAvailable",
         "produces": [
           "application/json"
         ],
@@ -1228,7 +1354,52 @@
             "$ref": "#/parameters/SecurityConnectorName"
           },
           {
-            "$ref": "#/parameters/InventoryScope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides list of GitHub owner resources",
+            "schema": {
+              "$ref": "#/definitions/GitHubOwnerListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GitHubOwners_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GitHubOwnersListAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of GitHub owners onboarded to the connector.",
+        "operationId": "GitHubOwners_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1254,12 +1425,6 @@
         "x-ms-examples": {
           "GitHubOwners_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitHubOwnersList.json"
-          },
-          "GitHubOwners_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitHubOwnersListOnboarded.json"
-          },
-          "GitHubOwners_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitHubOwnersListAvailable.json"
           }
         }
       }
@@ -1498,12 +1663,63 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{installationId}/listAvailableRepos": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of all GitHub repositories accessible by the user token and app installation used by the connector.",
+        "operationId": "GitHubRepos_ListAvailable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/InstallationId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides list of GitHub repository resources",
+            "schema": {
+              "$ref": "#/definitions/GitHubRepoListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GitHubRepos_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GitHubReposListAvailable.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos": {
       "get": {
         "tags": [
           "default"
         ],
-        "summary": "Returns a list of GitHub repositories.",
+        "summary": "Returns a list of GitHub repositories onboarded to the connector.",
         "operationId": "GitHubRepos_List",
         "produces": [
           "application/json"
@@ -1520,9 +1736,6 @@
           },
           {
             "$ref": "#/parameters/OwnerName"
-          },
-          {
-            "$ref": "#/parameters/InventoryScope"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1548,12 +1761,6 @@
         "x-ms-examples": {
           "GitHubRepos_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitHubReposList.json"
-          },
-          "GitHubRepos_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitHubReposListOnboarded.json"
-          },
-          "GitHubRepos_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitHubReposListAvailable.json"
           }
         }
       }
@@ -1804,13 +2011,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/listAvailableGitLabGroups": {
+      "post": {
         "tags": [
           "default"
         ],
-        "summary": "Returns a list of GitLab groups.",
-        "operationId": "GitLabGroups_List",
+        "summary": "Returns a list of all GitLab groups accessible by the user token consumed by the connector.",
+        "operationId": "GitLabGroups_ListAvailable",
         "produces": [
           "application/json"
         ],
@@ -1825,7 +2032,52 @@
             "$ref": "#/parameters/SecurityConnectorName"
           },
           {
-            "$ref": "#/parameters/InventoryScope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides a list of GitLab Group details",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroupListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GitLabGroups_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GitLabGroupsListAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Returns a list of GitLab groups onboarded to the connector.",
+        "operationId": "GitLabGroups_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1851,12 +2103,6 @@
         "x-ms-examples": {
           "GitLabGroups_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitLabGroupsList.json"
-          },
-          "GitLabGroups_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitLabGroupsListOnboarded.json"
-          },
-          "GitLabGroups_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitLabGroupsListAvailable.json"
           }
         }
       }
@@ -2095,13 +2341,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listSubgroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listAvailableSubgroups": {
       "post": {
         "tags": [
           "default"
         ],
-        "summary": "Gets all nested subgroups of given GitLab Group.",
-        "operationId": "GitLabSubgroups_List",
+        "summary": "Gets all nested subgroups of given GitLab Group which are accessible by the user token consumed by the connector.",
+        "operationId": "GitLabSubgroups_ListAvailable",
         "produces": [
           "application/json"
         ],
@@ -2119,7 +2365,55 @@
             "$ref": "#/parameters/GroupFQName"
           },
           {
-            "$ref": "#/parameters/InventoryScope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides a list of GitLab Group details for subgroups",
+            "schema": {
+              "$ref": "#/definitions/GitLabGroupListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GitLabSubgroups_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GitLabSubgroupsListAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listSubgroups": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Gets nested subgroups of given GitLab Group which are onboarded to the connector.",
+        "operationId": "GitLabSubgroups_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2145,23 +2439,17 @@
         "x-ms-examples": {
           "GitLabSubgroups_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitLabSubgroupsList.json"
-          },
-          "GitLabSubgroups_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitLabSubgroupsListOnboarded.json"
-          },
-          "GitLabSubgroups_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitLabSubgroupsListAvailable.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/listAvailableProjects": {
+      "post": {
         "tags": [
           "default"
         ],
-        "summary": "Gets a list of GitLab projects that are directly owned by given group.",
-        "operationId": "GitLabProjects_List",
+        "summary": "Gets a list of all GitLab projects that are directly owned by given group and accessible by the user token consumed by the connector.",
+        "operationId": "GitLabProjects_ListAvailable",
         "produces": [
           "application/json"
         ],
@@ -2179,7 +2467,55 @@
             "$ref": "#/parameters/GroupFQName"
           },
           {
-            "$ref": "#/parameters/InventoryScope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides a list of GitLab Project details",
+            "schema": {
+              "$ref": "#/definitions/GitLabProjectListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GitLabProjects_ListAvailable": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GitLabProjectsListAvailable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitLabGroups/{groupFQName}/projects": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Gets a list of GitLab projects that are directly owned by given group and onboarded to the connector.",
+        "operationId": "GitLabProjects_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SecurityConnectorName"
+          },
+          {
+            "$ref": "#/parameters/GroupFQName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2205,12 +2541,6 @@
         "x-ms-examples": {
           "GitLabProjects_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitLabProjectsList.json"
-          },
-          "GitLabProjects_List_Onboarded": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitLabProjectsListOnboarded.json"
-          },
-          "GitLabProjects_List_Available": {
-            "$ref": "./examples/SecurityConnectorsDevOps/GitLabProjectsListAvailable.json"
           }
         }
       }
@@ -3387,13 +3717,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "InventoryScope": {
-      "in": "query",
-      "name": "inventoryScope",
-      "description": "Query parameter to decide returned inventory scope.\r\n            \"Onboarded\" (default) - returns all inventory already onboarded to the connector.\r\n            \"Available\" - returns all inventory accessible by the user token consumed by the connector.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "OrgName": {
       "in": "path",
       "name": "orgName",
@@ -3422,6 +3745,14 @@
       "in": "path",
       "name": "ownerName",
       "description": "Name of the GitHub owner.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "InstallationId": {
+      "in": "path",
+      "name": "installationId",
+      "description": "Id of the GitHub app installation.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
