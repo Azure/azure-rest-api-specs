@@ -6,7 +6,7 @@
       "name": "MonitorManagementClient"
     },
     "description": "Azure Monitor API reference for Private Links Scopes management.",
-    "version": "2021-07-01-preview"
+    "version": "2023-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -679,7 +679,7 @@
         "tags": [
           "PrivateLinkScopedResources"
         ],
-        "description": "Approve or reject a private endpoint connection with a given name.",
+        "description": "Add an Azure monitor scoped resource in the private link scope.",
         "operationId": "PrivateLinkScopedResources_CreateOrUpdate",
         "parameters": [
           {
@@ -744,7 +744,7 @@
         "tags": [
           "PrivateLinkScopedResources"
         ],
-        "description": "Deletes a private endpoint connection with a given name.",
+        "description": "Deletes an Azure monitor scoped resource with a given name.",
         "operationId": "PrivateLinkScopedResources_Delete",
         "parameters": [
           {
@@ -797,7 +797,7 @@
         "tags": [
           "PrivateLinkScopedResources"
         ],
-        "description": "Gets all private endpoint connections on a private link scope.",
+        "description": "Gets all scoped resources on a private link scope.",
         "operationId": "PrivateLinkScopedResources_ListByPrivateLinkScope",
         "parameters": [
           {
@@ -811,6 +811,13 @@
           },
           {
             "$ref": "#/parameters/PrivateLinkScopeName"
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "description": "The kind of the private link resource. Not specifying a kind will return scoped resources of all kinds.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -833,6 +840,9 @@
         "x-ms-examples": {
           "Gets list of scoped resources in a private link scope.": {
             "$ref": "./examples/PrivateLinkScopedResourceList.json"
+          },
+          "Gets list of scoped resources in a private link scope, filtered by kind.": {
+            "$ref": "./examples/PrivateLinkScopedResourceListKindFilter.json"
           }
         }
       }
@@ -1053,12 +1063,20 @@
       "description": "Properties of a private link scoped resource.",
       "type": "object",
       "properties": {
+        "kind": {
+          "description": "The kind of scoped Azure monitor resource.",
+          "type": "string"
+        },
         "linkedResourceId": {
           "description": "The resource id of the scoped Azure monitor resource.",
           "type": "string"
         },
+        "location": {
+          "description": "The location of the scoped Azure monitor resource.",
+          "type": "string"
+        },
         "provisioningState": {
-          "description": "State of the private endpoint connection.",
+          "description": "State of the Azure monitor resource.",
           "type": "string",
           "readOnly": true
         }
