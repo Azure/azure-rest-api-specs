@@ -134,8 +134,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure Spring Apps revision is activated"
+          },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being activated"
+            "description": "Accepted. Azure Spring Apps revision is being activated",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -177,8 +185,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure Spring Apps revision is deactivated"
+          },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being deactivated"
+            "description": "Accepted. Azure Spring Apps revision is being deactivated",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -313,8 +329,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure Spring Apps revision restarted"
+          },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being restarted"
+            "description": "Accepted. Azure Spring Apps revision is being restarted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
