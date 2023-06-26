@@ -85,15 +85,6 @@ tag: package-preview-2023-07
 
 The following packages may be composed from multiple api-versions.
 
-
-### Tag: package-preview-2023-07
-
-These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-07'
-input-file:
-  - Microsoft.Security/preview/2023-07-01-preview/healthReports.json
-```
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
