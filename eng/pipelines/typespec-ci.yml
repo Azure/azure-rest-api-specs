@@ -46,6 +46,7 @@ jobs:
 
   - script: git restore package-lock.json
     displayName: Revert package-lock.json
+    condition: succeededOrFailed()
 
   - template: templates/steps/typespec-ci.yml
     parameters:
