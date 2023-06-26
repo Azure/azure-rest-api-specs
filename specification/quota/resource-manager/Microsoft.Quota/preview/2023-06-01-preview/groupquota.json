@@ -39,8 +39,8 @@
         "description": "Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.",
         "operationId": "GroupQuotas_CreateOrUpdate",
         "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/PutGroupQuotas.json"
+          "GroupQuotas_Put_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/PutGroupQuotas.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -55,9 +55,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "GroupQuotaRequest",
+            "name": "GroupQuota Put Request Body",
             "in": "body",
-            "description": "The GroupQuota Request.",
+            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
             "schema": {
               "$ref": "#/definitions/GroupQuotasEntity"
             }
@@ -107,8 +107,8 @@
         "description": "Updates the GroupQuotas for the name passed. A GroupQuotas RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked. \n Any change in the filters will be applicable to the future quota assignments, existing quota assigned to subscriptions from the GroupQuotas remains unchanged.",
         "operationId": "GroupQuotas_Update",
         "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/PatchGroupQuotas.json"
+          "GroupQuotas_Patch_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/PatchGroupQuotas.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -175,8 +175,8 @@
         "description": "Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on groupQuota can be access from the groupQuota APIs.",
         "operationId": " GroupQuotas_Get",
         "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/GetGroupQuotas.json"
+          "GroupQuotas_Get_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/GetGroupQuotas.json"
           }
         },
         "parameters": [
@@ -213,8 +213,8 @@
         "description": "Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost.",
         "operationId": "GroupQuotas_Delete",
         "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/DeleteGroupQuotas.json"
+          "GroupQuotas_Delete_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/DeleteGroupQuotas.json"
           }
         },
         "parameters": [
@@ -253,8 +253,8 @@
         "description": "Lists GroupQuotas for the scope passed. It will return the GroupQuotas QuotaEntity properties only.The details on groupQuota can be access from the groupQuota APIs.",
         "operationId": "GroupQuotas_List",
         "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
-            "$ref": "./examples/GetGroupQuotasList.json"
+          "GroupQuotas_List_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/GetGroupQuotasList.json"
           }
         },
         "parameters": [
@@ -1504,7 +1504,7 @@
           "$ref": "#/definitions/RequestState",
           "readOnly": true
         },
-        "quotaSource": {
+        "quotaSources": {
           "$ref": "#/definitions/SubscriptionGroupQuotaAssignmentList"
         }
       }
