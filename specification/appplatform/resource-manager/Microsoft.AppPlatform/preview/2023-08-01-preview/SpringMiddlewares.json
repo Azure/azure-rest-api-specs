@@ -162,7 +162,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/default/validate": {
       "post": {
         "tags": [
           "ConfigServers"
@@ -398,7 +398,8 @@
                 "Deleted",
                 "Failed",
                 "Updating",
-                "Succeeded"
+                "Succeeded",
+                "Canceled"
               ],
               "type": "string",
               "readOnly": true,
@@ -518,7 +519,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/GitPatternRepository"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "uri": {
           "description": "URI of the repository",
@@ -637,7 +641,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConfigServerSettingsErrorRecord"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
