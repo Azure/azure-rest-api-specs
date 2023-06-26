@@ -68,6 +68,10 @@ directive:
     where: $.paths
     from: applications.json
     reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: integrations.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
 ```
 
 ### Basic Information
@@ -84,7 +88,17 @@ tag: package-preview-2023-07
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+### Tag: package-preview-2023-07
 
+These settings apply only when `--tag=package-2023-07-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-preview-only'
+input-file:
+  - Microsoft.Security/preview/2023-07-01-preview/integrations.json
+
+override-info:
+  title: SecurityCenter
+```
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
@@ -394,6 +408,7 @@ input-file:
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
+- Microsoft.Security/preview/2023-07-01-preview/integrations.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
 - Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
@@ -458,7 +473,8 @@ input-file:
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2022-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
-- Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
+- Microsoft.Security/preview/2022-01-01-preview/governanceRules.json
+- Microsoft.Security/preview/2023-07-01-preview/integrations.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
