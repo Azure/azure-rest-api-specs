@@ -212,7 +212,7 @@ enum PoolType {
 enum VolumeBindingMode {
   /** Immediate binding */
   Immediate,
-  /**  Wait for customer to bind */
+  /** Wait for customer to bind */
   WaitFirstForCustomer,
 }
 
@@ -318,7 +318,7 @@ model VolumeProperties {
   // placementProperties: PlacementProperties;
 }
 
-/** Storage volume mode  */
+/** Storage volume mode */
 enum VolumeMode {
   /** FileSystem volume mode */
   Filesystem,
