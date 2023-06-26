@@ -1,0 +1,38 @@
+{
+	"parameters": {
+		"api-version": "2022-01-01-preview",
+		"scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+		"serviceNowAuthonticationDetails": {
+			"properties": {
+				"userName": "User1",
+				"password": "User Password",
+				"ClientId": "c23b5354-ff0a-4b2a-9f92-6f144effd936",
+				"ClientSecret": "MySecret",
+				"InstanceUrl": "Integration platform instance url"
+			}
+		}
+	},
+	"200": {
+		"body": {
+			"properties": {
+				"authonticationSecceeded": true,
+				"errorType": "",
+				"errorDescription": "",
+				"serviceNowTablesMetadata": [
+					{
+						"Table": "Incident",
+						"DisplayName": "Assignee",
+						"ServiceNowKey": "Assignee column platform key",
+						"IsMandatory": true
+					},
+					{
+						"Table": "Incident",
+						"DisplayName": "ETA",
+						"ServiceNowKey": "ETA column platform key",
+						"IsMandatory": false
+					}
+				]
+			}
+		}
+	}
+}

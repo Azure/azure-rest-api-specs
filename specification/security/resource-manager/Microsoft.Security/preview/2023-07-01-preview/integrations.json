@@ -252,25 +252,22 @@
 					}
 				],
 				"responses": {
-					"200": {
-						"description": "OK - Integration was deleted"
-					},
 					"202": {
-						"description": "Accepted - The operation still in progress",
-						"headers": {
-							"location": {
-								"type": "string",
-								"description": "Location URL for the deletion status"
-							}
-						}
+					  "description": "Accepted - The operation still in progress"
 					},
 					"204": {
-						"description": "No Content - Integration does not exist"
+					  "description": "No Content - Integration does not exist"
+					},
+					"200": {
+					  "description": "Success - Integration was deleted"
 					},
 					"default": {
-						"description": "Error response describing why the operation failed"
+					  "description": "Error response describing why the operation failed.",
+					  "schema": {
+						"$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+					  }
 					}
-				},
+				  },
 				"x-ms-long-running-operation": true,
 				"x-ms-long-running-operation-options": {
 					"final-state-via": "location"
@@ -281,7 +278,7 @@
 			"get": {
 				"x-ms-examples": {
 					"Get integration user names over subscription scope": {
-						"$ref": "./examples/Integrations/IntegrationUserNames_example.json"
+						"$ref": "./examples/Integrations/GetIntegrationUserNames_example.json"
 					},
 					"Get integration user names over security connector scope": {
 						"$ref": "./examples/Integrations/GetSecurityConnectorIntegrationUserNames_example.json"
