@@ -99,7 +99,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/{configServerName}": {
       "get": {
         "tags": [
           "ConfigServers"
@@ -116,6 +116,9 @@
           },
           {
             "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigServerNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -246,7 +249,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/default/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/configServers/{configServerName}/validate": {
       "post": {
         "tags": [
           "ConfigServers"
@@ -263,6 +266,9 @@
           },
           {
             "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigServerNameParameter"
           },
           {
             "$ref": "#/parameters/ConfigServerSettingsParameter"
@@ -304,7 +310,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/eurekaServers/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/springEnvironments/{springEnvironmentName}/eurekaServers/{eurekaServerName}": {
       "get": {
         "tags": [
           "EurekaServers"
@@ -321,6 +327,9 @@
           },
           {
             "$ref": "#/parameters/SpringEnvironmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EurekaServerNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -805,6 +814,14 @@
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$"
     },
+    "ConfigServerNameParameter": {
+      "name": "configServerNameParameter",
+      "in": "path",
+      "description": "Name of the Config Server.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
+    },
     "ConfigServerEnvelopeParameter": {
       "name": "configServerResource",
       "in": "body",
@@ -822,6 +839,14 @@
       "schema": {
         "$ref": "#/definitions/ConfigServerSettings"
       }
+    },
+    "EurekaServerNameParameter": {
+      "name": "eurekaServerNameParameter",
+      "in": "path",
+      "description": "Name of the Eureka Server.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$"
     },
     "EurekaServerEnvelopeParameter": {
       "name": "eurekaServerResource",
