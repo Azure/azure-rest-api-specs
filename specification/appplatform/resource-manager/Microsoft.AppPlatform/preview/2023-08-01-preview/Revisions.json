@@ -138,12 +138,7 @@
             "description": "Azure Spring Apps revision is activated"
           },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being activated",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted. Azure Spring Apps revision is being activated"
           },
           "default": {
             "description": "Common error response.",
@@ -157,7 +152,10 @@
             "$ref": "./examples/v2/Revisions/Revisions_Activate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/deactivate": {
@@ -189,12 +187,7 @@
             "description": "Azure Spring Apps revision is deactivated"
           },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being deactivated",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted. Azure Spring Apps revision is being deactivated"
           },
           "default": {
             "description": "Common error response.",
@@ -208,7 +201,10 @@
             "$ref": "./examples/v2/Revisions/Revisions_Deactivate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/replicas/{replicaName}": {
@@ -333,12 +329,7 @@
             "description": "Azure Spring Apps revision restarted"
           },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being restarted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted. Azure Spring Apps revision is being restarted"
           },
           "default": {
             "description": "Common error response.",
@@ -352,7 +343,10 @@
             "$ref": "./examples/v2/Revisions/Revisions_Restart.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
