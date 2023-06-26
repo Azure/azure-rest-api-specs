@@ -135,10 +135,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure Spring Apps revision is activated"
+            "description": "Azure Spring Apps revision is activated",
+            "schema": {
+              "$ref": "#/definitions/Revision"
+            }
           },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being activated"
+            "description": "Accepted. Azure Spring Apps revision is being activated",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -184,10 +192,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure Spring Apps revision is deactivated"
+            "description": "Azure Spring Apps revision is deactivated",
+            "schema": {
+              "$ref": "#/definitions/Revision"
+            }
           },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being deactivated"
+            "description": "Accepted. Azure Spring Apps revision is being deactivated",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -326,10 +342,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure Spring Apps revision restarted"
+            "description": "Azure Spring Apps revision restarted",
+            "schema": {
+              "$ref": "#/definitions/Revision"
+            }
           },
           "202": {
-            "description": "Accepted. Azure Spring Apps revision is being restarted"
+            "description": "Accepted. Azure Spring Apps revision is being restarted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -403,7 +427,9 @@
                 "Provisioned",
                 "Failed",
                 "Deprovisioning",
-                "Deprovisioned"
+                "Deprovisioned",
+                "Succeeded",
+                "Canceled"
               ],
               "type": "string",
               "readOnly": true,
