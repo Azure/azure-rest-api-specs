@@ -899,7 +899,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/{migrationName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/startAccountMigration": {
       "post": {
         "tags": [
           "AccountMigrations"
@@ -923,9 +923,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/MigrationName"
           },
           {
             "name": "validate",
@@ -959,13 +956,55 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/accountMigrations/{migrationName}": {
+      "get": {
+        "tags": [
+          "AccountMigrations"
+        ],
+        "operationId": "StorageAccounts_GetCustomerInitiatedMigration",
+        "description": "Gets the status of the ongoing migration for the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountGetMigrationFailed": {
+            "$ref": "./examples/StorageAccountGetMigrationFailed.json"
+          },
+          "StorageAccountGetMigrationInProgress": {
+            "$ref": "./examples/StorageAccountGetMigrationInProgress.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/MigrationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the details of the ongoing or completed migration successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountMigration"
+            }
+          }
         }
       }
     },
@@ -5622,6 +5661,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z0-9]+$",
       "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
       "maxLength": 24,
       "minLength": 3,
@@ -5658,6 +5698,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the Storage Account Migration. It should always be 'default'",
+      "pattern": "^[a-z][a-z0-9]*$",
       "enum": [
         "default"
       ],
