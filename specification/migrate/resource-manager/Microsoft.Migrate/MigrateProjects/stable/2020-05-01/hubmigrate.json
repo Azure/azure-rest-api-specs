@@ -774,7 +774,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxyRequestBody"
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
             }
           }
         ],
@@ -782,7 +782,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProxyRequestBody"
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
             }
           },
           "default": {
@@ -1288,6 +1288,7 @@
       }
     },
     "ResourceId": {
+      "description": "Defines resource ID of a private endpoint connection.",
       "type": "object",
       "properties": {
         "id": {
@@ -1435,6 +1436,7 @@
       }
     },
     "PrivateEndpointConnectionProxy": {
+      "description": "Defines Private endpoint proxy resource.",
       "type": "object",
       "properties": {
         "id": {
@@ -1470,15 +1472,8 @@
         }
       }
     },
-    "PrivateEndpointConnectionProxyRequestBody": {
-      "type": "object",
-      "properties": {
-        "remotePrivateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointDetails"
-        }
-      }
-    },
     "PrivateEndpointDetails": {
+      "description": "Defines Private endpoint additional details.",
       "type": "object",
       "properties": {
         "id": {
@@ -1511,8 +1506,12 @@
       }
     },
     "PrivateLinkServiceConnection": {
+      "description": "Defines Private link service connection.",
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -1528,6 +1527,7 @@
       }
     },
     "PrivateLinkServiceProxy": {
+      "description": "Defines Private link service proxy.",
       "type": "object",
       "properties": {
         "id": {
@@ -1548,6 +1548,7 @@
       }
     },
     "IpConfiguration": {
+      "description": "Defines Private link IP configuration.",
       "type": "object",
       "properties": {
         "id": {
@@ -1568,8 +1569,12 @@
       }
     },
     "GroupConnectivityInformation": {
+      "description": "Defines Private link service group connectivity.",
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "groupId": {
           "type": "string"
         },
@@ -1615,6 +1620,9 @@
       "description": "Operation detail payload",
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string"
+        },
         "name": {
           "description": "Name of the operation",
           "type": "string"
