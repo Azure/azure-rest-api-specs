@@ -4773,13 +4773,37 @@
           "type": "integer",
           "readOnly": true
         },
+        "memOverallUsageGB": {
+          "format": "int64",
+          "description": "Gets the used physical memory on the pool in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memCapacityGB": {
+          "format": "int64",
+          "description": "Gets the total amount of physical memory on the pool in GB.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "CPUOverallUsageMHz": {
+          "format": "int64",
+          "description": "Gets the used CPU usage across all cores on the pool in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "CPUCapacityMHz": {
+          "format": "int64",
+          "description": "Gets the max CPU usage across all cores on the pool in MHz.",
+          "type": "integer",
+          "readOnly": true
+        },
         "customResourceName": {
           "description": "Gets the name of the corresponding resource in Kubernetes.",
           "type": "string",
           "readOnly": true
         },
         "datastoreIds": {
-          "description": "Gets or sets the datastore ARM ids.",
+          "description": "Gets the datastore ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4787,7 +4811,7 @@
           "readOnly": true
         },
         "networkIds": {
-          "description": "Gets or sets the network ARM ids.",
+          "description": "Gets the network ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4803,7 +4827,7 @@
           }
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -6225,8 +6249,32 @@
           "type": "string",
           "readOnly": true
         },
+        "usedMemoryGB": {
+          "format": "int64",
+          "description": "Gets the used physical memory on the cluster in GB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalMemoryGB": {
+          "format": "int64",
+          "description": "Gets the total amount of physical memory on the cluster in GB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usedCPUMHz": {
+          "format": "int64",
+          "description": "Gets the used CPU usage across all cores on the cluster in MHz.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalCPUMHz": {
+          "format": "int64",
+          "description": "Gets the max CPU usage across all cores on the cluster in MHz.",
+          "type": "string",
+          "readOnly": true
+        },
         "datastoreIds": {
-          "description": "Gets or sets the datastore ARM ids.",
+          "description": "Gets the datastore ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6234,7 +6282,7 @@
           "readOnly": true
         },
         "networkIds": {
-          "description": "Gets or sets the network ARM ids.",
+          "description": "Gets the network ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6242,7 +6290,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
@@ -6365,8 +6413,32 @@
           "type": "string",
           "readOnly": true
         },
+        "overallMemoryUsageGB": {
+          "format": "int64",
+          "description": "Gets the used physical memory on the host in GB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memorySizeGB": {
+          "format": "int64",
+          "description": "Gets the total amount of physical memory on the host in GB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "overallCPUUsageMHz": {
+          "format": "int64",
+          "description": "Gets the used CPU usage across all cores in MHz.",
+          "type": "string",
+          "readOnly": true
+        },
+        "CPUMhz": {
+          "format": "int64",
+          "description": "Gets the max CPU usage across all cores in MHz.",
+          "type": "string",
+          "readOnly": true
+        },
         "datastoreIds": {
-          "description": "Gets or sets the datastore ARM ids.",
+          "description": "Gets the datastore ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6374,7 +6446,7 @@
           "readOnly": true
         },
         "networkIds": {
-          "description": "Gets or sets the network ARM ids.",
+          "description": "Gets the network ARM ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -6382,7 +6454,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
+          "description": "Gets the provisioning state.",
           "type": "string",
           "readOnly": true
         }
