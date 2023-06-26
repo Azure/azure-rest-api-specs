@@ -46,7 +46,47 @@
     }
   },
   "tags": [],
-  "paths": {},
+  "paths": {
+    "/language/:analyze-conversations": {
+      "post": {
+        "operationId": "ConversationAnalysis_AnalyzeConversation",
+        "description": "Analyzes the input conversation utterance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationTask"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationTaskResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "AADToken": {
       "type": "object",
@@ -356,6 +396,19 @@
       "required": [
         "code",
         "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
@@ -746,6 +799,17 @@
         {
           "$ref": "#/definitions/AnalyzeConversationTaskResult"
         }
+      ]
+    },
+    "Conversations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "CurrencyResolution": {
@@ -2054,5 +2118,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

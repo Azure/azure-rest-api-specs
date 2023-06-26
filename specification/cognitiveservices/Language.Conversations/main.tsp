@@ -27,6 +27,12 @@ using Azure.Core.Traits;
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Azure.AI.Language.Conversations;
 
+@TypeSpec.Rest.resource("language")
+model Conversations {
+  @key
+  id: string;
+}
+
 @doc("A subscription key for a Language service resource")
 model apim_key
   is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
@@ -811,4 +817,15 @@ enum WeightUnit {
   ShortHundredWeightUS,
   Stone,
   Dram,
+}
+
+interface ConversationAnalysis {
+  @doc("Analyzes the input conversation utterance.")
+  @TypeSpec.Rest.actionSeparator("/:")
+  @TypeSpec.Rest.action("analyze-conversations")
+  analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+    Conversations,
+    AnalyzeConversationTask,
+    AnalyzeConversationTaskResult
+  >;
 }
