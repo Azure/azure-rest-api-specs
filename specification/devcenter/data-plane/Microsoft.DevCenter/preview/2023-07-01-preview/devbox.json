@@ -2215,10 +2215,11 @@
     "DevBoxOperationStatus": {
       "type": "string",
       "enum": [
+        "NotStarted",
+        "Running",
         "Succeeded",
-        "Failed",
         "Canceled",
-        "Running"
+        "Failed"
       ],
       "description": "The status of a Dev Box operation.",
       "x-ms-enum": {
@@ -2226,20 +2227,24 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Succeeded",
-            "description": "The operation succeeded."
+            "value": "NotStarted",
+            "description": "The operation has not started."
           },
           {
-            "value": "Failed",
-            "description": "The operation failed."
+            "value": "Running",
+            "description": "The operation is running."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The operation succeeded."
           },
           {
             "value": "Canceled",
             "description": "The operation was canceled."
           },
           {
-            "value": "Running",
-            "description": "The operation is running."
+            "value": "Failed",
+            "description": "The operation failed."
           }
         ]
       }
