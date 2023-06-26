@@ -82,21 +82,21 @@
 		"/{scope}/providers/Microsoft.Security/integrations/metadata": {
 			"get": {
 				"x-ms-examples": {
-					"Try to get Service Now metatdata by subscription scope": {
-						"$ref": "./examples/integrations/TryGetServiceNowMetatdataBySubscription_example.json"
+					"Try to get Service Now metadata by subscription scope": {
+						"$ref": "./examples/integrations/TryGetServiceNowMetadataBySubscription_example.json"
 					},
-					"Try to get Service Now metatdata by security connector scope": {
-						"$ref": "./examples/integrations/TryGetServiceNowMetatdataBySecurityConnector_example.json"
+					"Try to get Service Now metadata by security connector scope": {
+						"$ref": "./examples/integrations/TryGetServiceNowMetadataBySecurityConnector_example.json"
 					},
-					"Try to get Service Now metatdata by management group scope": {
-						"$ref": "./examples/integrations/TryGetServiceNowMetatdataByManagementGroup_example.json"
+					"Try to get Service Now metadata by management group scope": {
+						"$ref": "./examples/integrations/TryGetServiceNowMetadataByManagementGroup_example.json"
 					}
 				},
 				"tags": [
-					"TryGetServiceNowMetatdata"
+					"TryGetServiceNowMetadata"
 				],
-				"description": "Try to get Service Now metatdata over a scope",
-				"operationId": "ServiceNowMetatdata_Get",
+				"description": "Try to get Service Now metadata over a scope",
+				"operationId": "ServiceNowMetadata_Get",
 				"parameters": [
 					{
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -105,7 +105,7 @@
 						"$ref": "#/parameters/Scope"
 					},
 					{
-						"$ref": "#/parameters/ServiceNowAuthonticationDetailsBody"
+						"$ref": "#/parameters/ServiceNowAuthenticationDetailsBody"
 					}
 				],
 				"responses": {
@@ -522,7 +522,7 @@
 				}
 			}
 		},
-		"ServiceNowAuthonticationDetails": {
+		"ServiceNowAuthenticationDetails": {
 			"description": "Service Now authentication details",
 			"type": "object",
 			"properties": {
@@ -549,10 +549,10 @@
 			}
 		},
 		"ServiceNowMetadataResponse": {
-			"description": "Describes the Service Now authentication response and if successfull, contains tables metadata reponse",
+			"description": "Describes the Service Now authentication response and if successful, contains tables metadata response",
 			"type": "object",
 			"properties": {
-				"authonticationSecceeded": {
+				"authenticationSucceeded": {
 					"type": "boolean",
 					"description": "Defines whether the Service Now authentication succeeded or not"
 				},
@@ -566,7 +566,7 @@
 				},
 				"serviceNowTablesMetadata": {
 					"type": "array",
-					"description": "Describes a collection of tables cloumns, each item contains column table name an column details",
+					"description": "Describes a collection of tables columns, each item contains column table name and column details",
 					"items": {
 						"$ref": "#/definitions/ServiceNowTableMetadata"
 					}
@@ -587,11 +587,11 @@
 				},
 				"serviceNowKey": {
 					"type": "string",
-					"description": "The Service Now cloumn key"
+					"description": "The Service Now column key"
 				},
 				"isMandatory": {
 					"type": "boolean",
-					"description": "Defines whether the cloumn is mandatory or not"
+					"description": "Defines whether the column is mandatory or not"
 				}
 			}
 		},
@@ -622,14 +622,14 @@
 			"description": "Integration over a given scope",
 			"x-ms-parameter-location": "method"
 		},
-		"ServiceNowAuthonticationDetailsBody": {
-			"name": "serviceNowAuthonticationDetails",
+		"ServiceNowAuthenticationDetailsBody": {
+			"name": "serviceNowAuthenticationDetails",
 			"in": "body",
 			"required": true,
 			"schema": {
-				"$ref": "#/definitions/ServiceNowAuthonticationDetails"
+				"$ref": "#/definitions/ServiceNowAuthenticationDetails"
 			},
-			"description": "Service Now authontication details over a given scope",
+			"description": "Service Now authentication details over a given scope",
 			"x-ms-parameter-location": "method"
 		},
 		"Scope": {
