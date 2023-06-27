@@ -420,7 +420,7 @@
           "description": "A timestamp when this operation and its associated images expire and will be deleted (in unix epochs)."
         },
         "result": {
-          "$ref": "#/definitions/ImageLocationResult",
+          "$ref": "#/definitions/ImageGenerations",
           "description": "The result of the operation if the operation succeeded."
         },
         "status": {
@@ -1001,22 +1001,7 @@
         "prompt"
       ]
     },
-    "ImageLocation": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL that provides temporary access to download the generated image."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error if the operation failed."
-        }
-      },
-      "description": "The image url if successful, and an error otherwise."
-    },
-    "ImageLocationResult": {
+    "ImageGenerations": {
       "type": "object",
       "properties": {
         "created": {
@@ -1039,6 +1024,17 @@
         "created",
         "data"
       ]
+    },
+    "ImageLocation": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL that provides temporary access to download the generated image."
+        }
+      },
+      "description": "The image url if successful, and an error otherwise."
     },
     "ImageSize": {
       "type": "string",
