@@ -632,6 +632,36 @@
         "usage"
       ]
     },
+    "CompletionsFinishReason": {
+      "type": "string",
+      "description": "Representation of the manner in which a completions response concluded.",
+      "enum": [
+        "stop",
+        "length",
+        "content_filter"
+      ],
+      "x-ms-enum": {
+        "name": "CompletionsFinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completions ended normally and reached its end of token generation."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "Completions exhausted available token limits before generation could complete."
+          },
+          {
+            "name": "contentFiltered",
+            "value": "content_filter",
+            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          }
+        ]
+      }
+    },
     "CompletionsLogProbabilityModel": {
       "type": "object",
       "properties": {
@@ -1107,8 +1137,7 @@
         "running",
         "succeeded",
         "canceled",
-        "failed",
-        "deleted"
+        "failed"
       ],
       "x-ms-enum": {
         "name": "State",
@@ -1138,11 +1167,6 @@
             "name": "failed",
             "value": "failed",
             "description": "The operation has completed processing with a failure and cannot be further consumed."
-          },
-          {
-            "name": "deleted",
-            "value": "deleted",
-            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion."
           }
         ]
       }
