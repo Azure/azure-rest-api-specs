@@ -18,6 +18,7 @@ batch:
   - tag: package-hubmigrate-2018-09
 ```
 
+
 ### Tag: package-migrate-2018-02 and java
 
 These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
@@ -31,6 +32,32 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-migrate-2017-11 and java
+
+These settings apply only when `--tag=package-migrate-2017-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-migrate-2017-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2017_11_11
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2017_11_11
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-migrate-2019-10 and java
+
+These settings apply only when `--tag=package-migrate-2019-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-migrate-2019-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2019_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2019_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-migrate-2020-01 and java
 
 These settings apply only when `--tag=package-migrate-2020-01 --java` is specified on the command line.
@@ -40,19 +67,6 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2020_01_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_01_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-migrate-2020-05 and java
-
-These settings apply only when `--tag=package-migrate-2020-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-migrate-2020-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2020_05_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -83,19 +97,6 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-migrateengine-2022-05 and java
-
-These settings apply only when `--tag=package-migrateengine-2022-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-migrateengine-2022-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2022_05_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2022_05_01
-regenerate-manager: true
-generate-interface: true
-```
-
 ### Tag: package-hubmigrate-2018-09 and java
 
 These settings apply only when `--tag=package-hubmigrate-2018-09 --java` is specified on the command line.
@@ -105,6 +106,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.azuremigrate.V2018_09_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-V2018_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-migrateengine-2022-05 and java
+
+These settings apply only when `--tag=package-migrateengine-2022-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-migrateengine-2022-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2022_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2022_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -130,7 +144,7 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 tag: package-migrate-2019-10
-tag: package-migrate-2019-10
+tag: package-hubmigrate-2020-05
 ```
 
 ### Tag: package-migrate-2018-02
@@ -151,6 +165,15 @@ input-file:
 - Microsoft.Migrate/stable/2019-10-01/migrate.json
 ```
 
+### Tag: package-migrate-2017-11
+
+These settings apply only when `--tag=package-migrate-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrate-2017-11'
+input-file:
+- Microsoft.Migrate/preview/2017-11-11-preview/migrate.json
+```
+
 ### Tag: package-migrate-2020-01
 
 These settings apply only when `--tag=package-migrate-2020-01` is specified on the command line.
@@ -158,6 +181,15 @@ These settings apply only when `--tag=package-migrate-2020-01` is specified on t
 ``` yaml $(tag) == 'package-migrate-2020-01'
 input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
+```
+
+### Tag: package-migrate-2020-07
+
+These settings apply only when `--tag=package-migrate-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrate-2020-07'
+input-file:
+- Microsoft.OffAzure/stable/2020-07-07/migrate.json
 ```
 
 ### Tag: package-hubmigrate-2020-05
@@ -176,15 +208,6 @@ These settings apply only when `--tag=package-hubmigrate-2018-09` is specified o
 ``` yaml $(tag) == 'package-hubmigrate-2018-09'
 input-file:
 - Microsoft.Migrate/MigrateProjects/preview/2018-09-01-preview/hubmigrate.json
-```
-
-### Tag: package-migrate-2020-07
-
-These settings apply only when `--tag=package-migrate-2020-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-migrate-2020-07'
-input-file:
-- Microsoft.OffAzure/stable/2020-07-07/migrate.json
 ```
 
 ### Tag: package-migrateengine-2022-05
