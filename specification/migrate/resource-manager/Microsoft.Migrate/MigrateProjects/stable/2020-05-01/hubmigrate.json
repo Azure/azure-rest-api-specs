@@ -575,8 +575,8 @@
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "summary": "Get the list of private link proxy resources.",
-        "description": "Get the list of private link proxy resources.",
+        "summary": "Get the private link proxy resource.",
+        "description": "Get the of private link proxy resources from a migrate peoject and private link proxy resource.",
         "operationId": "PrivateEndpointConnectionProxyController_Get",
         "parameters": [
           {
@@ -762,7 +762,7 @@
           "PrivateEndpointConnectionProxyController"
         ],
         "summary": "Validates private endpoint connection proxy.",
-        "description": "Validates private endpoint connection proxy",
+        "description": "Validates private endpoint connection using a project and private endpoint connection proxy",
         "operationId": "PrivateEndpointConnectionProxyController_Validate",
         "parameters": [
           {
@@ -883,7 +883,7 @@
           "PrivateLinkResourceController"
         ],
         "summary": "Get the list of private link resources.",
-        "description": "Get the list of private link resources.",
+        "description": "Get the list of private link resources under a resource group and migrate project.",
         "operationId": "PrivateLinkResourceController_ListPrivateLinkResources",
         "parameters": [
           {
@@ -1298,7 +1298,7 @@
           "type": "string",
           "description": "Private link connection state.",
           "x-ms-enum": {
-            "name": "status",
+            "name": "PrivateLinkServiceConnectionState_status",
             "modelAsString": true
           }
         },
@@ -1483,6 +1483,19 @@
         "eTag": {
           "type": "string"
         },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProxyProperties": {
+      "type": "object",
+      "description": "Properties of a private endpoint connection proxy.",
+      "properties": {
         "remotePrivateEndpoint": {
           "$ref": "#/definitions/PrivateEndpointDetails",
           "readOnly": true
@@ -1495,7 +1508,7 @@
             "Running"
           ],
           "x-ms-enum": {
-            "name": "status",
+            "name": "PrivateEndpointConnectionProxyProperties_status",
             "modelAsString": true
           },
           "type": "string",
