@@ -48,21 +48,18 @@
                     "$ref": "#/definitions/Proposals.Proposal"
                   },
                   "x-ms-identifiers": [],
-                  "description": "The Proposal items on this page",
-                  "x-typespec-name": "Proposals.Proposal[]"
+                  "description": "The Proposal items on this page"
                 },
                 "nextLink": {
                   "type": "string",
                   "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                  "description": "The link to the next page of items"
                 }
               },
               "description": "Paged collection of Proposal items",
               "required": [
                 "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Proposals.Proposal, Azure.Core.(anonymous model)>"
+              ]
             }
           },
           "default": {
@@ -934,21 +931,18 @@
                     "$ref": "#/definitions/ServiceState.Member"
                   },
                   "x-ms-identifiers": [],
-                  "description": "The Member items on this page",
-                  "x-typespec-name": "ServiceState.Member[]"
+                  "description": "The Member items on this page"
                 },
                 "nextLink": {
                   "type": "string",
                   "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                  "description": "The link to the next page of items"
                 }
               },
               "description": "Paged collection of Member items",
               "required": [
                 "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<ServiceState.Member, Azure.Core.(anonymous model)>"
+              ]
             }
           },
           "default": {
@@ -1053,21 +1047,18 @@
                     "$ref": "#/definitions/ServiceState.Node"
                   },
                   "x-ms-identifiers": [],
-                  "description": "The Node items on this page",
-                  "x-typespec-name": "ServiceState.Node[]"
+                  "description": "The Node items on this page"
                 },
                 "nextLink": {
                   "type": "string",
                   "format": "uri",
-                  "description": "The link to the next page of items",
-                  "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+                  "description": "The link to the next page of items"
                 }
               },
               "description": "Paged collection of Node items",
               "required": [
                 "value"
-              ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<ServiceState.Node, Azure.Core.(anonymous model)>"
+              ]
             }
           },
           "default": {
@@ -1261,8 +1252,7 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "description": "An array of details about specific errors that led to this reported error."
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1404,8 +1394,7 @@
             "$ref": "#/definitions/Proposals.Action"
           },
           "x-ms-identifiers": [],
-          "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically.",
-          "x-typespec-name": "Proposals.Action[]"
+          "description": "A list of actions to apply. Each action is considered, in order, for both proposal and execution of the proposal. All actions are validated and, if the proposal is accepted, applied atomically."
         }
       },
       "description": "The actions contained in a proposal, describing the proposal's changes.",
@@ -1594,8 +1583,7 @@
             "type": "string",
             "format": "byte"
           },
-          "description": "Code measurements of acceptable enclaves.",
-          "x-typespec-name": "bytes[]"
+          "description": "Code measurements of acceptable enclaves."
         }
       },
       "description": "Describes what a joining node must present, in order to join the service.",
@@ -1611,8 +1599,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.JsOperations"
           },
-          "description": "The collection of endpoints exposed by the application. Keyed by path.",
-          "x-typespec-name": "Record<ServiceState.JsOperations>"
+          "description": "The collection of endpoints exposed by the application. Keyed by path."
         }
       },
       "description": "Describes the currently installed JavaScript application.",
@@ -1640,8 +1627,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The authentication policies which restrict access to this endpoint",
-          "x-typespec-name": "string[]"
+          "description": "The authentication policies which restrict access to this endpoint"
         },
         "mode": {
           "$ref": "#/definitions/ServiceState.JsExecMode",
@@ -1650,8 +1636,7 @@
         "openApi": {
           "type": "object",
           "additionalProperties": true,
-          "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API.",
-          "x-typespec-name": "Record<unknown>"
+          "description": "An OpenAPI Operation object (https://swagger.io/specification/#operation-object) describing this operation. This is merged into the auto-generated OpenAPI to describe the current application's API."
         }
       },
       "description": "Describes an endpoint implemented by a Javascript handler.",
@@ -1709,16 +1694,14 @@
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.JwtIssuer"
           },
-          "description": "Collection of JWT issuers. Keyed by issuer ID.",
-          "x-typespec-name": "Record<ServiceState.JwtIssuer>"
+          "description": "Collection of JWT issuers. Keyed by issuer ID."
         },
         "caCertBundles": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.caCertBundle"
           },
-          "description": "Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names.",
-          "x-typespec-name": "Record<ServiceState.caCertBundle>"
+          "description": "Collection of CAs used to authenticate connections with issuers. Keyed by governance-controlled bundle names."
         }
       },
       "description": "Describes what Javascript Web Tokens (JWTs) are accepted by the service, and how they will be validated.",
@@ -1739,8 +1722,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Collection of claims which must be present in SGX attestation to permit updates from this issuer.",
-          "x-typespec-name": "Record<string>"
+          "description": "Collection of claims which must be present in SGX attestation to permit updates from this issuer."
         },
         "autoRefresh": {
           "type": "boolean",
@@ -1880,8 +1862,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/ServiceState.NetworkInterface"
           },
-          "description": "A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator.",
-          "x-typespec-name": "Record<ServiceState.NetworkInterface>"
+          "description": "A collection of interfaces by which this node may be contacted. Some may be limited to private networks, and others may be DNS names or internet-public network addresses. The keys are arbitrary strings determined by the node operator."
         }
       },
       "description": "Information on individual nodes within a service.",
@@ -1978,8 +1959,7 @@
           "required": [
             "maximumNodeCertificateValidityDays",
             "recentCoseProposalsWindowSize"
-          ],
-          "x-typespec-name": "ServiceState.(anonymous model)"
+          ]
         }
       },
       "description": "General information about the current service.",
@@ -2062,8 +2042,7 @@
             "type": "string",
             "format": "byte"
           },
-          "description": "Code measurements of acceptable enclaves.",
-          "x-typespec-name": "bytes[]"
+          "description": "Code measurements of acceptable enclaves."
         },
         "hostData": {
           "type": "object",
@@ -2071,8 +2050,7 @@
             "type": "string",
             "format": "byte"
           },
-          "description": "Collection of acceptable host data values.",
-          "x-typespec-name": "Record<bytes>"
+          "description": "Collection of acceptable host data values."
         },
         "uvmEndorsements": {
           "type": "object",
@@ -2080,8 +2058,7 @@
             "type": "string",
             "format": "byte"
           },
-          "description": "Collection of acceptable UVM endorsements.",
-          "x-typespec-name": "Record<bytes>"
+          "description": "Collection of acceptable UVM endorsements."
         }
       },
       "description": "Join policy fields specific to nodes running on AMD SEV-SNP hardware.",
