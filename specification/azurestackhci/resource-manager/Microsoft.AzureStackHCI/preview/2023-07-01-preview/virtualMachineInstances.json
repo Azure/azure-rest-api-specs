@@ -712,7 +712,7 @@
     }
   },
   "definitions": {
-    "VirtualMachineInstanceProperties.": {
+    "VirtualMachineInstanceProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -980,12 +980,16 @@
         "status": {
           "$ref": "#/definitions/VirtualMachineInstanceStatus"
         },
+        "guestAgentInstallStatus": {
+          "description": "Guest agent install status.",
+          "$ref": "#/definitions/GuestAgentInstallStatus"
+        },
         "vmId": {
           "description": "Unique identifier for the vm resource.",
           "type": "string",
           "readOnly": true
         },
-        "arcVmId": {
+        "resourceUid": {
           "description": "Unique identifier defined by ARC to identify the guest of the VM.",
           "type": "string"
         }
@@ -1080,7 +1084,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineInstanceProperties."
+          "$ref": "#/definitions/VirtualMachineInstanceProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
@@ -1322,6 +1326,50 @@
         },
         "nextLink": {
           "type": "string"
+        }
+      }
+    },
+    "GuestAgentInstallStatus": {
+      "description": "Defines the status of a guest agent installation.",
+      "type": "object",
+      "properties": {
+        "vmUuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the VM's unique SMBIOS ID."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The installation status of the hybrid machine agent installation.",
+          "enum": [
+            "Succeeded",
+            "InProgress",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "StatusTypes",
+            "modelAsString": true
+          }
+        },
+        "lastStatusChange": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the last status change."
+        },
+        "agentVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hybrid machine agent full version."
+        },
+        "errorDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          },
+          "description": "Details about the error state."
         }
       }
     },
