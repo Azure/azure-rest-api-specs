@@ -15,7 +15,6 @@ batch:
   - tag: package-migrate-2020-07
   - tag: package-hubmigrate-2020-05
   - tag: package-migrateengine-2022-05
-  - tag: package-hubmigrate-2018-09
 ```
 
 ### Tag: package-migrate-2018-02 and java
