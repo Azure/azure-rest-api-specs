@@ -178,10 +178,11 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
+            "description": "A single conversational task to execute.",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -202,6 +203,17 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Orchestration direct target result": {
+            "$ref": "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
+          },
+          "Orchestration result": {
+            "$ref": "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
+          },
+          "Conversation project result": {
+            "$ref": "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json"
           }
         }
       }
