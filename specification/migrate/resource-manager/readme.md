@@ -15,7 +15,7 @@ batch:
   - tag: package-migrate-2020-07
   - tag: package-hubmigrate-2020-05
   - tag: package-migrateengine-2022-05
-  - tag: package-hubmigrate-2018-09-preview
+  - tag: package-hubmigrate-2018-09
 ```
 
 ### Tag: package-migrate-2018-02 and java
@@ -96,15 +96,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-hubmigrate-2018-09-preview and java
+### Tag: package-hubmigrate-2018-09 and java
 
-These settings apply only when `--tag=package-hubmigrate-2018-09-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-hubmigrate-2018-09 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-hubmigrate-2018-09-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-hubmigrate-2018-09' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.V2018_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-V2018_09_01_preview
+  namespace: com.microsoft.azure.management.azuremigrate.V2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-V2018_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -168,11 +168,11 @@ input-file:
 - Microsoft.Migrate/MigrateProjects/stable/2020-05-01/hubmigrate.json
 ```
 
-### Tag: package-hubmigrate-2018-09-preview
+### Tag: package-hubmigrate-2018-09
 
-These settings apply only when `--tag=package-hubmigrate-2018-09-preview` is specified on the command line.
+These settings apply only when `--tag=package-hubmigrate-2018-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-hubmigrate-2018-09-preview'
+``` yaml $(tag) == 'package-hubmigrate-2018-09'
 input-file:
 - Microsoft.Migrate/MigrateProjects/preview/2018-09-01-preview/hubmigrate.json
 ```
