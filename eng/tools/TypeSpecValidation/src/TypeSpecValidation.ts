@@ -1,5 +1,6 @@
 import {exec} from "child_process";
-import {promises as fsp} from "fs"
+import {access} from "fs/promises"
+import {parseArgs, ParseArgsConfig} from 'node:util';
 import path from "path";
 import {simpleGit} from 'simple-git';
 
@@ -27,14 +28,21 @@ async function runCmd(cmd:string, cwd:string) {
 }
 
 async function checkFileExists(file:string) {
-    return fsp.access(file)
+    return access(file)
         .then(() => true)
         .catch(() => false)
 }
     
 export async function main() {
     const args = process.argv.slice(2);
-    const folder = args[0];
+    const options = {
+        folder: {
+          type: 'string',
+          short: 'f',
+        },
+    };
+    const parsedArgs = parseArgs({ args, options, allowPositionals: true} as ParseArgsConfig);
+    const folder = parsedArgs.positionals[0];
     console.log("Running TypeSpecValidation on folder:", folder);
 
     // Verify all specs are using root level pacakge.json
