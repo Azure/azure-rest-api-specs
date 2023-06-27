@@ -471,16 +471,34 @@
 			"type": "object",
 			"description": "The integration additional data (abstract)",
 			"discriminator": "integrationPlatform",
-			"x-abstract": true
+			"properties": {
+			  "integrationPlatform": {
+				"type": "string",
+				"description": "Describes the integration platform",
+				"enum": [
+				  "ServiceNow"
+				],
+				"x-ms-enum": {
+				  "name": "integrationPlatforms",
+				  "modelAsString": true
+				}
+			  }
+			},
+			"additionalProperties": {
+			  "description": "Additional data for concrete integration platfom"
+			},
+			"required": [
+			  "type"
+			]
 		},
 		"ServiceNowAdditionalData": {
 			"description": "Service Now specific additional data",
+			"x-ms-discriminator-value": "ServiceNow",
 			"allOf": [
 				{
 					"$ref": "#/definitions/IntegrationAdditionalData"
 				},
 				{
-					"type": "object",
 					"properties": {
 						"instanceUrl": {
 							"description": "Integration creation date",
