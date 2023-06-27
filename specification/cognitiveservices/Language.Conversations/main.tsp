@@ -826,15 +826,15 @@ interface ConversationAnalysis {
   @TypeSpec.Rest.actionSeparator("/:")
   @TypeSpec.Rest.action("analyze-conversations")
   @example(
-    "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
+    "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
     "Conversation project result"
   )
   @example(
-    "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitration.json",
+    "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitration.json",
     "Orchestration result"
   )
   @example(
-    "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
+    "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
     "Orchestration direct target result"
   )
   analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
