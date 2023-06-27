@@ -1,5 +1,3 @@
-// no-op
-
 import "@azure-tools/typespec-client-generator-core";
 import "./route.trialmatcher.tsp";
 
@@ -20,7 +18,7 @@ namespace ClientForAzureHealthInsights;
   name: "ClinicalMatchingClient",
   service: AzureHealthInsights,
 })
-interface ClinicalMatchingClient {
+interface ClinicalMatchingClient2 {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
   matchTrials is AzureHealthInsights.TrialMatcher.createJob;
 }
