@@ -107,7 +107,7 @@
         "description": "Updates the GroupQuotas for the name passed. A GroupQuotas RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked. \n Any change in the filters will be applicable to the future quota assignments, existing quota assigned to subscriptions from the GroupQuotas remains unchanged.",
         "operationId": "GroupQuotas_Update",
         "x-ms-examples": {
-          "GroupQuotaLimits_Put_Request_ForCompute": {
+          "GroupQuotaLimits_Get_Request_ForCompute": {
             "$ref": "./examples/PatchGroupQuotas.json"
           }
         },
@@ -1480,7 +1480,7 @@
           "type": "string",
           "readOnly": true
         },
-        "properties": {
+        "additionalProperties": {
           "description": "Group Quota properties for the specified resource.",
           "$ref": "#/definitions/SubscriptionQuotaDetails"
         }
@@ -1764,12 +1764,7 @@
       "x-ms-parameter-location": "method"
     },
     "SubscriptionIdInParameters": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription Id.",
-      "x-ms-parameter-location": "method"
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SubscriptionIdParameter"
     },
     "MgIdInParameters": {
       "name": "mgId",
@@ -1791,13 +1786,7 @@
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "client",
-      "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2023-06-01-preview.",
-      "minLength": 1
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ApiVersionParameter"
     },
     "ScopeInParameters": {
       "name": "resourceProviderScope",
