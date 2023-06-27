@@ -54,5 +54,5 @@ model Deployment {
   @visibility("read")
   @doc("deployment id of the deployed model")
   @key
-  deploymentId: string;
+  deploymentOrModelName: string;
 }
