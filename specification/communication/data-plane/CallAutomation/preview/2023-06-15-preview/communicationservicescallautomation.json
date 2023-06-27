@@ -680,6 +680,20 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
           }
         ],
         "responses": {
@@ -690,7 +704,10 @@
             }
           },
           "202": {
-            "description": "Returns the send dtmf response"
+            "description": "Returns the send dtmf response",
+            "schema": {
+              "$ref": "#/definitions/SendDtmfResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1539,6 +1556,10 @@
         "voiceName": {
           "description": "Voice name to be played\r\nRefer to available Text-to-speech voices here: <seealso href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=stt-tts\" />",
           "type": "string"
+        },
+        "customVoiceEndpointId": {
+          "description": "Endpoint where the custom voice was deployed.",
+          "type": "string"
         }
       }
     },
@@ -1550,6 +1571,10 @@
       "properties": {
         "ssmlText": {
           "description": "Ssml string for the cognitive service to be played",
+          "type": "string"
+        },
+        "customVoiceEndpointId": {
+          "description": "Endpoint where the custom voice was deployed.",
           "type": "string"
         }
       }
@@ -1619,6 +1644,10 @@
         },
         "speechLanguage": {
           "description": "Speech language to be recognized, If not set default is en-US",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
           "type": "string"
         },
         "dtmfOptions": {
@@ -1758,6 +1787,15 @@
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "SendDtmfResponse": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "The operation context provided by client.",
           "type": "string"
         }
       }
