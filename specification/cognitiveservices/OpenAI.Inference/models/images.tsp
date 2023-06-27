@@ -50,7 +50,7 @@ model ImageLocation {
 
 @doc("The result of the operation if the operation succeeded.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-model ImageLocationResult {
+model ImageGenerations {
   @doc("A timestamp when this job or item was created (in unix epochs).")
   created: int64;
 
@@ -75,7 +75,7 @@ model BatchImageGenerationOperationResponse {
   expires?: int64;
 
   @doc("The result of the operation if the operation succeeded.")
-  result?: ImageLocationResult;
+  result?: ImageGenerations;
 
   @doc("The status of the operation")
   status: AzureOpenAIOperationState;
