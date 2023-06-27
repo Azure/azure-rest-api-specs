@@ -8,6 +8,7 @@ import "./common.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Autorest;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
