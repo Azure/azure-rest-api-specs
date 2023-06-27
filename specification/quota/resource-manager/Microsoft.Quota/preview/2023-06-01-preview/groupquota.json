@@ -1763,14 +1763,13 @@
       "description": "Resource allocation Id.",
       "x-ms-parameter-location": "method"
     },
-    "SubscriptionIdInParameters": {
-      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/SubscriptionIdParameter"
-    },
     "MgIdInParameters": {
       "name": "mgId",
       "in": "path",
       "required": true,
       "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
       "description": "Management Group Id.",
       "x-ms-parameter-location": "method"
     },
