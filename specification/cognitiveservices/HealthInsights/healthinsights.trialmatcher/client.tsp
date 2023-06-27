@@ -1,3 +1,5 @@
+// no-op
+
 import "@azure-tools/typespec-client-generator-core";
 import "./route.trialmatcher.tsp";
 
