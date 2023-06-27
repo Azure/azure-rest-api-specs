@@ -60,7 +60,7 @@ export async function main() {
     }
 
     // Format parent folder to include shared files
-    const output = await runCmd(
+    await runCmd(
         `npx tsp format ../**/*.tsp`,
         folder
     );
