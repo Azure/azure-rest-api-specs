@@ -643,6 +643,10 @@
       "type": "object",
       "description": "Resource usage and limit.",
       "properties": {
+        "id": {
+          "description": "Fully qualified ID.",
+          "type": "string"
+        },
         "unit": {
           "readOnly": true,
           "type": "string",
@@ -686,6 +690,12 @@
           },
           "x-ms-identifiers": [],
           "description": "The list of resource usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of results (if there are any).",
+          "readOnly": true
         }
       },
       "required": [

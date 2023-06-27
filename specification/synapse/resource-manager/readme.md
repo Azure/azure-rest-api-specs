@@ -56,6 +56,8 @@ input-file:
   - Microsoft.Synapse/stable/2023-05-01/sqlPool.json
   - Microsoft.Synapse/stable/2023-05-01/sqlServer.json
   - Microsoft.Synapse/stable/2023-05-01/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
 ```
 ### Tag: package-composite-v2
 
