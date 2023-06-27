@@ -567,7 +567,15 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyController_ListPrivateEndpointConnectionProxies_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_ListPrivateEndpointConnectionProxies_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxyController_ListPrivateEndpointConnectionProxies_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_ListPrivateEndpointConnectionProxies_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/privateEndpointConnectionProxies/{pecProxyName}": {
@@ -576,7 +584,7 @@
           "PrivateEndpointConnectionProxyController"
         ],
         "summary": "Get the private link proxy resource.",
-        "description": "Get the of private link proxy resources from a migrate peoject and private link proxy resource.",
+        "description": "Get the of private link proxy resources from a migrate project and private link proxy resource.",
         "operationId": "PrivateEndpointConnectionProxyController_Get",
         "parameters": [
           {
@@ -1112,7 +1120,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1249,7 +1257,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1466,6 +1474,7 @@
     },
     "PrivateEndpointConnectionProxy": {
       "description": "Defines Private endpoint proxy resource.",
+      "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
         "id": {
@@ -1487,7 +1496,7 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProxyProperties"
         },
         "systemData": {
-          "$ref": "#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1744,59 +1753,6 @@
         },
         "nextLink": {
           "type": "string"
-        }
-      }
-    },
-    "systemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
         }
       }
     }
