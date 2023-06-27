@@ -899,7 +899,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/startAccountMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/startAccountMigration": {
       "post": {
         "tags": [
           "AccountMigrations"
@@ -996,6 +996,12 @@
             "description": "OK -- Get the details of the ongoing or completed migration successfully.",
             "schema": {
               "$ref": "#/definitions/StorageAccountMigration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
