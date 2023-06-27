@@ -1,5 +1,5 @@
 import {exec} from "child_process";
-import fs from "fs";
+import {promises as fsp} from "fs"
 import path from "path";
 import {simpleGit} from 'simple-git';
 
@@ -25,6 +25,12 @@ async function runCmd(cmd:string, cwd:string) {
     }
     return resultString as string;
 }
+
+async function checkFileExists(file:string) {
+    return fsp.access(file)
+        .then(() => true)
+        .catch(() => false)
+}
     
 export async function main() {
     const args = process.argv.slice(2);
@@ -40,13 +46,13 @@ export async function main() {
     }
 
     // Spec compilation check
-    if (fs.existsSync(path.join(folder, "main.tsp"))) {
+    if (await checkFileExists(path.join(folder, "main.tsp"))) {
         await runCmd(
             `npx --no tsp compile . --warn-as-error`,
             folder
         );
     }
-    if (fs.existsSync(path.join(folder, "client.tsp"))) {
+    if (await checkFileExists(path.join(folder, "client.tsp"))) {
         await runCmd(
             `npx --no tsp compile client.tsp --no-emit --warn-as-error`,
             folder
