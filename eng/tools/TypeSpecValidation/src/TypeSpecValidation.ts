@@ -38,7 +38,7 @@ export async function main() {
     console.log("Running TypeSpecValidation on folder:", folder);
 
     // Verify all specs are using root level pacakge.json
-    let expected_npm_prefix = process.cwd().trim()
+    let expected_npm_prefix = process.cwd()
     const actual_npm_prefix = (await runCmd(`npm prefix`, folder)).trim()
     if (expected_npm_prefix !== actual_npm_prefix) {
         console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.")
