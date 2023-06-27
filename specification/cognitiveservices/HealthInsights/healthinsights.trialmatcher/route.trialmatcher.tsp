@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-autorest";
 import "@typespec/rest";
 import "@typespec/http";
 
@@ -9,7 +8,6 @@ import "../healthinsights.common/primitives.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Autorest;
 
 namespace AzureHealthInsights;
 
