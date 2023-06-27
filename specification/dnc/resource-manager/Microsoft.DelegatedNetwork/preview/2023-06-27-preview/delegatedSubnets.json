@@ -425,6 +425,14 @@
         "controllerDetails": {
           "$ref": "./common-types.json#/definitions/controllerDetails",
           "description": "Properties of the controller."
+        },
+        "allocationBlockPrefixSize": {
+          "description": "Defines size of CIDR blocks allocated to nodes in VnetBlock Mode.",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 32,
+          "minimum": 12,
+          "default": 32
         }
       }
     },
