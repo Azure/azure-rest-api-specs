@@ -1,5 +1,3 @@
-// no-op
-
 import "@azure-tools/typespec-client-generator-core";
 import "./route.oncophenotype.tsp";
 
@@ -20,7 +18,7 @@ namespace ClientForAzureHealthInsights;
   name: "CancerProfilingClient",
   service: AzureHealthInsights,
 })
-interface CancerProfilingClient {
+interface CancerProfilingClient2 {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
   inferCancerProfile is AzureHealthInsights.OncoPhenotype.createJob;
 }
