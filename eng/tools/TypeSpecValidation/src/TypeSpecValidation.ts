@@ -46,7 +46,7 @@ export async function main() {
     console.log("Running TypeSpecValidation on folder:", folder);
 
     // Verify all specs are using root level pacakge.json
-    let expected_npm_prefix = process.cwd().trim()
+    let expected_npm_prefix = process.cwd()
     const actual_npm_prefix = (await runCmd(`npm prefix`, folder)).trim()
     if (expected_npm_prefix !== actual_npm_prefix) {
         console.log("ERROR: TypeSpec folders MUST NOT contain a package.json, and instead MUST rely on the package.json at repo root.")
@@ -67,12 +67,11 @@ export async function main() {
         );
     }
 
-    // TODO: enable this after tsp format hotfix is merged
     // Format parent folder to include shared files
-    // const output = await runCmd(
-    //     `npx tsp format ../**/*.tsp`,
-    //     folder
-    // );
+    await runCmd(
+        `npx tsp format ../**/*.tsp`,
+        folder
+    );
 
     // Verify generated swagger file is in sync with one on disk
     const git = simpleGit();
