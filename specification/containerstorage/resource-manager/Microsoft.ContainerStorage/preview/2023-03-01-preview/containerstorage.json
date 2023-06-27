@@ -1250,8 +1250,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "List of KV pairs to set in StorageClass to configure CSI driver.",
-          "x-typespec-name": "Record<string>"
+          "description": "List of KV pairs to set in StorageClass to configure CSI driver."
         },
         "maxVolumeCapacityGiB": {
           "type": "integer",
@@ -1264,8 +1263,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
-          "x-typespec-name": "string[]"
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
         }
       },
       "description": "Disk Pool Properties"
@@ -1405,16 +1403,14 @@
           "items": {
             "type": "string"
           },
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
-          "x-typespec-name": "string[]"
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks."
         },
         "disks": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
-          "x-typespec-name": "string[]"
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
         },
         "diskFormat": {
           "type": "boolean",
@@ -1436,16 +1432,14 @@
           "items": {
             "type": "string"
           },
-          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks.",
-          "x-typespec-name": "string[]"
+          "description": "Template name or KV pairs containing disk selection criteria, e.g. model=\"Microsoft NVMe Direct Disk\" to match all Lsv2 NVMe disks."
         },
         "disks": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags).",
-          "x-typespec-name": "string[]"
+          "description": "Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying multiple disks (same syntax as tags)."
         },
         "diskFormat": {
           "type": "boolean",
@@ -1472,8 +1466,7 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
           },
-          "description": "Virtual network rules",
-          "x-typespec-name": "VirtualNetworkRule[]"
+          "description": "Virtual network rules"
         }
       },
       "description": "Network Rule Set definition",
@@ -1533,14 +1526,12 @@
           "items": {
             "$ref": "#/definitions/Pool"
           },
-          "description": "The Pool items on this page",
-          "x-typespec-name": "Pool[]"
+          "description": "The Pool items on this page"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
       "description": "The response of a Pool list operation.",
@@ -1565,8 +1556,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of availability zones that resources can be created in.",
-          "x-typespec-name": "string[]"
+          "description": "List of availability zones that resources can be created in."
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1578,8 +1568,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
-          "x-typespec-name": "string[]"
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many."
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolProperties",
@@ -1647,8 +1636,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags.",
-          "x-typespec-name": "Record<string>"
+          "description": "Resource tags."
         },
         "properties": {
           "$ref": "#/definitions/PoolUpdateProperties",
@@ -1669,8 +1657,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of availability zones that resources can be created in.",
-          "x-typespec-name": "string[]"
+          "description": "List of availability zones that resources can be created in."
         },
         "poolCapacityGiB": {
           "type": "integer",
@@ -1682,8 +1669,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many.",
-          "x-typespec-name": "string[]"
+          "description": "List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups. For local and standard this must be a single reference. For portable there can be many."
         },
         "ephemeralPoolProperties": {
           "$ref": "#/definitions/EphemeralPoolPropertiesUpdate",
@@ -1920,14 +1906,12 @@
           "items": {
             "$ref": "#/definitions/Volume"
           },
-          "description": "The Volume items on this page",
-          "x-typespec-name": "Volume[]"
+          "description": "The Volume items on this page"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
       "description": "The response of a Volume list operation.",
@@ -1972,8 +1956,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "String KV pairs indicating labels",
-          "x-typespec-name": "Record<string>"
+          "description": "String KV pairs indicating labels"
         },
         "capacityGiB": {
           "type": "integer",
@@ -1993,8 +1976,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          "description": "List of string mount options"
         }
       },
       "description": "Volume Properties",
@@ -2034,14 +2016,12 @@
           "items": {
             "$ref": "#/definitions/VolumeSnapshot"
           },
-          "description": "The VolumeSnapshot items on this page",
-          "x-typespec-name": "VolumeSnapshot[]"
+          "description": "The VolumeSnapshot items on this page"
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
+          "description": "The link to the next page of items"
         }
       },
       "description": "The response of a VolumeSnapshot list operation.",
@@ -2074,8 +2054,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          "description": "List of string mount options"
         }
       },
       "description": "Volume Snapshot Properties",
@@ -2116,8 +2095,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          "description": "List of string mount options"
         }
       },
       "description": "The updatable properties of the VolumeSnapshot."
@@ -2140,8 +2118,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "String KV pairs indicating labels",
-          "x-typespec-name": "Record<string>"
+          "description": "String KV pairs indicating labels"
         },
         "capacityGiB": {
           "type": "integer",
@@ -2161,8 +2138,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of string mount options",
-          "x-typespec-name": "string[]"
+          "description": "List of string mount options"
         }
       },
       "description": "The updatable properties of the Volume."
