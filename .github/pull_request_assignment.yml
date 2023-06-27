@@ -73,6 +73,14 @@
       - tjprescott
 
 - rule:
+    # resource management plane typespec PR's
+    paths:
+      - "specification/**/*Management/**"
+      - "specification/**/*Management.Shared/**"
+    reviewers:
+      - rkmanda
+      
+- rule:
     paths:
         - "specification/**/*.cadl"
         - "specification/**/*.tsp"
@@ -121,10 +129,8 @@
       - konrad-jamrozik
       
 - rule:
-    # resource management plane PR's
+    # resource management plane swagger PR's
     paths:
-      - "specification/**/*Management/**"
-      - "specification/**/*Management.Shared/**"
       - "specification/**/resource-manager/**"
       - "specification/common-types/resource-management/**"
     reviewers:
