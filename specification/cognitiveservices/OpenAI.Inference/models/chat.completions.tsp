@@ -50,6 +50,14 @@ model ChatCompletionsOptions {
   maxTokens?: int32;
 
   @doc("""
+    Information about the content filtering category (hate, sexual, violence, self_harm), if it 
+    has been detected, as well as the severity level (very_low, low, medium, high-scale that 
+    determines the intensity and risk level of harmful content) and if it has been filtered or not.
+    """)
+  @projectedName("json","contentFilterResults")
+  annotation?: string;
+
+  @doc("""
     The sampling temperature to use that controls the apparent creativity of generated completions.
     Higher values will make output more random while lower values will make results more focused
     and deterministic.
