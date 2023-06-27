@@ -39,7 +39,6 @@ input-file:
   - Dynatrace.Observability/stable/2023-04-27/dynatrace.json
 suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: Dynatrace.Observability/stable/2023-04-27/dynatrace.json
     reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
@@ -52,7 +51,6 @@ input-file:
   - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
 suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: Dynatrace.Observability/stable/2021-09-01/dynatrace.json
     reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
@@ -63,6 +61,9 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
   - Dynatrace.Observability/preview/2021-09-01-preview/dynatrace.json
+suppressions:
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
 ---
