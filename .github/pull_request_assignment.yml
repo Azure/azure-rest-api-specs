@@ -1,15 +1,5 @@
 ---
 - rule:
-    # resource management plane PR's
-    paths:
-      - "specification/**/*Management/**"
-      - "specification/**/*Management.Shared/**"
-      - "specification/**/resource-manager/**"
-      - "specification/common-types/resource-management/**"
-    reviewers:
-      - rkmanda
-
-- rule:
     # translator data-plane PR
     paths:
       - "specification/cognitiveservices/data-plane/TranslatorText/**"
@@ -129,7 +119,17 @@
     reviewers:
       - weshaggard
       - konrad-jamrozik
-
+      
+- rule:
+    # resource management plane PR's
+    paths:
+      - "specification/**/*Management/**"
+      - "specification/**/*Management.Shared/**"
+      - "specification/**/resource-manager/**"
+      - "specification/common-types/resource-management/**"
+    reviewers:
+      - rkmanda
+      
 - rule:
     # temporary catchall
     paths:
