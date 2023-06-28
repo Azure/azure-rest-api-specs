@@ -111,6 +111,10 @@
           "List all rooms.": {
             "$ref": "./examples/Rooms_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -312,6 +316,10 @@
           "Get participants": {
             "$ref": "./examples/Participants_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       },
       "patch": {
@@ -403,15 +411,23 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ParticipantProperties"
+          },
+          "example": {
+            "rawId1": {
+              "role": "Presenter"
+            },
+            "rawId2": {
+              "role": "Attendee"
+            },
+            "rawId3": null
           }
         }
       }
     },
-    "UpdateParticipantsResult": {
-      "description": "Request response for updating participants.",
-      "type": "object"
-    },
     "ParticipantProperties": {
+      "required": [
+        "role"
+      ],
       "type": "object",
       "properties": {
         "role": {
@@ -427,7 +443,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "A collection of participants",
+          "description": "A collection of participants.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
@@ -436,28 +452,6 @@
         "nextLink": {
           "description": "If there are more participants that can be retrieved, the next link will be populated.",
           "type": "string"
-        }
-      }
-    },
-    "UpdateParticipantsRequest": {
-      "description": "Participants to be updated in the room.",
-      "type": "object",
-      "properties": {
-        "participants": {
-          "description": "Participants to be updated.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ParticipantProperties"
-          },
-          "example": {
-            "rawId1": {
-              "role": "Presenter"
-            },
-            "rawId2": {
-              "role": "Attendee"
-            },
-            "rawId3": null
-          }
         }
       }
     },
@@ -478,8 +472,8 @@
       "description": "The meeting room.",
       "type": "object",
       "required": [
-        "id",
         "createdAt",
+        "id",
         "validFrom",
         "validUntil"
       ],
@@ -545,6 +539,32 @@
           "type": "string"
         }
       }
+    },
+    "UpdateParticipantsRequest": {
+      "description": "Participants to be updated in the room.",
+      "type": "object",
+      "properties": {
+        "participants": {
+          "description": "Participants to be updated.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParticipantProperties"
+          },
+          "example": {
+            "rawId1": {
+              "role": "Presenter"
+            },
+            "rawId2": {
+              "role": "Attendee"
+            },
+            "rawId3": null
+          }
+        }
+      }
+    },
+    "UpdateParticipantsResult": {
+      "description": "Request response for updating participants.",
+      "type": "object"
     },
     "UpdateRoomRequest": {
       "description": "Request payload for updating a room.",
