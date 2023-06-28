@@ -2069,7 +2069,7 @@
       "description": "Response payload from declining a job",
       "type": "object"
     },
-    "DirectMapRule": {
+    "DirectMapRouterRule": {
       "description": "A rule that return the same labels as the input labels.",
       "type": "object",
       "allOf": [
@@ -2269,7 +2269,7 @@
       },
       "discriminator": "kind"
     },
-    "ExpressionRule": {
+    "ExpressionRouterRule": {
       "description": "A rule providing inline expression rules.",
       "required": [
         "expression"
@@ -2291,7 +2291,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ExpressionLanguage",
+            "name": "ExpressionRouterRuleLanguage",
             "modelAsString": true
           }
         },
@@ -2304,7 +2304,7 @@
       },
       "x-ms-discriminator-value": "expression-rule"
     },
-    "FunctionRule": {
+    "FunctionRouterRule": {
       "description": "A rule providing a binding to an HTTP Triggered Azure Function.",
       "required": [
         "functionUri"
@@ -2325,12 +2325,12 @@
           "type": "string"
         },
         "credential": {
-          "$ref": "#/definitions/FunctionRuleCredential"
+          "$ref": "#/definitions/FunctionRouterRuleCredential"
         }
       },
       "x-ms-discriminator-value": "azure-function-rule"
     },
-    "FunctionRuleCredential": {
+    "FunctionRouterRuleCredential": {
       "description": "Credentials used to access Azure function rule",
       "type": "object",
       "properties": {
@@ -2351,33 +2351,6 @@
           "maxLength": 500,
           "minLength": 0,
           "type": "string"
-        }
-      }
-    },
-    "JobMatchingMode": {
-      "description": "",
-      "type": "object",
-      "properties": {
-        "modeType": {
-          "enum": [
-            "queueAndMatchMode",
-            "scheduleAndSuspendMode",
-            "suspendMode"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobMatchModeType",
-            "modelAsString": true
-          }
-        },
-        "queueAndMatchMode": {
-          "$ref": "#/definitions/QueueAndMatchMode"
-        },
-        "scheduleAndSuspendMode": {
-          "$ref": "#/definitions/ScheduleAndSuspendMode"
-        },
-        "suspendMode": {
-          "$ref": "#/definitions/SuspendMode"
         }
       }
     },
@@ -2537,10 +2510,6 @@
         }
       },
       "x-ms-discriminator-value": "pass-through"
-    },
-    "QueueAndMatchMode": {
-      "description": "",
-      "type": "object"
     },
     "QueueLengthExceptionTrigger": {
       "description": "Trigger for an exception action on exceeding queue length",
@@ -2756,14 +2725,14 @@
             "type": "string"
           }
         },
-        "scheduledAt": {
+        "unavailableForMatching": {
+          "description": "A flag indicating this job is ready for being matched with workers.\r\nWhen set to true, job matching will not be started. If set to false, job matching will start automatically",
+          "type": "boolean"
+        },
+        "scheduledTimeUtc": {
           "format": "date-time",
           "description": "If set, job will be scheduled to be enqueued at a given time",
-          "type": "string",
-          "readOnly": true
-        },
-        "matchingMode": {
-          "$ref": "#/definitions/JobMatchingMode"
+          "type": "string"
         }
       }
     },
@@ -3305,15 +3274,6 @@
       },
       "x-ms-discriminator-value": "rule-engine"
     },
-    "ScheduleAndSuspendMode": {
-      "type": "object",
-      "properties": {
-        "scheduleAt": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
     "ScoringRuleOptions": {
       "description": "Encapsulates all options that can be passed as parameters for scoring rule with BestWorkerMode",
       "type": "object",
@@ -3371,7 +3331,7 @@
       },
       "x-ms-discriminator-value": "static"
     },
-    "StaticRule": {
+    "StaticRouterRule": {
       "description": "A rule providing static rules that always return the same result, regardless of input.",
       "type": "object",
       "allOf": [
@@ -3413,9 +3373,6 @@
         }
       },
       "x-ms-discriminator-value": "static"
-    },
-    "SuspendMode": {
-      "type": "object"
     },
     "UnassignJobRequest": {
       "description": "Request payload for unassigning a job.",
@@ -3471,7 +3428,7 @@
       },
       "x-ms-discriminator-value": "wait-time"
     },
-    "WebhookRule": {
+    "WebhookRouterRule": {
       "description": "A rule providing a binding to an external web server.",
       "type": "object",
       "allOf": [
