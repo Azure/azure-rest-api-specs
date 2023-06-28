@@ -1,38 +1,38 @@
 {
-"swagger": "2.0",
-  "info": {
-    "title": "Microsoft Defender for Cloud",
-    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2023-07-01-preview"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
+	"swagger": "2.0",
+	"info": {
+		"title": "Microsoft Defender for Cloud",
+		"description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+		"version": "2023-07-01-preview"
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
 	"paths": {
 		"/{scope}/providers/Microsoft.Security/integrations": {
 			"get": {
@@ -253,21 +253,21 @@
 				],
 				"responses": {
 					"202": {
-					  "description": "Accepted - The operation still in progress"
+						"description": "Accepted - The operation still in progress"
 					},
 					"204": {
-					  "description": "No Content - Integration does not exist"
+						"description": "No Content - Integration does not exist"
 					},
 					"200": {
-					  "description": "Success - Integration was deleted"
+						"description": "Success - Integration was deleted"
 					},
 					"default": {
-					  "description": "Error response describing why the operation failed.",
-					  "schema": {
-						"$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-					  }
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+						}
 					}
-				  },
+				},
 				"x-ms-long-running-operation": true,
 				"x-ms-long-running-operation-options": {
 					"final-state-via": "location"
@@ -415,8 +415,8 @@
 				"integrationAdditionalData": {
 					"type": "object",
 					"description": "Additional data",
-						"$ref": "#/definitions/IntegrationAdditionalData"
-					}
+					"$ref": "#/definitions/IntegrationAdditionalData"
+				}
 			},
 			"required": [
 				"displayName",
@@ -474,13 +474,13 @@
 			"description": "The integration additional data (abstract)",
 			"discriminator": "integrationPlatform",
 			"properties": {
-			  "integrationPlatform": {
-				"type": "string",
-				"description": "Describes the integration platform"
-			  }
+				"integrationPlatform": {
+					"type": "string",
+					"description": "Describes the integration platform"
+				}
 			},
 			"required": [
-			  "integrationPlatform"
+				"integrationPlatform"
 			]
 		},
 		"ServiceNowAdditionalData": {
@@ -605,6 +605,10 @@
 			"items": {
 				"type": "string"
 			}
+		},
+		"NamePrefix": {
+			"type": "string",
+			"description": "User names prefix"
 		}
 	},
 	"parameters": {
@@ -648,7 +652,9 @@
 			"name": "namePrefix",
 			"in": "body",
 			"required": true,
-			"type": "string",
+			"schema": {
+				"$ref": "#/definitions/NamePrefix"
+			},
 			"description": "Prefix of user names to get",
 			"x-ms-parameter-location": "method"
 		}
