@@ -272,8 +272,8 @@
           "Insights"
         ],
         "operationId": "Insights_Update",
-        "summary": "Patches tags field of Workload Insights instance.",
-        "description": "Patches the tags field of Workload Insights instance for the specified subscription, resource group, and instance name.",
+        "summary": "Patches tags field and managed identity field of Workload Insights instance.",
+        "description": "Patches the tags field and managed identity field of Workload Insights instance for the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
           "Update Tags field of a Workload Insights instance": {
             "$ref": "./examples/insights/insights_PatchTags.json"
@@ -343,6 +343,9 @@
         }
       ],
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "description": "Insight Instance properties",
           "x-ms-client-flatten": true,
@@ -787,6 +790,9 @@
       "description": "Workload insight instance update request.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "tags": {
           "description": "Gets or sets the Resource tags.",
           "type": "object",
