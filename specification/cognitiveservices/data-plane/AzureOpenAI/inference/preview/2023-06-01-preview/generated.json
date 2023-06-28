@@ -212,38 +212,6 @@
         }
       }
     },
-    "/images/generations": {
-      "post": {
-        "operationId": "GetImageGenerations",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "imageGenerationOptions": {
-                  "$ref": "#/definitions/ImageGenerationOptions"
-                }
-              },
-              "required": [
-                "imageGenerationOptions"
-              ],
-              "x-typespec-name": "(anonymous model)"
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ImageGenerations"
-            }
-          }
-        }
-      }
-    },
     "/images/generations:submit": {
       "post": {
         "operationId": "BeginAzureBatchImageGeneration",
