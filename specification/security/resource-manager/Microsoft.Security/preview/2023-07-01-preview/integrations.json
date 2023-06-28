@@ -413,7 +413,11 @@
 					"$ref": "#/definitions/IntegrationMetadata"
 				},
 				"integrationAdditionalData": {
-					"$ref": "#/definitions/IntegrationAdditionalData"
+					"schema":{
+						"oneof":{
+							"$ref": "#/definitions/ServiceNowAdditionalData"
+						}
+					}
 				}
 			},
 			"required": [
@@ -470,30 +474,21 @@
 		"IntegrationAdditionalData": {
 			"type": "object",
 			"description": "The integration additional data (abstract)",
-			"discriminator": "integrationPlatform",
+			"discriminator": {
+				"propertyName": "integrationPlatform"
+			},
 			"properties": {
 			  "integrationPlatform": {
 				"type": "string",
-				"description": "Describes the integration platform",
-				"enum": [
-				  "ServiceNow"
-				],
-				"x-ms-enum": {
-				  "name": "integrationPlatforms",
-				  "modelAsString": true
-				}
+				"description": "Describes the integration platform"
 			  }
 			},
-			"additionalProperties": {
-			  "description": "Additional data for concrete integration platfom"
-			},
 			"required": [
-			  "type"
+			  "integrationPlatform"
 			]
 		},
 		"ServiceNowAdditionalData": {
 			"description": "Service Now specific additional data",
-			"x-ms-discriminator-value": "ServiceNow",
 			"allOf": [
 				{
 					"$ref": "#/definitions/IntegrationAdditionalData"
@@ -532,13 +527,7 @@
 						}
 					}
 				}
-			],
-			"discriminator": {
-				"propertyName": "integrationPlatform",
-				"mapping": {
-					"ServiceNowAdditionalData": "#/definitions/ServiceNowAdditionalData"
-				}
-			}
+			]
 		},
 		"ServiceNowAuthenticationDetails": {
 			"description": "Service Now authentication details",
