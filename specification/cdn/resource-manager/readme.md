@@ -39,6 +39,10 @@ input-file:
   - Microsoft.Cdn/preview/2023-07-01-preview/afdx.json
   - Microsoft.Cdn/preview/2023-07-01-preview/cdn.json
   - Microsoft.Cdn/preview/2023-07-01-preview/cdnwebapplicationfirewall.json
+
+suppressions:
+  - code: PutRequestResponseSchemeArm
+    reason: False alarm. PUT request body is not superset of GET response body. We also do not support PATCH on keyGroups resource by design.  
 ```
 
 ### Tag: package-2023-05
