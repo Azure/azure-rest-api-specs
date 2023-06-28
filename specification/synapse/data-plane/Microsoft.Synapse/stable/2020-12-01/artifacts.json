@@ -788,6 +788,34 @@
           "maxLength": 260
         }
       }
+    },
+    "CredentialReference": {
+      "description": "Credential reference type.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Credential reference type.",
+          "enum": [
+            "CredentialReference"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "Reference credential name."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
     }
   },
   "parameters": {
