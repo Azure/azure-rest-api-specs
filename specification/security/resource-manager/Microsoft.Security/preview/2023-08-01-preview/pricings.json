@@ -132,6 +132,40 @@
             }
           }
         }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a pricing on resource": {
+            "$ref": "./examples/Pricings/DeleteResourcePricing_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Gets a provided Microsoft Defender for Cloud pricing configuration in a scope. Valid scopes are: subscription id or a specific resource id.",
+        "operationId": "Pricings_Delete_Resource",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ScopeResourceId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the pricing configuration of the resource."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
       }
     },
     "/{scopeId}/providers/Microsoft.Security/pricings": { 
@@ -175,42 +209,6 @@
             "schema": {
               "$ref": "#/definitions/PricingList"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/{resourceId}/providers/Microsoft.Security/pricings/{pricingName}": { 
-      "delete": {
-        "x-ms-examples": {
-          "Delete a pricing on resource": {
-            "$ref": "./examples/Pricings/DeleteResourcePricing_example.json"
-          }
-        },
-        "tags": [
-          "Pricings"
-        ],
-        "description": "Gets a provided Microsoft Defender for Cloud pricing configuration in a scope. Valid scopes are: subscription id or a specific resource id.",
-        "operationId": "Pricings_Delete_Resource",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "$ref": "#/parameters/PricingName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the pricing configuration of the resource."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
