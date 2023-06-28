@@ -23,6 +23,14 @@ To see additional help and options, run:
 ``` yaml
 directive:
   - suppress: R2059
+  - suppress: LroExtension
+    from: subscriptions.json
+    where: '$.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get'
+    reason: Avoid Lro changes on this api to return 202.
+  - suppress: GetOperation200
+    from: subscriptions.json
+    where: '$.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get'
+    reason: This api will return 200 and 202 response.
 ```
 
 
@@ -42,17 +50,6 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 input-file:
 - Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 - Microsoft.Subscription/stable/2021-10-01/subscriptions.json
-directive:
-  - where:
-      - $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"]
-    suppress:
-      - LroExtension
-    reason: Avoid Lro changes on this api to return 202.
-  - where:
-      - $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"]
-    suppress:
-      - GetOperation200
-    reason: This api will return 200 and 202 response.
 title: SubscriptionClient
 description: The subscription client
 ```
