@@ -1,9 +1,9 @@
 {
   "parameters": {
     "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "groupQuotaName ": "yourGroupQuotaNameHere",
+    "groupQuotaName": "groupquota1",
     "api-version": "2023-06-01-preview",
-    "body": {
+    "GroupQuotasPatchRequestBody": {
       "properties": {
         "displayName": "GroupQuota1",
         "additionalAttributes": {
@@ -13,7 +13,7 @@
           },
           "environment": "Production"
         },
-        "subscriptionIds":  [
+        "subscriptionIds": [
           "id1",
           "id2",
           "id3"
@@ -23,7 +23,7 @@
   },
   "responses": {
     "200": {
-      "body":  {
+      "body": {
         "properties": {
           "displayName": "GroupQuota1",
           "additionalAttributes": {
@@ -46,6 +46,9 @@
       }
     },
     "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      },
       "body": {
         "id": "id",
         "type": "type",
@@ -53,7 +56,20 @@
         "properties": {
           "provisioningState": "Accepted"
         },
-        "error": "some error message"
+        "error": {
+          "error": {
+            "code": "errorCode",
+            "message": "errorMesssage",
+            "target": "errorTarget",
+            "details": [],
+            "additionalInfo": [
+              {
+                "type": "additionalInfoType",
+                "info": {}
+              }
+            ]
+          }
+        }
       }
     }
   }

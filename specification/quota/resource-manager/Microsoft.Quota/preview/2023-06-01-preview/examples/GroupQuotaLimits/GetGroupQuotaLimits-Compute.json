@@ -1,0 +1,35 @@
+{
+  "operationId": "GroupQuotaLimits_Get",
+  "parameters": {
+    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+    "groupQuotaName": "groupquota1",
+    "resourceName": "cores",
+    "api-version": "2023-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "id",
+        "type": "type",
+        "name": "name",
+        "properties": {
+          "limit": 100,
+          "comment": "comment text",
+          "name": {
+            "value": "cores",
+            "localizedValue": "Total Regional vCPUs"
+          },
+          "unit": "vCPUs",
+          "availableLimit": 80,
+          "assignedToSubscriptions": [
+            {
+              "subId1": 20
+            }
+          ],
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

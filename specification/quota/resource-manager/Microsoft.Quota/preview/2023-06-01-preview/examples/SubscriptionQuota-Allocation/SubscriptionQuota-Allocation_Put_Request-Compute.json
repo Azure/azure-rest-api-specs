@@ -1,49 +1,34 @@
 {
-  "operationId": "GroupQuotas_CreateOrUpdate",
+  "operationId": "GroupQuotaSubscriptionQuotaAllocation_CreateOrUpdate",
   "parameters": {
     "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "subscriptionId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
     "groupQuotaName": "groupquota1",
+    "resourceName": "cores",
     "api-version": "2023-06-01-preview",
-    "GroupQuotaPutRequestBody": {
+    "allocateQuotaRequest": {
       "properties": {
-        "displayName": "GroupQuota1",
-        "additionalAttributes": {
-          "groupId": {
-            "groupingIdType": "ServiceTreeId",
-            "value": "yourServiceTreeIdHere"
-          },
-          "environment": "Production"
-        },
-        "subscriptionIds": [
-          "id1",
-          "id2",
-          "id3"
-        ]
+        "limit": 75
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "displayName": "GroupQuota1",
-          "additionalAttributes": {
-            "groupId": {
-              "groupingIdType": "ServiceTreeId",
-              "value": "yourServiceTreeIdHere"
-            },
-            "environment": "Production"
-          },
-          "subscriptionIds": [
-            "id1",
-            "id2",
-            "id3"
-          ],
-          "provisioningState": "Accepted"
-        },
         "id": "id",
         "type": "type",
-        "name": "name"
+        "name": "name",
+        "properties": {
+          "limit": 100,
+          "nonShareableQuota": 25,
+          "provisioningState": "Accepted",
+          "quotaSources": [
+            {
+              "groupquota1": 75
+            }
+          ]
+        }
       }
     },
     "201": {
