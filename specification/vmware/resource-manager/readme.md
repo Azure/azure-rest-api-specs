@@ -31,7 +31,6 @@ These settings apply only when `--tag=package-2023-03-01` is specified on the co
 ``` yaml $(tag) == 'package-2023-03-01'
 input-file:
 - Microsoft.AVS/stable/2023-03-01/vmware.json
-- Microsoft.AVS/stable/2023-03-01/skus.json
 ```
 
 ``` yaml
@@ -121,7 +120,6 @@ directive:
     reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
     from:
       - vmware.json
-      - skus.json
 
   - suppress: TrackedResourceListByImmediateParent
     reason: list by immediate parent operations are defined
