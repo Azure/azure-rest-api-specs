@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-07-01",
+    "version": "2021-12-01",
     "title": "PurviewManagementClient",
     "description": "Creates a Microsoft.Purview management client."
   },
@@ -578,6 +578,334 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/listFeatures": {
+      "post": {
+        "tags": [
+          "Feature"
+        ],
+        "summary": "Gets a list of features and their status for the account.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
+        "description": "Gets details from a list of feature names.",
+        "operationId": "Features_AccountGet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "featureRequest",
+            "in": "body",
+            "description": "Request body with feature names.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Features_AccountGet": {
+            "$ref": "./examples/Features_AccountGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Purview/locations/{locations}/listFeatures": {
+      "post": {
+        "tags": [
+          "Feature"
+        ],
+        "summary": "Gets a list of features and their status for the location and subscription.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
+        "description": "Gets details from a list of feature names.",
+        "operationId": "Features_SubscriptionGet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "locations",
+            "in": "path",
+            "description": "Location of feature.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "featureRequest",
+            "in": "body",
+            "description": "Request body with feature names.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchFeatureStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Features_SubscriptionGet": {
+            "$ref": "./examples/Features_SubscriptionGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/kafkaConfigurations/{kafkaConfigurationName}": {
+      "get": {
+        "tags": [
+          "KafkaConfiguration"
+        ],
+        "summary": "Gets the kafka configuration.",
+        "description": "Gets the kafka configuration for the account",
+        "operationId": "KafkaConfigurations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "kafkaConfigurationName",
+            "in": "path",
+            "description": "Name of kafka configuration.",
+            "required": true,
+            "type": "string",
+            "maxLength": 63,
+            "minLength": 3,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/KafkaConfiguration"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KafkaConfigurations_Get": {
+            "$ref": "./examples/KafkaConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "KafkaConfiguration"
+        ],
+        "summary": "Create or update the kafka configuration.",
+        "description": "Create or update Kafka Configuration",
+        "operationId": "KafkaConfigurations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "kafkaConfigurationName",
+            "in": "path",
+            "description": "The kafka configuration name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 63,
+            "minLength": 3,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "kafkaConfiguration",
+            "in": "body",
+            "description": "The kafka configuration of the account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KafkaConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or Update Successful",
+            "schema": {
+              "$ref": "#/definitions/KafkaConfiguration"
+            }
+          },
+          "201": {
+            "description": "Create or Update Successful",
+            "schema": {
+              "$ref": "#/definitions/KafkaConfiguration"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KafkaConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/KafkaConfigurations_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "KafkaConfiguration"
+        ],
+        "summary": "Deletes the kafka configuration on the account.",
+        "description": "Deletes a KafkaConfiguration resource.",
+        "operationId": "KafkaConfigurations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "kafkaConfigurationName",
+            "in": "path",
+            "description": "Name of kafka configuration.",
+            "required": true,
+            "type": "string",
+            "maxLength": 63,
+            "minLength": 3,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KafkaConfigurations_Delete": {
+            "$ref": "./examples/KafkaConfigurations_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/kafkaConfigurations": {
+      "get": {
+        "tags": [
+          "KafkaConfiguration"
+        ],
+        "summary": "Gets the list of Kafka configurations for the account.",
+        "description": "Lists the Kafka configurations in the Account",
+        "operationId": "KafkaConfigurations_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The skip token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/KafkaConfigurationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "KafkaConfigurations_ListByAccount": {
+            "$ref": "./examples/KafkaConfigurations_ListByAccount.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Purview/operations": {
       "get": {
         "tags": [
@@ -975,11 +1303,61 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Purview/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "summary": "Gets the Usage quota configuration.",
+        "description": "Get the usage quota configuration",
+        "operationId": "Usages_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The region.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UsageList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the provider.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Usages_Get": {
+            "$ref": "./examples/Usages_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
     "AccountList": {
-      "description": "Paged list of account resources",
+      "description": "Paged list of Account resources",
       "required": [
         "value"
       ],
@@ -1055,6 +1433,15 @@
       "description": "The account properties",
       "type": "object",
       "properties": {
+        "accountStatus": {
+          "description": "Gets or sets the status of the account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountStatus"
+            }
+          ],
+          "readOnly": true
+        },
         "cloudConnectors": {
           "$ref": "#/definitions/CloudConnectors",
           "description": "Cloud connectors.\r\nExternal cloud identifier used as part of scanning configuration."
@@ -1089,6 +1476,20 @@
           "type": "string",
           "readOnly": true
         },
+        "managedEventHubState": {
+          "description": " Gets or sets the state of managed eventhub. If enabled managed eventhub will be created, if disabled the managed eventhub will be removed.",
+          "default": "NotSpecified",
+          "enum": [
+            "NotSpecified",
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "managedEventHubState",
+            "modelAsString": true
+          }
+        },
         "managedResourceGroupName": {
           "description": "Gets or sets the managed resource group name",
           "type": "string",
@@ -1105,6 +1506,20 @@
             }
           ],
           "readOnly": true
+        },
+        "managedResourcesPublicNetworkAccess": {
+          "description": "Gets or sets the public network access for managed resources.",
+          "default": "NotSpecified",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "managedResourcesPublicNetworkAccess",
+            "modelAsString": true
+          }
         },
         "privateEndpointConnections": {
           "description": "Gets the private endpoint connections information.",
@@ -1277,6 +1692,42 @@
         }
       }
     },
+    "AccountStatus": {
+      "description": "The account status.",
+      "type": "object",
+      "properties": {
+        "accountProvisioningState": {
+          "description": "Gets the account status code.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Updating",
+            "Moving",
+            "Deleting",
+            "SoftDeleting",
+            "SoftDeleted",
+            "Failed",
+            "Succeeded",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "accountProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "errorDetails": {
+          "description": "Gets the account error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
     "PrivateEndpointConnection": {
       "description": "A private endpoint connection class.",
       "type": "object",
@@ -1325,6 +1776,39 @@
         },
         "principalId": {
           "description": "Gets or Sets Principal ID",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "Default error model",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets or sets the code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Gets or sets the details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ],
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets or sets the messages.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets or sets the target.",
           "type": "string",
           "readOnly": true
         }
@@ -1403,39 +1887,6 @@
         }
       }
     },
-    "ErrorModel": {
-      "description": "Default error model",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Gets or sets the code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Gets or sets the details.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorModel"
-          },
-          "x-ms-identifiers": [
-            "code"
-          ],
-          "readOnly": true
-        },
-        "message": {
-          "description": "Gets or sets the messages.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Gets or sets the target.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "AccountUpdateParameters": {
       "description": "The account update properties.",
       "type": "object",
@@ -1462,12 +1913,10 @@
       "type": "object",
       "properties": {
         "atlasKafkaPrimaryEndpoint": {
-          "x-ms-secret": true,
           "description": "Gets or sets the primary connection string.",
           "type": "string"
         },
         "atlasKafkaSecondaryEndpoint": {
-          "x-ms-secret": true,
           "description": "Gets or sets the secondary connection string.",
           "type": "string"
         }
@@ -1521,6 +1970,161 @@
         }
       }
     },
+    "BatchFeatureRequest": {
+      "description": "Feature request model",
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "Set of features",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BatchFeatureStatus": {
+      "description": "List of features with enabled status",
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "Features with enabled status",
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "KafkaConfiguration": {
+      "description": "The configuration of the event streaming service resource attached to the Purview account for kafka notifications.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KafkaConfigurationProperties",
+          "description": "Gets or sets the kafka configuration properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "KafkaConfigurationProperties": {
+      "description": "The kafka configuration properties of the event streaming service attached to the Purview account for kafka notifications.",
+      "type": "object",
+      "properties": {
+        "consumerGroup": {
+          "description": "Consumer group for hook event hub.",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/Credentials",
+          "description": "Credentials to access event hub."
+        },
+        "eventHubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventHub/namespaces/eventHubs"
+              }
+            ]
+          }
+        },
+        "eventHubType": {
+          "description": "The event hub type.",
+          "enum": [
+            "Notification",
+            "Hook"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "eventHubType",
+            "modelAsString": true
+          }
+        },
+        "eventStreamingState": {
+          "description": "The state of the event streaming service",
+          "default": "Enabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "eventStreamingState",
+            "modelAsString": true
+          }
+        },
+        "eventStreamingType": {
+          "description": "The event streaming service type",
+          "default": "None",
+          "enum": [
+            "None",
+            "Managed",
+            "Azure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "eventStreamingType",
+            "modelAsString": true
+          }
+        },
+        "eventHubPartitionId": {
+          "description": "Optional partition Id for notification event hub. If not set, all partitions will be leveraged.",
+          "type": "string"
+        }
+      }
+    },
+    "Credentials": {
+      "description": "Credentials to access the event streaming service attached to the purview account.",
+      "type": "object",
+      "properties": {
+        "identityId": {
+          "description": "Identity identifier for UserAssign type.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Identity Type.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialsType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KafkaConfigurationList": {
+      "description": "Paged list of kafka configuration resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type results.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KafkaConfiguration"
+          }
+        }
+      }
+    },
     "OperationList": {
       "description": "Paged list of operation resources",
       "required": [
@@ -1528,11 +2132,6 @@
       ],
       "type": "object",
       "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
         "nextLink": {
           "description": "The Url of next result page.",
           "type": "string"
@@ -1749,11 +2348,6 @@
       ],
       "type": "object",
       "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
         "nextLink": {
           "description": "The Url of next result page.",
           "type": "string"
@@ -1764,7 +2358,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1775,11 +2372,6 @@
       ],
       "type": "object",
       "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
         "nextLink": {
           "description": "The Url of next result page.",
           "type": "string"
@@ -1889,6 +2481,75 @@
         }
       }
     },
+    "UsageList": {
+      "description": "Response for usage get request",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of usage values.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          }
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "Usage": {
+      "description": "Response for usage information",
+      "type": "object",
+      "properties": {
+        "currentValue": {
+          "format": "int32",
+          "description": "Current usage quota value",
+          "type": "integer",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Fully qualified ARM resource Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "limit": {
+          "format": "int32",
+          "description": "Usage quota limit",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Quota name",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QuotaName"
+            }
+          ],
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Quota usage unit.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaName": {
+      "description": "Quota name",
+      "type": "object",
+      "properties": {
+        "localizedValue": {
+          "description": "Gets or sets the localized name value.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the name value.",
+          "type": "string"
+        }
+      }
+    },
     "TrackedResource": {
       "description": "Azure ARM Tracked Resource",
       "type": "object",
@@ -1949,6 +2610,15 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "type": {
           "description": "Gets or sets the type.",
           "type": "string",
@@ -1973,14 +2643,6 @@
       "required": true,
       "type": "string"
     },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The resource group name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "accountName": {
       "name": "accountName",
       "in": "path",
@@ -1990,6 +2652,14 @@
       "maxLength": 63,
       "minLength": 3,
       "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   },

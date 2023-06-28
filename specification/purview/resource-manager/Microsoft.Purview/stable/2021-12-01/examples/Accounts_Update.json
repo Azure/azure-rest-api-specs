@@ -3,11 +3,17 @@
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "SampleResourceGroup",
     "accountName": "account1",
-    "api-version": "2020-12-01-preview",
+    "api-version": "2021-12-01",
     "accountUpdateParameters": {
       "tags": {
         "newTag": "New tag value."
       }
+    },
+    "properties": {
+      "cloudConnectors": {},
+      "managedResourceGroupName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "publicNetworkAccess": "NotSpecified",
+      "managedResourcesPublicNetworkAccess": "Disabled"
     }
   },
   "responses": {
@@ -28,12 +34,21 @@
           "name": "Standard",
           "capacity": 1
         },
+        "systemData": {
+          "createdBy": "client-name",
+          "createdByType": "User",
+          "createdAt": "2019-11-22T18:39:58.6929344Z",
+          "lastModifiedBy": "client-name",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-03-16T23:24:34.3430059Z"
+        },
         "properties": {
           "friendlyName": "friendly-account1",
-          "createdBy": "client-name",
-          "createdByObjectId": "client-objectId",
-          "createdAt": "2019-11-22T18:39:58.6929344Z",
           "provisioningState": "Succeeded",
+          "accountStatus": {
+            "accountProvisioningState": "Succeeded",
+            "errorDetails": {}
+          },
           "endpoints": {
             "catalog": "https://account2.catalog.purview.azure-test.com",
             "scan": "https://account2.scan.purview.azure-test.com",
@@ -44,14 +59,6 @@
             "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
             "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
             "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
-          },
-          "systemData": {
-            "createdBy": "client-name",
-            "createdByType": "User",
-            "createdAt": "2019-11-22T18:39:58.6929344Z",
-            "lastModifiedBy": "client-name",
-            "lastModifiedByType": "User",
-            "lastModifiedAt": "2021-03-16T23:24:34.3430059Z"
           }
         },
         "tags": {
@@ -67,7 +74,7 @@
         "x-ms-ratelimit-remaining-tenant-reads": "14999",
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd",
         "x-ms-long-running-operation": true,
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2020-12-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/operationResults/dad6baec-3a39-41df-a469-843a9ee94213?api-version=2021-07-01"
       },
       "body": {
         "location": "West US 2",
@@ -78,11 +85,16 @@
           "name": "Standard",
           "capacity": 1
         },
+        "systemData": {
+          "createdBy": "client-name",
+          "createdByType": "User",
+          "createdAt": "2019-11-22T18:39:58.6929344Z",
+          "lastModifiedBy": "client-name",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-03-16T23:24:34.3430059Z"
+        },
         "properties": {
           "friendlyName": "friendly-account1",
-          "createdBy": "client-name",
-          "createdByObjectId": "client-objectId",
-          "createdAt": "2019-11-22T18:39:58.6929344Z",
           "provisioningState": "Succeeded",
           "endpoints": {
             "catalog": "https://account2.catalog.purview.azure-test.com",
@@ -94,14 +106,6 @@
             "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
             "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
             "eventHubNamespace": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.EventHub/namespaces/atlas-westusdddnbtp"
-          },
-          "systemData": {
-            "createdBy": "client-name",
-            "createdByType": "User",
-            "createdAt": "2019-11-22T18:39:58.6929344Z",
-            "lastModifiedBy": "client-name",
-            "lastModifiedByType": "User",
-            "lastModifiedAt": "2021-03-16T23:24:34.3430059Z"
           }
         },
         "tags": {
