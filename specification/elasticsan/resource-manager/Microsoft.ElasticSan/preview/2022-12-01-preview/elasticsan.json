@@ -278,7 +278,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "ElasticSans_Create_MaximumSet_Gen": {
@@ -342,7 +342,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "ElasticSans_Update_MaximumSet_Gen": {
@@ -555,7 +555,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "VolumeGroups_Create_MaximumSet_Gen": {
@@ -622,7 +622,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "VolumeGroups_Update_MaximumSet_Gen": {
@@ -796,7 +796,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Volumes_Create_MaximumSet_Gen": {
@@ -866,7 +866,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Volumes_Update_MaximumSet_Gen": {
@@ -1094,7 +1094,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "PrivateEndpointConnections_Create_MaximumSet_Gen": {
@@ -1444,7 +1444,7 @@
     },
     "ElasticSanCreateParameter": {
       "type": "object",
-      "description": "Input Parameter for ElasticSan request.",
+      "description": "Input Parameter for Create ElasticSan.",
       "required": [
         "properties"
       ],
@@ -1471,7 +1471,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1552,18 +1552,6 @@
           "readOnly": true,
           "$ref": "#/definitions/PrivateEndpointConnectionList",
           "description": "The list of Private Endpoint Connections."
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "Allow or disallow public network access to ElasticSan. Value is optional but if passed in, must be 'Enabled' or 'Disabled'.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -1606,18 +1594,6 @@
             "read",
             "create"
           ]
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          },
-          "description": "Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
         }
       }
     },
@@ -1827,7 +1803,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1889,13 +1865,6 @@
           "x-ms-client-flatten": true,
           "description": "Properties of VolumeGroup.",
           "$ref": "#/definitions/VolumeGroupUpdateProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       }
     },
@@ -1926,7 +1895,7 @@
       "required": [
         "properties"
       ],
-      "description": "Response for Volume request.",
+      "description": "Input Parameter for Create Volume.",
       "allOf": [
         {
           "$ref": "#/definitions/Volume"
@@ -1950,7 +1919,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2008,13 +1977,6 @@
           "x-ms-client-flatten": true,
           "description": "Properties of Volume.",
           "$ref": "#/definitions/VolumeUpdateProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       }
     },
@@ -2116,54 +2078,6 @@
         ]
       }
     },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "Resource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure resource identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Azure resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Azure resource type.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Azure resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "description": "The resource model definition.",
-      "x-ms-azure-resource": true
-    },
     "NetworkRuleSet": {
       "type": "object",
       "properties": {
@@ -2250,7 +2164,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -2275,7 +2189,7 @@
           "description": " List of resources private endpoint is mapped",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "type": "string"
           }
         }
       },
