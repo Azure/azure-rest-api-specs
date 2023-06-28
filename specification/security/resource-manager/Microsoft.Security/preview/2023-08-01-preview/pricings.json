@@ -146,14 +146,14 @@
           "Get pricings on subscription with resource level filter": {
             "$ref": "./examples/Pricings/ListPricingsWithResourceFilter_example.json"
           },
-          "Get pricings on resrource": {
+          "Get pricings on resource": {
             "$ref": "./examples/Pricings/ListResourcePricings_example.json"
           }
         },
         "tags": [
           "Pricings"
         ],
-        "description": "Lists Microsoft Defender for Cloud pricing configurations (both subscription and resrource level) of the subscription.",
+        "description": "Lists Microsoft Defender for Cloud pricing configurations (both subscription and resource level) of the subscription.",
         "operationId": "Pricings_List",
         "parameters": [
           {
@@ -210,7 +210,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted the pricing configration of the resource."
+            "description": "Successfully deleted the pricing configuration of the resource."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -312,7 +312,7 @@
         "source": {
           "type": "string",
           "readOnly": true,
-          "description": "The id of the scope inheritef from. \"Null\" if not inherited. Available only for resource level pricing."
+          "description": "The id of the scope inherited from. \"Null\" if not inherited. Available only for resource level pricing."
         },
         "extensions": {
           "type": "array",
@@ -437,7 +437,7 @@
       "required": false,
       "type": "array",
       "items": {
-        "$ref": "#/parameters/PricingName"
+        "type": "string"
       },
       "description": "Optional - Plans filter, array of plan names to filter on. By default filter is off, and will return pricing for all plans.",
       "x-ms-parameter-location": "method"
@@ -448,7 +448,7 @@
       "required": false,
       "type": "boolean",
       "default": false,
-      "description": "Optional - Resource level filter - relevant only for scope = subscription. If TRUE, will not return the resrouce level pricings under this subscrption. By default will return all pricings in both subscription and resource level.",
+      "description": "Optional - Resource level filter - relevant only for scope = subscription. If TRUE, will not return the resouce level pricings under this subscription. By default will return all pricings in both subscription and resource level.",
       "x-ms-parameter-location": "method"
     },
     "Pricing": {
