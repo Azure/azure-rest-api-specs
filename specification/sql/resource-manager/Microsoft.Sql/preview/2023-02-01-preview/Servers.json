@@ -1069,7 +1069,15 @@
         },
         "primaryUserAssignedIdentityId": {
           "description": "The resource id of a user assigned identity to be used by default.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         },
         "federatedClientId": {
           "format": "uuid",
