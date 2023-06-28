@@ -413,10 +413,9 @@
 					"$ref": "#/definitions/IntegrationMetadata"
 				},
 				"integrationAdditionalData": {
-					"schema":{
-						"oneof":{
-							"$ref": "#/definitions/ServiceNowAdditionalData"
-						}
+					"type": "object",
+					"description": "Additional data",
+						"$ref": "#/definitions/IntegrationAdditionalData"
 					}
 				}
 			},
@@ -474,9 +473,7 @@
 		"IntegrationAdditionalData": {
 			"type": "object",
 			"description": "The integration additional data (abstract)",
-			"discriminator": {
-				"propertyName": "integrationPlatform"
-			},
+			"discriminator": "integrationPlatform",
 			"properties": {
 			  "integrationPlatform": {
 				"type": "string",
@@ -527,7 +524,8 @@
 						}
 					}
 				}
-			]
+			],
+			"x-ms-discriminator-value": "ServiceNow"
 		},
 		"ServiceNowAuthenticationDetails": {
 			"description": "Service Now authentication details",
