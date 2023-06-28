@@ -2,31 +2,24 @@
   "parameters": {
     "api-version": "2023-08-01-preview",
     "scopeId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "pricingName": "StorageAccounts"
+    "pricingName": "Containers"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
-        "name": "StorageAccounts",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/Containers",
+        "name": "Containers",
         "type": "Microsoft.Security/pricings",
         "properties": {
           "pricingTier": "Standard",
           "isEnabled": true,
           "freeTrialRemainingTime": "PT0S",
           "enablementTime": "2023-03-01T12:42:42.1921106Z",
-          "subPlan": "PerStorageAccount",
-          "enforce": false,
+          "inherited": true,
+          "source": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
           "extensions": [
             {
-              "name": "OnUploadMalwareScanning",
-              "isEnabled": "True",
-              "additionalExtensionProperties": {
-                "capGBPerMonthPerStorageAccount": 10
-              }
-            },
-            {
-              "name": "SensitiveDataDiscovery",
+              "name": "ContainerRegistriesVulnerabilityAssessments",
               "isEnabled": "True"
             }
           ]
