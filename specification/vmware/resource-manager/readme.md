@@ -33,11 +33,6 @@ input-file:
 - Microsoft.AVS/stable/2023-03-01/vmware.json
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2022-05-01
-```
-
 ### Tag: package-2022-05-01
 
 These settings apply only when `--tag=package-2022-05-01` is specified on the command line.
