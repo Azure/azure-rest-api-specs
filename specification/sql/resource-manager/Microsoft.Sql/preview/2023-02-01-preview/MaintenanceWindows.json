@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindows/{maintenanceWindowName}": {
       "get": {
         "tags": [
           "MaintenanceWindows"
@@ -39,7 +39,7 @@
           },
           {
             "name": "maintenanceWindowName",
-            "in": "query",
+            "in": "path",
             "description": "Maintenance window name.",
             "required": true,
             "type": "string"
@@ -90,7 +90,7 @@
           },
           {
             "name": "maintenanceWindowName",
-            "in": "query",
+            "in": "path",
             "description": "Maintenance window name.",
             "required": true,
             "type": "string"
