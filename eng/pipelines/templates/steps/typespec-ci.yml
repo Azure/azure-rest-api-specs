@@ -5,6 +5,24 @@ parameters:
   type: string
 
 steps:
-- script: npx --no tsv ${{parameters.Folder}}
+- pwsh: |
+    $tspFiles = @()
+    if ('$(Build.Reason)' -eq 'PullRequest') {
+      $tspFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff "$(System.PullRequest.TargetBranch)"..."$(System.PullRequest.SourceBranch)" --name-only | Where-Object {$_.StartsWith('specification')}
+    }
+    else {
+      $tspFiles = (Get-ChildItem -path ./specification *.tsp -Recurse).FullName -replace "$($pwd.Path)/"
+    }
+
+    $typeSpecFolders = @()
+    foreach ($file in $tspFiles) {
+      $file -match 'specification\/[^\/]*\/' | out-null
+      $typeSpecFolders += $matches[0]
+    }
+    $typeSpecFolders = $typeSpecFolders | Select-Object -Unique
+
+    foreach ($typeSpecFolder in $typeSpecFolders) {
+      npx --no tsv $typeSpecFolder
+    }
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
