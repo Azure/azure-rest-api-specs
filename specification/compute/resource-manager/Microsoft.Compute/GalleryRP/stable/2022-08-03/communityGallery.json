@@ -288,6 +288,24 @@
       },
       "description": "Base information about the community gallery resource in pir."
     },
+    "CommunityGalleryArtifactTags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "The artifact tags of a community gallery resource."
+    },
+    "CommunityGalleryDisclaimer": {
+      "type": "string",
+      "properties": {
+        "disclaimer": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Community gallery disclaimer"
+        }
+      },
+      "description": "The disclaimer for a community gallery resource."
+    },
     "CommunityGalleryIdentifier": {
       "properties": {
         "uniqueId": {
@@ -297,14 +315,63 @@
       },
       "description": "The identifier information of community gallery."
     },
+    "CommunityGalleryMetadata": {
+      "type": "object",
+      "properties": {
+        "publisherUri": {
+          "type": "string",
+          "description": "The publisher uri of this community gallery."
+        },
+        "publisherContact": {
+          "type": "string",
+          "description": "The publisher contact of this community gallery."
+        },
+        "eula": {
+          "type": "string",
+          "description": "The eula of this community gallery."
+        },
+        "publicNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of public names the gallery has."
+        },
+        "privacyStatementUri": {
+          "type": "string",
+          "description": "The privacyStatementUri of this community gallery."
+        }
+      },
+      "description": "The metadata of community gallery."
+    },
     "CommunityGallery": {
-      "properties": {},
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CommunityGalleryProperties"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/PirCommunityGalleryResource"
         }
       ],
       "description": "Specifies information about the Community Gallery that you want to create or update."
+    },
+    "CommunityGalleryProperties": {
+      "type": "object",
+      "properties": {
+        "disclaimer": {
+          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+        },
+        "artifactTags": {
+          "$ref": "#/definitions/CommunityGalleryArtifactTags"
+        },
+        "communityMetadata": {
+          "$ref": "#/definitions/CommunityGalleryMetadata"
+        }
+      },
+      "description": "Describes the properties of a community gallery."
     },
     "CommunityGalleryImageList": {
       "type": "object",
@@ -345,7 +412,7 @@
       "properties": {
         "osType": {
           "type": "string",
-          "description": "This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
+          "description": "This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. Possible values are: **Windows,** **Linux.**",
           "enum": [
             "Windows",
             "Linux"
@@ -373,7 +440,7 @@
           "description": "The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable."
         },
         "identifier": {
-          "$ref": "./galleryRPCommon.json#/definitions/GalleryImageIdentifier"
+          "$ref": "#/definitions/CommunityGalleryImageIdentifier"
         },
         "recommended": {
           "$ref": "./galleryRPCommon.json#/definitions/RecommendedMachineConfiguration"
@@ -416,6 +483,12 @@
         "eula": {
           "type": "string",
           "description": "End-user license agreement for the current community gallery image."
+        },
+        "disclaimer": {
+          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+        },
+        "artifactTags": {
+          "$ref": "#/definitions/CommunityGalleryArtifactTags"
         }
       },
       "required": [
@@ -479,9 +552,32 @@
         "storageProfile": {
           "$ref": "./galleryRPCommon.json#/definitions/SharedGalleryImageVersionStorageProfile",
           "description": "Describes the storage profile of the image version."
+        },
+        "disclaimer": {
+          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+        },
+        "artifactTags": {
+          "$ref": "#/definitions/CommunityGalleryArtifactTags"
         }
       },
       "description": "Describes the properties of a gallery image version."
+    },
+    "CommunityGalleryImageIdentifier": {
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the gallery image definition publisher."
+        },
+        "offer": {
+          "type": "string",
+          "description": "The name of the gallery image definition offer."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The name of the gallery image definition SKU."
+        }
+      },
+      "description": "This is the community gallery image definition identifier."
     }
   },
   "parameters": {
