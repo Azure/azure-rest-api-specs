@@ -28,7 +28,7 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-composite-v2
+tag: package-2023-05
 generate-empty-classes: true
 modelerfour:
   lenient-model-deduplication: true
@@ -63,21 +63,20 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-  - Microsoft.Synapse/stable/2023-05-01/azureADOnlyAuthentication.json
-  - Microsoft.Synapse/stable/2023-05-01/bigDataPool.json
-  - Microsoft.Synapse/stable/2023-05-01/checkNameAvailability.json
-  - Microsoft.Synapse/stable/2023-05-01/firewallRule.json
-  - Microsoft.Synapse/stable/2023-05-01/integrationRuntime.json
-  - Microsoft.Synapse/stable/2023-05-01/keys.json
-  - Microsoft.Synapse/stable/2023-05-01/library.json
-  - Microsoft.Synapse/stable/2023-05-01/listUsage.json
-  - Microsoft.Synapse/stable/2023-05-01/operations.json
-  - Microsoft.Synapse/stable/2023-05-01/privateEndpointConnections.json
-  - Microsoft.Synapse/stable/2023-05-01/privateLinkResources.json
-  - Microsoft.Synapse/stable/2023-05-01/privatelinkhub.json
-  - Microsoft.Synapse/stable/2023-05-01/sqlPool.json
-  - Microsoft.Synapse/stable/2023-05-01/sqlServer.json
-  - Microsoft.Synapse/stable/2023-05-01/workspace.json
+  - Microsoft.Synapse/stable/2021-06-01/azureADOnlyAuthentication.json
+  - Microsoft.Synapse/stable/2021-06-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2021-06-01/firewallRule.json
+  - Microsoft.Synapse/stable/2021-06-01/keys.json
+  - Microsoft.Synapse/stable/2021-06-01/operations.json
+  - Microsoft.Synapse/stable/2021-06-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2021-06-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2021-06-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
+  - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
+  - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/library.json
+  - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
   - Microsoft.Synapse/preview/2021-06-01-preview/sparkConfiguration.json
   - Microsoft.Synapse/preview/2021-06-01-preview/kustoPool.json
 ```
