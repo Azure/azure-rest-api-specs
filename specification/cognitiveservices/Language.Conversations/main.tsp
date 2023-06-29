@@ -823,22 +823,6 @@ enum WeightUnit {
   Dram,
 }
 
-model ConversationEnum extends Conversations{
-  kind: AnalyzeConversationTaskKind.Conversation;
-}
-
-model ConversationResultEnum extends Conversations{
-  kind: AnalyzeConversationTaskResultsKind.ConversationResult;
-}
-
-@discriminator("kind")
-@oneOf
-union Widget {
-  Conversation: ConversationEnum,
-  ConversationResult:ConversationResultEnum,
-}
-
-
 @doc("Analyzes the input conversation utterance.")
 @TypeSpec.Rest.actionSeparator("/:")
 @TypeSpec.Rest.action("analyze-conversations")
