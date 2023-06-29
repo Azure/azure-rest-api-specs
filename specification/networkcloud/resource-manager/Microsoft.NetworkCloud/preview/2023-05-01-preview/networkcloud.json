@@ -685,6 +685,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/BareMetalMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -727,7 +733,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -746,7 +758,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -786,6 +798,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/BareMetalMachine"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -802,7 +820,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -835,7 +853,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -854,7 +878,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -888,7 +911,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -907,7 +936,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -933,7 +961,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -952,7 +986,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -986,7 +1019,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1005,7 +1044,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1031,7 +1069,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1050,7 +1094,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1085,7 +1128,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1104,7 +1153,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1139,7 +1187,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1158,7 +1212,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1193,7 +1246,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1212,7 +1271,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1238,7 +1296,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1257,7 +1321,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1283,7 +1346,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1302,7 +1371,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1337,7 +1405,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1356,7 +1430,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -1478,6 +1551,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/CloudServicesNetwork"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1520,7 +1599,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1539,7 +1624,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -1579,6 +1664,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/CloudServicesNetwork"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1595,7 +1686,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -1716,6 +1807,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/ClusterManager"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1758,7 +1855,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1777,7 +1880,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -1944,6 +2047,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -1986,7 +2095,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2005,7 +2120,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -2045,6 +2160,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2064,7 +2185,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -2194,6 +2315,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/BareMetalMachineKeySet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2239,7 +2366,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2258,7 +2391,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -2301,6 +2434,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/BareMetalMachineKeySet"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2317,7 +2456,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -2447,6 +2586,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/BmcKeySet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2492,7 +2637,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2511,7 +2662,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -2554,6 +2705,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/BmcKeySet"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2570,7 +2727,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -2603,7 +2760,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2625,7 +2788,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -2756,6 +2918,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/ClusterMetricsConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2801,7 +2969,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2820,7 +2994,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -2863,6 +3037,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ClusterMetricsConfiguration"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -2879,7 +3059,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -2913,7 +3093,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2932,7 +3118,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -3054,6 +3239,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/KubernetesCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3096,7 +3287,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -3115,7 +3312,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -3155,6 +3352,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/KubernetesCluster"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3171,7 +3374,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -3301,6 +3504,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/AgentPool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3346,7 +3555,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -3365,7 +3580,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -3408,6 +3623,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/AgentPool"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3424,7 +3645,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -3458,7 +3679,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -3477,7 +3704,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -3599,6 +3825,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/L2Network"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3641,7 +3873,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -3660,7 +3898,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -3827,6 +4065,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/L3Network"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -3869,7 +4113,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -3888,7 +4138,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -4055,6 +4305,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Rack"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -4097,7 +4353,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -4116,7 +4378,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -4156,6 +4418,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Rack"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -4172,7 +4440,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -4293,6 +4561,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/StorageAppliance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -4335,7 +4609,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -4354,7 +4634,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -4394,6 +4674,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/StorageAppliance"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -4410,7 +4696,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -4435,7 +4721,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -4454,7 +4746,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -4488,7 +4779,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -4507,7 +4804,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -4542,7 +4838,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -4561,7 +4863,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -4683,6 +4984,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/TrunkedNetwork"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -4725,7 +5032,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -4744,7 +5057,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -4911,6 +5224,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -4953,7 +5272,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -4972,7 +5297,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -5012,6 +5337,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -5028,7 +5359,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -5062,7 +5393,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5081,7 +5418,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5212,6 +5548,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Console"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -5257,7 +5599,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5276,7 +5624,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -5319,6 +5667,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Console"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -5335,7 +5689,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -5369,7 +5723,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5388,7 +5748,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5422,7 +5781,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5441,7 +5806,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5467,7 +5831,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5486,7 +5856,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5512,7 +5881,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5531,7 +5906,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5557,7 +5931,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5576,7 +5956,6 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
           "final-state-via": "location"
         }
       }
@@ -5698,6 +6077,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Volume"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
             }
           },
           "default": {
@@ -5740,7 +6125,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -5759,7 +6150,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -12101,7 +12492,7 @@
       "required": true
     },
     "VolumeNameParameter": {
-      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,28}[a-zA-Z0-9])$",
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9])$",
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The name of the volume.",
