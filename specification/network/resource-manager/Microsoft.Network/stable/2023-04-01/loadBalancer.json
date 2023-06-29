@@ -1528,14 +1528,16 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
+            "description": "The name of the resource group.",
+			"pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "name": "loadBalancerName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the load balancer."
+            "description": "The name of the load balancer.",
+			"pattern": "^[a-z][a-z0-9]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2692,7 +2694,7 @@
     "MigratedPools": {
       "type": "object",
       "properties": {
-        "MigratedPools": {
+        "migratedPools": {
           "type": "array",
           "items": {
             "type": "string"
