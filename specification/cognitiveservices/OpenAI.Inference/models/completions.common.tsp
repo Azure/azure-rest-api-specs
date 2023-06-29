@@ -1,3 +1,5 @@
+namespace Azure.OpenAI;
+
 @doc("""
 Representation of the token counts processed for a completions request.
 Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
@@ -22,17 +24,14 @@ Representation of the manner in which a completions response concluded.
 """)
 enum CompletionsFinishReason {
   @doc("Completions ended normally and reached its end of token generation.")
-  @projectedName("json", "stop")
-  stopped,
+  stopped: "stop",
 
   @doc("Completions exhausted available token limits before generation could complete.")
-  @projectedName("json", "length")
-  tokenLimitReached,
+  tokenLimitReached: "length",
 
   @doc("""
     Completions generated a response that was identified as potentially sensitive per content
     moderation policies.
     """)
-  @projectedName("json", "content_filter")
-  contentFiltered,
+  contentFiltered: "content_filter",
 }

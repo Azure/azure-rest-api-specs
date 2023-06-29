@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 
 import "./acks.tsp";
 import "./proposals.tsp";

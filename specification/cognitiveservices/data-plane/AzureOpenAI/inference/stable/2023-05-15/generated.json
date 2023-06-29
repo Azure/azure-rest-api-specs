@@ -538,6 +538,36 @@
         "usage"
       ]
     },
+    "CompletionsFinishReason": {
+      "type": "string",
+      "description": "Representation of the manner in which a completions response concluded.",
+      "enum": [
+        "stop",
+        "length",
+        "content_filter"
+      ],
+      "x-ms-enum": {
+        "name": "CompletionsFinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completions ended normally and reached its end of token generation."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "Completions exhausted available token limits before generation could complete."
+          },
+          {
+            "name": "contentFiltered",
+            "value": "content_filter",
+            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          }
+        ]
+      }
+    },
     "CompletionsLogProbabilityModel": {
       "type": "object",
       "properties": {
@@ -824,161 +854,6 @@
         "total_tokens"
       ]
     },
-    "ImageGenerationOptions": {
-      "type": "object",
-      "properties": {
-        "prompt": {
-          "type": "string",
-          "description": "A description of the desired images."
-        },
-        "n": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of images to generate (defaults to 1).",
-          "default": 1
-        },
-        "size": {
-          "$ref": "#/definitions/ImageSize",
-          "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
-          "default": "1024x1024"
-        },
-        "user": {
-          "type": "string",
-          "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
-        }
-      },
-      "description": "Represents the request data used to generate images.",
-      "required": [
-        "prompt"
-      ]
-    },
-    "ImageLocation": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL that provides temporary access to download the generated image."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error if the operation failed."
-        }
-      },
-      "description": "The image url if successful, and an error otherwise."
-    },
-    "ImageOperationResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the operation."
-        },
-        "created": {
-          "type": "integer",
-          "format": "int64",
-          "description": "A timestamp when this job or item was created (in unix epochs)."
-        },
-        "expires": {
-          "type": "integer",
-          "format": "int64",
-          "description": "A timestamp when this operation and its associated images expire and will be deleted (in unix epochs)."
-        },
-        "result": {
-          "$ref": "#/definitions/ImageResponse",
-          "description": "The result of the operation if the operation succeeded."
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the operation"
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error if the operation failed."
-        }
-      },
-      "description": "The result of the operation if the operation succeeded.",
-      "required": [
-        "id",
-        "created",
-        "status"
-      ]
-    },
-    "ImageOperationStatus": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation.",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the operation"
-        }
-      },
-      "description": "Provides status details for long running operations.",
-      "required": [
-        "id",
-        "status"
-      ]
-    },
-    "ImageResponse": {
-      "type": "object",
-      "properties": {
-        "created": {
-          "type": "integer",
-          "format": "int64",
-          "description": "A timestamp when this job or item was created (in unix epochs)."
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageLocation"
-          },
-          "x-ms-identifiers": [],
-          "description": "The images generated by the operator.",
-          "x-typespec-name": "ImageLocation[]"
-        }
-      },
-      "description": "The result of the operation if the operation succeeded.",
-      "required": [
-        "created",
-        "data"
-      ]
-    },
-    "ImageSize": {
-      "type": "string",
-      "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
-      "enum": [
-        "256x256",
-        "512x512",
-        "1024x1024"
-      ],
-      "x-ms-enum": {
-        "name": "ImageSize",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Size256x256",
-            "value": "256x256",
-            "description": "Image size of 256x256."
-          },
-          {
-            "name": "Size512x512",
-            "value": "512x512",
-            "description": "Image size of 512x512."
-          },
-          {
-            "name": "Size1024x1024",
-            "value": "1024x1024",
-            "description": "Image size of 1024x1024."
-          }
-        ]
-      }
-    },
     "ServiceApiVersions": {
       "type": "string",
       "enum": [
@@ -1001,54 +876,6 @@
           {
             "name": "v2023_06_01_Preview",
             "value": "2023-06-01-preview"
-          }
-        ]
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "The state of a job or item.",
-      "enum": [
-        "notRunning",
-        "running",
-        "succeeded",
-        "canceled",
-        "failed",
-        "deleted"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notRunning",
-            "value": "notRunning",
-            "description": "The operation was created and is queued to be processed in the future."
-          },
-          {
-            "name": "running",
-            "value": "running",
-            "description": "The operation has started to be processed."
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded",
-            "description": "The operation has successfully be processed and is ready for consumption."
-          },
-          {
-            "name": "canceled",
-            "value": "canceled",
-            "description": "The operation has been canceled and is incomplete."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The operation has completed processing with a failure and cannot be further consumed."
-          },
-          {
-            "name": "deleted",
-            "value": "deleted",
-            "description": "The entity has been deleted but may still be referenced by other entities predating the deletion."
           }
         ]
       }
