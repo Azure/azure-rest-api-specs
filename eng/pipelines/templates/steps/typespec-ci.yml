@@ -8,3 +8,7 @@ steps:
 - script: npx --no tsv ${{parameters.Folder}}
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
+
+- script: git restore .; git clean -df
+  displayName: Discard git changes
+  condition: succeededOrFailed()
