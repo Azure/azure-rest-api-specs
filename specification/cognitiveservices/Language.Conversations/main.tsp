@@ -38,6 +38,9 @@ using OpenAPI;
 namespace Azure.AI.Language.Conversations;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 149def2ab2 (added route)
 @TypeSpec.Rest.resource("language")
 model Conversations {
   @key
@@ -839,6 +842,7 @@ enum WeightUnit {
 >>>>>>> 189c09fcb7 (Adding Models to Typespec for CLU (#24376))
 }
 
+<<<<<<< HEAD
 @doc("Enumeration of supported conversational task results.")
 enum AnalyzeConversationTaskResultsKind {
   ConversationResult,
@@ -1626,3 +1630,15 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   AnalyzeConversationTask,
   AnalyzeConversationTaskResult
 >;
+=======
+interface ConversationAnalysis {
+  @doc("Analyzes the input conversation utterance.")
+  @TypeSpec.Rest.actionSeparator("/:")
+  @TypeSpec.Rest.action("analyze-conversations")
+  analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+    Conversations,
+    AnalyzeConversationTask,
+    AnalyzeConversationTaskResult
+  >;
+}
+>>>>>>> 149def2ab2 (added route)
