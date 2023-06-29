@@ -344,6 +344,21 @@
         "modelAsString": true
       }
     },
+    "RunningState": {
+      "type": "string",
+      "description": "Object representing RunningState for Confidential Ledger.",
+      "enum": [
+        "Active",
+        "Paused",
+        "Unknown",
+        "Pausing",
+        "Resuming"
+      ],
+      "x-ms-enum": {
+        "name": "RunningState",
+        "modelAsString": true
+      }
+    },
     "LanguageRuntime": {
       "type": "string",
       "description": "Object representing LanguageRuntime for Manged CCF.",
@@ -446,6 +461,10 @@
         "deploymentType": {
           "description": "Deployment Type of Managed CCF",
           "$ref": "#/definitions/DeploymentType"
+        },
+        "runningState": {
+          "description": "Object representing RunningState for Ledger.",
+          "$ref": "#/definitions/RunningState"
         },
         "provisioningState": {
           "description": "Provisioning state of Ledger Resource",
