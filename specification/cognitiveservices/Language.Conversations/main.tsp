@@ -4,9 +4,13 @@ import "@typespec/versioning";
 import "@typespec/openapi3";
 import "@azure-tools/typespec-azure-core";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import "@azure-tools/typespec-autorest";
 =======
 >>>>>>> 189c09fcb7 (Adding Models to Typespec for CLU (#24376))
+=======
+import "@azure-tools/typespec-autorest";
+>>>>>>> 807ec25f22 (added examples to path object)
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -1635,9 +1639,25 @@ interface ConversationAnalysis {
   @doc("Analyzes the input conversation utterance.")
   @TypeSpec.Rest.actionSeparator("/:")
   @TypeSpec.Rest.action("analyze-conversations")
+  @example(
+    "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
+    "Conversation project result"
+  )
+  @example(
+    "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitration.json",
+    "Orchestration result"
+  )
+  @example(
+    "../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
+    "Orchestration direct target result"
+  )
   analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
     Conversations,
-    AnalyzeConversationTask,
+    {
+      @doc("A single conversational task to execute.")
+      @body
+      body: AnalyzeConversationTask;
+    },
     AnalyzeConversationTaskResult
   >;
 }
