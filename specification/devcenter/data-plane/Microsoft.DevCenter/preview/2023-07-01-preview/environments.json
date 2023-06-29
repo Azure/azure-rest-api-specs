@@ -454,6 +454,18 @@
             "schema": {
               "type": "file"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
           }
         },
         "x-ms-examples": {
