@@ -324,6 +324,98 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}/backup": {
+      "post": {
+        "tags": [
+          "Confidential Ledger"
+        ],
+        "summary": "Retrieves information about all Confidential Ledger resources under the given subscription",
+        "description": "Retrieves the properties of all Confidential Ledgers.",
+        "operationId": "Ledger_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "name": "$filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of Confidential Ledgers",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFBackup"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedCCFBackup": {
+            "$ref": "./examples/ManagedCCF_Backup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/managedCCFs/{appName}/restore": {
+      "post": {
+        "tags": [
+          "Confidential Ledger"
+        ],
+        "summary": "Retrieves information about all Confidential Ledger resources under the given subscription",
+        "description": "Retrieves the properties of all Confidential Ledgers.",
+        "operationId": "Ledger_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "name": "$filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of Confidential Ledgers",
+            "schema": {
+              "$ref": "#/definitions/ManagedCCFRestore"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedCCFRestore": {
+            "$ref": "./examples/ManagedCCF_Restore.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -495,6 +587,40 @@
       }
     },
     "ManagedCCFList": {
+      "description": "Object that includes an array of Managed CCF and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Managed CCF",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedCCF"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedCCFBackup": {
+      "description": "Object that includes an array of Managed CCF and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Managed CCF",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedCCF"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedCCFRestore": {
       "description": "Object that includes an array of Managed CCF and a possible link for next set.",
       "type": "object",
       "properties": {

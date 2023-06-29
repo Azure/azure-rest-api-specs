@@ -412,6 +412,98 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers/{ledgerName}/backup": {
+      "post": {
+        "tags": [
+          "Confidential Ledger"
+        ],
+        "summary": "Retrieves information about all Confidential Ledger resources under the given subscription",
+        "description": "Retrieves the properties of all Confidential Ledgers.",
+        "operationId": "Ledger_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "name": "$filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of Confidential Ledgers",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerListBySub": {
+            "$ref": "./examples/ConfidentialLedger_Backup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConfidentialLedger/ledgers/{ledgerName}/restore": {
+      "post": {
+        "tags": [
+          "Confidential Ledger"
+        ],
+        "summary": "Retrieves information about all Confidential Ledger resources under the given subscription",
+        "description": "Retrieves the properties of all Confidential Ledgers.",
+        "operationId": "Ledger_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. eg. $filter=ledgerType eq 'Public'",
+            "name": "$filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the list of Confidential Ledgers",
+            "schema": {
+              "$ref": "#/definitions/ConfidentialLedgerList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConfidentialLedgerListBySub": {
+            "$ref": "./examples/ConfidentialLedger_Restore.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -639,6 +731,40 @@
       }
     },
     "ConfidentialLedgerList": {
+      "description": "Object that includes an array of Confidential Ledgers and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Confidential Ledgers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfidentialLedger"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "ConfidentialLedgerBackup": {
+      "description": "Object that includes an array of Confidential Ledgers and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Confidential Ledgers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfidentialLedger"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "ConfidentialLedgerRestore": {
       "description": "Object that includes an array of Confidential Ledgers and a possible link for next set.",
       "type": "object",
       "properties": {
