@@ -50,7 +50,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
 ```
 
 
