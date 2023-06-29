@@ -11,28 +11,18 @@ options:
     output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
     examples-directory: examples
-  # Uncomment this line and add "@azure-tools/cadl-python" to your package.json to generate Python code
-  # "@azure-tools/cadl-python":
-  #   "basic-setup-py": true
-  #   "package-version":
-  #   "package-name":
-  #   "output-path":
-  # Uncomment this line and add "@azure-tools/cadl-java" to your package.json to generate Java code
-  # "@azure-tools/cadl-java": true
-  # Uncomment this line and add "@azure-tools/cadl-csharp" to your package.json to generate C# code
+    omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.OpenAI"
     namespace: "Azure.AI.OpenAI"
     clear-output-folder: true
     model-namespace: false
-  # https://github.com/Azure/azure-rest-api-specs/issues/24497
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-openai"
     namespace: "com.azure.ai.openai"
     partial-update: true
     enable-sync-stack: true
     generate-tests: false
-  # https://github.com/Azure/azure-rest-api-specs/issues/24498
   # "@azure-tools/typespec-ts":
   #   package-dir: "azure-ai-openai"
   #   emitter-output-dir: "{project-root}/generated"
