@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-azure-core/auth-required" "MUST fix in next update"
 @service({
   title: "Contoso Widget Manager",
 })
