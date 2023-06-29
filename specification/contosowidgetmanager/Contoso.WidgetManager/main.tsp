@@ -38,7 +38,7 @@ model Widget {
 
 interface Widgets {
   @doc("Fetch a Widget by name.")
-  getWidget2 is ResourceRead<Widget>;
+  getWidget is ResourceRead<Widget>;
 
   @doc("Gets status of a Widget operation.")
   getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
