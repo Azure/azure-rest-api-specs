@@ -5,6 +5,18 @@ parameters:
   type: string
 
 steps:
-- script: npx --no tsv ${{parameters.Folder}}
+- bash: |
+    exit_code=0
+
+    # Log commands before running
+    set -x
+
+    npx --no tsv ${{parameters.Folder}} || exit_code=1
+
+    # Discard any changes
+    git restore .
+    git clean -df
+
+    exit $exit_code
   displayName: ${{parameters.DisplayName}}
   condition: succeededOrFailed()
