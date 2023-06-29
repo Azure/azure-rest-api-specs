@@ -107,7 +107,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "List resources by subscription.",
+        "description": "List Catalog resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -146,7 +146,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "List resources by parent.",
+        "description": "List Catalog resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -188,7 +188,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Retrieve a resource.",
+        "description": "Get a Catalog",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -233,7 +233,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Create or update a resource using the asynchronous call pattern.",
+        "description": "Create a Catalog",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -304,7 +304,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Update a resource using the synchronous call pattern.",
+        "description": "Update a Catalog",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -358,7 +358,7 @@
         "tags": [
           "Catalogs"
         ],
-        "description": "Delete a resource using the asynchronous call pattern.",
+        "description": "Delete a Catalog",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -383,7 +383,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The response for asynchronous ARM delete ACCEPTED",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -397,7 +397,7 @@
             }
           },
           "204": {
-            "description": "ARM response for a properly formed delete request, with no resource found"
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -423,7 +423,7 @@
         "tags": [
           "Certificates"
         ],
-        "description": "List resources by parent.",
+        "description": "List Certificate resources by Catalog",
         "parameters": [
           {
             "$ref": "#/parameters/CustomFilterQueryParameter"
@@ -485,7 +485,7 @@
         "tags": [
           "Certificates"
         ],
-        "description": "Retrieve a resource.",
+        "description": "Get a Certificate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -703,7 +703,7 @@
         "tags": [
           "Images"
         ],
-        "description": "List resources by parent.",
+        "description": "List Image resources by Catalog",
         "parameters": [
           {
             "$ref": "#/parameters/CustomFilterQueryParameter"
@@ -765,7 +765,7 @@
         "tags": [
           "Images"
         ],
-        "description": "Retrieve a resource.",
+        "description": "Get a Image",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -817,7 +817,7 @@
         "tags": [
           "Images"
         ],
-        "description": "Create or update a resource using the asynchronous call pattern.",
+        "description": "Create a Image",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -895,7 +895,7 @@
         "tags": [
           "Images"
         ],
-        "description": "Delete a resource using the asynchronous call pattern.",
+        "description": "Delete a Image",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -927,7 +927,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The response for asynchronous ARM delete ACCEPTED",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -941,7 +941,7 @@
             }
           },
           "204": {
-            "description": "ARM response for a properly formed delete request, with no resource found"
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1224,7 +1224,7 @@
         "tags": [
           "Products"
         ],
-        "description": "List resources by parent.",
+        "description": "List Product resources by Catalog",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1451,7 +1451,7 @@
             }
           },
           "202": {
-            "description": "The standard ARM response for asynchronous PATCH, POST, and DELETE operations",
+            "description": "Resource update request accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -1519,7 +1519,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The response for asynchronous ARM delete ACCEPTED",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -1533,7 +1533,7 @@
             }
           },
           "204": {
-            "description": "ARM response for a properly formed delete request, with no resource found"
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1885,7 +1885,7 @@
             }
           },
           "202": {
-            "description": "The standard ARM response for asynchronous PATCH, POST, and DELETE operations",
+            "description": "Resource update request accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -1961,7 +1961,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The response for asynchronous ARM delete ACCEPTED",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -1975,7 +1975,7 @@
             }
           },
           "204": {
-            "description": "ARM response for a properly formed delete request, with no resource found"
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2432,7 +2432,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The response for asynchronous ARM delete ACCEPTED",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -2446,7 +2446,7 @@
             }
           },
           "204": {
-            "description": "ARM response for a properly formed delete request, with no resource found"
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2843,7 +2843,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The response for asynchronous ARM delete ACCEPTED",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -2857,7 +2857,7 @@
             }
           },
           "204": {
-            "description": "ARM response for a properly formed delete request, with no resource found"
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
