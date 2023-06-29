@@ -33,7 +33,6 @@
   "paths": {
     "/documentModels/{modelId}:analyze": {
       "post": {
-        "summary": "Analyze document",
         "description": "Analyzes document with document model.",
         "operationId": "DocumentModels_AnalyzeDocument",
         "tags": [
@@ -105,10 +104,10 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "AnalyzeDocument_Url": {
+          "Analyze Document from Url": {
             "$ref": "./examples/AnalyzeDocument_Url.json"
           },
-          "AnalyzeDocument_Base64": {
+          "Analyze Document from Base64": {
             "$ref": "./examples/AnalyzeDocument_Base64.json"
           }
         }
@@ -116,7 +115,6 @@
     },
     "/documentModels/{modelId}/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get analyze result",
         "description": "Gets the result of document analysis.",
         "operationId": "DocumentModels_GetAnalyzeResult",
         "tags": [
@@ -152,7 +150,7 @@
           }
         },
         "x-ms-examples": {
-          "GetAnalyzeDocumentResult": {
+          "Get Analyze Document Result": {
             "$ref": "./examples/GetAnalyzeDocumentResult.json"
           }
         }
@@ -160,7 +158,6 @@
     },
     "/documentModels:build": {
       "post": {
-        "summary": "Build document model",
         "description": "Builds a custom document analysis model.",
         "operationId": "DocumentModels_BuildModel",
         "tags": [
@@ -206,7 +203,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "BuildDocumentModel": {
+          "Build Document Model": {
             "$ref": "./examples/BuildDocumentModel.json"
           }
         }
@@ -214,7 +211,6 @@
     },
     "/documentModels:compose": {
       "post": {
-        "summary": "Compose document model",
         "description": "Creates a new document model from document types of existing document models.",
         "operationId": "DocumentModels_ComposeModel",
         "tags": [
@@ -260,7 +256,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ComposeDocumentModel": {
+          "Compose Document Model": {
             "$ref": "./examples/ComposeDocumentModel.json"
           }
         }
@@ -268,7 +264,6 @@
     },
     "/documentModels:authorizeCopy": {
       "post": {
-        "summary": "Generate copy authorization",
         "description": "Generates authorization to copy a document model to this location with specified modelId and optional description.",
         "operationId": "DocumentModels_AuthorizeModelCopy",
         "tags": [
@@ -309,7 +304,7 @@
           }
         },
         "x-ms-examples": {
-          "AuthorizeCopyDocumentModel": {
+          "Authorize Copy of Document Model": {
             "$ref": "./examples/AuthorizeCopyDocumentModel.json"
           }
         }
@@ -317,7 +312,6 @@
     },
     "/documentModels/{modelId}:copyTo": {
       "post": {
-        "summary": "Copy document model",
         "description": "Copies document model to the target resource, region, and modelId.",
         "operationId": "DocumentModels_CopyModelTo",
         "tags": [
@@ -366,7 +360,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "CopyDocumentModelTo": {
+          "Copy Document Model To": {
             "$ref": "./examples/CopyDocumentModelTo.json"
           }
         }
@@ -374,7 +368,6 @@
     },
     "/operations": {
       "get": {
-        "summary": "List operations",
         "description": "Lists all operations.",
         "operationId": "Miscellaneous_ListOperations",
         "tags": [
@@ -408,7 +401,7 @@
           "itemName": "value"
         },
         "x-ms-examples": {
-          "GetOperations": {
+          "Get Operations": {
             "$ref": "./examples/GetOperations.json"
           }
         }
@@ -416,7 +409,6 @@
     },
     "/operations/{operationId}": {
       "get": {
-        "summary": "Get operation",
         "description": "Gets operation info.",
         "operationId": "Miscellaneous_GetOperation",
         "tags": [
@@ -449,7 +441,7 @@
           }
         },
         "x-ms-examples": {
-          "GetOperation": {
+          "Get Operation": {
             "$ref": "./examples/GetOperation.json"
           }
         }
@@ -457,7 +449,6 @@
     },
     "/documentModels": {
       "get": {
-        "summary": "List document models",
         "description": "List all document models",
         "operationId": "DocumentModels_ListModels",
         "tags": [
@@ -491,7 +482,7 @@
           "itemName": "value"
         },
         "x-ms-examples": {
-          "GetDocumentModels": {
+          "Get Document Models": {
             "$ref": "./examples/GetDocumentModels.json"
           }
         }
@@ -499,7 +490,6 @@
     },
     "/documentModels/{modelId}": {
       "get": {
-        "summary": "Get document model",
         "description": "Gets detailed document model information.",
         "operationId": "DocumentModels_GetModel",
         "tags": [
@@ -532,16 +522,15 @@
           }
         },
         "x-ms-examples": {
-          "GetDocumentModel_Prebuilt": {
+          "Get Prebuilt Document Model": {
             "$ref": "./examples/GetDocumentModel_Prebuilt.json"
           },
-          "GetDocumentModel_Custom": {
+          "Get Custom Document Model": {
             "$ref": "./examples/GetDocumentModel_Custom.json"
           }
         }
       },
       "delete": {
-        "summary": "Delete document model",
         "description": "Deletes document model.",
         "operationId": "DocumentModels_DeleteModel",
         "tags": [
@@ -571,7 +560,7 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDocumentModel": {
+          "Delete Document Model": {
             "$ref": "./examples/DeleteDocumentModel.json"
           }
         }
@@ -579,7 +568,6 @@
     },
     "/documentClassifiers:build": {
       "post": {
-        "summary": "Build document classifier",
         "description": "Builds a custom document classifier.",
         "operationId": "DocumentClassifiers_BuildClassifier",
         "tags": [
@@ -625,7 +613,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "BuildDocumentModel": {
+          "Build Document Classifier": {
             "$ref": "./examples/BuildDocumentClassifier.json"
           }
         }
@@ -633,7 +621,6 @@
     },
     "/documentClassifiers": {
       "get": {
-        "summary": "List document classifiers",
         "description": "List all document classifiers.",
         "operationId": "DocumentClassifiers_ListClassifiers",
         "tags": [
@@ -667,7 +654,7 @@
           "itemName": "value"
         },
         "x-ms-examples": {
-          "GetDocumentModels": {
+          "Get Document Classifiers": {
             "$ref": "./examples/GetDocumentClassifiers.json"
           }
         }
@@ -675,7 +662,6 @@
     },
     "/documentClassifiers/{classifierId}": {
       "get": {
-        "summary": "Get document classifier",
         "description": "Gets detailed document classifier information.",
         "operationId": "DocumentClassifiers_GetClassifier",
         "tags": [
@@ -708,13 +694,12 @@
           }
         },
         "x-ms-examples": {
-          "GetDocumentClassifier": {
+          "Get Document Classifier": {
             "$ref": "./examples/GetDocumentClassifier.json"
           }
         }
       },
       "delete": {
-        "summary": "Delete document classifier",
         "description": "Deletes document classifier.",
         "operationId": "DocumentClassifiers_DeleteClassifier",
         "tags": [
@@ -744,7 +729,7 @@
           }
         },
         "x-ms-examples": {
-          "DeleteDocumentClassifier": {
+          "Delete Document Classifier": {
             "$ref": "./examples/DeleteDocumentClassifier.json"
           }
         }
@@ -752,7 +737,6 @@
     },
     "/documentClassifiers/{classifierId}:analyze": {
       "post": {
-        "summary": "Classify document",
         "description": "Classifies document with document classifier.",
         "operationId": "DocumentClassifiers_ClassifyDocument",
         "tags": [
@@ -815,7 +799,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ClassifyDocument_Url": {
+          "Classify Document from Url": {
             "$ref": "./examples/ClassifyDocument_Url.json"
           }
         }
@@ -823,7 +807,6 @@
     },
     "/documentClassifiers/{classifierId}/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get document classifier result",
         "description": "Gets the result of document classifier.",
         "operationId": "DocumentClassifiers_GetClassifyResult",
         "tags": [
@@ -859,7 +842,7 @@
           }
         },
         "x-ms-examples": {
-          "GetClassifyDocumentResult": {
+          "Get Classify Document Result": {
             "$ref": "./examples/GetClassifyDocumentResult.json"
           }
         }
@@ -867,7 +850,6 @@
     },
     "/info": {
       "get": {
-        "summary": "Get resource info",
         "description": "Return information about the current resource.",
         "operationId": "Miscellaneous_GetResourceInfo",
         "tags": [
@@ -897,7 +879,7 @@
           }
         },
         "x-ms-examples": {
-          "GetResourceDetails": {
+          "Get Resource Details": {
             "$ref": "./examples/GetResourceDetails.json"
           }
         }
