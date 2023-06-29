@@ -1,0 +1,10 @@
+parameters:
+- name: Folder
+  type: string
+- name: DisplayName
+  type: string
+
+steps:
+- script: npx --no tsv ${{parameters.Folder}}
+  displayName: ${{parameters.DisplayName}}
+  condition: succeededOrFailed()

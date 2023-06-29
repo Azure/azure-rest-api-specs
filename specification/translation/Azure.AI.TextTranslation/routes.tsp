@@ -15,9 +15,16 @@ using Azure.ClientGenerator.Core;
 namespace TextTranslation;
 
 @doc("Defines Text Translation custom Operation")
-op CustomOperation<TBody, TParams, TResponse, Traits = {}, TError = ErrorResponse>(
+op CustomOperation<
+  TBody,
+  TParams,
+  TResponse,
+  Traits = {},
+  TError = ErrorResponse
+>(
   ...TParams,
 
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing spec"
   @doc("Defines the content of the request")
   @body
   requestBody: TBody,
@@ -42,7 +49,7 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
 @protocolAPI(false)
-op GetLanguages is CustomGetOperation<
+op getLanguages is CustomGetOperation<
   GetLanguageParameters,
   GetLanguagesResult,
   {},
@@ -55,7 +62,7 @@ op GetLanguages is CustomGetOperation<
 @summary("Translate Text")
 @doc("Translate Text")
 @protocolAPI(false)
-op Translate is CustomOperation<
+op translate is CustomOperation<
   InputTextItem[],
   TranslateParameters,
   TranslationResult,
@@ -69,7 +76,7 @@ op Translate is CustomOperation<
 @summary("Transliterate Text")
 @doc("Transliterate Text")
 @protocolAPI(false)
-op Transliterate is CustomOperation<
+op transliterate is CustomOperation<
   InputTextItem[],
   TransliterateParameters,
   TransliterateResult,
@@ -83,7 +90,7 @@ op Transliterate is CustomOperation<
 @summary("Find Sentence Boundaries")
 @doc("Find Sentence Boundaries")
 @protocolAPI(false)
-op FindSentenceBoundaries is CustomOperation<
+op findSentenceBoundaries is CustomOperation<
   InputTextItem[],
   BreakSentenceParameters,
   BreakSentenceResult,
@@ -97,7 +104,7 @@ op FindSentenceBoundaries is CustomOperation<
 @summary("Lookup Dictionary Entries")
 @doc("Lookup Dictionary Entries")
 @protocolAPI(false)
-op LookupDictionaryEntries is CustomOperation<
+op lookupDictionaryEntries is CustomOperation<
   InputTextItem[],
   DictionaryLookupParameters,
   DictionaryLookupResult,
@@ -111,7 +118,7 @@ op LookupDictionaryEntries is CustomOperation<
 @summary("Lookup Dictionary Examples")
 @doc("Lookup Dictionary Examples")
 @protocolAPI(false)
-op LookupDictionaryExamples is CustomOperation<
+op lookupDictionaryExamples is CustomOperation<
   DictionaryExampleTextItem[],
   DictionaryExamplesParameters,
   DictionaryExamplesResult,
