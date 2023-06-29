@@ -214,7 +214,7 @@
     },
     "/images/generations:submit": {
       "post": {
-        "operationId": "StartGenerateImage",
+        "operationId": "BeginAzureBatchImageGeneration",
         "description": "Starts the generation of a batch of images from a text caption",
         "parameters": [
           {
@@ -240,7 +240,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ImageOperationResponse"
+              "$ref": "#/definitions/BatchImageGenerationOperationResponse"
             }
           },
           "default": {
@@ -265,7 +265,7 @@
     },
     "/operations/images/{operationId}": {
       "get": {
-        "operationId": "GetImageOperationStatus",
+        "operationId": "GetAzureBatchImageGenerationOperationStatus",
         "description": "Returns the status of the images operation",
         "parameters": [
           {
@@ -283,7 +283,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ImageOperationResponse"
+              "$ref": "#/definitions/BatchImageGenerationOperationResponse"
             }
           },
           "default": {
@@ -369,6 +369,85 @@
         }
       },
       "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+    },
+    "AzureOpenAIOperationState": {
+      "type": "string",
+      "description": "The state of a job or item.",
+      "enum": [
+        "notRunning",
+        "running",
+        "succeeded",
+        "canceled",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "AzureOpenAIOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notRunning",
+            "value": "notRunning",
+            "description": "The operation was created and is queued to be processed in the future."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation has started to be processed."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The operation has successfully be processed and is ready for consumption."
+          },
+          {
+            "name": "canceled",
+            "value": "canceled",
+            "description": "The operation has been canceled and is incomplete."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The operation has completed processing with a failure and cannot be further consumed."
+          }
+        ]
+      }
+    },
+    "BatchImageGenerationOperationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the operation."
+        },
+        "created": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A timestamp when this job or item was created (in unix epochs)."
+        },
+        "expires": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A timestamp when this operation and its associated images expire and will be deleted (in unix epochs)."
+        },
+        "result": {
+          "$ref": "#/definitions/ImageGenerations",
+          "description": "The result of the operation if the operation succeeded."
+        },
+        "status": {
+          "$ref": "#/definitions/AzureOpenAIOperationState",
+          "description": "The status of the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error if the operation failed."
+        }
+      },
+      "description": "A polling status update or final response payload for an image operation.",
+      "required": [
+        "id",
+        "created",
+        "status"
+      ]
     },
     "ChatChoice": {
       "type": "object",
@@ -632,36 +711,6 @@
         "usage"
       ]
     },
-    "CompletionsFinishReason": {
-      "type": "string",
-      "description": "Representation of the manner in which a completions response concluded.",
-      "enum": [
-        "stop",
-        "length",
-        "content_filter"
-      ],
-      "x-ms-enum": {
-        "name": "CompletionsFinishReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "stopped",
-            "value": "stop",
-            "description": "Completions ended normally and reached its end of token generation."
-          },
-          {
-            "name": "tokenLimitReached",
-            "value": "length",
-            "description": "Completions exhausted available token limits before generation could complete."
-          },
-          {
-            "name": "contentFiltered",
-            "value": "content_filter",
-            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
-          }
-        ]
-      }
-    },
     "CompletionsLogProbabilityModel": {
       "type": "object",
       "properties": {
@@ -840,20 +889,6 @@
         "total_tokens"
       ]
     },
-    "Deployment": {
-      "type": "object",
-      "properties": {
-        "deploymentId": {
-          "type": "string",
-          "description": "deployment id of the deployed model",
-          "readOnly": true
-        }
-      },
-      "description": "A specific deployment",
-      "required": [
-        "deploymentId"
-      ]
-    },
     "EmbeddingItem": {
       "type": "object",
       "properties": {
@@ -966,6 +1001,11 @@
           "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
           "default": "1024x1024"
         },
+        "response_format": {
+          "$ref": "#/definitions/ImageGenerationResponseFormat",
+          "description": "  The format in which image generation response items should be presented.\n  Azure OpenAI only supports URL response items.",
+          "x-ms-client-name": "responseFormat"
+        },
         "user": {
           "type": "string",
           "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
@@ -976,80 +1016,31 @@
         "prompt"
       ]
     },
-    "ImageLocation": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL that provides temporary access to download the generated image."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error if the operation failed."
-        }
-      },
-      "description": "The image url if successful, and an error otherwise."
+    "ImageGenerationResponseFormat": {
+      "type": "string",
+      "description": "The format in which the generated images are returned.",
+      "enum": [
+        "url",
+        "b64_json"
+      ],
+      "x-ms-enum": {
+        "name": "ImageGenerationResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "Image generation response items should provide a URL from which the image may be retrieved."
+          },
+          {
+            "name": "Base64",
+            "value": "b64_json",
+            "description": "Image generation response items should provide image data as a base64-encoded string."
+          }
+        ]
+      }
     },
-    "ImageOperationResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the operation."
-        },
-        "created": {
-          "type": "integer",
-          "format": "int64",
-          "description": "A timestamp when this job or item was created (in unix epochs)."
-        },
-        "expires": {
-          "type": "integer",
-          "format": "int64",
-          "description": "A timestamp when this operation and its associated images expire and will be deleted (in unix epochs)."
-        },
-        "result": {
-          "$ref": "#/definitions/ImageResponse",
-          "description": "The result of the operation if the operation succeeded."
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the operation"
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error if the operation failed."
-        }
-      },
-      "description": "The result of the operation if the operation succeeded.",
-      "required": [
-        "id",
-        "created",
-        "status"
-      ]
-    },
-    "ImageOperationStatus": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation.",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/State",
-          "description": "The status of the operation"
-        }
-      },
-      "description": "Provides status details for long running operations.",
-      "required": [
-        "id",
-        "status"
-      ]
-    },
-    "ImageResponse": {
+    "ImageGenerations": {
       "type": "object",
       "properties": {
         "created": {
@@ -1058,13 +1049,8 @@
           "description": "A timestamp when this job or item was created (in unix epochs)."
         },
         "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageLocation"
-          },
-          "x-ms-identifiers": [],
-          "description": "The images generated by the operator.",
-          "x-typespec-name": "ImageLocation[]"
+          "x-typespec-name": "ImageLocation[] | ImagePayload[]",
+          "description": "The images generated by the operator."
         }
       },
       "description": "The result of the operation if the operation succeeded.",
@@ -1099,74 +1085,6 @@
             "name": "Size1024x1024",
             "value": "1024x1024",
             "description": "Image size of 1024x1024."
-          }
-        ]
-      }
-    },
-    "ServiceApiVersions": {
-      "type": "string",
-      "enum": [
-        "2022-12-01",
-        "2023-05-15",
-        "2023-06-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceApiVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2022_12_01",
-            "value": "2022-12-01"
-          },
-          {
-            "name": "v2023_05_15",
-            "value": "2023-05-15"
-          },
-          {
-            "name": "v2023_06_01_Preview",
-            "value": "2023-06-01-preview"
-          }
-        ]
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "The state of a job or item.",
-      "enum": [
-        "notRunning",
-        "running",
-        "succeeded",
-        "canceled",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notRunning",
-            "value": "notRunning",
-            "description": "The operation was created and is queued to be processed in the future."
-          },
-          {
-            "name": "running",
-            "value": "running",
-            "description": "The operation has started to be processed."
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded",
-            "description": "The operation has successfully be processed and is ready for consumption."
-          },
-          {
-            "name": "canceled",
-            "value": "canceled",
-            "description": "The operation has been canceled and is incomplete."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The operation has completed processing with a failure and cannot be further consumed."
           }
         ]
       }
