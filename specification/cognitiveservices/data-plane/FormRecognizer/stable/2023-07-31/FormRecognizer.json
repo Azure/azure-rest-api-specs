@@ -3,7 +3,7 @@
   "info": {
     "title": "Form Recognizer Client",
     "description": "Extracts content, layout, and structured data from documents.",
-    "version": "2023-02-28-preview"
+    "version": "2023-07-31"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -83,9 +83,6 @@
           },
           {
             "$ref": "#/parameters/QueryFeatures"
-          },
-          {
-            "$ref": "#/parameters/QueryQueryFields"
           }
         ],
         "responses": {
@@ -913,11 +910,11 @@
       "type": "object",
       "properties": {
         "urlSource": {
-          "description": "Document URL to analyze",
+          "description": "Document URL to analyze.  Either urlSource or base64Source must be specified.",
           "$ref": "#/definitions/UrlContentSource"
         },
         "base64Source": {
-          "description": "Base64 encoding of the document to analyze",
+          "description": "Base64 encoding of the document to analyze.  Either urlSource or base64Source must be specified.",
           "$ref": "#/definitions/Base64ContentSource"
         }
       }
@@ -940,12 +937,12 @@
           "$ref": "#/definitions/DocumentBuildMode"
         },
         "azureBlobSource": {
-          "description": "Azure Blob Storage location containing the training data.",
+          "description": "Azure Blob Storage location containing the training data.  Either azureBlobSource or azureBlobFileListSource must be specified.",
           "$ref": "#/definitions/AzureBlobContentSource"
         },
         "azureBlobFileListSource": {
-          "description": "Azure Blob Storage file list specifying the training data.",
-          "$ref": "#/definitions/AzureBlobFileListSource"
+          "description": "Azure Blob Storage file list specifying the training data.  Either azureBlobSource or azureBlobFileListSource must be specified.",
+          "$ref": "#/definitions/AzureBlobFileListContentSource"
         },
         "tags": {
           "description": "List of key-value tag attributes associated with the document model.",
@@ -1239,11 +1236,11 @@
       "type": "object",
       "properties": {
         "urlSource": {
-          "description": "Document URL to classify",
+          "description": "Document URL to classify.  Either urlSource or base64Source must be specified.",
           "$ref": "#/definitions/UrlContentSource"
         },
         "base64Source": {
-          "description": "Base64 encoding of the document to classify",
+          "description": "Base64 encoding of the document to classify.  Either urlSource or base64Source must be specified.",
           "$ref": "#/definitions/Base64ContentSource"
         }
       }
@@ -1288,16 +1285,16 @@
       }
     },
     "ClassifierDocumentTypeDetails": {
-      "description": "Training data source.",
+      "description": "Classifier document type info.",
       "type": "object",
       "properties": {
         "azureBlobSource": {
-          "description": "Azure Blob Storage location containing the training data.",
+          "description": "Azure Blob Storage location containing the training data for a classifier document type.  Either azureBlobSource or azureBlobFileListSource must be specified.",
           "$ref": "#/definitions/AzureBlobContentSource"
         },
         "azureBlobFileListSource": {
-          "description": "Azure Blob Storage file list specifying the training data.",
-          "$ref": "#/definitions/AzureBlobFileListSource"
+          "description": "Azure Blob Storage file list specifying the training data for a classifier document type.  Either azureBlobSource or azureBlobFileListSource must be specified.",
+          "$ref": "#/definitions/AzureBlobFileListContentSource"
         }
       }
     },
@@ -1459,7 +1456,7 @@
         }
       }
     },
-    "AzureBlobFileListSource": {
+    "AzureBlobFileListContentSource": {
       "description": "File list in Azure Blob Storage.",
       "type": "object",
       "required": [
@@ -1930,43 +1927,10 @@
       "description": "Content and layout elements extracted from a page from the input.",
       "type": "object",
       "required": [
-        "kind",
         "pageNumber",
         "spans"
       ],
       "properties": {
-        "kind": {
-          "description": "Kind of document page.",
-          "type": "string",
-          "enum": [
-            "document",
-            "sheet",
-            "slide",
-            "image"
-          ],
-          "x-ms-enum": {
-            "name": "DocumentPageKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "document",
-                "description": "A page from a PDF or image file.  All content from Office/HTML files is represented as a single page."
-              },
-              {
-                "value": "sheet",
-                "description": "A sheet from a spreadsheet."
-              },
-              {
-                "value": "slide",
-                "description": "A slide from a presentation."
-              },
-              {
-                "value": "image",
-                "description": "An embedded image from an Office/HTML file."
-              }
-            ]
-          }
-        },
         "pageNumber": {
           "description": "1-based page number in the input document.",
           "type": "integer",
@@ -2059,13 +2023,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentFormula"
-          }
-        },
-        "images": {
-          "description": "Extracted images from the page.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentImage"
           }
         }
       }
@@ -2387,35 +2344,6 @@
         }
       }
     },
-    "DocumentImage": {
-      "description": "An image object detected in the page.",
-      "type": "object",
-      "required": [
-        "span",
-        "pageNumber",
-        "confidence"
-      ],
-      "properties": {
-        "polygon": {
-          "description": "Bounding polygon of the image.",
-          "$ref": "#/definitions/BoundingPolygon"
-        },
-        "span": {
-          "description": "Location of the image in the reading order concatenated content.",
-          "$ref": "#/definitions/DocumentSpan"
-        },
-        "pageNumber": {
-          "description": "1-based page number of the page that contains the image.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1
-        },
-        "confidence": {
-          "description": "Confidence of correctly identifying the image.",
-          "$ref": "#/definitions/Confidence"
-        }
-      }
-    },
     "DocumentParagraph": {
       "description": "A paragraph object consisting with contiguous lines generally with common alignment and spacing.",
       "type": "object",
@@ -2643,10 +2571,6 @@
         "value": {
           "description": "Field value of the key-value pair.",
           "$ref": "#/definitions/DocumentKeyValueElement"
-        },
-        "commonName": {
-          "description": "Common name of the key-value pair.",
-          "type": "string"
         },
         "confidence": {
           "description": "Confidence of correctly extracting the key-value pair.",
@@ -3367,46 +3291,43 @@
       "items": {
         "type": "string",
         "enum": [
-          "ocr.highResolution",
-          "ocr.formula",
-          "ocr.font",
-          "queryFields.premium"
+          "ocrHighResolution",
+          "languages",
+          "barcodes",
+          "formulas",
+          "keyValuePairs",
+          "styleFont"
         ],
         "x-ms-enum": {
           "name": "DocumentAnalysisFeature",
           "modelAsString": true,
           "values": [
             {
-              "value": "ocr.highResolution",
+              "value": "ocrHighResolution",
               "description": "Perform OCR at a higher resolution to handle documents with fine print."
             },
             {
-              "value": "ocr.formula",
-              "description": "Enable the detection of mathematical expressions the document."
+              "value": "languages",
+              "description": "Enable the detection of the text content language."
             },
             {
-              "value": "ocr.font",
+              "value": "barcodes",
+              "description": "Enable the detection of barcodes in the document."
+            },
+            {
+              "value": "formulas",
+              "description": "Enable the detection of mathematical expressions in the document."
+            },
+            {
+              "value": "keyValuePairs",
+              "description": "Enable the detection of general key value pairs (form fields) in the document."
+            },
+            {
+              "value": "styleFont",
               "description": "Enable the recognition of various font styles."
-            },
-            {
-              "value": "queryFields.premium",
-              "description": "Enable extraction of additional fields via the queryFields query parameter."
             }
           ]
         }
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method"
-    },
-    "QueryQueryFields": {
-      "name": "queryFields",
-      "description": "List of additional fields to extract.  Ex. \"NumberOfGuests,StoreNumber\"",
-      "required": false,
-      "type": "array",
-      "in": "query",
-      "items": {
-        "type": "string",
-        "pattern": "^[\\p{L}\\p{M}\\p{N}_]{1,64}$"
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
