@@ -259,7 +259,13 @@
 						"description": "No Content - Integration does not exist"
 					},
 					"200": {
-						"description": "Success - Integration was deleted"
+						"description": "Success - Integration was deleted",
+						"headers": {
+							"location": {
+							  "type": "string",
+							  "description": "Location URL for the deletion status"
+							}
+						  }
 					},
 					"default": {
 						"description": "Error response describing why the operation failed.",
@@ -267,10 +273,6 @@
 							"$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
 						}
 					}
-				},
-				"x-ms-long-running-operation": true,
-				"x-ms-long-running-operation-options": {
-					"final-state-via": "location"
 				}
 			}
 		},
@@ -435,7 +437,6 @@
 				"distance": {
 					"description": "The number of nodes between integration and the root integration resource",
 					"type": "number",
-					"format": "date-time",
 					"readOnly": true
 				}
 			}
@@ -492,27 +493,15 @@
 					"properties": {
 						"instanceUrl": {
 							"description": "Integration creation date",
-							"type": "string",
-							"format": "date-time",
-							"readOnly": true
+							"type": "string"
 						},
 						"clientId": {
 							"description": "Integration creation date",
-							"type": "string",
-							"format": "date-time",
-							"readOnly": true
+							"type": "string"
 						},
 						"clientSecret": {
 							"description": "Integration creation date",
-							"type": "string",
-							"format": "date-time",
-							"readOnly": true
-						},
-						"refreshToken": {
-							"description": "Integration creation date",
-							"type": "string",
-							"format": "date-time",
-							"readOnly": true
+							"type": "string"
 						},
 						"tableMetadata": {
 							"type": "array",
