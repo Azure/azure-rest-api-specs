@@ -214,7 +214,7 @@
     },
     "/images/generations:submit": {
       "post": {
-        "operationId": "StartGenerateImage",
+        "operationId": "BeginAzureBatchImageGeneration",
         "description": "Starts the generation of a batch of images from a text caption",
         "parameters": [
           {
@@ -241,6 +241,9 @@
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/BatchImageGenerationOperationResponse"
             }
           },
           "default": {
@@ -265,7 +268,7 @@
     },
     "/operations/images/{operationId}": {
       "get": {
-        "operationId": "GetImageOperationStatus",
+        "operationId": "GetAzureBatchImageGenerationOperationStatus",
         "description": "Returns the status of the images operation",
         "parameters": [
           {
@@ -283,7 +286,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ImageOperationResponse"
+              "$ref": "#/definitions/BatchImageGenerationOperationResponse"
             }
           },
           "default": {
@@ -367,7 +370,8 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      }
+      },
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "ChatChoice": {
       "type": "object",
@@ -627,36 +631,6 @@
         "usage"
       ]
     },
-    "CompletionsFinishReason": {
-      "type": "string",
-      "description": "Representation of the manner in which a completions response concluded.",
-      "enum": [
-        "stop",
-        "length",
-        "content_filter"
-      ],
-      "x-ms-enum": {
-        "name": "CompletionsFinishReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "stopped",
-            "value": "stop",
-            "description": "Completions ended normally and reached its end of token generation."
-          },
-          {
-            "name": "tokenLimitReached",
-            "value": "length",
-            "description": "Completions exhausted available token limits before generation could complete."
-          },
-          {
-            "name": "contentFiltered",
-            "value": "content_filter",
-            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
-          }
-        ]
-      }
-    },
     "CompletionsLogProbabilityModel": {
       "type": "object",
       "description": "Representation of a log probabilities model for a completions generation.",
@@ -828,7 +802,6 @@
     },
     "Deployment": {
       "type": "object",
-      "description": "A specific deployment",
       "properties": {
         "deploymentId": {
           "type": "string",
@@ -836,6 +809,7 @@
           "readOnly": true
         }
       },
+      "description": "A specific deployment",
       "required": [
         "deploymentId"
       ]
@@ -950,6 +924,11 @@
           "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024 (defaults to 1024x1024).",
           "default": "1024x1024"
         },
+        "response_format": {
+          "$ref": "#/definitions/ImageGenerationResponseFormat",
+          "description": "  The format in which image generation response items should be presented.\n  Azure OpenAI only supports URL response items.",
+          "x-ms-client-name": "responseFormat"
+        },
         "user": {
           "type": "string",
           "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse."
@@ -961,7 +940,6 @@
     },
     "ImageLocation": {
       "type": "object",
-      "description": "The image url if successful, and an error otherwise.",
       "properties": {
         "url": {
           "type": "string",
@@ -972,11 +950,11 @@
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error if the operation failed."
         }
-      }
+      },
+      "description": "The image url if successful, and an error otherwise."
     },
     "ImageOperationResponse": {
       "type": "object",
-      "description": "The result of the operation if the operation succeeded.",
       "properties": {
         "id": {
           "type": "string",
@@ -1005,6 +983,7 @@
           "description": "The error if the operation failed."
         }
       },
+      "description": "The result of the operation if the operation succeeded.",
       "required": [
         "id",
         "created",
@@ -1013,7 +992,6 @@
     },
     "ImageOperationStatus": {
       "type": "object",
-      "description": "Provides status details for long running operations.",
       "properties": {
         "id": {
           "type": "string",
@@ -1027,6 +1005,7 @@
           "description": "The status of the operation"
         }
       },
+      "description": "Provides status details for long running operations.",
       "required": [
         "id",
         "status"
@@ -1043,11 +1022,12 @@
         },
         "data": {
           "type": "array",
-          "description": "The images generated by the operator.",
           "items": {
             "$ref": "#/definitions/ImageLocation"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "description": "The images generated by the operator.",
+          "x-typespec-name": "ImageLocation[]"
         }
       },
       "required": [
@@ -1081,74 +1061,6 @@
             "name": "Size1024x1024",
             "value": "1024x1024",
             "description": "Image size of 1024x1024."
-          }
-        ]
-      }
-    },
-    "ServiceApiVersions": {
-      "type": "string",
-      "enum": [
-        "2022-12-01",
-        "2023-05-15",
-        "2023-06-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceApiVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2022_12_01",
-            "value": "2022-12-01"
-          },
-          {
-            "name": "v2023_05_15",
-            "value": "2023-05-15"
-          },
-          {
-            "name": "v2023_06_01_Preview",
-            "value": "2023-06-01-preview"
-          }
-        ]
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "The state of a job or item.",
-      "enum": [
-        "notRunning",
-        "running",
-        "succeeded",
-        "canceled",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notRunning",
-            "value": "notRunning",
-            "description": "The operation was created and is queued to be processed in the future."
-          },
-          {
-            "name": "running",
-            "value": "running",
-            "description": "The operation has started to be processed."
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded",
-            "description": "The operation has successfully be processed and is ready for consumption."
-          },
-          {
-            "name": "canceled",
-            "value": "canceled",
-            "description": "The operation has been canceled and is incomplete."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The operation has completed processing with a failure and cannot be further consumed."
           }
         ]
       }

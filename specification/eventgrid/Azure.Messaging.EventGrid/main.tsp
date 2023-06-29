@@ -26,7 +26,7 @@ import "@azure-tools/typespec-azure-core";
 )
 @doc("Azure Messaging EventGrid Client")
 @versioned(ServiceApiVersions)
-namespace Azure.Messaging.EventGrid {
+namespace EventGrid {
   using TypeSpec.Http;
   using TypeSpec.Rest;
   using TypeSpec.Versioning;
@@ -39,6 +39,8 @@ namespace Azure.Messaging.EventGrid {
     v2023_06_01_preview: "2023-06-01-preview",
   }
 
+  alias StandardOperations = Azure.Core.StandardResourceOperations;
+
   @doc("Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.")
   model CloudEvent {
     @doc("An identifier for the event. The combination of id and source must be unique for each distinct event.")
@@ -47,9 +49,11 @@ namespace Azure.Messaging.EventGrid {
     @doc("Identifies the context in which an event happened. The combination of id and source must be unique for each distinct event.")
     source: string;
 
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "Using 'unknown' for data is intentional. Following CloudEvent spec."
     @doc("Event data specific to the event type.")
     data?: unknown;
 
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Using 'data_base64' is intentional. Following CloudEvent spec."
     @doc("Event data specific to the event type, encoded as a base64 string.")
     data_base64?: bytes;
 
@@ -156,77 +160,79 @@ namespace Azure.Messaging.EventGrid {
     lockTokens: string[];
   }
 
+  @doc("Topic Resource.")
+  @resource("topics")
+  model Topic {
+    @key
+    @doc("Topic Name.")
+    @visibility("read")
+    topicName: string;
+  }
+
+  @doc("Event Subscription Resource.")
+  @resource("eventsubscriptions")
+  @parentResource(Topic)
+  model EventSubscription {
+    @key
+    @doc("Event Subscription Name.")
+    @visibility("read")
+    eventSubscriptionName: string;
+  }
+
   // Publish Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
   @doc("Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")
-  @route(
-    "/topics/{topicName}:publish",
-    {
-      shared: true,
-    }
-  )
-  @post
-  op PublishCloudEvent is Azure.Core.RpcOperation<
+  @sharedRoute
+  @action("publish")
+  op publishCloudEvent is StandardOperations.ResourceAction<
+    Topic,
     {
       @doc("content type")
       @header("content-type")
       contentType: "application/cloudevents+json; charset=utf-8";
 
-      @doc("Topic Name.")
-      @path
-      topicName: string;
-
       @doc("Single Cloud Event being published.")
       @body
       event: CloudEvent;
     },
-    PublishResult
+    {
+      @body _: PublishResult;
+    }
   >;
 
   @doc("Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ")
-  @route(
-    "/topics/{topicName}:publish",
-    {
-      shared: true,
-    }
-  )
-  @post
-  op PublishCloudEvents is Azure.Core.RpcOperation<
+  @sharedRoute
+  @action("publish")
+  op publishCloudEvents is StandardOperations.ResourceAction<
+    Topic,
     {
       @doc("content type")
       @header("content-type")
       contentType: "application/cloudevents-batch+json; charset=utf-8";
 
-      @doc("Topic Name.")
-      @path
-      topicName: string;
-
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Not using a container model for CloudEvent is intentional. Went through Stewardship Board review (#21880)."
       @doc("Array of Cloud Events being published.")
       @body
       events: CloudEvent[];
     },
-    PublishResult
+    {
+      @body _: PublishResult;
+    }
   >;
 
   // Receive Operation:
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&maxWaitTime=60&maxEvents={maxEvents}
 
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
-  @post
-  op ReceiveCloudEvents is Azure.Core.RpcOperation<
+  @action("receive")
+  op receiveCloudEvents is StandardOperations.ResourceAction<
+    EventSubscription,
     {
-      @doc("Topic Name.")
-      @path
-      topicName: string;
-
-      @doc("Event Subscription Name.")
-      @path
-      eventSubscriptionName: string;
-
       @doc("Max Events count to be received. Minimum value is 1, while maximum value is 100 events. If not specified, the default value is 1.")
       @query
+      @minValue(1)
+      @maxValue(100)
       maxEvents?: int32 = 1;
 
       @doc("Max wait time value for receive operation in Seconds. It is the time in seconds that the server approximately waits for the availability of an event and responds to the request. If an event is available, the broker responds immediately to the client. Minimum value is 10 seconds, while maximum value is 120 seconds. If not specified, the default value is 60 seconds.")
@@ -241,21 +247,13 @@ namespace Azure.Messaging.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
   @doc("Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully acknowledged. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge")
-  @post
-  op AcknowledgeCloudEvents is Azure.Core.RpcOperation<
+  @action("acknowledge")
+  op acknowledgeCloudEvents is StandardOperations.ResourceAction<
+    EventSubscription,
     {
       @doc("content type")
       @header("content-type")
-      contentType: "application/json; charset=utf-8";
-
-      @doc("Topic Name.")
-      @path
-      topicName: string;
-
-      @doc("Event Subscription Name.")
-      @path
-      eventSubscriptionName: string;
+      contentType: "application/json";
 
       @doc("AcknowledgeOptions.")
       @body
@@ -268,21 +266,13 @@ namespace Azure.Messaging.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
 
   @doc("Release batch of Cloud Events. The server responds with an HTTP 200 status code if at least one event is successfully released. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release")
-  @post
-  op ReleaseCloudEvents is Azure.Core.RpcOperation<
+  @action("release")
+  op releaseCloudEvents is StandardOperations.ResourceAction<
+    EventSubscription,
     {
       @doc("content type")
       @header("content-type")
-      contentType: "application/json; charset=utf-8";
-
-      @doc("Topic Name.")
-      @path
-      topicName: string;
-
-      @doc("Event Subscription Name.")
-      @path
-      eventSubscriptionName: string;
+      contentType: "application/json";
 
       @doc("ReleaseOptions")
       @body
@@ -295,21 +285,13 @@ namespace Azure.Messaging.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
 
   @doc("Reject batch of Cloud Events.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject")
-  @post
-  op RejectCloudEvents is Azure.Core.RpcOperation<
+  @action("reject")
+  op rejectCloudEvents is StandardOperations.ResourceAction<
+    EventSubscription,
     {
       @doc("content type")
       @header("content-type")
-      contentType: "application/json; charset=utf-8";
-
-      @doc("Topic Name.")
-      @path
-      topicName: string;
-
-      @doc("Event Subscription Name.")
-      @path
-      eventSubscriptionName: string;
+      contentType: "application/json";
 
       @doc("RejectOptions")
       @body
