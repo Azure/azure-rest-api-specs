@@ -21,6 +21,7 @@ pr:
     - specification/confidentialledger
     - specification/containerservice
     - specification/containerstorage
+    - specification/eventgrid
     - specification/servicenetworking
     - specification/sphere
     - specification/translation
@@ -88,6 +89,11 @@ jobs:
     parameters:
       Folder: specification/containerstorage/ContainerStorage.Management
       DisplayName: ContainerStorage.Management
+
+  - template: templates/steps/typespec-ci.yml
+    parameters:
+      Folder: specification/eventgrid/Azure.Messaging.EventGrid
+      DisplayName: Messaging.EventGrid
 
   - template: templates/steps/typespec-ci.yml
     parameters:
