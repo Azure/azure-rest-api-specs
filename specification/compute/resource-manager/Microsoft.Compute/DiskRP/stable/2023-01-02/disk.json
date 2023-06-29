@@ -468,12 +468,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/disks/{diskName}/beginGetAccess": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}/disks/{diskName}/beginGetAccess": {
       "post": {
         "tags": [
           "Disks"
         ],
-        "operationId": "Disks_GrantAccessOnVMSSVMInstanceDisk",
+        "operationId": "Disks_GrantAccessOnVMSSVMInstance",
         "description": "Grants access to a VMSS VM Instance OS disk for DiskInspection scenario.",
         "parameters": [
           {
@@ -948,11 +948,11 @@
       "x-ms-parameter-location": "method"
     },
     "VirtualmachineScaleSetsNameParameter": {
-      "name": "vmScaleSetName",
+      "name": "vmssName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the VirtulmachineScaleSet managing the managed disk. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+      "description": "The name of the VirtualmachineScaleSet managing the managed disk. The name can't be changed after the disk is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     }
   }
