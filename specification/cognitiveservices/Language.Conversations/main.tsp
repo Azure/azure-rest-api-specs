@@ -823,7 +823,6 @@ enum WeightUnit {
   Dram,
 }
 
-<<<<<<< HEAD
 @doc("Analyzes the input conversation utterance.")
 @TypeSpec.Rest.actionSeparator("/:")
 @TypeSpec.Rest.action("analyze-conversations")
@@ -844,31 +843,3 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   AnalyzeConversationTask,
   AnalyzeConversationTaskResult
 >;
-=======
-interface ConversationAnalysis {
-  @doc("Analyzes the input conversation utterance.")
-  @TypeSpec.Rest.actionSeparator("/:")
-  @TypeSpec.Rest.action("analyze-conversations")
-  @example(
-    "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
-    "Conversation project result"
-  )
-  @example(
-    "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitration.json",
-    "Orchestration result"
-  )
-  @example(
-    "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
-    "Orchestration direct target result"
-  )
-  analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
-    Conversations,
-    {
-      @doc("A single conversational task to execute.")
-      @body
-      body: AnalyzeConversationTask;
-    },
-    AnalyzeConversationTaskResult
-  >;
-}
->>>>>>> 149def2ab2 (added route)
