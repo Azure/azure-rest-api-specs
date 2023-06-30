@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+@useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
 @service({
   title: "Contoso Widget Manager",
 })

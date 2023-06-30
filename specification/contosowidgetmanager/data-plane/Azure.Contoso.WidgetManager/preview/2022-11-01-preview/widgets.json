@@ -18,6 +18,25 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://contoso.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://contoso.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
   "tags": [],
   "paths": {
     "/widgets": {
@@ -289,7 +308,7 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
-              "description": "Provides the status of a resource operation.",
+              "description": "Provides status details for long running operations.",
               "properties": {
                 "id": {
                   "type": "string",
