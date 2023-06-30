@@ -1,12 +1,12 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -18,13 +18,21 @@ using Azure.ResourceManager.Foundations;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.DevTunnels;
 
-interface Operations extends Azure.ResourceManager.Operations { }
+interface Operations extends Azure.ResourceManager.Operations {
+  @tag("CheckNameAvailability")
+  checkName is checkGlobalNameAvailability;
+}
 
 @doc("Provisioning state enum")
 enum ProvisioningState {
-    Succeeded,
-    Failed,
-    Canceled
+  @doc("The operation succeeded")
+  Succeeded,
+  
+  @doc("The operation failed")
+  Failed,
+
+  @doc("The operation was canceled")
+  Canceled,
 }
 
 @doc("The properties of TunnelPlan")
@@ -32,9 +40,13 @@ model TunnelPlanProperties {
   @doc("The billing tier for the plan")
   billingTier: string;
 
+  @doc("Cluster ID where the TunnelPlan resides, used for data-plane operations")
+  @visibility("read")
+  clusterId?: string;
+
   @doc("The provisioning state of the plan")
   @visibility("read")
-  provisioningState?: ProvisioningState
+  provisioningState?: ProvisioningState;
 }
 
 @doc("A Tunnel Plan resource")
@@ -46,14 +58,13 @@ model TunnelPlanResource is TrackedResource<TunnelPlanProperties> {
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
-
   ...EntityTag;
 }
 
 @doc("The response to a getToken request")
 model GetTokenResponse {
-    @doc("The TunnelPlan token")
-    token: string;
+  @doc("The TunnelPlan token")
+  token: string;
 }
 
 @armResourceOperations
@@ -62,9 +73,9 @@ interface TunnelPlans {
   @armResourceAction(TResource)
   @post
   @doc("POST ARM resource action with no body")
-  op ArmResourceActionNoBodySync<
+  ArmResourceActionNoBodySync<
     TResource extends ArmResource,
-    TResponse extends object,
+    TResponse extends {},
     TBaseParameters = BaseParameters<TResource>
   >(
     ...ResourceInstanceParameters<TResource, TBaseParameters>
@@ -77,29 +88,32 @@ interface TunnelPlans {
   listByResourceGroup is ArmResourceListByParent<TunnelPlanResource>;
   listBySubscription is ArmListBySubscription<TunnelPlanResource>;
   @doc("Get a Tunnel Plan token")
-  ListToken is TunnelPlans.ArmResourceActionNoBodySync<TunnelPlanResource, GetTokenResponse>
+  listToken is TunnelPlans.ArmResourceActionNoBodySync<
+    TunnelPlanResource,
+    GetTokenResponse
+  >;
 }
 
-@doc("The properties of a billing plan")
-model BillingPlanProperties {
-    @doc("Description of the billing plan")
-    description: string;
+@doc("The properties of a billing tier")
+model BillingTierProperties {
+  @doc("Description of the billing tier")
+  description: string;
 
-    @doc("The provisioning state of the plan")
-    @visibility("read")
-    provisioningState?: ProvisioningState
+  @doc("The provisioning state of the plan")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 @subscriptionResource
-model BillingPlanResource is ProxyResource<BillingPlanProperties>
-{
-    @doc("Plans name")
-    @visibility("read")
-    @key
-    @path
-    @segment("billingPlans")
-    name: string;
+model BillingTierResource is ProxyResource<BillingTierProperties> {
+  @doc("Billing Tier Name")
+  @visibility("read")
+  @key
+  @path
+  @segment("billingTiers")
+  name: string;
 }
 
-@armResourceOperations(BillingPlanResource)
-interface BillingPlans extends ResourceListBySubscription<BillingPlanResource>{ }
+@armResourceOperations(BillingTierResource)
+interface BillingTiers
+  extends ResourceListBySubscription<BillingTierResource> {}
