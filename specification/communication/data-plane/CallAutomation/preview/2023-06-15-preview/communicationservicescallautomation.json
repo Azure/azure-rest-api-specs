@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-03-06",
+    "version": "2023-06-15-preview",
     "title": "Azure Communication Service Call Automation APIs",
     "description": "Azure Communication Service Call Automation APIs"
   },
@@ -62,7 +62,7 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            }
+          }
           }
         },
         "x-ms-examples": {
@@ -120,7 +120,7 @@
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          }
+            }
         },
         "x-ms-examples": {
           "AnswerCall": {
@@ -268,7 +268,7 @@
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          }
+            }
         },
         "x-ms-examples": {
           "CallConnection_GetCall": {
@@ -561,6 +561,162 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:startContinuousDtmfRecognition": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Start continuous Dtmf recognition by subscribing to tones.",
+        "operationId": "CallMedia_StartContinuousDtmfRecognition",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuousDtmfRecognitionRequest",
+            "in": "body",
+            "description": "The continuous recognize request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContinuousDtmfRecognitionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "The service has accepted the start continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StartContinuousDtmfRecognition": {
+            "$ref": "./examples/CallMedia_StartContinuousDtmfRecognition.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:stopContinuousDtmfRecognition": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Stop continuous Dtmf recognition by unsubscribing to tones.",
+        "operationId": "CallMedia_StopContinuousDtmfRecognition",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuousDtmfRecognitionRequest",
+            "in": "body",
+            "description": "The continuous recognize request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContinuousDtmfRecognitionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "The service has accepted the stop continuous recognize request and will begin processing it. You will receive events at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_StopContinuousDtmfRecognition": {
+            "$ref": "./examples/CallMedia_StopContinuousDtmfRecognition.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:sendDtmf": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Send dtmf tones.",
+        "description": "Send dtmf tones.",
+        "operationId": "CallMedia_SendDtmf",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sendDtmfRequest",
+            "in": "body",
+            "description": "The send dtmf request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendDtmfRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the send dtmf response",
+            "schema": {
+              "$ref": "#/definitions/SendDtmfResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },     
+        "x-ms-examples": {
+          "CallMedia_SendDtmf": {
+            "$ref": "./examples/CallMedia_SendDtmf.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants": {
       "get": {
         "tags": [
@@ -733,6 +889,71 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}/participants:mute": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Mute participants from the call using identifier.",
+        "description": "Mute participants from the call using identifier.",
+        "operationId": "CallConnection_Mute",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "muteParticipantsRequest",
+            "in": "body",
+            "description": "The participants to be muted from the call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MuteParticipantsRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Returns the mute participants response",
+            "schema": {
+              "$ref": "#/definitions/MuteParticipantsResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "CallConnection_Mute": {
+            "$ref": "./examples/CallConnection_Mute.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants/{participantRawId}": {
       "get": {
         "tags": [
@@ -772,7 +993,7 @@
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             }
-          }
+            }
         },
         "x-ms-examples": {
           "CallConnection_GetParticipant": {
@@ -827,7 +1048,7 @@
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
-            }
+          }
           }
         },
         "x-ms-examples": {
@@ -1022,6 +1243,10 @@
         "callbackUri": {
           "description": "The callback URI.",
           "type": "string"
+        },
+        "azureCognitiveServicesEndpointUrl": {
+          "description": "The identifier of the Cognitive Service resource assigned to this call.",
+          "type": "string"
         }
       }
     },
@@ -1120,6 +1345,10 @@
         },
         "operationContext": {
           "description": "A customer set value used to track the answering of a call.",
+          "type": "string"
+        },
+        "azureCognitiveServicesEndpointUrl": {
+          "description": "The endpoint URL of the Azure Cognitive Services resource attached",
           "type": "string"
         },
         "answeredBy": {
@@ -1235,7 +1464,9 @@
     "PlaySourceType": {
       "description": "Defines the type of the play source",
       "enum": [
-        "file"
+        "file",
+        "text",
+        "ssml"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1259,6 +1490,14 @@
         "file": {
           "$ref": "#/definitions/FileSource",
           "description": "Defines the file source info to be used for play"
+        },
+        "textSource": {
+          "$ref": "#/definitions/TextSource",
+          "description": "Defines the text source info to be used for play"
+        },
+        "ssmlSource": {
+          "$ref": "#/definitions/SsmlSource",
+          "description": "Defines the ssml(Speech Synthesis Markup Language) source info to be used for play"
         }
       }
     },
@@ -1286,10 +1525,68 @@
         }
       }
     },
+    "Gender": {
+      "description": "Voice gender type",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Gender",
+        "modelAsString": true
+      }
+    },
+    "TextSource": {
+      "required": [
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Text for the cognitive service to be played",
+          "type": "string"
+        },
+        "sourceLocale": {
+          "description": "Source language locale to be played\r\nRefer to available locales here: <seealso href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=stt-tts\" />",
+          "type": "string"
+        },
+        "voiceGender": {
+          "$ref": "#/definitions/Gender"
+        },
+        "voiceName": {
+          "description": "Voice name to be played\r\nRefer to available Text-to-speech voices here: <seealso href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=stt-tts\" />",
+          "type": "string"
+        },
+        "customVoiceEndpointId": {
+          "description": "Endpoint where the custom voice was deployed.",
+          "type": "string"
+        }
+      }
+    },
+    "SsmlSource": {
+      "required": [
+        "ssmlText"
+      ],
+      "type": "object",
+      "properties": {
+        "ssmlText": {
+          "description": "Ssml string for the cognitive service to be played",
+          "type": "string"
+        },
+        "customVoiceEndpointId": {
+          "description": "Endpoint where the custom voice was deployed.",
+          "type": "string"
+        }
+      }
+    },
     "RecognizeInputType": {
       "description": "Determines the type of the recognition.",
       "enum": [
-        "dtmf"
+        "dtmf",
+        "speech",
+        "speechOrDtmf",
+        "choices"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1346,9 +1643,28 @@
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "Target participant of DTMF tone recognition."
         },
+        "speechLanguage": {
+          "description": "Speech language to be recognized, If not set default is en-US",
+          "type": "string"
+        },
+        "speechRecognitionModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
+          "type": "string"
+        },
         "dtmfOptions": {
           "$ref": "#/definitions/DtmfOptions",
           "description": "Defines configurations for DTMF."
+        },
+        "choices": {
+          "description": "Defines Ivr choices for recognize.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Choice"
+          }
+        },
+        "speechOptions": {
+          "$ref": "#/definitions/SpeechOptions",
+          "description": "Defines continuous speech recognition option."
         }
       }
     },
@@ -1399,6 +1715,89 @@
           "items": {
             "$ref": "#/definitions/Tone"
           }
+        }
+      }
+    },
+    "Choice": {
+      "required": [
+        "label",
+        "phrases"
+      ],
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Identifier for a given choice",
+          "type": "string"
+        },
+        "phrases": {
+          "description": "List of phrases to recognize",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tone": {
+          "$ref": "#/definitions/Tone"
+        }
+      }
+    },
+    "SpeechOptions": {
+      "description": "Options for continuous speech recognition",
+      "type": "object",
+      "properties": {
+        "endSilenceTimeoutInMs": {
+          "format": "int64",
+          "description": "The length of end silence when user stops speaking and cogservice send response.",
+          "type": "integer"
+        }
+      }
+    },
+    "ContinuousDtmfRecognitionRequest": {
+      "required": [
+        "targetParticipant"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Defines options for recognition."
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "SendDtmfRequest": {
+      "required": [
+        "tones",
+        "targetParticipant"
+      ],
+      "type": "object",
+      "properties": {
+        "tones": {
+          "description": "List of tones to be sent to target participant.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tone"
+          }
+        },
+        "targetParticipant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Target participant of send DTMF."
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "SendDtmfResponse": {
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
         }
       }
     },
@@ -1501,6 +1900,36 @@
     },
     "RemoveParticipantResponse": {
       "description": "The response payload for removing participants of the call.",
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "The operation context provided by client.",
+          "type": "string"
+        }
+      }
+    },
+    "MuteParticipantsRequest": {
+      "description": "The request payload for muting participants from the call.",
+      "required": [
+        "targetParticipants"
+      ],
+      "type": "object",
+      "properties": {
+        "targetParticipants": {
+          "description": "Participants to be muted from the call.\r\nOnly ACS Users are supported.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      }
+    },
+    "MuteParticipantsResponse": {
+      "description": "The response payload for muting participants from the call.",
       "type": "object",
       "properties": {
         "operationContext": {
@@ -2027,7 +2456,9 @@
     "RecognitionType": {
       "description": "Determines the sub-type of the recognize operation.\r\nIn case of cancel operation the this field is not set and is returned empty",
       "enum": [
-        "dtmf"
+        "dtmf",
+        "speech",
+        "choices"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2064,6 +2495,15 @@
         "dtmfResult": {
           "$ref": "#/definitions/DtmfResult",
           "description": "Defines the result for RecognitionType = Dtmf"
+        },
+        "choiceResult": {
+          "$ref": "#/definitions/ChoiceResult",
+          "description": "Defines the result for RecognitionType = Choices"
+        },
+        "speechResult": {
+          "$ref": "#/definitions/SpeechResult",
+          "description": "Defines the result for RecognitionType = Speech and SpeechOrDtmf",
+          "readOnly": true
         }
       }
     },
@@ -2076,6 +2516,29 @@
             "$ref": "#/definitions/Tone"
           },
           "readOnly": true
+        }
+      }
+    },
+    "ChoiceResult": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Label is the primary identifier for the choice detected",
+          "type": "string"
+        },
+        "recognizedPhrase": {
+          "description": "Phrases are set to the value if choice is selected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
+          "type": "string"
+        }
+      }
+    },
+    "SpeechResult": {
+      "description": "The speech status as a result.",
+      "type": "object",
+      "properties": {
+        "speech": {
+          "description": "The recognized speech in string.",
+          "type": "string"
         }
       }
     },
@@ -2122,6 +2585,153 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        }
+      }
+    },
+    "ContinuousDtmfRecognitionToneFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      }
+    },
+    "ContinuousDtmfRecognitionToneReceived": {
+      "type": "object",
+      "properties": {
+        "toneInfo": {
+          "$ref": "#/definitions/ToneInfo",
+          "description": "Information about Tone."
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId or skype chain ID.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      }
+    },
+    "ToneInfo": {
+      "description": "The information about the tone.",
+      "required": [
+        "sequenceId",
+        "tone"
+      ],
+      "type": "object",
+      "properties": {
+        "sequenceId": {
+          "format": "int32",
+          "description": "The sequence id which can be used to determine if the same tone was played multiple times or if any tones were missed.",
+          "type": "integer"
+        },
+        "tone": {
+          "$ref": "#/definitions/Tone"
+        }
+      }
+    },
+    "ContinuousDtmfRecognitionStopped": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "SendDtmfCompleted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "SendDtmfFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     }
