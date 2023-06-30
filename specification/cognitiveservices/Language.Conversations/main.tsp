@@ -1060,6 +1060,7 @@ enum WeightUnit {
   Dram,
 }
 
+<<<<<<< HEAD
 @doc("Analyzes the input conversation utterance.")
 @TypeSpec.Rest.actionSeparator("/:")
 @TypeSpec.Rest.action("analyze-conversations")
@@ -1082,3 +1083,15 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   AnalyzeConversationTask,
   AnalyzeConversationTaskResult
 >;
+=======
+interface ConversationAnalysis {
+  @doc("Analyzes the input conversation utterance.")
+  @TypeSpec.Rest.actionSeparator("/:")
+  @TypeSpec.Rest.action("analyze-conversations")
+  analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+    Conversations,
+    AnalyzeConversationTask,
+    AnalyzeConversationTaskResult
+  >;
+}
+>>>>>>> 149def2ab2 (added route)
