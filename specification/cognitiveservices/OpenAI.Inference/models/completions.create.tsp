@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./completions.common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
@@ -158,6 +160,14 @@ model Completions {
   @projectedName("json", "created")
   @projectedName("csharp", "InternalCreatedSecondsAfterUnixEpoch")
   created: int32;
+
+  @doc("""
+  Content filtering results for zero or more prompts in the request. In a streaming request, 
+  results for different prompts may arrive at different times or in different orders.
+  """)
+  @added(ServiceApiVersions.v2023_06_01_Preview)
+  @projectedName("json", "promptFilterResults")
+  promptFilterResults?: PromptFilterResult[];
 
   @doc("""
     The collection of completions choices associated with this completions response.

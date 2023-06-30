@@ -178,55 +178,6 @@ model ChatChoice {
   contentFilterResults?: ContentFilterResults;
 }
 
-@doc("Ratings for the intensity and risk level of harmful content.")
-enum ContentFilterSeverity {
-  @doc("General content or related content in generic or non-harmful contexts.")
-  safe: "safe";
-
-  @doc("Harmful content at a low intensity and risk level.")
-  low: "low";
-
-  @doc("Harmful content at a medium intensity and risk level.")
-  medium: "medium";
-
-  @doc("Harmful content at a high intensity and risk level.")
-  high: "high";
-}
-
-@doc("Information about filtered content severity level and if it has been filtered or not.")
-model ContentFilterResult {
-  @doc("")
-  @projectedName("json", "severity")
-  severity: ContentFilterSeverity;
-
-  @doc("")
-  @projectedName("json", "filtered")
-  filtered: boolean;
-
-}
-
-@doc("Information about the content filtering category, if it has been detected.")
-model ContentFilterResults {
-  sexual: ContentFilterResult;
-  violence: ContentFilterResult;
-  hate: ContentFilterResult;
-  selfHarm: ContentFilterResult;
-  //error?
-}
-
-@doc("""
-Content filtering results for a single prompt in the request.
-""")
-model PromptFilterResult {
-  @doc("")
-  @projectedName("json", "prompt_index")
-  promptIndex: int32;
-
-  @doc("asdfasdfasdf")
-  @projectedName("json", "contentFilterResults")
-  contentFilterResults?: ContentFilterResults;
-}
-
 @doc("""
 Representation of the response data from a chat completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
@@ -257,7 +208,8 @@ model ChatCompletions {
   Content filtering results for zero or more prompts in the request. In a streaming request, 
   results for different prompts may arrive at different times or in different orders.
   """)
-  @projectedName("json", "promptFilterResults")
+  @added(ServiceApiVersions.v2023_06_01_Preview)
+  @projectedName("json", "promptFilterResults") // TODO: or "prompt_filter_results"?
   promptFilterResults?: PromptFilterResult[];
 
   @doc("""
