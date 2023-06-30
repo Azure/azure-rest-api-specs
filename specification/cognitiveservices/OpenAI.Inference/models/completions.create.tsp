@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./completions.common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
@@ -163,6 +165,7 @@ model Completions {
   Content filtering results for zero or more prompts in the request. In a streaming request, 
   results for different prompts may arrive at different times or in different orders.
   """)
+  @added(ServiceApiVersions.v2023_06_01_Preview)
   @projectedName("json", "prompt_filter_results")
   promptFilterResults?: PromptFilterResult[];
 
