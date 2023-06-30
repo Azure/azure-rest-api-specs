@@ -280,11 +280,11 @@ numeric, underscore or hyphen characters.
 }
 
 interface LoadTestRun {
-  @summary("Delete a test run by its name.")
-  @doc("Delete a test run by its name.")
+  @summary("Get test run details by name.")
+  @doc("Get test run details by name.")
   @route("/test-runs/{testRunId}")
-  @delete
-  DeleteTestRun is Azure.Core.Foundations.Operation<
+  @get
+  GetTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -293,7 +293,7 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    void
+    TestRun
   >;
 
   @summary("Create and start a new test run with the given name.")
@@ -315,12 +315,11 @@ numeric, underscore or hyphen characters.
     >
   >;
 
-
-  @summary("Get test run details by name.")
-  @doc("Get test run details by name.")
+  @summary("Delete a test run by its name.")
+  @doc("Delete a test run by its name.")
   @route("/test-runs/{testRunId}")
-  @get
-  GetTestRun is Azure.Core.Foundations.Operation<
+  @delete
+  DeleteTestRun is Azure.Core.Foundations.Operation<
     {
       @doc("""
 Unique name for the load test run, must contain only lower-case alphabetic,
@@ -329,7 +328,7 @@ numeric, underscore or hyphen characters.
       @path
       testRunId: string;
     },
-    TestRun
+    void
   >;
 
   @summary("Get test run file by file name.")
