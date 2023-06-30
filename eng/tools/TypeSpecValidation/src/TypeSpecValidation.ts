@@ -1,5 +1,5 @@
 import { exec } from "child_process";
-import { debug } from "debug";
+import debug from "debug";
 import { access } from "fs/promises"
 import { parseArgs, ParseArgsConfig } from 'node:util';
 import path from "path";
