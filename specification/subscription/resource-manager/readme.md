@@ -29,7 +29,7 @@ directive:
     reason: Avoid Lro changes on this api to return 202.
   - suppress: GetOperation200
     from: subscriptions.json
-    where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get.responses
+    where: $.paths["/providers/Microsoft.Subscription/subscriptionOperations/{operationId}"].get.responses["202"]
     reason: This api will return 200 and 202 response.
 ```
 
