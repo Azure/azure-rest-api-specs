@@ -1,9 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
+<<<<<<< HEAD
     "title": "Microsoft Cognitive Language Service",
     "version": "2022-05-01",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
+=======
+    "title": "Contoso Widget Manager",
+    "version": "0000-00-00",
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -13,6 +18,7 @@
   "schemes": [
     "https"
   ],
+<<<<<<< HEAD
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
@@ -26,12 +32,15 @@
       }
     ]
   },
+=======
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
+<<<<<<< HEAD
   "security": [
     {
       "apim_key": []
@@ -51,24 +60,75 @@
       "post": {
         "operationId": "AnalyzeConversation",
         "description": "Analyzes the input conversation utterance.",
+=======
+  "tags": [],
+  "paths": {
+    "/widgets/{widgetName}/operations/{operationId}": {
+      "get": {
+        "operationId": "Widgets_GetWidgetOperationStatus",
+        "description": "Gets status of a Widget operation.",
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+<<<<<<< HEAD
             "name": "body",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
             },
             "required": true
+=======
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "description": "The widget name.",
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "The unique ID of the operation.",
+            "type": "string"
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
+<<<<<<< HEAD
               "$ref": "#/definitions/AnalyzeConversationTaskResult"
+=======
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/Widget",
+                  "description": "The result of the operation."
+                }
+              },
+              "description": "Provides status details for long running operations.",
+              "required": [
+                "id",
+                "status"
+              ],
+              "x-typespec-name": "Azure.Core.ResourceOperationStatus<Widget, Widget, Azure.Core.Foundations.Error>"
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
             }
           },
           "default": {
@@ -88,6 +148,7 @@
     }
   },
   "definitions": {
+<<<<<<< HEAD
     "AADToken": {
       "type": "object",
       "properties": {
@@ -369,6 +430,8 @@
         "modelAsString": true
       }
     },
+=======
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "properties": {
@@ -390,8 +453,13 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
+<<<<<<< HEAD
           "description": "An array of details about specific errors that led to this reported error.",
           "x-typespec-name": "Azure.Core.Foundations.Error[]"
+=======
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
+          "description": "An array of details about specific errors that led to this reported error."
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -401,7 +469,12 @@
       "description": "The error object.",
       "required": [
         "code",
+<<<<<<< HEAD
         "message"
+=======
+        "message",
+        "details"
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -429,6 +502,7 @@
           "description": "Inner error."
         }
       },
+<<<<<<< HEAD
       "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "BaseExtraInformation": {
@@ -2122,6 +2196,77 @@
         "name": "unit",
         "modelAsString": true
       }
+=======
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true
+      }
+    },
+    "FakedSharedModel": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "The tag."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created date."
+        }
+      },
+      "description": "Faked shared model",
+      "required": [
+        "tag",
+        "createdDate"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "2022-11-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true
+      }
+    },
+    "Widget": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The widget name.",
+          "readOnly": true
+        },
+        "manufacturerId": {
+          "type": "string",
+          "description": "The ID of the manufacturer."
+        },
+        "sharedModel": {
+          "$ref": "#/definitions/FakedSharedModel",
+          "description": "The faked shared model."
+        }
+      },
+      "description": "A widget.",
+      "required": [
+        "name",
+        "manufacturerId"
+      ]
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
     }
   },
   "parameters": {
@@ -2131,8 +2276,13 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
+<<<<<<< HEAD
       "type": "string",
       "minLength": 1,
+=======
+      "minLength": 1,
+      "type": "string",
+>>>>>>> ee78f193a4 (Adding example TypeSpec definition for CLU (#24309))
       "x-ms-parameter-location": "method"
     }
   }
