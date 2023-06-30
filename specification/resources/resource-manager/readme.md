@@ -78,15 +78,23 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-snapshots-2022-11
+tag: package-2023-07
 ```
 
 
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07'
+input-file:
+  - Microsoft.Resources/stable/2023-07-01/resources.json
+```
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-12'
+``` yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
@@ -315,7 +323,6 @@ These settings apply only when `--tag=package-subscriptions-2022-12` is specifie
 input-file:
 - Microsoft.Resources/stable/2022-12-01/subscriptions.json
 ```
-
 
 ### Tag: package-subscriptions-2021-01
 
