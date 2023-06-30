@@ -32,7 +32,7 @@
         "tags": [
           "Settings"
         ],
-        "operationId": "UpdateSettings",
+        "operationId": "UpdateSetting",
         "summary": "Updates key vault account setting, stores it, then returns the setting name and value to the client.",
         "description": "Description of the pool setting to be updated",
         "parameters": [
@@ -45,7 +45,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/UpdateSettingsRequest"
+              "$ref": "#/definitions/UpdateSettingRequest"
             },
             "description": "The parameters to update an account setting."
           },
@@ -77,9 +77,9 @@
         "tags": [
           "Settings"
         ],
-        "operationId": "GetSettingValue",
-        "summary": "Get specified account setting value.",
-        "description": "Retrieves the value of a specified, value account setting.",
+        "operationId": "GetSetting",
+        "summary": "Get specified account setting object.",
+        "description": "Retrieves the setting object of a specified setting name.",
         "parameters": [
           {
             "$ref": "#/parameters/SettingNameParameter"
@@ -145,7 +145,7 @@
     }
   },
   "definitions": {
-    "UpdateSettingsRequest": {
+    "UpdateSettingRequest": {
       "properties": {
         "value": {
           "type": "string",
@@ -188,7 +188,7 @@
     },
     "SettingsListResult": {
       "properties": {
-        "value": {
+        "settings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Setting"

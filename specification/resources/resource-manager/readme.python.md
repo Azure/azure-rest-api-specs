@@ -31,20 +31,25 @@ batch:
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
   - multiapiscript-locks: true
-  - tag: package-managedapplications-2018-06
+  - tag: package-managedapplications-2019-07
   - multiapiscript-managedapplications: true
-  - tag: package-policy-2021-06
-  - tag: package-policy-2020-09
+  - tag: package-policy-2022-08-preview-only
+  - tag: package-policy-2022-07-preview-only
+  - tag: package-policy-2022-06-only
+  - tag: package-policy-2021-06-only
+  - tag: package-policy-2020-09-only
+  - tag: package-policy-2020-07-preview-only
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
   - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
-  - tag: package-policy-2017-06
+  - tag: package-policy-2017-06-preview-only
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
   - multiapiscript-policy: true
+  - tag: package-resources-2022-09
   - tag: package-resources-2021-04
   - tag: package-resources-2021-01
   - tag: package-resources-2020-10
@@ -61,6 +66,7 @@ batch:
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
   - multiapiscript-resources: true
+  - tag: package-subscriptions-2022-12
   - tag: package-subscriptions-2021-01
   - tag: package-subscriptions-2019-11
   - tag: package-subscriptions-2019-06
@@ -75,6 +81,8 @@ batch:
   - tag: package-templatespecs-2021-03-preview
   - tag: package-templatespecs-2019-06-preview
   - multiapiscript-templatespecs: true
+  - tag: package-deploymentstacks-2022-08-preview
+  - multiapiscript-deploymentstacks: true
   - tag: package-changes-2022-05
   - multiapiscript-changes: true
 ```
@@ -136,6 +144,12 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 perform-load: false
 ```
 
+```yaml $(multiapiscript-deploymentstacks)
+package-name: azure-mgmt-resource#deploymentstacks
+multiapiscript: true
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentstacks
+perform-load: false
+```
 
 ```yaml $(multiapiscript-locks)
 package-name: azure-mgmt-resource#locks
@@ -164,6 +178,7 @@ These settings apply only when `--tag=package-changes-2022-05 --python` is speci
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-changes-2022-05'
+default-api-version: "2022-05-01"
 namespace: azure.mgmt.resource.changes.v2022_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/changes/v2022_05_01
 ```
@@ -174,6 +189,7 @@ These settings apply only when `--tag=package-privatelinks-2020-05 --python` is 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-privatelinks-2020-05'
+default-api-version: "2020-05-01"
 namespace: azure.mgmt.resource.privatelinks.v2020_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/privatelinks/v2020_05_01
 ```
@@ -184,6 +200,7 @@ These settings apply only when `--tag=package-features-2021-07 --python` is spec
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-features-2021-07'
+default-api-version: "2021-07-01"
 namespace: azure.mgmt.resource.features.v2021_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/features/v2021_07_01
 ```
@@ -204,6 +221,7 @@ These settings apply only when `--tag=package-links-2016-09 --python` is specifi
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-links-2016-09'
+default-api-version: "2016-09-01"
 namespace: azure.mgmt.resource.links.v2016_09_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/links/v2016_09_01
 ```
@@ -214,6 +232,7 @@ These settings apply only when `--tag=package-locks-2016-09 --python` is specifi
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-locks-2016-09'
+default-api-version: "2016-09-01"
 namespace: azure.mgmt.resource.locks.v2016_09_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks/v2016_09_01
 ```
@@ -228,34 +247,76 @@ namespace: azure.mgmt.resource.locks.v2015_01_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks/v2015_01_01
 ```
 
-### Tag: package-managedapplications-2018-06 and python
+### Tag: package-managedapplications-2019-07 and python
 
-These settings apply only when `--tag=package-managedapplications-2018-06 --python` is specified on the command line.
+These settings apply only when `--tag=package-managedapplications-2019-07 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-managedapplications-2018-06'
-namespace: azure.mgmt.resource.managedapplications.v2018_06_01
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2018_06_01
+``` yaml $(tag) == 'package-managedapplications-2019-07'
+default-api-version: "2019-07-01"
+namespace: azure.mgmt.resource.managedapplications.v2019_07_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2019_07_01
 ```
 
-### Tag: package-policy-2021-06 and python
+### Tag: package-policy-2022-08-preview-only and python
 
-These settings apply only when `--tag=package-policy-2021-06 --python` is specified on the command line.
+These settings apply only when `--tag=package-policy-2022-08-preview-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-policy-2021-06'
+``` yaml $(tag) == 'package-policy-2022-08-preview-only'
+namespace: azure.mgmt.resource.policy.v2022_08_01_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2022_08_01_preview
+```
+
+### Tag: package-policy-2022-07-preview-only and python
+
+These settings apply only when `--tag=package-policy-2022-07-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2022-07-preview-only'
+namespace: azure.mgmt.resource.policy.v2022_07_01_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2022_07_01_preview
+```
+
+### Tag: package-policy-2022-06-only and python
+
+These settings apply only when `--tag=package-policy-2022-06-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2022-06-only'
+default-api-version: "2022-06-01"
+namespace: azure.mgmt.resource.policy.v2022_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2022_06_01
+```
+
+### Tag: package-policy-2021-06-only and python
+
+These settings apply only when `--tag=package-policy-2021-06-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2021-06-only'
 namespace: azure.mgmt.resource.policy.v2021_06_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2021_06_01
 ```
 
-### Tag: package-policy-2020-09 and python
+### Tag: package-policy-2020-09-only and python
 
-These settings apply only when `--tag=package-policy-2020-09 --python` is specified on the command line.
+These settings apply only when `--tag=package-policy-2020-09-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-policy-2020-09'
+``` yaml $(tag) == 'package-policy-2020-09-only'
 namespace: azure.mgmt.resource.policy.v2020_09_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2020_09_01
+```
+
+### Tag: package-policy-2020-07-preview-only and python
+
+These settings apply only when `--tag=package-policy-2020-07-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-policy-2020-07-preview-only'
+namespace: azure.mgmt.resource.policy.v2020_07_01_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2020_07_01_preview
 ```
 
 ### Tag: package-policy-2019-09 and python
@@ -308,12 +369,12 @@ namespace: azure.mgmt.resource.policy.v2018_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2018_03_01
 ```
 
-### Tag: package-policy-2017-06 and python
+### Tag: package-policy-2017-06-preview-only and python
 
-These settings apply only when `--tag=package-policy-2017-06 --python` is specified on the command line.
+These settings apply only when `--tag=package-policy-2017-06-preview-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-policy-2017-06'
+``` yaml $(tag) == 'package-policy-2017-06-preview-only'
 namespace: azure.mgmt.resource.policy.v2017_06_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2017_06_01_preview
 ```
@@ -346,6 +407,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-policy-2015-10'
 namespace: azure.mgmt.resource.policy.v2015_10_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+
+### Tag: package-resources-2022-09 and python
+
+These settings apply only when `--tag=package-resources-2022-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2022-09'
+default-api-version: "2022-09-01"
+namespace: azure.mgmt.resource.resources.v2022_09_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2022_09_01
 ```
 
 ### Tag: package-resources-2021-04 and python
@@ -498,6 +570,17 @@ namespace: azure.mgmt.resource.resources.v2016_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
 ```
 
+### Tag: package-subscriptions-2022-12 and python
+
+These settings apply only when `--tag=package-subscriptions-2022-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2022-12'
+default-api-version: "2022-12-01"
+namespace: azure.mgmt.resource.subscriptions.v2022_12_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2022_12_01
+```
+
 ### Tag: package-subscriptions-2021-01 and python
 
 These settings apply only when `--tag=package-subscriptions-2021-01 --python` is specified on the command line.
@@ -564,6 +647,7 @@ These settings apply only when `--tag=package-deploymentscripts-2020-10` is spec
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-deploymentscripts-2020-10'
+default-api-version: "2020-10-01"
 namespace: azure.mgmt.resource.deploymentscripts.v2020_10_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts/v2020_10_01
 ```
@@ -604,8 +688,20 @@ These settings apply only when `--tag=package-templatespecs-2022-02` is specifie
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-templatespecs-2022-02'
+default-api-version: "2022-02-01"
 namespace: azure.mgmt.resource.templatespecs.v2022_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2022_02_01
+```
+
+### Tag: package-deploymentstacks-2022-08-preview and python
+
+These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
+default-api-version: "2022-08-01-preview"
+namespace: azure.mgmt.resource.deploymentstacks.v2022_08_01_preview
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentstacks/v2022_08_01_preview
 ```
 
 ``` yaml $(python)
