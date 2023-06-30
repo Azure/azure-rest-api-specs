@@ -42,8 +42,8 @@
   "securityDefinitions": {
     "ApiKeyAuth": {
       "type": "apiKey",
-      "in": "header",
-      "name": "SharedAccessKey"
+      "name": "SharedAccessKey",
+      "in": "header"
     }
   },
   "tags": [],
@@ -52,6 +52,9 @@
       "post": {
         "operationId": "PublishCloudEvents",
         "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -59,21 +62,20 @@
           {
             "name": "topicName",
             "in": "path",
-            "required": true,
             "description": "Topic Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "events",
             "in": "body",
-            "required": true,
             "description": "Array of Cloud Events being published.",
+            "required": true,
             "schema": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/CloudEvent"
-              },
-              "x-typespec-name": "CloudEvent[]"
+              }
             }
           }
         ],
@@ -86,20 +88,17 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
-        "consumes": [
-          "application/cloudevents-batch+json; charset=utf-8"
-        ],
         "x-ms-examples": {
           "Publish Cloud Event": {
             "$ref": "./examples/publish.json"
@@ -118,33 +117,33 @@
           {
             "name": "topicName",
             "in": "path",
-            "required": true,
             "description": "Topic Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "eventSubscriptionName",
             "in": "path",
-            "required": true,
             "description": "Event Subscription Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "maxEvents",
             "in": "query",
-            "required": false,
             "description": "Max Events count to be received. Minimum value is 1, while maximum value is 100 events. If not specified, the default value is 1.",
-            "default": 1,
+            "required": false,
             "type": "integer",
             "format": "int32",
+            "default": 1,
             "minimum": 1,
             "maximum": 100
           },
           {
             "name": "maxWaitTime",
             "in": "query",
-            "required": false,
             "description": "Max wait time value for receive operation in Seconds. It is the time in seconds that the server approximately waits for the availability of an event and responds to the request. If an event is available, the broker responds immediately to the client. Minimum value is 10 seconds, while maximum value is 120 seconds. If not specified, the default value is 60 seconds.",
+            "required": false,
             "type": "integer",
             "format": "int32"
           }
@@ -158,14 +157,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -187,22 +186,22 @@
           {
             "name": "topicName",
             "in": "path",
-            "required": true,
             "description": "Topic Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "eventSubscriptionName",
             "in": "path",
-            "required": true,
             "description": "Event Subscription Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "lockTokens",
             "in": "body",
-            "required": true,
             "description": "AcknowledgeOptions.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AcknowledgeOptions"
             }
@@ -217,14 +216,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -246,22 +245,22 @@
           {
             "name": "topicName",
             "in": "path",
-            "required": true,
             "description": "Topic Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "eventSubscriptionName",
             "in": "path",
-            "required": true,
             "description": "Event Subscription Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "lockTokens",
             "in": "body",
-            "required": true,
             "description": "ReleaseOptions",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ReleaseOptions"
             }
@@ -276,14 +275,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -305,22 +304,22 @@
           {
             "name": "topicName",
             "in": "path",
-            "required": true,
             "description": "Topic Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "eventSubscriptionName",
             "in": "path",
-            "required": true,
             "description": "Event Subscription Name.",
+            "required": true,
             "type": "string"
           },
           {
             "name": "lockTokens",
             "in": "body",
-            "required": true,
             "description": "RejectOptions",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/RejectOptions"
             }
@@ -335,14 +334,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "description": "String error code indicating what went wrong.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -357,43 +356,40 @@
   "definitions": {
     "AcknowledgeOptions": {
       "type": "object",
+      "description": "Array of lock token strings for the corresponding received Cloud Events to be acknowledged.",
       "properties": {
         "lockTokens": {
           "type": "array",
+          "description": "String array of lock tokens.",
           "items": {
             "type": "string"
-          },
-          "description": "String array of lock tokens.",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "Array of lock token strings for the corresponding received Cloud Events to be acknowledged.",
       "required": [
         "lockTokens"
       ]
     },
     "AcknowledgeResult": {
       "type": "object",
+      "description": "The result of the Acknowledge operation.",
       "properties": {
         "failedLockTokens": {
           "type": "array",
+          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
-          "x-ms-identifiers": [],
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
-          "x-typespec-name": "FailedLockToken[]"
+          "x-ms-identifiers": []
         },
         "succeededLockTokens": {
           "type": "array",
+          "description": "Array of lock tokens values for the successfully acknowledged cloud events.",
           "items": {
             "type": "string"
-          },
-          "description": "Array of lock tokens values for the successfully acknowledged cloud events.",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "The result of the Acknowledge operation.",
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
@@ -401,6 +397,7 @@
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
+      "description": "The error object.",
       "properties": {
         "code": {
           "type": "string",
@@ -416,19 +413,17 @@
         },
         "details": {
           "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
-          "x-ms-identifiers": [],
-          "description": "An array of details about specific errors that led to this reported error.",
-          "x-typespec-name": "Azure.Core.Foundations.Error[]"
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "An object containing more specific information than the current object about the error."
         }
       },
-      "description": "The error object.",
       "required": [
         "code",
         "message"
@@ -436,19 +431,20 @@
     },
     "Azure.Core.Foundations.ErrorResponse": {
       "type": "object",
+      "description": "A response containing error details.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
         }
       },
-      "description": "A response containing error details.",
       "required": [
         "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -458,11 +454,11 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
-      },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
+      }
     },
     "BrokerProperties": {
       "type": "object",
+      "description": "Properties of the Event Broker operation.",
       "properties": {
         "lockToken": {
           "type": "string",
@@ -474,7 +470,6 @@
           "description": "The attempt count for delivering the event."
         }
       },
-      "description": "Properties of the Event Broker operation.",
       "required": [
         "lockToken",
         "deliveryCount"
@@ -482,6 +477,7 @@
     },
     "CloudEvent": {
       "type": "object",
+      "description": "Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.",
       "properties": {
         "id": {
           "type": "string",
@@ -525,7 +521,6 @@
           "description": "This describes the subject of the event in the context of the event producer (identified by source)."
         }
       },
-      "description": "Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.",
       "required": [
         "id",
         "source",
@@ -535,6 +530,7 @@
     },
     "FailedLockToken": {
       "type": "object",
+      "description": "Failed LockToken information.",
       "properties": {
         "lockToken": {
           "type": "string",
@@ -549,7 +545,6 @@
           "description": "Description of the token error."
         }
       },
-      "description": "Failed LockToken information.",
       "required": [
         "lockToken",
         "errorCode",
@@ -558,11 +553,12 @@
     },
     "PublishResult": {
       "type": "object",
-      "properties": {},
-      "description": "The result of the Publish operation."
+      "description": "The result of the Publish operation.",
+      "properties": {}
     },
     "ReceiveDetails": {
       "type": "object",
+      "description": "Receive operation details per Cloud Event.",
       "properties": {
         "brokerProperties": {
           "$ref": "#/definitions/BrokerProperties",
@@ -573,7 +569,6 @@
           "description": "Cloud Event details."
         }
       },
-      "description": "Receive operation details per Cloud Event.",
       "required": [
         "brokerProperties",
         "event"
@@ -581,61 +576,57 @@
     },
     "ReceiveResult": {
       "type": "object",
+      "description": "Details of the Receive operation response.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "Array of receive responses, one per cloud event.",
           "items": {
             "$ref": "#/definitions/ReceiveDetails"
           },
-          "x-ms-identifiers": [],
-          "description": "Array of receive responses, one per cloud event.",
-          "x-typespec-name": "ReceiveDetails[]"
+          "x-ms-identifiers": []
         }
       },
-      "description": "Details of the Receive operation response.",
       "required": [
         "value"
       ]
     },
     "RejectOptions": {
       "type": "object",
+      "description": "Array of lock token strings for the corresponding received Cloud Events to be rejected.",
       "properties": {
         "lockTokens": {
           "type": "array",
+          "description": "String array of lock tokens.",
           "items": {
             "type": "string"
-          },
-          "description": "String array of lock tokens.",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "Array of lock token strings for the corresponding received Cloud Events to be rejected.",
       "required": [
         "lockTokens"
       ]
     },
     "RejectResult": {
       "type": "object",
+      "description": "The result of the Reject operation.",
       "properties": {
         "failedLockTokens": {
           "type": "array",
+          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
-          "x-ms-identifiers": [],
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
-          "x-typespec-name": "FailedLockToken[]"
+          "x-ms-identifiers": []
         },
         "succeededLockTokens": {
           "type": "array",
+          "description": "Array of lock tokens values for the successfully rejected cloud events.",
           "items": {
             "type": "string"
-          },
-          "description": "Array of lock tokens values for the successfully rejected cloud events.",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "The result of the Reject operation.",
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
@@ -643,43 +634,40 @@
     },
     "ReleaseOptions": {
       "type": "object",
+      "description": "Array of lock token strings for the corresponding received Cloud Events to be released.",
       "properties": {
         "lockTokens": {
           "type": "array",
+          "description": "String array of lock tokens.",
           "items": {
             "type": "string"
-          },
-          "description": "String array of lock tokens.",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "Array of lock token strings for the corresponding received Cloud Events to be released.",
       "required": [
         "lockTokens"
       ]
     },
     "ReleaseResult": {
       "type": "object",
+      "description": "The result of the Release operation.",
       "properties": {
         "failedLockTokens": {
           "type": "array",
+          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
           "items": {
             "$ref": "#/definitions/FailedLockToken"
           },
-          "x-ms-identifiers": [],
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
-          "x-typespec-name": "FailedLockToken[]"
+          "x-ms-identifiers": []
         },
         "succeededLockTokens": {
           "type": "array",
+          "description": "Array of lock tokens values for the successfully released cloud events.",
           "items": {
             "type": "string"
-          },
-          "description": "Array of lock tokens values for the successfully released cloud events.",
-          "x-typespec-name": "string[]"
+          }
         }
       },
-      "description": "The result of the Release operation.",
       "required": [
         "failedLockTokens",
         "succeededLockTokens"
@@ -690,12 +678,12 @@
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "required": true,
       "description": "The API version to use for this operation.",
-      "x-ms-client-name": "apiVersion",
+      "required": true,
       "type": "string",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
