@@ -48,6 +48,65 @@
   },
   "tags": [],
   "paths": {
+    "/topics/{topicName}:publish": {
+      "post": {
+        "operationId": "PublishCloudEvents",
+        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "required": true,
+            "description": "Topic Name.",
+            "type": "string"
+          },
+          {
+            "name": "events",
+            "in": "body",
+            "required": true,
+            "description": "Array of Cloud Events being published.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudEvent"
+              },
+              "x-typespec-name": "CloudEvent[]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PublishResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/cloudevents-batch+json; charset=utf-8"
+        ],
+        "x-ms-examples": {
+          "Publish Cloud Event": {
+            "$ref": "./examples/publish.json"
+          }
+        }
+      }
+    },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive": {
       "post": {
         "operationId": "ReceiveCloudEvents",
@@ -77,7 +136,9 @@
             "description": "Max Events count to be received. Minimum value is 1, while maximum value is 100 events. If not specified, the default value is 1.",
             "default": 1,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100
           },
           {
             "name": "maxWaitTime",
@@ -106,6 +167,11 @@
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Receive Cloud Event": {
+            "$ref": "./examples/receive.json"
           }
         }
       }
@@ -162,9 +228,11 @@
             }
           }
         },
-        "consumes": [
-          "application/json; charset=utf-8"
-        ]
+        "x-ms-examples": {
+          "Acknowledge Cloud Event": {
+            "$ref": "./examples/ack.json"
+          }
+        }
       }
     },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
@@ -219,9 +287,11 @@
             }
           }
         },
-        "consumes": [
-          "application/json; charset=utf-8"
-        ]
+        "x-ms-examples": {
+          "Release Cloud Event": {
+            "$ref": "./examples/release.json"
+          }
+        }
       }
     },
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject": {
@@ -276,65 +346,11 @@
             }
           }
         },
-        "consumes": [
-          "application/json; charset=utf-8"
-        ]
-      }
-    }
-  },
-  "x-ms-paths": {
-    "/topics/{topicName}:publish?api-version={apiVersion}": {
-      "post": {
-        "operationId": "PublishCloudEvents",
-        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "topicName",
-            "in": "path",
-            "required": true,
-            "description": "Topic Name.",
-            "type": "string"
-          },
-          {
-            "name": "events",
-            "in": "body",
-            "required": true,
-            "description": "Array of Cloud Events being published.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudEvent"
-              },
-              "x-typespec-name": "CloudEvent[]"
-            }
+        "x-ms-examples": {
+          "Reject Cloud Event": {
+            "$ref": "./examples/reject.json"
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PublishResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        },
-        "consumes": [
-          "application/cloudevents-batch+json; charset=utf-8"
-        ]
+        }
       }
     }
   },
@@ -347,8 +363,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "String array of lock tokens."
+          "description": "String array of lock tokens.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Array of lock token strings for the corresponding received Cloud Events to be acknowledged.",
@@ -365,16 +381,16 @@
             "$ref": "#/definitions/FailedLockToken"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "FailedLockToken[]",
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description)."
+          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
+          "x-typespec-name": "FailedLockToken[]"
         },
         "succeededLockTokens": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Array of lock tokens values for the successfully acknowledged cloud events."
+          "description": "Array of lock tokens values for the successfully acknowledged cloud events.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The result of the Acknowledge operation.",
@@ -404,8 +420,8 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "Azure.Core.Foundations.Error[]",
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]"
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -415,8 +431,7 @@
       "description": "The error object.",
       "required": [
         "code",
-        "message",
-        "details"
+        "message"
       ]
     },
     "Azure.Core.Foundations.ErrorResponse": {
@@ -444,10 +459,7 @@
           "description": "Inner error."
         }
       },
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "required": [
-        "code"
-      ]
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses."
     },
     "BrokerProperties": {
       "type": "object",
@@ -576,8 +588,8 @@
             "$ref": "#/definitions/ReceiveDetails"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "ReceiveDetails[]",
-          "description": "Array of receive responses, one per cloud event."
+          "description": "Array of receive responses, one per cloud event.",
+          "x-typespec-name": "ReceiveDetails[]"
         }
       },
       "description": "Details of the Receive operation response.",
@@ -593,8 +605,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "String array of lock tokens."
+          "description": "String array of lock tokens.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Array of lock token strings for the corresponding received Cloud Events to be rejected.",
@@ -611,16 +623,16 @@
             "$ref": "#/definitions/FailedLockToken"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "FailedLockToken[]",
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description)."
+          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
+          "x-typespec-name": "FailedLockToken[]"
         },
         "succeededLockTokens": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Array of lock tokens values for the successfully rejected cloud events."
+          "description": "Array of lock tokens values for the successfully rejected cloud events.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The result of the Reject operation.",
@@ -637,8 +649,8 @@
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "String array of lock tokens."
+          "description": "String array of lock tokens.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "Array of lock token strings for the corresponding received Cloud Events to be released.",
@@ -655,16 +667,16 @@
             "$ref": "#/definitions/FailedLockToken"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "FailedLockToken[]",
-          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description)."
+          "description": "Array of LockToken values for failed cloud events. Each LockToken includes the lock token value along with the related error information (namely, the error code and description).",
+          "x-typespec-name": "FailedLockToken[]"
         },
         "succeededLockTokens": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]",
-          "description": "Array of lock tokens values for the successfully released cloud events."
+          "description": "Array of lock tokens values for the successfully released cloud events.",
+          "x-typespec-name": "string[]"
         }
       },
       "description": "The result of the Release operation.",
@@ -681,8 +693,8 @@
       "required": true,
       "description": "The API version to use for this operation.",
       "x-ms-client-name": "apiVersion",
-      "minLength": 1,
       "type": "string",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
