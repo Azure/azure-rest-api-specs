@@ -1,6 +1,8 @@
-namespace Azure.OpenAI;
+import "@typespec/versioning";
 
 using TypeSpec.Versioning;
+
+namespace Azure.OpenAI;
 
 @doc("""
 Representation of the token counts processed for a completions request.
@@ -74,7 +76,6 @@ model ContentFilterResults {
   violence: ContentFilterResult;
   hate: ContentFilterResult;
   selfHarm: ContentFilterResult;
-  //error?
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
@@ -87,6 +88,6 @@ model PromptFilterResult {
   promptIndex: int32;
 
   @doc("asdfasdfasdf")
-  @projectedName("json", "contentFilterResults")
+  @projectedName("json", "content_filter_results")
   contentFilterResults?: ContentFilterResults;
 }
