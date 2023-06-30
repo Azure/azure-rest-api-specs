@@ -1,8 +1,11 @@
 import { exec } from "child_process";
+import debug from "debug";
 import { access } from "fs/promises"
 import { parseArgs, ParseArgsConfig } from 'node:util';
 import path from "path";
 import { simpleGit } from 'simple-git';
+
+debug.enable('simple-git');
 
 async function runCmd(cmd: string, cwd: string) {
     console.log(`run command:${cmd}`)
