@@ -51,8 +51,7 @@ input-file:
   - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
 directive:
   - where:
-      - $.paths["/subscriptions/{}/resourceGroups/{}/providers/Dynatrace.Observability/monitors/{}/getAccountCredentials"]
-    suppress: MISSING_APIS_IN_DEFAULT_TAG
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getAccountCredentials"]
     reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
