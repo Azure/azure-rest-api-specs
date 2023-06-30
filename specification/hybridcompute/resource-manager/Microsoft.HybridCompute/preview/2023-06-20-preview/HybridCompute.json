@@ -87,7 +87,7 @@
         },
         "x-ms-examples": {
           "Create or Update a Machine": {
-            "$ref": "./examples/Machines_CreateOrUpdate.json"
+            "$ref": "./examples/machine/Machines_CreateOrUpdate.json"
           }
         }
       },
@@ -143,7 +143,7 @@
         },
         "x-ms-examples": {
           "Update a Machine": {
-            "$ref": "./examples/Machines_Update.json"
+            "$ref": "./examples/machine/Machines_Update.json"
           }
         }
       },
@@ -190,7 +190,7 @@
         },
         "x-ms-examples": {
           "Delete a Machine": {
-            "$ref": "./examples/Machines_Delete.json"
+            "$ref": "./examples/machine/Machines_Delete.json"
           }
         }
       },
@@ -251,7 +251,329 @@
         },
         "x-ms-examples": {
           "Get Machine": {
-            "$ref": "./examples/Machines_Get.json"
+            "$ref": "./examples/machine/Machines_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/licenseProfiles/{licenseProfileName}": {
+      "put": {
+        "tags": [
+          "licenseProfiles"
+        ],
+        "operationId": "LicenseProfiles_CreateOrUpdate",
+        "description": "The operation to create or update a license profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/licenseProfileNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            },
+            "description": "Parameters supplied to the Create license profile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Resource",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            },
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update a License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "licenseProfiles"
+        ],
+        "operationId": "LicenseProfiles_Update",
+        "description": "The operation to update a license profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/licenseProfileNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseProfileUpdate"
+            },
+            "description": "Parameters supplied to the Update license profile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "licenseProfiles"
+        ],
+        "operationId": "LicenseProfiles_Get",
+        "description": "Retrieves information about the view of a license profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/licenseProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "licenseProfiles"
+        ],
+        "operationId": "LicenseProfiles_Delete",
+        "description": "The operation to delete a license profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/machineNameParameter"
+          },
+          {
+            "$ref": "#/parameters/licenseProfileNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/licenseProfiles": {
+      "get": {
+        "tags": [
+          "licenseProfiles"
+        ],
+        "operationId": "licenseProfiles_List",
+        "description": "The operation to get all license profiles of a non-Azure machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54,
+            "description": "The name of the machine."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfilesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GET all Machine Extensions": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_List.json"
           }
         }
       }
@@ -264,7 +586,7 @@
         "operationId": "Machines_AssessPatches",
         "x-ms-examples": {
           "Assess patch state of a machine.": {
-            "$ref": "./examples/MachineAssessPatches.json"
+            "$ref": "./examples/machine/Machine_AssessPatches.json"
           }
         },
         "description": "The operation to assess patches on a hybrid machine identity in Azure.",
@@ -328,7 +650,7 @@
         "description": "The operation to install patches on a hybrid machine identity in Azure.",
         "x-ms-examples": {
           "Install patch state of a machine.": {
-            "$ref": "./examples/MachineInstallPatches.json"
+            "$ref": "./examples/machine/Machine_InstallPatches.json"
           }
         },
         "parameters": [
@@ -425,7 +747,7 @@
         },
         "x-ms-examples": {
           "List Machines by resource group": {
-            "$ref": "./examples/Machines_ListByResourceGroup.json"
+            "$ref": "./examples/machine/Machines_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -464,7 +786,7 @@
         },
         "x-ms-examples": {
           "List Machines by resource group": {
-            "$ref": "./examples/Machines_ListBySubscription.json"
+            "$ref": "./examples/machine/Machines_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -535,7 +857,7 @@
         },
         "x-ms-examples": {
           "Create or Update a Machine Extension": {
-            "$ref": "./examples/PUTExtension.json"
+            "$ref": "./examples/extension/Extension_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -617,7 +939,7 @@
         },
         "x-ms-examples": {
           "Create or Update a Machine Extension": {
-            "$ref": "./examples/UpdateExtension.json"
+            "$ref": "./examples/extension/Extension_Update.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -691,7 +1013,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete a Machine Extension": {
-            "$ref": "./examples/DELETEExtension.json"
+            "$ref": "./examples/extension/Extension_Delete.json"
           }
         }
       },
@@ -745,7 +1067,7 @@
         },
         "x-ms-examples": {
           "GET Machine Extension": {
-            "$ref": "./examples/GETExtension.json"
+            "$ref": "./examples/extension/Extension_Get.json"
           }
         }
       }
@@ -804,7 +1126,7 @@
         },
         "x-ms-examples": {
           "GET all Machine Extensions": {
-            "$ref": "./examples/LISTExtension.json"
+            "$ref": "./examples/extension/Extension_List.json"
           }
         }
       }
@@ -877,7 +1199,7 @@
         },
         "x-ms-examples": {
           "Upgrade Machine Extensions": {
-            "$ref": "./examples/Extensions_Upgrade.json"
+            "$ref": "./examples/extension/Extensions_Upgrade.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -942,7 +1264,7 @@
         },
         "x-ms-examples": {
           "GET an extensions metadata": {
-            "$ref": "./examples/ExtensionMetadata_Get.json"
+            "$ref": "./examples/extension/ExtensionMetadata_Get.json"
           }
         }
       }
@@ -1002,7 +1324,7 @@
         },
         "x-ms-examples": {
           "GET a list of extensions": {
-            "$ref": "./examples/ExtensionMetadata_List.json"
+            "$ref": "./examples/extension/ExtensionMetadata_List.json"
           }
         }
       }
@@ -1087,7 +1409,7 @@
         },
         "x-ms-examples": {
           "GET Network Profile": {
-            "$ref": "./examples/GETNetworkProfile.json"
+            "$ref": "./examples/NetworkProfile_Get.json"
           }
         }
       }
@@ -1102,7 +1424,7 @@
         "description": "Implements HybridIdentityMetadata GET method.",
         "x-ms-examples": {
           "GetHybridIdentityMetadata": {
-            "$ref": "./examples/GetHybridIdentityMetadata.json"
+            "$ref": "./examples/HybridIdentityMetadata_Get.json"
           }
         },
         "produces": [
@@ -1244,7 +1566,7 @@
         },
         "x-ms-examples": {
           "GET Agent Versions": {
-            "$ref": "./examples/GETAgentVersions.json"
+            "$ref": "./examples/AgentVersions_Get.json"
           }
         }
       }
@@ -1291,337 +1613,7 @@
         },
         "x-ms-examples": {
           "GET Agent Versions": {
-            "$ref": "./examples/GETLatestAgentVersion.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}": {
-      "put": {
-        "tags": [
-          "MachineRunCommands"
-        ],
-        "operationId": "MachineRunCommands_CreateOrUpdate",
-        "description": "The operation to create or update a run command.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/machineNameParameter"
-          },
-          {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
-          },
-          {
-            "name": "runCommandProperties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommand"
-            },
-            "description": "Parameters supplied to the Create Run Command."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated Resource",
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommand"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommand"
-            },
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or Update a Run Command": {
-            "$ref": "./examples/PutRunCommand.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "tags": [
-          "MachineRunCommands"
-        ],
-        "operationId": "MachineRunCommands_Update",
-        "description": "The operation to update the run command.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/machineNameParameter"
-          },
-          {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
-          },
-          {
-            "name": "runCommandProperties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommandUpdate"
-            },
-            "description": "Parameters supplied to the Create Run Command."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommand"
-            }
-          },
-          "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a Run Command": {
-            "$ref": "./examples/UpdateRunCommand.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "MachineRunCommands"
-        ],
-        "operationId": "MachineRunCommands_Delete",
-        "description": "The operation to delete a run command.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/machineNameParameter"
-          },
-          {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Delete a Machine Run Command": {
-            "$ref": "./examples/DeleteRunCommand.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "MachineRunCommands"
-        ],
-        "operationId": "MachineRunCommands_Get",
-        "description": "The operation to get a run command.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/machineNameParameter"
-          },
-          {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]",
-            "description": "The name of the run command."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommand"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a Run Command": {
-            "$ref": "./examples/GetRunCommand.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands": {
-      "get": {
-        "tags": [
-          "MachineRunCommands"
-        ],
-        "operationId": "MachineRunCommands_List",
-        "description": "The operation to get all the run commands of a non-Azure machine.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/machineNameParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommandsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "GET all Machine Run Commands": {
-            "$ref": "./examples/ListRunCommand.json"
+            "$ref": "./examples/AgentVersion_GetLatest.json"
           }
         }
       }
@@ -2013,6 +2005,10 @@
           "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the hybrid machine."
         },
+        "esuProperties": {
+          "$ref": "#/definitions/MachineEsuProperties",
+          "description": "Specifies the ESU related properties for a machine."
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -2192,18 +2188,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         },
         "kind": {
-          "type": "string",
-          "description": "Indicates which kind of VM fabric the instance is an instance of, such as HCI or SCVMM etc.",
-          "enum": [
-            "AVS",
-            "HCI",
-            "SCVMM",
-            "VMware"
-          ],
-          "x-ms-enum": {
-            "name": "privateCloudKind",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ArcKindEnum "
         }
       },
       "allOf": [
@@ -2213,6 +2198,23 @@
       ],
       "description": "Describes a hybrid machine."
     },
+    "ArcKindEnum ": {
+      "type": "string",
+      "description": "Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.",
+      "enum": [
+        "AVS",
+        "HCI",
+        "SCVMM",
+        "VMware",
+        "EPS",
+        "GCP",
+        "AWS"
+      ],
+      "x-ms-enum": {
+        "name": "ArcKindEnum ",
+        "modelAsString": true
+      }
+    },
     "MachineUpdate": {
       "type": "object",
       "properties": {
@@ -2220,18 +2222,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         },
         "kind": {
-          "type": "string",
-          "description": "Indicates which kind of VM fabric the instance is an instance of, such as HCI or SCVMM etc.",
-          "enum": [
-            "AVS",
-            "HCI",
-            "SCVMM",
-            "VMware"
-          ],
-          "x-ms-enum": {
-            "name": "privateCloudKind",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ArcKindEnum "
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2265,6 +2256,182 @@
         "value"
       ],
       "description": "The List hybrid machine operation response."
+    },
+    "LicenseProfile": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "esuProfile": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/EsuProfileProperties",
+              "description": "Hybrid Compute ESU Profile properties"
+            },
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The provisioning state, which only appears in the response."
+            }
+          },
+          "description": "Describe the properties of a license profile."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a license profile in a hybrid machine."
+    },
+    "LicenseProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "esuProfile": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/EsuProfileUpdateProperties",
+              "description": "Hybrid Compute ESU Profile Update properties"
+            }
+          },
+          "description": "Describe the Update properties of a license profile."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
+      "description": "Describes a License Profile Update."
+    },
+    "LicenseProfilesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LicenseProfile"
+          },
+          "description": "The list of license profiles."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Machines. Call ListNext() with this URI to fetch the next page of license profile."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List hybrid machine operation response."
+    },
+    "EsuKey": {
+      "type": "object",
+      "properties": {
+        "esuSku": {
+          "type": "string",
+          "description": "SKU number."
+        },
+        "licenseStatus": {
+          "type": "string",
+          "description": "The current status of the license profile key."
+        }
+      }
+    },
+    "ArcEnabledEsuStatus": {
+      "type": "string",
+      "enum": [
+        "enrolled",
+        "unenrolled",
+        "ineligible",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ArcEnabledEsuStatus",
+        "modelAsString": true
+      },
+      "description": "The ESU enrollment state."
+    },
+    "EsuEnrollmentUpdateRecord": {
+      "type": "object",
+      "properties": {
+        "oldState": {
+          "$ref": "#/definitions/ArcEnabledEsuStatus",
+          "description": "The old ESU enrollment state."
+        },
+        "newState": {
+          "$ref": "#/definitions/ArcEnabledEsuStatus",
+          "description": "The new ESU enrollment state."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the state has been changed."
+        }
+      }
+    },
+    "EsuProfileProperties": {
+      "type": "object",
+      "properties": {
+        "arcEsuEnrolled": {
+          "$ref": "#/definitions/ArcEsuEnrolled"
+        },
+        "esuKeys": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EsuKey"
+          },
+          "description": "The list of ESU keys.",
+          "x-ms-identifiers": []
+        },
+        "esuEnrollmentHistory": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EsuEnrollmentUpdateRecord"
+          },
+          "description": "The time records represent the state change of ESU enrollment.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "Describes the properties of a License Profile."
+    },
+    "ArcEsuEnrolled": {
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "ArcEsuEnrolled",
+        "modelAsString": true
+      },
+      "description": "Specifies wether the machine has enrolled in ESU or not."
+    },
+    "EsuProfileUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "arcEsuEnrolled": {
+          "$ref": "#/definitions/ArcEsuEnrolled"
+        }
+      },
+      "description": "Describes the Update properties of a License Profile."
+    },
+    "MachineEsuProperties": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "esuKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EsuKey"
+          },
+          "description": "The list of ESU keys.",
+          "x-ms-identifiers": []
+        }
+      }
     },
     "ResourceUpdate": {
       "type": "object",
@@ -3083,223 +3250,6 @@
         }
       },
       "description": "The result summary of an installation operation."
-    },
-    "MachineRunCommand": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MachineRunCommandProperties",
-          "description": "Describes Run Command Properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Describes a Run Command"
-    },
-    "MachineRunCommandProperties": {
-      "type": "object",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/MachineRunCommandScriptSource",
-          "description": "The source of the run command script."
-        },
-        "parameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RunCommandInputParameter"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The parameters used by the script."
-        },
-        "protectedParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RunCommandInputParameter"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The parameters used by the script."
-        },
-        "asyncExecution": {
-          "type": "boolean",
-          "default": false,
-          "description": "Optional. If set to true, provisioning will complete as soon as script starts and will not wait for script to complete."
-        },
-        "runAsUser": {
-          "type": "string",
-          "description": "Specifies the user account on the machine when executing the run command."
-        },
-        "runAsPassword": {
-          "type": "string",
-          "description": "Specifies the user account password on the machine when executing the run command.",
-          "x-ms-secret": true
-        },
-        "timeoutInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The timeout in seconds to execute the run command."
-        },
-        "outputBlobUri": {
-          "type": "string",
-          "description": "Specifies the Azure storage blob where script output stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter. "
-        },
-        "errorBlobUri": {
-          "type": "string",
-          "description": "Specifies the Azure storage blob where script error stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer errorBlobManagedIdentity parameter."
-        },
-        "outputBlobManagedIdentity": {
-          "$ref": "#/definitions/RunCommandManagedIdentity",
-          "description": "User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
-        },
-        "errorBlobManagedIdentity": {
-          "$ref": "#/definitions/RunCommandManagedIdentity",
-          "description": "User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged "
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response."
-        },
-        "instanceView": {
-          "readOnly": true,
-          "$ref": "#/definitions/MachineRunCommandInstanceView",
-          "description": "The machine run command instance view."
-        }
-      },
-      "description": "Describes the properties of a run command."
-    },
-    "MachineRunCommandScriptSource": {
-      "type": "object",
-      "properties": {
-        "script": {
-          "type": "string",
-          "description": "Specifies the script content to be executed on the machine."
-        },
-        "scriptUri": {
-          "type": "string",
-          "description": "Specifies the script download location. It can be either SAS URI of an Azure storage blob with read access or public URI."
-        },
-        "commandId": {
-          "type": "string",
-          "description": "Specifies the commandId of predefined built-in script."
-        },
-        "scriptUriManagedIdentity": {
-          "$ref": "#/definitions/RunCommandManagedIdentity",
-          "description": "User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
-        }
-      },
-      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId."
-    },
-    "MachineRunCommandInstanceView": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The run command name."
-        },
-        "status": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The status code."
-            },
-            "level": {
-              "type": "string",
-              "description": "The level code.",
-              "enum": [
-                "Info",
-                "Warning",
-                "Error"
-              ],
-              "x-ms-enum": {
-                "name": "StatusLevelTypes",
-                "modelAsString": true
-              }
-            },
-            "displayStatus": {
-              "type": "string",
-              "description": "The short localizable label for the status."
-            },
-            "message": {
-              "type": "string",
-              "description": "The detailed status message, including for alerts and error messages."
-            },
-            "time": {
-              "type": "string",
-              "format": "date-time",
-              "description": "The time of the status."
-            }
-          },
-          "description": "Instance view status."
-        }
-      },
-      "description": "Describes the Machine Extension Instance View."
-    },
-    "MachineRunCommandsListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MachineRunCommand"
-          },
-          "description": "The list of run commands"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
-        }
-      },
-      "description": "Describes the Run Commands List Result."
-    },
-    "MachineRunCommandUpdate": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceUpdate"
-        }
-      ],
-      "description": "Describes a Machine Extension Update."
-    },
-    "RunCommandInputParameter": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The run command parameter name."
-        },
-        "value": {
-          "type": "string",
-          "description": "The run command parameter value."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ],
-      "description": "Describes the properties of a run command parameter."
-    },
-    "RunCommandManagedIdentity": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "Client Id (GUID value) of the user-assigned managed identity. ObjectId should not be used if this is provided."
-        },
-        "objectId": {
-          "type": "string",
-          "description": "Object Id (GUID value) of the user-assigned managed identity. ClientId should not be used if this is provided."
-        }
-      },
-      "description": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
     }
   },
   "parameters": {
@@ -3308,9 +3258,25 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "[a-zA-Z0-9-_\\.]",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the hybrid machine.",
       "x-ms-parameter-location": "method"
+    },
+    "licenseProfileNameParameter": {
+      "name": "licenseProfileName",
+      "in": "path",
+      "description": "The name of the license profile.",
+      "required": true,
+      "type": "string",
+      "pattern": "[a-zA-Z0-9-_\\.]+",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method",
+      "x-ms-enum": {
+        "name": "LicenseProfileName",
+        "modelAsString": false
+      }
     }
   }
 }

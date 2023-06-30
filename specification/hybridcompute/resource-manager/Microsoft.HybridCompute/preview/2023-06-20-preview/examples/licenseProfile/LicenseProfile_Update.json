@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "licenseProfileName": "default",
+    "api-version": "2023-06-20-preview",
+    "parameters": {
+      "properties": {
+        "esuProfile": {
+          "arcEsuEnrolled": "false"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/licenseProfiles/default",
+        "name": "default",
+        "type": "Microsoft.HybridCompute/machines/licenseProfiles",
+        "location": "eastus2euap",
+        "tags": null,
+        "properties": {
+          "esuProfile": {
+            "arcEsuEnrolled": "false",
+            "esuKeys": [
+              {
+                "esuSku": "skuNumber1",
+                "licenseStatus": "licenseStatus1"
+              },
+              {
+                "esuSku": "skuNumber2",
+                "licenseStatus": "licenseStatus2"
+              }
+            ],
+            "esuEnrollmentHistory": [
+              {
+                "oldState": "oldState",
+                "newState": "newState",
+                "time": "2020-08-08T20:42:10.999Z"
+              },
+              {
+                "oldState": "oldState",
+                "newState": "newState",
+                "time": "2020-08-08T20:42:10.999Z"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      }
+    }
+  }
+}
