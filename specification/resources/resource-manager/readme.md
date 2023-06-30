@@ -46,7 +46,7 @@ tag: package-policy-2022-06
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2022-09
+tag: package-resources-2023-07
 ```
 
 ``` yaml $(package-subscriptions)
@@ -78,7 +78,7 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-2023-07
+tag: package-snapshots-2022-11
 ```
 
 
