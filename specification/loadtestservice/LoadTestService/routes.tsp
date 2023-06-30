@@ -481,6 +481,7 @@ The timespan of the query. It is a string with the following format
 'startDateTime_ISO/endDateTime_ISO'.
 """)
       @query
+      @projectedName("python", "time_interval")
       timespan?: string;
 
       @doc("Metric dimension filter ")
