@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./completions.common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.OpenAI;
 
@@ -48,14 +50,6 @@ model ChatCompletionsOptions {
   @doc("The maximum number of tokens to generate.")
   @projectedName("json", "max_tokens")
   maxTokens?: int32;
-
-  @doc("""
-    Information about the content filtering category (hate, sexual, violence, self_harm), if it 
-    has been detected, as well as the severity level (very_low, low, medium, high-scale that 
-    determines the intensity and risk level of harmful content) and if it has been filtered or not.
-    """)
-  @projectedName("json","contentFilterResults")
-  annotation?: string;
 
   @doc("""
     The sampling temperature to use that controls the apparent creativity of generated completions.
@@ -173,6 +167,64 @@ model ChatChoice {
   @projectedName("json", "delta")
   @projectedName("csharp", "InternalStreamingDeltaMessage")
   delta?: ChatMessage;
+
+  @doc("""
+    Information about the content filtering category (hate, sexual, violence, self_harm), if it 
+    has been detected, as well as the severity level (very_low, low, medium, high-scale that 
+    determines the intensity and risk level of harmful content) and if it has been filtered or not.
+    """)
+  @added(ServiceApiVersions.v2023_06_01_Preview)
+  @projectedName("json","content_filter_results")
+  contentFilterResults?: ContentFilterResults;
+}
+
+@doc("Ratings for the intensity and risk level of harmful content.")
+enum ContentFilterSeverity {
+  @doc("General content or related content in generic or non-harmful contexts.")
+  safe: "safe";
+
+  @doc("Harmful content at a low intensity and risk level.")
+  low: "low";
+
+  @doc("Harmful content at a medium intensity and risk level.")
+  medium: "medium";
+
+  @doc("Harmful content at a high intensity and risk level.")
+  high: "high";
+}
+
+@doc("Information about filtered content severity level and if it has been filtered or not.")
+model ContentFilterResult {
+  @doc("")
+  @projectedName("json", "severity")
+  severity: ContentFilterSeverity;
+
+  @doc("")
+  @projectedName("json", "filtered")
+  filtered: boolean;
+
+}
+
+@doc("Information about the content filtering category, if it has been detected.")
+model ContentFilterResults {
+  sexual: ContentFilterResult;
+  violence: ContentFilterResult;
+  hate: ContentFilterResult;
+  selfHarm: ContentFilterResult;
+  //error?
+}
+
+@doc("""
+Content filtering results for a single prompt in the request.
+""")
+model PromptFilterResult {
+  @doc("")
+  @projectedName("json", "prompt_index")
+  promptIndex: int32;
+
+  @doc("asdfasdfasdf")
+  @projectedName("json", "contentFilterResults")
+  contentFilterResults?: ContentFilterResults;
 }
 
 @doc("""
@@ -200,6 +252,13 @@ model ChatCompletions {
     """)
   @projectedName("json", "choices")
   choices: ChatChoice[];
+
+  @doc("""
+  Content filtering results for zero or more prompts in the request. In a streaming request, 
+  results for different prompts may arrive at different times or in different orders.
+  """)
+  @projectedName("json", "promptFilterResults")
+  promptFilterResults?: PromptFilterResult[];
 
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
