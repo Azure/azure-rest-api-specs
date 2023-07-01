@@ -1,0 +1,158 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mixed Reality",
+    "description": "Mixed Reality Resource Provider API",
+    "version": "2019-12-02-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "AccountKeys": {
+      "description": "Developer Keys of account",
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "value of primary key.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "value of secondary key.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "AccountKeyRegenerateRequest": {
+      "description": "Request for account key regeneration",
+      "type": "object",
+      "properties": {
+        "serial": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ],
+          "default": 1,
+          "x-ms-enum": {
+            "name": "Serial",
+            "values": [
+              {
+                "value": 1,
+                "description": "The Primary Key",
+                "name": "Primary"
+              },
+              {
+                "value": 2,
+                "description": "The Secondary Key",
+                "name": "Secondary"
+              }
+            ]
+          },
+          "description": "serial of key to be regenerated"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Response on Error",
+      "type": "object",
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "message": {
+          "description": "Describes the error in detail and provides debugging information",
+          "type": "string"
+        },
+        "code": {
+          "description": "String that can be used to programmatically identify the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of JSON objects that MUST contain name/value pairs for code and message, and MAY contain a name/value pair for target, as described above.The contents of this section are service-defined but must adhere to the aforementioned schema.",
+          "type": "string"
+        }
+      }
+    },
+    "MixedRealityAccountProperties": {
+      "description": "Common Properties shared by Mixed Reality Accounts",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "description": "unique id of certain account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "accountDomain": {
+          "description": "Correspond domain name of certain Spatial Anchors Account",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "accountKeyRegenerateParameter": {
+      "name": "regenerate",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AccountKeyRegenerateRequest"
+      },
+      "x-ms-parameter-location": "method",
+      "description": "Required information for key regeneration."
+    },
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Mixed Reality Account."
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "description": "Version of the API to be used with the client request.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The location in which uniqueness will be verified."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "description": "Azure subscription ID.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  }
+}
