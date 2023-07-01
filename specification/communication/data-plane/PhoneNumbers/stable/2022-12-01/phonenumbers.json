@@ -1302,6 +1302,38 @@
           "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min, e.g. 2020-11-19T16:31:49.048Z.",
           "type": "string"
         },
+        "errorCode": {
+          "format": "int32",
+          "description": "The error code of the search.",
+          "type": "integer"
+        },
+        "error": {
+          "description": "Mapping Error Messages to Codes",
+          "enum": [
+            "NoError",
+            "UnknownErrorCode",
+            "OutOfStock",
+            "AuthorizationDenied",
+            "MissingAddress",
+            "InvalidAddress",
+            "InvalidOfferModel",
+            "NotEnoughLicenses",
+            "NoWallet",
+            "NotEnoughCredit",
+            "NumbersPartiallyAcquired",
+            "AllNumbersNotAcquired",
+            "ReservationExpired",
+            "PurchaseFailed",
+            "BillingUnavailable",
+            "ProvisioningFailed",
+            "UnknownSearchError"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Error",
+            "modelAsString": true
+          }
+        }
       }
     },
     "PurchasedPhoneNumber": {
@@ -1394,7 +1426,8 @@
       "name": "api-version",
       "description": "Version of API to invoke",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "Endpoint": {
       "in": "path",
@@ -1402,6 +1435,7 @@
       "description": "The communication resource, for example https://resourcename.communication.azure.com",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
