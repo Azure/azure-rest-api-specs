@@ -83,29 +83,6 @@ input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/common.json
 ```
 
-### Tag: package-2022-01-15-privatepreview
-
-These settings apply only when `--tag=package-2022-01-15-privatepreview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-01-15-privatepreview'
-input-file:
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/common.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/Operations.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricControllers.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabrics.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDevices.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRacks.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L2IsolationDomains.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/L3IsolationDomains.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/RoutePolicies.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/AccessControlLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpCommunityLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/IpPrefixLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkFabricSkus.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkRackSkus.json
-  - Microsoft.ManagedNetworkFabric/preview/2022-01-15-privatepreview/NetworkDeviceSkus.json
-```
-
 ---
 
 # Code Generation
@@ -120,7 +97,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_managednetworkfabric']
 ```
@@ -133,10 +112,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
@@ -144,3 +119,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
