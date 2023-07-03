@@ -43,10 +43,10 @@
         "description": "Exports the Terraform configuration used for the specified scope.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ExportParameter"
@@ -169,6 +169,10 @@
             "china",
             "usgovernment"
           ],
+          "x-ms-enum": {
+            "name": "environment",
+            "modelAsString": true
+          },
           "default": "public"
         },
         "type": {
@@ -183,6 +187,7 @@
         "parallelism": {
           "description": " Limit the number of parallel operations, i.e., resource discovery, import",
           "type": "integer",
+          "format": "int64",
           "default": 10
         }
       },
@@ -195,9 +200,14 @@
         "ExportResourceParameter",
         "ExportResourceGroupParameter",
         "ExportQueryParameter"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "parameterType",
+        "modelAsString": true
+      }
     },
     "ExportResult": {
+      "type": "object",
       "description": "The Terraform export result",
       "properties": {
         "configuration": {
@@ -222,6 +232,7 @@
     },
     "CloudError": {
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorResponse"
@@ -274,20 +285,6 @@
         "$ref": "#/definitions/BaseExportParameter"
       },
       "x-ms-parameter-location": "method"
-    },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }
