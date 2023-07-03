@@ -1830,6 +1830,18 @@
         "virtualNetwork": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to a virtual network."
+        },
+        "syncMode": {
+          "type": "string",
+          "description": "Backend address synchronous mode for the backend pool",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "SyncMode",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the backend address pool."
