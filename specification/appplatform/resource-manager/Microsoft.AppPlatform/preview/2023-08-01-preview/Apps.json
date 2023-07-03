@@ -374,18 +374,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Container App started successfully.",
-            "schema": {
-              "$ref": "#/definitions/App"
-            }
-          },
           "202": {
             "description": "Start operation is in progress.",
             "headers": {
               "Location": {
                 "type": "string"
               }
+            }
+          },
+          "204": {
+            "description": "App started successfully."
             }
           },
           "default": {
@@ -428,12 +426,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "App stopped successfully.",
-            "schema": {
-              "$ref": "#/definitions/App"
-            }
-          },
           "202": {
             "description": "Stop operation is in progress.",
             "headers": {
@@ -441,6 +433,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "App stopped successfully."
           },
           "default": {
             "description": "Common error response.",
