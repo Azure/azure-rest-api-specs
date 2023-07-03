@@ -134,12 +134,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure Spring Apps revision is activated",
-            "schema": {
-              "$ref": "#/definitions/Revision"
-            }
-          },
           "202": {
             "description": "Accepted. Azure Spring Apps revision is being activated",
             "headers": {
@@ -147,6 +141,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "Azure Spring Apps revision is activated"
           },
           "default": {
             "description": "Common error response.",
@@ -191,12 +188,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure Spring Apps revision is deactivated",
-            "schema": {
-              "$ref": "#/definitions/Revision"
-            }
-          },
           "202": {
             "description": "Accepted. Azure Spring Apps revision is being deactivated",
             "headers": {
@@ -204,6 +195,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "Azure Spring Apps revision is deactivated"
           },
           "default": {
             "description": "Common error response.",
@@ -341,12 +335,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure Spring Apps revision restarted",
-            "schema": {
-              "$ref": "#/definitions/Revision"
-            }
-          },
           "202": {
             "description": "Accepted. Azure Spring Apps revision is being restarted",
             "headers": {
@@ -354,6 +342,9 @@
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "Azure Spring Apps revision is restarted"
           },
           "default": {
             "description": "Common error response.",
@@ -408,18 +399,6 @@
         "properties": {
           "type": "object",
           "properties": {
-            "runtimeVersion": {
-              "description": "Runtime version of the Jar file",
-              "type": "string"
-            },
-            "jvmOptions": {
-              "description": "JVM parameter",
-              "type": "string"
-            },
-            "relativePath": {
-              "description": "Relative path of the storage which stores the source",
-              "type": "string"
-            },
             "provisioningState": {
               "description": "Current provisioning State of the revision",
               "enum": [
@@ -437,6 +416,10 @@
                 "name": "RevisionProvisioningState",
                 "modelAsString": true
               }
+            },
+            "template": {
+              "description": "Azure Spring Apps Revision Template with all possible settings and the\ndefaults if user did not provide them. The defaults are populated\nas they were at the creation time",
+              "$ref": "./CommonDefinitions.json#/definitions/Template"
             }
           }
         }
