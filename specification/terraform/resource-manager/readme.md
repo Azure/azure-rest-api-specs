@@ -28,6 +28,7 @@ These are the global settings for the AzureTerraform API.
 title: AzureTerraformManagementClient
 description: AzureTerraform Client
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-2023-07
 ```
 
