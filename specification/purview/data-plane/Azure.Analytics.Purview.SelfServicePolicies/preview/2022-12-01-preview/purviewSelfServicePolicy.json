@@ -1,0 +1,355 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview self-service Policies REST API Document",
+    "version": "2022-12-01-preview"
+  },
+  "paths": {
+    "/self-service-policies": {
+      "get": {
+        "tags": [
+          "SelfServicePolicies"
+        ],
+        "description": "List Self-service policies",
+        "operationId": "SelfServicePolicies_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SelfServicePoliciesList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "SelfServicePolicy_List": {
+            "$ref": "./examples/SelfServicePolicy_List.json"
+          }
+        }
+      }
+    },
+    "/self-service-policies/{policyId}": {
+      "get": {
+        "tags": [
+          "SelfServicePolicies"
+        ],
+        "description": "Get Self-service policy",
+        "operationId": "SelfServicePolicies_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyId",
+            "description": "The policyId of the self-service policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SelfServicePolicy"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SelfServicePolicy_Get": {
+            "$ref": "./examples/SelfServicePolicy_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SelfServicePolicies"
+        ],
+        "description": "Delete a Self-service policy",
+        "operationId": "SelfServicePolicies_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyId",
+            "description": "The policyId of the self-service policy.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error response received from the Policy Service",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SelfServicePolicy_Delete": {
+            "$ref": "./examples/SelfServicePolicy_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SelfServicePolicyDecisionRule": {
+      "type": "object",
+      "description": "The decision rule of a SelfServicePolicy",
+      "required": [
+        "effect",
+        "purviewRoleName",
+        "resourceAzurePath"
+      ],
+      "properties": {
+        "effect": {
+          "description": "The effect for rule",
+          "enum": [
+            "Permit"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
+          }
+        },
+        "purviewRoleName": {
+          "type": "string",
+          "description": "This is field will indicate the role of a self service policy."
+        },
+        "principals": {
+          "type": "array",
+          "description": "Azure Active Directory Ids for users",
+          "items": {
+            "type": "string",
+            "description": "Azure Active Directory Id"
+          }
+        },
+        "principalGroups": {
+          "type": "array",
+          "description": "Azure Active Directory Ids for groups",
+          "items": {
+            "type": "string",
+            "description": "Azure Active Directory Id"
+          }
+        },
+        "resourceAzurePath": {
+          "type": "string",
+          "description": "The resource path of the azure resource"
+        }
+      }
+    },
+    "ErrorModel": {
+      "description": "The error model for policy",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code",
+          "minLength": 1,
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message",
+          "minLength": 1,
+          "type": "string"
+        },
+        "details": {
+          "description": "The error details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "description": "The error response model for policy",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      }
+    },
+    "SelfServicePolicy": {
+      "description": "The Self-service policy model",
+      "required": [
+        "decisionRule",
+        "policyId"
+      ],
+      "type": "object",
+      "properties": {
+        "policyId": {
+          "type": "string",
+          "description": "The policyId of the self-service policy"
+        },
+        "requestor": {
+          "type": "string",
+          "description": "The requestor of the self-service policy"
+        },
+        "expiresAt": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Expiry Date of the policy"
+        },
+        "decisionRule": {
+          "$ref": "#/definitions/SelfServicePolicyDecisionRule"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      }
+    },
+    "SelfServicePoliciesList": {
+      "description": "List of Self-service policies",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of policies",
+          "items": {
+            "$ref": "#/definitions/SelfServicePolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Pagination link"
+        }
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "The system data",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "Created by"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Created at"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "last modified by"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "type": "string",
+          "description": "last modified at"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiVersion",
+      "x-ms-parameter-location": "client"
+    },
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "basePath": "/policyStore",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

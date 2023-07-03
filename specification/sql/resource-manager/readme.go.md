@@ -8,6 +8,8 @@ module-name: sdk/resourcemanager/sql/armsql
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+modelerfour:
+  lenient-model-deduplication: true
 directive:
 - rename-model:
     from: 'SqlVulnerabilityAssessmentScanRecord'
@@ -24,6 +26,14 @@ directive:
 - rename-model:
     from: 'SqlVulnerabilityAssessmentScanError'
     to: 'VulnerabilityAssessmentScanForSqlError'
+- from: swagger-document
+  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}"].get.parameters[2]
+  transform: > 
+    $["x-ms-enum"].name = "SQLVulnerabilityAssessmentName"
+- from: swagger-document
+  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/sqlVulnerabilityAssessments/{vulnerabilityAssessmentName}"].get.parameters[3]
+  transform: > 
+    $["x-ms-enum"].name = "SQLVulnerabilityAssessmentName"
 ```
 
 ``` yaml $(go) && !$(track2)

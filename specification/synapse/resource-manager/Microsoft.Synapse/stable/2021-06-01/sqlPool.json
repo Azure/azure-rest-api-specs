@@ -699,6 +699,12 @@
             },
             "description": "Accepted"
           },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/SqlPool"
+            },
+            "description": "Created"
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -5331,8 +5337,7 @@
           "description": "The service tier",
           "x-ms-mutability": [
             "create",
-            "read",
-            "update"
+            "read"
           ]
         },
         "name": {
@@ -5342,7 +5347,12 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -6765,7 +6775,12 @@
       "properties": {
         "isEnabled": {
           "description": "Recurring scans state.",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "emailSubscriptionAdmins": {
           "description": "Specifies that the schedule scan notification will be is sent to the subscription administrators.",

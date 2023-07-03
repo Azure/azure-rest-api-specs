@@ -5,6 +5,14 @@
     "title": "Azure Maps Wayfinding Service",
     "description": "Azure Maps Wayfinding REST APIs"
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{geography}.atlas.microsoft.com",
+    "parameters": [
+      {
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -137,14 +145,17 @@
           "enum": [
             "NoExplanation"
           ],
-          "x-ms_enum": {
-            "name": "noResultExplanation",
-            "description": "In the event that no paths are found, the `paths` array will be empty. If the reason no paths were found can be determined, this property will provide an explanation why.",
+          "x-ms-enum": {
+            "name": "NoResultExplanation",
+            "modelAsString": true,
             "values": [
-              "NoExplanation"
-            ],
-            "modelAsString": true
-          }
+              {
+                "value": "NoExplanation",
+                "description": "Default value provided when a result is returned or it wasn't possible to determine why a path wasn't found."
+              }
+            ]
+          },
+          "readOnly": true
         },
         "paths": {
           "description": "An array of wayfinding path results.  An empty array will be returned if no results were found.",
@@ -219,33 +230,39 @@
     },
     "AvoidFeatures": {
       "name": "avoidFeatures",
-      "description": "To avoid certain types of connectors in the resulting path. Multiple comma separated values can be selected.",
+      "in": "query",
+      "description": "To avoid certain types of connectors in the resulting path. Can be specified multiple times in one request, for example, '&avoidFeatures=elevators&avoidFeatures=escalators'.",
       "type": "array",
+      "collectionFormat": "multi",
       "items": {
         "type": "string",
         "enum": [
           "stairs",
           "elevators"
         ],
-        "x-ms_enum": {
+        "x-ms-enum": {
           "name": "avoidFeatures",
-          "description": "To avoid certain types of connectors in the resulting path.",
+          "modelAsString": true,
           "values": [
-            "stairs",
-            "elevators"
-          ],
-          "modelAsString": true
-        }
-      },
-      "in": "query",
-      "x-ms-parameter-location": "client"
+            {
+              "value": "stairs",
+              "description": "Avoids the use of stairs in route calculation."
+            },
+            {
+              "value": "elevators",
+              "description": "Avoids the use of elevators in route calculation."
+            }
+          ]
+        },
+        "x-ms-parameter-location": "client"
+      }
     },
     "MinWidth": {
       "name": "minWidth",
-      "description": "The minimum radius (in meters) of openings in the resulting path. For example, if you specified a minimum radius width of 0.5, the searched path will avoid openings less than 1 meters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by the same distance.",
+      "description": "The minimum width (in meters) of openings in the searched path. For example, if you specified a minimum width of 0.85, the searched path will avoid openings less than 85 centimeters wide. Note: by using this value, the resulting path points will be buffered from walls and other vertical obstacles by half of the width provided.",
       "type": "number",
       "in": "query",
-      "default": "0.0",
+      "default": "0.55",
       "x-ms-parameter-location": "client"
     }
   },
@@ -253,10 +270,10 @@
     "/wayfinding/path": {
       "get": {
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\n Creator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThe Wayfinding Service API is part of Creator, and adheres to the [Open Geospatial Consortium](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html) standard and uses indoor maps data from the routeset to calculate the best path between two locations within the same facility.",
-        "operationId": "wayfindingGetPath",
+        "operationId": "Wayfinding_GetPath",
         "x-ms-examples": {
           "Get the shortest path between two points in the facility.": {
-            "$ref": "./examples/wayfind/Wayfind_GetPath.json"
+            "$ref": "./examples/wayfind/Wayfinding_GetPath.json"
           }
         },
         "parameters": [

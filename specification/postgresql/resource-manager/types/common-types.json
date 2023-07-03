@@ -1,0 +1,65 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "CapabilityBase": {
+      "type": "object",
+      "description": "Base object for representing capability",
+      "properties": {
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location.",
+      "minLength": 1,
+      "pattern": "^[-\\w\\._]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
