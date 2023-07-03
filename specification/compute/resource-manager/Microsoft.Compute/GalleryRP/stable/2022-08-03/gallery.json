@@ -3161,94 +3161,94 @@
           "description": "region of the Gallery Image Version."
         }
       }
-    }
-  },
-  "GalleryImageVersionUefiSettings": {
-    "type": "object",
-    "description": "",
-    "properties": {
-      "signatureTemplateNames": {
-        "type": "array",
-        "description": "The name of the template(s) that contains default UEFI key signatures that will be added to the image.",
-        "items": {
-          "$ref": "#/definitions/UefiSignatureTemplateName"
+    },
+    "GalleryImageVersionUefiSettings": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "signatureTemplateNames": {
+          "type": "array",
+          "description": "The name of the template(s) that contains default UEFI key signatures that will be added to the image.",
+          "items": {
+            "$ref": "#/definitions/UefiSignatureTemplateName"
+          },
+          "x-ms-identifiers": []
         },
-        "x-ms-identifiers": []
-      },
-      "additionalSignatures": {
-        "$ref": "#/definitions/uefiKeySignatures"
-      }
-    }
-  },
-  "UefiSignatureTemplateName": {
-    "type": "string",
-    "description": "The name of the signature template that contains default UEFI keys.",
-    "enum": [
-      "NoSignatureTemplate",
-      "MicrosoftUefiCertificateAuthorityTemplate",
-      "MicrosoftWindowsTemplate"
-    ],
-    "x-ms-enum": {
-      "name": "UefiSignatureTemplateName",
-      "modelAsString": true
-    }
-  },
-  "uefiKeySignatures": {
-    "type": "object",
-    "description": "Additional UEFI key signatures that will be added to the image in addition to the signature templates",
-    "properties": {
-      "pk": {
-        "$ref": "#/definitions/uefiKey"
-      },
-      "kek": {
-        "type": "array",
-        "description": "The Key Encryption Keys of this image version.",
-        "items": {
-          "$ref": "#/definitions/uefiKey"
-        },
-        "x-ms-identifiers": []
-      },
-      "db": {
-        "type": "array",
-        "description": "The database of UEFI keys for this image version.",
-        "items": {
-          "$ref": "#/definitions/uefiKey"
-        },
-        "x-ms-identifiers": []
-      },
-      "dbx": {
-        "type": "array",
-        "description": "The database of revoked UEFI keys for this image version.",
-        "items": {
-          "$ref": "#/definitions/uefiKey"
-        },
-        "x-ms-identifiers": []
-      }
-    }
-  },
-  "uefiKey": {
-    "type": "object",
-    "description": "A UEFI key signature.",
-    "properties": {
-      "type": {
-        "type": "string",
-        "description": "The type of key signature.",
-        "enum": [
-          "sha256",
-          "x509"
-        ],
-        "x-ms-enum": {
-          "name": "UefiKeyType",
-          "modelAsString": true
+        "additionalSignatures": {
+          "$ref": "#/definitions/uefiKeySignatures"
         }
-      },
-      "value": {
-        "type": "array",
-        "description": "The value of the key signature.",
-        "items": {
-          "type": "string"
+      }
+    },
+    "UefiSignatureTemplateName": {
+      "type": "string",
+      "description": "The name of the signature template that contains default UEFI keys.",
+      "enum": [
+        "NoSignatureTemplate",
+        "MicrosoftUefiCertificateAuthorityTemplate",
+        "MicrosoftWindowsTemplate"
+      ],
+      "x-ms-enum": {
+        "name": "UefiSignatureTemplateName",
+        "modelAsString": true
+      }
+    },
+    "uefiKeySignatures": {
+      "type": "object",
+      "description": "Additional UEFI key signatures that will be added to the image in addition to the signature templates",
+      "properties": {
+        "pk": {
+          "$ref": "#/definitions/uefiKey"
         },
-        "x-ms-identifiers": []
+        "kek": {
+          "type": "array",
+          "description": "The Key Encryption Keys of this image version.",
+          "items": {
+            "$ref": "#/definitions/uefiKey"
+          },
+          "x-ms-identifiers": []
+        },
+        "db": {
+          "type": "array",
+          "description": "The database of UEFI keys for this image version.",
+          "items": {
+            "$ref": "#/definitions/uefiKey"
+          },
+          "x-ms-identifiers": []
+        },
+        "dbx": {
+          "type": "array",
+          "description": "The database of revoked UEFI keys for this image version.",
+          "items": {
+            "$ref": "#/definitions/uefiKey"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "uefiKey": {
+      "type": "object",
+      "description": "A UEFI key signature.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of key signature.",
+          "enum": [
+            "sha256",
+            "x509"
+          ],
+          "x-ms-enum": {
+            "name": "UefiKeyType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "array",
+          "description": "The value of the key signature.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
       }
     }
   },
