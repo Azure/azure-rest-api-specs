@@ -1235,7 +1235,7 @@
           "200": {
             "description": "OK -- Successfully retrieved private endpoint connections",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -1471,7 +1471,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ]
     },
@@ -2299,6 +2299,50 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "List of private endpoint connections associated with SAN"
+    },
+    "TrackedResource": {
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
     }
   }
 }
