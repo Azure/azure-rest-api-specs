@@ -845,6 +845,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{galleryImageName}/versionNames/latest": {
+      "get": {
+        "tags": [
+          "GalleryImageVersions"
+        ],
+        "operationId": "GalleryImageVersions_GetLatest",
+        "description": "Retrieves information about the latest version of an image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*$",
+            "description": "The name of the Shared Image Gallery in which the Image Definition resides."
+          },
+          {
+            "name": "galleryImageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*$",
+            "description": "The name of the gallery image definition in which the Image Version resides."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LatestVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get latest version of an image.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Get_LatestVersionName.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{galleryApplicationName}": {
       "put": {
         "tags": [
@@ -3133,7 +3188,7 @@
     "LatestGalleryImageVersion": {
       "type": "object",
       "readOnly": true,
-      "description": "The gallery image version with latest version in a particular region.",
+      "description": "The property latestVersion. It contains two value, the latest version name and the region.",
       "properties": {
         "latestVersionName": {
           "type": "string",
@@ -3142,6 +3197,30 @@
         "location": {
           "type": "string",
           "description": "region of the Gallery Image Version."
+        }
+      }
+    },
+    "LatestVersion": {
+      "readOnly": true,
+      "description": "latestVersion is an ARM resource. It follows the schema of ARM resource, which has id, name, type and properties. The name of the latest version in the region is in the properties.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/LatestGalleryImageVersion"
         }
       }
     }
