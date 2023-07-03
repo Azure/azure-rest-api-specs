@@ -258,13 +258,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
+            "description": "OK -- Resurce Create or Update operation is successfully completed.",
             "schema": {
               "$ref": "#/definitions/ElasticSan"
             }
           },
           "201": {
-            "description": "Created -- Resource Created; operation will complete asynchronously.",
+            "description": "Created -- Resource Create; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ElasticSan"
             }
@@ -535,13 +535,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
+            "description": "OK -- Resource Create or Update operation is successfully completed.",
             "schema": {
               "$ref": "#/definitions/VolumeGroup"
             }
           },
           "201": {
-            "description": "Created -- Resource Created; operation will complete asynchronously.",
+            "description": "Created -- Resource Create; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/VolumeGroup"
             }
@@ -776,13 +776,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
+            "description": "OK -- Resource Create or Update operation is successfully completed.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
           },
           "201": {
-            "description": "Created -- Resource Created; operation will complete asynchronously.",
+            "description": "Created -- Resource Create; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
@@ -1074,13 +1074,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned with the operation is successfully completed.",
+            "description": "OK -- Resource Create or Update operation is successfully completed.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "Created -- Resource Created; operation will complete asynchronously",
+            "description": "Created -- Resource Create; operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -2301,6 +2301,7 @@
       "description": "Properties of a private link resource."
     },
     "PrivateEndpointConnectionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2308,6 +2309,11 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "List of private endpoint connections associated with SAN"
