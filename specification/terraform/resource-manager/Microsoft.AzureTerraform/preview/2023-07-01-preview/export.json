@@ -1,296 +1,296 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "AzureTerraformResourceProviderClient",
-        "description": "The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.",
-        "version": "2023-07-01-preview"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
-            "post": {
-                "tags": [
-                    "ExportTerraform"
-                ],
-                "operationId": "ExportTerraform",
-                "description": "Exports the Terraform configuration used for the specified scope.",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ExportParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK - Returns the template.",
-                        "schema": {
-                            "$ref": "#/definitions/ExportResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "ExportTerraform": {
-                        "$ref": "./examples/ExportTerraform.json"
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "ExportResourceParameter": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BaseExportParameter"
-                }
-            ],
-            "description": "Export parameter for a single resource",
-            "required": [
-                "resourceId"
-            ],
-            "properties": {
-                "resourceId": {
-                    "description": "The id of the resource to be exported",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "The Terraform resource name",
-                    "type": "string",
-                    "default": "res-0"
-                }
-            },
-            "type": "object",
-            "x-ms-discriminator-value": "Resource"
-        },
-        "ExportResourceGroupParameter": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BaseExportParameter"
-                }
-            ],
-            "description": "Export parameter for a resource group",
-            "required": [
-                "resourceGroupName"
-            ],
-            "properties": {
-                "resourceGroupName": {
-                    "description": "The name of the resource group to be exported",
-                    "type": "string"
-                },
-                "namePattern": {
-                    "description": "The pattern of the Terraform resources",
-                    "type": "string",
-                    "default": "res-"
-                }
-            },
-            "type": "object",
-            "x-ms-discriminator-value": "ResourceGroup"
-        },
-        "ExportQueryParameter": {
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BaseExportParameter"
-                }
-            ],
-            "description": "Export parameter for resources queried by ARG (Azure Resource Graph)",
-            "required": [
-                "query"
-            ],
-            "properties": {
-                "query": {
-                    "description": "The ARG where predicate. Note that you can combine multiple conditions in one `where` predicate, e.g. `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`",
-                    "type": "string"
-                },
-                "namePattern": {
-                    "description": "The pattern of the Terraform resources",
-                    "type": "string",
-                    "default": "res-"
-                },
-                "recursive": {
-                    "description": "Whether to recursively list child resources of the query result",
-                    "type": "boolean",
-                    "default": false
-                }
-            },
-            "type": "object",
-            "x-ms-discriminator-value": "Query"
-        },
-        "BaseExportParameter": {
-            "description": "The base export parameter",
-            "discriminator": "type",
-            "required": [
-                "subscriptionId",
-                "type"
-            ],
-            "properties": {
-                "subscriptionId": {
-                    "description": "The id of the subscription where the target resources reside in",
-                    "type": "string"
-                },
-                "environment": {
-                    "description": "The cloud environment",
-                    "type": "string",
-                    "enum": [
-                        "public",
-                        "china",
-                        "usgovernment"
-                    ],
-                    "default": "public"
-                },
-                "type": {
-                    "$ref": "#/definitions/Type",
-                    "description": "The parameter type"
-                },
-                "fullProperties": {
-                    "description": "Whether to output all non-computed properties in the generated Terraform configuration? This probably needs manual modifications to make it valid",
-                    "type": "boolean",
-                    "default": false
-                },
-                "parallelism": {
-                    "description": " Limit the number of parallel operations, i.e., resource discovery, import",
-                    "type": "integer",
-                    "default": 10
-                }
-            },
-            "type": "object"
-        },
-        "Type": {
-            "description": "The parameter type",
-            "type": "string",
-            "enum": [
-                "ExportResourceParameter",
-                "ExportResourceGroupParameter",
-                "ExportQueryParameter"
-            ]
-        },
-        "ExportResult": {
-            "description": "The Terraform export result",
-            "properties": {
-                "configuration": {
-                    "type": "object",
-                    "description": "The Terraform configuration content"
-                },
-                "skippedResources": {
-                    "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "errors": {
-                    "description": "A list of errors derived during exporting each resource",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "CloudError": {
-            "x-ms-external": true,
-            "properties": {
-                "error": {
-                    "$ref": "#/definitions/ErrorResponse"
-                }
-            },
-            "description": "An error response for a resource management request"
-        },
-        "ErrorResponse": {
-            "title": "Error Response",
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The error code."
-                },
-                "message": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The error message."
-                },
-                "target": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The error target."
-                },
-                "details": {
-                    "readOnly": true,
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ErrorResponse"
-                    },
-                    "x-ms-identifiers": [
-                        "message",
-                        "target"
-                    ],
-                    "description": "The error details."
-                }
-            }
-        }
-    },
-    "parameters": {
-        "ExportParameter": {
-            "description": "The export parameter",
-            "in": "body",
-            "name": "exportParameter",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/BaseExportParameter"
-            },
-            "x-ms-parameter-location": "method"
-        },
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureTerraformResourceProviderClient",
+    "description": "The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.",
+    "version": "2023-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
+      "post": {
+        "tags": [
+          "ExportTerraform"
+        ],
+        "operationId": "ExportTerraform",
+        "description": "Exports the Terraform configuration used for the specified scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExportParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the template.",
+            "schema": {
+              "$ref": "#/definitions/ExportResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportTerraform": {
+            "$ref": "./examples/ExportTerraform.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExportResourceParameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExportParameter"
+        }
+      ],
+      "description": "Export parameter for a single resource",
+      "required": [
+        "resourceId"
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "The id of the resource to be exported",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Terraform resource name",
+          "type": "string",
+          "default": "res-0"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Resource"
+    },
+    "ExportResourceGroupParameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExportParameter"
+        }
+      ],
+      "description": "Export parameter for a resource group",
+      "required": [
+        "resourceGroupName"
+      ],
+      "properties": {
+        "resourceGroupName": {
+          "description": "The name of the resource group to be exported",
+          "type": "string"
+        },
+        "namePattern": {
+          "description": "The pattern of the Terraform resources",
+          "type": "string",
+          "default": "res-"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ResourceGroup"
+    },
+    "ExportQueryParameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExportParameter"
+        }
+      ],
+      "description": "Export parameter for resources queried by ARG (Azure Resource Graph)",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "description": "The ARG where predicate. Note that you can combine multiple conditions in one `where` predicate, e.g. `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`",
+          "type": "string"
+        },
+        "namePattern": {
+          "description": "The pattern of the Terraform resources",
+          "type": "string",
+          "default": "res-"
+        },
+        "recursive": {
+          "description": "Whether to recursively list child resources of the query result",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Query"
+    },
+    "BaseExportParameter": {
+      "description": "The base export parameter",
+      "discriminator": "type",
+      "required": [
+        "subscriptionId",
+        "type"
+      ],
+      "properties": {
+        "subscriptionId": {
+          "description": "The id of the subscription where the target resources reside in",
+          "type": "string"
+        },
+        "environment": {
+          "description": "The cloud environment",
+          "type": "string",
+          "enum": [
+            "public",
+            "china",
+            "usgovernment"
+          ],
+          "default": "public"
+        },
+        "type": {
+          "$ref": "#/definitions/Type",
+          "description": "The parameter type"
+        },
+        "fullProperties": {
+          "description": "Whether to output all non-computed properties in the generated Terraform configuration? This probably needs manual modifications to make it valid",
+          "type": "boolean",
+          "default": false
+        },
+        "parallelism": {
+          "description": " Limit the number of parallel operations, i.e., resource discovery, import",
+          "type": "integer",
+          "default": 10
+        }
+      },
+      "type": "object"
+    },
+    "Type": {
+      "description": "The parameter type",
+      "type": "string",
+      "enum": [
+        "ExportResourceParameter",
+        "ExportResourceGroupParameter",
+        "ExportQueryParameter"
+      ]
+    },
+    "ExportResult": {
+      "description": "The Terraform export result",
+      "properties": {
+        "configuration": {
+          "type": "object",
+          "description": "The Terraform configuration content"
+        },
+        "skippedResources": {
+          "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "description": "A list of errors derived during exporting each resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request"
+    },
+    "ErrorResponse": {
+      "title": "Error Response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
+          "description": "The error details."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ExportParameter": {
+      "description": "The export parameter",
+      "in": "body",
+      "name": "exportParameter",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BaseExportParameter"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
 }
