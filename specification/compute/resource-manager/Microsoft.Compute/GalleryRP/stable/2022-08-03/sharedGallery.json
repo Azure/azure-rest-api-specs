@@ -413,13 +413,6 @@
       ],
       "description": "Base information about the shared gallery resource in pir."
     },
-    "SharedGalleryArtifactTags": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "The artifact tags of a shared gallery resource."
-    },
     "SharedGalleryIdentifier": {
       "properties": {
         "uniqueId": {
@@ -452,28 +445,13 @@
       ]
     },
     "SharedGallery": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SharedGalleryProperties"
-        }
-      },
+      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/PirSharedGalleryResource"
         }
       ],
       "description": "Specifies information about the Shared Gallery that you want to create or update."
-    },
-    "SharedGalleryProperties": {
-      "type": "object",
-      "properties": {
-        "artifactTags": {
-          "readOnly": true,
-          "$ref": "#/definitions/SharedGalleryArtifactTags"
-        }
-      },
-      "description": "Specifies the properties of a shared gallery"
     },
     "SharedGalleryImageList": {
       "description": "The List Shared Gallery Images operation response.",
@@ -513,7 +491,7 @@
       "properties": {
         "osType": {
           "type": "string",
-          "description": "This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
+          "description": "This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. Possible values are: **Windows,** **Linux.**",
           "enum": [
             "Windows",
             "Linux"
@@ -584,9 +562,6 @@
         "eula": {
           "type": "string",
           "description": "End-user license agreement for the current community gallery image."
-        },
-        "artifactTags": {
-          "$ref": "#/definitions/SharedGalleryArtifactTags"
         }
       },
       "required": [
@@ -649,9 +624,6 @@
         "storageProfile": {
           "$ref": "./galleryRPCommon.json#/definitions/SharedGalleryImageVersionStorageProfile",
           "description": "Describes the storage profile of the image version."
-        },
-        "artifactTags": {
-          "$ref": "#/definitions/SharedGalleryArtifactTags"
         }
       },
       "description": "Describes the properties of a gallery image version."
