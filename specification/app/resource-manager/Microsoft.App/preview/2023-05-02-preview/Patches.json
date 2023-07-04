@@ -1,0 +1,357 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2023-05-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches": {
+      "get": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_ListByBuilderResource",
+        "description": "List PatchResource resources by BuilderResource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "builderName",
+            "in": "path",
+            "required": true,
+            "description": "The name of the builder",
+            "minLength": 2,
+            "maxLength": 32,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchCollection"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/builders/{builderName}/patches/{patchName}": {
+      "get": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Get",
+        "description": "Get a PatchResource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches_Get_0": {
+            "$ref": "./examples/Patches_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_CreateOrUpdate",
+        "description": "Create a PatchResource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          },
+          {
+            "name": "patchEnvelope",
+            "in": "body",
+            "required": true,
+            "description": "Resource create or update parameters.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM create or update operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            }
+          },
+          "201": {
+            "description": "ARM create or update operation has been started.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Builds_CreateOrUpdate_WithConfig": {
+            "$ref": "./examples/Patches_CreateOrUpdate.json"
+          },
+          "Builds_CreateOrUpdate_NoConfig": {
+            "$ref": "./examples/Patches_CreateOrUpdate_NoConfig.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Patches"
+        ],
+        "operationId": "Patches_Delete",
+        "description": "Delete a PatchResource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./Builders.json#/parameters/BuilderNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PatchNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully.",
+            "schema": {
+              "$ref": "#/definitions/PatchResource"
+            }
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches_Delete_0": {
+            "$ref": "./examples/Patches_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "PatchResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Resource instance provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PatchConfiguration": {
+      "type": "object",
+      "properties": {
+        "patchId": {
+          "type": "string",
+          "description": "The id of the patch to apply to the app."
+        }
+      },
+      "description": "Configuration of the patch."
+    },
+    "PatchStatus": {
+      "type": "string",
+      "description": "The status of the patch once it has been provisioned",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PatchStatus",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "PatchProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Patch provisioning state.",
+          "readOnly": true
+        },
+        "patchStatus": {
+          "$ref": "#/definitions/PatchStatus",
+          "description": "The status of the patch once it has been provisioned",
+          "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/PatchConfiguration",
+          "description": "Configuration of the patch."
+        }
+      }
+    },
+    "PatchCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchResource"
+          },
+          "description": "The PatchResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "the link to the next page of items"
+        }
+      },
+      "description": "The response of a PatchResource list resources",
+      "requried": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "PatchNameParameter": {
+      "name": "patchName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the patch",
+      "minLength": 2,
+      "maxLength": 64,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
