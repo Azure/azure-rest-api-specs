@@ -245,6 +245,14 @@
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
+              },
+              "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
               }
             },
             "schema": {
@@ -257,19 +265,18 @@
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
+              },
+              "location": {
+                "description": "Location header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked",
+                "type": "string"
               }
             },
             "schema": {
               "$ref": "./definitions.json#/definitions/GlobalSchemaContract"
-            }
-          },
-          "202": {
-            "description": "Accepted the change when updating the service.",
-            "headers": {
-              "location": {
-                "description": "Location header",
-                "type": "string"
-              }
             }
           },
           "default": {
