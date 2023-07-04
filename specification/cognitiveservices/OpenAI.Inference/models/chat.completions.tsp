@@ -5,19 +5,18 @@ import "./completions.common.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
+namespace Azure.OpenAI;
+
 @doc("A description of the intended purpose of a message within a chat completions interaction.")
 enum ChatRole {
   @doc("The role that instructs or sets the behavior of the assistant.")
-  @projectedName("json", "system")
-  system,
+  system: "system",
 
   @doc("The role that provides responses to system-instructed, user-prompted input.")
-  @projectedName("json", "assistant")
-  assistant,
+  assistant: "assistant",
 
   @doc("The role that provides input for chat completions.")
-  @projectedName("json", "user")
-  user,
+  user: "user",
 }
 
 @doc("A single, role-attributed message within a chat completion interaction.")
