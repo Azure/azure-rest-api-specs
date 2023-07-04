@@ -1,11 +1,12 @@
 parameters:
-  service-directory-name:
-    default: "loadtesting"
+  service-dir:
+    default: "sdk/loadtesting"
 emit:
   # - "@azure-tools/typespec-autorest"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
   - "@azure-tools/typespec-python"
   - "@azure-tools/typespec-ts"
+  - "@azure-tools/typespec-csharp"
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   # "@azure-tools/typespec-java": true
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
@@ -19,7 +20,8 @@ options:
   #   azure-resource-provider-folder: "data-plane"
   #   examples-directory: ./examples
   "@azure-tools/typespec-python":
-    package-name: "azure-developer-loadtesting"
+    package-dir: "azure-developer-loadtesting"
+    package-name: "{package-dir}"
     # emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-mode: dataplane
   "@azure-tools/typespec-ts":
@@ -32,3 +34,7 @@ options:
       name: "@azure-rest/load-testing"
       description: "This package contains Microsoft Azure LoadTestingClient client library."
       version: 1.0.1
+  "@azure-tools/typespec-csharp":
+     package-dir: "Azure.Developer.LoadTesting"
+     clear-output-folder: true
+     namespace: "{package-dir}"
