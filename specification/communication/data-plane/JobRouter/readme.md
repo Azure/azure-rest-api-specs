@@ -55,9 +55,6 @@ directive:
     transform: >
       $.type = "object";
       $.additionalProperties["$ref"] = "#/definitions/ExceptionAction";
-# Remove redundant communication error models during codegen
-  - remove-model: CommunicationError
-  - remove-model: CommunicationErrorResponse
 ```
 
 
