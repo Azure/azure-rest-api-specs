@@ -1550,7 +1550,10 @@
         },
         "privateEndpointConnections": {
           "readOnly": true,
-          "$ref": "#/definitions/PrivateEndpointConnectionList",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
           "description": "The list of Private Endpoint Connections."
         }
       }
@@ -1852,7 +1855,10 @@
         },
         "privateEndpointConnections": {
           "readOnly": true,
-          "$ref": "#/definitions/PrivateEndpointConnectionList",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
           "description": "The list of Private Endpoint Connections."
         }
       }
@@ -2132,25 +2138,6 @@
         "id"
       ],
       "description": "Virtual Network rule."
-    },
-    "PrivateEndpointConnectionList": {
-      "type": "object",
-      "description": "List of Private Endpoints",
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "description": "An array of Private Endpoint Connection objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "description": "URI to fetch the next section of the paginated response.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "PrivateEndpointConnection": {
       "type": "object",

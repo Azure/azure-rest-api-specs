@@ -2,22 +2,74 @@
   "title": "VolumeGroups_Create",
   "operationId": "VolumeGroups_Create",
   "parameters": {
-    "subscriptionId": "5ED36C6E-F804-407F-AD4D-126277AB3EEB",
+    "subscriptionId": "A809C6A2-DF28-4BEE-8440-E25396838122",
     "resourceGroupName": "rgelasticsan",
-    "elasticSanName": "yOwol_E_766_Sx758-2p",
-    "volumeGroupName": "cnT5Mn4-J1I7",
+    "elasticSanName": "1LNM_w1_67x8YM_Xy63",
+    "volumeGroupName": "HmCpf4x-1v93h-l7TF1_3U25_v30_C91cP",
     "parameters": {},
     "api-version": "2022-12-01-preview"
   },
   "responses": {
     "200": {
-      "body": {}
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "protocolType": "Iscsi",
+          "encryption": "EncryptionAtRestWithPlatformKey",
+          "networkAcls": {
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+                "action": "Allow",
+                "state": "provisioning"
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "zloujisrarsox",
+          "createdByType": "User",
+          "createdAt": "2023-07-04T05:52:15.371Z",
+          "lastModifiedBy": "lmdztjjcmdfzam",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-07-04T05:52:15.371Z"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups"
+      }
     },
     "201": {
       "headers": {
         "location": "https://contoso.com/operationstatus"
       },
-      "body": {}
+      "body": {
+        "properties": {
+          "provisioningState": "Invalid",
+          "protocolType": "Iscsi",
+          "encryption": "EncryptionAtRestWithPlatformKey",
+          "networkAcls": {
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+                "action": "Allow",
+                "state": "provisioning"
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "zloujisrarsox",
+          "createdByType": "User",
+          "createdAt": "2023-07-04T05:52:15.371Z",
+          "lastModifiedBy": "lmdztjjcmdfzam",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-07-04T05:52:15.371Z"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups"
+      }
     }
   }
 }

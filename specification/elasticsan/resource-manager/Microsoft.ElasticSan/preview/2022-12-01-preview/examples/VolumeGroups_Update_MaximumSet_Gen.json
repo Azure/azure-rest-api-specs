@@ -2,10 +2,10 @@
   "title": "VolumeGroups_Update",
   "operationId": "VolumeGroups_Update",
   "parameters": {
-    "subscriptionId": "5ED36C6E-F804-407F-AD4D-126277AB3EEB",
+    "subscriptionId": "A809C6A2-DF28-4BEE-8440-E25396838122",
     "resourceGroupName": "rgelasticsan",
-    "elasticSanName": "yOwol_E_766_Sx758-2p",
-    "volumeGroupName": "cnT5Mn4-J1I7",
+    "elasticSanName": "1LNM_w1_67x8YM_Xy63",
+    "volumeGroupName": "HmCpf4x-1v93h-l7TF1_3U25_v30_C91cP",
     "parameters": {
       "properties": {
         "protocolType": "Iscsi",
@@ -13,7 +13,7 @@
         "networkAcls": {
           "virtualNetworkRules": [
             {
-              "id": "bo",
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
               "action": "Allow"
             }
           ]
@@ -32,56 +32,53 @@
           "networkAcls": {
             "virtualNetworkRules": [
               {
-                "id": "bo",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
                 "action": "Allow",
                 "state": "provisioning"
               }
             ]
           },
-          "privateEndpointConnections": {
-            "value": [
-              {
-                "properties": {
-                  "provisioningState": "Invalid",
-                  "privateEndpoint": {
-                    "id": "kywwthb"
-                  },
-                  "privateLinkServiceConnectionState": {
-                    "status": "Pending",
-                    "description": "jojfxekxcjidtssjduatimzl",
-                    "actionsRequired": "onbzrcmlirybnpxrrnmdr"
-                  },
-                  "groupIds": [
-                    "trzmqdfvalmywkf"
-                  ]
+          "privateEndpointConnections": [
+            {
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}"
                 },
-                "id": "jqejjgcztrlwdofthdrucxjmvshci",
-                "name": "ckrvgn",
-                "type": "akfmmjevaojftdw",
-                "systemData": {
-                  "createdBy": "otfifnrahdshqombvtg",
-                  "createdByType": "User",
-                  "createdAt": "2023-07-03T09:59:45.919Z",
-                  "lastModifiedBy": "jnaxavnlhrboshtidtib",
-                  "lastModifiedByType": "User",
-                  "lastModifiedAt": "2023-07-03T09:59:45.919Z"
-                }
+                "privateLinkServiceConnectionState": {
+                  "status": "Pending",
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None"
+                },
+                "groupIds": [
+                  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}"
+                ]
+              },
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/privateEndpointConnections/{privateEndpointConnectionName}",
+              "name": "{privateEndpointConnectionName}",
+              "type": "Microsoft.ElasticSan/elasticSans/privateEndpointConnections",
+              "systemData": {
+                "createdBy": "otfifnrahdshqombvtg",
+                "createdByType": "User",
+                "createdAt": "2023-07-03T09:59:45.919Z",
+                "lastModifiedBy": "jnaxavnlhrboshtidtib",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2023-07-03T09:59:45.919Z"
               }
-            ],
-            "nextLink": "wpgoyr"
-          }
+            }
+          ]
         },
         "systemData": {
-          "createdBy": "otfifnrahdshqombvtg",
+          "createdBy": "zloujisrarsox",
           "createdByType": "User",
-          "createdAt": "2023-07-03T09:59:45.919Z",
-          "lastModifiedBy": "jnaxavnlhrboshtidtib",
+          "createdAt": "2023-07-04T05:52:15.371Z",
+          "lastModifiedBy": "lmdztjjcmdfzam",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-07-03T09:59:45.919Z"
+          "lastModifiedAt": "2023-07-04T05:52:15.371Z"
         },
-        "id": "idwidxczgzecfv",
-        "name": "ddmgnjlrawvp",
-        "type": "sqjvbqzb"
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}",
+        "name": "cr",
+        "type": "Microsoft.ElasticSan/elasticSans/volumeGroups"
       }
     },
     "202": {
