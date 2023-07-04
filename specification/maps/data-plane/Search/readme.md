@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-preview-2022-12` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-12'
 input-file:
-  - preview/2022-12-01-preview/search.json
+  - preview/2023-12-01-preview/search.json
 ```
 
 # Code Generation
