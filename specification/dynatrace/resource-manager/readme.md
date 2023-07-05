@@ -46,11 +46,6 @@ These settings apply only when `--tag=package-2021-09-01` is specified on the co
 ```yaml $(tag) == 'package-2021-09-01'
 input-file:
   - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
-suppressions:
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: Dynatrace.Observability/stable/2021-09-01/dynatrace.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getAccountCredentials"]
-    reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -86,8 +81,6 @@ swagger-to-sdk:
 
 ``` yaml
 suppressions:
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
   - code: SECRET_PROPERTY
     from: Dynatrace.Observability/preview/2021-06-01-preview/dynatrace.json
     where: $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
