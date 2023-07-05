@@ -36,6 +36,8 @@ input-file:
 - Microsoft.DataReplication/preview/2021-02-16-preview/swagger.json
 ```
 
+## Suppression
+
 ---
 
 # Code Generation
@@ -47,7 +49,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
   - repo: azure-resource-manager-schemas
 ```
 
