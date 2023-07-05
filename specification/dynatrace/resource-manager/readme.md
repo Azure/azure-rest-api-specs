@@ -86,11 +86,8 @@ swagger-to-sdk:
 
 ``` yaml
 suppressions:
-
 - code: MISSING_APIS_IN_DEFAULT_TAG
-  from: dynatrace.json
   reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
-
 - code: SECRET_PROPERTY
   from: Dynatrace.Observability/preview/2021-06-01-preview/dynatrace.json
   where: $.definitions.VMIngestionDetailsResponse.properties.ingestionKey
