@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "appName": "testApp0",
+    "revisionName": "testApp0-pjxhsye",
+    "api-version": "2023-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/apps/testApp0/revisions/testApp0-pjxhsye",
+        "name": "testApp0-pjxhsye",
+        "type": "Microsoft.App/containerApps/revisions",
+        "properties": {
+          "createdTime": "2021-05-24T21:24:22+00:00",
+          "lastActiveTime": "2021-05-24T21:24:22+00:00",
+          "fqdn": "testApp0-pjxhsye.politehill-ab123456.eastus.azurecontainerapps.io",
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testApp0:v2",
+                "name": "testApp0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            },
+            "javaProperties": {
+              "runtimeVersion": "Java_17",
+              "jvmOptions": "-Xms1024m -Xmx2048m",
+              "jarFileSource": "resources/a172cedcae47474b615c54d510a5d84a8dea3032e958587430b413538be3f333-2019082605-e3095339-1723-44b7-8b5e-31b1003978bc"
+            }
+          },
+          "trafficWeight": 80,
+          "active": true,
+          "replicas": 1,
+          "runningState": "Running"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "springEnvironmentName": "jlaw-demo1",
+    "api-version": "2023-08-02-preview",
+    "environmentEnvelope": {
+      "location": "East US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.AppPlatform/springEnvironments/jlaw-demo1",
+        "name": "jlaw-demo1",
+        "type": "Microsoft.AppPlatform/springEnvironments",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
+          "infraResourceGroup": "capp-svc-jlaw-demo1-eastus",
+          "zoneRedundant": true,
+          "defaultDomain": "jlaw-demo1.k4apps.io"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.AppPlatform/localtions/eastus/operationResults/00000"
+      }
+    }
+  }
+}

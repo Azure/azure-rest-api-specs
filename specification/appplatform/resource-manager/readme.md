@@ -52,10 +52,10 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - Microsoft.AppPlatform/preview/2023-08-01-preview/Apps.json
-  - Microsoft.AppPlatform/preview/2023-08-01-preview/Revisions.json
-  - Microsoft.AppPlatform/preview/2023-08-01-preview/SpringEnvironments.json
-  - Microsoft.AppPlatform/preview/2023-08-01-preview/SpringMiddlewares.json
+  - Microsoft.AppPlatform/preview/2023-08-02-preview/Apps.json
+  - Microsoft.AppPlatform/preview/2023-08-02-preview/Revisions.json
+  - Microsoft.AppPlatform/preview/2023-08-02-preview/SpringEnvironments.json
+  - Microsoft.AppPlatform/preview/2023-08-02-preview/SpringMiddlewares.json
   - Microsoft.AppPlatform/preview/2023-05-01-preview/appplatform.json
 ```
 
