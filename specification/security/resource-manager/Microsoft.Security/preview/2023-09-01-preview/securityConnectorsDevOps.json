@@ -48,9 +48,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "AzureDevOpsOrgs_ListAvailable": {
             "$ref": "./examples/SecurityConnectorsDevOps/AzureDevOpsOrgsListAvailable.json"
@@ -380,9 +377,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "AzureDevOpsProjects_ListAvailable": {
@@ -731,9 +725,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "AzureDevOpsRepos_ListAvailable": {
@@ -1371,9 +1362,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "GitHubOwners_ListAvailable": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitHubOwnersListAvailable.json"
@@ -1703,9 +1691,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GitHubRepos_ListAvailable": {
@@ -2049,9 +2034,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "GitLabGroups_ListAvailable": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitLabGroupsListAvailable.json"
@@ -2382,9 +2364,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "GitLabSubgroups_ListAvailable": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitLabSubgroupsListAvailable.json"
@@ -2433,9 +2412,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "GitLabSubgroups_List": {
             "$ref": "./examples/SecurityConnectorsDevOps/GitLabSubgroupsList.json"
@@ -2483,9 +2459,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GitLabProjects_ListAvailable": {
@@ -3169,6 +3142,9 @@
         },
         "onboardingState": {
           "$ref": "#/definitions/OnboardingState"
+        },
+        "ghazdoState": {
+          "$ref": "#/definitions/GitHubAdvancedSecurityState"
         }
       }
     },
@@ -3285,6 +3261,20 @@
           },
           "x-nullable": true
         }
+      }
+    },
+    "GitHubAdvancedSecurityState": {
+      "description": "Details about GitHub Advanced Security for ADO.",
+      "enum": [
+        "Unknown",
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "GitHubAdvancedSecurityState",
+        "modelAsString": true,
+        "modelAsExtensible": true
       }
     },
     "GitHubOwner": {
@@ -3752,7 +3742,7 @@
     "InstallationId": {
       "in": "path",
       "name": "installationId",
-      "description": "Id of the GitHub app installation.",
+      "description": "Id of the GitHub app installation, usually in the format of a long number such as 12345678.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
