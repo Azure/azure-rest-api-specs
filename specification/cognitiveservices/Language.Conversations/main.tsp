@@ -826,6 +826,7 @@ enum WeightUnit {
 @doc("Analyzes the input conversation utterance.")
 @TypeSpec.Rest.actionSeparator("/:")
 @TypeSpec.Rest.action("analyze-conversations")
+//removed examples due to bug
 // @example(
 //   "../../../../data-plane/Language/stable/2022-05-01/examples/conversations/SuccessfulAnalyzeConversations.json",
 //   "Conversation project result"
