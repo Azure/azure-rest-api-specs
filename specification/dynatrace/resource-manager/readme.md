@@ -48,8 +48,8 @@ input-file:
   - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
 suppressions:
   - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getAccountCredentials"]
-    where: $.definitions.Foo
+    from: Dynatrace.Observability/stable/2021-09-01/dynatrace.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/getAccountCredentials"]
     reason: API is deprecated and hence it is cleaned up, it is not being used in the last stable version.
 ```
 
