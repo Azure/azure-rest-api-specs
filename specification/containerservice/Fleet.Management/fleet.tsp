@@ -64,6 +64,7 @@ model FleetHubProfile {
   kubernetesVersion?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
 enum FleetProvisioningState {

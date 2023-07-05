@@ -614,6 +614,31 @@ directive:
 
 ```
 
+### Tag: package-2018-03-preview-only
+
+These settings apply only when `--tag=package-2018-03-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview-only'
+input-file:
+- Microsoft.Storage/preview/2018-03-01-preview/storage.json
+- Microsoft.Storage/preview/2018-03-01-preview/blob.json
+- Microsoft.Storage/preview/2018-03-01-preview/managementpolicy.json
+
+directive:
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+
+```
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
