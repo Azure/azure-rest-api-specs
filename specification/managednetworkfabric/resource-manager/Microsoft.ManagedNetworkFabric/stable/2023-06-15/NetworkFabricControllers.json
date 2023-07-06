@@ -409,6 +409,12 @@
           "readOnly": true
         },
         "workloadManagementNetwork": {
+          "description": "A workload management network is required for all the tenant (workload) traffic. This traffic is only dedicated for Tenant workloads which are required to access internet or any other MSFT/Public endpoints. This is used for the backward compatibility.",
+          "type": "boolean",
+          "default": true,
+          "readOnly": true
+        },
+        "isWorkloadManagementNetworkEnabled": {
           "description": "A workload management network is required for all the tenant (workload) traffic. This traffic is only dedicated for Tenant workloads which are required to access internet or any other MSFT/Public endpoints.",
           "type": "string",
           "default": "True",
@@ -418,7 +424,7 @@
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "WorkloadManagementNetwork"
+            "name": "IsWorkloadManagementNetworkEnabled"
           }
         },
         "tenantInternetGatewayIds": {
