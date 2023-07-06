@@ -12,7 +12,7 @@
   "info": {
     "description": "The Network Cloud APIs provide management of the on-premises clusters and their resources, such as, racks, bare metal hosts, virtual machines, workload networks and more.",
     "title": "NetworkCloud",
-    "version": "2023-05-01-preview"
+    "version": "2023-07-01"
   },
   "host": "management.azure.com",
   "paths": {
@@ -1376,66 +1376,6 @@
         "x-ms-examples": {
           "Uncordon bare metal machine": {
             "$ref": "./examples/BareMetalMachines_Uncordon.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines/{bareMetalMachineName}/validateHardware": {
-      "post": {
-        "description": "Validate the hardware of the provided bare metal machine.",
-        "summary": "Trigger hardware validation of the bare metal machine.",
-        "operationId": "BareMetalMachines_ValidateHardware",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/BareMetalMachineNameParameter"
-          },
-          {
-            "description": "The request body.",
-            "name": "bareMetalMachineValidateHardwareParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BareMetalMachineValidateHardwareParameters"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Validate the bare metal machine hardware": {
-            "$ref": "./examples/BareMetalMachines_ValidateHardware.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -4824,66 +4764,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/storageAppliances/{storageApplianceName}/runReadCommands": {
-      "post": {
-        "description": "Run and retrieve output from read only commands on the provided storage appliance.",
-        "summary": "Retrieve output from read-only commands exercised against a storage appliance.",
-        "operationId": "StorageAppliances_RunReadCommands",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/StorageApplianceNameParameter"
-          },
-          {
-            "description": "The request body.",
-            "name": "storageApplianceRunReadCommandsParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageApplianceRunReadCommandsParameters"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Run and retrieve output from read only commands on storage appliance.": {
-            "$ref": "./examples/StorageAppliances_RunReadCommands.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
-          "final-state-via": "location"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/trunkedNetworks": {
       "get": {
         "description": "Get a list of trunked networks in the provided resource group.",
@@ -5380,66 +5260,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/attachVolume": {
-      "post": {
-        "description": "Attach volume to the provided virtual machine.",
-        "summary": "Attach volume to the virtual machine.",
-        "operationId": "VirtualMachines_AttachVolume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualMachineNameParameter"
-          },
-          {
-            "description": "The request body.",
-            "name": "virtualMachineAttachVolumeParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineVolumeParameters"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Attach volume to virtual machine": {
-            "$ref": "./examples/VirtualMachines_AttachVolume.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
-          "final-state-via": "location"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/consoles": {
       "get": {
         "description": "Get a list of consoles for the provided virtual machine.",
@@ -5708,66 +5528,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/detachVolume": {
-      "post": {
-        "description": "Detach volume from the provided virtual machine.",
-        "summary": "Detach volume from the virtual machine.",
-        "operationId": "VirtualMachines_DetachVolume",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualMachineNameParameter"
-          },
-          {
-            "description": "The request body.",
-            "name": "virtualMachineDetachVolumeParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualMachineVolumeParameters"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URL to retrieve the status of the asynchronous operation."
-              }
-            }
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Detach volume from virtual machine": {
-            "$ref": "./examples/VirtualMachines_DetachVolume.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-schema": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult",
-          "final-state-via": "location"
         }
       }
     },
@@ -7431,26 +7191,6 @@
           "format": "int64",
           "maximum": 14400,
           "minimum": 60
-        }
-      }
-    },
-    "BareMetalMachineValidateHardwareParameters": {
-      "type": "object",
-      "title": "BareMetalMachineValidateHardwareParameters represents the body of the request to validate the physical hardware of a bare metal machine.",
-      "required": [
-        "validationCategory"
-      ],
-      "properties": {
-        "validationCategory": {
-          "description": "The category of hardware validation to perform.",
-          "type": "string",
-          "enum": [
-            "BasicValidation"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "BareMetalMachineHardwareValidationCategory"
-          }
         }
       }
     },
@@ -11199,26 +10939,6 @@
       ],
       "x-ms-azure-resource": true
     },
-    "StorageApplianceCommandSpecification": {
-      "type": "object",
-      "title": "StorageApplianceCommandSpecification represents the read-only command and optional arguments to execute against a storage appliance.",
-      "required": [
-        "command"
-      ],
-      "properties": {
-        "arguments": {
-          "description": "The list of string arguments that will be passed to the script in order as separate arguments.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "command": {
-          "description": "The read-only command to execute against the storage appliance.",
-          "type": "string"
-        }
-      }
-    },
     "StorageApplianceConfigurationData": {
       "type": "object",
       "title": "StorageApplianceConfigurationData represents configuration for the storage application.",
@@ -11441,32 +11161,6 @@
             "read",
             "create"
           ]
-        }
-      }
-    },
-    "StorageApplianceRunReadCommandsParameters": {
-      "type": "object",
-      "title": "StorageApplianceRunReadCommandsParameters represents the body of request containing list of read-only commands to run for a storage appliance.",
-      "required": [
-        "commands",
-        "limitTimeSeconds"
-      ],
-      "properties": {
-        "commands": {
-          "description": "The list of read-only commands to run.",
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/StorageApplianceCommandSpecification"
-          },
-          "x-ms-identifiers": []
-        },
-        "limitTimeSeconds": {
-          "description": "The maximum time the commands are allowed to run.\nIf the execution time exceeds the maximum, the script will be stopped, any output produced until then will be captured, and the exit code matching a timeout will be returned (252).",
-          "type": "integer",
-          "format": "int64",
-          "maximum": 14400,
-          "minimum": 60
         }
       }
     },
@@ -12222,19 +11916,6 @@
             "type": "string"
           },
           "readOnly": true
-        }
-      }
-    },
-    "VirtualMachineVolumeParameters": {
-      "type": "object",
-      "title": "VirtualMachineVolumeParameters represents the body of the request to handle attachment and detachment of volumes for the virtual machine.",
-      "required": [
-        "volumeId"
-      ],
-      "properties": {
-        "volumeId": {
-          "description": "The resource ID of the volume.",
-          "type": "string"
         }
       }
     },
