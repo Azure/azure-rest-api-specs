@@ -191,12 +191,6 @@
           },
           {
             "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "maxpagesize",
             "description": "Number of results in response.",
             "type": "integer",
@@ -441,12 +435,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/TestIdPathParameter"
-          },
-          {
-            "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -913,12 +901,6 @@
             "in": "query",
             "name": "orderby",
             "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime asc. Supported fields - executedDateTime",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
             "type": "string"
           },
           {
@@ -3237,6 +3219,7 @@
       "description": "URL to perform data plane API operations on the resource.",
       "required": true,
       "type": "string",
+      "format": "uri",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     }

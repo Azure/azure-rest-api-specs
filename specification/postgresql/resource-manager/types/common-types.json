@@ -5,7 +5,40 @@
     "title": "Common types"
   },
   "paths": {},
-  "definitions": {},
+  "definitions": {
+    "CapabilityBase": {
+      "type": "object",
+      "description": "Base object for representing capability",
+      "properties": {
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    }
+  },
   "parameters": {
     "ServerNameParameter": {
       "name": "serverName",
@@ -13,7 +46,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "pattern": "^[a-z][a-z0-9]*$",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
       "minLength": 3,
       "maxLength": 63,
       "x-ms-parameter-location": "method"

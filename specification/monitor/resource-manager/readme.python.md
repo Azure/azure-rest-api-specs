@@ -3,11 +3,13 @@
 These settings apply only when `--track2` is specified on the command line.
 
 ``` yaml $(python)
+title: MonitorManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-monitor
 no-namespace-folders: true
 package-version: 1.0.0b1
+python-base-namespace: azure.mgmt.monitor
 python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
 ```
 
@@ -17,13 +19,20 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 clear-output-folder: true
+default-api-version: "2023-01-01"
 multiapi: true
 batch:
+  - tag: package-2023-03-01-preview-only
+  - tag: package-2023-01-only
+  - tag: package-2022-08-01-preview-only
   - tag: package-2022-10-01-only
   - tag: package-2022-06-01-only
   - tag: package-2022-04-01-only
   - tag: package-2022-02-01-preview-only
   - tag: package-2021-09-01-only
+  - tag: package-2021-07-01-preview-only
+  - tag: package-2021-06-03-preview-only
+  - tag: package-2021-05-only
   - tag: package-2021-05-01-preview-only
   - tag: package-2021-04-only
   - tag: package-2020-10-only
@@ -45,14 +54,35 @@ batch:
   - tag: package-2017-03-01-preview-only
   - tag: package-2016-09-01-only
   - tag: package-2016-03-01-only
-  - tag: package-2015-07-01-only
-  - tag: package-2015-04-01-only
+  - tag: package-2015-07-01-python-only
+  - tag: package-2015-04-01-python-only
+  - tag: package-2014-04-01-only
   - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
 perform-load: false
+```
+
+### Tag: package-2023-03-01-preview-only and python
+
+These settings apply only when `--tag=package-2023-03-01-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-03-01-preview-only'
+namespace: $(python-base-namespace).v2023_03_01_preview
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2023_03_01_preview
+```
+
+### Tag: package-2023-01-only and python
+
+These settings apply only when `--tag=package-2023-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-01-only'
+namespace: $(python-base-namespace).v2023_01_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2023_01_01
 ```
 
 ### Tag: package-2022-10-01-only and python
@@ -63,6 +93,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-10-01-only'
 namespace: $(python-base-namespace).v2022_10_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2022_10_01
+```
+
+### Tag: package-2022-08-01-preview-only and python
+
+These settings apply only when `package-2022-08-01-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-08-01-preview-only'
+namespace: $(python-base-namespace).v2022_08_01_preview
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2022_08_01_preview
 ```
 
 ### Tag: package-2022-06-01-only and python
@@ -113,6 +153,24 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2021-07-01-preview-only'
 namespace: $(python-base-namespace).v2021_07_01_preview
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_07_01_preview
+```
+
+### Tag: package-2021-06-03-preview-only and python
+These settings apply only when `--tag=package-2021-06-03-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+``` yaml $(tag) == 'package-2021-06-03-preview-only'
+namespace: $(python-base-namespace).v2021_06_03_preview
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_06_03_preview
+```
+
+### Tag: package-2021-05-only and python
+
+These settings apply only when `--tag=package-2021-05-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-05-only'
+namespace: $(python-base-namespace).v2021_05_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_05_01
 ```
 
 ### Tag: package-2021-05-01-preview-only and python
@@ -324,22 +382,32 @@ namespace: $(python-base-namespace).v2016_03_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2016_03_01
 ```
 
-### Tag: package-2015-07-01-only and python
+### Tag: package-2015-07-01-python-only and python
 
-These settings apply only when `--tag=package-2015-07-01-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2015-07-01-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2015-07-01-only'
+``` yaml $(tag) == 'package-2015-07-01-python-only'
 namespace: $(python-base-namespace).v2015_07_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2015_07_01
 ```
 
-### Tag: package-2015-04-01-only and python
+### Tag: package-2015-04-01-python-only and python
 
-These settings apply only when `--tag=package-2015-04-01-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2015-04-01-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2015-04-01-only'
+``` yaml $(tag) == 'package-2015-04-01-python-only'
 namespace: $(python-base-namespace).v2015_04_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2015_04_01
+```
+
+### Tag: package-2014-04-01-only and python
+
+These settings apply only when `--tag=package-2014-04-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2014-04-01-only'
+namespace: $(python-base-namespace).v2014_04_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2014_04_01
 ```
