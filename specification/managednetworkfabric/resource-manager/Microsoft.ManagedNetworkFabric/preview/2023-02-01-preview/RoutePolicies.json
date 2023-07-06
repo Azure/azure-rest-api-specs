@@ -378,169 +378,7 @@
           ],
           "items": {
             "description": "Route Policy condition model.",
-            "type": "object",
-            "required": [
-              "sequenceNumber",
-              "condition",
-              "action"
-            ],
-            "allOf": [
-              {
-                "$ref": "./common.json#/definitions/AnnotationResource",
-                "description": "Common properties for annotated type."
-              }
-            ],
-            "properties": {
-              "sequenceNumber": {
-                "type": "integer",
-                "format": "int64",
-                "minimum": 1,
-                "maximum": 4294967295,
-                "description": "Sequence to insert to/delete from existing route."
-              },
-              "condition": {
-                "type": "object",
-                "description": "Route policy condition properties.",
-                "properties": {
-                  "ipCommunityIds": {
-                    "type": "array",
-                    "description": "List of IPCommunity resource IDs.",
-                    "items": {
-                      "type": "string",
-                      "description": "Arm Resource Id of IPCommunity."
-                    }
-                  },
-                  "ipExtendedCommunityIds": {
-                    "type": "array",
-                    "description": "List of IPExtendedCommunity resource IDs.",
-                    "items": {
-                      "type": "string",
-                      "description": "Arm Resource Id of IpExtendedCommunity."
-                    }
-                  },
-                  "ipPrefixId": {
-                    "type": "string",
-                    "description": "Arm Resource Id of IpPrefix."
-                  }
-                }
-              },
-              "action": {
-                "type": "object",
-                "description": "Route policy action properties.",
-                "properties": {
-                  "localPreference": {
-                    "type": "integer",
-                    "format": "int64",
-                    "minimum": 0,
-                    "maximum": 4294967295,
-                    "description": "localPreference of the route policy."
-                  },
-                  "actionType": {
-                    "description": "action. Example: Permit | Deny.",
-                    "$ref": "./common.json#/definitions/CommunityActionTypes"
-                  },
-                  "ipCommunityProperties": {
-                    "type": "object",
-                    "description": "ipCommunity Properties.",
-                    "properties": {
-                      "add": {
-                        "type": "object",
-                        "description": "Route policy add manipulations.",
-                        "properties": {
-                          "ipCommunityIds": {
-                            "type": "array",
-                            "description": "List of IPCommunity resource IDs.",
-                            "items": {
-                              "type": "string",
-                              "description": "Arm Resource Id of IPCommunity."
-                            }
-                          }
-                        }
-                      },
-                      "delete": {
-                        "type": "object",
-                        "description": "Route policy delete manipulations.",
-                        "properties": {
-                          "ipCommunityIds": {
-                            "type": "array",
-                            "description": "List of IPCommunity resource IDs.",
-                            "items": {
-                              "type": "string",
-                              "description": "Arm Resource Id of IPCommunity."
-                            }
-                          }
-                        }
-                      },
-                      "set": {
-                        "type": "object",
-                        "description": "Route policy set manipulations.",
-                        "properties": {
-                          "ipCommunityIds": {
-                            "type": "array",
-                            "description": "List of IPCommunity resource IDs.",
-                            "items": {
-                              "type": "string",
-                              "description": "Arm Resource Id of IPCommunity."
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "ipExtendedCommunityProperties": {
-                    "type": "object",
-                    "description": "IP Extended Community Properties.",
-                    "properties": {
-                      "add": {
-                        "type": "object",
-                        "description": "Route policy add manipulations.",
-                        "properties": {
-                          "ipExtendedCommunityIds": {
-                            "type": "array",
-                            "description": "List of IPExtendedCommunity resource IDs.",
-                            "items": {
-                              "type": "string",
-                              "description": "Arm Resource Id of IPExtendedCommunity."
-                            }
-                          }
-                        }
-                      },
-                      "delete": {
-                        "type": "object",
-                        "description": "Route policy delete manipulations.",
-                        "properties": {
-                          "ipExtendedCommunityIds": {
-                            "type": "array",
-                            "description": "List of IPExtendedCommunity resource IDs.",
-                            "items": {
-                              "type": "string",
-                              "description": "Arm Resource Id of IPExtendedCommunity."
-                            }
-                          }
-                        }
-                      },
-                      "set": {
-                        "type": "object",
-                        "description": "Route policy set manipulations.",
-                        "properties": {
-                          "ipExtendedCommunityIds": {
-                            "type": "array",
-                            "description": "List of IPExtendedCommunity resource IDs.",
-                            "items": {
-                              "type": "string",
-                              "description": "Arm Resource Id of IPExtendedCommunity."
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "required": [
-                  "actionType"
-                ]
-              }
-            }
+            "$ref": "#/definitions/RoutePolicyStatementProperties"
           }
         },
         "provisioningState": {
@@ -552,7 +390,7 @@
       "required": [
         "statements"
       ],
-      "description": "RoutePolicyProperties define the resource properties."
+      "description": "RoutePolicy Properties define the resource properties."
     },
     "RoutePolicy": {
       "type": "object",
@@ -603,6 +441,202 @@
         "nextLink": {
           "type": "string",
           "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "RoutePolicyStatementProperties": {
+      "description": "Route Policy Statement properties..",
+      "type": "object",
+      "required": [
+        "sequenceNumber",
+        "condition",
+        "action"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 4294967295,
+          "description": "Sequence to insert to/delete from existing route."
+        },
+        "condition": {
+          "description": "Route policy condition properties.",
+          "$ref": "#/definitions/StatementConditionProperties"
+        },
+        "action": {
+          "description": "Route policy action properties.",
+          "$ref": "#/definitions/StatementActionProperties"
+        }
+      }
+    },
+    "StatementConditionProperties": {
+      "type": "object",
+      "description": "Route policy statement condition properties.",
+      "properties": {
+        "ipPrefixId": {
+          "type": "string",
+          "description": "Arm Resource Id of IpPrefix."
+        }
+      },
+      "allOf": [
+        {
+          "description": "List of IP Community resource IDs.",
+          "$ref": "#/definitions/IpCommunityIdList"
+        },
+        {
+          "description": "List of IP Extended Community resource IDs.",
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      ]
+    },
+    "StatementActionProperties": {
+      "type": "object",
+      "description": "Route policy action properties.",
+      "properties": {
+        "localPreference": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "localPreference of the route policy."
+        },
+        "actionType": {
+          "description": "action. Example: Permit | Deny.",
+          "$ref": "./common.json#/definitions/CommunityActionTypes"
+        },
+        "ipCommunityProperties": {
+          "description": "IP Community Properties.",
+          "$ref": "#/definitions/ActionIpCommunityProperties"
+        },
+        "ipExtendedCommunityProperties": {
+          "description": "IP Extended Community Properties.",
+          "$ref": "#/definitions/ActionIpExtendedCommunityProperties"
+        }
+      },
+      "required": [
+        "actionType"
+      ]
+    },
+    "ActionIpCommunityProperties": {
+      "description": "IP Community Properties.",
+      "allOf": [
+        {
+          "description": "IP Community add operation properties.",
+          "$ref": "#/definitions/IpCommunityAddOperationProperties"
+        },
+        {
+          "description": "IP Community delete operation properties.",
+          "$ref": "#/definitions/IpCommunityDeleteOperationProperties"
+        },
+        {
+          "description": "IP Community set operation properties.",
+          "$ref": "#/definitions/IpCommunitySetOperationProperties"
+        }
+      ]
+    },
+    "IpCommunityAddOperationProperties": {
+      "type": "object",
+      "description": "IP Community add operation properties.",
+      "properties": {
+        "add": {
+          "$ref": "#/definitions/IpCommunityIdList"
+        }
+      }
+    },
+    "IpCommunitySetOperationProperties": {
+      "type": "object",
+      "description": "IP Community set operation properties.",
+      "properties": {
+        "set": {
+          "$ref": "#/definitions/IpCommunityIdList"
+        }
+      }
+    },
+    "IpCommunityDeleteOperationProperties": {
+      "type": "object",
+      "description": "IP Community delete operation properties.",
+      "properties": {
+        "delete": {
+          "$ref": "#/definitions/IpCommunityIdList"
+        }
+      }
+    },
+    "ActionIpExtendedCommunityProperties": {
+      "description": "IP Extended Community Properties.",
+      "allOf": [
+        {
+          "description": "IP Extended Community add operation properties.",
+          "$ref": "#/definitions/IpExtendedCommunityAddOperationProperties"
+        },
+        {
+          "description": "IP Extended Community delete operation properties.",
+          "$ref": "#/definitions/IpExtendedCommunityDeleteOperationProperties"
+        },
+        {
+          "description": "IP Extended Community set operation properties.",
+          "$ref": "#/definitions/IpExtendedCommunitySetOperationProperties"
+        }
+      ]
+    },
+    "IpExtendedCommunityAddOperationProperties": {
+      "type": "object",
+      "description": "IP Extended Community add operation properties.",
+      "properties": {
+        "add": {
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      }
+    },
+    "IpExtendedCommunitySetOperationProperties": {
+      "type": "object",
+      "description": "IP Extended Community set operation properties.",
+      "properties": {
+        "set": {
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      }
+    },
+    "IpExtendedCommunityDeleteOperationProperties": {
+      "type": "object",
+      "description": "IP Extended Community delete operation properties.",
+      "properties": {
+        "delete": {
+          "$ref": "#/definitions/IpExtendedCommunityIdList"
+        }
+      }
+    },
+    "IpCommunityIdList": {
+      "description": "IP Community ID list properties.",
+      "type": "object",
+      "properties": {
+        "ipCommunityIds": {
+          "type": "array",
+          "description": "List of IP Community resource IDs.",
+          "items": {
+            "type": "string",
+            "description": "ARM Resource ID of IPCommunity."
+          }
+        }
+      }
+    },
+    "IpExtendedCommunityIdList": {
+      "description": "IP Extended Community Id list properties.",
+      "type": "object",
+      "properties": {
+        "ipExtendedCommunityIds": {
+          "type": "array",
+          "description": "List of IP Extended Community resource IDs.",
+          "items": {
+            "type": "string",
+            "description": "ARM Resource ID of IP Extended Community."
+          }
         }
       }
     }
