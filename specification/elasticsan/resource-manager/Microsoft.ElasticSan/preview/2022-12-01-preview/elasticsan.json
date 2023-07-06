@@ -67,7 +67,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ElasticSanOperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -248,7 +248,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ElasticSanCreateParameter"
+              "$ref": "#/definitions/ElasticSan"
             },
             "description": "Elastic San object."
           },
@@ -766,7 +766,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VolumeCreateParameter"
+              "$ref": "#/definitions/Volume"
             },
             "description": "Volume object."
           },
@@ -1348,81 +1348,6 @@
     }
   },
   "definitions": {
-    "ElasticSanOperationDisplay": {
-      "type": "object",
-      "required": [
-        "provider",
-        "resource",
-        "operation",
-        "description"
-      ],
-      "description": "Metadata about an operation.",
-      "additionalProperties": false,
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Localized friendly form of the resource provider name."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Localized friendly form of the resource type related to this action/operation."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Localized friendly name for the operation, as it should be shown to the user."
-        },
-        "description": {
-          "type": "string",
-          "description": "Localized friendly description for the operation, as it should be shown to the user."
-        }
-      }
-    },
-    "ElasticSanRPOperation": {
-      "type": "object",
-      "required": [
-        "name"
-      ],
-      "description": "Description of a ElasticSan RP Operation",
-      "additionalProperties": false,
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation being performed on this particular object"
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Indicates whether the operation applies to data-plane.",
-          "readOnly": true
-        },
-        "display": {
-          "description": "Additional metadata about RP operation.",
-          "$ref": "#/definitions/ElasticSanOperationDisplay",
-          "readOnly": true
-        }
-      }
-    },
-    "ElasticSanOperationListResult": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "description": "List of operations supported by the RP.",
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "An array of operations supported by the ElasticSan RP.",
-          "items": {
-            "$ref": "#/definitions/ElasticSanRPOperation"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "URI to fetch the next section of the paginated response.",
-          "type": "string"
-        }
-      }
-    },
     "ElasticSanList": {
       "type": "object",
       "description": "List of Elastic Sans",
@@ -1442,36 +1367,23 @@
         }
       }
     },
-    "ElasticSanCreateParameter": {
-      "type": "object",
-      "description": "Input Parameter for Create ElasticSan.",
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ElasticSan"
-        }
-      ]
-    },
     "ElasticSan": {
       "type": "object",
       "description": "Response for ElasticSan request.",
+      "required": [
+        "properties",
+        "location"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of ElasticSan.",
           "$ref": "#/definitions/ElasticSanProperties"
-        },
-        "systemData": {
-          "description": "Resource metadata required by ARM RPC",
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1615,6 +1527,11 @@
             "$ref": "#/definitions/SkuInformation"
           },
           "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to fetch the next section of the paginated response.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -1797,11 +1714,6 @@
           "x-ms-client-flatten": true,
           "description": "Properties of VolumeGroup.",
           "$ref": "#/definitions/VolumeGroupProperties"
-        },
-        "systemData": {
-          "description": "Resource metadata required by ARM RPC",
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -1898,29 +1810,34 @@
     },
     "VolumeCreateParameter": {
       "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Volume.",
+          "$ref": "#/definitions/VolumeProperties"
+        }
+      },
       "required": [
         "properties"
       ],
       "description": "Input Parameter for Create Volume.",
       "allOf": [
         {
-          "$ref": "#/definitions/Volume"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
     "Volume": {
       "type": "object",
       "description": "Response for Volume request.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of Volume.",
           "$ref": "#/definitions/VolumeProperties"
-        },
-        "systemData": {
-          "description": "Resource metadata required by ARM RPC",
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -2142,6 +2059,9 @@
     "PrivateEndpointConnection": {
       "type": "object",
       "description": " Response for PrivateEndpoint Connection object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2304,38 +2224,6 @@
         }
       },
       "description": "List of private endpoint connections associated with SAN"
-    },
-    "TrackedResource": {
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ]
     }
   }
 }
