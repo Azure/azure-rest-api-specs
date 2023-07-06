@@ -76,11 +76,14 @@
     label: Approved-OkToMerge
     onLabeledComments: >-
       Hi @${PRAuthor}! Your PR is approved. Congratulations. :partying_face::rocket: </br>
-      <li>If this PR is targeting 'main' branch, then it cannot be merged, as azure-rest-api-specs-pr repo 'main' branch is mirrored from azure-rest-api-specs 'main' branch.
-      If you want to publish the PR to the public repo (Azure/azure-rest-api-specs) 'main' branch, 
+      <li>
+      If this PR is targeting `main` branch, then it cannot be merged, as `azure-rest-api-specs-pr` repo `main` branch 
+      is mirrored from `azure-rest-api-specs` `main`` branch. <br/>
+      If you want to publish the PR to the public repo (`Azure/azure-rest-api-specs`) `main` branch, 
       please use [OpenAPIHub Publish PR](${openapiHub}/tools/publishpullrequest?pr=${owner}/${repo}/${PRNumber}&to=${to}).
-      </li> 
-      <li>For further guidance on how to proceed please refer to this [wiki doc](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/205/RP-Scenarios-to-Contribute-to-Swagger?anchor=**public-repository-vs.-private-repository**).
+      </li><li>
+      For further guidance on how to proceed please refer to this 
+      [wiki article](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/205/RP-Scenarios-to-Contribute-to-Swagger?anchor=**public-repository-vs.-private-repository**).
       </li>
 
 - rule:
@@ -122,11 +125,11 @@
     variables:
       openapiHub: https://aka.ms/openapihub
     onOpenedComments: >- 
-      Hi, @${PRAuthor}! Thank you for your pull request. To help get your PR merged:</br>
-      - Ensure you reviewed the checklists in the PR description.
-      - Know that PR assignee is the person auto-assigned and responsible for your current PR review and approval.
-      - For convenient view of the API changes made by this PR, refer to the URLs provided in the table in
-        the `Generated ApiView` comment added to this PR. You can use ApiView to show API versions diff.
+      Hi, @${PRAuthor}! Thank you for your pull request. To help get your PR merged: </br>
+      <li> Ensure you reviewed the checklists in the PR description. </li>
+      <li> Know that PR assignee is the person auto-assigned and responsible for your current PR review and approval. </li>
+      <li> For convenient view of the API changes made by this PR, refer to the URLs provided in the table in
+      the `Generated ApiView` comment added to this PR. You can use ApiView to show API versions diff. </li>
 
 - rule:
     type: checkbox
@@ -160,13 +163,12 @@
     type: label
     label: ARMChangesRequested
     onLabeledComments: >-
-      Please address or respond to feedback from the ARM API reviewer.
-      When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label.
+      Please address or respond to feedback from the ARM API reviewer. <br/>
+      When you are ready to continue the ARM API review, please remove the `ARMChangesRequested` label. <br/>
       This will notify the reviewer to have another look. <br/>
       If the feedback provided needs further discussion, please use this Teams channel to post your questions - 
-      https://aka.ms/azsdk/support/specreview-channel. <br/>
-      Please indicate that this is an ARM-related question in the title of your post by including "[ARM Query]"
-      in the title.
+      [aka.ms/azsdk/support/specreview-channel](https://aka.ms/azsdk/support/specreview-channel). <br/>
+      Please include `[ARM Query]` in the title of your question to indicate that it is ARM-related.
     onLabeledRemoveLabels:
         - WaitForARMFeedback
 
