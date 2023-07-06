@@ -425,10 +425,15 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "An unexpected error response.",
+          "200": {
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ValidateEnterpriseSupportResponseItem"
+              },
+              "x-ms-identifiers": [],
+              "x-typespec-name": "ValidateEnterpriseSupportResponseItem[]"
             }
           }
         },
