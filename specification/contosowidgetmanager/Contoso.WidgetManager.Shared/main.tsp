@@ -4,5 +4,5 @@ model FakedSharedModel {
   tag: string;
 
   @doc("The created date.")
-  createdAt: utcDateTime;
+  createdDate: utcDateTime;
 }
