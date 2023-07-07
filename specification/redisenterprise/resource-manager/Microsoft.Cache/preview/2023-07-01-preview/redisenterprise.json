@@ -1311,7 +1311,7 @@
       }
     }
   },
-  "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/CheckNameAvailability": {
+  "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/checkNameAvailability": {
     "post": {
       "tags": [
         "RedisEnterprise"
@@ -1343,6 +1343,12 @@
       "responses": {
         "200": {
           "description": "Name is available"
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
         }
       }
     }
@@ -2067,7 +2073,9 @@
       "description": "Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation."
     },
     "CheckNameAvailabilityParameters": {
+      "title": "Check availability for a given name.",
       "description": "Parameters body to pass for resource name availability check.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
