@@ -41,8 +41,8 @@ enum Versions {
 
 interface CertificateProfileOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
-  @summary("Gets the status of a codesign operation.")
-  @doc("Retrieves the status of the codesign operation long running operation.")
+  @summary("Gets the status of a codesigning operation.")
+  @doc("This status operation requires that a Sign request has been submitted and the operationId is known.")
   @example(
     "./examples/CertificateProfile_GetSigningOperationStatus.json",
     "GetSigningOperationStatus"
@@ -54,7 +54,7 @@ interface CertificateProfileOperations {
   >;
 
   @summary("Gets the codesigning root certificate on the certificate chain for that account and profile name.")
-  @doc("Retrieve the codesigning root certificate on the certificate chain for that account and profile name.")
+  @doc("The root certificate is generated as part of the initial account creation and it is used to sign the bits for the profile provided.")
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/rootcert")
   @example(
     "./examples/CertificateProfile_GetSignRootCert.json",
@@ -65,13 +65,13 @@ interface CertificateProfileOperations {
     BytesBody<"application/x-x509-ca-cert">
   >;
 
-  @summary("Gets a list of extended key usage object identifiers that are allowed.")
-  @doc("Retrieve a list of extended key usage object identifierss that are allowed for this account and profile name.")
+  @summary("Gets a list of extended key usage object identifiers that are allowed for this account and profile combination.")
+  @doc("The list of extended key usages are used to determine the purpose of the certificate usage as part of the codesigning operation.")
   @example("./examples/CertificateProfile_GetSignEku.json", "GetSignEku")
   listSignEkus is StandardResourceOperations.ResourceList<ExtendedKeyUsage>;
 
   @summary("Submit a codesign operation.")
-  @doc("Submit a codesign operation under the specified account and profile name.")
+  @doc("Submit a codesign operation under the created codesign account and profile name provided.")
   @example("./examples/CertificateProfile_Sign.json", "Sign")
   @pollingOperation(CertificateProfileOperations.getCodeSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
