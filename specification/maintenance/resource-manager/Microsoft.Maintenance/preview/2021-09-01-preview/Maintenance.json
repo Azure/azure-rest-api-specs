@@ -1152,14 +1152,14 @@
           }
         },
         "x-ms-examples": {
-          "MaintenanceConfigurations_GetForResource": {
-            "$ref": "./examples/MaintenanceConfigurations_GetForResource.json"
-          },
           "MaintenanceConfigurations_GetForResource_GuestOSPatchWindows": {
             "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchWindows.json"
           },
           "MaintenanceConfigurations_GetForResource_GuestOSPatchLinux": {
             "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchLinux.json"
+          },
+          "MaintenanceConfigurations_GetForResource": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource.json"
           }
         }
       },
@@ -2043,7 +2043,7 @@
         },
         "installPatches": {
           "$ref": "#/definitions/InputPatchConfiguration",
-          "description": "The input parameters to be passed to the patch run operation."
+          "description": "The input parameters to be passed to the patch run operation. This property only applies to Guest (InGuestPatch) scope."
         }
       }
     },
@@ -2062,18 +2062,18 @@
             "modelAsString": true
           },
           "default": "IfRequired",
-          "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed."
+          "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed. This property only applies to Guest (InGuestPatch) scope."
         },
         "windowsParameters": {
           "$ref": "#/definitions/InputWindowsParameters",
-          "description": "Input parameters specific to patching a Windows machine. For Linux machines, do not pass this property."
+          "description": "Input parameters specific to patching a Windows machine. For Linux machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope."
         },
         "linuxParameters": {
           "$ref": "#/definitions/InputLinuxParameters",
-          "description": "Input parameters specific to patching Linux machine. For Windows machines, do not pass this property."
+          "description": "Input parameters specific to patching Linux machine. For Windows machines, do not pass this property. This property only applies to Guest (InGuestPatch) scope."
         },
         "tasks": {
-          "description": "Tasks information for the Software update configuration.",
+          "description": "[Not supported] Tasks information for the Software update configuration.",
           "$ref": "#/definitions/softwareUpdateConfigurationTasks",
           "x-ms-client-flatten": true
         }
@@ -2109,7 +2109,7 @@
           "description": "Exclude patches which need reboot"
         }
       },
-      "description": "Input properties for patching a Windows machine."
+      "description": "Input properties for patching a Windows machine. This property only applies to Guest (InGuestPatch) scope."
     },
     "InputLinuxParameters": {
       "type": "object",
@@ -2136,51 +2136,53 @@
           "description": "Classification category of patches to be patched"
         }
       },
-      "description": "Input properties for patching a Linux machine."
+      "description": "Input properties for patching a Linux machine. This property only applies to Guest (InGuestPatch) scope."
     },
     "softwareUpdateConfigurationTasks": {
       "type": "object",
-      "description": "Task properties of the software update configuration.",
+      "description": "[Not supported] Task properties of the software update configuration.",
       "properties": {
         "preTasks": {
           "type": "array",
-          "description": "List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}]",
+          "description": "[Not supported] List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}]",
           "items": {
             "$ref": "#/definitions/taskProperties",
             "x-ms-client-flatten": true
-          }
+          },
+          "x-ms-identifiers": []
         },
         "postTasks": {
           "type": "array",
-          "description": "List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}]",
+          "description": "[Not supported] List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}]",
           "items": {
             "$ref": "#/definitions/taskProperties",
             "x-ms-client-flatten": true
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "taskProperties": {
       "type": "object",
-      "description": "Task properties of the software update configuration.",
+      "description": "[Not supported] Task properties of the software update configuration.",
       "properties": {
         "parameters": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets the parameters of the task."
+          "description": "[Not supported] Gets or sets the parameters of the task."
         },
         "source": {
           "type": "string",
-          "description": "Gets or sets the name of the runbook."
+          "description": "[Not supported] Gets or sets the name of the runbook."
         },
         "taskScope": {
           "enum": [
             "Global",
             "Resource"
           ],
-          "description": "Global Task execute once when schedule trigger. Resource task execute for each VM.",
+          "description": "[Not supported] Global Task execute once when schedule trigger. Resource task execute for each VM.",
           "type": "string",
           "x-ms-enum": {
             "name": "TaskScope",
@@ -2263,7 +2265,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -2325,7 +2330,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Update"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

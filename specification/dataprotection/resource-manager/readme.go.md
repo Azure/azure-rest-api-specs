@@ -21,10 +21,22 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-10-preview
+  - tag: package-preview-2022-09
   - tag: package-2021-06-preview
   - tag: package-2021-02-preview
   - tag: package-2021-01
   - tag: package-2021-07
+  - tag: package-2022-03
+```
+
+### Tag: package-2022-03 and go
+
+These settings apply only when `--tag=package-2022-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2022-03' && $(go)
+output-folder: $(go-sdk-folder)/services/dataprotection/mgmt/2022-03-01/$(namespace)
 ```
 
 ### Tag: package-2021-07 and go
@@ -61,4 +73,22 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2021-06-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/dataprotection/mgmt/2021-06-01-preview/$(namespace)
+```
+
+### Tag: package-2022-10-preview and go
+
+These settings apply only when `--tag=package-2022-10-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2022-10-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/dataprotection/mgmt/2022-10-01-preview/$(namespace)
+```
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-preview-2022-09' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/dataprotection/mgmt/2022-09-01-preview/$(namespace)
 ```

@@ -1,0 +1,835 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServiceClient",
+    "description": "The Container Service Client.",
+    "version": "2022-07-02-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}": {
+      "put": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_CreateOrUpdate",
+        "summary": "Creates or updates a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchHeader"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchHeader"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            },
+            "description": "The Fleet to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or update a fleet resource": {
+            "$ref": "./examples/Fleets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_Update",
+        "summary": "Patches a fleet resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchHeader"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/FleetPatch"
+            },
+            "description": "The properties of a Fleet to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches a fleet resource": {
+            "$ref": "./examples/Fleets_PatchTags.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_Get",
+        "summary": "Gets a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a fleet resource.": {
+            "$ref": "./examples/Fleets_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_Delete",
+        "summary": "Deletes a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchHeader"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete a fleet resource.": {
+            "$ref": "./examples/Fleets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets": {
+      "get": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_ListByResourceGroup",
+        "summary": "Lists fleets in the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List fleet resources in a given resource group": {
+            "$ref": "./examples/Fleets_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/fleets": {
+      "get": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_List",
+        "summary": "Lists fleets in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List fleet resources in a given subscription": {
+            "$ref": "./examples/Fleets_ListBySub.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/members/{fleetMemberName}": {
+      "put": {
+        "tags": [
+          "FleetMembers"
+        ],
+        "operationId": "FleetMembers_CreateOrUpdate",
+        "summary": "Creates or updates a fleet member.",
+        "description": "A member contains a reference to an existing Kubernetes cluster. Creating a member makes the referenced cluster join the Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetMemberNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchHeader"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchHeader"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            },
+            "description": "The Fleet member to create or update."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a fleet member resource. Joins an existing cluster to the fleet": {
+            "$ref": "./examples/FleetMembers_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FleetMembers"
+        ],
+        "operationId": "FleetMembers_Get",
+        "summary": "Gets a Fleet member.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetMemberNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FleetMember"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a fleet member resource.": {
+            "$ref": "./examples/FleetMembers_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FleetMembers"
+        ],
+        "operationId": "FleetMembers_Delete",
+        "summary": "Deletes a fleet member.",
+        "description": "Deleting a Fleet member results in the member cluster leaving fleet. The Member azure resource is deleted upon success. The underlying cluster is not deleted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetMemberNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Deletes a fleet member resource.": {
+            "$ref": "./examples/FleetMembers_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/members": {
+      "get": {
+        "tags": [
+          "FleetMembers"
+        ],
+        "operationId": "FleetMembers_ListByFleet",
+        "summary": "Lists the members of a fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FleetMembersListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists the members of a fleet.": {
+            "$ref": "./examples/FleetMembers_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleets_ListCredentials",
+        "summary": "Lists the user credentials of a Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FleetCredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Fleet Credentials": {
+            "$ref": "./examples/Fleets_ListCredentialsResult.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Fleet": {
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "properties": {
+          "description": "Properties of a Fleet.",
+          "$ref": "#/definitions/FleetProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The Fleet resource which contains multiple Kubernetes clusters as its members."
+    },
+    "FleetProperties": {
+      "type": "object",
+      "description": "Properties of a Fleet.",
+      "properties": {
+        "hubProfile": {
+          "description": "The FleetHubProfile configures the Fleet's hub.",
+          "$ref": "#/definitions/FleetHubProfile"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FleetProvisioningState",
+            "modelAsString": true
+          },
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "description": "The provisioning state of the last accepted operation."
+        }
+      }
+    },
+    "FleetHubProfile": {
+      "type": "object",
+      "description": "The FleetHubProfile configures the fleet hub.",
+      "properties": {
+        "dnsPrefix": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "DNS prefix used to create the FQDN for the Fleet hub."
+        },
+        "fqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The FQDN of the Fleet hub."
+        },
+        "kubernetesVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Kubernetes version of the Fleet hub."
+        }
+      }
+    },
+    "FleetListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fleet"
+          },
+          "description": "The list of Fleets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next page of Fleets.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Fleets operation."
+    },
+    "FleetMembersListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FleetMember"
+          },
+          "description": "The list of members in a given Fleet."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next page of Fleet members."
+        }
+      },
+      "description": "The response from the List FleetMembers operation."
+    },
+    "FleetPatch": {
+      "type": "object",
+      "description": "Properties of a Fleet that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "FleetMember": {
+      "type": "object",
+      "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
+      "properties": {
+        "properties": {
+          "description": "Properties of a Fleet member.",
+          "$ref": "#/definitions/FleetMemberProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+        }
+      ]
+    },
+    "FleetMemberProperties": {
+      "description": "Properties of a Fleet member.",
+      "type": "object",
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The ARM resource id of the cluster that joins the Fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FleetMemberProvisioningState",
+            "modelAsString": true
+          },
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Joining",
+            "Leaving",
+            "Updating"
+          ],
+          "description": "The provisioning state of the last accepted operation."
+        }
+      }
+    },
+    "FleetCredentialResults": {
+      "type": "object",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FleetCredentialResult"
+          },
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The list credential result response."
+    },
+    "FleetCredentialResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the credential."
+        },
+        "value": {
+          "type": "string",
+          "format": "byte",
+          "readOnly": true,
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The credential result response."
+    }
+  },
+  "parameters": {
+    "FleetNameParameter": {
+      "name": "fleetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+      "description": "The name of the Fleet resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "FleetMemberNameParameter": {
+      "name": "fleetMemberName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
+      "description": "The name of the Fleet member resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Kubernetes cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "IfMatchHeader": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-client-name": "IfMatch",
+      "x-ms-parameter-location": "method",
+      "description": "Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+    },
+    "IfNoneMatchHeader": {
+      "name": "If-None-Match",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-client-name": "IfNoneMatch",
+      "x-ms-parameter-location": "method",
+      "description": "Set to '*' to allow a new resource to be created and prevent updating an existing resource. Other values will result in a 412 Pre-condition Failed response."
+    }
+  }
+}

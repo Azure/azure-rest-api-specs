@@ -705,34 +705,38 @@
           "type": "array"
         },
         "status": {
-          "description": "The alert rule template status.",
-          "enum": [
-            "Installed",
-            "Available",
-            "NotAvailable"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "TemplateStatus",
-            "values": [
-              {
-                "description": "Alert rule template installed. and can not use more then once",
-                "value": "Installed"
-              },
-              {
-                "description": "Alert rule template is available.",
-                "value": "Available"
-              },
-              {
-                "description": "Alert rule template is not available",
-                "value": "NotAvailable"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AlertRuleTemplateStatus",
+          "description": "The alert rule template status."
         }
       },
       "type": "object"
+    },
+    "AlertRuleTemplateStatus": {
+      "description": "The alert rule template status.",
+      "enum": [
+        "Installed",
+        "Available",
+        "NotAvailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TemplateStatus",
+        "values": [
+          {
+            "description": "Alert rule template installed. and can not use more then once",
+            "value": "Installed"
+          },
+          {
+            "description": "Alert rule template is available.",
+            "value": "Available"
+          },
+          {
+            "description": "Alert rule template is not available",
+            "value": "NotAvailable"
+          }
+        ]
+      }
     },
     "AlertRuleTemplateWithMitreProperties": {
       "allOf": [
@@ -1164,26 +1168,8 @@
       "description": "Represents Fusion alert rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
-            }
-          ],
+          "$ref": "#/definitions/FusionAlertRuleTemplateProperties",
           "description": "Fusion alert rule template properties",
-          "properties": {
-            "severity": {
-              "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
-              "description": "The severity for alerts created by this alert rule."
-            },
-            "sourceSettings": {
-              "description": "All supported source signal configurations consumed in fusion detection.",
-              "items": {
-                "$ref": "#/definitions/FusionTemplateSourceSetting"
-              },
-              "x-ms-identifiers": [],
-              "type": "array"
-            }
-          },
           "required": [
             "displayName",
             "description",
@@ -1192,12 +1178,35 @@
             "sourceSettings",
             "alertRulesCreatedByTemplateCount"
           ],
-          "type": "object",
           "x-ms-client-flatten": true
         }
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
+    },
+    "FusionAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplateWithMitreProperties"
+        }
+      ],
+      "description": "Fusion alert rule template properties",
+      "properties": {
+        "severity": {
+          "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "sourceSettings": {
+          "description": "All supported source signal configurations consumed in fusion detection.",
+          "items": {
+            "$ref": "#/definitions/FusionTemplateSourceSetting"
+          },
+          "x-ms-identifiers": [],
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "x-ms-client-flatten": true
     },
     "FusionTemplateSourceSetting": {
       "description": "Represents a source signal consumed in Fusion detection.",
@@ -1407,21 +1416,8 @@
           "type": "array"
         },
         "productFilter": {
-          "description": "The alerts' productName on which the cases will be generated",
-          "enum": [
-            "Microsoft Cloud App Security",
-            "Azure Security Center",
-            "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT",
-            "Office 365 Advanced Threat Protection",
-            "Microsoft Defender Advanced Threat Protection"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "MicrosoftSecurityProductName"
-          }
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
         },
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
@@ -1435,6 +1431,23 @@
         "productFilter"
       ],
       "type": "object"
+    },
+    "MicrosoftSecurityProductName": {
+      "description": "The alerts' productName on which the cases will be generated",
+      "enum": [
+        "Microsoft Cloud App Security",
+        "Azure Security Center",
+        "Azure Advanced Threat Protection",
+        "Azure Active Directory Identity Protection",
+        "Azure Security Center for IoT",
+        "Office 365 Advanced Threat Protection",
+        "Microsoft Defender Advanced Threat Protection"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MicrosoftSecurityProductName"
+      }
     },
     "MicrosoftSecurityIncidentCreationAlertRuleProperties": {
       "allOf": [
@@ -1483,14 +1496,7 @@
       "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
-            }
-          ],
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties",
           "description": "MicrosoftSecurityIncidentCreation rule template properties",
           "required": [
             "displayName",
@@ -1505,6 +1511,43 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+        }
+      ],
+      "description": "MicrosoftSecurityIncidentCreation rule template properties",
+      "properties": {
+        "displayNamesFilter": {
+          "description": "the alerts' displayNames on which the cases will be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "productFilter": {
+          "$ref": "#/definitions/MicrosoftSecurityProductName",
+          "description": "The alerts' productName on which the cases will be generated"
+        },
+        "severitiesFilter": {
+          "description": "the alerts' severities on which the cases will be generated",
+          "items": {
+            "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "x-ms-client-flatten": true
     },
     "QueryBasedAlertRuleProperties": {
       "description": "Query based alert rule base property bag.",

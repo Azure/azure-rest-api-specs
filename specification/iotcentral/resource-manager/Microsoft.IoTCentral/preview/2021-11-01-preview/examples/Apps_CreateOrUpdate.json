@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "resourceName": "myIoTCentralApp",
+    "api-version": "2021-11-01-preview",
+    "App": {
+      "location": "westus",
+      "sku": {
+        "name": "ST2"
+      },
+      "properties": {
+        "displayName": "My IoT Central App",
+        "subdomain": "my-iot-central-app",
+        "template": "iotc-pnp-preview@1.0.0"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Code": "200",
+        "Message": "OK",
+        "Target": "ResourceHandler.ExecutePutRequest",
+        "Retry-After": "10",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.IoTCentral/locations/westus/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2021-11-01-preview&type=createOrUpdateIotApplication"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/iotApps/myIoTCentralApp",
+        "name": "myIoTCentralApp",
+        "type": "Microsoft.IoTCentral/iotApps",
+        "location": "westus",
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "applicationId": "6ebd8fd3-6e34-419e-908f-9be61ec6f6d6",
+          "displayName": "My IoT Central App",
+          "subdomain": "my-iot-central-app",
+          "template": "iotc-pnp-preview@1.0.0",
+          "state": "created",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
+          "networkRuleSets": {
+            "applyToDevices": false,
+            "applyToIoTCentral": false,
+            "defaultAction": "Deny",
+            "ipRules": []
+          },
+          "privateEndpointConnections": []
+        },
+        "sku": {
+          "name": "ST2"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "principalId": "8988ab15-3e7a-4586-8a1c-ed07a73a53e9"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Code": "200",
+        "Message": "OK",
+        "Target": "ResourceHandler.ExecutePutRequest",
+        "Retry-After": "10",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.IoTCentral/locations/westus/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2021-11-01-preview&type=createOrUpdateIotApplication"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTCentral/iotApps/myIoTCentralApp",
+        "name": "myIoTCentralApp",
+        "type": "Microsoft.IoTCentral/iotApps",
+        "location": "westus",
+        "tags": {
+          "key": "value"
+        },
+        "properties": {
+          "applicationId": "6ebd8fd3-6e34-419e-908f-9be61ec6f6d6",
+          "displayName": "My IoT Central App",
+          "subdomain": "my-iot-central-app",
+          "template": "iotc-pnp-preview@1.0.0",
+          "state": "created",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
+          "networkRuleSets": {
+            "applyToDevices": false,
+            "applyToIoTCentral": false,
+            "defaultAction": "Deny",
+            "ipRules": []
+          },
+          "privateEndpointConnections": []
+        },
+        "sku": {
+          "name": "ST2"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "principalId": "8988ab15-3e7a-4586-8a1c-ed07a73a53e9"
+        }
+      }
+    }
+  }
+}

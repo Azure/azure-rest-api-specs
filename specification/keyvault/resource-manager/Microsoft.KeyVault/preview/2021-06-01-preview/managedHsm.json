@@ -132,6 +132,12 @@
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
             }
@@ -1228,6 +1234,14 @@
     },
     "MHSMPrivateEndpointConnectionItem": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of private endpoint connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        },
         "properties": {
           "$ref": "#/definitions/MHSMPrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,

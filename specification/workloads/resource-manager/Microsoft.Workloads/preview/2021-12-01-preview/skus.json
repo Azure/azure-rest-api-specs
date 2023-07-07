@@ -1,0 +1,377 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-12-01-preview",
+    "title": "Workloads Client",
+    "description": "Workloads client provides access to various workload skus"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/skus": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "description": "Lists all the available SKUs under this PR",
+        "operationId": "Skus_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SkusListResult"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Skus": {
+            "$ref": "./examples/Skus_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestrictionInfo": {
+      "description": "The SKU restriction information.",
+      "type": "object",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The restriction locations."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The restriction zones."
+        }
+      }
+    },
+    "SkuRestriction": {
+      "description": "The SKU restriction definition.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Location",
+            "Zone"
+          ],
+          "x-ms-enum": {
+            "name": "SkuRestrictionType",
+            "modelAsString": true
+          },
+          "description": "The SKU restriction type."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Restriction values."
+        },
+        "restrictionInfo": {
+          "description": "The restriction information.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/RestrictionInfo"
+          }
+        },
+        "reasonCode": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "SkuRestrictionReasonCode",
+            "modelAsString": true
+          },
+          "description": "The SKU restriction reason code."
+        }
+      }
+    },
+    "SkuCost": {
+      "description": "The SKU cost definition.",
+      "type": "object",
+      "properties": {
+        "meterId": {
+          "type": "string",
+          "description": "Billing meter id."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The quantity."
+        },
+        "extendedUnit": {
+          "type": "string",
+          "description": "The extended unit."
+        }
+      }
+    },
+    "SkuCapacity": {
+      "description": "The SKU capacity.",
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum capacity value."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum capacity value."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default capacity value."
+        },
+        "scaleType": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "x-ms-enum": {
+            "name": "SkuScaleType",
+            "modelAsString": true
+          },
+          "description": "Scale type of the SKU capacity."
+        }
+      }
+    },
+    "SkuCapability": {
+      "description": "The SKU capability definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The capability name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The capability value."
+        }
+      }
+    },
+    "SkuZoneDetail": {
+      "description": "The SKU zone details.",
+      "type": "object",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The physical zones."
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "description": "The capabilities.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SkuLocationAndZones": {
+      "description": "The SKU location and zone.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the SKU."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The availability zones of SKU location."
+        },
+        "zoneDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuZoneDetail"
+          },
+          "description": "The availability zone details of the SKU location.",
+          "x-ms-identifiers": []
+        },
+        "extendedLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The extended locations of SKU."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Region",
+            "EdgeZone"
+          ],
+          "x-ms-enum": {
+            "name": "LocationType",
+            "modelAsString": true
+          },
+          "description": "Type of the extended location."
+        }
+      }
+    },
+    "SkuDefinition": {
+      "description": "The SKU definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type the SKU applicable for."
+        },
+        "tier": {
+          "type": "string",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "kind": {
+          "type": "string",
+          "description": "If the service has different kinds of hardware, for the same SKU, then that can be captured here."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of locations where this SKU is available."
+        },
+        "locationInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuLocationAndZones"
+          },
+          "description": "List of locations where this SKU is available.",
+          "x-ms-identifiers": []
+        },
+        "capacity": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/SkuCapacity"
+          },
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        },
+        "costs": {
+          "description": "The SKU costs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          },
+          "x-ms-identifiers": []
+        },
+        "capabilities": {
+          "description": "The SKU capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "x-ms-identifiers": []
+        },
+        "restrictions": {
+          "description": "The SKU restrictions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuRestriction"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SkusListResult": {
+      "description": "A list of SKUs supported by an Azure Resource Provider.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDefinition"
+          },
+          "description": "List of SKUs supported by the resource provider",
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of SKU list results (if there are any).",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

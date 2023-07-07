@@ -1,0 +1,31 @@
+{
+  "title": "Get NSP Access Rule",
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1",
+    "profileName": "profile1",
+    "accessRuleName": "accessRule1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "accessRule1",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
+        "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "direction": "Outbound",
+          "addressPrefixes": [],
+          "fullyQualifiedDomainNames": [
+            "paasrp1.contoso.org",
+            "paasrp2.contoso.org"
+          ],
+          "subscriptions": [],
+          "networkSecurityPerimeters": []
+        }
+      }
+    }
+  }
+}

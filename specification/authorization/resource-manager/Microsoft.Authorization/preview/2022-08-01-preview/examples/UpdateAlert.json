@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+    "alertId": "TooManyPermanentOwnersAssignedToResource",
+    "api-version": "2022-08-01-preview",
+    "parameters": {
+      "properties": {
+        "isActive": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+          "incidentCount": 1,
+          "lastModifiedDateTime": "2022-04-05T03:04:06.467+00:00",
+          "lastScannedDateTime": "2022-04-06T18:25:00.38+00:00",
+          "isActive": false,
+          "alertDefinition": {
+            "properties": {
+              "displayName": "Too many permanent owners assigned to a resource",
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+              "description": "The number of users set to never expire is too high. To enhance the security of your resources, we recommend requiring activation for role use. Take a moment to review the list of users, and suggested changes here.",
+              "severityLevel": "Medium",
+              "securityImpact": "Providing users permanent access in a role may leave resources vulnerable to accidental or malicious activity.",
+              "mitigationSteps": "To mitigate this issue, require the user to activate the role before use.",
+              "howToPrevent": "Enable “Activation Required” in the role settings menu. This will ensure newly added users must activate their role.",
+              "isRemediatable": true,
+              "isConfigurable": true
+            },
+            "name": "TooManyPermanentOwnersAssignedToResource",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlerts/alertDefinitions/TooManyPermanentOwnersAssignedToResource",
+            "type": "Microsoft.Authorization/roleManagementAlerts/alertDefinitions"
+          },
+          "alertIncidents": [
+            {
+              "properties": {
+                "alertIncidentType": "TooManyPermanentOwnersAssignedToResourceAlertIncident",
+                "assigneeName": "testUser",
+                "assigneeType": "User"
+              },
+              "name": "a9f38501-74ec-43ea-8663-6c538602150d",
+              "type": "Microsoft.Authorization/roleManagementAlerts/alertIncidents",
+              "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlerts/alerts/TooManyPermanentOwnersAssignedToResource/alertIncidents/a9f38501-74ec-43ea-8663-6c538602150d"
+            }
+          ],
+          "alertConfiguration": {
+            "properties": {
+              "alertConfigurationType": "TooManyPermanentOwnersAssignedToResourceAlertConfiguration",
+              "alertDefinitionId": "TooManyPermanentOwnersAssignedToResource",
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+              "isEnabled": true,
+              "thresholdNumberOfPermanentOwners": 10,
+              "thresholdPercentageOfPermanentOwnersOutOfAllOwners": 10
+            },
+            "name": "TooManyPermanentOwnersAssignedToResource",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlerts/alertConfigurations/TooManyPermanentOwnersAssignedToResource",
+            "type": "Microsoft.Authorization/roleManagementAlerts/alertConfigurations"
+          }
+        },
+        "name": "TooManyPermanentOwnersAssignedToResource",
+        "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlerts/alerts/TooManyPermanentOwnersAssignedToResource",
+        "type": "Microsoft.Authorization/roleManagementAlerts/alerts"
+      }
+    }
+  }
+}

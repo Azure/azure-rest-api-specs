@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/default",
+            "name": "{galleryName}",
+            "type": "Microsoft.DevCenter/devcenters/galleries",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "galleryResourceId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Compute/galleries/CentralGallery"
+            },
+            "systemData": {
+              "createdBy": "User1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:24:24.818Z",
+              "lastModifiedBy": "User1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+            }
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/ImageGallery",
+            "name": "{galleryName}",
+            "type": "Microsoft.DevCenter/devcenters/galleries",
+            "properties": {
+              "galleryResourceId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Compute/galleries/SharedGallery",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "User1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:24:24.818Z",
+              "lastModifiedBy": "User1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

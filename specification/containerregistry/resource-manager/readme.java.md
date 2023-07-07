@@ -25,6 +25,7 @@ directive:
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2022-02-preview
   - tag: package-2021-12-preview
   - tag: package-2021-09
   - tag: package-2021-08-preview
@@ -40,6 +41,19 @@ batch:
   - tag: package-2017-06-preview
   - tag: package-2017-03
   - tag: package-2016-06-preview
+```
+
+### Tag: package-2022-02-preview and java
+
+These settings apply only when `--tag=package-2022-02-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-02-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerregistry.v2022_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerregistry/mgmt-v2022_02_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2021-12-preview and java

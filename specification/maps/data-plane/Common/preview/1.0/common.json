@@ -532,6 +532,67 @@
       "type": "string",
       "description": "The ontology version of this dataset.",
       "readOnly": true
+    },
+    "MapsErrorResponse": {
+      "type": "object",
+      "description": "Common error response for Azure Maps APIs to return error details for failed operations.",
+      "readOnly": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/MapsErrorDetail"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "MapsErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MapsErrorDetail"
+          },
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/MapsInnerError"
+        }
+      }
+    },
+    "MapsInnerError": {
+      "description": "An object containing more specific information than the current object about the error.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/MapsInnerError"
+        }
+      }
     }
   },
   "parameters": {
@@ -599,6 +660,32 @@
       "x-ms-client-default": "json",
       "x-ms-parameter-location": "method"
     },
+    "MapsAccountGeographicResourceLocation": {
+      "name": "geography",
+      "description": "This parameter specifies where the Azure Maps Account is located. Valid values are us (East US, West Central US, West US 2) and eu (North Europe, West Europe).",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "us",
+        "eu"
+      ],
+      "x-ms-enum": {
+        "name": "GeographicResourceLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "us",
+            "description": "Used to access an Azure Maps Account in the United States (East US, West Central US, West US 2)."
+          },
+          {
+            "value": "eu",
+            "description": "Used to access an Azure Maps Account in Europe (North Europe, West Europe)."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "client"
+    },
     "GeographicResourceLocation": {
       "name": "geography",
       "description": "This parameter specifies where the Azure Maps Creator resource is located.  Valid values are us and eu.",
@@ -630,7 +717,7 @@
       "name": "view",
       "x-ms-client-name": "localizedMapView",
       "in": "query",
-      "description": "The View parameter (also called the \"user region\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries have different views of such regions, and the View parameter allows your application to comply with the view required by the country your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+      "description": "The View parameter (also called the \"user region\" parameter) allows you to show the correct maps for a certain country/region for geopolitically disputed regions. Different countries/regions have different views of such regions, and the View parameter allows your application to comply with the view required by the country/region your application will be serving. By default, the View parameter is set to “Unified” even if you haven’t defined it in  the request. It is your responsibility to determine the location of your users, and then set the View parameter correctly for that location. Alternatively, you have the option to set ‘View=Auto’, which will return the map data based on the IP  address of the request. The View parameter in Azure Maps must be used in compliance with applicable laws, including those  regarding mapping, of the country/region where maps, images and other data and third party content that you are authorized to  access via Azure Maps is made available. Example: view=IN.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "enum": [
@@ -797,7 +884,7 @@
       "name": "text",
       "x-ms-client-name": "includeText",
       "in": "query",
-      "description": "Yes/no value to exclude textual data from response. Only images and country names will be in response.",
+      "description": "Yes/no value to exclude textual data from response. Only images and country/region names will be in response.",
       "type": "string",
       "enum": [
         "yes",
@@ -813,7 +900,7 @@
           },
           {
             "value": "no",
-            "description": "Exclude textual data from response. Only images and country names will be in response."
+            "description": "Exclude textual data from response. Only images and country/region names will be in response."
           }
         ]
       },

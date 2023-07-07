@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
+    "resourceGroupName": "Default-RecoveryServices-ResourceGroup",
+    "vaultName": "swaggerExample",
+    "api-version": "2022-01-01",
+    "vault": {
+      "properties": {
+        "encryption": {
+          "keyVaultProperties": {
+            "keyUri": "https://cmk2xkv.vault.azure.net/keys/Key1/0767b348bb1a4c07baa6c4ec0055d2b3"
+          },
+          "kekIdentity": {
+            "userAssignedIdentity": "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi"
+          },
+          "infrastructureEncryption": "Enabled"
+        }
+      },
+      "sku": {
+        "name": "Standard"
+      },
+      "location": "West US",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "name": "swaggerExample",
+        "etag": "W/\"datetime'2017-12-15T12%3A36%3A51.68Z'\"",
+        "tags": {
+          "TestUpdatedKey": "TestUpdatedValue"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi": {
+              "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
+              "principalId": "075a0ca6-43f6-4434-9abf-c9b1b79f9219"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "encryption": {
+            "keyVaultProperties": {
+              "keyUri": "https://cmk2xkv.vault.azure.net/keys/Key1/0767b348bb1a4c07baa6c4ec0055d2b3"
+            },
+            "kekIdentity": {
+              "userAssignedIdentity": "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi",
+              "useSystemAssignedIdentity": false
+            },
+            "infrastructureEncryption": "Enabled"
+          }
+        },
+        "id": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample",
+        "type": "Microsoft.RecoveryServices/vaults",
+        "sku": {
+          "name": "Standard"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "location": "westus",
+        "name": "swaggerExample",
+        "etag": "W/\"datetime'2017-12-15T12%3A36%3A51.68Z'\"",
+        "tags": {
+          "TestUpdatedKey": "TestUpdatedValue"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi": {}
+          }
+        },
+        "properties": {
+          "provisioningState": "Provisioning",
+          "encryption": {
+            "keyVaultProperties": {
+              "keyUri": "https://cmk2xkv.vault.azure.net/keys/Key1/0767b348bb1a4c07baa6c4ec0055d2b3"
+            },
+            "kekIdentity": {
+              "userAssignedIdentity": "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi",
+              "useSystemAssignedIdentity": false
+            },
+            "infrastructureEncryption": "Enabled"
+          }
+        },
+        "id": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample",
+        "type": "Microsoft.RecoveryServices/vaults",
+        "sku": {
+          "name": "Standard"
+        }
+      },
+      "headers": {
+        "Retry-After": "10",
+        "Azure-AsyncOperation": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample/operationStatus/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2015-03-15"
+      }
+    }
+  }
+}

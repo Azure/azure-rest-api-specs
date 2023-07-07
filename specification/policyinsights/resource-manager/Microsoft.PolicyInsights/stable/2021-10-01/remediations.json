@@ -1078,6 +1078,9 @@
           "items": {
             "$ref": "#/definitions/RemediationDeployment"
           },
+          "x-ms-identifiers": [
+            "remediatedResourceId"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -1318,6 +1321,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "additionalInfo": {
@@ -1326,6 +1330,7 @@
           "items": {
             "$ref": "#/definitions/TypedErrorInfo"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -1362,6 +1367,10 @@
       "enum": [
         "Microsoft.Management"
       ],
+      "x-ms-enum": {
+        "name": "ManagementGroupsNamespaceType",
+        "modelAsString": false
+      },
       "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
       "x-ms-parameter-location": "method"
     },

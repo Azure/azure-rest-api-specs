@@ -1561,7 +1561,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDescriptor"
-          }
+          },
+          "x-ms-identifiers": [
+            "registry"
+          ]
         },
         "task": {
           "description": "The task against which run was scheduled.",
@@ -1675,7 +1678,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageDescriptor"
-          }
+          },
+          "x-ms-identifiers": [
+            "registry"
+          ]
         }
       }
     },
@@ -2219,6 +2225,7 @@
           "items": {
             "$ref": "#/definitions/BaseImageDependency"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "contextPath": {
@@ -2241,14 +2248,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TimerTrigger"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sourceTriggers": {
           "description": "The collection of triggers based on source code repository.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SourceTrigger"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "sourceRepository/repositoryUrl"
+          ]
         },
         "baseImageTrigger": {
           "$ref": "#/definitions/BaseImageTrigger",
@@ -2730,14 +2744,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TimerTriggerUpdateParameters"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "sourceTriggers": {
           "description": "The collection of triggers based on source code repository.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SourceTriggerUpdateParameters"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "baseImageTrigger": {
           "$ref": "#/definitions/BaseImageTriggerUpdateParameters",
@@ -3088,7 +3108,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/InnerErrorDescription"
-          }
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
         }
       }
     },
@@ -3166,7 +3190,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Argument"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "timeout": {
           "format": "int32",
@@ -3245,7 +3272,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SetValue"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "timeout": {
           "format": "int32",
@@ -3337,7 +3365,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Argument"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "target": {
           "description": "The name of the target build stage for the docker build.",
@@ -3348,7 +3379,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SetValue"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "updateTriggerToken": {
           "description": "Base64 encoded update trigger token that will be attached with the base image trigger webhook.",
@@ -3383,7 +3415,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SetValue"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "timeout": {
           "format": "int32",
@@ -3455,7 +3488,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Argument"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "x-ms-discriminator-value": "Docker"
@@ -3486,7 +3522,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SetValue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "FileTask"
@@ -3517,7 +3554,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SetValue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "EncodedTask"
@@ -3558,7 +3596,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Argument"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "target": {
           "description": "The name of the target build stage for the docker build.",
@@ -3592,7 +3633,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SetValue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "FileTask"
@@ -3622,7 +3664,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SetValue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "EncodedTask"
