@@ -73,7 +73,7 @@
   "paths": {
     "/route/directions": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile, commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions supports vehicle attributes such as size, weight, cargo type, and max speed to calculate the truck specific route. Not all trucks can travel the same routes as other vehicles. Here are some examples:<li>Bridges have heights and weight limits.</li><li>Tunnels often have restrictions on flammable or hazardous materials.</li><li>Longer trucks have difficulty making tight turns.</li><li>Highways often have a separate speed limit for trucks.</li><li>Certain trucks may want to avoid roads that have steep gradients.</li>\n\nRouting supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile (driving), commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions supports vehicle attributes such as size, weight, cargo type, and max speed to calculate the truck specific route. Not all trucks can travel the same routes as other vehicles. Here are some examples:\n<li>Bridges have heights and weight limits.</li><li>Tunnels often have restrictions on flammable or hazardous materials.</li><li>Longer trucks have difficulty making tight turns.</li><li>Highways often have a separate speed limit for trucks.</li><li>Certain trucks may want to avoid roads that have steep gradients.</li>\n\nRouting supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
         "operationId": "Route_PostDirections",
         "consumes": [
           "application/geo+json"
@@ -207,14 +207,14 @@
         },
         "features": {
           "type": "array",
-          "description": "You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. The start and end points of the route cannot be viaWaypoints.",
+          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. Refer to (RFC 7946)[https://www.rfc-editor.org/rfc/rfc7946] for details on the GeoJSON format.",
           "minimum": 2,
           "items": {
             "$ref": "#/definitions/InputWaypointFeaturesItem"
           }
         },
         "travelMode": {
-          "description": "The mode of travel for the requested route.",
+          "description": "The mode of travel for the requested route.\n\n`Note`: For truck travelMode, the requested truck route may not be available for the entire route. Where the truck route is not available for a particular section, the travelMode element of the response for that section will be \"other\".\n\nExample: \"travelMode\":\"driving\"",
           "type": "string",
           "default": "driving",
           "enum": [
@@ -242,17 +242,17 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point. Departure times apart from now must be specified as a dateTime. When a time zone offset is not specified, it will be assumed to be that of the origin point. The departAt value must be in the future in the date-time format defined by (RFC 3339, section 5.6)[https://www.rfc-editor.org/rfc/rfc3339#section-5.6]. For example, `2022-06-01T09:30:00.000-07:00`",
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by (RFC 3339, section 5.6)[https://www.rfc-editor.org/rfc/rfc3339#section-5.6]. When a time zone offset is not specified, it will be assumed to be that of the origin point.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"\n\"departAt\": \"now\"",
           "type": "string",
           "format": "date-time"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point. It must be specified as a dateTime format defined by (RFC 3339, section 5.6)[https://www.rfc-editor.org/rfc/rfc3339#section-5.6]. When a time zone offset is not specified it will be assumed to be that of the destination point. The arriveAt value must be in the future. The arriveAt parameter cannot be used in conjunction with departAt.",
+          "description": "The date and time of arrival at the destination point formatted as a dateTime value defined by (RFC 3339, section 5.6)[https://www.rfc-editor.org/rfc/rfc3339#section-5.6]. When a time zone offset is not specified it will be assumed to be that of the destination point. The arriveAt value must be in the future. The arriveAt parameter cannot be used in conjunction with departAt.\n\nExample:\"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
         "optimizeRoute": {
-          "description": "Specifies what parameters to use to optimize the route.",
+          "description": "Specifies the parameter to use to optimize the route.\n\nExample: \"optimizeRoute\":\"shortest\"",
           "type": "string",
           "default": "fastestWithoutTraffic",
           "enum": [
@@ -289,12 +289,12 @@
           }
         },
         "optimizeWaypointOrder": {
-          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route length. Notice that origin and destination are excluded from the optimized waypoint indices.Possible values are true or false. `Note`:This parameter is only available for the driving and Truck mode.",
+          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route cost specified with the optimize parameter. The origin and destination are excluded from the optimized waypoint and their position is considered fixed. Acceptable values are true or false.\n\nThis parameter is only supported for the \"Driving\" and \"Truck\" travel modes. The parameter is available when the route is composed of more than two waypoints.",
           "type": "boolean",
           "default": false
         },
         "avoid": {
-          "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple items, for example, '\"avoid\": [\"highways\", \"tollRoads\"]'. Noted that tunnels are not supported for driving and walking mode.",
+          "description": "Specifies restrictions that the route calculation should honor or minimize when determining the route. It can be a comma-separated list of values.\n\nIf more than one option is specified to avoid, the most restrictive option is used. For example, when avoid parameter is set to both \"highways\" and \"minimizeHighways\", all highways will be restricted.\n\nExample:\"avoid\": [\"highways\", \"tolls\"]",
           "type": "array",
           "items": {
             "type": "string",
@@ -344,7 +344,7 @@
           }
         },
         "routeOutputOptions": {
-          "description": "Information of route being returned. Can specify multiple values such as \"routeOutputOptions\": [\"routePath\", \"regionTravelSummary\"].",
+          "description": "Include or exclude the desired route information from the response. By default, the route summary and itinerary are included in the response.\n\nSupports multiple values such as \"routeOutputOptions\": [\"routePath\", \"regionTravelSummary\"]",
           "type": "array",
           "default": [
             "routeSummary"
@@ -382,14 +382,14 @@
           }
         },
         "maxRouteCount": {
-          "description": "Number of maximal routes to be calculated. Default: 1, minimum: 1 and maximum: 3",
+          "description": "The maximum number of routes to return. Available for the driving and truck travel modes.\n\nFor driving routes, this parameter supports routes with up to two waypoints in addition to the origin and destination and avoid parameter must not be set.\n\nDefault: \"maxRouteCount\":1\nMinimum: \"maxRouteCount\":1\nMaximum: \"maxRouteCount\":3",
           "type": "integer",
           "format": "int64",
           "minimum": 1,
           "maximum": 3
         },
         "vehicleSpec": {
-          "description": "",
+          "description": "Specifies the vehicle attributes such as size, weight, max speed, and type of cargo for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.",
           "$ref": "#/definitions/VehicleSpec"
         }
       }
@@ -452,7 +452,7 @@
     },
     "FeatureTypeEnum": {
       "type": "string",
-      "description": "must be FeatureCollection",
+      "description": "Specifies the GeoJSON type. The only supported object type is FeatureCollection. Refer to (RFC 7946)[https://www.rfc-editor.org/rfc/rfc7946] for details.",
       "enum": [
         "FeatureCollection"
       ],
