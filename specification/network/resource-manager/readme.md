@@ -99,6 +99,8 @@ input-file:
   - Microsoft.Network/stable/2023-04-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2023-04-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2023-04-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2023-04-01/cloudServiceNetworkInterfaceList.json
+  - Microsoft.Network/stable/2023-04-01/cloudServicePublicIpAddressList.json
 ```
 ### Tag: package-2023-02
 
