@@ -43,9 +43,11 @@ input-file:
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - Microsoft.Cache/preview/2023-03-01-preview/redisenterprise.json
 ```
+
 
 ### Tag: package-preview-2022-11
 
