@@ -11,8 +11,8 @@ using Azure.Core;
 
 @useAuth(OAuth2Auth<[ContosoAuthFlow]>)
 @service({
-    title: "Contoso Widget Manager",
-  })
+  title: "Contoso Widget Manager",
+})
 @versioned(Contoso.WidgetManager.Versions)
 
 namespace Azure.Contoso.WidgetManager;
