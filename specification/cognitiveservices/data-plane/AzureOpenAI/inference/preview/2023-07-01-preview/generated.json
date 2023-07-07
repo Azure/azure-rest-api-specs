@@ -1035,17 +1035,17 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes,\nwith a maximum length of 64."
+          "description": "The name of the function to be called."
         },
         "description": {
           "type": "string",
-          "description": "The description of what the function does."
+          "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "description": "The parameters the functions accepts, described as a JSON Schema object.\nSee the [guide](/docs/guides/gpt/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/)\nfor documentation about the format."
+          "description": "The parameters the functions accepts, described as a JSON Schema object."
         }
       },
-      "description": "The definition of a function that can be called by the model.\nSee the [guide](/docs/guides/gpt/function-calling) for examples.",
+      "description": "The definition of a caller-specified function that chat completions may invoke in response to matching user input.",
       "required": [
         "name"
       ]
