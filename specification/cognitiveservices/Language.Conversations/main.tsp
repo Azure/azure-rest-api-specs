@@ -12,22 +12,27 @@ using Autorest;
 using Azure.Core;
 using Azure.Core.Traits;
 
-@doc("The language service conversations API is a suite of natural language processing (NLP) skills that can be used to analyze structured conversations (textual or spoken). The synchronous API in this suite accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversational Language Understanding, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service. The asynchronous APIs in this suite enable tasks like Conversation Summarization and Conversational PII detection.")
+@useAuth(apim_key)
 @service({
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
-  version: "2022-05-01",
 })
-@useAuth(apim_key)
 @server(
-  "{Endpoint}/language",
+  "{endpoint}/language",
   "Single server endpoint",
   {
     @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
-    Endpoint: string,
+    endpoint: string,
   }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace Azure.AI.Language.Conversations;
+@versioned(Versions)
+namespace Language.Conversations;
+
+@doc("Analyze Conversations Service Versions")
+enum Versions {
+  @doc("Version 2022-05-01")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2022_05_01: "2022-05-01",
+}
 
 @TypeSpec.Rest.resource("language")
 model Conversations {
