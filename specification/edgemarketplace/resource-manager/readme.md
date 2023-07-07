@@ -29,7 +29,17 @@ title: EdgeMarketPlaceClient
 description: Edge marketplace extensions
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-04
+tag: package-2023
+```
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.EdgeMarketPlace/preview/2023-06-01-preview/publishers.json
+  - Microsoft.EdgeMarketPlace/preview/2023-06-01-preview/operations.json
+  - Microsoft.EdgeMarketPlace/preview/2023-06-01-preview/offers.json
 ```
 
 ### Tag: package-2023-04

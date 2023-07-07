@@ -83,7 +83,7 @@ model OfferProperties  {
 	contentVersion: string;
 	
 	@doc("The content url")
-	contentUrl: string;
+	contentUrl?: string;
 	
 	@doc("The offer content")
   offerContent: OfferContent;
@@ -137,9 +137,6 @@ model OfferContent
 	
 	@doc("The icon files")
 	iconFileUris:IconFileUris;
-
-	@doc("The terms and conditions")
-  termsAndConditions?: TermsAndConditions;
   
 	@doc("The category ids ")
 	categoryIds?:Array<string>;
@@ -243,13 +240,13 @@ model MarketplaceSkuVersion
 	name:string;
 	
 	@doc("The size of the image")
-	sizeOnDiskInMb: integer;
+	sizeOnDiskInMb?: integer;
 	
 	@doc("The size of the download")
-	minimumDownloadSizeInMb: integer;
+	minimumDownloadSizeInMb?: integer;
 	
 	@doc("The stage name")
-	stageName: string;	
+	stageName?: string;	
 }
 
 @doc("The sku operating system") 
@@ -268,10 +265,13 @@ model SkuOperatingSystem
 @armResourceOperations
 interface Offers
 {
-  list is ArmResourceListByParent<Offer>;
- // get is ArmResourceRead<Offer>;
-  //getAccessToken is ArmResourceActionAsync<Offer, AccessTokenRequest,
-  //DiskAccessToken>;
-  //search is ArmResourceActionSync<Offer, OfferSearchRequest, ResourceListResult<Offer>>;
+  list is ArmResourceListByParent<Offer,Azure.ResourceManager.Foundations.BaseParameters<Offer> &
+			Azure.Core.StandardListQueryParameters &
+			Azure.Core.FilterQueryParameter
+	>;
+  get is ArmResourceRead<Offer>;
+  getAccessToken is ArmResourceActionAsync<Offer, AccessTokenRequest,
+  DiskAccessToken>;
+  search is ArmResourceActionSync<Offer, OfferSearchRequest, ResourceListResult<Offer>>;
 
 }

@@ -40,6 +40,9 @@ model PublisherProperties {
 @armResourceOperations
 interface Publishers
 {
-  list is ArmResourceListByParent<Publisher>;
+  list is ArmResourceListByParent<Publisher,Azure.ResourceManager.Foundations.BaseParameters<Publisher> &
+			Azure.Core.StandardListQueryParameters &
+			Azure.Core.FilterQueryParameter
+	>;
   get is ArmResourceRead<Publisher>;
 }
