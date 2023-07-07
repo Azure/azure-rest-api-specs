@@ -28,7 +28,7 @@ using Azure.ClientGenerator.Core;
   "Single server endpoint",
   {
     @doc("Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).")
-    Endpoint: string,
+    endpoint: string,
   }
 )
 @versioned(Versions)
