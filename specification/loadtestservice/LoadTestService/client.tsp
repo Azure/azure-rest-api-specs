@@ -32,7 +32,9 @@ interface AdministrationOperations {
     service: AzureLoadTesting,
 })
 interface TestRunOperations {
-    TestRun is LoadTestRun.CreateOrUpdateTestRun;
+    // TODO check with service team why is Python different here?
+    @projectedName("python", "TestRun")
+    CreateOrUpdateTestRun is LoadTestRun.CreateOrUpdateTestRun;
     CreateOrUpdateAppComponents is LoadTestRun.CreateOrUpdateAppComponents;
     CreateOrUpdateServerMetricsConfig is LoadTestRun.CreateOrUpdateServerMetricsConfig;
     DeleteTestRun is LoadTestRun.DeleteTestRun;
