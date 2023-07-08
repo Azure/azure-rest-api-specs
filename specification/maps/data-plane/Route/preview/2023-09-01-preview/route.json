@@ -73,7 +73,7 @@
   "paths": {
     "/route/directions": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile (driving), commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions supports vehicle attributes such as size, weight, cargo type, and max speed to calculate the truck specific route. Not all trucks can travel the same routes as other vehicles. Here are some examples:\n\n<li>Bridges have heights and weight limits.</li><li>Tunnels often have restrictions on flammable or hazardous materials.</li><li>Longer trucks have difficulty making tight turns.</li><li>Highways often have a separate speed limit for trucks.</li><li>Certain trucks may want to avoid roads that have steep gradients.</li>\n\nRouting supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile (driving), commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions supports vehicle attributes such as size, weight, cargo type, and max speed to calculate the truck specific route. Not all trucks can travel the same routes as other vehicles. Here are some examples:\n\n <li>Bridges have heights and weight limits.</li><li>Tunnels often have restrictions on flammable or hazardous materials.</li><li>Longer trucks have difficulty making tight turns.</li><li>Highways often have a separate speed limit for trucks.</li><li>Certain trucks may want to avoid roads that have steep gradients.</li>\n\nRouting supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
         "operationId": "Route_PostDirections",
         "consumes": [
           "application/geo+json"
@@ -214,7 +214,7 @@
           }
         },
         "travelMode": {
-          "description": "The mode of travel for the requested route.\n\n`Note`: For truck travelMode, the requested truck route may not be available for the entire route. Where the truck route is not available for a particular section, the travelMode element of the response for that section will be \"other\".\n\nExample: \"travelMode\":\"driving\"",
+          "description": "The mode of travel for the requested route. If not defined, the default value is \"driving\" that returns the route optimized for cars.\n\n`Note`: For truck travelMode, the requested truck route may not be available for the entire route. Where the truck route is not available for a particular section, the travelMode element of the response for that section will be \"other\".\n\nExample: \"travelMode\":\"driving\"",
           "type": "string",
           "default": "driving",
           "enum": [
@@ -228,11 +228,11 @@
             "values": [
               {
                 "value": "driving",
-                "description": "The returned routes are optimized for common driving scenarios."
+                "description": "The returned routes are optimized for cars."
               },
               {
                 "value": "truck",
-                "description": "The returned routes are optimized for trucks."
+                "description": "The returned routes are optimized for large size trucks based on the vehicle specification."
               },
               {
                 "value": "walking",
@@ -252,9 +252,9 @@
           "format": "date-time"
         },
         "optimizeRoute": {
-          "description": "Specifies the parameter to use to optimize the route.\n\nExample: \"optimizeRoute\":\"shortest\"",
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithTraffic\" which returns the route to minimize the travel time using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
           "type": "string",
-          "default": "fastestWithoutTraffic",
+          "default": "fastestWithTraffic",
           "enum": [
             "shortest",
             "fastestWithoutTraffic",
@@ -273,17 +273,17 @@
               {
                 "value": "fastestWithoutTraffic",
                 "name": "FastestWithoutTraffic",
-                "description": "The route is calculated to minimize the time. Traffic information is not used."
+                "description": "Finds the fastest route, without factoring in traffic information."
               },
               {
                 "value": "fastestAvoidClosureWithoutTraffic",
                 "name": "FastestAvoidClosureWithoutTraffic",
-                "description": "The route is calculated to minimize the time and avoid road closures. Traffic information except road closures are not used in the calculation."
+                "description": "The route is calculated to minimize the time and avoid road closures. No traffic information except for road closures is used in the calculation."
               },
               {
                 "value": "fastestWithTraffic",
                 "name": "FastestWithTraffic",
-                "description": "The route is calculated to minimize the time and uses current traffic information."
+                "description": "The route is calculated to minimize the time using current traffic information."
               }
             ]
           }
@@ -305,7 +305,9 @@
               "minimizeHighways",
               "minimizeTollRoads",
               "tunnels",
-              "borderCrossings"
+              "borderCrossings",
+              "lowEmissionZones",
+              "unpavedRoads"
             ],
             "x-ms-enum": {
               "name": "Avoid",
@@ -313,11 +315,11 @@
               "values": [
                 {
                   "value": "highways",
-                  "description": "Avoids the use of highways in the route.  `Note`:The parameter is available only for driving and walking mode."
+                  "description": "Avoids the use of highways in the route."
                 },
                 {
                   "value": "tollRoads",
-                  "description": "Avoids the use of toll roads in the route"
+                  "description": "Avoids the use of toll roads in the route."
                 },
                 {
                   "value": "ferries",
@@ -325,19 +327,27 @@
                 },
                 {
                   "value": "minimizeHighways",
-                  "description": "Minimizes (tries to avoid) the use of highways in the route. Note: If you specify more than one option for a road type, then the most restrictive option is used. For example, if you set the avoid parameter to both highways and minimizeHighways, the highways option is used and all highways are avoided. `Note`:The parameter is available only for driving and walking mode"
+                  "description": "Minimizes (tries to avoid) the use of highways in the route. `Note`: The parameter is available only for driving travelMode."
                 },
                 {
                   "value": "minimizeTollRoads",
-                  "description": "Minimizes (tries to avoid) the use of toll roads in the route. Note: If you specify more than one option for a road type, then the most restrictive option is used. For example, if you set the avoid parameter to both tollRoads and minimizeTollRoads, the tollRoads option is used and all toll roads are avoided."
+                  "description": "Minimizes (tries to avoid) the use of toll roads in the route. `Note`: The parameter is available only for driving travelMode."
                 },
                 {
                   "value": "tunnels",
-                  "description": "Avoids the use of tunnels in the route. `Note`:The parameter is available only for truck mode"
+                  "description": "Avoids the use of tunnels in the route. `Note`: The parameter is available only for truck travelMode"
                 },
                 {
                   "value": "borderCrossings",
                   "description": "Avoids crossing country borders in the route."
+                },
+                {
+                  "value": "lowEmissionZones",
+                  "description": "Avoids low-emission zones in the route. `Note`: The parameter is available only for truck travelMode."
+                },
+                {
+                  "value": "unpavedRoads",
+                  "description": "Avoids unpaved roads in the route. `Note`: The parameter is available only for truck travelMode."
                 }
               ]
             }
@@ -367,15 +377,15 @@
                 },
                 {
                   "value": "regionTravelSummary",
-                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada). `Note`:The parameter is available only for driving and walking mode"
+                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g., US, Canada) and administrative division or subregion (e.g., \"state\" in US and \"province\" in Canada). `Note`: The parameter is available only for driving and walking travelMode"
                 },
                 {
                   "value": "routePath",
-                  "description": "Include a set of point (latitude and longitude) values that describe the route’s path in the response."
+                  "description": "Include a GeoJSON MultiLineString [RFC 7946, section 3.1.5](https://www.rfc-editor.org/rfc/rfc7946#section-3.1.5) that describe the route's path in the response."
                 },
                 {
                   "value": "itinerary",
-                  "description": "Include detailed directions in the response. Detailed directions are provided as ManeuverPoints and contain details such as written instructions."
+                  "description": "Include detailed directions in the response. Detailed directions are provided as \"ManeuverPoints\" and contain details such as turn-by-turn instructions."
                 }
               ]
             }
