@@ -1022,6 +1022,33 @@ model NonceRequest {
   applianceName?: string;
 }
 
+@doc("ErrorSummaryRequest body")
+model ErrorSummaryRequest {
+  @doc("Gets or sets the Appliance Name.")
+  applianceName?: string;
+}
+
+@doc("ExportSqlServerRequest body")
+model ExportSqlServersRequest {
+  @doc("Gets or sets the Appliance Name.")
+  applianceName?: string;
+
+  @doc("filter options.")
+  filter?: string;
+}
+
+@doc("ExportWebAppsRequest body")
+model ExportWebAppsRequest {
+  @doc("filter options.")
+  filter?: string;
+}
+
+@doc("ExportMachinesRequest body")
+model ExportMachinesRequest {
+  @doc("filter options.")
+  filter?: string;
+}
+
 @doc("AgentManifestNonce REST Resource.")
 model ApplianceNonce {
   @doc("Gets or sets the nested properties.")

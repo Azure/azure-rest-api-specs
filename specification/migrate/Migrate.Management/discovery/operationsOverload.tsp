@@ -242,12 +242,41 @@ namespace Azure.ResourceManager;
 //   body: TRequest
 // ):  ArmAcceptedResponse ;
 
+// @autoRoute
+// @extension("x-ms-long-running-operation", true)
+// @extension(
+//   "x-ms-long-running-operation-options",
+//   {
+//     "final-state-via": "location",
+//   }
+// )
+// @armResourceAction(TResource)
+// @post
+// op ArmResourceActionNoContentAsyncMetaDataBody<
+//   TResource extends ArmResource,
+//   TRequest extends object,
+//   TBaseParameters = BaseParameters<TResource>
+// >(
+//   ...ResourceInstanceParametersCustom<TResource, TBaseParameters>,
+
+//   @doc("The content of the action request")
+//   @body
+//   metaData: TRequest
+// ):  ArmAcceptedResponse  |ErrorResponse;;
+
+/**
+ * A long-running resource action.
+ * @template TResource The resource being acted upon
+ * @template TRequest The request model for the action
+ * @template TResponse The response model for the action
+ * @template TBaseParameters Optional. Allows overriding the parameters for the operation
+ */
 @autoRoute
 @extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
   {
-    "final-state-via": "location",
+    `final-state-via`: "location",
   }
 )
 @armResourceAction(TResource)
@@ -255,15 +284,15 @@ namespace Azure.ResourceManager;
 op ArmResourceActionNoContentAsyncMetaDataBody<
   TResource extends ArmResource,
   TRequest extends object,
+  TResponse extends object,
   TBaseParameters = BaseParameters<TResource>
 >(
-  ...ResourceInstanceParametersCustom<TResource, TBaseParameters>,
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("The content of the action request")
   @body
   metaData: TRequest
-):  ArmAcceptedResponse | ErrorResponse;;
-
+): ArmAcceptedLroResponse | ArmResponse<TResponse> | ErrorResponse;
 
 // @autoRoute
 // @armResourceAction(TResource)

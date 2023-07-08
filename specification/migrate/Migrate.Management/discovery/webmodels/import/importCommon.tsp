@@ -28,23 +28,25 @@ model V20200201DeleteImportMachinesJob {
     properties?: CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties;
 
     @doc("Gets or sets the relative ARM name to get job.")
+    @visibility("read")
     id?: string;
 
     @doc("Gets or sets the Job ID.")
+    @visibility("read")
     name?: string;
 
-    // TODO in code , remove this property
-    // @doc("Gets or sets the Job status.")
-    // status?: string;
+    //updating swagger in advance
+    @doc("Gets or sets the Job status.")
+    status?: string;
 
-    // @doc("Gets or sets the Job start time.")
-    // startTime?: string;
+    @doc("Gets or sets the Job start time.")
+    startTime?: string;
 
-    // @doc("Gets or sets the Job end time.")
-    // endTime?: string;
+    @doc("Gets or sets the Job end time.")
+    endTime?: string;
 
-    // @doc("Gets or sets the Display name.")
-    // displayName?: string;
+    @doc("Gets or sets the Display name.")
+    displayName?: string;
 }
 
 @doc("Delete Imported Machines Job Properties")

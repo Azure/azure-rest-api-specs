@@ -88,6 +88,9 @@ enum Versions {
 
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2022_10_27: "2022-10-27",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2023_06_06: "2023-06-06",
 }
 
 
@@ -198,56 +201,80 @@ interface Sites {
   summary is ArmResourceActionSyncNoRequestBody<VmwareSite, VmwareSiteUsage>;
 
 
-  @doc("Method to get site error summary.")
-  @armResourceRead(InnerError)
-  //@segment("errorSummary")
-  @route("/errorSummary")
-  @added(Versions.v2018_05_01_preview)
-  @get  
-  getErrorSummary(
-    ...ResourceInstanceParameters<VmwareSite>,
+  // @doc("Method to get site error summary.")
+  // @armResourceRead(InnerError)
+  // @segment("errorSummary")
+  // @added(Versions.v2018_05_01_preview)
+  // @get  
+  // getErrorSummary(
+  //   ...ResourceInstanceParameters<VmwareSite>,
 
-    @doc("Appliance Name")
-    @query
-    applianceName: string
-  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+  //   @doc("Appliance Name")
+  //   @query
+  //   applianceName: string
+  // ): ArmResponse<SiteErrorSummary> | ErrorResponse;
 
   @doc("Method to get site error summary.")
-  @armResourceRead(InnerError)
-  @segment("usage")
-  @added(Versions.v2018_05_01_preview)
-  @get
+  @added(Versions.v2023_06_06)
+  errorSummary is ArmResourceActionSync<
+  VmwareSite,
+    {},
+    SiteErrorSummary
+  >;
+
+  // @doc("Method to get site error summary.")
+  // @armResourceRead(InnerError)
+  // @segment("usage")
+  // @added(Versions.v2018_05_01_preview)
+  // @get
   
-  getUsage(
-    ...ResourceInstanceParameters<VmwareSite>
-  ): ArmResponse<VmwareSiteUsage> | ErrorResponse;
+  // getUsage(
+  //   ...ResourceInstanceParameters<VmwareSite>
+  // ): ArmResponse<VmwareSiteUsage> | ErrorResponse;
+
+  @doc("Method to get site error summary.")
+  @added(Versions.v2023_06_06)
+  usage is ArmResourceActionSync<
+  VmwareSite,
+    {},
+    VmwareSiteUsage
+  >;
+
+
+  // @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
+  // @armResourceAction(InnerError)
+  // @added(Versions.v2020_01_01)
+  // @post
+  
+  // @extension("x-ms-long-running-operation", true)
+  // @extension(
+  //   "x-ms-long-running-operation-options",
+  //   {
+  //     "final-state-via": "location",
+  //   }
+  // )
+  // exportMachines(
+  //   ...ResourceInstanceParameters<VmwareSite>,
+
+  //   @doc("filter query")
+  //   @query
+  //   filter?: string
+  // ): ArmAcceptedResponseWithLocationHeader | ErrorResponse;
 
   @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
-  @armResourceAction(InnerError)
-  @added(Versions.v2020_01_01)
-  @post
-  
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      "final-state-via": "location",
-    }
-  )
-  exportMachines(
-    ...ResourceInstanceParameters<VmwareSite>,
-
-    @doc("filter query")
-    @query
-    filter?: string
-  ): ArmAcceptedResponse | ErrorResponse;
+  @added(Versions.v2023_06_06)  
+  exportMachines is ArmResourceActionAsync<
+    VmwareSite,
+    ExportMachinesRequest,
+    {}
+  >;
 
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
-  @added(Versions.v2020_01_01)
-  
-  exportMachineErrors is ArmResourceActionNoContentAsync<
+  @added(Versions.v2020_01_01)  
+  exportMachineErrors is ArmResourceActionAsync<
     VmwareSite,
-    VersionedV202001ExportMachineErrorsRequest
+    VersionedV202001ExportMachineErrorsRequest,
+    {}
   >;
 
   @added(Versions.v2018_05_01_preview)
@@ -285,7 +312,8 @@ site.
   
   updateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
     VmwareSite,
-    UpdateMachineDepMapStatus
+    UpdateMachineDepMapStatus,
+    {}
   >;
 
   // @added(Versions.v2019_05_01_preview)
@@ -306,7 +334,8 @@ site.
   @doc("Method to update properties for machines   in a site.")
   updateProperties is ArmResourceActionNoContentAsyncMetaDataBody<
     VmwareSite,
-    MachineMetadataList
+    MachineMetadataList,
+    {}
   >;
 }
 
@@ -318,9 +347,10 @@ Method to update properties for web applications.
             in a site.
 """)
   
-  updateProperties is ArmResourceActionNoContentAsync<
+  updateProperties is ArmResourceActionAsync<
     WebAppSite,
-    WebAppPropertiesCollection
+    WebAppPropertiesCollection,
+    {}
   >;
 }
 
@@ -440,27 +470,44 @@ interface MachinesController {
   
   start is ArmResourceActionAsyncNoRequestBody<MachineResource, {}>;
 
-  @doc("Method to get a machines software inventory like applications and roles.")
-  @armResourceRead(InnerError)
-  @get
-  @added(Versions.v2020_07_10)
-  @segment("softwareInventory/default")
+  // @doc("Method to get a machines software inventory like applications and roles.")
+  // @armResourceRead(InnerError)
+  // @get
+  // @added(Versions.v2020_07_10)
+  // @segment("softwareInventory/default")
   
-  getMachineSoftwareInventory(
-    ...ResourceInstanceParameters<MachineResource>
-  ): ArmResponse<VmwareMachineSoftwareInventory> | ErrorResponse;
+  // getMachineSoftwareInventory(
+  //   ...ResourceInstanceParameters<MachineResource>
+  // ): ArmResponse<VmwareMachineSoftwareInventory> | ErrorResponse;
+
+  @doc("Method to get a machines software inventory like applications and roles.")
+  @added(Versions.v2023_06_06)
+  @action("softwareInventory/default")
+  getMachineSoftwareInventory is ArmResourceActionSync<
+  MachineResource,
+    {},
+    VmwareMachineSoftwareInventory
+  >;
 }
 @armResourceOperations
 interface VmwareMachinesController {
-  @doc("Method to get machine with application and roles present in it.")
-  @segment("applications")
-  @armResourceRead(InnerError)
-  @added(Versions.v2018_05_01_preview)
-  @get
+  // @doc("Method to get machine with application and roles present in it.")
+  // @segment("applications")
+  // @armResourceRead(InnerError)
+  // @added(Versions.v2018_05_01_preview)
+  // @get
   
-  getApplications(
-    ...ResourceInstanceParameters<MachineResource>
-  ): ArmResponse<MachineResource> | ErrorResponse ;
+  // getApplications(
+  //   ...ResourceInstanceParameters<MachineResource>
+  // ): ArmResponse<MachineResource> | ErrorResponse ;
+
+  @doc("Method to get machine with application and roles present in it.")
+  @added(Versions.v2023_06_06)
+  applications is ArmResourceActionSync<
+  MachineResource,
+    {},
+    MachineResource
+  >;
 }
 @doc("A vcenter resource belonging to a site resource.")
 @parentResource(VmwareSite)
@@ -656,18 +703,26 @@ interface HypervSitesController {
     ...ResourceInstanceParameters<HypervSite>
   ): ArmResponse<SiteHealthSummaryCollection> |ErrorResponse;
 
-  @doc("Method to get site error summary.")
-  @armResourceRead(InnerError)
-  @added(Versions.v2018_05_01_preview)
-  @segment("errorSummary")
-  @get  
-  getErrorSummary(
-    ...ResourceInstanceParameters<HypervSite>,
+  // @doc("Method to get site error summary.")
+  // @armResourceRead(InnerError)
+  // @added(Versions.v2018_05_01_preview)
+  // @segment("errorSummary")
+  // @get  
+  // getErrorSummary(
+  //   ...ResourceInstanceParameters<HypervSite>,
 
-    @doc("Appliance Name")
-    @query
-    applianceName: string
-  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+  //   @doc("Appliance Name")
+  //   @query
+  //   applianceName: string
+  // ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+
+  @doc("Method to get site error summary.")
+  @added(Versions.v2023_06_06)
+  errorSummary is ArmResourceActionSync<
+  HypervSite,
+    {},
+    SiteErrorSummary
+  >;
 
   @doc("Method to get site error summary.")
   @armResourceRead(InnerError)
@@ -688,9 +743,10 @@ interface HypervSitesController {
 
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_08_01_preview)  
-  exportMachineErrors is ArmResourceActionNoContentAsync<
+  exportMachineErrors is ArmResourceActionAsync<
     HypervSite,
-    VersionedV202001ExportMachineErrorsRequest
+    VersionedV202001ExportMachineErrorsRequest,
+    {}
   >;
 }
 
@@ -863,33 +919,51 @@ interface HypervMachinesController {
     }
   >;
 
-  @doc("Method to get machine with application and roles present in it.")
-  @segment("applications")
-  @armResourceRead(InnerError)
-  @added(Versions.v2020_08_01_preview)
+  // @doc("Method to get machine with application and roles present in it.")
+  // @segment("applications")
+  // @armResourceRead(InnerError)
+  // @added(Versions.v2020_08_01_preview)
   
   //Not there
-  @get
-  getApplications(
-    ...ResourceInstanceParameters<HypervMachine>
-  ): ArmResponse<HypervMachine> | ErrorResponse;
+  // @get
+  // getApplications(
+  //   ...ResourceInstanceParameters<HypervMachine>
+  // ): ArmResponse<HypervMachine> | ErrorResponse;
+
+
+  @doc("Method to get machine with application and roles present in it.")
+  @added(Versions.v2023_06_06)
+  applications is ArmResourceActionSync<
+  HypervMachine,
+    {},
+    HypervMachine
+  >;
+
+  // @doc("Method to get a machines software inventory like applications and roles.")
+  // @armResourceRead(InnerError)
+  // @get
+  // @added(Versions.v2022_10_27)
+  // @segment("softwareInventory/default")
+  // getMachineSoftwareInventory(
+  //   ...ResourceInstanceParameters<HypervMachine>
+  // ): ArmResponse<HypervVmSoftwareInventory> | ErrorResponse;
+
 
   @doc("Method to get a machines software inventory like applications and roles.")
-  @armResourceRead(InnerError)
-  @get
-  @added(Versions.v2022_10_27)
-  @segment("softwareInventory/default")
-  
-  //Not there 
-  getMachineSoftwareInventory(
-    ...ResourceInstanceParameters<HypervMachine>
-  ): ArmResponse<HypervVmSoftwareInventory> | ErrorResponse;
+  @added(Versions.v2023_06_06)
+  @action("softwareInventory/default")
+  getMachineSoftwareInventory is ArmResourceActionSync<
+  HypervMachine,
+    {},
+    HypervVmSoftwareInventory
+  >;
 
   @added(Versions.v2018_05_01_preview)
   @doc("Method to update custom properties for HYPERV machines\r\n            in a site.")
   updateProperties is ArmResourceActionNoContentAsyncMetaDataBody<
     HypervSite,
-    MachineMetadataList
+    MachineMetadataList,
+    {}
   >;
 }
 
@@ -935,15 +1009,23 @@ model ServerSiteResource is TrackedResource<SitesProperties> {
 @added(Versions.v2019_05_01_preview)
 interface ServersController {
 
-  @doc("Method to get machine with application and roles present in it.")
-  @segment("applications")
-  @armResourceRead(InnerError)
-  @added(Versions.v2020_08_01_preview)  
-  @get
-  getApplications(
-    ...ResourceInstanceParameters<ServerMachineResource>
-  ): ArmResponse<ServerMachineResource> | ErrorResponse ;
+  // @doc("Method to get machine with application and roles present in it.")
+  // @segment("applications")
+  // @armResourceRead(InnerError)
+  // @added(Versions.v2020_08_01_preview)  
+  // @get
+  // getApplications(
+  //   ...ResourceInstanceParameters<ServerMachineResource>
+  // ): ArmResponse<ServerMachineResource> | ErrorResponse ;
 
+  
+  @doc("Method to get machine with application and roles present in it.")
+  @added(Versions.v2023_06_06)
+  applications is ArmResourceActionSync<
+  ServerMachineResource,
+    {},
+    ServerMachineResource
+  >;
   
   
   getMachine is ArmResourceRead<ServerMachineResource>;
@@ -975,7 +1057,8 @@ interface ServerSitesController {
   @doc("Operation to update custom properties for servers")
   updateProperties is ArmResourceActionNoContentAsyncMetaDataBody<
     ServerSiteResource,
-    MachineMetadataList
+    MachineMetadataList,
+    {}
   >;
 
   @doc("A operation status resource belonging to a site resource.")
@@ -993,27 +1076,43 @@ interface ServerSitesController {
     operationStatusName: string
   ): ArmResponse<OperationStatus> | ErrorResponse;
 
-  @get
+  // @get
+  // @doc("Get a serve site usage.")
+  // @segment("usage")
+  // @armResourceRead(InnerError)
+  
+  // getUsage(
+  //   ...ResourceInstanceParameters<ServerSiteResource>
+  // ): ArmResponse<ServerSiteUsageResponse> | ErrorResponse;
+
   @doc("Get a serve site usage.")
-  @segment("usage")
-  @armResourceRead(InnerError)
-  
-  getUsage(
-    ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<ServerSiteUsageResponse> | ErrorResponse;
+  @added(Versions.v2023_06_06)
+  usage is ArmResourceActionSync<
+  ServerSiteResource,
+    {},
+    ServerSiteUsageResponse
+  >;
 
-  @get
+  // @get
+  // @doc("Get the error summary for a server site.")
+  // @segment("errorSummary")
+  // @armResourceRead(InnerError)
+  
+  // getErrorSummary(
+  //   ...ResourceInstanceParameters<ServerSiteResource>,
+
+  //   @doc("Appliance Name")
+  //   @query
+  //   applianceName: string
+  // ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+
   @doc("Get the error summary for a server site.")
-  @segment("errorSummary")
-  @armResourceRead(InnerError)
-  
-  getErrorSummary(
-    ...ResourceInstanceParameters<ServerSiteResource>,
-
-    @doc("Appliance Name")
-    @query
-    applianceName: string
-  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+  @added(Versions.v2023_06_06)
+  errorSummary is ArmResourceActionSync<
+  ServerSiteResource,
+    {},
+    SiteErrorSummary
+  >;
 
   // @doc("Method to get a machines software inventory like applications and roles.")
   // @armResourceRead(InnerError)
@@ -1041,9 +1140,10 @@ interface ServerSitesController {
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_08_01_preview)
   
-  exportMachineErrors is ArmResourceActionNoContentAsync<
+  exportMachineErrors is ArmResourceActionAsync<
     ServerSiteResource,
-    VersionedV202001ExportMachineErrorsRequest
+    VersionedV202001ExportMachineErrorsRequest,
+    {}
   >;
 
   @doc("Method to get site usage.")
@@ -1206,13 +1306,12 @@ interface ImportJobsController {
   
   listDeletejobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<Azure.Core.PageUpdated<ImportDeleteImportMachinesJobDeleteImportMachinesJobCollection>> | ErrorResponse;
+  ): ArmResponse<Azure.Core.PageUpdated<V20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection>> | ErrorResponse;
 
   @doc("Gets the delete imported machines job with the given job name.")
   @armResourceRead(InnerError)
   @get
-  @added(Versions.v2020_02_01)
-  
+  @added(Versions.v2020_02_01)  
   getDeletejob(
     ...ResourceInstanceParameters<ImportSiteResource>,
 
@@ -1273,6 +1372,7 @@ interface ImportJobsController {
     jobName: string
   ): ArmResponse<V20200201ImportMachinesJob> | ErrorResponse;
 
+//updating swagger in advance  
   @doc("Patch the delete imported machines job object.")
   @armResourceUpdate(InnerError)
   @patch
@@ -1291,8 +1391,9 @@ interface ImportJobsController {
     @body
     body: V20200201DeleteImportMachinesJob
   ): ArmResponse<V20200201DeleteImportMachinesJob> | ErrorResponse;
-}
-#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+ }
+
+// #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("An machine resource belonging to a site resource.")
 @parentResource(ImportSiteResource)
 model ImportMachineResource is ProxyResource<ImportMachineProperties> {
@@ -1426,18 +1527,26 @@ interface MasterSitesController {
   
   update is ArmResourcePatchAsync<MasterSite, MasterSiteProperties>;
 
-  @doc("Method to get error summary from master site for an appliance.")
-  @armResourceAction(InnerError)
-  @added(Versions.v2020_07_07)
-  @post
-  
-  getErrorSummary(
-    ...ResourceInstanceParameters<MasterSite>,
+  // @doc("Method to get error summary from master site for an appliance.")
+  // @armResourceAction(InnerError)
+  // @added(Versions.v2020_07_07)
+  // @post  
+  // getErrorSummary(
+  //   ...ResourceInstanceParameters<MasterSite>,
 
-    @doc("Appliance name.")
-    @query
-    applianceName: string
-  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+  //   @doc("Appliance name.")
+  //   @query
+  //   applianceName: string
+  // ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+
+
+  @doc("Method to get error summary from master site for an appliance.")
+  @added(Versions.v2023_06_06)
+  getErrorSummary is ArmResourceActionSync<
+  MasterSite,
+  ErrorSummaryRequest,
+    SiteErrorSummary
+  >;
 }
 
 @armResourceOperations
@@ -1628,36 +1737,32 @@ interface SqlSitesController {
   @armResourceAction(InnerError)
   @added(Versions.v2020_11_11_preview)
   
-  exportSqlServers is ArmResourceActionAsyncNoRequestBody<
+  exportSqlServers is ArmResourceActionAsync<
     SqlSite,
-    {},
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-
-      @doc("Appliance name.")
-      @query
-      applianceName?: string;
-
-      @doc("filter options.")
-      @query
-      filter?: string;
-    }
+    ExportSqlServersRequest,
+    {}
   >;
 
-  @doc("Method to get error summary from SQL site.")
-  @armResourceAction(InnerError)
-  @added(Versions.v2020_11_11_preview)
-  @post
+  // @doc("Method to get error summary from SQL site.")
+  // @armResourceAction(InnerError)
+  // @added(Versions.v2020_11_11_preview)
+  // @post
   
-  getErrorSummary(
-    ...ResourceInstanceParameters<SqlSite>,
+  // getErrorSummary(
+  //   ...ResourceInstanceParameters<SqlSite>,
 
-    @doc("Appliance name.")
-    @query
-    applianceName: string
-  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+  //   @doc("Appliance name.")
+  //   @query
+  //   applianceName: string
+  // ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+  
+  @doc("MMethod to get error summary from SQL site.")
+  @added(Versions.v2023_06_06)
+  getErrorSummary is ArmResourceActionSync<
+  SqlSite,
+  ErrorSummaryRequest,
+    SiteErrorSummary
+  >;
 
   @doc("Method to get site usage/summary.")
   @added(Versions.v2020_11_11_preview)
@@ -1723,32 +1828,33 @@ interface WebAppSitesController {
   @doc("Method to generate report containing web app inventory.")
   @added(Versions.v2020_11_11_preview)
   
-  exportInventory is ArmResourceActionAsyncNoRequestBody<
+  exportInventory is ArmResourceActionAsync<
     WebAppSite,
-    {},
-    {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-
-      @doc("filter query")
-      @query
-      filter?: string;
-    }
+    ExportWebAppsRequest,
+    {}
   >;
 
-  @doc("Method to get error summary from web app site.")
-  @armResourceAction(InnerError)
-  @added(Versions.v2020_11_11_preview)
-  @post
+  // @doc("Method to get error summary from web app site.")
+  // @armResourceAction(InnerError)
+  // @added(Versions.v2020_11_11_preview)
+  // @post
   
-  getErrorSummary(
-    ...ResourceInstanceParameters<WebAppSite>,
+  // getErrorSummary(
+  //   ...ResourceInstanceParameters<WebAppSite>,
 
-    @doc("Appliance name.")
-    @query
-    applianceName: string
-  ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+  //   @doc("Appliance name.")
+  //   @query
+  //   applianceName: string
+  // ): ArmResponse<SiteErrorSummary> | ErrorResponse;
+
+  @doc("MMethod to get error summary from web app  site.")
+  @added(Versions.v2023_06_06)
+  getErrorSummary is ArmResourceActionSync<
+  WebAppSite,
+  ErrorSummaryRequest,
+    SiteErrorSummary
+  >;
+  
 
   @doc("Method to get site usage/summary.")
   @added(Versions.v2020_11_11_preview)

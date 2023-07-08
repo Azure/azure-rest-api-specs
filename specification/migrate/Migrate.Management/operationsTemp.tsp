@@ -28,7 +28,7 @@ op ArmResourceActionAsyncNoRequestBody<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
-):   ArmAcceptedResponseWithLocationHeader | ErrorResponse;
+):   ArmAcceptedResponseWithLocationHeader | ArmResponse<TResponse> | ErrorResponse;
 
 
 @autoRoute
@@ -65,7 +65,7 @@ op ArmResourceActionNoBodyAsync<
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
-):  ArmAcceptedResponseWithLocationHeader ;
+):  ArmAcceptedResponseWithLocationHeader |  ErrorResponse;
 
 
 @doc("The response of a {name} list operation.", TResource)
@@ -142,6 +142,7 @@ op ArmResourceActionAsyncCustomMapRequest<
 op ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
   TResource extends ArmResource,
   TRequest extends object,
+  TResponse extends object,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
@@ -149,7 +150,7 @@ op ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
   @doc("The content of the action request")
   @body
   updateMachineDepMapStatus: TRequest
-):  ArmAcceptedResponseWithLocationHeader | ErrorResponse;
+):  ArmAcceptedResponseWithLocationHeader | ArmResponse<TResponse> | ErrorResponse;
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
