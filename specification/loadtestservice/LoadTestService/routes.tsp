@@ -295,24 +295,34 @@ numeric, underscore or hyphen characters.
     },
     TestRun
   >;
-
   @summary("Create and start a new test run with the given name.")
   @doc("Create and start a new test run with the given name.")
-  @pollingOperation(LoadTestRun.GetTestRun)
-  CreateOrUpdateTestRun is LongRunningResourceCreateOrUpdate<
-  TestRun,
-  QueryParametersTrait<
-      {
-        @doc("""
-      Existing test run identifier that should be rerun, if this is provided, the
-      test will run with the JMX file, configuration and app components from the
-      existing test run. You can override the configuration values for new test run
-      in the request body.
-      """)
-        @query
-        oldTestRunId?: string;
-      }
-    >
+  @route("/test-runs/{testRunId}")
+  @patch
+  CreateOrUpdateTestRun is Azure.Core.Foundations.Operation<
+    {
+      @header contentType: "application/merge-patch+json",
+      @doc("""
+Unique name for the load test run, must contain only lower-case alphabetic,
+numeric, underscore or hyphen characters.
+""")
+      @path
+      testRunId: string;
+
+      @doc("""
+Existing test run identifier that should be rerun, if this is provided, the
+test will run with the JMX file, configuration and app components from the
+existing test run. You can override the configuration values for new test run
+in the request body.
+""")
+      @query
+      oldTestRunId?: string;
+
+      @doc("Load test run model")
+      @body
+      body: TestRun;
+    },
+    ResourceCreatedOrOkResponse<TestRun>
   >;
 
   @summary("Delete a test run by its name.")
@@ -462,26 +472,27 @@ numeric, underscore or hyphen characters.
 
       @doc("The aggregation")
       @query
-      aggregation?: string;
+      aggregation: string;
 
+      // TODO: check DPG sdks, this is the correct definition but might cause breaks for some languages
       @doc("The interval (i.e. timegrain) of the query.")
       @query
-      interval?: Interval;
+      interval?: Interval = Interval.PT1M;
 
       @doc("Metric name")
       @query
-      metricName?: string;
+      metricName: string;
 
       @doc("Metric namespace to query metric definitions for.")
       @query
-      metricNamespace?: string;
+      metricNamespace: string;
 
       @doc("""
 The timespan of the query. It is a string with the following format
 'startDateTime_ISO/endDateTime_ISO'.
 """)
       @query
-      timespan?: string;
+      timespan: string;
 
       @doc("Metric dimension filter ")
       @body
