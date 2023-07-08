@@ -40,9 +40,48 @@
   "tags": [
     {
       "name": "KdbInsightsEnterprise"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
+    "/providers/Microsoft.KX/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_5": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KX/kdbInsightsEnterprise": {
       "get": {
         "tags": [
@@ -324,20 +363,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -352,11 +377,7 @@
           "KdbInsightsEnterprise_Delete_6": {
             "$ref": "./examples/KdbInsightsEnterprise_Delete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },
@@ -383,7 +404,7 @@
         "emailAddress": {
           "type": "string",
           "description": "Email address for licensing and certificate registration",
-          "pattern": "^(?=.{1,320}$)(?=[^@]{1,64}@)\\w+([\\.\\-\\+\\w]*)@(?=.{1,255}$)\\w+([\\.\\-]?\\w+)*(\\.\\w{2,3})+$",
+          "pattern": "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -393,6 +414,155 @@
           "type": "string",
           "description": "The UI user name",
           "pattern": "^[A-Za-z0-9]{8,20}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "systemNodePoolVmSize": {
+          "type": "string",
+          "description": "AKS System node pool VM size",
+          "default": "Standard_D2d_v4",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "userNodePoolVmSize": {
+          "type": "string",
+          "description": "AKS User node pool VM size",
+          "default": "Standard_D8ds_v4",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "readWriteManyStorageClass": {
+          "$ref": "#/definitions/ReadWriteManyStorageClass",
+          "description": "Storage Class for ReadWriteMany volumes",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "readWriteOnceStorageClass": {
+          "type": "string",
+          "description": "Storage Class for ReadWriteOnce volumes derived from IsPremiumStorageEnabled",
+          "default": "managed-csi",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "rtStorageClass": {
+          "type": "string",
+          "description": "RT storage class value, derived from IsPremiumStorageEnabled",
+          "default": "managed-csi",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isRookCeph": {
+          "type": "boolean",
+          "description": "Indicate whether to deploy a Ceph cluster into AKS and enable rook-cephfs storage class",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "securityMonitoringEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether to enable Microsoft Defender for Containers",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isPremiumStorageEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether to use Premium Storage for ReadWriteOnce volumes",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isNotificationsOn": {
+          "type": "boolean",
+          "description": "Indicate whether to send notification emails to the client",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "clientNotificationAddress": {
+          "type": "string",
+          "description": "Email address for alert notifications",
+          "pattern": "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vnetAddressSpace": {
+          "type": "string",
+          "description": "A custom *.*.0.0/16 Address space for the kdb Insights Enterprise cluster Virtual Network",
+          "pattern": "\\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\\b/[0-9]+",
+          "default": "10.0.0.0/16",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isAuthorizedIpRanges": {
+          "type": "boolean",
+          "description": "Indicate whether to secure access to the Kubernetes API server using authorized public IP address ranges",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "authorizedIpRanges": {
+          "type": "string",
+          "description": "A comma-separated list of public IP addresses or address ranges",
+          "pattern": "^(?=.{1,320}$)\\b(?!(10\\.|172\\.(1[6-9]|2[0-9]|3[0-1])\\.|192\\.168))(((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([1-9]|1[0-9]|2[0-8]|3[0-2])){0,1}){0,1}((\\s*,\\s*)(?=[^,])){0,1})+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksContainerInsightsRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "AKS Container insights retention period in days",
+          "minimum": 30,
+          "maximum": 730,
+          "default": 30,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksLogRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "AKS Kubernetes audit log retention period in days. A value of 0 will retain the events indefinitely.",
+          "default": 30,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksMetricsRetentionDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "AKS Kubernetes metrics retention period in days. A value of 0 will retain the metrics indefinitely.",
+          "default": 30,
           "x-ms-mutability": [
             "read",
             "create"
@@ -409,7 +579,13 @@
           "readOnly": true
         }
       },
-      "description": "Details of the kdbInsightsEnterprise resource."
+      "description": "Details of the kdbInsightsEnterprise resource.",
+      "required": [
+        "keyCloakPassword",
+        "uiPassword",
+        "emailAddress",
+        "uiUsername"
+      ]
     },
     "KdbInsightsEnterpriseResource": {
       "type": "object",
@@ -493,32 +669,77 @@
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "The full set of provisioning states",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled",
         "Provisioning",
+        "Updating",
         "Deleting",
         "Accepted"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning the resource is in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The change request has been accepted"
+          }
+        ]
       }
     },
-    "ProvisioningStateKV": {
+    "ReadWriteManyStorageClass": {
       "type": "string",
+      "description": "Accepted values for ReadWriteManyStorageClass property",
       "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Provisioning",
-        "Deleting",
-        "Accepted"
+        "azurefile-premium-kxi-nfs",
+        "rook-cephfs"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningStateKV",
-        "modelAsString": true
+        "name": "ReadWriteManyStorageClass",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "AzureFile",
+            "value": "azurefile-premium-kxi-nfs",
+            "description": "Use Azure Files Premium for ReadWriteMany volumes"
+          },
+          {
+            "name": "RookCeph",
+            "value": "rook-cephfs",
+            "description": "Use RookCeph for ReadWriteMany volumes"
+          }
+        ]
       }
     }
   },
