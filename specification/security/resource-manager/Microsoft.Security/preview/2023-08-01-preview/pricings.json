@@ -59,7 +59,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Gets a provided Microsoft Defender for Cloud pricing configuration in a scope. Valid scopes are: subscription id or a specific resource id (Supported resources are (VirtualMachines)).",
+        "description": "Gets a provided Microsoft Defender for Cloud pricing configuration in a scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS & ARC machines').",
         "operationId": "Pricings_Get",
         "parameters": [
           {
@@ -102,7 +102,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are (VirtualMachines) and only for plan='VirtualMachines' and subPlan='P1').",
+        "description": "Updates a provided Microsoft Defender for Cloud pricing configuration in the scope. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS & ARC machines' and only for plan='VirtualMachines' and subPlan='P1').",
         "operationId": "Pricings_Update",
         "parameters": [
           {
@@ -142,7 +142,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope.",
+        "description": "Deletes a provided Microsoft Defender for Cloud pricing configuration in a specific resource. Valid only for resource scope (Supported resources are: 'VirtualMachines, VMSS & ARC machines').",
         "operationId": "Pricings_Delete",
         "parameters": [
           {
@@ -187,7 +187,7 @@
         "tags": [
           "Pricings"
         ],
-        "description": "Lists Microsoft Defender for Cloud pricing configurations (both subscription and resource level) of the subscription that match the optional given $filter. Valid values for $filter are: 'atExactScope()' or 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=atExactScope()' is provided, the returned list only includes all pricings set at the subscription. If '$filter=name in (planName1,planName2)' is provided, the returned list includes all pricings set for 'planName1' and 'planName2' only. Note: Only resources that their pricing have been set specifically (using PUT on the specific resource) are relevant fot this operation and will be returned.",
+        "description": "Lists Microsoft Defender for Cloud pricing configurations (both subscription and resource level) of the subscription that match the optional given $filter. Valid scopes are: subscription id or a specific resource id (Supported resources are: 'VirtualMachines, VMSS & ARC machines'). Valid values for $filter are: 'atExactScope()' or 'name in ({planName1},{planName2},...)'. If $filter is not provided, the unfiltered list will be returned. If '$filter=atExactScope()' is provided, the returned list only includes all pricings set at the subscription. If '$filter=name in (planName1,planName2)' is provided, the returned list includes all pricings set for 'planName1' and 'planName2' only. Note: When calling with scope = subscription, only resources that their pricing have been set specifically (using PUT on the specific resource) are relevant fot this operation and will be returned.",
         "operationId": "Pricings_List",
         "parameters": [
           {
@@ -318,16 +318,52 @@
           "readOnly": true,
           "description": "Optional. If `pricingTier` is `Standard` then this property holds the date of the last time the `pricingTier` was set to `Standard`, when available (e.g 2023-03-01T12:42:42.1921106Z)."
         },
-        "enforce": {
-          "type": "boolean",
-          "description": "If set to \"false\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows \"inherited\" = false). If set to \"true\", it prevents overrides and forces this pricing configuration to all descendants. Available only for subscription level pricing."
+        "enforcement": {
+          "type": "string",
+          "description": "If set to \"None\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inheritance=\"Override\"). If set to \"Enforced\", it prevents overrides and forces this pricing configuration to all descendants. Available only for subscription level pricing.",
+          "enum": [
+            "None",
+            "Enforced"
+          ],
+          "x-ms-enum": {
+            "name": "enforcement",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inheritance=\"Override\")"
+              },
+              {
+                "value": "Enforced",
+                "description": "Prevents overrides and forces the current scope's pricing configuration to all descendants"
+              }
+            ]
+          }
         },
-        "inherited": {
-          "type": "boolean",
+        "inheritance": {
+          "type": "string",
           "readOnly": true,
-          "description": "True if the pricing on this scope is inherited from a parent. The parent scope id will be in the \"source\" field.  Available only for resource level pricing."
+          "description": "If set to \"Inherit\", it indicates that this scope is inheriting its pricing configuration from its parent, and the parent's id will be in the \"inheritedFrom\" field. If set to \"Override\", it indicates that this scope is overriding the pricing configuration of its parent with its own pricing configuration. Available only for resource level pricing.",
+          "enum": [
+            "Inherit",
+            "Override"
+          ],
+          "x-ms-enum": {
+            "name": "inheritance",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Inherit",
+                "description": "Indicates that this scope is inheriting its pricing configuration from its parent"
+              },
+              {
+                "value": "Override",
+                "description": "Indicates that this scope is overriding the pricing configuration of its parent with its own pricing configuration"
+              }
+            ]
+          }
         },
-        "source": {
+        "inheritedFrom": {
           "type": "string",
           "readOnly": true,
           "description": "The id of the scope inherited from. \"Null\" if not inherited. Available only for resource level pricing."
