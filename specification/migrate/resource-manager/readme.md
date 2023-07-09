@@ -19,13 +19,13 @@ batch:
 ```
 
 
-### Tag: package-2022-10
+### Tag: package-2023-06
 
-These settings apply only when `--tag=package-2022-10` is specified on the command line.
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+```yaml $(tag) == 'package-2023-06'
 input-file:
-  - Microsoft.OffAzure/stable/2022-10-27/migrate.json
+  - Microsoft.OffAzure/stable/2023-06-06/migrate.json
 ```
 ### Tag: package-migrate-2018-02 and java
 
@@ -125,7 +125,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-10
+tag: package-2023-06
 ```
 
 ### Tag: package-migrate-2018-02
