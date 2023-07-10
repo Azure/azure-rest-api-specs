@@ -38,6 +38,10 @@ enum CompletionsFinishReason {
     moderation policies.
     """)
   contentFiltered: "content_filter",
+
+  @doc("Completion ended normally, with the model requesting a function to be called.")
+  @added(ServiceApiVersions.v2023_07_01_Preview)
+  functionCall: "function_call",
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
