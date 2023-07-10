@@ -910,6 +910,59 @@
       }
     }
   },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize": {
+    "post": {
+      "tags": [
+        "OperationalizationClusters",
+        "MachineLearningComputes"
+      ],
+      "operationId": "Compute_Resize",
+      "description": "Updates the size of a Compute Instance.",
+      "x-ms-long-running-operation": true,
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ComputeNameParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "parameters",
+          "in": "body",
+          "required": true,
+          "description": "The object for updating VM size setting of specified ComputeInstance.",
+          "schema": {
+            "$ref": "#/definitions/TargetVMSize"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success."
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "List VM Sizes": {
+          "$ref": "./examples/Compute/resize.json"
+        }
+      }
+    }
+  },
   "parameters": {
     "WorkspaceNameParameter": {
       "name": "workspaceName",
@@ -3797,6 +3850,16 @@
         "idleTimeBeforeShutdown": {
           "type": "string",
           "description": "Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days."
+        }
+      }
+    },
+    "TargetVMSize": {
+      "type": "object",
+      "description": "Target size for VM resize.",
+      "properties": {
+        "targetVMSize": {
+          "type": "string",
+          "description": "The name of the virtual machine size."
         }
       }
     }
