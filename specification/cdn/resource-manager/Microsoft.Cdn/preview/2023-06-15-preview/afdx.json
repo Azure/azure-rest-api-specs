@@ -4829,7 +4829,9 @@
       "description": "Supported protocols for the customer's endpoint.",
       "enum": [
         "Http",
-        "Https"
+        "Https",
+        "TCP",
+        "UDP"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5328,59 +5330,20 @@
       "x-ms-azure-resource": true
     },
     "AFDOriginGroupUpdatePropertiesParameters": {
-      "type": "object",
-      "discriminator": "originGroupPropertiesType",
-      "required": [
-        "originGroupPropertiesType"
-      ],
-      "properties": {
-        "originGroupPropertiesType": {
-          "type": "string",
-          "enum": [
-            "L4OriginGroupProperties",
-            "L7OriginGroupProperties"
-          ],
-          "default": "L7OriginGroupProperties",
-          "x-ms-enum": {
-            "name": "OriginGroupPropertiesType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "L7OriginGroupProperties": {
-      "x-ms-discriminator-value": "L7OriginGroupProperties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
-        },
-        {
-          "$ref": "#/definitions/OriginGroupBaseProperties"
-        }
-      ]
-    },
-    "L4OriginGroupProperties": {
-      "x-ms-discriminator-value": "L4OriginGroupProperties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
-        },
-        {
-          "$ref": "#/definitions/OriginGroupBaseProperties"
-        },
-        {
-          "properties": {
-            "originProtocolSettings": {
-              "description": "Origin protocol settings that determine how the origin is accessed.",
-              "type": "object",
-              "$ref": "#/definitions/OriginProtocolSettingsParameters"
-            }
-          }
-        }
-      ]
-    },
-    "OriginGroupBaseProperties": {
       "description": "The JSON object that contains the properties of the origin group.",
+      "originGroupType": {
+        "description": "The type of the origin group. Indicates whether the origin group is a 'L4' type or a 'L7' type.",
+        "type": "string",
+        "enum": [
+          "L4OriginGroup",
+          "L7OriginGroup"
+        ],
+        "x-ms-enum": {
+          "name": "originGroupType",
+          "modelAsString": true
+        },
+        "default": "L7OriginGroup"
+      },
       "properties": {
         "profileName": {
           "description": "The name of the profile which holds the origin group.",
@@ -5394,7 +5357,7 @@
         "healthProbeSettings": {
           "description": "Health probe settings to the origin that is used to determine the health of the origin.",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/HealthProbeParameters"
+          "$ref": "./cdn.json#/definitions/ "
         },
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
@@ -5414,6 +5377,10 @@
             "name": "EnabledState",
             "modelAsString": true
           }
+        },
+        "originProtocolSettings": {
+          "description": "The protocol settings for the origin for L4 accelerator.",
+          "$ref": "#/definitions/OriginProtocolSettingsParameters"
         }
       }
     },
@@ -5442,15 +5409,15 @@
       "description": "Origin protocol settings that determine how the origin is accessed.",
       "type": "object",
       "properties": {
-        "sessionAffinityType": {
-          "description": "Session affinity to use for origins under the origin groups. Valid options are 'SourceIP' or 'None'",
+        "clientAffinity": {
+          "description": "Client affinity to use for origins under the origin groups. Valid options are 'SourceIP' or 'None'",
               "enum": [
                 "SourceIP",
                 "None"
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "sessionAffinityType",
+                "name": "clientAffinity",
                 "modelAsString": true
               }
         },
@@ -5535,6 +5502,9 @@
         {
           "$ref": "#/definitions/AFDStateProperties"
         }
+      ],
+      "required": [
+        "originGroup"
       ]
     },
     "RouteUpdateParameters": {
@@ -5548,45 +5518,20 @@
       }
     },
     "RouteUpdatePropertiesParameters": {
-      "description": "Based on the RouteType the route can have either L4 or L7 properties.",
-      "type": "object",
-      "discriminator": "routeType",
-      "required": [
-        "routeType"
-      ],
-      "properties": {
-        "routeType": {
-          "type": "string",
-          "enum": [
-            "L7Route",
-            "L4Route"
-          ],
-          "default": "L7Route",
-          "x-ms-enum": {
-            "name": "RouteType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "L7RouteProperties": {
-      "description": "Friendly Routes name mapping to the any Routes or secret related information.",
-      "type": "object",
-      "x-ms-discriminator-value": "L7Route",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/L7RouteUpdatePropertiesParameters"
-        }
-      }
-    },
-    "L7RouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
+      "routeMode": {
+        "description": "The type of the route that is being created. Possible values include: 'L7Type', 'L4Type' ",
+        "type": "string",
+        "enum": [
+          "Layer7",
+          "Layer4"
+        ],
+        "x-ms-enum": {
+          "name": "routeMode",
+          "modelAsString": true
+        },
+        "default": "Layer7"
+      },
       "properties": {
         "endpointName": {
           "description": "The name of the endpoint which holds the route.",
@@ -5646,13 +5591,24 @@
           "enum": [
             "HttpOnly",
             "HttpsOnly",
-            "MatchRequest"
+            "MatchRequest",
+            "TCPOnly",
+            "UDPOnly"
           ],
           "x-ms-enum": {
             "name": "ForwardingProtocol",
             "modelAsString": true
           },
           "default": "MatchRequest"
+        },
+        "frontEndPorts": {
+          "description": "The list of frontend ports used to land traffic on azure front door.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          }
         },
         "linkToDefaultDomain": {
           "description": "whether this route will be linked to the default endpoint domain.",
@@ -5692,10 +5648,7 @@
             "modelAsString": true
           }
         }
-      },
-      "required": [
-        "originGroup"
-      ]
+      }
     },
     "AfdRouteCacheConfiguration": {
       "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
@@ -5829,99 +5782,6 @@
             "modelAsString": true
           },
           "default": "Continue"
-        }
-      }
-    },
-    "L4RouteProperties": {
-      "description": "Friendly Routes name mapping to L4 Routes",
-      "type": "object",
-      "x-ms-discriminator-value": "L4Route",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RouteUpdatePropertiesParameters"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/L4RouteUpdatePropertiesParameters"
-        }
-      }
-    },
-    "L4RouteUpdatePropertiesParameters": {
-      "description": "L4 Route.",
-      "type": "object",
-      "properties": {
-        "customDomains": {
-          "description": "Domains referenced by this endpoint.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActivatedResourceReference"
-          }
-        },
-        "originGroup": {
-          "description": "A reference to the origin group.",
-          "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
-        },
-       "protocolSettings": {
-          "description": "L4 Route base settings",
-          "type": "object",
-          "$ref": "#/definitions/ProtocolSettings"
-        },
-        "enabledState": {
-          "description": "Whether to enable the route. Permitted values are 'Enabled' or 'Disabled'",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "enabledState",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "originGroup"
-      ]
-    },
-    "ProtocolSettings": {
-      "description": "Base class for all L4 route settings.",
-      "type": "object",
-      "properties": {
-        "listenerProtocol": {
-          "description": "Listener/Frontend protocol for TCP/UDP routes, to accept connection from client.",
-          "type": "string",
-          "enum": [
-            "TCP",
-            "UDP"
-          ],
-          "x-ms-enum": {
-            "name": "listenerProtocol",
-            "modelAsString": true
-          }
-        },
-        "originProtocol": {
-          "description": "Origin/Backend protocol used to establish connection with customer's origin.",
-          "type": "string",
-          "enum": [
-            "TCP",
-            "UDP"
-          ],
-          "x-ms-enum": {
-            "name": "originProtocol",
-            "modelAsString": true
-          }
-        },
-       "ports": {
-          "description": "The ports used for the TCP/UDP connection. Must be between 1 and 65535. The ports can be a comma separated list or a valid range like 5050-5090",
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 65535
-          }
         }
       }
     },
@@ -6509,7 +6369,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2023-06-15-preview."
+      "description": "Version of the API to be used with the client request. Current version is 2023-05-01."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",

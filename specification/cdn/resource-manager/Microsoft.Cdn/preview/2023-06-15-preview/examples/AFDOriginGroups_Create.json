@@ -5,9 +5,28 @@
     "resourceGroupName": "RG",
     "profileName": "profile1",
     "originGroupName": "origingroup1",
+    "originGroupType": "L4OriginGroup",
     "originGroup": {
       "properties": {
-        "originGroupPropertiesType": "L4OriginGroupProperties"
+        "loadBalancingSettings": {
+          "sampleSize": 3,
+          "successfulSamplesRequired": 3,
+          "additionalLatencyInMilliseconds": 1000
+        },
+        "healthProbeSettings": {
+          "probePath": "/path2",
+          "probeRequestType": "NotSet",
+          "probeProtocol": "NotSet",
+          "probeIntervalInSeconds": 10
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+        "originProtocolSettings": {
+          "clientAffinity": "SourceIP",
+          "originPort": [
+            "8080", "8081-8085", "8087"
+          ],
+          "clientIPPreservationState": "Enabled"
+        }
       }
     }
   },
@@ -17,8 +36,27 @@
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
         "type": "Microsoft.Cdn/profiles/origingroups",
         "name": "origingroup1",
+        "originGroupType": "L4OriginGroup",
         "properties": {
-          "originGroupPropertiesType": "L4OriginGroupProperties",
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "originProtocolSettings": {
+            "clientAffinity": "SourceIP",
+            "originPort": [
+              "8080", "8081-8085", "8087"
+            ],
+            "clientIPPreservationState": "Enabled"
+          },
           "provisioningState": "Succeeded",
           "deploymentStatus": "NotStarted"
         }
@@ -29,8 +67,27 @@
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
         "type": "Microsoft.Cdn/profiles/origingroups",
         "name": "origingroup1",
+        "originGroupType": "L4OriginGroup",
         "properties": {
-          "originGroupPropertiesType": "L4OriginGroupProperties",
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "originProtocolSettings": {
+            "clientAffinity": "SourceIP",
+            "originPort": [
+              "8080", "8081-8085", "8087"
+            ],
+            "clientIPPreservationState": "Enabled"
+          },
           "provisioningState": "Succeeded",
           "deploymentStatus": "NotStarted"
         }
@@ -44,8 +101,27 @@
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
         "type": "Microsoft.Cdn/profiles/origingroups",
         "name": "origingroup1",
+        "originGroupType": "L4OriginGroup",
         "properties": {
-          "originGroupPropertiesType": "L4OriginGroupProperties",
+          "loadBalancingSettings": {
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3,
+            "additionalLatencyInMilliseconds": 1000
+          },
+          "healthProbeSettings": {
+            "probePath": "/path1",
+            "probeRequestType": "HEAD",
+            "probeProtocol": "Http",
+            "probeIntervalInSeconds": 10
+          },
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "originProtocolSettings": {
+            "clientAffinity": "SourceIP",
+            "originPort": [
+              "8080", "8081-8085", "8087"
+            ],
+            "clientIPPreservationState": "Enabled"
+          },
           "provisioningState": "Creating",
           "deploymentStatus": "NotStarted"
         }
