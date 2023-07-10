@@ -156,8 +156,11 @@ model AnswersOptions {
     includeUnstructuredSources?: boolean;
 }
 
+@doc("Type of ranker to be used")
 enum RankerKind {
+    @doc("Default ranker.")
     Default: "Default ranker",
+    @doc("Question only ranker.")
     Question: "Question only ranker",
 }
 
@@ -208,7 +211,9 @@ model SourceFilter {
 
 @doc("Set to 'OR' or 'AND' for using corresponding logical operation.")
 enum LogicalOperationKind {
+    @doc("Set to AND.")
     AND,
+    @doc("Set to OR.")
     OR,
 }
 
@@ -231,40 +236,72 @@ model ShortAnswerOptions {
 
 @doc("Human-readable error code.")
 enum InnerErrorCode {
+    @doc("Human-readable error code.")
     InvalidRequest,
+    @doc("Human-readable error code.")
     InvalidParameterValue,
+    @doc("Human-readable error code.")
     KnowledgeBaseNotFound,
+    @doc("Human-readable error code.")
     AzureCognitiveSearchNotFound,
+    @doc("Human-readable error code.")
     AzureCognitiveSearchThrottling,
+    @doc("Human-readable error code.")
     ExtractionFailure,
+    @doc("Human-readable error code.")
     InvalidRequestBodyFormat,
+    @doc("Human-readable error code.")
     EmptyRequest,
+    @doc("Human-readable error code.")
     MissingInputDocuments,
+    @doc("Human-readable error code.")
     InvalidDocument,
+    @doc("Human-readable error code.")
     ModelVersionIncorrect,
+    @doc("Human-readable error code.")
     InvalidDocumentBatch,
+    @doc("Human-readable error code.")
     UnsupportedLanguageCode,
+    @doc("Human-readable error code.")
     InvalidCountryHint,
 }
 
 @doc("Human-readable error code.")
 enum ErrorCode {
+    @doc("Human-readable error code.")
     InvalidRequest,
+    @doc("Human-readable error code.")
     InvalidArgument,
+    @doc("Human-readable error code.")
     Unauthorized,
+    @doc("Human-readable error code.")
     Forbidden,
+    @doc("Human-readable error code.")
     NotFound,
+    @doc("Human-readable error code.")
     ProjectNotFound,
+    @doc("Human-readable error code.")
     OperationNotFound,
+    @doc("Human-readable error code.")
     AzureCognitiveSearchNotFound,
+    @doc("Human-readable error code.")
     AzureCognitiveSearchIndexNotFound,
+    @doc("Human-readable error code.")
     TooManyRequests,
+    @doc("Human-readable error code.")
     AzureCognitiveSearchThrottling,
+    @doc("Human-readable error code.")
     AzureCognitiveSearchIndexLimitReached,
+    @doc("Human-readable error code.")
     InternalServerError,
+    @doc("Human-readable error code.")
     ServiceUnavailable,
+    @doc("Human-readable error code.")
     Timeout,
+    @doc("Human-readable error code.")
     QuotaExceeded,
+    @doc("Human-readable error code.")
     Conflict,
+    @doc("Human-readable error code.")
     Warning,
 }
