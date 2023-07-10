@@ -116,6 +116,31 @@
           "description": "Activity description.",
           "type": "string"
         },
+        "state": {
+          "description": "Activity state. This is an optional property and if not provided, the state will be Active by default.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityState",
+            "modelAsString": true
+          }
+        },
+        "onInactiveMarkAs": {
+          "description": "Status result of the activity when the state is set to Inactive. This is an optional property and if not provided when the activity is inactive, the status will be Succeeded by default.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Skipped"
+          ],
+          "x-ms-enum": {
+            "name": "ActivityOnInactiveMarkAs",
+            "modelAsString": true
+          }
+        },
         "dependsOn": {
           "type": "array",
           "description": "Activity depends on condition.",
@@ -2246,16 +2271,9 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         }
       }
     },
@@ -2274,21 +2292,26 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         },
         "readBehavior": {
-          "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
-          "enum": [
-            "Query",
-            "QueryAll"
-          ],
-          "x-ms-enum": {
-            "name": "SalesforceSourceReadBehavior",
-            "modelAsString": true
-          }
+          "description": "The read behavior for the operation. Default is Query. Allowed values: Query/QueryAll. Type: string (or Expression with resultType string).",
+          "type": "object",
+          "x-ms-format": "dfe-string"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
+      }
+    },
+    "SalesforceSourceReadBehavior": {
+      "description": "The Salesforce read behavior for the operation",
+      "type": "string",
+      "enum": [
+        "Query",
+        "QueryAll"
+      ],
+      "x-ms-enum": {
+        "name": "SalesforceSourceReadBehavior",
+        "modelAsString": true
       }
     },
     "SapCloudForCustomerSource": {
@@ -2652,6 +2675,11 @@
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
           "type": "object"
         },
+        "isolationLevel": {
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
@@ -2687,6 +2715,11 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object"
+        },
+        "isolationLevel": {
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "produceAdditionalTypes": {
@@ -2726,6 +2759,11 @@
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
           "type": "object"
         },
+        "isolationLevel": {
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
@@ -2761,6 +2799,11 @@
         },
         "storedProcedureParameters": {
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object"
+        },
+        "isolationLevel": {
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "produceAdditionalTypes": {
@@ -2799,6 +2842,11 @@
         "storedProcedureParameters": {
           "type": "object",
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
+        },
+        "isolationLevel": {
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
@@ -3367,7 +3415,18 @@
         "outputColumns": {
           "type": "object",
           "x-ms-format": "dfe-list-generic",
-          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+          "x-ms-format-element-type": "OutputColumn",
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). itemType: OutputColumn. Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
+        }
+      }
+    },
+    "OutputColumn": {
+      "description": "The columns to be read out from the Office 365 table.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the table column. Type: string."
         }
       }
     },
@@ -7696,6 +7755,10 @@
           "description": "Set Variable activity properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SetVariableActivityTypeProperties"
+        },
+        "policy": {
+          "$ref": "#/definitions/SecureInputOutputPolicy",
+          "description": "Activity policy."
         }
       },
       "required": [
@@ -7717,6 +7780,20 @@
         "setSystemVariable": {
           "description": "If set to true, it sets the pipeline run return value.",
           "type": "boolean"
+        }
+      }
+    },
+    "SecureInputOutputPolicy": {
+      "description": "Execution policy for an activity that supports secure input and output.",
+      "type": "object",
+      "properties": {
+        "secureInput": {
+          "type": "boolean",
+          "description": "When set to true, Input from activity is considered as secure and will not be logged to monitoring."
+        },
+        "secureOutput": {
+          "type": "boolean",
+          "description": "When set to true, Output from activity is considered as secure and will not be logged to monitoring."
         }
       }
     },
@@ -8368,6 +8445,32 @@
           "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide. Type: integer (or Expression with resultType integer).",
           "type": "object",
           "x-ms-format": "dfe-int"
+        },
+        "configurationType": {
+          "enum": [
+            "Default",
+            "Customized",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationParametrizationReference"
+        },
+        "sparkConfig": {
+          "description": "Spark configuration property.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [
