@@ -16,7 +16,6 @@ using Azure.Core;
   title: "Contoso Widget Manager",
 })
 @versioned(Contoso.WidgetManager.Versions)
-
 namespace Azure.Contoso.WidgetManager;
 
 @doc("Versions info.")
@@ -30,8 +29,10 @@ enum Versions {
 model ContosoAuthFlow {
   @doc("The auth flow type.")
   type: OAuth2FlowType.implicit;
+
   @doc("The auth flow authorization URL.")
   authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+
   @doc("The auth flow token URL.")
   scopes: ["https://security.microsoft.com/.default"];
 }
