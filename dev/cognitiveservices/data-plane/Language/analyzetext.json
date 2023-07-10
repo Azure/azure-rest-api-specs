@@ -2766,6 +2766,20 @@
       },
       "description": "The reference point that the ordinal number denotes."
     },
+    "RangeInclusivity":{
+      "type": "string",
+          "enum": [
+            "noneInclusive",
+            "leftInclusive",
+            "rightInclusive",
+            "leftRightInclusive"
+          ],
+          "x-ms-enum": {
+            "name": "RangeInclusivity",
+            "modelAsString": true
+          },
+          "description": "The range inclusiveness of this property property."
+    },
     "NumericRangeKind": {
       "type": "string",
       "enum": [
@@ -3202,7 +3216,7 @@
         }
       }
     },
-    "NumberRangeMetadata": {
+    "NumericRangeMetadata": {
       "description": "represents the Metadata of numeric intervals.",
       "allOf": [
         {
@@ -3210,7 +3224,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumberRangeMetadata",
+      "x-ms-discriminator-value": "NumericRangeMetadata",
       "properties": {
         "rangeKind": {
           "$ref": "#/definitions/NumericRangeKind"
@@ -3224,6 +3238,9 @@
           "type": "number",
           "format": "double",
           "description": "The ending value of the interval."
+        },
+        "rangeInclusivity":{
+          "$ref": "#/definitions/RangeInclusivity"
         }
       },
       "required": [
