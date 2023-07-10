@@ -53,7 +53,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- returned when the storage task was already created from a previous request with the same properties specified in the request body.",
+            "description": "OK -- Update storage task with the same properties specified in the request body.",
             "schema": {
               "$ref": "#/definitions/StorageTask"
             }
@@ -69,7 +69,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -113,7 +113,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -153,7 +153,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -210,7 +210,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -250,7 +250,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -292,7 +292,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -543,7 +543,7 @@
             "break"
           ],
           "x-ms-enum": {
-            "name": "onSuccess",
+            "name": "onFailure",
             "modelAsString": false
           }
         }
@@ -571,28 +571,6 @@
         }
       },
       "description": "The response from the List Storage Tasks operation."
-    },
-    "ErrorBody": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        }
-      },
-      "description": "Error response body contract."
-    },
-    "Error": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorBody",
-          "description": "Azure Storage Resource Provider error response body."
-        }
-      },
-      "description": "An error response from the storage resource provider."
     }
   },
   "parameters": {
