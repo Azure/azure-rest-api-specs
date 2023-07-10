@@ -18,6 +18,23 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://security.microsoft.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://security.microsoft.com/.default": ""
+      }
+    }
+  },
   "tags": [],
   "paths": {
     "/widgets": {
@@ -38,11 +55,11 @@
                 "value": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/Widget"
+                    "$ref": "#/definitions/WidgetSuite"
                   },
                   "x-ms-identifiers": [],
-                  "description": "The Widget items on this page",
-                  "x-typespec-name": "Widget[]"
+                  "description": "The WidgetSuite items on this page",
+                  "x-typespec-name": "WidgetSuite[]"
                 },
                 "nextLink": {
                   "type": "string",
@@ -51,11 +68,11 @@
                   "x-typespec-name": "TypeSpec.Rest.ResourceLocation"
                 }
               },
-              "description": "Paged collection of Widget items",
+              "description": "Paged collection of WidgetSuite items",
               "required": [
                 "value"
               ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Widget, Azure.Core.(anonymous model)>"
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<WidgetSuite, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
@@ -101,7 +118,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Widget"
+              "$ref": "#/definitions/WidgetSuite"
             }
           },
           "default": {
@@ -143,7 +160,7 @@
             "required": true,
             "description": "The resource instance.",
             "schema": {
-              "$ref": "#/definitions/WidgetUpdate"
+              "$ref": "#/definitions/WidgetSuiteUpdate"
             }
           }
         ],
@@ -158,7 +175,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/Widget"
+              "$ref": "#/definitions/WidgetSuite"
             }
           },
           "201": {
@@ -171,7 +188,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/Widget"
+              "$ref": "#/definitions/WidgetSuite"
             }
           },
           "default": {
@@ -307,7 +324,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/Widget",
+                  "$ref": "#/definitions/WidgetSuite",
                   "description": "The result of the operation."
                 }
               },
@@ -316,7 +333,7 @@
                 "id",
                 "status"
               ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<Widget, Widget, Azure.Core.Foundations.Error>"
+              "x-typespec-name": "Azure.Core.ResourceOperationStatus<WidgetSuite, WidgetSuite, Azure.Core.Foundations.Error>"
             }
           },
           "default": {
@@ -439,6 +456,40 @@
         ]
       }
     },
+    "ContosoAuthFlow": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "implicit"
+          ],
+          "description": "The auth flow type."
+        },
+        "authorizationUrl": {
+          "type": "string",
+          "enum": [
+            "https://login.microsoftonline.com/common/oauth2/authorize"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "The auth flow authorization URL."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {},
+          "x-typespec-name": "[https://security.microsoft.com/.default]",
+          "description": "The auth flow token URL."
+        }
+      },
+      "description": "A faked auth model.",
+      "required": [
+        "type",
+        "authorizationUrl",
+        "scopes"
+      ]
+    },
     "FakedSharedModel": {
       "type": "object",
       "properties": {
@@ -475,6 +526,7 @@
     },
     "Versions": {
       "type": "string",
+      "description": "Versions info.",
       "enum": [
         "2022-11-01-preview"
       ],
@@ -484,12 +536,13 @@
         "values": [
           {
             "name": "v2022_11_01_Preview",
-            "value": "2022-11-01-preview"
+            "value": "2022-11-01-preview",
+            "description": "The 2022-11-01-preview version."
           }
         ]
       }
     },
-    "Widget": {
+    "WidgetSuite": {
       "type": "object",
       "properties": {
         "name": {
@@ -512,7 +565,7 @@
         "manufacturerId"
       ]
     },
-    "WidgetUpdate": {
+    "WidgetSuiteUpdate": {
       "type": "object",
       "properties": {
         "manufacturerId": {
