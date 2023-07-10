@@ -39,6 +39,10 @@ enum Versions {
   @doc("Version 2022-05-01")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_05_01: "2022-05-01",
+
+  @doc("Version 2023-04-01")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_01: "2023-04-01",
 }
 
 @doc("Resource model")
@@ -313,6 +317,9 @@ enum extraInformationKind {
   EntitySubtype,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
   ListKey,
+
+  @doc("Regex Key")
+  RegexKey,
 }
 
 @doc("The concrete entity Subtype model of extra information.")
@@ -331,6 +338,19 @@ model ListKey extends BaseExtraInformation {
 
   @doc("The canonical form of the extracted entity.")
   key?: string;
+}
+
+@doc("The regex key extra data kind.")
+@added(Versions.v2023_04_01)
+model RegexKey extends BaseExtraInformation {
+  @doc("The regex key extra data kind.")
+  extraInformationKind: extraInformationKind.RegexKey;
+
+  @doc("The key of the regex pattern used in extracting the entity.")
+  key: string;
+
+  @doc("The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions.")
+  regexPattern: string;
 }
 
 @doc("The abstract base class for entity resolutions.")
@@ -556,6 +576,109 @@ model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
 
   @doc("The generated answer by a Question Answering KB.")
   result?: AnswersResult;
+}
+
+@doc("It is a wrap up a Question Answering KB response.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationJobsInput {
+  @doc("Display name for the analysis job.")
+  displayName?: string;
+
+  @doc("Analysis Input")
+  analysisInput: MultiLanguageConversationAnalysisInput;
+
+  @doc("Set of tasks to execute on the input conversation.")
+  tasks: Array<AnalyzeConversationLROTask>;
+}
+
+@doc("Base class for a long-running conversation input task.")
+@added(Versions.v2023_04_01)
+@discriminator("kind")
+model AnalyzeConversationLROTask extends TaskIdentifier {
+  @doc("Enumeration of supported analysis tasks on a collection of conversations.")
+  kind: AnalyzeConversationLROTaskKind;
+}
+
+@doc("Enumeration of supported analysis tasks on a collection of conversations.")
+@added(Versions.v2023_04_01)
+enum AnalyzeConversationLROTaskKind {
+  @doc("Conversational Summarization Task")
+  ConversationalSummarizationTask,
+}
+
+@doc("Enumeration of results for supported conversation analysis tasks.")
+@added(Versions.v2023_04_01)
+enum AnalyzeConversationResultsKind {
+  @doc("Conversational Summarization Results")
+  ConversationalSummarizationResults,
+}
+
+@doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationJobState extends JobState {
+  ...ConversationTaskState;
+  ...AnalyzeConversationJobStatistics;
+}
+
+@doc("Contains the statistics for the submitted job.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationJobStatistics {
+  @doc("Contains the statistics for the submitted job.")
+  statistics: ConversationRequestStatistics;
+}
+
+@doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
+@added(Versions.v2023_04_01)
+model ConversationTaskState {
+  tasks: {
+    @doc("Count of tasks that finished successfully.")
+    completed: int32;
+
+    @doc("Count of tasks that failed.")
+    failed: int32;
+
+    @doc("Count of tasks that are currently in progress.")
+    inProgress: int32;
+
+    @doc("Total count of tasks submitted as part of the job.")
+    total: int32;
+
+    @doc("List of results from tasks (if available).")
+    items?: Array<AnalyzeConversationJobResult>;
+  };
+}
+
+
+@doc("Container for results of all tasks in the conversation job.")
+@added(Versions.v2023_04_01)
+@discriminator("kind")
+model AnalyzeConversationJobResult extends TaskState{
+  ...TaskIdentifier
+  @doc("discriminator kind")
+  kind: AnalyzeConversationResultsKind;
+}
+
+@doc("")
+@added(Versions.v2023_04_01)
+model MultiLanguageConversationAnalysisInput{
+  conversations: Array<Conversation>;
+}
+
+@doc("Complete ordered set of utterances (spoken or written) by one or more speakers to be used for analysis.")
+@added(Versions.v2023_04_01)
+@discriminator("modality")
+model Conversation{
+  @doc("Unique identifier for the conversation.")
+  id: string;
+
+  @doc("Language of the conversation item in BCP-47 format.")
+  language: string;
+
+  @doc("modality")
+  modality: Modality;
+
+  @doc("domain")
+  domain: ConversationDomain;
 }
 
 @doc("Input parameters necessary for a Conversation task.")
@@ -1081,3 +1204,13 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   AnalyzeConversationTask,
   AnalyzeConversationTaskResult
 >;
+
+// @doc("Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.")
+// @summary("Submit analysis job for conversations")
+// @TypeSpec.Rest.actionSeparator("/")
+// @TypeSpec.Rest.action("analyze-conversations/jobs")
+// op submitJob is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+//   Conversations,
+//   AnalyzeConversationJobsInput,
+//   AnalyzeConversationTaskResult
+// >;
