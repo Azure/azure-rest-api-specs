@@ -57,9 +57,9 @@
               "properties": {
                 "value": {
                   "type": "array",
-                  "description": "The Widget items on this page",
+                  "description": "The WidgetSuite items on this page",
                   "items": {
-                    "$ref": "#/definitions/Widget"
+                    "$ref": "#/definitions/WidgetSuite"
                   },
                   "x-ms-identifiers": []
                 },
@@ -117,7 +117,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Widget"
+              "$ref": "#/definitions/WidgetSuite"
             }
           },
           "default": {
@@ -162,7 +162,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WidgetUpdate"
+              "$ref": "#/definitions/WidgetSuiteUpdate"
             }
           }
         ],
@@ -170,7 +170,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Widget"
+              "$ref": "#/definitions/WidgetSuite"
             },
             "headers": {
               "Operation-Location": {
@@ -183,7 +183,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Widget"
+              "$ref": "#/definitions/WidgetSuite"
             },
             "headers": {
               "Operation-Location": {
@@ -323,7 +323,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/Widget",
+                  "$ref": "#/definitions/WidgetSuite",
                   "description": "The result of the operation."
                 }
               },
@@ -452,6 +452,40 @@
         ]
       }
     },
+    "ContosoAuthFlow": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "implicit"
+          ],
+          "description": "The auth flow type."
+        },
+        "authorizationUrl": {
+          "type": "string",
+          "enum": [
+            "https://login.microsoftonline.com/common/oauth2/authorize"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "The auth flow authorization URL."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {},
+          "x-typespec-name": "[https://security.microsoft.com/.default]",
+          "description": "The auth flow token URL."
+        }
+      },
+      "description": "A faked auth model.",
+      "required": [
+        "type",
+        "authorizationUrl",
+        "scopes"
+      ]
+    },
     "FakedSharedModel": {
       "type": "object",
       "description": "Faked shared model",
@@ -488,6 +522,7 @@
     },
     "Versions": {
       "type": "string",
+      "description": "Versions info.",
       "enum": [
         "2022-11-01-preview"
       ],
@@ -497,12 +532,13 @@
         "values": [
           {
             "name": "v2022_11_01_Preview",
-            "value": "2022-11-01-preview"
+            "value": "2022-11-01-preview",
+            "description": "The 2022-11-01-preview version."
           }
         ]
       }
     },
-    "Widget": {
+    "WidgetSuite": {
       "type": "object",
       "description": "A widget.",
       "properties": {
@@ -525,7 +561,7 @@
         "manufacturerId"
       ]
     },
-    "WidgetUpdate": {
+    "WidgetSuiteUpdate": {
       "type": "object",
       "description": "A widget.",
       "properties": {
