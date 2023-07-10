@@ -32,6 +32,10 @@ enum Versions {
   @doc("Version 2022-05-01")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_05_01: "2022-05-01",
+
+  @doc("Version 2023-04-01")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2023_04_01: "2023-04-01",
 }
 
 @doc("Resource model")
@@ -39,7 +43,7 @@ enum Versions {
 model Conversations {
   @key
   @doc("id")
-  @visibility("read")
+  @visibility("create")
   id: string;
 }
 
@@ -303,8 +307,12 @@ model BaseExtraInformation {
 enum extraInformationKind {
   @doc("Entity Subtype.")
   EntitySubtype,
+
   @doc("List key.")
   ListKey,
+
+  @doc("Regex Key")
+  RegexKey,
 }
 
 @doc("The concrete entity Subtype model of extra information.")
@@ -323,6 +331,19 @@ model ListKey extends BaseExtraInformation {
 
   @doc("The canonical form of the extracted entity.")
   key: string;
+}
+
+@doc("The regex key extra data kind.")
+@added(Versions.v2023_04_01)
+model RegexKey extends BaseExtraInformation {
+  @doc("The regex key extra data kind.")
+  extraInformationKind: extraInformationKind.RegexKey;
+
+  @doc("The key of the regex pattern used in extracting the entity.")
+  key: string;
+
+  @doc("The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions.")
+  regexPattern: string;
 }
 
 @doc("The abstract base class for entity resolutions.")
@@ -503,6 +524,10 @@ model TemporalSpanResolution extends BaseResolution {
 
   @doc("An optional modifier of a date/time instance.")
   modifier: TemporalModifier;
+
+  @doc("An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings.")
+  @added(Versions.v2023_04_01)
+  timex: string;
 }
 
 @doc("represents the resolution of numeric intervals.")
@@ -539,6 +564,109 @@ model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
 
   @doc("The generated answer by a Question Answering KB.")
   result?: AnswersResult;
+}
+
+@doc("It is a wrap up a Question Answering KB response.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationJobsInput {
+  @doc("Display name for the analysis job.")
+  displayName?: string;
+
+  @doc("Analysis Input")
+  analysisInput: MultiLanguageConversationAnalysisInput;
+
+  @doc("Set of tasks to execute on the input conversation.")
+  tasks: Array<AnalyzeConversationLROTask>;
+}
+
+@doc("Base class for a long-running conversation input task.")
+@added(Versions.v2023_04_01)
+@discriminator("kind")
+model AnalyzeConversationLROTask extends TaskIdentifier {
+  @doc("Enumeration of supported analysis tasks on a collection of conversations.")
+  kind: AnalyzeConversationLROTaskKind;
+}
+
+@doc("Enumeration of supported analysis tasks on a collection of conversations.")
+@added(Versions.v2023_04_01)
+enum AnalyzeConversationLROTaskKind {
+  @doc("Conversational Summarization Task")
+  ConversationalSummarizationTask,
+}
+
+@doc("Enumeration of results for supported conversation analysis tasks.")
+@added(Versions.v2023_04_01)
+enum AnalyzeConversationResultsKind {
+  @doc("Conversational Summarization Results")
+  ConversationalSummarizationResults,
+}
+
+@doc("Contains the status of the submitted job for analyzing a conversation, along with related statistics.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationJobState extends JobState {
+  ...ConversationTaskState;
+  ...AnalyzeConversationJobStatistics;
+}
+
+@doc("Contains the statistics for the submitted job.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationJobStatistics {
+  @doc("Contains the statistics for the submitted job.")
+  statistics: ConversationRequestStatistics;
+}
+
+@doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
+@added(Versions.v2023_04_01)
+model ConversationTaskState {
+  tasks: {
+    @doc("Count of tasks that finished successfully.")
+    completed: int32;
+
+    @doc("Count of tasks that failed.")
+    failed: int32;
+
+    @doc("Count of tasks that are currently in progress.")
+    inProgress: int32;
+
+    @doc("Total count of tasks submitted as part of the job.")
+    total: int32;
+
+    @doc("List of results from tasks (if available).")
+    items?: Array<AnalyzeConversationJobResult>;
+  };
+}
+
+
+@doc("Container for results of all tasks in the conversation job.")
+@added(Versions.v2023_04_01)
+@discriminator("kind")
+model AnalyzeConversationJobResult extends TaskState{
+  ...TaskIdentifier
+  @doc("discriminator kind")
+  kind: AnalyzeConversationResultsKind;
+}
+
+@doc("")
+@added(Versions.v2023_04_01)
+model MultiLanguageConversationAnalysisInput{
+  conversations: Array<Conversation>;
+}
+
+@doc("Complete ordered set of utterances (spoken or written) by one or more speakers to be used for analysis.")
+@added(Versions.v2023_04_01)
+@discriminator("modality")
+model Conversation{
+  @doc("Unique identifier for the conversation.")
+  id: string;
+
+  @doc("Language of the conversation item in BCP-47 format.")
+  language: string;
+
+  @doc("modality")
+  modality: Modality;
+
+  @doc("domain")
+  domain: ConversationDomain;
 }
 
 @doc("Input parameters necessary for a Conversation task.")
@@ -609,28 +737,40 @@ model OrchestrationPrediction extends BasePrediction {
 enum AreaUnit {
   @doc("Unspecified unit of area.")
   Unspecified,
+
   @doc("SI unit of area.")
   SquareKilometer,
+
   @doc("SI unit of area.")
   SquareHectometer,
+
   @doc("SI unit of area.")
   SquareDecameter,
+
   @doc("SI unit of area.")
   SquareDecimeter,
+
   @doc("SI unit of area.")
   SquareMeter,
+
   @doc("SI unit of area.")
   SquareCentimeter,
+
   @doc("SI unit of area.")
   SquareMillimeter,
+
   @doc("Imperial unit of area.")
   SquareInch,
+
   @doc("Imperial unit of area.")
   SquareFoot,
+
   @doc("Imperial unit of area.")
   SquareMile,
+
   @doc("Imperial unit of area.")
   SquareYard,
+
   @doc("Imperial unit of area.")
   Acre,
 }
@@ -639,12 +779,16 @@ enum AreaUnit {
 enum DateTimeSubKind {
   @doc("Datetime unit.")
   Time,
+
   @doc("Datetime unit.")
   Date,
+
   @doc("Datetime unit.")
   DateTime,
+
   @doc("Datetime unit.")
   Duration,
+
   @doc("Datetime unit.")
   Set,
 }
@@ -653,36 +797,52 @@ enum DateTimeSubKind {
 enum LengthUnit {
   @doc("THe length unit of measurement.")
   Unspecified,
+
   @doc("THe length unit of measurement.")
   Kilometer,
+
   @doc("THe length unit of measurement.")
   Hectometer,
+
   @doc("THe length unit of measurement.")
   Decameter,
+
   @doc("THe length unit of measurement.")
   Meter,
+
   @doc("THe length unit of measurement.")
   Decimeter,
+
   @doc("THe length unit of measurement.")
   Centimeter,
+
   @doc("THe length unit of measurement.")
   Millimeter,
+
   @doc("THe length unit of measurement.")
   Micrometer,
+
   @doc("THe length unit of measurement.")
   Nanometer,
+
   @doc("THe length unit of measurement.")
   Picometer,
+
   @doc("THe length unit of measurement.")
   Mile,
+
   @doc("THe length unit of measurement.")
   Yard,
+
   @doc("THe length unit of measurement.")
   Inch,
+
   @doc("THe length unit of measurement.")
   Foot,
+
   @doc("THe length unit of measurement.")
   LightYear,
+
   @doc("THe length unit of measurement.")
   Pt,
 }
@@ -691,28 +851,40 @@ enum LengthUnit {
 enum InformationUnit {
   @doc("The information (data) Unit of measurement.")
   Unspecified,
+
   @doc("The information (data) Unit of measurement.")
   Bit,
+
   @doc("The information (data) Unit of measurement.")
   Kilobit,
+
   @doc("The information (data) Unit of measurement.")
   Megabit,
+
   @doc("The information (data) Unit of measurement.")
   Gigabit,
+
   @doc("The information (data) Unit of measurement.")
   Terabit,
+
   @doc("The information (data) Unit of measurement.")
   Petabit,
+
   @doc("The information (data) Unit of measurement.")
   Byte,
+
   @doc("The information (data) Unit of measurement.")
   Kilobyte,
+
   @doc("The information (data) Unit of measurement.")
   Megabyte,
+
   @doc("The information (data) Unit of measurement.")
   Gigabyte,
+
   @doc("The information (data) Unit of measurement.")
   Terabyte,
+
   @doc("The information (data) Unit of measurement.")
   Petabyte,
 }
@@ -721,6 +893,7 @@ enum InformationUnit {
 enum Modality {
   @doc("Transcript conversational modality.")
   transcript,
+
   @doc("Text conversational modality.")
   text,
 }
@@ -729,14 +902,19 @@ enum Modality {
 enum NumberKind {
   @doc("The type of the extracted number entity.")
   Integer,
+
   @doc("The type of the extracted number entity.")
   Decimal,
+
   @doc("The type of the extracted number entity.")
   Power,
+
   @doc("The type of the extracted number entity.")
   Fraction,
+
   @doc("The type of the extracted number entity.")
   Percent,
+
   @doc("The type of the extracted number entity.")
   Unspecified,
 }
@@ -745,6 +923,7 @@ enum NumberKind {
 enum projectKind {
   @doc("The type of the project.")
   Conversation,
+
   @doc("The type of the project.")
   Orchestration,
 }
@@ -753,22 +932,31 @@ enum projectKind {
 enum RangeKind {
   @doc("The kind of range that the resolution object represents.")
   Number,
+
   @doc("The kind of range that the resolution object represents.")
   Speed,
+
   @doc("The kind of range that the resolution object represents.")
   Weight,
+
   @doc("The kind of range that the resolution object represents.")
   Length,
+
   @doc("The kind of range that the resolution object represents.")
   Volume,
+
   @doc("The kind of range that the resolution object represents.")
   Area,
+
   @doc("The kind of range that the resolution object represents.")
   Age,
+
   @doc("The kind of range that the resolution object represents.")
   Information,
+
   @doc("The kind of range that the resolution object represents.")
   Temperature,
+
   @doc("The kind of range that the resolution object represents.")
   Currency,
 }
@@ -777,8 +965,10 @@ enum RangeKind {
 enum RelativeTo {
   @doc("The reference point that the ordinal number denotes.")
   Current,
+
   @doc("The reference point that the ordinal number denotes.")
   End,
+
   @doc("The reference point that the ordinal number denotes.")
   Start,
 }
@@ -787,32 +977,46 @@ enum RelativeTo {
 enum resolutionKind {
   @doc("The entity resolution object kind.")
   BooleanResolution,
+
   @doc("The entity resolution object kind.")
   DateTimeResolution,
+
   @doc("The entity resolution object kind.")
   NumberResolution,
+
   @doc("The entity resolution object kind.")
   OrdinalResolution,
+
   @doc("The entity resolution object kind.")
   SpeedResolution,
+
   @doc("The entity resolution object kind.")
   WeightResolution,
+
   @doc("The entity resolution object kind.")
   LengthResolution,
+
   @doc("The entity resolution object kind.")
   VolumeResolution,
+
   @doc("The entity resolution object kind.")
   AreaResolution,
+
   @doc("The entity resolution object kind.")
   AgeResolution,
+
   @doc("The entity resolution object kind.")
   InformationResolution,
+
   @doc("The entity resolution object kind.")
   TemperatureResolution,
+
   @doc("The entity resolution object kind.")
   CurrencyResolution,
+
   @doc("The entity resolution object kind.")
   NumericRangeResolution,
+
   @doc("The entity resolution object kind.")
   TemporalSpanResolution,
 }
@@ -821,30 +1025,43 @@ enum resolutionKind {
 enum SpeedUnit {
   @doc("The speed Unit of measurement")
   Unspecified,
+
   @doc("The speed Unit of measurement")
   MetersPerSecond,
+
   @doc("The speed Unit of measurement")
   KilometersPerHour,
+
   @doc("The speed Unit of measurement")
   KilometersPerMinute,
+
   @doc("The speed Unit of measurement")
   KilometersPerSecond,
+
   @doc("The speed Unit of measurement")
   MilesPerHour,
+
   @doc("The speed Unit of measurement")
   Knot,
+
   @doc("The speed Unit of measurement")
   FootPerSecond,
+
   @doc("The speed Unit of measurement")
   FootPerMinute,
+
   @doc("The speed Unit of measurement")
   YardsPerMinute,
+
   @doc("The speed Unit of measurement")
   YardsPerSecond,
+
   @doc("The speed Unit of measurement")
   MetersPerMillisecond,
+
   @doc("The speed Unit of measurement")
   CentimetersPerMillisecond,
+
   @doc("The speed Unit of measurement")
   KilometersPerMillisecond,
 }
@@ -853,10 +1070,13 @@ enum SpeedUnit {
 enum targetProjectKind {
   @doc("The type of a target service.")
   Luis,
+
   @doc("The type of a target service.")
   Conversation,
+
   @doc("The type of a target service.")
   QuestionAnswering,
+
   @doc("The type of a target service.")
   NonLinked,
 }
@@ -865,12 +1085,16 @@ enum targetProjectKind {
 enum TemperatureUnit {
   @doc("The temperature Unit of measurement.")
   Unspecified,
+
   @doc("The temperature Unit of measurement.")
   Fahrenheit,
+
   @doc("The temperature Unit of measurement.")
   Kelvin,
+
   @doc("The temperature Unit of measurement.")
   Rankine,
+
   @doc("The temperature Unit of measurement.")
   Celsius,
 }
@@ -879,38 +1103,55 @@ enum TemperatureUnit {
 enum TemporalModifier {
   @doc("An optional modifier of a date/time instance.")
   AfterApprox,
+
   @doc("An optional modifier of a date/time instance.")
   Before,
+
   @doc("An optional modifier of a date/time instance.")
   BeforeStart,
+
   @doc("An optional modifier of a date/time instance.")
   Approx,
+
   @doc("An optional modifier of a date/time instance.")
   ReferenceUndefined,
+
   @doc("An optional modifier of a date/time instance.")
   SinceEnd,
+
   @doc("An optional modifier of a date/time instance.")
   AfterMid,
+
   @doc("An optional modifier of a date/time instance.")
   Start,
+
   @doc("An optional modifier of a date/time instance.")
   After,
+
   @doc("An optional modifier of a date/time instance.")
   BeforeEnd,
+
   @doc("An optional modifier of a date/time instance.")
   Until,
+
   @doc("An optional modifier of a date/time instance.")
   End,
+
   @doc("An optional modifier of a date/time instance.")
   Less,
+
   @doc("An optional modifier of a date/time instance.")
   Since,
+
   @doc("An optional modifier of a date/time instance.")
   AfterStart,
+
   @doc("An optional modifier of a date/time instance.")
   BeforeApprox,
+
   @doc("An optional modifier of a date/time instance.")
   Mid,
+
   @doc("An optional modifier of a date/time instance.")
   More,
 }
@@ -919,12 +1160,16 @@ enum TemporalModifier {
 enum unit {
   @doc("The Age Unit of measurement")
   Unspecified,
+
   @doc("The Age Unit of measurement")
   Year,
+
   @doc("The Age Unit of measurement")
   Month,
+
   @doc("The Age Unit of measurement")
   Week,
+
   @doc("The Age Unit of measurement")
   Day,
 }
@@ -933,58 +1178,85 @@ enum unit {
 enum VolumeUnit {
   @doc("The Volume Unit of measurement")
   Unspecified,
+
   @doc("The Volume Unit of measurement")
   CubicMeter,
+
   @doc("The Volume Unit of measurement")
   CubicCentimeter,
+
   @doc("The Volume Unit of measurement")
   CubicMillimeter,
+
   @doc("The Volume Unit of measurement")
   Hectoliter,
+
   @doc("The Volume Unit of measurement")
   Decaliter,
+
   @doc("The Volume Unit of measurement")
   Liter,
+
   @doc("The Volume Unit of measurement")
   Centiliter,
+
   @doc("The Volume Unit of measurement")
   Milliliter,
+
   @doc("The Volume Unit of measurement")
   CubicYard,
+
   @doc("The Volume Unit of measurement")
   CubicInch,
+
   @doc("The Volume Unit of measurement")
   CubicFoot,
+
   @doc("The Volume Unit of measurement")
   CubicMile,
+
   @doc("The Volume Unit of measurement")
   FluidOunce,
+
   @doc("The Volume Unit of measurement")
   Teaspoon,
+
   @doc("The Volume Unit of measurement")
   Tablespoon,
+
   @doc("The Volume Unit of measurement")
   Pint,
+
   @doc("The Volume Unit of measurement")
   Quart,
+
   @doc("The Volume Unit of measurement")
   Cup,
+
   @doc("The Volume Unit of measurement")
   Gill,
+
   @doc("The Volume Unit of measurement")
   Pinch,
+
   @doc("The Volume Unit of measurement")
   FluidDram,
+
   @doc("The Volume Unit of measurement")
   Barrel,
+
   @doc("The Volume Unit of measurement")
   Minim,
+
   @doc("The Volume Unit of measurement")
   Cord,
+
   @doc("The Volume Unit of measurement")
   Peck,
+
   @doc("The Volume Unit of measurement")
   Bushel,
+
   @doc("The Volume Unit of measurement")
   Hogshead,
 }
@@ -993,34 +1265,49 @@ enum VolumeUnit {
 enum WeightUnit {
   @doc("The weight Unit of measurement.")
   Unspecified,
+
   @doc("The weight Unit of measurement.")
   Kilogram,
+
   @doc("The weight Unit of measurement.")
   Gram,
+
   @doc("The weight Unit of measurement.")
   Milligram,
+
   @doc("The weight Unit of measurement.")
   Gallon,
+
   @doc("The weight Unit of measurement.")
   MetricTon,
+
   @doc("The weight Unit of measurement.")
   Ton,
+
   @doc("The weight Unit of measurement.")
   Pound,
+
   @doc("The weight Unit of measurement.")
   Ounce,
+
   @doc("The weight Unit of measurement.")
   Grain,
+
   @doc("The weight Unit of measurement.")
   PennyWeight,
+
   @doc("The weight Unit of measurement.")
   LongTonBritish,
+
   @doc("The weight Unit of measurement.")
   ShortTonUS,
+
   @doc("The weight Unit of measurement.")
   ShortHundredWeightUS,
+
   @doc("The weight Unit of measurement.")
   Stone,
+
   @doc("The weight Unit of measurement.")
   Dram,
 }
@@ -1046,3 +1333,13 @@ op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollecti
   AnalyzeConversationTask,
   AnalyzeConversationTaskResult
 >;
+
+// @doc("Submit a collection of conversations for analysis. Specify one or more unique tasks to be executed.")
+// @summary("Submit analysis job for conversations")
+// @TypeSpec.Rest.actionSeparator("/")
+// @TypeSpec.Rest.action("analyze-conversations/jobs")
+// op submitJob is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+//   Conversations,
+//   AnalyzeConversationJobsInput,
+//   AnalyzeConversationTaskResult
+// >;
