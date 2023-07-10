@@ -1,23 +1,39 @@
 {
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "subid",
+    "policyRestrictionId": "policyRestriction1",
+    "If-Match": "*",
     "parameters": {
-      "serviceName": "apimService1",
-      "resourceGroupName": "rg1",
-      "api-version": "2023-03-01-preview",
-      "subscriptionId": "subid",
-      "policyRestrictionId": "policyRestriction1",
-      "If-Match": "*",
-      "parameters": {
+      "properties": {
+        "scope": "Sample Path 2 to the policy document."
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyRestrictions/policyRestriction1",
+        "type": "Microsoft.ApiManagement/service/policyRestrictions",
+        "name": "policyRestriction1",
         "properties": {
-          "scope": "Sample Path 2 to the policy document."
+          "scope": "Sample Path 2 to the policy document.",
+          "requireBase": "true"
         }
       }
     },
-    "responses": {
-        "202": {
-            "headers": {
-                "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationStatus...",
-                "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
-            }
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyRestrictions/policyRestriction1",
+        "type": "Microsoft.ApiManagement/service/policyRestrictions",
+        "name": "policyRestriction1",
+        "properties": {
+          "scope": "Sample Path 2 to the policy document.",
+          "requireBase": "true"
         }
+      }
     }
+  }
 }
