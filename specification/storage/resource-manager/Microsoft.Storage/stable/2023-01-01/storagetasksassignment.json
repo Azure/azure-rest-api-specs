@@ -1,0 +1,520 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StorageTaskManagementClient",
+    "description": "The Azure Storage Tasks Management API.",
+    "version": "2023-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}": {
+      "put": {
+        "tags": [
+          "StorageTaskAssignment"
+        ],
+        "description": "Asynchronously creates a new storage task assignment resource with the specified parameters. If a resource is already created and a subsequent create request is issued with different properties, the resource properties will be updated. If a resource is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.",
+        "operationId": "StorageTaskAssignment_Create",
+        "x-ms-examples": {
+          "PutStorageTaskAssignmentRunOnceType": {
+            "$ref": "./examples/storageTasks/PutStorageTaskAssignmentRunOnceType.json"
+          },
+          "PutStorageTaskAssignmentOnScheduleType": {
+            "$ref": "./examples/storageTasks/PutStorageTaskAssignmentOnScheduleType.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            },
+            "description": "The parameters to create a Storage Task Assignment."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update storage task assignment with the same properties specified in the request body.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "delete": {
+        "tags": [
+          "StorageTaskAssignment"
+        ],
+        "description": "Delete the storage task resource.",
+        "operationId": "StorageTaskAssignment_Delete",
+        "x-ms-examples": {
+          "DeleteStorageTaskAssignment": {
+            "$ref": "./examples/storageTasks/DeleteStorageTaskAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- specified storage task assignment does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "StorageTaskAssignment"
+        ],
+        "description": "Get the storage task properties",
+        "operationId": "StorageTaskAssignment_Get",
+        "x-ms-examples": {
+          "GetStorageTaskAssignment": {
+            "$ref": "./examples/storageTasks/GetStorageTaskAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- properties retrieved successfully for the storage task.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "StorageTaskAssignment"
+        ],
+        "operationId": "StorageTaskAssignment_Update",
+        "description": "Update storage task properties",
+        "x-ms-examples": {
+          "PatchStorageTaskAssignmentRunOnceType": {
+            "$ref": "./examples/storageTasks/PatchStorageTaskAssignmentRunOnceType.json"
+          },
+          "PatchStorageTaskAssignmentOnScheduleType": {
+            "$ref": "./examples/storageTasks/PatchStorageTaskAssignmentOnScheduleType.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            },
+            "description": "The parameters to provide to update the storage task assignment resource."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- returned when the update request body had no changes.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments": {
+      "get": {
+        "tags": [
+          "StorageTaskAssignment"
+        ],
+        "operationId": "StorageTaskAssignment_List",
+        "description": "List Storage Task Assignments.",
+        "x-ms-examples": {
+          "ListStorageTaskAssignmentsForStorageAccount": {
+            "$ref": "./examples/storageTasks/ListStorageTaskAssignmentsForStorageAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "type": "string",
+            "description": "Optional. Specified maximum number of storage task assignments that can be included in the list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List of storage task assignment in the given resource group retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StorageTaskAssignment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageTaskAssignmentProperties",
+          "description": "Properties of the storage task assignment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Represents Storage Task Assignment."
+    },
+    "StorageTaskAssignmentProperties": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "ARM Id of the corresponding storage task. This property is required and immutable."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Storage Task Assignment is enabled when set to true."
+        },
+        "description": {
+          "type": "string",
+          "description": "Text that describes the purpose of the storage task assignment"
+        },
+        "executionContext": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionContext",
+          "description": "The storage task assignment execution context"
+        },
+        "report": {
+          "$ref": "#/definitions/StorageTaskAssignmentReport",
+          "description": "The storage task assignment report"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Represents the provisioning state of the storage task assignment.",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "taskId",
+        "description",
+        "executionContext",
+        "report"
+      ],
+      "description": "Properties of the storage task assignment."
+    },
+    "StorageTaskAssignmentExecutionContext": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionTarget",
+          "description": "Execution target of the storage task assignment"
+        },
+        "trigger": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionTrigger",
+          "description": "Execution trigger of the storage task assignment"
+        },
+        "constraints": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionConstraints",
+          "description": "Execution constraints of the storage task assignment"
+        }
+      },
+      "required": [
+        "target",
+        "trigger"
+      ],
+      "description": "The storage task assignment execution context"
+    },
+    "StorageTaskAssignmentExecutionTarget": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of target prefixes"
+        },
+        "reservedPathPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of reserved path prefixes"
+        }
+      },
+      "description": "Target for storage task assignment execution"
+    },
+    "StorageTaskAssignmentExecutionTrigger": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "RunOnce",
+            "OnSchedule"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionTriggerType",
+            "modelAsString": false
+          },
+          "description": "The trigger type of the storage task assignment execution. This property is immutable."
+        },
+        "parameters": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionTriggerParameters",
+          "description": "The trigger parameters of the storage task assignment execution"
+        }
+      },
+      "description": "Trigger for storage task assignment execution"
+    },
+    "StorageTaskAssignmentExecutionTriggerParameters": {
+      "properties": {
+        "startFrom": {
+          "type": "string",
+          "description": "When to start task execution. Only applicable for OnSchedule type. The value must be a current or future date time value in either UTC ISO 8601 sortable or roundtrip format."
+        },
+        "interval": {
+          "type": "integer",
+          "description": "Run interval of task execution. Only applicable for OnSchedule type."
+        },
+        "intervalUnit": {
+          "type": "string",
+          "enum": [
+            "days"
+          ],
+          "description": "Run interval unit of task execution. Only applicable for OnSchedule type."
+        },
+        "endBy": {
+          "type": "string",
+          "description": "When to end task execution. Only applicable for OnSchedule type. The value must be a date time value in either UTC ISO 8601 sortable or roundtrip format and greater than or equal to startFrom."
+        },
+        "startOn": {
+          "type": "string",
+          "description": "startOn for task execution. Only applicable for OnSchedule type. The value must be a current or future date time value in either UTC ISO 8601 sortable or roundtrip format"
+        }
+      },
+      "description": "The trigger parameters of the storage task assignment execution"
+    },
+    "StorageTaskAssignmentExecutionConstraints": {
+      "type": "object",
+      "properties": {
+        "abortOnFailures": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000,
+          "description": "abortOnFailures constraint for storage task assignment execution"
+        }
+      },
+      "description": "Constraints for storage task assignment execution"
+    },
+    "StorageTaskAssignmentReport": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string",
+          "description": "Blob Container name to store storage task assignment run reports"
+        }
+      },
+      "description": "The storage task assignment report"
+    },
+    "StorageTaskAssignmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskAssignment"
+          },
+          "description": "Gets the list of storage task assignments and their properties for the storage account."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage task assignments. Returned when total number of requested storage task assignments exceed maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Storage Task Assignment operation."
+    }
+  },
+  "parameters": {
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "StorageTaskAssignmentName": {
+      "name": "storageTaskAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
+      "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$",
+      "maxLength": 62,
+      "minLength": 2,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

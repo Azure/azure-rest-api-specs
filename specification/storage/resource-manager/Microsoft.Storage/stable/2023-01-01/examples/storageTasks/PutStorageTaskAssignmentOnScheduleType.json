@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "res7687",
+    "accountName": "sto9699",
+    "storageTaskAssignmentName": "myassignment1",
+    "api-version": "2023-01-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "taskId": "/subscriptions/3fc8c5ef-c10a-401a-92fc-5dfb21f4d78f/resourcegroups/rg1/providers/microsoft.storage/storagetasks/mytask",
+        "enabled": true,
+        "description": "Scheduled Storage task assignment",
+        "executionContext": {
+          "target": {
+            "prefix": [
+              "containerPrefix"
+            ],
+            "reservedPathPrefix": []
+          },
+          "trigger": {
+            "type": "OnSchedule",
+            "parameters": {
+              "startFrom": "2023-07-06T19:53:53",
+              "interval": 5,
+              "intervalUnit": "days",
+              "endBy": "2023-07-06T19:53:53"
+            }
+          },
+          "constraints": {
+            "abortOnFailures": 50
+          }
+        },
+        "report": {
+          "prefix": "reportingContainer"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-01-01"
+      },
+      "body": {
+        "id": "/subscriptions/3fc8c5ef-c10a-401a-92fc-5dfb21f4d78f/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/sto9699/storageTaskAssignments/myassignment1",
+        "name": "myassignment1",
+        "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
+        "properties": {
+          "taskId": "/subscriptions/3fc8c5ef-c10a-401a-92fc-5dfb21f4d78f/resourcegroups/rg1/providers/microsoft.storage/storagetasks/mytask",
+          "enabled": true,
+          "description": "Scheduled Storage task assignment",
+          "executionContext": {
+            "target": {
+              "prefix": [
+                "containerPrefix"
+              ],
+              "reservedPathPrefix": []
+            },
+            "trigger": {
+              "type": "OnSchedule",
+              "parameters": {
+                "startFrom": "2023-07-06T19:53:53",
+                "interval": 5,
+                "intervalUnit": "days",
+                "endBy": "2023-07-06T19:53:53"
+              }
+            },
+            "constraints": {
+              "abortOnFailures": 50
+            }
+          },
+          "report": {
+            "prefix": "reportingContainer"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-01-01"
+      }
+    }
+  }
+}

@@ -104,8 +104,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK -- storage task deleted successfully."
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- specified storage task does not exist."
@@ -284,7 +289,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- List of storage accounts in the given resource group retrieved and returned successfully.",
+            "description": "OK -- List of storage tasks in the given resource group retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/StorageTasksListResult"
             }
