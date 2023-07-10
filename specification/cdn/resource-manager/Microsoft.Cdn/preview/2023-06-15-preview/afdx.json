@@ -5350,7 +5350,7 @@
         "healthProbeSettings": {
           "description": "Health probe settings to the origin that is used to determine the health of the origin.",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ "
+          "$ref": "./cdn.json#/definitions/HealthProbeParameters"
         },
         "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
           "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
@@ -5431,7 +5431,7 @@
           "description": "The ports used for the TCP/UDP connection to the customer's backend. Must be between 1 and 65535. The ports can be a comma separated list or a valid range like 5050-5090",
           "type": "array",
           "items": {
-            "type": "integer",
+            "type": "string",
             "minimum": 1,
             "maximum": 65535
           }
@@ -5604,7 +5604,7 @@
           "description": "The list of frontend ports used to land traffic on azure front door.",
           "type": "array",
           "items": {
-            "type": "integer",
+            "type": "string",
             "minimum": 1,
             "maximum": 65535
           }
