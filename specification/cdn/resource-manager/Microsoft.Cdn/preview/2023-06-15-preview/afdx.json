@@ -5300,6 +5300,9 @@
         }
       ],
       "properties": {
+        "originGroupType": {
+          "$ref": "#/definitions/AFDOriginGroupType"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AFDOriginGroupProperties"
@@ -5322,6 +5325,9 @@
       "type": "object",
       "description": "AFDOrigin group properties needed for origin group creation or update.",
       "properties": {
+        "originGroupType":{
+          "$ref": "#/definitions/AFDOriginGroupType"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AFDOriginGroupUpdatePropertiesParameters"
@@ -5331,19 +5337,6 @@
     },
     "AFDOriginGroupUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the origin group.",
-      "originGroupType": {
-        "description": "The type of the origin group. Indicates whether the origin group is a 'L4' type or a 'L7' type.",
-        "type": "string",
-        "enum": [
-          "L4OriginGroup",
-          "L7OriginGroup"
-        ],
-        "x-ms-enum": {
-          "name": "originGroupType",
-          "modelAsString": true
-        },
-        "default": "L7OriginGroup"
-      },
       "properties": {
         "profileName": {
           "description": "The name of the profile which holds the origin group.",
@@ -5404,6 +5397,19 @@
           "format": "int32"
         }
       }
+    },
+    "AFDOriginGroupType":{
+      "description": "The type of the origin group. Indicates whether the origin group is a 'L4' type or a 'L7' type.",
+      "type": "string",
+      "enum": [
+        "L4OriginGroup",
+        "L7OriginGroup"
+      ],
+      "x-ms-enum": {
+        "name": "AFDOriginGroupType",
+        "modelAsString": true
+      },
+      "default": "L7OriginGroup"
     },
     "OriginProtocolSettingsParameters": {
       "description": "Origin protocol settings that determine how the origin is accessed.",
@@ -5487,6 +5493,9 @@
         }
       ],
       "properties": {
+        "routeMode": {
+          "$ref": "#/definitions/RouteMode"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RouteProperties"
@@ -5511,6 +5520,9 @@
       "description": "The domain JSON object required for domain creation or update.",
       "type": "object",
       "properties": {
+        "routeMode":{
+          "$ref": "#/definitions/RouteMode"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RouteUpdatePropertiesParameters"
@@ -5519,19 +5531,6 @@
     },
     "RouteUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
-      "routeMode": {
-        "description": "The type of the route that is being created. Possible values include: 'L7Type', 'L4Type' ",
-        "type": "string",
-        "enum": [
-          "Layer7",
-          "Layer4"
-        ],
-        "x-ms-enum": {
-          "name": "routeMode",
-          "modelAsString": true
-        },
-        "default": "Layer7"
-      },
       "properties": {
         "endpointName": {
           "description": "The name of the endpoint which holds the route.",
@@ -5784,6 +5783,19 @@
           "default": "Continue"
         }
       }
+    },
+    "RouteMode": {
+      "description": "The type of the route that is being created. Possible values include: 'L7Type', 'L4Type' ",
+      "type": "string",
+      "enum": [
+        "Layer7",
+        "Layer4"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMode",
+        "modelAsString": true
+      },
+      "default": "Layer7"
     },
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",
