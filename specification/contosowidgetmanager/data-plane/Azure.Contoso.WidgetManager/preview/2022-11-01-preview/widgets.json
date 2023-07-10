@@ -53,7 +53,7 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
-              "description": "Paged collection of Widget items",
+              "description": "Paged collection of WidgetSuite items",
               "properties": {
                 "value": {
                   "type": "array",
@@ -451,40 +451,6 @@
           }
         ]
       }
-    },
-    "ContosoAuthFlow": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "implicit"
-          ],
-          "description": "The auth flow type."
-        },
-        "authorizationUrl": {
-          "type": "string",
-          "enum": [
-            "https://login.microsoftonline.com/common/oauth2/authorize"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "description": "The auth flow authorization URL."
-        },
-        "scopes": {
-          "type": "array",
-          "items": {},
-          "x-typespec-name": "[https://security.microsoft.com/.default]",
-          "description": "The auth flow token URL."
-        }
-      },
-      "description": "A faked auth model.",
-      "required": [
-        "type",
-        "authorizationUrl",
-        "scopes"
-      ]
     },
     "FakedSharedModel": {
       "type": "object",
