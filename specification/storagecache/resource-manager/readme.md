@@ -26,16 +26,26 @@ These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-01
+tag: package-2023-05
 add-credentials: true
 title: StorageCacheManagementClient
 ```
 
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.StorageCache/stable/2023-05-01/amlfilesystem.json
+  - Microsoft.StorageCache/stable/2023-05-01/storagecache.json
+```
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - Microsoft.StorageCache/preview/2023-03-01-preview/storagecache.json
   - Microsoft.StorageCache/preview/2023-03-01-preview/amlfilesystem.json
@@ -45,10 +55,11 @@ input-file:
 
 These settings apply only when `--tag=package-2023-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-01'
+``` yaml $(tag) == 'package-2023-01'
 input-file:
   - Microsoft.StorageCache/stable/2023-01-01/storagecache.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
