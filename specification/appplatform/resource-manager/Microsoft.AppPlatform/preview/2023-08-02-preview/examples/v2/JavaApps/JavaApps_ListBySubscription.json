@@ -1,7 +1,6 @@
 {
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
     "api-version": "2023-08-02-preview"
   },
   "responses": {
@@ -10,9 +9,9 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/apps/testApp0",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/javaApps/testApp0",
             "name": "testApp0",
-            "type": "Microsoft.AppPlatform/apps",
+            "type": "Microsoft.AppPlatform/javaApps",
             "location": "East US",
             "properties": {
               "provisioningState": "Succeeded",
@@ -52,13 +51,13 @@
                   "ipSecurityRestrictions": [
                     {
                       "name": "Allow work IP A subnet",
-                      "description": "Allowing all IP's within the subnet below to access containerapp",
+                      "description": "Allowing all IP's within the subnet below to access the app",
                       "ipAddressRange": "192.168.1.1/32",
                       "action": "Allow"
                     },
                     {
                       "name": "Allow work IP B subnet",
-                      "description": "Allowing all IP's within the subnet below to access containerapp",
+                      "description": "Allowing all IP's within the subnet below to access the app",
                       "ipAddressRange": "192.168.1.1/8",
                       "action": "Allow"
                     }
@@ -76,7 +75,10 @@
                   "logLevel": "debug",
                   "enableApiLogging": true
                 },
-                "maxInactiveRevisions": 10
+                "maxInactiveRevisions": 10,
+                "service": {
+                  "type": "redis"
+                }
               },
               "template": {
                 "containers": [

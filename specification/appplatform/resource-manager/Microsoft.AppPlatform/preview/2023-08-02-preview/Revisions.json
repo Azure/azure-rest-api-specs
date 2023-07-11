@@ -15,12 +15,12 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/revisions": {
       "get": {
         "tags": [
           "Revisions"
         ],
-        "summary": "Get the Revisions for a given App.",
+        "summary": "Get the Revisions for a given JavaApp.",
         "operationId": "Revisions_List",
         "parameters": [
           {
@@ -64,12 +64,12 @@
         "x-ms-odata": "#/definitions/Revision"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/revisions/{revisionName}": {
       "get": {
         "tags": [
           "Revisions"
         ],
-        "summary": "Get a revision of an App.",
+        "summary": "Get a revision of a JavaApp.",
         "operationId": "Revisions_Get",
         "parameters": [
           {
@@ -109,12 +109,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/activate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/revisions/{revisionName}/activate": {
       "post": {
         "tags": [
           "Revisions"
         ],
-        "summary": "Activates a revision for an App",
+        "summary": "Activates a revision for a JavaApp",
         "operationId": "Revisions_Activate",
         "parameters": [
           {
@@ -163,12 +163,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/deactivate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/revisions/{revisionName}/deactivate": {
       "post": {
         "tags": [
           "Revisions"
         ],
-        "summary": "Deactivates a revision for an App",
+        "summary": "Deactivates a revision for a JavaApp",
         "operationId": "Revisions_Deactivate",
         "parameters": [
           {
@@ -207,7 +207,7 @@
           }
         },
         "x-ms-examples": {
-          "Deactivate the revision of an App": {
+          "Deactivate the revision of a JavaApp": {
             "$ref": "./examples/v2/Revisions/Revisions_Deactivate.json"
           }
         },
@@ -217,7 +217,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/replicas/{replicaName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/revisions/{revisionName}/replicas/{replicaName}": {
       "get": {
         "tags": [
           "RevisionReplicas"
@@ -259,13 +259,13 @@
           }
         },
         "x-ms-examples": {
-          "Get the revision replica of an App": {
+          "Get the revision replica of a JavaApp": {
             "$ref": "./examples/v2/Revisions/Replicas_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/replicas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/revisions/{revisionName}/replicas": {
       "get": {
         "tags": [
           "RevisionReplicas"
@@ -304,18 +304,18 @@
           }
         },
         "x-ms-examples": {
-          "List replicas of an App": {
+          "List replicas of a JavaApp": {
             "$ref": "./examples/v2/Revisions/Replicas_List.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/revisions/{revisionName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/revisions/{revisionName}/restart": {
       "post": {
         "tags": [
           "Revisions"
         ],
-        "summary": "Restarts a revision for an App",
+        "summary": "Restarts a revision for a JavaApp",
         "operationId": "Revisions_Restart",
         "parameters": [
           {
@@ -354,7 +354,7 @@
           }
         },
         "x-ms-examples": {
-          "Restart the revision of an App": {
+          "Restart the revision of a JavaApp": {
             "$ref": "./examples/v2/Revisions/Revisions_Restart.json"
           }
         },

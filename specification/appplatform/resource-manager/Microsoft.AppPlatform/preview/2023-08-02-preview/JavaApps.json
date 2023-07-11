@@ -15,13 +15,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/apps": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/javaApps": {
       "get": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Get the Apps in a given subscription.",
-        "operationId": "Apps_ListBySubscription",
+        "summary": "Get the JavaApps in a given subscription.",
+        "operationId": "JavaApps_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -34,7 +34,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppCollection"
+              "$ref": "#/definitions/JavaAppsCollection"
             }
           },
           "default": {
@@ -45,8 +45,8 @@
           }
         },
         "x-ms-examples": {
-          "List Apps by subscription": {
-            "$ref": "./examples/v2/Apps/Apps_ListBySubscription.json"
+          "List JavaApps by subscription": {
+            "$ref": "./examples/v2/JavaApps/JavaApps_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -54,13 +54,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps": {
       "get": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Get the Apps in a given resource group.",
-        "operationId": "Apps_ListByResourceGroup",
+        "summary": "Get the JavaApps in a given resource group.",
+        "operationId": "JavaApps_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -76,7 +76,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AppCollection"
+              "$ref": "#/definitions/JavaAppsCollection"
             }
           },
           "default": {
@@ -87,8 +87,8 @@
           }
         },
         "x-ms-examples": {
-          "List Apps by resource group": {
-            "$ref": "./examples/v2/Apps/Apps_ListByResourceGroup.json"
+          "List JavaApps by resource group": {
+            "$ref": "./examples/v2/JavaApps/JavaApps_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -96,13 +96,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}": {
       "get": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Get the properties of an App.",
-        "operationId": "Apps_Get",
+        "summary": "Get the properties of a JavaApp.",
+        "operationId": "JavaApps_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -121,7 +121,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/App"
+              "$ref": "#/definitions/JavaApp"
             }
           },
           "default": {
@@ -133,17 +133,17 @@
         },
         "x-ms-examples": {
           "Get an App": {
-            "$ref": "./examples/v2/Apps/Apps_Get.json"
+            "$ref": "./examples/v2/JavaApps/JavaApps_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Create or update an App.",
-        "description": "Create or update an App.",
-        "operationId": "Apps_CreateOrUpdate",
+        "summary": "Create or update a JavaApp.",
+        "description": "Create or update a JavaApp.",
+        "operationId": "JavaApps_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -160,7 +160,7 @@
             "description": "Properties used to create an app",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/App"
+              "$ref": "#/definitions/JavaApp"
             }
           },
           {
@@ -171,13 +171,13 @@
           "200": {
             "description": "No update performed on the App.",
             "schema": {
-              "$ref": "#/definitions/App"
+              "$ref": "#/definitions/JavaApp"
             }
           },
           "201": {
             "description": "App create or update has been started.",
             "schema": {
-              "$ref": "#/definitions/App"
+              "$ref": "#/definitions/JavaApp"
             }
           },
           "default": {
@@ -189,7 +189,7 @@
         },
         "x-ms-examples": {
           "Create or Update an App": {
-            "$ref": "./examples/v2/Apps/Apps_CreateOrUpdate.json"
+            "$ref": "./examples/v2/JavaApps/JavaApps_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -199,11 +199,11 @@
       },
       "delete": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Delete an App.",
-        "description": "Delete an App.",
-        "operationId": "Apps_Delete",
+        "summary": "Delete a JavaApp.",
+        "description": "Delete a JavaApp.",
+        "operationId": "JavaApps_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -242,7 +242,7 @@
         },
         "x-ms-examples": {
           "Delete an App": {
-            "$ref": "./examples/v2/Apps/Apps_Delete.json"
+            "$ref": "./examples/v2/JavaApps/JavaApps_Delete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -252,11 +252,11 @@
       },
       "patch": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Update properties of an App",
+        "summary": "Update properties of a JavaApp",
         "description": "Patches an App using JSON Merge Patch",
-        "operationId": "Apps_Update",
+        "operationId": "JavaApps_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -273,7 +273,7 @@
             "required": true,
             "description": "Properties used to create an app",
             "schema": {
-              "$ref": "#/definitions/App"
+              "$ref": "#/definitions/JavaApp"
             }
           },
           {
@@ -284,7 +284,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/App"
+              "$ref": "#/definitions/JavaApp"
             }
           },
           "202": {
@@ -304,19 +304,19 @@
         },
         "x-ms-examples": {
           "Patch an App": {
-            "$ref": "./examples/v2/Apps/Apps_Patch.json"
+            "$ref": "./examples/v2/JavaApps/JavaApps_Patch.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/listSecrets": {
       "post": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "List secrets for an app",
-        "operationId": "Apps_ListSecrets",
+        "summary": "List secrets for a JavaApp",
+        "operationId": "JavaApps_ListSecrets",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -346,19 +346,19 @@
           }
         },
         "x-ms-examples": {
-          "List Apps Secrets": {
-            "$ref": "./examples/v2/Apps/Apps_ListSecrets.json"
+          "List JavaApps Secrets": {
+            "$ref": "./examples/v2/JavaApps/JavaApps_ListSecrets.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/start": {
       "post": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Start an app",
-        "operationId": "Apps_Start",
+        "summary": "Start a JavaApp",
+        "operationId": "JavaApps_Start",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -394,7 +394,7 @@
         },
         "x-ms-examples": {
           "Start an App": {
-            "$ref": "./examples/v2/Apps/Apps_Start.json"
+            "$ref": "./examples/v2/JavaApps/JavaApps_Start.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -403,13 +403,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/stop": {
       "post": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
-        "summary": "Stop an app",
-        "operationId": "Apps_Stop",
+        "summary": "Stop a JavaApp",
+        "operationId": "JavaApps_Stop",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -445,7 +445,7 @@
         },
         "x-ms-examples": {
           "Stop an App": {
-            "$ref": "./examples/v2/Apps/Apps_Stop.json"
+            "$ref": "./examples/v2/JavaApps/JavaApps_Stop.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -454,13 +454,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/apps/{appName}/getResourceUploadUrl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/getResourceUploadUrl": {
       "post": {
         "tags": [
-          "Apps"
+          "JavaApps"
         ],
         "description": "Get an resource upload URL for an App, which may be artifacts or source archive.",
-        "operationId": "Apps_GetResourceUploadUrl",
+        "operationId": "JavaApps_GetResourceUploadUrl",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -491,15 +491,15 @@
         },
         "x-ms-examples": {
           "BuildService_GetResourceUploadUrl": {
-            "$ref": "./examples/v2/Apps/Apps_GetResourceUploadUrl.json"
+            "$ref": "./examples/v2/JavaApps/JavaApps_GetResourceUploadUrl.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AppCollection": {
-      "description": "App collection ARM resource.",
+    "JavaAppsCollection": {
+      "description": "JavaApps collection ARM resource.",
       "required": [
         "value"
       ],
@@ -509,7 +509,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/App"
+            "$ref": "#/definitions/JavaApp"
           }
         },
         "nextLink": {
@@ -519,8 +519,8 @@
         }
       }
     },
-    "App": {
-      "description": "Azure Spring Apps App resource",
+    "JavaApp": {
+      "description": "Azure Spring Apps JavaApp resource",
       "type": "object",
       "allOf": [
         {
@@ -532,7 +532,7 @@
           "type": "object",
           "properties": {
             "provisioningState": {
-              "description": "Provisioning state of the Azure Spring Apps App.",
+              "description": "Provisioning state of the Azure Spring Apps JavaApp.",
               "enum": [
                 "InProgress",
                 "Succeeded",
@@ -543,7 +543,7 @@
               "type": "string",
               "readOnly": true,
               "x-ms-enum": {
-                "name": "AppProvisioningState",
+                "name": "JavaAppProvisioningState",
                 "modelAsString": true
               }
             },
@@ -620,7 +620,7 @@
       "description": "Properties used to create an app",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/App"
+        "$ref": "#/definitions/JavaApp"
       }
     }
   },
