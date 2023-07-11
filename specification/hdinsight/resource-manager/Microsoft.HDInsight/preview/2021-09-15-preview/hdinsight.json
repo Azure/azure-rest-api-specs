@@ -1483,6 +1483,9 @@
           "type": "object",
           "description": "Stub cluster profile.",
           "additionalProperties": true
+        },
+        "scriptActionProfiles": {
+          "$ref": "#/definitions/ScriptActionProfiles"
         }
       },
       "description": "Cluster profile."
@@ -1956,6 +1959,58 @@
         },
         "metastoreSpec": {
           "$ref": "#/definitions/SparkMetastoreSpec"
+        }
+      }
+    },
+    "ScriptActionProfiles": {
+      "type": "array",
+      "description": "The script action profile list.",
+      "items": {
+        "$ref": "#/definitions/ScriptActionProfile"
+      }
+    },
+    "ScriptActionProfile": {
+      "type": "object",
+      "description": "The script action profile.",
+      "required": [
+        "name",
+        "type",
+        "url",
+        "services"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the script action. Supported type is bash scripts."
+        },
+        "name": {
+          "type": "string",
+          "description": "Script name."
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of the script file.",
+          "pattern": "^(https)|(http)://.*$"
+        },
+        "parameters": {
+          "type": "string",
+          "description": "Additional parameters for the script action. It should be space-separated list of arguments required for script execution."
+        },
+        "services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "List of services to apply the script action."
+        },
+        "timeoutInMinutes": {
+          "type": "integer",
+          "description": "Timeout duration for the script action in minutes."
+        },
+        "shouldPersist": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specify if the script should persist on the cluster."
         }
       }
     },
