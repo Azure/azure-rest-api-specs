@@ -15189,7 +15189,7 @@
         "type": "object",
         "properties": {
           "shapeType": {
-            "description": "Type of shape file to be ingested from JohnDeere.\r\nPossible values of shape file type are taken from - https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
+            "description": "Type of shape file to be ingested from Operation Data Provider.",
             "minLength": 1,
             "enum": [
               "Point",
@@ -15202,7 +15202,7 @@
             }
           },
           "shapeResolution": {
-            "description": "Resolution of shape file to be ingested from JohnDeere.\r\nPossible values of shape file resolution are taken from - https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
+            "description": "Resolution of shape file to be ingested from Operation Data Provider.",
             "minLength": 1,
             "enum": [
               "EachSection",
@@ -16709,7 +16709,7 @@
             "type": "string"
           },
           "isProductionApp": {
-            "description": "An optional flag to determine if the App is ready to be used for Production scenarios in the provider side or not. (Default value: false)\r\nNote: Currently applicable for JohnDeere.",
+            "description": "An optional flag to determine if the App is ready to be used for Production scenarios in the provider side or not. (Default value: false)",
             "default": false,
             "type": "boolean"
           },
@@ -18648,6 +18648,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "partyId": {
+            "description": "Party ID which belongs to the operation data.",
+            "type": "string"
           },
           "ids": {
             "description": "Ids of the resource.",
