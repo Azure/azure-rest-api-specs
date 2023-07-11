@@ -140,7 +140,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/v2/{configurationName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}/v2/{configurationType}": {
       "put": {
         "tags": [
           "Configurations"
@@ -178,11 +178,26 @@
               "name": "ConfigurationName",
               "modelAsString": true
             }
+          },
+          {
+            "name": "configurationType",
+            "in": "path",
+            "description": "Advisor configuration name. Value must be 'duration'",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "enum": [
+              "duration"
+            ],
+            "x-ms-enum": {
+              "name": "ConfigurationName",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully created or updated a configuration.",
+            "description": "Successfully create or update a configuration.",
             "schema": {
               "$ref": "#/definitions/ConfigData"
             }
@@ -310,7 +325,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/v2/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}/v2/{configurationType}": {
       "put": {
         "tags": [
           "Configurations"
@@ -339,8 +354,24 @@
             "description": "Advisor configuration name. Value must be 'default'",
             "required": true,
             "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
             "enum": [
               "default"
+            ],
+            "x-ms-enum": {
+              "name": "ConfigurationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "configurationType",
+            "in": "path",
+            "description": "Advisor configuration name. Value must be 'duration'",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "enum": [
+              "duration"
             ],
             "x-ms-enum": {
               "name": "ConfigurationName",
