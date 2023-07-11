@@ -5981,9 +5981,10 @@
     "AFDUrlSigningAction": {
       "description": "Defines the url signing action for the delivery rule.",
       "type": "object",
+      "x-ms-discriminator-value": "UrlSigning",
       "allOf": [
         {
-          "$ref": "./cdn.json#/definitions/BaseUrlSigningAction"
+          "$ref": "./cdn.json#/definitions/DeliveryRuleAction"
         }
       ],
       "required": [
