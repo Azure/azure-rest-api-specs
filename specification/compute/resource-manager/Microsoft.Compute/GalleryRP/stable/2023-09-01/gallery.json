@@ -3347,6 +3347,29 @@
           "type": "string"
         }
       }
+    },
+    "VMArtifactsProfile": {
+      "type": "object",
+      "properties": {
+        "artifactProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactProfile"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "upgradeProviderInfo": {
+          "$ref": "#/definitions/UpgradeProviderInfo"
+        },
+        "upgradeSdpPolicy": {
+          "$ref": "#/definitions/UpgradeSDPPolicy"
+        }
+      }
     }
   },
   "parameters": {
