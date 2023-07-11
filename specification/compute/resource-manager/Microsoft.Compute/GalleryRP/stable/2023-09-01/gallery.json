@@ -1732,6 +1732,58 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}": {
+      "get": {
+        "tags": [
+          "GalleryServiceArtifactGet"
+        ],
+        "operationId": "GalleryServiceArtifact_Get",
+        "description": "Retrieves a Service Artifact under a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery."
+          },
+          {
+            "name": "serviceArtifactName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Gallery Service Artifact."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryServiceArtifact"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryServiceArtifact"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {}
+      }
     }
   },
   "definitions": {
@@ -3142,6 +3194,157 @@
         "location": {
           "type": "string",
           "description": "region of the Gallery Image Version."
+        }
+      }
+    },
+    "GalleryServiceArtifact": {
+      "type": "object",
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation"
+        },
+        "id": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "managedBy": {
+          "$ref": "#/definitions/Identity"
+        },
+        "name": {
+          "type": "string"
+        },
+        "plan": {
+          "$ref": "#/definitions/Plan"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "provisioningState": {
+              "readOnly": true,
+              "$ref": "#/definitions/GalleryProvisioningState"
+            },
+            "targetLocations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TargetLocation"
+              }
+            },
+            "vmArtifactsProfiles": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VMArtifactsProfile"
+              }
+            }
+          }
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/Plan"
+        },
+        "tags": {
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object"
+    },
+    "Identity": {
+      "type": "object"
+    },
+    "Plan": {
+      "type": "object"
+    },
+    "TargetLocation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "initialVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ArtifactProfile": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference"
+        }
+      }
+    },
+    "UpgradeProviderParameters": {
+      "type": "object",
+      "properties": {
+        "ServiceGroup": {
+          "type": "string"
+        },
+        "ServiceIdentifier": {
+          "type": "string"
+        }
+      }
+    },
+    "UpgradeProviderInfo": {
+      "type": "object",
+      "properties": {
+        "enableAutoTrigger": {
+          "type": "boolean"
+        },
+        "upgradeProviderParameters": {
+          "$ref": "#/definitions/UpgradeProviderParameters"
+        }
+      }
+    },
+    "SchedulingPolicy": {
+      "type": "object",
+      "properties": {
+        "disableRegularUpgrades": {
+          "type": "boolean"
+        },
+        "maxConcurrentResourceCountPerRegion": {
+          "type": "integer"
+        },
+        "upgradeWindow": {
+          "type": "string"
+        }
+      }
+    },
+    "UpgradeSDPPolicy": {
+      "type": "object",
+      "properties": {
+        "schedulingPolicy": {
+          "$ref": "#/definitions/SchedulingPolicy"
+        },
+        "type": {
+          "type": "string"
         }
       }
     }
