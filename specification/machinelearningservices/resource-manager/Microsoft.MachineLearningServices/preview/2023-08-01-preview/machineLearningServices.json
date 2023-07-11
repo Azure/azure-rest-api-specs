@@ -2175,6 +2175,10 @@
           "description": "ComputeInstance version.",
           "$ref": "#/definitions/ComputeInstanceVersion",
           "readOnly": true
+        },
+        "autoRestartAfterUpdates": {
+          "type": "boolean",
+          "description": "Indicates whether this compute instance allow auto reboot when reboot is required after os patching."
         }
       }
     },
@@ -2875,6 +2879,18 @@
         "isLatestOsImageVersion": {
           "type": "boolean",
           "description": "Specifies whether this compute instance is running on the latest operating system image."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "description": "Specifies whether this compute instance is pending for reboot to finish os patching."
+        },
+        "patchStatus": {
+          "type": "string",
+          "description": "The os patching status."
+        },
+        "latestUpdateTime": {
+          "type": "string",
+          "description": "Time of the lastest os patching."
         }
       }
     },
