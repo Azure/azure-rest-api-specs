@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myRG",
+    "vmName": "myVM",
+    "applicationName": "myApp",
+    "api-version": "2023-07-01",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myApp",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/myVM/VMApplications/myApp",
+        "type": "Microsoft.Compute/virtualMachines/VMApplications",
+        "properties": {
+          "packageReferenceId": "/subscriptions/a53f7094-a16c-47af-abe4-b05c05d0d79a/resourceGroups/bhbrahma_testing/providers/Microsoft.Compute/galleries/gallery1/applications/myApp/versions/1.0.0",
+          "treatFailureAsDeploymentFailure": true,
+          "enableAutomaticUpgrade": false,
+          "instanceView": {
+            "name": "myApp",
+            "version": "1.0.0",
+            "result": "Install FAILED Error executing command 'return -1': command terminated with exit status=2",
+            "actionsPerformed": [
+              {
+                "operation": "Install",
+                "result": "Error executing command 'return -1': command terminated with exit status=2"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
