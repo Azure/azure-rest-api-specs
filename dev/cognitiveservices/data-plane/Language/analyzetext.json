@@ -3197,6 +3197,13 @@
       "type": "object",
       "x-ms-discriminator-value": "TemporalSpanMetadata",
       "properties": {
+        "spanValues":{
+          "$ref": "#/definitions/TemporalSpanValues"
+        }
+      }
+    },
+    "TemporalSpanValues":{
+      "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
         },
