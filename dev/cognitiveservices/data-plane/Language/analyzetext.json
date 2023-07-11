@@ -2766,19 +2766,19 @@
       },
       "description": "The reference point that the ordinal number denotes."
     },
-    "RangeInclusivity":{
+    "RangeInclusivity": {
       "type": "string",
-          "enum": [
-            "noneInclusive",
-            "leftInclusive",
-            "rightInclusive",
-            "leftRightInclusive"
-          ],
-          "x-ms-enum": {
-            "name": "RangeInclusivity",
-            "modelAsString": true
-          },
-          "description": "The range inclusiveness of this property property."
+      "enum": [
+        "noneInclusive",
+        "leftInclusive",
+        "rightInclusive",
+        "leftRightInclusive"
+      ],
+      "x-ms-enum": {
+        "name": "RangeInclusivity",
+        "modelAsString": true
+      },
+      "description": "The range inclusiveness of this property property."
     },
     "NumericRangeKind": {
       "type": "string",
@@ -2824,7 +2824,7 @@
             "InformationMetadata",
             "TemperatureMetadata",
             "CurrencyMetadata",
-            "NumberRangeMetadata",
+            "NumericRangeMetadata",
             "TemporalSpanMetadata"
           ],
           "x-ms-enum": {
@@ -3197,12 +3197,13 @@
       "type": "object",
       "x-ms-discriminator-value": "TemporalSpanMetadata",
       "properties": {
-        "spanValues":{
+        "spanValues": {
           "$ref": "#/definitions/TemporalSpanValues"
         }
       }
     },
-    "TemporalSpanValues":{
+    "TemporalSpanValues": {
+      "type": "object",
       "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
@@ -3246,7 +3247,7 @@
           "format": "double",
           "description": "The ending value of the interval."
         },
-        "rangeInclusivity":{
+        "rangeInclusivity": {
           "$ref": "#/definitions/RangeInclusivity"
         }
       },
