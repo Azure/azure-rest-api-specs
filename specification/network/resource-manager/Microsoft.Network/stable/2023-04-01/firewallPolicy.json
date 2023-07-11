@@ -420,6 +420,10 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Create or Update FirewallPolicy draft": {
             "$ref": "./examples/FirewallPolicyPutDraft.json"
@@ -458,13 +462,6 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -522,6 +519,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting FirewallPolicy resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyDraft"
+            }
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -839,7 +842,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+            "description": "The name of the FirewallPolicyRuleCollectionGroup.",
+            "pattern": "^[a-zA-Z0-9]*$"
           },
           {
             "name": "parameters",
@@ -859,10 +863,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting FirewallPolicyRuleCollectionGroup resource.",
+            "description": "Request successful. The operation returns the resulting FirewallPolicy resource.",
             "schema": {
               "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupDraft"
             }
+          },
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting FirewallPolicy resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupDraft"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -870,6 +883,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Create or Update FirewallPolicyRuleCollectionGroup draft": {
@@ -909,7 +926,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+            "description": "The name of the FirewallPolicyRuleCollectionGroup.",
+            "pattern": "^[a-zA-Z0-9]*$"
           },
           {
             "name": "parameters",
@@ -979,7 +997,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+            "description": "The name of the FirewallPolicyRuleCollectionGroup.",
+            "pattern": "^[a-zA-Z0-9]*$"
           },
           {
             "name": "parameters",
