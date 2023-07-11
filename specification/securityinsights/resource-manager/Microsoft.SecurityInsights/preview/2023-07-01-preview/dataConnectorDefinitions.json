@@ -254,8 +254,9 @@
       }
     },
     "AvailabilityStatus": {
-      "description": "The exposure status of the connector to the customers. Avilable values are 0-4 (0=None, 1=Available, 2=FeatureFlag, 3=Internal).",
-      "type": "integer"
+      "description": "The exposure status of the connector to the customers. Available values are 0-4 (0=None, 1=Available, 2=FeatureFlag, 3=Internal).",
+      "type": "integer",
+      "format": "Int32"
     },
     "ConnectivityCriterion": {
       "description": "The criteria by which we determine whether the connector is connected or not.\r\nFor Example, use a KQL query to check if  the expected data type is flowing).",
@@ -362,6 +363,7 @@
     },
     "CustomizableConnectorDefinitionProperties": {
       "description": "The UiConfig for 'Customizable' connector definition kind.",
+      "type": "object",
       "required": [
         "connectorUiConfig"
       ],
