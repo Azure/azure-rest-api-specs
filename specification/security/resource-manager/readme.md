@@ -148,6 +148,15 @@ input-file:
   - Microsoft.Security/preview/2023-02-01-preview/healthReports.json
   - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 ```
+### Tag: package-preview-2022-12
+
+These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-12'
+input-file:
+  - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
+```
+
 
 ### Tag: package-preview-2022-11
 
@@ -400,6 +409,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/securityStandards.json
 - Microsoft.Security/preview/2023-05-01-preview/standardAssignments.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
+- Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 
 
 # Needed when there is more than one input file

@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-preview-2023-04
+tag: package-2023-05
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -46,6 +46,14 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+- Microsoft.DataProtection/stable/2023-05-01/dataprotection.json
+```
 
 ### Tag: package-preview-2023-04
 
