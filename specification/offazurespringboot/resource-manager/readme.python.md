@@ -7,7 +7,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-offazurespringboot
-no-namespace-folders: true
+namespace: azure-mgmt-offazurespringboot
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
@@ -16,4 +16,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/offazurespringboot/azure-mgmt-offazurespringboot/azure/mgmt/offazurespringboot
 ```
-
