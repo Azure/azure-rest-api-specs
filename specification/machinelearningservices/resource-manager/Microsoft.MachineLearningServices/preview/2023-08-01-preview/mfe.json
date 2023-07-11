@@ -6878,6 +6878,41 @@
             "name": "description",
             "description": "Description of the featureset.",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "description": "Page size.",
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
           }
         ],
         "responses": {
@@ -8999,20 +9034,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "query",
-            "name": "includeJobInstructions",
-            "description": "Boolean value to indicate whether to include JobInstructions in response.",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "in": "query",
-            "name": "includeLabelCategories",
-            "description": "Boolean value to indicate Whether to include LabelCategories in response.",
-            "type": "boolean",
-            "default": false
           }
         ],
         "responses": {
@@ -9243,7 +9264,10 @@
             }
           },
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LabelingJob"
+            }
           }
         },
         "x-ms-examples": {
@@ -9292,7 +9316,10 @@
             }
           },
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LabelingJob"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -11428,6 +11455,492 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints": {
+      "get": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "List Serverless Endpoints.",
+        "operationId": "ServerlessEndpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServerlessEndpointTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}": {
+      "delete": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "Delete Serverless Endpoint (asynchronous).",
+        "operationId": "ServerlessEndpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Serverless Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "Get Serverless Endpoint.",
+        "operationId": "ServerlessEndpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Serverless Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServerlessEndpointTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "Update Serverless Endpoint (asynchronous).",
+        "operationId": "ServerlessEndpoints_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Serverless Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Serverless Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "description": "Strictly used in update requests."
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServerlessEndpointTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "Create or update Serverless Endpoint (asynchronous).",
+        "operationId": "ServerlessEndpoints_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Serverless Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Serverless Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerlessEndpointTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/ServerlessEndpointTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ServerlessEndpointTrackedResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys": {
+      "post": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "List EndpointAuthKeys for an Endpoint using Key-based authentication.",
+        "operationId": "ServerlessEndpoints_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Serverless Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EndpointAuthKeys"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListKeys Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/listKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "ServerlessEndpoint"
+        ],
+        "summary": "Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).",
+        "operationId": "ServerlessEndpoints_RegenerateKeys",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Serverless Endpoint name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "RegenerateKeys request .",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateEndpointKeysRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EndpointAuthKeys"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegenerateKeys Workspace Serverless Endpoint.": {
+            "$ref": "./examples/Workspace/ServerlessEndpoint/regenerateKeys.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }
@@ -20214,6 +20727,21 @@
       "x-ms-discriminator-value": "ModelPerformance",
       "additionalProperties": false
     },
+    "ModelProfile": {
+      "required": [
+        "modelUri"
+      ],
+      "type": "object",
+      "properties": {
+        "modelUri": {
+          "description": "[Required] The model to create a serverless endpoint of",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "ModelSize": {
       "description": "Image model size.",
       "enum": [
@@ -22331,6 +22859,19 @@
           ],
           "x-nullable": true
         },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "tags": {
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
           "type": "object",
@@ -22434,6 +22975,19 @@
         "modelConfiguration": {
           "description": "Model configuration including the mount mode.",
           "$ref": "#/definitions/ModelConfiguration",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "properties": {
+          "description": "Property dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
           "readOnly": true,
           "x-ms-mutability": [
             "read"
@@ -24077,6 +24631,88 @@
             "value": "KerberosKeytab"
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "ServerlessEndpoint": {
+      "required": [
+        "modelProfile"
+      ],
+      "type": "object",
+      "properties": {
+        "inferenceUri": {
+          "format": "uri",
+          "description": "The inference uri to target when making requests against the serverless endpoint",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "modelProfile": {
+          "description": "[Required] The model profile to configure the serverless endpoint with",
+          "$ref": "#/definitions/ModelProfile"
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the endpoint.",
+          "$ref": "#/definitions/EndpointProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-client-name": "ServerlessEndpointProperties",
+      "additionalProperties": false
+    },
+    "ServerlessEndpointTrackedResource": {
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/ServerlessEndpoint"
+        },
+        "sku": {
+          "description": "Sku details required for ARM contract for Autoscaling.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        }
+      },
+      "x-ms-client-name": "ServerlessEndpoint",
+      "additionalProperties": false
+    },
+    "ServerlessEndpointTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of ServerlessEndpoint entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of ServerlessEndpoint objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type ServerlessEndpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerlessEndpointTrackedResource"
+          }
+        }
       },
       "additionalProperties": false
     },
