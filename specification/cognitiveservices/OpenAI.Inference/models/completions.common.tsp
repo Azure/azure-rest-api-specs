@@ -119,6 +119,7 @@ model ContentFilterResults {
   Describes language related to physical actions intended to purposely hurt, injure,
   or damage one’s body, or kill oneself.
   """)
+  @projectedName("json", "self_harm")
   selfHarm: ContentFilterResult;
 }
 
