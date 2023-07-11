@@ -29,15 +29,25 @@ openapi-type: arm
 tag: package-2023-07
 ```
 
+### Tag: package-2023-07-only
+
+These settings apply only when `--tag=package-2023-07-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07-only'
+input-file:
+  - Microsoft.ContainerRegistry/stable/2023-07-01/containerregistry.json
+```
 
 ### Tag: package-2023-07
 
 These settings apply only when `--tag=package-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+``` yaml $(tag) == 'package-2023-07'
 input-file:
   - Microsoft.ContainerRegistry/stable/2023-07-01/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
+
 ### Tag: package-2023-01-preview-only
 
 These settings apply only when `--tag=package-2023-01-preview-only` is specified on the command line.
