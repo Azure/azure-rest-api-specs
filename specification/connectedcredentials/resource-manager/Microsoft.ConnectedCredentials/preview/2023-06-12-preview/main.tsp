@@ -54,12 +54,6 @@ enum ProvisioningState {
 
 @doc("The extended location.")
 model ExtendedLocation {
-  @doc("The extended location properties.")
-  properties?: ExtendedLocationProperties;
-}
-
-@doc("The extended location properties.")
-model ExtendedLocationProperties {
   @visibility("read", "create")
   @doc("The extended location type.")
   type?: string;
@@ -83,61 +77,26 @@ model CredentialProperties {
   @doc("The friendly name of the credential.")
   friendlyName?: string;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("Provider specific settings.")
   azureKvProvider?: AzureKvProvider;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("Details of the target K8s secret.")
   target?: Target;
-
-  @visibility("read")
-  @doc("CredentialStatus defines the observed state of Credential.")
-  status?: CredentialStatus;
 
   @visibility("read", "create", "update")
   @doc(" Data defines the connection between the Kubernetes Secret keys and the Provider data, Array.")
   data?: Data;
 }
 
-@doc("CredentialStatus defines the observed state of Credential.")
-model CredentialStatus {
-  @visibility("read")
-  @doc("ErrorCode is a short code for error.")
-  errorCode?: string;
-
-  @visibility("read")
-  @doc("LastOperation is the last operation executed.")
-  lastOperation?: string;
-
-  @visibility("read")
-  @doc("Message is a brief message from the sync.")
-  message?: string;
-
-  @visibility("read")
-  @doc("SyncState is the state of the sync, set to New to retrigger.")
-  syncState?: SyncState;
-}
-
-@doc("SyncState is the state of the sync, set to New to retrigger.")
-enum SyncState {
-  @doc("New SyncState")
-  New,
-
-  @doc("Failed SyncState")
-  Failed,
-
-  @doc("Complete SyncState")
-  Complete,
-}
-
 @doc("Provider specific settings.")
 model AzureKvProvider {
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("Vault Url from which the secrets to be fetched from.")
   vaultUrl?: string;
 
-  @visibility("read", "create")
+  @visibility("read", "create", "update")
   @doc("Whether to delete the secret from the source or other delete behavior customizations.")
   deleteOption?: string;
 }
@@ -156,6 +115,7 @@ model Target {
   @doc("Secret resource namespace, should be same as CL namespace.")
   `namespace`?: string;
 
+  @visibility("read", "create", "update")
   @doc("Metadata associated with credentials.")
   metadata?: Metadata;
 }
