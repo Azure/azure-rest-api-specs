@@ -39,3 +39,31 @@ jobs:
   - script: npm ls -a
     displayName: npm ls -a
     condition: succeededOrFailed()
+
+  - script: npm run build
+    displayName: npm run build
+    condition: succeededOrFailed()
+  - pwsh: |
+      $typespecFolders = @()
+      if ('$(Build.Reason)' -eq 'PullRequest') {
+        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Get-Typespec-Folders.ps1 $(Build.SourcesDirectory) "$(System.PullRequest.TargetBranch)" "$(System.PullRequest.SourceBranch)"
+      }
+      else {
+        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Get-Typespec-Folders.ps1 $(Build.SourcesDirectory)
+      }
+
+      $exitCode = 0
+      foreach ($typeSpecFolder in $typeSpecFolders) {
+        try {
+          npx --no tsv $typeSpecFolder
+        }
+        catch {
+          $exitCode = 1
+        }
+        git restore .
+        git clean -df
+      }
+
+      exit $exitCode
+    displayName: TypeSpecValidation
+    condition: succeededOrFailed()
