@@ -38,7 +38,7 @@
                 "lastDataReceivedQuery": "GitHubAuditLogPolling_CL \n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
               }
             ],
-            "ConnectivityCriteria": [
+            "connectivityCriteria": [
               {
                 "type": "IsConnectedQuery",
                 "value": [
@@ -91,7 +91,8 @@
             ]
           },
           "connectionsConfig": {
-            "templateSpecName": "templateNameMock"
+            "templateSpecName": "templateNameMock",
+            "templateSpecVersion": "1.0.0"
           }
         }
       }
