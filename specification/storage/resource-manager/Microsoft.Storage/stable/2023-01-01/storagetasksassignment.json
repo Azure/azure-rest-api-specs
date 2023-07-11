@@ -208,7 +208,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageTaskAssignment"
+              "$ref": "#/definitions/UpdateStorageTaskAssignment"
             },
             "description": "The parameters to provide to update the storage task assignment resource."
           },
@@ -383,6 +383,57 @@
       ],
       "description": "The storage task assignment execution context"
     },
+    "UpdateStorageTaskAssignment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UpdateStorageTaskAssignmentProperties",
+          "description": "Properties of the storage task assignment."
+        }
+      },
+      "description": "Represents Storage Task Assignment."
+    },
+    "UpdateStorageTaskAssignmentProperties": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Storage Task Assignment is enabled when set to true."
+        },
+        "description": {
+          "type": "string",
+          "description": "Text that describes the purpose of the storage task assignment"
+        },
+        "executionContext": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionContext",
+          "description": "The storage task assignment execution context"
+        },
+        "report": {
+          "$ref": "#/definitions/StorageTaskAssignmentReport",
+          "description": "The storage task assignment report"
+        }
+      },
+      "description": "Properties of the storage task assignment to be updated."
+    },
+    "UpdateStorageTaskAssignmentExecutionContext": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionTarget",
+          "description": "Execution target of the storage task assignment"
+        },
+        "trigger": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionTrigger",
+          "description": "Execution trigger of the storage task assignment"
+        },
+        "constraints": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionConstraints",
+          "description": "Execution constraints of the storage task assignment"
+        }
+      },
+      "description": "The storage task assignment execution context to be updated"
+    },
     "StorageTaskAssignmentExecutionTarget": {
       "type": "object",
       "properties": {
@@ -428,6 +479,7 @@
       "description": "Trigger for storage task assignment execution"
     },
     "StorageTaskAssignmentExecutionTriggerParameters": {
+      "type": "object",
       "properties": {
         "startFrom": {
           "type": "string",
@@ -435,6 +487,9 @@
         },
         "interval": {
           "type": "integer",
+          "minimum": 1,
+          "maximum": 365,
+          "format": "int64",
           "description": "Run interval of task execution. Only applicable for OnSchedule type."
         },
         "intervalUnit": {
@@ -442,6 +497,10 @@
           "enum": [
             "days"
           ],
+          "x-ms-enum": {
+            "name": "IntervalUnit",
+            "modelAsString": false
+          },
           "description": "Run interval unit of task execution. Only applicable for OnSchedule type."
         },
         "endBy": {
@@ -462,6 +521,7 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 10000,
+          "format": "int64",
           "description": "abortOnFailures constraint for storage task assignment execution"
         }
       },
