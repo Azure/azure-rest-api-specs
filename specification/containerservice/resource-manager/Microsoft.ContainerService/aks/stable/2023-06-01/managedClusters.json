@@ -6239,9 +6239,25 @@
       "description": "VPA (Vertical Pod Autoscaler) settings for the workload auto-scaler profile.",
       "properties": {
         "enabled": {
-          "type": "boolean",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "Enabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "true"
+              },
+              {
+                "value": "false"
+              }
+            ]
+          },
           "description": "Whether to enable VPA. Default value is false.",
-          "default": false
+          "default": "false"
         }
       },
       "required": [
