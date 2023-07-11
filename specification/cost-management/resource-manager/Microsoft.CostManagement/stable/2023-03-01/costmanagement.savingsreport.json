@@ -1,0 +1,768 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CostManagementClient",
+    "description": "CostManagement management client provides access to CostManagement resources for Azure Enterprise Subscriptions.",
+    "version": "2023-03-01"
+  },
+  "tags": [
+    {
+      "name": "Savings Report API",
+      "description": "APIs for getting savings report data which will give insights into dollar amount saved by purchasing benefits like Reserved Instances (RI) and Azure Savings Plan (ASP)."
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ByBillingAccountId",
+        "description": "Generates savings report for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId, properties/usageDate",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ByBillingAccountName",
+        "description": "Generates savings report for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId, properties/usageDate",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}/providers/Microsoft.CostManagement/benefitSavingsReport":{
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ByCustomerId",
+        "description": "Generates savings report for the customer scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/customerIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId, properties/usageDate",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ListByBillingProfileId",
+        "description": "Generates savings report for the billing profile scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitId, properties/benefitOrderId, properties/usageDate",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingProfile": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-BillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ByBillingAccountNameAndSavingsPlanOrderId",
+        "description": "Generates savings report for the billing account and savings plan order id scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitId, properties/usageDate",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ByBillingAccountNameAndSavingsPlanOrderIdSavingPlanId",
+        "description": "Generates savings report for the billing account, savings plan order id and savings plan id scope. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Supports filtering by properties/benefitId, properties/usageDate",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummaries-BillingAccount": {
+            "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ListByReservationOrder",
+        "description": "Generates savings report for the reservation order id. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummariesDaily": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-SavingsPlanOrderId-Daily.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Supports filtering by properties/usageDate.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ListByReservation",
+        "description": "Generates savings report for the reservation order id and reservation id. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummariesDaily": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-SavingsPlanOrderId-Daily.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Supports filtering by properties/usageDate.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ListBySavingsPlanOrder",
+        "description": "Generates savings report for the savings plan order id. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummariesDaily": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-SavingsPlanOrderId-Daily.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Supports filtering by properties/usageDate.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+      "get": {
+        "tags": [
+          "SavingsReport"
+        ],
+        "operationId": "SavingsReport_ListBySavingsPlan",
+        "description": "Generates savings report for the savings plan order id and savings plan id. Supported at grain values: 'Daily' and 'Monthly'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SavingsPlanUtilizationSummariesDaily": {
+            "$ref": "./examples/BenefitUtilizationSummaries/SavingsPlan-SavingsPlanOrderId-Daily.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Supports filtering by properties/usageDate.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SavingsReportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SavingsReportListResult": {
+      "description": "List of data entries indicating dollar amount saved by purchasing benefits.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The data entries indicating dollar amount saved by purchasing benefits.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SavingsReportRecord"
+          }
+        },
+        "nextLink": {
+          "description": "The link (URL) to the next page of results.",
+          "type": "string",
+          "readOnly": true,
+          "format": "uri"
+        }
+      }
+    },
+    "SavingsReportRecord": {
+      "description": "Savings report resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Supported values: 'SavingsPlan' and 'Reservation'.",
+          "$ref": "#/definitions/BenefitKind"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Savings report properties.",
+          "$ref": "#/definitions/SavingsReportRecordProperties"
+        }
+      }
+    },
+    "SavingsReportRecordProperties": {
+      "description": "The properties of savings report record.",
+      "type": "object",
+      "discriminator": "scope",
+      "properties": {
+        "productType": {
+          "description": "Product type. Example values can be, 'VM', 'Compute', 'SQL' etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitOrderId": {
+          "description": "The benefit order ID is the identifier for a benefit purchase.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitOrderName": {
+          "description": "The benefit order name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitId": {
+          "description": "The benefit ID is the identifier of the benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitType": {
+          "description": "The benefit type. Supported values: 'SavingsPlan'.",
+          "$ref": "#/definitions/BenefitKind"
+        },
+        "usageDate": {
+          "description": "Date corresponding to the utilization summary record. If the grain of data is monthly, value for this field will be first day of the month.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "scope": {
+          "description": "Benefit scope. For example, Single or Shared.",
+          "$ref": "#/definitions/RecommendationScope"
+        },
+        "costsInBillingCurrency": {
+          "description": "The costs in billing currency related to a benefit.",
+          "type": "object",
+          "$ref": "#/definitions/Costs"
+        },
+        "costsInUSD": {
+          "description": "The costs in USD related to a benefit.",
+          "type": "object",
+          "$ref": "#/definitions/Costs"
+        },
+        "costsInPricingCurrency": {
+          "description": "The costs in pricing currency related to a benefit.",
+          "type": "object",
+          "$ref": "#/definitions/Costs"
+        }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "singleScopeSavingsReportRecordProperties": {
+      "type": "object",
+      "description": "The properties of the savings report when scope is 'Single'.",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID will be the id of subscription where benefit is applied. Applicable only if report is for 'Single' scope.",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group where benefit is applied. Applicable only if report is for 'Single' scope.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SavingsReportRecordProperties"
+        }
+      ]
+    },
+    "sharedScopeSavingsReportRecordProperties": {
+      "type": "object",
+      "description": "The properties of the savings report when scope is 'Shared'.",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SavingsReportRecordProperties"
+        }
+      ]
+    },
+    "Costs": {
+      "description": "The costs related to a benefit.",
+      "type": "object",
+      "properties": {
+        "UsedCost": {
+          "description": "The used cost.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "UnusedCost": {
+          "description": "The unused cost.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "PayAsYouGoCost": {
+          "description": "The PAYG cost.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "ActualSavings": {
+          "description": "The amount saved as compared to pay as you go cost.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "PotentialSavings": {
+          "description": "The potential amount which could have been saved if the benefit was used completely. Its Savings + Unused Cost.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "TotalCost": {
+          "type": "number",
+          "format": "decimal",
+          "description": "Total cost, which is sum of used cost and unused cost.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+  }
+}
