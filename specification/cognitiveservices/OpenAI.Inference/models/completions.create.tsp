@@ -166,7 +166,7 @@ model Completions {
   results for different prompts may arrive at different times or in different orders.
   """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
-  @projectedName("json", "prompt_filter_results")
+  @projectedName("json", "prompt_annotations")
   promptFilterResults?: PromptFilterResult[];
 
   @doc("""
