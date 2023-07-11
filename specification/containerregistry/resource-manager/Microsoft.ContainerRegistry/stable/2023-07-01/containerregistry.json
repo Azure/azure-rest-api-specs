@@ -15,6 +15,564 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules": {
+      "get": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Lists all cache rule resources for the specified container registry.",
+        "operationId": "CacheRules_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRulesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleList": {
+            "$ref": "./examples/CacheRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules/{cacheRuleName}": {
+      "get": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Gets the properties of the specified cache rule resource.",
+        "operationId": "CacheRules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleGet": {
+            "$ref": "./examples/CacheRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Creates a cache rule for a container registry with the specified parameters.",
+        "operationId": "CacheRules_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          },
+          {
+            "name": "cacheRuleCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a cache rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleCreate": {
+            "$ref": "./examples/CacheRuleCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Deletes a cache rule resource from a container registry.",
+        "operationId": "CacheRules_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The cache rule does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleDelete": {
+            "$ref": "./examples/CacheRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "CacheRules"
+        ],
+        "description": "Updates a cache rule for a container registry with the specified parameters.",
+        "operationId": "CacheRules_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheRuleNameParameter"
+          },
+          {
+            "name": "cacheRuleUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a cache rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CacheRuleUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CacheRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CacheRuleUpdate": {
+            "$ref": "./examples/CacheRuleUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/credentialSets": {
+      "get": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Lists all credential set resources for the specified container registry.",
+        "operationId": "CredentialSets_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetList": {
+            "$ref": "./examples/CredentialSetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/credentialSets/{credentialSetName}": {
+      "get": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Gets the properties of the specified credential set resource.",
+        "operationId": "CredentialSets_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetGet": {
+            "$ref": "./examples/CredentialSetGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Creates a credential set for a container registry with the specified parameters.",
+        "operationId": "CredentialSets_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          },
+          {
+            "name": "credentialSetCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a credential set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetCreate": {
+            "$ref": "./examples/CredentialSetCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Deletes a credential set from a container registry.",
+        "operationId": "CredentialSets_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The credential store resource does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetDelete": {
+            "$ref": "./examples/CredentialSetDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "CredentialSets"
+        ],
+        "description": "Updates a credential set for a container registry with the specified parameters.",
+        "operationId": "CredentialSets_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CredentialSetNameParameter"
+          },
+          {
+            "name": "credentialSetUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a credential set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CredentialSetUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CredentialSet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CredentialSetUpdate": {
+            "$ref": "./examples/CredentialSetUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importImage": {
       "post": {
         "tags": [
@@ -2050,6 +2608,507 @@
     }
   },
   "definitions": {
+    "CacheRulesListResult": {
+      "description": "The result of a request to list cache rules for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of cache rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CacheRule"
+          }
+        },
+        "nextLink": {
+          "description": "If provided, client must use NextLink URI to request next list of cache rules.",
+          "type": "string"
+        }
+      }
+    },
+    "CacheRule": {
+      "description": "An object that represents a cache rule for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CacheRuleProperties",
+          "description": "The properties of the cache rule.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InnerErrorDescription": {
+      "description": "inner error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
+        }
+      }
+    },
+    "CacheRuleProperties": {
+      "description": "The properties of a cache rule.",
+      "type": "object",
+      "properties": {
+        "credentialSetResourceId": {
+          "description": "The ARM resource ID of the credential store which is associated with the cache rule.",
+          "type": "string"
+        },
+        "sourceRepository": {
+          "description": "Source repository pulled from upstream.",
+          "type": "string"
+        },
+        "targetRepository": {
+          "description": "Target repository specified in docker pull command.\r\nEg: docker pull myregistry.azurecr.io/{targetRepository}:{tag}",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the cache rule.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CacheRuleUpdateParameters": {
+      "description": "The parameters for updating a cache rule.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CacheRuleUpdateProperties",
+          "description": "The properties of the cache rule update parameters.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CacheRuleUpdateProperties": {
+      "description": "The parameters for updating cache rule properties.",
+      "type": "object",
+      "properties": {
+        "credentialSetResourceId": {
+          "description": "The ARM resource ID of the credential store which is associated with the Cache rule.",
+          "type": "string"
+        }
+      }
+    },
+    "CredentialSetListResult": {
+      "description": "The result of a request to list credential sets for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of credential sets. Since this list may be incomplete, the nextLink field should be used to request the next list of credential sets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialSet"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of credential sets.",
+          "type": "string"
+        }
+      }
+    },
+    "CredentialSet": {
+      "description": "An object that represents a credential set resource for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identities associated with the resource. This is used to access the KeyVault secrets."
+        },
+        "properties": {
+          "$ref": "#/definitions/CredentialSetProperties",
+          "description": "The properties of the credential set.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentityProperties": {
+      "description": "Managed identity for the resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of resource identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      }
+    },
+    "CredentialSetProperties": {
+      "description": "The properties of a credential set resource.",
+      "type": "object",
+      "properties": {
+        "loginServer": {
+          "description": "The credentials are stored for this upstream or login server.",
+          "type": "string"
+        },
+        "authCredentials": {
+          "description": "List of authentication credentials stored for an upstream.\r\nUsually consists of a primary and an optional secondary credential.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthCredential"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of credential store resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. This cannot be changed after the resource is created.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AuthCredential": {
+      "description": "Authentication credential stored for an upstream.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the credential.",
+          "enum": [
+            "Credential1"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialName",
+            "modelAsString": true
+          }
+        },
+        "usernameSecretIdentifier": {
+          "description": "KeyVault Secret URI for accessing the username.",
+          "type": "string"
+        },
+        "passwordSecretIdentifier": {
+          "description": "KeyVault Secret URI for accessing the password.",
+          "type": "string"
+        },
+        "credentialHealth": {
+          "$ref": "#/definitions/CredentialHealth",
+          "description": "This provides data pertaining to the health of the auth credential.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CredentialHealth": {
+      "description": "The health of the auth credential.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The health status of credential.",
+          "enum": [
+            "Healthy",
+            "Unhealthy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CredentialHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "errorCode": {
+          "description": "Error code representing the health check error.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Descriptive message representing the health check error.",
+          "type": "string"
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string"
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource modification (UTC).",
+          "type": "string"
+        }
+      },
+      "readOnly": true
+    },
+    "ErrorResponseBody": {
+      "description": "An error response from the Azure Container Registry service.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "an array of additional nested error response info objects, as described by this contract.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InnerErrorDescription"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "An error response from the Azure Container Registry service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Azure container registry build API error body."
+        }
+      }
+    },
+    "CredentialSetUpdateParameters": {
+      "description": "The parameters for updating a credential set",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CredentialSetUpdateProperties",
+          "description": "The properties of the credential set update parameters",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identities associated with the resource. This is used to access the KeyVault secrets."
+        }
+      }
+    },
+    "CredentialSetUpdateProperties": {
+      "description": "The parameters for updating credential set properties.",
+      "type": "object",
+      "properties": {
+        "authCredentials": {
+          "description": "List of authentication credentials stored for an upstream.\r\nUsually consists of a primary and an optional secondary credential.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthCredential"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "ImportImageParameters": {
       "required": [
         "source"
@@ -2361,59 +3420,6 @@
         }
       }
     },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "description": "The identity that created the resource.",
-          "type": "string"
-        },
-        "createdByType": {
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC).",
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "description": "The identity that last modified the resource.",
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "lastModifiedByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource modification (UTC).",
-          "type": "string"
-        }
-      },
-      "readOnly": true
-    },
     "PrivateEndpointConnectionProperties": {
       "description": "The properties of a private endpoint connection.",
       "type": "object",
@@ -2573,41 +3579,6 @@
         }
       }
     },
-    "IdentityProperties": {
-      "description": "Managed identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal ID of resource identity.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenant ID of resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
-          }
-        }
-      }
-    },
     "RegistryProperties": {
       "description": "The properties of a container registry.",
       "type": "object",
@@ -2722,64 +3693,6 @@
           }
         }
       }
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal id of user assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "description": "The client id of user assigned identity.",
-          "type": "string"
-        }
-      }
-    },
-    "Resource": {
-      "description": "An Azure resource.",
-      "required": [
-        "location"
-      ],
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the resource. This cannot be changed after the resource is created.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "type": "object",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "Status": {
       "description": "The status of an Azure resource at the time the operation was called.",
@@ -2903,33 +3816,6 @@
           "readOnly": true
         }
       }
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
-      "properties": {
-        "id": {
-          "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "type": "object",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "IPRule": {
       "description": "IP rule with specific IP or IP range in CIDR format.",
@@ -4313,68 +5199,6 @@
           }
         }
       }
-    },
-    "ErrorResponse": {
-      "description": "An error response from the Azure Container Registry service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody",
-          "description": "Azure container registry build API error body."
-        }
-      }
-    },
-    "ErrorResponseBody": {
-      "description": "An error response from the Azure Container Registry service.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "target of the particular error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "an array of additional nested error response info objects, as described by this contract.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InnerErrorDescription"
-          },
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
-        }
-      }
-    },
-    "InnerErrorDescription": {
-      "description": "inner error.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "target of the particular error.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
@@ -4447,6 +5271,28 @@
       "description": "The name of the private link resource.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CredentialSetNameParameter": {
+      "name": "credentialSetName",
+      "in": "path",
+      "description": "The name of the credential set.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "CacheRuleNameParameter": {
+      "name": "cacheRuleName",
+      "in": "path",
+      "description": "The name of the cache rule.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     }
   },
