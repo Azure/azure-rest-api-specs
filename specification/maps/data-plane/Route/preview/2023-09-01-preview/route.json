@@ -207,7 +207,7 @@
         },
         "features": {
           "type": "array",
-          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. Refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946) for details on the GeoJSON format.",
           "minimum": 2,
           "items": {
             "$ref": "#/definitions/InputWaypointFeaturesItem"
@@ -462,7 +462,7 @@
     },
     "FeatureTypeEnum": {
       "type": "string",
-      "description": "Specifies the GeoJSON type. The only supported object type is FeatureCollection. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is FeatureCollection. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "enum": [
         "FeatureCollection"
       ],
@@ -471,14 +471,15 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "FeatureCollection"
+            "value": "FeatureCollection",
+            "description": "Specifies the `GeoJSON` FeatureCollection object type."
           }
         ]
       }
     },
     "FeaturesItemTypeEnum": {
       "type": "string",
-      "description": "must be Feature",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is Feature. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "enum": [
         "Feature"
       ],
@@ -487,7 +488,8 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "Feature"
+            "value": "Feature",
+            "description": "Specifies the `GeoJSON` Feature object type."
           }
         ]
       }
@@ -538,7 +540,7 @@
       "description": "Geometry",
       "properties": {
         "type": {
-          "description": "Geometry type",
+          "description": "Specifies the `GeoJSON` type. The only supported object type is Point. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
           "type": "string"
         }
       },
@@ -599,7 +601,7 @@
       "description": "Waypoint properties",
       "properties": {
         "pointIndex": {
-          "description": "It is used to identify and order the sequence of waypoints in the route.The default value is the `index value` of a features array.",
+          "description": "Identify and order the sequence of waypoints in the route. The default value is the `index value` of a features array.",
           "format": "int64",
           "type": "integer"
         },
@@ -818,7 +820,7 @@
       }
     },
     "InputWaypointTypeEnum": {
-      "description": "waypoint type",
+      "description": "Waypoint type on the route. It can be a stop or an intermediate location that the route must pass through.",
       "type": "string",
       "default": "waypoint",
       "enum": [
