@@ -8,14 +8,13 @@ param (
   [string]$SourceBranch
 )
 
-Write-Host $TargetBranch
-Write-Host $SourceBranch
 $tspFiles = @()
 if ([string]::IsNullOrEmpty($TargetBranch) -or [string]::IsNullOrEmpty($SourceBranch)) {
   $tspFiles = (Get-ChildItem -path ./specification tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)/"
 }
 else {
-  $tspFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff "$TargetBranch"..."$SourceBranch" -- --name-only | Where-Object {$_.StartsWith('specification')}
+  Write-Host "git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {`$_.StartsWith('specification')}"
+  $tspFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {$_.StartsWith('specification')}
 }
 
 $typeSpecFolders = @()

@@ -43,13 +43,14 @@ jobs:
   - pwsh: |
       $typespecFolders = @()
       if ('$(Build.Reason)' -eq 'PullRequest') {
-        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Get-Typespec-Folders.ps1 $(Build.SourcesDirectory) "$(System.PullRequest.TargetBranch)" "$(System.PullRequest.SourceBranch)"
+        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Get-Typespec-Folders.ps1 $(Build.SourcesDirectory) "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
       }
       else {
         $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Get-Typespec-Folders.ps1 $(Build.SourcesDirectory)
       }
 
       $exitCode = 0
+      Write-Host "Running TSV on: $typespecFolders"
       foreach ($typeSpecFolder in $typeSpecFolders) {
         try {
           npx --no tsv $typeSpecFolder
