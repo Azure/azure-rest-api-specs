@@ -5957,7 +5957,7 @@
           "description": "A list of actions that are executed when all the conditions of a rule are satisfied.",
           "type": "array",
           "items": {
-            "$ref": "./cdn.json#/definitions/DeliveryRuleAction"
+            "$ref": "#/definitions/DeliveryRuleAction"
           },
           "x-ms-identifiers": [
             "name"
@@ -5978,13 +5978,41 @@
         }
       }
     },
+    "DeliveryRuleAction": {
+      "description": "An action for the delivery rule.",
+      "discriminator": "name",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "The name of the action for the delivery rule.",
+          "type": "string",
+          "enum": [
+            "CacheExpiration",
+            "CacheKeyQueryString",
+            "ModifyRequestHeader",
+            "ModifyResponseHeader",
+            "UrlRedirect",
+            "UrlRewrite",
+            "UrlSigning",
+            "OriginGroupOverride",
+            "RouteConfigurationOverride"
+          ],
+          "x-ms-enum": {
+            "name": "DeliveryRuleAction",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AFDUrlSigningAction": {
       "description": "Defines the url signing action for the delivery rule.",
       "type": "object",
       "x-ms-discriminator-value": "UrlSigning",
       "allOf": [
         {
-          "$ref": "./cdn.json#/definitions/DeliveryRuleAction"
+          "$ref": "#/definitions/DeliveryRuleAction"
         }
       ],
       "required": [
