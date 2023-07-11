@@ -5980,6 +5980,7 @@
     },
     "DeliveryRuleAction": {
       "description": "An action for the delivery rule.",
+      "type": "object",
       "discriminator": "name",
       "required": [
         "name"
@@ -6001,6 +6002,74 @@
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AfdDeliveryRuleRouteConfigurationOverrideAction": {
+      "description": "Defines the route configuration override action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles.",
+      "type": "object",
+      "x-ms-discriminator-value": "RouteConfigurationOverride",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/RouteConfigurationOverrideActionParameters"
+        }
+      }
+    },
+    "AfdRouteConfigurationOverrideActionParameters": {
+      "description": "Defines the parameters for the route configuration override action.",
+      "type": "object",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleRouteConfigurationOverrideActionParameters"
+          ]
+        },
+        "originGroupOverride": {
+          "description": "A reference to the origin group override configuration. Leave empty to use the default origin group on route.",
+          "type": "object",
+          "$ref": "#/definitions/AfdOriginGroupOverride"
+        },
+        "cacheConfiguration": {
+          "description": "The caching configuration associated with this rule. To disable caching, do not provide a cacheConfiguration object.",
+          "type": "object",
+          "$ref": "#/definitions/CacheConfiguration"
+        }
+      }
+    },
+    "AfdOriginGroupOverride": {
+      "description": "Defines the parameters for the origin group override configuration.",
+      "type": "object",
+      "properties": {
+        "originGroup": {
+          "description": "defines the OriginGroup that would override the DefaultOriginGroup on route.",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference"
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "string",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
             "modelAsString": true
           }
         }
