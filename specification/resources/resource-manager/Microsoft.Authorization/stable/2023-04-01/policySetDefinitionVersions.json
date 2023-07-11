@@ -42,6 +42,11 @@
         "operationId": "PolicySetDefinitionVersions_ListAllBuiltins",
         "summary": "Lists all built-in policy set definition versions.",
         "description": "This operation lists all the built-in policy set definition versions for all built-in policy set definitions.",
+        "x-ms-examples": {
+          "List all built-in policy definition versions": {
+            "$ref": "./examples/listAllBuiltInPolicySetDefinitionVersions.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -77,6 +82,11 @@
         "operationId": "PolicySetDefinitionVersions_ListAllAtManagementGroup",
         "summary": "Lists all policy set definition versions at management group scope.",
         "description": "This operation lists all the policy set definition versions for all policy set definitions at the management group scope.",
+        "x-ms-examples": {
+          "List all policy definition versions at management group": {
+            "$ref": "./examples/listAllPolicySetDefinitionVersionsByManagementGroup.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -115,6 +125,11 @@
         "operationId": "PolicySetDefinitionVersions_ListAll",
         "summary": "Lists all policy set definition versions within a subscription.",
         "description": "This operation lists all the policy set definition versions for all policy set definitions within a subscription.",
+        "x-ms-examples": {
+          "List all policy definition versions at subscription": {
+            "$ref": "./examples/listAllPolicySetDefinitionVersions.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -154,7 +169,7 @@
         "summary": "Creates or updates a policy set definition version.",
         "description": "This operation creates or updates a policy set definition version in the given subscription with the given name and version.",
         "x-ms-examples": {
-          "Create or update a policy set definition": {
+          "Create or update a policy set definition version": {
             "$ref": "./examples/createOrUpdatePolicySetDefinitionVersion.json"
           }
         },
@@ -217,6 +232,11 @@
         "operationId": "PolicySetDefinitionVersions_Delete",
         "summary": "Deletes a policy set definition version.",
         "description": "This operation deletes the policy set definition version in the given subscription with the given name and version.",
+        "x-ms-examples": {
+          "Delete a policy set definition version": {
+            "$ref": "./examples/deletePolicySetDefinitionVersion.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
@@ -261,7 +281,11 @@
         "operationId": "PolicySetDefinitionVersions_Get",
         "summary": "Retrieves a policy set definition version.",
         "description": "This operation retrieves the policy set definition version in the given subscription with the given name and version.",
-        "parameters": [
+        "x-ms-examples": {
+          "Retrieve a policy set definition version": {
+            "$ref": "./examples/getPolicySetDefinitionVersion.json"
+          }
+        },        "parameters": [
           {
             "name": "policySetDefinitionName",
             "in": "path",
@@ -307,6 +331,11 @@
         "operationId": "PolicySetDefinitionVersions_GetBuiltIn",
         "summary": "Retrieves a built in policy set definition version.",
         "description": "This operation retrieves the built-in policy set definition version with the given name and version.",
+        "x-ms-examples": {
+          "Retrieve a built-in policy set definition version": {
+            "$ref": "./examples/getBuiltInPolicySetDefinitionVersion.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
@@ -350,6 +379,11 @@
         "operationId": "PolicySetDefinitionVersions_List",
         "summary": "Retrieves the policy set definition versions for a given policy set definition in a subscription.",
         "description": "This operation retrieves a list of all the policy set definition versions for the given policy set definition.",
+        "x-ms-examples": {
+          "List policy set definitions": {
+            "$ref": "./examples/listPolicySetDefinitionVersions.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
@@ -395,6 +429,11 @@
         "operationId": "PolicySetDefinitionVersions_ListBuiltIn",
         "summary": "Retrieves built-in policy set definition versions.",
         "description": "This operation retrieves a list of all the built-in policy set definition versions for the given built-in policy set definition.",
+        "x-ms-examples": {
+          "List built-in policy set definitions": {
+            "$ref": "./examples/listBuiltInPolicySetDefinitionVersions.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
@@ -437,6 +476,11 @@
         "operationId": "PolicySetDefinitionVersions_CreateOrUpdateAtManagementGroup",
         "summary": "Creates or updates a policy set definition version.",
         "description": "This operation creates or updates a policy set definition version in the given management group with the given name and version.",
+        "x-ms-examples": {
+          "Create or update a policy set definition version at management group level": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionVersionAtManagementGroup.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
@@ -496,6 +540,11 @@
         "operationId": "PolicySetDefinitionVersions_DeleteAtManagementGroup",
         "summary": "Deletes a policy set definition version.",
         "description": "This operation deletes the policy set definition version in the given management group with the given name and version.",
+        "x-ms-examples": {
+          "Delete a policy set definition version at management group level": {
+            "$ref": "./examples/deletePolicySetDefinitionVersionAtManagementGroup.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
@@ -540,7 +589,11 @@
         "operationId": "PolicySetDefinitionVersions_GetAtManagementGroup",
         "summary": "Retrieves a policy set definition version.",
         "description": "This operation retrieves the policy set definition version in the given management group with the given name and version.",
-        "parameters": [
+        "x-ms-examples": {
+          "Retrieve a policy set definition version at management group level": {
+            "$ref": "./examples/getPolicySetDefinitionVersionAtManagementGroup.json"
+          }
+        },        "parameters": [
           {
             "name": "policySetDefinitionName",
             "in": "path",
@@ -586,6 +639,11 @@
         "operationId": "PolicySetDefinitionVersions_ListByManagementGroup",
         "summary": "Retrieves all policy set definition versions for a given policy set definition in a management group.",
         "description": "This operation retrieves a list of all the policy set definition versions for the given policy set definition in a given management group.",
+        "x-ms-examples": {
+          "List policy set definitions at management group level": {
+            "$ref": "./examples/listPolicySetDefinitionVersionsByManagementGroup.json"
+          }
+        },
         "parameters": [
           {
             "name": "policySetDefinitionName",
