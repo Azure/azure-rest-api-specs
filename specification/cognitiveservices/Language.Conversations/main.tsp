@@ -580,8 +580,8 @@ model AnalyzeConversationJobsInput {
 }
 
 @doc("Base class for a long-running conversation input task.")
-@added(Versions.v2023_04_01)
 @discriminator("kind")
+@added(Versions.v2023_04_01)
 model AnalyzeConversationLROTask extends TaskIdentifier {
   @doc("Enumeration of supported analysis tasks on a collection of conversations.")
   kind: AnalyzeConversationLROTaskKind;
@@ -618,6 +618,7 @@ model AnalyzeConversationJobStatistics {
 @doc("Contains the state for the tasks that are being executed as part of the submitted job for analyzing a conversation.")
 @added(Versions.v2023_04_01)
 model ConversationTaskState {
+  @doc("tasks")
   tasks: {
     @doc("Count of tasks that finished successfully.")
     completed: int32;
@@ -632,30 +633,32 @@ model ConversationTaskState {
     total: int32;
 
     @doc("List of results from tasks (if available).")
+    @added(Versions.v2023_04_01)
     items?: Array<AnalyzeConversationJobResult>;
   };
 }
 
-
 @doc("Container for results of all tasks in the conversation job.")
-@added(Versions.v2023_04_01)
 @discriminator("kind")
-model AnalyzeConversationJobResult extends TaskState{
-  ...TaskIdentifier
+@added(Versions.v2023_04_01)
+model AnalyzeConversationJobResult extends TaskState {
+  ...TaskIdentifier;
+
   @doc("discriminator kind")
   kind: AnalyzeConversationResultsKind;
 }
 
-@doc("")
+@doc("Multi Language Conversation Analysis Input")
 @added(Versions.v2023_04_01)
-model MultiLanguageConversationAnalysisInput{
+model MultiLanguageConversationAnalysisInput {
+  @doc("Array of conversation items")
   conversations: Array<Conversation>;
 }
 
 @doc("Complete ordered set of utterances (spoken or written) by one or more speakers to be used for analysis.")
 @added(Versions.v2023_04_01)
 @discriminator("modality")
-model Conversation{
+model Conversation {
   @doc("Unique identifier for the conversation.")
   id: string;
 
@@ -667,6 +670,211 @@ model Conversation{
 
   @doc("domain")
   domain: ConversationDomain;
+}
+
+@doc("Enumeration of supported conversational domains.")
+@added(Versions.v2023_04_01)
+enum ConversationDomain {
+  @doc("Enumeration of supported conversational domains.")
+  finance,
+
+  @doc("Enumeration of supported conversational domains.")
+  healthcare,
+
+  @doc("Enumeration of supported conversational domains.")
+  generic,
+}
+
+@doc("model for text conversation")
+@added(Versions.v2023_04_01)
+model TextConversation extends Conversation {
+  @doc("modality discriminator")
+  modality: Modality.text;
+
+  @doc("Ordered list of text conversation items in the conversation.")
+  conversationItems: Array<TextConversationItem>;
+}
+
+@doc("model for transcript conversation")
+@added(Versions.v2023_04_01)
+model TranscriptConversation extends Conversation {
+  @doc("modality discriminator")
+  modality: Modality.transcript;
+
+  @doc("Ordered list of transcript conversation items in the conversation.")
+  conversationItems: Array<TranscriptConversationItem>;
+}
+
+@doc("Additional properties for supporting transcript conversation.")
+@added(Versions.v2023_04_01)
+model TranscriptConversationItem extends ConversationItemBase {
+  @doc("Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied.")
+  itn: string;
+
+  @doc("Inverse-text-normalized format with profanity masking applied.")
+  maskedItn: string;
+
+  @doc("Display form of the recognized text from the speech-to-text API, with punctuation and capitalization added.")
+  text: string;
+
+  @doc("Lexical form of the recognized text from the speech-to-text API, with the actual words recognized.")
+  lexical: string;
+
+  @doc("Audio timing at the conversation item level. This still can help with AI quality if word-level audio timings are not available.")
+  conversationItemLevelTiming?: ConversationItemLevelTiming;
+}
+
+@doc("Transcript content response that the service generates, with all necessary personally identifiable information redacted.")
+@added(Versions.v2023_04_01)
+model RedactedTranscriptContent {
+  @doc("Redacted output for input in inverse-text-normalized format.")
+  itn?: string;
+
+  @doc("Redacted output for input in masked inverse-text-normalized format.")
+  maskedItn?: string;
+
+  @doc("Redacted output for input in text (Microsoft's speech-to-text 'display') format.")
+  text?: string;
+
+  @doc("Redacted output for input in lexical format.")
+  lexical?: string;
+
+  @doc("List of redacted audio segments.")
+  audioTimings?: Array<AudioTiming>;
+}
+
+@doc("Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.")
+@added(Versions.v2023_04_01)
+model WordLevelTiming extends AudioTiming {
+  @doc("Recognized word.")
+  word: string;
+}
+
+@doc("Audio timing information.")
+@added(Versions.v2023_04_01)
+model AudioTiming {
+  @doc("Offset from the start of speech audio, in ticks. 1 tick = 100 nanoseconds.")
+  offset: int64;
+
+  @doc("Duration of word articulation, in ticks. 1 tick = 100 nanoseconds.")
+  duration: int64;
+}
+
+@doc("Shared attributes for all conversational task results.")
+@added(Versions.v2023_04_01)
+model ConversationResultBase {
+  @doc("Unique, non-empty conversation identifier.")
+  id: string;
+
+  @doc("Warnings encountered in processing the document.")
+  warnings: Array<InputWarning>;
+
+  @doc("statistics")
+  statistics: ConversationStatistics;
+}
+
+@doc("If showStats=true was specified in the request, this field contains information about the conversation payload.")
+@added(Versions.v2023_04_01)
+model ConversationStatistics {
+  @doc("Number of text units for the request.")
+  transactionsCount: int32;
+}
+
+@doc("if showStats=true was specified in the request, this field contains information about the request payload.")
+@added(Versions.v2023_04_01)
+model ConversationRequestStatistics extends RequestStatistics {
+  @doc("Number of conversations submitted in the request.")
+  conversationsCount: int32;
+
+  @doc("Number of conversation documents. This excludes documents that are empty, over the size limit, or in unsupported languages.")
+  validConversationCount: int32;
+
+  @doc("Number of invalid documents. This includes documents that are empty, over the size limit, or in unsupported languages.")
+  erroneousConversationsCount: int32;
+}
+
+@doc("Audio timing at the conversation item level.")
+@added(Versions.v2023_04_01)
+model ConversationItemLevelTiming extends AudioTiming {}
+
+@doc("Task definition for conversational summarization.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationSummarizationTask extends AnalyzeConversationLROTask {
+  @doc("discriminator kind")
+  kind: AnalyzeConversationLROTaskKind.ConversationalSummarizationTask;
+
+  @doc("parameters")
+  parameters: ConversationSummarizationTaskParameters;
+}
+
+@doc("Supported parameters for a conversational summarization task.")
+@added(Versions.v2023_04_01)
+model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
+  ...AbstractiveSummarizationTaskParameterBase;
+
+  @doc("Supported parameters for a conversational summarization task.")
+  summaryAspects: Array<SummaryAspect>;
+}
+
+@doc("Supported parameters for a conversational summarization task.")
+@added(Versions.v2023_04_01)
+enum SummaryAspect {
+  @doc("Summary of issues in transcripts of web chats and service calls between customer-service agents and customers.")
+  issue,
+
+  @doc("Summary of resolutions in transcripts of web chats and service calls between customer-service agents and customers.")
+  resolution,
+
+  @doc("Chapter title of any conversation. It's usually one phrase or several phrases naturally combined. Long conversations tend to have more chapters. You can find the chapter boundary from the summary context.")
+  chapterTitle,
+
+  @doc("Generic narrative summary of any conversation. It generally converts the conversational language into formal written language, compresses the text length, and keeps the salient information.")
+  narritive,
+}
+
+@doc("Result for the summarization task on the conversation.")
+@added(Versions.v2023_04_01)
+model AnalyzeConversationSummarizationResult
+  extends AnalyzeConversationJobResult {
+  @doc("discriminator kind")
+  kind: AnalyzeConversationResultsKind.ConversationalSummarizationResults;
+
+  @doc("results")
+  results: SummaryResult;
+}
+
+@doc("Summary Results")
+@added(Versions.v2023_04_01)
+model SummaryResult extends PreBuiltResult {
+  @doc("array of conversations")
+  conversations: Array<ConversationsSummaryResult>;
+}
+
+@doc("Conversations Summary Result")
+@added(Versions.v2023_04_01)
+model ConversationsSummaryResult extends ConversationResultBase {
+  @doc("array of summaries")
+  summaries: Array<SummaryResultItem>;
+}
+
+@doc("Summary Result Item")
+@added(Versions.v2023_04_01)
+model SummaryResultItem {
+  @doc("aspect")
+  aspect: string;
+
+  @doc("text")
+  text: string;
+
+  @doc("Context list of the summary.")
+  contexts?: Array<ItemizedSummaryContext>;
+}
+
+@doc("Context of the summary with a conversation item ID.")
+@added(Versions.v2023_04_01)
+model ItemizedSummaryContext extends SummaryContext {
+  @doc("Reference to the ID of ConversationItem.")
+  conversationItemId: string;
 }
 
 @doc("Input parameters necessary for a Conversation task.")
