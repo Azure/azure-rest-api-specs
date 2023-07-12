@@ -36,7 +36,6 @@ model EnterpriseSupports is TrackedResource<EnterpriseSupportsResponseProperties
 	name: string;
 }
 
-
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
 enum ProvisioningState {
@@ -84,6 +83,80 @@ model EnterpriseSupportsResponseProperties {
 	csam: string;
 }
 
-@armResourceOperations
-interface EnterpriseSuportsResource extends TrackedResourceOperations<EnterpriseSupports, EnterpriseSupportsResponseProperties> {
+@doc("The request for an eligibility check.")
+model ValidateEnterpriseSupportRequestItem {
+	@doc("The array of items to be validated")
+	items: Array<ItemToValidate>;
 }
+
+@doc("The item to be validated.")
+model ItemToValidate {
+	@doc("The billing account ID")
+	billingAccountId: string;
+
+	@doc("The billing group ID")
+	billingGroupId: string;
+
+	@doc("The product ID.")
+	productId: string;
+
+	@doc("The product SKU ID.")
+	skuId: string;
+
+	@doc("The quantity for this purchase")
+	quantity: integer;
+}
+
+@doc("The response for an eligibility check.")
+model ValidateEnterpriseSupportResponseItem {
+	@doc("The billing account ID")
+	billingAccountId: string;
+
+	@doc("The billing group ID")
+	billingGroupId: string;
+
+	@doc("The product ID.")
+	productId: string;
+
+	@doc("The product SKU ID.")
+	skuId: string;
+
+	@doc("The quantity for this purchase")
+	quantity: integer;	
+
+	@doc("Boolean value to determine if purchase is eligible")
+	isEligible: boolean;	
+
+	@doc("String reason for isEligible")
+	reason: string;
+
+	@doc("Code reason for isEligible")
+	reasonCode: integer;
+}
+
+@doc("Parameters for a custom operation.")
+model CustomParams {
+	@doc("Subscription ID")
+	@path
+	@segment("subscriptions")
+	subscriptionId: string;
+
+	@doc("Resource Group Name")
+	@path
+	@segment("resourceGroups")
+	resourceGroupName: string;
+}
+
+@armResourceOperations
+interface EnterpriseSupportsResource extends TrackedResourceOperations<EnterpriseSupports, EnterpriseSupportsResponseProperties> {
+}
+
+@autoRoute
+@armResourceOperations
+interface ProviderLevelOperations {
+    @post
+	@doc("ProviderLevel operation to check eligibility to create EnterpriseSupport instance")
+    @segment("providers/Microsoft.EnterpriseSupport/ValidateEnterpriseSupport")
+    validateEnterpriseSupport(...CustomParams, @body items: ValidateEnterpriseSupportRequestItem): ArmResponse<Array<ValidateEnterpriseSupportResponseItem>>;
+}
+
