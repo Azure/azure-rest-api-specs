@@ -701,16 +701,6 @@
             "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in 'Operation-Location' header.",
             "schema": {
               "$ref": "#/definitions/SendDtmfResponse"
-            },
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "operation-id": {
-                "description": "The operation id.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -720,7 +710,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CallMedia_SendDtmf": {
             "$ref": "./examples/CallMedia_SendDtmf.json"
@@ -948,16 +937,6 @@
             "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in 'Operation-Location' header.",
             "schema": {
               "$ref": "#/definitions/MuteParticipantsResponse"
-            },
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "operation-id": {
-                "description": "The operation id.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -967,7 +946,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CallConnection_Mute": {
             "$ref": "./examples/CallConnection_Mute.json"
