@@ -48,17 +48,5 @@ jobs:
       else {
         $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Validate-Typespec.ps1 $(Build.SourcesDirectory)
       }
-
-      $exitCode = 0
-      foreach ($typespecFolder in $typespecFolders) {
-        npx --no tsv $typespecFolder
-        if ($LASTEXITCODE) {
-          $exitCode = 1
-        }
-        git restore .
-        git clean -df
-      }
-
-      exit $exitCode
     displayName: TypespecValidation
     condition: succeededOrFailed()
