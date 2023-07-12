@@ -52,6 +52,11 @@
       }
     },
     "201": {
+      "headers": {
+        "Location": "{callbackUrl}",
+        "Retry-After": 200,
+        "Azure-AsyncOperation": "{callbackUri}"
+      },
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/licenseProfiles/default",
         "name": "default",
@@ -87,11 +92,7 @@
       }
     },
     "202": {
-      "headers": {
-        "Location": "{callbackUrl}",
-        "Retry-After": 200,
-        "Azure-AsyncOperation": "{callbackUri}"
-      }
+      
     }
   }
 }
