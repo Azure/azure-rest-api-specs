@@ -258,13 +258,7 @@
             "$ref": "#/parameters/SpringEnvironmentNameParameter"
           },
           {
-            "name": "environmentEnvelope",
-            "in": "body",
-            "required": true,
-            "description": "Configuration details of the Spring Environment.",
-            "schema": {
-              "$ref": "#/definitions/SpringEnvironment"
-            }
+            "$ref": "#/parameters/SpringEnvironmentEnvelopeParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -369,6 +363,16 @@
         }
       }
     },
+    "SpringEnvironmentForPatchBody": {
+      "description": "An environment for hosting Azure Spring Apps only for patch body",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SpringEnvironment"
+        }
+      ],
+      "required": []
+    },
     "SpringEnvironment": {
       "description": "An environment for hosting Azure Spring Apps",
       "type": "object",
@@ -440,7 +444,7 @@
       "description": "Configuration details of the Spring Environment.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/SpringEnvironment"
+        "$ref": "#/definitions/SpringEnvironmentForPatchBody"
       }
     },
     "CheckNameAvailabilityParameter": {
