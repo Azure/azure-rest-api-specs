@@ -32,6 +32,11 @@ tag: package-preview-2023-08
 
 ``` yaml
 directive:
+  - suppress: LroPostReturn
+    from: JavaApps.json
+    where: 
+      - $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/start.post
+      - $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/stop.post
   - suppress: EnumInsteadOfBoolean
     from: appplatform.json
     where: $.definitions.NameAvailability.properties.nameAvailable
