@@ -162,7 +162,7 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: PathForPutOperation
     from: maintenance.json
-    reason: Subscription or resource group is passed in request body.
+    reason: False postive. ConfigurationAssignments is proxy resource.
   - suppress: DeleteResponseBodyEmpty
     from: maintenance.json
     reason: Suppression warning to avoid breaking changes
@@ -190,17 +190,5 @@ directive:
   - suppress: ResourceNameRestriction
     from: maintenance.json
     reason: Maintenance RP accept any string, no special restriction required.
-  - suppress: PutResponseSchemaDescription
-    from: maintenance.json
-    reason: No documentation changes.
-  - suppress: DeleteOperationAsyncResponseValidation
-    from: maintenance.json
-    reason: No async operation supported by Mantenance RP.
-  - suppress: LroLocationHeader
-    from: maintenance.json
-    reason: No async operation supported by Mantenance RP.
-  - suppress: LroErrorContent
-    from: maintenance.json
-    reason: No documentation changes.
 ```
 
