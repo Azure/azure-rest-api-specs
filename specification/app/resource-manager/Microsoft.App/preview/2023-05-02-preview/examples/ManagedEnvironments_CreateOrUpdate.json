@@ -14,6 +14,26 @@
             "sharedKey": "string"
           }
         },
+        "appInsightsConfiguration": {
+          "connectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/"
+        },
+        "openTelemetryConfiguration": {
+          "destinationsConfiguration": {
+            "dataDogConfiguration": {
+              "site": "string",
+              "key": "000000000000000000000000"
+            }
+          },
+          "tracesConfiguration": {
+            "destinations": [ "appInsights" ]
+          },
+          "logsConfiguration": {
+            "destinations": [ "appInsights" ]
+          },
+          "metricsConfiguration": {
+            "destinations": [ "dataDog" ]
+          }
+        },
         "zoneRedundant": true,
         "vnetConfiguration": {
           "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
@@ -72,6 +92,29 @@
               "customerId": "string"
             }
           },
+          "openTelemetryConfiguration": {
+            "destinationsConfiguration": {
+              "dataDogConfiguration": {
+                "site": "datadoghq.com",
+                "key": null
+              }
+            },
+            "tracesConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "logsConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "metricsConfiguration": {
+              "destinations": [
+                "dataDog"
+              ]
+            }
+          },
           "zoneRedundant": true,
           "vnetConfiguration": {
             "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
@@ -108,6 +151,7 @@
               "workloadProfileType": "Consumption"
             }
           ],
+          "appInsightsConfiguration": null,
           "infrastructureResourceGroup": "capp-svc-testcontainerenv-eastus",
           "peerAuthentication": {
             "mtls": {
@@ -133,6 +177,29 @@
               "customerId": "string"
             }
           },
+          "openTelemetryConfiguration": {
+            "destinationsConfiguration": {
+              "dataDogConfiguration": {
+                "site": "datadoghq.com",
+                "key": null
+              }
+            },
+            "tracesConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "logsConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "metricsConfiguration": {
+              "destinations": [
+                "dataDog"
+              ]
+            }
+          },
           "zoneRedundant": true,
           "vnetConfiguration": {
             "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
@@ -169,6 +236,7 @@
               "workloadProfileType": "Consumption"
             }
           ],
+          "appInsightsConfiguration": null,
           "infrastructureResourceGroup": "capp-svc-testcontainerenv-eastus",
           "peerAuthentication": {
             "mtls": {
