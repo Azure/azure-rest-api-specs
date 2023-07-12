@@ -698,15 +698,17 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the send dtmf response",
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in 'Operation-Location' header.",
+            "schema": {
+              "$ref": "#/definitions/SendDtmfResponse"
+            },
             "headers": {
-              "Location": {
-                "type": "string"
-              },
               "Operation-Location": {
+                "description": "URL to query for status of the operation.",
                 "type": "string"
               },
               "operation-id": {
+                "description": "The operation id.",
                 "type": "string"
               }
             }
@@ -719,9 +721,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "CallMedia_SendDtmf": {
             "$ref": "./examples/CallMedia_SendDtmf.json"
@@ -946,30 +945,29 @@
         ],
         "responses": {
           "202": {
-            "description": "Returns the mute participants response",
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in 'Operation-Location' header.",
+            "schema": {
+              "$ref": "#/definitions/MuteParticipantsResponse"
+            },
             "headers": {
-              "Location": {
-                "type": "string"
-              },
               "Operation-Location": {
+                "description": "URL to query for status of the operation.",
                 "type": "string"
               },
               "operation-id": {
+                "description": "The operation id.",
                 "type": "string"
               }
             }
           },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+         "default": {
+           "description": "Error",
+           "schema": {
+             "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
-        },
+        },      
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "CallConnection_Mute": {
             "$ref": "./examples/CallConnection_Mute.json"
