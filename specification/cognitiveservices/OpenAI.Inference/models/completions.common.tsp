@@ -84,7 +84,7 @@ model ContentFilterResult {
   @projectedName("json", "severity")
   severity: ContentFilterSeverity;
 
-  @doc(" A value indicating whether or not the content has been filtered.")
+  @doc("A value indicating whether or not the content has been filtered.")
   @projectedName("json", "filtered")
   filtered: boolean;
 }
