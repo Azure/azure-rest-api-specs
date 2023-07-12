@@ -158,7 +158,7 @@
             "$ref": "#/parameters/SpringEnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentEnvelopeParameter"
+            "$ref": "#/parameters/SpringEnvironmentEnvelopePutParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -258,7 +258,7 @@
             "$ref": "#/parameters/SpringEnvironmentNameParameter"
           },
           {
-            "$ref": "#/parameters/SpringEnvironmentEnvelopeParameter"
+            "$ref": "#/parameters/SpringEnvironmentEnvelopePatchParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -438,13 +438,22 @@
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$"
     },
-    "SpringEnvironmentEnvelopeParameter": {
+    "SpringEnvironmentEnvelopePatchParameter": {
       "name": "environmentEnvelope",
       "in": "body",
       "description": "Configuration details of the Spring Environment.",
       "required": true,
       "schema": {
         "$ref": "#/definitions/SpringEnvironmentForPatchBody"
+      }
+    },
+    "SpringEnvironmentEnvelopePutParameter": {
+      "name": "environmentEnvelope",
+      "in": "body",
+      "description": "Configuration details of the Spring Environment.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SpringEnvironment"
       }
     },
     "CheckNameAvailabilityParameter": {
