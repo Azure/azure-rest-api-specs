@@ -85,9 +85,11 @@ system.
 model TrialMatcherInferenceEvidence {
   @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
   eligibilityCriteriaEvidence?: string;
+
   ...InferenceEvidence;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next version"
 @doc("The status of the processing job.")
 enum JobStatus {
   NotStarted: "notStarted",
