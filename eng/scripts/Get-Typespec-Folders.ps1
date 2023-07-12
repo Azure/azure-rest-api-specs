@@ -17,11 +17,11 @@ else {
   $tspFiles = git -c core.quotepath=off -c i18n.logoutputencoding=utf-8 diff --name-only `"$TargetBranch...$SourceBranch`" -- | Where-Object {$_.StartsWith('specification')}
 }
 
-$typeSpecFolders = @()
+$typespecFolders = @()
 foreach ($file in $tspFiles) {
   $file -match 'specification\/[^\/]*\/' | out-null
-  $typeSpecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)/"
+  $typespecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).Directory.FullName -replace "$($pwd.Path)/"
 }
-$typeSpecFolders = $typeSpecFolders | Select-Object -Unique
+$typespecFolders = $typespecFolders | Select-Object -Unique
 
-return $typeSpecFolders
+return $typespecFolders

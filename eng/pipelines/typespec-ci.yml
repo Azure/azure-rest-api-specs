@@ -50,8 +50,8 @@ jobs:
       }
 
       $exitCode = 0
-      foreach ($typeSpecFolder in $typeSpecFolders) {
-        npx --no tsv $typeSpecFolder
+      foreach ($typespecFolder in $typespecFolders) {
+        npx --no tsv $typespecFolder
         if ($LASTEXITCODE) {
           $exitCode = 1
         }
@@ -60,5 +60,5 @@ jobs:
       }
 
       exit $exitCode
-    displayName: TypeSpecValidation
+    displayName: TypespecValidation
     condition: succeededOrFailed()
