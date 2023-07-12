@@ -217,6 +217,7 @@ model ChatCompletions {
     """)
   @projectedName("json", "created")
   @projectedName("csharp", "InternalCreatedSecondsAfterUnixEpoch")
+  @projectedName("java", "createdAt")
   created: int32;
 
   @doc("""

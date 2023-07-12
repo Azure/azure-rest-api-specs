@@ -214,15 +214,18 @@ model CompletionsLogProbabilityModel {
   @doc("A collection of log probability values for the tokens in this completions data.")
   @projectedName("json", "token_logprobs")
   @projectedName("csharp", "TokenLogProbabilities")
+  @projectedName("java", "tokenLogProbabilities")
   tokenLogprobs: NullableFloat[];
 
   @doc("A mapping of tokens to maximum log probability values in this completions data.")
   @projectedName("json", "top_logprobs")
   @projectedName("csharp", "TopLogProbabilities")
+  @projectedName("java", "topLogProbabilities")
   topLogprobs: Record<NullableFloat>[];
 
   @doc("The text offsets associated with tokens in this completions data.")
   @projectedName("json", "text_offset")
   @projectedName("csharp", "TextOffsets")
+  @projectedName("java", "textOffsets")
   textOffset: int32[];
 }
