@@ -198,6 +198,15 @@ model Choice {
   @projectedName("json", "index")
   index: int32;
 
+  @doc("""
+  Information about the content filtering category (hate, sexual, violence, self_harm), if it 
+  has been detected, as well as the severity level (very_low, low, medium, high-scale that 
+  determines the intensity and risk level of harmful content) and if it has been filtered or not.
+  """)
+  @added(ServiceApiVersions.v2023_06_01_Preview)
+  @projectedName("json", "content_filter_results")
+  contentFilterResults?: ContentFilterResults;
+
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   @doc("The log probabilities model for tokens associated with this completions choice.")
   @projectedName("json", "logprobs")
