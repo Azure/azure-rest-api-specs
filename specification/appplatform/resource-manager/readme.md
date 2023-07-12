@@ -31,12 +31,14 @@ tag: package-preview-2023-08
 ### Suppression
 
 ``` yaml
+suppressions:
+  - code: LroPostReturn
+    from: swagger-document
+    reason: The linter incorrectly flags LRO POST operation with no payload response. It should allow to be a 202/204 NoContext for LRO empty response case.
+```
+
+``` yaml
 directive:
-  - suppress: LroPostReturn
-    from: JavaApps.json
-    where: 
-      - $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/start.post
-      - $.paths./subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/javaApps/{appName}/stop.post
   - suppress: EnumInsteadOfBoolean
     from: appplatform.json
     where: $.definitions.NameAvailability.properties.nameAvailable
