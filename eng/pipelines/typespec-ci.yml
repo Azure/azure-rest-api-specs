@@ -52,10 +52,8 @@ jobs:
       $exitCode = 0
       Write-Host "Running TSV on: $typespecFolders"
       foreach ($typeSpecFolder in $typeSpecFolders) {
-        try {
-          npx --no tsv $typeSpecFolder
-        }
-        catch {
+        npx --no tsv $typeSpecFolder
+        if ($LASTEXITCODE) {
           $exitCode = 1
         }
         git restore .
