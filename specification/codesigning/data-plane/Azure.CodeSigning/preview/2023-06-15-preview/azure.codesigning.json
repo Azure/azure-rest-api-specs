@@ -55,7 +55,7 @@
       "post": {
         "operationId": "CertificateProfileOperations_Sign",
         "summary": "Submit a codesign operation.",
-        "description": "Submit a codesign operation under the specified account and profile name.",
+        "description": "Submit a codesign operation under the created codesign account and profile name provided.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -143,8 +143,8 @@
     "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}": {
       "get": {
         "operationId": "CertificateProfileOperations_GetCodeSigningStatus",
-        "summary": "Gets the status of a codesign operation.",
-        "description": "Retrieves the status of the codesign operation long running operation.",
+        "summary": "Gets the status of a codesigning operation.",
+        "description": "This status operation requires that a Sign request has been submitted and the operationId is known.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -217,8 +217,8 @@
     "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/eku": {
       "get": {
         "operationId": "CertificateProfileOperations_ListSignEkus",
-        "summary": "Gets a list of extended key usage object identifiers that are allowed.",
-        "description": "Retrieve a list of extended key usage object identifierss that are allowed for this account and profile name.",
+        "summary": "Gets a list of extended key usage object identifiers that are allowed for this account and profile combination.",
+        "description": "The list of extended key usages are used to determine the purpose of the certificate usage as part of the codesigning operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -294,7 +294,7 @@
       "get": {
         "operationId": "CertificateProfileOperations_GetSignRootCertificate",
         "summary": "Gets the codesigning root certificate on the certificate chain for that account and profile name.",
-        "description": "Retrieve the codesigning root certificate on the certificate chain for that account and profile name.",
+        "description": "The root certificate is generated as part of the initial account creation and it is used to sign the bits for the profile provided.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
