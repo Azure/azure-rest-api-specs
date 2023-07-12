@@ -33,7 +33,7 @@ tag: package-preview-2023-08
 ``` yaml
 suppressions:
   - code: LroPostReturn
-    from: swagger-document
+    from: JavaApps.json
     reason: The linter incorrectly flags LRO POST operation with no payload response. It should allow to be a 202/204 NoContext for LRO empty response case.
 ```
 
