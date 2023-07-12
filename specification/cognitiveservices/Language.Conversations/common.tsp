@@ -201,7 +201,10 @@ model KnowledgeBaseAnswer {
     @doc("Answer confidence score, value ranges from 0 to 1.")
     @minValue(0)
     @maxValue(1)
+<<<<<<< HEAD
     @projectedName("client", "confidence")
+=======
+>>>>>>> 0f1a02ebb0 (lint diff fix)
     confidenceScore?: float64;
 
     @doc("ID of the QnA result.")
