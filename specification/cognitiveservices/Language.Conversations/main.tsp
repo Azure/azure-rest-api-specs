@@ -39,7 +39,7 @@ enum Versions {
 model Conversations {
   @key
   @doc("id")
-  @visibility("read")
+  @visibility("create")
   id: string;
 }
 
