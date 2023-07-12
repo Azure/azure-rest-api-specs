@@ -43,10 +43,10 @@ jobs:
   - pwsh: |
       $typespecFolders = @()
       if ('$(Build.Reason)' -eq 'PullRequest') {
-        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Get-Typespec-Folders.ps1 $(Build.SourcesDirectory) "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
+        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Validate-Typespec.ps1 $(Build.SourcesDirectory) "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
       }
       else {
-        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Get-Typespec-Folders.ps1 $(Build.SourcesDirectory)
+        $typespecFolders = $(Build.SourcesDirectory)/eng/scripts/Validate-Typespec.ps1 $(Build.SourcesDirectory)
       }
 
       $exitCode = 0
