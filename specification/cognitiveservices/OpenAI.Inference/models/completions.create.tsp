@@ -214,6 +214,7 @@ model Choice {
   logprobs: CompletionsLogProbabilityModel | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("Reason for finishing")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
