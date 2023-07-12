@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-offazurespringboot
-namespace: azure.mgmt.offazurespringboot
+package-name: azure-mgmt-springappdiscovery
+namespace: azure.mgmt.springappdiscovery
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/offazurespringboot/azure-mgmt-offazurespringboot/azure/mgmt/offazurespringboot
+output-folder: $(python-sdks-folder)/springappdiscovery/azure-mgmt-springappdiscovery/azure/mgmt/springappdiscovery
 ```
