@@ -52,9 +52,6 @@ directive:
   - suppress: R3021
     from: appplatform.json
     reason:  The resource type name 'Spring' is a trademark so cannot be changed to be camel-case
-    #where:
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/configServers/default"]
-    #  - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/monitoringSettings/default"]
 ```
 ### Tag: package-preview-2023-08
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
