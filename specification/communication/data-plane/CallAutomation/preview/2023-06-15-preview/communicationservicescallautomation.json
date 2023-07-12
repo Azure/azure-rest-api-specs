@@ -699,6 +699,15 @@
         "responses": {
           "202": {
             "description": "Returns the send dtmf response",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SendDtmfResponse"
             }
@@ -711,6 +720,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "CallMedia_SendDtmf": {
             "$ref": "./examples/CallMedia_SendDtmf.json"
@@ -936,6 +948,15 @@
         "responses": {
           "202": {
             "description": "Returns the mute participants response",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/MuteParticipantsResponse"
             }
@@ -948,6 +969,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "CallConnection_Mute": {
             "$ref": "./examples/CallConnection_Mute.json"
