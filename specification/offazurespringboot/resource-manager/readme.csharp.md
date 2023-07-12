@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Azure.ResourceManager.SpringAppDiscovery
-  output-folder: $(csharp-sdks-folder)/offazurespringboot/management/Azure.ResourceManager.SpringAppDiscovery/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/springappdiscovery/management/Azure.ResourceManager.SpringAppDiscovery/GeneratedProtocol
 ```
