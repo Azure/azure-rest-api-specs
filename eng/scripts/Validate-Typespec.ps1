@@ -14,7 +14,7 @@ $typespecFolders = &"$PSScriptRoot/Get-Typespec-Folders.ps1" "$SpecsRepoRootDire
 
 $exitCode = 0
 foreach ($typespecFolder in $typespecFolders) {
-  npx --no tsv $typespecFolder 2>&1
+  npx --no tsv $typespecFolder 2>&1 | Write-Host
   if ($LASTEXITCODE) {
     $exitCode = 1
   }
