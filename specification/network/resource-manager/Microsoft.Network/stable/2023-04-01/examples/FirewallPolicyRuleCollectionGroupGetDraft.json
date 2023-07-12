@@ -1,46 +1,44 @@
 {
     "parameters": {
-      "ruleCollectionGroupName": "ruleCollectionGroup1",
-      "firewallPolicyName": "firewallPolicy",
-      "resourceGroupName": "rg1",
-      "api-version": "2023-04-01",
-      "subscriptionId": "subid"
+        "ruleCollectionGroupName": "ruleCollectionGroup1",
+        "firewallPolicyName": "firewallPolicy",
+        "resourceGroupName": "rg1",
+        "api-version": "2023-04-01",
+        "subscriptionId": "subid"
     },
     "responses": {
-      "200": {
-        "body": {
-          "properties": {
-            "priority": 110,
-            "ruleCollections": [
-              {
-                "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
-                "name": "Example-Filter-Rule-Collection",
-                "priority": 200,
-                "action": {
-                  "type": "Deny"
-                },
-                "rules": [
-                  {
-                    "ruleType": "NetworkRule",
-                    "name": "network-rule1",
-                    "sourceAddresses": [
-                      "10.1.25.0/24"
-                    ],
-                    "destinationAddresses": [
-                      "*"
-                    ],
-                    "ipProtocols": [
-                      "TCP"
-                    ],
-                    "destinationPorts": [
-                      "*"
-                    ]
-                  }
+        "200": {
+            "body": {
+                "priority": 110,
+                "ruleCollections": [
+                    {
+                        "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+                        "name": "Example-Filter-Rule-Collection",
+                        "priority": 200,
+                        "action": {
+                            "type": "Deny"
+                        },
+                        "rules": [
+                            {
+                                "ruleType": "NetworkRule",
+                                "name": "network-rule1",
+                                "sourceAddresses": [
+                                    "10.1.25.0/24"
+                                ],
+                                "destinationAddresses": [
+                                    "*"
+                                ],
+                                "ipProtocols": [
+                                    "TCP"
+                                ],
+                                "destinationPorts": [
+                                    "*"
+                                ]
+                            }
+                        ]
+                    }
                 ]
-              }
-            ]
-          }
+            }
         }
-      }
     }
-  }
+}
