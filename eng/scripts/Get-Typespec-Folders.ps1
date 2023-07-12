@@ -20,7 +20,7 @@ else {
 $typeSpecFolders = @()
 foreach ($file in $tspFiles) {
   $file -match 'specification\/[^\/]*\/' | out-null
-  $typeSpecFolders += $matches[0]
+  $typeSpecFolders += (Get-ChildItem -path $matches[0] tspconfig.yaml -Recurse).FullName -replace "$($pwd.Path)/"
 }
 $typeSpecFolders = $typeSpecFolders | Select-Object -Unique
 

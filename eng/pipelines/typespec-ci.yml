@@ -50,7 +50,6 @@ jobs:
       }
 
       $exitCode = 0
-      Write-Host "Running TSV on: $typespecFolders"
       foreach ($typeSpecFolder in $typeSpecFolders) {
         npx --no tsv $typeSpecFolder
         if ($LASTEXITCODE) {

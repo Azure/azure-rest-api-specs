@@ -62,6 +62,7 @@ export async function main() {
 
   // Spec compilation check
   if (await checkFileExists(path.join(folder, "main.tsp"))) {
+    console.log(path.join(folder, "main.tsp"));
     await runCmd(`npx --no tsp compile . --warn-as-error`, folder);
   }
   if (await checkFileExists(path.join(folder, "client.tsp"))) {
