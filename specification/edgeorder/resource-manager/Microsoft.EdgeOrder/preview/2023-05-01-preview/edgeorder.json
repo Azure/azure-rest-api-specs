@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-05-01-preview",
+    "version": "2023-05-01-preview",
     "title": "Edge Ordering Service-Customer"
   },
   "host": "management.azure.com",
@@ -3019,6 +3019,10 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "Represents resource creation and update time.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "Msi identity of the resource"
         }
       }
     },
@@ -3056,6 +3060,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "Msi identity of the resource"
         }
       }
     },
@@ -3527,6 +3535,34 @@
       },
       "x-ms-discriminator-value": "Purchase"
     },
+    "ResourceIdentity": {
+      "description": "Msi identity details of the resource",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identity type",
+          "type": "string",
+          "default": "None"
+        },
+        "principalId": {
+          "description": "Service Principal Id backing the Msi",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Home Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "User Assigned Identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
     "ResourceMoveRequest": {
       "type": "object",
       "properties": {
@@ -3860,6 +3896,22 @@
               }
             ]
           }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "Class defining User assigned identity details.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

@@ -24,6 +24,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 default-api-version: "2021-12-01"
 batch:
+  - tag: package-2023-05-preview
   - tag: package-2022-05-preview
   - tag: package-2021-12
   - tag: package-2020-12-preview
@@ -33,6 +34,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/
 perform-load: false
+```
+
+### Tag: package-2023-05-preview and python
+
+These settings apply only when `--tag=package-2023-05-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-05-preview' && $(python)
+namespace: azure.mgmt.edgeorder.v2023_05_01_preview
+output-folder: $(python-sdks-folder)/edgeorder/azure-mgmt-edgeorder/azure/mgmt/edgeorder/v2023_05_01_preview
 ```
 
 ### Tag: package-2022-05-preview and python
