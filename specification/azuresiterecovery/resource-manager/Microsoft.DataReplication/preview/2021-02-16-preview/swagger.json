@@ -5,14 +5,22 @@
     "description": "A first party Azure service enabling the data replication.",
     "version": "2021-02-16-preview"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}": {
       "get": {
-        "tags": ["Dra"],
+        "tags": [
+          "Dra"
+        ],
         "summary": "Gets the Dra.",
         "description": "Gets the details of the fabric agent.",
         "operationId": "Dra_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -61,12 +69,18 @@
         }
       },
       "put": {
-        "tags": ["Dra"],
+        "tags": [
+          "Dra"
+        ],
         "summary": "Puts the Dra.",
         "description": "Creates the fabric agent.",
         "operationId": "Dra_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -144,90 +158,16 @@
           }
         }
       },
-      "patch": {
-        "tags": ["Dra"],
-        "summary": "Updates the Dra.",
-        "description": "Updates the fabric agent.",
-        "operationId": "Dra_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "in": "path",
-            "name": "draName",
-            "description": "Dra name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Dra model.",
-            "schema": {
-              "$ref": "#/definitions/DraModel"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DraModel"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Dra_Update": {
-            "$ref": "./examples/Dra_Update.json"
-          }
-        }
-      },
       "delete": {
-        "tags": ["Dra"],
+        "tags": [
+          "Dra"
+        ],
         "summary": "Deletes the Dra.",
         "description": "Deletes the fabric agent.",
         "operationId": "Dra_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -294,11 +234,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents": {
       "get": {
-        "tags": ["Dra"],
+        "tags": [
+          "Dra"
+        ],
         "summary": "Lists the Dras.",
         "description": "Gets the list of fabric agents in the given fabric.",
         "operationId": "Dra_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -342,84 +286,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}/refresh": {
-      "post": {
-        "tags": ["Dra"],
-        "summary": "Refreshes the Dra.",
-        "description": "Refreshes the fabric agent.",
-        "operationId": "Dra_Refresh",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "fabricName",
-            "description": "Fabric name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "in": "path",
-            "name": "draName",
-            "description": "Dra name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DraModel"
-            }
-          },
-          "202": {
-            "description": "Returns success on refresh.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Dra_Refresh": {
-            "$ref": "./examples/Dra_Refresh.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/fabricAgents/{draName}/operations/{operationId}": {
       "get": {
-        "tags": ["Dra"],
+        "tags": [
+          "Dra"
+        ],
         "summary": "Gets the Dra operation status.",
         "description": "Tracks the results of an asynchronous operation on the fabric agent.",
         "operationId": "DraOperationStatus_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -477,11 +354,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/alertSettings/{emailConfigurationName}": {
       "get": {
-        "tags": ["EmailConfiguration"],
+        "tags": [
+          "EmailConfiguration"
+        ],
         "summary": "Gets the email configuration setting.",
         "description": "Gets the details of the alert configuration setting.",
         "operationId": "EmailConfiguration_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -530,12 +411,18 @@
         }
       },
       "put": {
-        "tags": ["EmailConfiguration"],
+        "tags": [
+          "EmailConfiguration"
+        ],
         "summary": "Creates email configuration settings.",
         "description": "Creates an alert configuration setting for the given vault.",
         "operationId": "EmailConfiguration_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -598,12 +485,18 @@
         }
       },
       "patch": {
-        "tags": ["EmailConfiguration"],
+        "tags": [
+          "EmailConfiguration"
+        ],
         "summary": "Updates email configuration settings.",
         "description": "Updates the alert configuration setting for the given vault.",
         "operationId": "EmailConfiguration_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -635,7 +528,7 @@
             "name": "body",
             "description": "EmailConfiguration model.",
             "schema": {
-              "$ref": "#/definitions/EmailConfigurationModel"
+              "$ref": "#/definitions/EmailConfigurationModelUpdate"
             }
           }
         ],
@@ -662,11 +555,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/alertSettings": {
       "get": {
-        "tags": ["EmailConfiguration"],
+        "tags": [
+          "EmailConfiguration"
+        ],
         "summary": "Lists the email configuration settings.",
         "description": "Gets the list of alert configuration settings for the given vault.",
         "operationId": "EmailConfiguration_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -712,11 +609,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/events/{eventName}": {
       "get": {
-        "tags": ["Event"],
+        "tags": [
+          "Event"
+        ],
         "summary": "Gets the event.",
         "description": "Gets the details of the event.",
         "operationId": "Event_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -767,11 +668,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/events": {
       "get": {
-        "tags": ["Event"],
+        "tags": [
+          "Event"
+        ],
         "summary": "Lists the events.",
         "description": "Gets the list of events in the given vault.",
         "operationId": "Event_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -829,11 +734,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}": {
       "get": {
-        "tags": ["Fabric"],
+        "tags": [
+          "Fabric"
+        ],
         "summary": "Gets the fabric.",
         "description": "Gets the details of the fabric.",
         "operationId": "Fabric_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -874,12 +783,18 @@
         }
       },
       "put": {
-        "tags": ["Fabric"],
+        "tags": [
+          "Fabric"
+        ],
         "summary": "Puts the fabric.",
         "description": "Creates the fabric.",
         "operationId": "Fabric_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -950,12 +865,18 @@
         }
       },
       "patch": {
-        "tags": ["Fabric"],
+        "tags": [
+          "Fabric"
+        ],
         "summary": "Updates the fabric.",
         "description": "Performs update on the fabric.",
         "operationId": "Fabric_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -979,7 +900,7 @@
             "name": "body",
             "description": "Fabric properties.",
             "schema": {
-              "$ref": "#/definitions/FabricModel"
+              "$ref": "#/definitions/FabricModelUpdate"
             }
           }
         ],
@@ -1020,11 +941,15 @@
         }
       },
       "delete": {
-        "tags": ["Fabric"],
+        "tags": [
+          "Fabric"
+        ],
         "summary": "Deletes the fabric.",
         "description": "Removes the fabric.",
         "operationId": "Fabric_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1083,11 +1008,15 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataReplication/replicationFabrics": {
       "get": {
-        "tags": ["Fabric"],
+        "tags": [
+          "Fabric"
+        ],
         "summary": "Lists the fabrics.",
         "description": "Gets the list of fabrics in the given subscription.",
         "operationId": "Fabric_ListBySubscription",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1128,11 +1057,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics": {
       "get": {
-        "tags": ["Fabric"],
+        "tags": [
+          "Fabric"
+        ],
         "summary": "Lists the fabrics.",
         "description": "Gets the list of fabrics in the given subscription and resource group.",
         "operationId": "Fabric_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1176,11 +1109,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationFabrics/{fabricName}/operations/{operationId}": {
       "get": {
-        "tags": ["Fabric"],
+        "tags": [
+          "Fabric"
+        ],
         "summary": "Gets the fabric operation status.",
         "description": "Tracks the results of an asynchronous operation on the fabric.",
         "operationId": "FabricOperationsStatus_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1201,12 +1138,6 @@
             "name": "operationId",
             "description": "Operation Id.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "OperationType",
-            "description": "The operation type.",
             "type": "string"
           },
           {
@@ -1236,11 +1167,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationPolicies/{policyName}": {
       "get": {
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "summary": "Gets the policy.",
         "description": "Gets the details of the policy.",
         "operationId": "Policy_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1289,12 +1224,18 @@
         }
       },
       "put": {
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "summary": "Puts the policy.",
         "description": "Creates the policy.",
         "operationId": "Policy_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1373,12 +1314,18 @@
         }
       },
       "patch": {
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "summary": "Updates the policy.",
         "description": "Performs update on the policy.",
         "operationId": "Policy_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1410,7 +1357,7 @@
             "name": "body",
             "description": "Policy model.",
             "schema": {
-              "$ref": "#/definitions/PolicyModel"
+              "$ref": "#/definitions/PolicyModelUpdate"
             }
           }
         ],
@@ -1451,11 +1398,15 @@
         }
       },
       "delete": {
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "summary": "Deletes the policy.",
         "description": "Removes the policy.",
         "operationId": "Policy_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1522,11 +1473,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationPolicies": {
       "get": {
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "summary": "Lists the policies.",
         "description": "Gets the list of policies in the given vault.",
         "operationId": "Policy_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1572,11 +1527,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationPolicies/{policyName}/operations/{operationId}": {
       "get": {
-        "tags": ["Policy"],
+        "tags": [
+          "Policy"
+        ],
         "summary": "Gets the policy operation status.",
         "description": "Tracks the results of an asynchronous operation on the policy.",
         "operationId": "PolicyOperationStatus_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1634,11 +1593,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}": {
       "get": {
-        "tags": ["ProtectedItem"],
+        "tags": [
+          "ProtectedItem"
+        ],
         "summary": "Gets the protected item.",
         "description": "Gets the details of the protected item.",
         "operationId": "ProtectedItem_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1687,12 +1650,18 @@
         }
       },
       "put": {
-        "tags": ["ProtectedItem"],
+        "tags": [
+          "ProtectedItem"
+        ],
         "summary": "Puts the protected item.",
         "description": "Creates the protected item.",
         "operationId": "ProtectedItem_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1771,12 +1740,18 @@
         }
       },
       "patch": {
-        "tags": ["ProtectedItem"],
+        "tags": [
+          "ProtectedItem"
+        ],
         "summary": "Updates the protected item.",
         "description": "Performs update on the protected item.",
         "operationId": "ProtectedItem_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1808,7 +1783,7 @@
             "name": "body",
             "description": "Protected item model.",
             "schema": {
-              "$ref": "#/definitions/ProtectedItemModel"
+              "$ref": "#/definitions/ProtectedItemModelUpdate"
             }
           }
         ],
@@ -1849,11 +1824,15 @@
         }
       },
       "delete": {
-        "tags": ["ProtectedItem"],
+        "tags": [
+          "ProtectedItem"
+        ],
         "summary": "Deletes the protected item.",
         "description": "Removes the protected item.",
         "operationId": "ProtectedItem_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1926,11 +1905,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems": {
       "get": {
-        "tags": ["ProtectedItem"],
+        "tags": [
+          "ProtectedItem"
+        ],
         "summary": "Lists the protected items.",
         "description": "Gets the list of protected items in the given vault.",
         "operationId": "ProtectedItem_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1976,12 +1959,18 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}/plannedFailover": {
       "post": {
-        "tags": ["ProtectedItem"],
+        "tags": [
+          "ProtectedItem"
+        ],
         "summary": "Performs planned failover.",
         "description": "Performs the planned failover on the protected item.",
         "operationId": "ProtectedItem_PlannedFailover",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2059,11 +2048,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}/operations/{operationId}": {
       "get": {
-        "tags": ["ProtectedItem"],
+        "tags": [
+          "ProtectedItem"
+        ],
         "summary": "Gets the protected item operation status.",
         "description": "Tracks the results of an asynchronous operation on the protected item.",
         "operationId": "ProtectedItemOperationStatus_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2121,11 +2114,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointName}": {
       "get": {
-        "tags": ["RecoveryPoint"],
+        "tags": [
+          "RecoveryPoint"
+        ],
         "summary": "Gets the recovery point.",
         "description": "Gets the details of the recovery point of a protected item.",
         "operationId": "RecoveryPoints_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2184,11 +2181,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/protectedItems/{protectedItemName}/recoveryPoints": {
       "get": {
-        "tags": ["RecoveryPoint"],
+        "tags": [
+          "RecoveryPoint"
+        ],
         "summary": "Lists the recovery points.",
         "description": "Gets the list of recovery points of the given protected item.",
         "operationId": "RecoveryPoints_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2242,11 +2243,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationExtensions/{replicationExtensionName}": {
       "get": {
-        "tags": ["ReplicationExtension"],
+        "tags": [
+          "ReplicationExtension"
+        ],
         "summary": "Gets the replication extension.",
         "description": "Gets the details of the replication extension.",
         "operationId": "ReplicationExtension_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2295,12 +2300,18 @@
         }
       },
       "put": {
-        "tags": ["ReplicationExtension"],
+        "tags": [
+          "ReplicationExtension"
+        ],
         "summary": "Puts the replication extension.",
         "description": "Creates the replication extension in the given vault.",
         "operationId": "ReplicationExtension_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2378,90 +2389,16 @@
           }
         }
       },
-      "patch": {
-        "tags": ["ReplicationExtension"],
-        "summary": "Updates the replication extension.",
-        "description": "Updates the replication extension in the given vault.",
-        "operationId": "ReplicationExtension_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "in": "path",
-            "name": "replicationExtensionName",
-            "description": "Replication extension name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Replication extension model.",
-            "schema": {
-              "$ref": "#/definitions/ReplicationExtensionModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ReplicationExtensionModel"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "ReplicationExtension_Update": {
-            "$ref": "./examples/ReplicationExtension_Update.json"
-          }
-        }
-      },
       "delete": {
-        "tags": ["ReplicationExtension"],
+        "tags": [
+          "ReplicationExtension"
+        ],
         "summary": "Deletes the replication extension.",
         "description": "Deletes the replication extension in the given vault.",
         "operationId": "ReplicationExtension_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2528,11 +2465,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationExtensions": {
       "get": {
-        "tags": ["ReplicationExtension"],
+        "tags": [
+          "ReplicationExtension"
+        ],
         "summary": "Lists the replication extensions.",
         "description": "Gets the list of replication extensions in the given vault.",
         "operationId": "ReplicationExtension_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2578,11 +2519,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/replicationExtensions/{replicationExtensionName}/operations/{operationId}": {
       "get": {
-        "tags": ["ReplicationExtension"],
+        "tags": [
+          "ReplicationExtension"
+        ],
         "summary": "Gets the replication extension operation status.",
         "description": "Tracks the results of an asynchronous operation on the replication extension.",
         "operationId": "ReplicationExtensionOperationStatus_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2640,12 +2585,18 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataReplication/locations/{location}/checkNameAvailability": {
       "post": {
-        "tags": ["Tenant"],
+        "tags": [
+          "Tenant"
+        ],
         "summary": "Performs the resource name availability check.",
         "description": "Checks the resource name availability.",
         "operationId": "CheckNameAvailability",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2692,11 +2643,15 @@
     },
     "/providers/Microsoft.DataReplication/operations": {
       "get": {
-        "tags": ["Tenant"],
+        "tags": [
+          "Tenant"
+        ],
         "summary": "Get a list of REST API operations supported by Microsoft.DataReplication.",
         "description": "Gets the operations.",
         "operationId": "Operations_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2728,11 +2683,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/deployments/{deploymentId}/preflight": {
       "post": {
-        "tags": ["Tenant"],
+        "tags": [
+          "Tenant"
+        ],
         "summary": "Performs resource deployment validation.",
         "operationId": "DeploymentPreflight",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2782,11 +2743,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}": {
       "get": {
-        "tags": ["Vault"],
+        "tags": [
+          "Vault"
+        ],
         "summary": "Gets the vault.",
         "description": "Gets the details of the vault.",
         "operationId": "Vault_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2827,12 +2792,18 @@
         }
       },
       "put": {
-        "tags": ["Vault"],
+        "tags": [
+          "Vault"
+        ],
         "summary": "Puts the vault.",
         "description": "Creates the vault.",
         "operationId": "Vault_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2903,12 +2874,18 @@
         }
       },
       "patch": {
-        "tags": ["Vault"],
+        "tags": [
+          "Vault"
+        ],
         "summary": "Updates the vault.",
         "description": "Performs update on the vault.",
         "operationId": "Vault_Update",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2932,7 +2909,7 @@
             "name": "body",
             "description": "Vault properties.",
             "schema": {
-              "$ref": "#/definitions/VaultModel"
+              "$ref": "#/definitions/VaultModelUpdate"
             }
           }
         ],
@@ -2973,11 +2950,15 @@
         }
       },
       "delete": {
-        "tags": ["Vault"],
+        "tags": [
+          "Vault"
+        ],
         "summary": "Deletes the vault.",
         "description": "Removes the vault.",
         "operationId": "Vault_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3036,11 +3017,15 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataReplication/replicationVaults": {
       "get": {
-        "tags": ["Vault"],
+        "tags": [
+          "Vault"
+        ],
         "summary": "Lists the vaults.",
         "description": "Gets the list of vaults in the given subscription.",
         "operationId": "Vault_ListBySubscription",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3081,11 +3066,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults": {
       "get": {
-        "tags": ["Vault"],
+        "tags": [
+          "Vault"
+        ],
         "summary": "Lists the vaults.",
         "description": "Gets the list of vaults in the given subscription and resource group.",
         "operationId": "Vault_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3127,60 +3116,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/statistics": {
-      "get": {
-        "tags": ["Vault"],
-        "summary": "Gets the vault statistics.",
-        "description": "Gets the statistics for the vault.",
-        "operationId": "VaultStatistics_Get",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "vaultName",
-            "description": "Vault name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]*$"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns VaultStatistics Model on success.",
-            "schema": {
-              "$ref": "#/definitions/VaultStatisticsModel"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ArmError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VaultStatistics_Get": {
-            "$ref": "./examples/VaultStatistics_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/operations/{operationId}": {
       "get": {
-        "tags": ["Vault"],
+        "tags": [
+          "Vault"
+        ],
         "summary": "Gets the vault operation status.",
         "description": "Tracks the results of an asynchronous operation on the vault.",
         "operationId": "VaultOperationStatus_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3201,12 +3147,6 @@
             "name": "operationId",
             "description": "Operation Id.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "OperationType",
-            "description": "The operation type.",
             "type": "string"
           },
           {
@@ -3236,11 +3176,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/jobs/{workflowName}": {
       "get": {
-        "tags": ["Workflow"],
+        "tags": [
+          "Workflow"
+        ],
         "summary": "Gets the workflow.",
         "description": "Gets the details of the job.",
         "operationId": "Workflow_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3291,11 +3235,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/jobs": {
       "get": {
-        "tags": ["Workflow"],
+        "tags": [
+          "Workflow"
+        ],
         "summary": "Lists the workflows.",
         "description": "Gets the list of jobs in the given vault.",
         "operationId": "Workflow_List",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3353,11 +3301,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataReplication/replicationVaults/{vaultName}/jobs/{workflowName}/operations/{operationId}": {
       "get": {
-        "tags": ["Workflow"],
+        "tags": [
+          "Workflow"
+        ],
         "summary": "Gets the workflow operation status.",
         "description": "Tracks the results of an asynchronous operation on the job.",
         "operationId": "WorkflowOperationStatus_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3477,7 +3429,11 @@
     },
     "AzStackHCIFabricModelCustomProperties": {
       "description": "AzStackHCI fabric model custom properties.",
-      "required": ["azStackHciSiteId", "cluster", "migrationSolutionId"],
+      "required": [
+        "azStackHciSiteId",
+        "cluster",
+        "migrationSolutionId"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3593,7 +3549,9 @@
     },
     "DraModel": {
       "description": "Dra model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -3653,7 +3611,9 @@
     },
     "DraModelCustomProperties": {
       "description": "Dra model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -3746,7 +3706,9 @@
     },
     "EmailConfigurationModel": {
       "description": "Email configuration model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -3806,7 +3768,9 @@
     },
     "EmailConfigurationModelProperties": {
       "description": "Email configuration model properties.",
-      "required": ["sendToOwners"],
+      "required": [
+        "sendToOwners"
+      ],
       "type": "object",
       "properties": {
         "sendToOwners": {
@@ -3825,6 +3789,47 @@
           "type": "string"
         }
       }
+    },
+    "EmailConfigurationModelUpdate": {
+      "description": "Email configuration model for update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EmailConfigurationModelProperties"
+        },
+        "id": {
+          "description": "Gets or sets the Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemDataModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "maxLength": 15,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "ErrorModel": {
       "description": "Error model.",
@@ -3870,7 +3875,9 @@
     },
     "EventModel": {
       "description": "Event model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -3929,7 +3936,9 @@
     },
     "EventModelCustomProperties": {
       "description": "Event model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -3942,7 +3951,9 @@
     },
     "EventModelProperties": {
       "description": "Event model properties.",
-      "required": ["customProperties"],
+      "required": [
+        "customProperties"
+      ],
       "type": "object",
       "properties": {
         "resourceType": {
@@ -4002,13 +4013,16 @@
     },
     "FabricModel": {
       "description": "Fabric model.",
-      "required": ["properties"],
+      "required": [
+        "location",
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "location": {
           "description": "Gets or sets the location of the fabric.",
-          "type": "string",
-          "readOnly": true
+          "minLength": 1,
+          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/FabricModelProperties"
@@ -4067,7 +4081,9 @@
     },
     "FabricModelCustomProperties": {
       "description": "Fabric model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -4080,7 +4096,9 @@
     },
     "FabricModelProperties": {
       "description": "Fabric model properties.",
-      "required": ["customProperties"],
+      "required": [
+        "customProperties"
+      ],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -4113,7 +4131,11 @@
         },
         "health": {
           "description": "Gets or sets the fabric health.",
-          "enum": ["Normal", "Warning", "Critical"],
+          "enum": [
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -4135,20 +4157,51 @@
         }
       }
     },
-    "FabricStatisticsModel": {
-      "description": "Fabric statistics model.",
+    "FabricModelUpdate": {
+      "description": "Fabric model for update.",
       "type": "object",
       "properties": {
-        "fabricErrors": {
-          "description": "Gets or sets the list of fabric health errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorModel"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
+        "location": {
+          "description": "Gets or sets the location of the fabric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/FabricModelProperties"
+        },
+        "id": {
+          "description": "Gets or sets the Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemDataModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "maxLength": 15,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "FailoverProtectedItemProperties": {
       "description": "Failover properties of the protected item.",
@@ -4295,7 +4348,10 @@
     },
     "HyperVMigrateFabricModelCustomProperties": {
       "description": "HyperV migrate fabric model custom properties.",
-      "required": ["hyperVSiteId", "migrationSolutionId"],
+      "required": [
+        "hyperVSiteId",
+        "migrationSolutionId"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4332,7 +4388,12 @@
     },
     "HyperVToAzStackHCIDiskInput": {
       "description": "HyperVToAzStack disk input.",
-      "required": ["diskFileFormat", "diskId", "diskSizeGB", "isOsDisk"],
+      "required": [
+        "diskFileFormat",
+        "diskId",
+        "diskSizeGB",
+        "isOsDisk"
+      ],
       "type": "object",
       "properties": {
         "diskId": {
@@ -4402,7 +4463,10 @@
     },
     "HyperVToAzStackHCINicInput": {
       "description": "HyperVToAzStackHCI NIC properties.",
-      "required": ["nicId", "selectionTypeForFailover"],
+      "required": [
+        "nicId",
+        "selectionTypeForFailover"
+      ],
       "type": "object",
       "properties": {
         "nicId": {
@@ -4443,7 +4507,9 @@
     },
     "HyperVToAzStackHCIPlannedFailoverModelCustomProperties": {
       "description": "HyperV to AzStackHCI planned failover model custom properties.",
-      "required": ["shutdownSourceVM"],
+      "required": [
+        "shutdownSourceVM"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4575,7 +4641,10 @@
       "properties": {
         "activeLocation": {
           "description": "Gets or sets the location of the protected item.",
-          "enum": ["Primary", "Recovery"],
+          "enum": [
+            "Primary",
+            "Recovery"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -4858,7 +4927,10 @@
     },
     "HyperVToAzStackHCIReplicationExtensionModelCustomProperties": {
       "description": "HyperV to AzStackHCI Replication extension model custom properties.",
-      "required": ["azStackHciFabricArmId", "hyperVFabricArmId"],
+      "required": [
+        "azStackHciFabricArmId",
+        "hyperVFabricArmId"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5117,7 +5189,9 @@
     },
     "PlannedFailoverModel": {
       "description": "Planned failover model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -5127,7 +5201,9 @@
     },
     "PlannedFailoverModelCustomProperties": {
       "description": "Planned failover model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -5140,7 +5216,9 @@
     },
     "PlannedFailoverModelProperties": {
       "description": "Planned failover model properties.",
-      "required": ["customProperties"],
+      "required": [
+        "customProperties"
+      ],
       "type": "object",
       "properties": {
         "customProperties": {
@@ -5150,7 +5228,9 @@
     },
     "PolicyModel": {
       "description": "Policy model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -5210,7 +5290,9 @@
     },
     "PolicyModelCustomProperties": {
       "description": "Policy model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -5223,7 +5305,9 @@
     },
     "PolicyModelProperties": {
       "description": "Policy model properties.",
-      "required": ["customProperties"],
+      "required": [
+        "customProperties"
+      ],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -5248,6 +5332,47 @@
           "$ref": "#/definitions/PolicyModelCustomProperties"
         }
       }
+    },
+    "PolicyModelUpdate": {
+      "description": "Policy model for update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyModelProperties"
+        },
+        "id": {
+          "description": "Gets or sets the Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemDataModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "maxLength": 15,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "ProtectedItemDynamicMemoryConfig": {
       "description": "Protected item dynamic memory config.",
@@ -5318,7 +5443,9 @@
     },
     "ProtectedItemModel": {
       "description": "Protected item model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -5378,7 +5505,9 @@
     },
     "ProtectedItemModelCustomProperties": {
       "description": "Protected item model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -5644,7 +5773,11 @@
         },
         "replicationHealth": {
           "description": "Gets or sets protected item replication health.",
-          "enum": ["Normal", "Warning", "Critical"],
+          "enum": [
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -5666,39 +5799,52 @@
         }
       }
     },
-    "ProtectedItemStatisticsModel": {
-      "description": "Protected item statistics.",
+    "ProtectedItemModelUpdate": {
+      "description": "Protected item model for update.",
       "type": "object",
       "properties": {
-        "healthErrors": {
-          "description": "Gets or sets the list of health errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorModel"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
+        "properties": {
+          "$ref": "#/definitions/ProtectedItemModelProperties"
         },
-        "count": {
-          "format": "int64",
-          "description": "Gets or sets the resource count.",
-          "type": "integer",
+        "id": {
+          "description": "Gets or sets the Id of the resource.",
+          "type": "string",
           "readOnly": true
         },
-        "categorizedCounts": {
-          "description": "Gets or sets the categorized resource counts.",
+        "name": {
+          "description": "Gets or sets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemDataModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "maxLength": 15,
           "type": "object",
           "additionalProperties": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "readOnly": true
+            "type": "string"
+          }
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "RecoveryPointModel": {
       "description": "Recovery point model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -5757,7 +5903,9 @@
     },
     "RecoveryPointModelCustomProperties": {
       "description": "Recovery point model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -5784,7 +5932,10 @@
         },
         "recoveryPointType": {
           "description": "Gets or sets the recovery point type.",
-          "enum": ["ApplicationConsistent", "CrashConsistent"],
+          "enum": [
+            "ApplicationConsistent",
+            "CrashConsistent"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPointType",
@@ -5798,7 +5949,9 @@
     },
     "ReplicationExtensionModel": {
       "description": "Replication extension model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -5858,7 +6011,9 @@
     },
     "ReplicationExtensionModelCustomProperties": {
       "description": "Replication extension model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -5871,7 +6026,9 @@
     },
     "ReplicationExtensionModelProperties": {
       "description": "Replication extension model properties.",
-      "required": ["customProperties"],
+      "required": [
+        "customProperties"
+      ],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -5899,7 +6056,10 @@
     },
     "StorageContainerProperties": {
       "description": "Storage container properties.",
-      "required": ["clusterSharedVolumePath", "name"],
+      "required": [
+        "clusterSharedVolumePath",
+        "name"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -5999,7 +6159,9 @@
     },
     "TaskModelCustomProperties": {
       "description": "Task model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -6047,7 +6209,10 @@
     },
     "VMwareDraModelCustomProperties": {
       "description": "VMware DRA model custom properties.",
-      "required": ["biosId", "marsAuthenticationIdentity"],
+      "required": [
+        "biosId",
+        "marsAuthenticationIdentity"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -6067,7 +6232,10 @@
     },
     "VMwareMigrateFabricModelCustomProperties": {
       "description": "VMware migrate fabric model custom properties.",
-      "required": ["migrationSolutionId", "vmwareSiteId"],
+      "required": [
+        "migrationSolutionId",
+        "vmwareSiteId"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -6089,7 +6257,12 @@
     },
     "VMwareToAzStackHCIDiskInput": {
       "description": "VMwareToAzStack disk input.",
-      "required": ["diskFileFormat", "diskId", "diskSizeGB", "isOsDisk"],
+      "required": [
+        "diskFileFormat",
+        "diskId",
+        "diskSizeGB",
+        "isOsDisk"
+      ],
       "type": "object",
       "properties": {
         "diskId": {
@@ -6123,7 +6296,11 @@
     },
     "VMwareToAzStackHCINicInput": {
       "description": "VMwareToAzStackHCI NIC properties.",
-      "required": ["label", "nicId", "selectionTypeForFailover"],
+      "required": [
+        "label",
+        "nicId",
+        "selectionTypeForFailover"
+      ],
       "type": "object",
       "properties": {
         "nicId": {
@@ -6169,7 +6346,9 @@
     },
     "VMwareToAzStackHCIPlannedFailoverModelCustomProperties": {
       "description": "VMware to AzStackHCI planned failover model custom properties.",
-      "required": ["shutdownSourceVM"],
+      "required": [
+        "shutdownSourceVM"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -6301,7 +6480,10 @@
       "properties": {
         "activeLocation": {
           "description": "Gets or sets the location of the protected item.",
-          "enum": ["Primary", "Recovery"],
+          "enum": [
+            "Primary",
+            "Recovery"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -6621,7 +6803,10 @@
     },
     "VMwareToAzStackHCIReplicationExtensionModelCustomProperties": {
       "description": "VMware to AzStackHCI Replication extension model custom properties.",
-      "required": ["azStackHciFabricArmId", "vmwareFabricArmId"],
+      "required": [
+        "azStackHciFabricArmId",
+        "vmwareFabricArmId"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -6711,12 +6896,15 @@
     },
     "VaultModel": {
       "description": "Vault model.",
+      "required": [
+        "location"
+      ],
       "type": "object",
       "properties": {
         "location": {
           "description": "Gets or sets the location of the vault.",
-          "type": "string",
-          "readOnly": true
+          "minLength": 1,
+          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/VaultModelProperties"
@@ -6802,7 +6990,10 @@
         },
         "vaultType": {
           "description": "Gets or sets the type of vault.",
-          "enum": ["DisasterRecovery", "Migrate"],
+          "enum": [
+            "DisasterRecovery",
+            "Migrate"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ReplicationVaultType",
@@ -6811,57 +7002,57 @@
         }
       }
     },
-    "VaultStatisticsModel": {
-      "description": "Vault statistics model.",
+    "VaultModelUpdate": {
+      "description": "Vault model for update.",
       "type": "object",
       "properties": {
+        "location": {
+          "description": "Gets or sets the location of the vault.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
-          "$ref": "#/definitions/VaultStatisticsModelProperties"
+          "$ref": "#/definitions/VaultModelProperties"
+        },
+        "id": {
+          "description": "Gets or sets the Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemDataModel"
+            }
+          ],
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Gets or sets the resource tags.",
+          "maxLength": 15,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      }
-    },
-    "VaultStatisticsModelProperties": {
-      "description": "Vault statistics properties.",
-      "type": "object",
-      "properties": {
-        "protectedItemStatistics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProtectedItemStatisticsModel"
-            }
-          ],
-          "readOnly": true
-        },
-        "jobStatistics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/WorkflowStatisticsModel"
-            }
-          ],
-          "readOnly": true
-        },
-        "vaultErrors": {
-          "description": "Gets or sets the list of vault health errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorModel"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "fabricStatistics": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/FabricStatisticsModel"
-            }
-          ],
-          "readOnly": true
-        }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "WorkflowModel": {
       "description": "Workflow model.",
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -6921,7 +7112,9 @@
     },
     "WorkflowModelCustomProperties": {
       "description": "Workflow model custom properties.",
-      "required": ["instanceType"],
+      "required": [
+        "instanceType"
+      ],
       "type": "object",
       "properties": {
         "instanceType": {
@@ -6942,7 +7135,9 @@
     },
     "WorkflowModelProperties": {
       "description": "Workflow model properties.",
-      "required": ["customProperties"],
+      "required": [
+        "customProperties"
+      ],
       "type": "object",
       "properties": {
         "displayName": {
@@ -7071,27 +7266,6 @@
           "$ref": "#/definitions/WorkflowModelCustomProperties"
         }
       }
-    },
-    "WorkflowStatisticsModel": {
-      "description": "Workflow statistics.",
-      "type": "object",
-      "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Gets or sets the resource count.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "categorizedCounts": {
-          "description": "Gets or sets the categorized resource counts.",
-          "type": "object",
-          "additionalProperties": {
-            "format": "int64",
-            "type": "integer"
-          },
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
@@ -7136,7 +7310,9 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "tags": [
