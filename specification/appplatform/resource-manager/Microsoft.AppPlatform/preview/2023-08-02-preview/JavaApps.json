@@ -268,13 +268,7 @@
             "$ref": "#/parameters/AppNameParameter"
           },
           {
-            "name": "appEnvelope",
-            "in": "body",
-            "required": true,
-            "description": "Properties used to create an app",
-            "schema": {
-              "$ref": "#/definitions/JavaApp"
-            }
+            "$ref": "#/parameters/AppEnvelopePatchParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -555,6 +549,16 @@
         }
       }
     },
+    "JavaAppForPatch": {
+      "description": "Azure Spring Apps JavaApp resource for patch body",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaApp"
+        }
+      ],
+      "required": [] 
+    },
     "SecretsCollection": {
       "description": "App Secrets Collection ARM resource.",
       "required": [
@@ -621,6 +625,15 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/JavaApp"
+      }
+    },
+    "AppEnvelopePatchParameter": {
+      "name": "appEnvelope",
+      "in": "body",
+      "description": "Properties used to create an app",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/JavaAppForPatch"
       }
     }
   },
