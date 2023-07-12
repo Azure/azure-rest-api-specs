@@ -166,7 +166,7 @@ model LuisCallingOptions {
   showAllIntents?: boolean;
 
   @doc("The timezone offset for the location of the request.")
-  timezoneOffset?: float;
+  timezoneOffset?: float32;
 
   @doc("Enable spell checking.")
   spellCheck?: boolean;

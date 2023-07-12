@@ -63,7 +63,7 @@ model KnowledgeBaseAnswer {
     @doc("Answer confidence score, value ranges from 0 to 1.")
     @minValue(0)
     @maxValue(1)
-    confidenceScore?: float;
+    confidenceScore?: float64;
 
     @doc("ID of the QnA result.")
     id?: int32;
