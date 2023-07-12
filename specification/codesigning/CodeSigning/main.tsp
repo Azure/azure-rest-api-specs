@@ -34,7 +34,9 @@ using Autorest;
 @doc("Azure CodeSigning is a service that provides managed code signing for all.")
 namespace Azure.CodeSigning;
 
+@doc("Versions info.")
 enum Versions {
+  @doc("The 2023-06-15-preview version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_06_15_preview: "2023-06-15-preview",
 }
