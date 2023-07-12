@@ -2,19 +2,38 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2022-07-18-preview",
-    "id": "8780b28c-7079-4de1-9143-4d369289e958",
+    "id": "JobId",
     "patch": {
-      "channelReference": "1d5896f3-8b54-40be-82d3-910323f5e2af"
+      "channelId": "CustomChatChannel",
+      "channelReference": "1d5896f3-8b54-40be-82d3-910323f5e2af",
+      "queueId": "MainQueue",
+      "priority": 5,
+      "requestedWorkerSelectors": [
+        {
+          "key": "Sales",
+          "labelOperator": "equal",
+          "value": true
+        }
+      ],
+      "labels": {},
+      "matchingMode": {
+        "modeType": "scheduleAndSuspendMode",
+        "queueAndMatchMode": null,
+        "scheduleAndSuspendMode": {
+          "scheduleAt": "2023-05-26T23:22:12.0774222+00:00"
+        },
+        "suspendMode": null
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "383541b3-5637-4af6-8aac-3391da8a578a",
+        "id": "JobId",
         "channelReference": "1d5896f3-8b54-40be-82d3-910323f5e2af",
         "status": "queued",
         "enqueuedAt": "2021-09-30T23:59:04.5311999+00:00",
-        "channelId": "CustomVoiceChannel",
+        "channelId": "CustomChatChannel",
         "classificationPolicyId": null,
         "queueId": "MainQueue",
         "priority": 5,
@@ -32,20 +51,23 @@
         "assignments": {},
         "notes": {},
         "matchingMode": {
-          "modeType": "queueAndMatchMode",
-          "queueAndMatchMode": {},
-          "scheduleAndSuspendMode": null,
+          "modeType": "scheduleAndSuspendMode",
+          "queueAndMatchMode": null,
+          "scheduleAndSuspendMode": {
+            "scheduleAt": "2023-05-26T23:22:12.0774222+00:00"
+          },
           "suspendMode": null
-        }
+        },
+        "scheduledAt": null
       }
     },
     "201": {
       "body": {
-        "id": "383541b3-5637-4af6-8aac-3391da8a578a",
+        "id": "JobId",
         "channelReference": "1d5896f3-8b54-40be-82d3-910323f5e2af",
         "status": "queued",
         "enqueuedAt": "2021-09-30T23:59:04.5311999+00:00",
-        "channelId": "CustomVoiceChannel",
+        "channelId": "CustomChatChannel",
         "classificationPolicyId": null,
         "queueId": "MainQueue",
         "priority": 5,
@@ -63,11 +85,14 @@
         "assignments": {},
         "notes": {},
         "matchingMode": {
-          "modeType": "queueAndMatchMode",
-          "queueAndMatchMode": {},
-          "scheduleAndSuspendMode": null,
+          "modeType": "scheduleAndSuspendMode",
+          "queueAndMatchMode": null,
+          "scheduleAndSuspendMode": {
+            "scheduleAt": "2023-05-26T23:22:12.0774222+00:00"
+          },
           "suspendMode": null
-        }
+        },
+        "scheduledAt": null
       }
     }
   }
