@@ -33,22 +33,11 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
-  - script: git merge origin/main
-    displayName: git merge origin/main
-  
-  # Remove lockfile to update all packages to latest "next" version
-  - script: rm package-lock.json
-    displayName: rm package-lock.json
-
-  - script: npm install
-    displayName: npm install
+  - script: npm ci
+    displayName: npm ci
 
   - script: npm ls -a
     displayName: npm ls -a
-    condition: succeededOrFailed()
-
-  - script: git restore package-lock.json
-    displayName: Revert package-lock.json
     condition: succeededOrFailed()
 
   - template: templates/steps/typespec-ci.yml
