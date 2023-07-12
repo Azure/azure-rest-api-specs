@@ -317,24 +317,6 @@
               }
             }
           },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -487,9 +469,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -2188,7 +2167,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         },
         "kind": {
-          "$ref": "#/definitions/ArcKindEnum "
+          "$ref": "#/definitions/ArcKindEnum"
         }
       },
       "allOf": [
@@ -2450,7 +2429,6 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/MachineExtensionProperties",
           "description": "Describes Machine Extension Properties."
         }
