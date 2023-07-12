@@ -195,7 +195,6 @@ model Choice {
   logprobs: CompletionsLogProbabilityModel | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "https://github.com/Azure/typespec-azure/issues/3180"
   @doc("Reason for finishing")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
