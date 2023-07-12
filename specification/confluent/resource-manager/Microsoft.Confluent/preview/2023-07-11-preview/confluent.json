@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Confluent",
-    "version": "2023-02-09-preview"
+    "version": "2023-07-11-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -811,8 +811,8 @@
         "tags": [
           "accessandaccounts"
         ],
-        "summary": "Organization service accounts details",
-        "operationId": "Access_ListServiceAccounts",
+        "summary": "Environment list of an organization",
+        "operationId": "Access_EnvironmentList",
         "consumes": [
           "application/json"
         ],
@@ -857,7 +857,7 @@
           }
         },
         "x-ms-examples": {
-          "Access_ServiceAccountsList": {
+          "Access_EnvironmentList": {
             "$ref": "./examples/Access_EnvironmentList.json"
           }
         }
@@ -868,8 +868,8 @@
         "tags": [
           "accessandaccounts"
         ],
-        "summary": "Organization service accounts details",
-        "operationId": "Access_ListServiceAccounts",
+        "summary": "Cluster details",
+        "operationId": "Access_ClusterList",
         "consumes": [
           "application/json"
         ],
@@ -877,6 +877,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/EnvironmentParameter"
           },
@@ -914,7 +917,7 @@
           }
         },
         "x-ms-examples": {
-          "Access_ServiceAccountsList": {
+          "Access_ClusterList": {
             "$ref": "./examples/Access_ClusterList.json"
           }
         }
@@ -925,8 +928,8 @@
         "tags": [
           "accessandaccounts"
         ],
-        "summary": "Organization service accounts details",
-        "operationId": "Access_ListServiceAccounts",
+        "summary": "Organization role bindings",
+        "operationId": "Access_RoleBindingList",
         "consumes": [
           "application/json"
         ],
@@ -934,6 +937,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/CrnPatternParameter"
           },
@@ -974,13 +980,12 @@
           }
         },
         "x-ms-examples": {
-          "Access_ServiceAccountsList": {
+          "Access_RoleBindingList": {
             "$ref": "./examples/Access_RoleBindingList.json"
           }
         }
       }
     }
-
   },
   "definitions": {
     "ConfluentAgreementProperties": {
@@ -1810,7 +1815,7 @@
           "type": "string"
         },
         "kafka_bootstrap_endpoint": {
-          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluste",
+          "description": "The bootstrap endpoint used by Kafka clients to connect to the cluster",
           "type": "string"
         },
         "http_endpoint": {
@@ -1821,20 +1826,20 @@
           "description": "The Kafka API cluster endpoint",
           "type": "string"
         },
-        "config":{
-          "description" : "Specification of the cluster",
+        "config": {
+          "description": "Specification of the cluster",
           "$ref": "#/definitions/ClusterConfigEntity"
         },
-        "environment":{
-          "description" : "Specification of the cluster",
+        "environment": {
+          "description": "Specification of the cluster",
           "$ref": "#/definitions/ClusterEnvironmentEntity"
         },
-        "network":{
-          "description" : "Specification of the cluster",
+        "network": {
+          "description": "Specification of the cluster",
           "$ref": "#/definitions/ClusterNetworkEntity"
         },
-        "byok":{
-          "description" : "Specification of the cluster",
+        "byok": {
+          "description": "Specification of the cluster",
           "$ref": "#/definitions/ClusterByokEntity"
         }
       }
@@ -1844,7 +1849,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "ID of the referred resourcer",
+          "description": "ID of the referred resource",
           "type": "string"
         },
         "related": {
@@ -1855,7 +1860,6 @@
           "description": "CRN reference to the referred resource",
           "type": "string"
         }
-
       }
     },
     "ClusterNetworkEntity": {
@@ -1863,7 +1867,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "ID of the referred resourcer",
+          "description": "ID of the referred resource",
           "type": "string"
         },
         "environment": {
@@ -1878,7 +1882,6 @@
           "description": "CRN reference to the referred resource",
           "type": "string"
         }
-
       }
     },
     "ClusterEnvironmentEntity": {
@@ -1886,7 +1889,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "ID of the referred resourcer",
+          "description": "ID of the referred resource",
           "type": "string"
         },
         "environment": {
@@ -1901,7 +1904,6 @@
           "description": "CRN reference to the referred resource",
           "type": "string"
         }
-
       }
     },
     "ClusterConfigEntity": {
@@ -1909,7 +1911,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "description": "The lifecyle phase of the cluster",
+          "description": "The lifecycle phase of the cluster",
           "type": "string"
         }
       }
@@ -1919,14 +1921,13 @@
       "type": "object",
       "properties": {
         "phase": {
-          "description": "The lifecyle phase of the cluster",
+          "description": "The lifecycle phase of the cluster",
           "type": "string"
         },
         "cku": {
           "description": "The number of Confluent Kafka Units ",
           "type": "integer"
         }
-
       }
     },
     "ClusterRecord": {
@@ -1949,13 +1950,13 @@
           "description": "Display name of the user",
           "type": "string"
         },
-        "spec":{
-            "description" : "Specification of the cluster",
-            "$ref": "#/definitions/ClusterSpecEntity"
+        "spec": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterSpecEntity"
         },
-        "status":{
-            "description" : "Specification of the cluster",
-            "$ref": "#/definitions/ClusterStatusEntity"
+        "status": {
+          "description": "Specification of the cluster",
+          "$ref": "#/definitions/ClusterStatusEntity"
         }
       }
     },
@@ -2072,7 +2073,7 @@
       "x-ms-parameter-location": "method"
     },
     "CrnPatternParameter": {
-      "name": "crn-pattern",
+      "name": "crn_pattern",
       "in": "query",
       "description": "Crn pattern",
       "required": true,
@@ -2081,7 +2082,7 @@
     "PrincipalParameter": {
       "name": "principal",
       "in": "query",
-      "description": "Prinicipal name",
+      "description": "Principal name",
       "required": true,
       "type": "string"
     },
