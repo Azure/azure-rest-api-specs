@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01-preview",
+    "version": "2022-05-01-preview",
     "title": "Edge Ordering Service-Customer"
   },
   "host": "management.azure.com",
@@ -1679,6 +1679,15 @@
           "description": "Frequency of recurrence.",
           "type": "string",
           "readOnly": true
+        },
+        "termTypeDetails": {
+          "description": "Represent Term Type details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TermTypeDetails"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1871,6 +1880,14 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "supportedTermCommitmentDurations": {
+          "description": "The Term Commitment Durations that are supported for a configuration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "filterableProperties": {
           "description": "List of filters supported for a product.",
           "uniqueItems": false,
@@ -2025,6 +2042,15 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "termCommitmentInformation": {
+          "description": "Term Commitment Information of the Device.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TermCommitmentInformation"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -2114,6 +2140,14 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "supportedTermCommitmentDurations": {
+          "description": "The Term Commitment Durations that are supported for a configuration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -3221,6 +3255,14 @@
         "managementResourcePreferences": {
           "$ref": "#/definitions/ManagementResourcePreferences",
           "description": "Preferences related to the Management resource."
+        },
+        "termCommitmentPreferences": {
+          "description": "Preferences related to the Term commitment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TermCommitmentPreferences"
+            }
+          ]
         }
       }
     },
@@ -3320,6 +3362,15 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "termCommitmentInformation": {
+          "description": "Term Commitment Information of the Device.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TermCommitmentInformation"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -3829,6 +3880,105 @@
           "description": "Stage start time.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "TermCommitmentInformation": {
+      "description": "Term Commitment Information.",
+      "required": [
+        "termCommitmentType"
+      ],
+      "type": "object",
+      "properties": {
+        "termCommitmentType": {
+          "description": "Term Commitment Type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TermCommitmentType"
+            }
+          ]
+        },
+        "termCommitmentTypeDuration": {
+          "description": "Term Commitment Duration. Currently Supporting P365D, P1095D",
+          "type": "string",
+          "readOnly": true
+        },
+        "pendingDaysForTerm": {
+          "format": "int32",
+          "description": "Number of Days Pending for Term Commitment",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "TermCommitmentPreferences": {
+      "description": "Term Commitment preference received from customer.",
+      "required": [
+        "preferredTermCommitmentType"
+      ],
+      "type": "object",
+      "properties": {
+        "preferredTermCommitmentType": {
+          "description": "Term Commitment Type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TermCommitmentType"
+            }
+          ]
+        },
+        "preferredTermCommitmentDuration": {
+          "description": "Customer preferred Term Duration.",
+          "type": "string"
+        }
+      }
+    },
+    "TermCommitmentType": {
+      "format": "int32",
+      "description": "Term Commitment Type",
+      "enum": [
+        "None",
+        "Trial",
+        "Timed"
+      ],
+      "type": "integer",
+      "x-ms-enum": {
+        "name": "TermCommitmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "Pay as you go Term Commitment Model."
+          },
+          {
+            "value": "Trial",
+            "description": "Trial Term Commitment Model."
+          },
+          {
+            "value": "Timed",
+            "description": "Time based Term Commitment Model."
+          }
+        ]
+      }
+    },
+    "TermTypeDetails": {
+      "description": "Holds details about term type and duration.",
+      "required": [
+        "termType",
+        "termTypeDuration"
+      ],
+      "type": "object",
+      "properties": {
+        "termType": {
+          "description": "Term Commitment Type",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TermCommitmentType"
+            }
+          ]
+        },
+        "termTypeDuration": {
+          "description": "Duration for the term type.",
+          "type": "string"
         }
       }
     },
