@@ -711,6 +711,7 @@
                 "1.1",
                 "1.2"
               ],
+              "default": "1.2",
               "x-ms-enum": {
                 "name": "TlsVersion",
                 "modelAsString": true
@@ -781,7 +782,8 @@
             },
             "zoneRedundant": {
               "type": "boolean",
-              "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones."
+              "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones.",
+              "default": false
             },
             "encryption": {
               "$ref": "#/definitions/Encryption",
@@ -796,7 +798,8 @@
             },
             "disableLocalAuth": {
               "type": "boolean",
-              "description": "This property disables SAS authentication for the Event Hubs namespace."
+              "description": "This property disables SAS authentication for the Event Hubs namespace.",
+              "default": false
             },
             "alternateName": {
               "type": "string",
@@ -992,6 +995,13 @@
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/ConnectionState",
           "description": "Details about the state of the connection."
+        },
+        "groupId": {
+          "description": "Array of group IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "provisioningState": {
           "description": "Provisioning state of the Private Endpoint Connection.",

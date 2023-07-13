@@ -781,7 +781,8 @@
             },
             "zoneRedundant": {
               "type": "boolean",
-              "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones."
+              "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones.",
+              "default": false
             },
             "encryption": {
               "$ref": "#/definitions/Encryption",
@@ -992,6 +993,13 @@
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/ConnectionState",
           "description": "Details about the state of the connection."
+        },
+        "groupId": {
+          "description": "Array of group IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "provisioningState": {
           "description": "Provisioning state of the Private Endpoint Connection.",
