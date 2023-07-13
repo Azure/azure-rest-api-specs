@@ -41,7 +41,6 @@ jobs:
     condition: succeededOrFailed()
 
   - pwsh: |
-      $typespecFolders = @()
       if ('$(Build.Reason)' -eq 'PullRequest') {
         $(Build.SourcesDirectory)/eng/scripts/Validate-Typespec.ps1 $(Build.SourcesDirectory) "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
       }
