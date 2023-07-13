@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "rgroup1",
+    "storageTaskName": "mytask1",
+    "api-version": "2023-01-01",
+    "monitor": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "taskAssignmentId": "/subscriptions/9d6baee9-681f-44d8-99f7-d06d180af6bb/resourcegroups/rgroup1/providers/Microsoft.Storage/storageAccounts/acc123/storageTaskAssignments/assign1",
+            "storageAccountId": "/subscriptions/9d6baee9-681f-44d8-99f7-d06d180af6bb/resourcegroups/rgroup1/providers/Microsoft.Storage/storageAccounts/acc123",
+            "startTime": "2023-06-23T00:30:43.226744Z",
+            "finishTime": "2023-06-23T00:40:10.2931264Z",
+            "objectsTargetedCount": "150",
+            "objectsOperatedOnCount": "150",
+            "objectFailedCount": "0",
+            "objectsSucceededCount": "150",
+            "runStatusError": "0",
+            "runStatusEnum": "Finished",
+            "summaryReportPath": "https://acc123.blob.core.windows.net/result-container/{folderpath}/SummaryReport.json",
+            "taskId": "/subscriptions/9d6baee9-681f-44d8-99f7-d06d180af6bb/resourcegroups/rgroup1/providers/Microsoft.StorageTasks/storageTasks/mytask1",
+            "taskVersion": "1",
+            "runResult": "Succeeded"
+          },
+          {
+            "taskAssignmentId": "/subscriptions/9d6baee9-681f-44d8-99f7-d06d180af6bb/resourcegroups/rgroup1/providers/Microsoft.Storage/storageAccounts/acc123/storageTaskAssignments/assign2",
+            "storageAccountId": "/subscriptions/9d6baee9-681f-44d8-99f7-d06d180af6bb/resourcegroups/rgroup1/providers/Microsoft.Storage/storageAccounts/acc123",
+            "startTime": "2023-06-23T00:30:43.226744Z",
+            "finishTime": "2023-06-23T00:40:10.2931264Z",
+            "objectsTargetedCount": "500",
+            "objectsOperatedOnCount": "500",
+            "objectFailedCount": "300",
+            "objectsSucceededCount": "200",
+            "runStatusError": "0",
+            "runStatusEnum": "Finished",
+            "summaryReportPath": "https://acc123.blob.core.windows.net/result-container/{folderpath}/SummaryReport.json",
+            "taskId": "/subscriptions/9d6baee9-681f-44d8-99f7-d06d180af6bb/resourcegroups/rgroup1/providers/Microsoft.StorageTasks/storageTasks/mytask1",
+            "taskVersion": "1",
+            "runResult": "Failed"
+          }
+        ]
+      }
+    }
+  }
+}
