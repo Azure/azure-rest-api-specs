@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "catalogName": "default",
+    "location": "westus",
+    "projectName": "abc",
+    "api-version": "2023-05-01-preview",
+    "Referer": [
+      "https://localhost/providers/Microsoft.EdgeOrder/hciCatalog/default/projects/locations/westus/abc/listSolutionRecommendations?api-version=2023-05-01-preview"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "platformId": "PlatformId",
+              "vendorId": "VendorId",
+              "numberOfNodes": 2,
+              "coreCount": 10,
+              "cpuFamily": "CpuFamily",
+              "cpuBreakdown": {
+                "used": "10",
+                "futureGrowth": "20",
+                "highAvailability": 1,
+                "total": 2,
+                "leftover": 1,
+                "availability": "n",
+                "availabilityTotal": 2
+              },
+              "memoryBreakdown": {
+                "csvSbl": "10",
+                "hyperV": "20",
+                "workloads": 1,
+                "futureGrowth": "20",
+                "highAvailability": 1,
+                "total": 2,
+                "leftover": 1,
+                "availability": "n",
+                "availabilityTotal": 2
+              },
+              "storageBreakdown": {
+                "used": "10",
+                "resiliency": "20",
+                "futureGrowth": "20",
+                "total": 2,
+                "leftover": 1,
+                "reserve": 2,
+                "reserveTotal": 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "catalogName": "default",
+    "api-version": "2023-05-01-preview",
+    "Referer": [
+      "https://localhost/providers/Microsoft.EdgeOrder/hciFlightCatalog/default/listSolutionRecommendations?api-version=2023-05-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "39"
+    ],
+    "solutionRecommendationRequest": {
+      "preferenceDetails": {
+        "systemType": "IntegratedSystem",
+        "cpuFamily": "CPUFamily",
+        "isTwoNodeSolution": true,
+        "growthPercentage": 0,
+        "memoryExpandability": true,
+        "storageExpandability": true,
+        "vendorId": "vendorId",
+        "storageFutureGrowthBytes": 0,
+        "resiliencyRequirements": {
+          "availability": "n+1",
+          "storageFailuresToTolerate": 0
+        },
+        "storagePreference": {
+          "storageType": "HDD",
+          "persistentCache": "Any",
+          "resiliencyPreference": "OptimizedForCapacity",
+          "inMemoryCacheSizeInGB": 2
+        },
+        "networkPreference": {
+          "usesSoftwareDefinedNetwork": true,
+          "networkController": 0,
+          "softwareLoadBalancer": 0,
+          "rasGateway": 0
+        },
+        "workloads": [
+          {
+            "workloadDetails": {
+              "workloadName": "Heavy",
+              "workloadType": "General",
+              "numberOfVms": 0,
+              "virtualCpu": 0,
+              "virtualCorePerPhysicalCore": 0,
+              "memoryBytes": 0,
+              "storageBytes": 0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "platformId": "PlatformId",
+              "vendorId": "VendorId",
+              "numberOfNodes": 2,
+              "coreCount": 10,
+              "cpuFamily": "CpuFamily",
+              "cpuBreakdown": {
+                "used": "10",
+                "futureGrowth": "20",
+                "highAvailability": 1,
+                "total": 2,
+                "leftover": 1,
+                "availability": "n",
+                "availabilityTotal": 2
+              },
+              "memoryBreakdown": {
+                "csvSbl": "10",
+                "hyperV": "20",
+                "workloads": 1,
+                "futureGrowth": "20",
+                "highAvailability": 1,
+                "total": 2,
+                "leftover": 1,
+                "availability": "n",
+                "availabilityTotal": 2
+              },
+              "storageBreakdown": {
+                "used": "10",
+                "resiliency": "20",
+                "futureGrowth": "20",
+                "total": 2,
+                "leftover": 1,
+                "reserve": 2,
+                "reserveTotal": 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
