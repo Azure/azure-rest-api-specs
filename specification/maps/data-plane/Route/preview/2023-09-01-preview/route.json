@@ -398,6 +398,13 @@
           "minimum": 1,
           "maximum": 3
         },
+        "heading": {
+          "description": "The directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 359
+        },
         "vehicleSpec": {
           "description": "Specifies the vehicle attributes such as size, weight, max speed, and type of cargo for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.",
           "$ref": "#/definitions/VehicleSpec"
@@ -1603,14 +1610,6 @@
           "type": "boolean",
           "default": false
         },
-        "heading": {
-          "x-ms-client-name": "headingInDegrees",
-          "description": "The directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
-          "format": "int64",
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 359
-        },
         "length": {
           "x-ms-client-name": "lengthInMeters",
           "description": "Length of the vehicle in meters. A value of 0 means that length restrictions are not considered. `Note`: The parameter is available only for truck mode.",
@@ -1642,12 +1641,6 @@
         "maxSpeed": {
           "x-ms-client-name": "maxSpeedInKilometersPerHour",
           "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways. \n\n* A value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\n* A non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle  maximum speed is set to 50 km/hour, the routing engine will consider 60 km/hour as this is the current situation.  If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour. `Note`: The parameter is available only for truck mode.",
-          "format": "int64",
-          "type": "integer",
-          "default": 0
-        },
-        "axleCount": {
-          "description": "Number of axles of the vehicle. `Note`: The parameter is available only for truck mode.",
           "format": "int64",
           "type": "integer",
           "default": 0
