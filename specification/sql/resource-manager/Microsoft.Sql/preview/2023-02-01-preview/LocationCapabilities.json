@@ -42,7 +42,8 @@
               "supportedElasticPoolEditions",
               "supportedManagedInstanceVersions",
               "supportedInstancePoolEditions",
-              "supportedManagedInstanceEditions"
+              "supportedManagedInstanceEditions",
+              "supportedJobAgentVersions"
             ],
             "x-ms-enum": {
               "name": "CapabilityGroup",
@@ -579,6 +580,79 @@
         }
       }
     },
+    "JobAgentEditionCapability": {
+      "description": "The job agent edition capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The job agent edition name.",
+          "type": "string"
+        },
+        "supportedSkus": {
+          "description": "The list of supported SKUs for the edition.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../common/v1/types.json#/definitions/Sku"
+          }
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "JobAgentVersionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The job agent version name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedEditions": {
+          "description": "The list of supported skus.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAgentEditionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
     "LicenseTypeCapability": {
       "description": "The license type capability",
       "type": "object",
@@ -631,6 +705,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedInstanceVersionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedJobAgentVersions": {
+          "description": "The list of supported job agent versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobAgentVersionCapability"
           },
           "readOnly": true
         },
