@@ -2859,7 +2859,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Provider"
+            "$ref": "#/definitions/DeploymentsProvider"
           },
           "description": "The list of resource providers needed for the deployment."
         },
@@ -3497,6 +3497,42 @@
         }
       },
       "description": "Specifies whether template expressions are evaluated within the scope of the parent template or nested template."
+    },
+    "DeploymentsProvider": {
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "The namespace of the resource provider."
+        },
+        "resourceTypes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentsResourceType"
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ],
+          "description": "The collection of provider resource types."
+        }
+      },
+      "description": "Resource provider information."
+    },
+    "DeploymentsResourceType": {
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The collection of locations where this resource type can be created."
+        }
+      },
+      "description": "Resource type managed by the resource provider."
     }
   },
   "parameters": {
