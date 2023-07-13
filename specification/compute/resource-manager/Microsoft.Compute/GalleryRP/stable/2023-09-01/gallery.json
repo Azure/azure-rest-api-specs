@@ -1816,6 +1816,18 @@
             "required": true,
             "type": "string",
             "description": "The name of the Gallery Service Artifact."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryServiceArtifact",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryServiceArtifact"
+            },
+            "description": "Parameters supplied to the create or update Gallery Service Artifact."
           }
         ],
         "responses": {
@@ -3263,29 +3275,17 @@
     "GalleryServiceArtifact": {
       "type": "object",
       "properties": {
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation"
-        },
         "id": {
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "kind": {
-          "type": "string"
+          "readOnly": true,
+          "type": "string",
+          "description": "Describes the gallery service artifact unique name."
         },
         "location": {
           "type": "string"
         },
-        "managedBy": {
-          "$ref": "#/definitions/Identity"
-        },
         "name": {
+          "readOnly": true,
           "type": "string"
-        },
-        "plan": {
-          "$ref": "#/definitions/Plan"
         },
         "properties": {
           "type": "object",
@@ -3300,7 +3300,7 @@
             "targetLocations": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/TargetLocation"
+                "$ref": "#/definitions/GalleryServiceArtifactTargetLocation"
               }
             },
             "vmArtifactsProfiles": {
@@ -3309,107 +3309,46 @@
                 "$ref": "#/definitions/VMArtifactsProfile"
               }
             }
-          }
+          },
+          "required": [
+            "targetLocations",
+            "vmArtifactsProfiles"
+          ]
         },
         "resourceGroup": {
           "type": "string"
         },
-        "sku": {
-          "$ref": "#/definitions/Plan"
-        },
         "tags": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         },
         "type": {
-          "type": "string"
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
         }
-      }
+      },
+      "required": [
+        "id",
+        "location",
+        "name",
+        "properties",
+        "type"
+      ]
     },
-    "ExtendedLocation": {
-      "type": "object"
-    },
-    "Identity": {
-      "type": "object"
-    },
-    "Plan": {
-      "type": "object"
-    },
-    "TargetLocation": {
+    "GalleryServiceArtifactTargetLocation": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string"
         }
-      }
-    },
-    "ImageReference": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "initialVersion": {
-          "type": "string"
-        }
-      }
-    },
-    "ArtifactProfile": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "imageReference": {
-          "$ref": "#/definitions/ImageReference"
-        }
-      }
-    },
-    "UpgradeProviderParameters": {
-      "type": "object",
-      "properties": {
-        "ServiceGroup": {
-          "type": "string"
-        },
-        "ServiceIdentifier": {
-          "type": "string"
-        }
-      }
-    },
-    "UpgradeProviderInfo": {
-      "type": "object",
-      "properties": {
-        "enableAutoTrigger": {
-          "type": "boolean"
-        },
-        "upgradeProviderParameters": {
-          "$ref": "#/definitions/UpgradeProviderParameters"
-        }
-      }
-    },
-    "SchedulingPolicy": {
-      "type": "object",
-      "properties": {
-        "disableRegularUpgrades": {
-          "type": "boolean"
-        },
-        "maxConcurrentResourceCountPerRegion": {
-          "type": "integer"
-        },
-        "upgradeWindow": {
-          "type": "string"
-        }
-      }
-    },
-    "UpgradeSDPPolicy": {
-      "type": "object",
-      "properties": {
-        "schedulingPolicy": {
-          "$ref": "#/definitions/SchedulingPolicy"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "VMArtifactsProfile": {
       "type": "object",
@@ -3431,6 +3370,93 @@
         },
         "upgradeSdpPolicy": {
           "$ref": "#/definitions/UpgradeSDPPolicy"
+        }
+      },
+      "required": [
+        "artifactProfiles",
+        "name",
+        "upgradeProviderInfo",
+        "upgradeSdpPolicy"
+      ]
+    },
+    "ArtifactProfile": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference"
+        }
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "initialVersion": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "offer": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "initialVersion"
+      ]
+    },
+    "UpgradeProviderInfo": {
+      "type": "object",
+      "properties": {
+        "enableAutoTrigger": {
+          "type": "boolean"
+        },
+        "upgradeProviderParameters": {
+          "$ref": "#/definitions/UpgradeProviderParameters"
+        }
+      }
+    },
+    "UpgradeProviderParameters": {
+      "type": "object",
+      "properties": {
+        "ServiceGroup": {
+          "type": "string"
+        },
+        "ServiceIdentifier": {
+          "type": "string"
+        }
+      }
+    },
+    "UpgradeSDPPolicy": {
+      "type": "object",
+      "properties": {
+        "schedulingPolicy": {
+          "$ref": "#/definitions/SchedulingPolicy"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "SchedulingPolicy": {
+      "type": "object",
+      "properties": {
+        "disableRegularUpgrades": {
+          "type": "boolean"
+        },
+        "maxConcurrentResourceCountPerRegion": {
+          "type": "integer"
+        },
+        "upgradeWindow": {
+          "type": "string"
         }
       }
     }
