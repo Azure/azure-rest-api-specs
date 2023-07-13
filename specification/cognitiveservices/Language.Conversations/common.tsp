@@ -14,6 +14,7 @@ namespace Language.Conversations;
 @doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "InnerErrorModel should not use 'extends Record<unknown>'. Use 'extends Record<string>' instead."
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
 model InnerErrorModel extends Record<unknown> {
     @doc("One of a server-defined set of error codes.")
@@ -71,6 +72,7 @@ model KnowledgeBaseAnswer {
     @doc("Source of QnA result.")
     source?: string;
 
+    #suppress "deprecated" " Deprecated: object is deprecated. Please use {} for an empty model, `Record<unknown>` for a record with unknown property types, `unknown[]` for an array."
     @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
     metadata?: object;
 
@@ -160,6 +162,7 @@ model AnswersOptions {
 enum RankerKind {
     @doc("Default ranker.")
     Default: "Default ranker",
+
     @doc("Question only ranker.")
     Question: "Question only ranker",
 }
@@ -213,6 +216,7 @@ model SourceFilter {
 enum LogicalOperationKind {
     @doc("Set to AND.")
     AND,
+
     @doc("Set to OR.")
     OR,
 }
@@ -238,30 +242,43 @@ model ShortAnswerOptions {
 enum InnerErrorCode {
     @doc("Human-readable error code.")
     InvalidRequest,
+
     @doc("Human-readable error code.")
     InvalidParameterValue,
+
     @doc("Human-readable error code.")
     KnowledgeBaseNotFound,
+
     @doc("Human-readable error code.")
     AzureCognitiveSearchNotFound,
+
     @doc("Human-readable error code.")
     AzureCognitiveSearchThrottling,
+
     @doc("Human-readable error code.")
     ExtractionFailure,
+
     @doc("Human-readable error code.")
     InvalidRequestBodyFormat,
+
     @doc("Human-readable error code.")
     EmptyRequest,
+
     @doc("Human-readable error code.")
     MissingInputDocuments,
+
     @doc("Human-readable error code.")
     InvalidDocument,
+
     @doc("Human-readable error code.")
     ModelVersionIncorrect,
+
     @doc("Human-readable error code.")
     InvalidDocumentBatch,
+
     @doc("Human-readable error code.")
     UnsupportedLanguageCode,
+
     @doc("Human-readable error code.")
     InvalidCountryHint,
 }
@@ -270,38 +287,55 @@ enum InnerErrorCode {
 enum ErrorCode {
     @doc("Human-readable error code.")
     InvalidRequest,
+
     @doc("Human-readable error code.")
     InvalidArgument,
+
     @doc("Human-readable error code.")
     Unauthorized,
+
     @doc("Human-readable error code.")
     Forbidden,
+
     @doc("Human-readable error code.")
     NotFound,
+
     @doc("Human-readable error code.")
     ProjectNotFound,
+
     @doc("Human-readable error code.")
     OperationNotFound,
+
     @doc("Human-readable error code.")
     AzureCognitiveSearchNotFound,
+
     @doc("Human-readable error code.")
     AzureCognitiveSearchIndexNotFound,
+
     @doc("Human-readable error code.")
     TooManyRequests,
+
     @doc("Human-readable error code.")
     AzureCognitiveSearchThrottling,
+
     @doc("Human-readable error code.")
     AzureCognitiveSearchIndexLimitReached,
+
     @doc("Human-readable error code.")
     InternalServerError,
+
     @doc("Human-readable error code.")
     ServiceUnavailable,
+
     @doc("Human-readable error code.")
     Timeout,
+
     @doc("Human-readable error code.")
     QuotaExceeded,
+
     @doc("Human-readable error code.")
     Conflict,
+
     @doc("Human-readable error code.")
     Warning,
 }
