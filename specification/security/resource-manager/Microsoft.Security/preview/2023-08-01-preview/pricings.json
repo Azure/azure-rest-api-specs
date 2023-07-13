@@ -279,29 +279,6 @@
             ]
           }
         },
-        "isEnabled": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Whether the plan is enabled on the scope or not. This field is replacing the \"pricingTier\" field, and will always be synced with it.",
-          "enum": [
-            "True",
-            "False"
-          ],
-          "x-ms-enum": {
-            "name": "isEnabled",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "True",
-                "description": "Indicates the plan is enabled. Gets the \"Standard\" Microsoft Defender for Cloud experience with advanced security features"
-              },
-              {
-                "value": "False",
-                "description": "Indicates the plan is disabled. Gets only \"Free\" Microsoft Defender for Cloud experience with basic security features"
-              }
-            ]
-          }
-        },
         "subPlan": {
           "type": "string",
           "description": "The sub-plan selected for a Standard pricing configuration, when more than one sub-plan is available. Each sub-plan enables a set of security features. When not specified, full plan is applied."
@@ -320,45 +297,45 @@
         },
         "enforcement": {
           "type": "string",
-          "description": "If set to \"None\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inheritance=\"Override\"). If set to \"Enforced\", it prevents overrides and forces this pricing configuration to all descendants. Available only for subscription level pricing.",
+          "description": "If set to \"False\", it allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inherited=\"False\"). If set to \"True\", it prevents overrides and forces this pricing configuration on all descendants. This option is only available for subscription-level pricing.",
           "enum": [
-            "None",
-            "Enforced"
+            "False",
+            "True"
           ],
           "x-ms-enum": {
             "name": "enforcement",
             "modelAsString": true,
             "values": [
               {
-                "value": "None",
+                "value": "False",
                 "description": "Allows the descendants of this scope to override the pricing configuration set on this scope (allows setting inheritance=\"Override\")"
               },
               {
-                "value": "Enforced",
+                "value": "True",
                 "description": "Prevents overrides and forces the current scope's pricing configuration to all descendants"
               }
             ]
           }
         },
-        "inheritance": {
+        "inherited": {
           "type": "string",
           "readOnly": true,
-          "description": "If set to \"Inherit\", it indicates that this scope is inheriting its pricing configuration from its parent, and the parent's id will be in the \"inheritedFrom\" field. If set to \"Override\", it indicates that this scope is overriding the pricing configuration of its parent with its own pricing configuration. Available only for resource level pricing.",
+          "description": "When set to \"True\", it means that the current scope inherits its pricing configuration from its parent. The ID of the parent scope that provides the inherited configuration is displayed in the \"inheritedFrom\" field. On the other hand, if the parameter is set to \"False\", it indicates that the current scope sets its own pricing configuration and does not inherit it from its parent. This option is only available for resource-level pricing.",
           "enum": [
-            "Inherit",
-            "Override"
+            "True",
+            "False"
           ],
           "x-ms-enum": {
-            "name": "inheritance",
+            "name": "inherited",
             "modelAsString": true,
             "values": [
               {
-                "value": "Inherit",
-                "description": "Indicates that this scope is inheriting its pricing configuration from its parent"
+                "value": "True",
+                "description": "Indicates that the current scope is inheriting its pricing configuration from its parent"
               },
               {
-                "value": "Override",
-                "description": "Indicates that this scope is overriding the pricing configuration of its parent with its own pricing configuration"
+                "value": "False",
+                "description": "Indicates that the current scope sets its own pricing configuration and does not inherit it from its parent"
               }
             ]
           }
@@ -366,7 +343,7 @@
         "inheritedFrom": {
           "type": "string",
           "readOnly": true,
-          "description": "The id of the scope inherited from. \"Null\" if not inherited. Available only for resource level pricing."
+          "description": "The id of the scope inherited from. \"Null\" if not inherited. This option is only available for resource-level pricing."
         },
         "extensions": {
           "type": "array",
