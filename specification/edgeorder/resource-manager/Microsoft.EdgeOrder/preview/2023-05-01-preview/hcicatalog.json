@@ -1,0 +1,3543 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Edge Ordering Service-HCI Catalog",
+    "version": "2023-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.EdgeOrder/hciCatalog": {
+      "get": {
+        "tags": [
+          "HciCatalog"
+        ],
+        "description": "List HciCatalog resources.",
+        "operationId": "HciCatalog_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of HciCatalog resources.",
+            "schema": {
+              "$ref": "#/definitions/HciCatalogResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciCatalogList": {
+            "$ref": "./examples/HciCatalogList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}": {
+      "get": {
+        "tags": [
+          "HciCatalog"
+        ],
+        "description": "Get default HciCatalog resource.",
+        "operationId": "HciCatalog_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HciCatalog resource object.",
+            "schema": {
+              "$ref": "#/definitions/HciCatalogResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogGet": {
+            "$ref": "./examples/HciCatalogGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/listSolutionRecommendations": {
+      "post": {
+        "tags": [
+          "HciCatalog"
+        ],
+        "description": "Get solution recommendation.",
+        "operationId": "HciCatalog_ListSolutionRecommendations",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "solutionRecommendationRequest",
+            "description": "Captures requirement and workloads for which solution is required.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionRecommendationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recommended solution.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecommendedSolution"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogRecommendation": {
+            "$ref": "./examples/HciCatalogRecommendation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/platforms": {
+      "get": {
+        "tags": [
+          "Platforms"
+        ],
+        "description": "List HCI catalog platform resources.",
+        "operationId": "HciCatalogPlatforms_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "$skipToken is supported on list of platforms, which provides the next page in the list of platforms.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of platform resources.",
+            "schema": {
+              "$ref": "#/definitions/PlatformResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciCatalogPlatformsList": {
+            "$ref": "./examples/HciCatalogPlatformsList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/platforms/{platformId}": {
+      "get": {
+        "tags": [
+          "Platforms"
+        ],
+        "description": "Get HCI catalog platform by id.",
+        "operationId": "HciCatalogPlatforms_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/platformIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Platform resource object.",
+            "schema": {
+              "$ref": "#/definitions/PlatformResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogPlatformsGet": {
+            "$ref": "./examples/HciCatalogPlatformsGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/locations/{location}/projects": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "description": "List project resources.",
+        "operationId": "HciCatalogProjects_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "$filter is supported to fetch list at OrganizationLevel. Filter supports only equals operation.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "$skipToken is supported on list of platforms, which provides the next page in the list of projects.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of project resources. Default at user-level, OrganizationLevel filter is given, will return all projects within that tenant.",
+            "schema": {
+              "$ref": "#/definitions/ProjectResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciCatalogProjectsList": {
+            "$ref": "./examples/HciCatalogProjectsList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/locations/{location}/projects/{projectName}": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Get a project.",
+        "operationId": "HciCatalogProject_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "project resource object.",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogProjectGet": {
+            "$ref": "./examples/HciCatalogProjectGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Create a project. Existing project cannot be updated with this api and should instead be updated with the Update project\r\nAPI.",
+        "operationId": "HciCatalogProject_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "projectResource",
+            "description": "Project details from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. Returns project resource object",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "201": {
+            "description": "Create successful. Returns project resource object",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogProjectCreate": {
+            "$ref": "./examples/HciCatalogProjectCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Update the properties of an existing project.",
+        "operationId": "HciCatalogProject_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the project on the server matches this value.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "projectUpdateParameter",
+            "description": "Project update parameters from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project resource object.",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogProjectUpdate": {
+            "$ref": "./examples/HciCatalogProjectUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Delete a project by id.",
+        "operationId": "HciCatalogProject_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project deleted."
+          },
+          "204": {
+            "description": "No content. Project deleted."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogProjectDelete": {
+            "$ref": "./examples/HciCatalogProjectDelete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/locations/{location}/projects/{projectName}/solutionRecommendations": {
+      "post": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Get solution recommendation for the Project.",
+        "operationId": "HciCatalogProject_SolutionRecommendations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recommended solution.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecommendedSolution"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogProjectSolutionRecommendation": {
+            "$ref": "./examples/HciCatalogProjectSolutionRecommendation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/search": {
+      "post": {
+        "tags": [
+          "HciCatalog"
+        ],
+        "description": "Search HCI catalog.",
+        "operationId": "HciCatalog_Search",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "hciCatalogSearchRequest",
+            "description": "Hci Catalog search request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HciCatalogSearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search result for HCI catalog search request.",
+            "schema": {
+              "$ref": "#/definitions/HciCatalogSearchResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogSearch": {
+            "$ref": "./examples/HciCatalogSearch.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/vendors": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "description": "List HCI catalog vendor resources.",
+        "operationId": "HciCatalogVendors_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "$skipToken is supported on list of vendors, which provides the next page in the list of vendors.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of vendor resources.",
+            "schema": {
+              "$ref": "#/definitions/VendorResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciCatalogVendorsList": {
+            "$ref": "./examples/HciCatalogVendorsList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciCatalog/{catalogName}/vendors/{vendorId}": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "description": "Get HCI catalog vendor by id.",
+        "operationId": "HciCatalogVendors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/vendorIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vendor resource object.",
+            "schema": {
+              "$ref": "#/definitions/VendorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciCatalogVendorsGet": {
+            "$ref": "./examples/HciCatalogVendorsGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog": {
+      "get": {
+        "tags": [
+          "HciFlightCatalog"
+        ],
+        "description": "List HciCatalog resources.",
+        "operationId": "HciFlightCatalog_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of HciCatalog resources.",
+            "schema": {
+              "$ref": "#/definitions/HciCatalogResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogList": {
+            "$ref": "./examples/HciFlightCatalogList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}": {
+      "get": {
+        "tags": [
+          "HciFlightCatalog"
+        ],
+        "description": "Get default HciCatalog resource.",
+        "operationId": "HciFlightCatalog_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HciCatalog resource object.",
+            "schema": {
+              "$ref": "#/definitions/HciCatalogResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogGet": {
+            "$ref": "./examples/HciFlightCatalogGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/listSolutionRecommendations": {
+      "post": {
+        "tags": [
+          "HciCatalog"
+        ],
+        "description": "Get solution recommendation.",
+        "operationId": "HciFlightCatalog_ListSolutionRecommendations",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "solutionRecommendationRequest",
+            "description": "Captures requirement and workloads for which solution is required.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionRecommendationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recommended solution.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecommendedSolution"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogRecommendation": {
+            "$ref": "./examples/HciFlightCatalogRecommendation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/platforms": {
+      "get": {
+        "tags": [
+          "Platforms"
+        ],
+        "description": "List HCI catalog platform resources.",
+        "operationId": "HciFlightCatalogPlatforms_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "$skipToken is supported on list of platforms, which provides the next page in the list of platforms.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of platform resources.",
+            "schema": {
+              "$ref": "#/definitions/PlatformResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogPlatformsList": {
+            "$ref": "./examples/HciFlightCatalogPlatformsList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/platforms/{platformId}": {
+      "get": {
+        "tags": [
+          "Platforms"
+        ],
+        "description": "Get HCI catalog platform by id.",
+        "operationId": "HciFlightCatalogPlatforms_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/platformIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Platform resource object.",
+            "schema": {
+              "$ref": "#/definitions/PlatformResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogPlatformsGet": {
+            "$ref": "./examples/HciFlightCatalogPlatformsGet.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/locations/{location}/projects": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "description": "List project resources.",
+        "operationId": "HciFlightCatalogProjects_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "description": "$filter is supported to fetch list at OrganizationLevel. Filter supports only equals operation.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "$skipToken is supported on list of platforms, which provides the next page in the list of projects.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of project resources. Default at user-level, OrganizationLevel filter is given, will return all projects within that tenant.",
+            "schema": {
+              "$ref": "#/definitions/ProjectResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogProjectsList": {
+            "$ref": "./examples/HciFlightCatalogProjectsList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/locations/{location}/projects/{projectName}": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Get a project.",
+        "operationId": "HciFlightCatalogProject_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "project resource object.",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogProjectGet": {
+            "$ref": "./examples/HciFlightCatalogProjectGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Create a project. Existing project cannot be updated with this api and should instead be updated with the Update project\r\nAPI.",
+        "operationId": "HciFlightCatalogProject_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "projectResource",
+            "description": "Project details from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. Returns project resource object",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "201": {
+            "description": "Create successful. Returns project resource object",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogProjectCreate": {
+            "$ref": "./examples/HciFlightCatalogProjectCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Update the properties of an existing project.",
+        "operationId": "HciFlightCatalogProject_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the project on the server matches this value.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "projectUpdateParameter",
+            "description": "Project update parameters from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project resource object.",
+            "schema": {
+              "$ref": "#/definitions/ProjectResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogProjectUpdate": {
+            "$ref": "./examples/HciFlightCatalogProjectUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Delete a project by id.",
+        "operationId": "HciFlightCatalogProject_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project deleted."
+          },
+          "204": {
+            "description": "No content. Project deleted."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogProjectDelete": {
+            "$ref": "./examples/HciFlightCatalogProjectDelete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/locations/{location}/projects/{projectName}/solutionRecommendations": {
+      "post": {
+        "tags": [
+          "Project"
+        ],
+        "description": "Get solution recommendation for the Project.",
+        "operationId": "HciFlightCatalogProject_SolutionRecommendations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recommended solution.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecommendedSolution"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogProjectSolutionRecommendation": {
+            "$ref": "./examples/HciFlightCatalogProjectSolutionRecommendation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/search": {
+      "post": {
+        "tags": [
+          "HciFlightCatalog"
+        ],
+        "description": "Search HCI catalog.",
+        "operationId": "HciFlightCatalog_Search",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "hciCatalogSearchRequest",
+            "description": "Hci Catalog search request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HciCatalogSearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search result for HCI catalog search request.",
+            "schema": {
+              "$ref": "#/definitions/HciCatalogSearchResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogSearch": {
+            "$ref": "./examples/HciFlightCatalogSearch.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/vendors": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "description": "List HCI catalog vendor resources.",
+        "operationId": "HciFlightCatalogVendors_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "$skipToken is supported on list of vendors, which provides the next page in the list of vendors.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of vendor resources.",
+            "schema": {
+              "$ref": "#/definitions/VendorResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogVendorsList": {
+            "$ref": "./examples/HciFlightCatalogVendorsList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EdgeOrder/hciFlightCatalog/{catalogName}/vendors/{vendorId}": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "description": "Get HCI catalog vendor by id.",
+        "operationId": "HciFlightCatalogVendors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/catalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/vendorIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vendor resource object.",
+            "schema": {
+              "$ref": "#/definitions/VendorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HciFlightCatalogVendorsGet": {
+            "$ref": "./examples/HciFlightCatalogVendorsGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlternateSolutionDetails": {
+      "description": "Represents alternate solution details.",
+      "type": "object",
+      "properties": {
+        "alternativeSolutionName": {
+          "description": "Alternate solution name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "alternativeSolutionId": {
+          "description": "Alternate solution id.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ByteSize": {
+      "description": "Size details in bytes.",
+      "required": [
+        "amount",
+        "byteUnit"
+      ],
+      "type": "object",
+      "properties": {
+        "amount": {
+          "format": "double",
+          "description": "Amount of bytes in byte unit.",
+          "type": "number"
+        },
+        "byteUnit": {
+          "description": "Type of byte unit.",
+          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ByteUnitType"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ByteUnitType": {
+      "description": "Byte unit types.",
+      "enum": [
+        "GB",
+        "PB",
+        "TB"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ByteUnitType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "GB",
+            "description": "Gigabyte"
+          },
+          {
+            "value": "PB",
+            "description": "Petabyte"
+          },
+          {
+            "value": "TB",
+            "description": "Terabyte"
+          }
+        ]
+      }
+    },
+    "CacheDriveDetails": {
+      "description": "Represents Cache Drive specific details.",
+      "type": "object",
+      "properties": {
+        "cacheDriveTypes": {
+          "description": "List of cache drive types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "minimumNumberOfCacheDrives": {
+          "format": "int32",
+          "description": "Minimum number of cache drives.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maximumNumberOfCacheDrives": {
+          "format": "int32",
+          "description": "Maximum number of cache drives.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cacheDriveSizes": {
+          "description": "List of cache drive sizes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ByteSize"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "cacheDriveSizesBytes": {
+          "description": "List of cache drive sizes in bytes.",
+          "type": "array",
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "CapacityDriveDetails": {
+      "description": "Represents Capacity Drive specific details.",
+      "type": "object",
+      "properties": {
+        "capacityStorageDriveTypes": {
+          "description": "List of Capacity storage drive types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "minimumNumberOfCapacityDrives": {
+          "format": "int32",
+          "description": "Minimum number of Capacity drives.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maximumNumberOfCapacityDrives": {
+          "format": "int32",
+          "description": "Maximum number of Capacity drives.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "capacityDriveSizes": {
+          "description": "List of Capacity drive sizes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ByteSize"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "capacityDriveSizesBytes": {
+          "description": "List of Capacity drive sizes in bytes.",
+          "type": "array",
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "CPUBreakdown": {
+      "description": "Cpu breakdown.",
+      "type": "object",
+      "properties": {
+        "used": {
+          "format": "int32",
+          "description": "(Number of VMs x vCPU per VM) / ratio of virtual to physical cores",
+          "type": "integer",
+          "readOnly": true
+        },
+        "futureGrowth": {
+          "format": "int32",
+          "description": "Cores reserved for future growth.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "highAvailability": {
+          "format": "int32",
+          "description": "Hosts reserved for emergency scenarios (e.g. maintenance, one node is down etc).",
+          "type": "integer",
+          "readOnly": true
+        },
+        "total": {
+          "format": "int32",
+          "description": "The total CPU needed to run your workloads.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "leftover": {
+          "format": "int32",
+          "description": "Cores left on the hardware. This is total - (Used + Future Growth+ High availability).",
+          "type": "integer",
+          "readOnly": true
+        },
+        "availability": {
+          "description": "Host reserved for emergency scenarios.",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilityTotal": {
+          "format": "int32",
+          "description": "Total host reserved for emergency scenarios.",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "CpuDetails": {
+      "description": "Represents CPU specific details.",
+      "type": "object",
+      "properties": {
+        "minimumCores": {
+          "format": "int32",
+          "description": "Minimum number of cores.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maximumCores": {
+          "format": "int32",
+          "description": "Maximum number of cores.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalSocketsSupported": {
+          "format": "int32",
+          "description": "Total sockets supported.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "coresPerSocket": {
+          "description": "List of cores per socket.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "Filter": {
+      "description": "Filter details.",
+      "required": [
+        "name",
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the filter.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Metadata of the filter.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FilterMetadata"
+            }
+          ],
+          "readOnly": true
+        },
+        "values": {
+          "description": "List of filter values.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "FilterMetadata": {
+      "description": "Filter metadata details.",
+      "type": "object",
+      "properties": {
+        "displayText": {
+          "description": "Display text of the filter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of the filter.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FilterValue": {
+      "description": "Filter value details.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The filter value.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Display text of the filter value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FilterValueMetadata"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FilterValueMetadata": {
+      "description": "Filter value metadata details.",
+      "type": "object",
+      "properties": {
+        "displayText": {
+          "description": "Display text of the filter value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description of the filter value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "count": {
+          "format": "int64",
+          "description": "The approximate count of results falling within the bucket for this filter value.",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "GeneralWorkloadDetails": {
+      "description": "General workload details",
+      "required": [
+        "workloadName",
+        "workloadType",
+        "numberOfVms",
+        "virtualCpu",
+        "virtualCorePerPhysicalCore",
+        "memoryBytes",
+        "storageBytes"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "General"
+    },
+    "GpuDetails": {
+      "description": "Represents GPU specific details.",
+      "type": "object",
+      "properties": {
+        "isGpuSupported": {
+          "description": "Flag to indicate whether GPU is supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "gpuMfgModel": {
+          "description": "GPU Mfg model.",
+          "type": "string",
+          "readOnly": true
+        },
+        "gpuDda": {
+          "description": "List of GPU DDA.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "gpuP": {
+          "description": "List of GPU-P.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "HciCatalogPlatformsSearchRequest": {
+      "description": "Request body for HCI catalog search call.",
+      "required": [
+        "page",
+        "pageSize",
+        "resourceType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HciCatalogSearchRequest"
+        }
+      ],
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "Platforms"
+    },
+    "HciCatalogPlatformsSearchResponse": {
+      "description": "HCI catalog platforms search response",
+      "required": [
+        "currentPage",
+        "resourceType",
+        "totalPages",
+        "totalResults"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HciCatalogSearchResponse"
+        }
+      ],
+      "properties": {
+        "platforms": {
+          "description": "List of search filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformResource"
+          }
+        },
+        "platformFilters": {
+          "description": "List of search filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "Platforms"
+    },
+    "HciCatalogProperties": {
+      "description": "Represents order details.",
+      "type": "object",
+      "properties": {
+        "platformFilters": {
+          "description": "List of platform filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "HciCatalogResource": {
+      "description": "Specifies the properties for HciCatalog. HciCatalog is a catalog for third-party Azure Stack HCI solutions.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "HciCatalog properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HciCatalogProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "HciCatalogResourceList": {
+      "description": "List of hci catalog resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of hci catalog resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HciCatalogResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link for the next set of hci catalog resources.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HciCatalogSearchRequest": {
+      "description": "Request body for HCI catalog search call",
+      "required": [
+        "page",
+        "pageSize",
+        "resourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Search resource type.",
+          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HciCatalogSearchResourceType"
+            }
+          ]
+        },
+        "searchText": {
+          "description": "Search text.",
+          "type": "string"
+        },
+        "filters": {
+          "description": "List of search filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchFilter"
+          },
+          "x-ms-identifiers": []
+        },
+        "sortOptions": {
+          "description": "Sort options.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SortOptions"
+            }
+          ]
+        },
+        "page": {
+          "format": "int64",
+          "description": "Page number for client-side pagination.",
+          "type": "integer"
+        },
+        "pageSize": {
+          "format": "int64",
+          "description": "Page size for client-size pagination.",
+          "type": "integer"
+        }
+      },
+      "discriminator": "resourceType"
+    },
+    "HciCatalogSearchResourceType": {
+      "description": "Support resource types for HCI catalog search.",
+      "enum": [
+        "Platforms"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "HciCatalogSearchResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Platforms",
+            "description": "Platforms."
+          }
+        ]
+      }
+    },
+    "HciCatalogSearchResponse": {
+      "description": "HCI catalog search response",
+      "required": [
+        "currentPage",
+        "resourceType",
+        "totalPages",
+        "totalResults"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Search resource type.",
+          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HciCatalogSearchResourceType"
+            }
+          ]
+        },
+        "currentPage": {
+          "format": "int64",
+          "description": "Current page number for client-side pagination.",
+          "type": "integer"
+        },
+        "totalPages": {
+          "format": "int64",
+          "description": "Total number of pages for client-size pagination.",
+          "type": "integer"
+        },
+        "totalResults": {
+          "format": "int64",
+          "description": "Total count of results for given search request.",
+          "type": "integer"
+        }
+      },
+      "discriminator": "resourceType"
+    },
+    "HWaaSDetails": {
+      "description": "Represents Hardware as a Service details.",
+      "type": "object",
+      "properties": {
+        "isHWaaSSupported": {
+          "description": "Flag to indicate if the platform supports Hardware as a Service.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "hWaaSName": {
+          "description": "Hardware as a Service name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hWaaSDescription": {
+          "description": "Hardware as a Service Description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hWaaSLink": {
+          "description": "Hardware as a Service link.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "MemoryBreakdown": {
+      "description": "Memory breakdown.",
+      "type": "object",
+      "properties": {
+        "csvSbl": {
+          "format": "int64",
+          "description": "This is memory taken by csv(In-memory cache) and SBL cache.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "hyperV": {
+          "format": "int64",
+          "description": "Hyper V(4% system overhead is taken by Hyper-V",
+          "type": "integer",
+          "readOnly": true
+        },
+        "workloads": {
+          "format": "int64",
+          "description": "Number of VM * memory per VM.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "futureGrowth": {
+          "format": "int32",
+          "description": "Future growth",
+          "type": "integer",
+          "readOnly": true
+        },
+        "leftover": {
+          "format": "int32",
+          "description": "Left over.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "highAvailability": {
+          "format": "int32",
+          "description": "Hosts reserved for emergency scenarios (e.g. maintenance, one node is down etc).",
+          "type": "integer",
+          "readOnly": true
+        },
+        "total": {
+          "format": "int32",
+          "description": "The total memory needed to run your workloads.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "availability": {
+          "description": "Host reserved for emergency scenarios.",
+          "type": "string",
+          "readOnly": true
+        },
+        "availabilityTotal": {
+          "format": "int32",
+          "description": "Total host reserved for emergency scenarios.",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "MemoryDetails": {
+      "description": "Represents Memory specific details.",
+      "type": "object",
+      "properties": {
+        "minimumMemory": {
+          "description": "Minimum memory.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ByteSize"
+            }
+          ],
+          "readOnly": true
+        },
+        "minimumMemoryBytes": {
+          "format": "int64",
+          "description": "Minimum memory in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maximumMemory": {
+          "description": "Maximum memory.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ByteSize"
+            }
+          ],
+          "readOnly": true
+        },
+        "maximumMemoryBytes": {
+          "format": "int64",
+          "description": "Maximum memory in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numberOfDimmSlots": {
+          "format": "int32",
+          "description": "Number of DIMM (dual in-line memory module) slots.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isHalfDimmSlotsSupported": {
+          "description": "Flag to indicate if half DIMM (dual in-line memory module) slots are supported.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "dimmSlotSizes": {
+          "description": "List of DIMM (dual in-line memory module) slot sizes.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        },
+        "dimmSlotSizesBytes": {
+          "description": "List of DIMM (dual in-line memory module) slot sizes in bytes.",
+          "type": "array",
+          "items": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "MiscellaneousDetails": {
+      "description": "Represents miscellaneous configuration details.",
+      "type": "object",
+      "properties": {
+        "hbaManufacturer": {
+          "description": "HBA (Host Bus Adapter) manufacturer name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hbaModel": {
+          "description": "HBA (Host Bus Adapter) model name.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "NetworkingDetails": {
+      "description": "Represents Networking specific details.",
+      "type": "object",
+      "properties": {
+        "networkingSpeed": {
+          "format": "int32",
+          "description": "Networking speed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "nicVendorModel": {
+          "description": "NIC vendor model.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rdmaType": {
+          "description": "RDMA type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "NetworkPreference": {
+      "description": "Network preferences.",
+      "required": [
+        "usesSoftwareDefinedNetwork",
+        "networkController",
+        "softwareLoadBalancer",
+        "rasGateway"
+      ],
+      "type": "object",
+      "properties": {
+        "usesSoftwareDefinedNetwork": {
+          "description": "Use software defined networking to centrally configure and manage networks and network services.",
+          "type": "boolean"
+        },
+        "networkController": {
+          "format": "int32",
+          "description": "Number of network controller to manage, configure, monitor, and troubleshoot virtual network infrastructure.",
+          "type": "integer"
+        },
+        "softwareLoadBalancer": {
+          "format": "int32",
+          "description": "Number of load balancer needed.",
+          "type": "integer"
+        },
+        "rasGateway": {
+          "format": "int32",
+          "description": "Number of Ras gateway needed.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PlatformConfigurationProperties": {
+      "description": "Represents configuration details.",
+      "required": [
+        "configurationId",
+        "configurationName",
+        "vendorId",
+        "vendorName",
+        "platformId",
+        "platformName",
+        "isArchived",
+        "isSingleNodeConfiguration"
+      ],
+      "type": "object",
+      "properties": {
+        "configurationId": {
+          "description": "Unique Id representing the configuration.",
+          "type": "string"
+        },
+        "configurationName": {
+          "description": "Name of the configuration.",
+          "type": "string"
+        },
+        "vendorId": {
+          "description": "Vendor id.",
+          "type": "string"
+        },
+        "vendorName": {
+          "description": "Vendor name.",
+          "type": "string"
+        },
+        "platformId": {
+          "description": "Platform id.",
+          "type": "string"
+        },
+        "platformName": {
+          "description": "Platform name.",
+          "type": "string"
+        },
+        "isArchived": {
+          "description": "Flag to indicate if the configuration is archived.",
+          "type": "boolean"
+        },
+        "isSingleNodeConfiguration": {
+          "description": "Flag to indicate if the configuration is a single node configuration.",
+          "type": "boolean"
+        },
+        "memoryDetails": {
+          "description": "Memory specific details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MemoryDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "storageDetails": {
+          "description": "Storage specific details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StorageDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "gpuDetails": {
+          "description": "GPU specific details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/GpuDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "cpuDetails": {
+          "description": "CPU specific details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CpuDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "networkingDetails": {
+          "description": "Networking specific details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/NetworkingDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "miscellaneousDetails": {
+          "description": "Miscellaneous configuration details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MiscellaneousDetails"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PlatformImageDetails": {
+      "description": "Represents Platform image details.",
+      "type": "object",
+      "properties": {
+        "thumbnailImage": {
+          "description": "Thumbnail image.",
+          "type": "string",
+          "readOnly": true
+        },
+        "images": {
+          "description": "List of images.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PlatformProperties": {
+      "description": "Represents platform details.",
+      "required": [
+        "platformId",
+        "platformName",
+        "vendorId",
+        "vendorName",
+        "isArchived",
+        "systemType",
+        "isPMemorySupported",
+        "websiteUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "platformId": {
+          "description": "Unique Id representing the platform.",
+          "type": "string"
+        },
+        "platformName": {
+          "description": "Platform name.",
+          "type": "string"
+        },
+        "vendorId": {
+          "description": "Vendor Id.",
+          "type": "string"
+        },
+        "vendorName": {
+          "description": "Vendor name.",
+          "type": "string"
+        },
+        "isArchived": {
+          "description": "Flag to indicate if the platform is archived.",
+          "type": "boolean"
+        },
+        "serverDescription": {
+          "description": "Server description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemType": {
+          "description": "Identifies system configuration, can be integratedSystem, ValidatedNode, Premium, etc",
+          "type": "string"
+        },
+        "formFactor": {
+          "description": "Form factor.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rackUnits": {
+          "format": "int32",
+          "description": "Number of rack units.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "minimumScale": {
+          "format": "int32",
+          "description": "Minimum scale.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maximumScale": {
+          "format": "int32",
+          "description": "Maximum scale.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isPMemorySupported": {
+          "description": "Flag to indicate if the platform supports P-Memory.",
+          "type": "boolean"
+        },
+        "regions": {
+          "description": "List of availability regions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "technicalUseCases": {
+          "description": "List of technical use-cases.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "imageDetails": {
+          "description": "Image details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PlatformImageDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "lastTestedVersion": {
+          "description": "Last tested version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "websiteUrl": {
+          "description": "Website Url.",
+          "type": "string"
+        },
+        "smbiosDetails": {
+          "description": "SMBIOS details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SMBIOSDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "windowsAdminCenterDetails": {
+          "description": "Windows Admin Center (WAC) details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/WindowsAdminCenterDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "lifecycleStage": {
+          "format": "int32",
+          "description": "Lifecycle stage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "unsupportedDate": {
+          "description": "Unsupported date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "alternateSolutionDetails": {
+          "description": "Alternate solution details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlternateSolutionDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "cpuFamily": {
+          "description": "CPU Family.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cpuModel": {
+          "description": "CPU model.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isGpuSupported": {
+          "description": "Flag to indicate if the platform supports GPU.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "sdnNicDetails": {
+          "description": "SDN NIC details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SdnNicDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "featuresSupported": {
+          "description": "List of supported features.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "hWaaSDetails": {
+          "description": "Hardware as a Service details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HWaaSDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "storageDrives": {
+          "description": "List of storage drive types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "gpuMfgModels": {
+          "description": "List of GPU mfg models.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "configurations": {
+          "description": "List of configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformConfigurationProperties"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "PlatformResource": {
+      "description": "Specifies the properties for Platform in HCI Catalog.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Platform properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PlatformProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PlatformResourceList": {
+      "description": "List of platforms.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of platform resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link for the next set of platform resources.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreferenceDetails": {
+      "description": "Preference details.",
+      "required": [
+        "systemType",
+        "cpuFamily",
+        "growthPercentage",
+        "memoryExpandability",
+        "storageExpandability",
+        "vendorId",
+        "storageFutureGrowthBytes"
+      ],
+      "type": "object",
+      "properties": {
+        "systemType": {
+          "description": "SystemType, IntegratedSystem, ValidatedNode, Premium.",
+          "type": "string"
+        },
+        "cpuFamily": {
+          "description": "Cpu Family, Currently Intel, AMD.",
+          "type": "string"
+        },
+        "isTwoNodeSolution": {
+          "description": "Is 2 node solution.",
+          "type": "boolean"
+        },
+        "growthPercentage": {
+          "format": "int32",
+          "description": "Growth Percentage.",
+          "type": "integer"
+        },
+        "memoryExpandability": {
+          "description": "If require memory expandability, it reserve DIMM slots for future growth (only fill half the DIMM slots in your solution.",
+          "type": "boolean"
+        },
+        "storageExpandability": {
+          "description": "If require storage expandability, reserve drive bays for future growth (leave half of the drives empty for future growth) .",
+          "type": "boolean"
+        },
+        "vendorId": {
+          "description": "vendor id.",
+          "type": "string"
+        },
+        "storageFutureGrowthBytes": {
+          "format": "int32",
+          "description": "Percentage needed to be reserved for future growth.",
+          "type": "integer"
+        },
+        "resiliencyRequirements": {
+          "description": "failure tolerate capabilities.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResiliencyRequirements"
+            }
+          ]
+        },
+        "storagePreference": {
+          "description": "Storage preferences.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StoragePreference"
+            }
+          ]
+        },
+        "networkPreference": {
+          "description": "Network Preferences.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/NetworkPreference"
+            }
+          ]
+        },
+        "workloads": {
+          "description": "Details of your on-premises workloads. This information will be used to understand and recommend a solution.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workload"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectProperties": {
+      "description": "Project properties",
+      "required": [
+        "preferenceDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "projectNotes": {
+          "description": "Project name.",
+          "type": "string"
+        },
+        "preferenceDetails": {
+          "description": "Preference details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PreferenceDetails"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectResource": {
+      "description": "Specifies the properties for Project in HCI Catalog.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Project properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProjectProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Represents resource creation and update time.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "ProjectResourceList": {
+      "description": "Project resource list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of project resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link for the next set of project resources.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectUpdateParameter": {
+      "description": "Updates project.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Represents resource creation and update time.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Project update properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProjectUpdateProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectUpdateProperties": {
+      "description": "Project update properties.",
+      "required": [
+        "preferenceDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "projectNotes": {
+          "description": "Project notes.",
+          "type": "string"
+        },
+        "preferenceDetails": {
+          "description": "Preference details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PreferenceDetails"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "RecommendedSolution": {
+      "description": "Recommended Solution",
+      "required": [
+        "platformId",
+        "vendorId",
+        "cpuBreakdown",
+        "memoryBreakdown",
+        "storageBreakdown"
+      ],
+      "type": "object",
+      "properties": {
+        "platformId": {
+          "description": "Platform id.",
+          "type": "string"
+        },
+        "vendorId": {
+          "description": "Vendor id.",
+          "type": "string"
+        },
+        "platformProperties": {
+          "description": "Platform properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PlatformProperties"
+            }
+          ],
+          "readOnly": true
+        },
+        "vendorProperties": {
+          "description": "Vendor properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VendorProperties"
+            }
+          ],
+          "readOnly": true
+        },
+        "solutionConfigurationId": {
+          "format": "int32",
+          "description": "Solution configuration id",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numberOfNodes": {
+          "format": "int32",
+          "description": "Number of nodes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "coreCount": {
+          "format": "int32",
+          "description": "Core count.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "coresPerNode": {
+          "format": "int32",
+          "description": "Cores per node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cpuFamily": {
+          "description": "Cpu family.",
+          "type": "string",
+          "readOnly": true
+        },
+        "socketsFilled": {
+          "format": "int32",
+          "description": "Sockets filled.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "coresPerSocket": {
+          "format": "int32",
+          "description": "Cores per socket.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memorySlots": {
+          "format": "int32",
+          "description": "Memory slots.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memoryPerSlot": {
+          "format": "int64",
+          "description": "Memory per slot.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memoryPerNode": {
+          "format": "int64",
+          "description": "Memory per node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "capacityStorageDrives": {
+          "format": "int64",
+          "description": "Capacity storage drives.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "capacityStorage": {
+          "format": "int64",
+          "description": "Capacity storage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "capacityStoragePerDrive": {
+          "format": "int64",
+          "description": "Capacity storage per drive.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "capacityStoragePerNode": {
+          "format": "int64",
+          "description": "Capacity storage per node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "capacityStorageType": {
+          "description": "Capacity storage type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cacheStorageDrives": {
+          "format": "int32",
+          "description": "Cache storage drives",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cacheStorage": {
+          "format": "int64",
+          "description": "Cache storage",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cacheStoragePerDrive": {
+          "format": "int64",
+          "description": "Cache storage per drive.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cacheStoragePerNode": {
+          "format": "int64",
+          "description": "Cache storage per node.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cacheStorageType": {
+          "description": "Cache storage type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cpuBreakdown": {
+          "description": "Cpu breakdown.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CPUBreakdown"
+            }
+          ]
+        },
+        "memoryBreakdown": {
+          "description": "Memory breakdown.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MemoryBreakdown"
+            }
+          ]
+        },
+        "storageBreakdown": {
+          "description": "Storage breakdown.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StorageBreakdown"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResiliencyRequirements": {
+      "description": "Resiliency requirements.",
+      "required": [
+        "availability",
+        "storageFailuresToTolerate"
+      ],
+      "type": "object",
+      "properties": {
+        "availability": {
+          "description": "Reserve additional host for emergency scenarios, N+1, N+2.",
+          "type": "string"
+        },
+        "storageFailuresToTolerate": {
+          "format": "int32",
+          "description": "Number of failures that can occur simultaneously without compromising availability and data.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SdnNicDetails": {
+      "description": "Represents Software defined network NIC details.",
+      "type": "object",
+      "properties": {
+        "isSdnNicSupported": {
+          "description": "Flag to indicate if the platform supports SDN NIC.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "sdnNicVendorModels": {
+          "description": "List of SDN NIC vendor models.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SearchFilter": {
+      "description": "Search filter details.",
+      "required": [
+        "name",
+        "values"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the filter.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "values": {
+          "description": "List of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "SMBIOSDetails": {
+      "description": "Represents SMBIOS details.",
+      "type": "object",
+      "properties": {
+        "oemModel": {
+          "description": "OEM model name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "oemSubModel": {
+          "description": "OEM sub-model name.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SolutionRecommendationRequest": {
+      "description": "Solution recommendation request.",
+      "required": [
+        "preferenceDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "preferenceDetails": {
+          "description": "Preference details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PreferenceDetails"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "SortDirection": {
+      "description": "Sort direction enums.",
+      "enum": [
+        "Ascending",
+        "Descending"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SortDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Ascending",
+            "description": "Ascending."
+          },
+          {
+            "value": "Descending",
+            "description": "Descending."
+          }
+        ]
+      }
+    },
+    "SortOptions": {
+      "description": "Sort options.",
+      "required": [
+        "sortBy",
+        "sortDirection"
+      ],
+      "type": "object",
+      "properties": {
+        "sortBy": {
+          "description": "Sort by field.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "sortDirection": {
+          "description": "Sort direction.",
+          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SortDirection"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "SQLWorkloadDetails": {
+      "description": "Sql workload details",
+      "required": [
+        "workloadName",
+        "workloadType",
+        "numberOfVms",
+        "virtualCpu",
+        "virtualCorePerPhysicalCore",
+        "memoryBytes",
+        "storageBytes"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "SQL"
+    },
+    "StorageBreakdown": {
+      "description": "Storage breakdown.",
+      "type": "object",
+      "properties": {
+        "used": {
+          "format": "int64",
+          "description": "This is based on user input, storage per VM * total VM",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resiliency": {
+          "format": "int64",
+          "description": "This is the storage taken up by resiliency. \r\nThe resiliency types are mirror, mirror accelerated parity and nested mirror. \r\nResiliency type is decided by your inputs (optimizing for storage or performance) and your chosen number of storage failures to tolerate.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "futureGrowth": {
+          "format": "int32",
+          "description": "Future growth",
+          "type": "integer",
+          "readOnly": true
+        },
+        "leftover": {
+          "format": "int32",
+          "description": "Left over.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "total": {
+          "format": "int32",
+          "description": "The total storage needed to run your workloads.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "reserve": {
+          "format": "int64",
+          "description": "1 capacity drive per node is taken by reserve.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "reserveTotal": {
+          "format": "int64",
+          "description": "Reserve total.",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "StorageDetails": {
+      "description": "Represents Storage specific details.",
+      "type": "object",
+      "properties": {
+        "minimumStorage": {
+          "description": "Minimum storage.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ByteSize"
+            }
+          ],
+          "readOnly": true
+        },
+        "minimumStorageBytes": {
+          "format": "int64",
+          "description": "Minimum storage in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maximumStorage": {
+          "description": "Maximum storage.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ByteSize"
+            }
+          ],
+          "readOnly": true
+        },
+        "storageMaxBytes": {
+          "format": "int64",
+          "description": "Maximum storage in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "storageDrives": {
+          "description": "Types of storage drives.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "cacheDriveDetails": {
+          "description": "Cache drive specific details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CacheDriveDetails"
+            }
+          ],
+          "readOnly": true
+        },
+        "capacityDriveDetails": {
+          "description": "Capacity drive specific details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CapacityDriveDetails"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "StoragePreference": {
+      "description": "Storage preferences.",
+      "required": [
+        "storageType",
+        "persistentCache",
+        "resiliencyPreference",
+        "inMemoryCacheSizeInGB"
+      ],
+      "type": "object",
+      "properties": {
+        "storageType": {
+          "description": "Storage type.",
+          "type": "string"
+        },
+        "persistentCache": {
+          "description": "Cache choice.",
+          "type": "string"
+        },
+        "resiliencyPreference": {
+          "description": "Resiliency preference, optimized for capacity or performance.",
+          "type": "string"
+        },
+        "inMemoryCacheSizeInGB": {
+          "format": "int32",
+          "description": "Resiliency preference, optimized for capacity or performance.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VDIWorkloadDetails": {
+      "description": "VDI workload details",
+      "required": [
+        "workloadName",
+        "workloadType",
+        "numberOfVms",
+        "virtualCpu",
+        "virtualCorePerPhysicalCore",
+        "memoryBytes",
+        "storageBytes"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "VDI"
+    },
+    "VendorProperties": {
+      "description": "Represents Vendor details.",
+      "required": [
+        "vendorId",
+        "vendorName",
+        "companyLogoUri"
+      ],
+      "type": "object",
+      "properties": {
+        "vendorId": {
+          "description": "Unique Id representing the vendor.",
+          "type": "string"
+        },
+        "vendorName": {
+          "description": "Name of the vendor.",
+          "type": "string"
+        },
+        "companyLogoUri": {
+          "description": "Company logo Uri of the vendor.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VendorResource": {
+      "description": "Specifies the properties for Vendor in HCI Catalog.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Vendor properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/VendorProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "VendorResourceList": {
+      "description": "List of vendors.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of vendor resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VendorResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link for the next set of vendor resources.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WindowsAdminCenterDetails": {
+      "description": "Represents Windows Admin Center details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Windows Admin Center name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Windows Admin Center description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "websiteLink": {
+          "description": "Windows Admin Center name website link.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "Workload": {
+      "description": "Details of your on-premises workloads. This information will be used to understand and recommend a solution.",
+      "required": [
+        "workloadDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "workloadDetails": {
+          "description": "Workload details",
+          "allOf": [
+            {
+              "$ref": "#/definitions/WorkloadDetails"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkloadCategory": {
+      "description": "Type of workload.",
+      "enum": [
+        "General",
+        "SQL",
+        "VDI"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "WorkloadCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "General",
+            "description": "General workload."
+          },
+          {
+            "value": "SQL",
+            "description": "SQL workload."
+          },
+          {
+            "value": "VDI",
+            "description": "VDI workload."
+          }
+        ]
+      }
+    },
+    "WorkloadDetails": {
+      "description": "Workload details",
+      "required": [
+        "workloadName",
+        "workloadType",
+        "numberOfVms",
+        "virtualCpu",
+        "virtualCorePerPhysicalCore",
+        "memoryBytes",
+        "storageBytes"
+      ],
+      "type": "object",
+      "properties": {
+        "workloadName": {
+          "description": "Workload name",
+          "type": "string"
+        },
+        "workloadType": {
+          "description": "Workload type, general, AVD, etc",
+          "type": "string",
+          "allOf": [
+            {
+              "$ref": "#/definitions/WorkloadCategory"
+            }
+          ]
+        },
+        "numberOfVms": {
+          "format": "int32",
+          "description": "Number of virtual machines",
+          "type": "integer"
+        },
+        "virtualCpu": {
+          "format": "int32",
+          "description": "Virtual cpus",
+          "type": "integer"
+        },
+        "virtualCorePerPhysicalCore": {
+          "format": "int32",
+          "description": "V:P ratio",
+          "type": "integer"
+        },
+        "memoryBytes": {
+          "format": "int64",
+          "description": "Memory bytes requirement.",
+          "type": "integer"
+        },
+        "storageBytes": {
+          "format": "int64",
+          "description": "Storage bytes requirement.",
+          "type": "integer"
+        }
+      },
+      "discriminator": "workloadType"
+    }
+  },
+  "parameters": {
+    "catalogNameParameter": {
+      "in": "path",
+      "name": "catalogName",
+      "description": "Name of HCI catalog resource.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 12,
+      "pattern": "^[a-z][a-z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "platformIdParameter": {
+      "in": "path",
+      "name": "platformId",
+      "description": "Unique identifier for HCI catalog platform.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "projectNameParameter": {
+      "in": "path",
+      "name": "projectName",
+      "description": "The name of the project Resource. project names must be between 3 and 72 characters in length and use any alphanumeric and underscore only.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 72,
+      "pattern": "^[-\\w\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "vendorIdParameter": {
+      "in": "path",
+      "name": "vendorId",
+      "description": "Unique identifier for HCI catalog vendor.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
