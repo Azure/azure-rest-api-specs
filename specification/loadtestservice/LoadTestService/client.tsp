@@ -22,6 +22,7 @@ interface AdministrationOperations {
     GetTestFile is LoadTestAdministration.GetTestFile;
     ListTestFiles is LoadTestAdministration.ListTestFiles;
     ListTests is LoadTestAdministration.ListTests;
+    @projectedName("python", "BeginUploadTestFile")
     UploadTestFile is LoadTestAdministration.UploadTestFile;
     DeleteTestFile is LoadTestAdministration.DeleteTestFile;
     DeleteTest is LoadTestAdministration.DeleteTest;
@@ -33,7 +34,7 @@ interface AdministrationOperations {
 })
 interface TestRunOperations {
     // TODO check with service team why is Python different here?
-    @projectedName("python", "TestRun")
+    @projectedName("python", "BeginTestRun")
     CreateOrUpdateTestRun is LoadTestRun.CreateOrUpdateTestRun;
     CreateOrUpdateAppComponents is LoadTestRun.CreateOrUpdateAppComponents;
     CreateOrUpdateServerMetricsConfig is LoadTestRun.CreateOrUpdateServerMetricsConfig;
