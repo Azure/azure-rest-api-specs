@@ -40,72 +40,12 @@ jobs:
     displayName: npm ls -a
     condition: succeededOrFailed()
 
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/contosowidgetmanager/Contoso.WidgetManager
-      DisplayName: Contoso.WidgetManager
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/AnomalyDetector
-      DisplayName: AnomalyDetector
-      
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/ContentSafety
-      DisplayName: ContentSafety
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/HealthInsights/healthinsights.openapi
-      DisplayName: healthinsights.openapi
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/HealthInsights/healthinsights.oncophenotype
-      DisplayName: healthinsights.oncophenotype
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/HealthInsights/healthinsights.trialmatcher
-      DisplayName: healthinsights.trialmatcher
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/cognitiveservices/OpenAI.Inference
-      DisplayName: OpenAI.Inference
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/confidentialledger/Microsoft.ManagedCcf
-      DisplayName: ManagedCcf
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/containerservice/Fleet.Management
-      DisplayName: Fleet.Management
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/containerstorage/ContainerStorage.Management
-      DisplayName: ContainerStorage.Management
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/eventgrid/Azure.Messaging.EventGrid
-      DisplayName: Messaging.EventGrid
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/servicenetworking/ServiceNetworking.Management
-      DisplayName: Microsoft.ServiceNetworking
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/sphere/Sphere.Management
-      DisplayName: Sphere.Management
-
-  - template: templates/steps/typespec-ci.yml
-    parameters:
-      Folder: specification/translation/Azure.AI.TextTranslation
-      DisplayName: AI.TextTranslation
+  - pwsh: |
+      if ('$(Build.Reason)' -eq 'PullRequest') {
+        $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
+      }
+      else {
+        $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory)
+      }
+    displayName: Validate TypeSpec
+    condition: succeededOrFailed()
