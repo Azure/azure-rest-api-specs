@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
   ]>
 )
 @service({
-  title: "Azure OpenAI API",
+  title: "Azure OpenAI API 2",
 })
 @server(
   "{endpoint}/openai",
