@@ -37,7 +37,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           }
         },
@@ -610,137 +610,6 @@
         }
       },
       "description": "The response from the List Storage Tasks operation."
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Storage operations supported by the Storage resource provider."
-        }
-      }
-    },
-    "Operation": {
-      "description": "Storage REST API operation definition.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft Storage.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of operation: get, read, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description of the operation.",
-              "type": "string"
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "description": "The origin of operations."
-        },
-        "properties": {
-          "description": "Properties of operation, include metric specifications.",
-          "x-ms-client-flatten": true,
-          "x-ms-client-name": "OperationProperties",
-          "$ref": "#/definitions/OperationProperties"
-        }
-      }
-    },
-    "OperationProperties": {
-      "description": "Properties of operation, include metric specifications.",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/ServiceSpecification",
-          "description": "One property of operation, include metric specifications."
-        }
-      }
-    },
-    "ServiceSpecification": {
-      "description": "One property of operation, include metric specifications.",
-      "properties": {
-        "metricSpecifications": {
-          "description": "Metric specifications of operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricSpecification"
-          }
-        }
-      }
-    },
-    "MetricSpecification": {
-      "description": "Metric specification of operation.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of metric specification."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of metric specification."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Display description of metric specification."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Unit could be Bytes or Count."
-        },
-        "dimensions": {
-          "description": "Dimensions of storage task parameters.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Dimension"
-          }
-        },
-        "aggregationType": {
-          "type": "string",
-          "description": "Aggregation type could be Average."
-        },
-        "fillGapWithZero": {
-          "type": "boolean",
-          "description": "The property to decide fill gap with zero or not."
-        },
-        "category": {
-          "type": "string",
-          "description": "The category this metric specification belong to, could be Capacity."
-        },
-        "resourceIdDimensionNameOverride": {
-          "type": "string",
-          "description": "Account Resource Id."
-        }
-      }
-    },
-    "Dimension": {
-      "description": "Dimensions of storage task parameters.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of dimension parameter."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of dimension parameter."
-        }
-      }
     }
   },
   "parameters": {
