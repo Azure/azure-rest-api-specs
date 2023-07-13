@@ -64,7 +64,7 @@
     "Accept-Language": {
       "name": "Accept-Language",
       "in": "header",
-      "description": "Language in which routing results should be returned. \n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes) for details.",
+      "description": "Language in which routing results should be returned. \n\nRefer to [Supported Languages](https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes) for details.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -73,7 +73,7 @@
   "paths": {
     "/route/directions": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile (driving), commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions supports vehicle attributes such as size, weight, cargo type, and max speed to calculate the truck specific route. Not all trucks can travel the same routes as other vehicles. Here are some examples:\n\n <li>Bridges have heights and weight limits.</li><li>Tunnels often have restrictions on flammable or hazardous materials.</li><li>Longer trucks have difficulty making tight turns.</li><li>Highways often have a separate speed limit for trucks.</li><li>Certain trucks may want to avoid roads that have steep gradients.</li>\n\nRouting supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nRoute Directions V2 API returns the ideal route between an origin and a destination for automobile (driving), commercial trucks and walking routes, passing through a series of waypoints if they are specified. A waypoint is a specified geographical location defined by longitude and latitude that is used for navigational purposes. The route will consider factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nRoute Directions takes into account local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific route and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile, cargo type or road. For example, highways often have separate speed limits for trucks, some roads do not allow trucks with flammable or hazardous materials, height and weight restriction on bridges.\n\nRouting supports up to 25 waypoints and up to 10 viaWaypoints between any two waypoints for driving and walking route. Each set of waypoints creates a separate route leg. ViaWaypoints define the route path and can be used for route construction through specific locations and do not create route legs like waypoints. Truck route supports up to 150 waypoints and does not support viaWaypoints.\n\nRouting availability in countries/regions is summarized in the [Routing coverage documentation](https://learn.microsoft.com/en-us/azure/azure-maps/routing-coverage).\n\n",
         "operationId": "Route_PostDirections",
         "consumes": [
           "application/geo+json"
@@ -294,7 +294,7 @@
           "default": false
         },
         "avoid": {
-          "description": "Specifies restrictions that the route calculation should honor or minimize when determining the route. It can be a comma-separated list of values.\n\nIf more than one option is specified to avoid, the most restrictive option is used. For example, when avoid parameter is set to both \"highways\" and \"minimizeHighways\", all highways will be restricted.\n\nExample: \"avoid\": [\"highways\", \"tolls\"]",
+          "description": "Specifies restrictions that the route calculation should honor or minimize when determining the route. It can be a comma-separated list of values.\n\nExample: \"avoid\": [\"highways\", \"tolls\"]",
           "type": "array",
           "items": {
             "type": "string",
@@ -302,8 +302,6 @@
               "highways",
               "tollRoads",
               "ferries",
-              "minimizeHighways",
-              "minimizeTollRoads",
               "tunnels",
               "borderCrossings",
               "lowEmissionZones",
@@ -324,14 +322,6 @@
                 {
                   "value": "ferries",
                   "description": "Avoids the use of ferries in the route."
-                },
-                {
-                  "value": "minimizeHighways",
-                  "description": "Minimizes (tries to avoid) the use of highways in the route. `Note`: The parameter is available only for driving travelMode."
-                },
-                {
-                  "value": "minimizeTollRoads",
-                  "description": "Minimizes (tries to avoid) the use of toll roads in the route. `Note`: The parameter is available only for driving travelMode."
                 },
                 {
                   "value": "tunnels",
@@ -1595,7 +1585,7 @@
       }
     },
     "VehicleSpec": {
-      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, please specify the vehicle attributes.",
+      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.",
       "type": "object",
       "properties": {
         "isVehicleCommercial": {
