@@ -1736,7 +1736,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}": {
       "get": {
         "tags": [
-          "GalleryServiceArtifactGet"
+          "GalleryServiceArtifact"
         ],
         "operationId": "GalleryServiceArtifact_Get",
         "description": "Retrieves a Service Artifact under a gallery.",
@@ -1769,6 +1769,12 @@
               "$ref": "#/definitions/GalleryServiceArtifact"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryServiceArtifact"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -1782,6 +1788,63 @@
             }
           }
         },
+        "x-ms-examples": {}
+      },
+      "put": {
+        "tags": [
+          "GalleryServiceArtifact"
+        ],
+        "operationId": "GalleryServiceArtifact_CreateOrUpdate",
+        "description": "Create or update a Service Artifact under a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the Service Artifact is to be created or updated."
+          },
+          {
+            "name": "serviceArtifactName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Gallery Service Artifact."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryServiceArtifact"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryServiceArtifact"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryServiceArtifact"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {}
       }
     }
