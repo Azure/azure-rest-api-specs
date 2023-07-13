@@ -107,6 +107,144 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance/{AzureLargeInstanceName}/start": {
+      "post": {
+        "description": "The operation to start an Azure Large Instance",
+        "operationId": "AzureLargeInstance_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Restart an Azure Large Instance": {
+            "$ref": "./examples/AzureLargeInstance_Start.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance/{AzureLargeInstanceName}/restart": {
+      "post": {
+        "description": "The operation to restart an Azure Large Instance",
+        "operationId": "AzureLargeInstance_Restart",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Restart an Azure Large Instance": {
+            "$ref": "./examples/AzureLargeInstance_Restart.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLargeInstance/AzureLargeInstance/{azureLargeInstanceName}/shutdown": {
+      "post": {
+        "description": "The operation to shutdown an Azure Large Instance",
+        "operationId": "AzureLargeInstance_Shutdown",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Shutdown an AzureLarge instance": {
+            "$ref": "./examples/AzureLargeInstance_Shutdown.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureLargeInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AzureLargeInstance/operations": {
       "get": {
         "tags": ["AzureLargeInstance"],
@@ -172,7 +310,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AzureLargeInstanceInstance"
+              "$ref": "#/definitions/AzureLargeInstance"
             }
           },
           "default": {
@@ -217,7 +355,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AzureLargeInstanceInstance"
+              "$ref": "#/definitions/AzureLargeInstance"
             }
           },
           "default": {
