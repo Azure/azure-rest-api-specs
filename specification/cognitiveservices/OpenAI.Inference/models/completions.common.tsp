@@ -98,13 +98,13 @@ model ContentFilterResults {
    those portrayed as an assault or a forced sexual violent act against one’s will, 
    prostitution, pornography, and abuse.
   """)
-  sexual: ContentFilterResult;
+  sexual?: ContentFilterResult;
 
   @doc("""
   Describes language related to physical actions intended to hurt, injure, damage, or 
   kill someone or something; describes weapons, etc.
   """)
-  violence: ContentFilterResult;
+  violence?: ContentFilterResult;
 
   @doc("""
   Describes language attacks or uses that include pejorative or discriminatory language 
@@ -113,14 +113,14 @@ model ContentFilterResults {
   gender identity and expression, sexual orientation, religion, immigration status, ability
   status, personal appearance, and body size.
   """)
-  hate: ContentFilterResult;
+  hate?: ContentFilterResult;
 
   @doc("""
   Describes language related to physical actions intended to purposely hurt, injure,
   or damage one’s body, or kill oneself.
   """)
   @projectedName("json", "self_harm")
-  selfHarm: ContentFilterResult;
+  selfHarm?: ContentFilterResult;
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
