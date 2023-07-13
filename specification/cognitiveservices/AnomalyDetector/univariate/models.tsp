@@ -8,6 +8,7 @@ using Azure.Core;
 
 namespace AnomalyDetector.Univariate;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum ImputeMode {
   Auto: "auto",
   Previous: "previous",
@@ -17,21 +18,22 @@ enum ImputeMode {
   NotFill: "notFill",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum AnomalyDetectorErrorCodes {
-  "InvalidCustomInterval",
-  "BadArgument",
-  "InvalidGranularity",
-  "InvalidPeriod",
-  "InvalidModelArgument",
-  "InvalidSeries",
-  "InvalidJsonFormat",
-  "RequiredGranularity",
-  "RequiredSeries",
-  "InvalidImputeMode",
-  "InvalidImputeFixedValue",
+  InvalidCustomInterval,
+  BadArgument,
+  InvalidGranularity,
+  InvalidPeriod,
+  InvalidModelArgument,
+  InvalidSeries,
+  InvalidJsonFormat,
+  RequiredGranularity,
+  RequiredSeries,
+  InvalidImputeMode,
+  InvalidImputeFixedValue,
 }
 
-@fixed
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
@@ -100,7 +102,7 @@ and imputeMode is \"fixed\".
 @doc("Definition of input time series points.")
 model TimeSeriesPoint {
   @doc("Argument that indicates the time stamp of a data point (ISO8601 format).")
-  timestamp?: zonedDateTime;
+  timestamp?: utcDateTime;
 
   @doc("Measurement of that point.")
   value: float32;
@@ -172,15 +174,15 @@ severe the anomaly is. For normal points, the severity is always 0.
 @doc("Error information that the API returned.")
 @error
 model AnomalyDetectorError {
-  @header
+  @header("x-ms-error-code")
   @doc("Error code.")
-  "x-ms-error-code"?: string,
+  msErrorCode: string;
 
   @doc("Error code.")
-  code?: AnomalyDetectorErrorCodes;
+  code: AnomalyDetectorErrorCodes;
 
   @doc("Message that explains the error that the service reported.")
-  message?: string;
+  message: string;
 }
 
 @doc("Response of the last anomaly detection.")
