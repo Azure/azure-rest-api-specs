@@ -6,7 +6,7 @@ These settings apply only when `--python` is specified on the command line.
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-storage
-package-version: 1.0.0b1
+package-version: 22.0.0
 no-namespace-folders: true
 modelerfour:
   lenient-model-deduplication: true
@@ -18,9 +18,10 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2022-09-01"
+default-api-version: "2023-01-01"
 clear-output-folder: true
 batch:
+  - tag: package-2023-01
   - tag: package-2022-09
   - tag: package-2022-05
   - tag: package-2021-09
@@ -48,6 +49,17 @@ batch:
 output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/
 perform-load: false
 ```
+
+### Tag: package-2023-01 and python
+
+These settings apply only when `--tag=package-2023-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-01'
+namespace: azure.mgmt.storage.v2023_01_01
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/v2023_01_01
+```
+
 ### Tag: package-2022-09 and python
 
 These settings apply only when `--tag=package-2022-09 --python` is specified on the command line.
