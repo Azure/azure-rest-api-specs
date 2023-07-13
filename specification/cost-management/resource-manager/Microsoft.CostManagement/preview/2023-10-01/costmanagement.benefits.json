@@ -720,12 +720,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ByBillingAccountId",
+        "operationId": "BenefitSavings_ByBillingAccountId",
         "description": "Generates savings report for the enterprise agreement scope. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
@@ -764,7 +764,7 @@
           }
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-BillingAccount": {
+          "BenefitSavings-BillingAccount": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -773,12 +773,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}/providers/Microsoft.CostManagement/benefitSavingsReport":{
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}/providers/Microsoft.CostManagement/benefitSavings":{
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ByCustomerId",
+        "operationId": "BenefitSavings_ByCustomerId",
         "description": "Generates savings report for the customer scope. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
@@ -820,7 +820,7 @@
           }
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-Customer": {
+          "BenefitSavings-Customer": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -829,12 +829,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ListByBillingProfileId",
+        "operationId": "BenefitSavings_ListByBillingProfileId",
         "description": "Generates savings report for the billing profile scope. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
@@ -876,7 +876,7 @@
           }
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-BillingProfile": {
+          "BenefitSavings-BillingProfile": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -885,12 +885,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ByBillingAccountIdAndSavingsPlanOrderId",
+        "operationId": "BenefitSavings_ByBillingAccountIdAndSavingsPlanOrderId",
         "description": "Generates savings report for the billing account and savings plan order id scope. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
@@ -932,7 +932,7 @@
           }
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-BillingAccountAndSavingsPlanOrder": {
+          "BenefitSavings-BillingAccountAndSavingsPlanOrder": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -941,12 +941,12 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ByBillingAccountIdAndSavingsPlanOrderIdSavingPlanId",
+        "operationId": "BenefitSavings_ByBillingAccountIdAndSavingsPlanOrderIdSavingPlanId",
         "description": "Generates savings report for the billing account, savings plan order id and savings plan id scope. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
@@ -991,7 +991,7 @@
           }
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-BillingAccountAndSavingsPlan": {
+          "BenefitSavings-BillingAccountAndSavingsPlan": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -1000,18 +1000,18 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ListByReservationOrder",
+        "operationId": "BenefitSavings_ListByReservationOrder",
         "description": "Generates savings report for the reservation order id. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-ReservationOrder": {
+          "BenefitSavings-ReservationOrder": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -1052,18 +1052,18 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ListByReservation",
+        "operationId": "BenefitSavings_ListByReservation",
         "description": "Generates savings report for the reservation order id and reservation id. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-Reservation": {
+          "BenefitSavings-Reservation": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -1107,18 +1107,18 @@
         }
       }
     },
-    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ListBySavingsPlanOrder",
+        "operationId": "BenefitSavings_ListBySavingsPlanOrder",
         "description": "Generates savings report for the savings plan order id. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-SavingsPlanOrder": {
+          "BenefitSavings-SavingsPlanOrder": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
@@ -1159,18 +1159,18 @@
         }
       }
     },
-    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitSavingsReport": {
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitSavings": {
       "get": {
         "tags": [
-          "BenefitSavingsReport"
+          "BenefitSavings"
         ],
-        "operationId": "BenefitSavingsReport_ListBySavingsPlan",
+        "operationId": "BenefitSavings_ListBySavingsPlan",
         "description": "Generates savings report for the savings plan order id and savings plan id. Supported at grain values: 'Daily' and 'Monthly'.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
         },
         "x-ms-examples": {
-          "BenefitSavingsReport-SavingsPlan": {
+          "BenefitSavings-SavingsPlan": {
             "$ref": "./examples/SavingsReport/SavingsReportByBillingAccount.json"
           }
         },
