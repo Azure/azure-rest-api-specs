@@ -1049,7 +1049,11 @@
         "isPrivate": {
           "type": "boolean",
           "description": "Indication that the plan is accessible to restricted audience only"
-        }
+        },
+		"hasRI": {
+          "type": "boolean",
+          "description": "Indication whether the SKU supports reservations"
+        }			
       }
     },
     "VmArchitectureType": {
@@ -2169,6 +2173,10 @@
             }
           ]
         },
+		"hasRI": {
+          "type": "boolean",
+          "description": "Indication whether the SKU supports reservations"
+        },	
         "skuAttributes": {
           "type": "array",
           "description": "The SKU attributes",
@@ -2396,7 +2404,11 @@
 		"productId": {
           "type": "string",
           "description": "The unique id of the product"
-        },		
+        },
+		"hasRIPlans": {
+          "type": "boolean",
+          "description": "Indication whether the product has plans with reservations"
+        },					
 		"hasMarketplaceFootprint": {
           "type": "boolean",
           "description": "Indication if product has a representation in the marketplace"
