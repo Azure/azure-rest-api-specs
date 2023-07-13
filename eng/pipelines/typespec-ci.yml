@@ -11,23 +11,15 @@ pr:
     - typespec-next
   paths:
     include:
-    - package.json
+    - .gitattributes
+    - .prettierrc.json
     - package-lock.json
-    - eng/pipelines/typespec-ci.yml
-    - eng/pipelines/templates/steps/typespec-ci.yml
-    - eng/tools/TypeSpecValidation
-    - specification/contosowidgetmanager
-    - specification/cognitiveservices
-    - specification/confidentialledger
-    - specification/containerservice
-    - specification/containerstorage
-    - specification/eventgrid
-    - specification/servicenetworking
-    - specification/sphere
-    - specification/translation
+    - package.json
+    - tsconfig.json
+    - eng
 
 jobs:
-- job: TypeSpecCI
+- job: Validate_All_Specs
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
@@ -52,11 +44,6 @@ jobs:
     condition: succeededOrFailed()
 
   - pwsh: |
-      if ('$(Build.Reason)' -eq 'PullRequest') {
-        $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory) "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
-      }
-      else {
-        $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory)
-      }
-    displayName: Validate TypeSpec
+      $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory)
+    displayName: Validate All Specs
     condition: succeededOrFailed()
