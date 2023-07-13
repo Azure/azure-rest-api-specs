@@ -10,7 +10,7 @@ pr:
     - specification
 
 jobs:
-- job: Validate
+- job: Validate Changed Specs
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
@@ -28,5 +28,5 @@ jobs:
         $(Build.SourcesDirectory) `
         "origin/${env:SYSTEM_PULLREQUEST_TARGETBRANCH}" `
         "${env:SYSTEM_PULLREQUEST_SOURCECOMMITID}"
-    displayName: Validate TypeSpec
+    displayName: Validate Changed Specs
     condition: succeededOrFailed()

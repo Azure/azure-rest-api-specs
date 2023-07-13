@@ -15,7 +15,7 @@ pr:
     - eng
 
 jobs:
-- job: Validate
+- job: Validate All Specs
   pool:
     name: azsdk-pool-mms-ubuntu-2204-general
     vmImage: ubuntu-22.04
@@ -30,5 +30,5 @@ jobs:
 
   - pwsh: |
       $(Build.SourcesDirectory)/eng/scripts/Validate-TypeSpec.ps1 $(Build.SourcesDirectory)
-    displayName: Validate TypeSpec
+    displayName: Validate All Specs
     condition: succeededOrFailed()
