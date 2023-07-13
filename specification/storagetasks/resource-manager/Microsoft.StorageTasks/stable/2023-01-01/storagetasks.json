@@ -345,6 +345,51 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageTasks/storageTasks/{storageTaskName}/storageTaskAssignments": {
+      "get": {
+        "tags": [
+          "StorageTasks"
+        ],
+        "operationId": "ListStorageTaskAssignmentIds",
+        "description": "Lists all the storage tasks available under the given resource group.",
+        "x-ms-examples": {
+          "ListStorageTasksByResourceGroup": {
+            "$ref": "./examples/storageTasksList/ListStorageTaskAssignmentIds.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List of storage tasks in the given resource group retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignmentsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -616,6 +661,36 @@
         }
       },
       "description": "The response from the List Storage Tasks operation."
+    },
+    "StorageTaskAssignmentsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskAssignmentId"
+          },
+          "description": "Gets the list of storage task assignment Ids."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage task assignment Ids. Returned when total number of requested storage task assignment Ids exceed maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Storage Tasks operation."
+    },
+    "StorageTaskAssignmentId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM Id of the storage task assignments, associated with the storage tasks.",
+          "readOnly": true
+        }
+      },
+      "description": "Fetch the Storage task assignment ARM ids."
     }
   },
   "parameters": {
