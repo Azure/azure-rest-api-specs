@@ -344,6 +344,20 @@
             "provisioningState": {
               "readOnly": true,
               "type": "string",
+              "enum": [
+                "Unknown",
+                "Creating",
+                "Deleting",
+                "Scaling",
+                "Active",
+                "Failed",
+                "Succeeded",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "provisioningState",
+                "modelAsString": true
+              },
               "description": "Provisioning state of the Cluster."
             },
             "updatedAt": {
