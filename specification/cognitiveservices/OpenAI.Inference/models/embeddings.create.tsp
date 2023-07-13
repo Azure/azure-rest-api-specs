@@ -60,6 +60,7 @@ model EmbeddingItem {
   embedding: float32[];
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
+  @projectedName("java", "promptIndex")
   index: int32;
 }
 
