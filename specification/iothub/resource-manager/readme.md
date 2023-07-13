@@ -91,6 +91,15 @@ These settings apply only when `--tag=package-2021-07-02` is specified on the co
 ``` yaml $(tag) == 'package-2021-07-02'
 input-file:
   - Microsoft.Devices/stable/2021-07-02/iothub.json
+
+directive:
+  - from: swagger-document
+    where: $.definitions.FallbackRouteProperties.properties.source
+    transform: >
+      $['x-ms-enum'] = {
+        "name": "RoutingSource",
+        "modelAsString": true
+      };
 ```
 
 ### Tag: package-preview-2021-07-02
