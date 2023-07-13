@@ -10,7 +10,7 @@ param (
 
 $typespecFolders = @()
 
-$typespecFolders = &"$PSScriptRoot/Get-Typespec-Folders.ps1" "$SpecsRepoRootDirectory" "$TargetBranch" "$SourceBranch"
+$typespecFolders = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" "$SpecsRepoRootDirectory" "$TargetBranch" "$SourceBranch"
 
 $exitCode = 0
 foreach ($typespecFolder in $typespecFolders) {
